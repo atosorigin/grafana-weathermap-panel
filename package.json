@@ -1,0 +1,22 @@
+{
+  "name": "network-weathermap-panel",
+  "version": "0.0.1",
+  "description": "22 Network WeatherMap Panel Plugin for Grafana",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch"
+  },
+  "author": "ATOS OpenSource",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@grafana/data": "next",
+    "@grafana/toolkit": "next",
+    "@grafana/ui": "next",
+    "css-loader": "^3.3.0"
+  },
+  "dependencies": {
+    "redux": "^4.0.4"
+  }
+}

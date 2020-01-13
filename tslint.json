@@ -1,0 +1,71 @@
+{
+	"defaultSeverity": "warning",
+	"extends": [
+		"tslint:recommended"
+	],
+	"linterOptions": {
+		"exclude": [
+			"node_modules",
+			"dist",
+			"docs"
+		]
+	},
+	"jsRules": {},
+	"rules": {
+		"quotemark": [
+			true,
+			"single",
+			"jsx-single",
+			"avoid-escape"
+		],
+		"interface-name": [
+			true,
+			"always-prefix"
+		],
+		"no-console": [
+			false
+		],
+		"no-var-keyword": true,
+		"prefer-const": [
+			true,
+			{
+				"destructuring": "all"
+			}
+		],
+		"prefer-for-of": true,
+		"indent": [
+			true,
+			"tabs",
+			2
+		],
+		"completed-docs": [
+			true
+		],
+		"align": [
+			true,
+			"parameters",
+			"statements"
+		],
+		"comment-format": [
+			true,
+			"check-space",
+			"check-uppercase",
+			"allow-trailing-lowercase"
+		],
+		"file-header": [
+			false,
+			{
+				"match": "Atos Opensource \\d{4}",
+				"allow-single-line-comments": true,
+				"default": "Atos Opensource 2019",
+				"enforce-trailing-newline": true
+			}
+		],
+		"no-irregular-whitespace": true,
+		"ordered-imports": false,
+		"object-literal-sort-keys": false,
+		"only-arrow-functions": true,
+		"no-any": true
+	},
+	"rulesDirectory": []
+}
