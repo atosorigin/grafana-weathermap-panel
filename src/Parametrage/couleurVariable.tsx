@@ -1,9 +1,4 @@
-/**
- * ToDo:
- *  sauvegarde
- */
-
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import { ArrayInputClass } from '../Models/arrayInputClass';
 import { Seuil } from '../Models/seuil';
 import { InputClass } from '../Models/inputClass';
@@ -252,17 +247,12 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 
 		if (this.props.fondIsActive) {
 			const keyFondColorPicker = key + 'FondcolorPicker';
-			const styleCouleurFond: CSSProperties = {
-				color: this.state.seuil[keyInt].couleurFond,
-				cursor: 'pointer',
-			};
 
 			couleur.push(
 				<InputSeriesColorPicker
 					key={keyFondColorPicker}
 					color={this.state.seuil[keyInt].couleurFond}
 					keyInt={keyInt}
-					style={styleCouleurFond}
 					text='Changer la couleur du fond'
 					_onChange={this.onChangeColorFond}
 				/>,
@@ -270,17 +260,12 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 		}
 		if (this.props.contourIsActive) {
 			const keyContourDiv = key + 'ContourDiv';
-			const styleCouleurContour: CSSProperties = {
-				color: this.state.seuil[keyInt].couleurContour,
-				cursor: 'pointer',
-			};
 
 			couleur.push(
 				<div key={keyContourDiv}>
 					<InputSeriesColorPicker
 						color={this.state.seuil[keyInt].couleurContour}
 						keyInt={keyInt}
-						style={styleCouleurContour}
 						text='Changer la couleur du contour'
 						_onChange={this.onChangeColorContour}
 					/>

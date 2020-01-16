@@ -1,11 +1,3 @@
-/**
- * To do:
- * ajouter class metriquePrincipal
- * sauvegarder ces donnees en utilisant cette class
- * voir si possible de separer les variables du store en uitilisant des interfaces interface
- * trop de commentaire voir comment reguler avec la JsDoc
- */
-
 import React from 'react';
 import { Switch } from '@grafana/ui';
 import CouleurVariable from './couleurVariable';

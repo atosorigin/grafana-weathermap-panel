@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import { FormField } from '@grafana/ui';
 import InputSeriesColorPicker from 'Input/inputSeriesColorPicker';
 import { Seuil } from 'Models/seuil';
@@ -142,17 +142,12 @@ class CouleurFixe extends React.Component<IProps, IState> {
 
 		if (this.props.fondIsActive) {
 			const keyFondColorPicker = key + 'FondcolorPicker';
-			const styleCouleurFond: CSSProperties = {
-				color: this.state.colorFond,
-				cursor: 'pointer',
-			};
 
 			couleur.push(
 				<InputSeriesColorPicker
 					key={keyFondColorPicker}
 					color={this.state.colorFond}
 					keyInt={0}
-					style={styleCouleurFond}
 					text='Changer la couleur du fond'
 					_onChange={this.onChangeColorFond}
 				/>,
@@ -160,17 +155,12 @@ class CouleurFixe extends React.Component<IProps, IState> {
 		}
 		if (this.props.contourIsActive) {
 			const keyContourDiv = key + 'ContourDiv';
-			const styleCouleurContour: CSSProperties = {
-				color: this.state.colorContour,
-				cursor: 'pointer',
-			};
 
 			couleur.push(
 				<div key={keyContourDiv}>
 					<InputSeriesColorPicker
 						color={this.state.colorContour}
 						keyInt={0}
-						style={styleCouleurContour}
 						text='Changer la couleur du contour'
 						_onChange={this.onChangeColorContour}
 					/>

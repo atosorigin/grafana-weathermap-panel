@@ -66,13 +66,13 @@ class EspaceCoordonnees extends React.Component<IProps, IState>  {
 	 * add inputs for a new coordiante
 	 */
 	public addInput = (
-		id: number, xMin?: number, xMax?: number, yMin?: number, yMax?: number, text?: string) => {
+		id: number, xMin?: string, xMax?: string, yMin?: string, yMax?: string, text?: string) => {
 		const num: number = id;
 		const finalArray: InputClass[] = createInputCoor(num);
 
 		this.setState({
-			arrayCoor: this.state.arrayCoor.concat(new EspaceCoordonneesClass(num, xMin || 0,
-				xMax || 0, yMin || 0, yMax || 0, text || '')),
+			arrayCoor: this.state.arrayCoor.concat(new EspaceCoordonneesClass(num, xMin || '0',
+				xMax || '0', yMin || '0', yMax || '0', text || '')),
 			arrayInput: this.state.arrayInput.concat([
 				new ArrayInputClass(num, finalArray),
 			]),
@@ -285,8 +285,6 @@ class EspaceCoordonnees extends React.Component<IProps, IState>  {
 				}
 				<div className='buttonAddCoor'>
 					<Button onClick={this.addTestInput}>Ajouter des coordonnées</Button>
-					{/* <input type='button' value='Ajouter des coordonnées'
-						onClick={this.addTestInput} /> */}
 				</div>
 			</div>
 		);

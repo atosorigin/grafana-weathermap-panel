@@ -1,5 +1,5 @@
 import { ColorPicker, FormLabel } from '@grafana/ui';
-import React, { FunctionComponent, CSSProperties } from 'react';
+import React, { FunctionComponent } from 'react';
 
 /**
  * props
@@ -7,7 +7,6 @@ import React, { FunctionComponent, CSSProperties } from 'react';
 type InputTextFieldProps = {
 	color: string,
 	keyInt: number,
-	style: CSSProperties,
 	text: string
 	_onChange: Function
 };
@@ -19,7 +18,6 @@ type InputTextFieldProps = {
 export const InputSeriesColorPicker: FunctionComponent<InputTextFieldProps> = ({
 	color,
 	keyInt,
-	style,
 	text,
 	_onChange,
 }) => (

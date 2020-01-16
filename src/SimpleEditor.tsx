@@ -1,6 +1,6 @@
 import { PanelEditorProps } from '@grafana/data';
 import { FormField, Collapse } from '@grafana/ui';
-import React, { Component } from 'react';
+import React from 'react';
 import { SimpleOptions } from './types';
 import _ from 'lodash';
 
@@ -10,10 +10,13 @@ import EspaceCoordonnees from './EspaceCoordonnees/EspaceCoordonnees';
 import RendutextDefault from './RenduTextDefault/renduTextDefault';
 import EspaceVisualisationInitial from './EspaceVisualisationInitial/EspaceVisualisationInitial';
 import ParametresGeneriques from './Parametrage/parametresGeneriques';
+import TextObjects from './Parametrage/textObjects';
 
 import './style/SimpleEditor.css';
 import { Seuil } from 'Models/seuil';
 import { ParametrageMetrique } from 'Models/parametrageMetrique';
+import { TextObject } from 'Models/TextObject';
+import ObjectVisibility from 'objectVisibility';
 
 interface IProps extends PanelEditorProps<SimpleOptions> { }
 interface IState {
@@ -30,16 +33,23 @@ interface IState {
 	collapseGenericSettings: boolean;
 
 	/** collapse */
+	collapseGenericSettingsBis: boolean;
+
+	/** collapse */
 	collapseInitialDisplay: boolean;
 
 	/** collapse */
 	collapseCoorSpace: boolean;
+
+	/** collapse */
+	collapseObjectVisibility: boolean;
+
 }
 
 /**
  * class SimpleEditor
  */
-export class SimpleEditor extends Component<PanelEditorProps<SimpleOptions>, IState, IProps> {
+export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOptions>, IState, IProps> {
 
 	constructor(props: IProps) {
 		super(props);
@@ -47,9 +57,11 @@ export class SimpleEditor extends Component<PanelEditorProps<SimpleOptions>, ISt
 			arrayEspaceCoordonnees: this.props.options.arrayEspaceCoordonnees,
 			collapseDefaultText: false,
 			collapseDisplay: false,
-			collapseGenericSettings: true,
+			collapseGenericSettings: false,
 			collapseInitialDisplay: false,
 			collapseCoorSpace: false,
+			collapseGenericSettingsBis: false,
+			collapseObjectVisibility: true,
 		};
 	}
 
@@ -117,6 +129,16 @@ export class SimpleEditor extends Component<PanelEditorProps<SimpleOptions>, ISt
 	}
 
 	/**
+	 * gyuhjkjkhgf
+	 */
+	public callBackTextObject = (newValue: TextObject): void => {
+		this.props.onOptionsChange({
+			...this.props.options,
+			valueTextObject: newValue,
+		});
+	}
+
+	/**
 	 * call back for parametresGeneriques
 	 */
 	public myCallBackGenericSettings = (
@@ -169,6 +191,20 @@ export class SimpleEditor extends Component<PanelEditorProps<SimpleOptions>, ISt
 	public onToggleCoorSpace = (isOpen: boolean): void => {
 		this.setState({
 			collapseCoorSpace: isOpen,
+		});
+	}
+
+	/** edit collapse when click */
+	public onToggleGenericSettingsBis = (isOpen: boolean): void => {
+		this.setState({
+			collapseGenericSettingsBis: isOpen,
+		});
+	}
+
+	/** edit collapse when click */
+	public onToggleObjectVisibility = (isOpen: boolean): void => {
+		this.setState({
+			collapseObjectVisibility: isOpen,
 		});
 	}
 
@@ -234,6 +270,17 @@ export class SimpleEditor extends Component<PanelEditorProps<SimpleOptions>, ISt
 						</Collapse>
 					</div>
 
+					<div className='espaceVisualisationInitial'>
+						<Collapse isOpen={this.state.collapseGenericSettingsBis}
+							label='Parametres Generiques bis'
+							onToggle={this.onToggleGenericSettingsBis}>
+
+							<TextObjects lastValue={this.props.options.valueTextObject}
+								callBackFromParent={this.callBackTextObject.bind(this)} />
+
+						</Collapse>
+					</div>
+
 					<div className='espaceVisualisationInitital'>
 						<Collapse isOpen={this.state.collapseInitialDisplay}
 							label='Espace de visualisation initial'
@@ -254,6 +301,16 @@ export class SimpleEditor extends Component<PanelEditorProps<SimpleOptions>, ISt
 							<EspaceCoordonnees
 								callbackFromParent={this.myCallbackEspaceCoordonnees.bind(this)}
 								arrayEspaceCoordonnees={this.state.arrayEspaceCoordonnees} />
+
+						</Collapse>
+					</div>
+
+					<div className='espaceVisualisationInitital'>
+						<Collapse isOpen={this.state.collapseObjectVisibility}
+							label='Visibilité des objets'
+							onToggle={this.onToggleObjectVisibility}>
+
+							<ObjectVisibility />
 
 						</Collapse>
 					</div>

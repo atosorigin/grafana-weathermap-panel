@@ -7,16 +7,17 @@ import { EspaceCoordonneesClass } from '../Models/EspaceCoordonneesClass';
  * @param {string} newValue value to insert in the parameter
  * @returns {Coor} object edit
  */
-export const editGoodParameter = (name: string, editCoor: EspaceCoordonneesClass,
-																	 newValue: string): EspaceCoordonneesClass => {
+export const editGoodParameter = (
+	name: string, editCoor: EspaceCoordonneesClass,
+	newValue: string): EspaceCoordonneesClass => {
 	if (name.startsWith('positionXMin')) {
-		editCoor.setXMin(parseInt(newValue, 10));
+		editCoor.setXMin(newValue);
 	} else if (name.startsWith('positionXMax')) {
-		editCoor.setXMax(parseInt(newValue, 10));
+		editCoor.setXMax(newValue);
 	} else if (name.startsWith('positionYMin')) {
-		editCoor.setYMin(parseInt(newValue, 10));
+		editCoor.setYMin(newValue);
 	} else if (name.startsWith('positionYMax')) {
-		editCoor.setYMax(parseInt(newValue, 10));
+		editCoor.setYMax(newValue);
 	} else if (name.startsWith('label')) {
 		editCoor.setLabel(newValue);
 	}

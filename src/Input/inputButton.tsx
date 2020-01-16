@@ -13,7 +13,7 @@ type InputButtonFieldProps = {
 const InputButtonField: FunctionComponent<InputButtonFieldProps> = ({
 	label, value, name, required, _handleChange, id }) => (
 		<div>
-				<FormField label={id}
+				<FormField label={label}
 						labelWidth={10}
 						inputWidth={20}
 						type='button'

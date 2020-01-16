@@ -56,10 +56,10 @@ class EspaceVisualisationInitial extends React.Component<IProps, IState>  {
 
 		const newEspaceCoor: EspaceCoordonneesClass = new EspaceCoordonneesClass(
 			arrayEspaceVisualisationInitial.id || 0,
-			arrayEspaceVisualisationInitial.xMin || 0,
-			arrayEspaceVisualisationInitial.xMax || 0,
-			arrayEspaceVisualisationInitial.yMin || 0,
-			arrayEspaceVisualisationInitial.yMax || 0,
+			arrayEspaceVisualisationInitial.xMin || '0',
+			arrayEspaceVisualisationInitial.xMax || '0',
+			arrayEspaceVisualisationInitial.yMin || '0',
+			arrayEspaceVisualisationInitial.yMax || '0',
 			arrayEspaceVisualisationInitial.label || 'Espace Coordonnées Initial');
 		return newEspaceCoor;
 	}

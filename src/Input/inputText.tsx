@@ -31,7 +31,7 @@ export const InputTextField: FunctionComponent<InputTextFieldProps> = ({
 
 		<div>
 				<FormField label={label}
-					labelWidth={10}
+					labelWidth={ Math.round(label.length * 1.7) }
 					inputWidth={20}
 					type='text'
 					required={required}

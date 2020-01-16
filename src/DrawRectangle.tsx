@@ -6,6 +6,8 @@
 import { EspaceCoordonneesClass } from './Models/EspaceCoordonneesClass';
 import React from 'react';
 
+import { isNumFloat } from 'Functions/isNumFloat';
+
 interface IProps {
 	/**
 	 * color of border
@@ -46,7 +48,7 @@ export default class DrawRectangle extends React.Component<IProps, IState> {
 	 * @param {number} position 1 if xMin, 2 if xMax, 3 if yMin, 4 if yMax
 	 * @returns 0 if it's good or 1 otherwise
 	 */
-	public verifLimit = (value: number, position: number): number => {
+	public verifLimit = (intValue: number, position: number): number => {
 		const { useLimit, limit } = this.props;
 
 		if (!useLimit) {
@@ -55,16 +57,20 @@ export default class DrawRectangle extends React.Component<IProps, IState> {
 
 		if (limit) {
 			if (position === 1 || position === 2) {
-				if (limit.xMin <= value && limit.xMax >= value) {
-					return (value);
+				if (parseInt(limit.xMin, 10) <= intValue
+					&& parseInt(limit.xMax, 10) >= intValue) {
+					return (intValue);
 				} else {
-					return (position === 1 ? limit.xMin : limit.xMax);
+					return (position === 1 ? parseInt(limit.xMin, 10)
+						: parseInt(limit.xMax, 10));
 				}
 			} else if (position === 3 || position === 4) {
-				if (limit.yMin <= value && limit.yMax >= value) {
-					return (value);
+				if (parseInt(limit.yMin, 10) <= intValue
+					&& parseInt(limit.yMax, 10) >= intValue) {
+					return (intValue);
 				} else {
-					return (position === 3 ? limit.yMin : limit.yMax);
+					return (position === 3 ? parseInt(limit.yMin, 10)
+						: parseInt(limit.yMax, 10));
 				}
 			}
 		}
@@ -77,8 +83,8 @@ export default class DrawRectangle extends React.Component<IProps, IState> {
 	 * @param {boolean} isMax true if x or y is max value
 	 * @returns coordinate to percent
 	 */
-	public transformCoordonneesToPx = (size: number, isMax: boolean,
-		position: number): number => {
+	public transformCoordonneesToPx = (
+		size: number, isMax: boolean, position: number): number => {
 		if (size > 100) {
 			size = 100;
 		} else if (size < 0 && size < -100) {
@@ -118,16 +124,16 @@ export default class DrawRectangle extends React.Component<IProps, IState> {
 		let yMax: number = 0;
 		const border: string = '1px solid ' + this.props.color;
 
+		xMin = (isNumFloat(line.xMin)) ? parseInt(line.xMin, 10) : 0;
+		xMax = (isNumFloat(line.xMax)) ? parseInt(line.xMax, 10) : 0;
+		yMin = (isNumFloat(line.yMin)) ? parseInt(line.yMin, 10) : 0;
+		yMax = (isNumFloat(line.yMax)) ? parseInt(line.yMax, 10) : 0;
+
 		if (this.props.useLimit) {
-			xMin = this.verifLimit(line.xMin, 1);
-			xMax = this.verifLimit(line.xMax, 2);
-			yMin = this.verifLimit(line.yMin, 3);
-			yMax = this.verifLimit(line.yMax, 4);
-		} else {
-			xMin = line.xMin;
-			xMax = line.xMax;
-			yMin = line.yMin;
-			yMax = line.yMax;
+			xMin = this.verifLimit(xMin, 1);
+			xMax = this.verifLimit(xMax, 2);
+			yMin = this.verifLimit(yMin, 3);
+			yMax = this.verifLimit(yMax, 4);
 		}
 
 		if (xMax >= 0) {

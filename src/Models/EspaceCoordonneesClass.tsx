@@ -8,10 +8,10 @@
  */
 export class EspaceCoordonneesClass {
 	public id: number;
-	public xMin: number;
-	public xMax: number;
-	public yMin: number;
-	public yMax: number;
+	public xMin: string;
+	public xMax: string;
+	public yMin: string;
+	public yMax: string;
 	public label: string;
 
 	/**
@@ -25,10 +25,10 @@ export class EspaceCoordonneesClass {
 	 */
 	constructor(
 		id: number,
-		xMin: number,
-		xMax: number,
-		yMin: number,
-		yMax: number,
+		xMin: string,
+		xMax: string,
+		yMin: string,
+		yMax: string,
 		label: string,
 	) {
 		this.id = id;
@@ -47,35 +47,35 @@ export class EspaceCoordonneesClass {
 		this.id = id;
 	}
 
-	public getXMin(): number {
+	public getXMin(): string {
 		return this.xMin;
 	}
 
-	public setXMin(xMin: number) {
+	public setXMin(xMin: string) {
 		this.xMin = xMin;
 	}
 
-	public getXMax(): number {
+	public getXMax(): string {
 		return this.xMax;
 	}
 
-	public setXMax(xMax: number) {
+	public setXMax(xMax: string) {
 		this.xMax = xMax;
 	}
 
-	public getYMin(): number {
+	public getYMin(): string {
 		return this.yMin;
 	}
 
-	public setYMin(yMin: number) {
+	public setYMin(yMin: string) {
 		this.yMin = yMin;
 	}
 
-	public getYMax(): number {
+	public getYMax(): string {
 		return this.yMax;
 	}
 
-	public setYMax(yMax: number) {
+	public setYMax(yMax: string) {
 		this.yMax = yMax;
 	}
 

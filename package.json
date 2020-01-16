@@ -1,7 +1,7 @@
 {
   "name": "network-weathermap-panel",
   "version": "0.1",
-  "description": "22 Network WeatherMap Panel Plugin for Grafana",
+  "description": "Network WeatherMap Panel Plugin for Grafana",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
     "test": "grafana-toolkit plugin:test",
