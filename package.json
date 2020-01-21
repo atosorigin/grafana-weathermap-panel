@@ -1,6 +1,6 @@
 {
   "name": "network-weathermap-panel",
-  "version": "0.1",
+  "version": "0.15",
   "description": "Network WeatherMap Panel Plugin for Grafana",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
@@ -13,7 +13,7 @@
   "devDependencies": {
     "@grafana/data": "next",
     "@grafana/toolkit": "next",
-    "@grafana/ui": "next",
+    "@grafana/ui": "^6.6.0-pre-a0b04559e4",
     "css-loader": "^3.3.0"
   },
   "dependencies": {

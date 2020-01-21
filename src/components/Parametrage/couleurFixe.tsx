@@ -1,25 +1,12 @@
 import React from 'react';
 import { FormField } from '@grafana/ui';
-import InputSeriesColorPicker from 'Input/inputSeriesColorPicker';
+import InputSeriesColorPicker from 'Functions/Input/inputSeriesColorPicker';
 import { Seuil } from 'Models/seuil';
 
-interface IProps {
-	/**
-	 * color for fond
-	 */
-	fondIsActive: boolean;
-	/**
-	 * color for contour
-	 */
-	contourIsActive: boolean;
-	/**
-	 * old color
-	 */
-	seuil: Seuil[];
-	/**
-	 * function for return value to parent
-	 */
-	callBackFromParent: (dataFromChild: Seuil[]) => void;
+import { PanelEditorProps } from '@grafana/data';
+import { SimpleOptions } from 'types';
+
+interface IProps extends PanelEditorProps<SimpleOptions> {
 }
 
 interface IState {
@@ -44,9 +31,9 @@ class CouleurFixe extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			colorFond: this.props.seuil[0] ? this.props.seuil[0].couleurFond : '',
-			colorContour: this.props.seuil[0] ? this.props.seuil[0].couleurContour : '',
-			szContour: this.props.seuil[0] ? this.props.seuil[0].sizeContour : '',
+			colorFond: this.props.options.seuil[0] ? this.props.options.seuil[0].couleurFond : '',
+			colorContour: this.props.options.seuil[0] ? this.props.options.seuil[0].couleurContour : '',
+			szContour: this.props.options.seuil[0] ? this.props.options.seuil[0].sizeContour : '',
 		};
 	}
 
@@ -98,9 +85,12 @@ class CouleurFixe extends React.Component<IProps, IState> {
 	public callBack = (): void => {
 		const { colorContour, colorFond, szContour } = this.state;
 		console.log('call back couleurFixe');
-		this.props.callBackFromParent([
-			new Seuil(0, '', '', colorFond, colorContour, szContour),
-		]);
+
+		const newSeuil: Seuil[] = [new Seuil(0, '', '', colorFond, colorContour, szContour)];
+		this.props.onOptionsChange({
+			...this.props.options,
+			seuil: newSeuil,
+		});
 	}
 
 	/**
@@ -140,7 +130,7 @@ class CouleurFixe extends React.Component<IProps, IState> {
 		const key = '0';
 		const couleur: JSX.Element[] = [];
 
-		if (this.props.fondIsActive) {
+		if (this.props.options.fondIsActive) {
 			const keyFondColorPicker = key + 'FondcolorPicker';
 
 			couleur.push(
@@ -153,7 +143,7 @@ class CouleurFixe extends React.Component<IProps, IState> {
 				/>,
 			);
 		}
-		if (this.props.contourIsActive) {
+		if (this.props.options.contourIsActive) {
 			const keyContourDiv = key + 'ContourDiv';
 
 			couleur.push(

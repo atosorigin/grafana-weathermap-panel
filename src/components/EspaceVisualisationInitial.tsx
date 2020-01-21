@@ -1,20 +1,14 @@
 import React from 'react';
 import { createInputCoor } from '../Functions/createInputCoor';
-import InputTextField from '../Input/inputText';
-import { InputClass } from 'Models/inputClass';
-import { ArrayInputClass } from 'Models/arrayInputClass';
-import { EspaceCoordonneesClass } from 'Models/EspaceCoordonneesClass';
+import InputTextField from '../Functions/Input/inputText';
+import { InputClass } from '../Models/inputClass';
+import { ArrayInputClass } from '../Models/arrayInputClass';
+import { EspaceCoordonneesClass } from '../Models/EspaceCoordonneesClass';
 import { editGoodParameter } from '../Functions/editGoodParameter';
+import { PanelEditorProps } from '@grafana/data';
+import { SimpleOptions } from 'types';
 
-interface IProps {
-	/**
-	 * function for return arrayInput for Parent
-	 */
-	callBackFromParent: Function;
-	/**
-	 * old data
-	 */
-	arrayEspaceVisualisationInitial: EspaceCoordonneesClass;
+interface IProps extends PanelEditorProps<SimpleOptions> {
 }
 
 interface IState {
@@ -45,14 +39,17 @@ class EspaceVisualisationInitial extends React.Component<IProps, IState>  {
 	 * Call parent to send arrayCoor data
 	 */
 	public callBack = () => {
-		this.props.callBackFromParent(this.state.arrayCoor);
+		this.props.onOptionsChange({
+			...this.props.options,
+			arrayEspaceVisualisationInitial: this.state.arrayCoor,
+		});
 	}
 
 	/**
 	 * initialize a new EspaceCoordonnees Class
 	 */
 	public initEspaceCoordonneesClass = (): EspaceCoordonneesClass => {
-		const { arrayEspaceVisualisationInitial } = this.props;
+		const { arrayEspaceVisualisationInitial } = this.props.options;
 
 		const newEspaceCoor: EspaceCoordonneesClass = new EspaceCoordonneesClass(
 			arrayEspaceVisualisationInitial.id || 0,

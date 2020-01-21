@@ -1,0 +1,14 @@
+{
+	"objectVisibility": {
+		"decalCenterPointTextRegion": "Décaler le point de centrage de la région de texte",
+		"decalCenterBubble": "Décaler la pointe ou le centre d’une bulle",
+		"forceCalqueLevel": "Forcer un niveau de calque spécifique",
+		"forceCourbSpecificLink": "Forcer une courbure de lien spécifique",
+		"calcLevel": "Niveau de calque",
+		"courbure": "Courbure"
+	},
+	"basics": {
+		"abscisses": "Abscisses",
+		"ordonnees": "Ordonnées"
+	}
+}

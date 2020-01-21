@@ -1,10 +1,10 @@
 {
   "type": "panel",
-  "name": "Synoptique pour Grafana",
-  "id": "myorgid-simple-panel",
+  "name": "network WeatherMap",
+  "id": "grafana-network-weathermap-panel",
 
   "info": {
-    "description": "Plugin pour EDF",
+    "description": "Network WeatherMap Panel Plugin for Grafana",
     "author": {
       "name": "Atos OpenSource"
     },

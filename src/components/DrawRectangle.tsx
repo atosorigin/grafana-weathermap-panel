@@ -1,12 +1,7 @@
-
-/*!
- * Atos Opensource 2019
- */
-
-import { EspaceCoordonneesClass } from './Models/EspaceCoordonneesClass';
+import { EspaceCoordonneesClass } from '../Models/EspaceCoordonneesClass';
 import React from 'react';
 
-import { isNumFloat } from 'Functions/isNumFloat';
+import { isNumFloat } from '../Functions/isNumFloat';
 
 interface IProps {
 	/**
@@ -84,6 +79,8 @@ export default class DrawRectangle extends React.Component<IProps, IState> {
 	 * @returns coordinate to percent
 	 */
 	public transformCoordonneesToPx = (
+
+
 		size: number, isMax: boolean, position: number): number => {
 		if (size > 100) {
 			size = 100;

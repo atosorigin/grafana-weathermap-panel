@@ -5,38 +5,10 @@ import CouleurFixe from './couleurFixe';
 import ParametrageMetriquePrincipale from './parametrageMetriquePrincipale';
 import { Seuil } from 'Models/seuil';
 import { ParametrageMetrique } from 'Models/parametrageMetrique';
+import { PanelEditorProps } from '@grafana/data';
+import { SimpleOptions } from 'types';
 
-interface IProps {
-	/**
-	 * call back from parent
-	 */
-	callBackFromParent: (
-		pFondIsActive: boolean,
-		pContourIsActive: boolean,
-		pColorMode: boolean,
-		pSeuil: Seuil[],
-		parametrageMetrique: ParametrageMetrique) => void;
-	/**
-	 * last value fond
-	 */
-	fondIsActive: boolean;
-	/**
-	 * last value contour
-	 */
-	contourIsActive: boolean;
-	/**
-	 * last color mode
-	 */
-	colorMode: boolean;
-	/**
-	 * last seuil
-	 */
-	seuil: Seuil[];
-	/**
-	 * stock metrique
-	 */
-	parametrageMetrique: ParametrageMetrique;
-}
+interface IProps extends PanelEditorProps<SimpleOptions> { }
 
 interface IState {
 	/**
@@ -68,11 +40,11 @@ class ParametresGeneriques extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			fondIsActive: this.props.fondIsActive,
-			contourIsActive: this.props.contourIsActive,
-			colorMode: this.props.colorMode,
-			seuil: this.props.seuil,
-			parametrageMetrique: this.props.parametrageMetrique,
+			fondIsActive: this.props.options.fondIsActive,
+			contourIsActive: this.props.options.contourIsActive,
+			colorMode: this.props.options.colorMode,
+			seuil: this.props.options.seuil,
+			parametrageMetrique: this.props.options.parametrageMetrique,
 		};
 	}
 
@@ -80,12 +52,14 @@ class ParametresGeneriques extends React.Component<IProps, IState> {
 	 * call back data to parent
 	 */
 	public callBack = (): void => {
-		this.props.callBackFromParent(
-			this.state.fondIsActive,
-			this.state.contourIsActive,
-			this.state.colorMode,
-			this.state.seuil,
-			this.state.parametrageMetrique);
+		const { onOptionsChange } = this.props;
+
+		onOptionsChange({
+			...this.props.options,
+			fondIsActive: this.state.fondIsActive,
+			contourIsActive: this.state.contourIsActive,
+			colorMode: this.state.colorMode,
+		});
 	}
 
 	/**
@@ -202,32 +176,6 @@ class ParametresGeneriques extends React.Component<IProps, IState> {
 	}
 
 	/**
-	 * save data in state and call callBack function
-	 * @param dataFromChild Seuil[]
-	 */
-	public myCallBackColor = async (dataFromChild: Seuil[]) => {
-		console.group('myCallBackColor');
-		console.table(dataFromChild);
-		console.groupEnd();
-
-		await this.setStateAsyncSeuil({
-			seuil: dataFromChild,
-		});
-		this.callBack();
-	}
-
-	/**
-	 * save data in state and call callBack function
-	 */
-	public myCallBackMetriquePrincipal = async (
-		param: ParametrageMetrique) => {
-		await this.setStateAsyncParametrageMetrique({
-			parametrageMetrique: param,
-		});
-		this.callBack();
-	}
-
-	/**
 	 * HTML
 	 */
 	public render() {
@@ -240,8 +188,9 @@ class ParametresGeneriques extends React.Component<IProps, IState> {
 
 					<h4>Paramétrage d&#39;une métrique principale</h4>
 					<ParametrageMetriquePrincipale
-						parametrageMetrique={this.state.parametrageMetrique}
-						callBackFromParent={this.myCallBackMetriquePrincipal.bind(this)}
+						options={this.props.options}
+						onOptionsChange={this.props.onOptionsChange}
+						data={this.props.data}
 					/>
 
 					<h4>Objets graphiques</h4>
@@ -271,18 +220,17 @@ class ParametresGeneriques extends React.Component<IProps, IState> {
 					this.state.colorMode ?
 						(
 							<CouleurVariable
-								fondIsActive={this.state.fondIsActive}
-								contourIsActive={this.state.contourIsActive}
-								seuil={this.state.seuil}
-								callBackFromParent={this.myCallBackColor.bind(this)} />
+								options={this.props.options}
+								onOptionsChange={this.props.onOptionsChange}
+								data={this.props.data}
+							/>
 						)
 						:
 						(
 							<CouleurFixe
-								fondIsActive={this.state.fondIsActive}
-								contourIsActive={this.state.contourIsActive}
-								seuil={this.state.seuil}
-								callBackFromParent={this.myCallBackColor.bind(this)}
+								options={this.props.options}
+								onOptionsChange={this.props.onOptionsChange}
+								data={this.props.data}
 							/>
 						)
 				}

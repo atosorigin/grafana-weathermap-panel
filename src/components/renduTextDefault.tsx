@@ -3,18 +3,11 @@ import React from 'react';
 import { FormField } from '@grafana/ui';
 import { SelectableValue } from '@grafana/data';
 
-import InputSelect from 'Input/inputSelect';
+import InputSelect from 'Functions/Input/inputSelect';
+import { PanelEditorProps } from '@grafana/data';
+import { SimpleOptions } from 'types';
 
-interface IProps {
-	/** police for SimplePanel */
-	police: string;
-	/** size for SimplePanel */
-	taille: string;
-	/** style for SimplePanel */
-	style: string;
-	/** call for return value to parent */
-	// tslint:disable-next-line: completed-docs
-	callBackFromParent: (dataFromChild: {police: string, taille: string, style: string}) => void;
+interface IProps extends PanelEditorProps<SimpleOptions> {
 }
 
 interface IState {
@@ -33,9 +26,10 @@ class RendutextDefault extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			newPolice: { value: this.props.police, label: this.props.police },
-			taille: this.props.taille,
-			style: this.props.style,
+			newPolice: { value: this.props.options.police,
+				label: this.props.options.police },
+			taille: this.props.options.taille,
+			style: this.props.options.style,
 		};
 	}
 
@@ -44,8 +38,16 @@ class RendutextDefault extends React.Component<IProps, IState> {
 	 */
 	public callParent = () => {
 		const { newPolice, taille, style } = this.state;
-		const police: string = newPolice.value || '';
-		this.props.callBackFromParent({ police, taille, style });
+		const pPolice: string = newPolice.value || '';
+		const pTaille = taille;
+		const pStyle = style;
+
+		this.props.onOptionsChange({
+			...this.props.options,
+			police: pPolice,
+			taille: pTaille,
+			style: pStyle,
+		});
 	}
 
 	/**

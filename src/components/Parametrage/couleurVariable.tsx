@@ -1,33 +1,17 @@
 import React from 'react';
-import { ArrayInputClass } from '../Models/arrayInputClass';
-import { Seuil } from '../Models/seuil';
-import { InputClass } from '../Models/inputClass';
-
-import { SimpleOptions } from '../types';
+import { ArrayInputClass } from 'Models/arrayInputClass';
+import { Seuil } from 'Models/seuil';
+import { InputClass } from 'Models/inputClass';
 
 import { Button, FormField } from '@grafana/ui';
+
+import InputTextField from 'Functions/Input/inputText';
+import InputSeriesColorPicker from 'Functions/Input/inputSeriesColorPicker';
+
 import { PanelEditorProps } from '@grafana/data';
+import { SimpleOptions } from 'types';
 
-import InputTextField from 'Input/inputText';
-import InputSeriesColorPicker from 'Input/inputSeriesColorPicker';
-
-interface IProps {
-	/**
-	 * fond is select
-	 */
-	fondIsActive: boolean;
-	/**
-	 * contour is select
-	 */
-	contourIsActive: boolean;
-	/**
-	 * ancien Seuil
-	 */
-	seuil: Seuil[];
-	/**
-	 * call back from parent
-	 */
-	callBackFromParent: (dataFromChild: Seuil[]) => void;
+interface IProps extends PanelEditorProps<SimpleOptions> {
 }
 
 interface IState {
@@ -61,7 +45,7 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 		super(props);
 		this.state = {
 			arrayInputClass: [],
-			seuil: this.props.seuil,
+			seuil: this.props.options.seuil,
 			index: 0,
 			nbVariation: '3',
 			waitEnd: false,
@@ -142,7 +126,12 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 	 * send data to parent
 	 */
 	public callBack = () => {
-		this.props.callBackFromParent(this.state.seuil);
+		const { onOptionsChange } = this.props;
+
+		onOptionsChange({
+			...this.props.options,
+			seuil: this.state.seuil,
+		});
 	}
 
 	/**
@@ -245,7 +234,7 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 		const key = keyInt.toString();
 		const couleur: JSX.Element[] = [];
 
-		if (this.props.fondIsActive) {
+		if (this.props.options.fondIsActive) {
 			const keyFondColorPicker = key + 'FondcolorPicker';
 
 			couleur.push(
@@ -258,7 +247,7 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 				/>,
 			);
 		}
-		if (this.props.contourIsActive) {
+		if (this.props.options.contourIsActive) {
 			const keyContourDiv = key + 'ContourDiv';
 
 			couleur.push(
@@ -408,9 +397,9 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 			waitEnd: true,
 		});
 
-		if (this.props.seuil.length > 0) {
+		if (this.props.options.seuil.length > 0) {
 			const nb: number = parseInt(this.state.nbVariation, 10);
-			await this.addVariation(nb, this.props.seuil);
+			await this.addVariation(nb, this.props.options.seuil);
 			await this.setStateAsyncArrayWaitEnd({
 				waitEnd: false,
 			});
@@ -448,7 +437,6 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 				<Button onClick={this.infoSeuil}>
 					Info Seuil
 				</Button>
-				{/* <Alert title='test' /> */}
 			</div>
 		);
 	}

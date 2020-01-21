@@ -3,7 +3,7 @@ import { EspaceCoordonneesClass } from 'Models/EspaceCoordonneesClass';
 import _ from 'lodash';
 import React from 'react';
 import { SimpleOptions } from 'types';
-import DrawRectangle from './DrawRectangle';
+import DrawRectangle from './components/DrawRectangle';
 
 interface IProps extends PanelProps<SimpleOptions> { }
 

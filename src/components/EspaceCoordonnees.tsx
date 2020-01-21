@@ -3,22 +3,16 @@ import { Button } from '@grafana/ui';
 import { ArrayInputClass } from '../Models/arrayInputClass';
 import { EspaceCoordonneesClass } from '../Models/EspaceCoordonneesClass';
 import { InputClass } from '../Models/inputClass';
-import InputButtonField from '../Input/inputButton';
-import InputTextField from '../Input/inputText';
+import InputButtonField from '../Functions/Input/inputButton';
+import InputTextField from '../Functions/Input/inputText';
 import { createInputCoor } from '../Functions/createInputCoor';
 import { editGoodParameter } from '../Functions/editGoodParameter';
 
 import '../style/EspaceCoordonnees.css';
+import { PanelEditorProps } from '@grafana/data';
+import { SimpleOptions } from 'types';
 
-interface IProps {
-	/**
-	 * call callbackFromParent function in SimpleEditor
-	 */
-	callbackFromParent: Function;
-	/**
-	 * last value of parent if you edit the last panel
-	 */
-	arrayEspaceCoordonnees: EspaceCoordonneesClass[];
+interface IProps extends PanelEditorProps<SimpleOptions> {
 }
 
 interface IState {
@@ -59,7 +53,10 @@ class EspaceCoordonnees extends React.Component<IProps, IState>  {
 	 * call function to return arrayCoor a SimpleEditor
 	 */
 	public callBack = () => {
-		this.props.callbackFromParent(this.state.arrayCoor);
+		this.props.onOptionsChange({
+			...this.props.options,
+			arrayEspaceCoordonnees: this.state.arrayCoor,
+		});
 	}
 
 	/**
@@ -235,7 +232,6 @@ class EspaceCoordonnees extends React.Component<IProps, IState>  {
 							required={obj.getRequired()}
 							_handleChange={this.deleteOwnInput}
 							id={obj.getId()} />,
-					// <DeleteButton onClickDelete={this.onClickDelete}>Delete</DeleteButton>,
 				);
 			const divKey: string = 'inputCoor' + line.getId();
 			const newInput: JSX.Element = <div key={divKey} className='inputCoor'>{mapItems}</div>;
@@ -252,14 +248,9 @@ class EspaceCoordonnees extends React.Component<IProps, IState>  {
 	 * call function in load component
 	 */
 	public componentDidMount = () => {
-		const { arrayEspaceCoordonnees } = this.props;
+		const { arrayEspaceCoordonnees } = this.props.options;
 
 		if (arrayEspaceCoordonnees.length === 0) {
-			// if (!this.state.debug) {
-			// 	this.setState({
-			// 		debug: !this.state.debug,
-			// 	});
-			// }
 			return;
 		}
 		for (const element of arrayEspaceCoordonnees) {
@@ -268,9 +259,6 @@ class EspaceCoordonnees extends React.Component<IProps, IState>  {
 					element.xMax, element.yMin, element.yMax, element.label);
 			}, 100);
 		}
-		// this.setState({
-		// 	debug: !this.state.debug,
-		// });
 	}
 
 	/**

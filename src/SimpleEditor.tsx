@@ -6,17 +6,14 @@ import _ from 'lodash';
 
 import { EspaceCoordonneesClass } from 'Models/EspaceCoordonneesClass';
 
-import EspaceCoordonnees from './EspaceCoordonnees/EspaceCoordonnees';
-import RendutextDefault from './RenduTextDefault/renduTextDefault';
-import EspaceVisualisationInitial from './EspaceVisualisationInitial/EspaceVisualisationInitial';
-import ParametresGeneriques from './Parametrage/parametresGeneriques';
-import TextObjects from './Parametrage/textObjects';
+import EspaceCoordonnees from './components/EspaceCoordonnees';
+import RendutextDefault from './components/renduTextDefault';
+import EspaceVisualisationInitial from './components/EspaceVisualisationInitial';
+import ParametresGeneriques from './components/Parametrage/parametresGeneriques';
+import TextObjects from './components/Parametrage/textObjects';
 
 import './style/SimpleEditor.css';
-import { Seuil } from 'Models/seuil';
-import { ParametrageMetrique } from 'Models/parametrageMetrique';
-import { TextObject } from 'Models/TextObject';
-import ObjectVisibility from 'objectVisibility';
+import ObjectVisibility from 'components/objectVisibility';
 
 interface IProps extends PanelEditorProps<SimpleOptions> { }
 interface IState {
@@ -75,88 +72,6 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 		target: HTMLInputElement;
 	}) => {
 		this.props.onOptionsChange({ ...this.props.options, imageUrl: event.target.value });
-	}
-
-	/**
-	 * Data from child (EspaceCoordonnees)
-	 * @param {EspaceCoordonneesClass[]} dataFromChild array EspaceCoordonneesClass object
-	 */
-	public myCallbackEspaceCoordonnees = (dataFromChild: EspaceCoordonneesClass[]) => {
-		this.setState({
-			arrayEspaceCoordonnees: dataFromChild,
-		});
-
-		// Bug
-		this.props.onOptionsChange({
-			...this.props.options,
-			arrayEspaceCoordonnees: dataFromChild,
-		});
-	}
-
-	/**
-	 * Data from child (EspaceVisualisationInitial)
-	 */
-	public myCallBackVisuelInitial = (dataFromChild: EspaceCoordonneesClass) => {
-		this.props.onOptionsChange({
-			...this.props.options,
-			arrayEspaceVisualisationInitial: dataFromChild,
-		});
-	}
-
-	/**
-	 * edit default text
-	 */
-	public myCallBackDefaultText = (datafromChild: {
-		/**
-		 * new police
-		 */
-		police: string,
-		/**
-		 * new size
-		 */
-		taille: string,
-		/**
-		 * new style (italic, bold, ...)
-		 */
-		style: string,
-	}) => {
-		this.props.onOptionsChange({
-			...this.props.options,
-			police: datafromChild.police,
-			taille: datafromChild.taille,
-			style: datafromChild.style,
-		});
-	}
-
-	/**
-	 * gyuhjkjkhgf
-	 */
-	public callBackTextObject = (newValue: TextObject): void => {
-		this.props.onOptionsChange({
-			...this.props.options,
-			valueTextObject: newValue,
-		});
-	}
-
-	/**
-	 * call back for parametresGeneriques
-	 */
-	public myCallBackGenericSettings = (
-		pFondIsActive: boolean,
-		pContourIsActive: boolean,
-		pColorMode: boolean,
-		pSeuil: Seuil[],
-		parametresMetrique: ParametrageMetrique) => {
-		const { onOptionsChange } = this.props;
-
-		onOptionsChange({
-			...this.props.options,
-			fondIsActive: pFondIsActive,
-			contourIsActive: pContourIsActive,
-			colorMode: pColorMode,
-			seuil: pSeuil,
-			parametrageMetrique: parametresMetrique,
-		});
 	}
 
 	/** edit collapse when click */
@@ -228,10 +143,9 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 						onToggle={this.onToggleCollapseDefaultText}>
 
 						<RendutextDefault
-							police={options.police}
-							taille={options.taille}
-							style={options.style}
-							callBackFromParent={this.myCallBackDefaultText.bind(this)}
+							options={this.props.options}
+							onOptionsChange={this.props.onOptionsChange}
+							data={this.props.data}
 						/>
 
 					</Collapse>
@@ -259,12 +173,9 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 							onToggle={this.onToggleGenericSettings}>
 
 							<ParametresGeneriques
-								callBackFromParent={this.myCallBackGenericSettings.bind(this)}
-								fondIsActive={options.fondIsActive}
-								contourIsActive={options.contourIsActive}
-								colorMode={options.colorMode}
-								seuil={options.seuil}
-								parametrageMetrique={options.parametrageMetrique}
+								options={this.props.options}
+								onOptionsChange={this.props.onOptionsChange}
+								data={this.props.data}
 							/>
 
 						</Collapse>
@@ -275,8 +186,11 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 							label='Parametres Generiques bis'
 							onToggle={this.onToggleGenericSettingsBis}>
 
-							<TextObjects lastValue={this.props.options.valueTextObject}
-								callBackFromParent={this.callBackTextObject.bind(this)} />
+							<TextObjects
+								options={this.props.options}
+								onOptionsChange={this.props.onOptionsChange}
+								data={this.props.data}
+							/>
 
 						</Collapse>
 					</div>
@@ -287,8 +201,10 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 							onToggle={this.onToggleInitialDisplay}>
 
 							<EspaceVisualisationInitial
-								callBackFromParent={this.myCallBackVisuelInitial.bind(this)}
-								arrayEspaceVisualisationInitial={this.props.options.arrayEspaceVisualisationInitial} />
+								options={this.props.options}
+								onOptionsChange={this.props.onOptionsChange}
+								data={this.props.data}
+							/>
 
 						</Collapse>
 					</div>
@@ -299,8 +215,10 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 							onToggle={this.onToggleCoorSpace}>
 
 							<EspaceCoordonnees
-								callbackFromParent={this.myCallbackEspaceCoordonnees.bind(this)}
-								arrayEspaceCoordonnees={this.state.arrayEspaceCoordonnees} />
+								options={this.props.options}
+								onOptionsChange={this.props.onOptionsChange}
+								data={this.props.data}
+							/>
 
 						</Collapse>
 					</div>

@@ -1,17 +1,10 @@
 import React from 'react';
-import InputTextField from 'Input/inputText';
+import InputTextField from 'Functions/Input/inputText';
 import { ParametrageMetrique } from 'Models/parametrageMetrique';
+import { PanelEditorProps } from '@grafana/data';
+import { SimpleOptions } from 'types';
 
-interface IProps {
-	/**
-	 * old data
-	 */
-	parametrageMetrique: ParametrageMetrique;
-	/**
-	 * call parent for return value
-	 */
-	callBackFromParent: (parametrageMetrique: ParametrageMetrique) => void;
-}
+interface IProps extends PanelEditorProps<SimpleOptions> { }
 
 interface IState {
 	/**react
@@ -34,9 +27,9 @@ class ParametrageMetriquePrincipale extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			followLink: this.props.parametrageMetrique.followLink,
-			hoveringTooltipLink: this.props.parametrageMetrique.hoveringTooltipLink,
-			hoveringTooltipText: this.props.parametrageMetrique.hoveringTooltipText,
+			followLink: this.props.options.parametrageMetrique.followLink,
+			hoveringTooltipLink: this.props.options.parametrageMetrique.hoveringTooltipLink,
+			hoveringTooltipText: this.props.options.parametrageMetrique.hoveringTooltipText,
 		};
 	}
 
@@ -86,12 +79,17 @@ class ParametrageMetriquePrincipale extends React.Component<IProps, IState> {
 	 * save data
 	 */
 	public callBack = () => {
-		const { followLink, hoveringTooltipLink, hoveringTooltipText } =  this.state;
+		const { followLink, hoveringTooltipLink, hoveringTooltipText } = this.state;
 
-		this.props
-		.callBackFromParent(new ParametrageMetrique(followLink,
-		hoveringTooltipLink,
-		hoveringTooltipText));
+		const { onOptionsChange } = this.props;
+		const newMetrique: ParametrageMetrique = new ParametrageMetrique(followLink,
+			hoveringTooltipLink,
+			hoveringTooltipText);
+
+		onOptionsChange({
+			...this.props.options,
+			parametrageMetrique: newMetrique,
+		});
 	}
 
 	/**
@@ -138,7 +136,9 @@ class ParametrageMetriquePrincipale extends React.Component<IProps, IState> {
 					required={false}
 					value={this.state.followLink}
 					_handleChange={
-						(event) => this.onChangeFollowLink(event.currentTarget.value)
+						(event: {
+							currentTarget: HTMLInputElement
+						}) => this.onChangeFollowLink(event.currentTarget.value)
 					}
 				/>
 
@@ -149,7 +149,9 @@ class ParametrageMetriquePrincipale extends React.Component<IProps, IState> {
 					required={false}
 					value={this.state.hoveringTooltipLink}
 					_handleChange={
-						(event) => this.onChangeHoveringTooltipLink(event.currentTarget.value)
+						(event: {
+							currentTarget: HTMLInputElement
+						}) => this.onChangeHoveringTooltipLink(event.currentTarget.value)
 					}
 				/>
 
@@ -160,7 +162,9 @@ class ParametrageMetriquePrincipale extends React.Component<IProps, IState> {
 					required={false}
 					value={this.state.hoveringTooltipText}
 					_handleChange={
-						(event) => this.onChangeHoveringTooltipText(event.currentTarget.value)
+						(event: {
+							currentTarget: HTMLInputElement
+						}) => this.onChangeHoveringTooltipText(event.currentTarget.value)
 					}
 				/>
 

@@ -1,18 +1,16 @@
 import React from 'react';
 import { Button } from '@grafana/ui';
 
-import InputTextField from 'Input/inputText';
+import InputTextField from 'Functions/Input/inputText';
 
-import InputSeriesColorPicker from 'Input/inputSeriesColorPicker';
+import InputSeriesColorPicker from 'Functions/Input/inputSeriesColorPicker';
 import { Switch } from '@grafana/ui';
-
 import { TextObject } from 'Models/TextObject';
 
-interface IProps {
-	/** last value of the panel */
-	lastValue: TextObject;
-	/** call back function to save */
-	callBackFromParent: (newValue: TextObject) => void;
+import { PanelEditorProps } from '@grafana/data';
+import { SimpleOptions } from 'types';
+
+interface IProps extends PanelEditorProps<SimpleOptions> {
 }
 
 interface IState {
@@ -67,25 +65,25 @@ class TextObjects extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			legende: this.props.lastValue.legende,
-			valeur: this.props.lastValue.valeur,
-			unite: this.props.lastValue.unite,
-			colorBackRegion: this.props.lastValue.colorBackRegion,
-			colorBackBulle: this.props.lastValue.colorBackBulle,
-			colorBackElement: this.props.lastValue.colorBackElement,
-			colorTextBulle: this.props.lastValue.colorTextBulle,
-			colorTextElement: this.props.lastValue.colorTextElement,
-			colorTextRegion: this.props.lastValue.colorTextRegion,
-			styleTextBulle: this.props.lastValue.styleTextBulle,
-			styleTextRegion: this.props.lastValue.styleTextRegion,
-			generateObjectText: this.props.lastValue.generateObjectText,
-			legendElement: this.props.lastValue.legendElement,
-			numericFormatElement: this.props.lastValue.numericFormatElement,
-			unityMesureElement: this.props.lastValue.unityMesureElement,
-			displayObjectInText: this.props.lastValue.displayObjectInText,
-			displayObjectPermanently: this.props.lastValue.displayObjectPermanently,
-			addColorTextElement: this.props.lastValue.addColorTextElement,
-			addColorBackElement: this.props.lastValue.addColorBackElement,
+			legende: this.props.options.valueTextObject.legende,
+			valeur: this.props.options.valueTextObject.valeur,
+			unite: this.props.options.valueTextObject.unite,
+			colorBackRegion: this.props.options.valueTextObject.colorBackRegion,
+			colorBackBulle: this.props.options.valueTextObject.colorBackBulle,
+			colorBackElement: this.props.options.valueTextObject.colorBackElement,
+			colorTextBulle: this.props.options.valueTextObject.colorTextBulle,
+			colorTextElement: this.props.options.valueTextObject.colorTextElement,
+			colorTextRegion: this.props.options.valueTextObject.colorTextRegion,
+			styleTextBulle: this.props.options.valueTextObject.styleTextBulle,
+			styleTextRegion: this.props.options.valueTextObject.styleTextRegion,
+			generateObjectText: this.props.options.valueTextObject.generateObjectText,
+			legendElement: this.props.options.valueTextObject.legendElement,
+			numericFormatElement: this.props.options.valueTextObject.numericFormatElement,
+			unityMesureElement: this.props.options.valueTextObject.unityMesureElement,
+			displayObjectInText: this.props.options.valueTextObject.displayObjectInText,
+			displayObjectPermanently: this.props.options.valueTextObject.displayObjectPermanently,
+			addColorTextElement: this.props.options.valueTextObject.addColorTextElement,
+			addColorBackElement: this.props.options.valueTextObject.addColorBackElement,
 
 		};
 	}
@@ -115,7 +113,10 @@ class TextObjects extends React.Component<IProps, IState> {
 			this.state.addColorBackElement,
 			this.state.colorBackElement,
 		);
-		this.props.callBackFromParent(newValue);
+		this.props.onOptionsChange({
+			...this.props.options,
+			valueTextObject: newValue,
+		});
 	}
 
 	/** change value for legend input */
