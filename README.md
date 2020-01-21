@@ -1,21 +1,44 @@
-# Simple React Panel
+# Network WeatherMap Panel
 
-This is just a stub to show how you can create a basic visualization plugin.
+Visualization Network with  Prometheus
 
-To work with this plugin run:
+
+# Requirements
+
+* Grafana > 6.5.x
+
+
+# Installation
+
+TODO
+
+TODO
+
+TODO
+
+TODO
+
+
 ```
-yarn dev
+grafana-cli plugins install network-weathermap-panel
+
+grafana-cli plugins install <id du plugin>
+
+service grafana-server restart
 ```
 
-or
-```
-yarn watch
-```
 
-This will run linting tools and apply prettier fix.
+## Alternative installation methods
+
+### Download latest zip
 
 
-To build the plugin run:
+
+
+### Git Clone
+
+
 ```
-yarn build
+git clone https://github.com/xxxxxxxxxxx.git --branch master
+sudo service grafana-server restart
 ```
