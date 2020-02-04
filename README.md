@@ -18,23 +18,35 @@ Download and install it
 
 
 
-## grafana-cli
+## Automatic
 
 ```
 TODO
 ```
 
-## Build
+## Manual
 
 ```sh
 $ git clone https://github.com/atosorigin/grafana-weathermap
+```
+
+move the folder to grafana's plugins folder
+
+```sh
+mv grafana-weathermap /var/lib/grafana/plugins
+```
+
+Install the plugins
+
+```sh
+$ cd grafana-weathermap
 $ yarn install
 $ yarn build
 $ yarn watch
-
-
 $ systemctl restart grafana-server
 ```
 
 
 ## Utilisation
+
+TODO
