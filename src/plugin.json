@@ -1,10 +1,9 @@
 {
   "type": "panel",
-  "name": "network WeatherMap",
-  "id": "grafana-network-weathermap-panel",
-
+  "name": "WeatherMap",
+  "id": "grafana-weathermap-panel",
   "info": {
-    "description": "Network WeatherMap Panel Plugin for Grafana",
+    "description": "WeatherMap Panel Plugin for Grafana",
     "author": {
       "name": "Atos OpenSource"
     },
@@ -14,16 +13,16 @@
       "large": "img/logo.svg"
     },
     "links": [
-      {"name": "Website", "url": "https://github.com/grafana/simple-react-panel"},
-      {"name": "License", "url": "https://github.com/grafana/simple-react-panel/blob/master/LICENSE"}
+      {"name": "Website", "url": "https://github.com/atosorigin/grafana-weathermap"},
+      {"name": "License", "url": "https://github.com/atosorigin/grafana-weathermap/blob/master/LICENCE"}
     ],
     "screenshots": [],
-    "version": "%VERSION%",
-    "updated": "%TODAY%"
+    "version": "0.20",
+    "updated": "2020-02-03"
   },
 
   "dependencies": {
-    "grafanaVersion": "6.3.x",
+    "grafanaVersion": "6.6.x",
     "plugins": []
   }
 }

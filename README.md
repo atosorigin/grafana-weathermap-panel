@@ -1,73 +1,31 @@
-* Network WeatherMap Panel
+# WeatherMap
 
-Visualization Network with  Prometheus
+WeatherMap Panel Plugin for Grafana
 
-
-# Requirements
-
-* Grafana > 6.3.x
+Compatibility with  Prometheus
 
 
 # Installation
 
+Weathermap requires [Grafana](https://www.grafana.com/) v6.6+ to run (not tested lower version)
+Download and install it
+
+
+## grafana-cli
+
+```
 TODO
-
-TODO
-
-TODO
-
-TODO
-
-## Méthodes : 
-
-2 méthodes d'installation disponible : 
-
-* Méthode 1 : 
-
-décompresser le fichier dans data/plugins
-
 ```
 
-cd network-weathermap-panel
+## Build
 
-grafana-cli plugins install network-weathermap-panel
-
-service grafana-server restart
-
+```sh
+$ git clone https://github.com/atosorigin/grafana-weathermap
+$ yarn install
+$ yarn build
+$ yarn watch
+$ systemctl restart grafana-server
 ```
 
 
-* Méthode 2 (en version développeur) : 
-
-
-décompresser le fichier dans data/plugins
-
-
-```
-cd network-weathermap-panel
-
-npm install
-
-yarn watch
-
-
-```
-
-
-
-## Alternative installation methods
-
-### Download latest zip
-
-
-
-
-### Git Clone
-
-
-```
-git clone https://github.com/xxxxxxxxxxx.git --branch master
-sudo service grafana-server restart
-```
-
-
+## Utilisation

@@ -1,4 +1,3 @@
-
 /**
  * class InputClass
  * @param id string
@@ -55,7 +54,6 @@ export class InputClass {
 		this.required = required;
 		this.placeholder = placeholder;
 		this.value = value;
-
 	}
 
 	/**

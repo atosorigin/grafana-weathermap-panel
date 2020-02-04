@@ -13,3 +13,23 @@ h3.titreSection {
 	margin-bottom: 2%;
 /*   color: blue; */
 }
+
+
+.parameter-interface-container {
+  width: 100%;
+}
+
+
+.parameter-interface-list-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-bottom: 4px solid white;
+  margin: 10px 0;
+}
+
+.parameter-interface-title {
+  padding: 10px;
+  list-style: none;
+  cursor: pointer;
+}
