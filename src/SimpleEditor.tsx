@@ -2,8 +2,8 @@ import { PanelEditorProps } from '@grafana/data';
 import { SimpleOptions } from './types';
 import { FormField, Collapse, Tab, TabsBar, TabContent } from '@grafana/ui';
 import React from 'react';
-import _ from 'lodash';
-
+// import _ from 'lodash';
+//
 import { EspaceCoordonneesClass } from 'Models/EspaceCoordonneesClass';
 
 import EspaceCoordonnees from './components/EspaceCoordonnees';

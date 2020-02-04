@@ -1,6 +1,10 @@
 # Changelog
 
-## v0.20 2020-02-03
+## v0.20 (2020-02-04)
+
+- update library and dependance
+
+## v0.20 (2020-02-03)
 
 - Add monitoring data JSON
 - Displayed data
