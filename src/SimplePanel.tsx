@@ -3,7 +3,7 @@ import { PanelProps } from '@grafana/data';
 import { SimpleOptions } from 'types';
 
 import { EspaceCoordonneesExtendClass } from 'Models/EspaceCoordonneesExtendClass';
-import _ from 'lodash';
+
 import DrawRectangle from './components/Draw/DrawRectangle';
 import DrawRectangleExtend from './components/Draw/DrawRectangleExtend';
 import DrawCircleCross from './components/Draw/DrawCircleCross';
@@ -209,7 +209,7 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 	public getCoordinatesWithClick = (event: { nativeEvent: MouseEvent }) => {
 
 		// console.log(event.nativeEvent);
-		
+
 
 		// const element = document.getElementById('mainPanel');
 		console.clear();
