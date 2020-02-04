@@ -4,8 +4,6 @@ import InputSelect from '../Functions/Input/inputSelect';
 import { SelectableValue } from '@grafana/data';
 import { FormField } from '@grafana/ui';
 
-import axios from 'axios';
-
 interface IProps {
 
 }
@@ -29,8 +27,6 @@ interface IState {
 	courbureSelect: Array<SelectableValue<string>>;
 	courbureSelectDefault: SelectableValue<string>,
 	courbureInput: string;
-
-	dataTest: JSX.Element[];
 }
 
 /**
@@ -41,11 +37,11 @@ class ObjectVisibility extends React.Component<IProps, IState> {
 		super(props);
 		this.state = {
 			regionTextSelect: [
-				{ value: 'bonjour', label: 'Bonjour' },
-				{ value: 'Salut', label: 'Salut' },
-				{ value: 'toi', label: 'toi' },
+				{ value: 'value1', label: 'Value 1' },
+				{ value: 'value2', label: 'Value 2' },
+				{ value: 'value3', label: 'Value 3' },
 			],
-			regionTextSelectDefault: { value: 'bonjour', label: 'Bonjour' },
+			regionTextSelectDefault: { value: 'value1', label: 'Value 1' },
 			abscissesPointRegionTexte: '',
 			ordonneesPointRegionTexte: '',
 			centerBubbleSelect: [],
@@ -58,7 +54,6 @@ class ObjectVisibility extends React.Component<IProps, IState> {
 			courbureSelect: [],
 			courbureSelectDefault: {},
 			courbureInput: '',
-			dataTest: [],
 		};
 	}
 
@@ -116,53 +111,29 @@ class ObjectVisibility extends React.Component<IProps, IState> {
 		});
 	}
 
-	/*
-	state => dataTest: JSX.Element[]
-*/
-
-	// public setStateAsyncDataTest = (state: {
-	// 	dataTest: JSX.Element[];
-	// }) => {
-	// 	return new Promise((resolve) => {
-	// 		this.setState(state, resolve);
-	// 	});
-	// }
-
-	// public componentDidMount = () => {
-	// 	axios.get('https://api.punkapi.com/v2/beers')
-	// 		.then(async (res) => {
-	// 			for (const r of res.data) {
-	// 				await this.setStateAsyncDataTest({
-	// 					dataTest: this.state.dataTest.concat(<p>{r.name}</p>),
-	// 				});
-	// 			}
-	// 		});
-	// }
-
 	/**
 	 * result
 	 */
 	public render() {
 
-		const json = require('../Localization/fr.json');
+		const l10s = require('Localization/en.json');
 
 		return (
 			<div>
+						{/* icon={child.icon} */}
+
 				<div>
-					{/* {
-						this.state.dataTest
-					} */}
-					<p>{json.objectVisibility.decalCenterPointTextRegion}</p>
+					<p>{l10s.objectVisibility.decalCenterPointTextRegion}</p>
 					<InputSelect _onChange={this.onChangeRegionTextSelectDefault}
 						data={this.state.regionTextSelect}
 						defaultValue={this.state.regionTextSelectDefault}
 					/>
-					<FormField label={json.basics.abscisses}
+					<FormField label={l10s.basics.abscisses}
 						labelWidth={15} type='text'
 						required={false} name='abscissesPointRegionTexte'
 						onChange={this.onChangeAbscissesPointRegionText}
 						value={this.state.abscissesPointRegionTexte} />
-					<FormField label={json.basics.ordonnees}
+					<FormField label={l10s.basics.ordonnees}
 						labelWidth={15} type='text'
 						required={false} name='ordonneesPointRegionTexte'
 						onChange={this.onChangeOrdonneesPointRegionText}
@@ -170,17 +141,17 @@ class ObjectVisibility extends React.Component<IProps, IState> {
 				</div>
 
 				<div>
-					<p>{json.objectVisibility.decalCenterBubble}</p>
+					<p>{l10s.objectVisibility.decalCenterBubble}</p>
 					<InputSelect _onChange={this.onChangeCenterBubbleSelect}
 						data={this.state.centerBubbleSelect}
 						defaultValue={this.state.centerBubbleSelectDefault}
 					/>
-					<FormField label={json.basics.abscisses}
+					<FormField label={l10s.basics.abscisses}
 						labelWidth={15} type='text'
 						required={false} name='centerBubbleInputAbscisses'
 						onChange={this.onChangeCenterBubbleInputAbscisses}
 						value={this.state.centerBubbleInputAbscisses} />
-					<FormField label={json.basics.ordonnees}
+					<FormField label={l10s.basics.ordonnees}
 						labelWidth={15} type='text'
 						required={false} name='centerBubbleInputOrdonnees'
 						onChange={this.onChangeCenterBubbleInputOrdonnees}
@@ -188,12 +159,12 @@ class ObjectVisibility extends React.Component<IProps, IState> {
 				</div>
 
 				<div>
-					<p>{json.objectVisibility.forceCalqueLevel}</p>
+					<p>{l10s.objectVisibility.forceCalqueLevel}</p>
 					<InputSelect _onChange={this.onChangeNvCalqueSelect}
 						data={this.state.nvCalqueSelect}
 						defaultValue={this.state.nvCalqueSelectDefault}
 					/>
-					<FormField label={json.basics.calcLevel}
+					<FormField label={l10s.objectVisibility.calcLevel}
 						labelWidth={15} type='text'
 						required={false} name='nvCalque'
 						onChange={this.onChangeNvCalque}
@@ -201,18 +172,17 @@ class ObjectVisibility extends React.Component<IProps, IState> {
 				</div>
 
 				<div>
-					<p>{json.objectVisibility.forceCourbSpecificLink}</p>
+					<p>{l10s.objectVisibility.forceCourbSpecificLink}</p>
 					<InputSelect _onChange={this.onChangeCourbureInput}
 						data={this.state.courbureSelect}
 						defaultValue={this.state.courbureSelectDefault}
 					/>
-					<FormField label={json.basics.courbure}
+					<FormField label={l10s.objectVisibility.courbure}
 						labelWidth={15} type='text'
 						required={false} name='courbureInput'
 						onChange={this.onChangeCourbureInput}
 						value={this.state.courbureInput} />
 				</div>
-				{/* <h3>{json.sam.test}</h3> */}
 			</div>
 		);
 	}

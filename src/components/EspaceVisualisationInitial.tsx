@@ -22,6 +22,7 @@ interface IState {
 	arrayCoor: EspaceCoordonneesClass;
 }
 
+
 /**
  * class EspaceVisualisationInitial
  */
@@ -50,6 +51,7 @@ class EspaceVisualisationInitial extends React.Component<IProps, IState>  {
 	 */
 	public initEspaceCoordonneesClass = (): EspaceCoordonneesClass => {
 		const { arrayEspaceVisualisationInitial } = this.props.options;
+		const json = require('Localization/fr.json');
 
 		const newEspaceCoor: EspaceCoordonneesClass = new EspaceCoordonneesClass(
 			arrayEspaceVisualisationInitial.id || 0,
@@ -57,7 +59,7 @@ class EspaceVisualisationInitial extends React.Component<IProps, IState>  {
 			arrayEspaceVisualisationInitial.xMax || '0',
 			arrayEspaceVisualisationInitial.yMin || '0',
 			arrayEspaceVisualisationInitial.yMax || '0',
-			arrayEspaceVisualisationInitial.label || 'Espace Coordonnées Initial');
+			arrayEspaceVisualisationInitial.label || json.initialCoordonateSpace.label);
 		return newEspaceCoor;
 	}
 
@@ -65,7 +67,7 @@ class EspaceVisualisationInitial extends React.Component<IProps, IState>  {
 	 * test
 	 */
 	public initInput = (): ArrayInputClass => {
-		const arrayInput: InputClass[] = createInputCoor(0);
+		const arrayInput: InputClass[] = createInputCoor(0, true);
 		const newArrayInput: ArrayInputClass = new ArrayInputClass(0, arrayInput);
 		return newArrayInput;
 	}

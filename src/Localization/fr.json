@@ -9,6 +9,85 @@
 	},
 	"basics": {
 		"abscisses": "Abscisses",
-		"ordonnees": "Ordonnées"
+		"ordonnees": "Ordonnées",
+		"delete": "Supprimer",
+		"label": "Label"
+	},
+	"simpleEditor": {
+		"renduTextDefault": "Rendu du texte par défaut",
+		"display": "Affichage",
+		"pictureLink": "URL de l'image",
+		"genericSettings": "Parametres Generiques",
+		"genericSettingsBis": "Parametres Generiques bis",
+		"spaceInitialVisualisation": "Espace de visualisation initial",
+		"spaceCoordinate": "Espace de coordonnées",
+		"objectVisibility": "Visibilité des objets"
+	},
+	"coordinateSpace": {
+		"addCoordinate": "Ajouter des coordonnées"
+	},
+	"initialCoordonateSpace": {
+		"label": "Espace Coordonnées Initial"
+	},
+	"inputCoordinate": {
+		"minXPosition": "Position X min",
+		"maxXPosition": "Position X max",
+		"minYPosition": "Position Y min",
+		"maxYPosition": "Position Y max",
+		"image": "Image",
+		"interfaceJson": "Nom d'interface"
+	},
+	"textDefault": {
+		"police": "Police",
+		"size": "Taille",
+		"style": "Style"
+	},
+	"genericParameter": {
+		"settingPrincipalMetric": "Paramétrage d'une métrique principale",
+		"graphicObject": "Objets graphiques",
+		"variableColor": "Couleur variable",
+		"traceBackground": "Tracer le fond",
+		"traceContour": "Tracer le contour"
+	},
+	"metricPrincipalSetting": {
+		"followLink": "Lien à suivre",
+		"link": "Link",
+		"text": "Text",
+		"linkTooltip": "Lien info bulle",
+		"textInTooltip": "Texte dans l'info bulle"
+	},
+	"colorVariable": {
+		"switchBackgroundColor": "Changer la couleur du fond",
+		"switchOutlineColor": "Changer la couleur du contour",
+		"thicknessOutline": "Épaisseur du contour",
+		"variationNumber": "Nombre de variation",
+		"number": "Nombre",
+		"addColor": "Ajouter couleur",
+		"infoSeuil": "Info seuil"
+	},
+	"textObject": {
+		"titleTextObject": "Un objet texte",
+		"optionalLegend": "Légende (optionnelle)",
+		"legend": "Légende",
+		"value": "Valeur",
+		"optionalUnit": "Unité optionnelle",
+		"unit": "Unité",
+		"principalMetric": "Métrique principal",
+		"textRegion": "Région texte",
+		"colorBackground": "Couleur du fond",
+		"colorText": "Couleur du texte",
+		"colorTextOptional": "Couleur du text optionnelle",
+		"textStyle": "Style du texte",
+		"style": "Style",
+		"textBubble": "Bulle de texte",
+		"generateTextObject": "Générer un objet texte",
+		"auxiliaryElement": "Élément auxiliaire",
+		"digitalFormatting": "Formatage numérique (si métrique)",
+		"mesureUnit": "Unité de mesure (si métrique)",
+		"objectDisplayTextTooltip": "Objet affiché dans le texte ou dans le tooltip",
+		"objectDisplayInPermanentlyHover": "Objet affiché en permanence ou en survol",
+		"backgroundColor": "Couleur du fond",
+		"optionalBackgroundColor": "Couleur du fond optionnelle",
+		"save": "Enregistrer"
 	}
 }

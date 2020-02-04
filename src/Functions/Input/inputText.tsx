@@ -1,10 +1,6 @@
-
-/*!
- * Atos Opensource 2019
- */
-
 import { FormField } from '@grafana/ui';
 import React, { ChangeEvent, FunctionComponent } from 'react';
+// import { SelectableValue } from '@grafana/data';
 
 /**
  * props
@@ -30,17 +26,17 @@ export const InputTextField: FunctionComponent<InputTextFieldProps> = ({
 }) => (
 
 		<div>
-				<FormField label={label}
-					labelWidth={ Math.round(label.length * 1.7) }
-					inputWidth={20}
-					type='text'
-					required={required}
-					name={name}
-					value={value}
-					onChange={_handleChange}
-					placeholder={placeholder}
-					disabled={disabled ? disabled : false}
-				/>
+			<FormField label={label}
+				labelWidth={Math.round((label && label.length > 0 ? label.length : 1) * 1.7)}
+				inputWidth={20}
+				type='text'
+				required={required}
+				name={name}
+				value={value}
+				onChange={_handleChange}
+				placeholder={placeholder}
+				disabled={disabled ? disabled : false}
+			/>
 		</div>
 	);
 

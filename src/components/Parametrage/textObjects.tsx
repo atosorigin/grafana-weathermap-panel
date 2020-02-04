@@ -157,7 +157,8 @@ class TextObjects extends React.Component<IProps, IState> {
 	/** change value for style text region */
 	public onChangeStyleTextRegion = (event: {
 		/** target for style text region input */
-		currentTarget: HTMLInputElement }) => {
+		currentTarget: HTMLInputElement
+	}) => {
 		this.setState({
 			styleTextRegion: event.currentTarget.value,
 		});
@@ -166,7 +167,8 @@ class TextObjects extends React.Component<IProps, IState> {
 	/** change value for style text bubble */
 	public onChangeStyleTextBulle = (event: {
 		/** target for style text region bubble */
-		currentTarget: HTMLInputElement }) => {
+		currentTarget: HTMLInputElement
+	}) => {
 		this.setState({
 			styleTextBulle: event.currentTarget.value,
 		});
@@ -196,7 +198,8 @@ class TextObjects extends React.Component<IProps, IState> {
 	/** change value for legend element */
 	public onChangeLegendElement = (event: {
 		/** target for legend text element input */
-		currentTarget: HTMLInputElement }) => {
+		currentTarget: HTMLInputElement
+	}) => {
 		this.setState({
 			legendElement: event.currentTarget.value,
 		});
@@ -205,7 +208,8 @@ class TextObjects extends React.Component<IProps, IState> {
 	/** change value for unity mesure element */
 	public onChangeUnityMesureElement = (event: {
 		/** target for unity mesure element input */
-		currentTarget: HTMLInputElement }) => {
+		currentTarget: HTMLInputElement
+	}) => {
 		this.setState({
 			unityMesureElement: event.currentTarget.value,
 		});
@@ -214,7 +218,8 @@ class TextObjects extends React.Component<IProps, IState> {
 	/** change format for numeric text object */
 	public onChangeFormatageNumeriqueTextObject = (event: {
 		/** target for numeric format text object input */
-		currentTarget: HTMLInputElement }) => {
+		currentTarget: HTMLInputElement
+	}) => {
 		this.setState({
 			numericFormatElement: event.currentTarget.value,
 		});
@@ -266,15 +271,16 @@ class TextObjects extends React.Component<IProps, IState> {
 	 * result
 	 */
 	public render() {
+		const l10n = require('Localization/en.json');
 
 		return (
 			<div>
 				<div>
-					<h4>Un objet texte</h4>
-					<InputTextField label='Légende (optionnelle)'
+					<h4>{l10n.textObject.titleTextObject}</h4>
+					<InputTextField label={l10n.textObject.optionalLegend}
 						key='legendeTextObject'
 						name='legendeTextObject'
-						placeholder='Légende'
+						placeholder={l10n.textObject.legend}
 						required={false}
 						value={this.state.legende}
 						_handleChange={(event: {
@@ -283,10 +289,10 @@ class TextObjects extends React.Component<IProps, IState> {
 						}) =>
 							this.onChangeLegende(event.currentTarget.value)} />
 
-					<InputTextField label='Valeur'
+					<InputTextField label={l10n.textObject.value}
 						key='valeurTextObject'
 						name='valeurTextObject'
-						placeholder='Valeur'
+						placeholder={l10n.textObject.value}
 						required={false}
 						value={this.state.valeur}
 						_handleChange={(event: {
@@ -295,10 +301,10 @@ class TextObjects extends React.Component<IProps, IState> {
 						}) =>
 							this.onChangeValeur(event.currentTarget.value)} />
 
-					<InputTextField label='Unité (optionnelle)'
+					<InputTextField label={l10n.textObject.optionalUnit}
 						key='unitéTextObject'
 						name='unitéTextObject'
-						placeholder='Unité'
+						placeholder={l10n.textObject.unit}
 						required={false}
 						value={this.state.unite}
 						_handleChange={(event: {
@@ -310,100 +316,100 @@ class TextObjects extends React.Component<IProps, IState> {
 				</div>
 
 				<div>
-					<h4>Métriques principales</h4>
+					<h4>{l10n.textObject.principalMetric}</h4>
 
-					<h5>Région de texte</h5>
+					<h5>{l10n.textObject.textRegion}</h5>
 
 					<InputSeriesColorPicker color={this.state.colorBackRegion}
 						keyInt={0}
-						text='Couleur de fond'
+						text={l10n.textObject.colorBackground}
 						_onChange={this.onChangeBackColorRegion}
 					/>
 
 					<InputSeriesColorPicker color={this.state.colorTextRegion}
 						keyInt={0}
-						text='Couleur texte'
+						text={l10n.textObject.colorText}
 						_onChange={this.onChangeColorTextRegion}
 					/>
 
 					<InputTextField
-						label='Style du texte'
+						label={l10n.textObject.textStyle}
 						name='textStyleTextObject'
-						placeholder='style'
+						placeholder={l10n.textObject.style}
 						required={false}
 						value={this.state.styleTextRegion}
 						_handleChange={this.onChangeStyleTextRegion}
 					/>
 
-					<h5>Bulle de texte</h5>
+					<h5>{l10n.textObject.textBubble}</h5>
 
 					<InputSeriesColorPicker
 						color={this.state.colorBackBulle}
 						keyInt={0}
-						text='Couleur de fond'
+						text={l10n.textObject.colorBackground}
 						_onChange={this.onChangeColorBackBulle}
 					/>
 
 					<InputSeriesColorPicker
 						color={this.state.colorTextBulle}
 						keyInt={0}
-						text='Couleur du texte'
+						text={l10n.textObject.colorText}
 						_onChange={this.onChangeColorTextBulle}
 					/>
 
 					<InputTextField
-						label='Style du texte'
+						label={l10n.textObject.textStyle}
 						name='textStyleTextObjectBulle'
-						placeholder='style'
+						placeholder={l10n.textObject.style}
 						required={false}
 						value={this.state.styleTextBulle}
 						_handleChange={this.onChangeStyleTextBulle}
 					/>
 					<Switch
-						label='Générer un objet texte'
+						label={l10n.textObject.generateTextObject}
 						checked={this.state.generateObjectText}
 						onChange={this.onSwitchGenerateObjectText}
 					/>
 				</div>
 
 				<div>
-					<h4>Element auxiliaire</h4>
+					<h4>{l10n.textObject.auxiliaryElement}</h4>
 					<InputTextField
-						label='Legende'
+						label={l10n.textObject.legend}
 						name='legendTextObject'
-						placeholder='Légende'
+						placeholder={l10n.textObject.legend}
 						required={false}
 						value={this.state.legendElement}
 						_handleChange={this.onChangeLegendElement}
 					/>
 					<InputTextField
-						label='Formatage numérique (si métrique)'
+						label={l10n.textObject.digitalFormatting}
 						name='formatageNumeriqueTextObject'
-						placeholder='Formatage Numerique'
+						placeholder={l10n.textObject.digitalFormatting}
 						required={false}
 						value={this.state.numericFormatElement}
 						_handleChange={this.onChangeFormatageNumeriqueTextObject}
 					/>
 					<InputTextField
-						label='Unité de mesure (si métrique)'
+						label={l10n.textObject.mesureUnit}
 						name='mesureUnityTextObject'
-						placeholder='Unité'
+						placeholder={l10n.textObject.unit}
 						required={false}
 						value={this.state.unityMesureElement}
 						_handleChange={this.onChangeUnityMesureElement}
 					/>
 					<Switch
-						label='Objet affiché dans le texte / bulle'
+						label={l10n.textObject.objectDisplayTextTooltip}
 						checked={this.state.displayObjectInText}
 						onChange={this.onSwitchDisplayObjectInText}
 					/>
 					<Switch
-						label='Objet affiché en permanence / survol'
+						label={l10n.textObject.objectDisplayInPermanentlyHover}
 						checked={this.state.displayObjectPermanently}
 						onChange={this.onSwitchDisplayObjectPermanently}
 					/>
 					<Switch
-						label='Colorisation du texte'
+						label={l10n.textObject.colorText}
 						checked={this.state.addColorTextElement}
 						onChange={this.onSwitchAddColorTextElement}
 					/>
@@ -413,7 +419,7 @@ class TextObjects extends React.Component<IProps, IState> {
 								<InputSeriesColorPicker
 									color={this.state.colorTextElement}
 									keyInt={0}
-									text='Colorisation du texte (optionnelle)'
+									text={l10n.textObject.colorTextOptional}
 									_onChange={this.onChangeColorTextElement}
 								/>
 
@@ -424,7 +430,7 @@ class TextObjects extends React.Component<IProps, IState> {
 							)
 					}
 					<Switch
-						label='Colorisation du fond'
+						label={l10n.textObject.backgroundColor}
 						checked={this.state.addColorBackElement}
 						onChange={this.onSwitchAddColorBackElement}
 					/>
@@ -434,7 +440,7 @@ class TextObjects extends React.Component<IProps, IState> {
 								<InputSeriesColorPicker
 									color={this.state.colorBackElement}
 									keyInt={0}
-									text='Colorisation du fond (optionnelle)'
+									text={l10n.textObject.optionalBackgroundColor}
 									_onChange={this.onChangeColorBackElement}
 								/>
 
@@ -446,7 +452,7 @@ class TextObjects extends React.Component<IProps, IState> {
 					}
 
 				</div>
-				<Button onClick={this.callBack}>Save</Button>
+				<Button onClick={this.callBack}>{l10n.textObject.save}</Button>
 
 			</div>
 		);

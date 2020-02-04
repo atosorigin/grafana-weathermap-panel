@@ -161,6 +161,10 @@ class ParametresGeneriques extends React.Component<IProps, IState> {
 	 */
 	public onSwitchColorMode = async () => {
 		if (this.state.colorMode) {
+			this.props.onOptionsChange({
+				...this.props.options,
+				seuil: [],
+			});
 			await this.setStateAsyncSeuil({
 				seuil: [new Seuil(0, '', '', '', '', '')],
 			});
@@ -180,23 +184,25 @@ class ParametresGeneriques extends React.Component<IProps, IState> {
 	 */
 	public render() {
 		const urlTooltip: string = 'https://atos.net';
+		const l10n = require('Localization/en.json');
+
 
 		return (
 			<div>
 
 				<div>
 
-					<h4>Paramétrage d&#39;une métrique principale</h4>
+					<h4>{l10n.genericParameter.settingPrincipalMetric}</h4>
 					<ParametrageMetriquePrincipale
 						options={this.props.options}
 						onOptionsChange={this.props.onOptionsChange}
 						data={this.props.data}
 					/>
 
-					<h4>Objets graphiques</h4>
+					<h4>{l10n.genericParameter.graphicObject}</h4>
 					<br />
 					<Switch
-						label='Couleur variable'
+						label={l10n.genericParameter.variableColor}
 						checked={this.state.colorMode}
 						onChange={this.onSwitchColorMode}
 					/>
@@ -204,12 +210,12 @@ class ParametresGeneriques extends React.Component<IProps, IState> {
 
 					<Switch
 						tooltip={urlTooltip}
-						label='Tracer le fond'
+						label={l10n.genericParameter.traceBackground}
 						checked={this.state.fondIsActive}
 						onChange={this.onSwitchFond} />
 
 					<Switch
-						label='Tracer le contour'
+						label={l10n.genericParameter.traceContour}
 						checked={this.state.contourIsActive}
 						onChange={this.onSwitchContour} />
 
@@ -234,9 +240,7 @@ class ParametresGeneriques extends React.Component<IProps, IState> {
 							/>
 						)
 				}
-
 				<br />
-
 			</div>
 		);
 	}

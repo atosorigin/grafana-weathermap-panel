@@ -126,13 +126,14 @@ class ParametrageMetriquePrincipale extends React.Component<IProps, IState> {
 	 * result
 	 */
 	public render() {
+		const l10n = require('Localization/en.json');
 
 		return (
 			<div>
 				<InputTextField
-					label='Lien à suivre'
+					label={l10n.metricPrincipalSetting.followLink}
 					name='followLink'
-					placeholder='Lien'
+					placeholder={l10n.metricPrincipalSetting.link}
 					required={false}
 					value={this.state.followLink}
 					_handleChange={
@@ -143,9 +144,9 @@ class ParametrageMetriquePrincipale extends React.Component<IProps, IState> {
 				/>
 
 				<InputTextField
-					label='Lien info bulle'
+					label={l10n.metricPrincipalSetting.linkTooltip}
 					name='linkTooltip'
-					placeholder='Lien'
+					placeholder={l10n.metricPrincipalSetting.link}
 					required={false}
 					value={this.state.hoveringTooltipLink}
 					_handleChange={
@@ -156,9 +157,9 @@ class ParametrageMetriquePrincipale extends React.Component<IProps, IState> {
 				/>
 
 				<InputTextField
-					label='Texte dans l&#39;info bulle'
+					label={l10n.metricPrincipalSetting.textInTooltip}
 					name='textTooltip'
-					placeholder='Texte'
+					placeholder={l10n.metricPrincipalSetting.text}
 					required={false}
 					value={this.state.hoveringTooltipText}
 					_handleChange={

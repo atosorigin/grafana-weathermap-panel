@@ -7,8 +7,9 @@ import React, { FunctionComponent } from 'react';
 type InputTextFieldProps = {
 	color: string,
 	keyInt: number,
-	text: string
-	_onChange: Function
+	text: string,
+	_onChange: Function,
+	width?: number,
 };
 
 /**
@@ -20,14 +21,16 @@ export const InputSeriesColorPicker: FunctionComponent<InputTextFieldProps> = ({
 	keyInt,
 	text,
 	_onChange,
+	width,
 }) => (
 
 		<div className='form-field'>
-			<FormLabel width={ Math.round(text.length * 1.7) }>{text}</FormLabel>
-			<ColorPicker
+			<FormLabel width={width || Math.round(text.length * 1.7)}>{text}</FormLabel>
+			<div id ='colorPicker' style={{ margin: '1%' }}>
+				<ColorPicker
 				color={color}
-				onChange={(newColor) => _onChange(keyInt, newColor)}
-			/>
+				onChange={(newColor) => _onChange(keyInt, newColor)}/>
+			</div>
 		</div>
 	);
 

@@ -31,10 +31,11 @@ interface IState {
 	 * nombre de variation à ajouter qui est affiché dans l'input
 	 */
 	nbVariation: string;
+
 	/**
-	 * wait end addInput variation
+	 * fill dynamic input
 	 */
-	waitEnd: boolean;
+	dynamicInput: JSX.Element;
 }
 
 /**
@@ -48,22 +49,8 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 			seuil: this.props.options.seuil,
 			index: 0,
 			nbVariation: '3',
-			waitEnd: false,
+			dynamicInput: <br />,
 		};
-	}
-
-	/**
-	 * set state for waitEnd whith Promise
-	 */
-	public setStateAsyncArrayWaitEnd = (state: {
-		/**
-		 * edit waitEnd
-		 */
-		waitEnd: boolean,
-	}) => {
-		return new Promise((resolve) => {
-			this.setState(state, resolve);
-		});
 	}
 
 	/**
@@ -126,6 +113,8 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 	 * send data to parent
 	 */
 	public callBack = () => {
+		this.fillVarInput();
+
 		const { onOptionsChange } = this.props;
 
 		onOptionsChange({
@@ -233,6 +222,7 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 	public addButtonColor = (keyInt: number): JSX.Element[] => {
 		const key = keyInt.toString();
 		const couleur: JSX.Element[] = [];
+		const l10n = require('Localization/en.json');
 
 		if (this.props.options.fondIsActive) {
 			const keyFondColorPicker = key + 'FondcolorPicker';
@@ -242,7 +232,7 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 					key={keyFondColorPicker}
 					color={this.state.seuil[keyInt].couleurFond}
 					keyInt={keyInt}
-					text='Changer la couleur du fond'
+					text={l10n.colorVariable.switchBackgroundColor}
 					_onChange={this.onChangeColorFond}
 				/>,
 			);
@@ -255,15 +245,15 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 					<InputSeriesColorPicker
 						color={this.state.seuil[keyInt].couleurContour}
 						keyInt={keyInt}
-						text='Changer la couleur du contour'
+						text={l10n.colorVariable.switchOutlineColor}
 						_onChange={this.onChangeColorContour}
 					/>
 
 					<FormField
 						labelWidth={15}
-						label='Épaisseur du contour'
+						label={l10n.colorVariable.thicknessOutline}
 						name='epaisseurContour'
-						placeholder='Epaisseur contour'
+						placeholder={l10n.colorVariable.thicknessOutline}
 						value={this.state.seuil[keyInt].sizeContour}
 						onChange={(event) => this.onChangeSzContour(keyInt, event.currentTarget.value)}
 					/>
@@ -298,6 +288,7 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 			const newSeuil: Seuil = (seuil) ? seuil[i] : new Seuil(i, '', '', '', '', '');
 			await this.addInput(i, newSeuil);
 		}
+		this.fillVarInput();
 	}
 
 	/**
@@ -313,15 +304,9 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 		await this.setStateAsyncSeuil({
 			seuil: [],
 		});
-		await this.setStateAsyncArrayWaitEnd({
-			waitEnd: true,
-		});
 
 		const nb: number = parseInt(this.state.nbVariation, 10);
 		await this.addVariation(nb);
-		await this.setStateAsyncArrayWaitEnd({
-			waitEnd: false,
-		});
 		this.callBack();
 	}
 
@@ -332,20 +317,24 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 	public fillVarInput = (): JSX.Element => {
 		let final: JSX.Element[] = [];
 
+		if (this.state.seuil.length === 0) {
+			return <br />;
+		}
+
 		for (const line of this.state.arrayInputClass) {
-			if (line.getUneClassInput().length <= 0) {
+			if (line.uneClassInput.length <= 0) {
 				return (<br />);
 			}
-			const result = line.getUneClassInput()
+			const result = line.uneClassInput
 				.map((obj: InputClass) =>
-					<InputTextField key={obj.getId()}
-						label={obj.getLabel()}
-						name={obj.getName()}
-						placeholder={obj.getPlaceholder() || ''}
-						required={obj.getRequired()}
-						value={(obj.getName() === 'seuilMin')
-							? (line.getId() === 0) ? '-∞' : this.state.seuil[line.getId()].seuilMin
-							: (line.getId() === this.state.index - 1) ? '+∞' : this.state.seuil[line.getId()].seuilMax}
+					<InputTextField key={obj.id}
+						label={obj.label}
+						name={obj.name}
+						placeholder={obj.placeholder || ''}
+						required={obj.required}
+						value={(obj.name === 'seuilMin')
+							? (line.id === 0) ? '-∞' : this.state.seuil[line.id].seuilMin
+							: (line.id === this.state.index - 1) ? '+∞' : this.state.seuil[line.id].seuilMax}
 						_handleChange={
 							(event: {
 								/**
@@ -353,14 +342,17 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 								 */
 								currentTarget: HTMLInputElement;
 							}) => this.handleValueChange(event.currentTarget.value,
-								obj.getName(), line.getId())
-						} disabled={(obj.getName() === 'seuilMin') || (line.getId() === this.state.index - 1)} />,
+								obj.name, line.id)
+						} disabled={(obj.name === 'seuilMin') || (line.id === this.state.index - 1)} />,
 				);
-			const couleur: JSX.Element[] = this.addButtonColor(line.getId());
-			const newKey = line.getId().toString() + 'brGestColor';
+			const couleur: JSX.Element[] = this.addButtonColor(line.id);
+			const newKey = line.id.toString() + 'brGestColor';
 			final = final.concat(result.concat(couleur
 				.concat(<br key={newKey} />)));
 		}
+		this.setState({
+			dynamicInput: <ul>{final}</ul>,
+		});
 		return (
 			<div className='couleurVariable' >
 				<ul>
@@ -393,49 +385,38 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 		await this.setStateAsyncSeuil({
 			seuil: [],
 		});
-		await this.setStateAsyncArrayWaitEnd({
-			waitEnd: true,
-		});
 
 		if (this.props.options.seuil.length > 0) {
 			const nb: number = parseInt(this.state.nbVariation, 10);
-			await this.addVariation(nb, this.props.options.seuil);
-			await this.setStateAsyncArrayWaitEnd({
-				waitEnd: false,
-			});
+			this.addVariation(nb, this.props.options.seuil);
 		}
-
 	}
 
 	/**
 	 * render
 	 */
 	public render() {
-
+		const l10n = require('Localization/en.json');
+	
 		return (
 			<div>
 				<InputTextField
-					label='Nombre de variation:'
+					label={l10n.colorVariable.variationNumber}
 					name='nbVariation'
-					placeholder='nombre'
+					placeholder={l10n.colorVariable.number}
 					required={true}
 					value={this.state.nbVariation}
 					_handleChange={this.onChangeVariation} />
 				<Button onClick={this.onClickVariation}>
-					Ajouter des couleurs
+					{l10n.colorVariable.addColor}
 				</Button>
 				<br />
 				<br />
 				{
-					(this.state.waitEnd === false) ?
-						this.fillVarInput()
-						:
-						(
-							<br />
-						)
+					this.state.dynamicInput
 				}
 				<Button onClick={this.infoSeuil}>
-					Info Seuil
+					{l10n.colorVariable.infoSeuil}
 				</Button>
 			</div>
 		);

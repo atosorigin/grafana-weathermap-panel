@@ -129,6 +129,7 @@ class CouleurFixe extends React.Component<IProps, IState> {
 	public addButtonColor = (): JSX.Element[] => {
 		const key = '0';
 		const couleur: JSX.Element[] = [];
+		const l10n = require('Localization/en.json');
 
 		if (this.props.options.fondIsActive) {
 			const keyFondColorPicker = key + 'FondcolorPicker';
@@ -138,7 +139,7 @@ class CouleurFixe extends React.Component<IProps, IState> {
 					key={keyFondColorPicker}
 					color={this.state.colorFond}
 					keyInt={0}
-					text='Changer la couleur du fond'
+					text={l10n.colorVariable.switchBackgroundColor}
 					_onChange={this.onChangeColorFond}
 				/>,
 			);
@@ -151,15 +152,15 @@ class CouleurFixe extends React.Component<IProps, IState> {
 					<InputSeriesColorPicker
 						color={this.state.colorContour}
 						keyInt={0}
-						text='Changer la couleur du contour'
+						text={l10n.colorVariable.switchOutlineColor}
 						_onChange={this.onChangeColorContour}
 					/>
 
 					<FormField
 						labelWidth={10}
-						label='Épaisseur du contour'
+						label={l10n.colorVariable.thicknessOutline}
 						name='epaisseurContour'
-						placeholder='Epaisseur contour'
+						placeholder={l10n.colorVariable.thicknessOutline}
 						value={this.state.szContour}
 						onChange={(event) => this
 							.onChangeSzContour(event.currentTarget.value)}

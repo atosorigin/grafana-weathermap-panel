@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button } from '@grafana/ui';
 import { ArrayInputClass } from '../Models/arrayInputClass';
-import { EspaceCoordonneesClass } from '../Models/EspaceCoordonneesClass';
+import { EspaceCoordonneesExtendClass } from '../Models/EspaceCoordonneesExtendClass';
 import { InputClass } from '../Models/inputClass';
 import InputButtonField from '../Functions/Input/inputButton';
 import InputTextField from '../Functions/Input/inputText';
 import { createInputCoor } from '../Functions/createInputCoor';
-import { editGoodParameter } from '../Functions/editGoodParameter';
+import { editGoodParameterExtend } from '../Functions/editGoodParameter';
 
 import '../style/EspaceCoordonnees.css';
 import { PanelEditorProps } from '@grafana/data';
@@ -19,7 +19,7 @@ interface IState {
 	/**
 	 * stock coordinates in array object for Parent Component
 	 */
-	arrayCoor: EspaceCoordonneesClass[];
+	arrayCoor: EspaceCoordonneesExtendClass[];
 	/**
 	 * enable of disable console.log
 	 */
@@ -48,6 +48,35 @@ class EspaceCoordonnees extends React.Component<IProps, IState>  {
 		};
 	}
 
+	/** update state with promise */
+	public setStateAsyncArrayCoor = (state: {
+		/** new espace coordinate */
+		arrayCoor: EspaceCoordonneesExtendClass[],
+	}) => {
+		return new Promise((resolve) => {
+			this.setState(state, resolve);
+		});
+	}
+
+	/** update state with promise */
+	public setStateAsyncArrayInput = (state: {
+		/** new line in array input */
+		arrayInput: ArrayInputClass[],
+	}) => {
+		return new Promise((resolve) => {
+			this.setState(state, resolve);
+		});
+	}
+
+	/** update state with promise */
+	public setStateAsyncIndex = (state: {
+		/** edit index */
+		index: number,
+	}) => {
+		return new Promise((resolve) => {
+			this.setState(state, resolve);
+		});
+	}
 
 	/**
 	 * call function to return arrayCoor a SimpleEditor
@@ -62,26 +91,36 @@ class EspaceCoordonnees extends React.Component<IProps, IState>  {
 	/**
 	 * add inputs for a new coordiante
 	 */
-	public addInput = (
-		id: number, xMin?: string, xMax?: string, yMin?: string, yMax?: string, text?: string) => {
+	public addInput = async (
+		id: number, xMin?: string, xMax?: string,
+		yMin?: string, yMax?: string, text?: string,
+		image?: string, interfaceJson?: string,
+	) => {
 		const num: number = id;
-		const finalArray: InputClass[] = createInputCoor(num);
+		const finalArray: InputClass[] = createInputCoor(num, false);
 
-		this.setState({
-			arrayCoor: this.state.arrayCoor.concat(new EspaceCoordonneesClass(num, xMin || '0',
-				xMax || '0', yMin || '0', yMax || '0', text || '')),
+		await this.setStateAsyncArrayCoor({
+			arrayCoor: this.state.arrayCoor.concat(
+				new EspaceCoordonneesExtendClass(num, xMin || '0',
+					xMax || '0', yMin || '0', yMax || '0', text || '',
+					image || '', interfaceJson || '')),
+		});
+		await this.setStateAsyncArrayInput({
 			arrayInput: this.state.arrayInput.concat([
-				new ArrayInputClass(num, finalArray),
-			]),
-			index: (id + 1),
+				new ArrayInputClass(num, finalArray)]),
+		});
+		await this.setStateAsyncIndex({
+			index: id + 1,
 		});
 	}
 
 	/**
-	 * dsgs
+	 * add input with current state index
 	 */
-	public addTestInput = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-		this.addInput(this.state.index);
+	public addTestInput = async (
+		event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+	) => {
+		await this.addInput(this.state.index);
 	}
 
 	/**
@@ -89,8 +128,8 @@ class EspaceCoordonnees extends React.Component<IProps, IState>  {
 	 * @param {number} id id of object element to delete
 	 */
 	public deleteArrayCoor(id: number): void {
-		const newEspaceCoordonneesClass: EspaceCoordonneesClass[] = this.state.arrayCoor
-			.filter((value: EspaceCoordonneesClass) =>
+		const newEspaceCoordonneesClass: EspaceCoordonneesExtendClass[] = this.state.arrayCoor
+			.filter((value: EspaceCoordonneesExtendClass) =>
 				value.getId() !== id,
 			);
 		this.setState({
@@ -138,10 +177,10 @@ class EspaceCoordonnees extends React.Component<IProps, IState>  {
 		let i: number;
 
 		i = 0;
-		const cpy: EspaceCoordonneesClass[] = this.state.arrayCoor.slice();
+		const cpy: EspaceCoordonneesExtendClass[] = this.state.arrayCoor.slice();
 		for (const line of cpy) {
 			if (line.getId() === index) {
-				cpy[i] = editGoodParameter(name, cpy[i], currentTarget);
+				cpy[i] = editGoodParameterExtend(name, cpy[i], currentTarget);
 				break;
 			}
 			i++;
@@ -185,20 +224,16 @@ class EspaceCoordonnees extends React.Component<IProps, IState>  {
 			value = this.state.arrayCoor[idx].getYMax().toString();
 		} else if (param.startsWith('label')) {
 			value = this.state.arrayCoor[idx].getLabel();
+		} else if (param.startsWith('image')) {
+			value = this.state.arrayCoor[idx].img;
+		} else if (param.startsWith('interfaceJson')) {
+			value = this.state.arrayCoor[idx].interfaceJson;
 		}
 		return value;
 	}
 
 	/**
-	 * test
-	 */
-	public onClickDelete = (event: React.SyntheticEvent<Element, Event>) => {
-		console.log('je suis la');
-
-	}
-
-	/**
-	 * create dynamic input
+	 * Create dynamic input
 	 */
 	public fillInputEspaceCoor(): JSX.Element {
 		const { arrayInput } = this.state;
@@ -216,9 +251,7 @@ class EspaceCoordonnees extends React.Component<IProps, IState>  {
 							value={this.getGoodValue(line.getId(), obj.getName())}
 							_handleChange={
 								(event: {
-									/**
-									 * get currentTarget in event element
-									 */
+									/** get currentTarget in event element */
 									currentTarget: HTMLInputElement;
 								}) => this._handleChange(event.currentTarget.value,
 									obj.getName(), line.getId())
@@ -245,19 +278,18 @@ class EspaceCoordonnees extends React.Component<IProps, IState>  {
 	}
 
 	/**
-	 * call function in load component
+	 * Call function in load component
 	 */
-	public componentDidMount = () => {
+	public componentDidMount = async () => {
 		const { arrayEspaceCoordonnees } = this.props.options;
 
 		if (arrayEspaceCoordonnees.length === 0) {
 			return;
 		}
 		for (const element of arrayEspaceCoordonnees) {
-			setTimeout(() => {
-				this.addInput(element.id, element.xMin,
-					element.xMax, element.yMin, element.yMax, element.label);
-			}, 100);
+			await this.addInput(element.id, element.xMin,
+				element.xMax, element.yMin, element.yMax,
+				element.label, element.img, element.interfaceJson);
 		}
 	}
 
@@ -265,14 +297,13 @@ class EspaceCoordonnees extends React.Component<IProps, IState>  {
 	 * render
 	 */
 	public render() {
+		const json = require('Localization/en.json');
 
 		return (
 			<div>
-				{
-					this.fillInputEspaceCoor()
-				}
+				{ this.fillInputEspaceCoor() }
 				<div className='buttonAddCoor'>
-					<Button onClick={this.addTestInput}>Ajouter des coordonnées</Button>
+					<Button onClick={this.addTestInput}>{json.coordinateSpace.addCoordinate}</Button>
 				</div>
 			</div>
 		);

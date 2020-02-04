@@ -29,7 +29,7 @@ class RendutextDefault extends React.Component<IProps, IState> {
 			newPolice: { value: this.props.options.police,
 				label: this.props.options.police },
 			taille: this.props.options.taille,
-			style: this.props.options.style,
+			style: this.props.options.styleText,
 		};
 	}
 
@@ -46,7 +46,7 @@ class RendutextDefault extends React.Component<IProps, IState> {
 			...this.props.options,
 			police: pPolice,
 			taille: pTaille,
-			style: pStyle,
+			styleText: pStyle,
 		});
 	}
 
@@ -129,6 +129,8 @@ class RendutextDefault extends React.Component<IProps, IState> {
 	 * html
 	 */
 	public render() {
+		const json = require('Localization/en.json');
+
 		const police: Array<SelectableValue<string>> = [
 			{ value: 'Helvetica', label: 'Helvetica' },
 			{ value: 'Arial', label: 'Arial' },
@@ -145,7 +147,7 @@ class RendutextDefault extends React.Component<IProps, IState> {
 				/>
 
 				<FormField
-					label='Taille'
+					label={json.textDefault.size}
 					labelWidth={10}
 					inputWidth={30}
 					required={true}
@@ -153,7 +155,7 @@ class RendutextDefault extends React.Component<IProps, IState> {
 					onChange={this.handleChangeTaille} />
 
 				<FormField
-					label='Style'
+					label={json.textDefault.style}
 					labelWidth={10}
 					inputWidth={30}
 					required={true}

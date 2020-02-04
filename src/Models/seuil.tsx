@@ -12,7 +12,7 @@ export class Seuil {
 		seuilMax: string,
 		couleurFond: string,
 		couleurContour: string,
-		sizeContour: string
+		sizeContour: string,
 	) {
 		this.id = id;
 		this.seuilMin = seuilMin;
