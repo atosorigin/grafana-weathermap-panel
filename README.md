@@ -1,22 +1,17 @@
 # WeatherMap
 
-WeatherMap Panel Plugin for Grafana
+Inspired by the WeatherMap plugin for Cacti (https://www.network-weathermap.com/), WeatherMap Panel Plugin for Grafana.
 
 Compatibility with  Prometheus
 
-
 # Installation
 
-Weathermap requires [Grafana](https://www.grafana.com/) v6.6+ to run (not tested lower version)
-Download and install it
+* Weathermap requires [Grafana](https://www.grafana.com/) v6.6+ to run (not tested lower version). Download and install it first.
 
 ## Compatibility
 
 - Grafana 6.6.x
 - Yarn 1.21.1
-
-
-
 
 ## Automatic
 
