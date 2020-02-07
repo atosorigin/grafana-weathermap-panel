@@ -21,7 +21,8 @@
 		"genericSettingsBis": "Parametres Generiques bis",
 		"spaceInitialVisualisation": "Espace de visualisation initial",
 		"spaceCoordinate": "Espace de coordonnées",
-		"objectVisibility": "Visibilité des objets"
+		"objectVisibility": "Visibilité des objets",
+		"metricsSettings": "Paramètres des données"
 	},
 	"coordinateSpace": {
 		"addCoordinate": "Ajouter des coordonnées"
@@ -35,7 +36,8 @@
 		"minYPosition": "Position Y min",
 		"maxYPosition": "Position Y max",
 		"image": "Image",
-		"interfaceJson": "Nom d'interface"
+		"key": "Clé",
+		"valueKey": "Valeur de la clé"
 	},
 	"textDefault": {
 		"police": "Police",

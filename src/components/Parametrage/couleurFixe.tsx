@@ -13,15 +13,7 @@ interface IState {
 	/**
 	 * couleur du fond
 	 */
-	colorFond: string;
-	/**
-	 * couleur contour
-	 */
-	colorContour: string;
-	/**
-	 * taille contour
-	 */
-	szContour: string;
+	seuil: Seuil[];
 }
 
 /**
@@ -31,48 +23,18 @@ class CouleurFixe extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			colorFond: this.props.options.seuil[0] ? this.props.options.seuil[0].couleurFond : '',
-			colorContour: this.props.options.seuil[0] ? this.props.options.seuil[0].couleurContour : '',
-			szContour: this.props.options.seuil[0] ? this.props.options.seuil[0].sizeContour : '',
+			seuil: this.props.options.seuil,
 		};
 	}
 
 	/**
 	 * edit background color with Promise
 	 */
-	public setStateAsyncColorFond = (state: {
+	public setStateAsyncSeuil = (state: {
 		/**
 		 * edit colorFond
 		 */
-		colorFond: string,
-	}) => {
-		return new Promise((resolve) => {
-			this.setState(state, resolve);
-		});
-	}
-
-	/**
-	 * edit contour color with Promise
-	 */
-	public setStateAsyncColorContour = (state: {
-		/**
-		 * edit colorContour
-		 */
-		colorContour: string,
-	}) => {
-		return new Promise((resolve) => {
-			this.setState(state, resolve);
-		});
-	}
-
-	/**
-	 * edit size contour with Promise
-	 */
-	public setStateAsyncSzContour = (state: {
-		/**
-		 * edit szContour
-		 */
-		szContour: string,
+		seuil: Seuil[],
 	}) => {
 		return new Promise((resolve) => {
 			this.setState(state, resolve);
@@ -83,22 +45,21 @@ class CouleurFixe extends React.Component<IProps, IState> {
 	 * save data
 	 */
 	public callBack = (): void => {
-		const { colorContour, colorFond, szContour } = this.state;
-		console.log('call back couleurFixe');
-
-		const newSeuil: Seuil[] = [new Seuil(0, '', '', colorFond, colorContour, szContour)];
 		this.props.onOptionsChange({
 			...this.props.options,
-			seuil: newSeuil,
+			seuil: this.state.seuil,
 		});
+
 	}
 
 	/**
 	 * change background color
 	 */
 	public onChangeColorFond = async (key: number, color: string) => {
-		await this.setStateAsyncColorFond({
-			colorFond: color,
+		const newSeuil: Seuil[] = this.state.seuil;
+		newSeuil[0].couleurFond = color;
+		await this.setStateAsyncSeuil({
+			seuil: newSeuil,
 		});
 		this.callBack();
 	}
@@ -107,8 +68,10 @@ class CouleurFixe extends React.Component<IProps, IState> {
 	 * change contour color
 	 */
 	public onChangeColorContour = async (key: number, color: string) => {
-		await this.setStateAsyncColorContour({
-			colorContour: color,
+		const newSeuil: Seuil[] = this.state.seuil;
+		newSeuil[0].couleurContour = color;
+		await this.setStateAsyncSeuil({
+			seuil: newSeuil,
 		});
 		this.callBack();
 	}
@@ -117,8 +80,10 @@ class CouleurFixe extends React.Component<IProps, IState> {
 	 * change size color
 	 */
 	public onChangeSzContour = async (value: string) => {
-		await this.setStateAsyncSzContour({
-			szContour: value,
+		const newSeuil: Seuil[] = this.state.seuil;
+		newSeuil[0].sizeContour = value;
+		await this.setStateAsyncSeuil({
+			seuil: newSeuil,
 		});
 		this.callBack();
 	}
@@ -137,7 +102,7 @@ class CouleurFixe extends React.Component<IProps, IState> {
 			couleur.push(
 				<InputSeriesColorPicker
 					key={keyFondColorPicker}
-					color={this.state.colorFond}
+					color={this.state.seuil[0].couleurFond}
 					keyInt={0}
 					text={l10n.colorVariable.switchBackgroundColor}
 					_onChange={this.onChangeColorFond}
@@ -150,7 +115,7 @@ class CouleurFixe extends React.Component<IProps, IState> {
 			couleur.push(
 				<div key={keyContourDiv}>
 					<InputSeriesColorPicker
-						color={this.state.colorContour}
+						color={this.state.seuil[0].couleurContour}
 						keyInt={0}
 						text={l10n.colorVariable.switchOutlineColor}
 						_onChange={this.onChangeColorContour}
@@ -161,7 +126,7 @@ class CouleurFixe extends React.Component<IProps, IState> {
 						label={l10n.colorVariable.thicknessOutline}
 						name='epaisseurContour'
 						placeholder={l10n.colorVariable.thicknessOutline}
-						value={this.state.szContour}
+						value={this.state.seuil[0].sizeContour}
 						onChange={(event) => this
 							.onChangeSzContour(event.currentTarget.value)}
 					/>

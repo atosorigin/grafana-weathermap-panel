@@ -31,6 +31,7 @@ export class EspaceCoordonneesClass {
 		this.yMin = yMin;
 		this.yMax = yMax;
 		this.label = label;
+
 	}
 
 	public getId(): number {

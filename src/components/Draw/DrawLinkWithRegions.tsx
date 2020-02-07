@@ -265,14 +265,14 @@ export default class DrawLienWithRegions extends React.Component<IProps, IState>
 
 		const colorA: string = this.props.colorA;
 		const colorB: string = this.props.colorB;
-		const xMinRegionIn: number = parseInt(this.props.regionIn.value?.xMin || '0', 10);
-		const xMaxRegionIn: number = parseInt(this.props.regionIn.value?.xMax || '0', 10);
-		const xMinRegionOut: number = parseInt(this.props.regionOut.value?.xMin || '0', 10);
-		const xMaxRegionOut: number = parseInt(this.props.regionOut.value?.xMax || '0', 10);
-		const yMinRegionIn: number = parseInt(this.props.regionIn.value?.yMin || '0', 10);
-		const yMaxRegionIn: number = parseInt(this.props.regionIn.value?.yMax || '0', 10);
-		const yMinRegionOut: number = parseInt(this.props.regionOut.value?.yMin || '0', 10);
-		const yMaxRegionOut: number = parseInt(this.props.regionOut.value?.yMax || '0', 10);
+		const xMinRegionIn: number = parseInt(this.props.regionIn.value?.xMin || '0');
+		const xMaxRegionIn: number = parseInt(this.props.regionIn.value?.xMax || '0');
+		const xMinRegionOut: number = parseInt(this.props.regionOut.value?.xMin || '0');
+		const xMaxRegionOut: number = parseInt(this.props.regionOut.value?.xMax || '0');
+		const yMinRegionIn: number = parseInt(this.props.regionIn.value?.yMin || '0');
+		const yMaxRegionIn: number = parseInt(this.props.regionIn.value?.yMax || '0');
+		const yMinRegionOut: number = parseInt(this.props.regionOut.value?.yMin || '0');
+		const yMaxRegionOut: number = parseInt(this.props.regionOut.value?.yMax || '0');
 		const xA: number = this.synchroX((xMaxRegionIn + xMinRegionIn) / 2);
 		const yA: number = this.synchroY((yMaxRegionIn + yMinRegionIn) / 2);
 		const xB: number = this.synchroX((xMaxRegionOut + xMinRegionOut) / 2);

@@ -61,17 +61,17 @@ export interface IMetricSettings {
 export interface MetricQuery {
 	__name__: string,
 	job: string,
-	instance: string
+	//key: string,
 }
 
 export interface ResultQuery {
-	metric: Array<MetricQuery>,
+	metric: any,
 	value: Array<any>
 }
 
 export interface DataQuery {
 	resultType: string,
-	result: ResultQuery,
+	result: Array<ResultQuery>,
 }
 
 export interface ReturnQuery {
@@ -256,6 +256,9 @@ export interface SimpleOptions extends IParametrage,
 	 * TODO
 	 */
 	mainQueryReturn: ReturnQuery;
+
+	testMainQueryReturn: any;
+
 	coordinatesFromClick: [
 		{
 			id: number,
@@ -263,12 +266,32 @@ export interface SimpleOptions extends IParametrage,
 		{
 			x: number,
 			y: number,
+			labelPoint: string,
+			point: any,			//PointCLass
+			labelRegion: string,
+			region: any, 		//EspaceCoordonneesClass
 		},
 		{
 			x: number,
 			y: number,
+			labelPoint: string,
+			point: any,			//PointClass
+			labelRegion: string,
+			region: any,		//EspaceCoordonneesClass
 		}
 	];
+	// coordinatesFromClick: {
+	// 	id: number,
+	// 	count: number,
+	// 	pointA: {
+	// 		x: number,
+	// 		y: number,
+	// 	},
+	// 	pointB: {
+	// 		x: number,
+	// 		y: number,
+	// 	}
+	// };
 	indexOrientedLink: number,
 }
 
@@ -327,16 +350,17 @@ export const defaults: SimpleOptions = {
 	mainQueryProm: '',
 	mainQueryReturn: {
 		status: '', data: {
-			resultType: '', result: {
-				metric: [{
+			resultType: '', result: [{
+				metric: {
 					__name__: '',
 					job: '',
-					instance: '',
-				}],
+					//key: '',
+				},
 				value: [],
-			},
+			}],
 		},
 	},
+	testMainQueryReturn: {},
 	coordinatesFromClick: [
 		{
 			id: 0,
@@ -344,11 +368,32 @@ export const defaults: SimpleOptions = {
 		{
 			x: 0,
 			y: 0,
+			labelPoint: '',
+			point: {},
+			labelRegion: '',
+			region: {},
 		},
 		{
 			x: 0,
 			y: 0,
+			labelPoint: '',
+			point: {},
+			labelRegion: '',
+			region: {},
 		}
-	],
+	],	
+	
+	// coordinatesFromClick: {
+	// 	id: 1,
+	// 	count: 0,
+	// 	pointA: {
+	// 		x: 0,
+	// 		y: 0,
+	// 	},
+	// 	pointB: {
+	// 		x: 0,
+	// 		y: 0,
+	// 	}
+	// },
 	indexOrientedLink: 0,
 };

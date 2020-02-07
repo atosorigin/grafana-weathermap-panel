@@ -125,7 +125,7 @@ export default class LinkForm extends React.Component<IProps, IState> {
 
 		arrayPointClass.forEach(point => {
 			let optionPoint: SelectableValue<PointClass> = {
-				label: point.getLabel(),
+				label: point.label,
 				value: point,
 			};
 			arrayOptionsPoint.push(optionPoint);
@@ -173,7 +173,7 @@ export default class LinkForm extends React.Component<IProps, IState> {
 			orientationLink || {}, pointAPositionX || '0', pointAPositionY || '0', colorCoordinateA || '#5794F2',
 			pointBPositionX || '0', pointBPositionY || '0', colorCoordinateB || '#5794F2',
 			pointIn || {}, pointOut || {}, regionIn || {}, colorRegionIn || '#5794F2',
-			regionOut || {}, colorRegionOut || '#5794F2', labelLinkA || '', positionXLabelA || '0',
+			regionOut || {}, colorRegionOut || '#E54658', labelLinkA || '', positionXLabelA || '0',
 			positionYLabelA || '0', labelLinkB || '', positionXLabelB || '0', positionYLabelB || '0' )),
 
 			arrayInput: this.state.arrayInput.concat([
@@ -197,7 +197,7 @@ export default class LinkForm extends React.Component<IProps, IState> {
 	public deleteArrayLinkCLass(id: number): void {
 		const newLinkClass: LinkClass[] = this.state.arrayLinkClass
 			.filter((value: LinkClass) =>
-				value.getId() !== id,
+				value.id !== id,
 			);
 		this.setState({
 			arrayLinkClass: newLinkClass,
@@ -216,12 +216,12 @@ export default class LinkForm extends React.Component<IProps, IState> {
 		const id = event.currentTarget.id;
 
 		for (const obj of arrayInput) {
-			for (const line of obj.getUneClassInput()) {
-				if (line.getInputType() === 'button') {
-					if (line.getId() === id) {
+			for (const line of obj.uneClassInput) {
+				if (line.input_type === 'button') {
+					if (line.id === id) {
 						const updateArrayInput: ArrayInputSelectableClass[] = arrayInput
 							.filter((value: ArrayInputSelectableClass) =>
-								value.getId() !== obj.getId(),
+								value.id !== obj.id,
 							);
 						this.setState({
 							arrayInput: updateArrayInput,
@@ -246,7 +246,7 @@ export default class LinkForm extends React.Component<IProps, IState> {
 		i = 0;
 		const copyOfarrayLinkClass: LinkClass[] = this.state.arrayLinkClass.slice();
 		for (const line of copyOfarrayLinkClass) {
-			if (line.getId() === index) {
+			if (line.id === index) {
 				copyOfarrayLinkClass[i] = editGoodParameterLink(name, copyOfarrayLinkClass[i], currentTarget, {});
 				break;
 			}
@@ -274,7 +274,7 @@ export default class LinkForm extends React.Component<IProps, IState> {
 		value = '';
 		valueSelect = {};
 		for (const line of this.state.arrayLinkClass) {
-			if (line.getId() === id) {
+			if (line.id === id) {
 				idx = index;
 				break;
 			}
@@ -290,17 +290,17 @@ export default class LinkForm extends React.Component<IProps, IState> {
 			) {
 
 			if (name.startsWith('getCoordinate')) {
-				valueSelect = this.state.arrayLinkClass[idx].getDefineHowToGetCoordonate();
+				valueSelect = this.state.arrayLinkClass[idx].defineHowToGetCoordonate;
 			} else if (name.startsWith('pointIn')) {
-				valueSelect = this.state.arrayLinkClass[idx].getPointIn();
+				valueSelect = this.state.arrayLinkClass[idx].pointIn;
 			} else if (name.startsWith('pointOut')) {
-				valueSelect = this.state.arrayLinkClass[idx].getPointOut();
+				valueSelect = this.state.arrayLinkClass[idx].pointOut;
 			} else if (name.startsWith('regionIn')) {
-				valueSelect = this.state.arrayLinkClass[idx].getRegionIn();
+				valueSelect = this.state.arrayLinkClass[idx].regionIn;
 			} else if (name.startsWith('regionOut')) {
-				valueSelect = this.state.arrayLinkClass[idx].getRegionOut();
+				valueSelect = this.state.arrayLinkClass[idx].regionOut;
 			} else if (name.startsWith('orientationLink')) {
-				valueSelect = this.state.arrayLinkClass[idx].getOrientationLink();
+				valueSelect = this.state.arrayLinkClass[idx].orientationLink;
 			}
 
 			return valueSelect;
@@ -308,33 +308,33 @@ export default class LinkForm extends React.Component<IProps, IState> {
 		} else {
 
 			if (name.startsWith('pointAX')) {
-				value = this.state.arrayLinkClass[idx].getPointAPositionX();
+				value = this.state.arrayLinkClass[idx].pointAPositionX;
 			} else if (name.startsWith('pointAY')) {
-				value = this.state.arrayLinkClass[idx].getPointAPositionY();
+				value = this.state.arrayLinkClass[idx].pointAPositionY;
 			} else if (name.startsWith('pointBX')) {
-				value = this.state.arrayLinkClass[idx].getPointBPositionX();
+				value = this.state.arrayLinkClass[idx].pointBPositionX;
 			} else if (name.startsWith('pointBY')) {
-				value = this.state.arrayLinkClass[idx].getPointBPositionY();
+				value = this.state.arrayLinkClass[idx].pointBPositionY;
 			} else if (name.startsWith('colorCoordinateA')) {
-				value = this.state.arrayLinkClass[idx].getColorCoordinateA();
+				value = this.state.arrayLinkClass[idx].colorCoordinateA;
 			} else if (name.startsWith('colorCoordinateB')) {
-				value = this.state.arrayLinkClass[idx].getColorCoordinateB();
+				value = this.state.arrayLinkClass[idx].colorCoordinateB;
 			} else if (name.startsWith('colorRegionIn')) {
-				value = this.state.arrayLinkClass[idx].getColorRegionIn();
+				value = this.state.arrayLinkClass[idx].colorRegionIn;
 			} else if (name.startsWith('colorRegionOut')) {
-				value = this.state.arrayLinkClass[idx].getColorRegionOut();
+				value = this.state.arrayLinkClass[idx].colorRegionOut;
 			} else if (name.startsWith('labelLinkA')) {
-				value = this.state.arrayLinkClass[idx].getLabelLinkA();
+				value = this.state.arrayLinkClass[idx].labelLinkA;
 			} else if (name.startsWith('labelLinkB')) {
-				value = this.state.arrayLinkClass[idx].getLabelLinkB();
+				value = this.state.arrayLinkClass[idx].labelLinkB;
 			} else if (name.startsWith('positionXLabelLinkA')) {
-				value = this.state.arrayLinkClass[idx].getPositionXLabelA();
+				value = this.state.arrayLinkClass[idx].positionXLabelA;
 			} else if (name.startsWith('positionYLabelLinkA')) {
-				value = this.state.arrayLinkClass[idx].getPositionYLabelA();
+				value = this.state.arrayLinkClass[idx].positionYLabelA;
 			} else if (name.startsWith('positionXLabelLinkB')) {
-				value = this.state.arrayLinkClass[idx].getPositionXLabelB();
+				value = this.state.arrayLinkClass[idx].positionXLabelB;
 			} else if (name.startsWith('positionYLabelLinkB')) {
-				value = this.state.arrayLinkClass[idx].getPositionYLabelB();
+				value = this.state.arrayLinkClass[idx].positionYLabelB;
 			}
 
 			return value;
@@ -350,16 +350,16 @@ export default class LinkForm extends React.Component<IProps, IState> {
 		const { arrayInput } = this.state;
 		let finalItem: JSX.Element[] = [];
 		for (const line of arrayInput) {
-			const mapItems = line.getUneClassInput()
+			const mapItems = line.uneClassInput
 				.map((obj: InputSelectableClass) =>
-					(obj.getInputType() === 'text') ?
+					(obj.input_type === 'text') ?
 						<InputTextLink
-							key={obj.getId()}
-							label={obj.getLabel()}
-							name={obj.getName()}
-							placeholder={obj.getPlaceholder() || ''}
-							required={obj.getRequired()}
-							value={this.getGoodValue(line.getId(), obj.getName())}
+							key={obj.id}
+							label={obj.label}
+							name={obj.name}
+							placeholder={obj.placeholder || ''}
+							required={obj.required}
+							value={this.getGoodValue(line.id, obj.name)}
 							_handleChange={
 								(event: {
 									/**
@@ -367,15 +367,15 @@ export default class LinkForm extends React.Component<IProps, IState> {
 									 */
 									currentTarget: HTMLInputElement;
 								}) => {
-									this._handleChange(event.currentTarget.value, obj.getName(), line.getId());
+									this._handleChange(event.currentTarget.value, obj.name, line.id);
 								}
 							}
-							defineHowToGetCoordinate={this.getGoodValue(line.getId(), 'getCoordinate').value}
+							defineHowToGetCoordinate={this.getGoodValue(line.id, 'getCoordinate').value}
 						/>
 
-						: (obj.getInputType() === 'select' ?
+						: (obj.input_type === 'select' ?
 							<InputSelectLink
-								key={obj.getId()}
+								key={obj.id}
 								_onChange={(value: SelectableValue<string>, name: string, index: number) => {
 
 									//console.log(value)
@@ -384,7 +384,7 @@ export default class LinkForm extends React.Component<IProps, IState> {
 									const copyOfarrayLinkClass: LinkClass[] = this.state.arrayLinkClass.slice();
 
 									for (const line of copyOfarrayLinkClass) {
-										if (line.getId() === index) {
+										if (line.id === index) {
 											copyOfarrayLinkClass[i] = editGoodParameterLink(name, copyOfarrayLinkClass[i],
 												value.value || '', value || {});
 											break;
@@ -398,21 +398,21 @@ export default class LinkForm extends React.Component<IProps, IState> {
 
 									this.callBack();
 								}}
-								name={obj.getName()}
-								index={line.getId()}
-								data={obj.getOptionValues()}
-								defaultValue={this.getGoodValue(line.getId(), obj.getName())}
-								defineHowToGetCoordinate={this.getGoodValue(line.getId(), 'getCoordinate').value}
-								label={obj.getLabel()}
-								orientationLink={this.getGoodValue(line.getId(), 'orientationLink').value}
+								name={obj.name}
+								index={line.id}
+								data={obj.optionValues}
+								defaultValue={this.getGoodValue(line.id, obj.name)}
+								defineHowToGetCoordinate={this.getGoodValue(line.id, 'getCoordinate').value}
+								label={obj.label}
+								orientationLink={this.getGoodValue(line.id, 'orientationLink').value}
 							/>
 
-							: (obj.getInputType() === 'color' ?
+							: (obj.input_type === 'color' ?
 							<InputSeriesColorPickerLink
-								key={obj.getId()}
-								keyInt={parseInt(obj.getId(), 10)}
-								color={this.getGoodValue(line.getId(), obj.getName())}
-								text={obj.getLabel()}
+								key={obj.id}
+								keyInt={parseInt(obj.id, 10)}
+								color={this.getGoodValue(line.id, obj.name)}
+								text={obj.label}
 								width={10}
 								_onChange={(keyInt: number, newColor: string) => {
 
@@ -420,8 +420,8 @@ export default class LinkForm extends React.Component<IProps, IState> {
 									i = 0;
 									const copyOfArrayLien: LinkClass[] = this.state.arrayLinkClass.slice();
 									for (const line of copyOfArrayLien) {
-										if (line.getId() === keyInt) {
-											copyOfArrayLien[i] = editGoodParameterLink(obj.getName(), copyOfArrayLien[i], newColor, {});
+										if (line.id === keyInt) {
+											copyOfArrayLien[i] = editGoodParameterLink(obj.name, copyOfArrayLien[i], newColor, {});
 											break;
 										}
 										i++;
@@ -435,24 +435,24 @@ export default class LinkForm extends React.Component<IProps, IState> {
 
 									obj.setDefaultValueColor(newColor);
 								}}
-								defineHowToGetCoordinate={this.getGoodValue(line.getId(), 'getCoordinate').value}
-								name={obj.getName()}
+								defineHowToGetCoordinate={this.getGoodValue(line.id, 'getCoordinate').value}
+								name={obj.name}
 							/>
 							:
 							<InputButtonField
-								key={obj.getId()}
-								label={obj.getLabel()}
-								value={obj.getValue() || ''}
-								name={obj.getName()}
-								required={obj.getRequired()}
+								key={obj.id}
+								label={obj.label}
+								value={obj.value || ''}
+								name={obj.name}
+								required={obj.required}
 								_handleChange={this.deleteOwnInput}
-								id={obj.getId()}
+								id={obj.id}
 							/>
 							)
 						),
 				);
 
-			const divKey: string = 'inputCoor' + line.getId();
+			const divKey: string = 'inputCoor' + line.id;
 			const newInput: JSX.Element = <div key={divKey} className='inputCoor'>{mapItems}</div>;
 			finalItem = finalItem.concat(newInput);
 		}

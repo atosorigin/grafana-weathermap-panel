@@ -21,7 +21,8 @@
 		"genericSettingsBis": "Generic parameters bis",
 		"spaceInitialVisualisation": "Initial viewing space",
 		"spaceCoordinate": "Coordinates space",
-		"objectVisibility": "Visibility of objects"
+		"objectVisibility": "Visibility of objects",
+		"metricsSettings": "Metrics Settings"
 	},
 	"coordinateSpace": {
 		"addCoordinate": "Add coordinates"
@@ -35,7 +36,9 @@
 		"minYPosition": "Position Y min",
 		"maxYPosition": "Position Y max",
 		"image": "Image",
-		"interfaceJson": "Interface name"
+		"interfaceJson": "Interface name",
+		"key": "Key",
+		"valueKey": "Value key"
 	},
 	"textDefault": {
 		"police": "Font",
@@ -57,8 +60,8 @@
 		"textInTooltip": "Text in tooltip"
 	},
 	"colorVariable": {
-		"switchBackgroundColor": "Switch background color",
-		"switchOutlineColor": "Switch outline color",
+		"switchBackgroundColor": "Edit background color",
+		"switchOutlineColor": "Edit outline color",
 		"thicknessOutline": "Thickness outline",
 		"variationNumber": "Variation number",
 		"number": "Number",

@@ -26,8 +26,10 @@ class RendutextDefault extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			newPolice: { value: this.props.options.police,
-				label: this.props.options.police },
+			newPolice: {
+				value: this.props.options.police,
+				label: this.props.options.police
+			},
 			taille: this.props.options.taille,
 			style: this.props.options.styleText,
 		};
@@ -95,7 +97,7 @@ class RendutextDefault extends React.Component<IProps, IState> {
 	public handleChangeTaille = async (event: {
 		/** target to input element */
 		target: HTMLInputElement,
-		}) => {
+	}) => {
 		await this.setStateAsyncTaille({
 			taille: event.target.value,
 		});
@@ -108,7 +110,7 @@ class RendutextDefault extends React.Component<IProps, IState> {
 	public handleChangeStyle = async (event: {
 		/** target to input element */
 		target: HTMLInputElement,
-		}) => {
+	}) => {
 		await this.setStateAsyncStyle({
 			style: event.target.value,
 		});
@@ -126,10 +128,21 @@ class RendutextDefault extends React.Component<IProps, IState> {
 	}
 
 	/**
+	 * Change background picture
+	 */
+	public onImageChanged = (event: {
+		/**
+		 * Get target element
+		 */
+		target: HTMLInputElement;
+	}) => {
+		this.props.onOptionsChange({ ...this.props.options, imageUrl: event.target.value });
+	}
+
+	/**
 	 * html
 	 */
 	public render() {
-		const json = require('Localization/en.json');
 
 		const police: Array<SelectableValue<string>> = [
 			{ value: 'Helvetica', label: 'Helvetica' },
@@ -137,6 +150,9 @@ class RendutextDefault extends React.Component<IProps, IState> {
 			{ value: 'sans-serif', label: 'sans-serif' },
 			{ value: 'mono', label: 'mono' },
 		];
+
+		const { options } = this.props;
+		const l10n = require('Localization/en.json');
 
 		return (
 			<div>
@@ -147,20 +163,27 @@ class RendutextDefault extends React.Component<IProps, IState> {
 				/>
 
 				<FormField
-					label={json.textDefault.size}
+					label={l10n.textDefault.size}
 					labelWidth={10}
-					inputWidth={30}
+					inputWidth={15}
 					required={true}
 					value={this.state.taille}
 					onChange={this.handleChangeTaille} />
 
 				<FormField
-					label={json.textDefault.style}
+					label={l10n.textDefault.style}
 					labelWidth={10}
-					inputWidth={30}
+					inputWidth={15}
 					required={true}
 					value={this.state.style}
 					onChange={this.handleChangeStyle} />
+
+				<FormField label={l10n.simpleEditor.pictureLink}
+					labelWidth={10}
+					inputWidth={30}
+					type='text'
+					onChange={this.onImageChanged}
+					value={options.imageUrl || ''} />
 			</div>
 		);
 	}

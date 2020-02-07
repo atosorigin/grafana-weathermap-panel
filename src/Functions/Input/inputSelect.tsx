@@ -17,8 +17,8 @@ const InputSelect: FunctionComponent<InputSelectProps> = ({
 			<Select
 				onChange={(value) => _onChange(value)}
 				allowCustomValue={false} options={data}
+				width={10}
 				value={defaultValue} />
-
 		</div>
 	);
 

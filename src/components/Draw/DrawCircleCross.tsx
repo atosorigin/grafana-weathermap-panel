@@ -17,6 +17,7 @@ interface IProps {
 	height: number;
 	police: string;
 	sizePolice: string;
+	idPoint: string;
 }
 
 interface IState {
@@ -222,19 +223,19 @@ export default class DrawCircleCross extends React.Component<IProps, IState> {
 	public defineSizeGraphicMarkerPx(size: string, shape: string) {
 
 		if (size === 'small' && shape === 'circle') {
-			return 1;
+			return 4;
 		}
 		if (size === 'small' && shape === 'cross') {
 			return 10;
 		}
 		if (size === 'medium' && shape === 'circle') {
-			return 2;
+			return 6;
 		}
 		if (size === 'medium' && shape === 'cross') {
 			return 14;
 		}
 		if (size === 'large' && shape === 'circle') {
-			return 3;
+			return 8;
 		}
 		if (size === 'large' && shape === 'cross') {
 			return 16;
@@ -267,14 +268,14 @@ export default class DrawCircleCross extends React.Component<IProps, IState> {
 						position: 'absolute',
 						left: positionShapeX,
 						top: positionShapeY,
-					}}>
+					}} id={this.props.idPoint}>
 					</div>
 				)
 
 			} else if (shape === 'cross') {
 
 				return (
-					<div id="cross" style={{
+					<div id={this.props.idPoint} style={{
 						fontSize: size,
 						fontWeight: 'bold',
 						position: 'absolute',
@@ -331,7 +332,7 @@ export default class DrawCircleCross extends React.Component<IProps, IState> {
 		const police = this.props.police;
 
 		return (
-			<div>
+			<div style={{cursor: 'pointer'}}>
 				{this.defineLabel(drawGraphicMarker, label, positionShapeX, positionShapeY,
 					positionLabelX, positionLabelY, police, color)}
 

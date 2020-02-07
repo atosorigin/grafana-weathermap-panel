@@ -36,6 +36,8 @@ interface IState {
 	 * fill dynamic input
 	 */
 	dynamicInput: JSX.Element;
+
+	displayInput: boolean;
 }
 
 /**
@@ -46,10 +48,11 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 		super(props);
 		this.state = {
 			arrayInputClass: [],
-			seuil: this.props.options.seuil,
+			seuil: [],
 			index: 0,
 			nbVariation: '3',
 			dynamicInput: <br />,
+			displayInput: false,
 		};
 	}
 
@@ -114,6 +117,10 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 	 */
 	public callBack = () => {
 		this.fillVarInput();
+
+	}
+
+	public saveData = () => {
 
 		const { onOptionsChange } = this.props;
 
@@ -266,7 +273,7 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 	/**
 	 * call fonction when edit nbVariation
 	 */
-	public onChangeVariation = (
+	public onChangeVariation = async (
 		event: {
 			/**
 			 * currentTarget is item that is being edited
@@ -274,15 +281,53 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 			currentTarget: HTMLInputElement,
 		},
 	) => {
-		this.setStateAsyncNbVariation(
+		await this.setStateAsyncNbVariation(
 			{ nbVariation: event.currentTarget.value },
 		);
 	}
+
+	public test = async (newSeuil: Seuil[]) => {
+		const arrayInput: ArrayInputClass[] = this.state.arrayInputClass.slice();
+		let idx = this.state.index;
+		const pSeuil: Seuil[] = this.state.seuil;
+
+		for (const line of newSeuil) {
+			arrayInput.push(new ArrayInputClass(idx,
+				[
+					new InputClass('gestCouleurMin' + idx, 'Seuil min',
+						'seuilMin', 'text', false, 'Seuil min', undefined),
+					new InputClass('gestCouleurMax' + idx, 'Seuil max',
+						'seuilMax', 'text', false, 'Seuil max', undefined),
+				]));
+			idx++;
+			pSeuil.push(line);
+		}
+		await this.setStateAsyncArrayInputClass({
+			arrayInputClass: arrayInput,
+		});
+
+		await this.setStateAsyncSeuil({
+			seuil: pSeuil,
+		});
+
+		await this.setStateAsyncIndex({
+			index: idx,
+		});
+
+	}
+
 
 	/**
 	 * call addInput to prepare new inputs
 	 * @param nb number inputs to add
 	 */
+	public addMultipleVariation = async (nb: number, seuil?: Seuil[]) => {
+		if (seuil) {
+			await this.test(seuil);
+			this.fillVarInput();
+		}
+	}
+
 	public addVariation = async (nb: number, seuil?: Seuil[]) => {
 		for (let i = 0; i < nb; i++) {
 			const newSeuil: Seuil = (seuil) ? seuil[i] : new Seuil(i, '', '', '', '', '');
@@ -305,25 +350,35 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 			seuil: [],
 		});
 
+		this.setState({
+			displayInput: true,
+		});
+
 		const nb: number = parseInt(this.state.nbVariation, 10);
 		await this.addVariation(nb);
-		this.callBack();
 	}
 
 	/**
 	 * generate input seuil min and max with value
 	 * @returns JSX.Element
 	 */
-	public fillVarInput = (): JSX.Element => {
+	public fillVarInput = (): void => {
 		let final: JSX.Element[] = [];
 
 		if (this.state.seuil.length === 0) {
-			return <br />;
+			this.setState({
+				dynamicInput: <br />,
+			});
+			return;
 		}
 
+		let i: number = 0;
 		for (const line of this.state.arrayInputClass) {
 			if (line.uneClassInput.length <= 0) {
-				return (<br />);
+				this.setState({
+					dynamicInput: <br />,
+				});
+				return;
 			}
 			const result = line.uneClassInput
 				.map((obj: InputClass) =>
@@ -333,8 +388,8 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 						placeholder={obj.placeholder || ''}
 						required={obj.required}
 						value={(obj.name === 'seuilMin')
-							? (line.id === 0) ? '-∞' : this.state.seuil[line.id].seuilMin
-							: (line.id === this.state.index - 1) ? '+∞' : this.state.seuil[line.id].seuilMax}
+							? (line.id === 0) ? '-∞' : this.state.seuil[i].seuilMin
+							: (line.id === this.state.index - 1) ? '+∞' : this.state.seuil[i].seuilMax}
 						_handleChange={
 							(event: {
 								/**
@@ -345,6 +400,7 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 								obj.name, line.id)
 						} disabled={(obj.name === 'seuilMin') || (line.id === this.state.index - 1)} />,
 				);
+			i++;
 			const couleur: JSX.Element[] = this.addButtonColor(line.id);
 			const newKey = line.id.toString() + 'brGestColor';
 			final = final.concat(result.concat(couleur
@@ -353,13 +409,6 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 		this.setState({
 			dynamicInput: <ul>{final}</ul>,
 		});
-		return (
-			<div className='couleurVariable' >
-				<ul>
-					{final}
-				</ul>
-			</div>
-		);
 	}
 
 	/**
@@ -376,19 +425,9 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 	 * component mount
 	 */
 	public componentDidMount = async () => {
-		await this.setStateAsyncArrayInputClass({
-			arrayInputClass: [],
-		});
-		await this.setStateAsyncIndex({
-			index: 0,
-		});
-		await this.setStateAsyncSeuil({
-			seuil: [],
-		});
-
 		if (this.props.options.seuil.length > 0) {
 			const nb: number = parseInt(this.state.nbVariation, 10);
-			this.addVariation(nb, this.props.options.seuil);
+			this.addMultipleVariation(nb, this.props.options.seuil);
 		}
 	}
 
@@ -397,7 +436,7 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 	 */
 	public render() {
 		const l10n = require('Localization/en.json');
-	
+
 		return (
 			<div>
 				<InputTextField
@@ -415,6 +454,9 @@ class CouleurVariable extends React.Component<IProps, IState, PanelEditorProps<S
 				{
 					this.state.dynamicInput
 				}
+				<Button onClick={this.saveData}>
+					Save
+				</Button>
 				<Button onClick={this.infoSeuil}>
 					{l10n.colorVariable.infoSeuil}
 				</Button>

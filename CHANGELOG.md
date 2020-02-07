@@ -1,14 +1,24 @@
 # Changelog
 
-## v0.20 (2020-02-04)
+## v0.21 (2020-02-07)
 
-- update library and dependance
+- Add Auxiliary metrics
+- Add Auxiliary metadata
+- Add main link oriented metrics
+- Fixed key metrics
+- Update tabs
+
+## v0.20.1 (2020-02-04)
+
+- Fixed update library and dependance
 
 ## v0.20 (2020-02-03)
 
 - Add monitoring data JSON
 - Displayed data
 - Localization
+- add Main metrics (region, point, links)
+- Data representation
 
 ## v0.16 (2020-01-27)
 

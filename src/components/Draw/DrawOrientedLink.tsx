@@ -1,6 +1,7 @@
 import React from 'react';
 import { SelectableValue } from '@grafana/data';
 import { EspaceCoordonneesClass } from 'Models/EspaceCoordonneesClass';
+import { PointClass } from 'Models/PointClass';
 
 interface IProps {
 	pointAPositionX: string;
@@ -16,9 +17,12 @@ interface IProps {
 	labelAPositionY: string;
 	labelBPositionX: string;
 	labelBPositionY: string;
-	associateRegionA: SelectableValue<EspaceCoordonneesClass>;
-	associateRegionB: SelectableValue<EspaceCoordonneesClass>;
-	height: number;
+	associatePointIn: SelectableValue<PointClass>;
+	associatePointOut: SelectableValue<PointClass>;
+	associateRegionIn: SelectableValue<EspaceCoordonneesClass>;
+	associateRegionOut: SelectableValue<EspaceCoordonneesClass>;
+	sidePanel: number;
+	deleteOnCLick: any;
 }
 
 interface IState {
@@ -34,13 +38,40 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 
 
 	public synchroArrowX(positionX: number, defineCenter: number): number {
-		return Math.round((positionX * (defineCenter / 100)) + defineCenter);
-		//return positionX + defineCenter;
-	}
+		
+		//const synchroSizePanel: number = (this.props.sidePanel - 200) / 2;
 
+		// if (positionX > 0) {
+		// 	return Math.round(positionX + defineCenter + 50);
+		// } else if (positionX < 0) {
+		// 	return Math.round(positionX + defineCenter - 50);
+		// } else {
+		// 	return Math.round(positionX + defineCenter);
+		// }
+		//((event.nativeEvent.offsetX) - (this.props.height / 2)) * (100 / this.props.height)) * 2
+		//console.log((positionX * (this.props.sidePanel / 100)) + defineCenter)
+		//console.log(positionX)
+		//console.log('drawX : ' + (positionX * (this.props.sidePanel / 200)) + defineCenter);
+		return (positionX * (this.props.sidePanel / 200)) + defineCenter;
+	}
+	
 	public synchroArrowY(positionY: number, defineCenter: number): number {
-		return Math.round(defineCenter - (positionY * (defineCenter / 100)));
-		//return defineCenter + positionY;
+		
+		//const synchroSizePanel: number = (this.props.sidePanel - 200) / 2;
+		
+		// if (positionY > 0) {
+			// 	return Math.round(defineCenter - positionY + 50);
+			// } else if (positionY < 0) {
+				// 	return Math.round(defineCenter - positionY - 50);
+				// } else {
+					// 	return Math.round(defineCenter - positionY);
+					// }
+		// console.log(positionY)
+		// console.log(defineCenter - positionY)
+		//return defineCenter - (positionY * (defineCenter / 100));
+		//console.log(positionY)
+		//console.log('drawY : ' + (defineCenter - (positionY * (this.props.sidePanel / 200))));
+		return defineCenter - (positionY * (this.props.sidePanel / 200));
 	}
 
 	// public drawPoint(xA: number, yA: number, xB: number, yB: number) {
@@ -68,11 +99,27 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 	//     )
 	// }
 
+	// public defineMarginForLinkNotDouble(angle: number, margin: number): string {
+		
+	// 	let styleMargin: string = '0 0 0 0';
+	// 	console.log(angle)
+	// 	if (angle === 0) {
+	// 		styleMargin = '0 0 0 ' + (margin / 2) + 'px';
+	// 	} else if (angle === 90) {
+	// 		styleMargin = (margin / 4) + 'px 0 0 ' + (margin / 4) + 'px';
+	// 	} else if (angle === 180) {
+	// 		styleMargin = '0 0 0 0';
+	// 	} else if (angle === -90) {
+	// 		styleMargin = '0 0 ' + margin + 'px 0';
+	// 	}
+		
+	// 	return styleMargin;
+	// }
 
 	public drawLink(xA: number, yA: number, xB: number, yB: number, colorA: string,
 		colorB: string, labelA: string, labelB: string, orientationLink: string,
 		labelAPositionX: number, labelAPositionY: number, labelBPositionX: number,
-		labelBPositionY: number) {
+		labelBPositionY: number, valueMargin: number) {
 
 		const xC: number = (xA + xB) / 2;
 		const yC: number = (yA + yB) / 2;
@@ -106,9 +153,13 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 
 		const sizeArrowTriangle: number = 8;
 
+		//console.log('label : ' + labelA)
+
+		//const margin: string = this.defineMarginForLinkNotDouble(angleDegreeAB, valueMargin);
+
 		if (orientationLink === 'double') {
 			return (
-				<div>
+				<div id='link' onClick={this.props.deleteOnCLick}>
 					<div>
 						<div id='arrow1' style={{
 							display: 'flex',
@@ -138,7 +189,7 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 							position: 'absolute',
 							top: yMidAC + labelAPositionY,
 							left: xMidAC + labelAPositionX,
-							fontSize: distanceAC * (10 / 100),
+							fontSize: distanceAC * (8 / 100),
 							//border: '1px solid black',
 							backgroundColor: 'white',
 							color: 'black',
@@ -174,7 +225,7 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 							position: 'absolute',
 							top: yMidBC + labelBPositionY,
 							left: xMidBC + labelBPositionX,
-							fontSize: distanceBC * (10 / 100),
+							fontSize: distanceBC * (8 / 100),
 							//border: '1px solid black',
 							backgroundColor: 'white',
 							color: 'black',
@@ -186,16 +237,19 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 			)
 		} else if (orientationLink === 'AB') {
 			return (
-				<div>
+				<div 	id='link' 
+						onClick={this.props.deleteOnCLick}
+				>
 					<div id='arrow1' style={{
-						display: 'flex',
-						position: 'absolute',
-						top: yArrowAB - (sizeArrowTriangle / 2),
-						left: xArrowAB,
-						transform: 'rotate(' + angleDegreeAB + 'deg)',
-						width: distanceAB,
+								display: 'flex',
+								position: 'absolute',
+								top: yArrowAB - (sizeArrowTriangle / 2),
+								left: xArrowAB,
+								transform: 'rotate(' + angleDegreeAB + 'deg)',
+								width: distanceAB,
+								//margin: margin,
 
-					}}>
+					}} >
 						<div className='arrowTriangle' style={{
 							width: '0',
 							height: '0',
@@ -216,7 +270,7 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 						left: xMidAB + labelAPositionX,
 						//border: '1px solid black',
 						backgroundColor: 'white',
-						fontSize: distanceAB * (8 / 100),
+						fontSize: distanceAB * (4 / 100),
 						color: 'black',
 						padding: '0 5px',
 						cursor: 'pointer',
@@ -228,7 +282,7 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 			)
 		} else if (orientationLink === 'BA') {
 			return (
-				<div>
+				<div id='link' onClick={this.props.deleteOnCLick}>
 					<div id='arrow1' style={{
 						display: 'flex',
 						alignContent: 'stretch',
@@ -260,7 +314,7 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 						//border: '1px solid black',
 						backgroundColor: 'white',
 						color: 'black',
-						fontSize: distanceAB * (8 / 100),
+						fontSize: distanceAB * (4 / 100),
 						padding: '0 5px',
 					}}>
 						{labelB}
@@ -276,10 +330,40 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 		}
 	}
 
+	public defineSideRegion(xMin: number, xMax: number, yMin: number, yMax: number): number {
+
+		let result: number = ((xMax - xMin) * (this.props.sidePanel / 100)) / 2;
+
+		if (result < 0) {
+			result = result * (-1);
+		}
+		return result;
+	}
+
+	// public defineDiagonal(xMin: number, xMax: number, yMin: number, yMax: number): number {
+
+	// 	const sideA: number = xMax - xMin < 0 ? xMin - xMax : xMax - xMin;
+	// 	const sideB: number = yMax - yMin < 0 ? yMin - yMax : yMax - yMin;
+	// 	let diagonal: number = 0;
+
+	// 	if (yMax - yMin === xMax - xMin) {
+	// 		// square
+	// 		diagonal = sideA * Math.sqrt(2);
+	// 		console.log('carré : ' + diagonal)
+	// 	} else {
+	// 		// rectangle
+	// 		diagonal = Math.sqrt((sideA * sideA) + (sideB * sideB));
+	// 		console.log('rectangle : ' + diagonal)
+	// 	}
+
+	// 	return diagonal;
+	// }
+
 	public defineCoordinates(associateRegion: SelectableValue<EspaceCoordonneesClass>,
 		coordinate: number, region: number): number {
 		let result: number = 0;
-		if (associateRegion.value === undefined) {
+		//console.log(associateRegion.value)
+		if (associateRegion.value === undefined || associateRegion.value.id === undefined) {
 			result = coordinate;
 		} else {
 			result = region;
@@ -287,16 +371,35 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 		return result;
 	}
 
+	public defineColor(associatePoint: SelectableValue<PointClass>, type: string) {
+		let color: string = '';
+		if (type === 'in') {
+			if (associatePoint.value === undefined) {
+				color = this.props.colorA;
+			} else {
+				color = associatePoint.value.color;
+			}
+		} else if (type === 'out') {
+			if (associatePoint.value === undefined) {
+				color = this.props.colorB;
+			} else {
+				color = associatePoint.value.color;
+			}
+		}
+		return color;
+	}
+
 	public render() {
 
-		const defineCenter: number = this.props.height / 2;
+		const sidePanel: number = this.props.sidePanel;
+		const defineCenter: number = sidePanel / 2;
 
 		const xCoordinateA: number = this.synchroArrowX(parseInt(this.props.pointAPositionX, 10), defineCenter);
 		const yCoordinateA: number = this.synchroArrowY(parseInt(this.props.pointAPositionY, 10), defineCenter);
 		const xCoordinateB: number = this.synchroArrowX(parseInt(this.props.pointBPositionX, 10), defineCenter);
 		const yCoordinateB: number = this.synchroArrowY(parseInt(this.props.pointBPositionY, 10), defineCenter);
-		const colorA: string = this.props.colorA;
-		const colorB: string = this.props.colorB;
+		const colorA: string = this.defineColor(this.props.associatePointIn, 'in');
+		const colorB: string = this.defineColor(this.props.associatePointOut, 'out');
 		const orientationLink: string = this.props.orientationLink;
 		const labelA: string = this.props.labelA;
 		const labelB: string = this.props.labelB;
@@ -305,32 +408,40 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 		const labelBPositionX: number = parseInt(this.props.labelBPositionX, 10);
 		const labelBPositionY: number = parseInt(this.props.labelBPositionY, 10) * (-1);
 
-		const associateRegionA: SelectableValue<EspaceCoordonneesClass> = this.props.associateRegionA;
-		const associateRegionB: SelectableValue<EspaceCoordonneesClass> = this.props.associateRegionB;
+		const associateRegionIn: SelectableValue<EspaceCoordonneesClass> = this.props.associateRegionIn;
+		const associateRegionOut: SelectableValue<EspaceCoordonneesClass> = this.props.associateRegionOut;
 
-		const xMinAssociateRegionA: number = parseInt(associateRegionA.value?.xMin || '0', 10);
-		const xMaxAssociateRegionA: number = parseInt(associateRegionA.value?.xMax || '0', 10);
-		const xMinAssociateRegionB: number = parseInt(associateRegionB.value?.xMin || '0', 10);
-		const xMaxAssociateRegionB: number = parseInt(associateRegionB.value?.xMax || '0', 10);
-		const yMinAssociateRegionA: number = parseInt(associateRegionA.value?.yMin || '0', 10);
-		const yMaxAssociateRegionA: number = parseInt(associateRegionA.value?.yMax || '0', 10);
-		const yMinAssociateRegionB: number = parseInt(associateRegionB.value?.yMin || '0', 10);
-		const yMaxAssociateRegionB: number = parseInt(associateRegionB.value?.yMax || '0', 10);
-		const xRegionA: number = this.synchroArrowX((xMaxAssociateRegionA + xMinAssociateRegionA) / 2, defineCenter);
-		const yRegionA: number = this.synchroArrowY((yMaxAssociateRegionA + yMinAssociateRegionA) / 2, defineCenter);
-		const xRegionB: number = this.synchroArrowX((xMaxAssociateRegionB + xMinAssociateRegionB) / 2, defineCenter);
-		const yRegionB: number = this.synchroArrowY((yMaxAssociateRegionB + yMinAssociateRegionB) / 2, defineCenter);
+		const xMinAssociateRegionIn: number = parseInt(associateRegionIn.value?.xMin || '0');
+		const xMaxAssociateRegionIn: number = parseInt(associateRegionIn.value?.xMax || '0');
+		const xMinAssociateRegionOut: number = parseInt(associateRegionOut.value?.xMin || '0');
+		const xMaxAssociateRegionOut: number = parseInt(associateRegionOut.value?.xMax || '0');
+		const yMinAssociateRegionIn: number = parseInt(associateRegionIn.value?.yMin || '0');
+		const yMaxAssociateRegionIn: number = parseInt(associateRegionIn.value?.yMax || '0');
+		const yMinAssociateRegionOut: number = parseInt(associateRegionOut.value?.yMin || '0');
+		const yMaxAssociateRegionOut: number = parseInt(associateRegionOut.value?.yMax || '0');
+		const xRegionIn: number = this.synchroArrowX((xMaxAssociateRegionIn + xMinAssociateRegionIn) / 2, defineCenter);
+		const yRegionIn: number = this.synchroArrowY((yMaxAssociateRegionIn + yMinAssociateRegionIn) / 2, defineCenter);
+		const xRegionOut: number = this.synchroArrowX((xMaxAssociateRegionOut + xMinAssociateRegionOut) / 2, defineCenter);
+		const yRegionOut: number = this.synchroArrowY((yMaxAssociateRegionOut + yMinAssociateRegionOut) / 2, defineCenter);
+
+		const valueMarginRegionIn: number = this.defineSideRegion(	xMinAssociateRegionOut, xMaxAssociateRegionOut,
+																	yMinAssociateRegionOut, yMaxAssociateRegionOut);
 
 		return (
 			<div>
 				{
-					this.drawLink(this.defineCoordinates(associateRegionA, xCoordinateA, xRegionA),
-						this.defineCoordinates(associateRegionA, yCoordinateA, yRegionA),
-						this.defineCoordinates(associateRegionB, xCoordinateB, xRegionB),
-						this.defineCoordinates(associateRegionB, yCoordinateB, yRegionB),
+					this.drawLink(this.defineCoordinates(associateRegionIn, xCoordinateA, xRegionIn),
+						this.defineCoordinates(associateRegionIn, yCoordinateA, yRegionIn),
+						this.defineCoordinates(associateRegionOut, xCoordinateB, xRegionOut),
+						this.defineCoordinates(associateRegionOut, yCoordinateB, yRegionOut),
+						colorA, colorB, labelA, labelB, orientationLink, labelAPositionX, 
+						labelAPositionY, labelBPositionX, labelBPositionY, valueMarginRegionIn)
+				}
+				{/* {
+					this.drawLink(xCoordinateA, yCoordinateA, xCoordinateB, yCoordinateB,
 						colorA, colorB, labelA, labelB, orientationLink,
 						labelAPositionX, labelAPositionY, labelBPositionX, labelBPositionY)
-				}
+				} */}
 			</div>
 		);
 	}

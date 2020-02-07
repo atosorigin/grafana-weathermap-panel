@@ -26,7 +26,7 @@ class MainTarget extends React.Component<IProps>{
 		let dateStamp = Date.parse(this.props.options.timeQuery).toString();
 		dateStamp = dateStamp.substring(0, dateStamp.length - 3);
 		this.props.options.mainQueryProm = this.props.options.promUrl + "query?query=" + this.props.options.mainTarget.expr + "&time=" + dateStamp;
-		console.log(this.props.options.mainQueryProm);
+		//console.log(this.props.options.mainQueryProm);
 	}
 
 	fetchMainQuerry = () => {
@@ -34,14 +34,14 @@ class MainTarget extends React.Component<IProps>{
 		fetch(this.props.options.mainQueryProm)
 		.then(response => response.json())
 		.then((result) => {
-			console.log(result);
+			//console.log(result);
 			this.props.options.mainQueryReturn = result;
 		})
 		.catch((error) => {
 			console.log(error)
 		});
-		console.log(this.props.options.mainQueryReturn);
 		this.props.onOptionsChange({ ...this.props.options, mainQueryReturn: this.props.options.mainQueryReturn });
+		console.log(this.props.options.mainQueryReturn);
 	}
 
 	/**

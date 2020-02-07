@@ -12,10 +12,16 @@ interface IProps {
 	 * object EspaceCoordonnees
 	 */
 	uneCoor: EspaceCoordonneesClass;
+
+	/**
+	 * to do
+	 */
+	id: string;
 }
 
 // tslint:disable-next-line: no-empty-interface
 interface IState {
+	resultHTML: JSX.Element;
 }
 
 /**
@@ -25,6 +31,7 @@ export default class DrawRectangle extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
+			resultHTML: <div></div>,
 		};
 	}
 
@@ -61,7 +68,7 @@ export default class DrawRectangle extends React.Component<IProps, IState> {
 		return size;
 	}
 
-	public fillTooltip = (): JSX.Element => {
+	public fillTooltip = (): void => {
 		const line: EspaceCoordonneesClass = this.props.uneCoor;
 		let left: string;
 		let right: string;
@@ -94,17 +101,24 @@ export default class DrawRectangle extends React.Component<IProps, IState> {
 			top = this.transformCoordonneesToPx(yMin, false, 3).toString() + '%';
 			bottom = this.transformCoordonneesToPx(yMax, true, 4).toString() + '%';
 		}
-		return (
-			<div style={{
-				'border': border,
-				'bottom': bottom,
-				'left': left,
-				'position': 'absolute',
-				'right': right,
-				'top': top,
-			}}>
-			</div>
-		);
+		const data: JSX.Element = <div style={{
+			'border': border,
+			'bottom': bottom,
+			'left': left,
+			'position': 'absolute',
+			'right': right,
+			'top': top,
+		}} id={this.props.id}>
+		</div>;
+		this.setState({
+			resultHTML: data,
+		});
+	}
+
+	public componentDidUpdate(prevProps: IProps) {
+		if (prevProps.uneCoor !== this.props.uneCoor) {
+			this.fillTooltip();
+		}
 	}
 
 	/**
@@ -114,7 +128,9 @@ export default class DrawRectangle extends React.Component<IProps, IState> {
 
 		return (
 			<div>
-				{this.fillTooltip()}
+				{
+					this.state.resultHTML
+				}
 			</div >
 		);
 	}
