@@ -1,15 +1,17 @@
 import { InputSelectableClass } from '../Models/inputSelectableClass';
 import { SelectableValue } from '@grafana/data';
 import { EspaceCoordonneesClass } from 'Models/EspaceCoordonneesClass';
+import { PointClass } from 'Models/PointClass';
 
 
-export const createInputsOrientedLink = (id: number, dataSpaceCoordinate: SelectableValue<EspaceCoordonneesClass>[]): InputSelectableClass[] => {
+export const createInputsOrientedLink = (id: number, dataSpaceCoordinate: SelectableValue<EspaceCoordonneesClass>[], 
+										dataPoint: SelectableValue<PointClass>[]): InputSelectableClass[] => {
 
 	const newFieldOrientationLink: InputSelectableClass = new InputSelectableClass(id + 'orientationLink',
 		'Orientation', 'orientationLink' + id.toString(), 'select',
 		[
-            {label: 'A > B', value: 'AB'},
-            {label: 'B > A', value: 'BA'},
+            {label: 'In > Out', value: 'AB'},
+            {label: 'Out > In', value: 'BA'},
             {label: 'Double', value: 'double'},
         ], '', true, 'Orientation', undefined);
 	const newFieldPointAPositionX: InputSelectableClass = new InputSelectableClass(id + 'pointAX',
@@ -48,26 +50,34 @@ export const createInputsOrientedLink = (id: number, dataSpaceCoordinate: Select
 	const newFieldLabelLinkBPositionY: InputSelectableClass = new InputSelectableClass(id + 'posiitonYLabelLinkB',
 		'Label B - Y', 'positionYLabelLinkB' + id.toString(), 'text',
 		[], '', true, 'Label B - Position Y', undefined);
-	const newFieldSpaceCoordinateAssociatePointA: InputSelectableClass = new InputSelectableClass(id + 'spaceCoordinateAssociatePointA',
-		'Associate region A', 'spaceCoordinateAssociatePointA' + id.toString(), 'select',
-		dataSpaceCoordinate, '', true, 'Associate region A', undefined);
-	const newFieldSpaceCoordinateAssociatePointB: InputSelectableClass = new InputSelectableClass(id + 'spaceCoordinateAssociatePointB',
-		'Associate region B', 'spaceCoordinateAssociatePointB' + id.toString(), 'select',
-		dataSpaceCoordinate, '', true, 'Associate region A', undefined);
+	const newFieldRegionIn: InputSelectableClass = new InputSelectableClass(id + 'spaceCoordinateAssociatePointA',
+		'AssociateRegionIn', 'spaceCoordinateAssociatePointA' + id.toString(), 'select',
+		dataSpaceCoordinate, '', true, 'Associate Region In', undefined);
+	const newFieldRegionOut: InputSelectableClass = new InputSelectableClass(id + 'spaceCoordinateAssociatePointB',
+		'AssociateRegionOut', 'spaceCoordinateAssociatePointB' + id.toString(), 'select',
+		dataSpaceCoordinate, '', true, 'Associate Region Out', undefined);
+	const newFieldPointIn: InputSelectableClass = new InputSelectableClass(id + 'pointIn',
+		'AssociatePointIn', 'pointIn' + id.toString(), 'select',
+		dataPoint, '', true, 'Associate Point In', undefined);
+	const newFieldPointOut: InputSelectableClass = new InputSelectableClass(id + 'pointOut',
+		'AssociatePointOut', 'pointOut' + id.toString(), 'select',
+		dataPoint, '', true, 'Associate Point Out', undefined);
 	const newFieldButton: InputSelectableClass = new InputSelectableClass(id + 'delete',
 	'Delete', 'delete' + id.toString(),
 	'button', [], '', false, undefined, 'delete');
 
 	const finalArray: InputSelectableClass[] = [
 		newFieldOrientationLink,
-		newFieldSpaceCoordinateAssociatePointA,
+		newFieldPointIn,
+		newFieldRegionIn,
 		newFieldPointAPositionX,
 		newFieldPointAPositionY,
 		newFieldLabelLinkA,
 		newFieldLabelLinkAPositionX,
 		newFieldLabelLinkAPositionY,
 		newFieldColorCoordinateA,
-		newFieldSpaceCoordinateAssociatePointB,
+		newFieldPointOut,
+		newFieldRegionOut,
 		newFieldPointBPositionX,
 		newFieldPointBPositionY,
 		newFieldLabelLinkB,

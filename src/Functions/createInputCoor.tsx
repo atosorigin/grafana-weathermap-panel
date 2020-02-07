@@ -20,10 +20,13 @@ export const createInputCoor = (id: number, isInitial: boolean): InputClass[] =>
 		'text', true, l10n.inputCoordinate.maxYPosition, undefined);
 	const newFieldImage: InputClass = new InputClass(id + 'image',
 		l10n.inputCoordinate.image, 'image' + id.toString(),
-		'text', true, l10n.inputCoordinate.image, undefined);
-	const newFieldInterfaceJson: InputClass = new InputClass(id + 'interfaceJson',
-		l10n.inputCoordinate.interfaceJson, 'interfaceJson' + id.toString(),
-		'text', true, l10n.inputCoordinate.interfaceJson, undefined);
+		'text', true, 'Image', undefined);
+	const newFieldKey: InputClass = new InputClass(id + 'key',
+		l10n.inputCoordinate.key, 'key' + id.toString(),
+		'text', true, l10n.inputCoordinate.key, undefined);
+	const newFieldValueKey: InputClass = new InputClass(id + 'valueKey',
+		l10n.inputCoordinate.valueKey, 'valueKey' + id.toString(),
+		'text', true, l10n.inputCoordinate.valueKey, undefined);
 	const newFieldButton: InputClass = new InputClass(id + 'supprimer',
 		l10n.basics.delete, 'supprimer' + id.toString(),
 		'button', false, undefined, l10n.basics.delete);
@@ -37,7 +40,8 @@ export const createInputCoor = (id: number, isInitial: boolean): InputClass[] =>
 			newFieldPositionYMin,
 			newFieldPositionYMax,
 			newFieldImage,
-			newFieldInterfaceJson,
+			newFieldKey,
+			newFieldValueKey,
 			newFieldButton,
 		];
 	} else {

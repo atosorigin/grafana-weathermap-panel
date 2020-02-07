@@ -146,7 +146,7 @@ export default class PointForm extends React.Component<IProps, IState> {
 		this.setState({
 			arrayPointClass: this.state.arrayPointClass.concat(new PointClass(num, 
 			coordinateSpaceAssociate || {}, drawGraphicMarker || {label: 'Yes', value: 'true'},
-			shape || {label: '', value: ''}, sizeWidth || {label: 'Medium', value: 'medium'},
+			shape || {label: '', value: ''}, sizeWidth || {label: 'Small', value: 'small'},
 			sizeHeight || {label: 'Small', value: 'small'}, rotateArrow || '0' , positionShapeX || '0', positionShapeY || '0',
 			label || '', positionLabelX || '0', positionLabelY || '0', color || '#5794F2')),
 
@@ -171,7 +171,7 @@ export default class PointForm extends React.Component<IProps, IState> {
 	public deletearrayPointClass(id: number): void {
 		const newPointClass: PointClass[] = this.state.arrayPointClass
 			.filter((value: PointClass) =>
-				value.getId() !== id,
+				value.id !== id,
 			);
 		this.setState({
 			arrayPointClass: newPointClass,
@@ -190,12 +190,12 @@ export default class PointForm extends React.Component<IProps, IState> {
 		const id = event.currentTarget.id;
 
 		for (const obj of arrayInput) {
-			for (const line of obj.getUneClassInput()) {
-				if (line.getInputType() === 'button') {
-					if (line.getId() === id) {
+			for (const line of obj.uneClassInput) {
+				if (line.input_type === 'button') {
+					if (line.id === id) {
 						const updateArrayInput: ArrayInputSelectableClass[] = arrayInput
 							.filter((value: ArrayInputSelectableClass) =>
-								value.getId() !== obj.getId(),
+								value.id !== obj.id,
 							);
 						this.setState({
 							arrayInput: updateArrayInput,
@@ -220,7 +220,7 @@ export default class PointForm extends React.Component<IProps, IState> {
 		i = 0;
 		const copyOfarrayPointClass: PointClass[] = this.state.arrayPointClass.slice();
 		for (const line of copyOfarrayPointClass) {
-			if (line.getId() === index) {
+			if (line.id === index) {
 				copyOfarrayPointClass[i] = editGoodParameterPoint(name, copyOfarrayPointClass[i], currentTarget, {});
 				break;
 			}
@@ -248,7 +248,7 @@ export default class PointForm extends React.Component<IProps, IState> {
 		value = '';
 		valueSelect = {};
 		for (const line of this.state.arrayPointClass) {
-			if (line.getId() === id) {
+			if (line.id === id) {
 				idx = index;
 				break;
 			}
@@ -266,32 +266,32 @@ export default class PointForm extends React.Component<IProps, IState> {
 				param.startsWith('linkWithCoordinateSpace')
 			) {
 				if (param.startsWith('drawGraphicMarker')) {
-					valueSelect = this.state.arrayPointClass[idx].getDrawGraphicMarker();
+					valueSelect = this.state.arrayPointClass[idx].drawGraphicMarker;
 				} else if (param.startsWith('shape')) {
-					valueSelect = this.state.arrayPointClass[idx].getShape();
+					valueSelect = this.state.arrayPointClass[idx].shape;
 				} else if (param.startsWith('sizeWidth')) {
-					valueSelect = this.state.arrayPointClass[idx].getSizeWidth();
+					valueSelect = this.state.arrayPointClass[idx].sizeWidth;
 				} else if (param.startsWith('sizeHeight')) {
-					valueSelect = this.state.arrayPointClass[idx].getSizeHeight();
+					valueSelect = this.state.arrayPointClass[idx].sizeHeight;
 				} else if (param.startsWith('linkWithCoordinateSpace')) {
-					valueSelect = this.state.arrayPointClass[idx].getCoordinateSpace();
+					valueSelect = this.state.arrayPointClass[idx].coordinateSpace;
 				}
 				return valueSelect;
 		} else {
 			if (param.startsWith('rotateArrow')) {
-				value = this.state.arrayPointClass[idx].getRotateArrow();
+				value = this.state.arrayPointClass[idx].rotateArrow;
 			} else if (param.startsWith('positionShapeX')) {
-				value = this.state.arrayPointClass[idx].getPositionShapeX();
+				value = this.state.arrayPointClass[idx].positionShapeX;
 			} else if (param.startsWith('positionShapeY')) {
-				value = this.state.arrayPointClass[idx].getPositionShapeY();
+				value = this.state.arrayPointClass[idx].positionShapeY;
 			} else if (param.startsWith('label')) {
-				value = this.state.arrayPointClass[idx].getLabel();
+				value = this.state.arrayPointClass[idx].label;
 			} else if (param.startsWith('positionLabelX')) {
-				value = this.state.arrayPointClass[idx].getPositionLabelX();
+				value = this.state.arrayPointClass[idx].positionLabelX;
 			} else if (param.startsWith('positionLabelY')) {
-				value = this.state.arrayPointClass[idx].getPositionLabelY();
+				value = this.state.arrayPointClass[idx].positionLabelY;
 			} else if (param.startsWith('color')) {
-				value = this.state.arrayPointClass[idx].getColor();
+				value = this.state.arrayPointClass[idx].color;
 			}
 			return value;
 		}
@@ -305,16 +305,16 @@ export default class PointForm extends React.Component<IProps, IState> {
 		const { arrayInput } = this.state;
 		let finalItem: JSX.Element[] = [];
 		for (const line of arrayInput) {
-			const mapItems = line.getUneClassInput()
+			const mapItems = line.uneClassInput
 				.map((obj: InputSelectableClass) =>
-				(obj.getInputType() === 'text') ?
+				(obj.input_type === 'text') ?
 					<InputTextPoint
-						key={obj.getId()}
-						label={obj.getLabel()}
-						name={obj.getName()}
-						placeholder={obj.getPlaceholder() || ''}
-						required={obj.getRequired()}
-						value={this.getGoodValue(line.getId(), obj.getName())}
+						key={obj.id}
+						label={obj.label}
+						name={obj.name}
+						placeholder={obj.placeholder || ''}
+						required={obj.required}
+						value={this.getGoodValue(line.id, obj.name)}
 						_handleChange={
 							(event: {
 								/**
@@ -322,15 +322,15 @@ export default class PointForm extends React.Component<IProps, IState> {
 								 */
 								currentTarget: HTMLInputElement;
 							}) => {
-									this._handleChange(event.currentTarget.value, obj.getName(), line.getId());
+									this._handleChange(event.currentTarget.value, obj.name, line.id);
 								}
 						}
-						shape={this.getGoodValue(line.getId(), 'shape').value}
+						shape={this.getGoodValue(line.id, 'shape').value}
 					/>
 
-					: (obj.getInputType() === 'select' ?
+					: (obj.input_type === 'select' ?
 						<InputSelectPoint
-							key={obj.getId()}
+							key={obj.id}
 							_onChange={(value: SelectableValue<string>, name: string, index: number) => {
 
 								let i: number;
@@ -338,7 +338,7 @@ export default class PointForm extends React.Component<IProps, IState> {
 								const copyOfarrayPointClass: PointClass[] = this.state.arrayPointClass.slice();
 
 								for (const line of copyOfarrayPointClass) {
-									if (line.getId() === index) {
+									if (line.id === index) {
 										copyOfarrayPointClass[i] = editGoodParameterPoint(name, copyOfarrayPointClass[i], 
 											value.value || '', value || {});
 										break;
@@ -352,20 +352,20 @@ export default class PointForm extends React.Component<IProps, IState> {
 
 								this.callBack();
 							}}
-							name={obj.getName()}
-							index={line.getId()}
-							data={obj.getOptionValues()}
-							defaultValue={this.getGoodValue(line.getId(), obj.getName())}
-							shape={this.getGoodValue(line.getId(), 'shape').value}
-							label={obj.getLabel()}
+							name={obj.name}
+							index={line.id}
+							data={obj.optionValues}
+							defaultValue={this.getGoodValue(line.id, obj.name)}
+							shape={this.getGoodValue(line.id, 'shape').value}
+							label={obj.label}
 						/>
 					 :
-					 (obj.getInputType() === 'color' ?
+					 (obj.input_type === 'color' ?
 							<InputSeriesColorPickerPoint
-								key={obj.getId()}
-								keyInt={parseInt(obj.getId(), 10)}
-								color={this.getGoodValue(line.getId(), 'color')}
-								text='Color'
+								key={obj.id}
+								keyInt={parseInt(obj.id, 10)}
+								color={this.getGoodValue(line.id, 'color')}
+								text={obj.label}
 								width={10}
 								_onChange={(keyInt: number, newColor: string) => {
 
@@ -373,8 +373,8 @@ export default class PointForm extends React.Component<IProps, IState> {
 									i = 0;
 									const copyOfarrayPointClass: PointClass[] = this.state.arrayPointClass.slice();
 									for (const line of copyOfarrayPointClass) {
-										if (line.getId() === keyInt) {
-											copyOfarrayPointClass[i] = editGoodParameterPoint(obj.getName(), copyOfarrayPointClass[i], newColor, {});
+										if (line.id === keyInt) {
+											copyOfarrayPointClass[i] = editGoodParameterPoint(obj.name, copyOfarrayPointClass[i], newColor, {});
 											break;
 										}
 										i++;
@@ -391,19 +391,19 @@ export default class PointForm extends React.Component<IProps, IState> {
 							/>
 					 :
 					 	<InputButtonField
-							key={obj.getId()}
-							label={obj.getLabel()}
-							value={obj.getValue() || ''}
-							name={obj.getName()}
-							required={obj.getRequired()}
+							key={obj.id}
+							label={obj.label}
+							value={obj.value || ''}
+							name={obj.name}
+							required={obj.required}
 							_handleChange={this.deleteOwnInput}
-							id={obj.getId()}
+							id={obj.id}
 					/>
 					)
 				)
 			)
 
-			const divKey: string = 'inputCoor' + line.getId();
+			const divKey: string = 'inputCoor' + line.id;
 			const newInput: JSX.Element = 
 				<div key={divKey} className='inputCoor'>{mapItems}</div>;
 			finalItem = finalItem.concat(newInput);

@@ -20,6 +20,7 @@ interface IProps {
 	height: number;
 	police: string;
 	sizePolice: string;
+	idPoint: string;
 }
 
 interface IState {
@@ -244,7 +245,7 @@ export default class DrawArrow extends React.Component<IProps, IState> {
 		const color: string = this.props.color;
 
 		return (
-			<div>
+			<div id={this.props.idPoint}>
 				{
 					this.defineLabel(color, positionLabelX, positionLabelY, positionArrowX,
 						positionArrowY, drawGraphicMarker, heightArrow)

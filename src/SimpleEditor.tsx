@@ -1,16 +1,14 @@
 import { PanelEditorProps } from '@grafana/data';
 import { SimpleOptions } from './types';
-import { FormField, Collapse, Tab, TabsBar, TabContent } from '@grafana/ui';
+import { Collapse, Tab, TabsBar, TabContent } from '@grafana/ui';
 import React from 'react';
-import _ from 'lodash';
 
 import { EspaceCoordonneesClass } from 'Models/EspaceCoordonneesClass';
 
-import EspaceCoordonnees from './components/EspaceCoordonnees';
+import ManageSeuil from './components/manageSeuil';
 import RendutextDefault from './components/renduTextDefault';
 import EspaceVisualisationInitial from './components/EspaceVisualisationInitial';
-import ParametresGeneriques from './components/Parametrage/parametresGeneriques';
-import TextObjects from './components/Parametrage/textObjects';
+import ManageCoordinateSpace from './components/CoordinateSpace/manageCoordinateSpace';
 
 import 'style/SimpleEditor.css';
 import ObjectVisibility from 'components/objectVisibility';
@@ -84,7 +82,7 @@ interface IState {
 
 	tabsVariable: boolean[];
 
-	idOrientedLink: number;
+	//idOrientedLink: number;
 }
 
 /**
@@ -112,24 +110,11 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 			arrayPoints: this.props.options.arrayPoints,
 			arrayLinks: this.props.options.arrayLinks,
 			arrayOrientedLinks: this.props.options.arrayOrientedLinks,
-			idOrientedLink: this.props.options.indexOrientedLink,
 			index: 0,
 			collapseTargets: false,
 			collapsePrincipalTarget: false,
-			tabsVariable: [false, false, false, false, false, true, false],
+			tabsVariable: [false, false, false, true, false, false, false],
 		};
-	}
-
-	/**
-	 * Change background picture
-	 */
-	public onImageChanged = (event: {
-		/**
-		 * Get target element
-		 */
-		target: HTMLInputElement;
-	}) => {
-		this.props.onOptionsChange({ ...this.props.options, imageUrl: event.target.value });
 	}
 
 	/**
@@ -202,16 +187,16 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 		});
 	}
 
-	public myCallBackIdOrientedLink = (idFromOrientedLinkComponent: number) => {
-		this.setState({
-			idOrientedLink: idFromOrientedLinkComponent,
-		});
+	// public myCallBackIdOrientedLink = (idFromOrientedLinkComponent: number) => {
+	// 	this.setState({
+	// 		idOrientedLink: idFromOrientedLinkComponent,
+	// 	});
 
-		this.props.onOptionsChange({
-			...this.props.options,
-			indexOrientedLink: idFromOrientedLinkComponent,
-		});
-	}
+	// 	this.props.onOptionsChange({
+	// 		...this.props.options,
+	// 		indexOrientedLink: idFromOrientedLinkComponent,
+	// 	});
+	// }
 
 	/// Adrien
 	onInfoChanged = ({ target }: any) => {
@@ -297,51 +282,50 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 	 * HTML code
 	 */
 	public render() {
-		const { options } = this.props;
 		const l10n = require('Localization/en.json');
-		const defaultStyle = {
-			fontFamily: this.props.options.police,
-			fontSize: this.props.options.taille,
-			fontStyle: this.props.options.style !== 'bold' ? this.props.options.style : 'normal',
-			fontWeight: this.props.options.style === 'bold' ? 'bold' : 'normal',
-		} as React.CSSProperties;
+		// const defaultStyle = {
+		// 	fontFamily: this.props.options.police,
+		// 	fontSize: this.props.options.taille,
+		// 	fontStyle: this.props.options.style !== 'bold' ? this.props.options.style : 'normal',
+		// 	fontWeight: this.props.options.style === 'bold' ? 'bold' : 'normal',
+		// } as React.CSSProperties;
 
 		return (
-			<div className='divSimpleEditor' style={defaultStyle} >
+			<div className='divSimpleEditor' >
 
 				<TabsBar className='page-header tabs' hideBorder={false}>
-					<Tab key='tabDefaultText'
-						label={l10n.simpleEditor.renduTextDefault}
+					<Tab key='tabDisplay'
+						label={l10n.simpleEditor.display}
 						active={this.state.tabsVariable[0]}
 						onChangeTab={() => this.goToTab(0)}
 					/>
-					<Tab key='tabDisplay'
-						label={l10n.simpleEditor.display}
+					<Tab key='tabGenericParameter'
+						label='Seuil'
 						active={this.state.tabsVariable[1]}
 						onChangeTab={() => this.goToTab(1)}
 					/>
-					<Tab key='tabGenericParameter'
-						label={l10n.simpleEditor.genericSettings}
+					<Tab key='tabSpaceInitialVisualisation'
+						label={l10n.simpleEditor.spaceInitialVisualisation}
 						active={this.state.tabsVariable[2]}
 						onChangeTab={() => this.goToTab(2)}
 					/>
-					<Tab key='tabGenericParameterBis'
-						label={l10n.simpleEditor.genericSettingsBis}
+					<Tab key='tabCoordinateSpace'
+						label={l10n.simpleEditor.spaceCoordinate}
 						active={this.state.tabsVariable[3]}
 						onChangeTab={() => this.goToTab(3)}
 					/>
-					<Tab key='tabSpaceInitialVisualisation'
-						label={l10n.simpleEditor.spaceInitialVisualisation}
+					<Tab key='tabObjectVisibility'
+						label={l10n.simpleEditor.objectVisibility}
 						active={this.state.tabsVariable[4]}
 						onChangeTab={() => this.goToTab(4)}
 					/>
-					<Tab key='tabCoordinateSpace'
-						label={l10n.simpleEditor.spaceCoordinate}
+					<Tab key='tabMetricsSettings'
+						label={l10n.simpleEditor.metricsSettings}
 						active={this.state.tabsVariable[5]}
 						onChangeTab={() => this.goToTab(5)}
 					/>
-					<Tab key='tabObjectVisibility'
-						label={l10n.simpleEditor.objectVisibility}
+					<Tab key='tabGraphicalObject'
+						label='Graphical object'
 						active={this.state.tabsVariable[6]}
 						onChangeTab={() => this.goToTab(6)}
 					/>
@@ -354,34 +338,16 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 							data={this.props.data}
 						/>
 					}
-					{this.state.tabsVariable[1] &&
-						<div className='espaceVisualisationInitital'>
-							<FormField label={l10n.simpleEditor.pictureLink}
-								labelWidth={10}
-								inputWidth={30}
-								type='text'
-								onChange={this.onImageChanged}
-								value={options.imageUrl || ''} />
-						</div>
+					{
+						this.state.tabsVariable[1] &&
+						<ManageSeuil
+							options={this.props.options}
+							onOptionsChange={this.props.onOptionsChange}
+							data={this.props.data}
+						/>
 					}
 					{
 						this.state.tabsVariable[2] &&
-						<ParametresGeneriques
-							options={this.props.options}
-							onOptionsChange={this.props.onOptionsChange}
-							data={this.props.data}
-						/>
-					}
-					{
-						this.state.tabsVariable[3] &&
-						<TextObjects
-							options={this.props.options}
-							onOptionsChange={this.props.onOptionsChange}
-							data={this.props.data}
-						/>
-					}
-					{
-						this.state.tabsVariable[4] &&
 						<EspaceVisualisationInitial
 							options={this.props.options}
 							onOptionsChange={this.props.onOptionsChange}
@@ -389,91 +355,90 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 						/>
 					}
 					{
-						this.state.tabsVariable[5] &&
-						<EspaceCoordonnees
+						this.state.tabsVariable[3] &&
+						<ManageCoordinateSpace
 							options={this.props.options}
 							onOptionsChange={this.props.onOptionsChange}
 							data={this.props.data}
 						/>
 					}
 					{
-						this.state.tabsVariable[6] &&
+						this.state.tabsVariable[4] &&
 						<ObjectVisibility />
 
 					}
+					{
+						this.state.tabsVariable[5] &&
+
+						<div className='adrien'>
+							<Collapse isOpen={this.state.collapseDashboardData}
+								label='Dashboard Data Display' onToggle={this.onToggleDashboardData}>
+								<DashboardData options={this.props.options}
+									onOptionsChange={this.props.onOptionsChange} data={this.props.data} />
+							</Collapse>
+							<Collapse isOpen={this.state.collapseTimeSelector}
+								label='Time Selector Display' onToggle={this.onToggleTimeSelector}>
+								<TimeSelector options={this.props.options}
+									onOptionsChange={this.props.onOptionsChange} data={this.props.data} />
+							</Collapse>
+							<Collapse isOpen={this.state.collapsePrincipalTarget}
+								label='Metrics Principal' onToggle={this.onTogglePrincipalTargets}>
+								<MainTarget options={this.props.options} onOptionsChange={this.props.onOptionsChange} data={this.props.data} />
+							</Collapse>
+							<Collapse isOpen={this.state.collapsePanelData} label='Metrics Aux' onToggle={this.onTogglePanelData}>
+								<PanelData options={this.props.options} onOptionsChange={this.props.onOptionsChange} data={this.props.data} />
+							</Collapse>
+						</div>
+					}
+					{
+						this.state.tabsVariable[6] &&
+						<div>
+
+							<div className='espaceVisualisationInitital'>
+								<Collapse isOpen={this.state.collapsePoint}
+									label='Point'
+									onToggle={this.onTogglePoint}>
+
+									<PointForm
+										oldArrayPointClass={this.props.options.arrayPoints}
+										callBackFromParent={this.myCallBackArrayPoints.bind(this)}
+										arraySpaceCoordinate={this.props.options.arrayEspaceCoordonnees}
+									/>
+
+								</Collapse>
+							</div>
+							<div className='espaceVisualisationInitital'>
+								<Collapse isOpen={this.state.collapseLink}
+									label='Link'
+									onToggle={this.onToggleLink}>
+
+									<LinkForm
+										arrayCoordinateSpace={this.props.options.arrayEspaceCoordonnees}
+										oldArrayLinkClass={this.props.options.arrayLinks}
+										arrayPointClass={this.props.options.arrayPoints}
+										callBackFromParent={this.myCallBackArrayLinks.bind(this)}
+									/>
+
+								</Collapse>
+							</div>
+							<div className='espaceVisualisationInitital'>
+								<Collapse isOpen={this.state.collapseOrientedLink}
+									label='Oriented Link'
+									onToggle={this.onToggleOrientedLink}>
+
+									<OrientedLink
+										arrayPoint={this.props.options.arrayPoints}
+										arrayCoordinateSpace={this.props.options.arrayEspaceCoordonnees}
+										oldArrayOrientedLinkClass={this.props.options.arrayOrientedLinks}
+										callBackFromParent={this.myCallBackArrayOrientedLinks.bind(this)}
+									/>
+
+								</Collapse>
+							</div>
+						</div>
+					}
 				</TabContent>
 
-				<br />
-				<br />
-				<br />
-				<br />
-
-				<div>
-					<h3>Settings interface</h3>
-
-				</div>
-				<div className='adrien'>
-					<Collapse isOpen={this.state.collapseDashboardData}
-						label='Dashboard Data Display' onToggle={this.onToggleDashboardData}>
-						<DashboardData options={this.props.options}
-							onOptionsChange={this.props.onOptionsChange} data={this.props.data} />
-					</Collapse>
-					<Collapse isOpen={this.state.collapseTimeSelector}
-						label='Time Selector Display' onToggle={this.onToggleTimeSelector}>
-						<TimeSelector options={this.props.options}
-							onOptionsChange={this.props.onOptionsChange} data={this.props.data} />
-					</Collapse>
-					<Collapse isOpen={this.state.collapsePrincipalTarget}
-						label='Metrics Principal' onToggle={this.onTogglePrincipalTargets}>
-						<MainTarget options={this.props.options} onOptionsChange={this.props.onOptionsChange} data={this.props.data} />
-					</Collapse>
-					<Collapse isOpen={this.state.collapsePanelData} label='Metrics Aux' onToggle={this.onTogglePanelData}>
-						<PanelData options={this.props.options} onOptionsChange={this.props.onOptionsChange} data={this.props.data} />
-					</Collapse>
-				</div>
-
-				<div className='espaceVisualisationInitital'>
-					<Collapse isOpen={this.state.collapsePoint}
-						label='Point'
-						onToggle={this.onTogglePoint}>
-
-						<PointForm
-							oldArrayPointClass={this.props.options.arrayPoints}
-							callBackFromParent={this.myCallBackArrayPoints.bind(this)}
-							arraySpaceCoordinate={this.props.options.arrayEspaceCoordonnees}
-						/>
-
-					</Collapse>
-				</div>
-				<div className='espaceVisualisationInitital'>
-					<Collapse isOpen={this.state.collapseLink}
-						label='Link'
-						onToggle={this.onToggleLink}>
-
-						<LinkForm
-							arrayCoordinateSpace={this.props.options.arrayEspaceCoordonnees}
-							oldArrayLinkClass={this.props.options.arrayLinks}
-							arrayPointClass={this.props.options.arrayPoints}
-							callBackFromParent={this.myCallBackArrayLinks.bind(this)}
-						/>
-
-					</Collapse>
-				</div>
-				<div className='espaceVisualisationInitital'>
-					<Collapse isOpen={this.state.collapseOrientedLink}
-						label='Oriented Link'
-						onToggle={this.onToggleOrientedLink}>
-
-						<OrientedLink
-							arrayCoordinateSpace={this.props.options.arrayEspaceCoordonnees}
-							oldArrayOrientedLinkClass={this.props.options.arrayOrientedLinks}
-							callBackFromParent={this.myCallBackArrayOrientedLinks.bind(this)}
-							idFromPanel={this.props.options.indexOrientedLink}
-							callBackIdOrientedLink={this.myCallBackIdOrientedLink.bind(this)}
-						/>
-
-					</Collapse>
-				</div>
 			</div>
 		);
 	}

@@ -1,7 +1,8 @@
 import { SelectableValue } from '@grafana/data';
-import { EspaceCoordonneesClass } from './EspaceCoordonneesClass';
+import { EspaceCoordonneesExtendClass } from './EspaceCoordonneesExtendClass';
+import { PointClass } from './PointClass';
 //import { PointClass } from './PointClass';
-//import { EspaceCoordonneesClass } from './EspaceCoordonneesClass';
+//import { EspaceCoordonneesExtendClass } from './EspaceCoordonneesExtendClass';
 
 
 export class OrientedLinkClass {
@@ -77,12 +78,23 @@ export class OrientedLinkClass {
 	/**
 	 * to do
 	 */
-	public coordinateSpaceAssociatePointA: SelectableValue<EspaceCoordonneesClass>;	
-	
+	public pointIn: SelectableValue<PointClass>;
+
 	/**
 	 * to do
 	 */
-	public coordinateSpaceAssociatePointB: SelectableValue<EspaceCoordonneesClass>;
+	public pointOut: SelectableValue<PointClass>;
+
+	/**
+	 * to do
+	 */
+	public regionIn: SelectableValue<EspaceCoordonneesExtendClass>;
+
+	/**
+	 * to do
+	 */
+	public regionOut: SelectableValue<EspaceCoordonneesExtendClass>;
+
 	// /**
 	//  * to do
 	//  */
@@ -109,8 +121,10 @@ export class OrientedLinkClass {
 		positionYLabelA: string,
 		positionXLabelB: string,
 		positionYLabelB: string,
-		coordinateSpaceAssociatePointA: SelectableValue<EspaceCoordonneesClass>,
-		coordinateSpaceAssociatePointB: SelectableValue<EspaceCoordonneesClass>,
+		pointIn: SelectableValue<PointClass>,
+		pointOut: SelectableValue<PointClass>,
+		regionIn: SelectableValue<EspaceCoordonneesExtendClass>,
+		regionOut: SelectableValue<EspaceCoordonneesExtendClass>,
 		// typeOfWidthLink: boolean,
 		// widthLink: string,
 
@@ -129,8 +143,10 @@ export class OrientedLinkClass {
 		this.positionYLabelA = positionYLabelA;
 		this.positionXLabelB = positionXLabelB;
 		this.positionYLabelB = positionYLabelB;
-		this.coordinateSpaceAssociatePointA = coordinateSpaceAssociatePointA;
-		this.coordinateSpaceAssociatePointB = coordinateSpaceAssociatePointB;
+		this.pointIn = pointIn;
+		this.pointOut = pointOut;
+		this.regionIn = regionIn;
+		this.regionOut = regionOut;
 		// this.typeOfWidthLink = typeOfWidthLink;
 		// this.widthLink = widthLink;
 	}
@@ -310,20 +326,36 @@ export class OrientedLinkClass {
 		this.positionYLabelB = positionYLabelB;
 	}
 
-	public getCoordinateSpaceAssociatePointA() {
-		return this.coordinateSpaceAssociatePointA;
+	public getPointIn() {
+		return this.pointIn;
 	}
 
-	public setCoordinateSpaceAssociatePointA(coordinateSpaceAssociatePointA: SelectableValue<EspaceCoordonneesClass>) {
-		this.coordinateSpaceAssociatePointA = coordinateSpaceAssociatePointA;
+	public setPointIn(pointIn: SelectableValue<PointClass>) {
+		this.pointIn = pointIn;
+	}	
+	
+	public getPointOut() {
+		return this.pointOut;
 	}
 
-	public getCoordinateSpaceAssociatePointB() {
-		return this.coordinateSpaceAssociatePointB;
+	public setPointOut(pointOut: SelectableValue<PointClass>) {
+		this.pointOut = pointOut;
 	}
 
-	public setCoordinateSpaceAssociatePointB(coordinateSpaceAssociatePointB: SelectableValue<EspaceCoordonneesClass>) {
-		this.coordinateSpaceAssociatePointB = coordinateSpaceAssociatePointB;
+	public getRegionIn() {
+		return this.regionIn;
+	}
+
+	public setRegionIn(regionIn: SelectableValue<EspaceCoordonneesExtendClass>) {
+		this.regionIn = regionIn;
+	}
+
+	public getRegionOut() {
+		return this.regionOut;
+	}
+
+	public setRegionOut(regionOut: SelectableValue<EspaceCoordonneesExtendClass>) {
+		this.regionOut = regionOut;
 	}
 	// /**
 	//  * Retourne le type de largeur du lien : fixe ou variable

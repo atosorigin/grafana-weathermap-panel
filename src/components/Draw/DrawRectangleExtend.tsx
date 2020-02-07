@@ -28,6 +28,11 @@ interface IProps extends PanelEditorProps<SimpleOptions> {
 
 	/** data in tooltip */
 	contentTooltip: JSX.Element;
+
+	/**
+	 * to do
+	 */
+	id: string;
 }
 
 // tslint:disable-next-line: no-empty-interface
@@ -138,6 +143,45 @@ export default class DrawRectangleExtend extends React.Component<IProps, IState>
 		return size;
 	}
 
+	public testRefresh = () => {
+		const axios = require('axios');
+		axios.get('http://localhost:9090/api/v1/query?query=' + this.props.uneCoor.valueKey)
+			.then((response: any) => {
+				let i: number = 0;
+				let cnt: number = 0;
+
+				for (const line of response.data.data.result) {
+					cnt += parseFloat(line.value[1]);
+					++i;
+				}
+				cnt /= i;
+				this.setAsyncHtmlValue({
+					htmlValue: <div>
+						<a href={this.props.uneCoor.parametrageMetric.hoveringTooltipLink}>
+							{this.props.uneCoor.parametrageMetric.hoveringTooltipText}
+						</a>
+						<p>{this.props.uneCoor.valueKey}</p>
+						<p>{cnt.toString()}</p>
+					</div>,
+				});
+			})
+			.catch((error: any) => {
+				// console.log(error);
+				this.setAsyncHtmlValue({
+					htmlValue: <div>
+						<a href={this.props.uneCoor.parametrageMetric.hoveringTooltipLink}>
+							{this.props.uneCoor.parametrageMetric.hoveringTooltipText}
+						</a>
+						<p>{this.props.uneCoor.interfaceJson}</p>
+						<p>NaN</p>
+					</div>,
+				});
+			});
+		this.setState({
+			activeSync: false,
+		});
+	}
+
 	/**
 	 * fill coordinate for display
 	 */
@@ -154,38 +198,7 @@ export default class DrawRectangleExtend extends React.Component<IProps, IState>
 		const border: string = '1px solid ' + this.props.color;
 
 		if (this.state.activeSync) {
-			const axios = require('axios');
-			axios.get('http://localhost:9090/api/v1/query?query=' + this.props.uneCoor.interfaceJson)
-				.then((response: any) => {
-					let i: number = 0;
-					let cnt: number = 0;
-
-					for (const line of response.data.data.result) {
-						cnt += parseFloat(line.value[1]);
-						++i;
-					}
-					cnt /= i;
-					this.setAsyncHtmlValue({
-						htmlValue: <div>
-							<p>{this.props.uneCoor.label}</p>
-							<p>{this.props.uneCoor.interfaceJson}</p>
-							<p>{cnt.toString()}</p>
-						</div>,
-					});
-				})
-				.catch((error: any) => {
-					console.log(error);
-					this.setAsyncHtmlValue({
-						htmlValue: <div>
-							<p>{this.props.uneCoor.label}</p>
-							<p>{this.props.uneCoor.interfaceJson}</p>
-							<p>NaN</p>
-						</div>,
-					});
-				});
-			this.setState({
-				activeSync: false,
-			});
+			this.testRefresh();
 		}
 
 		xMin = (isNumFloat(line.xMin)) ? parseInt(line.xMin, 10) : 0;
@@ -234,7 +247,8 @@ export default class DrawRectangleExtend extends React.Component<IProps, IState>
 					justifyContent: 'center',
 					background: 'url(' + this.props.uneCoor.img + ') no-repeat center center',
 					backgroundSize: 'contain',
-				}}>
+					cursor: 'pointer',
+				}} id = {this.props.id}>
 					<div style={{
 						backgroundColor: backColor,
 						color: textColor,
@@ -247,10 +261,18 @@ export default class DrawRectangleExtend extends React.Component<IProps, IState>
 		);
 	}
 
-	componentWillReceiveProps = () => {
-		this.setState({
-			activeSync: true,
-		});
+	/**
+	 * update props
+	 * @param prevProps 
+	 */
+	public componentDidUpdate(prevProps: IProps) {
+		if (prevProps.uneCoor !== this.props.uneCoor
+			|| prevProps.useLimit !== this.props.useLimit
+			|| prevProps.contentTooltip !== this.props.contentTooltip) {
+			this.setState({
+				activeSync: true,
+			});
+		}
 	}
 
 	/**

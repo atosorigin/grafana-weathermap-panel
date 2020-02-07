@@ -4,6 +4,7 @@ import { PanelEditorProps, SelectableValue } from '@grafana/data';
 import { FormField } from '@grafana/ui';
 import { InputSelect } from '../inputSelect';
 import { Button } from '@grafana/ui';
+import FetchButton from './FetchButton';
 
 interface IProps extends PanelEditorProps<SimpleOptions> { }
 
@@ -87,9 +88,9 @@ class PanelData extends React.Component<IProps> {
 	 * TODO
 	 */
 	loadTarget = (onClick: { currentTarget: HTMLButtonElement }) => {
-		console.log(onClick.currentTarget.id);
+		//console.log(onClick.currentTarget.id);
 		const newTarget = this.props.options.panelTargets[parseInt(onClick.currentTarget.id)];
-		console.log(newTarget);
+		//console.log(newTarget);
 		this.props.options.promTargets.push(newTarget);
 		this.props.onOptionsChange({ ...this.props.options, promTargets: this.props.options.promTargets });
 	}
@@ -108,7 +109,7 @@ class PanelData extends React.Component<IProps> {
 	deleteTarget = (onClick: { currentTarget: HTMLButtonElement }) => {
 		const isTarget = (target: Target) => target.expr === this.props.options.panelTargets[parseInt(onClick.currentTarget.id)].expr;
 		this.props.options.promTargets.splice(this.props.options.promTargets.findIndex(isTarget), 1);
-		console.log(this.props.options.promTargets);
+		//console.log(this.props.options.promTargets);
 		this.props.onOptionsChange({ ...this.props.options, promTargets: this.props.options.promTargets });
 	}
 
@@ -119,7 +120,7 @@ class PanelData extends React.Component<IProps> {
 		const isTarget = (target: Target) => target.expr === this.props.options.promTargets[parseInt(onClick.currentTarget.id)].expr;
 		this.props.options.promTargets.splice(this.props.options.promTargets.findIndex(isTarget), 1);
 		this.props.onOptionsChange({ ...this.props.options, promTargets: this.props.options.promTargets });
-		console.log(this.props.options.promTargets);
+		//console.log(this.props.options.promTargets);
 	}
 
 	/**
@@ -184,6 +185,7 @@ class PanelData extends React.Component<IProps> {
 				<div className="section gf-form-group">
 					<this.targetsProm targets={options.promTargets} />
 				</div>
+				<FetchButton options={this.props.options} onOptionsChange={this.props.onOptionsChange} data={this.props.data} />
 			</div>
 		);
 	}

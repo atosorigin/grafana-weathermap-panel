@@ -27,15 +27,13 @@ class FetchButton extends React.Component<IProps>{
 			let tmp: string = this.props.options.promUrl + "query_range?query=" + target.expr + "&start=" + dateStampStart + "&end=" + dateStampEnd + "&step=" + this.props.options.refresh.label
 			this.props.options.queryPromRange.push(tmp);
 		})
-		console.table(this.props.options.queryPromRange);
+		//console.table(this.props.options.queryPromRange);
 	}
 
 	/**
 	 * Create and push the query url
 	 */
-	makeQuery = () => {
-		console.log('je suis la');
-		
+	makeQuery = () => {		
 		this.props.options.queryProm = [];
 		let dateStamp = Date.parse(this.props.options.timeQuery).toString();
 		dateStamp = dateStamp.substring(0, dateStamp.length - 3);
@@ -43,7 +41,7 @@ class FetchButton extends React.Component<IProps>{
 			let tmp: string = this.props.options.promUrl + "query?query=" + target.expr + "&time=" + dateStamp
 			this.props.options.queryProm.push(tmp);
 		});
-		console.table(this.props.options.queryProm);
+		//console.table(this.props.options.queryProm);
 	}
 
 	/**
@@ -54,16 +52,16 @@ class FetchButton extends React.Component<IProps>{
 		this.props.options.jsonQueryReturn = [];
 		this.props.options.queryPromRange.forEach(url => {
 			fetch(url)
-				.then(response => response.json())
+				.then((response) => response.json())
 				.then((result) => {
 					this.props.options.jsonQueryReturn.push(result);
 				})
 				.catch((error) => {
-					console.log(error)
+					// console.log(error)
 				})
 		});
-		console.log(this.props.options.jsonQueryReturn);
 		this.props.onOptionsChange({ ...this.props.options, promTargets: this.props.options.promTargets });
+		console.log(this.props.options.jsonQueryReturn);
 	}
 
 	/**
@@ -76,15 +74,15 @@ class FetchButton extends React.Component<IProps>{
 			fetch(url)
 				.then(response => response.json())
 				.then((result) => {
-					console.log(result);
+					//console.log(result);
 					this.props.options.jsonQueryReturn.push(result);
 				})
 				.catch((error) => {
 					console.log(error)
 				})
 		});
-		console.log(this.props.options.jsonQueryReturn);
 		this.props.onOptionsChange({ ...this.props.options, promTargets: this.props.options.promTargets });
+		console.log(this.props.options.jsonQueryReturn);
 	}
 
 	/**
@@ -103,7 +101,7 @@ class FetchButton extends React.Component<IProps>{
 					console.log(error)
 				})
 		});
-		console.log(this.props.options.jsonGlobalQueryReturn);
+		//console.log(this.props.options.jsonGlobalQueryReturn);
 	}
 
 	/**
@@ -131,8 +129,7 @@ class FetchButton extends React.Component<IProps>{
 				<Button key="ButtonPrint" onClick={this.printJSON}>jsonQueryReturn / promTargets list</Button>
 				<Button key="ButtonFetchRange" onClick={this.fetchQuerryRange}>fetch range</Button>
 				<Button key="ButtonFetchInstant" onClick={this.fetchQuerry}>fetch instant</Button>
-				<Button key="ButtonDelTargets" variant="danger" onClick={this.deleteTargets}>delete targets</Button>
-				
+				<Button key="ButtonDelTargets" variant="danger" onClick={this.deleteTargets}>delete targets</Button>		
 			</div>
 		);
 	}

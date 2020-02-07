@@ -1,10 +1,15 @@
 import React from 'react';
 import InputTextField from 'Functions/Input/inputText';
-import { ParametrageMetrique } from 'Models/parametrageMetrique';
-import { PanelEditorProps } from '@grafana/data';
-import { SimpleOptions } from 'types';
+import { EspaceCoordonneesExtendClass } from 'Models/EspaceCoordonneesExtendClass';
 
-interface IProps extends PanelEditorProps<SimpleOptions> { }
+interface IProps {
+	/** id for coordinate space */
+	coordinateSpace: EspaceCoordonneesExtendClass;
+	callBackToParent: (
+		followLink: string,
+		hoveringTooltipLink: string,
+		hoveringTooltipText: string) => void;
+}
 
 interface IState {
 	/**react
@@ -27,9 +32,9 @@ class ParametrageMetriquePrincipale extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			followLink: this.props.options.parametrageMetrique.followLink,
-			hoveringTooltipLink: this.props.options.parametrageMetrique.hoveringTooltipLink,
-			hoveringTooltipText: this.props.options.parametrageMetrique.hoveringTooltipText,
+			followLink: this.props.coordinateSpace.parametrageMetric.followLink,
+			hoveringTooltipLink: this.props.coordinateSpace.parametrageMetric.hoveringTooltipLink,
+			hoveringTooltipText: this.props.coordinateSpace.parametrageMetric.hoveringTooltipText,
 		};
 	}
 
@@ -79,17 +84,8 @@ class ParametrageMetriquePrincipale extends React.Component<IProps, IState> {
 	 * save data
 	 */
 	public callBack = () => {
-		const { followLink, hoveringTooltipLink, hoveringTooltipText } = this.state;
-
-		const { onOptionsChange } = this.props;
-		const newMetrique: ParametrageMetrique = new ParametrageMetrique(followLink,
-			hoveringTooltipLink,
-			hoveringTooltipText);
-
-		onOptionsChange({
-			...this.props.options,
-			parametrageMetrique: newMetrique,
-		});
+		this.props.callBackToParent(this.state.followLink, this.state.hoveringTooltipLink,
+			this.state.hoveringTooltipText);
 	}
 
 	/**
@@ -120,6 +116,16 @@ class ParametrageMetriquePrincipale extends React.Component<IProps, IState> {
 			hoveringTooltipText: value,
 		});
 		this.callBack();
+	}
+
+	public componentDidUpdate(prevProps: IProps) {
+		if (prevProps.coordinateSpace !== this.props.coordinateSpace) {
+			this.setState({
+				followLink: this.props.coordinateSpace.parametrageMetric.followLink,
+				hoveringTooltipLink: this.props.coordinateSpace.parametrageMetric.hoveringTooltipLink,
+				hoveringTooltipText: this.props.coordinateSpace.parametrageMetric.hoveringTooltipText,
+			});
+		}
 	}
 
 	/**

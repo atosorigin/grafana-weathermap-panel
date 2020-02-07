@@ -29,19 +29,21 @@ export const editGoodParameterExtend = (
 	name: string, editCoor: EspaceCoordonneesExtendClass,
 	newValue: string): EspaceCoordonneesExtendClass => {
 	if (name.startsWith('positionXMin')) {
-		editCoor.setXMin(newValue);
+		editCoor.xMin = newValue;
 	} else if (name.startsWith('positionXMax')) {
-		editCoor.setXMax(newValue);
+		editCoor.xMax = newValue;
 	} else if (name.startsWith('positionYMin')) {
-		editCoor.setYMin(newValue);
+		editCoor.yMin = newValue;
 	} else if (name.startsWith('positionYMax')) {
-		editCoor.setYMax(newValue);
+		editCoor.yMax = newValue;
 	} else if (name.startsWith('label')) {
-		editCoor.setLabel(newValue);
+		editCoor.label = newValue;
 	} else if (name.startsWith('image')) {
 		editCoor.img = newValue;
-	} else if (name.startsWith('interfaceJson')) {
-		editCoor.interfaceJson = newValue;
+	} else if (name.startsWith('key')) {
+		editCoor.key = newValue;
+	} else if (name.startsWith('valueKey')) {
+		editCoor.valueKey = newValue;
 	}
 	return editCoor;
 };

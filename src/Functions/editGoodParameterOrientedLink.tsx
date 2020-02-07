@@ -37,9 +37,13 @@ export const editGoodParameterOrientedLink = (name: string, editCoor: OrientedLi
 	} else if (name.startsWith('positionYLabelLinkB')) {
 		editCoor.setPositionYLabelB(newValue)
 	} else if (name.startsWith('spaceCoordinateAssociatePointA')) {
-		editCoor.setCoordinateSpaceAssociatePointA(newValueSelect);
+		editCoor.setRegionIn(newValueSelect);
 	} else if (name.startsWith('spaceCoordinateAssociatePointB')) {
-		editCoor.setCoordinateSpaceAssociatePointB(newValueSelect);
+		editCoor.setRegionOut(newValueSelect);
+	} else if (name.startsWith('pointIn')) {
+		editCoor.setPointIn(newValueSelect);
+	} else if (name.startsWith('pointOut')) {
+		editCoor.setPointOut(newValueSelect);
 	}
 	return editCoor;
 };
