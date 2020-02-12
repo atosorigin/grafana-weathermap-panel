@@ -120,11 +120,11 @@ class ParametrageMetriquePrincipale extends React.Component<IProps, IState> {
 
 	public componentDidUpdate(prevProps: IProps) {
 		if (prevProps.coordinateSpace !== this.props.coordinateSpace) {
-			this.setState((prevProps: IProps) => ({
+			this.setState({
 				followLink: prevProps.coordinateSpace.parametrageMetric.followLink,
 				hoveringTooltipLink: prevProps.coordinateSpace.parametrageMetric.hoveringTooltipLink,
 				hoveringTooltipText: prevProps.coordinateSpace.parametrageMetric.hoveringTooltipText,
-			}));
+			});
 		}
 	}
 
