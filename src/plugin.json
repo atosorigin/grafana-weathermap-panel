@@ -1,7 +1,7 @@
 {
   "type": "panel",
-  "name": "WeatherMap",
-  "id": "grafana-weathermap-panel",
+  "name": "preprod WeatherMap",
+  "id": "preprod-grafana-weathermap-panel",
   "info": {
     "description": "WeatherMap Panel Plugin for Grafana",
     "author": {
@@ -17,7 +17,7 @@
       {"name": "License", "url": "https://github.com/atosorigin/grafana-weathermap/blob/master/LICENCE"}
     ],
     "screenshots": [],
-    "version": "0.25b02",
+    "version": "0.25b05",
     "updated": "2020-02-12"
   },
 

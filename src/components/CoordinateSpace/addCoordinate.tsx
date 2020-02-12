@@ -97,6 +97,7 @@ class AddCoordinate extends React.Component<IProps, IState> {
 						data={this.props.data}
 						coordinate={this.state.coordinate}
 						callBackToParent={this.callBack}
+						isAddCoordinate={true}
 					/>
 				}
 			</div>

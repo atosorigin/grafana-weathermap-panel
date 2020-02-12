@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.25 (2020-02-12)
+
+- Add implementation for table type data (Mysql, Postgres, Zabbix, Streaming, loki and other ...)
+
 ## v0.21 (2020-02-07)
 
 - Add Auxiliary metrics
@@ -14,7 +18,7 @@
 
 ## v0.20 (2020-02-03)
 
-- Add monitoring data JSON
+- Add monitoring data JSON for Prometheus
 - Displayed data
 - Localization
 - add Main metrics (region, point, links)

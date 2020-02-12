@@ -3,7 +3,7 @@ import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
 import { Tooltip } from '@grafana/ui';
 import React, { CSSProperties } from 'react';
 
-import { PanelEditorProps } from '@grafana/data';
+import { PanelEditorProps, DataFrame } from '@grafana/data';
 import { SimpleOptions } from 'types';
 
 import { isNumFloat } from 'Functions/isNumFloat';
@@ -77,16 +77,6 @@ export default class DrawRectangleExtend extends React.Component<IProps, IState>
 			this.setState(state, resolve);
 		});
 	}
-
-	// /** promise htmlValue */
-	// public setAsyncActiveSync = async (state: {
-	// 	/** name of variable */
-	// 	activeSync: boolean,
-	// }) => {
-	// 	return await new Promise((resolve) => {
-	// 		this.setState(state, resolve);
-	// 	});
-	// }
 
 	/**
 	 * verif limit of coordinate
@@ -163,13 +153,20 @@ export default class DrawRectangleExtend extends React.Component<IProps, IState>
 		} as CSSProperties;
 		// setInterval(() => {
 
-		const { dataQuery } = this.props.uneCoor;
-		if (dataQuery && dataQuery.fields[0].values) {
+		// const { dataQuery } = this.props.uneCoor;
+		let data: DataFrame = { 'fields': [], 'length': 0 };
+		for (const line of this.props.data.series) {
+			if (line.refId === this.props.uneCoor.dataQuery?.refId) {
+				data = line;
+			}
+		}
+
+		if (data.fields.length > 0 && data.fields[0].values) {
 			let cnt: number = 0;
-			const sizeQuery: number = dataQuery.fields[0].values.length;
+			const sizeQuery: number = data.fields[0].values.length;
 			for (let i: number = 0; i < sizeQuery; i++) {
-				if (dataQuery.fields[0].values.get(i)) {
-					cnt += dataQuery.fields[0].values.get(i);
+				if (data.fields[0].values.get(i)) {
+					cnt += data.fields[0].values.get(i);
 				}
 			}
 			cnt /= sizeQuery;
@@ -197,84 +194,6 @@ export default class DrawRectangleExtend extends React.Component<IProps, IState>
 		// }, 1000);
 	}
 
-	// /**
-	//  * fill coordinate for display
-	//  */
-	// public fillTooltip = (): JSX.Element => {
-	// 	const line: CoordinateSpaceExtendClass = this.props.uneCoor;
-	// 	let pLeft: string;
-	// 	let pRight: string;
-	// 	let pTop: string;
-	// 	let pBottom: string;
-	// 	let xMin: number = 0;
-	// 	let xMax: number = 0;
-	// 	let yMin: number = 0;
-	// 	let yMax: number = 0;
-	// 	const pBorder: string = '1px solid ' + this.props.color;
-
-	// 	// if (this.state.activeSync) {
-	// 	// this.reqAxios();
-	// 	// }
-	// 	xMin = (isNumFloat(line.xMin)) ? parseInt(line.xMin, 10) : 0;
-	// 	xMax = (isNumFloat(line.xMax)) ? parseInt(line.xMax, 10) : 0;
-	// 	yMin = (isNumFloat(line.yMin)) ? parseInt(line.yMin, 10) : 0;
-	// 	yMax = (isNumFloat(line.yMax)) ? parseInt(line.yMax, 10) : 0;
-
-	// 	if (this.props.useLimit) {
-	// 		xMin = this.verifLimit(xMin, 1);
-	// 		xMax = this.verifLimit(xMax, 2);
-	// 		yMin = this.verifLimit(yMin, 3);
-	// 		yMax = this.verifLimit(yMax, 4);
-	// 	}
-
-	// 	if (xMax >= 0) {
-	// 		pLeft = this.transformCoordonneesToPx(xMin, false, 1).toString() + '%';
-	// 		pRight = this.transformCoordonneesToPx(xMax, true, 2).toString() + '%';
-	// 	} else {
-	// 		xMin = xMin * -1;
-	// 		pRight = this.transformCoordonneesToPx(xMin, false, 1).toString() + '%';
-	// 		pLeft = this.transformCoordonneesToPx(xMax, true, 2).toString() + '%';
-	// 	}
-	// 	if (yMax >= 0) {
-	// 		pBottom = this.transformCoordonneesToPx(yMin, false, 3).toString() + '%';
-	// 		pTop = this.transformCoordonneesToPx(yMax, true, 4).toString() + '%';
-	// 	} else {
-	// 		yMin = yMin * -1;
-	// 		pTop = this.transformCoordonneesToPx(yMin, false, 3).toString() + '%';
-	// 		pBottom = this.transformCoordonneesToPx(yMax, true, 4).toString() + '%';
-	// 	}
-
-	// 	const backColor: string = this.props.options.valueTextObject.colorBackRegion;
-	// 	const textColor: string = this.props.options.valueTextObject.colorTextRegion;
-
-	// 	return (
-	// 		<Tooltip content={this.state.tooltipValue} >
-	// 			<div style={{
-	// 				border: pBorder,
-	// 				bottom: pBottom,
-	// 				left: pLeft,
-	// 				position: 'absolute',
-	// 				right: pRight,
-	// 				top: pTop,
-	// 				display: 'flex',
-	// 				flexDirection: 'column',
-	// 				justifyContent: 'center',
-	// 				background: 'url(' + this.props.uneCoor.img + ') no-repeat center center',
-	// 				backgroundSize: 'contain',
-	// 				cursor: 'pointer',
-	// 			}} id={this.props.id}>
-	// 				<div style={{
-	// 					backgroundColor: backColor,
-	// 					color: textColor,
-	// 					verticalAlign: 'middle',
-	// 				}}>
-	// 					{this.props.uneCoor.label}
-	// 				</div>
-	// 			</div>
-	// 		</Tooltip >
-	// 	);
-	// }
-
 	/**
 	 * update props
 	 * @param prevProps
@@ -286,10 +205,10 @@ export default class DrawRectangleExtend extends React.Component<IProps, IState>
 			|| prevProps.data.series !== this.props.data.series) {
 			console.log('am here');
 			this.reqAxios();
-
 		}
 	}
 
+	/** load prometheus value */
 	public componentDidMount = () => {
 		this.reqAxios();
 	}
