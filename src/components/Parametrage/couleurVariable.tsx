@@ -1,7 +1,7 @@
 import React from 'react';
-import { ArrayInputClass } from 'Models/arrayInputClass';
-import { Seuil } from 'Models/seuil';
-import { InputClass } from 'Models/inputClass';
+import { ArrayInputClass } from 'Models/ArrayInputClass';
+import { Seuil } from 'Models/SeuilClass';
+import { InputClass } from 'Models/InputClass';
 
 import { Button, FormField } from '@grafana/ui';
 

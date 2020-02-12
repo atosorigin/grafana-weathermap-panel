@@ -4,26 +4,26 @@ import AddCoordinate from './addCoordinate';
 import { PanelEditorProps, SelectableValue } from '@grafana/data';
 import { SimpleOptions } from 'types';
 import { Select } from '@grafana/ui';
-import { EspaceCoordonneesExtendClass } from 'Models/EspaceCoordonneesExtendClass';
+import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
 
 import { Tab, TabsBar, TabContent } from '@grafana/ui';
 
-import { TextObject } from 'Models/TextObject';
-import { ParametrageMetrique } from 'Models/parametrageMetrique';
+import { TextObject } from 'Models/TextObjectClass';
+import { ParametrageMetrique } from 'Models/SettingMetricClass';
 
 interface IProps extends PanelEditorProps<SimpleOptions> { }
 
 interface IState {
 	/** array for select value with the coordianates space */
-	selectCoordinateSpace: Array<SelectableValue<EspaceCoordonneesExtendClass>>;
+	selectCoordinateSpace: Array<SelectableValue<CoordinateSpaceExtendClass>>;
 	/** default select value */
-	selectCoordinateSpaceDefault: SelectableValue<EspaceCoordonneesExtendClass>;
+	selectCoordinateSpaceDefault: SelectableValue<CoordinateSpaceExtendClass>;
 	/** manage tabs focus */
 	tabsVariable: boolean[];
 }
 
 /**
- * def class
+ * manage coordinate space for simpleEditor
  */
 class ManageCoordinateSpace extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
@@ -35,13 +35,14 @@ class ManageCoordinateSpace extends React.Component<IProps, IState> {
 		};
 	}
 
-	public initCoordinateSpace = (): EspaceCoordonneesExtendClass => {
+	/** init CoordinateSpaceExtendClass */
+	public initCoordinateSpace = (): CoordinateSpaceExtendClass => {
 		const initTextObject: TextObject = new TextObject('', '', '', '', '', '', '', '', '',
 			false, '', '', '',
 			false, false, false, '', false, '');
 		const parametrageMetric: ParametrageMetrique = new ParametrageMetrique('', '', '');
 
-		const newCoordinate: EspaceCoordonneesExtendClass = new EspaceCoordonneesExtendClass(
+		const newCoordinate: CoordinateSpaceExtendClass = new CoordinateSpaceExtendClass(
 			0, '', '', '', '', '', '', '',
 			initTextObject, parametrageMetric, '', '');
 		return newCoordinate;
@@ -50,9 +51,9 @@ class ManageCoordinateSpace extends React.Component<IProps, IState> {
 	/**
 	 * save data in parent
 	 */
-	public callBack = (id: number, newCoordinate?: EspaceCoordonneesExtendClass): void => {
+	public callBack = (id: number, newCoordinate?: CoordinateSpaceExtendClass): void => {
 		if (newCoordinate) {
-			const oldData: EspaceCoordonneesExtendClass[] = this.props.options.arrayEspaceCoordonnees.slice();
+			const oldData: CoordinateSpaceExtendClass[] = this.props.options.arrayCoordinateSpace.slice();
 			let i: number = 0;
 			for (const line of oldData) {
 				if (line.id === id) {
@@ -63,11 +64,11 @@ class ManageCoordinateSpace extends React.Component<IProps, IState> {
 			}
 			this.props.onOptionsChange({
 				...this.props.options,
-				arrayEspaceCoordonnees: oldData,
+				arrayCoordinateSpace: oldData,
 			});
 		} else {
 			let find: boolean = false;
-			const oldData: EspaceCoordonneesExtendClass[] = this.props.options.arrayEspaceCoordonnees.slice();
+			const oldData: CoordinateSpaceExtendClass[] = this.props.options.arrayCoordinateSpace.slice();
 			let i: number = 0;
 			for (const line of oldData) {
 				if (line.id === id) {
@@ -80,7 +81,7 @@ class ManageCoordinateSpace extends React.Component<IProps, IState> {
 				oldData.splice(i, 1);
 				this.props.onOptionsChange({
 					...this.props.options,
-					arrayEspaceCoordonnees: oldData,
+					arrayCoordinateSpace: oldData,
 				});
 			}
 		}
@@ -91,7 +92,7 @@ class ManageCoordinateSpace extends React.Component<IProps, IState> {
 	 */
 	public componentDidMount = () => {
 		const valueSelect = [];
-		const stockTmpCoordinatesSpace: EspaceCoordonneesExtendClass[] = this.props.options.arrayEspaceCoordonnees;
+		const stockTmpCoordinatesSpace: CoordinateSpaceExtendClass[] = this.props.options.arrayCoordinateSpace;
 
 		for (const line of stockTmpCoordinatesSpace) {
 			valueSelect.push({ value: line, label: line.label });
@@ -106,7 +107,7 @@ class ManageCoordinateSpace extends React.Component<IProps, IState> {
 	/**
 	 * Change select value to edit
 	 */
-	public onChangeSelectCoordinate = (value: SelectableValue<EspaceCoordonneesExtendClass>) => {
+	public onChangeSelectCoordinate = (value: SelectableValue<CoordinateSpaceExtendClass>) => {
 		this.setState({
 			selectCoordinateSpaceDefault: value,
 		});
@@ -116,7 +117,7 @@ class ManageCoordinateSpace extends React.Component<IProps, IState> {
 	 * switch tab
 	 * @param {number} id id to to new tab
 	 */
-	public goToTab = (id: number) => {
+	public goToTab = (id: number): void => {
 		const oldValue: boolean[] = this.state.tabsVariable.slice();
 		const size: number = oldValue.length;
 		for (let i: number = 0; i < size; i++) {
@@ -131,7 +132,7 @@ class ManageCoordinateSpace extends React.Component<IProps, IState> {
 	 * update state if value props change
 	 */
 	public componentDidUpdate = (prevProps: IProps) => {
-		if (prevProps.options.arrayEspaceCoordonnees !== this.props.options.arrayEspaceCoordonnees) {
+		if (prevProps.options.arrayCoordinateSpace !== this.props.options.arrayCoordinateSpace) {
 			this.componentDidMount();
 		}
 	}
@@ -140,18 +141,16 @@ class ManageCoordinateSpace extends React.Component<IProps, IState> {
 	 * result
 	 */
 	public render() {
-		// const l10n = require('Localization/en.json');
-
 		return (
 			<div>
 				<TabsBar className='page-header tabs' hideBorder={false}>
 					<Tab key='tabDisplayCoordinateSpaceAdd'
-						label='add coordinate space'
+						label='Add coordinate space'
 						active={this.state.tabsVariable[0]}
 						onChangeTab={() => this.goToTab(0)}
 					/>
 					<Tab key='tabDisplayCoordinateSpaceEdit'
-						label='edit coordinate space'
+						label='Edit coordinate space'
 						active={this.state.tabsVariable[1]}
 						onChangeTab={() => this.goToTab(1)}
 					/>

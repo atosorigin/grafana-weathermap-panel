@@ -1,6 +1,6 @@
 import { editGoodParameterLink} from '../editGoodParameterLink';
 import { LinkClass } from 'Models/LinkClass';
-import { EspaceCoordonneesClass } from 'Models/EspaceCoordonneesClass';
+import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
 import { PointClass } from 'Models/PointClass';
 
 /*
@@ -13,8 +13,8 @@ describe('test editGoodParameterLink', () => {
     
     beforeEach(() => {
         coordinates = [
-            new EspaceCoordonneesClass(0, '-10', '10', '-10', '10', 'espace0'),
-            new EspaceCoordonneesClass(1, '-20', '20', '-20', '20', 'espace0')
+            new CoordinateSpaceClass(0, '-10', '10', '-10', '10', 'espace0'),
+            new CoordinateSpaceClass(1, '-20', '20', '-20', '20', 'espace0')
         ];
         points = [
             new PointClass(0,

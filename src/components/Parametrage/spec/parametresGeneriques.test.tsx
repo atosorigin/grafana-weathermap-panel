@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ParametresGeneriques from '../parametresGeneriques';
-import { ParametrageMetrique } from 'Models/parametrageMetrique';
+import { ParametrageMetrique } from 'Models/SettingMetricClass';
 import { LoadingState } from '@grafana/data';
 import { defaults, SimpleOptions, Target } from '../../../types';
 import { act } from 'react-dom/test-utils';
+import { TextObject } from 'Models/TextObjectClass';
+import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
 
 /*
  * testing the ParametresGeneriques component features
  * - edit parameters
  */
 describe('ParametresGeneriques tests', () => {
-    let container, component;
+    let container, component, testTextObject, parametrageMetric, coordinateSpaceTest;
     const additionalStep = { value: '1', label: '1' };
     /*
      * Mock "onOptionChange" by re-rendering the component with the new options
@@ -22,22 +24,34 @@ describe('ParametresGeneriques tests', () => {
             act(() => {
                 ReactDOM.render(<ParametresGeneriques ref={c => component = c} {...testProps} />, container);
             });
+        },
+        callBackToParent: ( followLink: string, hoveringTooltipLink: string, hoveringTooltipText: string, textObj: TextObject) => {
+            coordinateSpaceTest.followLink = followLink ? followLink : coordinateSpaceTest.followLink;
+            coordinateSpaceTest.hoveringTooltipLink = hoveringTooltipLink ? hoveringTooltipLink : coordinateSpaceTest.hoveringTooltipLink;
+            coordinateSpaceTest.hoveringTooltipText = hoveringTooltipText ? hoveringTooltipText : coordinateSpaceTest.hoveringTooltipText;
+            coordinateSpaceTest.hoveringTooltipText = hoveringTooltipText ? hoveringTooltipText : coordinateSpaceTest.hoveringTooltipText;
+            act(() => {
+                ReactDOM.render(<ParametresGeneriques ref={c => component = c} {...testProps} />, container);
+            });
         }
     }
     let testProps = {};
     beforeEach(() => {
         let clonedDefaults = JSON.parse(JSON.stringify(defaults));
+        testTextObject = new TextObject('legende', 'valeur', 'unite', 'colbr', 'coltxtr', 'ctyletxtr', 'colbackbu', 'coltxtbu', 'styletxtby', true, 'legelement', 'numformatel', 'unitumseu', true, true, true, 'coltxtele', true, 'colbackel');
+        parametrageMetric = new ParametrageMetrique('', '', '');
+        coordinateSpaceTest = new CoordinateSpaceExtendClass(0, '-10', '10', '-20', '20', 'test-label', 'test.png', 'test-interface', testTextObject, parametrageMetric, 'key', 'valkey');
+        clonedDefaults.parametrageMetrique = parametrageMetric;
         clonedDefaults.seuil = [];
-        clonedDefaults.colorMode = false;
-        clonedDefaults.contourIsActive = false;
-        clonedDefaults.fondIsActive = false;
         clonedDefaults.listStep[1] = JSON.parse(JSON.stringify(additionalStep));
         clonedDefaults.promTargets = ['test'];
         container = document.createElement('div');
         document.body.appendChild(container);
         testProps = {
             options: clonedDefaults,
+            coordinateSpace: coordinateSpaceTest,
             onOptionsChange: mockFunctions.onOptionsChange,
+            callBackToParent: mockFunctions.callBackToParent,
             data: {
                 state: LoadingState.Done,
                 series: [
@@ -63,34 +77,25 @@ describe('ParametresGeneriques tests', () => {
         jest.clearAllMocks()
     });
 
-    test('test onSwitchColorMode', async () => {
-        await component.onSwitchColorMode();
+    test('test onToggleMainMetric', async () => {
+        expect(component.state.collapseMainMetric).toBe(false);
+        await component.onToggleMainMetric(true);
 
-        expect(component.state.colorMode).toBe(true);
-        expect(component.state.seuil.length).toBe(0);
-        await component.onSwitchColorMode();
+        expect(component.state.collapseMainMetric).toBe(true);
+        await component.onToggleMainMetric(false);
 
-        expect(component.state.colorMode).toBe(false);
-        expect(component.state.seuil.length).toBe(1);
-    })
+        expect(component.state.collapseMainMetric).toBe(false);
+    });
 
-    test('test onSwitchContour', () => {
-        component.onSwitchContour();
+    test('test onToggleTextObject', async () => {
+        expect(component.state.collapseTextObject).toBe(false);
+        await component.onToggleTextObject(true);
 
-        expect(component.state.contourIsActive).toBe(true);
-        component.onSwitchContour();
+        expect(component.state.collapseTextObject).toBe(true);
+        await component.onToggleTextObject(false);
 
-        expect(component.state.contourIsActive).toBe(false);
-    })
-
-    test('test onSwitchFond', () => {
-        component.onSwitchFond();
-
-        expect(component.state.fondIsActive).toBe(true);
-        component.onSwitchFond();
-
-        expect(component.state.fondIsActive).toBe(false);
-    })
+        expect(component.state.collapseTextObject).toBe(false);
+    });
 
     test('test setStateAsyncParametrageMetrique', () => {
         return component.setStateAsyncParametrageMetrique({parametrageMetrique:new ParametrageMetrique('A', 'B', 'C')}).then(() => {
@@ -98,6 +103,6 @@ describe('ParametresGeneriques tests', () => {
             expect(component.state.parametrageMetrique.hoveringTooltipLink).toBe('B');
             expect(component.state.parametrageMetrique.hoveringTooltipText).toBe('C');
         })
-    })
+    });
 
 });

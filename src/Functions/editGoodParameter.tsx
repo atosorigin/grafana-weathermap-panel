@@ -1,5 +1,5 @@
-import { EspaceCoordonneesClass } from '../Models/EspaceCoordonneesClass';
-import { EspaceCoordonneesExtendClass } from '../Models/EspaceCoordonneesExtendClass';
+import { CoordinateSpaceClass } from '../Models/CoordinateSpaceClass';
+import { CoordinateSpaceExtendClass } from '../Models/CoordinateSpaceExtendClass';
 
 /**
  * Edit the parameter in Coor object
@@ -9,8 +9,8 @@ import { EspaceCoordonneesExtendClass } from '../Models/EspaceCoordonneesExtendC
  * @returns {Coor} object edit
  */
 export const editGoodParameter = (
-	name: string, editCoor: EspaceCoordonneesClass,
-	newValue: string): EspaceCoordonneesClass => {
+	name: string, editCoor: CoordinateSpaceClass,
+	newValue: string): CoordinateSpaceClass => {
 	if (name.startsWith('positionXMin')) {
 		editCoor.setXMin(newValue);
 	} else if (name.startsWith('positionXMax')) {
@@ -26,8 +26,8 @@ export const editGoodParameter = (
 };
 
 export const editGoodParameterExtend = (
-	name: string, editCoor: EspaceCoordonneesExtendClass,
-	newValue: string): EspaceCoordonneesExtendClass => {
+	name: string, editCoor: CoordinateSpaceExtendClass,
+	newValue: string): CoordinateSpaceExtendClass => {
 	if (name.startsWith('positionXMin')) {
 		editCoor.xMin = newValue;
 	} else if (name.startsWith('positionXMax')) {

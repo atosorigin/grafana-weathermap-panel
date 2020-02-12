@@ -243,10 +243,10 @@ describe('ObjectVisibility tests', () => {
     test('update courbure select', () => {
         expect(component.state.courbureSelectDefault).toStrictEqual({});
         
-        const spy = jest.spyOn(component, 'onChangeCourbureInput');
+        const spy = jest.spyOn(component, 'onChangeCourbureInputSelect');
         
         act(() => {
-            component.onChangeCourbureInput(
+            component.onChangeCourbureInputSelect(
                 { value: 'bonjour', label: 'Bonjour' }
             );
         });

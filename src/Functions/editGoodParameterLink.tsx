@@ -8,8 +8,9 @@ import { SelectableValue } from '@grafana/data';
  * @param {string} newValue value to insert in the parameter
  * @returns {Coor} object edit
  */
-export const editGoodParameterLink = (name: string, editCoor: LinkClass, newValue: string,
-										newValueSelect: SelectableValue<any>): LinkClass => {
+export const editGoodParameterLink = (
+	name: string, editCoor: LinkClass, newValue: string,
+	newValueSelect: SelectableValue<any>): LinkClass => {
 	if (name.startsWith('getCoordinate')) {
 		editCoor.setDefineHowToGetCoordonate(newValueSelect);
 	} else if (name.startsWith('orientationLink')) {
@@ -43,13 +44,13 @@ export const editGoodParameterLink = (name: string, editCoor: LinkClass, newValu
 	} else if (name.startsWith('labelLinkB')) {
 		editCoor.setLabelLinkB(newValue);
 	} else if (name.startsWith('positionXLabelLinkA')) {
-		editCoor.setPositionXLabelA(newValue)
+		editCoor.setPositionXLabelA(newValue);
 	} else if (name.startsWith('positionYLabelLinkA')) {
-		editCoor.setPositionYLabelA(newValue)
+		editCoor.setPositionYLabelA(newValue);
 	} else if (name.startsWith('positionXLabelLinkB')) {
-		editCoor.setPositionXLabelB(newValue)
+		editCoor.setPositionXLabelB(newValue);
 	} else if (name.startsWith('positionYLabelLinkB')) {
-		editCoor.setPositionYLabelB(newValue)
+		editCoor.setPositionYLabelB(newValue);
 	}
 	return editCoor;
 };

@@ -1,6 +1,6 @@
 {
   "name": "weathermap",
-  "version": "0.21",
+  "version": "0.25b02",
   "description": "WeatherMap Panel Plugin for Grafana",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
@@ -13,7 +13,8 @@
   "devDependencies": {
     "@grafana/data": "^6.6.0",
     "@grafana/toolkit": "^6.6.0",
-    "css-loader": "^3.4.2"
+    "css-loader": "^3.4.2",
+    "jest-html-reporter": "^2.8.0"
   },
   "dependencies": {
     "@grafana/ui": "^6.6.0",

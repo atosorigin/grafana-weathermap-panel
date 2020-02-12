@@ -4,13 +4,16 @@ import TextObjects from '../textObjects';
 import { LoadingState } from '@grafana/data';
 import { defaults, SimpleOptions, Target } from '../../../types';
 import { act } from 'react-dom/test-utils';
+import { ParametrageMetrique } from 'Models/SettingMetricClass';
+import { TextObject } from 'Models/TextObjectClass';
+import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
 
 /*
  * testing the TextObjects component features
  * - edit parameters
  */
 describe('TextObjects tests', () => {
-    let container, component;
+    let container, component, testTextObject, parametrageMetric, coordinateSpaceTest;
     const additionalStep = { value: '1', label: '1' };
     /*
      * Mock "onOptionChange" by re-rendering the component with the new options
@@ -21,23 +24,32 @@ describe('TextObjects tests', () => {
             act(() => {
                 ReactDOM.render(<TextObjects ref={c => component = c} {...testProps} />, container);
             });
+        },
+        callBackToParent: ( followLink: string, hoveringTooltipLink: string, hoveringTooltipText: string, textObj: TextObject) => {
+            coordinateSpaceTest.followLink = followLink ? followLink : coordinateSpaceTest.followLink;
+            coordinateSpaceTest.hoveringTooltipLink = hoveringTooltipLink ? hoveringTooltipLink : coordinateSpaceTest.hoveringTooltipLink;
+            coordinateSpaceTest.hoveringTooltipText = hoveringTooltipText ? hoveringTooltipText : coordinateSpaceTest.hoveringTooltipText;
+            coordinateSpaceTest.hoveringTooltipText = hoveringTooltipText ? hoveringTooltipText : coordinateSpaceTest.hoveringTooltipText;
+            act(() => {
+                ReactDOM.render(<TextObjects ref={c => component = c} {...testProps} />, container);
+            });
         }
     }
     let testProps = {};
     beforeEach(() => {
         let clonedDefaults = JSON.parse(JSON.stringify(defaults));
-        clonedDefaults.generateObjectText = false;
-        clonedDefaults.displayObjectInText = false;
-        clonedDefaults.displayObjectPermanently = false;
-        clonedDefaults.addColorTextElement = false;
-        clonedDefaults.addColorBackElement = false;
+        testTextObject = new TextObject('legende', 'valeur', 'unite', 'colbr', 'coltxtr', 'ctyletxtr', 'colbackbu', 'coltxtbu', 'styletxtby', false, 'legelement', 'numformatel', 'unitumseu', false, false, false, 'coltxtele', false, 'colbackel');
+        parametrageMetric = new ParametrageMetrique('', '', '');
+        coordinateSpaceTest = new CoordinateSpaceExtendClass(0, '-10', '10', '-20', '20', 'test-label', 'test.png', 'test-interface', testTextObject, parametrageMetric, 'key', 'valkey');
         clonedDefaults.listStep[1] = JSON.parse(JSON.stringify(additionalStep));
         clonedDefaults.promTargets = ['test'];
         container = document.createElement('div');
         document.body.appendChild(container);
         testProps = {
             options: clonedDefaults,
+            coordinateSpace: coordinateSpaceTest,
             onOptionsChange: mockFunctions.onOptionsChange,
+            callBackToParent: mockFunctions.callBackToParent,
             data: {
                 state: LoadingState.Done,
                 series: [
@@ -66,31 +78,31 @@ describe('TextObjects tests', () => {
     test('test onChangeLegende', () => {
         component.onChangeLegende('testText');
 
-        expect(component.state.legende).toBe('testText');
+        expect(component.state.textObject.legende).toBe('testText');
     })
 
     test('test onChangeValeur', () => {
         component.onChangeValeur('testText');
 
-        expect(component.state.valeur).toBe('testText');
+        expect(component.state.textObject.valeur).toBe('testText');
     })
 
     test('test onChangeUnite', () => {
         component.onChangeUnite('testText');
 
-        expect(component.state.unite).toBe('testText');
+        expect(component.state.textObject.unite).toBe('testText');
     })
 
     test('test onChangeBackColorRegion', () => {
         component.onChangeBackColorRegion('whatiskey', 'testText');
 
-        expect(component.state.colorBackRegion).toBe('testText');
+        expect(component.state.textObject.colorBackRegion).toBe('testText');
     })
 
     test('test onChangeColorTextRegion', () => {
         component.onChangeColorTextRegion('whatiskey', 'testText');
 
-        expect(component.state.colorTextRegion).toBe('testText');
+        expect(component.state.textObject.colorTextRegion).toBe('testText');
     })
 
     test('test onChangeStyleTextRegion', () => {
@@ -101,7 +113,7 @@ describe('TextObjects tests', () => {
             currentTarget: input
         });
 
-        expect(component.state.styleTextRegion).toBe('testText');
+        expect(component.state.textObject.styleTextRegion).toBe('testText');
     })
 
     test('test onChangeStyleTextBulle', () => {
@@ -112,28 +124,28 @@ describe('TextObjects tests', () => {
             currentTarget: input
         });
 
-        expect(component.state.styleTextBulle).toBe('testText');
+        expect(component.state.textObject.styleTextBulle).toBe('testText');
     })
 
     test('test onChangeColorBackBulle', () => {
         component.onChangeColorBackBulle('whatiskey', 'testText');
 
-        expect(component.state.colorBackBulle).toBe('testText');
+        expect(component.state.textObject.colorBackBulle).toBe('testText');
     })
 
     test('test onChangeColorTextBulle', () => {
         component.onChangeColorTextBulle('whatiskey', 'testText');
 
-        expect(component.state.colorTextBulle).toBe('testText');
+        expect(component.state.textObject.colorTextBulle).toBe('testText');
     })
 
     test('test onSwitchGenerateObjectText', () => {
         component.onSwitchGenerateObjectText();
 
-        expect(component.state.generateObjectText).toBe(true);
+        expect(component.state.textObject.generateObjectText).toBe(true);
         component.onSwitchGenerateObjectText();
 
-        expect(component.state.generateObjectText).toBe(false);
+        expect(component.state.textObject.generateObjectText).toBe(false);
     })
 
     test('test onChangeLegendElement', () => {
@@ -144,7 +156,7 @@ describe('TextObjects tests', () => {
             currentTarget: input
         });
 
-        expect(component.state.legendElement).toBe('testText');
+        expect(component.state.textObject.legendElement).toBe('testText');
     })
 
     test('test onChangeUnityMesureElement', () => {
@@ -155,7 +167,7 @@ describe('TextObjects tests', () => {
             currentTarget: input
         });
 
-        expect(component.state.unityMesureElement).toBe('testText');
+        expect(component.state.textObject.unityMesureElement).toBe('testText');
     })
 
     test('test onChangeFormatageNumeriqueTextObject', () => {
@@ -166,54 +178,54 @@ describe('TextObjects tests', () => {
             currentTarget: input
         });
 
-        expect(component.state.numericFormatElement).toBe('testText');
+        expect(component.state.textObject.numericFormatElement).toBe('testText');
     })
 
     test('test onSwitchDisplayObjectInText', () => {
         component.onSwitchDisplayObjectInText();
 
-        expect(component.state.displayObjectInText).toBe(true);
+        expect(component.state.textObject.displayObjectInText).toBe(true);
         component.onSwitchDisplayObjectInText();
 
-        expect(component.state.displayObjectInText).toBe(false);
+        expect(component.state.textObject.displayObjectInText).toBe(false);
     })
 
     test('test onSwitchDisplayObjectPermanently', () => {
         component.onSwitchDisplayObjectPermanently();
 
-        expect(component.state.displayObjectPermanently).toBe(true);
+        expect(component.state.textObject.displayObjectPermanently).toBe(true);
         component.onSwitchDisplayObjectPermanently();
 
-        expect(component.state.displayObjectPermanently).toBe(false);
+        expect(component.state.textObject.displayObjectPermanently).toBe(false);
     })
 
     test('test onSwitchAddColorTextElement', () => {
         component.onSwitchAddColorTextElement();
 
-        expect(component.state.addColorTextElement).toBe(true);
+        expect(component.state.textObject.addColorTextElement).toBe(true);
         component.onSwitchAddColorTextElement();
 
-        expect(component.state.addColorTextElement).toBe(false);
+        expect(component.state.textObject.addColorTextElement).toBe(false);
     })
 
     test('test onSwitchAddColorBackElement', () => {
         component.onSwitchAddColorBackElement();
 
-        expect(component.state.addColorBackElement).toBe(true);
+        expect(component.state.textObject.addColorBackElement).toBe(true);
         component.onSwitchAddColorBackElement();
 
-        expect(component.state.addColorBackElement).toBe(false);
+        expect(component.state.textObject.addColorBackElement).toBe(false);
     })
 
     test('test onChangeColorTextElement', () => {
         component.onChangeColorTextElement('whatiskey', 'testText');
 
-        expect(component.state.colorTextElement).toBe('testText');
+        expect(component.state.textObject.colorTextElement).toBe('testText');
     })
 
     test('test onChangeColorBackElement', () => {
         component.onChangeColorBackElement('whatiskey', 'testText');
 
-        expect(component.state.colorBackElement).toBe('testText');
+        expect(component.state.textObject.colorBackElement).toBe('testText');
     })
 });

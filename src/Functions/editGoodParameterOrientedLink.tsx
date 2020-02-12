@@ -8,8 +8,9 @@ import { SelectableValue } from '@grafana/data';
  * @param {string} newValue value to insert in the parameter
  * @returns {Coor} object edit
  */
-export const editGoodParameterOrientedLink = (name: string, editCoor: OrientedLinkClass, newValue: string,
-										newValueSelect: SelectableValue<any>): OrientedLinkClass => {
+export const editGoodParameterOrientedLink = (
+	name: string, editCoor: OrientedLinkClass, newValue: string,
+	newValueSelect: SelectableValue<any>): OrientedLinkClass => {
 	if (name.startsWith('orientationLink')) {
 		editCoor.setOrientationLink(newValueSelect);
 	} else if (name.startsWith('pointAX')) {
@@ -29,16 +30,16 @@ export const editGoodParameterOrientedLink = (name: string, editCoor: OrientedLi
 	} else if (name.startsWith('labelLinkB')) {
 		editCoor.setLabelLinkB(newValue);
 	} else if (name.startsWith('positionXLabelLinkA')) {
-		editCoor.setPositionXLabelA(newValue)
+		editCoor.setPositionXLabelA(newValue);
 	} else if (name.startsWith('positionYLabelLinkA')) {
-		editCoor.setPositionYLabelA(newValue)
+		editCoor.setPositionYLabelA(newValue);
 	} else if (name.startsWith('positionXLabelLinkB')) {
-		editCoor.setPositionXLabelB(newValue)
+		editCoor.setPositionXLabelB(newValue);
 	} else if (name.startsWith('positionYLabelLinkB')) {
-		editCoor.setPositionYLabelB(newValue)
-	} else if (name.startsWith('spaceCoordinateAssociatePointA')) {
+		editCoor.setPositionYLabelB(newValue);
+	} else if (name.startsWith('CoordinateSpaceAssociatePointA')) {
 		editCoor.setRegionIn(newValueSelect);
-	} else if (name.startsWith('spaceCoordinateAssociatePointB')) {
+	} else if (name.startsWith('CoordinateSpaceAssociatePointB')) {
 		editCoor.setRegionOut(newValueSelect);
 	} else if (name.startsWith('pointIn')) {
 		editCoor.setPointIn(newValueSelect);

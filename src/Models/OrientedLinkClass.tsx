@@ -1,9 +1,6 @@
 import { SelectableValue } from '@grafana/data';
-import { EspaceCoordonneesExtendClass } from './EspaceCoordonneesExtendClass';
+import { CoordinateSpaceExtendClass } from './CoordinateSpaceExtendClass';
 import { PointClass } from './PointClass';
-//import { PointClass } from './PointClass';
-//import { EspaceCoordonneesExtendClass } from './EspaceCoordonneesExtendClass';
-
 
 export class OrientedLinkClass {
 	/**
@@ -49,8 +46,8 @@ export class OrientedLinkClass {
 	/**
 	 * to do
 	 */
-	public labelLinkA: string;	
-	
+	public labelLinkA: string;
+
 	/**
 	 * to do
 	 */
@@ -64,7 +61,7 @@ export class OrientedLinkClass {
 	 * to do
 	 */
 	public positionYLabelA: string;
-	
+
 	/**
 	 * to do
 	 */
@@ -88,12 +85,12 @@ export class OrientedLinkClass {
 	/**
 	 * to do
 	 */
-	public regionIn: SelectableValue<EspaceCoordonneesExtendClass>;
+	public regionIn: SelectableValue<CoordinateSpaceExtendClass>;
 
 	/**
 	 * to do
 	 */
-	public regionOut: SelectableValue<EspaceCoordonneesExtendClass>;
+	public regionOut: SelectableValue<CoordinateSpaceExtendClass>;
 
 	// /**
 	//  * to do
@@ -123,11 +120,8 @@ export class OrientedLinkClass {
 		positionYLabelB: string,
 		pointIn: SelectableValue<PointClass>,
 		pointOut: SelectableValue<PointClass>,
-		regionIn: SelectableValue<EspaceCoordonneesExtendClass>,
-		regionOut: SelectableValue<EspaceCoordonneesExtendClass>,
-		// typeOfWidthLink: boolean,
-		// widthLink: string,
-
+		regionIn: SelectableValue<CoordinateSpaceExtendClass>,
+		regionOut: SelectableValue<CoordinateSpaceExtendClass>
 	) {
 		this.id = id;
 		this.orientationLink = orientationLink;
@@ -147,7 +141,7 @@ export class OrientedLinkClass {
 		this.pointOut = pointOut;
 		this.regionIn = regionIn;
 		this.regionOut = regionOut;
-		// this.typeOfWidthLink = typeOfWidthLink;
+		// This.typeOfWidthLink = typeOfWidthLink;
 		// this.widthLink = widthLink;
 	}
 
@@ -163,8 +157,8 @@ export class OrientedLinkClass {
 	 */
 	public setId(id: number) {
 		this.id = id;
-    }
-	
+	}
+
 	/**
 	 * Extrémité par couple de coordonnée - Position X du Point A
 	 */
@@ -227,12 +221,12 @@ export class OrientedLinkClass {
 
 	/**
 	 * modifie la couleur pour le lien de A vers B
-	 * @param colorCoordinateA 
+	 * @param colorCoordinateA
 	 */
 	public setColorCoordinateA(colorCoordinateA: string) {
 		this.colorCoordinateA = colorCoordinateA;
-	}	
-	
+	}
+
 	/**
 	 * retourne la couleur pour le lien de B vers A
 	 */
@@ -242,7 +236,7 @@ export class OrientedLinkClass {
 
 	/**
 	 * modifie la couleur pour le lien de B vers A
-	 * @param colorCoordinateB 
+	 * @param colorCoordinateB
 	 */
 	public setColorCoordinateB(colorCoordinateB: string) {
 		this.colorCoordinateB = colorCoordinateB;
@@ -261,8 +255,8 @@ export class OrientedLinkClass {
 	 */
 	public setPointBPositionX(pointBPositionX: string) {
 		this.pointBPositionX = pointBPositionX;
-	}	
-	
+	}
+
 	/**
 	 * Extrémité par couple de coordonnée - Position Y du Point B
 	 */
@@ -285,7 +279,7 @@ export class OrientedLinkClass {
 	public setLabelLinkA(labelLinkA: string) {
 		this.labelLinkA = labelLinkA;
 	}
-	
+
 	public getLabelLinkB() {
 		return this.labelLinkB;
 	}
@@ -309,7 +303,7 @@ export class OrientedLinkClass {
 	public setPositionYLabelA(positionYLabelA: string) {
 		this.positionYLabelA = positionYLabelA;
 	}
-	
+
 	public getPositionXLabelB() {
 		return this.positionXLabelB;
 	}
@@ -332,8 +326,8 @@ export class OrientedLinkClass {
 
 	public setPointIn(pointIn: SelectableValue<PointClass>) {
 		this.pointIn = pointIn;
-	}	
-	
+	}
+
 	public getPointOut() {
 		return this.pointOut;
 	}
@@ -346,7 +340,7 @@ export class OrientedLinkClass {
 		return this.regionIn;
 	}
 
-	public setRegionIn(regionIn: SelectableValue<EspaceCoordonneesExtendClass>) {
+	public setRegionIn(regionIn: SelectableValue<CoordinateSpaceExtendClass>) {
 		this.regionIn = regionIn;
 	}
 
@@ -354,7 +348,7 @@ export class OrientedLinkClass {
 		return this.regionOut;
 	}
 
-	public setRegionOut(regionOut: SelectableValue<EspaceCoordonneesExtendClass>) {
+	public setRegionOut(regionOut: SelectableValue<CoordinateSpaceExtendClass>) {
 		this.regionOut = regionOut;
 	}
 	// /**
@@ -366,7 +360,7 @@ export class OrientedLinkClass {
 
 	// /**
 	//  * Modifie le type de largeur du lien : fixe ou variable
-	//  * @param typeOfWidthLink 
+	//  * @param typeOfWidthLink
 	//  */
 	// public setTypeOfWidthLink(typeOfWidthLink: boolean) {
 	// 	this.typeOfWidthLink = typeOfWidthLink;
@@ -380,7 +374,7 @@ export class OrientedLinkClass {
 	// }
 
 	// /**
-	//  * 
+	//  *
 	//  * @param widthLink Modifie la largeur du lien
 	//  */
 	// public setWidthLink(widthLink: string) {

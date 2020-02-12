@@ -9,7 +9,7 @@ interface IProps {
 }
 
 interface IState {
-	regionTextSelect: Array<SelectableValue<string>>
+	regionTextSelect: Array<SelectableValue<string>>;
 	/** defaultValue */
 	regionTextSelectDefault: SelectableValue<string>;
 	abscissesPointRegionTexte: string;
@@ -25,7 +25,7 @@ interface IState {
 	nvCalqueInput: string;
 
 	courbureSelect: Array<SelectableValue<string>>;
-	courbureSelectDefault: SelectableValue<string>,
+	courbureSelectDefault: SelectableValue<string>;
 	courbureInput: string;
 }
 
@@ -63,6 +63,9 @@ class ObjectVisibility extends React.Component<IProps, IState> {
 		});
 	}
 
+	/**
+	 * change abscisse value
+	 */
 	public onChangeAbscissesPointRegionText = (event: { currentTarget: HTMLInputElement }) => {
 		this.setState({
 			abscissesPointRegionTexte: event.currentTarget.value,
@@ -99,6 +102,12 @@ class ObjectVisibility extends React.Component<IProps, IState> {
 		});
 	}
 
+	public onChangeCourbureInputSelect = (value: SelectableValue<string>) => {
+		this.setState({
+			courbureSelectDefault: value,
+		});
+	}
+
 	public onChangeCourbureInput = (event: { currentTarget: HTMLInputElement }) => {
 		this.setState({
 			courbureInput: event.currentTarget.value,
@@ -120,7 +129,7 @@ class ObjectVisibility extends React.Component<IProps, IState> {
 
 		return (
 			<div>
-						{/* icon={child.icon} */}
+				{/* icon={child.icon} */}
 
 				<div>
 					<p>{l10s.objectVisibility.decalCenterPointTextRegion}</p>
@@ -173,7 +182,7 @@ class ObjectVisibility extends React.Component<IProps, IState> {
 
 				<div>
 					<p>{l10s.objectVisibility.forceCourbSpecificLink}</p>
-					<InputSelect _onChange={this.onChangeCourbureInput}
+					<InputSelect _onChange={this.onChangeCourbureInputSelect}
 						data={this.state.courbureSelect}
 						defaultValue={this.state.courbureSelectDefault}
 					/>

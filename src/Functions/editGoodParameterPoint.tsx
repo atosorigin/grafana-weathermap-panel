@@ -8,8 +8,9 @@ import { SelectableValue } from '@grafana/data';
  * @param {string} newValue value to insert in the parameter
  * @returns {Coor} object edit
  */
-export const editGoodParameterPoint = (name: string, editCoor: PointClass, newValue: string,
-											newValueSelect: SelectableValue<any>): PointClass => {
+export const editGoodParameterPoint = (
+	name: string, editCoor: PointClass, newValue: string,
+	newValueSelect: SelectableValue<any>): PointClass => {
 	if (name.startsWith('linkWithCoordinateSpace')) {
 		editCoor.setCoordinateSpace(newValueSelect);
 	} else if (name.startsWith('drawGraphicMarker')) {
