@@ -1,16 +1,15 @@
 import React from 'react';
 
 import InputTextField from 'Functions/Input/inputText';
-
 import InputSeriesColorPicker from 'Functions/Input/inputSeriesColorPicker';
-import { Switch } from '@grafana/ui';
-import { TextObject } from 'Models/TextObject';
+import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
 
-import { EspaceCoordonneesExtendClass } from 'Models/EspaceCoordonneesExtendClass';
+import { Switch } from '@grafana/ui';
+import { TextObject } from 'Models/TextObjectClass';
 
 interface IProps {
 	/** id coordinate */
-	coordinateSpace: EspaceCoordonneesExtendClass;
+	coordinateSpace: CoordinateSpaceExtendClass;
 	callBackToParent: (
 		followLink?: string,
 		hoveringTooltipLink?: string,

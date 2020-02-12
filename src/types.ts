@@ -1,9 +1,9 @@
 import { SelectableValue } from '@grafana/data';
-import { EspaceCoordonneesClass } from './Models/EspaceCoordonneesClass';
-import { EspaceCoordonneesExtendClass } from './Models/EspaceCoordonneesExtendClass';
-import { Seuil } from './Models/seuil';
-import { ParametrageMetrique } from './Models/parametrageMetrique';
-import { TextObject } from 'Models/TextObject';
+import { CoordinateSpaceClass } from './Models/CoordinateSpaceClass';
+import { CoordinateSpaceExtendClass } from './Models/CoordinateSpaceExtendClass';
+import { Seuil } from './Models/SeuilClass';
+import { ParametrageMetrique } from './Models/SettingMetricClass';
+import { TextObject } from 'Models/TextObjectClass';
 import { PointClass } from 'Models/PointClass';
 import { LinkClass } from 'Models/LinkClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
@@ -103,12 +103,12 @@ export interface SimpleOptions extends IParametrage,
 	/**
 	 * Espace de visualisation initial
 	 */
-	arrayEspaceVisualisationInitial: EspaceCoordonneesClass;
+	arrayCoordinateSpaceInitial: CoordinateSpaceClass;
 
 	/**
 	 * Espace de coordonnees
 	 */
-	arrayEspaceCoordonnees: EspaceCoordonneesExtendClass[];
+	arrayCoordinateSpace: CoordinateSpaceExtendClass[];
 
 	/**
 	 * Liste des points générés depuis l'onglet Point
@@ -269,7 +269,7 @@ export interface SimpleOptions extends IParametrage,
 			labelPoint: string,
 			point: any,			//PointCLass
 			labelRegion: string,
-			region: any, 		//EspaceCoordonneesClass
+			region: any, 		//CoordinateSpaceClass
 		},
 		{
 			x: number,
@@ -277,7 +277,7 @@ export interface SimpleOptions extends IParametrage,
 			labelPoint: string,
 			point: any,			//PointClass
 			labelRegion: string,
-			region: any,		//EspaceCoordonneesClass
+			region: any,		//CoordinateSpaceClass
 		}
 	];
 	// coordinatesFromClick: {
@@ -297,8 +297,8 @@ export interface SimpleOptions extends IParametrage,
 
 export const defaults: SimpleOptions = {
 	imageUrl: 'https://upload.wikimedia.org/wikipedia/en/b/be/Locator_Grid.png',
-	arrayEspaceVisualisationInitial: new EspaceCoordonneesClass(0, '0', '0', '0', '0', ''),
-	arrayEspaceCoordonnees: [],
+	arrayCoordinateSpaceInitial: new CoordinateSpaceClass(0, '0', '0', '0', '0', ''),
+	arrayCoordinateSpace: [],
 	arrayPoints: [],
 	arrayLinks: [],
 	arrayOrientedLinks: [],

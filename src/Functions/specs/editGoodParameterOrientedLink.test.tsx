@@ -1,6 +1,9 @@
 import { editGoodParameterOrientedLink} from '../editGoodParameterOrientedLink';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
-import { EspaceCoordonneesClass } from 'Models/EspaceCoordonneesClass';
+import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
+import { PointClass } from 'Models/PointClass';
+import { TextObject } from 'Models/TextObjectClass';
+import { ParametrageMetrique } from 'Models/SettingMetricClass';
 
 /*
  * testing the editGoodParameterOrientedLink function
@@ -8,12 +11,44 @@ import { EspaceCoordonneesClass } from 'Models/EspaceCoordonneesClass';
 describe('test editGoodParameterOrientedLink', () => {
     let orientedLinkClass;
     let coordinates = [];
+    let points = [];
     
     beforeEach(() => {
+        const initTextObject: TextObject = new TextObject('', '', '', '', '', '', '', '', '', false, '', '', '', false, false, false, '', false, '');
+        const parametrageMetric = new ParametrageMetrique('', '', '');
         coordinates = [
-            new EspaceCoordonneesClass(0, '-10', '10', '-10', '10', 'espace0'),
-            new EspaceCoordonneesClass(1, '-20', '20', '-20', '20', 'espace0')
-        ];
+            new CoordinateSpaceExtendClass(0, '-10', '10', '-10', '10', 'espace0', 'test.png', 'interface-test', initTextObject, parametrageMetric, '0-key', 'valkey0'),
+            new CoordinateSpaceExtendClass(1, '-10', '10', '-10', '10', 'espace1', 'test.png', 'interface-test', initTextObject, parametrageMetric, '1-key', 'valkey1')
+        ];points = [
+            new PointClass(0,
+                {label: 'coord0', value: coordinates[0]},
+                {label: 'shape', value: 'A'},
+                {label: 'shape', value: 'arrow'},
+                {label: 'width', value: '1'},
+                {label: 'height', size: '1'},
+                'right',
+                '5',
+                '4',
+                'point0',
+                '6',
+                '5',
+                '#AABBCC'
+            ),
+            new PointClass(1,
+                {label: 'coord1', value: coordinates[0]},
+                {label: 'shape', value: 'A'},
+                {label: 'shape', value: 'arrow'},
+                {label: 'width', value: '1'},
+                {label: 'height', size: '1'},
+                'right',
+                '4',
+                '5',
+                'point0',
+                '5',
+                '6',
+                '#BBCCDD'
+            )
+        ]
 
         orientedLinkClass = new OrientedLinkClass(
             5,
@@ -30,14 +65,17 @@ describe('test editGoodParameterOrientedLink', () => {
             '2',
             '3',
             '4',
-            {label: 'coordinateSpaceA', value: coordinates[0]},
-            {label: 'coordinateSpaceB', value: coordinates[0]}
+            {label: 'pointIn', value: points[0]},
+            {label: 'pointOut', value: points[0]},
+            {label: 'regionIn', value: coordinates[0]},
+            {label: 'regionOut', value: coordinates[0]}
         );
     });
 
     afterEach(() => {       
         orientedLinkClass = null;
         coordinates = [];
+        points = [];
     });
 
     test('orientationLink', () => {
@@ -105,14 +143,24 @@ describe('test editGoodParameterOrientedLink', () => {
         expect(orientedLinkClass.getPositionYLabelB()).toBe('test-value');
     });
 
-    test('spaceCoordinateAssociatePointA', () => {
-        editGoodParameterOrientedLink('spaceCoordinateAssociatePointA', orientedLinkClass, 'test-value-unused', {label: 'test-label', value: coordinates[1]});
-        expect(orientedLinkClass.getCoordinateSpaceAssociatePointA()).toStrictEqual({label: 'test-label', value: coordinates[1]});
+    test('CoordinateSpaceAssociatePointA', () => {
+        editGoodParameterOrientedLink('CoordinateSpaceAssociatePointA', orientedLinkClass, 'test-value-unused', {label: 'test-label', value: coordinates[1]});
+        expect(orientedLinkClass.getRegionIn()).toStrictEqual({label: 'test-label', value: coordinates[1]});
     });
 
-    test('spaceCoordinateAssociatePointB', () => {
-        editGoodParameterOrientedLink('spaceCoordinateAssociatePointB', orientedLinkClass, 'test-value-unused', {label: 'test-label', value: coordinates[1]});
-        expect(orientedLinkClass.getCoordinateSpaceAssociatePointB()).toStrictEqual({label: 'test-label', value: coordinates[1]});
+    test('CoordinateSpaceAssociatePointB', () => {
+        editGoodParameterOrientedLink('CoordinateSpaceAssociatePointB', orientedLinkClass, 'test-value-unused', {label: 'test-label', value: coordinates[1]});
+        expect(orientedLinkClass.getRegionOut()).toStrictEqual({label: 'test-label', value: coordinates[1]});
+    });
+
+    test('pointIn', () => {
+        editGoodParameterOrientedLink('pointIn', orientedLinkClass, 'test-value-unused', {label: 'test-label', value: points[1]});
+        expect(orientedLinkClass.getPointIn()).toStrictEqual({label: 'test-label', value: points[1]});
+    });
+
+    test('pointOut', () => {
+        editGoodParameterOrientedLink('pointOut', orientedLinkClass, 'test-value-unused', {label: 'test-label', value: points[1]});
+        expect(orientedLinkClass.getPointOut()).toStrictEqual({label: 'test-label', value: points[1]});
     });
 
 });

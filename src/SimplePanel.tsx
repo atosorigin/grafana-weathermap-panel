@@ -2,15 +2,15 @@ import React, { PureComponent } from 'react';
 import { PanelProps, SelectableValue } from '@grafana/data';
 import { SimpleOptions, ReturnQuery, ResultQuery } from 'types';
 
-import { EspaceCoordonneesExtendClass } from 'Models/EspaceCoordonneesExtendClass';
-import DrawRectangle from './components/Draw/DrawRectangle';
-import DrawRectangleExtend from './components/Draw/DrawRectangleExtend';
-import DrawCircleCross from './components/Draw/DrawCircleCross';
-import DrawArrow from './components/Draw/DrawArrow';
-import DrawLinkWithCoordinates from './components/Draw/DrawLinkWithCoordinates';
-import DrawLinkWithPoints from './components/Draw/DrawLinkWithPoints';
-import DrawLinkWithRegions from './components/Draw/DrawLinkWithRegions';
-import DrawOrientedLink from './components/Draw/DrawOrientedLink';
+import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
+import DrawRectangle from './components/Draw/drawRectangle';
+import DrawRectangleExtend from './components/Draw/drawRectangleExtend';
+import DrawCircleCross from './components/Draw/drawCircleCross';
+import DrawArrow from './components/Draw/drawArrow';
+import DrawLinkWithCoordinates from './components/Draw/drawLinkWithCoordinates';
+import DrawLinkWithPoints from './components/Draw/drawLinkWithPoints';
+import DrawLinkWithRegions from './components/Draw/drawLinkWithRegions';
+import DrawOrientedLink from './components/Draw/drawOrientedLink';
 
 import { PointClass } from 'Models/PointClass';
 import { LinkClass } from 'Models/LinkClass';
@@ -19,12 +19,10 @@ import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 interface IProps extends PanelProps<SimpleOptions> { }
 
 interface IState {
-	displayArrowOnPanel: JSX.Element,
-	isUpdate: boolean,
-	sizePanel: number,
+	isUpdate: boolean;
+	sizePanel: number;
 	idOrientedLink: number;
 }
-
 
 /**
  * Affichage
@@ -34,7 +32,6 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			displayArrowOnPanel: <div></div>,
 			isUpdate: false,
 			sizePanel: 300,
 			idOrientedLink: 1,
@@ -49,11 +46,11 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 		let mapItems: JSX.Element[];
 		let i: number = 0;
 
-		mapItems = options.arrayEspaceCoordonnees
-			.map((line: EspaceCoordonneesExtendClass, index) =>
+		mapItems = options.arrayCoordinateSpace
+			.map((line: CoordinateSpaceExtendClass, index) =>
 				<DrawRectangleExtend key={'drawRectangleExtend' + i++} color='red' uneCoor={line}
 					useLimit={true}
-					limit={options.arrayEspaceVisualisationInitial}
+					limit={options.arrayCoordinateSpaceInitial}
 					contentTooltip={<a>salut</a>}
 					onOptionsChange={this.props.onOptionsChange}
 					options={this.props.options}
@@ -69,16 +66,16 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 	}
 
 	/**
-	 * Display limit (arrayEspaceVisualisationInitial)
+	 * Display limit (arrayCoordinateSpaceInitial)
 	 * @returns JSX.Element
 	 */
 	public defineLimit = (): JSX.Element => {
-		const { arrayEspaceVisualisationInitial } = this.props.options;
+		const { arrayCoordinateSpaceInitial } = this.props.options;
 
 		let jsxItems: JSX.Element;
 
 		jsxItems = <DrawRectangle key='limitCoor' color='orange'
-			uneCoor={arrayEspaceVisualisationInitial} id='initialSpace' />;
+			uneCoor={arrayCoordinateSpaceInitial} id='initialSpace' />;
 		return jsxItems;
 	}
 
@@ -90,29 +87,29 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 		const { options } = this.props;
 
 		const arrayPoints: PointClass[] = options.arrayPoints;
-		let mapItems: JSX.Element[] = [];
+		const mapItems: JSX.Element[] = [];
 
 		arrayPoints.forEach((line: PointClass) => {
 			if (line.shape.value === 'arrow') {
 
-				let item: JSX.Element = <DrawArrow key={line.id} coordinateSpace={line.coordinateSpace}
+				const item: JSX.Element = <DrawArrow key={line.id} coordinateSpace={line.coordinateSpace}
 					drawGraphicmarker={line.drawGraphicMarker} shape={line.shape}
 					sizeWidth={line.sizeWidth} sizeHeight={line.sizeHeight} rotate={line.rotateArrow}
 					positionShapeX={line.positionShapeX} positionShapeY={line.positionShapeY} label={line.label}
 					positionLabelX={line.positionLabelX} positionLabelY={line.positionLabelY}
 					height={this.state.sizePanel} police={this.props.options.police}
-					sizePolice={this.props.options.taille} color={line.color} idPoint={'point' + line.id} />
+					sizePolice={this.props.options.taille} color={line.color} idPoint={'point' + line.id} />;
 
 				mapItems.push(item);
 
 			} else if (line.shape.value === 'circle' || line.shape.value === 'cross') {
 
-				let item: JSX.Element = <DrawCircleCross key={line.id} coordinateSpace={line.coordinateSpace}
+				const item: JSX.Element = <DrawCircleCross key={line.id} coordinateSpace={line.coordinateSpace}
 					drawGraphicMarker={line.drawGraphicMarker} shape={line.shape} size={line.sizeWidth}
 					positionShapeX={line.positionShapeX} positionShapeY={line.positionShapeY} label={line.label}
 					positionLabelX={line.positionLabelX} positionLabelY={line.positionLabelY}
 					height={this.state.sizePanel} police={this.props.options.police}
-					sizePolice={this.props.options.taille} color={line.color} idPoint={'point' + line.id} />
+					sizePolice={this.props.options.taille} color={line.color} idPoint={'point' + line.id} />;
 
 				mapItems.push(item);
 			}
@@ -125,9 +122,10 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 		);
 	}
 
+	/** display link with coordinate */
 	public displayLink() {
 		const { options } = this.props;
-		let mapItems: JSX.Element[] = [];
+		const mapItems: JSX.Element[] = [];
 		const arrayLinks: LinkClass[] = options.arrayLinks;
 
 		arrayLinks.forEach((link: LinkClass) => {
@@ -192,68 +190,24 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 		);
 	}
 
-	getGoodId(): string {
-		const startFunc = 'event.nativeEvent.';
-		let midFunc = '';
-		const endFunc = 'id';
-
-		// recuperer l'id
-		let id = eval(startFunc + endFunc);
-		while (id !== 'mainPanel') {
-			midFunc += 'parentElement.';
-			// tslint:disable-next-line: no-eval
-			id = eval(startFunc + midFunc + endFunc);
-		}
-		return id;
-	}
-
+	/** get coordinate when use click in panel */
 	public getCoordinatesWithClick = (event: any) => {
 
 		let positionX: number = 0;
 		let positionY: number = 0;
-		//const sidePanel: number = this.state.sizePanel;
 		const coordinates = this.props.options.coordinatesFromClick;
 		const pointA: any = coordinates[1];
 		const pointB: any = coordinates[2];
-		// const labelA: string = this.props.options.coordinatesFromClick[1].label;
-		// const regionA: any = this.props.options.coordinatesFromClick[1].region;
-		// const labelB: string = this.props.options.coordinatesFromClick[2].label;
-		// const regionB: any = this.props.options.coordinatesFromClick[2].region;
 
-
-		// get coordinate if it clicks on empty space of panel (mainPanel || initialSpace)
 		if (event.nativeEvent.target.id === 'mainPanel' ||
 			event.nativeEvent.target.id === 'initialSpace'
 		) {
-
-			// positionX = Math.round(((event.nativeEvent.offsetX) - (sidePanel / 2)) * (100 / sidePanel)) * 2;
-			// 	positionY = (Math.round(((event.nativeEvent.offsetY) - (sidePanel / 2)) * (100 / sidePanel)) * 2);
-
-
-
-			// 	if (coordinates[0].id % 2 === 0) {
-			// 		pointA.x = positionX;
-			// 		pointA.y = positionY * (-1);
-			// 		coordinates[0].id++;
-			// 	} else {
-			// 		pointB.x = positionX;
-			// 		pointB.y = positionY * (-1);
-			// 		coordinates[0].id++;
-			// 		// this.displayLinkClick(	{label: pointA.label, value: pointA.region},
-			// 		// 						{label: pointB.label, value: pointB.region});
-			// 		this.displayLinkClick({}, {});
-			// 		// this.setState({
-			// 			// 	isUpdate: false,
-			// 			// })
-			// 	}
 			return;
-
 		} else if (event.nativeEvent.target.id.startsWith('point')) {
-			const id: number = parseInt(event.nativeEvent.target.id.charAt(5) + event.nativeEvent.target.id.charAt(6));
+			const id: number = parseInt(event.nativeEvent.target.id.charAt(5) + event.nativeEvent.target.id.charAt(6), 10);
 			const arrayPoint: PointClass[] = this.props.options.arrayPoints;
 
 			arrayPoint.forEach((point: PointClass) => {
-
 				if (point.id === id) {
 					const coordinates = this.props.options.coordinatesFromClick;
 
@@ -274,21 +228,19 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 							{}, {});
 					}
 				}
-			})
+			});
 		} else {
-			// if it clicks on an element of panel
-			const arrayRegion: EspaceCoordonneesExtendClass[] = this.props.options.arrayEspaceCoordonnees;
+			const arrayRegion: CoordinateSpaceExtendClass[] = this.props.options.arrayCoordinateSpace;
 
-			arrayRegion.forEach((region: EspaceCoordonneesExtendClass) => {
+			arrayRegion.forEach((region: CoordinateSpaceExtendClass) => {
 
-				const xMin: number = parseInt(region.xMin);
-				const xMax: number = parseInt(region.xMax);
-				const yMin: number = parseInt(region.yMin);
-				const yMax: number = parseInt(region.yMax);
+				const xMin: number = parseInt(region.xMin, 10);
+				const xMax: number = parseInt(region.xMax, 10);
+				const yMin: number = parseInt(region.yMin, 10);
+				const yMax: number = parseInt(region.yMax, 10);
 
-				// if it clicks on a region
 				if (event.nativeEvent.target.id.startsWith('region')) {
-					const id: number = parseInt(event.nativeEvent.target.id.charAt(6) + event.nativeEvent.target.id.charAt(7));
+					const id: number = parseInt(event.nativeEvent.target.id.charAt(6) + event.nativeEvent.target.id.charAt(7), 10);
 
 					if (id === region.id) {
 
@@ -316,7 +268,8 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 						}
 					}
 				} else {
-					const id: number = parseInt(event.nativeEvent.target.offsetParent.id.charAt(6) + event.nativeEvent.target.offsetParent.id.charAt(7));
+					const id: number = parseInt(event.nativeEvent.target.offsetParent.id.charAt(6)
+						+ event.nativeEvent.target.offsetParent.id.charAt(7), 10);
 
 					if (id === region.id) {
 						positionX = (xMin + xMax) / 2;
@@ -342,7 +295,7 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 						}
 					}
 				}
-			})
+			});
 		}
 	}
 
@@ -350,58 +303,50 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 		//console.log(event.target)
 	}
 
-
-	public getValueMainQueryForOrientedLink(associateRegion: SelectableValue<EspaceCoordonneesExtendClass>): string[] {
+	public getValueMainQueryForOrientedLink(associateRegion: SelectableValue<CoordinateSpaceExtendClass>): string[] {
 		const req: ReturnQuery = this.props.options.mainQueryReturn;
-		let arrayValueQuery: string[] = [];
+		const arrayValueQuery: string[] = [];
 		const key: string = associateRegion.value?.key || '';
 
 		const results: ResultQuery[] = req.data.result;
 
 		results.forEach((result) => {
-
 			if (associateRegion.value?.valueKey === result.metric[key]) {
 				arrayValueQuery.push(result.value[1]);
 			}
-		})
+		});
 
 		return arrayValueQuery;
 	}
 
-	public defineLabelForOrientedLink(associateRegion: SelectableValue<EspaceCoordonneesExtendClass>): string {
+	public defineLabelForOrientedLink(associateRegion: SelectableValue<CoordinateSpaceExtendClass>): string {
 		const arrayValueQuery: string[] = this.getValueMainQueryForOrientedLink(associateRegion);
 		let valueQuery: number = 0;
 		let index: number = 0;
-		
+
 		arrayValueQuery.forEach((value) => {
-			valueQuery = valueQuery + parseInt(value);
+			valueQuery = valueQuery + parseInt(value, 10);
 			index++;
-		})
+		});
 
 		return Math.round((valueQuery / index)).toString();
 	}
 
 	public defineOrientedLinksAssociate(): OrientedLinkClass[] {
-		const arrayRegion: EspaceCoordonneesExtendClass[] = this.props.options.arrayEspaceCoordonnees;
+		const arrayRegion: CoordinateSpaceExtendClass[] = this.props.options.arrayCoordinateSpace;
 		const arrayAllOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
 		const arrayOrientedLinkAssociateRegionIn: OrientedLinkClass[] = [];
 		const arrayOrientedLinkAssociateRegionOut: OrientedLinkClass[] = [];
 		let arrayToReturn: OrientedLinkClass[] = [];
-		// console.log(arrayRegion);
-		// console.log(arrayAllOrientedLink);
-
 		arrayRegion.forEach((region) => {
-			// console.log(region)
 			arrayAllOrientedLink.forEach((orientedLink) => {
 				arrayToReturn = [];
 				if (region.id === orientedLink.regionIn.value?.id) {
-					// console.log(orientedLink)
-					// console.log(region)
 					arrayOrientedLinkAssociateRegionIn.push(orientedLink);
 					arrayToReturn = arrayOrientedLinkAssociateRegionIn;
 					region.associateOrientedLink = arrayToReturn;
 				}
-				
+
 				if (region.id === orientedLink.regionOut.value?.id) {
 					arrayOrientedLinkAssociateRegionOut.push(orientedLink);
 					arrayToReturn = arrayOrientedLinkAssociateRegionOut;
@@ -409,11 +354,7 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 				}
 			});
 		});
-		
-		// console.log(arrayRegion)
-
 		return arrayToReturn;
-
 	}
 
 	/**
@@ -422,8 +363,8 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 	public displayLinkClick = (
 		associatePointIn: SelectableValue<PointClass>,
 		associatePointOut: SelectableValue<PointClass>,
-		associateRegionIn: SelectableValue<EspaceCoordonneesExtendClass>,
-		associateRegionOut: SelectableValue<EspaceCoordonneesExtendClass>) => {
+		associateRegionIn: SelectableValue<CoordinateSpaceExtendClass>,
+		associateRegionOut: SelectableValue<CoordinateSpaceExtendClass>) => {
 
 		const coordinates = this.props.options.coordinatesFromClick;
 		const id: number = this.state.idOrientedLink;
@@ -449,20 +390,16 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 			associateRegionIn,
 			associateRegionOut,
 		);
-
-		this.setState({
-			idOrientedLink: this.state.idOrientedLink + 1,
-		})
-
+		this.setState((prevState: IState) => ({
+			idOrientedLink: prevState.idOrientedLink + 1,
+		}));
 		this.props.onOptionsChange({
 			...this.props.options,
 			arrayOrientedLinks: this.props.options.arrayOrientedLinks.concat(newOrientedLink),
 		});
-
 		setTimeout(() => {
 			this.displayOrientedLink();
 		}, 100);
-
 	}
 
 	/**
@@ -471,11 +408,9 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 	public displayOrientedLink() {
 		const { options } = this.props;
 		const arrayOrientedLink = options.arrayOrientedLinks;
-		//console.log(this.props.options.arrayOrientedLinks)
 		const mapItems: JSX.Element[] = [];
 		let item: JSX.Element = <div></div>;
 
-		//console.log(arrayOrientedLink)
 		arrayOrientedLink.forEach((orientedLink: OrientedLinkClass) => {
 			item = <DrawOrientedLink
 				key={orientedLink.id}
@@ -501,12 +436,7 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 			/>;
 			mapItems.push(item);
 		});
-
 		this.defineOrientedLinksAssociate();
-
-		// this.setState({
-		// 	displayArrowOnPanel: <ul>{mapItems}</ul>,
-		// });
 		return (
 			<div>
 				{mapItems}
@@ -514,17 +444,9 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 		);
 	}
 
-	// /** fill oriented link */
-	// public componentWillReceiveProps = () => {
-	// 	this.displayOrientedLink();
-	// }
-
-
 	// tslint:disable-next-line: completed-docs
 	public render() {
 		const { options } = this.props;
-		// const objectJSON = options.contentJson !== 'contenu du dashboard' ? JSON.parse(options.contentJson) : undefined;
-
 		const testStyle = {
 			height: '100vh',
 		} as React.CSSProperties;
@@ -543,35 +465,28 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 		// 	fontWeight: this.props.options.style === 'bold' ? 'bold' : 'normal',
 		// } as React.CSSProperties;
 
-
 		return (
-			// <CustomScrollbar
-			// 	autoHide={false}
-			// 	hideHorizontalTrack
-			// >
 			<section onClick={this.getCoordinatesWithClick} id='mainPanel' style={defaultStyle}>
 				<div style={testStyle}>
 
 					<div>
 
-						<div >
-
-
-							<div style={{
-								position: 'relative',
-								textAlign: 'center',
-								margin: 0,
-								padding: 0,
-								backgroundImage: 'url(' + options.imageUrl + ')',
-								backgroundPosition: 'center',
-								backgroundRepeat: 'no-repeat',
-								backgroundSize: '300px ',
-								height: this.state.sizePanel + 'px',
-								width: this.state.sizePanel + 'px',
-							}}>
-								{
-									this.defineLimit()
-								}
+						<div style={{
+							position: 'relative',
+							textAlign: 'center',
+							margin: 0,
+							padding: 0,
+							backgroundImage: 'url(' + options.imageUrl + ')',
+							backgroundPosition: 'center',
+							backgroundRepeat: 'no-repeat',
+							backgroundSize: '300px ',
+							height: this.state.sizePanel + 'px',
+							width: this.state.sizePanel + 'px',
+						}}>
+							{
+								this.defineLimit()
+							}
+							<div >
 								<br />
 								{
 									this.fillCoor()
@@ -586,11 +501,7 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 								</div>
 								<div>
 									{
-										//this.state.displayArrowOnPanel
-									}
-									{
 										this.displayOrientedLink()
-										//this.refreshDisplayOrientedLink()
 									}
 									<div>
 										{
@@ -599,30 +510,10 @@ export class SimplePanel extends PureComponent<IProps, IState> {
 									</div>
 								</div>
 							</div>
-
-						</div>
-					</div>
-					< div >
-						<div>
-							{/* {
-								objectJSON ?
-									(
-										<div>
-											<DashboardGlobal dash={objectJSON} />
-											<DashboardTime dash={objectJSON} time={options.timeRange} url={this.props.options.promUrl} />
-											<PanelTargets targets={this.props.options.panelTargets} panel={this.props.options.actualPanel} />
-										</div>
-									)
-									:
-									(
-										<br />
-									)
-							} */}
 						</div>
 					</div>
 				</div>
 			</section>
-			// </CustomScrollbar >
 		);
 	}
 }

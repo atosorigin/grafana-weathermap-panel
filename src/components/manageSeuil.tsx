@@ -2,7 +2,7 @@ import React from 'react';
 import { PanelEditorProps } from '@grafana/data';
 import { SimpleOptions } from 'types';
 
-import { Seuil } from 'Models/seuil';
+import { Seuil } from 'Models/SeuilClass';
 
 import { Switch } from '@grafana/ui';
 import CouleurVariable from 'components/Parametrage/couleurVariable';

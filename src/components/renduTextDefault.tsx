@@ -1,10 +1,9 @@
 
 import React from 'react';
 import { FormField } from '@grafana/ui';
-import { SelectableValue } from '@grafana/data';
+import { SelectableValue, PanelEditorProps } from '@grafana/data';
 
 import InputSelect from 'Functions/Input/inputSelect';
-import { PanelEditorProps } from '@grafana/data';
 import { SimpleOptions } from 'types';
 
 interface IProps extends PanelEditorProps<SimpleOptions> {
@@ -28,7 +27,7 @@ class RendutextDefault extends React.Component<IProps, IState> {
 		this.state = {
 			newPolice: {
 				value: this.props.options.police,
-				label: this.props.options.police
+				label: this.props.options.police,
 			},
 			taille: this.props.options.taille,
 			style: this.props.options.styleText,

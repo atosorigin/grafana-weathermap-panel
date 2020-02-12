@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormField } from '@grafana/ui';
 import InputSeriesColorPicker from 'Functions/Input/inputSeriesColorPicker';
-import { Seuil } from 'Models/seuil';
+import { Seuil } from 'Models/SeuilClass';
 
 import { PanelEditorProps } from '@grafana/data';
 import { SimpleOptions } from 'types';

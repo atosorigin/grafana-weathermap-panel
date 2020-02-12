@@ -1,13 +1,13 @@
 import { SelectableValue } from '@grafana/data';
-import { EspaceCoordonneesClass } from './EspaceCoordonneesClass';
+import { CoordinateSpaceClass } from './CoordinateSpaceClass';
 
 
 /**
  * to do
  */
 export class PointClass {
-    
-    /**
+
+	/**
 	 * to do
 	 */
 	public id: number;
@@ -15,23 +15,23 @@ export class PointClass {
 	/**
 	 * to do
 	 */
-	public coordinateSpace: SelectableValue<EspaceCoordonneesClass>;
-	
+	public coordinateSpace: SelectableValue<CoordinateSpaceClass>;
+
 	/**
 	 * to do
 	 */
 	public drawGraphicMarker: SelectableValue<string>;
-    
-    /**
-     * to do
-     */
+
+	/**
+	 * to do
+	 */
 	public shape: SelectableValue<string>;
-	
+
 	/**
 	 * to do
 	 */
 	public sizeWidth: SelectableValue<string>;
-	
+
 	/**
 	 * to do
 	 */
@@ -57,9 +57,9 @@ export class PointClass {
 	 */
 	public label: string;
 
-    /**
-	 * to do
-	 */
+	/**
+ * to do
+ */
 	public positionLabelX: string;
 
 	/**
@@ -72,10 +72,9 @@ export class PointClass {
 	 */
 	public color: string;
 
-
 	constructor(
 		id: number,
-		coordinateSpace: SelectableValue<EspaceCoordonneesClass>,
+		coordinateSpace: SelectableValue<CoordinateSpaceClass>,
 		drawGraphicMarker: SelectableValue<string>,
 		shape: SelectableValue<string>,
 		sizeWidth: SelectableValue<string>,
@@ -86,7 +85,7 @@ export class PointClass {
 		label: string,
 		positionLabelX: string,
 		positionLabelY: string,
-		color: string,
+		color: string
 	) {
 		this.id = id;
 		this.coordinateSpace = coordinateSpace;
@@ -120,7 +119,7 @@ export class PointClass {
 	/**
 	 * to do
 	 */
-	public getCoordinateSpace(): SelectableValue<EspaceCoordonneesClass> {
+	public getCoordinateSpace(): SelectableValue<CoordinateSpaceClass> {
 		return this.coordinateSpace;
 	}
 
@@ -128,7 +127,7 @@ export class PointClass {
 	 * to do
 	 * @param coordinateSpace
 	 */
-	public setCoordinateSpace(coordinateSpace: SelectableValue<EspaceCoordonneesClass>) {
+	public setCoordinateSpace(coordinateSpace: SelectableValue<CoordinateSpaceClass>) {
 		this.coordinateSpace = coordinateSpace;
 	}
 
@@ -146,67 +145,67 @@ export class PointClass {
 	public setDrawGraphicMarker(drawGraphicMarker: SelectableValue<string>) {
 		this.drawGraphicMarker = drawGraphicMarker;
 	}
-    
-    /**
-     * to do
-     */
-    public getShape(): SelectableValue<string> {
-        return this.shape;
-    }
 
-    /**
-     * to do
-     * @param picture
-     */
-    public setShape(shape: SelectableValue<string>) {
-        this.shape = shape;
+	/**
+	 * to do
+	 */
+	public getShape(): SelectableValue<string> {
+		return this.shape;
 	}
-	
-	/**
-     * to do
-     */
-    public getSizeWidth(): SelectableValue<string> {
-        return this.sizeWidth;
-    }
 
-    /**
-     * to do
-     * @param picture
-     */
-    public setSizeWidth(sizeWidth: SelectableValue<string>) {
-        this.sizeWidth = sizeWidth;
-	}	
-	
 	/**
-     * to do
-     */
-    public getSizeHeight(): SelectableValue<string> {
-        return this.sizeHeight;
-    }
-
-    /**
-     * to do
-     * @param picture
-     */
-    public setSizeHeight(sizeHeight: SelectableValue<string>) {
-        this.sizeHeight = sizeHeight;
-	}	
-	
-	/**
-     * to do
-     */
-    public getRotateArrow(): string {
-        return this.rotateArrow;
-    }
-
-    /**
-     * to do
-     * @param picture
-     */
-    public setRotateArrow(rotateArrow: string) {
-        this.rotateArrow = rotateArrow;
+	 * to do
+	 * @param picture
+	 */
+	public setShape(shape: SelectableValue<string>) {
+		this.shape = shape;
 	}
-	
+
+	/**
+     * to do
+     */
+	public getSizeWidth(): SelectableValue<string> {
+		return this.sizeWidth;
+	}
+
+	/**
+	 * to do
+	 * @param picture
+	 */
+	public setSizeWidth(sizeWidth: SelectableValue<string>) {
+		this.sizeWidth = sizeWidth;
+	}
+
+	/**
+     * to do
+     */
+	public getSizeHeight(): SelectableValue<string> {
+		return this.sizeHeight;
+	}
+
+	/**
+	 * to do
+	 * @param picture
+	 */
+	public setSizeHeight(sizeHeight: SelectableValue<string>) {
+		this.sizeHeight = sizeHeight;
+	}
+
+	/**
+     * to do
+     */
+	public getRotateArrow(): string {
+		return this.rotateArrow;
+	}
+
+	/**
+	 * to do
+	 * @param picture
+	 */
+	public setRotateArrow(rotateArrow: string) {
+		this.rotateArrow = rotateArrow;
+	}
+
 
 	/**
 	 * to do
@@ -220,8 +219,8 @@ export class PointClass {
 	 */
 	public setPositionShapeX(positionShapeX: string) {
 		this.positionShapeX = positionShapeX;
-    }
-    
+	}
+
 	/**
 	 * to do
 	 */
@@ -234,11 +233,11 @@ export class PointClass {
 	 */
 	public setPositionShapeY(positionShapeY: string) {
 		this.positionShapeY = positionShapeY;
-    }
-    
-    /**
-	 * to do
-	 */
+	}
+
+	/**
+ * to do
+ */
 	public getPositionLabelX(): string {
 		return this.positionLabelX;
 	}
@@ -248,8 +247,8 @@ export class PointClass {
 	 */
 	public setPositionLabelX(positionLabelX: string) {
 		this.positionLabelX = positionLabelX;
-    }
-    
+	}
+
 	/**
 	 * to do
 	 */

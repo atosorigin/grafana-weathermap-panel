@@ -1,45 +1,47 @@
 import React from 'react';
-import { ArrayInputClass } from 'Models/arrayInputClass';
-import { EspaceCoordonneesExtendClass } from 'Models/EspaceCoordonneesExtendClass';
-import { InputClass } from 'Models/inputClass';
+import { ArrayInputClass } from 'Models/ArrayInputClass';
+import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
+import { InputClass } from 'Models/InputClass';
 import InputButtonField from 'Functions/Input/inputButton';
 import InputTextField from 'Functions/Input/inputText';
 import { createInputCoor } from 'Functions/createInputCoor';
 import { editGoodParameterExtend } from 'Functions/editGoodParameter';
 
-import 'style/EspaceCoordonnees.css';
-import { PanelEditorProps } from '@grafana/data';
-import { Button } from '@grafana/ui';
+import 'style/CoordinateSpace.css';
+import { PanelEditorProps, SelectableValue, DataFrame } from '@grafana/data';
+import { Button, Select } from '@grafana/ui';
 import { SimpleOptions } from 'types';
 
 import ParametresGeneriques from 'components/Parametrage/parametresGeneriques';
-import { TextObject } from 'Models/TextObject';
+import { TextObject } from 'Models/TextObjectClass';
 
 interface IProps extends PanelEditorProps<SimpleOptions> {
 	/** coordinate to edit */
-	coordinate: EspaceCoordonneesExtendClass;
+	coordinate: CoordinateSpaceExtendClass;
 
 	/**
 	 * save data in parent
 	 */
-	callBackToParent: (id: number, newCoordinate?: EspaceCoordonneesExtendClass) => void;
+	callBackToParent: (id: number, newCoordinate?: CoordinateSpaceExtendClass) => void;
 }
 
 interface IState {
 	/**
 	 * stock coordinates in array object for Parent Component
 	 */
-	arrayCoor: EspaceCoordonneesExtendClass;
+	arrayCoor: CoordinateSpaceExtendClass;
 	/**
 	 * stock HTML input coordinates
 	 */
 	arrayInput: ArrayInputClass[];
 	/** stock html form */
 	htmlInput: JSX.Element;
+	selectQuery: Array<SelectableValue<DataFrame>>;
+	selectQueryDefault: SelectableValue<DataFrame>;
 }
 
 /**
- * class pour définir des espaces de coodonnées
+ * component edit space coordinate
  */
 class CoordinateSpace extends React.Component<IProps, IState>  {
 	constructor(props: IProps) {
@@ -48,13 +50,15 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 			arrayCoor: this.props.coordinate,
 			arrayInput: [],
 			htmlInput: <div></div>,
+			selectQuery: [],
+			selectQueryDefault: [],
 		};
 	}
 
 	/** update state with promise */
 	public setStateAsyncArrayCoor = (state: {
 		/** new espace coordinate */
-		arrayCoor: EspaceCoordonneesExtendClass,
+		arrayCoor: CoordinateSpaceExtendClass,
 	}) => {
 		return new Promise((resolve) => {
 			this.setState(state, resolve);
@@ -74,17 +78,17 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 	/**
 	 * call function to return arrayCoor a SimpleEditor
 	 */
-	public callBack = () => {
+	public callBack = (): void => {
 		this.props.callBackToParent(this.state.arrayCoor.id, this.state.arrayCoor);
 	}
 
-/** save data in parent */
+	/** save data in parent */
 	public callBackToOther = (
 		followLink?: string,
 		hoveringTooltipLink?: string,
 		hoveringTooltipText?: string,
-		textObj?: TextObject) => {
-		const oldCoor: EspaceCoordonneesExtendClass = this.state.arrayCoor;
+		textObj?: TextObject): void => {
+		const oldCoor: CoordinateSpaceExtendClass = this.state.arrayCoor;
 		if (followLink) {
 			oldCoor.parametrageMetric.followLink = followLink;
 		}
@@ -130,8 +134,8 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 	 * @param {string} name name of input
 	 * @param {number} index id of input
 	 */
-	public _handleChange(currentTarget: string, name: string, index: number) {
-		let tmp: EspaceCoordonneesExtendClass = this.state.arrayCoor;
+	public _handleChange(currentTarget: string, name: string, index: number): void {
+		let tmp: CoordinateSpaceExtendClass = this.state.arrayCoor;
 		tmp = editGoodParameterExtend(name, tmp, currentTarget);
 		this.setState({
 			arrayCoor: tmp,
@@ -214,28 +218,67 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 		});
 	}
 
+	/** edit value for select */
+	public onChangeSelectQuery = (value: SelectableValue<DataFrame>) => {
+		const newArrayCoor: CoordinateSpaceExtendClass = this.state.arrayCoor;
+		newArrayCoor.dataQuery = value.value;
+		this.setState({
+			arrayCoor: newArrayCoor,
+			selectQueryDefault: value,
+		});
+	}
+
 	/**
 	 * Call function in load component
 	 */
 	public componentDidMount = async () => {
-		const element: EspaceCoordonneesExtendClass = this.props.coordinate;
+		const element: CoordinateSpaceExtendClass = this.props.coordinate;
 
 		await this.addInput(element.id, element.xMin,
 			element.xMax, element.yMin, element.yMax,
 			element.label, element.img, element.interfaceJson, element.key, element.valueKey);
 		this.fillInputEspaceCoor();
+		if (this.props.data.series) {
+			const valueSelect: Array<SelectableValue<DataFrame>> = [];
 
+			for (const line of this.props.data.series) {
+				valueSelect.push({ value: line, label: line.refId });
+			}
+			const newArrayCoor: CoordinateSpaceExtendClass = this.state.arrayCoor;
+			newArrayCoor.dataQuery = valueSelect.length > 0 ?
+				valueSelect[0].value : undefined;
+			this.setState({
+				arrayCoor: newArrayCoor,
+				selectQuery: valueSelect,
+				selectQueryDefault: valueSelect[0],
+			});
+		}
 	}
 
 	/**
-	 * update props
+	 * function is call when props is update. Update state
 	 */
-	public componentDidUpdate = async (prevProps: IProps, prevState: IState) => {
+	public componentDidUpdate = async (prevProps: IProps) => {
 		if (prevProps.coordinate !== this.props.coordinate) {
 			await this.setStateAsyncArrayCoor({
 				arrayCoor: this.props.coordinate,
 			});
 			this.fillInputEspaceCoor();
+		}
+		if (prevProps.data.series !== this.props.data.series) {
+			const valueSelect: Array<SelectableValue<DataFrame>> = [];
+
+			for (const line of this.props.data.series) {
+				valueSelect.push({ value: line, label: line.refId });
+			}
+			const newArrayCoor: CoordinateSpaceExtendClass = this.state.arrayCoor;
+			newArrayCoor.dataQuery = valueSelect.length > 0 ?
+				valueSelect[0].value : undefined;
+			this.setState({
+				arrayCoor: newArrayCoor,
+				selectQuery: valueSelect,
+				selectQueryDefault: valueSelect[0],
+			});
 		}
 	}
 
@@ -243,11 +286,20 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 	 * render
 	 */
 	public render() {
-		// const json = require('Localization/en.json');
-
 		return (
 			<div>
-				{this.state.htmlInput /* {this.fillInputEspaceCoor()} */}
+				<div>
+					{this.state.htmlInput}
+				</div>
+				<div>
+					<Select
+						onChange={(value) => this.onChangeSelectQuery(value)}
+						allowCustomValue={false}
+						options={this.state.selectQuery}
+						width={10}
+						value={this.state.selectQueryDefault}
+					/>
+				</div>
 				<div>
 					<ParametresGeneriques
 						options={this.props.options}
@@ -264,5 +316,4 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 		);
 	}
 }
-
 export default CoordinateSpace;

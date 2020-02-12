@@ -1,6 +1,6 @@
 import { SelectableValue } from '@grafana/data';
 import { PointClass } from './PointClass';
-import { EspaceCoordonneesClass } from './EspaceCoordonneesClass';
+import { CoordinateSpaceClass } from './CoordinateSpaceClass';
 
 
 export class LinkClass {
@@ -64,7 +64,7 @@ export class LinkClass {
 	/**
 	 * to do
 	 */
-	public regionIn: SelectableValue<EspaceCoordonneesClass>;
+	public regionIn: SelectableValue<CoordinateSpaceClass>;
 
 	/**
 	 * to do
@@ -74,8 +74,8 @@ export class LinkClass {
 	/**
 	 * to do
 	 */
-	public regionOut: SelectableValue<EspaceCoordonneesClass>;
-	
+	public regionOut: SelectableValue<CoordinateSpaceClass>;
+
 	/**
 	 * to do
 	 */
@@ -100,7 +100,7 @@ export class LinkClass {
 	 * to do
 	 */
 	public labelLinkB: string;
-	
+
 	/**
 	 * to do
 	 */
@@ -133,19 +133,16 @@ export class LinkClass {
 		colorCoordinateB: string,
 		pointIn: SelectableValue<PointClass>,
 		pointOut: SelectableValue<PointClass>,
-		regionIn: SelectableValue<EspaceCoordonneesClass>,
+		regionIn: SelectableValue<CoordinateSpaceClass>,
 		colorRegionIn: string,
-		regionOut: SelectableValue<EspaceCoordonneesClass>,
+		regionOut: SelectableValue<CoordinateSpaceClass>,
 		colorRegionOut: string,
 		labelLinkA: string,
 		positionXLabelA: string,
 		positionYLabelA: string,
 		labelLinkB: string,
 		positionXLabelB: string,
-		positionYLabelB: string,
-		// typeOfWidthLink: boolean,
-		// widthLink: string,
-
+		positionYLabelB: string
 	) {
 		this.id = id;
 		this.defineHowToGetCoordonate = defineHowToGetCoordonate;
@@ -168,7 +165,7 @@ export class LinkClass {
 		this.labelLinkB = labelLinkB;
 		this.positionXLabelB = positionXLabelB;
 		this.positionYLabelB = positionYLabelB;
-		// this.typeOfWidthLink = typeOfWidthLink;
+		// This.typeOfWidthLink = typeOfWidthLink;
 		// this.widthLink = widthLink;
 	}
 
@@ -184,8 +181,8 @@ export class LinkClass {
 	 */
 	public setId(id: number) {
 		this.id = id;
-    }
-	
+	}
+
 	/**
 	 * Extrémité par couple de coordonnée - Position X du Point A
 	 */
@@ -248,12 +245,12 @@ export class LinkClass {
 
 	/**
 	 * modifie la couleur pour le lien de A vers B
-	 * @param colorCoordinateA 
+	 * @param colorCoordinateAtrailing
 	 */
 	public setColorCoordinateA(colorCoordinateA: string) {
 		this.colorCoordinateA = colorCoordinateA;
-	}	
-	
+	}
+
 	/**
 	 * retourne la couleur pour le lien de B vers A
 	 */
@@ -263,7 +260,7 @@ export class LinkClass {
 
 	/**
 	 * modifie la couleur pour le lien de B vers A
-	 * @param colorCoordinateB 
+	 * @param colorCoordinateB
 	 */
 	public setColorCoordinateB(colorCoordinateB: string) {
 		this.colorCoordinateB = colorCoordinateB;
@@ -282,8 +279,8 @@ export class LinkClass {
 	 */
 	public setPointBPositionX(pointBPositionX: string) {
 		this.pointBPositionX = pointBPositionX;
-	}	
-	
+	}
+
 	/**
 	 * Extrémité par couple de coordonnée - Position Y du Point B
 	 */
@@ -306,7 +303,7 @@ export class LinkClass {
 	public setPointIn(pointIn: SelectableValue<PointClass>) {
 		this.pointIn = pointIn;
 	}
-	
+
 	public getPointOut() {
 		return this.pointOut;
 	}
@@ -319,7 +316,7 @@ export class LinkClass {
 		return this.regionIn;
 	}
 
-	public setRegionIn(regionIn: SelectableValue<EspaceCoordonneesClass>) {
+	public setRegionIn(regionIn: SelectableValue<CoordinateSpaceClass>) {
 		this.regionIn = regionIn;
 	}
 
@@ -330,12 +327,12 @@ export class LinkClass {
 	public setColorRegionIn(colorRegionIn: string) {
 		this.colorRegionIn = colorRegionIn;
 	}
-	
+
 	public getRegionOut() {
 		return this.regionOut;
 	}
 
-	public setRegionOut(regionOut: SelectableValue<EspaceCoordonneesClass>) {
+	public setRegionOut(regionOut: SelectableValue<CoordinateSpaceClass>) {
 		this.regionOut = regionOut;
 	}
 
@@ -371,15 +368,15 @@ export class LinkClass {
 		this.positionYLabelA = positionYLabelA;
 	}
 
-	
+
 	public getLabelLinkB() {
 		return this.labelLinkB;
 	}
-	
+
 	public setLabelLinkB(labelLinkB: string) {
 		this.labelLinkB = labelLinkB;
 	}
-	
+
 	public getPositionXLabelB() {
 		return this.positionXLabelB;
 	}
@@ -404,7 +401,7 @@ export class LinkClass {
 
 	// /**
 	//  * Modifie le type de largeur du lien : fixe ou variable
-	//  * @param typeOfWidthLink 
+	//  * @param typeOfWidthLink
 	//  */
 	// public setTypeOfWidthLink(typeOfWidthLink: boolean) {
 	// 	this.typeOfWidthLink = typeOfWidthLink;
@@ -418,7 +415,7 @@ export class LinkClass {
 	// }
 
 	// /**
-	//  * 
+	//  *
 	//  * @param widthLink Modifie la largeur du lien
 	//  */
 	// public setWidthLink(widthLink: string) {

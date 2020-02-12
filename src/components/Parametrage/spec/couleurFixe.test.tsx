@@ -69,19 +69,19 @@ describe('CouleurFixe tests', () => {
     test('test onChangeSzContour', () => {
         component.onChangeSzContour('80');
 
-        expect(component.state.szContour).toBe('80');
+        expect(component.state.seuil[0].sizeContour).toBe('80');
     })
 
     test('test onChangeColorFond', () => {
         component.onChangeColorFond('whatiskey', '#123456');
 
-        expect(component.state.colorFond).toBe('#123456');
+        expect(component.state.seuil[0].couleurFond).toBe('#123456');
     })
 
     test('test onChangeColorContour', () => {
         component.onChangeColorContour('whatiskey', '#123456');
 
-        expect(component.state.colorContour).toBe('#123456');
+        expect(component.state.seuil[0].couleurContour).toBe('#123456');
     })
 
 });

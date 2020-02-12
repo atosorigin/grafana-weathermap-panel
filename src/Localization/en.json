@@ -20,7 +20,7 @@
 		"genericSettings": "Generic parameters",
 		"genericSettingsBis": "Generic parameters bis",
 		"spaceInitialVisualisation": "Initial viewing space",
-		"spaceCoordinate": "Coordinates space",
+		"CoordinateSpace": "Coordinates space",
 		"objectVisibility": "Visibility of objects",
 		"metricsSettings": "Metrics Settings"
 	},

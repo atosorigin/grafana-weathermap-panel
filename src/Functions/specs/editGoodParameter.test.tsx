@@ -1,7 +1,9 @@
 import { editGoodParameter, editGoodParameterExtend} from '../editGoodParameter';
 
-import { EspaceCoordonneesClass } from 'Models/EspaceCoordonneesClass';
-import { EspaceCoordonneesExtendClass } from 'Models/EspaceCoordonneesExtendClass';
+import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
+import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
+import { TextObject } from 'Models/TextObjectClass';
+import { ParametrageMetrique } from 'Models/SettingMetricClass';
 
 /*
  * testing the editGoodParameter function
@@ -10,7 +12,7 @@ describe('test editGoodParameter', () => {
     let coords;
     
     beforeEach(() => {
-        coords = new EspaceCoordonneesClass(0, '-10', '10', '-10', '10', 'espace0');
+        coords = new CoordinateSpaceClass(0, '-10', '10', '-10', '10', 'espace0');
     });
 
     afterEach(() => {       
@@ -47,10 +49,12 @@ describe('test editGoodParameter', () => {
  * testing the editGoodParameterExtend function
  */
 describe('test editGoodParameterExtend', () => {
-    let coordsExtend;
+    let coordsExtend, testTextObjectClass, parametrageMetric;
     
     beforeEach(() => {
-        coordsExtend = new EspaceCoordonneesExtendClass(0, '-10', '10', '-10', '10', 'espace0', 'image.png', 'pinterf');
+        testTextObjectClass = new TextObject('legende', 'valeur', 'unite', 'colbr', 'coltxtr', 'ctyletxtr', 'colbackbu', 'coltxtbu', 'styletxtby', true, 'legelement', 'numformatel', 'unitumseu', true, true, true, 'coltxtele', true, 'colbackel');
+        parametrageMetric = new ParametrageMetrique('', '', '');
+        coordsExtend = new CoordinateSpaceExtendClass(0, '-10', '10', '-20', '20', 'test-label', 'test.png', 'test-interface', testTextObjectClass, parametrageMetric, 'key', 'valkey');
     });
 
     afterEach(() => {     
@@ -87,9 +91,14 @@ describe('test editGoodParameterExtend', () => {
         expect(coordsExtend.img).toBe('test-value');
     });
 
-    test('interfaceJson', () => {
-        editGoodParameterExtend('interfaceJson', coordsExtend, 'test-value');
-        expect(coordsExtend.interfaceJson).toBe('test-value');
+    test('image', () => {
+        editGoodParameterExtend('key', coordsExtend, 'test-value');
+        expect(coordsExtend.key).toBe('test-value');
+    });
+
+    test('image', () => {
+        editGoodParameterExtend('valueKey', coordsExtend, 'test-value');
+        expect(coordsExtend.valueKey).toBe('test-value');
     });
 });
 

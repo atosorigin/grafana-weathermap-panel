@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TimeSelector from '../TimeSelector';
+import TimeSelector from '../timeSelector';
 import { LoadingState } from '@grafana/data';
 import { defaults, SimpleOptions } from '../../types';
 import { act } from 'react-dom/test-utils';

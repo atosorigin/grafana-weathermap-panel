@@ -1,10 +1,10 @@
 import React from 'react';
 import InputTextField from 'Functions/Input/inputText';
-import { EspaceCoordonneesExtendClass } from 'Models/EspaceCoordonneesExtendClass';
+import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
 
 interface IProps {
 	/** id for coordinate space */
-	coordinateSpace: EspaceCoordonneesExtendClass;
+	coordinateSpace: CoordinateSpaceExtendClass;
 	callBackToParent: (
 		followLink: string,
 		hoveringTooltipLink: string,
@@ -120,11 +120,11 @@ class ParametrageMetriquePrincipale extends React.Component<IProps, IState> {
 
 	public componentDidUpdate(prevProps: IProps) {
 		if (prevProps.coordinateSpace !== this.props.coordinateSpace) {
-			this.setState({
-				followLink: this.props.coordinateSpace.parametrageMetric.followLink,
-				hoveringTooltipLink: this.props.coordinateSpace.parametrageMetric.hoveringTooltipLink,
-				hoveringTooltipText: this.props.coordinateSpace.parametrageMetric.hoveringTooltipText,
-			});
+			this.setState((prevProps: IProps) => ({
+				followLink: prevProps.coordinateSpace.parametrageMetric.followLink,
+				hoveringTooltipLink: prevProps.coordinateSpace.parametrageMetric.hoveringTooltipLink,
+				hoveringTooltipText: prevProps.coordinateSpace.parametrageMetric.hoveringTooltipText,
+			}));
 		}
 	}
 

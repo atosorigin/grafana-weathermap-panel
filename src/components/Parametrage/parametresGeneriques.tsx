@@ -1,16 +1,17 @@
 import React from 'react';
 import { Collapse } from '@grafana/ui';
 import ParametrageMetriquePrincipale from './parametrageMetriquePrincipale';
-import { ParametrageMetrique } from 'Models/parametrageMetrique';
-import { TextObject } from 'Models/TextObject';
+import { ParametrageMetrique } from 'Models/SettingMetricClass';
+import { TextObject } from 'Models/TextObjectClass';
 import { PanelEditorProps } from '@grafana/data';
 import { SimpleOptions } from 'types';
 import TextObjects from './textObjects';
-import { EspaceCoordonneesExtendClass } from 'Models/EspaceCoordonneesExtendClass';
+import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
 
 interface IProps extends PanelEditorProps<SimpleOptions> {
 	/** id coordinate */
-	coordinateSpace: EspaceCoordonneesExtendClass;
+	coordinateSpace: CoordinateSpaceExtendClass;
+	/** call function to save data in parent */
 	callBackToParent: (
 		followLink?: string,
 		hoveringTooltipLink?: string,
