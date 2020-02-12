@@ -182,7 +182,8 @@ class ManageCoordinateSpace extends React.Component<IProps, IState> {
 											onOptionsChange={this.props.onOptionsChange}
 											data={this.props.data}
 											coordinate={this.state.selectCoordinateSpaceDefault.value}
-											callBackToParent={this.callBack} />
+											callBackToParent={this.callBack} 
+											isAddCoordinate={false} />
 										:
 										<p>Data not set</p>
 								}

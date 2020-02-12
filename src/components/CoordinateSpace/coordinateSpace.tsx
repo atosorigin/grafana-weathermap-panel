@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { ArrayInputClass } from 'Models/ArrayInputClass';
 import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
 import { InputClass } from 'Models/InputClass';
@@ -9,13 +9,15 @@ import { editGoodParameterExtend } from 'Functions/editGoodParameter';
 
 import 'style/CoordinateSpace.css';
 import { PanelEditorProps, SelectableValue, DataFrame } from '@grafana/data';
-import { Button, Select } from '@grafana/ui';
+import { Button, Select, Alert } from '@grafana/ui';
 import { SimpleOptions } from 'types';
 
 import ParametresGeneriques from 'components/Parametrage/parametresGeneriques';
 import { TextObject } from 'Models/TextObjectClass';
 
 interface IProps extends PanelEditorProps<SimpleOptions> {
+	/** if it's parent component is add then don't display delete button  */
+	isAddCoordinate: boolean;
 	/** coordinate to edit */
 	coordinate: CoordinateSpaceExtendClass;
 
@@ -38,6 +40,8 @@ interface IState {
 	htmlInput: JSX.Element;
 	selectQuery: Array<SelectableValue<DataFrame>>;
 	selectQueryDefault: SelectableValue<DataFrame>;
+	/** display alert when form error */
+	hiddenAlert: boolean;
 }
 
 /**
@@ -52,6 +56,7 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 			htmlInput: <div></div>,
 			selectQuery: [],
 			selectQueryDefault: [],
+			hiddenAlert: true,
 		};
 	}
 
@@ -79,7 +84,18 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 	 * call function to return arrayCoor a SimpleEditor
 	 */
 	public callBack = (): void => {
-		this.props.callBackToParent(this.state.arrayCoor.id, this.state.arrayCoor);
+		if (this.state.arrayCoor.label === '') {
+			this.setState({
+				hiddenAlert: false,
+			});
+			setTimeout(() => {
+				this.setState({
+					hiddenAlert: true,
+				});
+			}, 3000);
+		} else {
+			this.props.callBackToParent(this.state.arrayCoor.id, this.state.arrayCoor);
+		}
 	}
 
 	/** save data in parent */
@@ -200,16 +216,16 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 									obj.getName(), line.getId())
 							} />
 						:
-						<InputButtonField
+						(!this.props.isAddCoordinate) ? <InputButtonField
 							key={obj.getId()}
 							label={obj.getLabel()}
 							value={obj.getValue() || ''}
 							name={obj.getName()}
 							required={obj.getRequired()}
 							_handleChange={this.deleteOwnInput}
-							id={obj.getId()} />,
+							id={obj.getId()} /> : <div></div>,
 				);
-			const divKey: string = 'inputCoor' + line.getId();
+			const divKey: string = 'inputCoor' + line.getId().toString();
 			const newInput: JSX.Element = <div key={divKey} className='inputCoor'>{mapItems}</div>;
 			finalItem = finalItem.concat(newInput);
 		}
@@ -286,8 +302,19 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 	 * render
 	 */
 	public render() {
+
+		const styleAlert = {
+			position: 'fixed',
+			bottom: '5%',
+			right: '5%',
+			zIndex: 9999,
+		} as CSSProperties;
+
 		return (
 			<div>
+				<div style={styleAlert} hidden={this.state.hiddenAlert}>
+					<Alert title={'Error: label is empty'} severity={'error'} />
+				</div>
 				<div>
 					{this.state.htmlInput}
 				</div>
@@ -310,7 +337,7 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 					/>
 				</div>
 				<div className='buttonSave'>
-					<Button onClick={() => this.callBack()}>Save</Button>
+					<Button onClick={() => this.callBack()}>Load</Button>
 				</div>
 			</div>
 		);

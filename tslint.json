@@ -138,6 +138,6 @@
 				"variable-declaration": "onespace"
 			}
 		],
-		"no-this-assignment": [true, "allow-destructuring"],
+		"no-this-assignment": [true, "allow-destructuring"]
 	}
 }
