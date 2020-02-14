@@ -2,7 +2,9 @@
 
 Inspired by the [WeatherMap plugin for Cacti](https://www.network-weathermap.com/), WeatherMap Panel Plugin for Grafana.
 
-Compatibility with  Prometheus
+Compatibility with  Prometheus.
+
+This project is still in development.
 
 # Installation
 
