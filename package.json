@@ -1,6 +1,6 @@
 {
-  "name": "preprodweathermap",
-  "version": "0.25b05",
+  "name": "weathermap",
+  "version": "0.25b06",
   "description": "WeatherMap Panel Plugin for Grafana",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
