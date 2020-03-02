@@ -1,6 +1,7 @@
 import React from 'react';
 import { SelectableValue } from '@grafana/data';
 import { PointClass } from 'Models/PointClass';
+import { Tooltip } from '@grafana/ui';
 
 interface IProps {
 
@@ -14,6 +15,7 @@ interface IProps {
 	labelBPositionX: string;
 	labelBPositionY: string;
 	height: number;
+	name: string;
 }
 
 interface IState {
@@ -40,8 +42,8 @@ export default class DrawLienWithPoints extends React.Component<IProps, IState> 
 		let xRegion: number = 0;
 
 		if (this.props.pointIn.value?.coordinateSpace.value !== undefined) {
-			const xMin: number = parseInt(this.props.pointIn.value.coordinateSpace.value?.xMin || '0', 10);
-			const xMax: number = parseInt(this.props.pointIn.value.coordinateSpace.value?.xMax || '0', 10);
+			const xMin: number = parseInt(this.props.pointIn.value.coordinateSpace.value?.coords.xMin || '0', 10);
+			const xMax: number = parseInt(this.props.pointIn.value.coordinateSpace.value?.coords.xMax || '0', 10);
 			xRegion = (xMax + xMin) / 2;
 		}
 		return xRegion;
@@ -52,8 +54,8 @@ export default class DrawLienWithPoints extends React.Component<IProps, IState> 
 		let yRegion: number = 0;
 
 		if (this.props.pointIn.value?.coordinateSpace.value !== undefined) {
-			const yMin: number = parseInt(this.props.pointIn.value.coordinateSpace.value?.yMin || '0', 10);
-			const yMax: number = parseInt(this.props.pointIn.value.coordinateSpace.value?.yMax || '0', 10);
+			const yMin: number = parseInt(this.props.pointIn.value.coordinateSpace.value?.coords.yMin || '0', 10);
+			const yMax: number = parseInt(this.props.pointIn.value.coordinateSpace.value?.coords.yMax || '0', 10);
 			yRegion = (yMax + yMin) / 2;
 		}
 		return yRegion;
@@ -64,8 +66,8 @@ export default class DrawLienWithPoints extends React.Component<IProps, IState> 
 		let xRegion: number = 0;
 
 		if (this.props.pointOut.value?.coordinateSpace.value !== undefined) {
-			const xMin: number = parseInt(this.props.pointOut.value.coordinateSpace.value?.xMin || '0', 10);
-			const xMax: number = parseInt(this.props.pointOut.value.coordinateSpace.value?.xMax || '0', 10);
+			const xMin: number = parseInt(this.props.pointOut.value.coordinateSpace.value?.coords.xMin || '0', 10);
+			const xMax: number = parseInt(this.props.pointOut.value.coordinateSpace.value?.coords.xMax || '0', 10);
 			xRegion = (xMax + xMin) / 2;
 		}
 		return xRegion;
@@ -76,8 +78,8 @@ export default class DrawLienWithPoints extends React.Component<IProps, IState> 
 		let yRegion: number = 0;
 
 		if (this.props.pointOut.value?.coordinateSpace.value !== undefined) {
-			const yMin: number = parseInt(this.props.pointOut.value.coordinateSpace.value?.yMin || '0', 10);
-			const yMax: number = parseInt(this.props.pointOut.value.coordinateSpace.value?.yMax || '0', 10);
+			const yMin: number = parseInt(this.props.pointOut.value.coordinateSpace.value?.coords.yMin || '0', 10);
+			const yMax: number = parseInt(this.props.pointOut.value.coordinateSpace.value?.coords.yMax || '0', 10);
 			yRegion = (yMax + yMin) / 2;
 		}
 		return yRegion;
@@ -278,6 +280,18 @@ export default class DrawLienWithPoints extends React.Component<IProps, IState> 
 		return (<div></div>);
 	}
 
+	public defineValueToolTip = () => {
+		const infosLink: JSX.Element[] = [];
+
+		infosLink.push(<p>{this.props.name}</p>)
+
+		return (
+			<div>
+				{infosLink}
+			</div>
+		)
+	}
+
 	public render() {
 
 		const defineCenter: number = this.props.height / 2;
@@ -302,14 +316,17 @@ export default class DrawLienWithPoints extends React.Component<IProps, IState> 
 		const labelAPositionY: number = parseInt(this.props.labelAPositionY, 10) * (-1);
 		const labelBPositionX: number = parseInt(this.props.labelBPositionX, 10);
 		const labelBPositionY: number = parseInt(this.props.labelBPositionY, 10) * (-1);
-
+		const valueToolTip: JSX.Element = this.defineValueToolTip();
+		
 		return (
-			<div>
-				{
-					this.drawLink(xA, xB, yA, yB, colorA, colorB, orientationLink, labelA, labelB,
-						labelAPositionX, labelAPositionY, labelBPositionX, labelBPositionY)
-				}
-			</div>
+			<Tooltip content={valueToolTip}>
+				<div>
+					{
+						this.drawLink(xA, xB, yA, yB, colorA, colorB, orientationLink, labelA, labelB,
+							labelAPositionX, labelAPositionY, labelBPositionX, labelBPositionY)
+					}
+				</div>
+			</Tooltip>
 		);
 	}
 

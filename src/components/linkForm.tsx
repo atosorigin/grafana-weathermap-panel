@@ -11,7 +11,9 @@ import { LinkClass } from 'Models/LinkClass';
 import { createInputsLink } from 'Functions/createInputsLink';
 import { editGoodParameterLink } from 'Functions/editGoodParameterLink';
 import { PointClass } from 'Models/PointClass';
-import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
+import { RegionClass } from 'Models/RegionClass';
+import { TextObject } from 'Models/TextObjectClass';
+import { LinkURLClass } from 'Models/LinkURLClass';
 
 /**
  * IProps
@@ -36,7 +38,7 @@ interface IProps {
 	/**
 	 * Tableau des Régions existantes créées dans l'onglet 'Espace de coordonnées'
 	 */
-	arrayCoordinateSpace: CoordinateSpaceClass[];
+	arrayCoordinateSpace: RegionClass[];
 
 }
 
@@ -63,6 +65,10 @@ interface IState {
 	 */
 	debug: boolean;
 
+
+
+	openCollapseLink: boolean;
+
 }
 
 /**
@@ -76,6 +82,7 @@ export default class LinkForm extends React.Component<IProps, IState> {
 			arrayLinkClass: [],
 			debug: false,
 			index: 1,
+			openCollapseLink: false,
 		};
 	}
 
@@ -108,7 +115,8 @@ export default class LinkForm extends React.Component<IProps, IState> {
 					element.pointBPositionX, element.pointBPositionY, element.colorCoordinateB,
 					element.pointIn, element.pointOut, element.regionIn, element.colorRegionIn,
 					element.regionOut, element.colorRegionOut, element.labelLinkA, element.positionXLabelA,
-					element.positionYLabelA, element.labelLinkB, element.positionXLabelB, element.positionYLabelB);
+					element.positionYLabelA, element.labelLinkB, element.positionXLabelB, element.positionYLabelB
+					);
 			}, 100);
 		}
 		this.setState((prevState: IState) => ({
@@ -125,7 +133,7 @@ export default class LinkForm extends React.Component<IProps, IState> {
 
 		arrayPointClass.forEach(point => {
 			const optionPoint: SelectableValue<PointClass> = {
-				label: point.label,
+				label: point.name,
 				value: point,
 			};
 			arrayOptionsPoint.push(optionPoint);
@@ -134,15 +142,15 @@ export default class LinkForm extends React.Component<IProps, IState> {
 		return arrayOptionsPoint;
 	}
 
-	public defineDataRegion(): SelectableValue<CoordinateSpaceClass>[] {
+	public defineDataRegion(): SelectableValue<RegionClass>[] {
 		const { arrayCoordinateSpace } = this.props;
-		const optionRegionNull: SelectableValue<CoordinateSpaceClass> = { label: 'No selected region' };
-		const arrayOptionsRegion: SelectableValue<CoordinateSpaceClass>[] = [];
+		const optionRegionNull: SelectableValue<RegionClass> = { label: 'No selected region' };
+		const arrayOptionsRegion: SelectableValue<RegionClass>[] = [];
 
 		arrayOptionsRegion.push(optionRegionNull);
 
 		arrayCoordinateSpace.forEach((region) => {
-			const optionRegion: SelectableValue<CoordinateSpaceClass> = {
+			const optionRegion: SelectableValue<RegionClass> = {
 				label: region.label,
 				value: region,
 			};
@@ -160,18 +168,27 @@ export default class LinkForm extends React.Component<IProps, IState> {
 		orientationLink?: SelectableValue<string>, pointAPositionX?: string,
 		pointAPositionY?: string, colorCoordinateA?: string, pointBPositionX?: string,
 		pointBPositionY?: string, colorCoordinateB?: string, pointIn?: SelectableValue<PointClass>,
-		pointOut?: SelectableValue<PointClass>, regionIn?: SelectableValue<CoordinateSpaceClass>,
-		colorRegionIn?: string, regionOut?: SelectableValue<CoordinateSpaceClass>,
+		pointOut?: SelectableValue<PointClass>, regionIn?: SelectableValue<RegionClass>,
+		colorRegionIn?: string, regionOut?: SelectableValue<RegionClass>,
 		colorRegionOut?: string, labelLinkA?: string, positionXLabelA?: string, positionYLabelA?: string,
 		labelLinkB?: string, positionXLabelB?: string, positionYLabelB?: string) => {
 
 		const num: number = id || this.state.index;
+		const initTextObject: TextObject = new TextObject('', '', '', false, '', '', '',
+			false, '', '', '',
+			false, false, false, '', false, '');
+		const parametrageMetric: LinkURLClass = new LinkURLClass('', '', '');
 		const finalArray: InputSelectableClass[] = createInputsLink(num, this.defineDataPoint(), this.defineDataRegion());
 
 		this.setState((prevState: IState) => ({
-			arrayLinkClass: prevState.arrayLinkClass.concat(new LinkClass(num, defineHowToGetCoordonate || {},
-				orientationLink || {}, pointAPositionX || '0', pointAPositionY || '0', colorCoordinateA || '#5794F2',
-				pointBPositionX || '0', pointBPositionY || '0', colorCoordinateB || '#5794F2',
+			arrayLinkClass: prevState.arrayLinkClass.concat(new LinkClass(
+				num, parametrageMetric, '', [], '', initTextObject,
+			 	{'key': '', 'unit': '', 'format': '', 'keyValue': ''}, [],
+				 false, false, false,
+				 'link' + num.toString(), defineHowToGetCoordonate || {},
+				orientationLink || { label: 'Unidirectional', value: 'AB' }, pointAPositionX || '0',
+				pointAPositionY || '0', colorCoordinateA || '#5794F2',
+				pointBPositionX || '0', pointBPositionY || '0', colorCoordinateB || '#E54658',
 				pointIn || {}, pointOut || {}, regionIn || {}, colorRegionIn || '#5794F2',
 				regionOut || {}, colorRegionOut || '#E54658', labelLinkA || '', positionXLabelA || '0',
 				positionYLabelA || '0', labelLinkB || '', positionXLabelB || '0', positionYLabelB || '0')),
@@ -445,6 +462,7 @@ export default class LinkForm extends React.Component<IProps, IState> {
 									required={obj.required}
 									_handleChange={this.deleteOwnInput}
 									id={obj.id}
+									withLabel={true}
 								/>
 							)
 						)
@@ -471,10 +489,10 @@ export default class LinkForm extends React.Component<IProps, IState> {
 
 		return (
 			<div>
-				{this.displayListInputsLink()}
-				<div className='buttonAddCoor'>
-					<Button onClick={this.addTestInput}>Add Link</Button>
-				</div>
+					{this.displayListInputsLink()}
+					<div className='buttonAddCoor'>
+						<Button onClick={this.addTestInput}>Add Link</Button>
+					</div>
 			</div>
 		);
 	}

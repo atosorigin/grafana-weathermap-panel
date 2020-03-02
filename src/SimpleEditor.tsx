@@ -1,31 +1,29 @@
-import { PanelEditorProps } from '@grafana/data';
-import { SimpleOptions } from './types';
-import { Collapse, Tab, TabsBar, TabContent } from '@grafana/ui';
 import React from 'react';
 
-// import { DataFrame } from '@grafana/data';
+import { SimpleOptions } from './types';
+
+import { PanelEditorProps } from '@grafana/data';
+import { Collapse, Tab, TabsBar, TabContent } from '@grafana/ui';
 
 import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
-
-import ManageSeuil from './components/manageSeuil';
-import RendutextDefault from './components/renduTextDefault';
-import CoordinateSpaceInitial from './components/coordinateSpaceInitial';
-import ManageCoordinateSpace from './components/CoordinateSpace/manageCoordinateSpace';
-
-import 'style/SimpleEditor.css';
-import ObjectVisibility from 'components/objectVisibility';
-import './style/SimpleEditor.css';
-import { PointClass } from 'Models/PointClass';
 import { LinkClass } from 'Models/LinkClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
-import LinkForm from './components/linkForm';
-import PointForm from './components/pointForm';
-import OrientedLink from './components/orientedLinkForm';
+import { PointClass } from 'Models/PointClass';
 
-import TimeSelector from './components/timeSelector';
-import DashboardData from './components/dashboardData';
-import PanelData from './components/panelData';
-import MainTarget from './components/mainTarget';
+import CoordinateSpaceInitial from 'components/coordinateSpaceInitial';
+import DashboardData from 'components/dashboardData';
+import LinkForm from 'components/linkForm';
+import MainTarget from 'components/mainTarget';
+import ManageCoordinateSpace from 'components/CoordinateSpace/manageCoordinateSpace';
+import ObjectVisibility from 'components/objectVisibility';
+import OrientedLink from 'components/orientedLinkForm';
+import OrientedLinkForm from './components/orientedLinkForm';
+import PanelData from 'components/panelData';
+import PointForm from 'components/pointForm';
+import RendutextDefault from 'components/renduTextDefault';
+import TimeSelector from 'components/timeSelector';
+
+import 'style/SimpleEditor.css';
 
 interface IProps extends PanelEditorProps<SimpleOptions> { }
 
@@ -83,6 +81,8 @@ interface IState {
 	collapsePrincipalTarget: boolean;
 
 	tabsVariable: boolean[];
+
+	tabsCoordinateSpace: boolean[];
 }
 
 /**
@@ -113,7 +113,8 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 			index: 0,
 			collapseTargets: false,
 			collapsePrincipalTarget: false,
-			tabsVariable: [false, false, false, true, false, false, false],
+			tabsVariable: [false, false, true, false, false, false, false],
+			tabsCoordinateSpace: [true, false, false, false],
 		};
 	}
 
@@ -256,6 +257,20 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 	}
 
 	/**
+	 * swtith tab Coordinate space
+	 */
+	public goToTabCoordinateSpace = (id: number) => {
+		const oldValue: boolean[] = this.state.tabsCoordinateSpace.slice();
+		const size: number = oldValue.length;
+		for (let i: number = 0; i < size; i++) {
+			oldValue[i] = (i === id) ? true : false;
+		}
+		this.setState({
+			tabsCoordinateSpace: oldValue,
+		});
+	}
+
+	/**
 	 * HTML code
 	 */
 	public render() {
@@ -270,35 +285,30 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 						active={this.state.tabsVariable[0]}
 						onChangeTab={() => this.goToTab(0)}
 					/>
-					<Tab key='tabGenericParameter'
-						label='Lower limit'
+					<Tab key='tabSpaceInitialVisualisation'
+						label={l10n.simpleEditor.spaceInitialVisualisation}
 						active={this.state.tabsVariable[1]}
 						onChangeTab={() => this.goToTab(1)}
 					/>
-					<Tab key='tabSpaceInitialVisualisation'
-						label={l10n.simpleEditor.spaceInitialVisualisation}
+					<Tab key='tabCoordinateSpace'
+						label={l10n.simpleEditor.CoordinateSpace}
 						active={this.state.tabsVariable[2]}
 						onChangeTab={() => this.goToTab(2)}
 					/>
-					<Tab key='tabCoordinateSpace'
-						label={l10n.simpleEditor.CoordinateSpace}
+					<Tab key='tabObjectVisibility'
+						label={l10n.simpleEditor.objectVisibility}
 						active={this.state.tabsVariable[3]}
 						onChangeTab={() => this.goToTab(3)}
 					/>
-					<Tab key='tabObjectVisibility'
-						label={l10n.simpleEditor.objectVisibility}
+					<Tab key='tabMetricsSettings'
+						label={l10n.simpleEditor.metricsSettings}
 						active={this.state.tabsVariable[4]}
 						onChangeTab={() => this.goToTab(4)}
 					/>
-					<Tab key='tabMetricsSettings'
-						label={l10n.simpleEditor.metricsSettings}
-						active={this.state.tabsVariable[5]}
-						onChangeTab={() => this.goToTab(5)}
-					/>
 					<Tab key='tabGraphicalObject'
 						label='Graphical object'
-						active={this.state.tabsVariable[6]}
-						onChangeTab={() => this.goToTab(6)}
+						active={this.state.tabsVariable[5]}
+						onChangeTab={() => this.goToTab(5)}
 					/>
 				</TabsBar>
 				<TabContent>
@@ -311,14 +321,6 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 					}
 					{
 						this.state.tabsVariable[1] &&
-						<ManageSeuil
-							options={this.props.options}
-							onOptionsChange={this.props.onOptionsChange}
-							data={this.props.data}
-						/>
-					}
-					{
-						this.state.tabsVariable[2] &&
 						<CoordinateSpaceInitial
 							options={this.props.options}
 							onOptionsChange={this.props.onOptionsChange}
@@ -326,20 +328,83 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 						/>
 					}
 					{
-						this.state.tabsVariable[3] &&
-						<ManageCoordinateSpace
-							options={this.props.options}
-							onOptionsChange={this.props.onOptionsChange}
-							data={this.props.data}
-						/>
+						this.state.tabsVariable[2] &&
+						<div>
+							<TabsBar className='page-header tabs' hideBorder={false}>
+								<Tab key='tabDisplayManageCoordinateSpace'
+									label='Region'
+									active={this.state.tabsCoordinateSpace[0]}
+									onChangeTab={() => this.goToTabCoordinateSpace(0)}
+								/>
+								<Tab key='tabDisplayPoint'
+									label='Point'
+									active={this.state.tabsCoordinateSpace[1]}
+									onChangeTab={() => this.goToTabCoordinateSpace(1)}
+								/>
+								<Tab key='tabDisplayLink'
+									label='Link'
+									active={this.state.tabsCoordinateSpace[2]}
+									onChangeTab={() => this.goToTabCoordinateSpace(2)}
+								/>
+								<Tab key='tabDisplayOrientedLink'
+									label='OrientedLink'
+									active={this.state.tabsCoordinateSpace[3]}
+									onChangeTab={() => this.goToTabCoordinateSpace(3)}
+								/>
+							</TabsBar>
+							<TabContent>
+								{
+									this.state.tabsCoordinateSpace[0] &&
+									<ManageCoordinateSpace
+										options={this.props.options}
+										onOptionsChange={this.props.onOptionsChange}
+										data={this.props.data}
+									/>
+								}
+								{
+									this.state.tabsCoordinateSpace[1] &&
+
+									<PointForm 
+										callBackFromParent={this.myCallBackArrayPoints.bind(this)}
+										arrayCoordinateSpace={this.props.options.arrayCoordinateSpace}
+										oldArrayPointClass={this.props.options.arrayPoints}
+										options={this.props.options}
+										onOptionsChange={this.props.onOptionsChange}
+										data={this.props.data}
+									/>
+
+								}
+								{
+									this.state.tabsCoordinateSpace[2] &&
+
+									<LinkForm arrayCoordinateSpace={this.props.options.arrayCoordinateSpace}
+										oldArrayLinkClass={this.props.options.arrayLinks}
+										arrayPointClass={this.props.options.arrayPoints}
+										callBackFromParent={this.myCallBackArrayLinks.bind(this)}
+									/>
+								}
+								{
+									this.state.tabsCoordinateSpace[3] &&
+
+									<OrientedLinkForm arrayPoint={this.props.options.arrayPoints}
+										arrayCoordinateSpace={this.props.options.arrayCoordinateSpace}
+										oldArrayOrientedLinkClass={this.props.options.arrayOrientedLinks}
+										callBackFromParent={this.myCallBackArrayOrientedLinks.bind(this)}
+										options={this.props.options}
+										onOptionsChange={this.props.onOptionsChange}
+										data={this.props.data}
+									/>
+								}
+							</TabContent>
+						</div>
 					}
 					{
-						this.state.tabsVariable[4] &&
+						this.state.tabsVariable[3] &&
 						<ObjectVisibility />
 
 					}
 					{
-						this.state.tabsVariable[5] &&
+						this.state.tabsVariable[4] &&
 
 						<div className='adrien'>
 							<Collapse isOpen={this.state.collapseDashboardData}
@@ -362,17 +427,20 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 						</div>
 					}
 					{
-						this.state.tabsVariable[6] &&
+						this.state.tabsVariable[5] &&
 						<div>
 							<div className='CoordinateSpaceInitital'>
 								<Collapse isOpen={this.state.collapsePoint}
 									label='Point'
-									onToggle={this.onTogglePoint}>
-
+									onToggle={this.onTogglePoint}
+								>
 									<PointForm
 										oldArrayPointClass={this.props.options.arrayPoints}
 										callBackFromParent={this.myCallBackArrayPoints.bind(this)}
 										arrayCoordinateSpace={this.props.options.arrayCoordinateSpace}
+										options={this.props.options}
+										onOptionsChange={this.props.onOptionsChange}
+										data={this.props.data}
 									/>
 
 								</Collapse>
@@ -400,6 +468,9 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 										arrayCoordinateSpace={this.props.options.arrayCoordinateSpace}
 										oldArrayOrientedLinkClass={this.props.options.arrayOrientedLinks}
 										callBackFromParent={this.myCallBackArrayOrientedLinks.bind(this)}
+										options={this.props.options}
+										onOptionsChange={this.props.onOptionsChange}
+										data={this.props.data}
 									/>
 								</Collapse>
 							</div>

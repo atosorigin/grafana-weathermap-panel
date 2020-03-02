@@ -1,12 +1,15 @@
 import React from 'react';
-import { createInputCoor } from '../Functions/createInputCoor';
-import InputTextField from '../Functions/Input/inputText';
-import { InputClass } from 'Models/InputClass';
-import { ArrayInputClass } from '../Models/ArrayInputClass';
-import { CoordinateSpaceClass } from '../Models/CoordinateSpaceClass';
-import { editGoodParameter } from '../Functions/editGoodParameter';
-import { PanelEditorProps } from '@grafana/data';
 import { SimpleOptions } from 'types';
+
+import { PanelEditorProps } from '@grafana/data';
+
+import { createInputCoor } from 'Functions/createInputCoor';
+import { editGoodParameter } from 'Functions/editGoodParameter';
+import InputTextField from 'Functions/Input/inputText';
+
+import { ArrayInputClass } from 'Models/ArrayInputClass';
+import { CoordinateSpaceInitialClass } from 'Models/CoordinateSpaceInittialClass';
+import { InputClass } from 'Models/InputClass';
 
 interface IProps extends PanelEditorProps<SimpleOptions> {
 }
@@ -19,9 +22,8 @@ interface IState {
 	/**
 	 * stock value for Parent Component
 	 */
-	arrayCoor: CoordinateSpaceClass;
+	arrayCoor: CoordinateSpaceInitialClass;
 }
-
 
 /**
  * class CoordinateSpaceInitial
@@ -49,11 +51,11 @@ class CoordinateSpaceInitial extends React.Component<IProps, IState>  {
 	/**
 	 * initialize a new CoordinateSpace Class
 	 */
-	public initCoordinateSpaceClass = (): CoordinateSpaceClass => {
+	public initCoordinateSpaceClass = (): CoordinateSpaceInitialClass => {
 		const { arrayCoordinateSpaceInitial } = this.props.options;
 		const json = require('Localization/fr.json');
 
-		const newEspaceCoor: CoordinateSpaceClass = new CoordinateSpaceClass(
+		const newEspaceCoor: CoordinateSpaceInitialClass = new CoordinateSpaceInitialClass(
 			arrayCoordinateSpaceInitial.id || 0,
 			arrayCoordinateSpaceInitial.xMin || '0',
 			arrayCoordinateSpaceInitial.xMax || '0',

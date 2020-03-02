@@ -1,47 +1,71 @@
 import React, { CSSProperties } from 'react';
 import { ArrayInputClass } from 'Models/ArrayInputClass';
-import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
+import { RegionClass } from 'Models/RegionClass';
 import { InputClass } from 'Models/InputClass';
 import InputButtonField from 'Functions/Input/inputButton';
 import InputTextField from 'Functions/Input/inputText';
 import { createInputCoor } from 'Functions/createInputCoor';
 import { editGoodParameterExtend } from 'Functions/editGoodParameter';
-
 import 'style/CoordinateSpace.css';
 import { PanelEditorProps, SelectableValue, DataFrame } from '@grafana/data';
-import { Button, Select, Alert } from '@grafana/ui';
+import { Button, Select, Alert, FormField } from '@grafana/ui';
 import { SimpleOptions } from 'types';
-
-import ParametresGeneriques from 'components/Parametrage/parametresGeneriques';
 import { TextObject } from 'Models/TextObjectClass';
+import { LowerLimitClass } from 'Models/LowerLimitClass';
+import ParametresGeneriques from 'components/Parametrage/parametresGeneriques';
+import ManageLowerLimit from 'components/Parametrage/manageLowerLimit';
+import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
+import { PointClass } from 'Models/PointClass';
+import { LinkClass } from 'Models/LinkClass';
+import { OrientedLinkClass } from 'Models/OrientedLinkClass';
+
+export declare type AlertVariant = 'success' | 'warning' | 'error' | 'info';
 
 interface IProps extends PanelEditorProps<SimpleOptions> {
 	/** if it's parent component is add then don't display delete button  */
 	isAddCoordinate: boolean;
 	/** coordinate to edit */
-	coordinate: CoordinateSpaceExtendClass;
+	coordinate: RegionClass;
 
 	/**
 	 * save data in parent
 	 */
-	callBackToParent: (id: number, newCoordinate?: CoordinateSpaceExtendClass) => void;
+	callBackToParent: (id: number, newCoordinate?: RegionClass) => void;
 }
 
 interface IState {
 	/**
 	 * stock coordinates in array object for Parent Component
 	 */
-	arrayCoor: CoordinateSpaceExtendClass;
+	arrayCoor: RegionClass;
 	/**
 	 * stock HTML input coordinates
 	 */
 	arrayInput: ArrayInputClass[];
 	/** stock html form */
 	htmlInput: JSX.Element;
+	/** select aux query */
 	selectQuery: Array<SelectableValue<DataFrame>>;
+	/** select main query */
 	selectQueryDefault: SelectableValue<DataFrame>;
 	/** display alert when form error */
 	hiddenAlert: boolean;
+	/** variable for radio button */
+	checkedRadio: boolean[];
+	/** text to display alert */
+	titleAlert: string;
+	/** alert type */
+	severityAlert: AlertVariant;
+/** point class */
+	arrayPoints: PointClass[];
+/** link class */
+	arrayLinks: LinkClass[];
+
+	arrayOrientedLinks: OrientedLinkClass[];
+
+	openCollapseOrientedLink: boolean;
+
+	oldData: OrientedLinkClass[];
 }
 
 /**
@@ -57,13 +81,21 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 			selectQuery: [],
 			selectQueryDefault: [],
 			hiddenAlert: true,
+			checkedRadio: [true, false, false],
+			titleAlert: 'Error: label is empty',
+			severityAlert: 'error',
+			arrayPoints: [],
+			arrayLinks: [],
+			arrayOrientedLinks: [],
+			openCollapseOrientedLink: false,
+			oldData: this.props.options.arrayOrientedLinks,
 		};
 	}
 
 	/** update state with promise */
 	public setStateAsyncArrayCoor = (state: {
 		/** new espace coordinate */
-		arrayCoor: CoordinateSpaceExtendClass,
+		arrayCoor: RegionClass,
 	}) => {
 		return new Promise((resolve) => {
 			this.setState(state, resolve);
@@ -84,17 +116,41 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 	 * call function to return arrayCoor a SimpleEditor
 	 */
 	public callBack = (): void => {
+		const waitAlert: number = 3000;
+
 		if (this.state.arrayCoor.label === '') {
 			this.setState({
+				severityAlert: 'error',
+				titleAlert: 'Error: label is empty',
 				hiddenAlert: false,
 			});
 			setTimeout(() => {
 				this.setState({
 					hiddenAlert: true,
 				});
-			}, 3000);
+			}, waitAlert);
 		} else {
-			this.props.callBackToParent(this.state.arrayCoor.id, this.state.arrayCoor);
+			if (this.state.checkedRadio[0]) {
+				this.props.callBackToParent(this.state.arrayCoor.id, this.state.arrayCoor);
+			} else if (this.state.checkedRadio[1]) {
+				if (this.props.isAddCoordinate) {
+
+				} else {
+
+				}
+			}
+			this.setState({
+				severityAlert: 'success',
+				titleAlert: 'Save',
+				hiddenAlert: false,
+			});
+			if (!this.props.isAddCoordinate) {
+				setTimeout(() => {
+					this.setState({
+						hiddenAlert: true,
+					});
+				}, waitAlert);
+			}
 		}
 	}
 
@@ -104,18 +160,18 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 		hoveringTooltipLink?: string,
 		hoveringTooltipText?: string,
 		textObj?: TextObject): void => {
-		const oldCoor: CoordinateSpaceExtendClass = this.state.arrayCoor;
+		const oldCoor: RegionClass = this.state.arrayCoor;
 		if (followLink) {
-			oldCoor.parametrageMetric.followLink = followLink;
+			oldCoor.linkURL.followLink = followLink;
 		}
 		if (hoveringTooltipLink) {
-			oldCoor.parametrageMetric.hoveringTooltipLink = hoveringTooltipLink;
+			oldCoor.linkURL.hoveringTooltipLink = hoveringTooltipLink;
 		}
 		if (hoveringTooltipText) {
-			oldCoor.parametrageMetric.hoveringTooltipText = hoveringTooltipText;
+			oldCoor.linkURL.hoveringTooltipText = hoveringTooltipText;
 		}
 		if (textObj) {
-			oldCoor.textObject = textObj;
+			oldCoor.textObj = textObj;
 		}
 		this.setState({
 			arrayCoor: oldCoor,
@@ -126,9 +182,7 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 	 * add inputs for a new coordiante
 	 */
 	public addInput = async (
-		id: number, xMin: string, xMax: string,
-		yMin: string, yMax: string, text: string,
-		image: string, interfaceJson: string, key: string, valueKey: string,
+		id: number
 	) => {
 		await this.setStateAsyncArrayInput({
 			arrayInput: this.state.arrayInput.concat([
@@ -140,8 +194,12 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 	 * Delete array input and value
 	 * @param {event} event event click delete button
 	 */
-	public deleteOwnInput = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-		this.props.callBackToParent(this.state.arrayCoor.id, undefined);
+	public deleteOwnInput = (): void => {
+		const del: boolean = confirm('Delete "' + this.state.arrayCoor.label + '" ?');
+		// alert(del);
+		if (del) {
+			this.props.callBackToParent(this.state.arrayCoor.id, undefined);
+		}
 	}
 
 	/**
@@ -151,7 +209,7 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 	 * @param {number} index id of input
 	 */
 	public _handleChange(currentTarget: string, name: string, index: number): void {
-		let tmp: CoordinateSpaceExtendClass = this.state.arrayCoor;
+		let tmp: RegionClass = this.state.arrayCoor;
 		tmp = editGoodParameterExtend(name, tmp, currentTarget);
 		this.setState({
 			arrayCoor: tmp,
@@ -170,23 +228,23 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 
 		value = '';
 		if (param.startsWith('positionXMin')) {
-			value = this.state.arrayCoor.xMin;
+			value = this.state.arrayCoor.coords.xMin;
 		} else if (param.startsWith('positionXMax')) {
-			value = this.state.arrayCoor.xMax;
+			value = this.state.arrayCoor.coords.xMax;
 		} else if (param.startsWith('positionYMin')) {
-			value = this.state.arrayCoor.yMin;
+			value = this.state.arrayCoor.coords.yMin;
 		} else if (param.startsWith('positionYMax')) {
-			value = this.state.arrayCoor.yMax;
+			value = this.state.arrayCoor.coords.yMax;
 		} else if (param.startsWith('label')) {
 			value = this.state.arrayCoor.label;
 		} else if (param.startsWith('image')) {
 			value = this.state.arrayCoor.img;
-		} else if (param.startsWith('interfaceJson')) {
-			value = this.state.arrayCoor.interfaceJson;
+			// } else if (param.startsWith('interfaceJson')) {
+			// 	value = this.state.arrayCoor.;
 		} else if (param.startsWith('key')) {
-			value = this.state.arrayCoor.key;
+			value = this.state.arrayCoor.mainMetric.key;
 		} else if (param.startsWith('valueKey')) {
-			value = this.state.arrayCoor.valueKey;
+			value = this.state.arrayCoor.mainMetric.keyValue;
 		}
 		return value;
 	}
@@ -223,10 +281,10 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 							name={obj.getName()}
 							required={obj.getRequired()}
 							_handleChange={this.deleteOwnInput}
-							id={obj.getId()} /> : <div></div>,
+							id={obj.getId()} /> : <div></div>
 				);
 			const divKey: string = 'inputCoor' + line.getId().toString();
-			const newInput: JSX.Element = <div key={divKey} className='inputCoor'>{mapItems}</div>;
+			const newInput: JSX.Element = <div key={'addCoordinate' + divKey} className='inputCoor'>{mapItems}</div>;
 			finalItem = finalItem.concat(newInput);
 		}
 		this.setState({
@@ -236,8 +294,9 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 
 	/** edit value for select */
 	public onChangeSelectQuery = (value: SelectableValue<DataFrame>) => {
-		const newArrayCoor: CoordinateSpaceExtendClass = this.state.arrayCoor;
-		newArrayCoor.dataQuery = value.value;
+		const newArrayCoor: RegionClass = this.state.arrayCoor;
+		newArrayCoor.mainMetric.refId = value.value?.refId || '';
+		newArrayCoor.mainMetric.expr = 'rate(go_memstats_alloc_bytes[5m])';
 		this.setState({
 			arrayCoor: newArrayCoor,
 			selectQueryDefault: value,
@@ -248,11 +307,9 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 	 * Call function in load component
 	 */
 	public componentDidMount = async () => {
-		const element: CoordinateSpaceExtendClass = this.props.coordinate;
+		const element: RegionClass = this.props.coordinate;
 
-		await this.addInput(element.id, element.xMin,
-			element.xMax, element.yMin, element.yMax,
-			element.label, element.img, element.interfaceJson, element.key, element.valueKey);
+		await this.addInput(element.id);
 		this.fillInputEspaceCoor();
 		if (this.props.data.series) {
 			const valueSelect: Array<SelectableValue<DataFrame>> = [];
@@ -260,9 +317,9 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 			for (const line of this.props.data.series) {
 				valueSelect.push({ value: line, label: line.refId });
 			}
-			const newArrayCoor: CoordinateSpaceExtendClass = this.state.arrayCoor;
-			newArrayCoor.dataQuery = valueSelect.length > 0 ?
-				valueSelect[0].value : undefined;
+			const newArrayCoor: RegionClass = this.state.arrayCoor;
+			newArrayCoor.mainMetric.refId = valueSelect.length > 0 ?
+				valueSelect[0].value?.refId || '' : '';
 			this.setState({
 				arrayCoor: newArrayCoor,
 				selectQuery: valueSelect,
@@ -274,7 +331,7 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 	/**
 	 * function is call when props is update. Update state
 	 */
-	public componentDidUpdate = async (prevProps: IProps) => {
+	public componentDidUpdate = async (prevProps: IProps, prevState: IState) => {
 		if (prevProps.coordinate !== this.props.coordinate) {
 			await this.setStateAsyncArrayCoor({
 				arrayCoor: this.props.coordinate,
@@ -287,22 +344,104 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 			for (const line of this.props.data.series) {
 				valueSelect.push({ value: line, label: line.refId });
 			}
-			const newArrayCoor: CoordinateSpaceExtendClass = this.state.arrayCoor;
-			newArrayCoor.dataQuery = valueSelect.length > 0 ?
-				valueSelect[0].value : undefined;
+			const newArrayCoor: RegionClass = this.state.arrayCoor;
+			newArrayCoor.mainMetric.refId = valueSelect.length > 0 ?
+				valueSelect[0].value?.refId || '' : '';
 			this.setState({
 				arrayCoor: newArrayCoor,
 				selectQuery: valueSelect,
 				selectQueryDefault: valueSelect[0],
 			});
 		}
+		if (prevProps.options.arrayOrientedLinks.length !== this.state.oldData.length) {
+			//console.log('update that');
+		}
+	}
+
+	/** event change value click radio button */
+	public onChangeRadio = (event: React.ChangeEvent<HTMLInputElement>): void => {
+		const idElement: string = event.currentTarget.id;
+		let resulFinal: boolean[] = this.state.checkedRadio;
+
+		if (idElement === 'region') {
+			resulFinal = [true, false, false];
+		} else if (idElement === 'lien') {
+			resulFinal = [false, true, false];
+		} else if (idElement === 'point') {
+			resulFinal = [false, false, true];
+		}
+		this.setState({
+			checkedRadio: resulFinal,
+		});
+
+	}
+
+	/** update lower limit */
+	public callBackManageLowerLimit = (coordiante: CoordinateSpaceClass) => {
+		const newValue: RegionClass = this.state.arrayCoor;
+
+		newValue.colorMode = coordiante.colorMode;
+		newValue.traceBorder = coordiante.traceBorder;
+		newValue.traceBack = coordiante.traceBack;
+		// newValue.lowerLimit = coordiante.lowerLimit;
+		this.setState({
+			arrayCoor: newValue,
+		});
+	}
+
+	/** save lower limit data */
+	public callBackLowerLimit = (lowerLimit: LowerLimitClass[]) => {
+		const newValue: RegionClass = this.state.arrayCoor;
+
+		newValue.lowerLimit = lowerLimit;
+		this.setState({
+			arrayCoor: newValue,
+		});
+	}
+
+	public myCallBackArrayPoints = (dataFromChild: PointClass[]) => {
+		this.setState({
+			arrayPoints: dataFromChild,
+		});
+
+		this.props.onOptionsChange({
+			...this.props.options,
+			arrayPoints: dataFromChild,
+		});
+	}
+
+	public myCallBackArrayLinks = (dataFromChild: LinkClass[]) => {
+		this.setState({
+			arrayLinks: dataFromChild,
+		});
+
+		this.props.onOptionsChange({
+			...this.props.options,
+			arrayLinks: dataFromChild,
+		});
+	}
+
+	public myCallBackArrayOrientedLinks = (dataFromChild: OrientedLinkClass[]) => {
+		this.setState({
+			arrayOrientedLinks: dataFromChild,
+		});
+
+		this.props.onOptionsChange({
+			...this.props.options,
+			arrayOrientedLinks: dataFromChild,
+		});
+	}
+
+	public onToggleOrientedLink = (isOpen: boolean) => {
+		this.setState({
+			openCollapseOrientedLink: isOpen,
+		});
 	}
 
 	/**
 	 * render
 	 */
 	public render() {
-
 		const styleAlert = {
 			position: 'fixed',
 			bottom: '5%',
@@ -313,7 +452,7 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 		return (
 			<div>
 				<div style={styleAlert} hidden={this.state.hiddenAlert}>
-					<Alert title={'Error: label is empty'} severity={'error'} />
+					<Alert title={this.state.titleAlert} severity={this.state.severityAlert} />
 				</div>
 				<div>
 					{this.state.htmlInput}
@@ -326,6 +465,7 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 						width={10}
 						value={this.state.selectQueryDefault}
 					/>
+					<br />
 				</div>
 				<div>
 					<ParametresGeneriques
@@ -336,8 +476,132 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 						callBackToParent={this.callBackToOther}
 					/>
 				</div>
+				<div>
+					<ManageLowerLimit
+						coordinate={this.state.arrayCoor}
+						callBack={this.callBackManageLowerLimit}
+						lowerLimitCallBack={this.callBackLowerLimit} />
+				</div>
+				<br />
+
+				{/* <div className='choiceCateg'>
+					<div className='radio'>
+						<label>
+							<input type='radio' id='region' name='choiceCateg' value='region'
+								onChange={this.onChangeRadio} checked={this.state.checkedRadio[0]} />
+							Area
+						</label>
+					</div>
+					<div className='radio'>
+						<label>
+							<input type='radio' id='lien' name='choiceCateg' value='lien'
+								onChange={this.onChangeRadio} checked={this.state.checkedRadio[1]} />
+							Link
+						</label>
+					</div>
+					<div className='radio'>
+						<label>
+							<input type='radio' id='point' name='choiceCateg' value='point'
+								onChange={this.onChangeRadio} checked={this.state.checkedRadio[2]} />
+							Point
+						</label>
+					</div>
+				</div> */}
+				<br />
+				{
+					<div className='classRegion'>
+						<FormField label='Image' labelWidth={10} inputWidth={20}
+							type='text' value={this.state.arrayCoor.img} name='image'
+							onChange={(event) => this._handleChange(event.currentTarget.value,
+								'image', this.state.arrayCoor.id)} />
+						<FormField label='X min' labelWidth={10} inputWidth={20}
+							type='text' value={this.state.arrayCoor.coords.xMin} name='positionXMin'
+							onChange={(event) => this._handleChange(event.currentTarget.value,
+								'positionXMin', this.state.arrayCoor.id)} />
+						<FormField label='X max' labelWidth={10} inputWidth={20}
+							type='text' value={this.state.arrayCoor.coords.xMax} name='positionXMax'
+							onChange={(event) => this._handleChange(event.currentTarget.value,
+								'positionXMax', this.state.arrayCoor.id)} />
+						<FormField label='Y min' labelWidth={10} inputWidth={20}
+							type='text' value={this.state.arrayCoor.coords.yMin} name='positionYMin'
+							onChange={(event) => this._handleChange(event.currentTarget.value,
+								'positionYMin', this.state.arrayCoor.id)} />
+						<FormField label='Y max' labelWidth={10} inputWidth={20}
+							type='text' value={this.state.arrayCoor.coords.yMax} name='positionYMax'
+							onChange={(event) => this._handleChange(event.currentTarget.value,
+								'positionYMax', this.state.arrayCoor.id)} />
+					</div>
+				}
+
+				{/* {
+					this.state.checkedRadio[0] &&
+					<div className='classRegion'>
+						<FormField label='Picture' labelWidth={10} inputWidth={20}
+							type='text' value={this.state.arrayCoor.img} name='picture'
+							onChange={(event) => this._handleChange(event.currentTarget.value,
+								'image', this.state.arrayCoor.id)} />
+						<FormField label='X min' labelWidth={10} inputWidth={20}
+							type='text' value={this.state.arrayCoor.coords.xMin} name='positionXMin'
+							onChange={(event) => this._handleChange(event.currentTarget.value,
+								'positionXMin', this.state.arrayCoor.id)} />
+						<FormField label='X max' labelWidth={10} inputWidth={20}
+							type='text' value={this.state.arrayCoor.coords.xMax} name='positionXMax'
+							onChange={(event) => this._handleChange(event.currentTarget.value,
+								'positionXMax', this.state.arrayCoor.id)} />
+						<FormField label='Y min' labelWidth={10} inputWidth={20}
+							type='text' value={this.state.arrayCoor.coords.yMin} name='positionYMin'
+							onChange={(event) => this._handleChange(event.currentTarget.value,
+								'positionYMin', this.state.arrayCoor.id)} />
+						<FormField label='Y max' labelWidth={10} inputWidth={20}
+							type='text' value={this.state.arrayCoor.coords.yMax} name='positionYMax'
+							onChange={(event) => this._handleChange(event.currentTarget.value,
+								'positionYMax', this.state.arrayCoor.id)} />
+					</div>
+
+				}
+
+				{
+					this.state.checkedRadio[1] &&
+					<div>
+						<LinkForm arrayCoordinateSpace={this.props.options.arrayCoordinateSpace}
+							oldArrayLinkClass={this.props.options.arrayLinks}
+							arrayPointClass={this.props.options.arrayPoints}
+							callBackFromParent={this.myCallBackArrayLinks.bind(this)}
+						/>
+					</div>
+				}
+				{
+					this.state.checkedRadio[2] &&
+					<PointForm oldArrayPointClass={this.props.options.arrayPoints}
+						callBackFromParent={this.myCallBackArrayPoints.bind(this)}
+						arrayCoordinateSpace={this.props.options.arrayCoordinateSpace}
+						options={this.props.options}
+						onOptionsChange={this.props.onOptionsChange}
+						data={this.props.data}
+					/>
+				} */}
+				<br />
+
+				{/* <div>
+					<Collapse label={'OrientedLink'}
+						isOpen={this.state.openCollapseOrientedLink}
+						onToggle={this.onToggleOrientedLink}>
+						<OrientedLinkForm arrayPoint={this.props.options.arrayPoints}
+							arrayCoordinateSpace={this.props.options.arrayCoordinateSpace}
+							oldArrayOrientedLinkClass={this.props.options.arrayOrientedLinks}
+							callBackFromParent={this.myCallBackArrayOrientedLinks.bind(this)}
+							options={this.props.options}
+							onOptionsChange={this.props.onOptionsChange}
+							data={this.props.data}
+						/>
+					</Collapse>
+				</div> */}
 				<div className='buttonSave'>
 					<Button onClick={() => this.callBack()}>Load</Button>
+					{
+						(!this.props.isAddCoordinate) &&
+						<Button onClick={this.deleteOwnInput} variant='danger'>Delete</Button>
+					}
 				</div>
 			</div>
 		);

@@ -1,12 +1,12 @@
 import { InputSelectableClass } from 'Models/InputSelectableClass';
 import { SelectableValue } from '@grafana/data';
-import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
+import { RegionClass } from 'Models/RegionClass';
 
 export const createInputsPoint = (
-	id: number, dataEspaceCoor: SelectableValue<CoordinateSpaceClass>[]): InputSelectableClass[] => {
-	const newFieldLinkWithCoordonateSpace: InputSelectableClass = new InputSelectableClass(id.toString() + 'LinkWithCoordinateSpace',
-		'Associate region', 'linkWithCoordinateSpace' + id.toString(), 'select',
-		dataEspaceCoor, '', true, 'Associate region', undefined);
+	id: number, dataEspaceCoor: SelectableValue<RegionClass>[]): InputSelectableClass[] => {
+	// const newFieldLinkWithCoordonateSpace: InputSelectableClass = new InputSelectableClass(id.toString() + 'LinkWithCoordinateSpace',
+	// 	'Associate region', 'linkWithCoordinateSpace' + id.toString(), 'select',
+	// 	dataEspaceCoor, '', true, 'Associate region', undefined);
 	const newFieldDrawGraphicMarker: InputSelectableClass = new InputSelectableClass(id.toString() + 'drawGraphicMarker',
 		'Display ', 'drawGraphicMarker' + id.toString(), 'select',
 		[
@@ -14,16 +14,16 @@ export const createInputsPoint = (
 			{ value: 'false', label: 'No' },
 		],
 		'', true, 'drawGraphicMarker', undefined);
-	const newFieldShape: InputSelectableClass = new InputSelectableClass(id.toString() + 'shape',
-		'GraphicMarker', 'shape' + id.toString(), 'select',
-		[
-			{ value: 'arrow', label: 'Arrow' },
-			{ value: 'circle', label: 'Circle' },
-			{ value: 'cross', label: 'Cross' },
-		],
-		'', true, 'Shape', undefined);
+	// const newFieldShape: InputSelectableClass = new InputSelectableClass(id.toString() + 'shape',
+	// 	'GraphicMarker', 'shape' + id.toString(), 'select',
+	// 	[
+	// 		{ value: 'arrow', label: 'Arrow' },
+	// 		{ value: 'circle', label: 'Circle' },
+	// 		{ value: 'cross', label: 'Cross' },
+	// 	],
+	// 	'', true, 'Shape', undefined);
 	const newFieldSizeWidthShape: InputSelectableClass = new InputSelectableClass(id.toString() + 'sizeWidth',
-		'Length', 'sizeWidth' + id.toString(),
+		'Size', 'sizeWidth' + id.toString(),
 		'select',
 		[
 			{ value: 'small', label: 'Small' },
@@ -40,9 +40,9 @@ export const createInputsPoint = (
 			{ value: 'large', label: 'Large' },
 		],
 		'', true, 'SizeHeight', undefined);
-	const newFieldColor: InputSelectableClass = new InputSelectableClass(id.toString() + 'color',
-		'Color', 'color' + id.toString(), 'color', [],
-		'#5794F2', true, 'Color', undefined);
+	// const newFieldColor: InputSelectableClass = new InputSelectableClass(id.toString() + 'color',
+	// 	'Color', 'color' + id.toString(), 'color', [],
+	// 	'#5794F2', true, 'Color', undefined);
 	const newFieldRotateArrow: InputSelectableClass = new InputSelectableClass(id.toString() + 'rotateArrow',
 		'Orientation', 'rotateArrow' + id.toString(), 'text', [], '', true, 'RotateArrow', undefined);
 	const newFieldPositionXShape: InputSelectableClass = new InputSelectableClass(id.toString() + 'positionShapeX',
@@ -51,32 +51,44 @@ export const createInputsPoint = (
 	const newFieldPositionYShape: InputSelectableClass = new InputSelectableClass(id.toString() + 'positionShapeY',
 		'Position Y', 'positionShapeY' + id.toString(),
 		'text', [], '', true, 'Position Y Shape', undefined);
-	const newFieldLabel: InputSelectableClass = new InputSelectableClass(id.toString() + 'label',
-		'Label', 'label' + id.toString(),
+	const newFieldLabel: InputSelectableClass = new InputSelectableClass(id.toString() + 'labelPoint',
+		'Label', 'labelPoint' + id.toString(),
 		'text', [], '', true, 'Label', undefined);
-	const newFieldPositionLabelX: InputSelectableClass = new InputSelectableClass(id.toString() + 'positionLabelX',
-		'Position X Label', 'positionLabelX' + id.toString(),
-		'text', [], '', true, 'Position X Label', undefined);
-	const newFieldPositionLabelY: InputSelectableClass = new InputSelectableClass(id.toString() + 'positionLabelY',
-		'Position Y Label', 'positionLabelY' + id.toString(),
-		'text', [], '', true, 'Position Y Label', undefined);
+	// const newFieldPositionLabelX: InputSelectableClass = new InputSelectableClass(id.toString() + 'positionLabelX',
+	// 	'Position X Label', 'positionLabelX' + id.toString(),
+	// 	'text', [], '', true, 'Position X Label', undefined);
+	// const newFieldPositionLabelY: InputSelectableClass = new InputSelectableClass(id.toString() + 'positionLabelY',
+	// 	'Position Y Label', 'positionLabelY' + id.toString(),
+	// 	'text', [], '', true, 'Position Y Label', undefined);
+	const newFieldMainMetric: InputSelectableClass = new InputSelectableClass(id.toString() + 'refIdMainMetric',
+		'Ref Id Main Metric', 'refIdMainMetric' + id.toString(), 'text',
+		[], '', true, 'RefId Main Metric', undefined);
+	const newFieldKeyMainMetric: InputSelectableClass = new InputSelectableClass(id.toString() + 'keyMainMetric',
+		'Key Main Metric', 'keyMainMetric' + id.toString(), 'text',
+		[], '', true, 'Key Main Metric', undefined);
+	const newFieldKeyValueMainMetric: InputSelectableClass = new InputSelectableClass(id.toString() + 'keyValueMainMetric',
+		'Key Value Main Metric', 'keyValueMainMetric' + id.toString(), 'text',
+		[], '', true, 'Key Value Main Metric', undefined);
 	const newFieldButton: InputSelectableClass = new InputSelectableClass(id.toString() + 'delete',
 		'Delete', 'delete' + id.toString(),
 		'button', [], '', true, undefined, 'Delete');
 
 	const finalArray: InputSelectableClass[] = [
-		newFieldLinkWithCoordonateSpace,
+		newFieldLabel,
+		//newFieldLinkWithCoordonateSpace,
 		newFieldDrawGraphicMarker,
-		newFieldShape,
+		//newFieldShape,
 		newFieldSizeWidthShape,
 		newFieldSizeHeightShape,
-		newFieldColor,
+		//newFieldColor,
 		newFieldRotateArrow,
 		newFieldPositionXShape,
 		newFieldPositionYShape,
-		newFieldLabel,
-		newFieldPositionLabelX,
-		newFieldPositionLabelY,
+		// newFieldPositionLabelX,
+		// newFieldPositionLabelY,
+		newFieldMainMetric,
+		newFieldKeyMainMetric,
+		newFieldKeyValueMainMetric,
 		newFieldButton,
 	];
 	return finalArray;

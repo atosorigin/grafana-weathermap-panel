@@ -6,18 +6,14 @@ export class TextObject {
 	public valeur: string;
 	/** object unity */
 	public unite: string;
+	/** text display in element or tooltip */
+	public isTextRegion: boolean;
 	/** back color region */
-	public colorBackRegion: string;
+	public colorBack: string;
 	/** color text region */
-	public colorTextRegion: string;
+	public colorText: string;
 	/** style text region */
-	public styleTextRegion: string;
-	/** back color bulle */
-	public colorBackBulle: string;
-	/** color text bulle */
-	public colorTextBulle: string;
-	/** style text bulle */
-	public styleTextBulle: string;
+	public styleText: string;
 	/** generate object text */
 	public generateObjectText: boolean;
 	/** legend element */
@@ -43,12 +39,10 @@ export class TextObject {
 		legende: string,
 		valeur: string,
 		unite: string,
-		colorBackRegion: string,
-		colorTextRegion: string,
-		styleTextRegion: string,
-		colorBackBulle: string,
-		colorTextBulle: string,
-		styleTextBulle: string,
+		isTextRegion: boolean,
+		colorBack: string,
+		colorText: string,
+		styleText: string,
 		generateObjectText: boolean,
 		legendElement: string,
 		numericFormatElement: string,
@@ -63,12 +57,10 @@ export class TextObject {
 		this.legende = legende;
 		this.valeur = valeur;
 		this.unite = unite;
-		this.colorBackRegion = colorBackRegion;
-		this.colorTextRegion = colorTextRegion;
-		this.styleTextRegion = styleTextRegion;
-		this.colorBackBulle = colorBackBulle;
-		this.colorTextBulle = colorTextBulle;
-		this.styleTextBulle = styleTextBulle;
+		this.isTextRegion = isTextRegion;
+		this.colorBack = colorBack;
+		this.colorText = colorText;
+		this.styleText = styleText;
 		this.generateObjectText = generateObjectText;
 		this.legendElement = legendElement;
 		this.numericFormatElement = numericFormatElement;

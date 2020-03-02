@@ -1,5 +1,5 @@
 import React from 'react';
-import { SimpleOptions, Target } from '../types';
+import { SimpleOptions, ITarget } from '../types';
 import { PanelEditorProps, SelectableValue } from '@grafana/data';
 import { FormField, Button } from '@grafana/ui';
 import FetchButton from './fetchButton';
@@ -27,7 +27,7 @@ class DashboardData extends React.Component<IProps> {
 		});
 		let dateStamp = Date.now().toString();
 		dateStamp = dateStamp.substring(0, dateStamp.length - 3);
-		this.props.options.promTargets.map((target: Target) => {
+		this.props.options.promTargets.map((target: ITarget) => {
 			const tmp: string = this.props.options.promUrl + 'query?query=' + target.expr + '&time=' + dateStamp;
 			this.props.options.queryPromGlobal.push(tmp);
 		});
@@ -139,4 +139,3 @@ class DashboardData extends React.Component<IProps> {
 	}
 }
 export default DashboardData;
-

@@ -1,10 +1,16 @@
 import React from 'react';
-import { SelectableValue } from '@grafana/data';
-import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
+import { SelectableValue, PanelEditorProps } from '@grafana/data';
+import { RegionClass } from 'Models/RegionClass';
+import { Tooltip } from '@grafana/ui';
+import { OrientedLinkClass } from 'Models/OrientedLinkClass';
+import { SimpleOptions } from 'types';
+import { LinkClass } from 'Models/LinkClass';
+import { TextObject } from 'Models/TextObjectClass';
+import { LowerLimitClass } from 'Models/LowerLimitClass';
 
-interface IProps {
+interface IProps extends PanelEditorProps<SimpleOptions>{
 
-	coordinateSpace: SelectableValue<CoordinateSpaceClass>;
+	coordinateSpace: SelectableValue<RegionClass>;
 	drawGraphicMarker: SelectableValue<string>;
 	shape: SelectableValue<string>;
 	size: SelectableValue<string>;
@@ -18,10 +24,13 @@ interface IProps {
 	police: string;
 	sizePolice: string;
 	idPoint: string;
+	name: string;
+	textObject: TextObject;
+	seuil: LowerLimitClass[];
+	valueMainMetric: string;
 }
 
 interface IState {
-
 }
 
 /**
@@ -31,6 +40,7 @@ export default class DrawCircleCross extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
+
 		};
 	}
 
@@ -39,7 +49,7 @@ export default class DrawCircleCross extends React.Component<IProps, IState> {
 	 * @param coordinateX
 	 * @param coordinateSpace
 	 */
-	public defineLimitX(coordinateX: number, coordinateSpace: SelectableValue<CoordinateSpaceClass>) {
+	public defineLimitX(coordinateX: number, coordinateSpace: SelectableValue<RegionClass>) {
 
 		let result: number = coordinateX;
 
@@ -52,8 +62,8 @@ export default class DrawCircleCross extends React.Component<IProps, IState> {
 			}
 		} else {
 
-			const xMin = parseInt(coordinateSpace.value.xMin, 10);
-			const xMax = parseInt(coordinateSpace.value.xMax, 10);
+			const xMin = parseInt(coordinateSpace.value.coords.xMin, 10);
+			const xMax = parseInt(coordinateSpace.value.coords.xMax, 10);
 
 			if (xMax < 0) {
 				if (coordinateX < xMax) {
@@ -77,7 +87,7 @@ export default class DrawCircleCross extends React.Component<IProps, IState> {
 	 * @param coordinateY
 	 * @param coordinateSpace
 	 */
-	public defineLimitY(coordinateY: number, coordinateSpace: SelectableValue<CoordinateSpaceClass>) {
+	public defineLimitY(coordinateY: number, coordinateSpace: SelectableValue<RegionClass>) {
 
 		let result: number = coordinateY;
 
@@ -90,8 +100,8 @@ export default class DrawCircleCross extends React.Component<IProps, IState> {
 			}
 		} else {
 
-			const yMin: number = parseInt(coordinateSpace.value.yMin, 10);
-			const yMax: number = parseInt(coordinateSpace.value.yMax, 10);
+			const yMin: number = parseInt(coordinateSpace.value.coords.yMin, 10);
+			const yMax: number = parseInt(coordinateSpace.value.coords.yMax, 10);
 
 			if (yMax < 0) {
 				if (coordinateY < yMax) {
@@ -119,7 +129,7 @@ export default class DrawCircleCross extends React.Component<IProps, IState> {
 	 */
 	public definePositionX(
 		positionX: number,
-		coordinateSpace: SelectableValue<CoordinateSpaceClass>, defineCenter: number,
+		coordinateSpace: SelectableValue<RegionClass>, defineCenter: number,
 		size: number, valueBorder: number, shape: string): number {
 		let x: number;
 
@@ -140,8 +150,8 @@ export default class DrawCircleCross extends React.Component<IProps, IState> {
 				x = ((this.defineLimitX(positionX, coordinateSpace) * (defineCenter / 100)) + defineCenter) - (widthToCenterCross);
 			}
 		} else {
-			const xMin: number = parseInt(coordinateSpace.value.xMin, 10);
-			const xMax: number = parseInt(coordinateSpace.value.xMax, 10);
+			const xMin: number = parseInt(coordinateSpace.value.coords.xMin, 10);
+			const xMax: number = parseInt(coordinateSpace.value.coords.xMax, 10);
 			const xMid: number = (xMin + xMax) / 2;
 
 			if (shape === 'circle') {
@@ -170,7 +180,7 @@ export default class DrawCircleCross extends React.Component<IProps, IState> {
 	 * @param shapeGraphicMarker 
 	 */
 	public definePositionY(
-		positionY: number, coordinateSpace: SelectableValue<CoordinateSpaceClass>,
+		positionY: number, coordinateSpace: SelectableValue<RegionClass>,
 		defineCenter: number, size: number, valueBorder: number, shapeGraphicMarker: string): number {
 		let y: number;
 		if (coordinateSpace.value === undefined) {
@@ -193,8 +203,8 @@ export default class DrawCircleCross extends React.Component<IProps, IState> {
 			}
 
 		} else {
-			const yMin: number = parseInt(coordinateSpace.value.yMin, 10);
-			const yMax: number = parseInt(coordinateSpace.value.yMax, 10);
+			const yMin: number = parseInt(coordinateSpace.value.coords.yMin, 10);
+			const yMax: number = parseInt(coordinateSpace.value.coords.yMax, 10);
 			const yMid: number = (yMin + yMax) / 2;
 
 			if (shapeGraphicMarker === 'circle') {
@@ -259,41 +269,53 @@ export default class DrawCircleCross extends React.Component<IProps, IState> {
 		drawGraphicMarker: string, size: number,
 		positionShapeX: number, positionShapeY: number, shape: string, color: string, valueBorder: number): any {
 
+		const valueToolTip: JSX.Element = this.defineContentTooltip();
+
 		if (drawGraphicMarker === 'true') {
 
 			if (shape === 'circle') {
 
 				return (
-					<div style={{
-						border: valueBorder + 'px solid ' + color,
-						backgroundColor: color,
-						borderRadius: '50px',
-						padding: size + 'px',
-						position: 'absolute',
-						left: positionShapeX,
-						top: positionShapeY,
-					}} id={this.props.idPoint}>
-					</div>
+					<Tooltip content={valueToolTip}>
+						<div style={{
+							border: valueBorder + 'px solid ' + this.defineBorderColor(),
+							backgroundColor: this.defineBackgroundColor(),
+							borderRadius: '50px',
+							padding: size + 'px',
+							position: 'absolute',
+							left: positionShapeX,
+							top: positionShapeY,
+						}} id={this.props.idPoint}>
+						</div>
+					</Tooltip>
 				);
 
 			} else if (shape === 'cross') {
 
 				return (
-					<div id={this.props.idPoint} style={{
-						fontSize: size,
-						fontWeight: 'bold',
-						position: 'absolute',
-						color: color,
-						left: positionShapeX,
-						top: positionShapeY,
-					}}>X</div>
+					<Tooltip content={valueToolTip}>
+						<div id={this.props.idPoint} style={{
+							fontSize: size,
+							fontWeight: 'bold',
+							position: 'absolute',
+							color: color,
+							left: positionShapeX,
+							top: positionShapeY,
+						}}>X</div>
+					</Tooltip>
 				);
 			}
 		}
 	}
 
-	public defineLabel(drawGraphicMarker: string, label: string, positionX: number, positionY: number,
+	public defineLabel(drawGraphicMarker: string, label: string, name: string, positionX: number, positionY: number,
 		positionLabelX: number, positionLabelY: number, police: string, color: string) {
+
+		let valueToDisplay: string = label;
+
+		if (label === '') {
+			valueToDisplay = name;
+		}
 
 		if (drawGraphicMarker === 'true') {
 			return (
@@ -301,23 +323,189 @@ export default class DrawCircleCross extends React.Component<IProps, IState> {
 					fontSize: '12px',
 					fontFamily: police,
 					fontWeight: 'bold',
-					color: color,
+					color: this.props.textObject.colorText,
 					position: 'absolute',
 					top: positionY + positionLabelY + 10,
 					left: positionX + positionLabelX + 10,
-				}}>{label}
+				}}>{valueToDisplay}
 				</div>
 			);
 		}
 		return (<div></div>);
 	}
 
+	public defineContentTooltip() {
+		const arrayPoints = this.props.options.arrayPoints;
+		let arrayLinksIn: LinkClass[] = [];
+		let arrayLinksOut: LinkClass[] = [];
+		let arrayOrientedLinksIn: OrientedLinkClass[] = [];
+		let arrayOrientedLinksOut: OrientedLinkClass[] = [];
+		let refMainMetric: string = '';
+		let valueMainMetric: string = '';
+
+		arrayPoints.forEach((point) => {
+			if (point.name === this.props.name) {
+				arrayLinksIn = point.associateLinkIn;
+				arrayLinksOut = point.associateLinkOut;
+				arrayOrientedLinksIn = point.associateOrientedLinksIn;
+				arrayOrientedLinksOut = point.associateOrientedLinksOut;
+				refMainMetric = point.mainMetric.refId || '';
+				valueMainMetric = point.valueMetric;
+			}
+		});
+
+		const label: string = this.props.label !== '' ? this.props.label : this.props.name;
+
+		const listAssociateLinks: JSX.Element[] = [];
+
+		listAssociateLinks.push(<p style={{ fontSize: '12px', marginBottom: '0px' }}>{label}</p>)
+
+		listAssociateLinks.push(
+			<p style={{ fontSize: '10px', marginTop: '5px', marginBottom: '0px' }}>
+				Main Metric
+			</p>
+		);
+
+		listAssociateLinks.push(
+			<p style={{ fontSize: '8px', marginBottom: '0px' }}>
+					+ Reference : {refMainMetric}
+			</p>
+		);
+
+		listAssociateLinks.push(
+			<p style={{ fontSize: '8px', marginBottom: '0px' }}>
+					+ Value : {valueMainMetric + this.props.textObject.unityMesureElement}
+			</p>
+		);
+
+		if (arrayLinksIn.length !== 0 || arrayOrientedLinksIn.length !== 0) {
+			listAssociateLinks.push(
+				<p style={{ fontSize: '10px', marginTop: '5px', marginBottom: '0px' }}>
+					Associate Links In
+				</p>
+			);
+		}
+
+		if (arrayLinksIn.length !== 0) {
+			arrayLinksIn.forEach((linkIn) => {
+				listAssociateLinks.push(<p style={{ fontSize: '8px', marginBottom: '0px' }}> + {linkIn.name}</p>)
+			});
+		}
+
+		if (arrayOrientedLinksIn.length !== 0) {
+			arrayOrientedLinksIn.forEach((orientedLinkIn) => {
+				listAssociateLinks.push(<p style={{ fontSize: '8px', marginBottom: '0px' }}> + {orientedLinkIn.name}</p>)
+			});
+		}
+
+		if (arrayLinksOut.length !== 0 || arrayOrientedLinksOut.length !== 0) {
+			listAssociateLinks.push(
+				<p style={{ fontSize: '10px', marginTop: '5px', marginBottom: '0px' }}>
+					Associate Links Out
+				</p>
+			);
+		}
+
+		if (arrayLinksOut.length !== 0) {
+			arrayLinksOut.forEach((linkOut) => {
+				listAssociateLinks.push(<p style={{ fontSize: '8px', marginBottom: '0px' }}> + {linkOut.name}</p>)
+			});
+		}
+
+		if (arrayOrientedLinksOut.length !== 0) {
+			arrayOrientedLinksOut.forEach((orientedLinkOut) => {
+				listAssociateLinks.push(<p style={{ fontSize: '8px', marginBottom: '0px' }}> + {orientedLinkOut.name}</p>)
+			});
+		}
+		return (
+			<div>
+				{listAssociateLinks}
+			</div>
+		);
+	}
+
+	public defineBackgroundColor() {
+		
+		let colorBackground: string = this.props.color;
+		const valueMainMetric: number = parseInt(this.props.valueMainMetric, 10);
+		let index: number = 0;
+		
+
+		
+		
+		this.props.seuil.forEach((level: LowerLimitClass) => {
+
+			let seuilMin: number = 0;
+
+			if (level.seuilMin === '') {
+				seuilMin = 0;
+			} else {
+				seuilMin = parseInt(level.seuilMin.substring(1), 10);
+			}
+
+			console.log(seuilMin);
+
+			if (seuilMin === 0) {
+				if (valueMainMetric >= seuilMin && valueMainMetric <= parseInt(level.seuilMax, 10)) {
+					colorBackground = level.couleurFond;
+				}
+			} else if (this.props.seuil.length === index + 1) {
+				if (valueMainMetric > seuilMin) {
+					colorBackground = level.couleurFond;
+				}
+			} else if (valueMainMetric > seuilMin && valueMainMetric <= parseInt(level.seuilMax, 10)) {
+				colorBackground = level.couleurFond;
+			}
+
+			index++;
+		})
+
+		console.log(colorBackground)
+		return colorBackground;
+	}
+
+	public defineBorderColor() {
+		
+		let colorBorder: string = this.props.color;
+		const valueMainMetric: number = parseInt(this.props.valueMainMetric, 10);
+		let index: number = 0;
+
+		
+		
+		this.props.seuil.forEach((level: LowerLimitClass) => {
+
+			let seuilMin: number = 0;
+
+			if (level.seuilMin === '') {
+				seuilMin = 0;
+			} else {
+				seuilMin = parseInt(level.seuilMin.substring(1), 10);
+			}
+
+			if (seuilMin === 0) {
+				if (valueMainMetric >= seuilMin && valueMainMetric <= parseInt(level.seuilMax, 10)) {
+					colorBorder = level.couleurContour;
+				}
+			} else if (this.props.seuil.length === index + 1) {
+				if (valueMainMetric > seuilMin) {
+					colorBorder = level.couleurContour;
+				}
+			} else if (valueMainMetric > seuilMin && valueMainMetric <= parseInt(level.seuilMax, 10)) {
+				colorBorder = level.couleurContour;
+			}
+
+			index++;
+		})
+
+		console.log(colorBorder)
+		return colorBorder;
+	}
+
 	/**
 	 * render
 	 */
 	public render() {
-
-		const coordinateSpace: SelectableValue<CoordinateSpaceClass> = this.props.coordinateSpace;
+		const coordinateSpace: SelectableValue<RegionClass> = this.props.coordinateSpace;
 		const heightPanel: number = this.props.height;
 		const defineCenter: number = heightPanel / 2;
 		const shape: string = this.props.shape.value || '';
@@ -328,22 +516,26 @@ export default class DrawCircleCross extends React.Component<IProps, IState> {
 		const positionShapeX: number = this.definePositionX(valueInputPositionArrowX, coordinateSpace, defineCenter, size, valueBorder, shape);
 		const positionShapeY: number = this.definePositionY(valueInputPositionArrowY, coordinateSpace, defineCenter, size, valueBorder, shape);
 		const label: string = this.props.label;
+		const name: string = this.props.name;
 		const color: string = this.props.color;
 		const drawGraphicMarker: string = this.props.drawGraphicMarker.value || '';
 		const positionLabelX: number = parseInt(this.props.positionLabelX, 10);
 		const positionLabelY: number = parseInt(this.props.positionLabelY, 10) * (-1);
 		const police = this.props.police;
-
+		//const textObject: string = this.props.textObject.colorText;
+		
+			
 		return (
+
+			
 			<div style={{ cursor: 'pointer' }}>
-				{this.defineLabel(drawGraphicMarker, label, positionShapeX, positionShapeY,
-					positionLabelX, positionLabelY, police, color)}
+					{this.defineLabel(drawGraphicMarker, label, name, positionShapeX, positionShapeY,
+						positionLabelX, positionLabelY, police, color)}
+					{this.defineShapeGraphicmarker(drawGraphicMarker, size, positionShapeX, positionShapeY,
+						shape, color, valueBorder)}
+				</div>
 
-				{this.defineShapeGraphicmarker(drawGraphicMarker, size, positionShapeX, positionShapeY,
-					shape, color, valueBorder)}
-
-			</div>
-		);
+		)
 	}
 
 }

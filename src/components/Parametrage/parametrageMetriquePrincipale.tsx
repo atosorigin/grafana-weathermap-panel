@@ -1,19 +1,26 @@
 import React from 'react';
+
+import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
+import { TextObject } from 'Models/TextObjectClass';
+
 import InputTextField from 'Functions/Input/inputText';
-import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
 
 interface IProps {
 	/** id for coordinate space */
-	coordinateSpace: CoordinateSpaceExtendClass;
+	coordinateSpace: CoordinateSpaceClass;
+	/** save data to parent */
 	callBackToParent: (
 		followLink: string,
 		hoveringTooltipLink: string,
-		hoveringTooltipText: string) => void;
+		hoveringTooltipText: string,
+		textObj?: TextObject,
+		id?: number) => void;
+		/** id of object */
+	id?: number;
 }
 
 interface IState {
-	/**react
-	 */
+	/** link */
 	followLink: string;
 	/**
 	 * link for tooltip
@@ -28,13 +35,13 @@ interface IState {
 /**
  * def
  */
-class ParametrageMetriquePrincipale extends React.Component<IProps, IState> {
+class LinkURLClassPrincipale extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			followLink: this.props.coordinateSpace.parametrageMetric.followLink,
-			hoveringTooltipLink: this.props.coordinateSpace.parametrageMetric.hoveringTooltipLink,
-			hoveringTooltipText: this.props.coordinateSpace.parametrageMetric.hoveringTooltipText,
+			followLink: this.props.coordinateSpace.linkURL.followLink,
+			hoveringTooltipLink: this.props.coordinateSpace.linkURL.hoveringTooltipLink,
+			hoveringTooltipText: this.props.coordinateSpace.linkURL.hoveringTooltipText,
 		};
 	}
 
@@ -85,7 +92,7 @@ class ParametrageMetriquePrincipale extends React.Component<IProps, IState> {
 	 */
 	public callBack = () => {
 		this.props.callBackToParent(this.state.followLink, this.state.hoveringTooltipLink,
-			this.state.hoveringTooltipText);
+			this.state.hoveringTooltipText, undefined, this.props.id);
 	}
 
 	/**
@@ -121,9 +128,9 @@ class ParametrageMetriquePrincipale extends React.Component<IProps, IState> {
 	public componentDidUpdate(prevProps: IProps) {
 		if (prevProps.coordinateSpace !== this.props.coordinateSpace) {
 			this.setState({
-				followLink: prevProps.coordinateSpace.parametrageMetric.followLink,
-				hoveringTooltipLink: prevProps.coordinateSpace.parametrageMetric.hoveringTooltipLink,
-				hoveringTooltipText: prevProps.coordinateSpace.parametrageMetric.hoveringTooltipText,
+				followLink: prevProps.coordinateSpace.linkURL.followLink,
+				hoveringTooltipLink: prevProps.coordinateSpace.linkURL.hoveringTooltipLink,
+				hoveringTooltipText: prevProps.coordinateSpace.linkURL.hoveringTooltipText,
 			});
 		}
 	}
@@ -174,11 +181,10 @@ class ParametrageMetriquePrincipale extends React.Component<IProps, IState> {
 						}) => this.onChangeHoveringTooltipText(event.currentTarget.value)
 					}
 				/>
-
 				<br />
 				<br />
 			</div>
 		);
 	}
 }
-export default ParametrageMetriquePrincipale;
+export default LinkURLClassPrincipale;

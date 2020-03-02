@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.30 (2020-02-29)
+
+- Add legende
+- Fixes panel
+
 ## v0.25 (2020-02-12)
 
 - Add implementation for table type data (Mysql, Postgres, Zabbix, Streaming, loki and other ...)
@@ -10,7 +15,7 @@
 - Add Auxiliary metadata
 - Add main link oriented metrics
 - Fixed key metrics
-- Update tabs
+- Fixed tabs
 
 ## v0.20.1 (2020-02-04)
 

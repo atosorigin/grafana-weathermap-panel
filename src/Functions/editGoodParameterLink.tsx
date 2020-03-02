@@ -12,45 +12,45 @@ export const editGoodParameterLink = (
 	name: string, editCoor: LinkClass, newValue: string,
 	newValueSelect: SelectableValue<any>): LinkClass => {
 	if (name.startsWith('getCoordinate')) {
-		editCoor.setDefineHowToGetCoordonate(newValueSelect);
+		editCoor.defineHowToGetCoordonate = newValueSelect;
 	} else if (name.startsWith('orientationLink')) {
-		editCoor.setOrientationLink(newValueSelect);
+		editCoor.orientationLink = newValueSelect;
 	} else if (name.startsWith('pointIn')) {
-		editCoor.setPointIn(newValueSelect);
+		editCoor.pointIn = newValueSelect;
 	} else if (name.startsWith('pointOut')) {
-		editCoor.setPointOut(newValueSelect);
+		editCoor.pointOut = newValueSelect;
 	} else if (name.startsWith('regionIn')) {
-		editCoor.setRegionIn(newValueSelect);
+		editCoor.regionIn = newValueSelect;
 	} else if (name.startsWith('regionOut')) {
-		editCoor.setRegionOut(newValueSelect);
+		editCoor.regionOut = newValueSelect;
 	} else if (name.startsWith('pointAX')) {
-		editCoor.setPointAPositionX(newValue);
+		editCoor.pointAPositionX = newValue;
 	} else if (name.startsWith('pointAY')) {
-		editCoor.setPointAPositionY(newValue);
+		editCoor.pointAPositionY = newValue;
 	} else if (name.startsWith('pointBX')) {
-		editCoor.setPointBPositionX(newValue);
+		editCoor.pointBPositionX = newValue;
 	} else if (name.startsWith('pointBY')) {
-		editCoor.setPointBPositionY(newValue);
+		editCoor.pointBPositionY = newValue;
 	} else if (name.startsWith('colorCoordinateA')) {
-		editCoor.setColorCoordinateA(newValue);
+		editCoor.colorCoordinateA = newValue;
 	} else if (name.startsWith('colorCoordinateB')) {
-		editCoor.setColorCoordinateB(newValue);
+		editCoor.colorCoordinateB = newValue;
 	} else if (name.startsWith('colorRegionIn')) {
-		editCoor.setColorRegionIn(newValue);
+		editCoor.colorRegionIn = newValue;
 	} else if (name.startsWith('colorRegionOut')) {
-		editCoor.setColorRegionOut(newValue);
+		editCoor.colorRegionOut = newValue;
 	} else if (name.startsWith('labelLinkA')) {
-		editCoor.setLabelLinkA(newValue);
+		editCoor.labelLinkA = newValue;
 	} else if (name.startsWith('labelLinkB')) {
-		editCoor.setLabelLinkB(newValue);
+		editCoor.labelLinkB = newValue;
 	} else if (name.startsWith('positionXLabelLinkA')) {
-		editCoor.setPositionXLabelA(newValue);
+		editCoor.positionXLabelA = newValue;
 	} else if (name.startsWith('positionYLabelLinkA')) {
-		editCoor.setPositionYLabelA(newValue);
+		editCoor.positionYLabelA = newValue;
 	} else if (name.startsWith('positionXLabelLinkB')) {
-		editCoor.setPositionXLabelB(newValue);
+		editCoor.positionXLabelB = newValue;
 	} else if (name.startsWith('positionYLabelLinkB')) {
-		editCoor.setPositionYLabelB(newValue);
+		editCoor.positionYLabelB = newValue;
 	}
 	return editCoor;
 };

@@ -1,19 +1,29 @@
 import React from 'react';
+
 import { FormField } from '@grafana/ui';
+
+import { LowerLimitClass } from 'Models/LowerLimitClass';
+
 import InputSeriesColorPicker from 'Functions/Input/inputSeriesColorPicker';
-import { Seuil } from 'Models/SeuilClass';
 
-import { PanelEditorProps } from '@grafana/data';
-import { SimpleOptions } from 'types';
+interface IProps {
+	/** trace border? */
+	traceBorder: boolean;
+	/** trace background? */
+	traceBack: boolean;
+	/** last array lowerLimit */
+	lowerLimit: LowerLimitClass[];
+	/** function parent to save lower limit */
+	lowerLimitCallBack: (lowerLimit: LowerLimitClass[], id?: number) => void;
 
-interface IProps extends PanelEditorProps<SimpleOptions> {
+	id?: number;
 }
 
 interface IState {
-	/**
-	 * couleur du fond
-	 */
-	seuil: Seuil[];
+	/** couleur du fond */
+	lowerLimit: LowerLimitClass[];
+	/** result html */
+	htmlResult: JSX.Element;
 }
 
 /**
@@ -23,7 +33,8 @@ class CouleurFixe extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			seuil: this.props.options.seuil,
+			lowerLimit: this.props.lowerLimit,
+			htmlResult: <div></div>,
 		};
 	}
 
@@ -34,7 +45,7 @@ class CouleurFixe extends React.Component<IProps, IState> {
 		/**
 		 * edit colorFond
 		 */
-		seuil: Seuil[],
+		lowerLimit: LowerLimitClass[],
 	}) => {
 		return new Promise((resolve) => {
 			this.setState(state, resolve);
@@ -45,47 +56,46 @@ class CouleurFixe extends React.Component<IProps, IState> {
 	 * save data
 	 */
 	public callBack = (): void => {
-		this.props.onOptionsChange({
-			...this.props.options,
-			seuil: this.state.seuil,
-		});
-
+		this.props.lowerLimitCallBack(this.state.lowerLimit, this.props.id);
 	}
 
 	/**
 	 * change background color
 	 */
 	public onChangeColorFond = async (key: number, color: string) => {
-		const newSeuil: Seuil[] = this.state.seuil;
+		const newSeuil: LowerLimitClass[] = this.state.lowerLimit;
 		newSeuil[0].couleurFond = color;
 		await this.setStateAsyncSeuil({
-			seuil: newSeuil,
+			lowerLimit: newSeuil,
 		});
 		this.callBack();
+		this.initComponent();
 	}
 
 	/**
 	 * change contour color
 	 */
 	public onChangeColorContour = async (key: number, color: string) => {
-		const newSeuil: Seuil[] = this.state.seuil;
+		const newSeuil: LowerLimitClass[] = this.state.lowerLimit;
 		newSeuil[0].couleurContour = color;
 		await this.setStateAsyncSeuil({
-			seuil: newSeuil,
+			lowerLimit: newSeuil,
 		});
 		this.callBack();
+		this.initComponent();
 	}
 
 	/**
 	 * change size color
 	 */
 	public onChangeSzContour = async (value: string) => {
-		const newSeuil: Seuil[] = this.state.seuil;
+		const newSeuil: LowerLimitClass[] = this.state.lowerLimit;
 		newSeuil[0].sizeContour = value;
 		await this.setStateAsyncSeuil({
-			seuil: newSeuil,
+			lowerLimit: newSeuil,
 		});
 		this.callBack();
+		this.initComponent();
 	}
 
 	/**
@@ -95,27 +105,29 @@ class CouleurFixe extends React.Component<IProps, IState> {
 		const key = '0';
 		const couleur: JSX.Element[] = [];
 		const l10n = require('Localization/en.json');
+		console.log(this.state.lowerLimit);
+		console.log(this.props.lowerLimit);
 
-		if (this.props.options.fondIsActive) {
+		if (this.props.traceBack) {
 			const keyFondColorPicker = key + 'FondcolorPicker';
 
 			couleur.push(
 				<InputSeriesColorPicker
 					key={keyFondColorPicker}
-					color={this.state.seuil[0].couleurFond}
+					color={this.state.lowerLimit[0].couleurFond}
 					keyInt={0}
 					text={l10n.colorVariable.switchBackgroundColor}
 					_onChange={this.onChangeColorFond}
-				/>,
+				/>
 			);
 		}
-		if (this.props.options.contourIsActive) {
+		if (this.props.traceBorder) {
 			const keyContourDiv = key + 'ContourDiv';
 
 			couleur.push(
 				<div key={keyContourDiv}>
 					<InputSeriesColorPicker
-						color={this.state.seuil[0].couleurContour}
+						color={this.state.lowerLimit[0].couleurContour}
 						keyInt={0}
 						text={l10n.colorVariable.switchOutlineColor}
 						_onChange={this.onChangeColorContour}
@@ -126,14 +138,39 @@ class CouleurFixe extends React.Component<IProps, IState> {
 						label={l10n.colorVariable.thicknessOutline}
 						name='epaisseurContour'
 						placeholder={l10n.colorVariable.thicknessOutline}
-						value={this.state.seuil[0].sizeContour}
+						value={this.state.lowerLimit[0].sizeContour}
 						onChange={(event) => this
 							.onChangeSzContour(event.currentTarget.value)}
 					/>
-				</div >,
+				</div >
 			);
 		}
 		return (couleur);
+	}
+
+	/** create form */
+	public initComponent = () => {
+		this.setState({
+			htmlResult: <div>{this.addButtonColor()}</div>,
+		});
+	}
+
+	/** init component when component is mount */
+	public componentDidMount = async () => {
+		if (this.state.lowerLimit.length === 0) {
+			await this.setStateAsyncSeuil({
+				lowerLimit: [new LowerLimitClass(0, '', '', '','', '1')],
+			});
+		}
+		this.initComponent();
+	}
+
+	/** init component when  update props */
+	public componentDidUpdate = (prevProps: IProps) => {
+		if (prevProps.traceBorder !== this.props.traceBorder
+			|| prevProps.traceBack !== this.props.traceBack) {
+			this.initComponent();
+		}
 	}
 
 	/**
@@ -143,8 +180,9 @@ class CouleurFixe extends React.Component<IProps, IState> {
 		return (
 			<div>
 				{
-					this.addButtonColor()
+					this.state.htmlResult
 				}
+				{/* <Button onClick={() => console.log(this.props.lowerLimit)}></Button> */}
 			</div>
 		);
 	}

@@ -1,25 +1,26 @@
 import React from 'react';
-import { PanelEditorProps } from '@grafana/data';
+
 import { SimpleOptions } from 'types';
 
-import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
-import { TextObject } from 'Models/TextObjectClass';
-import { ParametrageMetrique } from 'Models/SettingMetricClass';
+import { PanelEditorProps } from '@grafana/data';
+
+import { RegionClass } from 'Models/RegionClass';
+
+import { initRegionCoordinateSpace } from 'Functions/initRegionCoordinateSpace';
 
 import CoordinateSpace from 'components/CoordinateSpace/coordinateSpace';
 
-interface IProps extends PanelEditorProps<SimpleOptions> { }
-
-interface IState {
-	/**
-	 * data for new CoordinateSpaceExtendClass
-	 */
-	coordinate?: CoordinateSpaceExtendClass;
+interface IProps extends PanelEditorProps<SimpleOptions> {
+	/** return to edit mode after save */
+	returnEditMode?: () => void;
 }
 
-/**
- * Add new coordinate space
- */
+interface IState {
+	/** data for new CoordinateSpaceExtendClass */
+	coordinate?: RegionClass;
+}
+
+/** Add new coordinate space */
 class AddCoordinate extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
@@ -28,10 +29,8 @@ class AddCoordinate extends React.Component<IProps, IState> {
 		};
 	}
 
-	/**
-	 * search new id for espacecoordinneesclass
-	 */
-	public searchNewId = (allCoordinateSpace: CoordinateSpaceExtendClass[]): number => {
+	/** search new id for espacecoordinneesclass */
+	public searchNewId = (allCoordinateSpace: RegionClass[]): number => {
 		let id: number = -1;
 
 		for (const line of allCoordinateSpace) {
@@ -43,50 +42,41 @@ class AddCoordinate extends React.Component<IProps, IState> {
 		return id;
 	}
 
-	/**
-	 * create new CoordinateSpace class
-	 */
-	public initCoordinateSpace = (): CoordinateSpaceExtendClass => {
-		const allCoordinateSpace: CoordinateSpaceExtendClass[] = this.props.options.arrayCoordinateSpace.slice();
-		const initTextObject: TextObject = new TextObject('', '', '', '', '', '', '', '', '',
-			false, '', '', '',
-			false, false, false, '', false, '');
-		const parametrageMetric: ParametrageMetrique = new ParametrageMetrique('', '', '');
-		const newId: number = this.searchNewId(allCoordinateSpace);
-
-		const newCoordinate: CoordinateSpaceExtendClass = new CoordinateSpaceExtendClass(
-			newId, '', '', '', '', '', '', '',
-			initTextObject, parametrageMetric, '', '');
-		return newCoordinate;
-	}
-
-	/**
-	 * call init class for coordinate state
-	 */
+	/** call init class for coordinate state */
 	public componentDidMount = (): void => {
 		this.setState({
-			coordinate: this.initCoordinateSpace(),
+			coordinate: initRegionCoordinateSpace(this.props.options.indexRegion),
 		});
 	}
 
-	/**
-	 * send data for parent
-	 */
-	public callBack = (
-		id: number, newCoordinate?: CoordinateSpaceExtendClass): void => {
+	/** update onOptionsChange */
+	public setAsyncOption = (newIdx: number) => {
+		return Promise.resolve('Success').then(() => {
+			this.props.onOptionsChange({
+				...this.props.options,
+				indexRegion: newIdx,
+			});
+		});
+	}
+
+	/** send data for parent */
+	public callBack = async (
+		id: number, newCoordinate?: RegionClass) => {
 		if (newCoordinate) {
-			const allCoordinateSpace: CoordinateSpaceExtendClass[] = this.props.options.arrayCoordinateSpace.slice();
+			const allCoordinateSpace: RegionClass[] = this.props.options.arrayCoordinateSpace.slice();
+			await this.setAsyncOption(newCoordinate.id);
 			this.props.onOptionsChange({
 				...this.props.options,
 				arrayCoordinateSpace: allCoordinateSpace.concat(newCoordinate),
 			});
-			this.componentDidMount();
+			if (this.props.returnEditMode) {
+				this.props.returnEditMode();
+			}
+			// this.componentDidMount();
 		}
 	}
 
-	/**
-	 * result
-	 */
+	/** result */
 	public render() {
 		return (
 			<div>

@@ -1,4 +1,4 @@
-import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
+import { CoordinateSpaceInitialClass } from 'Models/CoordinateSpaceInittialClass';
 import React from 'react';
 
 import { isNumFloat } from 'Functions/isNumFloat';
@@ -11,7 +11,7 @@ interface IProps {
 	/**
 	 * object CoordinateSpace
 	 */
-	uneCoor: CoordinateSpaceClass;
+	uneCoor: CoordinateSpaceInitialClass;
 
 	/**
 	 * to do
@@ -70,7 +70,7 @@ export default class DrawRectangle extends React.Component<IProps, IState> {
 
 	/** creaate rectrangle */
 	public createRectangle = (): void => {
-		const line: CoordinateSpaceClass = this.props.uneCoor;
+		const line: CoordinateSpaceInitialClass = this.props.uneCoor;
 		let pLeft: string;
 		let pRight: string;
 		let pTop: string;

@@ -7,16 +7,25 @@ import { ArrayInputSelectableClass } from 'Models/ArrayInputSelectableClass';
 import { editGoodParameterPoint } from 'Functions/editGoodParameterPoint';
 import { PointClass } from 'Models/PointClass';
 import InputSelectPoint from 'Functions/Input/inputSelectPoint';
-import { SelectableValue } from '@grafana/data';
+import { SelectableValue, PanelEditorProps } from '@grafana/data';
 import InputSeriesColorPickerPoint from 'Functions/Input/inputSeriesColorPickerPoint';
-import { Button } from '@grafana/ui';
+import { Button, Collapse } from '@grafana/ui';
+import { RegionClass } from 'Models/RegionClass';
+import { TextObject } from 'Models/TextObjectClass';
+import { LinkURLClass } from 'Models/LinkURLClass';
+import { SimpleOptions } from 'types';
+
+import ParametresGeneriques from 'components/Parametrage/parametresGeneriques';
+import ManageLowerLimit from 'components/Parametrage/manageLowerLimit';
 import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
+import { LowerLimitClass } from 'Models/LowerLimitClass';
+
 
 
 /**
  * IProps
  */
-interface IProps {
+interface IProps extends PanelEditorProps<SimpleOptions> {
 
 	/**
 	 * function for return arrayInput for Parent
@@ -31,7 +40,7 @@ interface IProps {
 	/**
 	 * Espace de coordonnées existants
 	 */
-	arrayCoordinateSpace: CoordinateSpaceClass[];
+	arrayCoordinateSpace: RegionClass[];
 
 }
 
@@ -39,6 +48,7 @@ interface IProps {
  * IState
  */
 interface IState {
+	oldArrayPointClass: PointClass[];
 	/**
 	 * to do
 	 */
@@ -58,6 +68,13 @@ interface IState {
 	 */
 	debug: boolean;
 
+	/**
+	 * Permet de savoir si la collapse est ouverte ou fermée
+	 */
+	listCollapsePoint: boolean[];
+
+	openCollapsePoint: boolean;
+
 }
 
 /**
@@ -69,8 +86,11 @@ export default class PointForm extends React.Component<IProps, IState> {
 		this.state = {
 			arrayInput: [],
 			arrayPointClass: [],
-			debug: false,
 			index: 1,
+			listCollapsePoint: [],
+			openCollapsePoint: false,
+			oldArrayPointClass: [],
+			debug: false,
 		};
 	}
 
@@ -86,6 +106,7 @@ export default class PointForm extends React.Component<IProps, IState> {
 	 * to do
 	 */
 	public loadCoorParent = () => {
+
 		const { oldArrayPointClass } = this.props;
 
 		if (oldArrayPointClass.length === 0 || this.state.debug === true) {
@@ -97,30 +118,34 @@ export default class PointForm extends React.Component<IProps, IState> {
 			return;
 		}
 
-		for (const element of oldArrayPointClass) {
+		//console.log(this.props.options.arrayPoints)
+
+		for (const element of this.props.options.arrayPoints) {
 			setTimeout(() => {
-				this.addInput(element.id, element.coordinateSpace, element.drawGraphicMarker, element.shape, element.sizeWidth,
+				this.addInput(element.id, element.label, element.coordinateSpace, element.drawGraphicMarker, element.shape, element.sizeWidth,
 					element.sizeHeight, element.rotateArrow, element.positionShapeX, element.positionShapeY,
-					element.label, element.positionLabelX, element.positionLabelY, element.color);
+					element.positionLabelX, element.positionLabelY, element.color,
+					element.mainMetric.refId, element.mainMetric.key, element.mainMetric.keyValue, element.textObj, element.lowerLimit);
 			}, 100);
 		}
+
 		this.setState((prevState: IState) => ({
 			debug: !prevState.debug,
 		}));
 	}
 
-	public defineDataCoordinateSpace(): SelectableValue<CoordinateSpaceClass>[] {
+	public defineDataCoordinateSpace(): SelectableValue<RegionClass>[] {
 		const { arrayCoordinateSpace } = this.props;
-		const dataEspaceCoor: SelectableValue<CoordinateSpaceClass>[] = [];
-		const optionNull: SelectableValue<CoordinateSpaceClass> = { label: 'Initial space' };
+		const dataEspaceCoor: SelectableValue<RegionClass>[] = [];
+		const optionNull: SelectableValue<RegionClass> = { label: 'Initial space' };
 
 		// Par défault, on ajoute une option qui permet de ne pas sélectionner d'espace de coordonnées
 		dataEspaceCoor.push(optionNull);
 
 		// On ajoute aux options de choix les espace de coordonnées existant
 		arrayCoordinateSpace.forEach(coordinateSpace => {
-			// Console.log(CoordinateSpace)
-			const option: SelectableValue<CoordinateSpaceClass> = {
+
+			const option: SelectableValue<RegionClass> = {
 				label: coordinateSpace.label,
 				value: coordinateSpace,
 			};
@@ -135,34 +160,53 @@ export default class PointForm extends React.Component<IProps, IState> {
 	 * add inputs for a new coordiante
 	 */
 	public addInput = (
-		id?: number, coordinateSpaceAssociate?: SelectableValue<CoordinateSpaceClass>,
+		id?: number, label?: string, coordinateSpaceAssociate?: SelectableValue<RegionClass>,
 		drawGraphicMarker?: SelectableValue<string>, shape?: SelectableValue<string>,
 		sizeWidth?: SelectableValue<string>, sizeHeight?: SelectableValue<string>, rotateArrow?: string,
-		positionShapeX?: string, positionShapeY?: string, label?: string, positionLabelX?: string, positionLabelY?: string,
-		color?: string) => {
+		positionShapeX?: string, positionShapeY?: string, positionLabelX?: string,
+		positionLabelY?: string, color?: string, refIdMainMetric?: string, keyMainMetric?: string,
+		keyValueMainMetric?: string, textObj?: TextObject, seuil?: LowerLimitClass[]) => {
 
-		const num: number = id || this.state.index;
+		const num: number = id || this.props.options.indexPoint + 1;
 		const finalArray: InputSelectableClass[] = createInputsPoint(num, this.defineDataCoordinateSpace());
+		const initTextObject: TextObject = textObj || new TextObject('', '', '', false, '', '', '',
+			false, '', '', '',
+			false, false, false, '', false, '');
+		const parametrageMetric: LinkURLClass = new LinkURLClass('', '', '');
 
 		this.setState((prevState: IState) => ({
-			arrayPointClass: prevState.arrayPointClass.concat(new PointClass(num,
-				coordinateSpaceAssociate || {}, drawGraphicMarker || { label: 'Yes', value: 'true' },
-				shape || { label: '', value: '' }, sizeWidth || { label: 'Small', value: 'small' },
+			arrayPointClass: prevState.arrayPointClass.concat(new PointClass(
+				num, parametrageMetric, '', seuil || [], label || '', initTextObject,
+				{
+					'key': keyMainMetric || '', 'unit': '', 'format': '',
+					'keyValue': keyValueMainMetric || '', 'refId': refIdMainMetric || ''
+				}, [], false, false, false,
+				'point' + num.toString(), '', coordinateSpaceAssociate || {}, drawGraphicMarker || { label: 'Yes', value: 'true' },
+				shape || { label: 'Circle', value: 'circle' }, sizeWidth || { label: 'Small', value: 'small' },
 				sizeHeight || { label: 'Small', value: 'small' }, rotateArrow || '0', positionShapeX || '0', positionShapeY || '0',
-				label || '', positionLabelX || '0', positionLabelY || '0', color || '#5794F2')),
+				positionLabelX || '0', positionLabelY || '0', color || 'black',
+				[], [], [], [])),
 
 			arrayInput: prevState.arrayInput.concat([
 				new ArrayInputSelectableClass(num, finalArray),
 			]),
-			index: (id || this.state.index) + 1,
+			//index: (id || this.state.index) + 1,
 		}));
+
+		this.props.onOptionsChange({
+			...this.props.options,
+			indexPoint: num,
+		})
+
+		//this.props.options.indexPoint + 1;
+
 	}
 
 	/**
 	 * dsgs
 	 */
-	public addTestInput = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-		this.addInput(this.state.index);
+	public addNewFormPoint = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+		this.addInput();
 	}
 
 	/**
@@ -180,16 +224,17 @@ export default class PointForm extends React.Component<IProps, IState> {
 		setTimeout(() => {
 			this.callBack();
 		}, 100);
+		//this.generateInputsPoints();
 	}
 
 	/**
 	 * Delete array input and value
 	 * @param {event} event event click delete button
 	 */
-	public deleteOwnInput = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+	// React.MouseEvent<HTMLInputElement, MouseEvent>
+	public deleteOwnInput = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		const { arrayInput } = this.state;
 		const id = event.currentTarget.id;
-
 		for (const obj of arrayInput) {
 			for (const line of obj.uneClassInput) {
 				if (line.input_type === 'button') {
@@ -259,6 +304,7 @@ export default class PointForm extends React.Component<IProps, IState> {
 			return value;
 		}
 
+
 		if (
 			param.startsWith('drawGraphicMarker') ||
 			param.startsWith('shape') ||
@@ -278,6 +324,7 @@ export default class PointForm extends React.Component<IProps, IState> {
 				valueSelect = this.state.arrayPointClass[idx].coordinateSpace;
 			}
 			return valueSelect;
+
 		} else {
 			if (param.startsWith('rotateArrow')) {
 				value = this.state.arrayPointClass[idx].rotateArrow;
@@ -285,17 +332,100 @@ export default class PointForm extends React.Component<IProps, IState> {
 				value = this.state.arrayPointClass[idx].positionShapeX;
 			} else if (param.startsWith('positionShapeY')) {
 				value = this.state.arrayPointClass[idx].positionShapeY;
-			} else if (param.startsWith('label')) {
-				value = this.state.arrayPointClass[idx].label;
 			} else if (param.startsWith('positionLabelX')) {
 				value = this.state.arrayPointClass[idx].positionLabelX;
 			} else if (param.startsWith('positionLabelY')) {
 				value = this.state.arrayPointClass[idx].positionLabelY;
+			} else if (param.startsWith('label')) {
+				value = this.state.arrayPointClass[idx].label;
 			} else if (param.startsWith('color')) {
 				value = this.state.arrayPointClass[idx].color;
+			} else if (param.startsWith('refIdMainMetric')) {
+				value = this.state.arrayPointClass[idx].mainMetric.refId || '';
+			} else if (param.startsWith('keyMainMetric')) {
+				value = this.state.arrayPointClass[idx].mainMetric.key || '';
+			} else if (param.startsWith('keyValueMainMetric')) {
+				value = this.state.arrayPointClass[idx].mainMetric.keyValue || '';
 			}
 			return value;
 		}
+	}
+
+	/**
+	 * to do
+	 */
+	public defineListCollapse = () => {
+
+		this.props.options.listCollapsePoint = [];
+		const arrayPoints = this.state.arrayPointClass;
+
+
+		arrayPoints.forEach(point => {
+			this.props.options.listCollapsePoint.push(false);
+		});
+
+	}
+
+	public defineLabelCollapse(id: number): string {
+		let label: string = this.getGoodValue(id, 'label');
+
+		if (this.getGoodValue(id, 'label') === '') {
+			label = 'Point ' + id.toString();
+		}
+
+		return label;
+	}
+
+	public callBackToOther = (
+		followLink?: string,
+		hoveringTooltipLink?: string,
+		hoveringTooltipText?: string,
+		textObj?: TextObject,
+		id?: number): void => {
+		const oldCoor: PointClass = this.state.arrayPointClass[id || 0];
+		if (followLink) {
+			oldCoor.linkURL.followLink = followLink;
+		}
+		if (hoveringTooltipLink) {
+			oldCoor.linkURL.hoveringTooltipLink = hoveringTooltipLink;
+		}
+		if (hoveringTooltipText) {
+			oldCoor.linkURL.hoveringTooltipText = hoveringTooltipText;
+		}
+		if (textObj) {
+			oldCoor.textObj = textObj;
+		}
+		const arrayPoint: PointClass[] = this.props.options.arrayPoints;
+
+		arrayPoint[id || 0] = oldCoor;
+
+		this.props.onOptionsChange({
+			...this.props.options,
+			arrayPoints: arrayPoint,
+		})
+	}
+
+	/** update lower limit */
+	public callBackManageLowerLimit = (coordiante: CoordinateSpaceClass, id?: number) => {
+		const newValue: PointClass = this.state.arrayPointClass[id || 0];
+		newValue.colorMode = coordiante.colorMode;
+		newValue.traceBorder = coordiante.traceBorder;
+		newValue.traceBack = coordiante.traceBack;
+		// newValue.lowerLimit = coordiante.lowerLimit;
+		this.props.options.arrayPoints[id || 0] = newValue;
+
+	}
+
+	/** save lower limit data */
+	public callBackLowerLimit = (lowerLimit: LowerLimitClass[], id?: number) => {
+
+		console.log(id)
+		const newValue: PointClass = this.state.arrayPointClass[id || 0];
+		console.log(this.state.arrayPointClass)
+		console.log(this.state.arrayPointClass[id || 0])
+		newValue.lowerLimit = lowerLimit;
+		this.props.options.arrayPoints[id || 0] = newValue;
+
 	}
 
 	/**
@@ -303,136 +433,254 @@ export default class PointForm extends React.Component<IProps, IState> {
 	 */
 	public generateInputsPoints(): JSX.Element {
 
+		let index: number = 0;
+		this.defineListCollapse();
 		const { arrayInput } = this.state;
+		let item: JSX.Element = <div></div>;
+		let itemButton: JSX.Element = <div></div>;
+		let mapItems: JSX.Element[] = [];
 		let finalItem: JSX.Element[] = [];
+		//console.log(this.state.arrayPointClass)
+
 		for (const line of arrayInput) {
-			const mapItems = line.uneClassInput
-				.map((obj: InputSelectableClass) =>
-					(obj.input_type === 'text') ?
-						<InputTextPoint
-							key={obj.id}
-							label={obj.label}
-							name={obj.name}
-							placeholder={obj.placeholder || ''}
-							required={obj.required}
-							value={this.getGoodValue(line.id, obj.name)}
-							_handleChange={
-								(event: {
-									/**
-									 * get currentTarget in event element
-									 */
-									currentTarget: HTMLInputElement;
-								}) => {
-									this._handleChange(event.currentTarget.value, obj.name, line.id);
-								}
+			mapItems = [];
+			line.uneClassInput.forEach((obj: InputSelectableClass) => {
+
+				if (obj.input_type === 'text') {
+
+					item = <InputTextPoint
+						key={obj.id}
+						label={obj.label}
+						name={obj.name}
+						placeholder={obj.placeholder || ''}
+						required={obj.required}
+						value={this.getGoodValue(line.id, obj.name)}
+						_handleChange={
+							(event: {
+								/**
+								 * get currentTarget in event element
+								 */
+								currentTarget: HTMLInputElement;
+							}) => {
+								this._handleChange(event.currentTarget.value, obj.name, line.id);
 							}
-							shape={this.getGoodValue(line.id, 'shape').value}
-						/>
+						}
+						shape={this.getGoodValue(line.id, 'shape').value}
+					/>
 
-						: (obj.input_type === 'select' ?
-							<InputSelectPoint
-								key={obj.id}
-								_onChange={(value: SelectableValue<string>, name: string, index: number) => {
+				} else if (obj.input_type === 'select') {
 
-									let i: number;
-									i = 0;
-									const copyOfarrayPointClass: PointClass[] = this.state.arrayPointClass.slice();
+					item = <InputSelectPoint
+						key={obj.id}
+						_onChange={(value: SelectableValue<string>, name: string, index: number) => {
 
-									for (const line of copyOfarrayPointClass) {
-										if (line.id === index) {
-											copyOfarrayPointClass[i] = editGoodParameterPoint(name, copyOfarrayPointClass[i],
-												value.value || '', value || {});
-											break;
-										}
-										i++;
-									}
+							let i: number;
+							i = 0;
+							const copyOfarrayPointClass: PointClass[] = this.state.arrayPointClass.slice();
 
-									this.setState({
-										arrayPointClass: copyOfarrayPointClass,
-									});
+							for (const line of copyOfarrayPointClass) {
+								if (line.id === index) {
+									copyOfarrayPointClass[i] = editGoodParameterPoint(name, copyOfarrayPointClass[i],
+										value.value || '', value || {});
+									break;
+								}
+								i++;
+							}
 
-									this.callBack();
-								}}
-								name={obj.name}
-								index={line.id}
-								data={obj.optionValues}
-								defaultValue={this.getGoodValue(line.id, obj.name)}
-								shape={this.getGoodValue(line.id, 'shape').value}
-								label={obj.label}
-							/>
-							:
-							(obj.input_type === 'color' ?
-								<InputSeriesColorPickerPoint
-									key={obj.id}
-									keyInt={parseInt(obj.id, 10)}
-									color={this.getGoodValue(line.id, 'color')}
-									text={obj.label}
-									width={10}
-									_onChange={(keyInt: number, newColor: string) => {
+							this.setState({
+								arrayPointClass: copyOfarrayPointClass,
+							});
 
-										let i: number;
-										i = 0;
-										const copyOfarrayPointClass: PointClass[] = this.state.arrayPointClass.slice();
-										for (const line of copyOfarrayPointClass) {
-											if (line.id === keyInt) {
-												copyOfarrayPointClass[i] = editGoodParameterPoint(obj.name, copyOfarrayPointClass[i], newColor, {});
-												break;
-											}
-											i++;
-										}
+							this.callBack();
+						}}
+						name={obj.name}
+						index={line.id}
+						data={obj.optionValues}
+						defaultValue={this.getGoodValue(line.id, obj.name)}
+						shape={this.getGoodValue(line.id, 'shape').value}
+						label={obj.label}
+					/>
 
-										this.setState({
-											arrayPointClass: copyOfarrayPointClass,
-										});
+				} else if (obj.input_type === 'color') {
 
-										this.callBack();
+					item = <InputSeriesColorPickerPoint
+						key={obj.id}
+						keyInt={parseInt(obj.id, 10)}
+						color={this.getGoodValue(line.id, 'color')}
+						text={obj.label}
+						width={10}
+						_onChange={(keyInt: number, newColor: string) => {
 
-										obj.setDefaultValueColor(newColor);
-									}}
-								/>
-								:
-								<InputButtonField
-									key={obj.id}
-									label={obj.label}
-									value={obj.value || ''}
-									name={obj.name}
-									required={obj.required}
-									_handleChange={this.deleteOwnInput}
-									id={obj.id}
-								/>
-							)
-						)
-				);
+							let i: number;
+							i = 0;
+							const copyOfarrayPointClass: PointClass[] = this.state.arrayPointClass.slice();
+							for (const line of copyOfarrayPointClass) {
+								if (line.id === keyInt) {
+									copyOfarrayPointClass[i] = editGoodParameterPoint(obj.name, copyOfarrayPointClass[i], newColor, {});
+									break;
+								}
+								i++;
+							}
 
-			const divKey: string = 'inputCoor' + line.id;
+							this.setState({
+								arrayPointClass: copyOfarrayPointClass,
+							});
+
+							this.callBack();
+
+							obj.setDefaultValueColor(newColor);
+						}}
+					/>
+
+				} else {
+					itemButton = <InputButtonField
+						key={obj.id}
+						label={obj.label}
+						value={obj.value || ''}
+						name={obj.name}
+						required={obj.required}
+						_handleChange={this.deleteOwnInput}
+						id={obj.id}
+						withLabel={false}
+					/>;
+
+					item = <div></div>;
+				}
+				mapItems.push(item);
+			})
+
+			//console.log(line.id)
+
+			const divKey: string = 'inputPoint' + line.id.toString();
 			const newInput: JSX.Element =
-				<div key={divKey} className='inputCoor'>{mapItems}</div>;
+				<div key={divKey}
+					className='inputCoor'
+					id={'point' + line.id.toString()}
+					style={{
+						display: 'flex',
+						flexDirection: 'row',
+						marginBottom: '5px',
+					}}>
+
+					<Collapse isOpen={this.state.listCollapsePoint[line.id - 1]}
+						label={this.defineLabelCollapse(line.id)}
+						onToggle={(isOpen) => {
+							this.props.options.listCollapsePoint[line.id - 1] = isOpen;
+							this.setState({
+								listCollapsePoint: this.props.options.listCollapsePoint,
+							});
+						}}>
+						<div>
+							<ParametresGeneriques
+								options={this.props.options}
+								onOptionsChange={this.props.onOptionsChange}
+								data={this.props.data}
+								coordinateSpace={this.state.arrayPointClass[index]}
+								callBackToParent={this.callBackToOther}
+								id={index}
+							/>
+						</div>
+						<div>
+							<ManageLowerLimit
+								coordinate={this.state.arrayPointClass[index]}
+								callBack={this.callBackManageLowerLimit}
+								lowerLimitCallBack={this.callBackLowerLimit}
+								id={index} />
+						</div>
+						{mapItems}
+					</Collapse>
+
+					<div style={{ marginTop: '4px' }} >
+						{itemButton}
+					</div>
+
+				</div>;
 			finalItem = finalItem.concat(newInput);
+			index++;
 		}
 
 		return (
-			<ul>
+			<div>
 				{finalItem}
-			</ul>
+			</div>
 		);
 	}
 
-	// Public onTogglePoint(id: number) {
 
+	public onTogglePoint = (isOpen: boolean): void => {
+
+		this.setState({
+			openCollapsePoint: isOpen,
+		});
+	}
+
+	public defineOptionsSelectPoint(): SelectableValue<string>[] {
+		let options: SelectableValue<string>[] = [];
+		const arrayPoints = this.props.options.arrayPoints;
+
+		arrayPoints.forEach((point) => {
+			options.push({ label: point.name })
+		})
+
+
+		return options;
+	}
+
+	/** update state when props uneCoor change */
+	// public componentDidUpdate(prevProps: IProps) {
+	// 	console.log('update')
+	// 	if (prevProps.oldArrayPointClass.length !== this.props.oldArrayPointClass.length) {
+	// 		this.loadCoorParent();
+	// 		this.generateInputsPoints();
+	// 	}
 	// }
+
+	public componentDidMount = () => {
+		this.loadCoorParent();
+	}
+
+	public componentWillReceiveProps() {
+		this.loadCoorParent();
+		this.generateInputsPoints();
+	}
+
+	/** update state when props uneCoor change */
+	public componentDidUpdate(prevProps: IProps) {
+			this.loadCoorParent();
+			this.generateInputsPoints();
+	}
+
+
+	/** update state when props uneCoor change */
+	//public componentWillUpdate(prevProps: IProps) {
+	// if (prevProps.oldArrayPointClass.length !== this.props.oldArrayPointClass.length) {
+	// 	this.loadCoorParent();
+	// 	this.generateInputsPoints();
+	// 	console.log(this.props.oldArrayPointClass);
+	// }
+	//}
 
 	/**
 	 * render()
-	 */
+*/
 	public render() {
-
-		this.loadCoorParent();
 
 		return (
 			<div>
+				<div style={{marginBottom: '5px'}}>
+					<Button onClick={() => {
+						this.setState({
+							arrayInput: [],
+							arrayPointClass: [],
+							debug: false,
+						});
+						this.loadCoorParent();
+						this.generateInputsPoints();
+					}}>Load Points</Button>
+				</div>
 				{this.generateInputsPoints()}
 				<div className='buttonAddCoor'>
-					<Button onClick={this.addTestInput}>Add point</Button>
+					<Button onClick={this.addNewFormPoint}>Add point</Button>
 				</div>
 			</div>
 		);

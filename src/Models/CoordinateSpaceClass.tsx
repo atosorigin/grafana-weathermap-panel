@@ -1,84 +1,46 @@
-/**
- * class CoordinateSpaceClass
- */
+import { LinkURLClass } from './LinkURLClass';
+import { LowerLimitClass } from './LowerLimitClass';
+import { TextObject } from './TextObjectClass';
+import { IMetric } from 'types';
+
 export class CoordinateSpaceClass {
+	/** coordinate id */
 	public id: number;
-	public xMin: string;
-	public xMax: string;
-	public yMin: string;
-	public yMax: string;
+	/** query */
+	public linkURL: LinkURLClass;
+	public meta: string;
+	public lowerLimit: LowerLimitClass[];
 	public label: string;
-	/**
-	 * r
-	 * @param id r
-	 * @param xMin r
-	 * @param xMax r
-	 * @param yMin r
-	 * @param yMax r
-	 * @param label r
-	 */
+	public textObj: TextObject;
+	public mainMetric: IMetric;
+	public metrics: Array<IMetric>;
+	public colorMode: boolean;
+	public traceBack: boolean;
+	public traceBorder: boolean;
+
 	constructor(
 		id: number,
-		xMin: string,
-		xMax: string,
-		yMin: string,
-		yMax: string,
-		label: string
+		linkURL: LinkURLClass,
+		meta: string,
+		lowerLimit: LowerLimitClass[],
+		label: string,
+		textObj: TextObject,
+		mainMetric: IMetric,
+		metrics: Array<IMetric>,
+		colorMode: boolean,
+		traceBack: boolean,
+		traceBorder: boolean
 	) {
 		this.id = id;
-		this.xMin = xMin;
-		this.xMax = xMax;
-		this.yMin = yMin;
-		this.yMax = yMax;
+		this.linkURL = linkURL;
+		this.meta = meta;
+		this.lowerLimit = lowerLimit;
 		this.label = label;
-
-	}
-
-	public getId(): number {
-		return this.id;
-	}
-
-	public setId(id: number) {
-		this.id = id;
-	}
-
-	public getXMin(): string {
-		return this.xMin;
-	}
-
-	public setXMin(xMin: string) {
-		this.xMin = xMin;
-	}
-
-	public getXMax(): string {
-		return this.xMax;
-	}
-
-	public setXMax(xMax: string) {
-		this.xMax = xMax;
-	}
-
-	public getYMin(): string {
-		return this.yMin;
-	}
-
-	public setYMin(yMin: string) {
-		this.yMin = yMin;
-	}
-
-	public getYMax(): string {
-		return this.yMax;
-	}
-
-	public setYMax(yMax: string) {
-		this.yMax = yMax;
-	}
-
-	public getLabel(): string {
-		return this.label;
-	}
-
-	public setLabel(label: string) {
-		this.label = label;
+		this.textObj = textObj;
+		this.mainMetric = mainMetric;
+		this.metrics = metrics;
+		this.colorMode = colorMode;
+		this.traceBack = traceBack;
+		this.traceBorder = traceBorder;
 	}
 }

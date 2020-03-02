@@ -18,31 +18,21 @@ export const createInputCoor = (id: number, isInitial: boolean): InputClass[] =>
 	const newFieldPositionYMax: InputClass = new InputClass(id.toString() + 'yMax',
 		l10n.inputCoordinate.maxYPosition, 'positionYMax' + id.toString(),
 		'text', true, l10n.inputCoordinate.maxYPosition, undefined);
-	const newFieldImage: InputClass = new InputClass(id.toString() + 'image',
-		l10n.inputCoordinate.image, 'image' + id.toString(),
-		'text', true, 'Image', undefined);
-	const newFieldKey: InputClass = new InputClass(id.toString() + 'key',
-		l10n.inputCoordinate.key, 'key' + id.toString(),
-		'text', true, l10n.inputCoordinate.key, undefined);
-	const newFieldValueKey: InputClass = new InputClass(id.toString() + 'valueKey',
-		l10n.inputCoordinate.valueKey, 'valueKey' + id.toString(),
-		'text', true, l10n.inputCoordinate.valueKey, undefined);
-	const newFieldButton: InputClass = new InputClass(id.toString() + 'supprimer',
-		l10n.basics.delete, 'supprimer' + id.toString(),
-		'button', false, undefined, l10n.basics.delete);
+	// const newFieldKey: InputClass = new InputClass(id.toString() + 'key',
+	// 	l10n.inputCoordinate.key, 'key' + id.toString(),
+	// 	'text', true, l10n.inputCoordinate.key, undefined);
+	// const newFieldValueKey: InputClass = new InputClass(id.toString() + 'valueKey',
+	// 	l10n.inputCoordinate.valueKey, 'valueKey' + id.toString(),
+	// 	'text', true, l10n.inputCoordinate.valueKey, undefined);
+	// const newFieldButton: InputClass = new InputClass(id.toString() + 'supprimer',
+	// 	l10n.basics.delete, 'supprimer' + id.toString(),
+	// 	'button', false, undefined, l10n.basics.delete);
 
 	let finalArray: InputClass[] = [];
 	if (!isInitial) {
 		finalArray = [
 			newFieldLabel,
-			newFieldPositionXMin,
-			newFieldPositionXMax,
-			newFieldPositionYMin,
-			newFieldPositionYMax,
-			newFieldImage,
-			newFieldKey,
-			newFieldValueKey,
-			newFieldButton,
+			// newFieldButton,
 		];
 	} else {
 		finalArray = [
@@ -51,7 +41,6 @@ export const createInputCoor = (id: number, isInitial: boolean): InputClass[] =>
 			newFieldPositionXMax,
 			newFieldPositionYMin,
 			newFieldPositionYMax,
-			newFieldButton,
 		];
 	}
 

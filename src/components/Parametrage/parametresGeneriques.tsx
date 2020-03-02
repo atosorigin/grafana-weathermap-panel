@@ -1,28 +1,36 @@
 import React from 'react';
-import { Collapse } from '@grafana/ui';
-import ParametrageMetriquePrincipale from './parametrageMetriquePrincipale';
-import { ParametrageMetrique } from 'Models/SettingMetricClass';
-import { TextObject } from 'Models/TextObjectClass';
-import { PanelEditorProps } from '@grafana/data';
 import { SimpleOptions } from 'types';
+
+import { Collapse } from '@grafana/ui';
+import { PanelEditorProps } from '@grafana/data';
+
+// import { RegionClass } from 'Models/RegionClass';
+import { TextObject } from 'Models/TextObjectClass';
+
+import LinkURLClassPrincipale from './parametrageMetriquePrincipale';
 import TextObjects from './textObjects';
-import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
+import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
 
 interface IProps extends PanelEditorProps<SimpleOptions> {
 	/** id coordinate */
-	coordinateSpace: CoordinateSpaceExtendClass;
+	coordinateSpace: CoordinateSpaceClass;
 	/** call function to save data in parent */
 	callBackToParent: (
 		followLink?: string,
 		hoveringTooltipLink?: string,
 		hoveringTooltipText?: string,
-		textObj?: TextObject) => void;
+		textObj?: TextObject,
+		id?: number) => void;
+	/**
+	 * 
+	 */
+	id?: number;
 }
 
 interface IState {
-	parametrageMetrique: ParametrageMetrique;
-
+	/** open or close collapse main metric */
 	collapseMainMetric: boolean;
+	/** open or close text object */
 	collapseTextObject: boolean;
 }
 
@@ -33,43 +41,40 @@ class ParametresGeneriques extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			parametrageMetrique: this.props.options.parametrageMetrique,
 			collapseMainMetric: false,
 			collapseTextObject: false,
 		};
 	}
 
-	/**
-	 * promise for parametrageMetrique
-	 */
-	public setStateAsyncParametrageMetrique = (state: {
-		/**
-		 * edit parametrageMetrique
-		 */
-		parametrageMetrique: ParametrageMetrique,
-	}) => {
-		return new Promise((resolve) => {
-			this.setState(state, resolve);
-		});
-	}
-
+	/** switch value collapseMainMetric when click collapse */
 	public onToggleMainMetric = (isOpen: boolean) => {
 		this.setState({
 			collapseMainMetric: isOpen,
 		});
 	}
 
+	/** switch value collapseTextObject when click collapse */
 	public onToggleTextObject = (isOpen: boolean) => {
 		this.setState({
 			collapseTextObject: isOpen,
 		});
 	}
 
-	/**
-	 * HTML
-	 */
+	/** close collapse when coordinateSpace object change */
+	public componentDidUpdate = (prevProps: IProps) => {
+		if (prevProps.coordinateSpace !== this.props.coordinateSpace) {
+			this.setState({
+				collapseMainMetric: false,
+				collapseTextObject: false,
+			});
+		}
+	}
+
+	/** HTML */
 	public render() {
 		const l10n = require('Localization/en.json');
+
+		//console.log(this.props.coordinateSpace)
 
 		return (
 			<div>
@@ -77,9 +82,10 @@ class ParametresGeneriques extends React.Component<IProps, IState> {
 					label={l10n.genericParameter.settingPrincipalMetric}
 					onToggle={this.onToggleMainMetric} >
 					<div>
-						<ParametrageMetriquePrincipale
+						<LinkURLClassPrincipale
 							coordinateSpace={this.props.coordinateSpace}
 							callBackToParent={this.props.callBackToParent}
+							id={this.props.id}
 						/>
 					</div>
 				</Collapse>
@@ -91,6 +97,7 @@ class ParametresGeneriques extends React.Component<IProps, IState> {
 						<TextObjects
 							coordinateSpace={this.props.coordinateSpace}
 							callBackToParent={this.props.callBackToParent}
+							id={this.props.id}
 						/>
 					</div>
 				</Collapse>

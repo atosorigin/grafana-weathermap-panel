@@ -1,5 +1,5 @@
 import React from 'react';
-import { SimpleOptions, Target } from '../types';
+import { SimpleOptions, ITarget } from '../types';
 import { PanelEditorProps, SelectableValue } from '@grafana/data';
 import { FormField, Button } from '@grafana/ui';
 import { InputSelect } from '../inputSelect';
@@ -55,7 +55,7 @@ class PanelData extends React.Component<IProps> {
 	 */
 	getTargetsInfo(value: any) {
 		this.props.options.panelTargets = [];
-		const targets: Array<Target> = this.getPanelInfo(value).targets;
+		const targets: Array<ITarget> = this.getPanelInfo(value).targets;
 		return targets;
 	}
 
@@ -81,7 +81,7 @@ class PanelData extends React.Component<IProps> {
 	 * TODO
 	 */
 	onPersonalTargetChanged = (event: { currentTarget: HTMLInputElement }) => {
-		const newData: Target = { expr: '' };
+		const newData: ITarget = { expr: '' };
 		newData.expr = event.currentTarget.value;
 		this.props.onOptionsChange({ ...this.props.options, personalTarget: newData });
 	}
@@ -109,7 +109,7 @@ class PanelData extends React.Component<IProps> {
 	 * TODO
 	 */
 	deleteTarget = (onClick: { currentTarget: HTMLButtonElement }) => {
-		const isTarget = (target: Target) => target.expr === this
+		const isTarget = (target: ITarget) => target.expr === this
 			.props.options.panelTargets[parseInt(onClick.currentTarget.id, 10)].expr;
 		this.props.options.promTargets.splice(this.props.options.promTargets.findIndex(isTarget), 1);
 		// Console.log(this.props.options.promTargets);
@@ -120,7 +120,7 @@ class PanelData extends React.Component<IProps> {
 	 * TODO
 	 */
 	deleteTargetProm = (onClick: { currentTarget: HTMLButtonElement }) => {
-		const isTarget = (target: Target) => target.expr === this
+		const isTarget = (target: ITarget) => target.expr === this
 			.props.options.promTargets[parseInt(onClick.currentTarget.id, 10)].expr;
 		this.props.options.promTargets.splice(this.props.options.promTargets.findIndex(isTarget), 1);
 		this.props.onOptionsChange({ ...this.props.options, promTargets: this.props.options.promTargets });
@@ -132,7 +132,7 @@ class PanelData extends React.Component<IProps> {
 	 */
 	targetsData = (props: any): JSX.Element => {
 		if (props.targets.lenght !== 0) {
-			const listTargets = props.targets.map((target: Target, index: number) =>
+			const listTargets = props.targets.map((target: ITarget, index: number) =>
 				<div key={'TargetDataDiv' + index.toString()}>
 					<FormField id={index.toString()} key={'TargetData' + index.toString() + target.refId}
 						label={'target ' + target.refId} labelWidth={5}
@@ -154,7 +154,7 @@ class PanelData extends React.Component<IProps> {
 	 */
 	targetsProm = (props: any): JSX.Element => {
 		if (props.targets.lenght !== 0) {
-			const listTargets = props.targets.map((target: Target, index: number) =>
+			const listTargets = props.targets.map((target: ITarget, index: number) =>
 				<div key={'TargetPromDiv' + index.toString()}>
 					<FormField id={index.toString()} key={'TargetProm' + index.toString() + target.refId}
 						label={'target ' + target.refId} labelWidth={5}

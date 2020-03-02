@@ -1,5 +1,5 @@
-import { CoordinateSpaceClass } from '../Models/CoordinateSpaceClass';
-import { CoordinateSpaceExtendClass } from '../Models/CoordinateSpaceExtendClass';
+import { CoordinateSpaceInitialClass } from '../Models/CoordinateSpaceInittialClass';
+import { RegionClass } from '../Models/RegionClass';
 
 /**
  * Edit the parameter in Coor object
@@ -9,8 +9,8 @@ import { CoordinateSpaceExtendClass } from '../Models/CoordinateSpaceExtendClass
  * @returns {Coor} object edit
  */
 export const editGoodParameter = (
-	name: string, editCoor: CoordinateSpaceClass,
-	newValue: string): CoordinateSpaceClass => {
+	name: string, editCoor: CoordinateSpaceInitialClass,
+	newValue: string): CoordinateSpaceInitialClass => {
 	if (name.startsWith('positionXMin')) {
 		editCoor.setXMin(newValue);
 	} else if (name.startsWith('positionXMax')) {
@@ -26,24 +26,24 @@ export const editGoodParameter = (
 };
 
 export const editGoodParameterExtend = (
-	name: string, editCoor: CoordinateSpaceExtendClass,
-	newValue: string): CoordinateSpaceExtendClass => {
+	name: string, editCoor: RegionClass,
+	newValue: string): RegionClass => {
 	if (name.startsWith('positionXMin')) {
-		editCoor.xMin = newValue;
+		editCoor.coords.xMin = newValue;
 	} else if (name.startsWith('positionXMax')) {
-		editCoor.xMax = newValue;
+		editCoor.coords.xMax = newValue;
 	} else if (name.startsWith('positionYMin')) {
-		editCoor.yMin = newValue;
+		editCoor.coords.yMin = newValue;
 	} else if (name.startsWith('positionYMax')) {
-		editCoor.yMax = newValue;
+		editCoor.coords.yMax = newValue;
 	} else if (name.startsWith('label')) {
 		editCoor.label = newValue;
 	} else if (name.startsWith('image')) {
 		editCoor.img = newValue;
 	} else if (name.startsWith('key')) {
-		editCoor.key = newValue;
+		editCoor.mainMetric.key = newValue;
 	} else if (name.startsWith('valueKey')) {
-		editCoor.valueKey = newValue;
+		editCoor.mainMetric.keyValue = newValue;
 	}
 	return editCoor;
 };

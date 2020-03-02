@@ -1,20 +1,24 @@
 import React from 'react';
 
+import { Switch } from '@grafana/ui';
+
+import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
+import { TextObject } from 'Models/TextObjectClass';
+
 import InputTextField from 'Functions/Input/inputText';
 import InputSeriesColorPicker from 'Functions/Input/inputSeriesColorPicker';
-import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
-
-import { Switch } from '@grafana/ui';
-import { TextObject } from 'Models/TextObjectClass';
 
 interface IProps {
 	/** id coordinate */
-	coordinateSpace: CoordinateSpaceExtendClass;
+	coordinateSpace: CoordinateSpaceClass;
+	/** call function to save data in parent */
 	callBackToParent: (
 		followLink?: string,
 		hoveringTooltipLink?: string,
 		hoveringTooltipText?: string,
-		textObj?: TextObject) => void;
+		textObj?: TextObject,
+		id?: number) => void;
+	id?: number;
 }
 
 interface IState {
@@ -29,11 +33,13 @@ class TextObjects extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			textObject: this.props.coordinateSpace.textObject,
+			textObject: this.props.coordinateSpace.textObj,
 		};
 	}
 
+/** save data in async mode */
 	public stateAsyncTextObject = (state: {
+		/** new text object */
 		textObject: TextObject
 	}) => {
 		return new Promise((resolve) => {
@@ -45,7 +51,7 @@ class TextObjects extends React.Component<IProps, IState> {
 	 * call back to parent
 	 */
 	public callBack = () => {
-		this.props.callBackToParent(undefined, undefined, undefined, this.state.textObject);
+		this.props.callBackToParent(undefined, undefined, undefined, this.state.textObject, this.props.id);
 	}
 
 	/** change value for legend input */
@@ -76,61 +82,31 @@ class TextObjects extends React.Component<IProps, IState> {
 	}
 
 	/** change value for back color input */
-	public onChangeBackColorRegion = async (key: number, color: string) => {
+	public onChangeBackColor = async (key: number, color: string) => {
 		const newTextObject: TextObject = this.state.textObject;
 
-		newTextObject.colorBackRegion = color;
+		newTextObject.colorBack = color;
 		await this.stateAsyncTextObject({ textObject: newTextObject });
 		this.callBack();
 	}
 
 	/** change value for color region */
-	public onChangeColorTextRegion = async (key: number, color: string) => {
+	public onChangeColorText = async (key: number, color: string) => {
 		const newTextObject: TextObject = this.state.textObject;
 
-		newTextObject.colorTextRegion = color;
+		newTextObject.colorText = color;
 		await this.stateAsyncTextObject({ textObject: newTextObject });
 		this.callBack();
 	}
 
 	/** change value for style text region */
-	public onChangeStyleTextRegion = async (event: {
+	public onChangeStyleText = async (event: {
 		/** target for style text region input */
 		currentTarget: HTMLInputElement,
 	}) => {
 		const newTextObject: TextObject = this.state.textObject;
 
-		newTextObject.styleTextRegion = event.currentTarget.value;
-		await this.stateAsyncTextObject({ textObject: newTextObject });
-		this.callBack();
-	}
-
-	/** change value for style text bubble */
-	public onChangeStyleTextBulle = async (event: {
-		/** target for style text region bubble */
-		currentTarget: HTMLInputElement,
-	}) => {
-		const newTextObject: TextObject = this.state.textObject;
-
-		newTextObject.styleTextBulle = event.currentTarget.value;
-		await this.stateAsyncTextObject({ textObject: newTextObject });
-		this.callBack();
-	}
-
-	/** change value for color back bubble */
-	public onChangeColorBackBulle = async (key: number, color: string) => {
-		const newTextObject: TextObject = this.state.textObject;
-
-		newTextObject.colorBackBulle = color;
-		await this.stateAsyncTextObject({ textObject: newTextObject });
-		this.callBack();
-	}
-
-	/** change value for color text bubble */
-	public onChangeColorTextBulle = async (key: number, color: string) => {
-		const newTextObject: TextObject = this.state.textObject;
-
-		newTextObject.colorTextBulle = color;
+		newTextObject.styleText = event.currentTarget.value;
 		await this.stateAsyncTextObject({ textObject: newTextObject });
 		this.callBack();
 	}
@@ -216,6 +192,18 @@ class TextObjects extends React.Component<IProps, IState> {
 		this.callBack();
 	}
 
+	/** switch display text */
+	public onSwitchIsTextRegion = async () => {
+		// console.clear();
+		// console.log('am here --');
+
+		const newTextObject: TextObject = this.state.textObject;
+
+		newTextObject.isTextRegion = !this.state.textObject.isTextRegion;
+		await this.stateAsyncTextObject({ textObject: newTextObject });
+		this.callBack();
+	}
+
 	/** change value for color text element */
 	public onChangeColorTextElement = async (key: number, color: string) => {
 		const newTextObject: TextObject = this.state.textObject;
@@ -256,21 +244,9 @@ class TextObjects extends React.Component<IProps, IState> {
 						}) =>
 							this.onChangeLegende(event.currentTarget.value)} />
 
-					<InputTextField label={l10n.textObject.value}
-						key='valeurTextObject'
-						name='valeurTextObject'
-						placeholder={l10n.textObject.value}
-						required={false}
-						value={this.state.textObject.valeur}
-						_handleChange={(event: {
-							/** call currentTarget to get value */
-							currentTarget: HTMLInputElement,
-						}) =>
-							this.onChangeValeur(event.currentTarget.value)} />
-
 					<InputTextField label={l10n.textObject.optionalUnit}
-						key='unitéTextObject'
-						name='unitéTextObject'
+						key='textUnitObject'
+						name='textUnitObject'
 						placeholder={l10n.textObject.unit}
 						required={false}
 						value={this.state.textObject.unite}
@@ -285,18 +261,24 @@ class TextObjects extends React.Component<IProps, IState> {
 				<div>
 					<h4>{l10n.textObject.principalMetric}</h4>
 
-					<h5>{l10n.textObject.textRegion}</h5>
+					<Switch
+						label='Display text in region or tooltip'
+						checked={this.state.textObject.isTextRegion}
+						onChange={this.onSwitchIsTextRegion} />
 
-					<InputSeriesColorPicker color={this.state.textObject.colorBackRegion}
+					<h5 hidden={this.state.textObject.isTextRegion}>{l10n.textObject.textRegion}</h5>
+					<h5 hidden={!this.state.textObject.isTextRegion}>{l10n.textObject.textBubble}</h5>
+
+					<InputSeriesColorPicker color={this.state.textObject.colorBack}
 						keyInt={0}
 						text={l10n.textObject.colorBackground}
-						_onChange={this.onChangeBackColorRegion}
+						_onChange={this.onChangeBackColor}
 					/>
 
-					<InputSeriesColorPicker color={this.state.textObject.colorTextRegion}
+					<InputSeriesColorPicker color={this.state.textObject.colorText}
 						keyInt={0}
 						text={l10n.textObject.colorText}
-						_onChange={this.onChangeColorTextRegion}
+						_onChange={this.onChangeColorText}
 					/>
 
 					<InputTextField
@@ -304,34 +286,11 @@ class TextObjects extends React.Component<IProps, IState> {
 						name='textStyleTextObject'
 						placeholder={l10n.textObject.style}
 						required={false}
-						value={this.state.textObject.styleTextRegion}
-						_handleChange={this.onChangeStyleTextRegion}
+						value={this.state.textObject.styleText}
+						_handleChange={this.onChangeStyleText}
 					/>
 
-					<h5>{l10n.textObject.textBubble}</h5>
-
-					<InputSeriesColorPicker
-						color={this.state.textObject.colorBackBulle}
-						keyInt={0}
-						text={l10n.textObject.colorBackground}
-						_onChange={this.onChangeColorBackBulle}
-					/>
-
-					<InputSeriesColorPicker
-						color={this.state.textObject.colorTextBulle}
-						keyInt={0}
-						text={l10n.textObject.colorText}
-						_onChange={this.onChangeColorTextBulle}
-					/>
-
-					<InputTextField
-						label={l10n.textObject.textStyle}
-						name='textStyleTextObjectBulle'
-						placeholder={l10n.textObject.style}
-						required={false}
-						value={this.state.textObject.styleTextBulle}
-						_handleChange={this.onChangeStyleTextBulle}
-					/>
+					<br />
 					<Switch
 						label={l10n.textObject.generateTextObject}
 						checked={this.state.textObject.generateObjectText}

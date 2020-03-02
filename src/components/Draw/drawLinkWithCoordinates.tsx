@@ -1,4 +1,5 @@
 import React from 'react';
+import { Tooltip } from '@grafana/ui';
 
 interface IProps {
 
@@ -16,6 +17,7 @@ interface IProps {
 	labelBPositionX: string;
 	labelBPositionY: string;
 	height: number;
+	name: string;
 }
 
 interface IState {
@@ -270,6 +272,18 @@ export default class DrawLinkWithCoordinates extends React.Component<IProps, ISt
 		}
 	}
 
+	public defineValueToolTip = () => {
+		const infosLink: JSX.Element[] = [];
+
+		infosLink.push(<p>{this.props.name}</p>)
+
+		return (
+			<div>
+				{infosLink}
+			</div>
+		)
+	}
+
 	public render() {
 
 		const defineCenter: number = this.props.height / 2;
@@ -287,14 +301,17 @@ export default class DrawLinkWithCoordinates extends React.Component<IProps, ISt
 		const labelAPositionY: number = parseInt(this.props.labelAPositionY) * (-1);
 		const labelBPositionX: number = parseInt(this.props.labelBPositionX);
 		const labelBPositionY: number = parseInt(this.props.labelBPositionY) * (-1);
-
+		const valueToolTip: JSX.Element = this.defineValueToolTip();
+		
 		return (
-			<div>
-				{
-					this.drawLink(xA, yA, xB, yB, colorA, colorB, orientationLink, labelA, labelB,
-						labelAPositionX, labelAPositionY, labelBPositionX, labelBPositionY)
-				}
-			</div>
+			<Tooltip content={valueToolTip}>
+				<div>
+					{
+						this.drawLink(xA, yA, xB, yB, colorA, colorB, orientationLink, labelA, labelB,
+							labelAPositionX, labelAPositionY, labelBPositionX, labelBPositionY)
+						}
+				</div>
+			</Tooltip>
 		);
 	}
 

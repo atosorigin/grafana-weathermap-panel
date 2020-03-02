@@ -1,22 +1,14 @@
-import { SelectableValue } from '@grafana/data';
-import { CoordinateSpaceClass } from './Models/CoordinateSpaceClass';
-import { CoordinateSpaceExtendClass } from './Models/CoordinateSpaceExtendClass';
-import { Seuil } from './Models/SeuilClass';
-import { ParametrageMetrique } from './Models/SettingMetricClass';
+import { SelectableValue, DataFrame } from '@grafana/data';
+// import { CoordinateSpaceClass } from './Models/CoordinateSpaceClass';
+// import { CoordinateSpaceExtendClass } from './Models/CoordinateSpaceExtendClass';
+import { LowerLimitClass } from 'Models/LowerLimitClass';
 import { TextObject } from 'Models/TextObjectClass';
 import { PointClass } from 'Models/PointClass';
 import { LinkClass } from 'Models/LinkClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
+import { RegionClass } from 'Models/RegionClass';
+import { CoordinateSpaceInitialClass } from 'Models/CoordinateSpaceInittialClass';
 
-/**
- * interface to save parametrageMetriquePrincipale
- */
-export interface IParametrage {
-	/**
-	 * parametrage metric
-	 */
-	parametrageMetrique: ParametrageMetrique;
-}
 
 /**
  * interface to save texte settings (police, size, style)
@@ -38,6 +30,17 @@ export interface ITexteSettings {
 	styleText: string;
 }
 
+export interface IMetric {
+	key: string;
+	unit: string;
+	/** ecriture scientifique */
+	format: string;
+	keyValue: string;
+	refId?: string;
+	expr?: string;
+	returnQuery?: DataFrame;
+}
+
 export interface IMetricSettings {
 	/**
 	 * fond is active (color)
@@ -50,7 +53,7 @@ export interface IMetricSettings {
 	/**
 	 * seuil for variable color
 	 */
-	seuil: Seuil[];
+	lowerLimit: LowerLimitClass[];
 	/**
 	 * color mode for parametresGeneriques
 	 */
@@ -79,7 +82,7 @@ export interface ReturnQuery {
 	data: DataQuery
 }
 
-export interface Target {
+export interface ITarget {
 	expr: string;
 	refId?: string;
 }
@@ -93,7 +96,7 @@ export interface TimeRange {
  * Stock the values between SimpleEditor and SimplePanel
  */
 // tslint:disable-next-line:interface-name
-export interface SimpleOptions extends IParametrage,
+export interface SimpleOptions extends
 	ITexteSettings, IMetricSettings {
 	/**
 	 * to do
@@ -103,12 +106,12 @@ export interface SimpleOptions extends IParametrage,
 	/**
 	 * Espace de visualisation initial
 	 */
-	arrayCoordinateSpaceInitial: CoordinateSpaceClass;
+	arrayCoordinateSpaceInitial: CoordinateSpaceInitialClass;
 
 	/**
 	 * Espace de coordonnees
 	 */
-	arrayCoordinateSpace: CoordinateSpaceExtendClass[];
+	arrayCoordinateSpace: RegionClass[];
 
 	/**
 	 * Liste des points générés depuis l'onglet Point
@@ -195,15 +198,15 @@ export interface SimpleOptions extends IParametrage,
 	/**
 	 * List of targets in the selected panel
 	 */
-	panelTargets: Array<Target>;
+	panelTargets: Array<ITarget>;
 	/**
 	 * List of targets loaded for fetch data
 	 */
-	promTargets: Array<Target>;
+	promTargets: Array<ITarget>;
 	/**
 	 * List of target load at init for fetch data
 	 */
-	promGlobalTargets: Array<Target>;
+	promGlobalTargets: Array<ITarget>;
 	/**
 	 * Time range selected for fetch data
 	 */
@@ -211,7 +214,7 @@ export interface SimpleOptions extends IParametrage,
 	/**
 	 * Input of editable target
 	 */
-	personalTarget: Target;
+	personalTarget: ITarget;
 	/**
 	 * Time instant selected for fetch data
 	 */
@@ -247,7 +250,7 @@ export interface SimpleOptions extends IParametrage,
 	/**
 	 * TODO
 	 */
-	mainTarget: Target;
+	mainTarget: ITarget;
 	/**
 	 * TODO
 	 */
@@ -259,7 +262,7 @@ export interface SimpleOptions extends IParametrage,
 
 	testMainQueryReturn: any;
 
-	coordinatesFromClick: [
+	coordinatesToDrawLinkWithClick: [
 		{
 			id: number,
 		},
@@ -267,37 +270,35 @@ export interface SimpleOptions extends IParametrage,
 			x: number,
 			y: number,
 			labelPoint: string,
-			point: any,			//PointCLass
+			point: any,
 			labelRegion: string,
-			region: any, 		//CoordinateSpaceClass
+			region: any
 		},
 		{
 			x: number,
 			y: number,
 			labelPoint: string,
-			point: any,			//PointClass
+			point: any,
 			labelRegion: string,
-			region: any,		//CoordinateSpaceClass
+			region: any
 		}
 	];
-	// coordinatesFromClick: {
-	// 	id: number,
-	// 	count: number,
-	// 	pointA: {
-	// 		x: number,
-	// 		y: number,
-	// 	},
-	// 	pointB: {
-	// 		x: number,
-	// 		y: number,
-	// 	}
-	// };
-	indexOrientedLink: number,
+
+	indexOrientedLink: number;
+
+	indexPoint: number;
+
+	indexRegion: number;
+
+	listCollapsePoint: boolean[];
+
+	listCollapseOrientedLink: boolean[];
+
 }
 
 export const defaults: SimpleOptions = {
 	imageUrl: 'https://upload.wikimedia.org/wikipedia/en/b/be/Locator_Grid.png',
-	arrayCoordinateSpaceInitial: new CoordinateSpaceClass(0, '0', '0', '0', '0', ''),
+	arrayCoordinateSpaceInitial: new CoordinateSpaceInitialClass(0, '', '', '', '', ''),
 	arrayCoordinateSpace: [],
 	arrayPoints: [],
 	arrayLinks: [],
@@ -307,11 +308,10 @@ export const defaults: SimpleOptions = {
 	styleText: 'normal',
 	fondIsActive: true,
 	contourIsActive: true,
-	seuil: [],
+	lowerLimit: [],
 	colorMode: true,
-	parametrageMetrique: new ParametrageMetrique('', '', ''),
-	valueTextObject: new TextObject('', '', '', 'rgb(0, 0, 0, 0)', 'black', '', '',
-		'', '', false, '', '', '', false, false, false, '', false, ''),
+	valueTextObject: new TextObject('', '', '', false, 'rgb(0, 0, 0, 0)', 'black', '',
+		false, '', '', '', false, false, false, '', false, ''),
 
 	info: 'Information sur votre panel',
 	contentJson: 'contenu du dashboard',
@@ -361,7 +361,7 @@ export const defaults: SimpleOptions = {
 		},
 	},
 	testMainQueryReturn: {},
-	coordinatesFromClick: [
+	coordinatesToDrawLinkWithClick: [
 		{
 			id: 0,
 		},
@@ -381,19 +381,11 @@ export const defaults: SimpleOptions = {
 			labelRegion: '',
 			region: {},
 		}
-	],	
-	
-	// coordinatesFromClick: {
-	// 	id: 1,
-	// 	count: 0,
-	// 	pointA: {
-	// 		x: 0,
-	// 		y: 0,
-	// 	},
-	// 	pointB: {
-	// 		x: 0,
-	// 		y: 0,
-	// 	}
-	// },
+	],
+
 	indexOrientedLink: 0,
+	indexPoint: 0,
+	indexRegion: 0,
+	listCollapsePoint: [],
+	listCollapseOrientedLink: [],
 };

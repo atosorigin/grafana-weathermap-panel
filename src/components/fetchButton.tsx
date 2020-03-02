@@ -1,7 +1,10 @@
 import React from 'react';
 import { PanelEditorProps } from '@grafana/data';
-import { SimpleOptions, Target } from '../types';
+import { SimpleOptions, ITarget } from '../types';
 import { Button } from '@grafana/ui';
+import { reqMetricRegion } from 'Functions/fetchMetrics';
+//import { reqUpdateMetrics, reqMetricAuxRegion} from "../Functions/fetchMetrics";
+// import { RegionClass } from 'Models/RegionClass';
 
 interface IProps extends PanelEditorProps<SimpleOptions> { }
 
@@ -22,7 +25,7 @@ class FetchButton extends React.Component<IProps> {
 		dateStampStart = dateStampStart.substring(0, dateStampStart.length - 3);
 		let dateStampEnd = Date.parse(this.props.options.timeRange.to).toString();
 		dateStampEnd = dateStampEnd.substring(0, dateStampEnd.length - 3);
-		this.props.options.promTargets.map((target: Target) => {
+		this.props.options.promTargets.map((target: ITarget) => {
 			const tmp: string = this.props.options.promUrl + 'query_range?query=' + target.expr + '&start=' + dateStampStart
 				+ '&end=' + dateStampEnd + '&step=' + this.props.options.refresh.label;
 			this.props.options.queryPromRange.push(tmp);
@@ -37,7 +40,7 @@ class FetchButton extends React.Component<IProps> {
 		this.props.options.queryProm = [];
 		let dateStamp = Date.parse(this.props.options.timeQuery).toString();
 		dateStamp = dateStamp.substring(0, dateStamp.length - 3);
-		this.props.options.promTargets.map((target: Target) => {
+		this.props.options.promTargets.map((target: ITarget) => {
 			const tmp: string = this.props.options.promUrl + 'query?query=' + target.expr + '&time=' + dateStamp;
 			this.props.options.queryProm.push(tmp);
 		});
@@ -74,7 +77,6 @@ class FetchButton extends React.Component<IProps> {
 			fetch(url)
 				.then((response) => response.json())
 				.then((result) => {
-					// Console.log(result);
 					this.props.options.jsonQueryReturn.push(result);
 				})
 				.catch((error) => {
@@ -101,15 +103,19 @@ class FetchButton extends React.Component<IProps> {
 					console.log(error);
 				});
 		});
-		// Console.log(this.props.options.jsonGlobalQueryReturn);
 	}
 
 	/**
 	 * Debug
 	 */
 	public printJSON = () => {
-		console.table(this.props.options.jsonQueryReturn);
-		console.table(this.props.options.promTargets);
+		// take expr
+		for (const target of this.props.options.arrayCoordinateSpace){
+			target.mainMetric.expr = "rate(node_cpu_seconds_total{mode=\"system\"}[1m])";
+		}
+		console.log(this.props.options.arrayCoordinateSpace[0].mainMetric.returnQuery);
+		reqMetricRegion(this.props.options.arrayCoordinateSpace[0], this.props);
+		console.log(this.props.options.arrayCoordinateSpace[0].mainMetric.returnQuery);
 	}
 
 	/**
@@ -126,7 +132,7 @@ class FetchButton extends React.Component<IProps> {
 	public render() {
 		return (
 			<div className='section gf-form-groug'>
-				<Button key='ButtonPrint' onClick={this.printJSON}>jsonQueryReturn / promTargets list</Button>
+				{/* <Button key='ButtonPrint' onClick={this.test}>test fetchMetric</Button> */}
 				<Button key='ButtonFetchRange' onClick={this.fetchQuerryRange}>fetch range</Button>
 				<Button key='ButtonFetchInstant' onClick={this.fetchQuerry}>fetch instant</Button>
 				<Button key='ButtonDelTargets' variant='danger' onClick={this.deleteTargets}>delete targets</Button>

@@ -1,110 +1,48 @@
 import { SelectableValue } from '@grafana/data';
-import { CoordinateSpaceExtendClass } from './CoordinateSpaceExtendClass';
 import { PointClass } from './PointClass';
+import { RegionClass } from './RegionClass';
+import { LinkURLClass } from './LinkURLClass';
+import { LowerLimitClass } from './LowerLimitClass';
+import { TextObject } from './TextObjectClass';
+import { IMetric } from 'types';
+import { CoordinateSpaceClass } from './CoordinateSpaceClass';
 
-export class OrientedLinkClass {
-	/**
-	 * to do
-	 */
-	public id: number;
+export class OrientedLinkClass extends CoordinateSpaceClass {
 
-	/**
-	 * to do
-	 */
+	public name: string;
 	public orientationLink: SelectableValue<string>;
-
-	/**
-	 * to do
-	 */
 	public pointAPositionX: string;
-
-	/**
-	 * to do
-	 */
 	public pointAPositionY: string;
-
-	/**
-	 * to do
-	 */
 	public colorCoordinateA: string;
-
-	/**
-	 * to do
-	 */
 	public pointBPositionX: string;
-
-	/**
-	 * to do
-	 */
 	public pointBPositionY: string;
-
-	/**
-	 * to do
-	 */
 	public colorCoordinateB: string;
-
-	/**
-	 * to do
-	 */
-	public labelLinkA: string;
-
-	/**
-	 * to do
-	 */
-	public labelLinkB: string;
-	/**
-	 * to do
-	 */
-	public positionXLabelA: string;
-
-	/**
-	 * to do
-	 */
-	public positionYLabelA: string;
-
-	/**
-	 * to do
-	 */
-	public positionXLabelB: string;
-
-	/**
-	 * to do
-	 */
-	public positionYLabelB: string;
-
-	/**
-	 * to do
-	 */
+	public valueMainMetricA: string;
+	public valueMainMetricB: string;
+	// public labelLinkA: string;
+	// public labelLinkB: string;
+	// public positionXLabelA: string;
+	// public positionYLabelA: string;
+	// public positionXLabelB: string;
+	// public positionYLabelB: string;
 	public pointIn: SelectableValue<PointClass>;
-
-	/**
-	 * to do
-	 */
 	public pointOut: SelectableValue<PointClass>;
-
-	/**
-	 * to do
-	 */
-	public regionIn: SelectableValue<CoordinateSpaceExtendClass>;
-
-	/**
-	 * to do
-	 */
-	public regionOut: SelectableValue<CoordinateSpaceExtendClass>;
-
-	// /**
-	//  * to do
-	//  */
-	// public typeOfWidthLink: boolean;
-
-	// /**
-	//  * to do
-	//  */
-	// public widthLink: string;
-
+	public regionIn: SelectableValue<RegionClass>;
+	public regionOut: SelectableValue<RegionClass>;
 
 	constructor(
 		id: number,
+		linkURL: LinkURLClass,
+		meta: string,
+		lowerLimitClass: LowerLimitClass[],
+		label: string,
+		textObj: TextObject,
+		mainMetric: IMetric,
+		metrics: Array<IMetric>,
+		colorMode: boolean,
+		traceBack: boolean,
+		traceBorder: boolean,
+		name: string,
 		orientationLink: SelectableValue<string>,
 		pointAPositionX: string,
 		pointAPositionY: string,
@@ -112,18 +50,22 @@ export class OrientedLinkClass {
 		pointBPositionX: string,
 		pointBPositionY: string,
 		colorCoordinateB: string,
-		labelLinkA: string,
-		labelLinkB: string,
-		positionXLabelA: string,
-		positionYLabelA: string,
-		positionXLabelB: string,
-		positionYLabelB: string,
+		valueMainMetricA: string,
+		valueMainMetricB: string,
+		// labelLinkA: string,
+		// labelLinkB: string,
+		// positionXLabelA: string,
+		// positionYLabelA: string,
+		// positionXLabelB: string,
+		// positionYLabelB: string,
 		pointIn: SelectableValue<PointClass>,
 		pointOut: SelectableValue<PointClass>,
-		regionIn: SelectableValue<CoordinateSpaceExtendClass>,
-		regionOut: SelectableValue<CoordinateSpaceExtendClass>
+		regionIn: SelectableValue<RegionClass>,
+		regionOut: SelectableValue<RegionClass>
 	) {
-		this.id = id;
+		super(id, linkURL, meta,
+			lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder);
+		this.name = name;
 		this.orientationLink = orientationLink;
 		this.pointAPositionX = pointAPositionX;
 		this.pointAPositionY = pointAPositionY;
@@ -131,254 +73,17 @@ export class OrientedLinkClass {
 		this.pointBPositionX = pointBPositionX;
 		this.pointBPositionY = pointBPositionY;
 		this.colorCoordinateB = colorCoordinateB;
-		this.labelLinkA = labelLinkA;
-		this.labelLinkB = labelLinkB;
-		this.positionXLabelA = positionXLabelA;
-		this.positionYLabelA = positionYLabelA;
-		this.positionXLabelB = positionXLabelB;
-		this.positionYLabelB = positionYLabelB;
+		// this.labelLinkA = labelLinkA;
+		// this.labelLinkB = labelLinkB;
+		// this.positionXLabelA = positionXLabelA;
+		// this.positionYLabelA = positionYLabelA;
+		// this.positionXLabelB = positionXLabelB;
+		// this.positionYLabelB = positionYLabelB;
+		this.valueMainMetricA = valueMainMetricA;
+		this.valueMainMetricB = valueMainMetricB;
 		this.pointIn = pointIn;
 		this.pointOut = pointOut;
 		this.regionIn = regionIn;
 		this.regionOut = regionOut;
-		// This.typeOfWidthLink = typeOfWidthLink;
-		// this.widthLink = widthLink;
 	}
-
-	/**
-	 * id de l'objet Lien
-	 */
-	public getId(): number {
-		return this.id;
-	}
-
-	/**
-	 * id de l'objet Lien
-	 */
-	public setId(id: number) {
-		this.id = id;
-	}
-
-	/**
-	 * Extrémité par couple de coordonnée - Position X du Point A
-	 */
-	public getPointAPositionX() {
-		return this.pointAPositionX;
-	}
-
-	/**
-	 * Extrémité par couple de coordonnée - Position X du Point A
-	 * @param pointAPositionX to do
-	 */
-	public setPointAPositionX(pointAPositionX: string) {
-		this.pointAPositionX = pointAPositionX;
-	}
-
-	// /**
-	//  * Retourne la manière dont on veut récupérer les deux extrémités du lien
-	//  */
-	// public getDefineHowToGetCoordonate() {
-	// 	return this.defineHowToGetCoordonate;
-	// }
-
-	// /**
-	//  * Modifie la manière dont on veut récupérer les deux extrémités du lien
-	//  * @param defineHowToGetCoordonate
-	//  */
-	// public setDefineHowToGetCoordonate(defineHowToGetCoordonate: SelectableValue<string>) {
-	// 	this.defineHowToGetCoordonate = defineHowToGetCoordonate;
-	// }
-
-	public getOrientationLink() {
-		return this.orientationLink;
-	}
-
-	public setOrientationLink(orientationLink: SelectableValue<string>) {
-		this.orientationLink = orientationLink;
-	}
-
-	/**
-	 * Extrémité par couple de coordonnée - Position Y du Point A
-	 */
-	public getPointAPositionY() {
-		return this.pointAPositionY;
-	}
-
-	/**
-	 * Extrémité par couple de coordonnée - Position Y du Point A
-	 * @param pointAPositionY
-	 */
-	public setPointAPositionY(pointAPositionY: string) {
-		this.pointAPositionY = pointAPositionY;
-	}
-
-	/**
-	 * retourne la couleur pour le lien de A vers B
-	 */
-	public getColorCoordinateA() {
-		return this.colorCoordinateA;
-	}
-
-	/**
-	 * modifie la couleur pour le lien de A vers B
-	 * @param colorCoordinateA
-	 */
-	public setColorCoordinateA(colorCoordinateA: string) {
-		this.colorCoordinateA = colorCoordinateA;
-	}
-
-	/**
-	 * retourne la couleur pour le lien de B vers A
-	 */
-	public getColorCoordinateB() {
-		return this.colorCoordinateB;
-	}
-
-	/**
-	 * modifie la couleur pour le lien de B vers A
-	 * @param colorCoordinateB
-	 */
-	public setColorCoordinateB(colorCoordinateB: string) {
-		this.colorCoordinateB = colorCoordinateB;
-	}
-
-	/**
-	 * Extrémité par couple de coordonnée - Position X du Point B
-	 */
-	public getPointBPositionX() {
-		return this.pointBPositionX;
-	}
-
-	/**
-	 * Extrémité par couple de coordonnée - Position X du Point B
-	 * @param pointBPositionX
-	 */
-	public setPointBPositionX(pointBPositionX: string) {
-		this.pointBPositionX = pointBPositionX;
-	}
-
-	/**
-	 * Extrémité par couple de coordonnée - Position Y du Point B
-	 */
-	public getPointBPositionY() {
-		return this.pointBPositionY;
-	}
-
-	/**
-	 * Extrémité par couple de coordonnée - Position Y du Point B
-	 * @param pointBPositionY
-	 */
-	public setPointBPositionY(pointBPositionY: string) {
-		this.pointBPositionY = pointBPositionY;
-	}
-
-	public getLabelLinkA() {
-		return this.labelLinkA;
-	}
-
-	public setLabelLinkA(labelLinkA: string) {
-		this.labelLinkA = labelLinkA;
-	}
-
-	public getLabelLinkB() {
-		return this.labelLinkB;
-	}
-
-	public setLabelLinkB(labelLinkB: string) {
-		this.labelLinkB = labelLinkB;
-	}
-
-	public getPositionXLabelA() {
-		return this.positionXLabelA;
-	}
-
-	public setPositionXLabelA(positionXLabelA: string) {
-		this.positionXLabelA = positionXLabelA;
-	}
-
-	public getPositionYLabelA() {
-		return this.positionYLabelA;
-	}
-
-	public setPositionYLabelA(positionYLabelA: string) {
-		this.positionYLabelA = positionYLabelA;
-	}
-
-	public getPositionXLabelB() {
-		return this.positionXLabelB;
-	}
-
-	public setPositionXLabelB(positionXLabelB: string) {
-		this.positionXLabelB = positionXLabelB;
-	}
-
-	public getPositionYLabelB() {
-		return this.positionYLabelB;
-	}
-
-	public setPositionYLabelB(positionYLabelB: string) {
-		this.positionYLabelB = positionYLabelB;
-	}
-
-	public getPointIn() {
-		return this.pointIn;
-	}
-
-	public setPointIn(pointIn: SelectableValue<PointClass>) {
-		this.pointIn = pointIn;
-	}
-
-	public getPointOut() {
-		return this.pointOut;
-	}
-
-	public setPointOut(pointOut: SelectableValue<PointClass>) {
-		this.pointOut = pointOut;
-	}
-
-	public getRegionIn() {
-		return this.regionIn;
-	}
-
-	public setRegionIn(regionIn: SelectableValue<CoordinateSpaceExtendClass>) {
-		this.regionIn = regionIn;
-	}
-
-	public getRegionOut() {
-		return this.regionOut;
-	}
-
-	public setRegionOut(regionOut: SelectableValue<CoordinateSpaceExtendClass>) {
-		this.regionOut = regionOut;
-	}
-	// /**
-	//  * Retourne le type de largeur du lien : fixe ou variable
-	//  */
-	// public getTypeOfWidthLink() {
-	// 	return this.typeOfWidthLink;
-	// }
-
-	// /**
-	//  * Modifie le type de largeur du lien : fixe ou variable
-	//  * @param typeOfWidthLink
-	//  */
-	// public setTypeOfWidthLink(typeOfWidthLink: boolean) {
-	// 	this.typeOfWidthLink = typeOfWidthLink;
-	// }
-
-	// /**
-	//  * Retourne la largeur du lien
-	//  */
-	// public getWidthLink() {
-	// 	return this.widthLink;
-	// }
-
-	// /**
-	//  *
-	//  * @param widthLink Modifie la largeur du lien
-	//  */
-	// public setWidthLink(widthLink: string) {
-	// 	this.widthLink = widthLink;
-	// }
-
 }

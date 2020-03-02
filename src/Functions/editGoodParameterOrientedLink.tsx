@@ -12,39 +12,46 @@ export const editGoodParameterOrientedLink = (
 	name: string, editCoor: OrientedLinkClass, newValue: string,
 	newValueSelect: SelectableValue<any>): OrientedLinkClass => {
 	if (name.startsWith('orientationLink')) {
-		editCoor.setOrientationLink(newValueSelect);
+		editCoor.orientationLink = newValueSelect;
 	} else if (name.startsWith('pointAX')) {
-		editCoor.setPointAPositionX(newValue);
+		editCoor.pointAPositionX = newValue;
 	} else if (name.startsWith('pointAY')) {
-		editCoor.setPointAPositionY(newValue);
+		editCoor.pointAPositionY = newValue;
 	} else if (name.startsWith('pointBX')) {
-		editCoor.setPointBPositionX(newValue);
+		editCoor.pointBPositionX = newValue;
 	} else if (name.startsWith('pointBY')) {
-		editCoor.setPointBPositionY(newValue);
+		editCoor.pointBPositionY = newValue;
 	} else if (name.startsWith('colorCoordinateA')) {
-		editCoor.setColorCoordinateA(newValue);
+		editCoor.colorCoordinateA = newValue;
 	} else if (name.startsWith('colorCoordinateB')) {
-		editCoor.setColorCoordinateB(newValue);
-	} else if (name.startsWith('labelLinkA')) {
-		editCoor.setLabelLinkA(newValue);
-	} else if (name.startsWith('labelLinkB')) {
-		editCoor.setLabelLinkB(newValue);
-	} else if (name.startsWith('positionXLabelLinkA')) {
-		editCoor.setPositionXLabelA(newValue);
-	} else if (name.startsWith('positionYLabelLinkA')) {
-		editCoor.setPositionYLabelA(newValue);
-	} else if (name.startsWith('positionXLabelLinkB')) {
-		editCoor.setPositionXLabelB(newValue);
-	} else if (name.startsWith('positionYLabelLinkB')) {
-		editCoor.setPositionYLabelB(newValue);
-	} else if (name.startsWith('CoordinateSpaceAssociatePointA')) {
-		editCoor.setRegionIn(newValueSelect);
+		editCoor.colorCoordinateB = newValue;
+	}  else if (name.startsWith('CoordinateSpaceAssociatePointA')) {
+		editCoor.regionIn = newValueSelect;
 	} else if (name.startsWith('CoordinateSpaceAssociatePointB')) {
-		editCoor.setRegionOut(newValueSelect);
+		editCoor.regionOut = newValueSelect;
 	} else if (name.startsWith('pointIn')) {
-		editCoor.setPointIn(newValueSelect);
+		editCoor.pointIn = newValueSelect;
 	} else if (name.startsWith('pointOut')) {
-		editCoor.setPointOut(newValueSelect);
+		editCoor.pointOut = newValueSelect;
+	} else if (name.startsWith('refIdMainMetric')) {
+		editCoor.mainMetric.refId = newValue;
+	} else if (name.startsWith('keyMainMetric')) {
+		editCoor.mainMetric.key = newValue;
+	} else if (name.startsWith('keyValueMainMetric')) {
+		editCoor.mainMetric.keyValue = newValue;
 	}
+	// else if (name.startsWith('labelLinkA')) {
+	// 	editCoor.labelLinkA = newValue;
+	// } else if (name.startsWith('labelLinkB')) {
+	// 	editCoor.labelLinkB = newValue;
+	// } else if (name.startsWith('positionXLabelLinkA')) {
+	// 	editCoor.positionXLabelA = newValue;
+	// } else if (name.startsWith('positionYLabelLinkA')) {
+	// 	editCoor.positionYLabelA = newValue;
+	// } else if (name.startsWith('positionXLabelLinkB')) {
+	// 	editCoor.positionXLabelB = newValue;
+	// } else if (name.startsWith('positionYLabelLinkB')) {
+	// 	editCoor.positionYLabelB = newValue;
+	// }
 	return editCoor;
 };

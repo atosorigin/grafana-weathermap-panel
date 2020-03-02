@@ -11,30 +11,36 @@ import { SelectableValue } from '@grafana/data';
 export const editGoodParameterPoint = (
 	name: string, editCoor: PointClass, newValue: string,
 	newValueSelect: SelectableValue<any>): PointClass => {
-	if (name.startsWith('linkWithCoordinateSpace')) {
-		editCoor.setCoordinateSpace(newValueSelect);
+	if (name.startsWith('label')) {
+		editCoor.label = newValue;
+	} else if (name.startsWith('linkWithCoordinateSpace')) {
+		editCoor.coordinateSpace = newValueSelect;
 	} else if (name.startsWith('drawGraphicMarker')) {
-		editCoor.setDrawGraphicMarker(newValueSelect);
+		editCoor.drawGraphicMarker = newValueSelect;
 	} else if (name.startsWith('shape')) {
-		editCoor.setShape(newValueSelect);
+		editCoor.shape = newValueSelect;
 	} else if (name.startsWith('sizeWidth')) {
-		editCoor.setSizeWidth(newValueSelect);
+		editCoor.sizeWidth = newValueSelect;
 	} else if (name.startsWith('sizeHeight')) {
-		editCoor.setSizeHeight(newValueSelect);
+		editCoor.sizeHeight = newValueSelect;
 	} else if (name.startsWith('rotateArrow')) {
-		editCoor.setRotateArrow(newValue);
+		editCoor.rotateArrow = newValue;
 	} else if (name.startsWith('positionShapeX')) {
-		editCoor.setPositionShapeX(newValue);
+		editCoor.positionShapeX = newValue;
 	} else if (name.startsWith('positionShapeY')) {
-		editCoor.setPositionShapeY(newValue);
-	} else if (name.startsWith('label')) {
-		editCoor.setLabel(newValue);
+		editCoor.positionShapeY = newValue;
 	} else if (name.startsWith('positionLabelX')) {
-		editCoor.setPositionLabelX(newValue);
+		editCoor.positionLabelX = newValue;
 	} else if (name.startsWith('positionLabelY')) {
-		editCoor.setPositionLabelY(newValue);
+		editCoor.positionLabelY = newValue;
 	} else if (name.startsWith('color')) {
-		editCoor.setColor(newValue);
+		editCoor.color = newValue;
+	} else if (name.startsWith('refIdMainMetric')) {
+		editCoor.mainMetric.refId = newValue;
+	} else if (name.startsWith('keyMainMetric')) {
+		editCoor.mainMetric.key = newValue;
+	} else if (name.startsWith('keyValueMainMetric')) {
+		editCoor.mainMetric.keyValue = newValue;
 	}
 	return editCoor;
 };

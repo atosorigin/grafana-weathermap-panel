@@ -1,11 +1,12 @@
 import { InputSelectableClass } from 'Models/InputSelectableClass';
 import { SelectableValue } from '@grafana/data';
 import { PointClass } from 'Models/PointClass';
-import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
+//import { CoordinateSpaceInitialClass } from 'Models/CoordinateSpaceInittialClass';
+import { RegionClass } from 'Models/RegionClass';
 
 export const createInputsLink = (
 	id: number, dataPoint: SelectableValue<PointClass>[],
-	dataRegion: SelectableValue<CoordinateSpaceClass>[]): InputSelectableClass[] => {
+	dataRegion: SelectableValue<RegionClass>[]): InputSelectableClass[] => {
 	const newFieldCoordinates: InputSelectableClass = new InputSelectableClass(id.toString() + 'GetCoordinate',
 		'Coordinates type', 'getCoordinate' + id.toString(), 'select',
 		[
@@ -16,9 +17,8 @@ export const createInputsLink = (
 	const newFieldOrientationLink: InputSelectableClass = new InputSelectableClass(id.toString() + 'orientationLink',
 		'Orientation', 'orientationLink' + id.toString(), 'select',
 		[
-			{ label: 'A > B', value: 'AB' },
-			{ label: 'B > A', value: 'BA' },
-			{ label: 'Double', value: 'double' },
+			{ label: 'Unidirectional', value: 'AB' },
+			{ label: 'Bidirectional', value: 'double' },
 		], '', true, 'Orientation', undefined);
 	const newFieldPointAPositionX: InputSelectableClass = new InputSelectableClass(id.toString() + 'pointAX',
 		'Point A - X', 'pointAX' + id.toString(), 'text',
@@ -26,18 +26,18 @@ export const createInputsLink = (
 	const newFieldPointAPositionY: InputSelectableClass = new InputSelectableClass(id.toString() + 'pointAY',
 		'Point A - Y', 'pointAY' + id.toString(), 'text',
 		[], '', true, 'PointA-Y', undefined);
-	const newFieldColorCoordinateA: InputSelectableClass = new InputSelectableClass(id.toString() + 'colorCoordinateA',
-		'Color A', 'colorCoordinateA' + id.toString(), 'color',
-		[], '', true, '', undefined);
+	// const newFieldColorCoordinateA: InputSelectableClass = new InputSelectableClass(id.toString() + 'colorCoordinateA',
+	// 	'Color A', 'colorCoordinateA' + id.toString(), 'color',
+	// 	[], '', true, '', undefined);
 	const newFieldPointBPositionX: InputSelectableClass = new InputSelectableClass(id.toString() + 'pointBX',
 		'Point B - X', 'pointBX' + id.toString(), 'text',
 		[], '', true, 'PointB-X', undefined);
 	const newFieldPointBPositionY: InputSelectableClass = new InputSelectableClass(id.toString() + 'pointBY',
 		'Point B - Y', 'pointBY' + id.toString(),
 		'text', [], '', true, 'PointB-Y', undefined);
-	const newFieldColorCoordinateB: InputSelectableClass = new InputSelectableClass(id.toString() + 'colorCoordinateB',
-		'Color B', 'colorCoordinateB' + id.toString(), 'color',
-		[], '', true, '', undefined);
+	// const newFieldColorCoordinateB: InputSelectableClass = new InputSelectableClass(id.toString() + 'colorCoordinateB',
+	// 	'Color B', 'colorCoordinateB' + id.toString(), 'color',
+	// 	[], '', true, '', undefined);
 	const newFieldPointIn: InputSelectableClass = new InputSelectableClass(id.toString() + 'pointIn',
 		'Point in', 'pointIn' + id.toString(),
 		'select', dataPoint, '', true, 'Point in', undefined);
@@ -47,33 +47,33 @@ export const createInputsLink = (
 	const newFieldRegionIn: InputSelectableClass = new InputSelectableClass(id.toString() + 'regionIn',
 		'Region in', 'regionIn' + id.toString(),
 		'select', dataRegion, '', true, 'Region in', undefined);
-	const newFieldColorRegionIn: InputSelectableClass = new InputSelectableClass(id.toString() + 'colorRegionIn',
-		'Color A', 'colorRegionIn' + id.toString(), 'color',
-		[], '', true, '', undefined);
+	// const newFieldColorRegionIn: InputSelectableClass = new InputSelectableClass(id.toString() + 'colorRegionIn',
+	// 	'Color A', 'colorRegionIn' + id.toString(), 'color',
+	// 	[], '', true, '', undefined);
 	const newFieldRegionOut: InputSelectableClass = new InputSelectableClass(id.toString() + 'regionOut',
 		'Region out', 'regionOut' + id.toString(),
 		'select', dataRegion, '', true, 'Region out', undefined);
-	const newFieldColorRegionOut: InputSelectableClass = new InputSelectableClass(id.toString() + 'colorRegionOut',
-		'Color B', 'colorRegionOut' + id.toString(), 'color',
-		[], '', true, '', undefined);
-	const newFieldLabelLinkA: InputSelectableClass = new InputSelectableClass(id.toString() + 'labelLinkA',
-		'Label A', 'labelLinkA' + id.toString(), 'text',
-		[], '', true, 'Label A', undefined);
-	const newFieldLabelLinkAPositionX: InputSelectableClass = new InputSelectableClass(id.toString() + 'positionXLabelLinkA',
-		'Label A - X', 'positionXLabelLinkA' + id.toString(), 'text',
-		[], '', true, 'Label A - Position X', undefined);
-	const newFieldLabelLinkAPositionY: InputSelectableClass = new InputSelectableClass(id.toString() + 'posiitonYLabelLinkA',
-		'Label A - Y', 'positionYLabelLinkA' + id.toString(), 'text',
-		[], '', true, 'Label A - Position Y', undefined);
-	const newFieldLabelLinkB: InputSelectableClass = new InputSelectableClass(id.toString() + 'labelLinkB',
-		'Label B', 'labelLinkB' + id.toString(), 'text',
-		[], '', true, 'Label B', undefined);
-	const newFieldLabelLinkBPositionX: InputSelectableClass = new InputSelectableClass(id.toString() + 'positionXLabelLinkB',
-		'Label B - X', 'positionXLabelLinkB' + id.toString(), 'text',
-		[], '', true, 'Label B - Position X', undefined);
-	const newFieldLabelLinkBPositionY: InputSelectableClass = new InputSelectableClass(id.toString() + 'posiitonYLabelLinkB',
-		'Label B - Y', 'positionYLabelLinkB' + id.toString(), 'text',
-		[], '', true, 'Label B - Position Y', undefined);
+	// const newFieldColorRegionOut: InputSelectableClass = new InputSelectableClass(id.toString() + 'colorRegionOut',
+	// 	'Color B', 'colorRegionOut' + id.toString(), 'color',
+	// 	[], '', true, '', undefined);
+	// const newFieldLabelLinkA: InputSelectableClass = new InputSelectableClass(id.toString() + 'labelLinkA',
+	// 	'Label A', 'labelLinkA' + id.toString(), 'text',
+	// 	[], '', true, 'Label A', undefined);
+	// const newFieldLabelLinkAPositionX: InputSelectableClass = new InputSelectableClass(id.toString() + 'positionXLabelLinkA',
+	// 	'Label A - X', 'positionXLabelLinkA' + id.toString(), 'text',
+	// 	[], '', true, 'Label A - Position X', undefined);
+	// const newFieldLabelLinkAPositionY: InputSelectableClass = new InputSelectableClass(id.toString() + 'posiitonYLabelLinkA',
+	// 	'Label A - Y', 'positionYLabelLinkA' + id.toString(), 'text',
+	// 	[], '', true, 'Label A - Position Y', undefined);
+	// const newFieldLabelLinkB: InputSelectableClass = new InputSelectableClass(id.toString() + 'labelLinkB',
+	// 	'Label B', 'labelLinkB' + id.toString(), 'text',
+	// 	[], '', true, 'Label B', undefined);
+	// const newFieldLabelLinkBPositionX: InputSelectableClass = new InputSelectableClass(id.toString() + 'positionXLabelLinkB',
+	// 	'Label B - X', 'positionXLabelLinkB' + id.toString(), 'text',
+	// 	[], '', true, 'Label B - Position X', undefined);
+	// const newFieldLabelLinkBPositionY: InputSelectableClass = new InputSelectableClass(id.toString() + 'posiitonYLabelLinkB',
+	// 	'Label B - Y', 'positionYLabelLinkB' + id.toString(), 'text',
+	// 	[], '', true, 'Label B - Position Y', undefined);
 	const newFieldButton: InputSelectableClass = new InputSelectableClass(id.toString() + 'delete',
 		'Delete', 'delete' + id.toString(),
 		'button', [], '', false, undefined, 'delete');
@@ -85,20 +85,20 @@ export const createInputsLink = (
 		newFieldPointAPositionY,
 		newFieldPointIn,
 		newFieldRegionIn,
-		newFieldLabelLinkA,
-		newFieldLabelLinkAPositionX,
-		newFieldLabelLinkAPositionY,
-		newFieldColorCoordinateA,
-		newFieldColorRegionIn,
+		// newFieldLabelLinkA,
+		// newFieldLabelLinkAPositionX,
+		// newFieldLabelLinkAPositionY,
+		// newFieldColorCoordinateA,
+		// newFieldColorRegionIn,
 		newFieldPointBPositionX,
 		newFieldPointBPositionY,
 		newFieldPointOut,
 		newFieldRegionOut,
-		newFieldLabelLinkB,
-		newFieldLabelLinkBPositionX,
-		newFieldLabelLinkBPositionY,
-		newFieldColorCoordinateB,
-		newFieldColorRegionOut,
+		// newFieldLabelLinkB,
+		// newFieldLabelLinkBPositionX,
+		// newFieldLabelLinkBPositionY,
+		// newFieldColorCoordinateB,
+		// newFieldColorRegionOut,
 		newFieldButton,
 	];
 	return finalArray;

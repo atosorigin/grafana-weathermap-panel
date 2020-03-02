@@ -1,10 +1,11 @@
 import React from 'react';
 import { SelectableValue } from '@grafana/data';
-import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
+import { RegionClass } from 'Models/RegionClass';
+import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 
 interface IProps {
 
-	coordinateSpace: SelectableValue<CoordinateSpaceClass>;
+	coordinateSpace: SelectableValue<RegionClass>;
 	drawGraphicmarker: SelectableValue<string>;
 	shape: SelectableValue<string>;
 	sizeWidth: SelectableValue<string>;
@@ -20,6 +21,11 @@ interface IProps {
 	police: string;
 	sizePolice: string;
 	idPoint: string;
+	name: string;
+	orientedLinksIn: OrientedLinkClass[];
+	orientedLinksOut: OrientedLinkClass[];
+	textObject: any;
+	seuil: any;
 }
 
 interface IState {
@@ -33,7 +39,7 @@ export default class DrawArrow extends React.Component<IProps, IState> {
 		};
 	}
 
-	public defineLimitX(coordinateX: number, coordinateSpace: SelectableValue<CoordinateSpaceClass>) {
+	public defineLimitX(coordinateX: number, coordinateSpace: SelectableValue<RegionClass>) {
 
 		let result: number = coordinateX;
 
@@ -46,8 +52,8 @@ export default class DrawArrow extends React.Component<IProps, IState> {
 			}
 		} else {
 
-			const xMin = parseInt(coordinateSpace.value.xMin, 10);
-			const xMax = parseInt(coordinateSpace.value.xMax, 10);
+			const xMin = parseInt(coordinateSpace.value.coords.xMin, 10);
+			const xMax = parseInt(coordinateSpace.value.coords.xMax, 10);
 
 			if (xMax < 0) {
 				if (coordinateX < xMax) {
@@ -66,7 +72,7 @@ export default class DrawArrow extends React.Component<IProps, IState> {
 		return result;
 	}
 
-	public defineLimitY(coordinateY: number, coordinateSpace: SelectableValue<CoordinateSpaceClass>) {
+	public defineLimitY(coordinateY: number, coordinateSpace: SelectableValue<RegionClass>) {
 
 		let result: number = coordinateY;
 
@@ -78,8 +84,8 @@ export default class DrawArrow extends React.Component<IProps, IState> {
 				coordinateY = -100;
 			}
 		} else {
-			const yMin: number = parseInt(coordinateSpace.value.yMin, 10);
-			const yMax: number = parseInt(coordinateSpace.value.yMax, 10);
+			const yMin: number = parseInt(coordinateSpace.value.coords.yMin, 10);
+			const yMax: number = parseInt(coordinateSpace.value.coords.yMax, 10);
 
 			if (yMax < 0) {
 				if (coordinateY < yMax) {
@@ -124,28 +130,28 @@ export default class DrawArrow extends React.Component<IProps, IState> {
 
 
 	public definePositionArrowX(positionX: number,
-		coordinateSpace: SelectableValue<CoordinateSpaceClass>,
+		coordinateSpace: SelectableValue<RegionClass>,
 		defineCenter: number, width: number): number {
 
 			if (coordinateSpace.value === undefined) {
 				return ((this.defineLimitX(positionX, coordinateSpace) * (defineCenter / 100)) + defineCenter - width);
 			} else {
-				const xMin: number = parseInt(coordinateSpace.value.xMin, 10);
-				const xMax: number = parseInt(coordinateSpace.value.xMax, 10);
+				const xMin: number = parseInt(coordinateSpace.value.coords.xMin, 10);
+				const xMax: number = parseInt(coordinateSpace.value.coords.xMax, 10);
 				const xMid: number = (xMin + xMax) / 2;
 				return ((this.defineLimitX(positionX + xMid, coordinateSpace) * (defineCenter / 100)) + defineCenter - width);
 			}
 	}
 
 	public definePositionArrowY(positionY: number,
-		coordinateSpace: SelectableValue<CoordinateSpaceClass>,
+		coordinateSpace: SelectableValue<RegionClass>,
 		defineCenter: number, size: number): number {
 
 			if (coordinateSpace.value === undefined) {
 				return (defineCenter - (this.defineLimitY(positionY, coordinateSpace) * (defineCenter / 100)) - (size / 2));
 			} else {
-				const yMin: number = parseInt(coordinateSpace.value.yMin, 10);
-				const yMax: number = parseInt(coordinateSpace.value.yMax, 10);
+				const yMin: number = parseInt(coordinateSpace.value.coords.yMin, 10);
+				const yMax: number = parseInt(coordinateSpace.value.coords.yMax, 10);
 				const yMid: number = (yMin + yMax) / 2;
 				return (defineCenter - (this.defineLimitY(positionY + yMid, coordinateSpace) * (defineCenter / 100)) - (size / 2));
 			}
@@ -188,21 +194,26 @@ export default class DrawArrow extends React.Component<IProps, IState> {
 		}
 	}
 
-	public defineCenterX(coordinateSpace: SelectableValue<CoordinateSpaceClass>): number {
+	public defineCenterX(coordinateSpace: SelectableValue<RegionClass>): number {
 		let result: number = 0;
 		result = this.props.height / 2;
 		return result;
 	}
 
-	public defineCenterY(coordinateSpace: SelectableValue<CoordinateSpaceClass>): number {
+	public defineCenterY(coordinateSpace: SelectableValue<RegionClass>): number {
 		let result: number = 0;
 		result = this.props.height / 2;
 		return result;
 	}
 
-	public defineLabel(color: string, positionLabelX: number, positionLabelY: number,
-		positionArrowX: number, positionArrowY: number, drawGraphicMarker: string, heightArrow: number) {
+	public defineLabel(	color: string, positionLabelX: number, positionLabelY: number,
+						positionArrowX: number, positionArrowY: number, drawGraphicMarker: string,
+						heightArrow: number) {
 
+		let valueToDisplay: string = this.props.label;
+		if (this.props.label === '') {
+			valueToDisplay = this.props.name;
+		}
 		if (drawGraphicMarker === 'true') {
 			return (
 				<span style={{
@@ -213,7 +224,7 @@ export default class DrawArrow extends React.Component<IProps, IState> {
 					color: color,
 					top: positionArrowY + heightArrow + positionLabelY,
 					left: positionArrowX + heightArrow + positionLabelX,
-				}}>{this.props.label}</span>
+				}}>{valueToDisplay}</span>
 			);
 		}
 		return (<br />);
@@ -224,7 +235,7 @@ export default class DrawArrow extends React.Component<IProps, IState> {
 	 */
 	public render() {
 
-		const coordinateSpace: SelectableValue<CoordinateSpaceClass> = this.props.coordinateSpace;
+		const coordinateSpace: SelectableValue<RegionClass> = this.props.coordinateSpace;
 		const widthArrow: number = this.defineSizeHeight(this.props.sizeHeight.value || '');
 		const heightArrow: number = this.defineSizeWidth(this.props.sizeWidth.value || '');
 		const sizeArrow: number = widthArrow + heightArrow;

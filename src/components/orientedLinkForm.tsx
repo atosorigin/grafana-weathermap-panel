@@ -1,7 +1,7 @@
 import React from 'react';
 import { InputSelectableClass } from 'Models/InputSelectableClass';
 import { ArrayInputSelectableClass } from 'Models/ArrayInputSelectableClass';
-import { SelectableValue } from '@grafana/data';
+import { SelectableValue, PanelEditorProps } from '@grafana/data';
 import InputTextOrientedLink from 'Functions/Input/inputTextOrientedLink';
 import InputSelectOrientedLink from 'Functions/Input/inputSelectOrientedLink';
 import InputSeriesColorPickerOrientedLink from 'Functions/Input/inputSeriesColorPickerOrientedLink';
@@ -9,15 +9,22 @@ import InputButtonField from 'Functions/Input/inputButton';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 import { createInputsOrientedLink } from 'Functions/createInputsOrientedLink';
 import { editGoodParameterOrientedLink } from 'Functions/editGoodParameterOrientedLink';
-import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
+import { RegionClass } from 'Models/RegionClass';
 import { PointClass } from 'Models/PointClass';
-
+import { TextObject } from 'Models/TextObjectClass';
+import { LinkURLClass } from 'Models/LinkURLClass';
+import { SimpleOptions, IMetric } from 'types';
+import { Collapse, Button } from '@grafana/ui';
+import ParametresGeneriques from './Parametrage/parametresGeneriques';
+import { LowerLimitClass } from 'Models/LowerLimitClass';
+import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
+import ManageLowerLimit from './Parametrage/manageLowerLimit';
 
 
 /**
  * IProps
  */
-interface IProps {
+interface IProps extends PanelEditorProps<SimpleOptions> {
 
 	/**
 	 * function for return arrayInput for Parent
@@ -25,7 +32,7 @@ interface IProps {
 	callBackFromParent: (dataFromChild: OrientedLinkClass[]) => void;
 
 	/** to do */
-	// CallBackIdOrientedLink: Function;
+	//CallBackIdOrientedLink: Function;
 
 	/**
 	 * old data
@@ -35,7 +42,7 @@ interface IProps {
 	/**
 	 * array of region existing
 	 */
-	arrayCoordinateSpace: CoordinateSpaceExtendClass[];
+	arrayCoordinateSpace: RegionClass[];
 
 
 	/**
@@ -56,7 +63,7 @@ interface IState {
 	/**
 	 * to do
 	 */
-	oldArrayOrientedLinkClass: OrientedLinkClass[];
+	arrayOrientedLinkClass: OrientedLinkClass[];
 
 	/**
 	 * to do
@@ -68,9 +75,10 @@ interface IState {
 	 */
 	debug: boolean;
 
-	/** to do */
-	// IndexOrientedLink: number;
-
+	/**
+	 * to do
+	 */
+	listCollapseOrientedLink: boolean[];
 }
 
 /**
@@ -81,10 +89,10 @@ export default class OrientedLinkForm extends React.Component<IProps, IState> {
 		super(props);
 		this.state = {
 			arrayInput: [],
-			oldArrayOrientedLinkClass: [],
-			debug: false,
+			arrayOrientedLinkClass: [],
 			index: 1,
-			// IndexOrientedLink: this.props.idFromPanel,
+			debug: false,
+			listCollapseOrientedLink: [],
 		};
 	}
 
@@ -92,7 +100,7 @@ export default class OrientedLinkForm extends React.Component<IProps, IState> {
 	 * to do
 	 */
 	public callBack = () => {
-		this.props.callBackFromParent(this.state.oldArrayOrientedLinkClass);
+		this.props.callBackFromParent(this.state.arrayOrientedLinkClass);
 	}
 
 	// /**
@@ -102,12 +110,65 @@ export default class OrientedLinkForm extends React.Component<IProps, IState> {
 	// 	this.props.callBackIdOrientedLink(this.state.indexOrientedLink);
 	// }
 
-	/**
+	// public setAsyncOrientedLink = (element: OrientedLinkClass) => {
+	// 	return Promise.resolve('Success').then(() => {
+	// 		this.addInput(element.id, element.orientationLink, element.pointAPositionX,
+	// 			element.pointAPositionY, element.colorCoordinateA, element.pointBPositionX,
+	// 			element.pointBPositionY, element.colorCoordinateB, element.pointIn,
+	// 			element.pointOut, element.regionIn, element.regionOut);
+	// 	});
+	// }
+
+	// public setAsyncIndex = (state: {
+	// 	index: number,
+	// }) => {
+	// 	return new Promise((resolve) => {
+	// 		this.setState(state, resolve);
+	// 	});
+	// }
+
+	// public setAsyncOldArrayInput = (state: {
+	// 	oldArrayOrientedLinkClass: OrientedLinkClass[],
+	// }) => {
+	// 	return new Promise((resolve) => {
+	// 		this.setState(state, resolve);
+	// 	});
+	// }
+
+	// public setAsyncArrayInput = (state: {
+	// 	arrayInput: ArrayInputSelectableClass[],
+	// }) => {
+	// 	return new Promise((resolve) => {
+	// 		this.setState(state, resolve);
+	// 	});
+	// }
+
+	// /**
+	//  * to do
+	//  */
+	// public loadCoorParent = async () => {
+	// 	const { oldArrayOrientedLinkClass } = this.props;
+
+	// 	if (oldArrayOrientedLinkClass.length === 0) {
+	// 		return;
+	// 	}
+
+	// 	await this.setAsyncOldArrayInput({oldArrayOrientedLinkClass: []});
+	// 	await this.setAsyncArrayInput({arrayInput: []});
+	// 	await this.setAsyncIndex({index: 0});
+
+	// 	for (const element of oldArrayOrientedLinkClass) {
+	// 		if (element.id) {
+	// 			await this.setAsyncOrientedLink(element);
+	// 		}
+	// 	}
+	// }
+
+		/**
 	 * to do
 	 */
 	public loadCoorParent = () => {
 		const { oldArrayOrientedLinkClass } = this.props;
-
 		if (oldArrayOrientedLinkClass.length === 0 || this.state.debug === true) {
 			if (!this.state.debug) {
 				this.setState((prevState: IState) => ({
@@ -121,35 +182,39 @@ export default class OrientedLinkForm extends React.Component<IProps, IState> {
 			setTimeout(() => {
 				this.addInput(element.id, element.orientationLink, element.pointAPositionX,
 					element.pointAPositionY, element.colorCoordinateA, element.pointBPositionX,
-					element.pointBPositionY, element.colorCoordinateB, element.labelLinkA, element.labelLinkB,
-					element.positionXLabelA, element.positionYLabelA, element.positionXLabelB, element.positionYLabelB,
-					element.pointIn, element.pointOut, element.regionIn, element.regionOut);
+					element.pointBPositionY, element.colorCoordinateB, element.pointIn,
+					element.pointOut, element.regionIn, element.regionOut, 
+					element.mainMetric.refId, element.mainMetric.key, element.mainMetric.keyValue,
+					element.textObj, element.lowerLimit);
 			}, 100);
 		}
+
 		this.setState((prevState: IState) => ({
 			debug: !prevState.debug,
 		}));
+
 	}
 
-	public defineDataRegion(): SelectableValue<CoordinateSpaceExtendClass>[] {
+	public defineDataRegion(): SelectableValue<RegionClass>[] {
+
 		const { arrayCoordinateSpace } = this.props;
-		const optionRegionNull: SelectableValue<CoordinateSpaceExtendClass> = { label: 'No selected region' };
-		const arrayOptionsRegion: SelectableValue<CoordinateSpaceExtendClass>[] = [];
+		const optionRegionNull: SelectableValue<RegionClass> = { label: 'No selected region' };
+		const arrayOptionsRegion: SelectableValue<RegionClass>[] = [];
 
 		arrayOptionsRegion.push(optionRegionNull);
 
 		arrayCoordinateSpace.forEach(region => {
-			const optionRegion: SelectableValue<CoordinateSpaceExtendClass> = {
+			const optionRegion: SelectableValue<RegionClass> = {
 				label: region.label,
 				value: region,
 			};
 			arrayOptionsRegion.push(optionRegion);
 		});
-
 		return arrayOptionsRegion;
 	}
 
 	public defineDataPoint(): SelectableValue<PointClass>[] {
+
 		const { arrayPoint } = this.props;
 		const optionPointNull: SelectableValue<PointClass> = { label: 'No selected point' };
 		const arrayOptionsPoint: SelectableValue<PointClass>[] = [];
@@ -157,8 +222,14 @@ export default class OrientedLinkForm extends React.Component<IProps, IState> {
 		arrayOptionsPoint.push(optionPointNull);
 
 		arrayPoint.forEach(point => {
+			let valueLabel = point.label;
+
+			if (point.label === '') {
+				valueLabel = point.name;
+			}
+
 			const optionPoint: SelectableValue<PointClass> = {
-				label: point.label,
+				label: valueLabel,
 				value: point,
 			};
 			arrayOptionsPoint.push(optionPoint);
@@ -173,39 +244,45 @@ export default class OrientedLinkForm extends React.Component<IProps, IState> {
 	public addInput = (
 		id?: number, orientationLink?: SelectableValue<string>, pointAPositionX?: string,
 		pointAPositionY?: string, colorCoordinateA?: string, pointBPositionX?: string,
-		pointBPositionY?: string, colorCoordinateB?: string, labelLinkA?: string, labelLinkB?: string,
-		positionXLabelA?: string, positionYLabelA?: string, positionXLabelB?: string,
-		positionYLabelB?: string, pointIn?: SelectableValue<PointClass>, pointOut?: SelectableValue<PointClass>,
-		regionIn?: SelectableValue<CoordinateSpaceExtendClass>, regionOut?: SelectableValue<CoordinateSpaceExtendClass>) => {
+		pointBPositionY?: string, colorCoordinateB?: string, pointIn?: SelectableValue<PointClass>,
+		pointOut?: SelectableValue<PointClass>, regionIn?: SelectableValue<RegionClass>,
+		regionOut?: SelectableValue<RegionClass>, refIdMainMetric?: string,
+		keyMainMetric?: string, keyValueMainMetric?: string, textObj?: TextObject, seuil?: LowerLimitClass[]) => {
 
-		const num: number = id || this.state.index;
+		const num: number = id || this.props.options.indexOrientedLink + 1;
 
 		const finalArray: InputSelectableClass[] = createInputsOrientedLink(num,
-								this.defineDataRegion(), this.defineDataPoint());
+			this.defineDataRegion(), this.defineDataPoint());
+		const initTextObject: TextObject = textObj || new TextObject('', '', '', false, '', '', '',
+			false, '', '', '',
+			false, false, false, '', false, '');
+		const parametrageMetric: LinkURLClass = new LinkURLClass('', '', '');
 
 		this.setState((prevState: IState) => ({
-			oldArrayOrientedLinkClass: prevState.oldArrayOrientedLinkClass.concat(new OrientedLinkClass(num,
-				orientationLink || { label: 'double', value: 'double' },
+			arrayOrientedLinkClass: prevState.arrayOrientedLinkClass.concat(new OrientedLinkClass(
+				num, parametrageMetric, '', seuil || [], '', initTextObject,
+				{	'key': keyMainMetric || '', 'unit': '', 'format': '',
+					'keyValue': keyValueMainMetric || '', 'refId': refIdMainMetric || ''
+				}, [],
+				false, false, false,
+				'orientedLink' + num.toString(), orientationLink || { label: 'double', value: 'double' },
 				pointAPositionX || '0', pointAPositionY || '0', colorCoordinateA || '#5794F2',
 				pointBPositionX || '0', pointBPositionY || '0', colorCoordinateB || '#E54658',
-				labelLinkA || '', labelLinkB || '', positionXLabelA || '0', positionYLabelA || '0',
-				positionXLabelB || '0', positionYLabelB || '0', pointIn || {}, pointOut || {},
+				'', '', pointIn || {}, pointOut || {},
 				regionIn || {}, regionOut || {})),
 
 			arrayInput: prevState.arrayInput.concat([
 				new ArrayInputSelectableClass(num, finalArray),
 			]),
-			index: (id || this.state.index) + 1,
+			//index: (id || this.state.index) + 1,
 		}));
+		
 
-		// This.callBackIdOrientedLink();
-	}
+		this.props.onOptionsChange({
+			...this.props.options,
+			indexOrientedLink: num,
+		})
 
-	/**
-	 * dsgs
-	 */
-	public addInputOnClickButton = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-		this.addInput();
 	}
 
 	/**
@@ -213,12 +290,12 @@ export default class OrientedLinkForm extends React.Component<IProps, IState> {
 	 * @param {number} id id of object element to delete
 	 */
 	public deleteArrayOrientedLinkClass(id: number): void {
-		const newLinkClass: OrientedLinkClass[] = this.state.oldArrayOrientedLinkClass
+		const newLinkClass: OrientedLinkClass[] = this.state.arrayOrientedLinkClass
 			.filter((value: OrientedLinkClass) =>
 				value.id !== id
 			);
 		this.setState({
-			oldArrayOrientedLinkClass: newLinkClass,
+			arrayOrientedLinkClass: newLinkClass,
 		});
 		setTimeout(() => {
 			this.callBack();
@@ -232,7 +309,6 @@ export default class OrientedLinkForm extends React.Component<IProps, IState> {
 	public deleteOwnInput = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
 		const { arrayInput } = this.state;
 		const id = event.currentTarget.id;
-
 		for (const obj of arrayInput) {
 			for (const line of obj.uneClassInput) {
 				if (line.input_type === 'button') {
@@ -262,7 +338,7 @@ export default class OrientedLinkForm extends React.Component<IProps, IState> {
 		let i: number;
 
 		i = 0;
-		const copyOfoldArrayOrientedLinkClass: OrientedLinkClass[] = this.state.oldArrayOrientedLinkClass.slice();
+		const copyOfoldArrayOrientedLinkClass: OrientedLinkClass[] = this.state.arrayOrientedLinkClass.slice();
 		for (const line of copyOfoldArrayOrientedLinkClass) {
 			if (line.id === index) {
 				copyOfoldArrayOrientedLinkClass[i] = editGoodParameterOrientedLink(name,
@@ -272,7 +348,7 @@ export default class OrientedLinkForm extends React.Component<IProps, IState> {
 			i++;
 		}
 		this.setState({
-			oldArrayOrientedLinkClass: copyOfoldArrayOrientedLinkClass,
+			arrayOrientedLinkClass: copyOfoldArrayOrientedLinkClass,
 		});
 		this.callBack();
 	}
@@ -287,18 +363,20 @@ export default class OrientedLinkForm extends React.Component<IProps, IState> {
 	public getGoodValue(id: number, name: string): any {
 		let value: string;
 		let valueSelect: SelectableValue<any>;
+		let valueMetric: IMetric;
 		let idx = -1;
 		let index = 0;
 
 		value = '';
 		valueSelect = {};
-		for (const line of this.state.oldArrayOrientedLinkClass) {
+		for (const line of this.state.arrayOrientedLinkClass) {
 			if (line.id === id) {
 				idx = index;
 				break;
 			}
 			++index;
 		}
+
 		if (idx === -1) {
 			return value;
 		}
@@ -311,96 +389,172 @@ export default class OrientedLinkForm extends React.Component<IProps, IState> {
 		) {
 
 			if (name.startsWith('orientationLink')) {
-				valueSelect = this.state.oldArrayOrientedLinkClass[idx].orientationLink;
+				valueSelect = this.state.arrayOrientedLinkClass[idx].orientationLink;
 			} else if (name.startsWith('CoordinateSpaceAssociatePointA')) {
-				valueSelect = this.state.oldArrayOrientedLinkClass[idx].regionIn;
+				valueSelect = this.state.arrayOrientedLinkClass[idx].regionIn;
 			} else if (name.startsWith('CoordinateSpaceAssociatePointB')) {
-				valueSelect = this.state.oldArrayOrientedLinkClass[idx].regionOut;
+				valueSelect = this.state.arrayOrientedLinkClass[idx].regionOut;
 			} else if (name.startsWith('pointIn')) {
-				valueSelect = this.state.oldArrayOrientedLinkClass[idx].pointIn;
+				valueSelect = this.state.arrayOrientedLinkClass[idx].pointIn;
 			} else if (name.startsWith('pointOut')) {
-				valueSelect = this.state.oldArrayOrientedLinkClass[idx].pointOut;
+				valueSelect = this.state.arrayOrientedLinkClass[idx].pointOut;
 			}
 
 			return valueSelect;
 
+		} else if (name.startsWith('mainMetric')) {
+			valueMetric = this.state.arrayOrientedLinkClass[idx].mainMetric;
+
+			return valueMetric;
+			
 		} else {
 
 			if (name.startsWith('pointAX')) {
-				value = this.state.oldArrayOrientedLinkClass[idx].pointAPositionX;
+				value = this.state.arrayOrientedLinkClass[idx].pointAPositionX;
 			} else if (name.startsWith('pointAY')) {
-				value = this.state.oldArrayOrientedLinkClass[idx].pointAPositionY;
+				value = this.state.arrayOrientedLinkClass[idx].pointAPositionY;
 			} else if (name.startsWith('pointBX')) {
-				value = this.state.oldArrayOrientedLinkClass[idx].pointBPositionX;
+				value = this.state.arrayOrientedLinkClass[idx].pointBPositionX;
 			} else if (name.startsWith('pointBY')) {
-				value = this.state.oldArrayOrientedLinkClass[idx].pointBPositionY;
+				value = this.state.arrayOrientedLinkClass[idx].pointBPositionY;
 			} else if (name.startsWith('colorCoordinateA')) {
-				value = this.state.oldArrayOrientedLinkClass[idx].colorCoordinateA;
+				value = this.state.arrayOrientedLinkClass[idx].colorCoordinateA;
 			} else if (name.startsWith('colorCoordinateB')) {
-				value = this.state.oldArrayOrientedLinkClass[idx].colorCoordinateB;
-			} else if (name.startsWith('labelLinkA')) {
-				value = this.state.oldArrayOrientedLinkClass[idx].labelLinkA;
-			} else if (name.startsWith('labelLinkB')) {
-				value = this.state.oldArrayOrientedLinkClass[idx].labelLinkB;
-			} else if (name.startsWith('positionXLabelLinkA')) {
-				value = this.state.oldArrayOrientedLinkClass[idx].positionXLabelA;
-			} else if (name.startsWith('positionYLabelLinkA')) {
-				value = this.state.oldArrayOrientedLinkClass[idx].positionYLabelA;
-			} else if (name.startsWith('positionXLabelLinkB')) {
-				value = this.state.oldArrayOrientedLinkClass[idx].positionXLabelB;
-			} else if (name.startsWith('positionYLabelLinkB')) {
-				value = this.state.oldArrayOrientedLinkClass[idx].positionYLabelB;
+				value = this.state.arrayOrientedLinkClass[idx].colorCoordinateB;
+			}  else if (name.startsWith('refIdMainMetric')) {
+				value = this.state.arrayOrientedLinkClass[idx].mainMetric.refId || '';
+			} else if (name.startsWith('keyMainMetric')) {
+				value = this.state.arrayOrientedLinkClass[idx].mainMetric.key || '';
+			} else if (name.startsWith('keyValueMainMetric')) {
+				value = this.state.arrayOrientedLinkClass[idx].mainMetric.keyValue || '';
 			}
+			// else if (name.startsWith('labelLinkA')) {
+			// 	value = this.state.oldArrayOrientedLinkClass[idx].labelLinkA;
+			// } else if (name.startsWith('labelLinkB')) {
+			// 	value = this.state.oldArrayOrientedLinkClass[idx].labelLinkB;
+			// } else if (name.startsWith('positionXLabelLinkA')) {
+			// 	value = this.state.oldArrayOrientedLinkClass[idx].positionXLabelA;
+			// } else if (name.startsWith('positionYLabelLinkA')) {
+			// 	value = this.state.oldArrayOrientedLinkClass[idx].positionYLabelA;
+			// } else if (name.startsWith('positionXLabelLinkB')) {
+			// 	value = this.state.oldArrayOrientedLinkClass[idx].positionXLabelB;
+			// } else if (name.startsWith('positionYLabelLinkB')) {
+			// 	value = this.state.oldArrayOrientedLinkClass[idx].positionYLabelB;
+			// }
 
 			return value;
 
 		}
 	}
 
-	/** fill oriented link */
-	public componentWillReceiveProps = () => {
-		this.displayListInputsOrientedLink();
+
+	/** update lower limit */
+	public callBackManageLowerLimit = (coordiante: CoordinateSpaceClass, id?: number) => {
+		const newValue: OrientedLinkClass = this.state.arrayOrientedLinkClass[id || 0];
+		newValue.colorMode = coordiante.colorMode;
+		newValue.traceBorder = coordiante.traceBorder;
+		newValue.traceBack = coordiante.traceBack;
+		// newValue.lowerLimit = coordiante.lowerLimit;
+		this.props.options.arrayOrientedLinks[id || 0] = newValue;
 	}
+
+	/** save lower limit data */
+	public callBackLowerLimit = (lowerLimit: LowerLimitClass[], id?: number) => {
+
+		const newValue: OrientedLinkClass = this.state.arrayOrientedLinkClass[id || 0];
+		newValue.lowerLimit = lowerLimit;
+		this.props.options.arrayOrientedLinks[id || 0] = newValue;
+	}
+
+	/**
+	 * to do
+	 */
+	public defineListCollapse = () => {
+
+		this.props.options.listCollapsePoint = [];
+		const arrayOrientedLink = this.state.arrayOrientedLinkClass;
+
+
+		arrayOrientedLink.forEach(orientedLink => {
+			this.props.options.listCollapseOrientedLink.push(false);
+		});
+	}
+
+	public callBackToOther = (
+		followLink?: string,
+		hoveringTooltipLink?: string,
+		hoveringTooltipText?: string,
+		textObj?: TextObject,
+		id?: number): void => {
+		const oldCoor: OrientedLinkClass = this.state.arrayOrientedLinkClass[id || 0];
+		if (followLink) {
+			oldCoor.linkURL.followLink = followLink;
+		}
+		if (hoveringTooltipLink) {
+			oldCoor.linkURL.hoveringTooltipLink = hoveringTooltipLink;
+		}
+		if (hoveringTooltipText) {
+			oldCoor.linkURL.hoveringTooltipText = hoveringTooltipText;
+		}
+		if (textObj) {
+			oldCoor.textObj = textObj;
+		}
+		const arrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+
+		arrayOrientedLink[id || 0] = oldCoor;
+
+		this.props.onOptionsChange({
+			...this.props.options,
+			arrayOrientedLinks: arrayOrientedLink,
+		})
+	}
+
 
 	/**
 	 * create dynamic input
 	 */
-	public displayListInputsOrientedLink(): JSX.Element {
+	public generateInputsOrientedLinks(): JSX.Element {
 
+		let index: number = 0;
+		this.defineListCollapse();
 		const { arrayInput } = this.state;
 		let finalItem: JSX.Element[] = [];
+		let item: JSX.Element = <div></div>;
+		let itemButton: JSX.Element = <div></div>;
+		
 		for (const line of arrayInput) {
-			const mapItems = line.uneClassInput
-				.map((obj: InputSelectableClass) =>
-					(obj.input_type === 'text') ?
-						<InputTextOrientedLink
-							key={obj.id}
-							label={obj.label}
-							name={obj.name}
-							placeholder={obj.placeholder || ''}
-							required={obj.required}
-							value={this.getGoodValue(line.id, obj.name)}
-							_handleChange={
-								(event: {
-									/**
-									 * get currentTarget in event element
-									 */
-									currentTarget: HTMLInputElement;
-								}) => {
-									this._handleChange(event.currentTarget.value, obj.name, line.id);
-								}
-							}
-						/>
 
-						: (obj.input_type === 'select' ?
-							<InputSelectOrientedLink
+			const mapItems: JSX.Element[] = [];
+				
+			line.uneClassInput.forEach((obj) => {
+					if (obj.input_type === 'text') {
+						item = <InputTextOrientedLink
+									key={obj.id}
+									label={obj.label}
+									name={obj.name}
+									placeholder={obj.placeholder || ''}
+									required={obj.required}
+									value={this.getGoodValue(line.id, obj.name)}
+									_handleChange={
+										(event: {
+											/**
+											 * get currentTarget in event element
+											 */
+											currentTarget: HTMLInputElement;
+										}) => {
+											this._handleChange(event.currentTarget.value, obj.name, line.id);
+										}
+									}
+								/>
+
+					} else if (obj.input_type === 'select') {
+							item = <InputSelectOrientedLink
 								key={obj.id}
 								_onChange={(value: SelectableValue<string>, name: string, index: number) => {
 
-									// Console.log(this.getGoodValue(line.id, obj.name))
 									let i: number;
 									i = 0;
-									const copyOfoldArrayOrientedLinkClass: OrientedLinkClass[] = this.state.oldArrayOrientedLinkClass.slice();
+									const copyOfoldArrayOrientedLinkClass: OrientedLinkClass[] = this.state.arrayOrientedLinkClass.slice();
 
 									for (const line of copyOfoldArrayOrientedLinkClass) {
 										if (line.id === index) {
@@ -412,7 +566,7 @@ export default class OrientedLinkForm extends React.Component<IProps, IState> {
 									}
 
 									this.setState({
-										oldArrayOrientedLinkClass: copyOfoldArrayOrientedLinkClass,
+										arrayOrientedLinkClass: copyOfoldArrayOrientedLinkClass,
 									});
 
 									this.callBack();
@@ -424,8 +578,8 @@ export default class OrientedLinkForm extends React.Component<IProps, IState> {
 								label={obj.label}
 							/>
 
-							: (obj.input_type === 'color' ?
-								<InputSeriesColorPickerOrientedLink
+					} else if (obj.input_type === 'color') {
+								item = <InputSeriesColorPickerOrientedLink
 									key={obj.id}
 									keyInt={parseInt(obj.id, 10)}
 									color={this.getGoodValue(line.id, obj.name)}
@@ -435,17 +589,17 @@ export default class OrientedLinkForm extends React.Component<IProps, IState> {
 
 										let i: number;
 										i = 0;
-										const copyOfArrayLien: OrientedLinkClass[] = this.state.oldArrayOrientedLinkClass.slice();
-										for (const line of copyOfArrayLien) {
+										const copyOfArrayOrientedLinkClass: OrientedLinkClass[] = this.state.arrayOrientedLinkClass.slice();
+										for (const line of copyOfArrayOrientedLinkClass) {
 											if (line.id === keyInt) {
-												copyOfArrayLien[i] = editGoodParameterOrientedLink(obj.name, copyOfArrayLien[i], newColor, {});
+												copyOfArrayOrientedLinkClass[i] = editGoodParameterOrientedLink(obj.name, copyOfArrayOrientedLinkClass[i], newColor, {});
 												break;
 											}
 											i++;
 										}
 
 										this.setState({
-											oldArrayOrientedLinkClass: copyOfArrayLien,
+											arrayOrientedLinkClass: copyOfArrayOrientedLinkClass,
 										});
 
 										this.callBack();
@@ -453,23 +607,66 @@ export default class OrientedLinkForm extends React.Component<IProps, IState> {
 										obj.setDefaultValueColor(newColor);
 									}}
 								/>
-								:
-								<InputButtonField
-									key={obj.id}
-									label={obj.label}
-									value={obj.value || ''}
-									name={obj.name}
-									required={obj.required}
-									_handleChange={this.deleteOwnInput}
-									id={obj.id}
-								/>
-							)
-						)
-				);
+					} else {
+						itemButton = <InputButtonField
+										key={obj.id}
+										label={obj.label}
+										value={obj.value || ''}
+										name={obj.name}
+										required={obj.required}
+										_handleChange={this.deleteOwnInput}
+										id={obj.id}
+										withLabel={false}
+									/>
+						item = <div></div>;
+					}
+					mapItems.push(item);
+				});
 
-			const divKey: string = 'inputCoor' + line.id;
-			const newInput: JSX.Element = <div key={divKey} className='inputCoor'>{mapItems}</div>;
+
+			const divKey: string = 'inputCoor' + line.id.toString();
+			const newInput: JSX.Element =
+				<div 	key={divKey}
+						className='inputCoor'
+						id={'orientedLink' + line.id.toString()}
+						style={{
+							display: 'flex',
+							flexDirection: 'row',
+							marginBottom: '5px',
+						}}>
+					<Collapse isOpen={this.state.listCollapseOrientedLink[line.id - 1]}
+						label={'OrientedLink ' + line.id.toString()}
+						onToggle={(isOpen) => {
+							this.props.options.listCollapseOrientedLink[line.id - 1] = isOpen;
+							this.setState({
+								listCollapseOrientedLink: this.props.options.listCollapseOrientedLink,
+							});
+					}}>
+						<div>
+							<ParametresGeneriques
+								options={this.props.options}
+								onOptionsChange={this.props.onOptionsChange}
+								data={this.props.data}
+								coordinateSpace={this.state.arrayOrientedLinkClass[index]}
+								callBackToParent={this.callBackToOther}
+								id={index}
+							/>
+						</div>
+						<div>
+							<ManageLowerLimit
+								coordinate={this.state.arrayOrientedLinkClass[index]}
+								callBack={this.callBackManageLowerLimit}
+								lowerLimitCallBack={this.callBackLowerLimit}
+								id={index} />
+						</div>
+						{mapItems}
+					</Collapse>
+					<div style={{ marginTop: '4px' }} >
+						{itemButton}
+					</div>
+				</div>;
 			finalItem = finalItem.concat(newInput);
+			index++;
 		}
 
 		return (
@@ -479,28 +676,44 @@ export default class OrientedLinkForm extends React.Component<IProps, IState> {
 		);
 	}
 
-	// Public refreshDisplayListInputLink() {
-	// 	setTimeout(() => {
-	// 		this.displayListInputsOrientedLink();
-	// 	}, 100)
-	// }
+	/**
+	 * to do
+	 */
+	public componentDidMount = () => {
+		this.loadCoorParent();
+	}
+
+	public componentWillReceiveProps() {
+		this.loadCoorParent();
+		this.generateInputsOrientedLinks();
+	}
+
+	/** update state when props uneCoor change */
+	public componentDidUpdate(prevProps: IProps) {
+			this.loadCoorParent();
+			this.generateInputsOrientedLinks();
+	}
 
 	/**
 	 * render()
 	 */
 	public render() {
 
-		this.loadCoorParent();
-
 		return (
 			<div>
-				{this.displayListInputsOrientedLink()}
-				{/* <div className='buttonAddCoor'>
-					<Button onClick={this.addInputOnClickButton}>Add Oriented Link</Button>
-				</div> */}
+				<div style={{marginBottom: '5px'}}>
+				<Button onClick={() => {
+					this.setState({
+						arrayInput: [],
+						arrayOrientedLinkClass: [],
+						debug: false,
+					});
+					this.loadCoorParent();
+					this.generateInputsOrientedLinks();
+				}}>Load Oriented Links</Button>
+				</div>
+				{this.generateInputsOrientedLinks()}
 			</div>
 		);
 	}
-
-
 }
