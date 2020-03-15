@@ -1,14 +1,27 @@
 # Changelog
 
-## v0.35 (2020-03-11)
+## v0.35 (2020-03-15)
 
-- add df
-- Fixed
+- Add external configuration files
+- Add Association template
+- Updated Spatial management Regions
+- Updated Points management
+- Updated Management of the link space
+- Fixed metrics
+
+## v0.34 (2020-03-13)
+
+- Special offline version
 
 ## v0.30 (2020-02-29)
 
 - Add legende
+- Add Type of graphic representation
+- Add compatibility SVG file
+- Update Graphic representation
+- Update metrics
 - Fixed panel
+- Fixed tabs
 
 ## v0.25 (2020-02-12)
 
