@@ -1,22 +1,22 @@
-import { CoordinateSpaceInitialClass } from 'Models/CoordinateSpaceInittialClass';
 import React from 'react';
 
+
+import { PanelEditorProps } from '@grafana/data';
+import { SimpleOptions, ICoordinateSpaceInitial } from 'types';
+
 import { isNumFloat } from 'Functions/isNumFloat';
+import DrawRectangleExtend from './drawRectangleExtend';
+import { RegionClass, ICoord4D } from 'Models/RegionClass';
 
-interface IProps {
-	/**
-	 * color of border
-	 */
+interface IProps extends PanelEditorProps<SimpleOptions> {
+	/** color of border */
 	color: string;
-	/**
-	 * object CoordinateSpace
-	 */
-	uneCoor: CoordinateSpaceInitialClass;
-
-	/**
-	 * to do
-	 */
+	/** coordinate space initial */
+	coordinateInitial: ICoordinateSpaceInitial;
+	/** id region */
 	id: string;
+	/** if button SimplePanel is active, block all onClick region space */
+	isEnabled: boolean;
 }
 
 // tslint:disable-next-line: no-empty-interface
@@ -51,26 +51,42 @@ export default class DrawRectangle extends React.Component<IProps, IState> {
 		}
 		if (size >= 0) {
 			size /= 2;
-			if (isMax) {
-				size = 50 - size;
-			} else {
-				size = 50 + size;
-			}
+			size = (isMax) ? 50 - size : 50 + size;
 		} else {
 			size *= -1;
 			size /= 2;
-			if (isMax) {
-				size = 50 - size;
-			} else {
-				size = 50 - size;
-			}
+			size = 50 - size;
 		}
 		return size;
 	}
 
+	public fillCoordinate = (): JSX.Element => {
+		const { options } = this.props;
+		let mapItems: JSX.Element[];
+
+		mapItems = options.regionCoordinateSpace
+			.map((line: RegionClass, index: number) =>
+				<DrawRectangleExtend
+					key={'drawRectangleExtend' + index.toString()}
+					uneCoor={line}
+					useLimit={false}
+					limit={options.coordinateSpaceInitial.coordinate}
+					onOptionsChange={this.props.onOptionsChange}
+					options={this.props.options}
+					data={this.props.data}
+					id={'region' + line.id.toString()}
+					isEnabled={this.props.isEnabled} />
+			);
+		return (
+			<ul>
+				{mapItems}
+			</ul>
+		);
+	}
+
 	/** creaate rectrangle */
 	public createRectangle = (): void => {
-		const line: CoordinateSpaceInitialClass = this.props.uneCoor;
+		const line: ICoord4D = this.props.coordinateInitial.coordinate;
 		let pLeft: string;
 		let pRight: string;
 		let pTop: string;
@@ -79,7 +95,7 @@ export default class DrawRectangle extends React.Component<IProps, IState> {
 		let xMax: number = 0;
 		let yMin: number = 0;
 		let yMax: number = 0;
-		const pBorder: string = '1px solid ' + this.props.color;
+		const pBorder: string = this.props.coordinateInitial.displayArea ? '3px solid ' + this.props.color : '';
 
 		xMin = (isNumFloat(line.xMin)) ? parseInt(line.xMin, 10) : 0;
 		xMax = (isNumFloat(line.xMax)) ? parseInt(line.xMax, 10) : 0;
@@ -102,6 +118,7 @@ export default class DrawRectangle extends React.Component<IProps, IState> {
 			pTop = this.transformCoordonneesToPx(yMin, false, 3).toString() + '%';
 			pBottom = this.transformCoordonneesToPx(yMax, true, 4).toString() + '%';
 		}
+
 		const data: JSX.Element = <div style={{
 			border: pBorder,
 			bottom: pBottom,
@@ -110,17 +127,24 @@ export default class DrawRectangle extends React.Component<IProps, IState> {
 			right: pRight,
 			top: pTop,
 		}} id={this.props.id}>
-		</div>;
+			{this.fillCoordinate()}
+		// </div>;
 		this.setState({
 			resultHTML: data,
 		});
 	}
 
-	/** update state when props uneCoor change */
+	/** update state when props coordinateInitial change */
 	public componentDidUpdate(prevProps: IProps) {
-		if (prevProps.uneCoor !== this.props.uneCoor) {
+		if (prevProps.isEnabled !== this.props.isEnabled) {
+			console.log('am here');
 			this.createRectangle();
 		}
+	}
+
+/** create rectangle when component mount */
+	public componentDidMount = () => {
+		this.createRectangle();
 	}
 
 	/**

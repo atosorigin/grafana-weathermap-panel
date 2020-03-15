@@ -29,7 +29,7 @@ interface IProps extends PanelEditorProps<SimpleOptions> {
 
 interface IState {
 	/** open or close collapse main metric */
-	collapseMainMetric: boolean;
+	collapseLink: boolean;
 	/** open or close text object */
 	collapseTextObject: boolean;
 }
@@ -41,15 +41,15 @@ class ParametresGeneriques extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			collapseMainMetric: false,
+			collapseLink: false,
 			collapseTextObject: false,
 		};
 	}
 
-	/** switch value collapseMainMetric when click collapse */
-	public onToggleMainMetric = (isOpen: boolean) => {
+	/** switch value collapseLink when click collapse */
+	public onToggleLinkCollapse = (isOpen: boolean) => {
 		this.setState({
-			collapseMainMetric: isOpen,
+			collapseLink: isOpen,
 		});
 	}
 
@@ -64,7 +64,7 @@ class ParametresGeneriques extends React.Component<IProps, IState> {
 	public componentDidUpdate = (prevProps: IProps) => {
 		if (prevProps.coordinateSpace !== this.props.coordinateSpace) {
 			this.setState({
-				collapseMainMetric: false,
+				collapseLink: false,
 				collapseTextObject: false,
 			});
 		}
@@ -72,15 +72,13 @@ class ParametresGeneriques extends React.Component<IProps, IState> {
 
 	/** HTML */
 	public render() {
-		const l10n = require('Localization/en.json');
-
-		//console.log(this.props.coordinateSpace)
+		// const l10n = require('Localization/en.json');
 
 		return (
 			<div>
-				<Collapse isOpen={this.state.collapseMainMetric}
-					label={l10n.genericParameter.settingPrincipalMetric}
-					onToggle={this.onToggleMainMetric} >
+				<Collapse isOpen={this.state.collapseLink}
+					label='Manage link'
+					onToggle={this.onToggleLinkCollapse} >
 					<div>
 						<LinkURLClassPrincipale
 							coordinateSpace={this.props.coordinateSpace}

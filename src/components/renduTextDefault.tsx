@@ -1,10 +1,11 @@
 
 import React from 'react';
-import { FormField } from '@grafana/ui';
+import { SimpleOptions, IBackground } from 'types';
+
 import { SelectableValue, PanelEditorProps } from '@grafana/data';
+import { FormField } from '@grafana/ui';
 
 import InputSelect from 'Functions/Input/inputSelect';
-import { SimpleOptions } from 'types';
 
 interface IProps extends PanelEditorProps<SimpleOptions> {
 }
@@ -13,7 +14,7 @@ interface IState {
 	/** police choice in select */
 	newPolice: SelectableValue<string>;
 	/** size variable for input */
-	taille: string;
+	size: string;
 	/** style variable for input */
 	style: string;
 }
@@ -29,7 +30,7 @@ class RendutextDefault extends React.Component<IProps, IState> {
 				value: this.props.options.police,
 				label: this.props.options.police,
 			},
-			taille: this.props.options.taille,
+			size: this.props.options.size,
 			style: this.props.options.styleText,
 		};
 	}
@@ -38,15 +39,15 @@ class RendutextDefault extends React.Component<IProps, IState> {
 	 * call parent with new data
 	 */
 	public callParent = () => {
-		const { newPolice, taille, style } = this.state;
+		const { newPolice, size, style } = this.state;
 		const pPolice: string = newPolice.value || '';
-		const pTaille = taille;
+		const pSize = size;
 		const pStyle = style;
 
 		this.props.onOptionsChange({
 			...this.props.options,
 			police: pPolice,
-			taille: pTaille,
+			size: pSize,
 			styleText: pStyle,
 		});
 	}
@@ -65,12 +66,12 @@ class RendutextDefault extends React.Component<IProps, IState> {
 	}
 
 	/**
-	 * set taille state async
+	 * set size state async
 	 */
-	public setStateAsyncTaille = (
+	public setStateAsyncsize = (
 		state: {
 			/** new size value */
-			taille: string,
+			size: string,
 		}) => {
 		return new Promise((resolve) => {
 			this.setState(state, resolve);
@@ -93,12 +94,12 @@ class RendutextDefault extends React.Component<IProps, IState> {
 	/**
 	 * edit size
 	 */
-	public handleChangeTaille = async (event: {
+	public handleChangesize = async (event: {
 		/** target to input element */
 		target: HTMLInputElement,
 	}) => {
-		await this.setStateAsyncTaille({
-			taille: event.target.value,
+		await this.setStateAsyncsize({
+			size: event.target.value,
 		});
 		this.callParent();
 	}
@@ -129,19 +130,27 @@ class RendutextDefault extends React.Component<IProps, IState> {
 	/**
 	 * Change background picture
 	 */
-	public onImageChanged = (event: {
+	public onImageChanged = (e: {
 		/**
 		 * Get target element
 		 */
 		target: HTMLInputElement;
 	}) => {
-		this.props.onOptionsChange({ ...this.props.options, imageUrl: event.target.value });
+		const newBaseMap: IBackground = this.props.options.baseMap;
+		newBaseMap.image = e.target.value;
+		this.props.onOptionsChange({
+			...this.props.options,
+			baseMap: newBaseMap,
+		});
+		// this.props.onOptionsChange({ ...this.props.options, imageUrl: event.target.value });
 	}
 
 	/**
 	 * html
 	 */
 	public render() {
+
+		const { options } = this.props;
 
 		const police: Array<SelectableValue<string>> = [
 			{ value: 'Helvetica', label: 'Helvetica' },
@@ -150,7 +159,6 @@ class RendutextDefault extends React.Component<IProps, IState> {
 			{ value: 'mono', label: 'mono' },
 		];
 
-		const { options } = this.props;
 		const l10n = require('Localization/en.json');
 
 		return (
@@ -166,8 +174,8 @@ class RendutextDefault extends React.Component<IProps, IState> {
 					labelWidth={10}
 					inputWidth={15}
 					required={true}
-					value={this.state.taille}
-					onChange={this.handleChangeTaille} />
+					value={this.state.size}
+					onChange={this.handleChangesize} />
 
 				<FormField
 					label={l10n.textDefault.style}
@@ -182,7 +190,7 @@ class RendutextDefault extends React.Component<IProps, IState> {
 					inputWidth={30}
 					type='text'
 					onChange={this.onImageChanged}
-					value={options.imageUrl || ''} />
+					value={options.baseMap.image || ''} />
 			</div>
 		);
 	}

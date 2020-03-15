@@ -1,40 +1,29 @@
 import React from 'react';
-import { SimpleOptions } from 'types';
+import { SimpleOptions, ICoordinateSpaceInitial } from 'types';
 
+import { FormField, Switch } from '@grafana/ui';
 import { PanelEditorProps } from '@grafana/data';
 
-import { createInputCoor } from 'Functions/createInputCoor';
 import { editGoodParameter } from 'Functions/editGoodParameter';
-import InputTextField from 'Functions/Input/inputText';
-
-import { ArrayInputClass } from 'Models/ArrayInputClass';
-import { CoordinateSpaceInitialClass } from 'Models/CoordinateSpaceInittialClass';
-import { InputClass } from 'Models/InputClass';
 
 interface IProps extends PanelEditorProps<SimpleOptions> {
 }
 
 interface IState {
-	/**
-	 * contains all input for this form
-	 */
-	arrayInput: ArrayInputClass;
-	/**
-	 * stock value for Parent Component
-	 */
-	arrayCoor: CoordinateSpaceInitialClass;
+	/** value to initial coordinate space */
+	arrayCoor: ICoordinateSpaceInitial;
+	/** change switch value */
+	// displayInitialSpace: boolean;
 }
 
 /**
- * class CoordinateSpaceInitial
+ * initialize space for space coordinate
  */
 class CoordinateSpaceInitial extends React.Component<IProps, IState>  {
-
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			arrayInput: this.initInput(),
-			arrayCoor: this.initCoordinateSpaceClass(),
+			arrayCoor: this.props.options.coordinateSpaceInitial,
 		};
 	}
 
@@ -44,47 +33,19 @@ class CoordinateSpaceInitial extends React.Component<IProps, IState>  {
 	public callBack = () => {
 		this.props.onOptionsChange({
 			...this.props.options,
-			arrayCoordinateSpaceInitial: this.state.arrayCoor,
+			coordinateSpaceInitial: this.state.arrayCoor,
 		});
-	}
-
-	/**
-	 * initialize a new CoordinateSpace Class
-	 */
-	public initCoordinateSpaceClass = (): CoordinateSpaceInitialClass => {
-		const { arrayCoordinateSpaceInitial } = this.props.options;
-		const json = require('Localization/fr.json');
-
-		const newEspaceCoor: CoordinateSpaceInitialClass = new CoordinateSpaceInitialClass(
-			arrayCoordinateSpaceInitial.id || 0,
-			arrayCoordinateSpaceInitial.xMin || '0',
-			arrayCoordinateSpaceInitial.xMax || '0',
-			arrayCoordinateSpaceInitial.yMin || '0',
-			arrayCoordinateSpaceInitial.yMax || '0',
-			arrayCoordinateSpaceInitial.label || json.initialCoordonateSpace.label);
-		return newEspaceCoor;
-	}
-
-	/**
-	 * test
-	 */
-	public initInput = (): ArrayInputClass => {
-		const arrayInput: InputClass[] = createInputCoor(0, true);
-		const newArrayInput: ArrayInputClass = new ArrayInputClass(0, arrayInput);
-		return newArrayInput;
 	}
 
 	/**
 	 * Use function if value input change
 	 * @param {string} currentTarget new value of input
 	 * @param {string} name name of input
-	 * @param {number} index id of input
 	 */
-	public _handleChange(currentTarget: string, name: string, index: number) {
-		const { arrayCoor } = this.state;
-
+	public _handleChange(currentTarget: string, name: string) {
 		this.setState({
-			arrayCoor: editGoodParameter(name, arrayCoor, currentTarget),
+			arrayCoor: editGoodParameter(name,
+				this.state.arrayCoor, currentTarget),
 		});
 		this.callBack();
 	}
@@ -100,53 +61,25 @@ class CoordinateSpaceInitial extends React.Component<IProps, IState>  {
 
 		value = '';
 		if (param.startsWith('positionXMin')) {
-			value = this.state.arrayCoor.getXMin().toString();
+			value = this.state.arrayCoor.coordinate.xMin;
 		} else if (param.startsWith('positionXMax')) {
-			value = this.state.arrayCoor.getXMax().toString();
+			value = this.state.arrayCoor.coordinate.xMax;
 		} else if (param.startsWith('positionYMin')) {
-			value = this.state.arrayCoor.getYMin().toString();
+			value = this.state.arrayCoor.coordinate.yMin;
 		} else if (param.startsWith('positionYMax')) {
-			value = this.state.arrayCoor.getYMax().toString();
-		} else if (param.startsWith('label')) {
-			value = this.state.arrayCoor.getLabel();
+			value = this.state.arrayCoor.coordinate.yMax;
 		}
 		return value;
 	}
 
-	/**
-	 * fill form in load
-	 */
-	public fillForm = (): JSX.Element => {
-		const { arrayInput } = this.state;
-		let finalItem: JSX.Element[] = [];
-
-		const mapItems = arrayInput.getUneClassInput()
-			.map((obj: InputClass) =>
-				(obj.getInputType() === 'text') ?
-					<InputTextField key={obj.getId()}
-						label={obj.getLabel()}
-						name={obj.getName()}
-						placeholder={obj.getPlaceholder() || ''}
-						required={obj.getRequired()}
-						value={this.getGoodValue(arrayInput.getId(), obj.getName())}
-						_handleChange={
-							(event: {
-								/**
-								 * get currentTarget in event element
-								 */
-								currentTarget: HTMLInputElement;
-							}) => this._handleChange(event.currentTarget.value,
-								obj.getName(), arrayInput.getId())
-						} />
-					:
-					<br key={obj.getId()} />
-			);
-		finalItem = mapItems;
-		return (
-			<ul>
-				{finalItem}
-			</ul>
-		);
+	/** change value for switch */
+	public onChangeSwitchDisplayInitialSpace = () => {
+		const newDisplayInitial: ICoordinateSpaceInitial = this.state.arrayCoor;
+		newDisplayInitial.displayArea = !newDisplayInitial.displayArea;
+		this.setState({
+			arrayCoor: newDisplayInitial,
+		});
+		this.callBack();
 	}
 
 	/**
@@ -155,10 +88,82 @@ class CoordinateSpaceInitial extends React.Component<IProps, IState>  {
 	public render() {
 
 		return (
-			<div>
-				{
-					this.fillForm()
-				}
+			<div className='coordinateSpaceInitial'>
+				<Switch
+					label='Display space initial'
+					checked={this.state.arrayCoor.displayArea}
+					onChange={this.onChangeSwitchDisplayInitialSpace} />
+				<FormField label='xMin'
+					labelWidth={10}
+					inputWidth={20}
+					type='text'
+					required={true}
+					name='xMin'
+					value={this.state.arrayCoor.coordinate.xMin}
+					onChange={(event: {
+						/**
+						 * get currentTarget in event element
+						 */
+						currentTarget: HTMLInputElement;
+					}) => this._handleChange(event.currentTarget.value,
+						'positionXMin')
+					}
+					placeholder={'X minimum'}
+				/>
+
+				<FormField label='X max'
+					labelWidth={10}
+					inputWidth={20}
+					type='text'
+					required={true}
+					name='xMax'
+					value={this.state.arrayCoor.coordinate.xMax}
+					onChange={(event: {
+						/**
+						 * get currentTarget in event element
+						 */
+						currentTarget: HTMLInputElement;
+					}) => this._handleChange(event.currentTarget.value,
+						'positionXMax')
+					}
+					placeholder={'X max'}
+				/>
+
+				<FormField label='Y min'
+					labelWidth={10}
+					inputWidth={20}
+					type='text'
+					required={true}
+					name='yMin'
+					value={this.state.arrayCoor.coordinate.yMin}
+					onChange={(event: {
+						/**
+						 * get currentTarget in event element
+						 */
+						currentTarget: HTMLInputElement;
+					}) => this._handleChange(event.currentTarget.value,
+						'positionYMin')
+					}
+					placeholder={'Y minimum'}
+				/>
+
+				<FormField label='Y max'
+					labelWidth={10}
+					inputWidth={20}
+					type='text'
+					required={true}
+					name='yMax'
+					value={this.state.arrayCoor.coordinate.yMax}
+					onChange={(event: {
+						/**
+						 * get currentTarget in event element
+						 */
+						currentTarget: HTMLInputElement;
+					}) => this._handleChange(event.currentTarget.value,
+						'positionYMax')
+					}
+					placeholder={'Y max'}
+				/>
 			</div>
 		);
 	}

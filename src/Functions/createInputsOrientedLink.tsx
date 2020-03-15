@@ -32,9 +32,9 @@ export const createInputsOrientedLink = (
 	// const newFieldColorCoordinateB: InputSelectableClass = new InputSelectableClass(id.toString() + 'colorCoordinateB',
 	// 	'Color B', 'colorCoordinateB' + id.toString(), 'color',
 	// 	[], '', true, '', undefined);
-	// const newFieldLabelLinkA: InputSelectableClass = new InputSelectableClass(id.toString() + 'labelLinkA',
-	// 	'Label A', 'labelLinkA' + id.toString(), 'text',
-	// 	[], '', true, 'Label A', undefined);
+	const newFieldLabelLink: InputSelectableClass = new InputSelectableClass(id.toString() + 'label',
+		'Label', 'label' + id.toString(), 'text',
+		[], '', true, 'Label', undefined);
 	// const newFieldLabelLinkB: InputSelectableClass = new InputSelectableClass(id.toString() + 'labelLinkB',
 	// 	'Label B', 'labelLinkB' + id.toString(), 'text',
 	// 	[], '', true, 'Label B', undefined);
@@ -76,12 +76,12 @@ export const createInputsOrientedLink = (
 		'button', [], '', false, undefined, 'delete');
 
 	const finalArray: InputSelectableClass[] = [
+		newFieldLabelLink,
 		newFieldOrientationLink,
 		//newFieldPointIn,
 		//newFieldRegionIn,
 		newFieldPointAPositionX,
 		newFieldPointAPositionY,
-		//newFieldLabelLinkA,
 		//newFieldLabelLinkAPositionX,
 		//newFieldLabelLinkAPositionY,
 		//newFieldColorCoordinateA,

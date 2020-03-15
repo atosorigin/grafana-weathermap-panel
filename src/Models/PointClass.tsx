@@ -7,6 +7,7 @@ import { TextObject } from './TextObjectClass';
 import { IMetric } from 'types';
 import { OrientedLinkClass } from './OrientedLinkClass';
 import { LinkClass } from './LinkClass';
+import { PositionParameterClass } from './PositionParameterClass';
 
 
 /**
@@ -24,8 +25,6 @@ export class PointClass extends CoordinateSpaceClass {
 	public rotateArrow: string;
 	public positionShapeX: string;
 	public positionShapeY: string;
-	public positionLabelX: string;
-	public positionLabelY: string;
 	public color: string;
 	public associateLinkIn: LinkClass[];
 	public associateLinkOut: LinkClass[];
@@ -44,6 +43,7 @@ export class PointClass extends CoordinateSpaceClass {
 		colorMode: boolean,
 		traceBack: boolean,
 		traceBorder: boolean,
+		positionParameter: PositionParameterClass,
 		name: string,
 		valueMetric: string,
 		coordinateSpace: SelectableValue<RegionClass>,
@@ -54,8 +54,6 @@ export class PointClass extends CoordinateSpaceClass {
 		rotateArrow: string,
 		positionShapeX: string,
 		positionShapeY: string,
-		positionLabelX: string,
-		positionLabelY: string,
 		color: string,
 		associateLinkIn: LinkClass[],
 		associateLinkOut: LinkClass[],
@@ -63,7 +61,7 @@ export class PointClass extends CoordinateSpaceClass {
 		associateOrientedLinksOut: OrientedLinkClass[],
 	) {
 		super(id, linkURL, meta,
-			lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder);
+			lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter);
 		this.name = name;
 		this.valueMetric = valueMetric;
 		this.coordinateSpace = coordinateSpace;
@@ -74,8 +72,6 @@ export class PointClass extends CoordinateSpaceClass {
 		this.rotateArrow = rotateArrow;
 		this.positionShapeX = positionShapeX;
 		this.positionShapeY = positionShapeY;
-		this.positionLabelX = positionLabelX;
-		this.positionLabelY = positionLabelY;
 		this.color = color;
 		this.associateLinkIn = associateLinkIn;
 		this.associateLinkOut = associateLinkOut;

@@ -5,8 +5,8 @@ import { Switch, Collapse } from '@grafana/ui';
 import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
 
-import CouleurFixe from 'components/Parametrage/couleurFixe';
-import CouleurVariable from 'components/Parametrage/couleurVariable';
+import FixColor from 'components/Parametrage/fixColor';
+import VariableColor from 'components/Parametrage/VariableColor';
 
 interface IProps {
 	/** last data */
@@ -62,8 +62,8 @@ class ManageLowerLimit extends React.Component<IProps, IState> {
 	 * save data in type
 	 */
 	public onSave = () => {
-		console.log('lower')
-		console.log(this.props.id)
+		console.log('lower');
+		console.log(this.props.id);
 		this.props.callBack(this.props.coordinate, this.props.id);
 		this.props.lowerLimitCallBack(this.state.coordinate.lowerLimit, this.props.id);
 	}
@@ -158,7 +158,7 @@ class ManageLowerLimit extends React.Component<IProps, IState> {
 					{
 						this.state.coordinate.colorMode ?
 							(
-								<CouleurVariable
+								<VariableColor
 									traceBorder={this.state.coordinate.traceBorder}
 									traceBack={this.state.coordinate.traceBack}
 									lowerLimit={this.state.coordinate.lowerLimit}
@@ -168,7 +168,7 @@ class ManageLowerLimit extends React.Component<IProps, IState> {
 							)
 							:
 							(
-								<CouleurFixe
+								<FixColor
 									traceBorder={this.state.coordinate.traceBorder}
 									traceBack={this.state.coordinate.traceBack}
 									lowerLimit={this.state.coordinate.lowerLimit}

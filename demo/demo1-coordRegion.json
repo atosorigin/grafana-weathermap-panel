@@ -1,0 +1,104 @@
+{ "regions": [
+    {
+      "colorMode": false,
+      "coords": {
+        "xMax": "98",
+        "xMin": "40",
+        "yMax": "-30",
+        "yMin": "50"
+      },
+      "id": 1,
+      "idSVG": "",
+      "img": "",
+      "label": "zone1",
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "lowerLimit": [
+        {
+          "backColor": "#C4162A",
+          "borderColor": "#FF0000",
+          "id": 0,
+          "lowerLimitMax": "",
+          "lowerLimitMin": "",
+          "sizeBorder": "5"
+        }
+      ],
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": "",
+        "refId": "A",
+        "returnQuery": {
+          "name": "{instance=\"localhost:9090\",job=\"prometheus\"}",
+          "refId": "A",
+          "fields": [
+            {
+              "name": "{instance=\"localhost:9090\",job=\"prometheus\"}",
+              "type": "number",
+              "config": {},
+              "values": {
+                "buffer": [
+                  188505.37543859647
+                ]
+              },
+              "labels": {
+                "instance": "localhost:9090",
+                "job": "prometheus"
+              },
+              "calcs": null
+            },
+            {
+              "name": "Time",
+              "type": "time",
+              "config": {},
+              "values": {
+                "buffer": [
+                  1583928450000
+                ]
+              },
+              "calcs": null
+            }
+          ],
+          "length": 1
+        },
+        "unit": ""
+      },
+      "meta": "",
+      "metrics": [],
+      "mode": false,
+      "orientedLink": [],
+      "positionParameter": {
+        "labelAPositionX": "0",
+        "labelAPositionY": "0",
+        "labelBPositionX": "0",
+        "labelBPositionY": "0",
+        "tooltipPositionA": {},
+        "tooltipPositionB": {}
+      },
+      "textObj": {
+        "addColorBackElement": false,
+        "addColorTextElement": false,
+        "colorBack": "rgba(255, 255, 255, 0)",
+        "colorBackElement": "",
+        "colorText": "rgba(0, 0, 0, 1)",
+        "colorTextElement": "",
+        "displayObjectInText": false,
+        "displayObjectPermanently": false,
+        "generateObjectText": false,
+        "isTextRegion": false,
+        "legend": "ceci est une legende",
+        "legendElement": "",
+        "numericFormatElement": "",
+        "styleText": "",
+        "unit": "",
+        "unityMesureElement": "",
+        "value": ""
+      },
+      "traceBack": true,
+      "traceBorder": false
+    }
+  ]}
+  

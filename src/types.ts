@@ -1,34 +1,24 @@
 import { SelectableValue, DataFrame } from '@grafana/data';
-// import { CoordinateSpaceClass } from './Models/CoordinateSpaceClass';
-// import { CoordinateSpaceExtendClass } from './Models/CoordinateSpaceExtendClass';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
 import { TextObject } from 'Models/TextObjectClass';
 import { PointClass } from 'Models/PointClass';
 import { LinkClass } from 'Models/LinkClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
-import { RegionClass } from 'Models/RegionClass';
-import { CoordinateSpaceInitialClass } from 'Models/CoordinateSpaceInittialClass';
-
+import { RegionClass, ICoord4D } from 'Models/RegionClass';
 
 /**
  * interface to save texte settings (police, size, style)
  */
 export interface ITexteSettings {
-	/**
-	 * police simple panel
-	 */
+	/** police simple panel */
 	police: string;
-
-	/**
-	 * size simple panel
-	 */
-	taille: string;
-
-	/**
-	 * style simple panel
-	 */
+	/** size simple panel */
+	size: string;
+	/** style simple panel */
 	styleText: string;
 }
+
+export declare type TManageValue = 'avg' | 'sum' | 'error';
 
 export interface IMetric {
 	key: string;
@@ -38,7 +28,9 @@ export interface IMetric {
 	keyValue: string;
 	refId?: string;
 	expr?: string;
-	returnQuery?: DataFrame;
+	returnQuery?: DataFrame[];
+	/** avg, count, error */
+	manageValue: TManageValue;
 }
 
 export interface IMetricSettings {
@@ -87,9 +79,33 @@ export interface ITarget {
 	refId?: string;
 }
 
+export interface IBackground {
+	/** background image */
+	image: string;
+	/** size width image */
+	width: string;
+	/** size height image */
+	height: string;
+	/** id svg for tag */
+	idSVG: string;
+}
+
 export interface TimeRange {
 	from: string;
 	to: string;
+}
+
+export interface IUrlList {
+	total: Array<string>;
+	multi: Array<string>;
+	mono: Array<string>;
+}
+
+export interface ICoordinateSpaceInitial {
+	/** coordinate for initial space */
+	coordinate: ICoord4D;
+	/** display zone in SimplePanel (orange rectangle) */
+	displayArea: boolean;
 }
 
 /**
@@ -106,12 +122,12 @@ export interface SimpleOptions extends
 	/**
 	 * Espace de visualisation initial
 	 */
-	arrayCoordinateSpaceInitial: CoordinateSpaceInitialClass;
+	coordinateSpaceInitial: ICoordinateSpaceInitial;
 
 	/**
 	 * Espace de coordonnees
 	 */
-	arrayCoordinateSpace: RegionClass[];
+	regionCoordinateSpace: RegionClass[];
 
 	/**
 	 * Liste des points générés depuis l'onglet Point
@@ -294,17 +310,32 @@ export interface SimpleOptions extends
 
 	listCollapseOrientedLink: boolean[];
 
+	baseMap: IBackground;
+	saveImportUrl: IUrlList;
+	totalUrlInput: string;
+	multiUrlInput: string;
+	monoUrlInput: string;
+
+	zIndexOrientedLink: number;
+
 }
 
 export const defaults: SimpleOptions = {
+	baseMap: { 'image': '', 'width': '', 'height': '', 'idSVG': '' },
 	imageUrl: 'https://upload.wikimedia.org/wikipedia/en/b/be/Locator_Grid.png',
-	arrayCoordinateSpaceInitial: new CoordinateSpaceInitialClass(0, '', '', '', '', ''),
-	arrayCoordinateSpace: [],
+	coordinateSpaceInitial: {
+		'coordinate': {
+			'xMin': '-100', 'xMax': '100',
+			'yMin': '-100', 'yMax': '100',
+		},
+		'displayArea': true,
+	},
+	regionCoordinateSpace: [],
 	arrayPoints: [],
 	arrayLinks: [],
 	arrayOrientedLinks: [],
 	police: 'Helvetica',
-	taille: '1em',
+	size: '1em',
 	styleText: 'normal',
 	fondIsActive: true,
 	contourIsActive: true,
@@ -388,4 +419,13 @@ export const defaults: SimpleOptions = {
 	indexRegion: 0,
 	listCollapsePoint: [],
 	listCollapseOrientedLink: [],
+	saveImportUrl: {
+		total: [],
+		multi: [],
+		mono: [],
+	},
+	totalUrlInput: '',
+	multiUrlInput: '',
+	monoUrlInput: '',
+	zIndexOrientedLink: 0,
 };

@@ -2,7 +2,9 @@ import React from 'react';
 import { PanelEditorProps } from '@grafana/data';
 import { SimpleOptions, ITarget } from '../types';
 import { Button } from '@grafana/ui';
-import { reqMetricRegion } from 'Functions/fetchMetrics';
+import { reqMetricAuxRegion, reqMetricLink, reqMetricAuxOrientedLink, reqMetricPoint, reqMetricAuxPoint } from 'Functions/fetchMetrics';
+//import { reqMetricRegion } from 'Functions/fetchMetrics';
+
 //import { reqUpdateMetrics, reqMetricAuxRegion} from "../Functions/fetchMetrics";
 // import { RegionClass } from 'Models/RegionClass';
 
@@ -109,13 +111,91 @@ class FetchButton extends React.Component<IProps> {
 	 * Debug
 	 */
 	public printJSON = () => {
-		// take expr
-		for (const target of this.props.options.arrayCoordinateSpace){
-			target.mainMetric.expr = "rate(node_cpu_seconds_total{mode=\"system\"}[1m])";
+		// // console.table(this.props.options.jsonQueryReturn);
+		// // console.table(this.props.options.promTargets);
+		// // reqMetricRegion(this.props.options.regionCoordinateSpace[0], this.props);
+		// // this.props.options.regionCoordinateSpace.map((region: RegionClass, index: number) => {
+		// // 	console.log("Region " + index);
+		// // 	console.log(region.mainMetric.returnQuery);
+		// // 	if (region.mainMetric.returnQuery?.fields[0].values) {
+		// // 		console.log(region.mainMetric.returnQuery?.fields[0].values);
+		// // 	}
+		// // })
+		// console.log("Update des régions");
+		// reqUpdateMetrics(this.props);
+		// // this.props.options.regionCoordinateSpace.map((region: RegionClass, index: number) => {
+		// // 	console.log("Region " + index);
+		// // 	console.log(region.mainMetric.returnQuery);
+		// // 	if (region.mainMetric.returnQuery?.fields[0].values.get(0)) {
+		// // 		console.log(region.mainMetric.returnQuery?.fields[0].values);
+		// // 	}
+		// // })
+		// console.log(this.props.options.regionCoordinateSpace[0].metrics[0].returnQuery);
+		// reqMetricAuxRegion(this.props.options.regionCoordinateSpace[0], this.props);
+		// console.log(this.props.options.regionCoordinateSpace[0].metrics[0].returnQuery);
+
+		// // pour choper l'expr
+		// for (const target of this.props.options.regionCoordinateSpace){
+		// 	target.mainMetric.expr = "rate(node_cpu_seconds_total{mode=\"system\"}[1m])";
+		// }
+		// let tmp : any = this.props.data.request;
+		// console.log(this.props.data.series)
+		// console.log(tmp.targets)
+		// reqMetricRegion(this.props.options.regionCoordinateSpace[0], this.props);
+		// console.log(this.props.options.regionCoordinateSpace[0].mainMetric.returnQuery);
+		// console.log(this.props.options.regionCoordinateSpace[0]);
+		//let test:any = this.props.data.request?.targets;
+		//console.table(test);
+
+		//Test to uncomment after
+		console.log("Regions");
+		for (const region of this.props.options.regionCoordinateSpace){
+			console.log(region);
 		}
-		console.log(this.props.options.arrayCoordinateSpace[0].mainMetric.returnQuery);
-		reqMetricRegion(this.props.options.arrayCoordinateSpace[0], this.props);
-		console.log(this.props.options.arrayCoordinateSpace[0].mainMetric.returnQuery);
+		console.log("Liens");
+		for (const link of this.props.options.arrayOrientedLinks){
+			console.log(link);
+		}
+		console.log("Points");
+		for (const point of this.props.options.arrayPoints){
+			console.log(point);
+		}
+		console.log("procced to fetch regions queries");
+		this.props.options.regionCoordinateSpace.forEach(region => {
+			reqMetricAuxRegion(region, this.props);
+			reqMetricAuxRegion(region, this.props);
+		});
+		console.log("procced to fetch links queries");
+		this.props.options.arrayOrientedLinks.forEach(link => {
+			reqMetricLink(link, this.props);
+			reqMetricAuxOrientedLink(link, this.props);
+		});
+		console.log("procced to fetch points queries");
+		this.props.options.arrayPoints.forEach(point => {
+			reqMetricPoint(point, this.props);
+			reqMetricAuxPoint(point, this.props);
+		});			
+		console.log("Regions");
+		for (const region of this.props.options.regionCoordinateSpace){
+			console.log(region);
+		}
+		console.log("Liens");
+		for (const link of this.props.options.arrayOrientedLinks){
+			console.log(link);
+		}
+		console.log("Points");
+		for (const point of this.props.options.arrayPoints){
+			console.log(point);
+		}
+
+	}
+
+	public test = () => {
+		
+		for (const line of this.props.data.series){
+			console.log(line.refId);
+			console.log(line);
+		}
 	}
 
 	/**
@@ -132,7 +212,7 @@ class FetchButton extends React.Component<IProps> {
 	public render() {
 		return (
 			<div className='section gf-form-groug'>
-				{/* <Button key='ButtonPrint' onClick={this.test}>test fetchMetric</Button> */}
+				<Button key='ButtonPrint' onClick={this.printJSON}>test fetchMetric</Button>
 				<Button key='ButtonFetchRange' onClick={this.fetchQuerryRange}>fetch range</Button>
 				<Button key='ButtonFetchInstant' onClick={this.fetchQuerry}>fetch instant</Button>
 				<Button key='ButtonDelTargets' variant='danger' onClick={this.deleteTargets}>delete targets</Button>

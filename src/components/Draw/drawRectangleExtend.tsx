@@ -1,28 +1,23 @@
 import React, { CSSProperties } from 'react';
 
-import { SimpleOptions } from 'types';
+import { SimpleOptions, IMetric } from 'types';
 
-import { PanelEditorProps } from '@grafana/data';
+import { PanelEditorProps, DataFrame } from '@grafana/data';
 import { Tooltip } from '@grafana/ui';
 
-import { CoordinateSpaceInitialClass } from 'Models/CoordinateSpaceInittialClass';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
-import { RegionClass } from 'Models/RegionClass';
+import { RegionClass, ICoord4D } from 'Models/RegionClass';
 
 import { isNumFloat } from 'Functions/isNumFloat';
 import { reqMetricRegion } from 'Functions/fetchMetrics';
 
 interface IProps extends PanelEditorProps<SimpleOptions> {
-	/** color of border */
-	color: string;
 	/** object CoordinateSpace */
 	uneCoor: RegionClass;
 	/** use limit */
 	useLimit: boolean;
 	/** limit */
-	limit?: CoordinateSpaceInitialClass;
-	/** data in tooltip */
-	contentTooltip: JSX.Element;
+	limit?: ICoord4D;
 	/** id region */
 	id: string;
 	/** if button SimplePanel is active, block all onClick region space */
@@ -52,6 +47,13 @@ interface ILowerLimit {
 	sizeBorder: number;
 }
 
+interface IColor {
+	/** base color */
+	color: string;
+	/** transparency level */
+	transparency: string;
+}
+
 /**
  * Draw rectangle
  */
@@ -65,6 +67,47 @@ export default class DrawRectangleExtend extends React.Component<IProps, IState>
 			sizeBorder: 1,
 			htmlResult: <div></div>,
 		};
+	}
+
+	/** parse color for svg */
+	public parseColor = (color: string): IColor => {
+		let colorEdit: string = color;
+		let transparency: string = '';
+		if (color.indexOf('#') > -1) {
+			colorEdit = color.replace('rgba', 'rgb');
+			if (colorEdit.indexOf(',') > -1) {
+				const arrayColor: string[] = colorEdit.split(',');
+				colorEdit = arrayColor[0] + ',' + arrayColor[1] + ',' + arrayColor[2] + ')';
+				if (arrayColor.length > 3) {
+					transparency = arrayColor[3].replace(')', '');
+				}
+			}
+		}
+		return { 'color': colorEdit, 'transparency': transparency };
+	}
+
+
+	/**
+	 * Edit color Zone in SVG
+	 * @param {string} id id is equal to zone for change color in Svg
+	 * @param {string} color define the color for Svg zone
+	 */
+	public editColorSvgZone = (id: string, color: string, border: string, sizeBorder: string): void => {
+		const colorSVG: IColor = this.parseColor(color);
+		const colorBorderSVG: IColor = this.parseColor(border);
+		const changeColorElement = document.getElementById(id);
+
+		if (changeColorElement) {
+			changeColorElement.style.fill = colorSVG.color;
+			changeColorElement.style.fillOpacity = colorSVG.transparency;
+			changeColorElement.style.stroke = colorBorderSVG.color;
+			changeColorElement.style.strokeOpacity = colorBorderSVG.transparency;
+			changeColorElement.style.strokeWidth = sizeBorder;
+			// changeColorElement.addEventListener('load', () => {
+			// 	changeColorElement.addEventListener('mouseover', () => console.log('over'));
+			// 	changeColorElement.addEventListener('mouseout', () => console.log('out'));
+			// });
+		}
 	}
 
 	/**
@@ -142,27 +185,50 @@ export default class DrawRectangleExtend extends React.Component<IProps, IState>
 
 		if (this.props.uneCoor.colorMode && value) {
 			for (const line of lowerLimit) {
-				const min: string = line.seuilMin.replace('>', '');
+				const min: string = line.lowerLimitMin.replace('>', '');
 				const minFloat: number = parseFloat(min);
-				const maxFloat: number = parseFloat(line.seuilMax);
-				if ((minFloat <= value || (!line.seuilMin))
-					&& (maxFloat >= value || (!line.seuilMax))) {
+				const maxFloat: number = parseFloat(line.lowerLimitMax);
+				if ((minFloat <= value || (!line.lowerLimitMin))
+					&& (maxFloat >= value || (!line.lowerLimitMax))) {
 					if (lowerLimit.length > 0) {
-						result.colorBack = this.props.uneCoor.traceBack ? line.couleurFond : '';
-						result.colorBorder = this.props.uneCoor.traceBorder ? line.couleurContour : '';
-						result.sizeBorder = this.props.uneCoor.traceBorder ? parseInt(line.sizeContour, 10) : 0;
+						result.colorBack = this.props.uneCoor.traceBack ? line.backColor : '';
+						result.colorBorder = this.props.uneCoor.traceBorder ? line.borderColor : '';
+						result.sizeBorder = this.props.uneCoor.traceBorder ? parseInt(line.sizeBorder, 10) : 0;
 						break;
 					}
 				}
 			}
 		} else {
 			if (lowerLimit.length > 0) {
-				result.colorBack = this.props.uneCoor.traceBack ? lowerLimit[0].couleurFond : '';
-				result.colorBorder = this.props.uneCoor.traceBorder ? lowerLimit[0].couleurContour : '';
-				result.sizeBorder = this.props.uneCoor.traceBorder ? parseInt(lowerLimit[0].sizeContour, 10) : 0;
+				result.colorBack = this.props.uneCoor.traceBack ? lowerLimit[0].backColor : '';
+				result.colorBorder = this.props.uneCoor.traceBorder ? lowerLimit[0].borderColor : '';
+				result.sizeBorder = this.props.uneCoor.traceBorder ? parseInt(lowerLimit[0].sizeBorder, 10) : 0;
 			}
 		}
 		return (result);
+	}
+
+	/** search is key and keyValue is in name query */
+	public searchNameIsKey = (query: DataFrame, mainMetric: IMetric): boolean => {
+		if (mainMetric.key === '' && mainMetric.keyValue === '') {
+			return true;
+		}
+		const nameQuery: string[] = query.name?.split(',').map((value) => {
+			return value.replace(/[\"{}]/gm, '');
+		}) || [];
+		if (nameQuery && nameQuery.length > 0) {
+			for (const oneQuery of nameQuery) {
+				const keyValue: string[] = oneQuery.split('=');
+				if (oneQuery.length === 2) {
+					console.log(keyValue);
+					if (keyValue[0] === mainMetric.key
+						&& keyValue[1] === mainMetric.keyValue) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	/** axios requete to test */
@@ -172,50 +238,95 @@ export default class DrawRectangleExtend extends React.Component<IProps, IState>
 			backgroundColor: this.props.uneCoor.textObj.colorBack,
 		} as CSSProperties;
 		let region: RegionClass = this.props.uneCoor;
-
+		const debug: number[] = [];
+console.log(this.props.data);
 		reqMetricRegion(region, this.props);
 		if (region.mainMetric.returnQuery
-			&& region.mainMetric.returnQuery.fields.length > 0
-			&& region.mainMetric.returnQuery.fields[0].values) {
+			&& region.mainMetric.returnQuery.length > 0) {
 			let cnt: number = 0;
+			let countValue: number = 0;
 			const sizeQuery: number = region.mainMetric.returnQuery?.length || 0;
 
-			for (let i: number = 0; i < sizeQuery; i++) {
-				if (region.mainMetric.returnQuery.fields[0].values.get(i)) {
-					cnt += region.mainMetric.returnQuery.fields[0].values.get(i);
+			for (const line of region.mainMetric.returnQuery) {
+				// console.log(line);
+				if (region.label === 'PC 2') {
+					console.log(this.searchNameIsKey(line, region.mainMetric).toString()
+						+ ' - ' + (line.name || 'null'));
+				}
+				for (let i: number = 0; i < sizeQuery; i++) {
+					if (line.fields[0].values.get(i)) {
+						cnt += line.fields[0].values.get(i);
+						debug.push(line.fields[0].values.get(i));
+						++countValue;
+					}
 				}
 			}
-			cnt /= sizeQuery;
+			cnt /= countValue;
+			// console.log('Prometheus data: ' + cnt.toString());
+			// console.log(debug);
+			// console.log(debug.length);
+
 
 			const lowerLimit: ILowerLimit = this.getLowerLimit(cnt);
 
-			this.setState({
-				tooltipValue: <div style={styleTooltip}>
-					<a href={region.linkURL.hoveringTooltipLink}>
-						{region.linkURL.hoveringTooltipText}
-					</a>
-					<p>{region.mainMetric.keyValue}</p>
-					<p>{cnt.toString() + ' ' + region.textObj.unite}</p>
-				</div>,
-				backgroundColor: lowerLimit.colorBack,
-				borderColor: lowerLimit.colorBorder,
-				sizeBorder: lowerLimit.sizeBorder,
-			});
-			// }
+			if (this.props.isEnabled) {
+				this.setState({
+					tooltipValue: <div style={styleTooltip}>
+						<a href={region.linkURL.hoveringTooltipLink}>
+							{region.linkURL.hoveringTooltipText}
+						</a>
+						<p>{region.mainMetric.keyValue}</p>
+						<p>{cnt.toString() + ' ' + region.textObj.unit}</p>
+					</div>,
+					backgroundColor: lowerLimit.colorBack,
+					borderColor: lowerLimit.colorBorder,
+					sizeBorder: lowerLimit.sizeBorder,
+				});
+			} else {
+				this.setState({
+					tooltipValue: <div style={styleTooltip}>
+						<p>{region.mainMetric.keyValue}</p>
+						<p>{cnt.toString() + ' ' + region.textObj.unit}</p>
+					</div>,
+					backgroundColor: lowerLimit.colorBack,
+					borderColor: lowerLimit.colorBorder,
+					sizeBorder: lowerLimit.sizeBorder,
+				});
+			}
+			if (this.props.uneCoor.mode) {
+				this.editColorSvgZone(this.props.uneCoor.idSVG,
+					lowerLimit.colorBack, lowerLimit.colorBorder, lowerLimit.sizeBorder.toString());
+			}
 		} else {
 			const lowerLimit: ILowerLimit = this.getLowerLimit();
 
-			this.setState({
-				tooltipValue: <div style={styleTooltip}>
-					<a href={this.props.uneCoor.linkURL.hoveringTooltipLink}>
-						{this.props.uneCoor.linkURL.hoveringTooltipText}
-					</a>
-					<p>NaN</p>
-				</div>,
-				backgroundColor: lowerLimit.colorBack,
-				borderColor: lowerLimit.colorBorder,
-				sizeBorder: lowerLimit.sizeBorder,
-			});
+			if (this.props.uneCoor.mode) {
+				this.editColorSvgZone(this.props.uneCoor.idSVG,
+					lowerLimit.colorBack, lowerLimit.colorBorder, lowerLimit.sizeBorder.toString());
+			}
+
+			if (this.props.isEnabled) {
+				this.setState({
+					tooltipValue: <div style={styleTooltip}>
+						<a href={this.props.uneCoor.linkURL.hoveringTooltipLink}>
+							{this.props.uneCoor.linkURL.hoveringTooltipText}
+						</a>
+						<p>NaN</p>
+					</div>,
+					backgroundColor: lowerLimit.colorBack,
+					borderColor: lowerLimit.colorBorder,
+					sizeBorder: lowerLimit.sizeBorder,
+				});
+			} else {
+				this.setState({
+					tooltipValue: <div style={styleTooltip}>
+						<p>NaN</p>
+					</div>,
+					backgroundColor: lowerLimit.colorBack,
+					borderColor: lowerLimit.colorBorder,
+					sizeBorder: lowerLimit.sizeBorder,
+				});
+			}
 		}
 	}
 
@@ -227,17 +338,6 @@ export default class DrawRectangleExtend extends React.Component<IProps, IState>
 		if (prevProps.isEnabled !== this.props.isEnabled) {
 			this.componentDidMount();
 		}
-		// if (prevProps.uneCoor !== this.props.uneCoor
-		// 	|| prevProps.contentTooltip !== this.props.contentTooltip
-		// 	|| prevProps.data.series !== this.props.data.series) {
-		// 	this.reqAxios();
-		// }
-		// if (prevState.tooltipValue !== this.state.tooltipValue
-		// 	|| prevState.backgroundColor !== this.state.backgroundColor
-		// 	|| prevState.borderColor !== this.state.borderColor
-		// 	|| prevState.sizeBorder !== this.state.sizeBorder) {
-		// 	this.renduHTML();
-		// }
 	}
 
 	/** load prometheus value */
@@ -245,12 +345,15 @@ export default class DrawRectangleExtend extends React.Component<IProps, IState>
 		await Promise.resolve('Success').then(() => {
 			this.reqAxios();
 		});
-		this.renduHTML();
+		await Promise.resolve('Success').then(() => {
+			this.renduFinal();
+		});
 	}
 
-	/** rendu html. Update when tooltipValue state change */
-	public renduHTML = () => {
-		// const coordinate: RegionClass = this.props.uneCoor;
+	public renduFinal = () => {
+		if (this.props.uneCoor.mode) {
+			return;
+		}
 		const line: RegionClass = this.props.uneCoor;
 		let pLeft: string;
 		let pRight: string;
@@ -261,7 +364,6 @@ export default class DrawRectangleExtend extends React.Component<IProps, IState>
 		let yMin: number = 0;
 		let yMax: number = 0;
 		const pBorder: string = this.state.sizeBorder.toString() + 'px solid ' + this.state.borderColor;
-
 		xMin = (isNumFloat(line.coords.xMin)) ? parseInt(line.coords.xMin, 10) : 0;
 		xMax = (isNumFloat(line.coords.xMax)) ? parseInt(line.coords.xMax, 10) : 0;
 		yMin = (isNumFloat(line.coords.yMin)) ? parseInt(line.coords.yMin, 10) : 0;
@@ -343,6 +445,7 @@ export default class DrawRectangleExtend extends React.Component<IProps, IState>
 								{this.props.uneCoor.label}
 							</div>
 						}
+						<h3>coucou</h3>
 					</div>
 				</Tooltip>,
 			}

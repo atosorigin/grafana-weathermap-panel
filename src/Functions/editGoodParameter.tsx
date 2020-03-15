@@ -1,5 +1,6 @@
-import { CoordinateSpaceInitialClass } from '../Models/CoordinateSpaceInittialClass';
+// import { CoordinateSpaceInitialClass } from '../Models/CoordinateSpaceInittialClass';
 import { RegionClass } from '../Models/RegionClass';
+import { ICoordinateSpaceInitial } from 'types';
 
 /**
  * Edit the parameter in Coor object
@@ -9,18 +10,16 @@ import { RegionClass } from '../Models/RegionClass';
  * @returns {Coor} object edit
  */
 export const editGoodParameter = (
-	name: string, editCoor: CoordinateSpaceInitialClass,
-	newValue: string): CoordinateSpaceInitialClass => {
+	name: string, editCoor: ICoordinateSpaceInitial,
+	newValue: string): ICoordinateSpaceInitial => {
 	if (name.startsWith('positionXMin')) {
-		editCoor.setXMin(newValue);
+		editCoor.coordinate.xMin = newValue;
 	} else if (name.startsWith('positionXMax')) {
-		editCoor.setXMax(newValue);
+		editCoor.coordinate.xMax = newValue;
 	} else if (name.startsWith('positionYMin')) {
-		editCoor.setYMin(newValue);
+		editCoor.coordinate.yMin = newValue;
 	} else if (name.startsWith('positionYMax')) {
-		editCoor.setYMax(newValue);
-	} else if (name.startsWith('label')) {
-		editCoor.setLabel(newValue);
+		editCoor.coordinate.yMax = newValue;
 	}
 	return editCoor;
 };

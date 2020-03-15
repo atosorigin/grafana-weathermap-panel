@@ -1,0 +1,98 @@
+{
+    "links": [{
+      "id": 2,
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "meta": "",
+      "lowerLimit": [
+        {
+          "id": 0,
+          "lowerLimitMin": "",
+          "lowerLimitMax": "10",
+          "backColor": "",
+          "borderColor": "",
+          "sizeBorder": ""
+        },
+        {
+          "id": 1,
+          "lowerLimitMin": ">10",
+          "lowerLimitMax": "90",
+          "backColor": "",
+          "borderColor": "",
+          "sizeBorder": ""
+        },
+        {
+          "id": 2,
+          "lowerLimitMin": ">90",
+          "lowerLimitMax": "",
+          "backColor": "",
+          "borderColor": "",
+          "sizeBorder": ""
+        }
+      ],
+      "label": "",
+      "textObj": {
+        "legend": "",
+        "value": "",
+        "unit": "",
+        "isTextRegion": false,
+        "colorBack": "",
+        "colorText": "",
+        "styleText": "",
+        "generateObjectText": false,
+        "legendElement": "",
+        "numericFormatElement": "",
+        "unityMesureElement": "",
+        "displayObjectInText": false,
+        "displayObjectPermanently": false,
+        "addColorTextElement": false,
+        "colorTextElement": "",
+        "addColorBackElement": false,
+        "colorBackElement": ""
+      },
+      "mainMetric": {
+        "key": "",
+        "unit": "",
+        "format": "",
+        "keyValue": "",
+        "refId": "",
+        "returnQuery": {
+          "fields": [],
+          "length": 0
+        }
+      },
+      "metrics": [],
+      "colorMode": true,
+      "traceBack": true,
+      "traceBorder": true,
+      "positionParameter": {
+        "labelAPositionX": "0",
+        "labelAPositionY": "0",
+        "labelBPositionX": "0",
+        "labelBPositionY": "0",
+        "tooltipPositionA": {},
+        "tooltipPositionB": {}
+      },
+      "name": "orientedLink2",
+      "orientationLink": {
+        "label": "Unidirectional",
+        "value": "AB"
+      },
+      "pointAPositionX": "-62",
+      "pointAPositionY": "54",
+      "colorCoordinateA": "#5794F2",
+      "pointBPositionX": "-32",
+      "pointBPositionY": "54",
+      "colorCoordinateB": "#E54658",
+      "valueMainMetricA": "",
+      "valueMainMetricB": "",
+      "pointIn": {},
+      "pointOut": {},
+      "regionIn": {},
+      "regionOut": {},
+      "zIndex": 0
+    }]
+  }

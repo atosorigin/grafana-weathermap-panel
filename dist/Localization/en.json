@@ -1,7 +1,7 @@
 {
 	"objectVisibility": {
 		"decalCenterPointTextRegion": "Shift the center point of the text region",
-		"decalCenterBubble": "Shift the point or center of a bubble",
+		"decalCenterBubble": "Shift the point or center of a tooltip",
 		"forceCalqueLevel": "Force a specific layer level",
 		"forceCourbSpecificLink": "Force a specific link curvature",
 		"calcLevel": "Layer level",
@@ -50,7 +50,7 @@
 		"graphicObject": "Graphic object",
 		"variableColor": "Variable color",
 		"traceBackground": "Trace the background",
-		"traceContour": "Trace the outline"
+		"traceContour": "Trace the border"
 	},
 	"metricPrincipalSetting": {
 		"followLink": "Following link",
@@ -61,8 +61,8 @@
 	},
 	"colorVariable": {
 		"switchBackgroundColor": "Edit background color",
-		"switchOutlineColor": "Edit outline color",
-		"thicknessOutline": "Thickness outline",
+		"switchOutlineColor": "Edit border color",
+		"thicknessOutline": "Size border",
 		"variationNumber": "Variation number",
 		"number": "Number",
 		"addColor": "Add color",
@@ -82,7 +82,7 @@
 		"colorTextOptional": "Optional color text",
 		"textStyle": "Text style",
 		"style": "Style",
-		"textBubble": "Text bubble",
+		"textBubble": "Text tooltip",
 		"generateTextObject": "Generate text object",
 		"auxiliaryElement": "Auxiliary element",
 		"digitalFormatting": "Digital formatting (if metric)",

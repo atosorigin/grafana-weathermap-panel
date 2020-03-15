@@ -63,11 +63,11 @@ class AddCoordinate extends React.Component<IProps, IState> {
 	public callBack = async (
 		id: number, newCoordinate?: RegionClass) => {
 		if (newCoordinate) {
-			const allCoordinateSpace: RegionClass[] = this.props.options.arrayCoordinateSpace.slice();
+			const allCoordinateSpace: RegionClass[] = this.props.options.regionCoordinateSpace.slice();
 			await this.setAsyncOption(newCoordinate.id);
 			this.props.onOptionsChange({
 				...this.props.options,
-				arrayCoordinateSpace: allCoordinateSpace.concat(newCoordinate),
+				regionCoordinateSpace: allCoordinateSpace.concat(newCoordinate),
 			});
 			if (this.props.returnEditMode) {
 				this.props.returnEditMode();

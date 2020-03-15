@@ -1,28 +1,30 @@
 import { RegionClass } from '../Models/RegionClass';
 import { PointClass } from '../Models/PointClass';
-import { LinkClass } from '../Models/LinkClass';
 import { DataFrame } from '@grafana/data';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 
 
 export const reqMetricRegion = (region: RegionClass, props: any) => {
-	let data: DataFrame = { 'fields': [], 'length': 0 };
+	const data: DataFrame[] = [];
+
 	for (const line of props.data.series) {
+		console.log(line.refId);
 		if (line.refId === region.mainMetric.refId) {
-			data = line;
-			break;
+			data.push(line);
 		}
 	}
 	region.mainMetric.returnQuery = data;
+	// console.group('reqMetricRegion');
+	// console.log(data);
+	// console.groupEnd();
 };
 
 export const reqMetricAuxRegion = (region: RegionClass, props: any) => {
-	let data: DataFrame = { 'fields': [], 'length': 0 };
+	const data: DataFrame[] = [];
 	for (const metric of region.metrics) {
 		for (const line of props.data.series) {
 			if (line.refId === metric.refId) {
-				data = line;
-				break;
+				data.push(line);
 			}
 		}
 		metric.returnQuery = data;
@@ -30,47 +32,43 @@ export const reqMetricAuxRegion = (region: RegionClass, props: any) => {
 };
 
 export const reqMetricPoint = (point: PointClass, props: any) => {
-	let data: DataFrame = { 'fields': [], 'length': 0 };
+	const data: DataFrame[] = [];
 	for (const line of props.data.series) {
 		if (line.refId === point.mainMetric.refId) {
-			data = line;
-			break;
+			data.push(line);
 		}
 	}
 	point.mainMetric.returnQuery = data;
 };
 
 export const reqMetricAuxPoint = (point: PointClass, props: any) => {
-	let data: DataFrame = { 'fields': [], 'length': 0 };
+	const data: DataFrame[] = [];
 	for (const metric of point.metrics) {
 		for (const line of props.data.series) {
 			if (line.refId === metric.refId) {
-				data = line;
-				break;
+				data.push(line);
 			}
 		}
 		metric.returnQuery = data;
 	}
 };
 
-export const reqMetricLink = (link: LinkClass, props: any) => {
-	let data: DataFrame = { 'fields': [], 'length': 0 };
+export const reqMetricLink = (link: OrientedLinkClass, props: any) => {
+	const data: DataFrame[] = [];
 	for (const line of props.data.series) {
 		if (line.refId === link.mainMetric.refId) {
-			data = line;
-			break;
+			data.push(line);
 		}
 	}
 	link.mainMetric.returnQuery = data;
 };
 
-export const reqMetricAuxLink = (link: LinkClass, props: any) => {
-	let data: DataFrame = { 'fields': [], 'length': 0 };
+export const reqMetricAuxLink = (link: OrientedLinkClass, props: any) => {
+	const data: DataFrame[] = [];
 	for (const metric of link.metrics) {
 		for (const line of props.data.series) {
 			if (line.refId === metric.refId) {
-				data = line;
-				break;
+				data.push(line);
 			}
 		}
 		metric.returnQuery = data;
@@ -78,23 +76,21 @@ export const reqMetricAuxLink = (link: LinkClass, props: any) => {
 };
 
 export const reqMetricOrientedLink = (orientedLink: OrientedLinkClass, props: any) => {
-	let data: DataFrame = { 'fields': [], 'length': 0 };
+	const data: DataFrame[] = [];
 	for (const line of props.data.series) {
 		if (line.refId === orientedLink.mainMetric.refId) {
-			data = line;
-			break;
+			data.push(line);
 		}
 	}
 	orientedLink.mainMetric.returnQuery = data;
 };
 
 export const reqMetricAuxOrientedLink = (orientedLink: OrientedLinkClass, props: any) => {
-	let data: DataFrame = { 'fields': [], 'length': 0 };
-	for (const metric of orientedLink.metrics){
+	const data: DataFrame[] = [];
+	for (const metric of orientedLink.metrics) {
 		for (const line of props.data.request.targets) {
 			if (line.expr === metric.expr) {
-				data = line;
-				break;
+				data.push(line);
 			}
 		}
 		metric.returnQuery = data;
@@ -103,7 +99,7 @@ export const reqMetricAuxOrientedLink = (orientedLink: OrientedLinkClass, props:
 
 export const reqUpdateMetrics = (props: any) => {
 	// Update regions
-	for (const region of props.options.arrayCoordinateSpace) {
+	for (const region of props.options.regionCoordinateSpace) {
 		reqMetricRegion(region, props);
 		reqMetricAuxRegion(region, props);
 	}

@@ -1,9 +1,14 @@
 # Changelog
 
+## v0.35 (2020-03-11)
+
+- add df
+- Fixed
+
 ## v0.30 (2020-02-29)
 
 - Add legende
-- Fixes panel
+- Fixed panel
 
 ## v0.25 (2020-02-12)
 

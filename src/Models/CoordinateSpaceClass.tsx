@@ -2,6 +2,7 @@ import { LinkURLClass } from './LinkURLClass';
 import { LowerLimitClass } from './LowerLimitClass';
 import { TextObject } from './TextObjectClass';
 import { IMetric } from 'types';
+import { PositionParameterClass } from 'Models/PositionParameterClass';
 
 export class CoordinateSpaceClass {
 	/** coordinate id */
@@ -17,6 +18,7 @@ export class CoordinateSpaceClass {
 	public colorMode: boolean;
 	public traceBack: boolean;
 	public traceBorder: boolean;
+	public positionParameter: PositionParameterClass;
 
 	constructor(
 		id: number,
@@ -29,7 +31,8 @@ export class CoordinateSpaceClass {
 		metrics: Array<IMetric>,
 		colorMode: boolean,
 		traceBack: boolean,
-		traceBorder: boolean
+		traceBorder: boolean,
+		positionParameter: PositionParameterClass
 	) {
 		this.id = id;
 		this.linkURL = linkURL;
@@ -42,5 +45,6 @@ export class CoordinateSpaceClass {
 		this.colorMode = colorMode;
 		this.traceBack = traceBack;
 		this.traceBorder = traceBorder;
+		this.positionParameter = positionParameter;
 	}
 }

@@ -34,7 +34,7 @@ export class InputClass {
 	 */
 	public placeholder?: string;
 	/**
-	 * la valeur de l'input
+	 * la value de l'input
 	 */
 	public value?: string;
 

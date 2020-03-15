@@ -19,6 +19,8 @@ import ParametresGeneriques from 'components/Parametrage/parametresGeneriques';
 import ManageLowerLimit from 'components/Parametrage/manageLowerLimit';
 import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
+import PositionParameter from '../components/Parametrage/positionParameters';
+import { PositionParameterClass } from 'Models/PositionParameterClass';
 
 
 
@@ -40,7 +42,7 @@ interface IProps extends PanelEditorProps<SimpleOptions> {
 	/**
 	 * Espace de coordonnées existants
 	 */
-	arrayCoordinateSpace: RegionClass[];
+	regionCoordinateSpace: RegionClass[];
 
 }
 
@@ -118,14 +120,12 @@ export default class PointForm extends React.Component<IProps, IState> {
 			return;
 		}
 
-		//console.log(this.props.options.arrayPoints)
-
 		for (const element of this.props.options.arrayPoints) {
 			setTimeout(() => {
 				this.addInput(element.id, element.label, element.coordinateSpace, element.drawGraphicMarker, element.shape, element.sizeWidth,
 					element.sizeHeight, element.rotateArrow, element.positionShapeX, element.positionShapeY,
-					element.positionLabelX, element.positionLabelY, element.color,
-					element.mainMetric.refId, element.mainMetric.key, element.mainMetric.keyValue, element.textObj, element.lowerLimit);
+					element.color, element.mainMetric.refId, element.mainMetric.key, element.mainMetric.keyValue,
+					element.textObj, element.lowerLimit, element.positionParameter);
 			}, 100);
 		}
 
@@ -135,7 +135,7 @@ export default class PointForm extends React.Component<IProps, IState> {
 	}
 
 	public defineDataCoordinateSpace(): SelectableValue<RegionClass>[] {
-		const { arrayCoordinateSpace } = this.props;
+		const { regionCoordinateSpace } = this.props;
 		const dataEspaceCoor: SelectableValue<RegionClass>[] = [];
 		const optionNull: SelectableValue<RegionClass> = { label: 'Initial space' };
 
@@ -143,7 +143,7 @@ export default class PointForm extends React.Component<IProps, IState> {
 		dataEspaceCoor.push(optionNull);
 
 		// On ajoute aux options de choix les espace de coordonnées existant
-		arrayCoordinateSpace.forEach(coordinateSpace => {
+		regionCoordinateSpace.forEach(coordinateSpace => {
 
 			const option: SelectableValue<RegionClass> = {
 				label: coordinateSpace.label,
@@ -163,9 +163,9 @@ export default class PointForm extends React.Component<IProps, IState> {
 		id?: number, label?: string, coordinateSpaceAssociate?: SelectableValue<RegionClass>,
 		drawGraphicMarker?: SelectableValue<string>, shape?: SelectableValue<string>,
 		sizeWidth?: SelectableValue<string>, sizeHeight?: SelectableValue<string>, rotateArrow?: string,
-		positionShapeX?: string, positionShapeY?: string, positionLabelX?: string,
-		positionLabelY?: string, color?: string, refIdMainMetric?: string, keyMainMetric?: string,
-		keyValueMainMetric?: string, textObj?: TextObject, seuil?: LowerLimitClass[]) => {
+		positionShapeX?: string, positionShapeY?: string, color?: string, refIdMainMetric?: string,
+		keyMainMetric?: string, keyValueMainMetric?: string, textObj?: TextObject, seuil?: LowerLimitClass[],
+		positionParameter?: PositionParameterClass) => {
 
 		const num: number = id || this.props.options.indexPoint + 1;
 		const finalArray: InputSelectableClass[] = createInputsPoint(num, this.defineDataCoordinateSpace());
@@ -173,19 +173,23 @@ export default class PointForm extends React.Component<IProps, IState> {
 			false, '', '', '',
 			false, false, false, '', false, '');
 		const parametrageMetric: LinkURLClass = new LinkURLClass('', '', '');
+		const initPositionParameter: PositionParameterClass = positionParameter || new PositionParameterClass('0', '0', '0', '0', {}, {});
 
 		this.setState((prevState: IState) => ({
 			arrayPointClass: prevState.arrayPointClass.concat(new PointClass(
 				num, parametrageMetric, '', seuil || [], label || '', initTextObject,
 				{
-					'key': keyMainMetric || '', 'unit': '', 'format': '',
-					'keyValue': keyValueMainMetric || '', 'refId': refIdMainMetric || ''
-				}, [], false, false, false,
+					'key': keyMainMetric || '',
+					'unit': '',
+					'format': '',
+					'keyValue': keyValueMainMetric || '',
+					'refId': refIdMainMetric || '',
+					'manageValue': 'avg',
+				}, [], false, false, false, initPositionParameter,
 				'point' + num.toString(), '', coordinateSpaceAssociate || {}, drawGraphicMarker || { label: 'Yes', value: 'true' },
 				shape || { label: 'Circle', value: 'circle' }, sizeWidth || { label: 'Small', value: 'small' },
 				sizeHeight || { label: 'Small', value: 'small' }, rotateArrow || '0', positionShapeX || '0', positionShapeY || '0',
-				positionLabelX || '0', positionLabelY || '0', color || 'black',
-				[], [], [], [])),
+				color || 'black', [], [], [], [])),
 
 			arrayInput: prevState.arrayInput.concat([
 				new ArrayInputSelectableClass(num, finalArray),
@@ -332,10 +336,6 @@ export default class PointForm extends React.Component<IProps, IState> {
 				value = this.state.arrayPointClass[idx].positionShapeX;
 			} else if (param.startsWith('positionShapeY')) {
 				value = this.state.arrayPointClass[idx].positionShapeY;
-			} else if (param.startsWith('positionLabelX')) {
-				value = this.state.arrayPointClass[idx].positionLabelX;
-			} else if (param.startsWith('positionLabelY')) {
-				value = this.state.arrayPointClass[idx].positionLabelY;
 			} else if (param.startsWith('label')) {
 				value = this.state.arrayPointClass[idx].label;
 			} else if (param.startsWith('color')) {
@@ -411,21 +411,24 @@ export default class PointForm extends React.Component<IProps, IState> {
 		newValue.colorMode = coordiante.colorMode;
 		newValue.traceBorder = coordiante.traceBorder;
 		newValue.traceBack = coordiante.traceBack;
-		// newValue.lowerLimit = coordiante.lowerLimit;
 		this.props.options.arrayPoints[id || 0] = newValue;
+		this.callBack();
 
+	}
+
+	public callBackPositionParameter = (positionParameter: PositionParameterClass, id?: number) => {
+		const pointToUpdate: PointClass = this.state.arrayPointClass[id || 0];
+		pointToUpdate.positionParameter = positionParameter;
+		this.props.options.arrayPoints[id || 0] = pointToUpdate;
+		this.callBack();
 	}
 
 	/** save lower limit data */
 	public callBackLowerLimit = (lowerLimit: LowerLimitClass[], id?: number) => {
-
-		console.log(id)
-		const newValue: PointClass = this.state.arrayPointClass[id || 0];
-		console.log(this.state.arrayPointClass)
-		console.log(this.state.arrayPointClass[id || 0])
-		newValue.lowerLimit = lowerLimit;
-		this.props.options.arrayPoints[id || 0] = newValue;
-
+		const pointToUpdate: PointClass = this.state.arrayPointClass[id || 0];
+		pointToUpdate.lowerLimit = lowerLimit;
+		this.props.options.arrayPoints[id || 0] = pointToUpdate;
+		this.callBack();
 	}
 
 	/**
@@ -440,7 +443,6 @@ export default class PointForm extends React.Component<IProps, IState> {
 		let itemButton: JSX.Element = <div></div>;
 		let mapItems: JSX.Element[] = [];
 		let finalItem: JSX.Element[] = [];
-		//console.log(this.state.arrayPointClass)
 
 		for (const line of arrayInput) {
 			mapItems = [];
@@ -549,7 +551,6 @@ export default class PointForm extends React.Component<IProps, IState> {
 				mapItems.push(item);
 			})
 
-			//console.log(line.id)
 
 			const divKey: string = 'inputPoint' + line.id.toString();
 			const newInput: JSX.Element =
@@ -587,13 +588,24 @@ export default class PointForm extends React.Component<IProps, IState> {
 								lowerLimitCallBack={this.callBackLowerLimit}
 								id={index} />
 						</div>
+						<div>
+							<PositionParameter
+								options={this.props.options}
+								onOptionsChange={this.props.onOptionsChange}
+								data={this.props.data}
+								coordinateSpace={this.state.arrayPointClass[index]}
+								callBackToParent={this.callBackPositionParameter}
+								isPoint={true}
+								isLink={false}
+								isRegion={false}
+								id={index} />
+						</div>
 						{mapItems}
 					</Collapse>
 
 					<div style={{ marginTop: '4px' }} >
 						{itemButton}
 					</div>
-
 				</div>;
 			finalItem = finalItem.concat(newInput);
 			index++;
@@ -639,15 +651,23 @@ export default class PointForm extends React.Component<IProps, IState> {
 		this.loadCoorParent();
 	}
 
-	public componentWillReceiveProps() {
-		this.loadCoorParent();
-		this.generateInputsPoints();
-	}
+	// public componentWillReceiveProps() {
+	// 	this.loadCoorParent();
+	// 	this.generateInputsPoints();
+	// }
+
+	// public setStateAsync = (state: {
+	// 	arrayInput: ArrayInputSelectableClass[],
+	// 	arrayPointClass: PointClass[],
+	// 	debug: boolean,
+	// }) => {
+	// 	return new Promise((resolve) => this.setState(state, resolve));
+	// }
 
 	/** update state when props uneCoor change */
-	public componentDidUpdate(prevProps: IProps) {
-			this.loadCoorParent();
-			this.generateInputsPoints();
+	public componentDidUpdate = (prevProps: IProps) => {
+		this.loadCoorParent();
+		this.generateInputsPoints();
 	}
 
 
@@ -667,7 +687,7 @@ export default class PointForm extends React.Component<IProps, IState> {
 
 		return (
 			<div>
-				<div style={{marginBottom: '5px'}}>
+				<div style={{ marginBottom: '5px' }}>
 					<Button onClick={() => {
 						this.setState({
 							arrayInput: [],

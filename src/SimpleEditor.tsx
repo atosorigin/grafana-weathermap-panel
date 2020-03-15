@@ -12,7 +12,7 @@ import { PointClass } from 'Models/PointClass';
 
 import CoordinateSpaceInitial from 'components/coordinateSpaceInitial';
 import DashboardData from 'components/dashboardData';
-import LinkForm from 'components/linkForm';
+//import LinkForm from 'components/linkForm';
 import MainTarget from 'components/mainTarget';
 import ManageCoordinateSpace from 'components/CoordinateSpace/manageCoordinateSpace';
 import ObjectVisibility from 'components/objectVisibility';
@@ -22,6 +22,7 @@ import PanelData from 'components/panelData';
 import PointForm from 'components/pointForm';
 import RendutextDefault from 'components/renduTextDefault';
 import TimeSelector from 'components/timeSelector';
+import ImportInput from 'components/importInput';
 
 import 'style/SimpleEditor.css';
 
@@ -33,7 +34,7 @@ interface IState {
 	collapsePanelData: boolean;
 	collapseTargets: boolean;
 	/** stock coordinates in array object */
-	arrayCoordinateSpace: CoordinateSpaceClass[];
+	regionCoordinateSpace: CoordinateSpaceClass[];
 
 	/** collapse */
 	collapseDefaultText: boolean;
@@ -96,7 +97,7 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 			collapseDashboardData: false,
 			collapsePanelData: false,
 			collapseTimeSelector: false,
-			arrayCoordinateSpace: this.props.options.arrayCoordinateSpace,
+			regionCoordinateSpace: this.props.options.regionCoordinateSpace,
 			collapseDefaultText: false,
 			collapseDisplay: false,
 			collapseGenericSettings: false,
@@ -113,7 +114,7 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 			index: 0,
 			collapseTargets: false,
 			collapsePrincipalTarget: false,
-			tabsVariable: [false, false, true, false, false, false, false],
+			tabsVariable: [false, false, false, false, false, false, true],
 			tabsCoordinateSpace: [true, false, false, false],
 		};
 	}
@@ -129,7 +130,7 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 		/**
 		 * new size
 		 */
-		taille: string,
+		size: string,
 		/**
 		 * new style (italic, bold, ...)
 		 */
@@ -138,7 +139,7 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 		this.props.onOptionsChange({
 			...this.props.options,
 			police: datafromChild.police,
-			taille: datafromChild.taille,
+			size: datafromChild.size,
 			style: datafromChild.style,
 		});
 	}
@@ -310,6 +311,11 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 						active={this.state.tabsVariable[5]}
 						onChangeTab={() => this.goToTab(5)}
 					/>
+					<Tab key='tabImportInput'
+						label='Import Files'
+						active={this.state.tabsVariable[6]}
+						onChangeTab={() => this.goToTab(6)}
+					/>
 				</TabsBar>
 				<TabContent>
 					{this.state.tabsVariable[0] &&
@@ -341,11 +347,11 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 									active={this.state.tabsCoordinateSpace[1]}
 									onChangeTab={() => this.goToTabCoordinateSpace(1)}
 								/>
-								<Tab key='tabDisplayLink'
+								{/* <Tab key='tabDisplayLink'
 									label='Link'
 									active={this.state.tabsCoordinateSpace[2]}
 									onChangeTab={() => this.goToTabCoordinateSpace(2)}
-								/>
+								/> */}
 								<Tab key='tabDisplayOrientedLink'
 									label='OrientedLink'
 									active={this.state.tabsCoordinateSpace[3]}
@@ -364,9 +370,9 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 								{
 									this.state.tabsCoordinateSpace[1] &&
 
-									<PointForm 
+									<PointForm
 										callBackFromParent={this.myCallBackArrayPoints.bind(this)}
-										arrayCoordinateSpace={this.props.options.arrayCoordinateSpace}
+										regionCoordinateSpace={this.props.options.regionCoordinateSpace}
 										oldArrayPointClass={this.props.options.arrayPoints}
 										options={this.props.options}
 										onOptionsChange={this.props.onOptionsChange}
@@ -374,20 +380,20 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 									/>
 
 								}
-								{
+								{/* {
 									this.state.tabsCoordinateSpace[2] &&
 
-									<LinkForm arrayCoordinateSpace={this.props.options.arrayCoordinateSpace}
+									<LinkForm regionCoordinateSpace={this.props.options.regionCoordinateSpace}
 										oldArrayLinkClass={this.props.options.arrayLinks}
 										arrayPointClass={this.props.options.arrayPoints}
 										callBackFromParent={this.myCallBackArrayLinks.bind(this)}
 									/>
-								}
+								} */}
 								{
 									this.state.tabsCoordinateSpace[3] &&
 
 									<OrientedLinkForm arrayPoint={this.props.options.arrayPoints}
-										arrayCoordinateSpace={this.props.options.arrayCoordinateSpace}
+										regionCoordinateSpace={this.props.options.regionCoordinateSpace}
 										oldArrayOrientedLinkClass={this.props.options.arrayOrientedLinks}
 										callBackFromParent={this.myCallBackArrayOrientedLinks.bind(this)}
 										options={this.props.options}
@@ -437,7 +443,7 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 									<PointForm
 										oldArrayPointClass={this.props.options.arrayPoints}
 										callBackFromParent={this.myCallBackArrayPoints.bind(this)}
-										arrayCoordinateSpace={this.props.options.arrayCoordinateSpace}
+										regionCoordinateSpace={this.props.options.regionCoordinateSpace}
 										options={this.props.options}
 										onOptionsChange={this.props.onOptionsChange}
 										data={this.props.data}
@@ -445,27 +451,27 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 
 								</Collapse>
 							</div>
-							<div className='CoordinateSpaceInitital'>
+							{/* <div className='CoordinateSpaceInitital'>
 								<Collapse isOpen={this.state.collapseLink}
 									label='Link'
 									onToggle={this.onToggleLink}>
 
 									<LinkForm
-										arrayCoordinateSpace={this.props.options.arrayCoordinateSpace}
+										regionCoordinateSpace={this.props.options.regionCoordinateSpace}
 										oldArrayLinkClass={this.props.options.arrayLinks}
 										arrayPointClass={this.props.options.arrayPoints}
 										callBackFromParent={this.myCallBackArrayLinks.bind(this)}
 									/>
 
 								</Collapse>
-							</div>
+							</div> */}
 							<div className='CoordinateSpaceInitital'>
 								<Collapse isOpen={this.state.collapseOrientedLink}
 									label='Oriented Link'
 									onToggle={this.onToggleOrientedLink}>
 									<OrientedLink
 										arrayPoint={this.props.options.arrayPoints}
-										arrayCoordinateSpace={this.props.options.arrayCoordinateSpace}
+										regionCoordinateSpace={this.props.options.regionCoordinateSpace}
 										oldArrayOrientedLinkClass={this.props.options.arrayOrientedLinks}
 										callBackFromParent={this.myCallBackArrayOrientedLinks.bind(this)}
 										options={this.props.options}
@@ -474,6 +480,13 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 									/>
 								</Collapse>
 							</div>
+						</div>
+					}
+					{
+						this.state.tabsVariable[6] &&
+						<div>
+							<ImportInput options={this.props.options}
+									onOptionsChange={this.props.onOptionsChange} data={this.props.data} />
 						</div>
 					}
 				</TabContent>

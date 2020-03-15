@@ -29,10 +29,6 @@ export const editGoodParameterPoint = (
 		editCoor.positionShapeX = newValue;
 	} else if (name.startsWith('positionShapeY')) {
 		editCoor.positionShapeY = newValue;
-	} else if (name.startsWith('positionLabelX')) {
-		editCoor.positionLabelX = newValue;
-	} else if (name.startsWith('positionLabelY')) {
-		editCoor.positionLabelY = newValue;
 	} else if (name.startsWith('color')) {
 		editCoor.color = newValue;
 	} else if (name.startsWith('refIdMainMetric')) {

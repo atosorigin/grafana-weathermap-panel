@@ -58,7 +58,7 @@ class TextObjects extends React.Component<IProps, IState> {
 	public onChangeLegende = async (value: string) => {
 		const newTextObject: TextObject = this.state.textObject;
 
-		newTextObject.legende = value;
+		newTextObject.legend = value;
 		await this.stateAsyncTextObject({ textObject: newTextObject });
 		this.callBack();
 	}
@@ -67,7 +67,7 @@ class TextObjects extends React.Component<IProps, IState> {
 	public onChangeValeur = async (value: string) => {
 		const newTextObject: TextObject = this.state.textObject;
 
-		newTextObject.valeur = value;
+		newTextObject.value = value;
 		await this.stateAsyncTextObject({ textObject: newTextObject });
 		this.callBack();
 	}
@@ -76,7 +76,7 @@ class TextObjects extends React.Component<IProps, IState> {
 	public onChangeUnite = async (value: string) => {
 		const newTextObject: TextObject = this.state.textObject;
 
-		newTextObject.unite = value;
+		newTextObject.unit = value;
 		await this.stateAsyncTextObject({ textObject: newTextObject });
 		this.callBack();
 	}
@@ -233,11 +233,11 @@ class TextObjects extends React.Component<IProps, IState> {
 				<div>
 					<h4>{l10n.textObject.titleTextObject}</h4>
 					<InputTextField label={l10n.textObject.optionalLegend}
-						key='legendeTextObject'
-						name='legendeTextObject'
+						key='legendTextObject'
+						name='legendTextObject'
 						placeholder={l10n.textObject.legend}
 						required={false}
-						value={this.state.textObject.legende}
+						value={this.state.textObject.legend}
 						_handleChange={(event: {
 							/** call currentTarget to get value */
 							currentTarget: HTMLInputElement,
@@ -249,7 +249,7 @@ class TextObjects extends React.Component<IProps, IState> {
 						name='textUnitObject'
 						placeholder={l10n.textObject.unit}
 						required={false}
-						value={this.state.textObject.unite}
+						value={this.state.textObject.unit}
 						_handleChange={(event: {
 							/** call currentTarget to get value */
 							currentTarget: HTMLInputElement,

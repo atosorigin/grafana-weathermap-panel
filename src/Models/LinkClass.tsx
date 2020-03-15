@@ -6,6 +6,7 @@ import { TextObject } from './TextObjectClass';
 import { IMetric } from 'types';
 import { CoordinateSpaceClass } from './CoordinateSpaceClass';
 import { RegionClass } from './RegionClass';
+import { PositionParameterClass } from './PositionParameterClass';
 
 
 export class LinkClass extends CoordinateSpaceClass {
@@ -52,6 +53,7 @@ export class LinkClass extends CoordinateSpaceClass {
 		colorMode: boolean,
 		traceBack: boolean,
 		traceBorder: boolean,
+		positionParameter: PositionParameterClass,
 		name: string,
 		defineHowToGetCoordonate: SelectableValue<string>,
 		orientationLink: SelectableValue<string>,
@@ -75,7 +77,7 @@ export class LinkClass extends CoordinateSpaceClass {
 		positionYLabelB: string
 	) {
 		super(id, linkURL, meta,
-			lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder);
+			lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter);
 		this.name = name;
 		this.defineHowToGetCoordonate = defineHowToGetCoordonate;
 		this.orientationLink = orientationLink;

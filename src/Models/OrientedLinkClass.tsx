@@ -6,6 +6,7 @@ import { LowerLimitClass } from './LowerLimitClass';
 import { TextObject } from './TextObjectClass';
 import { IMetric } from 'types';
 import { CoordinateSpaceClass } from './CoordinateSpaceClass';
+import { PositionParameterClass } from './PositionParameterClass';
 
 export class OrientedLinkClass extends CoordinateSpaceClass {
 
@@ -19,16 +20,11 @@ export class OrientedLinkClass extends CoordinateSpaceClass {
 	public colorCoordinateB: string;
 	public valueMainMetricA: string;
 	public valueMainMetricB: string;
-	// public labelLinkA: string;
-	// public labelLinkB: string;
-	// public positionXLabelA: string;
-	// public positionYLabelA: string;
-	// public positionXLabelB: string;
-	// public positionYLabelB: string;
 	public pointIn: SelectableValue<PointClass>;
 	public pointOut: SelectableValue<PointClass>;
 	public regionIn: SelectableValue<RegionClass>;
 	public regionOut: SelectableValue<RegionClass>;
+	public zIndex: number;
 
 	constructor(
 		id: number,
@@ -42,6 +38,7 @@ export class OrientedLinkClass extends CoordinateSpaceClass {
 		colorMode: boolean,
 		traceBack: boolean,
 		traceBorder: boolean,
+		positionParameter: PositionParameterClass,
 		name: string,
 		orientationLink: SelectableValue<string>,
 		pointAPositionX: string,
@@ -52,19 +49,14 @@ export class OrientedLinkClass extends CoordinateSpaceClass {
 		colorCoordinateB: string,
 		valueMainMetricA: string,
 		valueMainMetricB: string,
-		// labelLinkA: string,
-		// labelLinkB: string,
-		// positionXLabelA: string,
-		// positionYLabelA: string,
-		// positionXLabelB: string,
-		// positionYLabelB: string,
 		pointIn: SelectableValue<PointClass>,
 		pointOut: SelectableValue<PointClass>,
 		regionIn: SelectableValue<RegionClass>,
-		regionOut: SelectableValue<RegionClass>
+		regionOut: SelectableValue<RegionClass>,
+		zIndex: number
 	) {
 		super(id, linkURL, meta,
-			lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder);
+			lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter);
 		this.name = name;
 		this.orientationLink = orientationLink;
 		this.pointAPositionX = pointAPositionX;
@@ -73,17 +65,12 @@ export class OrientedLinkClass extends CoordinateSpaceClass {
 		this.pointBPositionX = pointBPositionX;
 		this.pointBPositionY = pointBPositionY;
 		this.colorCoordinateB = colorCoordinateB;
-		// this.labelLinkA = labelLinkA;
-		// this.labelLinkB = labelLinkB;
-		// this.positionXLabelA = positionXLabelA;
-		// this.positionYLabelA = positionYLabelA;
-		// this.positionXLabelB = positionXLabelB;
-		// this.positionYLabelB = positionYLabelB;
 		this.valueMainMetricA = valueMainMetricA;
 		this.valueMainMetricB = valueMainMetricB;
 		this.pointIn = pointIn;
 		this.pointOut = pointOut;
 		this.regionIn = regionIn;
 		this.regionOut = regionOut;
+		this.zIndex = zIndex;
 	}
 }

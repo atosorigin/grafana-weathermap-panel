@@ -1,6 +1,6 @@
 import React from 'react';
 import { SelectableValue, PanelEditorProps } from '@grafana/data';
-import { RegionClass } from 'Models/RegionClass';
+import { RegionClass, ICoord4D } from 'Models/RegionClass';
 import { PointClass } from 'Models/PointClass';
 import { Tooltip } from '@grafana/ui';
 import { SimpleOptions } from 'types';
@@ -15,23 +15,26 @@ interface IProps extends PanelEditorProps<SimpleOptions> {
 	colorA: string;
 	colorB: string;
 	orientationLink: string;
-	// labelA: string;
-	// labelB: string;
-	// labelAPositionX: string;
-	// labelAPositionY: string;
-	// labelBPositionX: string;
-	// labelBPositionY: string;
+	label: string;
 	associatePointIn: SelectableValue<PointClass>;
 	associatePointOut: SelectableValue<PointClass>;
 	associateRegionIn: SelectableValue<RegionClass>;
 	associateRegionOut: SelectableValue<RegionClass>;
-	sidePanel: number;
+	widthImage: number;
+	heightImage: number;
 	name: string;
 	refMainMetric: string;
 	valueMainMetricA: string;
 	valueMainMetricB: string;
 	textObject: TextObject;
 	seuil: LowerLimitClass[];
+	labelAPositionX: string;
+	labelAPositionY: string;
+	labelBPositionX: string;
+	labelBPositionY: string;
+	tooltipPositionA: SelectableValue<any>;
+	tooltipPositionB: SelectableValue<any>;
+	zIndex: number;
 }
 
 interface IState {
@@ -45,91 +48,29 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 		};
 	}
 
-
-	public synchroArrowX(positionX: number, defineCenter: number): number {
-		
-		//const synchroSizePanel: number = (this.props.sidePanel - 200) / 2;
-
-		// if (positionX > 0) {
-		// 	return Math.round(positionX + defineCenter + 50);
-		// } else if (positionX < 0) {
-		// 	return Math.round(positionX + defineCenter - 50);
-		// } else {
-		// 	return Math.round(positionX + defineCenter);
-		// }
-		//((event.nativeEvent.offsetX) - (this.props.height / 2)) * (100 / this.props.height)) * 2
-		//console.log((positionX * (this.props.sidePanel / 100)) + defineCenter)
-		//console.log(positionX)
-		//console.log('drawX : ' + (positionX * (this.props.sidePanel / 200)) + defineCenter);
-		return (positionX * (this.props.sidePanel / 200)) + defineCenter;
+	public synchroArrowX(positionX: number): number {
+		const initialSpace: ICoord4D = this.props.options.coordinateSpaceInitial.coordinate;
+		const xMin: number = parseInt(initialSpace.xMin, 10);
+		const xMinPx: number = (xMin + 100) * (this.props.widthImage / 200);
+		const xMax: number = parseInt(initialSpace.xMax, 10);
+		const xMaxPx: number = (xMax + 100) * (this.props.widthImage / 200)
+		const widthInitialSpace: number = xMaxPx - xMinPx;
+		const x: number = xMinPx + (((positionX) * (widthInitialSpace / 200)) + (widthInitialSpace / 2));
+		return x;
 	}
 	
-	public synchroArrowY(positionY: number, defineCenter: number): number {
-		
-		//const synchroSizePanel: number = (this.props.sidePanel - 200) / 2;
-		
-		// if (positionY > 0) {
-			// 	return Math.round(defineCenter - positionY + 50);
-			// } else if (positionY < 0) {
-				// 	return Math.round(defineCenter - positionY - 50);
-				// } else {
-					// 	return Math.round(defineCenter - positionY);
-					// }
-		// console.log(positionY)
-		// console.log(defineCenter - positionY)
-		//return defineCenter - (positionY * (defineCenter / 100));
-		//console.log(positionY)
-		//console.log('drawY : ' + (defineCenter - (positionY * (this.props.sidePanel / 200))));
-		return defineCenter - (positionY * (this.props.sidePanel / 200));
+	public synchroArrowY(positionY: number): number {
+		const initialSpace: ICoord4D = this.props.options.coordinateSpaceInitial.coordinate;
+		const yMin: number = parseInt(initialSpace.yMin, 10);
+		const yMinPx: number = (yMin + 100) * (this.props.heightImage / 200);
+		const yMax: number = parseInt(initialSpace.yMax, 10);
+		const yMaxPx: number = (yMax + 100) * (this.props.heightImage / 200);
+		const heightInitialSpace: number = yMaxPx - yMinPx;
+		const y: number = yMinPx + ((heightInitialSpace / 2) - ((positionY) * (heightInitialSpace / 200)));
+		return y;
 	}
 
-	// public drawPoint(xA: number, yA: number, xB: number, yB: number) {
-	//     return (
-	//         <div>
-	//             <div style={{
-	//                 border: '1px solid red',
-	//                 backgroundColor: 'red',
-	//                 borderRadius: '50px',
-	//                 padding: '2px',
-	//                 position: 'absolute',
-	//                 top: yA,
-	//                 left: xA,
-	//             }}></div>
-	//             <div style={{
-	//                 border: '1px solid white',
-	//                 backgroundColor: 'white',
-	//                 borderRadius: '50px',
-	//                 padding: '2px',
-	//                 position: 'absolute',
-	//                 top: yB,
-	//                 left: xB,
-	//             }}></div>
-	//         </div>
-	//     )
-	// }
-
-	// public defineMarginForLinkNotDouble(angle: number, margin: number): string {
-		
-	// 	let styleMargin: string = '0 0 0 0';
-	// 	console.log(angle)
-	// 	if (angle === 0) {
-	// 		styleMargin = '0 0 0 ' + (margin / 2) + 'px';
-	// 	} else if (angle === 90) {
-	// 		styleMargin = (margin / 4) + 'px 0 0 ' + (margin / 4) + 'px';
-	// 	} else if (angle === 180) {
-	// 		styleMargin = '0 0 0 0';
-	// 	} else if (angle === -90) {
-	// 		styleMargin = '0 0 ' + margin + 'px 0';
-	// 	}
-		
-	// 	return styleMargin;
-	// }
-
-	public drawLink(xA: number, yA: number, xB: number, yB: number, colorA: string,
-		colorB: string, orientationLink: string,
-		//labelA: string, labelB: string, labelAPositionX: number, labelAPositionY: number, 
-		//labelBPositionX: number, labelBPositionY: number
-		) {
+	public drawLink(xA: number, yA: number, xB: number, yB: number, orientationLink: string) {
 
 		const xC: number = (xA + xB) / 2;
 		const yC: number = (yA + yB) / 2;
@@ -164,132 +105,144 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 		const sizeArrowTriangle: number = 8;
 
 		const valueTooltipMonodirectional: JSX.Element = this.defineValueTooptip('monodirectional');
-		const valueTooltipBidirectional: JSX.Element = this.defineValueTooptip('bidirectional');
+		const valueTooltipBidirectionalA: JSX.Element = this.defineValueTooptip('bidirectional', 'A');
+		const valueTooltipBidirectionalB: JSX.Element = this.defineValueTooptip('bidirectional', 'B');
+
+		const inverseAxeY: number = -1;
 
 		if (orientationLink === 'double') {
 			return (
-				<Tooltip content={valueTooltipBidirectional}>
-					<div id='link'>
-						<div id='linkA'>
-							<div id='arrow1' style={{
-								display: 'flex',
-								alignContent: 'stretch',
-								position: 'absolute',
-								top: yArrowAC - (sizeArrowTriangle / 2),
-								left: xArrowAC,
-								transform: 'rotate(' + angleDegreeAC + 'deg)',
-								width: distanceAC,
-
-							}}>
-								<div className='arrowTriangle' style={{
-									width: '0',
-									height: '0',
-									borderLeft: sizeArrowTriangle + 'px solid transparent',
-									borderRight: sizeArrowTriangle + 'px solid transparent',
-									borderBottom: sizeArrowTriangle + 'px solid ' + this.defineBorderColor(),
-									transform: 'rotate(270deg)',
-								}}></div>
-								<div style={{
-									border: '1px solid ' + this.defineBorderColor(),
-									backgroundColor: this.defineBackgroundColor(),
+					<div id='link' >
+						<div>
+							<Tooltip content={valueTooltipBidirectionalA} placement={this.props.tooltipPositionA.value} >
+								<div id='linkA' style={{
+									position: 'absolute',
+									zIndex: this.props.zIndex,
+									top: yArrowAC - (sizeArrowTriangle / 2),
+									left: xArrowAC,
+									transform: 'rotate(' + angleDegreeAC.toString() + 'deg)',
 									width: distanceAC,
-								}}></div>
-							</div>
+								}}>
+									<div id='arrow1' style={{
+										display: 'flex',
+										alignContent: 'stretch',
+									}}>
+										<div className='arrowTriangle' style={{
+											width: '0',
+											height: '0',
+											borderLeft: sizeArrowTriangle.toString() + 'px solid transparent',
+											borderRight: sizeArrowTriangle.toString() + 'px solid transparent',
+											borderBottom: sizeArrowTriangle.toString() + 'px solid ' + this.defineBorderColor(),
+											transform: 'rotate(270deg)',
+										}}></div>
+										<div style={{
+											border: '1px solid ' + this.defineBorderColor(),
+											backgroundColor: this.defineBackgroundColor(),
+											width: distanceAC,
+										}}></div>
+									</div>
+								</div>
+							</Tooltip>
 							<div style={{
-								position: 'absolute',
-								top: yMidAC, //+ labelAPositionY,
-								left: xMidAC,// + labelAPositionX,
-								fontSize: distanceAC * (8 / 100),
-								//border: '1px solid black',
-								backgroundColor: 'white',
-								color: 'black',
-								padding: '0 5px',
-							}}>{this.props.valueMainMetricA}
+									position: 'absolute',
+									top: yMidAC + (parseInt(this.props.labelAPositionY, 10) * inverseAxeY),
+									left: xMidAC + parseInt(this.props.labelAPositionX, 10),
+									fontSize: '8px',
+									//border: '1px solid black',
+									backgroundColor: 'white',
+									color: 'black',
+									padding: '0 5px',
+								}}>{this.props.valueMainMetricA}
 							</div>
 						</div>
-						<div id='linkB'>
-							<div id='arrow2' style={{
-								display: 'flex',
-								alignContent: 'stretch',
-								position: 'absolute',
-								top: yArrowBC - (sizeArrowTriangle / 2),
-								left: xArrowBC,
-								transform: 'rotate(' + angleDegreeBC + 'deg)',
-								width: distanceBC,
-							}}>
-								<div className='arrowTriangle' style={{
-									width: '0',
-									height: '0',
-									borderLeft: sizeArrowTriangle + 'px solid transparent',
-									borderRight: sizeArrowTriangle + 'px solid transparent',
-									borderBottom: sizeArrowTriangle + 'px solid ' + this.defineBorderColor(),
-									transform: 'rotate(270deg)',
-								}}></div>
-								<div style={{
-									border: '1px solid ' + this.defineBorderColor(),
-									backgroundColor: this.defineBackgroundColor(),
+						<div>
+							<Tooltip content={valueTooltipBidirectionalB} placement={this.props.tooltipPositionB.value} >
+								<div id='linkB' style={{
+									position: 'absolute',
+									top: yArrowBC - (sizeArrowTriangle / 2),
+									left: xArrowBC,
+									transform: 'rotate(' + angleDegreeBC.toString() + 'deg)',
 									width: distanceBC,
-								}}></div>
-							</div>
+								}}>
+									<div id='arrow2' style={{
+										display: 'flex',
+										alignContent: 'stretch',
+									}}>
+										<div className='arrowTriangle' style={{
+											width: '0',
+											height: '0',
+											borderLeft: sizeArrowTriangle.toString() + 'px solid transparent',
+											borderRight: sizeArrowTriangle.toString() + 'px solid transparent',
+											borderBottom: sizeArrowTriangle.toString() + 'px solid ' + this.defineBorderColor(),
+											transform: 'rotate(270deg)',
+										}}></div>
+										<div style={{
+											border: '1px solid ' + this.defineBorderColor(),
+											backgroundColor: this.defineBackgroundColor(),
+											width: distanceBC,
+										}}></div>
+									</div>
+								</div>
+							</Tooltip>
 							<div style={{
-								position: 'absolute',
-								top: yMidBC,// + labelBPositionY,
-								left: xMidBC,// + labelBPositionX,
-								fontSize: distanceBC * (8 / 100),
-								//border: '1px solid black',
-								backgroundColor: 'white',
-								color: 'black',
-								padding: '0 5px',
-							}}>{this.props.valueMainMetricB}
+									position: 'absolute',
+									top: yMidBC + (parseInt(this.props.labelBPositionY, 10) * inverseAxeY),
+									left: xMidBC + parseInt(this.props.labelBPositionX, 10),
+									fontSize: '8px',
+									//border: '1px solid black',
+									backgroundColor: 'white',
+									color: 'black',
+									padding: '0 5px',
+								}}>{this.props.valueMainMetricB}
 							</div>
 						</div>
 					</div>
-				</Tooltip>
 			)
 		} else if (orientationLink === 'AB') {
 			return (
-				<Tooltip content={valueTooltipMonodirectional}>
-					<div id='link' >
-						<div id='arrow1' style={{
-									display: 'flex',
-									position: 'absolute',
-									top: yArrowAB - (sizeArrowTriangle / 2),
-									left: xArrowAB,
-									transform: 'rotate(' + angleDegreeAB + 'deg)',
-									width: distanceAB,
-									//margin: margin,
-
-						}} >
-							<div className='arrowTriangle' style={{
-								width: '0',
-								height: '0',
-								borderLeft: sizeArrowTriangle + 'px solid transparent',
-								borderRight: sizeArrowTriangle + 'px solid transparent',
-								borderBottom: sizeArrowTriangle + 'px solid ' + this.defineBorderColor(),
-								transform: 'rotate(270deg)',
-							}}></div>
-							<div style={{
-								border: '1px solid ' + this.defineBorderColor(),
-								backgroundColor: this.defineBackgroundColor(),
-								width: distanceAB,
-							}}></div>
-						</div>
-						<div style={{
+				<div>
+					<Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value} >
+						<div id='link' style={{
 							position: 'absolute',
-							top: yMidAB,// + labelAPositionY,
-							left: xMidAB,// + labelAPositionX,
-							//border: '1px solid black',
-							backgroundColor: 'white',
-							fontSize: distanceAB * (4 / 100),
-							color: 'black',
-							padding: '0 5px',
-							cursor: 'pointer',
-						}}
-						>
-							{this.props.valueMainMetricA}
+							zIndex: this.props.zIndex,
+							top: yArrowAB - (sizeArrowTriangle / 2),
+							left: xArrowAB,
+							transform: 'rotate(' + angleDegreeAB.toString() + 'deg)',
+							width: distanceAB,
+						}}>
+							<div id='arrow1' style={{
+										display: 'flex',
+							}} >
+								<div className='arrowTriangle' style={{
+									width: '0',
+									height: '0',
+									borderLeft: sizeArrowTriangle.toString() + 'px solid transparent',
+									borderRight: sizeArrowTriangle.toString() + 'px solid transparent',
+									borderBottom: sizeArrowTriangle.toString() + 'px solid ' + this.defineBorderColor(),
+									transform: 'rotate(270deg)',
+								}}></div>
+								<div style={{
+									border: '1px solid ' + this.defineBorderColor(),
+									backgroundColor: this.defineBackgroundColor(),
+									width: distanceAB,
+								}}></div>
+							</div>
 						</div>
+					</Tooltip>
+					<div style={{
+						position: 'absolute',
+						top: yMidAB + (parseInt(this.props.labelAPositionY, 10) * inverseAxeY),
+						left: xMidAB + parseInt(this.props.labelAPositionX, 10),
+						backgroundColor: 'white',
+						fontSize: '12px',
+						color: 'black',
+						padding: '0 5px',
+						cursor: 'pointer',
+					}}
+					>
+						{this.props.valueMainMetricA}
 					</div>
-				</Tooltip>
+				</div>
 			)
 		} 
 		// else if (orientationLink === 'BA') {
@@ -344,33 +297,37 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 	}
 
 	public defineBackgroundColor() {
-		
-		let colorBackground: string = this.props.colorA;
+		let colorBackground: string = '';
+
+		if (this.props.seuil.length > 0) {
+			colorBackground = this.props.seuil[0].backColor;
+		} else {
+			colorBackground = 'black';
+		}
+
 		const valueMainMetric: number = parseInt(this.props.valueMainMetricA, 10);
 		let index: number = 0;
 		
 		this.props.seuil.forEach((level: LowerLimitClass) => {
 
-			let seuilMin: number = 0;
+			let lowerLimitMin: number = 0;
 
-			if (level.seuilMin === '') {
-				seuilMin = 0;
+			if (level.lowerLimitMin === '') {
+				lowerLimitMin = 0;
 			} else {
-				seuilMin = parseInt(level.seuilMin.substring(1), 10);
+				lowerLimitMin = parseInt(level.lowerLimitMin.substring(1), 10);
 			}
 
-			console.log(seuilMin);
-
-			if (seuilMin === 0) {
-				if (valueMainMetric >= seuilMin && valueMainMetric <= parseInt(level.seuilMax, 10)) {
-					colorBackground = level.couleurFond;
+			if (lowerLimitMin === 0) {
+				if (valueMainMetric >= lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+					colorBackground = level.backColor;
 				}
 			} else if (this.props.seuil.length === index + 1) {
-				if (valueMainMetric > seuilMin) {
-					colorBackground = level.couleurFond;
+				if (valueMainMetric > lowerLimitMin) {
+					colorBackground = level.backColor;
 				}
-			} else if (valueMainMetric > seuilMin && valueMainMetric <= parseInt(level.seuilMax, 10)) {
-				colorBackground = level.couleurFond;
+			} else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+				colorBackground = level.backColor;
 			}
 
 			index++;
@@ -381,31 +338,37 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 
 	public defineBorderColor() {
 		
-		let colorBorder: string = this.props.colorA;
+		let colorBorder: string = '';
+
+		if (this.props.seuil.length > 0) {
+			colorBorder = this.props.seuil[0].borderColor;
+		} else {
+			colorBorder = 'black';
+		}
+
 		const valueMainMetric: number = parseInt(this.props.valueMainMetricA, 10);
 		let index: number = 0;
-
 		
 		this.props.seuil.forEach((level: LowerLimitClass) => {
 
-			let seuilMin: number = 0;
+			let lowerLimitMin: number = 0;
 
-			if (level.seuilMin === '') {
-				seuilMin = 0;
+			if (level.lowerLimitMin === '') {
+				lowerLimitMin = 0;
 			} else {
-				seuilMin = parseInt(level.seuilMin.substring(1), 10);
+				lowerLimitMin = parseInt(level.lowerLimitMin.substring(1), 10);
 			}
 
-			if (seuilMin === 0) {
-				if (valueMainMetric >= seuilMin && valueMainMetric <= parseInt(level.seuilMax, 10)) {
-					colorBorder = level.couleurContour;
+			if (lowerLimitMin === 0) {
+				if (valueMainMetric >= lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+					colorBorder = level.borderColor;
 				}
 			} else if (this.props.seuil.length === index + 1) {
-				if (valueMainMetric > seuilMin) {
-					colorBorder = level.couleurContour;
+				if (valueMainMetric > lowerLimitMin) {
+					colorBorder = level.borderColor;
 				}
-			} else if (valueMainMetric > seuilMin && valueMainMetric <= parseInt(level.seuilMax, 10)) {
-				colorBorder = level.couleurContour;
+			} else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+				colorBorder = level.borderColor;
 			}
 
 			index++;
@@ -414,39 +377,10 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 		return colorBorder;
 	}
 
-	public defineSideRegion(xMin: number, xMax: number, yMin: number, yMax: number): number {
-
-		let result: number = ((xMax - xMin) * (this.props.sidePanel / 100)) / 2;
-
-		if (result < 0) {
-			result = result * (-1);
-		}
-		return result;
-	}
-
-	// public defineDiagonal(xMin: number, xMax: number, yMin: number, yMax: number): number {
-
-	// 	const sideA: number = xMax - xMin < 0 ? xMin - xMax : xMax - xMin;
-	// 	const sideB: number = yMax - yMin < 0 ? yMin - yMax : yMax - yMin;
-	// 	let diagonal: number = 0;
-
-	// 	if (yMax - yMin === xMax - xMin) {
-	// 		// square
-	// 		diagonal = sideA * Math.sqrt(2);
-	// 		console.log('carré : ' + diagonal)
-	// 	} else {
-	// 		// rectangle
-	// 		diagonal = Math.sqrt((sideA * sideA) + (sideB * sideB));
-	// 		console.log('rectangle : ' + diagonal)
-	// 	}
-
-	// 	return diagonal;
-	// }
 
 	public defineCoordinates(associateRegion: SelectableValue<RegionClass>,
 		coordinate: number, region: number): number {
 		let result: number = 0;
-		//console.log(associateRegion.value)
 		// if (associateRegion.value === undefined || associateRegion.value.id === undefined) {
 		// 	result = coordinate;
 		// } else {
@@ -455,31 +389,14 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 		return result;
 	}
 
-	// public defineColor(associatePoint: SelectableValue<PointClass>, type: string) {
-	// 	let color: string = '';
-	// 	if (type === 'in') {
-	// 		if (associatePoint.value === undefined) {
-	// 			color = this.props.colorA;
-	// 		} else {
-	// 			color = associatePoint.value.color;
-	// 		}
-	// 	} else if (type === 'out') {
-	// 		if (associatePoint.value === undefined) {
-	// 			color = this.props.colorB;
-	// 		} else {
-	// 			color = associatePoint.value.color;
-	// 		}
-	// 	}
-	// 	return color;
-	// }
 
-	public defineValueTooptip = (typeLink: string) => {
+	public defineValueTooptip = (typeLink: string, link?: string) => {
 		const infosOrientedLink: JSX.Element[] = [];
 		const valueMainMetricA = this.props.valueMainMetricA;
 		const valueMainMetricB = this.props.valueMainMetricB;
 		const refMainMetric = this.props.refMainMetric;
 
-		infosOrientedLink.push(<p style={{ fontSize: '12px', marginBottom: '0px' }}>{this.props.name}</p>)
+		infosOrientedLink.push(<p style={{ fontSize: '12px', marginBottom: '0px' }}>{this.props.label || this.props.name}</p>)
 
 		infosOrientedLink.push(
 			<p style={{ fontSize: '10px', marginTop: '5px', marginBottom: '0px' }}>
@@ -488,28 +405,31 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 		);
 
 		if (typeLink === 'bidirectional') {
-			infosOrientedLink.push(
-				<p style={{ fontSize: '8px', marginBottom: '0px', marginTop:'5px' }}>
-						+ Link A : {refMainMetric}
-				</p>
-			);
-			infosOrientedLink.push(
-				<p style={{ fontSize: '8px', marginBottom: '0px' }}>	- Reference A : {refMainMetric}</p>
-			);
-			infosOrientedLink.push(
-				<p style={{ fontSize: '8px', marginBottom: '0px' }}>	- Value A : {valueMainMetricA}</p>
-			);
-			infosOrientedLink.push(
-				<p style={{ fontSize: '8px', marginBottom: '0px', marginTop:'5px' }}>
-						+ Link B : {refMainMetric}
-				</p>
-			);
-			infosOrientedLink.push(
-				<p style={{ fontSize: '8px', marginBottom: '0px' }}>	- Reference B : {refMainMetric}</p>
-			);
-			infosOrientedLink.push(
-				<p style={{ fontSize: '8px', marginBottom: '0px' }}>	- Value B : {valueMainMetricB}</p>
-			);
+			if (link === 'A') {
+				infosOrientedLink.push(
+					<p style={{ fontSize: '8px', marginBottom: '0px', marginTop:'5px' }}>
+							+ Link A : {refMainMetric}
+					</p>
+				);
+				infosOrientedLink.push(
+					<p style={{ fontSize: '8px', marginBottom: '0px' }}>	- Reference A : {refMainMetric}</p>
+				);
+				infosOrientedLink.push(
+					<p style={{ fontSize: '8px', marginBottom: '0px' }}>	- Value A : {valueMainMetricA}</p>
+				);
+			} else if (link === 'B') {
+				infosOrientedLink.push(
+					<p style={{ fontSize: '8px', marginBottom: '0px', marginTop:'5px' }}>
+							+ Link B : {refMainMetric}
+					</p>
+				);
+				infosOrientedLink.push(
+					<p style={{ fontSize: '8px', marginBottom: '0px' }}>	- Reference B : {refMainMetric}</p>
+				);
+				infosOrientedLink.push(
+					<p style={{ fontSize: '8px', marginBottom: '0px' }}>	- Value B : {valueMainMetricB}</p>
+				);
+			}
 		} else if (typeLink === 'monodirectional') {
 			infosOrientedLink.push(
 				<p style={{ fontSize: '8px', marginBottom: '0px' }}>	+ Reference : {refMainMetric}</p>
@@ -518,8 +438,6 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 				<p style={{ fontSize: '8px', marginBottom: '0px' }}>	+ Value : {valueMainMetricA}</p>
 			);
 		}
-
-		
 
 		return (
 			<div>
@@ -531,19 +449,10 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 
 	public render() {
 
-		const sidePanel: number = this.props.sidePanel;
-		const defineCenter: number = sidePanel / 2;
-
-		const xCoordinateA: number = this.synchroArrowX(parseInt(this.props.pointAPositionX, 10), defineCenter);
-		const yCoordinateA: number = this.synchroArrowY(parseInt(this.props.pointAPositionY, 10), defineCenter);
-		const xCoordinateB: number = this.synchroArrowX(parseInt(this.props.pointBPositionX, 10), defineCenter);
-		const yCoordinateB: number = this.synchroArrowY(parseInt(this.props.pointBPositionY, 10), defineCenter);
-
-		//const colorA: string = this.defineColor(this.props.associatePointIn, 'in');
-		//const colorB: string = this.defineColor(this.props.associatePointOut, 'out');
-		const colorA: string = this.props.colorA;
-		const colorB: string = this.props.colorB;
-		
+		const xCoordinateA: number = this.synchroArrowX(parseInt(this.props.pointAPositionX, 10));
+		const yCoordinateA: number = this.synchroArrowY(parseInt(this.props.pointAPositionY, 10));
+		const xCoordinateB: number = this.synchroArrowX(parseInt(this.props.pointBPositionX, 10));
+		const yCoordinateB: number = this.synchroArrowY(parseInt(this.props.pointBPositionY, 10));	
 		const orientationLink: string = this.props.orientationLink;
 		// const labelA: string = this.props.labelA;
 		// const labelB: string = this.props.labelB;
@@ -575,13 +484,8 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 		// const xRegionOut: number = this.synchroArrowX((xMaxAssociateRegionOut + xMinAssociateRegionOut) / 2, defineCenter);
 		// const yRegionOut: number = this.synchroArrowY((yMaxAssociateRegionOut + yMinAssociateRegionOut) / 2, defineCenter);
 
-		// const valueMarginRegionIn: number = this.defineSideRegion(	xMinAssociateRegionOut, xMaxAssociateRegionOut,
-		// 															yMinAssociateRegionOut, yMaxAssociateRegionOut);
-
-		
-
 		return (
-			
+
 				<div>
 					{
 						// this.drawLink(
@@ -591,14 +495,9 @@ export default class DrawOrientedLink extends React.Component<IProps, IState> {
 							// 	this.defineCoordinates(associateRegionOut, yCoordinateB, yRegionOut),
 							// 	colorA, colorB, labelA, labelB, orientationLink, labelAPositionX, 
 							// 	labelAPositionY, labelBPositionX, labelBPositionY, valueMarginRegionIn)
-							this.drawLink(
-								xCoordinateA, yCoordinateA, xCoordinateB, yCoordinateB,
-								colorA, colorB, orientationLink) 
-								// labelA, labelB,  labelAPositionX, 
-								// labelAPositionY, labelBPositionX, labelBPositionY
-						}
+						this.drawLink(xCoordinateA, yCoordinateA, xCoordinateB, yCoordinateB, orientationLink)
+					}
 				</div>
-
 		);
 	}
 

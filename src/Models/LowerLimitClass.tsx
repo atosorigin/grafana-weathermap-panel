@@ -1,24 +1,24 @@
 export class LowerLimitClass {
 	public id: number;
-	public seuilMin: string;
-	public seuilMax: string;
-	public couleurFond: string;
-	public couleurContour: string;
-	public sizeContour: string;
+	public lowerLimitMin: string;
+	public lowerLimitMax: string;
+	public backColor: string;
+	public borderColor: string;
+	public sizeBorder: string;
 	constructor(
 		id: number,
-		seuilMin: string,
-		seuilMax: string,
-		couleurFond: string,
-		couleurContour: string,
-		sizeContour: string
+		lowerLimitMin: string,
+		lowerLimitMax: string,
+		backColor: string,
+		borderColor: string,
+		sizeBorder: string
 	) {
 		this.id = id;
-		this.seuilMin = seuilMin;
-		this.seuilMax = seuilMax;
-		this.couleurFond = couleurFond;
-		this.couleurContour = couleurContour;
-		this.sizeContour = sizeContour;
+		this.lowerLimitMin = lowerLimitMin;
+		this.lowerLimitMax = lowerLimitMax;
+		this.backColor = backColor;
+		this.borderColor = borderColor;
+		this.sizeBorder = sizeBorder;
 	}
 
 	public get getId(): number {
@@ -29,43 +29,43 @@ export class LowerLimitClass {
 		this.id = id;
 	}
 
-	public get getSeuilMin(): string {
-		return this.seuilMin;
+	public get getlowerLimitMin(): string {
+		return this.lowerLimitMin;
 	}
 
-	public set setSeuilMin(seuilMin: string) {
-		this.seuilMin = seuilMin;
+	public set setlowerLimitMin(lowerLimitMin: string) {
+		this.lowerLimitMin = lowerLimitMin;
 	}
 
-	public get getSeuilMax(): string {
-		return this.seuilMax;
+	public get getlowerLimitMax(): string {
+		return this.lowerLimitMax;
 	}
 
-	public set setSeuilMax(seuilMax: string) {
-		this.seuilMax = seuilMax;
+	public set setlowerLimitMax(lowerLimitMax: string) {
+		this.lowerLimitMax = lowerLimitMax;
 	}
 
-	public get getSeuilCouleurFond(): string {
-		return this.couleurFond;
+	public get getSeuilbackColor(): string {
+		return this.backColor;
 	}
 
-	public set setSeuilCouleurFond(couleur: string) {
-		this.couleurFond = couleur;
+	public set setSeuilbackColor(couleur: string) {
+		this.backColor = couleur;
 	}
 
-	public get getSeuilCouleurContour(): string {
-		return this.couleurContour;
+	public get getSeuilborderColor(): string {
+		return this.borderColor;
 	}
 
-	public set setSeuilCouleurContour(couleur: string) {
-		this.couleurContour = couleur;
+	public set setSeuilborderColor(couleur: string) {
+		this.borderColor = couleur;
 	}
 
-	public get getSizeContour(): string {
-		return this.sizeContour;
+	public get getsizeBorder(): string {
+		return this.sizeBorder;
 	}
 
-	public set setSizeContour(size: string) {
-		this.sizeContour = size;
+	public set setsizeBorder(size: string) {
+		this.sizeBorder = size;
 	}
 }

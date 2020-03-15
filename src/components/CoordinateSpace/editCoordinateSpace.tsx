@@ -7,7 +7,7 @@ import { Select } from '@grafana/ui';
 
 import { RegionClass } from 'Models/RegionClass';
 
-import { initRegionCoordinateSpace } from 'Functions/initRegionCoordinateSpace';
+// import { initRegionCoordinateSpace } from 'Functions/initRegionCoordinateSpace';
 
 import CoordinateSpace from './coordinateSpace';
 
@@ -37,8 +37,9 @@ class EditCoordinateSpace extends React.Component<IProps, IState> {
 	 * save data in parent
 	 */
 	public callBack = (id: number, newCoordinate?: RegionClass): void => {
+		console.log('am here');
 		if (newCoordinate) {
-			const oldData: RegionClass[] = this.props.options.arrayCoordinateSpace.slice();
+			const oldData: RegionClass[] = this.props.options.regionCoordinateSpace.slice();
 			let i: number = 0;
 			for (const line of oldData) {
 				if (line.id === id) {
@@ -49,11 +50,11 @@ class EditCoordinateSpace extends React.Component<IProps, IState> {
 			}
 			this.props.onOptionsChange({
 				...this.props.options,
-				arrayCoordinateSpace: oldData,
+				regionCoordinateSpace: oldData,
 			});
 		} else {
 			let find: boolean = false;
-			const oldData: RegionClass[] = this.props.options.arrayCoordinateSpace.slice();
+			const oldData: RegionClass[] = this.props.options.regionCoordinateSpace.slice();
 			let i: number = 0;
 			for (const line of oldData) {
 				if (line.id === id) {
@@ -66,48 +67,54 @@ class EditCoordinateSpace extends React.Component<IProps, IState> {
 				oldData.splice(i, 1);
 				this.props.onOptionsChange({
 					...this.props.options,
-					arrayCoordinateSpace: oldData,
+					regionCoordinateSpace: oldData,
 				});
+				this.fillSelectRegionSpace();
 			}
 		}
 	}
 
-	/**
-	 * fill data for select
-	 */
-	public componentDidMount = () => {
-		const valueSelect = [];
-		const stockTmpCoordinatesSpace: RegionClass[] = this.props.options.arrayCoordinateSpace;
-
-		for (const line of stockTmpCoordinatesSpace) {
-			valueSelect.push({ value: line, label: line.label });
-		}
-		this.setState({
-			selectCoordinateSpace: valueSelect,
-			selectCoordinateSpaceDefault: (valueSelect.length > 0) ?
-				valueSelect[0] : initRegionCoordinateSpace(this.props.options.indexRegion),
-		});
-	}
-
-	/**
-	 * Change select value to edit
-	 */
+	/** change select value to edit */
 	public onChangeSelectCoordinate = (value: SelectableValue<RegionClass>) => {
 		this.setState({
 			selectCoordinateSpaceDefault: value,
 		});
 	}
 
-	/**
-	 * update state if value props change
-	 */
+	/** fill select whith array region object */
+	public fillSelectRegionSpace = () => {
+		const valueSelect: {
+			/** value select -> RegionClass */
+			'value': RegionClass,
+			/** label select */
+			'label': string
+		}[] = [];
+		const stockTmpCoordinatesSpace: RegionClass[] = this.props.options.regionCoordinateSpace.slice();
+
+		for (const line of stockTmpCoordinatesSpace) {
+			valueSelect.push({ 'value': line, 'label': line.label });
+		}
+		this.setState({
+			selectCoordinateSpace: valueSelect,
+			selectCoordinateSpaceDefault: (valueSelect.length > 0) ?
+				valueSelect[0] : this.state.selectCoordinateSpaceDefault,
+		});
+	}
+
+	/** fill data for select */
+	public componentDidMount = () => {
+		this.fillSelectRegionSpace();
+	}
+
+	/** update state if value props change */
 	public componentDidUpdate = (prevProps: IProps) => {
-		if (prevProps.options.arrayCoordinateSpace !== this.props.options.arrayCoordinateSpace) {
+		if (prevProps.options.regionCoordinateSpace !== this.props.options.regionCoordinateSpace) {
 			// this.componentDidMount();
+			this.fillSelectRegionSpace();
 		}
 	}
 
-	/** result */
+	/** return html */
 	public render() {
 		return (
 			<div>
@@ -126,13 +133,15 @@ class EditCoordinateSpace extends React.Component<IProps, IState> {
 							<CoordinateSpace options={this.props.options}
 								onOptionsChange={this.props.onOptionsChange}
 								data={this.props.data}
-								coordinate={this.state.selectCoordinateSpaceDefault.value}
+								coordinate={this.state.selectCoordinateSpaceDefault.value}// selectCoordinateSpaceDefault.value}
 								callBackToParent={this.callBack}
 								isAddCoordinate={false} />
 							:
 							<p>Data not set</p>
 					}
 				</div>
+				{/* <Button onClick={() => console.log(this.props.options.regionCoordinateSpace)}>Info region</Button>
+				<Button onClick={() => console.log(this.state.selectCoordinateSpaceDefault)}>Info region</Button> */}
 			</div>
 		);
 	}

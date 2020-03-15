@@ -1,11 +1,11 @@
 /** value of textObjects component */
 export class TextObject {
-	/** legende object */
-	public legende: string;
+	/** legend object */
+	public legend: string;
 	/** object value */
-	public valeur: string;
+	public value: string;
 	/** object unity */
-	public unite: string;
+	public unit: string;
 	/** text display in element or tooltip */
 	public isTextRegion: boolean;
 	/** back color region */
@@ -36,9 +36,9 @@ export class TextObject {
 	public colorBackElement: string;
 
 	constructor(
-		legende: string,
-		valeur: string,
-		unite: string,
+		legend: string,
+		value: string,
+		unit: string,
 		isTextRegion: boolean,
 		colorBack: string,
 		colorText: string,
@@ -54,9 +54,9 @@ export class TextObject {
 		addColorBackElement: boolean,
 		colorBackElement: string
 	) {
-		this.legende = legende;
-		this.valeur = valeur;
-		this.unite = unite;
+		this.legend = legend;
+		this.value = value;
+		this.unit = unit;
 		this.isTextRegion = isTextRegion;
 		this.colorBack = colorBack;
 		this.colorText = colorText;

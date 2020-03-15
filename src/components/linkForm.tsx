@@ -14,6 +14,7 @@ import { PointClass } from 'Models/PointClass';
 import { RegionClass } from 'Models/RegionClass';
 import { TextObject } from 'Models/TextObjectClass';
 import { LinkURLClass } from 'Models/LinkURLClass';
+import { PositionParameterClass } from 'Models/PositionParameterClass';
 
 /**
  * IProps
@@ -38,7 +39,7 @@ interface IProps {
 	/**
 	 * Tableau des Régions existantes créées dans l'onglet 'Espace de coordonnées'
 	 */
-	arrayCoordinateSpace: RegionClass[];
+	regionCoordinateSpace: RegionClass[];
 
 }
 
@@ -143,13 +144,13 @@ export default class LinkForm extends React.Component<IProps, IState> {
 	}
 
 	public defineDataRegion(): SelectableValue<RegionClass>[] {
-		const { arrayCoordinateSpace } = this.props;
+		const { regionCoordinateSpace } = this.props;
 		const optionRegionNull: SelectableValue<RegionClass> = { label: 'No selected region' };
 		const arrayOptionsRegion: SelectableValue<RegionClass>[] = [];
 
 		arrayOptionsRegion.push(optionRegionNull);
 
-		arrayCoordinateSpace.forEach((region) => {
+		regionCoordinateSpace.forEach((region) => {
 			const optionRegion: SelectableValue<RegionClass> = {
 				label: region.label,
 				value: region,
@@ -179,12 +180,13 @@ export default class LinkForm extends React.Component<IProps, IState> {
 			false, false, false, '', false, '');
 		const parametrageMetric: LinkURLClass = new LinkURLClass('', '', '');
 		const finalArray: InputSelectableClass[] = createInputsLink(num, this.defineDataPoint(), this.defineDataRegion());
+		const positionParameter: PositionParameterClass = new PositionParameterClass('0', '0', '0', '0', {}, {});
 
 		this.setState((prevState: IState) => ({
 			arrayLinkClass: prevState.arrayLinkClass.concat(new LinkClass(
 				num, parametrageMetric, '', [], '', initTextObject,
 			 	{'key': '', 'unit': '', 'format': '', 'keyValue': ''}, [],
-				 false, false, false,
+				 false, false, false, positionParameter,
 				 'link' + num.toString(), defineHowToGetCoordonate || {},
 				orientationLink || { label: 'Unidirectional', value: 'AB' }, pointAPositionX || '0',
 				pointAPositionY || '0', colorCoordinateA || '#5794F2',

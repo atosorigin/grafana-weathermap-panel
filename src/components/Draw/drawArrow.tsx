@@ -14,8 +14,6 @@ interface IProps {
 	positionShapeX: string;
 	positionShapeY: string;
 	label: string;
-	positionLabelX: string;
-	positionLabelY: string;
 	color: string;
 	height: number;
 	police: string;
@@ -206,8 +204,7 @@ export default class DrawArrow extends React.Component<IProps, IState> {
 		return result;
 	}
 
-	public defineLabel(	color: string, positionLabelX: number, positionLabelY: number,
-						positionArrowX: number, positionArrowY: number, drawGraphicMarker: string,
+	public defineLabel(	color: string, positionArrowX: number, positionArrowY: number, drawGraphicMarker: string,
 						heightArrow: number) {
 
 		let valueToDisplay: string = this.props.label;
@@ -222,8 +219,8 @@ export default class DrawArrow extends React.Component<IProps, IState> {
 					fontFamily: this.props.police,
 					fontWeight: 'bold',
 					color: color,
-					top: positionArrowY + heightArrow + positionLabelY,
-					left: positionArrowX + heightArrow + positionLabelX,
+					top: positionArrowY + heightArrow,
+					left: positionArrowX + heightArrow,
 				}}>{valueToDisplay}</span>
 			);
 		}
@@ -248,15 +245,15 @@ export default class DrawArrow extends React.Component<IProps, IState> {
 			defineCenterX, widthArrow);
 		const positionArrowY: number = this.definePositionArrowY(valueInputPositionArrowY, coordinateSpace,
 			defineCenterY, sizeArrow);
-		const positionLabelX: number = parseInt(this.props.positionLabelX, 10) || 0;
-		const positionLabelY: number = ((parseInt(this.props.positionLabelY, 10) || 0) * (-1));
+		//const positionLabelX: number = parseInt(this.props.positionLabelX, 10) || 0;
+		//const positionLabelY: number = ((parseInt(this.props.positionLabelY, 10) || 0) * (-1));
 		const drawGraphicMarker: string = this.props.drawGraphicmarker.value || '';
 		const color: string = this.props.color;
 
 		return (
 			<div id={this.props.idPoint}>
 				{
-					this.defineLabel(color, positionLabelX, positionLabelY, positionArrowX,
+					this.defineLabel(color, positionArrowX,
 						positionArrowY, drawGraphicMarker, heightArrow)
 				}
 				{

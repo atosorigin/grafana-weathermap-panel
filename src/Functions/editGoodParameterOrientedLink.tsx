@@ -11,7 +11,9 @@ import { SelectableValue } from '@grafana/data';
 export const editGoodParameterOrientedLink = (
 	name: string, editCoor: OrientedLinkClass, newValue: string,
 	newValueSelect: SelectableValue<any>): OrientedLinkClass => {
-	if (name.startsWith('orientationLink')) {
+	if (name.startsWith('label')) {
+		editCoor.label = newValue;
+	} else if (name.startsWith('orientationLink')) {
 		editCoor.orientationLink = newValueSelect;
 	} else if (name.startsWith('pointAX')) {
 		editCoor.pointAPositionX = newValue;
@@ -40,11 +42,7 @@ export const editGoodParameterOrientedLink = (
 	} else if (name.startsWith('keyValueMainMetric')) {
 		editCoor.mainMetric.keyValue = newValue;
 	}
-	// else if (name.startsWith('labelLinkA')) {
-	// 	editCoor.labelLinkA = newValue;
-	// } else if (name.startsWith('labelLinkB')) {
-	// 	editCoor.labelLinkB = newValue;
-	// } else if (name.startsWith('positionXLabelLinkA')) {
+	//else if (name.startsWith('positionXLabelLinkA')) {
 	// 	editCoor.positionXLabelA = newValue;
 	// } else if (name.startsWith('positionYLabelLinkA')) {
 	// 	editCoor.positionYLabelA = newValue;

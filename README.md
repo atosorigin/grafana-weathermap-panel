@@ -62,6 +62,8 @@ $ yarn build
 
 * [WeatherMap documentation](https://github.com/atosorigin/grafana-weathermap/tree/master/docs)
 
+* [WeatherMap Example](https://github.com/atosorigin/grafana-weathermap-panel/tree/master/dashboard)
+
 
 # History
 

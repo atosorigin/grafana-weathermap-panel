@@ -54,8 +54,8 @@ export class LegendPanel extends React.Component<IProps, IState>{
 
 		const myItems: LegendItem[] = [];
 		for (const lines of this.state.seuil) {
-			myItems.push({ label: 'label: ' + lines.id + ': ' + lines.seuilMin + ' - ' + lines.seuilMax,
-			color: lines.couleurFond, isVisible: true, yAxis: 0, })
+			myItems.push({ label: 'label: ' + lines.id + ': ' + lines.lowerLimitMin + ' - ' + lines.lowerLimitMax,
+			color: lines.backColor, isVisible: true, yAxis: 0, })
 		}
 
 

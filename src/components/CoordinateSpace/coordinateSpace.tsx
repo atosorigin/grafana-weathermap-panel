@@ -1,23 +1,28 @@
 import React, { CSSProperties } from 'react';
+import { SimpleOptions, IMetric } from 'types';
+
+import { PanelEditorProps, SelectableValue } from '@grafana/data';
+import { Button, Select, Alert, FormField } from '@grafana/ui';
+
 import { ArrayInputClass } from 'Models/ArrayInputClass';
-import { RegionClass } from 'Models/RegionClass';
+import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
 import { InputClass } from 'Models/InputClass';
+import { LowerLimitClass } from 'Models/LowerLimitClass';
+import { RegionClass } from 'Models/RegionClass';
+import { TextObject } from 'Models/TextObjectClass';
+
 import InputButtonField from 'Functions/Input/inputButton';
 import InputTextField from 'Functions/Input/inputText';
 import { createInputCoor } from 'Functions/createInputCoor';
 import { editGoodParameterExtend } from 'Functions/editGoodParameter';
-import 'style/CoordinateSpace.css';
-import { PanelEditorProps, SelectableValue, DataFrame } from '@grafana/data';
-import { Button, Select, Alert, FormField } from '@grafana/ui';
-import { SimpleOptions } from 'types';
-import { TextObject } from 'Models/TextObjectClass';
-import { LowerLimitClass } from 'Models/LowerLimitClass';
-import ParametresGeneriques from 'components/Parametrage/parametresGeneriques';
+import { returnAllId } from 'Functions/searchIDLimit';
+import { cloneRegionCoordinateSpace } from 'Functions/initRegionCoordinateSpace';
+
 import ManageLowerLimit from 'components/Parametrage/manageLowerLimit';
-import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
-import { PointClass } from 'Models/PointClass';
-import { LinkClass } from 'Models/LinkClass';
-import { OrientedLinkClass } from 'Models/OrientedLinkClass';
+import ManageQuery from './manageQuery';
+import ParametresGeneriques from 'components/Parametrage/parametresGeneriques';
+
+import 'style/CoordinateSpace.css';
 
 export declare type AlertVariant = 'success' | 'warning' | 'error' | 'info';
 
@@ -26,46 +31,29 @@ interface IProps extends PanelEditorProps<SimpleOptions> {
 	isAddCoordinate: boolean;
 	/** coordinate to edit */
 	coordinate: RegionClass;
-
-	/**
-	 * save data in parent
-	 */
+	/** save data in parent */
 	callBackToParent: (id: number, newCoordinate?: RegionClass) => void;
 }
 
 interface IState {
-	/**
-	 * stock coordinates in array object for Parent Component
-	 */
+	/** stock coordinates in array object for Parent Component */
 	arrayCoor: RegionClass;
-	/**
-	 * stock HTML input coordinates
-	 */
+	/** stock HTML input coordinates */
 	arrayInput: ArrayInputClass[];
 	/** stock html form */
 	htmlInput: JSX.Element;
-	/** select aux query */
-	selectQuery: Array<SelectableValue<DataFrame>>;
-	/** select main query */
-	selectQueryDefault: SelectableValue<DataFrame>;
 	/** display alert when form error */
 	hiddenAlert: boolean;
-	/** variable for radio button */
-	checkedRadio: boolean[];
 	/** text to display alert */
 	titleAlert: string;
 	/** alert type */
 	severityAlert: AlertVariant;
-/** point class */
-	arrayPoints: PointClass[];
-/** link class */
-	arrayLinks: LinkClass[];
-
-	arrayOrientedLinks: OrientedLinkClass[];
-
-	openCollapseOrientedLink: boolean;
-
-	oldData: OrientedLinkClass[];
+	/** choice svg mode */
+	selectedRadio: string;
+	/** selectedSVG */
+	allIDSelected: Array<SelectableValue<string>>;
+	/** selectedDefault id svg */
+	selectedDefaultSVG: SelectableValue<string>;
 }
 
 /**
@@ -75,20 +63,15 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			arrayCoor: this.props.coordinate,
+			arrayCoor: cloneRegionCoordinateSpace(this.props.coordinate),
 			arrayInput: [],
 			htmlInput: <div></div>,
-			selectQuery: [],
-			selectQueryDefault: [],
 			hiddenAlert: true,
-			checkedRadio: [true, false, false],
 			titleAlert: 'Error: label is empty',
 			severityAlert: 'error',
-			arrayPoints: [],
-			arrayLinks: [],
-			arrayOrientedLinks: [],
-			openCollapseOrientedLink: false,
-			oldData: this.props.options.arrayOrientedLinks,
+			selectedRadio: 'svgMode',
+			allIDSelected: [],
+			selectedDefaultSVG: [],
 		};
 	}
 
@@ -112,75 +95,7 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 		});
 	}
 
-	/**
-	 * call function to return arrayCoor a SimpleEditor
-	 */
-	public callBack = (): void => {
-		const waitAlert: number = 3000;
-
-		if (this.state.arrayCoor.label === '') {
-			this.setState({
-				severityAlert: 'error',
-				titleAlert: 'Error: label is empty',
-				hiddenAlert: false,
-			});
-			setTimeout(() => {
-				this.setState({
-					hiddenAlert: true,
-				});
-			}, waitAlert);
-		} else {
-			if (this.state.checkedRadio[0]) {
-				this.props.callBackToParent(this.state.arrayCoor.id, this.state.arrayCoor);
-			} else if (this.state.checkedRadio[1]) {
-				if (this.props.isAddCoordinate) {
-
-				} else {
-
-				}
-			}
-			this.setState({
-				severityAlert: 'success',
-				titleAlert: 'Save',
-				hiddenAlert: false,
-			});
-			if (!this.props.isAddCoordinate) {
-				setTimeout(() => {
-					this.setState({
-						hiddenAlert: true,
-					});
-				}, waitAlert);
-			}
-		}
-	}
-
-	/** save data in parent */
-	public callBackToOther = (
-		followLink?: string,
-		hoveringTooltipLink?: string,
-		hoveringTooltipText?: string,
-		textObj?: TextObject): void => {
-		const oldCoor: RegionClass = this.state.arrayCoor;
-		if (followLink) {
-			oldCoor.linkURL.followLink = followLink;
-		}
-		if (hoveringTooltipLink) {
-			oldCoor.linkURL.hoveringTooltipLink = hoveringTooltipLink;
-		}
-		if (hoveringTooltipText) {
-			oldCoor.linkURL.hoveringTooltipText = hoveringTooltipText;
-		}
-		if (textObj) {
-			oldCoor.textObj = textObj;
-		}
-		this.setState({
-			arrayCoor: oldCoor,
-		});
-	}
-
-	/**
-	 * add inputs for a new coordiante
-	 */
+	/** add inputs for a new coordiante */
 	public addInput = async (
 		id: number
 	) => {
@@ -239,8 +154,6 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 			value = this.state.arrayCoor.label;
 		} else if (param.startsWith('image')) {
 			value = this.state.arrayCoor.img;
-			// } else if (param.startsWith('interfaceJson')) {
-			// 	value = this.state.arrayCoor.;
 		} else if (param.startsWith('key')) {
 			value = this.state.arrayCoor.mainMetric.key;
 		} else if (param.startsWith('valueKey')) {
@@ -249,9 +162,7 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 		return value;
 	}
 
-	/**
-	 * Create dynamic input
-	 */
+	/** create dynamic input */
 	public fillInputEspaceCoor(): void {
 		const { arrayInput } = this.state;
 		let finalItem: JSX.Element[] = [];
@@ -289,91 +200,75 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 		}
 		this.setState({
 			htmlInput: <ul>{finalItem}</ul>,
+			selectedRadio: (this.props.coordinate.mode) ? 'svgMode' : 'coordinateMode',
 		});
 	}
 
-	/** edit value for select */
-	public onChangeSelectQuery = (value: SelectableValue<DataFrame>) => {
-		const newArrayCoor: RegionClass = this.state.arrayCoor;
-		newArrayCoor.mainMetric.refId = value.value?.refId || '';
-		newArrayCoor.mainMetric.expr = 'rate(go_memstats_alloc_bytes[5m])';
+	/** edit value for selectedDefaultValue and edit idSVG arrayCoor */
+	public onChangeSelectSVG = (value: SelectableValue<string>) => {
+		// const newId: SelectableValue<string> = value;
+		const coordinate: RegionClass = this.state.arrayCoor;
+		coordinate.idSVG = value.value || '';
 		this.setState({
-			arrayCoor: newArrayCoor,
-			selectQueryDefault: value,
+			selectedDefaultSVG: value,
+			arrayCoor: coordinate,
 		});
 	}
 
-	/**
-	 * Call function in load component
-	 */
-	public componentDidMount = async () => {
-		const element: RegionClass = this.props.coordinate;
+	/** call function to return arrayCoor a SimpleEditor */
+	public callBack = (): void => {
+		const waitAlert: number = 3000;
 
-		await this.addInput(element.id);
-		this.fillInputEspaceCoor();
-		if (this.props.data.series) {
-			const valueSelect: Array<SelectableValue<DataFrame>> = [];
-
-			for (const line of this.props.data.series) {
-				valueSelect.push({ value: line, label: line.refId });
-			}
-			const newArrayCoor: RegionClass = this.state.arrayCoor;
-			newArrayCoor.mainMetric.refId = valueSelect.length > 0 ?
-				valueSelect[0].value?.refId || '' : '';
+		if (this.state.arrayCoor.label === '') {
 			this.setState({
-				arrayCoor: newArrayCoor,
-				selectQuery: valueSelect,
-				selectQueryDefault: valueSelect[0],
+				severityAlert: 'error',
+				titleAlert: 'Error: label is empty',
+				hiddenAlert: false,
 			});
-		}
-	}
-
-	/**
-	 * function is call when props is update. Update state
-	 */
-	public componentDidUpdate = async (prevProps: IProps, prevState: IState) => {
-		if (prevProps.coordinate !== this.props.coordinate) {
-			await this.setStateAsyncArrayCoor({
-				arrayCoor: this.props.coordinate,
-			});
-			this.fillInputEspaceCoor();
-		}
-		if (prevProps.data.series !== this.props.data.series) {
-			const valueSelect: Array<SelectableValue<DataFrame>> = [];
-
-			for (const line of this.props.data.series) {
-				valueSelect.push({ value: line, label: line.refId });
-			}
-			const newArrayCoor: RegionClass = this.state.arrayCoor;
-			newArrayCoor.mainMetric.refId = valueSelect.length > 0 ?
-				valueSelect[0].value?.refId || '' : '';
-			this.setState({
-				arrayCoor: newArrayCoor,
-				selectQuery: valueSelect,
-				selectQueryDefault: valueSelect[0],
-			});
-		}
-		if (prevProps.options.arrayOrientedLinks.length !== this.state.oldData.length) {
-			//console.log('update that');
-		}
-	}
-
-	/** event change value click radio button */
-	public onChangeRadio = (event: React.ChangeEvent<HTMLInputElement>): void => {
-		const idElement: string = event.currentTarget.id;
-		let resulFinal: boolean[] = this.state.checkedRadio;
-
-		if (idElement === 'region') {
-			resulFinal = [true, false, false];
-		} else if (idElement === 'lien') {
-			resulFinal = [false, true, false];
-		} else if (idElement === 'point') {
-			resulFinal = [false, false, true];
+			setTimeout(() => {
+				this.setState({
+					hiddenAlert: true,
+				});
+			}, waitAlert);
+		} else {
+			this.props.callBackToParent(this.state.arrayCoor.id, this.state.arrayCoor);
 		}
 		this.setState({
-			checkedRadio: resulFinal,
+			severityAlert: 'success',
+			titleAlert: 'Save',
+			hiddenAlert: false,
 		});
+		if (!this.props.isAddCoordinate) {
+			setTimeout(() => {
+				this.setState({
+					hiddenAlert: true,
+				});
+			}, waitAlert);
+		}
+	}
 
+	/** save data in parent */
+	public callBackToOther = (
+		followLink?: string,
+		hoveringTooltipLink?: string,
+		hoveringTooltipText?: string,
+		textObj?: TextObject): void => {
+		const oldCoor: RegionClass = this.state.arrayCoor;
+		if (followLink) {
+			oldCoor.linkURL.followLink = followLink;
+		}
+		if (hoveringTooltipLink) {
+			oldCoor.linkURL.hoveringTooltipLink = hoveringTooltipLink;
+		}
+		if (hoveringTooltipText) {
+			oldCoor.linkURL.hoveringTooltipText = hoveringTooltipText;
+		}
+		if (textObj) {
+			oldCoor.textObj = textObj;
+		}
+		this.setState({
+			arrayCoor: oldCoor,
+		});
 	}
 
 	/** update lower limit */
@@ -383,7 +278,6 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 		newValue.colorMode = coordiante.colorMode;
 		newValue.traceBorder = coordiante.traceBorder;
 		newValue.traceBack = coordiante.traceBack;
-		// newValue.lowerLimit = coordiante.lowerLimit;
 		this.setState({
 			arrayCoor: newValue,
 		});
@@ -399,48 +293,97 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 		});
 	}
 
-	public myCallBackArrayPoints = (dataFromChild: PointClass[]) => {
-		this.setState({
-			arrayPoints: dataFromChild,
-		});
+	/** save mainMetric data */
+	public callBackMainMetric = (mainMetric: IMetric): void => {
+		const newValue: RegionClass = this.state.arrayCoor;
 
-		this.props.onOptionsChange({
-			...this.props.options,
-			arrayPoints: dataFromChild,
+		newValue.mainMetric = mainMetric;
+		this.setState({
+			arrayCoor: newValue,
 		});
 	}
 
-	public myCallBackArrayLinks = (dataFromChild: LinkClass[]) => {
+	/** change value radio button checker to pass svg or coordinate mode */
+	public radioClick = (event: {
+		/** get current target to event */
+		currentTarget: HTMLInputElement
+	}) => {
+		const coordinate: RegionClass = this.state.arrayCoor;
+		coordinate.mode = event.currentTarget.value === 'svgMode' ? true : false;
 		this.setState({
-			arrayLinks: dataFromChild,
-		});
-
-		this.props.onOptionsChange({
-			...this.props.options,
-			arrayLinks: dataFromChild,
+			selectedRadio: event.currentTarget.value,
+			arrayCoor: coordinate,
 		});
 	}
 
-	public myCallBackArrayOrientedLinks = (dataFromChild: OrientedLinkClass[]) => {
-		this.setState({
-			arrayOrientedLinks: dataFromChild,
-		});
+	/** add all id SVG in select */
+	public fillSelectSVG = () => {
+		const selectedIDSvg: Array<SelectableValue<string>> = [];
+		if (this.state.allIDSelected.length > 0) {
+			const allIDSelected: Array<SelectableValue<string>> = this.state.allIDSelected;
+			let defaultSVG: SelectableValue<string> = allIDSelected[0];
+			for (const line of allIDSelected) {
+				if (line.value === this.state.arrayCoor.idSVG) {
+					defaultSVG = line;
+				}
+			}
+			this.setState({
+				selectedDefaultSVG: defaultSVG,
+			});
+			return;
+		}
+		const timeRefresh: number = 1000;
+		const refresh = setInterval(() => {
+			const data: string[] = returnAllId(this.props.options.coordinateSpaceInitial.coordinate, this.props.options.baseMap);
 
-		this.props.onOptionsChange({
-			...this.props.options,
-			arrayOrientedLinks: dataFromChild,
-		});
+			if (data.length > 0) {
+				for (const line of data) {
+					selectedIDSvg.push({ value: line, label: line });
+				}
+				let defaultSVG: SelectableValue<string> = selectedIDSvg[0];
+				for (const line of selectedIDSvg) {
+					if (line.value === this.state.arrayCoor.idSVG) {
+						defaultSVG = line;
+					}
+				}
+				this.setState({
+					allIDSelected: selectedIDSvg,
+					selectedDefaultSVG: defaultSVG,
+				});
+				clearInterval(refresh);
+			} else {
+				console.error('error search id');
+			}
+		}, timeRefresh);
 	}
 
-	public onToggleOrientedLink = (isOpen: boolean) => {
-		this.setState({
-			openCollapseOrientedLink: isOpen,
-		});
+	/** call function in load component */
+	public componentDidMount = async () => {
+		await this.addInput(this.props.coordinate.id);
+		this.fillInputEspaceCoor();
+		this.fillSelectSVG();
 	}
 
-	/**
-	 * render
-	 */
+	/** function is call when props is update. Update state */
+	public componentDidUpdate = async (prevProps: IProps, prevState: IState) => {
+		if (prevProps.coordinate.id !== this.props.coordinate.id) {
+			await this.setStateAsyncArrayCoor({
+				arrayCoor: cloneRegionCoordinateSpace(this.props.coordinate),
+			});
+			await this.setStateAsyncArrayInput({
+				arrayInput: [],
+			});
+			await this.addInput(this.props.coordinate.id);
+			this.fillInputEspaceCoor();
+			this.fillSelectSVG();
+		}
+		// if (prevProps.data.series !== this.props.data.series) {
+		// 	this.fillSelectQuery();
+		// }
+
+	}
+
+	/** return html */
 	public render() {
 		const styleAlert = {
 			position: 'fixed',
@@ -458,14 +401,13 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 					{this.state.htmlInput}
 				</div>
 				<div>
-					<Select
-						onChange={(value) => this.onChangeSelectQuery(value)}
-						allowCustomValue={false}
-						options={this.state.selectQuery}
-						width={10}
-						value={this.state.selectQueryDefault}
+					<ManageQuery options={this.props.options}
+						idCoordinate={this.state.arrayCoor.id}
+						onOptionsChange={this.props.onOptionsChange}
+						data={this.props.data}
+						mainMetric={this.state.arrayCoor.mainMetric}
+						callBackToParent={this.callBackMainMetric}
 					/>
-					<br />
 				</div>
 				<div>
 					<ParametresGeneriques
@@ -483,119 +425,61 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 						lowerLimitCallBack={this.callBackLowerLimit} />
 				</div>
 				<br />
-
-				{/* <div className='choiceCateg'>
+				<div>
 					<div className='radio'>
 						<label>
-							<input type='radio' id='region' name='choiceCateg' value='region'
-								onChange={this.onChangeRadio} checked={this.state.checkedRadio[0]} />
-							Area
+							<input type='radio' value='svgMode'
+								checked={this.state.selectedRadio === 'svgMode'}
+								onChange={this.radioClick} />
+							SVG mode
 						</label>
 					</div>
 					<div className='radio'>
 						<label>
-							<input type='radio' id='lien' name='choiceCateg' value='lien'
-								onChange={this.onChangeRadio} checked={this.state.checkedRadio[1]} />
-							Link
+							<input type='radio' value='coordinateMode'
+								checked={this.state.selectedRadio === 'coordinateMode'}
+								onChange={this.radioClick} />
+							Coordinate mode
 						</label>
 					</div>
-					<div className='radio'>
-						<label>
-							<input type='radio' id='point' name='choiceCateg' value='point'
-								onChange={this.onChangeRadio} checked={this.state.checkedRadio[2]} />
-							Point
-						</label>
-					</div>
-				</div> */}
+					<br></br>
+					{
+						this.state.selectedRadio === 'svgMode' ?
+							<div className='svgMode'>
+								<Select
+									onChange={(value) => this.onChangeSelectSVG(value)}
+									allowCustomValue={false}
+									options={this.state.allIDSelected}
+									width={10}
+									value={this.state.selectedDefaultSVG}
+								/>
+							</div>
+							:
+							<div className='classRegion'>
+								<FormField label='Image' labelWidth={10} inputWidth={20}
+									type='text' value={this.state.arrayCoor.img} name='image'
+									onChange={(event) => this._handleChange(event.currentTarget.value,
+										'image', this.state.arrayCoor.id)} />
+								<FormField label='X min' labelWidth={10} inputWidth={20}
+									type='text' value={this.state.arrayCoor.coords.xMin} name='positionXMin'
+									onChange={(event) => this._handleChange(event.currentTarget.value,
+										'positionXMin', this.state.arrayCoor.id)} />
+								<FormField label='X max' labelWidth={10} inputWidth={20}
+									type='text' value={this.state.arrayCoor.coords.xMax} name='positionXMax'
+									onChange={(event) => this._handleChange(event.currentTarget.value,
+										'positionXMax', this.state.arrayCoor.id)} />
+								<FormField label='Y min' labelWidth={10} inputWidth={20}
+									type='text' value={this.state.arrayCoor.coords.yMin} name='positionYMin'
+									onChange={(event) => this._handleChange(event.currentTarget.value,
+										'positionYMin', this.state.arrayCoor.id)} />
+								<FormField label='Y max' labelWidth={10} inputWidth={20}
+									type='text' value={this.state.arrayCoor.coords.yMax} name='positionYMax'
+									onChange={(event) => this._handleChange(event.currentTarget.value,
+										'positionYMax', this.state.arrayCoor.id)} />
+							</div>
+					}
+				</div>
 				<br />
-				{
-					<div className='classRegion'>
-						<FormField label='Image' labelWidth={10} inputWidth={20}
-							type='text' value={this.state.arrayCoor.img} name='image'
-							onChange={(event) => this._handleChange(event.currentTarget.value,
-								'image', this.state.arrayCoor.id)} />
-						<FormField label='X min' labelWidth={10} inputWidth={20}
-							type='text' value={this.state.arrayCoor.coords.xMin} name='positionXMin'
-							onChange={(event) => this._handleChange(event.currentTarget.value,
-								'positionXMin', this.state.arrayCoor.id)} />
-						<FormField label='X max' labelWidth={10} inputWidth={20}
-							type='text' value={this.state.arrayCoor.coords.xMax} name='positionXMax'
-							onChange={(event) => this._handleChange(event.currentTarget.value,
-								'positionXMax', this.state.arrayCoor.id)} />
-						<FormField label='Y min' labelWidth={10} inputWidth={20}
-							type='text' value={this.state.arrayCoor.coords.yMin} name='positionYMin'
-							onChange={(event) => this._handleChange(event.currentTarget.value,
-								'positionYMin', this.state.arrayCoor.id)} />
-						<FormField label='Y max' labelWidth={10} inputWidth={20}
-							type='text' value={this.state.arrayCoor.coords.yMax} name='positionYMax'
-							onChange={(event) => this._handleChange(event.currentTarget.value,
-								'positionYMax', this.state.arrayCoor.id)} />
-					</div>
-				}
-
-				{/* {
-					this.state.checkedRadio[0] &&
-					<div className='classRegion'>
-						<FormField label='Picture' labelWidth={10} inputWidth={20}
-							type='text' value={this.state.arrayCoor.img} name='picture'
-							onChange={(event) => this._handleChange(event.currentTarget.value,
-								'image', this.state.arrayCoor.id)} />
-						<FormField label='X min' labelWidth={10} inputWidth={20}
-							type='text' value={this.state.arrayCoor.coords.xMin} name='positionXMin'
-							onChange={(event) => this._handleChange(event.currentTarget.value,
-								'positionXMin', this.state.arrayCoor.id)} />
-						<FormField label='X max' labelWidth={10} inputWidth={20}
-							type='text' value={this.state.arrayCoor.coords.xMax} name='positionXMax'
-							onChange={(event) => this._handleChange(event.currentTarget.value,
-								'positionXMax', this.state.arrayCoor.id)} />
-						<FormField label='Y min' labelWidth={10} inputWidth={20}
-							type='text' value={this.state.arrayCoor.coords.yMin} name='positionYMin'
-							onChange={(event) => this._handleChange(event.currentTarget.value,
-								'positionYMin', this.state.arrayCoor.id)} />
-						<FormField label='Y max' labelWidth={10} inputWidth={20}
-							type='text' value={this.state.arrayCoor.coords.yMax} name='positionYMax'
-							onChange={(event) => this._handleChange(event.currentTarget.value,
-								'positionYMax', this.state.arrayCoor.id)} />
-					</div>
-
-				}
-
-				{
-					this.state.checkedRadio[1] &&
-					<div>
-						<LinkForm arrayCoordinateSpace={this.props.options.arrayCoordinateSpace}
-							oldArrayLinkClass={this.props.options.arrayLinks}
-							arrayPointClass={this.props.options.arrayPoints}
-							callBackFromParent={this.myCallBackArrayLinks.bind(this)}
-						/>
-					</div>
-				}
-				{
-					this.state.checkedRadio[2] &&
-					<PointForm oldArrayPointClass={this.props.options.arrayPoints}
-						callBackFromParent={this.myCallBackArrayPoints.bind(this)}
-						arrayCoordinateSpace={this.props.options.arrayCoordinateSpace}
-						options={this.props.options}
-						onOptionsChange={this.props.onOptionsChange}
-						data={this.props.data}
-					/>
-				} */}
-				<br />
-
-				{/* <div>
-					<Collapse label={'OrientedLink'}
-						isOpen={this.state.openCollapseOrientedLink}
-						onToggle={this.onToggleOrientedLink}>
-						<OrientedLinkForm arrayPoint={this.props.options.arrayPoints}
-							arrayCoordinateSpace={this.props.options.arrayCoordinateSpace}
-							oldArrayOrientedLinkClass={this.props.options.arrayOrientedLinks}
-							callBackFromParent={this.myCallBackArrayOrientedLinks.bind(this)}
-							options={this.props.options}
-							onOptionsChange={this.props.onOptionsChange}
-							data={this.props.data}
-						/>
-					</Collapse>
-				</div> */}
 				<div className='buttonSave'>
 					<Button onClick={() => this.callBack()}>Load</Button>
 					{
@@ -603,6 +487,7 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 						<Button onClick={this.deleteOwnInput} variant='danger'>Delete</Button>
 					}
 				</div>
+				{/* <Button onClick={() => console.log(this.state.arrayCoor)}>load</Button> */}
 			</div>
 		);
 	}

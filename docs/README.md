@@ -1,127 +1,41 @@
-# Setup instructions
+# About WeatherMap plugin
 
-it's Draft
+It's Draft
 
-The current version proposes a representation between 2 nodes with a link and an associated value
-
-Many settings are available to customize the rendering.
-
-![resultat](images/resultat.png)
-
-# Prerequisites
-
-It is possible to see to follow a metric in an environment
-
-Example : node_cpu{cpu="cpu0",mode="idle"}
+WeatherMap is a plugin for grafana allowing to visualize monitoring...
 
 
-- [Prometheus](https://prometheus.io)
-- [Node_exporter](https://prometheus.io/docs/guides/node-exporter/)
-- [Grafana](grafana.com/)
+# Table of Contents
 
-## Testing Node_exporter
+- [Introduction](introduction.md)
 
-To see the available metrics, open the browser and type this:
+- [Environment](environment.md)
 
-```sh
-http://localhost:9100/metrics
-```
-
-![Node Exporter](images/node_exporter.png)
+  - [Pre-requis](configuration.md)
+  - [Installation](installation.md)
 
 
-## Testing Prometheus
+- [Dashboard](dashboard.md)
 
-```sh
-http://localhost:9090/
-```
+  - [Add region](dashboard-region.md)
+  - Add point
+  - Add oriented link
+  - Position Legend
 
-![Prometheus](images/prometheus.png)
+- [Panel](panel.md)
 
+  - Display
+  - initial viewing space
+  - Coordinates space
+  - Visibility of objects
+  - Metrics settings
+  - Graphical object
 
-## Testing Grafana
+- [Demo](demo.md)
 
-From the `data sources` menu in Grafana, choose Prometheus
+- [Annex](annex.md)
 
-Complete the form and the line
+  - [format SVG](annex-svg.md)
+  - [format JSON](annex-json.md)
 
-url : http://localhost:9090
-
-You have to go to the `New dashboard` menu...
-
-- Select the `graph` display
-- Selected the `Queries` tab
-
-Complete the targets to see the result
-
-![metrics graph](images/graph.png)
-
-
-# Plugin WeatherMap
-
-## Automatic view
-
-coming soon
-
-## Edit view
-
-the configuration screen offers many tabs that are :
-
-- Display
-- Seuil
-- Initial viewing space
-- Visibility of objects
-- Metrics Settings   
-
-
-
-### Display
-
-coming soon
-
-### Seuil
-
-coming soon
-
-### Initial viewing space
-
-
-Declaration Region
-
-Tab `Initial vieving Space`
-
-![Metrics auxiliaires](images/region.png)
-
-
-### Visibility of objects
-
-coming soon
-
-### Metrics Settings
-
-* Tab Time Selector Display
-
-Fill in the form
-
-- TimeQuery: 2020-02-06 11:59:57
-- Prometheus URL http://localhost:9090/api/v1/
-
-
-* Tab Metrics Principal
-
-Fill in the main metric
-
-
-Example : node_cpu{cpu="cpu0",mode="idle"}
-
-Currently the results are available in the console tab of the browser.
-
-![Metrics principal](images/metricsPrincipal.png)
-
-
-* Tab Metrics Auxiliaires
-
-It is possible to add auxiliary metrics as shown in the screenshot
-
-
-![Metrics auxiliaires](images/AuxMetrics.png)
+- [Contributed](released.md)
