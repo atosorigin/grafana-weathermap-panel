@@ -7,35 +7,43 @@ WeatherMap is a plugin for grafana allowing to visualize monitoring...
 
 # Table of Contents
 
-- [Introduction](introduction.md)
+- [Introduction](init/introduction.md)
 
-- [Environment](environment.md)
+- [Environment](init/environment.md)
 
-  - [Pre-requis](configuration.md)
-  - [Installation](installation.md)
+  - [Pre-requis](init/configuration.md)
+  - [Installation](init/installation.md)
+
+ 
+ 
+
+- [Panel](panel/panel.md)
+
+  - [Display](panel/display.md)
+  - [initial viewing space](panel/initial-viewing-space.md)
+  - [Coordinates space](panel/coordinates-space.md)
+  - [Visibility of objects](panel/visibility-objets.md)
 
 
-- [Dashboard](dashboard.md)
+ 
 
-  - [Add region](dashboard-region.md)
-  - Add point
-  - Add oriented link
-  - Position Legend
+- [View](view/dashboard.md)
 
-- [Panel](panel.md)
+  - [Add region](view/dashboard-region.md)
+  - [Add point](view/dashboard-point.md)
+  - [Add oriented link](view/dashboard-oriented-link.md)
+  - [Position Legend](view/dashboard-position-legend.md)
 
-  - Display
-  - initial viewing space
-  - Coordinates space
-  - Visibility of objects
-  - Metrics settings
-  - Graphical object
+
 
 - [Demo](demo.md)
 
-- [Annex](annex.md)
 
-  - [format SVG](annex-svg.md)
-  - [format JSON](annex-json.md)
 
-- [Contributed](released.md)
+- [Annex](annex/annex.md)
+
+  - [format SVG](annex/annex-svg.md)
+  - [format JSON](annex/annex-json.md)
+  - [server file import](annex/annex-server.md)
+
+- [Contributed](init/released.md)

@@ -34,7 +34,8 @@ Les paramètres obligatoires à cocher sont `shadow` and `embed images`
 
 ## Sauvegarde
 
-Il est important que chaque élément doit posséder une clef `ID`
+Il est important que chaque élément doit posséder une clef `ID` pour que le fichier créé puisse être importer dans le plugin.
 
 
-> Attention : il ne faut pas sauvegarder au format à plat, ni compresser le fichier
+> Attention : 
+> il ne faut pas sauvegarder au format à plat, ni compresser le fichier
