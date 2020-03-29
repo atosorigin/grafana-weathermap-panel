@@ -30,20 +30,20 @@ grafana-cli plugins install grafana-weathermap-panel
 ## Manual
 
 ```sh
-$ git clone https://github.com/atosorigin/grafana-weathermap
+$ git clone https://github.com/atosorigin/grafana-weathermap-panel.git
 ```
 
 move the folder to grafana's plugins folder
 
 ```sh
-$ mv grafana-weathermap /var/lib/grafana/plugins
+$ mv grafana-weathermap-panel /var/lib/grafana/plugins
 ```
 
 Install the plugins
 
 ```sh
 $ cd /var/lib/grafana/plugins
-$ cd grafana-weathermap
+$ cd grafana-weathermap-panel
 $ yarn install
 $ yarn watch
 $ systemctl restart grafana-server
@@ -61,11 +61,11 @@ $ yarn build
 
 # Getting Help
 
-* [WeatherMap documentation](https://github.com/atosorigin/grafana-weathermap/tree/master/docs)
+* [WeatherMap documentation](https://github.com/atosorigin/grafana-weathermap-panel/tree/master/docs)
 
 * [WeatherMap Demo](https://github.com/atosorigin/grafana-weathermap-panel/tree/master/demo)
 
 
 # History
 
-* [Changelog](https://github.com/atosorigin/grafana-weathermap/blob/master/CHANGELOG.md)
+* [Changelog](https://github.com/atosorigin/grafana-weathermap-panel/blob/master/CHANGELOG.md)
