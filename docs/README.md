@@ -8,42 +8,27 @@ WeatherMap is a plugin for grafana allowing to visualize monitoring...
 # Table of Contents
 
 - [Introduction](init/introduction.md)
-
-- [Environment](init/environment.md)
-
-  - [Pre-requis](init/configuration.md)
+- [Environment](init/README.md)
+  - [Configuration](init/configuration.md)
   - [Installation](init/installation.md)
-
- 
- 
-
-- [Panel](panel/panel.md)
-
-  - [Display](panel/display.md)
-  - [initial viewing space](panel/initial-viewing-space.md)
-  - [Coordinates space](panel/coordinates-space.md)
-  - [Visibility of objects](panel/visibility-objets.md)
-
-
- 
-
-- [View](view/dashboard.md)
-
-  - [Add region](view/dashboard-region.md)
-  - [Add point](view/dashboard-point.md)
-  - [Add oriented link](view/dashboard-oriented-link.md)
-  - [Position Legend](view/dashboard-position-legend.md)
-
-
-
-- [Demo](demo.md)
-
-
-
-- [Annex](annex/annex.md)
-
-  - [format SVG](annex/annex-svg.md)
-  - [format JSON](annex/annex-json.md)
-  - [server file import](annex/annex-server.md)
-
-- [Contributed](init/released.md)
+- [Editor](editor/README.md)
+  - [Display](editor/display.md)
+  - [initial viewing space](editor/initial-viewing-space.md)
+  - [Coordinates space](editor/coordinates.md)
+  - [Visibility of objects](editor/visibility-objets.md)
+  - [Inport files](editor/import.md)
+- [Panel](panel/README.md)
+  - [Add region](panel/region.md)
+  - [Add point](panel/point.md)
+  - [Add oriented link](panel/oriented-link.md)
+  - [Add incurved oriented link](panel/incurved-link.md)
+  - [Position Legend](panel/position-legend.md)
+- [Demo](demo/README.md)
+- [Annex](annex/README.md)
+  - [SVG](annex/svg.md)
+  - [JSON region](annex/json-region.md)
+  - [JSON point](annex/json-point.md)
+  - [JSON link](annex/json-links.md)
+  - [JSON global](annex/json-global.md)
+  - [Server](annex/server.md)
+- [Released](init/released.md)

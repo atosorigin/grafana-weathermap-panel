@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Tab, TabsBar, TabContent, Button } from '@grafana/ui';
+import { Tab, TabsBar, TabContent } from '@grafana/ui';
 import { PanelEditorProps } from '@grafana/data';
 
 import { SimpleOptions } from 'types';
@@ -85,7 +85,7 @@ class ManageCoordinateSpace extends React.Component<IProps, IState> {
 
 					}
 				</TabContent>
-				<Button onClick={() => console.log(this.props.data.series)}>List all metrics</Button>
+				{/* <Button onClick={() => console.log(this.props.data.series)}>List all metrics</Button> */}
 			</div>
 		);
 	}

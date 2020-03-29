@@ -18,6 +18,7 @@ interface IProps {
 		hoveringTooltipText?: string,
 		textObj?: TextObject,
 		id?: number) => void;
+	/** id element to save data*/
 	id?: number;
 }
 
@@ -37,7 +38,7 @@ class TextObjects extends React.Component<IProps, IState> {
 		};
 	}
 
-/** save data in async mode */
+	/** save data in async mode */
 	public stateAsyncTextObject = (state: {
 		/** new text object */
 		textObject: TextObject
@@ -47,36 +48,25 @@ class TextObjects extends React.Component<IProps, IState> {
 		});
 	}
 
-	/**
-	 * call back to parent
-	 */
+	/** call back to parent */
 	public callBack = () => {
 		this.props.callBackToParent(undefined, undefined, undefined, this.state.textObject, this.props.id);
 	}
 
-	/** change value for legend input */
-	public onChangeLegende = async (value: string) => {
-		const newTextObject: TextObject = this.state.textObject;
+	// /** change value for legend input */
+	// public onSwitchLegend = async () => {
+	// 	const newTextObject: TextObject = this.state.textObject;
 
-		newTextObject.legend = value;
-		await this.stateAsyncTextObject({ textObject: newTextObject });
-		this.callBack();
-	}
+	// 	newTextObject.legend = !newTextObject.legend;
+	// 	await this.stateAsyncTextObject({ textObject: newTextObject });
+	// 	this.callBack();
+	// }
 
 	/** change value for value input */
 	public onChangeValeur = async (value: string) => {
 		const newTextObject: TextObject = this.state.textObject;
 
 		newTextObject.value = value;
-		await this.stateAsyncTextObject({ textObject: newTextObject });
-		this.callBack();
-	}
-
-	/** change value for unity input */
-	public onChangeUnite = async (value: string) => {
-		const newTextObject: TextObject = this.state.textObject;
-
-		newTextObject.unit = value;
 		await this.stateAsyncTextObject({ textObject: newTextObject });
 		this.callBack();
 	}
@@ -127,19 +117,19 @@ class TextObjects extends React.Component<IProps, IState> {
 	}) => {
 		const newTextObject: TextObject = this.state.textObject;
 
-		newTextObject.legendElement = event.currentTarget.value;
+		newTextObject.generateAuxiliaryElement.legendElement = event.currentTarget.value;
 		await this.stateAsyncTextObject({ textObject: newTextObject });
 		this.callBack();
 	}
 
 	/** change value for unity mesure element */
-	public onChangeUnityMesureElement = async (event: {
+	public onChangeunit = async (event: {
 		/** target for unity mesure element input */
 		currentTarget: HTMLInputElement,
 	}) => {
 		const newTextObject: TextObject = this.state.textObject;
 
-		newTextObject.unityMesureElement = event.currentTarget.value;
+		newTextObject.generateAuxiliaryElement.unit = event.currentTarget.value;
 		await this.stateAsyncTextObject({ textObject: newTextObject });
 		this.callBack();
 	}
@@ -151,7 +141,7 @@ class TextObjects extends React.Component<IProps, IState> {
 	}) => {
 		const newTextObject: TextObject = this.state.textObject;
 
-		newTextObject.numericFormatElement = event.currentTarget.value;
+		newTextObject.generateAuxiliaryElement.numericFormatElement = event.currentTarget.value;
 		await this.stateAsyncTextObject({ textObject: newTextObject });
 		this.callBack();
 	}
@@ -160,25 +150,28 @@ class TextObjects extends React.Component<IProps, IState> {
 	public onSwitchDisplayObjectInText = async () => {
 		const newTextObject: TextObject = this.state.textObject;
 
-		newTextObject.displayObjectInText = !this.state.textObject.displayObjectInText;
+		newTextObject.generateAuxiliaryElement.displayObjectInText =
+			!this.state.textObject.generateAuxiliaryElement.displayObjectInText;
 		await this.stateAsyncTextObject({ textObject: newTextObject });
 		this.callBack();
 	}
 
-	/** switch value for display object permanently */
-	public onSwitchDisplayObjectPermanently = async () => {
-		const newTextObject: TextObject = this.state.textObject;
+	// /** switch value for display object permanently */
+	// public onSwitchDisplayObjectPermanently = async () => {
+	// 	const newTextObject: TextObject = this.state.textObject;
 
-		newTextObject.displayObjectPermanently = !this.state.textObject.displayObjectPermanently;
-		await this.stateAsyncTextObject({ textObject: newTextObject });
-		this.callBack();
-	}
+	// 	newTextObject.generateAuxiliaryElement.displayObjectPermanently =
+	// 		!this.state.textObject.generateAuxiliaryElement.displayObjectPermanently;
+	// 	await this.stateAsyncTextObject({ textObject: newTextObject });
+	// 	this.callBack();
+	// }
 
 	/** choice to apply color or not for text element */
 	public onSwitchAddColorTextElement = async () => {
 		const newTextObject: TextObject = this.state.textObject;
 
-		newTextObject.addColorTextElement = !this.state.textObject.addColorTextElement;
+		newTextObject.generateAuxiliaryElement.addColorTextElement =
+			!this.state.textObject.generateAuxiliaryElement.addColorTextElement;
 		await this.stateAsyncTextObject({ textObject: newTextObject });
 		this.callBack();
 	}
@@ -187,7 +180,8 @@ class TextObjects extends React.Component<IProps, IState> {
 	public onSwitchAddColorBackElement = async () => {
 		const newTextObject: TextObject = this.state.textObject;
 
-		newTextObject.addColorBackElement = !this.state.textObject.addColorBackElement;
+		newTextObject.generateAuxiliaryElement.addColorBackElement =
+			!this.state.textObject.generateAuxiliaryElement.addColorBackElement;
 		await this.stateAsyncTextObject({ textObject: newTextObject });
 		this.callBack();
 	}
@@ -208,7 +202,7 @@ class TextObjects extends React.Component<IProps, IState> {
 	public onChangeColorTextElement = async (key: number, color: string) => {
 		const newTextObject: TextObject = this.state.textObject;
 
-		newTextObject.colorTextElement = color;
+		newTextObject.generateAuxiliaryElement.colorTextElement = color;
 		await this.stateAsyncTextObject({ textObject: newTextObject });
 		this.callBack();
 	}
@@ -217,7 +211,104 @@ class TextObjects extends React.Component<IProps, IState> {
 	public onChangeColorBackElement = async (key: number, color: string) => {
 		const newTextObject: TextObject = this.state.textObject;
 
-		newTextObject.colorBackElement = color;
+		newTextObject.generateAuxiliaryElement.colorBackElement = color;
+		await this.stateAsyncTextObject({ textObject: newTextObject });
+		this.callBack();
+	}
+
+
+
+
+	/** change value for legend element */
+	public onChangeValueGenerateObjectTextLegendElement = async (event: {
+		/** target for legend text element input */
+		currentTarget: HTMLInputElement,
+	}) => {
+		const newTextObject: TextObject = this.state.textObject;
+
+		newTextObject.valueGenerateObjectText.legendElement = event.currentTarget.value;
+		await this.stateAsyncTextObject({ textObject: newTextObject });
+		this.callBack();
+	}
+
+	/** change value for unity mesure element */
+	public onChangeValueGenerateObjectTextunit = async (event: {
+		/** target for unity mesure element input */
+		currentTarget: HTMLInputElement,
+	}) => {
+		const newTextObject: TextObject = this.state.textObject;
+
+		newTextObject.valueGenerateObjectText.unit = event.currentTarget.value;
+		await this.stateAsyncTextObject({ textObject: newTextObject });
+		this.callBack();
+	}
+
+	/** change format for numeric text object */
+	public onChangeValueGenerateObjectTextFormatageNumeriqueTextObject = async (event: {
+		/** target for numeric format text object input */
+		currentTarget: HTMLInputElement,
+	}) => {
+		const newTextObject: TextObject = this.state.textObject;
+
+		newTextObject.valueGenerateObjectText.numericFormatElement = event.currentTarget.value;
+		await this.stateAsyncTextObject({ textObject: newTextObject });
+		this.callBack();
+	}
+
+	/** switch value for display object text */
+	public onSwitchValueGenerateObjectTextDisplayObjectInText = async () => {
+		const newTextObject: TextObject = this.state.textObject;
+
+		newTextObject.valueGenerateObjectText.displayObjectInText =
+			!this.state.textObject.valueGenerateObjectText.displayObjectInText;
+		await this.stateAsyncTextObject({ textObject: newTextObject });
+		this.callBack();
+	}
+
+	// /** switch value for display object permanently */
+	// public onSwitchValueGenerateObjectTextDisplayObjectPermanently = async () => {
+	// 	const newTextObject: TextObject = this.state.textObject;
+
+	// 	newTextObject.valueGenerateObjectText.displayObjectPermanently =
+	// 		!this.state.textObject.valueGenerateObjectText.displayObjectPermanently;
+	// 	await this.stateAsyncTextObject({ textObject: newTextObject });
+	// 	this.callBack();
+	// }
+
+	/** choice to apply color or not for text element */
+	public onSwitchValueGenerateObjectTextAddColorTextElement = async () => {
+		const newTextObject: TextObject = this.state.textObject;
+
+		newTextObject.valueGenerateObjectText.addColorTextElement =
+			!this.state.textObject.valueGenerateObjectText.addColorTextElement;
+		await this.stateAsyncTextObject({ textObject: newTextObject });
+		this.callBack();
+	}
+
+	/** choice to apply color or not for back element */
+	public onSwitchValueGenerateObjectTextAddColorBackElement = async () => {
+		const newTextObject: TextObject = this.state.textObject;
+
+		newTextObject.valueGenerateObjectText.addColorBackElement =
+			!this.state.textObject.valueGenerateObjectText.addColorBackElement;
+		await this.stateAsyncTextObject({ textObject: newTextObject });
+		this.callBack();
+	}
+
+	/** change value for color text element */
+	public onChangeValueGenerateObjectTextColorTextElement = async (key: number, color: string) => {
+		const newTextObject: TextObject = this.state.textObject;
+
+		newTextObject.valueGenerateObjectText.colorTextElement = color;
+		await this.stateAsyncTextObject({ textObject: newTextObject });
+		this.callBack();
+	}
+
+	/** change value for back element */
+	public onChangeValueGenerateObjectTextColorBackElement = async (key: number, color: string) => {
+		const newTextObject: TextObject = this.state.textObject;
+
+		newTextObject.valueGenerateObjectText.colorBackElement = color;
 		await this.stateAsyncTextObject({ textObject: newTextObject });
 		this.callBack();
 	}
@@ -230,33 +321,14 @@ class TextObjects extends React.Component<IProps, IState> {
 
 		return (
 			<div>
-				<div>
+				{/* <div>
 					<h4>{l10n.textObject.titleTextObject}</h4>
-					<InputTextField label={l10n.textObject.optionalLegend}
-						key='legendTextObject'
-						name='legendTextObject'
-						placeholder={l10n.textObject.legend}
-						required={false}
-						value={this.state.textObject.legend}
-						_handleChange={(event: {
-							/** call currentTarget to get value */
-							currentTarget: HTMLInputElement,
-						}) =>
-							this.onChangeLegende(event.currentTarget.value)} />
-
-					<InputTextField label={l10n.textObject.optionalUnit}
-						key='textUnitObject'
-						name='textUnitObject'
-						placeholder={l10n.textObject.unit}
-						required={false}
-						value={this.state.textObject.unit}
-						_handleChange={(event: {
-							/** call currentTarget to get value */
-							currentTarget: HTMLInputElement,
-						}) =>
-							this.onChangeUnite(event.currentTarget.value)} />
-					<br />
-				</div>
+					<Switch
+						label={l10n.textObject.optionalLegend}
+						checked={this.state.textObject.legend}
+						onChange={this.onSwitchLegend} />
+					<br /><br />
+				</div> */}
 
 				<div>
 					<h4>{l10n.textObject.principalMetric}</h4>
@@ -289,13 +361,84 @@ class TextObjects extends React.Component<IProps, IState> {
 						value={this.state.textObject.styleText}
 						_handleChange={this.onChangeStyleText}
 					/>
-
-					<br />
+					<br /><br />
+				</div>
+				<div>
+					<h4>Generate text object</h4>
 					<Switch
 						label={l10n.textObject.generateTextObject}
 						checked={this.state.textObject.generateObjectText}
 						onChange={this.onSwitchGenerateObjectText}
 					/>
+					{
+						this.state.textObject.generateObjectText &&
+						<div>
+							{/* <h4>Object text</h4> */}
+							<InputTextField
+								label={l10n.textObject.legend}
+								name='legendTextObject'
+								placeholder={l10n.textObject.legend}
+								required={false}
+								value={this.state.textObject.valueGenerateObjectText.legendElement}
+								_handleChange={this.onChangeValueGenerateObjectTextLegendElement}
+							/>
+							<InputTextField
+								label={l10n.textObject.digitalFormatting}
+								name='formatageNumeriqueTextObject'
+								placeholder={l10n.textObject.digitalFormatting}
+								required={false}
+								value={this.state.textObject.valueGenerateObjectText.numericFormatElement}
+								_handleChange={this.onChangeValueGenerateObjectTextFormatageNumeriqueTextObject}
+							/>
+							<InputTextField
+								label={l10n.textObject.mesureUnit}
+								name='mesureUnityTextObject'
+								placeholder={l10n.textObject.unit}
+								required={false}
+								value={this.state.textObject.valueGenerateObjectText.unit}
+								_handleChange={this.onChangeValueGenerateObjectTextunit}
+							/>
+							<Switch
+								label={l10n.textObject.objectDisplayTextTooltip}
+								checked={this.state.textObject.valueGenerateObjectText.displayObjectInText}
+								onChange={this.onSwitchValueGenerateObjectTextDisplayObjectInText}
+							/>
+							{/* <Switch
+								label={l10n.textObject.objectDisplayInPermanentlyHover}
+								checked={this.state.textObject.valueGenerateObjectText.displayObjectPermanently}
+								onChange={this.onSwitchValueGenerateObjectTextDisplayObjectPermanently}
+							/> */}
+							<Switch
+								label={l10n.textObject.colorText}
+								checked={this.state.textObject.valueGenerateObjectText.addColorTextElement}
+								onChange={this.onSwitchValueGenerateObjectTextAddColorTextElement}
+							/>
+							{
+								(this.state.textObject.valueGenerateObjectText.addColorTextElement) &&
+								<InputSeriesColorPicker
+									color={this.state.textObject.valueGenerateObjectText.colorTextElement}
+									keyInt={0}
+									text={l10n.textObject.colorTextOptional}
+									_onChange={this.onChangeValueGenerateObjectTextColorTextElement}
+								/>
+							}
+							<Switch
+								label={l10n.textObject.backgroundColor}
+								checked={this.state.textObject.valueGenerateObjectText.addColorBackElement}
+								onChange={this.onSwitchValueGenerateObjectTextAddColorBackElement}
+							/>
+							{
+								(this.state.textObject.valueGenerateObjectText.addColorBackElement) &&
+								<InputSeriesColorPicker
+									color={this.state.textObject.valueGenerateObjectText.colorBackElement}
+									keyInt={0}
+									text={l10n.textObject.optionalBackgroundColor}
+									_onChange={this.onChangeValueGenerateObjectTextColorBackElement}
+								/>
+							}
+						</div>
+					}
+					<br /><br />
 				</div>
 
 				<div>
@@ -305,7 +448,7 @@ class TextObjects extends React.Component<IProps, IState> {
 						name='legendTextObject'
 						placeholder={l10n.textObject.legend}
 						required={false}
-						value={this.state.textObject.legendElement}
+						value={this.state.textObject.generateAuxiliaryElement.legendElement}
 						_handleChange={this.onChangeLegendElement}
 					/>
 					<InputTextField
@@ -313,7 +456,7 @@ class TextObjects extends React.Component<IProps, IState> {
 						name='formatageNumeriqueTextObject'
 						placeholder={l10n.textObject.digitalFormatting}
 						required={false}
-						value={this.state.textObject.numericFormatElement}
+						value={this.state.textObject.generateAuxiliaryElement.numericFormatElement}
 						_handleChange={this.onChangeFormatageNumeriqueTextObject}
 					/>
 					<InputTextField
@@ -321,62 +464,48 @@ class TextObjects extends React.Component<IProps, IState> {
 						name='mesureUnityTextObject'
 						placeholder={l10n.textObject.unit}
 						required={false}
-						value={this.state.textObject.unityMesureElement}
-						_handleChange={this.onChangeUnityMesureElement}
+						value={this.state.textObject.generateAuxiliaryElement.unit}
+						_handleChange={this.onChangeunit}
 					/>
 					<Switch
 						label={l10n.textObject.objectDisplayTextTooltip}
-						checked={this.state.textObject.displayObjectInText}
+						checked={this.state.textObject.generateAuxiliaryElement.displayObjectInText}
 						onChange={this.onSwitchDisplayObjectInText}
 					/>
-					<Switch
+					{/* <Switch
 						label={l10n.textObject.objectDisplayInPermanentlyHover}
-						checked={this.state.textObject.displayObjectPermanently}
+						checked={this.state.textObject.generateAuxiliaryElement.displayObjectPermanently}
 						onChange={this.onSwitchDisplayObjectPermanently}
-					/>
+					/> */}
 					<Switch
 						label={l10n.textObject.colorText}
-						checked={this.state.textObject.addColorTextElement}
+						checked={this.state.textObject.generateAuxiliaryElement.addColorTextElement}
 						onChange={this.onSwitchAddColorTextElement}
 					/>
 					{
-						(this.state.textObject.addColorTextElement) ?
-							(
-								<InputSeriesColorPicker
-									color={this.state.textObject.colorTextElement}
-									keyInt={0}
-									text={l10n.textObject.colorTextOptional}
-									_onChange={this.onChangeColorTextElement}
-								/>
-
-							)
-							:
-							(
-								<br />
-							)
+						(this.state.textObject.generateAuxiliaryElement.addColorTextElement) &&
+						<InputSeriesColorPicker
+							color={this.state.textObject.generateAuxiliaryElement.colorTextElement}
+							keyInt={0}
+							text={l10n.textObject.colorTextOptional}
+							_onChange={this.onChangeColorTextElement}
+						/>
 					}
 					<Switch
 						label={l10n.textObject.backgroundColor}
-						checked={this.state.textObject.addColorBackElement}
+						checked={this.state.textObject.generateAuxiliaryElement.addColorBackElement}
 						onChange={this.onSwitchAddColorBackElement}
 					/>
 					{
-						(this.state.textObject.addColorBackElement) ?
-							(
-								<InputSeriesColorPicker
-									color={this.state.textObject.colorBackElement}
-									keyInt={0}
-									text={l10n.textObject.optionalBackgroundColor}
-									_onChange={this.onChangeColorBackElement}
-								/>
-
-							)
-							:
-							(
-								<br />
-							)
+						(this.state.textObject.generateAuxiliaryElement.addColorBackElement) &&
+						<InputSeriesColorPicker
+							color={this.state.textObject.generateAuxiliaryElement.colorBackElement}
+							keyInt={0}
+							text={l10n.textObject.optionalBackgroundColor}
+							_onChange={this.onChangeColorBackElement}
+						/>
 					}
-
+					<br /><br />
 				</div>
 			</div>
 		);

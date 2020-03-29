@@ -1,10 +1,10 @@
 import React from 'react';
-import { createInputsPoint } from 'Functions/createInputsPoint';
+import { createInputsPoint } from 'Functions/CreateInput/createInputsPoint';
 import InputTextPoint from 'Functions/Input/inputTextPoint';
 import InputButtonField from 'Functions/Input/inputButton';
 import { InputSelectableClass } from 'Models/InputSelectableClass';
 import { ArrayInputSelectableClass } from 'Models/ArrayInputSelectableClass';
-import { editGoodParameterPoint } from 'Functions/editGoodParameterPoint';
+import { editGoodParameterPoint } from 'Functions/EditParameter/editGoodParameterPoint';
 import { PointClass } from 'Models/PointClass';
 import InputSelectPoint from 'Functions/Input/inputSelectPoint';
 import { SelectableValue, PanelEditorProps } from '@grafana/data';
@@ -13,7 +13,7 @@ import { Button, Collapse } from '@grafana/ui';
 import { RegionClass } from 'Models/RegionClass';
 import { TextObject } from 'Models/TextObjectClass';
 import { LinkURLClass } from 'Models/LinkURLClass';
-import { SimpleOptions } from 'types';
+import { SimpleOptions, IMetric } from 'types';
 
 import ParametresGeneriques from 'components/Parametrage/parametresGeneriques';
 import ManageLowerLimit from 'components/Parametrage/manageLowerLimit';
@@ -21,6 +21,7 @@ import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
 import PositionParameter from '../components/Parametrage/positionParameters';
 import { PositionParameterClass } from 'Models/PositionParameterClass';
+import ManageQuery from './CoordinateSpace/manageQuery';
 
 
 
@@ -122,10 +123,12 @@ export default class PointForm extends React.Component<IProps, IState> {
 
 		for (const element of this.props.options.arrayPoints) {
 			setTimeout(() => {
-				this.addInput(element.id, element.label, element.coordinateSpace, element.drawGraphicMarker, element.shape, element.sizeWidth,
-					element.sizeHeight, element.rotateArrow, element.positionShapeX, element.positionShapeY,
-					element.color, element.mainMetric.refId, element.mainMetric.key, element.mainMetric.keyValue,
-					element.textObj, element.lowerLimit, element.positionParameter);
+				this.addInput(element.id, element.label, element.coordinateSpace, element.drawGraphicMarker,
+					element.shape, element.sizeWidth, element.sizeHeight, element.rotateArrow, element.positionShapeX,
+					element.positionShapeY, element.color,
+					//element.mainMetric.refId, element.mainMetric.key, element.mainMetric.keyValue,
+					element.textObj, element.lowerLimit, element.positionParameter, element.associateOrientedLinksIn,
+					element.associateOrientedLinksOut, element.mainMetric);
 			}, 100);
 		}
 
@@ -163,33 +166,59 @@ export default class PointForm extends React.Component<IProps, IState> {
 		id?: number, label?: string, coordinateSpaceAssociate?: SelectableValue<RegionClass>,
 		drawGraphicMarker?: SelectableValue<string>, shape?: SelectableValue<string>,
 		sizeWidth?: SelectableValue<string>, sizeHeight?: SelectableValue<string>, rotateArrow?: string,
-		positionShapeX?: string, positionShapeY?: string, color?: string, refIdMainMetric?: string,
-		keyMainMetric?: string, keyValueMainMetric?: string, textObj?: TextObject, seuil?: LowerLimitClass[],
-		positionParameter?: PositionParameterClass) => {
+		positionShapeX?: string, positionShapeY?: string, color?: string,
+		//refIdMainMetric?: string, keyMainMetric?: string, keyValueMainMetric?: string,
+		textObj?: TextObject, seuil?: LowerLimitClass[], positionParameter?: PositionParameterClass,
+		associateOrientedLinkIn?: any[], associateOrientedLinkOut?: any[], mainMetrics?: IMetric) => {
 
 		const num: number = id || this.props.options.indexPoint + 1;
 		const finalArray: InputSelectableClass[] = createInputsPoint(num, this.defineDataCoordinateSpace());
-		const initTextObject: TextObject = textObj || new TextObject('', '', '', false, '', '', '',
-			false, '', '', '',
-			false, false, false, '', false, '');
+		const initTextObject: TextObject = textObj || new TextObject('', false, '', '', '',
+			false,
+			{
+				'legendElement': '',
+				'numericFormatElement': '',
+				'unit': '',
+				'displayObjectInText': false,
+				// 'displayObjectPermanently': false,
+				'addColorTextElement': false,
+				'colorTextElement': 'white',
+				'addColorBackElement': false,
+				'colorBackElement': 'black',
+			},
+			{
+				'legendElement': '',
+				'numericFormatElement': '',
+				'unit': '',
+				'displayObjectInText': false,
+				// 'displayObjectPermanently': false,
+				'addColorTextElement': false,
+				'colorTextElement': 'white',
+				'addColorBackElement': false,
+				'colorBackElement': 'black',
+			});
 		const parametrageMetric: LinkURLClass = new LinkURLClass('', '', '');
 		const initPositionParameter: PositionParameterClass = positionParameter || new PositionParameterClass('0', '0', '0', '0', {}, {});
+		const initMainMetrics: IMetric = mainMetrics || 
+		{'key': '', 'unit': '', 'format': '', 'keyValue': '', 'refId': '', 'manageValue': 'avg',};
 
 		this.setState((prevState: IState) => ({
 			arrayPointClass: prevState.arrayPointClass.concat(new PointClass(
 				num, parametrageMetric, '', seuil || [], label || '', initTextObject,
-				{
-					'key': keyMainMetric || '',
-					'unit': '',
-					'format': '',
-					'keyValue': keyValueMainMetric || '',
-					'refId': refIdMainMetric || '',
-					'manageValue': 'avg',
-				}, [], false, false, false, initPositionParameter,
+				// {
+				// 	'key': keyMainMetric || '',
+				// 	'unit': '',
+				// 	'format': '',
+				// 	'keyValue': keyValueMainMetric || '',
+				// 	'refId': refIdMainMetric || '',
+				// 	'manageValue': 'avg',
+				// },
+				initMainMetrics,
+				[], false, false, false, initPositionParameter,
 				'point' + num.toString(), '', coordinateSpaceAssociate || {}, drawGraphicMarker || { label: 'Yes', value: 'true' },
 				shape || { label: 'Circle', value: 'circle' }, sizeWidth || { label: 'Small', value: 'small' },
 				sizeHeight || { label: 'Small', value: 'small' }, rotateArrow || '0', positionShapeX || '0', positionShapeY || '0',
-				color || 'black', [], [], [], [])),
+				color || 'black', [], [], associateOrientedLinkIn || [], associateOrientedLinkOut || [])),
 
 			arrayInput: prevState.arrayInput.concat([
 				new ArrayInputSelectableClass(num, finalArray),
@@ -431,6 +460,13 @@ export default class PointForm extends React.Component<IProps, IState> {
 		this.callBack();
 	}
 
+	public callBackMainMetric = (mainMetric: IMetric, id?:number): void => {
+		const newValue: PointClass = this.state.arrayPointClass[id || 0];
+		newValue.mainMetric = mainMetric;
+		this.props.options.arrayPoints[id || 0] = newValue;
+		this.callBack();
+	}
+
 	/**
 	 * create dynamic input
 	 */
@@ -553,7 +589,7 @@ export default class PointForm extends React.Component<IProps, IState> {
 
 
 			const divKey: string = 'inputPoint' + line.id.toString();
-			const newInput: JSX.Element =
+			const newInputList: JSX.Element =
 				<div key={divKey}
 					className='inputCoor'
 					id={'point' + line.id.toString()}
@@ -571,6 +607,16 @@ export default class PointForm extends React.Component<IProps, IState> {
 								listCollapsePoint: this.props.options.listCollapsePoint,
 							});
 						}}>
+						<div>
+							<ManageQuery
+								options={this.props.options}
+								idCoordinate={this.state.arrayPointClass[index].id}
+								onOptionsChange={this.props.onOptionsChange}
+								data={this.props.data}
+								mainMetric={this.state.arrayPointClass[index].mainMetric}
+								callBackToParent={this.callBackMainMetric}
+								id={index} />
+						</div>
 						<div>
 							<ParametresGeneriques
 								options={this.props.options}
@@ -595,6 +641,7 @@ export default class PointForm extends React.Component<IProps, IState> {
 								data={this.props.data}
 								coordinateSpace={this.state.arrayPointClass[index]}
 								callBackToParent={this.callBackPositionParameter}
+								callBackToParentZIndex={() => {}}
 								isPoint={true}
 								isLink={false}
 								isRegion={false}
@@ -607,7 +654,7 @@ export default class PointForm extends React.Component<IProps, IState> {
 						{itemButton}
 					</div>
 				</div>;
-			finalItem = finalItem.concat(newInput);
+			finalItem = finalItem.concat(newInputList);
 			index++;
 		}
 

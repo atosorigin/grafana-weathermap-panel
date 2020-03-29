@@ -13,8 +13,8 @@ import { TextObject } from 'Models/TextObjectClass';
 
 import InputButtonField from 'Functions/Input/inputButton';
 import InputTextField from 'Functions/Input/inputText';
-import { createInputCoor } from 'Functions/createInputCoor';
-import { editGoodParameterExtend } from 'Functions/editGoodParameter';
+import { createInputCoor } from 'Functions/CreateInput/createInputCoor';
+import { editGoodParameterExtend } from 'Functions/EditParameter/editGoodParameter';
 import { returnAllId } from 'Functions/searchIDLimit';
 import { cloneRegionCoordinateSpace } from 'Functions/initRegionCoordinateSpace';
 
@@ -33,6 +33,8 @@ interface IProps extends PanelEditorProps<SimpleOptions> {
 	coordinate: RegionClass;
 	/** save data in parent */
 	callBackToParent: (id: number, newCoordinate?: RegionClass) => void;
+	/** id coordinateSpace */
+	id?: number;
 }
 
 interface IState {
@@ -198,10 +200,10 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 			const newInput: JSX.Element = <div key={'addCoordinate' + divKey} className='inputCoor'>{mapItems}</div>;
 			finalItem = finalItem.concat(newInput);
 		}
-		this.setState({
+		this.setState((prevState: IState) => ({
 			htmlInput: <ul>{finalItem}</ul>,
-			selectedRadio: (this.props.coordinate.mode) ? 'svgMode' : 'coordinateMode',
-		});
+			selectedRadio: (prevState.arrayCoor.mode) ? 'svgMode' : 'coordinateMode',
+		}));
 	}
 
 	/** edit value for selectedDefaultValue and edit idSVG arrayCoor */
@@ -304,11 +306,12 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 	}
 
 	/** change value radio button checker to pass svg or coordinate mode */
-	public radioClick = (event: {
-		/** get current target to event */
+	public onChangeRadioMode = (event: {
+		/** get current value to target */
 		currentTarget: HTMLInputElement
 	}) => {
 		const coordinate: RegionClass = this.state.arrayCoor;
+
 		coordinate.mode = event.currentTarget.value === 'svgMode' ? true : false;
 		this.setState({
 			selectedRadio: event.currentTarget.value,
@@ -333,35 +336,46 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 			return;
 		}
 		const timeRefresh: number = 1000;
-		const refresh = setInterval(() => {
-			const data: string[] = returnAllId(this.props.options.coordinateSpaceInitial.coordinate, this.props.options.baseMap);
+		if (this.props.options.baseMap.modeSVG) {
+			const refresh = setInterval(() => {
+				const data: string[] = returnAllId(this.props.options.coordinateSpaceInitial.coordinate, this.props.options.baseMap);
 
-			if (data.length > 0) {
-				for (const line of data) {
-					selectedIDSvg.push({ value: line, label: line });
-				}
-				let defaultSVG: SelectableValue<string> = selectedIDSvg[0];
-				for (const line of selectedIDSvg) {
-					if (line.value === this.state.arrayCoor.idSVG) {
-						defaultSVG = line;
+				if (data.length > 0) {
+					for (const line of data) {
+						selectedIDSvg.push({ value: line, label: line });
 					}
+					let defaultSVG: SelectableValue<string> = selectedIDSvg[0];
+					for (const line of selectedIDSvg) {
+						if (line.value === this.state.arrayCoor.idSVG) {
+							defaultSVG = line;
+						}
+					}
+					this.setState({
+						allIDSelected: selectedIDSvg,
+						selectedDefaultSVG: defaultSVG,
+					});
+					clearInterval(refresh);
 				}
-				this.setState({
-					allIDSelected: selectedIDSvg,
-					selectedDefaultSVG: defaultSVG,
-				});
-				clearInterval(refresh);
-			} else {
-				console.error('error search id');
-			}
-		}, timeRefresh);
+				// else {
+				// 	console.error('error search id');
+				// }
+			}, timeRefresh);
+		}
 	}
 
-	/** call function in load component */
-	public componentDidMount = async () => {
+	/**
+	 * fill input whith data
+	 * this function is called by mount and update event
+	*/
+	public getDataInInput = async () => {
 		await this.addInput(this.props.coordinate.id);
 		this.fillInputEspaceCoor();
 		this.fillSelectSVG();
+	}
+
+	/** call function in load component */
+	public componentDidMount = () => {
+		this.getDataInInput();
 	}
 
 	/** function is call when props is update. Update state */
@@ -373,9 +387,7 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 			await this.setStateAsyncArrayInput({
 				arrayInput: [],
 			});
-			await this.addInput(this.props.coordinate.id);
-			this.fillInputEspaceCoor();
-			this.fillSelectSVG();
+			this.getDataInInput();
 		}
 		// if (prevProps.data.series !== this.props.data.series) {
 		// 	this.fillSelectQuery();
@@ -430,7 +442,7 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 						<label>
 							<input type='radio' value='svgMode'
 								checked={this.state.selectedRadio === 'svgMode'}
-								onChange={this.radioClick} />
+								onChange={this.onChangeRadioMode} />
 							SVG mode
 						</label>
 					</div>
@@ -438,7 +450,7 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 						<label>
 							<input type='radio' value='coordinateMode'
 								checked={this.state.selectedRadio === 'coordinateMode'}
-								onChange={this.radioClick} />
+								onChange={this.onChangeRadioMode} />
 							Coordinate mode
 						</label>
 					</div>
@@ -480,8 +492,8 @@ class CoordinateSpace extends React.Component<IProps, IState>  {
 					}
 				</div>
 				<br />
-				<div className='buttonSave'>
-					<Button onClick={() => this.callBack()}>Load</Button>
+				<div style={{ textAlign: 'center' }} className='buttonSave'>
+					<Button style={{ marginRight: '1%' }} onClick={() => this.callBack()}>Load</Button>
 					{
 						(!this.props.isAddCoordinate) &&
 						<Button onClick={this.deleteOwnInput} variant='danger'>Delete</Button>

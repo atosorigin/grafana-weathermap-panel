@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.4.1 (2020-03-30)
+
+- Add Tooltip in area SVG
+- Add link image (PNG/JPG/GIF) for background
+- Add parameter block
+- Add parameter levels
+- Add aggregation
+- Add recovery investment 
+- Update gabari
+- Fixed import
+
 ## v0.3.6 (2020-03-24)
 
 - Updated number version

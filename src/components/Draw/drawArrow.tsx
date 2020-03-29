@@ -1,7 +1,6 @@
 import React from 'react';
 import { SelectableValue } from '@grafana/data';
 import { RegionClass } from 'Models/RegionClass';
-import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 
 interface IProps {
 
@@ -20,8 +19,8 @@ interface IProps {
 	sizePolice: string;
 	idPoint: string;
 	name: string;
-	orientedLinksIn: OrientedLinkClass[];
-	orientedLinksOut: OrientedLinkClass[];
+	orientedLinksIn: string[];
+	orientedLinksOut: string[];
 	textObject: any;
 	seuil: any;
 }

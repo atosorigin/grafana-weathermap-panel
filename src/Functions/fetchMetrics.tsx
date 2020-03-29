@@ -8,15 +8,11 @@ export const reqMetricRegion = (region: RegionClass, props: any) => {
 	const data: DataFrame[] = [];
 
 	for (const line of props.data.series) {
-		console.log(line.refId);
 		if (line.refId === region.mainMetric.refId) {
 			data.push(line);
 		}
 	}
 	region.mainMetric.returnQuery = data;
-	// console.group('reqMetricRegion');
-	// console.log(data);
-	// console.groupEnd();
 };
 
 export const reqMetricAuxRegion = (region: RegionClass, props: any) => {

@@ -9,8 +9,11 @@ import { PositionParameterClass } from './PositionParameterClass';
 export interface ICoord4D {
 	/** coordinate x min */
 	xMin: string;
+	/** coordinate x max */
 	xMax: string;
+	/** coordinate y min */
 	yMin: string;
+	/** coordinate y max */
 	yMax: string;
 }
 

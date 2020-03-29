@@ -1,11 +1,30 @@
+interface IGenerateTextObject {
+	/** legend element */
+	legendElement: string;
+	/** numeric format element */
+	numericFormatElement: string;
+	/** unity mesure element */
+	unit: string;
+	/** display object in text */
+	displayObjectInText: boolean;
+	/** display object permanently */
+	// displayObjectPermanently: boolean;
+	/** color text element active */
+	addColorTextElement: boolean;
+	/** color text element */
+	colorTextElement: string;
+	/** color back element active */
+	addColorBackElement: boolean;
+	/** color back element */
+	colorBackElement: string;
+}
+
 /** value of textObjects component */
 export class TextObject {
 	/** legend object */
-	public legend: string;
+	// public legend: boolean;
 	/** object value */
 	public value: string;
-	/** object unity */
-	public unit: string;
 	/** text display in element or tooltip */
 	public isTextRegion: boolean;
 	/** back color region */
@@ -16,60 +35,30 @@ export class TextObject {
 	public styleText: string;
 	/** generate object text */
 	public generateObjectText: boolean;
-	/** legend element */
-	public legendElement: string;
-	/** numeric format element */
-	public numericFormatElement: string;
-	/** unity mesure element */
-	public unityMesureElement: string;
-	/** display object in text */
-	public displayObjectInText: boolean;
-	/** display object permanently */
-	public displayObjectPermanently: boolean;
-	/** color text element active */
-	public addColorTextElement: boolean;
-	/** color text element */
-	public colorTextElement: string;
-	/** color back element active */
-	public addColorBackElement: boolean;
-	/** color back element */
-	public colorBackElement: string;
+	/** if generateObjectText is true when use variable to stock data */
+	public valueGenerateObjectText: IGenerateTextObject;
+	/** text value for auxiliary metrics */
+	public generateAuxiliaryElement: IGenerateTextObject;
 
 	constructor(
-		legend: string,
+		// legend: boolean,
 		value: string,
-		unit: string,
 		isTextRegion: boolean,
 		colorBack: string,
 		colorText: string,
 		styleText: string,
 		generateObjectText: boolean,
-		legendElement: string,
-		numericFormatElement: string,
-		unityMesureElement: string,
-		displayObjectInText: boolean,
-		displayObjectPermanently: boolean,
-		addColorTextElement: boolean,
-		colorTextElement: string,
-		addColorBackElement: boolean,
-		colorBackElement: string
+		valueGenerateObjectText: IGenerateTextObject,
+		generateAuxiliaryElement: IGenerateTextObject
 	) {
-		this.legend = legend;
+		// this.legend = legend;
 		this.value = value;
-		this.unit = unit;
 		this.isTextRegion = isTextRegion;
 		this.colorBack = colorBack;
 		this.colorText = colorText;
 		this.styleText = styleText;
 		this.generateObjectText = generateObjectText;
-		this.legendElement = legendElement;
-		this.numericFormatElement = numericFormatElement;
-		this.unityMesureElement = unityMesureElement;
-		this.displayObjectInText = displayObjectInText;
-		this.displayObjectPermanently = displayObjectPermanently;
-		this.addColorTextElement = addColorTextElement;
-		this.colorTextElement = colorTextElement;
-		this.addColorBackElement = addColorBackElement;
-		this.colorBackElement = colorBackElement;
+		this.valueGenerateObjectText = valueGenerateObjectText;
+		this.generateAuxiliaryElement = generateAuxiliaryElement;
 	}
 }

@@ -5,7 +5,6 @@ import { LinkURLClass } from './LinkURLClass';
 import { LowerLimitClass } from './LowerLimitClass';
 import { TextObject } from './TextObjectClass';
 import { IMetric } from 'types';
-import { OrientedLinkClass } from './OrientedLinkClass';
 import { LinkClass } from './LinkClass';
 import { PositionParameterClass } from './PositionParameterClass';
 
@@ -28,8 +27,8 @@ export class PointClass extends CoordinateSpaceClass {
 	public color: string;
 	public associateLinkIn: LinkClass[];
 	public associateLinkOut: LinkClass[];
-	public associateOrientedLinksIn: OrientedLinkClass[]; 
-	public associateOrientedLinksOut: OrientedLinkClass[]; 
+	public associateOrientedLinksIn: any[];
+	public associateOrientedLinksOut: any[];
 
 	constructor(
 		id: number,
@@ -57,8 +56,8 @@ export class PointClass extends CoordinateSpaceClass {
 		color: string,
 		associateLinkIn: LinkClass[],
 		associateLinkOut: LinkClass[],
-		associateOrientedLinksIn: OrientedLinkClass[],
-		associateOrientedLinksOut: OrientedLinkClass[],
+		associateOrientedLinksIn: any[],
+		associateOrientedLinksOut: any[],
 	) {
 		super(id, linkURL, meta,
 			lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter);

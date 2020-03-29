@@ -15,7 +15,7 @@ interface IProps {
 		hoveringTooltipText: string,
 		textObj?: TextObject,
 		id?: number) => void;
-		/** id of object */
+	/** id of object */
 	id?: number;
 }
 

@@ -7,9 +7,30 @@ import { IMetric } from 'types';
 /** init CoordinateSpaceExtendClass */
 export const initRegionCoordinateSpace = (index: number): RegionClass => {
 	const newId: number = index + 1;
-	const initTextObject: TextObject = new TextObject('', '', '', false, 'rgba(255, 255, 255, 0)',
-		'rgba(0, 0, 0, 1)', '', false, '', '', '',
-		false, false, false, '', false, '');
+	const initTextObject: TextObject = new TextObject('', false, 'rgba(255, 255, 255, 0)',
+		'rgba(0, 0, 0, 1)', '', false,
+		{
+			'legendElement': '',
+			'numericFormatElement': '',
+			'unit': '',
+			'displayObjectInText': false,
+			// 'displayObjectPermanently': false,
+			'addColorTextElement': false,
+			'colorTextElement': 'white',
+			'addColorBackElement': false,
+			'colorBackElement': 'black',
+		},
+		{
+			'legendElement': '',
+			'numericFormatElement': '',
+			'unit': '',
+			'displayObjectInText': false,
+			// 'displayObjectPermanently': false,
+			'addColorTextElement': false,
+			'colorTextElement': 'white',
+			'addColorBackElement': false,
+			'colorBackElement': 'black',
+		});
 	const linkURL: LinkURLClass = new LinkURLClass('', '', '');
 	const coords: ICoord4D = {
 		'xMin': '0',
@@ -28,23 +49,15 @@ export const initRegionCoordinateSpace = (index: number): RegionClass => {
 
 export const cloneRegionCoordinateSpace = (region: RegionClass): RegionClass => {
 	const initTextObject: TextObject = new TextObject(
-		region.textObj.legend,
+		// region.textObj.legend,
 		region.textObj.value,
-		region.textObj.unit,
 		region.textObj.isTextRegion,
 		region.textObj.colorBack,
 		region.textObj.colorText,
 		region.textObj.styleText,
 		region.textObj.generateObjectText,
-		region.textObj.legendElement,
-		region.textObj.numericFormatElement,
-		region.textObj.unityMesureElement,
-		region.textObj.displayObjectInText,
-		region.textObj.displayObjectPermanently,
-		region.textObj.addColorTextElement,
-		region.textObj.colorTextElement,
-		region.textObj.addColorBackElement,
-		region.textObj.colorBackElement);
+		region.textObj.valueGenerateObjectText,
+		region.textObj.generateAuxiliaryElement);
 	const linkURL: LinkURLClass = new LinkURLClass(
 		region.linkURL.followLink,
 		region.linkURL.hoveringTooltipLink,

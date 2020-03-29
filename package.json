@@ -1,6 +1,6 @@
 {
   "name": "weathermap",
-  "version": "0.3.6",
+  "version": "0.4.1",
   "description": "WeatherMap Panel Plugin for Grafana",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
@@ -11,13 +11,18 @@
   "author": "ATOS OpenSource",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-typescript": "^7.9.0",
     "@grafana/data": "^6.6.0",
-    "@grafana/toolkit": "^6.6.0",
+    "@grafana/toolkit": "^6.7.1",
+    "babel-jest": "^25.1.0",
     "css-loader": "^3.4.2",
-    "sum": "^0.1.4"
+    "jest": "^25.1.0",
+    "jest-html-reporter": "^2.8.0"
   },
   "dependencies": {
-    "@grafana/ui": "^6.6.0",
+    "@grafana/ui": "^6.7.1",
     "@types/react-tabs": "^2.3.1",
     "react-tabs": "^3.1.0",
     "reactstrap": "^8.4.0",

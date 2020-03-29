@@ -2,7 +2,7 @@ import React from 'react';
 import { SimpleOptions, TManageValue, IMetric } from 'types';
 
 import { PanelEditorProps, SelectableValue, DataFrame } from '@grafana/data';
-import { Select, FormField, Collapse } from '@grafana/ui';
+import { Select, FormField, Collapse, FormLabel } from '@grafana/ui';
 
 interface IProps extends PanelEditorProps<SimpleOptions> {
 	/** id coordinate. Use to check if componentDidUpdate launch update */
@@ -10,7 +10,9 @@ interface IProps extends PanelEditorProps<SimpleOptions> {
 	/** parent data */
 	mainMetric: IMetric;
 	/** call function when save data */
-	callBackToParent: (mainMetric: IMetric) => void;
+	callBackToParent: (mainMetric: IMetric, id?: number) => void;
+	/** id coordinateSpace for link and point*/
+	id?: number;
 }
 
 interface IState {
@@ -44,6 +46,11 @@ class ManageQuery extends React.Component<IProps, IState> {
 		};
 	}
 
+	/** call back to parent */
+	public callBack = () => {
+		this.props.callBackToParent(this.state.mainMetric, this.props.id);
+	}
+
 	/** edit value for default select manage value */
 	public onChangeSelectManageValue = (value: SelectableValue<TManageValue>) => {
 		const newMainMetric: IMetric = this.state.mainMetric;
@@ -52,6 +59,7 @@ class ManageQuery extends React.Component<IProps, IState> {
 			mainMetric: newMainMetric,
 			selectDefaultManageValue: value || this.state.selectDefaultManageValue,
 		});
+		this.callBack();
 	}
 
 	/** edit value key for mainMetric */
@@ -62,6 +70,7 @@ class ManageQuery extends React.Component<IProps, IState> {
 		this.setState({
 			mainMetric: newMainMetric,
 		});
+		this.callBack();
 	}
 
 	/** edit value keyValue for mainMetric */
@@ -72,6 +81,7 @@ class ManageQuery extends React.Component<IProps, IState> {
 		this.setState({
 			mainMetric: newMainMetric,
 		});
+		this.callBack();
 	}
 
 	/** edit value for select */
@@ -84,6 +94,7 @@ class ManageQuery extends React.Component<IProps, IState> {
 			mainMetric: newMainMetric,
 			selectQueryDefault: value,
 		});
+		this.callBack();
 	}
 
 	/** switch value collapseMainMetric when click collapse */
@@ -98,8 +109,8 @@ class ManageQuery extends React.Component<IProps, IState> {
 		const valueSelect: Array<SelectableValue<DataFrame>> = [];
 		const newMainMetric: IMetric = this.state.mainMetric;
 
-		console.log(this.props.data.series);
-		console.log(this.props.data.request);
+		// console.log(this.props.data.series);
+		// console.log(this.props.data.request);
 
 		for (const line of this.props.data.series) {
 			let duplicate: boolean = false;
@@ -184,10 +195,12 @@ class ManageQuery extends React.Component<IProps, IState> {
 	 * result
 	 */
 	public render() {
+
 		return (
 			<Collapse isOpen={this.state.collapseMainMetric}
 				label='Main metric'
 				onToggle={this.onToggleMainMetric} >
+				<FormLabel>Query</FormLabel>
 				<Select
 					onChange={(value) => this.onChangeSelectQuery(value)}
 					allowCustomValue={false}
@@ -195,12 +208,15 @@ class ManageQuery extends React.Component<IProps, IState> {
 					width={10}
 					value={this.state.selectQueryDefault}
 				/>
+				<br/>
 				<FormField label='Key' labelWidth={10} inputWidth={20}
 					type='text' value={this.state.mainMetric.key} name='key'
 					onChange={(event) => this._handleChangeKey(event.currentTarget.value)} />
 				<FormField label='Value key' labelWidth={10} inputWidth={20}
 					type='text' value={this.state.mainMetric.keyValue} name='valueKey'
 					onChange={(event) => this._handleChangeKeyValue(event.currentTarget.value)} />
+				<br/>
+				<FormLabel>Manipulate</FormLabel>
 				<Select
 					onChange={(value) => this.onChangeSelectManageValue(value)}
 					allowCustomValue={false}

@@ -10,7 +10,6 @@ export const fetchConfFile = (filesUrl: Array<string>) => {
     let completFile : Array<any> = [];
     filesUrl.forEach(async url => {
         try {
-
             let response = await fetch(url);
             let responseJson = await response.json();
             completFile.push(responseJson);

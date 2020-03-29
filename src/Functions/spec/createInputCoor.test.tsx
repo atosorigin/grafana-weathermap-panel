@@ -1,4 +1,4 @@
-import {createInputCoor} from '../createInputCoor';
+import {createInputCoor} from '../CreateInput/createInputCoor';
 
 /*
  * testing the createInputCoor function

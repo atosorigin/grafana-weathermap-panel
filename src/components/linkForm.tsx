@@ -8,8 +8,8 @@ import { SelectableValue } from '@grafana/data';
 import InputSeriesColorPickerLink from '../Functions/Input/inputSeriesColorPickerLink';
 import { Button } from '@grafana/ui';
 import { LinkClass } from 'Models/LinkClass';
-import { createInputsLink } from 'Functions/createInputsLink';
-import { editGoodParameterLink } from 'Functions/editGoodParameterLink';
+import { createInputsLink } from 'Functions/CreateInput/createInputsLink';
+import { editGoodParameterLink } from 'Functions/EditParameter/editGoodParameterLink';
 import { PointClass } from 'Models/PointClass';
 import { RegionClass } from 'Models/RegionClass';
 import { TextObject } from 'Models/TextObjectClass';
@@ -175,9 +175,28 @@ export default class LinkForm extends React.Component<IProps, IState> {
 		labelLinkB?: string, positionXLabelB?: string, positionYLabelB?: string) => {
 
 		const num: number = id || this.state.index;
-		const initTextObject: TextObject = new TextObject('', '', '', false, '', '', '',
-			false, '', '', '',
-			false, false, false, '', false, '');
+		const initTextObject: TextObject = new TextObject(false, '', false, '', '', '',
+		false,
+		{
+			'legendElement': '',
+			'numericFormatElement': '',
+			'unit': '',
+			'displayObjectInText': false,
+			'addColorTextElement': false,
+			'colorTextElement': 'white',
+			'addColorBackElement': false,
+			'colorBackElement': 'black',
+		},
+		{
+			'legendElement': '',
+			'numericFormatElement': '',
+			'unit': '',
+			'displayObjectInText': false,
+			'addColorTextElement': false,
+			'colorTextElement': 'white',
+			'addColorBackElement': false,
+			'colorBackElement': 'black',
+		});
 		const parametrageMetric: LinkURLClass = new LinkURLClass('', '', '');
 		const finalArray: InputSelectableClass[] = createInputsLink(num, this.defineDataPoint(), this.defineDataRegion());
 		const positionParameter: PositionParameterClass = new PositionParameterClass('0', '0', '0', '0', {}, {});
@@ -185,7 +204,7 @@ export default class LinkForm extends React.Component<IProps, IState> {
 		this.setState((prevState: IState) => ({
 			arrayLinkClass: prevState.arrayLinkClass.concat(new LinkClass(
 				num, parametrageMetric, '', [], '', initTextObject,
-			 	{'key': '', 'unit': '', 'format': '', 'keyValue': ''}, [],
+			 	{'key': '', 'unit': '', 'format': '', 'keyValue': '', 'manageValue': 'avg'}, [],
 				 false, false, false, positionParameter,
 				 'link' + num.toString(), defineHowToGetCoordonate || {},
 				orientationLink || { label: 'Unidirectional', value: 'AB' }, pointAPositionX || '0',

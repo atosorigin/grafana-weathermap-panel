@@ -1,6 +1,4 @@
 import { SelectableValue } from '@grafana/data';
-import { PointClass } from './PointClass';
-import { RegionClass } from './RegionClass';
 import { LinkURLClass } from './LinkURLClass';
 import { LowerLimitClass } from './LowerLimitClass';
 import { TextObject } from './TextObjectClass';
@@ -20,11 +18,14 @@ export class OrientedLinkClass extends CoordinateSpaceClass {
 	public colorCoordinateB: string;
 	public valueMainMetricA: string;
 	public valueMainMetricB: string;
-	public pointIn: SelectableValue<PointClass>;
-	public pointOut: SelectableValue<PointClass>;
-	public regionIn: SelectableValue<RegionClass>;
-	public regionOut: SelectableValue<RegionClass>;
+	public pointIn: string;
+	public pointOut: string
+	public regionIn: string;
+	public regionOut: string;
 	public zIndex: number;
+	public pointCPositionX: string;
+	public pointCPositionY: string;
+	public isIncurved: SelectableValue<boolean>;
 
 	constructor(
 		id: number,
@@ -49,11 +50,14 @@ export class OrientedLinkClass extends CoordinateSpaceClass {
 		colorCoordinateB: string,
 		valueMainMetricA: string,
 		valueMainMetricB: string,
-		pointIn: SelectableValue<PointClass>,
-		pointOut: SelectableValue<PointClass>,
-		regionIn: SelectableValue<RegionClass>,
-		regionOut: SelectableValue<RegionClass>,
-		zIndex: number
+		pointIn: string,
+		pointOut: string,
+		regionIn: string,
+		regionOut: string,
+		zIndex: number,
+		pointCPositionX: string,
+		pointCPositionY: string,
+		isIncurved: SelectableValue<boolean>,
 	) {
 		super(id, linkURL, meta,
 			lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter);
@@ -72,5 +76,8 @@ export class OrientedLinkClass extends CoordinateSpaceClass {
 		this.regionIn = regionIn;
 		this.regionOut = regionOut;
 		this.zIndex = zIndex;
+		this.pointCPositionX = pointCPositionX;
+		this.pointCPositionY = pointCPositionY;
+		this.isIncurved = isIncurved;
 	}
 }

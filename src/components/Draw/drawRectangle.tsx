@@ -128,7 +128,7 @@ export default class DrawRectangle extends React.Component<IProps, IState> {
 			top: pTop,
 		}} id={this.props.id}>
 			{this.fillCoordinate()}
-		// </div>;
+		</div>;
 		this.setState({
 			resultHTML: data,
 		});
@@ -136,8 +136,7 @@ export default class DrawRectangle extends React.Component<IProps, IState> {
 
 	/** update state when props coordinateInitial change */
 	public componentDidUpdate(prevProps: IProps) {
-		if (prevProps.isEnabled !== this.props.isEnabled) {
-			console.log('am here');
+		if (prevProps !== this.props) {
 			this.createRectangle();
 		}
 	}

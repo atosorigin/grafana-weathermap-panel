@@ -4,7 +4,7 @@ import { SimpleOptions, ICoordinateSpaceInitial } from 'types';
 import { FormField, Switch } from '@grafana/ui';
 import { PanelEditorProps } from '@grafana/data';
 
-import { editGoodParameter } from 'Functions/editGoodParameter';
+import { editGoodParameter } from 'Functions/EditParameter/editGoodParameter';
 
 interface IProps extends PanelEditorProps<SimpleOptions> {
 }
@@ -12,8 +12,6 @@ interface IProps extends PanelEditorProps<SimpleOptions> {
 interface IState {
 	/** value to initial coordinate space */
 	arrayCoor: ICoordinateSpaceInitial;
-	/** change switch value */
-	// displayInitialSpace: boolean;
 }
 
 /**

@@ -37,7 +37,6 @@ class EditCoordinateSpace extends React.Component<IProps, IState> {
 	 * save data in parent
 	 */
 	public callBack = (id: number, newCoordinate?: RegionClass): void => {
-		console.log('am here');
 		if (newCoordinate) {
 			const oldData: RegionClass[] = this.props.options.regionCoordinateSpace.slice();
 			let i: number = 0;
@@ -94,11 +93,18 @@ class EditCoordinateSpace extends React.Component<IProps, IState> {
 		for (const line of stockTmpCoordinatesSpace) {
 			valueSelect.push({ 'value': line, 'label': line.label });
 		}
+		// dev
 		this.setState({
 			selectCoordinateSpace: valueSelect,
 			selectCoordinateSpaceDefault: (valueSelect.length > 0) ?
 				valueSelect[0] : this.state.selectCoordinateSpaceDefault,
 		});
+		// final
+		// this.setState({
+		// 	selectCoordinateSpace: valueSelect,
+		// 	selectCoordinateSpaceDefault: (valueSelect.length > 0) ?
+		// 		valueSelect[0] : this.state.selectCoordinateSpaceDefault,
+		// });
 	}
 
 	/** fill data for select */

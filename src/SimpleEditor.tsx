@@ -3,26 +3,20 @@ import React from 'react';
 import { SimpleOptions } from './types';
 
 import { PanelEditorProps } from '@grafana/data';
-import { Collapse, Tab, TabsBar, TabContent } from '@grafana/ui';
+import { Tab, TabsBar, TabContent } from '@grafana/ui';
 
-import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
 import { LinkClass } from 'Models/LinkClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 import { PointClass } from 'Models/PointClass';
 
 import CoordinateSpaceInitial from 'components/coordinateSpaceInitial';
-import DashboardData from 'components/dashboardData';
-//import LinkForm from 'components/linkForm';
-import MainTarget from 'components/mainTarget';
-import ManageCoordinateSpace from 'components/CoordinateSpace/manageCoordinateSpace';
-import ObjectVisibility from 'components/objectVisibility';
-import OrientedLink from 'components/orientedLinkForm';
-import OrientedLinkForm from './components/orientedLinkForm';
-import PanelData from 'components/panelData';
-import PointForm from 'components/pointForm';
-import RendutextDefault from 'components/renduTextDefault';
-import TimeSelector from 'components/timeSelector';
 import ImportInput from 'components/importInput';
+import ManageCoordinateSpace from 'components/CoordinateSpace/manageCoordinateSpace';
+import OrientedLinkForm from './components/orientedLinkForm';
+// import PanelData from 'components/panelData';
+import PointForm from 'components/pointForm';
+import Display from 'components/display';
+// import TimeSelector from 'components/timeSelector';
 
 import 'style/SimpleEditor.css';
 
@@ -32,36 +26,9 @@ interface IState {
 	collapseDashboardData: boolean;
 	collapseTimeSelector: boolean;
 	collapsePanelData: boolean;
-	collapseTargets: boolean;
-	/** stock coordinates in array object */
-	regionCoordinateSpace: CoordinateSpaceClass[];
-
-	/** collapse */
-	collapseDefaultText: boolean;
-
-	/** collapse */
-	collapseDisplay: boolean;
-
-	/** collapse */
-	collapseGenericSettings: boolean;
-
-	/** collapse */
-	collapseGenericSettingsBis: boolean;
-
-	/** collapse */
-	collapseInitialDisplay: boolean;
-
-	/** collapse */
-	collapseCoorSpace: boolean;
-
-	/** collapse */
-	collapseObjectVisibility: boolean;
 
 	/** collapse */
 	collapsePoint: boolean;
-
-	/** collapse */
-	collapseLink: boolean;
 
 	/** collapse */
 	collapseOrientedLink: boolean;
@@ -78,7 +45,6 @@ interface IState {
 	/**
 	 * index
 	 */
-	index: number;
 	collapsePrincipalTarget: boolean;
 
 	tabsVariable: boolean[];
@@ -97,52 +63,42 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 			collapseDashboardData: false,
 			collapsePanelData: false,
 			collapseTimeSelector: false,
-			regionCoordinateSpace: this.props.options.regionCoordinateSpace,
-			collapseDefaultText: false,
-			collapseDisplay: false,
-			collapseGenericSettings: false,
-			collapseInitialDisplay: false,
-			collapseCoorSpace: false,
-			collapseGenericSettingsBis: false,
-			collapseObjectVisibility: false,
 			collapsePoint: false,
-			collapseLink: false,
 			collapseOrientedLink: false,
 			arrayPoints: this.props.options.arrayPoints,
 			arrayLinks: this.props.options.arrayLinks,
 			arrayOrientedLinks: this.props.options.arrayOrientedLinks,
-			index: 0,
-			collapseTargets: false,
 			collapsePrincipalTarget: false,
-			tabsVariable: [false, false, false, false, false, false, true],
+			tabsVariable: [true, false, false, false, false],
 			tabsCoordinateSpace: [true, false, false, false],
 		};
 	}
+	/********************* Display Button in relation to View or Edit */
 
-	/**
-	 * edit default text
-	 */
-	public myCallBackDefaultText = (datafromChild: {
-		/**
-		 * new police
-		 */
-		police: string,
-		/**
-		 * new size
-		 */
-		size: string,
-		/**
-		 * new style (italic, bold, ...)
-		 */
-		style: string,
-	}) => {
-		this.props.onOptionsChange({
-			...this.props.options,
-			police: datafromChild.police,
-			size: datafromChild.size,
-			style: datafromChild.style,
-		});
-	}
+	// /**
+	//  * edit default text
+	//  */
+	// public myCallBackDefaultText = (datafromChild: {
+	// 	/**
+	// 	 * new police
+	// 	 */
+	// 	police: string,
+	// 	/**
+	// 	 * new size
+	// 	 */
+	// 	size: string,
+	// 	/**
+	// 	 * new style (italic, bold, ...)
+	// 	 */
+	// 	style: string,
+	// }) => {
+	// 	this.props.onOptionsChange({
+	// 		...this.props.options,
+	// 		police: datafromChild.police,
+	// 		size: datafromChild.size,
+	// 		style: datafromChild.style,
+	// 	});
+	// }
 
 	public myCallBackArrayPoints = (dataFromChild: PointClass[]) => {
 		this.setState({
@@ -178,9 +134,9 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 	}
 
 	/// Adrien
-	onInfoChanged = ({ target }: any) => {
-		this.props.onOptionsChange({ ...this.props.options, info: target.value });
-	}
+	// onInfoChanged = ({ target }: any) => {
+	// 	this.props.onOptionsChange({ ...this.props.options, info: target.value });
+	// }
 
 	onRefreshChanged = ({ target }: any) => {
 		this.props.onOptionsChange({ ...this.props.options, refresh: target.value });
@@ -218,21 +174,15 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 		});
 	}
 
-	public onToggleLink = (isOpen: boolean): void => {
-		this.setState({
-			collapseLink: isOpen,
-		});
-	}
+	// public onToggleLink = (isOpen: boolean): void => {
+	// 	this.setState({
+	// 		collapseLink: isOpen,
+	// 	});
+	// }
 
 	public onToggleOrientedLink = (isOpen: boolean): void => {
 		this.setState({
 			collapseOrientedLink: isOpen,
-		});
-	}
-
-	public onToggleTargets = (isOpen: boolean): void => {
-		this.setState({
-			collapseTargets: isOpen,
 		});
 	}
 
@@ -296,30 +246,15 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 						active={this.state.tabsVariable[2]}
 						onChangeTab={() => this.goToTab(2)}
 					/>
-					<Tab key='tabObjectVisibility'
-						label={l10n.simpleEditor.objectVisibility}
-						active={this.state.tabsVariable[3]}
-						onChangeTab={() => this.goToTab(3)}
-					/>
-					<Tab key='tabMetricsSettings'
-						label={l10n.simpleEditor.metricsSettings}
-						active={this.state.tabsVariable[4]}
-						onChangeTab={() => this.goToTab(4)}
-					/>
-					<Tab key='tabGraphicalObject'
-						label='Graphical object'
-						active={this.state.tabsVariable[5]}
-						onChangeTab={() => this.goToTab(5)}
-					/>
 					<Tab key='tabImportInput'
 						label='Import Files'
-						active={this.state.tabsVariable[6]}
-						onChangeTab={() => this.goToTab(6)}
+						active={this.state.tabsVariable[4]}
+						onChangeTab={() => this.goToTab(4)}
 					/>
 				</TabsBar>
 				<TabContent>
 					{this.state.tabsVariable[0] &&
-						<RendutextDefault
+						<Display
 							options={this.props.options}
 							onOptionsChange={this.props.onOptionsChange}
 							data={this.props.data}
@@ -371,6 +306,7 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 									this.state.tabsCoordinateSpace[1] &&
 
 									<PointForm
+										key={'pointInputList'}
 										callBackFromParent={this.myCallBackArrayPoints.bind(this)}
 										regionCoordinateSpace={this.props.options.regionCoordinateSpace}
 										oldArrayPointClass={this.props.options.arrayPoints}
@@ -404,13 +340,8 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 							</TabContent>
 						</div>
 					}
-					{
+					{/*
 						this.state.tabsVariable[3] &&
-						<ObjectVisibility />
-
-					}
-					{
-						this.state.tabsVariable[4] &&
 
 						<div className='adrien'>
 							<Collapse isOpen={this.state.collapseDashboardData}
@@ -431,62 +362,12 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 								<PanelData options={this.props.options} onOptionsChange={this.props.onOptionsChange} data={this.props.data} />
 							</Collapse>
 						</div>
-					}
+					} */}
 					{
-						this.state.tabsVariable[5] &&
-						<div>
-							<div className='CoordinateSpaceInitital'>
-								<Collapse isOpen={this.state.collapsePoint}
-									label='Point'
-									onToggle={this.onTogglePoint}
-								>
-									<PointForm
-										oldArrayPointClass={this.props.options.arrayPoints}
-										callBackFromParent={this.myCallBackArrayPoints.bind(this)}
-										regionCoordinateSpace={this.props.options.regionCoordinateSpace}
-										options={this.props.options}
-										onOptionsChange={this.props.onOptionsChange}
-										data={this.props.data}
-									/>
-
-								</Collapse>
-							</div>
-							{/* <div className='CoordinateSpaceInitital'>
-								<Collapse isOpen={this.state.collapseLink}
-									label='Link'
-									onToggle={this.onToggleLink}>
-
-									<LinkForm
-										regionCoordinateSpace={this.props.options.regionCoordinateSpace}
-										oldArrayLinkClass={this.props.options.arrayLinks}
-										arrayPointClass={this.props.options.arrayPoints}
-										callBackFromParent={this.myCallBackArrayLinks.bind(this)}
-									/>
-
-								</Collapse>
-							</div> */}
-							<div className='CoordinateSpaceInitital'>
-								<Collapse isOpen={this.state.collapseOrientedLink}
-									label='Oriented Link'
-									onToggle={this.onToggleOrientedLink}>
-									<OrientedLink
-										arrayPoint={this.props.options.arrayPoints}
-										regionCoordinateSpace={this.props.options.regionCoordinateSpace}
-										oldArrayOrientedLinkClass={this.props.options.arrayOrientedLinks}
-										callBackFromParent={this.myCallBackArrayOrientedLinks.bind(this)}
-										options={this.props.options}
-										onOptionsChange={this.props.onOptionsChange}
-										data={this.props.data}
-									/>
-								</Collapse>
-							</div>
-						</div>
-					}
-					{
-						this.state.tabsVariable[6] &&
+						this.state.tabsVariable[4] &&
 						<div>
 							<ImportInput options={this.props.options}
-									onOptionsChange={this.props.onOptionsChange} data={this.props.data} />
+								onOptionsChange={this.props.onOptionsChange} data={this.props.data} />
 						</div>
 					}
 				</TabContent>

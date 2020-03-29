@@ -1,6 +1,5 @@
 import { SelectableValue, DataFrame } from '@grafana/data';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
-import { TextObject } from 'Models/TextObjectClass';
 import { PointClass } from 'Models/PointClass';
 import { LinkClass } from 'Models/LinkClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
@@ -15,7 +14,7 @@ export interface ITexteSettings {
 	/** size simple panel */
 	size: string;
 	/** style simple panel */
-	styleText: string;
+	style: string;
 }
 
 export declare type TManageValue = 'avg' | 'sum' | 'error';
@@ -82,9 +81,13 @@ export interface ITarget {
 export interface IBackground {
 	/** background image */
 	image: string;
-	/** size width image */
+	/** layer image */
+	layerImage: string;
+	/** use image svg or value get by user */
+	modeSVG: boolean;
+	/** size width image or get by user */
 	width: string;
-	/** size height image */
+	/** size height image or get by user */
 	height: string;
 	/** id svg for tag */
 	idSVG: string;
@@ -101,6 +104,11 @@ export interface IUrlList {
 	mono: Array<string>;
 }
 
+export interface IImportFile {
+	name: string;
+	content: string
+}
+
 export interface ICoordinateSpaceInitial {
 	/** coordinate for initial space */
 	coordinate: ICoord4D;
@@ -108,17 +116,25 @@ export interface ICoordinateSpaceInitial {
 	displayArea: boolean;
 }
 
+interface ILegend {
+	hiddenLegend: boolean;
+	x: number;
+	y: number;
+}
+
 /**
  * Stock the values between SimpleEditor and SimplePanel
  */
 // tslint:disable-next-line:interface-name
 export interface SimpleOptions extends
-	ITexteSettings, IMetricSettings {
-	/**
-	 * to do
-	 */
-	imageUrl: string;
+	IMetricSettings {
+	/** legend */
+	legend: ILegend;
 
+	/** display: police, size and style text */
+	display: ITexteSettings;
+/****to do */
+displayButton: boolean;
 	/**
 	 * Espace de visualisation initial
 	 */
@@ -144,13 +160,6 @@ export interface SimpleOptions extends
 	 */
 	arrayOrientedLinks: OrientedLinkClass[];
 
-	/** value TextObjects component */
-	valueTextObject: TextObject;
-
-	/**
-	 *Encore actuel ? a test
-	 */
-	info: string;
 	/**
 	 * Raw format of dashboard's json
 	 */
@@ -297,6 +306,14 @@ export interface SimpleOptions extends
 			point: any,
 			labelRegion: string,
 			region: any
+		},
+		{
+			x: number,
+			y: number,
+			labelPoint: string,
+			point: any,
+			labelRegion: string,
+			region: any
 		}
 	];
 
@@ -309,20 +326,26 @@ export interface SimpleOptions extends
 	listCollapsePoint: boolean[];
 
 	listCollapseOrientedLink: boolean[];
-
+	/** background image with property */
 	baseMap: IBackground;
 	saveImportUrl: IUrlList;
+	saveImportFile: IImportFile[];
 	totalUrlInput: string;
 	multiUrlInput: string;
 	monoUrlInput: string;
 
 	zIndexOrientedLink: number;
+	orientedLinkToUpgrade: SelectableValue<OrientedLinkClass>;
+	orientedLinkToDowngrade: SelectableValue<OrientedLinkClass>;
+	checkIndexMultiLink: number;
+
 
 }
 
 export const defaults: SimpleOptions = {
-	baseMap: { 'image': '', 'width': '', 'height': '', 'idSVG': '' },
-	imageUrl: 'https://upload.wikimedia.org/wikipedia/en/b/be/Locator_Grid.png',
+	legend: { 'hiddenLegend': true, 'x': 0, 'y': 0 },
+	baseMap: { 'image': '', 'layerImage': '', 'modeSVG': true, 'width': '', 'height': '', 'idSVG': '' },
+	// imageUrl: 'https://upload.wikimedia.org/wikipedia/en/b/be/Locator_Grid.png',
 	coordinateSpaceInitial: {
 		'coordinate': {
 			'xMin': '-100', 'xMax': '100',
@@ -330,21 +353,20 @@ export const defaults: SimpleOptions = {
 		},
 		'displayArea': true,
 	},
+	displayButton: false,
 	regionCoordinateSpace: [],
 	arrayPoints: [],
 	arrayLinks: [],
 	arrayOrientedLinks: [],
-	police: 'Helvetica',
-	size: '1em',
-	styleText: 'normal',
+	display: {
+		'police': 'Helvetica',
+		'size': '1em',
+		'style': 'normal',
+	},
 	fondIsActive: true,
 	contourIsActive: true,
 	lowerLimit: [],
 	colorMode: true,
-	valueTextObject: new TextObject('', '', '', false, 'rgb(0, 0, 0, 0)', 'black', '',
-		false, '', '', '', false, false, false, '', false, ''),
-
-	info: 'Information sur votre panel',
 	contentJson: 'contenu du dashboard',
 	Id: 0,
 	uid: '',
@@ -411,6 +433,14 @@ export const defaults: SimpleOptions = {
 			point: {},
 			labelRegion: '',
 			region: {},
+		},
+		{
+			x: 0,
+			y: 0,
+			labelPoint: '',
+			point: {},
+			labelRegion: '',
+			region: {},
 		}
 	],
 
@@ -424,8 +454,13 @@ export const defaults: SimpleOptions = {
 		multi: [],
 		mono: [],
 	},
+	saveImportFile: [],
 	totalUrlInput: '',
 	multiUrlInput: '',
 	monoUrlInput: '',
-	zIndexOrientedLink: 0,
+	zIndexOrientedLink: 1,
+	orientedLinkToUpgrade: {},
+	orientedLinkToDowngrade: {},
+	checkIndexMultiLink: 0,
+
 };

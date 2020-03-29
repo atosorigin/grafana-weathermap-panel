@@ -1,4 +1,4 @@
-import { createInputsOrientedLink } from '../createInputsOrientedLink';
+import { createInputsOrientedLink } from '../CreateInput/createInputsOrientedLink';
 import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
 import { PointClass } from 'Models/PointClass';
 

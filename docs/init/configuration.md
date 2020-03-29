@@ -21,7 +21,7 @@ To see the available metrics, open the browser and type this:
 http://localhost:9100/metrics
 ```
 
-![Node Exporter](screenshots/environment/node_exporter.png)
+![Node Exporter](screenshots/node_exporter.png)
 
 
 ## Testing Prometheus
@@ -30,7 +30,7 @@ http://localhost:9100/metrics
 http://localhost:9090/
 ```
 
-![Prometheus](screenshots/environment/prometheus.png)
+![Prometheus](screenshots/prometheus.png)
 
 
 ## Testing Grafana
@@ -48,4 +48,4 @@ You have to go to the `New dashboard` menu...
 
 Complete the targets to see the result
 
-![metrics graph](screenshots/environment/graph.png)
+![metrics graph](screenshots/graph.png)

@@ -1,4 +1,4 @@
-import { createInputsLink } from '../createInputsLink';
+import { createInputsLink } from '../CreateInput/createInputsLink';
 import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
 import { PointClass } from 'Models/PointClass';
 

@@ -40,12 +40,10 @@ const searchOtherLimitDAttribute = (data: string, limit: number[]): boolean => {
 			}
 			if (index !== 0 && index % 2 !== 0) {
 				if (!verifAllLimit(parseInt(lineTmp, 10), limit, true)) {
-					console.error('x error in searchOtherLimitDAttribute');
 					return true;
 				}
 			} else if (index !== 0) {
 				if (!verifAllLimit(parseInt(lineTmp, 10), limit, false)) {
-					console.error('y error in searchOtherLimitDAttribute');
 					return true;
 				}
 			}
@@ -68,7 +66,6 @@ const searchOtherLimitXYAttribute = (
 			return false;
 		}
 	}
-	console.error('error limit: searchOtherLimitXYAttribute');
 	return true;
 };
 
@@ -89,7 +86,6 @@ const searchOtherLimitXnYnAttribute = (
 			return false;
 		}
 	}
-	console.error('error limit: searchOtherLimitXnYnAttribute');
 	return true;
 };
 
