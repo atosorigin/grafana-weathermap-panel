@@ -1,6 +1,10 @@
 # Changelog
 
-## v0.4.1 (2020-03-30)
+## v0.4.2 (2020-03-30)
+
+- Fixed dependencies library babel-loader
+
+## v0.4.1 (2020-03-29)
 
 - Add Tooltip in area SVG
 - Add link image (PNG/JPG/GIF) for background
