@@ -1,8 +1,8 @@
 import React, { CSSProperties } from 'react';
-import { SimpleOptions, IMetric } from 'types';
+import { SimpleOptions, Metric } from 'types';
 
 import { PanelEditorProps, SelectableValue } from '@grafana/data';
-import { Button, Select, Alert, FormField } from '@grafana/ui';
+import { Button, Select, Alert, FormField, FormLabel } from '@grafana/ui';
 
 import { ArrayInputClass } from 'Models/ArrayInputClass';
 import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
@@ -26,482 +26,506 @@ import 'style/CoordinateSpace.css';
 
 export declare type AlertVariant = 'success' | 'warning' | 'error' | 'info';
 
-interface IProps extends PanelEditorProps<SimpleOptions> {
-	/** if it's parent component is add then don't display delete button  */
-	isAddCoordinate: boolean;
-	/** coordinate to edit */
-	coordinate: RegionClass;
-	/** save data in parent */
-	callBackToParent: (id: number, newCoordinate?: RegionClass) => void;
-	/** id coordinateSpace */
-	id?: number;
+interface Props extends PanelEditorProps<SimpleOptions> {
+  /** if it's parent component is add then don't display delete button  */
+  isAddCoordinate: boolean;
+  /** coordinate to edit */
+  coordinate: RegionClass;
+  /** save data in parent */
+  callBackToParent: (id: number, newCoordinate?: RegionClass) => void;
+  /** id coordinateSpace */
+  id?: number;
 }
 
-interface IState {
-	/** stock coordinates in array object for Parent Component */
-	arrayCoor: RegionClass;
-	/** stock HTML input coordinates */
-	arrayInput: ArrayInputClass[];
-	/** stock html form */
-	htmlInput: JSX.Element;
-	/** display alert when form error */
-	hiddenAlert: boolean;
-	/** text to display alert */
-	titleAlert: string;
-	/** alert type */
-	severityAlert: AlertVariant;
-	/** choice svg mode */
-	selectedRadio: string;
-	/** selectedSVG */
-	allIDSelected: Array<SelectableValue<string>>;
-	/** selectedDefault id svg */
-	selectedDefaultSVG: SelectableValue<string>;
+interface State {
+  /** stock coordinates in array object for Parent Component */
+  arrayCoor: RegionClass;
+  /** stock HTML input coordinates */
+  arrayInput: ArrayInputClass[];
+  /** stock html form */
+  htmlInput: JSX.Element;
+  /** display alert when form error */
+  hiddenAlert: boolean;
+  /** text to display alert */
+  titleAlert: string;
+  /** alert type */
+  severityAlert: AlertVariant;
+  /** choice svg mode */
+  selectedRadio: string;
+  /** selectedSVG */
+  allIDSelected: Array<SelectableValue<string>>;
+  /** selectedDefault id svg */
+  selectedDefaultSVG: SelectableValue<string>;
 }
 
 /**
  * component edit space coordinate
  */
-class CoordinateSpace extends React.Component<IProps, IState>  {
-	constructor(props: IProps) {
-		super(props);
-		this.state = {
-			arrayCoor: cloneRegionCoordinateSpace(this.props.coordinate),
-			arrayInput: [],
-			htmlInput: <div></div>,
-			hiddenAlert: true,
-			titleAlert: 'Error: label is empty',
-			severityAlert: 'error',
-			selectedRadio: 'svgMode',
-			allIDSelected: [],
-			selectedDefaultSVG: [],
-		};
-	}
+class CoordinateSpace extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      arrayCoor: cloneRegionCoordinateSpace(this.props.coordinate),
+      arrayInput: [],
+      htmlInput: <div></div>,
+      hiddenAlert: true,
+      titleAlert: 'Error: label is empty',
+      severityAlert: 'error',
+      selectedRadio: 'svgMode',
+      allIDSelected: [],
+      selectedDefaultSVG: [],
+    };
+  }
 
-	/** update state with promise */
-	public setStateAsyncArrayCoor = (state: {
-		/** new espace coordinate */
-		arrayCoor: RegionClass,
-	}) => {
-		return new Promise((resolve) => {
-			this.setState(state, resolve);
-		});
-	}
+  /** update state with promise */
+  setStateAsyncArrayCoor = (state: {
+    /** new espace coordinate */
+    arrayCoor: RegionClass;
+  }) => {
+    return new Promise(resolve => {
+      this.setState(state, resolve);
+    });
+  };
 
-	/** update state with promise */
-	public setStateAsyncArrayInput = (state: {
-		/** new line in array input */
-		arrayInput: ArrayInputClass[],
-	}) => {
-		return new Promise((resolve) => {
-			this.setState(state, resolve);
-		});
-	}
+  /** update state with promise */
+  setStateAsyncArrayInput = (state: {
+    /** new line in array input */
+    arrayInput: ArrayInputClass[];
+  }) => {
+    return new Promise(resolve => {
+      this.setState(state, resolve);
+    });
+  };
 
-	/** add inputs for a new coordiante */
-	public addInput = async (
-		id: number
-	) => {
-		await this.setStateAsyncArrayInput({
-			arrayInput: this.state.arrayInput.concat([
-				new ArrayInputClass(id, createInputCoor(id, false))]),
-		});
-	}
+  /** add inputs for a new coordiante */
+  addInput = async (id: number) => {
+    await this.setStateAsyncArrayInput({
+      arrayInput: this.state.arrayInput.concat([new ArrayInputClass(id, createInputCoor(id, false))]),
+    });
+  };
 
-	/**
-	 * Delete array input and value
-	 * @param {event} event event click delete button
-	 */
-	public deleteOwnInput = (): void => {
-		const del: boolean = confirm('Delete "' + this.state.arrayCoor.label + '" ?');
-		// alert(del);
-		if (del) {
-			this.props.callBackToParent(this.state.arrayCoor.id, undefined);
-		}
-	}
+  /**
+   * Delete array input and value
+   * @param {event} event event click delete button
+   */
+  deleteOwnInput = (): void => {
+    const del: boolean = confirm('Delete "' + this.state.arrayCoor.label + '" ?');
+    // alert(del);
+    if (del) {
+      this.props.callBackToParent(this.state.arrayCoor.id, undefined);
+    }
+  };
 
-	/**
-	 * Use function if value input change
-	 * @param {string} currentTarget new value of input
-	 * @param {string} name name of input
-	 * @param {number} index id of input
-	 */
-	public _handleChange(currentTarget: string, name: string, index: number): void {
-		let tmp: RegionClass = this.state.arrayCoor;
-		tmp = editGoodParameterExtend(name, tmp, currentTarget);
-		this.setState({
-			arrayCoor: tmp,
-		});
-		this.fillInputEspaceCoor();
-	}
+  /**
+   * Use function if value input change
+   * @param {string} currentTarget new value of input
+   * @param {string} name name of input
+   * @param {number} index id of input
+   */
+  _handleChange(currentTarget: string, name: string, index: number): void {
+    let tmp: RegionClass = this.state.arrayCoor;
+    tmp = editGoodParameterExtend(name, tmp, currentTarget);
+    this.setState({
+      arrayCoor: tmp,
+    });
+    this.fillInputEspaceCoor();
+  }
 
-	/**
-	 * Get value of input with state.arrayCoor
-	 * @param {number} id id of element
-	 * @param {string} param name of input
-	 * @returns {string} value of the array element
-	 */
-	public getGoodValue(id: number, param: string): string {
-		let value: string;
+  /**
+   * Get value of input with state.arrayCoor
+   * @param {number} id id of element
+   * @param {string} param name of input
+   * @returns {string} value of the array element
+   */
+  getGoodValue(id: number, param: string): string {
+    let value: string;
 
-		value = '';
-		if (param.startsWith('positionXMin')) {
-			value = this.state.arrayCoor.coords.xMin;
-		} else if (param.startsWith('positionXMax')) {
-			value = this.state.arrayCoor.coords.xMax;
-		} else if (param.startsWith('positionYMin')) {
-			value = this.state.arrayCoor.coords.yMin;
-		} else if (param.startsWith('positionYMax')) {
-			value = this.state.arrayCoor.coords.yMax;
-		} else if (param.startsWith('label')) {
-			value = this.state.arrayCoor.label;
-		} else if (param.startsWith('image')) {
-			value = this.state.arrayCoor.img;
-		} else if (param.startsWith('key')) {
-			value = this.state.arrayCoor.mainMetric.key;
-		} else if (param.startsWith('valueKey')) {
-			value = this.state.arrayCoor.mainMetric.keyValue;
-		}
-		return value;
-	}
+    value = '';
+    if (param.startsWith('positionXMin')) {
+      value = this.state.arrayCoor.coords.xMin;
+    } else if (param.startsWith('positionXMax')) {
+      value = this.state.arrayCoor.coords.xMax;
+    } else if (param.startsWith('positionYMin')) {
+      value = this.state.arrayCoor.coords.yMin;
+    } else if (param.startsWith('positionYMax')) {
+      value = this.state.arrayCoor.coords.yMax;
+    } else if (param.startsWith('label')) {
+      value = this.state.arrayCoor.label;
+    } else if (param.startsWith('image')) {
+      value = this.state.arrayCoor.img;
+    } else if (param.startsWith('key')) {
+      value = this.state.arrayCoor.mainMetric.key;
+    } else if (param.startsWith('valueKey')) {
+      value = this.state.arrayCoor.mainMetric.keyValue;
+    }
+    return value;
+  }
 
-	/** create dynamic input */
-	public fillInputEspaceCoor(): void {
-		const { arrayInput } = this.state;
-		let finalItem: JSX.Element[] = [];
+  /** create dynamic input */
+  fillInputEspaceCoor(): void {
+    const { arrayInput } = this.state;
+    let finalItem: JSX.Element[] = [];
 
-		for (const line of arrayInput) {
-			const mapItems = line.getUneClassInput()
-				.map((obj: InputClass) =>
-					(obj.getInputType() === 'text') ?
-						<InputTextField key={obj.getId()}
-							label={obj.getLabel()}
-							name={obj.getName()}
-							placeholder={obj.getPlaceholder() || ''}
-							required={obj.getRequired()}
-							value={this.getGoodValue(line.getId(), obj.getName())}
-							_handleChange={
-								(event: {
-									/** get currentTarget in event element */
-									currentTarget: HTMLInputElement;
-								}) => this._handleChange(event.currentTarget.value,
-									obj.getName(), line.getId())
-							} />
-						:
-						(!this.props.isAddCoordinate) ? <InputButtonField
-							key={obj.getId()}
-							label={obj.getLabel()}
-							value={obj.getValue() || ''}
-							name={obj.getName()}
-							required={obj.getRequired()}
-							_handleChange={this.deleteOwnInput}
-							id={obj.getId()} /> : <div></div>
-				);
-			const divKey: string = 'inputCoor' + line.getId().toString();
-			const newInput: JSX.Element = <div key={'addCoordinate' + divKey} className='inputCoor'>{mapItems}</div>;
-			finalItem = finalItem.concat(newInput);
-		}
-		this.setState((prevState: IState) => ({
-			htmlInput: <ul>{finalItem}</ul>,
-			selectedRadio: (prevState.arrayCoor.mode) ? 'svgMode' : 'coordinateMode',
-		}));
-	}
+    for (const line of arrayInput) {
+      const mapItems = line.getUneClassInput().map((obj: InputClass) =>
+        obj.getInputType() === 'text' ? (
+          <InputTextField
+            key={obj.getId()}
+            label={obj.getLabel()}
+            name={obj.getName()}
+            placeholder={obj.getPlaceholder() || ''}
+            required={obj.getRequired()}
+            value={this.getGoodValue(line.getId(), obj.getName())}
+            _handleChange={(event: {
+              /** get currentTarget in event element */
+              currentTarget: HTMLInputElement;
+            }) => this._handleChange(event.currentTarget.value, obj.getName(), line.getId())}
+          />
+        ) : !this.props.isAddCoordinate ? (
+          <InputButtonField
+            key={obj.getId()}
+            label={obj.getLabel()}
+            value={obj.getValue() || ''}
+            name={obj.getName()}
+            required={obj.getRequired()}
+            _handleChange={this.deleteOwnInput}
+            id={obj.getId()}
+          />
+        ) : (
+          <div></div>
+        )
+      );
+      const divKey: string = 'inputCoor' + line.getId().toString();
+      const newInput: JSX.Element = (
+        <div key={'addCoordinate' + divKey} className="inputCoor">
+          {mapItems}
+        </div>
+      );
+      finalItem = finalItem.concat(newInput);
+    }
+    this.setState((prevState: State) => ({
+      htmlInput: <ul>{finalItem}</ul>,
+      selectedRadio: prevState.arrayCoor.mode ? 'svgMode' : 'coordinateMode',
+    }));
+  }
 
-	/** edit value for selectedDefaultValue and edit idSVG arrayCoor */
-	public onChangeSelectSVG = (value: SelectableValue<string>) => {
-		// const newId: SelectableValue<string> = value;
-		const coordinate: RegionClass = this.state.arrayCoor;
-		coordinate.idSVG = value.value || '';
-		this.setState({
-			selectedDefaultSVG: value,
-			arrayCoor: coordinate,
-		});
-	}
+  /** edit value for selectedDefaultValue and edit idSVG arrayCoor */
+  onChangeSelectSVG = (value: SelectableValue<string>) => {
+    // const newId: SelectableValue<string> = value;
+    const coordinate: RegionClass = this.state.arrayCoor;
+    coordinate.idSVG = value.value || '';
+    this.setState({
+      selectedDefaultSVG: value,
+      arrayCoor: coordinate,
+    });
+  };
 
-	/** call function to return arrayCoor a SimpleEditor */
-	public callBack = (): void => {
-		const waitAlert: number = 3000;
+  /** call function to return arrayCoor a SimpleEditor */
+  callBack = (): void => {
+    const waitAlert = 3000;
 
-		if (this.state.arrayCoor.label === '') {
-			this.setState({
-				severityAlert: 'error',
-				titleAlert: 'Error: label is empty',
-				hiddenAlert: false,
-			});
-			setTimeout(() => {
-				this.setState({
-					hiddenAlert: true,
-				});
-			}, waitAlert);
-		} else {
-			this.props.callBackToParent(this.state.arrayCoor.id, this.state.arrayCoor);
-		}
-		this.setState({
-			severityAlert: 'success',
-			titleAlert: 'Save',
-			hiddenAlert: false,
-		});
-		if (!this.props.isAddCoordinate) {
-			setTimeout(() => {
-				this.setState({
-					hiddenAlert: true,
-				});
-			}, waitAlert);
-		}
-	}
+    if (this.state.arrayCoor.label === '') {
+      this.setState({
+        severityAlert: 'error',
+        titleAlert: 'Error: label is empty',
+        hiddenAlert: false,
+      });
+      setTimeout(() => {
+        this.setState({
+          hiddenAlert: true,
+        });
+      }, waitAlert);
+    } else {
+      this.props.callBackToParent(this.state.arrayCoor.id, this.state.arrayCoor);
+    }
+    this.setState({
+      severityAlert: 'success',
+      titleAlert: 'Save',
+      hiddenAlert: false,
+    });
+    if (!this.props.isAddCoordinate) {
+      setTimeout(() => {
+        this.setState({
+          hiddenAlert: true,
+        });
+      }, waitAlert);
+    }
+  };
 
-	/** save data in parent */
-	public callBackToOther = (
-		followLink?: string,
-		hoveringTooltipLink?: string,
-		hoveringTooltipText?: string,
-		textObj?: TextObject): void => {
-		const oldCoor: RegionClass = this.state.arrayCoor;
-		if (followLink) {
-			oldCoor.linkURL.followLink = followLink;
-		}
-		if (hoveringTooltipLink) {
-			oldCoor.linkURL.hoveringTooltipLink = hoveringTooltipLink;
-		}
-		if (hoveringTooltipText) {
-			oldCoor.linkURL.hoveringTooltipText = hoveringTooltipText;
-		}
-		if (textObj) {
-			oldCoor.textObj = textObj;
-		}
-		this.setState({
-			arrayCoor: oldCoor,
-		});
-	}
+  /** save data in parent */
+  callBackToOther = (followLink?: string, hoveringTooltipLink?: string, hoveringTooltipText?: string, textObj?: TextObject): void => {
+    const oldCoor: RegionClass = this.state.arrayCoor;
+    if (followLink) {
+      oldCoor.linkURL.followLink = followLink;
+    }
+    if (hoveringTooltipLink) {
+      oldCoor.linkURL.hoveringTooltipLink = hoveringTooltipLink;
+    }
+    if (hoveringTooltipText) {
+      oldCoor.linkURL.hoveringTooltipText = hoveringTooltipText;
+    }
+    if (textObj) {
+      oldCoor.textObj = textObj;
+    }
+    this.setState({
+      arrayCoor: oldCoor,
+    });
+  };
 
-	/** update lower limit */
-	public callBackManageLowerLimit = (coordiante: CoordinateSpaceClass) => {
-		const newValue: RegionClass = this.state.arrayCoor;
+  /** update lower limit */
+  callBackManageLowerLimit = (coordiante: CoordinateSpaceClass) => {
+    const newValue: RegionClass = this.state.arrayCoor;
 
-		newValue.colorMode = coordiante.colorMode;
-		newValue.traceBorder = coordiante.traceBorder;
-		newValue.traceBack = coordiante.traceBack;
-		this.setState({
-			arrayCoor: newValue,
-		});
-	}
+    newValue.colorMode = coordiante.colorMode;
+    newValue.traceBorder = coordiante.traceBorder;
+    newValue.traceBack = coordiante.traceBack;
+    this.setState({
+      arrayCoor: newValue,
+    });
+  };
 
-	/** save lower limit data */
-	public callBackLowerLimit = (lowerLimit: LowerLimitClass[]) => {
-		const newValue: RegionClass = this.state.arrayCoor;
+  /** save lower limit data */
+  callBackLowerLimit = (lowerLimit: LowerLimitClass[]) => {
+    const newValue: RegionClass = this.state.arrayCoor;
 
-		newValue.lowerLimit = lowerLimit;
-		this.setState({
-			arrayCoor: newValue,
-		});
-	}
+    newValue.lowerLimit = lowerLimit;
+    this.setState({
+      arrayCoor: newValue,
+    });
+  };
 
-	/** save mainMetric data */
-	public callBackMainMetric = (mainMetric: IMetric): void => {
-		const newValue: RegionClass = this.state.arrayCoor;
+  /** save mainMetric data */
+  callBackMainMetric = (mainMetric: Metric): void => {
+    const newValue: RegionClass = this.state.arrayCoor;
 
-		newValue.mainMetric = mainMetric;
-		this.setState({
-			arrayCoor: newValue,
-		});
-	}
+    newValue.mainMetric = mainMetric;
+    this.setState({
+      arrayCoor: newValue,
+    });
+  };
 
-	/** change value radio button checker to pass svg or coordinate mode */
-	public onChangeRadioMode = (event: {
-		/** get current value to target */
-		currentTarget: HTMLInputElement
-	}) => {
-		const coordinate: RegionClass = this.state.arrayCoor;
+  /** change value radio button checker to pass svg or coordinate mode */
+  onChangeRadioMode = (event: {
+    /** get current value to target */
+    currentTarget: HTMLInputElement;
+  }) => {
+    const coordinate: RegionClass = this.state.arrayCoor;
 
-		coordinate.mode = event.currentTarget.value === 'svgMode' ? true : false;
-		this.setState({
-			selectedRadio: event.currentTarget.value,
-			arrayCoor: coordinate,
-		});
-	}
+    coordinate.mode = event.currentTarget.value === 'svgMode' ? true : false;
+    this.setState({
+      selectedRadio: event.currentTarget.value,
+      arrayCoor: coordinate,
+    });
+  };
 
-	/** add all id SVG in select */
-	public fillSelectSVG = () => {
-		const selectedIDSvg: Array<SelectableValue<string>> = [];
-		if (this.state.allIDSelected.length > 0) {
-			const allIDSelected: Array<SelectableValue<string>> = this.state.allIDSelected;
-			let defaultSVG: SelectableValue<string> = allIDSelected[0];
-			for (const line of allIDSelected) {
-				if (line.value === this.state.arrayCoor.idSVG) {
-					defaultSVG = line;
-				}
-			}
-			this.setState({
-				selectedDefaultSVG: defaultSVG,
-			});
-			return;
-		}
-		const timeRefresh: number = 1000;
-		if (this.props.options.baseMap.modeSVG) {
-			const refresh = setInterval(() => {
-				const data: string[] = returnAllId(this.props.options.coordinateSpaceInitial.coordinate, this.props.options.baseMap);
+  /** add all id SVG in select */
+  fillSelectSVG = () => {
+    const selectedIDSvg: Array<SelectableValue<string>> = [];
+    if (this.state.allIDSelected.length > 0) {
+      const allIDSelected: Array<SelectableValue<string>> = this.state.allIDSelected;
+      let defaultSVG: SelectableValue<string> = allIDSelected[0];
+      for (const line of allIDSelected) {
+        if (line.value === this.state.arrayCoor.idSVG) {
+          defaultSVG = line;
+        }
+      }
+      this.setState({
+        selectedDefaultSVG: defaultSVG,
+      });
+      return;
+    }
+    const timeRefresh = 1000;
+    if (this.props.options.baseMap.modeSVG) {
+      const refresh = setInterval(() => {
+        const data: string[] = returnAllId(this.props.options.coordinateSpaceInitial.coordinate, this.props.options.baseMap);
 
-				if (data.length > 0) {
-					for (const line of data) {
-						selectedIDSvg.push({ value: line, label: line });
-					}
-					let defaultSVG: SelectableValue<string> = selectedIDSvg[0];
-					for (const line of selectedIDSvg) {
-						if (line.value === this.state.arrayCoor.idSVG) {
-							defaultSVG = line;
-						}
-					}
-					this.setState({
-						allIDSelected: selectedIDSvg,
-						selectedDefaultSVG: defaultSVG,
-					});
-					clearInterval(refresh);
-				}
-				// else {
-				// 	console.error('error search id');
-				// }
-			}, timeRefresh);
-		}
-	}
+        if (data.length > 0) {
+          for (const line of data) {
+            selectedIDSvg.push({ value: line, label: line });
+          }
+          let defaultSVG: SelectableValue<string> = selectedIDSvg[0];
+          for (const line of selectedIDSvg) {
+            if (line.value === this.state.arrayCoor.idSVG) {
+              defaultSVG = line;
+            }
+          }
+          this.setState({
+            allIDSelected: selectedIDSvg,
+            selectedDefaultSVG: defaultSVG,
+          });
+          clearInterval(refresh);
+        }
+        // else {
+        // 	console.error('error search id');
+        // }
+      }, timeRefresh);
+    }
+  };
 
-	/**
-	 * fill input whith data
-	 * this function is called by mount and update event
-	*/
-	public getDataInInput = async () => {
-		await this.addInput(this.props.coordinate.id);
-		this.fillInputEspaceCoor();
-		this.fillSelectSVG();
-	}
+  /**
+   * fill input whith data
+   * this function is called by mount and update event
+   */
+  getDataInInput = async () => {
+    await this.addInput(this.props.coordinate.id);
+    this.fillInputEspaceCoor();
+    this.fillSelectSVG();
+  };
 
-	/** call function in load component */
-	public componentDidMount = () => {
-		this.getDataInInput();
-	}
+  /** call function in load component */
+  componentDidMount = () => {
+    this.getDataInInput();
+  };
 
-	/** function is call when props is update. Update state */
-	public componentDidUpdate = async (prevProps: IProps, prevState: IState) => {
-		if (prevProps.coordinate.id !== this.props.coordinate.id) {
-			await this.setStateAsyncArrayCoor({
-				arrayCoor: cloneRegionCoordinateSpace(this.props.coordinate),
-			});
-			await this.setStateAsyncArrayInput({
-				arrayInput: [],
-			});
-			this.getDataInInput();
-		}
-		// if (prevProps.data.series !== this.props.data.series) {
-		// 	this.fillSelectQuery();
-		// }
+  /** function is call when props is update. Update state */
+  componentDidUpdate = async (prevProps: Props, prevState: State) => {
+    if (prevProps.coordinate.id !== this.props.coordinate.id) {
+      await this.setStateAsyncArrayCoor({
+        arrayCoor: cloneRegionCoordinateSpace(this.props.coordinate),
+      });
+      await this.setStateAsyncArrayInput({
+        arrayInput: [],
+      });
+      this.getDataInInput();
+    }
+    // if (prevProps.data.series !== this.props.data.series) {
+    // 	this.fillSelectQuery();
+    // }
+  };
 
-	}
+  /** return html */
+  render() {
+    const styleAlert = {
+      position: 'fixed',
+      bottom: '5%',
+      right: '5%',
+      zIndex: 9999,
+    } as CSSProperties;
 
-	/** return html */
-	public render() {
-		const styleAlert = {
-			position: 'fixed',
-			bottom: '5%',
-			right: '5%',
-			zIndex: 9999,
-		} as CSSProperties;
-
-		return (
-			<div>
-				<div style={styleAlert} hidden={this.state.hiddenAlert}>
-					<Alert title={this.state.titleAlert} severity={this.state.severityAlert} />
-				</div>
-				<div>
-					{this.state.htmlInput}
-				</div>
-				<div>
-					<ManageQuery options={this.props.options}
-						idCoordinate={this.state.arrayCoor.id}
-						onOptionsChange={this.props.onOptionsChange}
-						data={this.props.data}
-						mainMetric={this.state.arrayCoor.mainMetric}
-						callBackToParent={this.callBackMainMetric}
-					/>
-				</div>
-				<div>
-					<ParametresGeneriques
-						options={this.props.options}
-						onOptionsChange={this.props.onOptionsChange}
-						data={this.props.data}
-						coordinateSpace={this.state.arrayCoor}
-						callBackToParent={this.callBackToOther}
-					/>
-				</div>
-				<div>
-					<ManageLowerLimit
-						coordinate={this.state.arrayCoor}
-						callBack={this.callBackManageLowerLimit}
-						lowerLimitCallBack={this.callBackLowerLimit} />
-				</div>
-				<br />
-				<div>
-					<div className='radio'>
-						<label>
-							<input type='radio' value='svgMode'
-								checked={this.state.selectedRadio === 'svgMode'}
-								onChange={this.onChangeRadioMode} />
-							SVG mode
-						</label>
-					</div>
-					<div className='radio'>
-						<label>
-							<input type='radio' value='coordinateMode'
-								checked={this.state.selectedRadio === 'coordinateMode'}
-								onChange={this.onChangeRadioMode} />
-							Coordinate mode
-						</label>
-					</div>
-					<br></br>
-					{
-						this.state.selectedRadio === 'svgMode' ?
-							<div className='svgMode'>
-								<Select
-									onChange={(value) => this.onChangeSelectSVG(value)}
-									allowCustomValue={false}
-									options={this.state.allIDSelected}
-									width={10}
-									value={this.state.selectedDefaultSVG}
-								/>
-							</div>
-							:
-							<div className='classRegion'>
-								<FormField label='Image' labelWidth={10} inputWidth={20}
-									type='text' value={this.state.arrayCoor.img} name='image'
-									onChange={(event) => this._handleChange(event.currentTarget.value,
-										'image', this.state.arrayCoor.id)} />
-								<FormField label='X min' labelWidth={10} inputWidth={20}
-									type='text' value={this.state.arrayCoor.coords.xMin} name='positionXMin'
-									onChange={(event) => this._handleChange(event.currentTarget.value,
-										'positionXMin', this.state.arrayCoor.id)} />
-								<FormField label='X max' labelWidth={10} inputWidth={20}
-									type='text' value={this.state.arrayCoor.coords.xMax} name='positionXMax'
-									onChange={(event) => this._handleChange(event.currentTarget.value,
-										'positionXMax', this.state.arrayCoor.id)} />
-								<FormField label='Y min' labelWidth={10} inputWidth={20}
-									type='text' value={this.state.arrayCoor.coords.yMin} name='positionYMin'
-									onChange={(event) => this._handleChange(event.currentTarget.value,
-										'positionYMin', this.state.arrayCoor.id)} />
-								<FormField label='Y max' labelWidth={10} inputWidth={20}
-									type='text' value={this.state.arrayCoor.coords.yMax} name='positionYMax'
-									onChange={(event) => this._handleChange(event.currentTarget.value,
-										'positionYMax', this.state.arrayCoor.id)} />
-							</div>
-					}
-				</div>
-				<br />
-				<div style={{ textAlign: 'center' }} className='buttonSave'>
-					<Button style={{ marginRight: '1%' }} onClick={() => this.callBack()}>Load</Button>
-					{
-						(!this.props.isAddCoordinate) &&
-						<Button onClick={this.deleteOwnInput} variant='danger'>Delete</Button>
-					}
-				</div>
-				{/* <Button onClick={() => console.log(this.state.arrayCoor)}>load</Button> */}
-			</div>
-		);
-	}
+    return (
+      <div>
+        <div style={styleAlert} hidden={this.state.hiddenAlert}>
+          <Alert title={this.state.titleAlert} severity={this.state.severityAlert} />
+        </div>
+        <div>{this.state.htmlInput}</div>
+        <div>
+          <ManageQuery
+            options={this.props.options}
+            idCoordinate={this.state.arrayCoor.id}
+            onOptionsChange={this.props.onOptionsChange}
+            data={this.props.data}
+            mainMetric={this.state.arrayCoor.mainMetric}
+            callBackToParent={this.callBackMainMetric}
+          />
+        </div>
+        <div>
+          <ParametresGeneriques
+            options={this.props.options}
+            onOptionsChange={this.props.onOptionsChange}
+            data={this.props.data}
+            coordinateSpace={this.state.arrayCoor}
+            callBackToParent={this.callBackToOther}
+          />
+        </div>
+        <div>
+          <ManageLowerLimit coordinate={this.state.arrayCoor} callBack={this.callBackManageLowerLimit} lowerLimitCallBack={this.callBackLowerLimit} />
+        </div>
+        <br />
+        <div>
+          <div className="radio">
+            <label>
+              <input type="radio" value="svgMode" checked={this.state.selectedRadio === 'svgMode'} onChange={this.onChangeRadioMode} />
+              SVG mode
+            </label>
+          </div>
+          <div className="radio">
+            <label>
+              <input type="radio" value="coordinateMode" checked={this.state.selectedRadio === 'coordinateMode'} onChange={this.onChangeRadioMode} />
+              Coordinate mode
+            </label>
+          </div>
+          <br></br>
+          {this.state.selectedRadio === 'svgMode' ? (
+            <div className="svgMode">
+              <tr style={{ verticalAlign: 'middle' }}>
+                <td>
+                  <FormLabel>Zone SVG</FormLabel>
+                </td>
+                <td>
+                  <Select
+                    onChange={value => this.onChangeSelectSVG(value)}
+                    allowCustomValue={false}
+                    options={this.state.allIDSelected}
+                    width={10}
+                    value={this.state.selectedDefaultSVG}
+                  />
+                </td>
+              </tr>
+            </div>
+          ) : (
+            <div className="classRegion">
+              <FormField
+                label="Image"
+                labelWidth={10}
+                inputWidth={20}
+                type="text"
+                value={this.state.arrayCoor.img}
+                name="image"
+                onChange={event => this._handleChange(event.currentTarget.value, 'image', this.state.arrayCoor.id)}
+              />
+              <FormField
+                label="X min"
+                labelWidth={10}
+                inputWidth={20}
+                type="text"
+                value={this.state.arrayCoor.coords.xMin}
+                name="positionXMin"
+                onChange={event => this._handleChange(event.currentTarget.value, 'positionXMin', this.state.arrayCoor.id)}
+              />
+              <FormField
+                label="X max"
+                labelWidth={10}
+                inputWidth={20}
+                type="text"
+                value={this.state.arrayCoor.coords.xMax}
+                name="positionXMax"
+                onChange={event => this._handleChange(event.currentTarget.value, 'positionXMax', this.state.arrayCoor.id)}
+              />
+              <FormField
+                label="Y min"
+                labelWidth={10}
+                inputWidth={20}
+                type="text"
+                value={this.state.arrayCoor.coords.yMin}
+                name="positionYMin"
+                onChange={event => this._handleChange(event.currentTarget.value, 'positionYMin', this.state.arrayCoor.id)}
+              />
+              <FormField
+                label="Y max"
+                labelWidth={10}
+                inputWidth={20}
+                type="text"
+                value={this.state.arrayCoor.coords.yMax}
+                name="positionYMax"
+                onChange={event => this._handleChange(event.currentTarget.value, 'positionYMax', this.state.arrayCoor.id)}
+              />
+            </div>
+          )}
+        </div>
+        <br />
+        <div style={{ textAlign: 'center' }} className="buttonSave">
+          <Button style={{ marginRight: '1%' }} onClick={() => this.callBack()}>
+            Load
+          </Button>
+          {!this.props.isAddCoordinate && (
+            <Button onClick={this.deleteOwnInput} variant="danger">
+              Delete
+            </Button>
+          )}
+        </div>
+        {/* <Button onClick={() => console.log(this.state.arrayCoor)}>load</Button> */}
+      </div>
+    );
+  }
 }
 export default CoordinateSpace;

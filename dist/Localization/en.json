@@ -1,99 +1,97 @@
 {
-	"objectVisibility": {
-		"decalCenterPointTextRegion": "Shift the center point of the text region",
-		"decalCenterBubble": "Shift the point or center of a tooltip",
-		"forceCalqueLevel": "Force a specific layer level",
-		"forceCourbSpecificLink": "Force a specific link curvature",
-		"calcLevel": "Layer level",
-		"courbure": "Curvature"
-	},
-	"basics": {
-		"abscisses": "Abscissa",
-		"ordonnees": "Ordered",
-		"delete": "Delete",
-		"label": "Label"
-	},
-	"simpleEditor": {
-		"renduTextDefault": "Default text rendering",
-		"display": "Display",
-		"pictureLink": "Image SVG",
-		"genericSettings": "Generic parameters",
-		"genericSettingsBis": "Generic parameters bis",
-		"spaceInitialVisualisation": "Initial viewing space",
-		"CoordinateSpace": "Coordinates space",
-		"objectVisibility": "Visibility of objects",
-		"metricsSettings": "Metrics Settings"
-	},
-	"coordinateSpace": {
-		"addCoordinate": "Add coordinates"
-	},
-	"initialCoordonateSpace": {
-		"label": "Initial coordinates space"
-	},
-	"inputCoordinate": {
-		"minXPosition": "Position X min",
-		"maxXPosition": "Position X max",
-		"minYPosition": "Position Y min",
-		"maxYPosition": "Position Y max",
-		"image": "Image",
-		"interfaceJson": "Interface name",
-		"key": "Key",
-		"valueKey": "Value key"
-	},
-	"textDefault": {
-		"police": "Font",
-		"size": "Size",
-		"style": "Style"
-	},
-	"genericParameter": {
-		"settingPrincipalMetric": "Main metric parameter",
-		"graphicObject": "Graphic object",
-		"variableColor": "Variable color",
-		"traceBackground": "Trace the background",
-		"traceContour": "Trace the border"
-	},
-	"metricPrincipalSetting": {
-		"followLink": "Following link",
-		"link": "Link",
-		"text": "Text",
-		"linkTooltip": "Link tooltip",
-		"textInTooltip": "Text in tooltip"
-	},
-	"colorVariable": {
-		"switchBackgroundColor": "Edit background color",
-		"switchOutlineColor": "Edit border color",
-		"thicknessOutline": "Size border",
-		"variationNumber": "Variation number",
-		"number": "Number",
-		"addColor": "Add color",
-		"infoSeuil": "Info seuil"
-	},
-	"textObject": {
-		"titleTextObject": "A text object",
-		"optionalLegend": "Optional legend",
-		"legend": "Legend",
-		"value": "Value",
-		"optionalUnit": "Optional unit",
-		"unit": "Unit",
-		"principalMetric": "Principal metric",
-		"textRegion": "Text region",
-		"colorBackground": "Color background",
-		"colorText": "Color text",
-		"colorTextOptional": "Optional color text",
-		"textStyle": "Text style",
-		"style": "Style",
-		"textBubble": "Text tooltip",
-		"generateTextObject": "Generate text object",
-		"auxiliaryElement": "Auxiliary element",
-		"digitalFormatting": "Digital formatting (if metric)",
-		"mesureUnit": "Unit of mesure (if metric)",
-		"objectDisplayTextTooltip": "Object display in text or tooltip",
-		"objectDisplayInPermanentlyHover": "Object display in permanently or hovering",
-		"backgroundColor": "Background color",
-		"optionalBackgroundColor": "Optional background color",
-		"save": "Save"
-	},
-	"defaultTextRendering": {
-		
-	}
+  "objectVisibility": {
+    "decalCenterPointTextRegion": "Shift the center point of the text region",
+    "decalCenterBubble": "Shift the point or center of a tooltip",
+    "forceCalqueLevel": "Force a specific layer level",
+    "forceCourbSpecificLink": "Force a specific link curvature",
+    "calcLevel": "Layer level",
+    "courbure": "Curvature"
+  },
+  "basics": {
+    "abscisses": "Abscissa",
+    "ordonnees": "Ordered",
+    "delete": "Delete",
+    "label": "Label"
+  },
+  "simpleEditor": {
+    "renduTextDefault": "Default text rendering",
+    "display": "Display",
+    "pictureLink": "Image SVG",
+    "genericSettings": "Generic parameters",
+    "genericSettingsBis": "Generic parameters bis",
+    "spaceInitialVisualisation": "Initial viewing space",
+    "CoordinateSpace": "Coordinates space",
+    "objectVisibility": "Visibility of objects",
+    "metricsSettings": "Metrics Settings"
+  },
+  "coordinateSpace": {
+    "addCoordinate": "Add coordinates"
+  },
+  "initialCoordonateSpace": {
+    "label": "Initial coordinates space"
+  },
+  "inputCoordinate": {
+    "minXPosition": "Position X min",
+    "maxXPosition": "Position X max",
+    "minYPosition": "Position Y min",
+    "maxYPosition": "Position Y max",
+    "image": "Image",
+    "interfaceJson": "Interface name",
+    "key": "Key",
+    "valueKey": "Value key"
+  },
+  "textDefault": {
+    "police": "Font",
+    "size": "Size",
+    "style": "Style"
+  },
+  "genericParameter": {
+    "settingPrincipalMetric": "Main metric parameter",
+    "graphicObject": "Graphic object",
+    "variableColor": "Variable color",
+    "traceBackground": "Trace the background",
+    "traceContour": "Trace the border"
+  },
+  "metricPrincipalSetting": {
+    "followLink": "Following link",
+    "link": "Link",
+    "text": "Text",
+    "linkTooltip": "Link tooltip",
+    "textInTooltip": "Text in tooltip"
+  },
+  "colorVariable": {
+    "switchBackgroundColor": "Edit background color",
+    "switchOutlineColor": "Edit border color",
+    "thicknessOutline": "Size border",
+    "variationNumber": "Variation number",
+    "number": "Number",
+    "addColor": "Add color",
+    "infoSeuil": "Info seuil"
+  },
+  "textObject": {
+    "titleTextObject": "A text object",
+    "optionalLegend": "Optional legend",
+    "legend": "Legend",
+    "value": "Value",
+    "optionalUnit": "Optional unit",
+    "unit": "Unit",
+    "principalMetric": "Principal metric",
+    "textRegion": "Text region",
+    "colorBackground": "Color background",
+    "colorText": "Color text",
+    "colorTextOptional": "Optional color text",
+    "textStyle": "Text style",
+    "style": "Style",
+    "textBubble": "Text tooltip",
+    "generateTextObject": "Generate text object",
+    "auxiliaryElement": "Auxiliary element",
+    "digitalFormatting": "Digital formatting (if metric)",
+    "mesureUnit": "Unit of mesure (if metric)",
+    "objectDisplayTextTooltip": "Object display in text or tooltip",
+    "objectDisplayInPermanentlyHover": "Object display in permanently or hovering",
+    "backgroundColor": "Background color",
+    "optionalBackgroundColor": "Optional background color",
+    "save": "Save"
+  },
+  "defaultTextRendering": {}
 }

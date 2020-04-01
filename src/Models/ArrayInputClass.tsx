@@ -6,47 +6,47 @@ import { InputClass } from './InputClass';
  * @param uneClassInput InputClass[]
  */
 export class ArrayInputClass {
-	/**
-	 * id
-	 */
-		public id: number;
-		/**
-		 * array class InputClass
-		 */
-		public uneClassInput: InputClass[];
+  /**
+   * id
+   */
+  id: number;
+  /**
+   * array class InputClass
+   */
+  uneClassInput: InputClass[];
 
-		constructor(id: number, uneClassInput: InputClass[]) {
-				this.id = id;
-				this.uneClassInput = uneClassInput;
-		}
+  constructor(id: number, uneClassInput: InputClass[]) {
+    this.id = id;
+    this.uneClassInput = uneClassInput;
+  }
 
-		/**
-		 * get id
-		 */
-		public getId() {
-				return this.id;
-		}
+  /**
+   * get id
+   */
+  getId() {
+    return this.id;
+  }
 
-		/**
-		 * set id
-		 * @param id new id
-		 */
-		public setId(id: number) {
-				this.id = id;
-		}
+  /**
+   * set id
+   * @param id new id
+   */
+  setId(id: number) {
+    this.id = id;
+  }
 
-		/**
-		 * get value of InputClass[]
-		 */
-		public getUneClassInput() {
-				return this.uneClassInput;
-		}
+  /**
+   * get value of InputClass[]
+   */
+  getUneClassInput() {
+    return this.uneClassInput;
+  }
 
-		/**
-		 * set a new InputClass[]
-		 * @param uneClassInput new object InputClass[]
-		 */
-		public setUneClassInput(uneClassInput: InputClass[]) {
-				this.uneClassInput = uneClassInput;
-		}
+  /**
+   * set a new InputClass[]
+   * @param uneClassInput new object InputClass[]
+   */
+  setUneClassInput(uneClassInput: InputClass[]) {
+    this.uneClassInput = uneClassInput;
+  }
 }

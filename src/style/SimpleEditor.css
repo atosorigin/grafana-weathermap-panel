@@ -5,20 +5,18 @@ div.divSimpleEditor {
 }
 
 div.CoordinateSpaceInitital {
-	/* margin: 1%; */
+  /* margin: 1%; */
   /* margin-bottom: 8%; */
 }
 
 h3.titreSection {
-	margin-bottom: 2%;
-/*   color: blue; */
+  margin-bottom: 2%;
+  /*   color: blue; */
 }
-
 
 .parameter-interface-container {
   width: 100%;
 }
-
 
 .parameter-interface-list-title {
   display: flex;

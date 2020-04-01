@@ -1,10 +1,18 @@
 # Changelog
 
+## v0.4.3 (2020-04-01)
+
+- Add fixed plugin
+- update user interface
+- update picture in the region
+- update the oriented link
+- fixed the tab : "text objects"
+
 ## v0.4.2 (2020-03-30)
 
-- Fixed dependencies library babel-loader
+- Fixed dependencies library 
 
-## v0.4.1 (2020-03-29)
+## v0.4.1 (2020-03-30)
 
 - Add Tooltip in area SVG
 - Add link image (PNG/JPG/GIF) for background

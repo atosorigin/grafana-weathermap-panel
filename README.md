@@ -43,6 +43,7 @@ Install the plugins
 
 ```sh
 $ cd /var/lib/grafana/plugins
+$ cd grafana-weathermap-panel
 $ yarn install
 $ yarn watch
 $ systemctl restart grafana-server

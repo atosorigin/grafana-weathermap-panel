@@ -1,266 +1,197 @@
 import React from 'react';
 import { PanelEditorProps } from '@grafana/data';
 import { SimpleOptions } from 'types';
+import { RegionClass } from 'Models/RegionClass';
+import { LowerLimitClass } from 'Models/LowerLimitClass';
+import { PointClass } from 'Models/PointClass';
 
-interface ILegend {
-	hiddenLegend: boolean;
-	x: number;
-	y: number;
+interface Legend {
+  hiddenLegend: boolean;
+  x: number;
+  y: number;
 }
 
-interface IProps extends PanelEditorProps<SimpleOptions>{
-	// legend: ILegend;
-	/** save data */
-	callBack: (event: any) => void;
+interface Props extends PanelEditorProps<SimpleOptions> {
+  // legend: Legend;
+  /** save data */
+  callBack: (event: any) => void;
 }
 
-interface IState {
-	finalHTML: JSX.Element;
-	legend: ILegend;
+interface State {
+  finalHTML: JSX.Element;
+  legend: Legend;
 }
 
 /**
  * def
  */
-class Legend extends React.Component<IProps, IState> {
-	constructor(props: IProps) {
-		super(props);
-		this.state = {
-			finalHTML: <div></div>,
-			legend: this.props.options.legend,
-		};
-	}
+class LegendComponent extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      finalHTML: <div></div>,
+      legend: this.props.options.legend,
+    };
+  }
 
-	/** async state */
-	public setStateAsyncFinalHTML = (state: {
-		/** mew value */
-		finalHTML: JSX.Element,
-	}) => {
-		return new Promise((resolve) => {
-			this.setState(state, resolve);
-		});
-	}
+  /** async state */
+  setStateAsyncFinalHTML = (state: {
+    /** mew value */
+    finalHTML: JSX.Element;
+  }) => {
+    return new Promise(resolve => {
+      this.setState(state, resolve);
+    });
+  };
 
-	/** generate legend */
-	public renduState = async () => {
-		const value: JSX.Element = <div style={{
-			position: 'relative',
-			left: this.state.legend.x,
-			top: this.state.legend.y,
-			maxWidth: '100%',
-			zIndex: 'auto',
-		}} hidden={this.state.legend.hiddenLegend}>
-			<article
-				style={{
-					width: '250px',
-					position: 'absolute',
-					overflowY: 'scroll',
-					margin: '0',
-					height: '170px',
-					backgroundColor: '#212124',
-					color: '#d8d9da',
-					border: '4px solid #299c46',
-					borderRadius: '4px',
-					scrollbarColor: '#09090b #212124',
-					scrollbarWidth: 'thin',
-					zIndex: 9999,
-				}}
-			>
-				<div style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
-					<h5 style={{ width: '100%', fontSize: '20px', display: 'inline-flex' }}>Legend
-						<i style={{ marginLeft: '78%', }} className='fa fa-close' onClick={this.props.callBack}></i></h5>
-					<p style={{ fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p>
-					<p style={{ fontSize: '11px', marginLeft: '17px' }}>Label</p>
-				</div>
-				<ul >
-					<li className='LegendMatt'>
-						<span style={{
-							padding: 4,
-							margin: 9,
-							width: '3.5rem',
-							borderRadius: '39%',
-							backgroundColor: 'red',
-							border: '3px solid yellow',
-							listStyleType: 'none',
-							display: 'inline-block',
-						}}></span>
-						<span style={{
-							display: 'inline-block', verticalAlign: 'middle',
-							marginBottom: '1.25rem', fontSize: '9px',
-						}}>Min-Max</span>
-					</li>tooltip_SVGImage
-					<li className='LegendMatt'>
-						<span style={{
-							padding: 4,
-							margin: 9,
-							width: '3.5rem',
-							borderRadius: '39%',
-							backgroundColor: 'green',
-							border: '3px solid yellow',
-							listStyleType: 'none',
-							display: 'inline-block',
-						}}></span>
-						<span style={{
-							display: 'inline-block', verticalAlign: 'middle',
-							marginBottom: '1.25rem', fontSize: '9px',
-						}}>Min-Max</span></li>
-					<li className='LegendMatt'>
-						<span style={{
-							padding: 4,
-							margin: 9,
-							width: '3.5rem',
-							borderRadius: '39%',
-							backgroundColor: 'orange',
-							border: '3px solid yellow',
-							listStyleType: 'none',
-							display: 'inline-block',
-						}}></span>
-						<span style={{
-							display: 'inline-block', verticalAlign: 'middle',
-							marginBottom: '1.25rem', fontSize: '9px',
-						}}>Min-Max</span></li>
-					<li className='LegendMatt'>
-						<span style={{
-							padding: 4,
-							margin: 9,
-							width: '3.5rem',
-							borderRadius: '39%',
-							backgroundColor: 'purple',
-							border: '3px solid yellow',
-							listStyleType: 'none',
-							display: 'inline-block',
-						}}></span>
-						<span style={{
-							display: 'inline-block', verticalAlign: 'middle',
-							marginBottom: '1.25rem', fontSize: '9px',
-						}}>Min-Max</span></li>
-					<li className='LegendMatt'>
-						<span style={{
-							padding: 4,
-							margin: 9,
-							width: '3.5rem',
-							borderRadius: '39%',
-							backgroundColor: 'green',
-							border: '3px solid yellow',
-							listStyleType: 'none',
-							display: 'inline-block',
-						}}></span>
-						<span style={{
-							display: 'inline-block', verticalAlign: 'middle',
-							marginBottom: '1.25rem', fontSize: '9px',
-						}}>Min-Max</span></li>
-					<li className='LegendMatt'>
-						<span style={{
-							padding: 4,
-							margin: 9,
-							width: '3.5rem',
-							borderRadius: '39%',
-							backgroundColor: 'purple',
-							border: '3px solid yellow',
-							listStyleType: 'none',
-							display: 'inline-block',
-						}}></span>
-						<span style={{
-							display: 'inline-block', verticalAlign: 'middle',
-							marginBottom: '1.25rem', fontSize: '9px',
-						}}>Min-Max</span></li>
-					<li className='LegendMatt'>
-						<span style={{
-							padding: 4,
-							margin: 9,
-							width: '3.5rem',
-							borderRadius: '39%',
-							backgroundColor: 'orange',
-							border: '3px solid yellow',
-							listStyleType: 'none',
-							display: 'inline-block',
-						}}></span>
-						<span style={{
-							display: 'inline-block', verticalAlign: 'middle',
-							marginBottom: '1.25rem', fontSize: '9px',
-						}}>Min-Max</span></li>
-					<li className='LegendMatt'>
-						<span style={{
-							padding: 4,
-							margin: 9,
-							width: '3.5rem',
-							borderRadius: '39%',
-							backgroundColor: 'red',
-							border: '3px solid yellow',
-							listStyleType: 'none',
-							display: 'inline-block',
-						}}></span>
-						<span style={{
-							display: 'inline-block', verticalAlign: 'middle',
-							marginBottom: '1.25rem', fontSize: '9px',
-						}}>Min-Max</span></li>
-				</ul>
-				<p style={{ fontSize: '11px', marginLeft: '17px' }}>Label</p>
-				<ul >
-					<li className='LegendMatt'>
-						<span style={{
-							padding: 4,
-							margin: 9,
-							width: '3.5rem',
-							borderRadius: '39%',
-							backgroundColor: 'red',
-							border: '3px solid yellow',
-							listStyleType: 'none',
-							display: 'inline-block',
-						}}></span>
-						<span style={{
-							display: 'inline-block', verticalAlign: 'middle',
-							marginBottom: '1.25rem', fontSize: '9px',
-						}}>No Variable</span></li>
+  /** fill lowerlimit in JSX.Element */
+  fillLowerLimit = (lowerLimit: LowerLimitClass[]): JSX.Element[] => {
+    const allLimit: JSX.Element[] = [];
+    for (const lower of lowerLimit) {
+      allLimit.push(
+        <li className="LegendMatt">
+          <span
+            style={{
+              padding: 4,
+              margin: 9,
+              width: '3.5rem',
+              borderRadius: '39%',
+              backgroundColor: lower.backColor,
+              border: lower.sizeBorder + 'px solid ' + lower.borderColor,
+              listStyleType: 'none',
+              display: 'inline-block',
+            }}
+          ></span>
+          {lowerLimit.length > 1 && (
+            <span
+              style={{
+                display: 'inline-block',
+                verticalAlign: 'middle',
+                marginBottom: '1.25rem',
+                fontSize: '9px',
+              }}
+            >
+              {lower.lowerLimitMin} - {lower.lowerLimitMax}
+            </span>
+          )}
+        </li>
+      );
+    }
+    return allLimit;
+  };
 
-				</ul>
-				<p style={{ fontSize: '15px', marginLeft: '10px' }}>Point</p>
-			</article>
-		</div>;
-		await this.setStateAsyncFinalHTML({
-			finalHTML: value,
-		});
-	}
+  /** get all lower limit for region */
+  fillRegion = () => {
+    const allRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
+    const rendu: JSX.Element[] = [];
 
-	public setStateLegendAsync = (state: {
-		legend: ILegend,
-	}) => {
-		return new Promise((resolve) => {
-			this.setState(state, resolve);
-		});
-	}
+    for (const line of allRegion) {
+      const allLimit: JSX.Element[] = this.fillLowerLimit(line.lowerLimit);
+      const ownElement: JSX.Element = (
+        <div>
+          {line.label}
+          {allLimit}
+        </div>
+      );
+      rendu.push(ownElement);
+    }
+    return rendu;
+  };
 
-	/** update when legend is edited */
-	public componentWillUpdate = async (prevProps: IProps, prevState: IState) => {
-		// console.log(this.props.legend);
-		// if (this.props.legend.hiddenLegend !== prevProv.legend.hiddenLegend
-		// 	|| this.props.legend.x !== prevProv.legend.x
-		// 	|| this.props.legend.y !== prevProv.legend.y) {
-		// 	console.log('am here skks');
-		// 	this.renduState();
-		// }
-		if (prevState.legend.hiddenLegend !== this.props.options.legend.hiddenLegend
-			|| prevState.legend.x !== this.props.options.legend.x
-			|| prevState.legend.y !== this.props.options.legend.y) {
-			console.log('am here ss');
-			await this.setStateLegendAsync({legend: this.props.options.legend });
-			this.renduState();
-		}
-	}
+  /** get all limit for point */
+  fillPoint = () => {
+    const allPoint: PointClass[] = this.props.options.arrayPoints;
+    const rendu: JSX.Element[] = [];
 
-	/** fill state value when component is mounted */
-	public componentDidMount = () => {
-		this.renduState();
-	}
+    for (const line of allPoint) {
+      const allLimit: JSX.Element[] = this.fillLowerLimit(line.lowerLimit);
+      const ownElement: JSX.Element = (
+        <div>
+          {line.label}
+          {allLimit}
+        </div>
+      );
+      rendu.push(ownElement);
+    }
+    return rendu;
+  };
 
-	/**
-	 * result
-	 */
-	public render() {
-		return (
-			<div>{this.state.finalHTML}</div>
-		);
-	}
+  /** generate legend */
+  renduState = async () => {
+    const value: JSX.Element = (
+      <div
+        style={{
+          position: 'relative',
+          left: this.state.legend.x,
+          top: this.state.legend.y,
+          maxWidth: '100%',
+          zIndex: 'auto',
+        }}
+        hidden={this.state.legend.hiddenLegend}
+      >
+        <article
+          style={{
+            width: '250px',
+            position: 'absolute',
+            overflowY: 'scroll',
+            margin: '0',
+            height: '170px',
+            backgroundColor: '#212124',
+            color: '#d8d9da',
+            border: '4px solid #299c46',
+            borderRadius: '4px',
+            scrollbarColor: '#09090b #212124',
+            scrollbarWidth: 'thin',
+            zIndex: 9999,
+          }}
+        >
+          <div style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
+            <h5 style={{ width: '100%', fontSize: '20px', display: 'inline-flex' }}>
+              Legend
+              <i style={{ marginLeft: '78%' }} className="fa fa-close" onClick={this.props.callBack}></i>
+            </h5>
+            {/* <p style={{ fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p> */}
+          </div>
+          <div style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
+            <p style={{ fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p>
+          </div>
+          <ul key={Math.random().toString()}>{this.fillRegion()}</ul>
+          <div style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
+            <p style={{ fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Point</p>
+          </div>
+          <ul key={Math.random().toString()}>{this.fillPoint()}</ul>
+        </article>
+      </div>
+    );
+    await this.setStateAsyncFinalHTML({
+      finalHTML: value,
+    });
+  };
+
+  setStateLegendAsync = (state: { legend: Legend }) => {
+    return new Promise(resolve => {
+      this.setState(state, resolve);
+    });
+  };
+
+  /** update when legend is edited */
+  componentDidUpdate = async (prevProps: Props, prevState: State) => {
+    if (prevProps !== this.props || prevState.legend.hiddenLegend !== this.props.options.legend.hiddenLegend) {
+      await this.setStateLegendAsync({ legend: this.props.options.legend });
+      this.renduState();
+    }
+  };
+
+  /** fill state value when component is mounted */
+  componentDidMount = () => {
+    this.renduState();
+  };
+
+  /**
+   * result
+   */
+  render() {
+    return <div>{this.state.finalHTML}</div>;
+  }
 }
-export default Legend;
-
+export default LegendComponent;

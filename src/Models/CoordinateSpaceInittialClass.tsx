@@ -2,83 +2,75 @@
  * class CoordinateSpaceClass
  */
 export class CoordinateSpaceInitialClass {
-	public id: number;
-	public xMin: string;
-	public xMax: string;
-	public yMin: string;
-	public yMax: string;
-	public label: string;
-	/**
-	 * r
-	 * @param id r
-	 * @param xMin r
-	 * @param xMax r
-	 * @param yMin r
-	 * @param yMax r
-	 * @param label r
-	 */
-	constructor(
-		id: number,
-		xMin: string,
-		xMax: string,
-		yMin: string,
-		yMax: string,
-		label: string
-	) {
-		this.id = id;
-		this.xMin = xMin;
-		this.xMax = xMax;
-		this.yMin = yMin;
-		this.yMax = yMax;
-		this.label = label;
+  id: number;
+  xMin: string;
+  xMax: string;
+  yMin: string;
+  yMax: string;
+  label: string;
+  /**
+   * r
+   * @param id r
+   * @param xMin r
+   * @param xMax r
+   * @param yMin r
+   * @param yMax r
+   * @param label r
+   */
+  constructor(id: number, xMin: string, xMax: string, yMin: string, yMax: string, label: string) {
+    this.id = id;
+    this.xMin = xMin;
+    this.xMax = xMax;
+    this.yMin = yMin;
+    this.yMax = yMax;
+    this.label = label;
+  }
 
-	}
+  getId(): number {
+    return this.id;
+  }
 
-	public getId(): number {
-		return this.id;
-	}
+  setId(id: number) {
+    this.id = id;
+  }
 
-	public setId(id: number) {
-		this.id = id;
-	}
+  getXMin(): string {
+    return this.xMin;
+  }
 
-	public getXMin(): string {
-		return this.xMin;
-	}
+  setXMin(xMin: string) {
+    this.xMin = xMin;
+  }
 
-	public setXMin(xMin: string) {
-		this.xMin = xMin;
-	}
+  getXMax(): string {
+    return this.xMax;
+  }
 
-	public getXMax(): string {
-		return this.xMax;
-	}
+  setXMax(xMax: string) {
+    this.xMax = xMax;
+  }
 
-	public setXMax(xMax: string) {
-		this.xMax = xMax;
-	}
+  getYMin(): string {
+    return this.yMin;
+  }
 
-	public getYMin(): string {
-		return this.yMin;
-	}
+  setYMin(yMin: string) {
+    this.yMin = yMin;
+  }
 
-	public setYMin(yMin: string) {
-		this.yMin = yMin;
-	}
+  getYMax(): string {
+    return this.yMax;
+  }
 
-	public getYMax(): string {
-		return this.yMax;
-	}
+  setYMax(yMax: string) {
+    this.yMax = yMax;
+  }
 
-	public setYMax(yMax: string) {
-		this.yMax = yMax;
-	}
+  getLabel(): string {
+    return this.label;
+  }
 
-	public getLabel(): string {
-		return this.label;
-	}
-
-	public setLabel(label: string) {
-		this.label = label;
-	}
+  setLabel(label: string) {
+    this.label = label;
+  }
 }

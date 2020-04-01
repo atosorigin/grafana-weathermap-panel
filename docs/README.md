@@ -23,7 +23,7 @@ WeatherMap is a plugin for grafana allowing to visualize monitoring...
   - [Add oriented link](panel/oriented-link.md)
   - [Add incurved oriented link](panel/incurved-link.md)
   - [Position Legend](panel/position-legend.md)
-- [Demo](demo/README.md)
+- [Demo / Tutorial](demo/README.md)
 - [Annex](annex/README.md)
   - [SVG](annex/svg.md)
   - [JSON region](annex/json-region.md)
