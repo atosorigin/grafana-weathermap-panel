@@ -97,7 +97,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * TODO
    */
-  // private fillCoordinate = (): JSX.Element => {
+  // fillCoordinate = (): JSX.Element => {
   // 	const { options } = this.props;
   // 	let mapItems: JSX.Element[];
 
@@ -147,7 +147,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * to do
    */
-  private getCoordinatesToDrawPointWithClick = (event: any) => {
+  getCoordinatesToDrawPointWithClick = (event: any) => {
     let positionX = 0;
     let positionY = 0;
     const widthPanel: number = parseInt(this.props.options.baseMap.width, 10);
@@ -165,17 +165,16 @@ export class SimplePanel extends PureComponent<Props, State> {
     const yMaxPx: number = (yMax + 100) * (heightPanel / 200);
     const heightInitialSpace: number = yMaxPx - yMinPx;
 
-    //positionX = Math.round(((event.nativeEvent.offsetX) - (widthPanel / 2)) * (100 / widthPanel)) * 2;
-    //positionY = (Math.round(((event.nativeEvent.offsetY) - (heightPanel / 2)) * (100 / heightPanel)) * 2) * (-1);
     positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
     positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1;
 
     if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'mainPanel') {
+      //event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG) {
       this.createPointToClick(positionX, positionY);
     }
   };
 
-  private defineIdPoint = (): number => {
+  defineIdPoint = (): number => {
     let id = 1;
     if (this.props.options.arrayPoints.length === 0) {
       return id;
@@ -188,7 +187,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * to do
    */
-  private createPointToClick = (x: number, y: number) => {
+  createPointToClick = (x: number, y: number) => {
     const id: number = this.defineIdPoint();
     const initTextObject: TextObject = new TextObject(
       '',
@@ -261,6 +260,7 @@ export class SimplePanel extends PureComponent<Props, State> {
 
     const newArrayPoint: PointClass[] = this.props.options.arrayPoints;
     newArrayPoint.push(newPoint);
+
     this.props.onOptionsChange({
       ...this.props.options,
       indexPoint: id,
@@ -275,7 +275,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * to do
    */
-  private displayPoint() {
+  displayPoint() {
     const mapItems: JSX.Element[] = [];
 
     this.props.options.arrayPoints.forEach((line: PointClass) => {
@@ -424,7 +424,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * to do
    */
-  private addAssociateOrientedLinkToPoint = (namePointIn: string, namePointOut: string, indexOrientedLinkAssociate: number) => {
+  addAssociateOrientedLinkToPoint = (namePointIn: string, namePointOut: string, indexOrientedLinkAssociate: number) => {
     let index = 0;
     this.props.options.arrayPoints.forEach((point: PointClass) => {
       const name: string = point.label || point.name;
@@ -448,7 +448,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * to do
    */
-  private updateAssociateOrientedLinkInToPoint = () => {
+  updateAssociateOrientedLinkInToPoint = () => {
     let indexPoint = 0;
     this.props.options.arrayPoints.forEach((point: PointClass) => {
       let indexAssociateOrientedLinkIn = 0;
@@ -482,7 +482,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * to do
    */
-  private updateAssociateOrientedLinkOutToPoint = () => {
+  updateAssociateOrientedLinkOutToPoint = () => {
     let indexPoint = 0;
     this.props.options.arrayPoints.forEach((point: PointClass) => {
       let indexAssociateOrientedLinkOut = 0;
@@ -516,7 +516,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * to do
    */
-  private resetCoordinatesToDrawLinkWithClick = () => {
+  resetCoordinatesToDrawLinkWithClick = () => {
     this.props.options.coordinatesToDrawLinkWithClick[1].labelPoint = '';
     this.props.options.coordinatesToDrawLinkWithClick[1].point = {};
     this.props.options.coordinatesToDrawLinkWithClick[1].labelRegion = '';
@@ -528,7 +528,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   };
 
   /** get coordinate when use click in panel */
-  private getCoordinatesToDrawOrientedLinkWithClick = (event: any) => {
+  getCoordinatesToDrawOrientedLinkWithClick = (event: any) => {
     let positionX = 0;
     let positionY = 0;
     const coordinates = this.props.options.coordinatesToDrawLinkWithClick;
@@ -549,7 +549,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     const yMaxPx: number = (yMax + 100) * (heightPanel / 200);
     const heightInitialSpace: number = yMaxPx - yMinPx;
 
-    if (event.nativeEvent.target.id === 'initialSpace') {
+    if (event.nativeEvent.target.id === 'initialSpace'  || event.nativeEvent.target.id === 'mainPanel') {
       positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
       positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
 
@@ -660,7 +660,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     }
   };
 
-  private getCoordinatesToDrawIncurvedOrientedLinkWithClick = (event: any) => {
+  getCoordinatesToDrawIncurvedOrientedLinkWithClick = (event: any) => {
     let positionX = 0;
     let positionY = 0;
     const coordinates = this.props.options.coordinatesToDrawLinkWithClick;
@@ -681,10 +681,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     const yMaxPx: number = (yMax + 100) * (heightPanel / 200);
     const heightInitialSpace: number = yMaxPx - yMinPx;
 
-    if (
-      //event.nativeEvent.target.id === 'mainPanel' ||
-      event.nativeEvent.target.id === 'initialSpace'
-    ) {
+    if (event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'initialSpace') {
       positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
       positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
 
@@ -801,7 +798,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     }
   };
 
-  // private defineAssociateOrientedLinkToRegion(): OrientedLinkClass[] {
+  // defineAssociateOrientedLinkToRegion(): OrientedLinkClass[] {
   // 	const arrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
   // 	const arrayAllOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
   // 	const arrayOrientedLinkAssociateRegionIn: OrientedLinkClass[] = [];
@@ -828,7 +825,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * to do
    */
-  private defineIdOrientedLink = (): number => {
+  defineIdOrientedLink = (): number => {
     let id = 1;
     if (this.props.options.arrayOrientedLinks.length === 0) {
       return id;
@@ -841,7 +838,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * to do
    */
-  private createOrientedLinkToClick = (isIncurved: SelectableValue<boolean>) => {
+  createOrientedLinkToClick = (isIncurved: SelectableValue<boolean>) => {
     const coordinates = this.props.options.coordinatesToDrawLinkWithClick;
     const id: number = this.defineIdOrientedLink();
     const name: string = 'orientedLink' + id.toString();
@@ -940,7 +937,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * to do
    */
-  private displayOrientedLink() {
+  displayOrientedLink() {
     const arrayOrientedLink = this.props.options.arrayOrientedLinks;
     const mapItems: JSX.Element[] = [];
     let item: JSX.Element = <div></div>;
@@ -1000,14 +997,14 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * to do
    */
-  private getValuesMainMetricOfPoint(point: PointClass) {
+  getValuesMainMetricOfPoint(point: PointClass) {
     reqMetricPoint(point, this.props);
     this.getValuesMainMetric(point.mainMetric, undefined, point);
     // const value: number | null = getResultQuery(point.mainMetric);
     // point.valueMetric = value ? value.toString() : '-';
   }
 
-  private getValuesMainMetricOfOrientedLink(orientedLink: OrientedLinkClass) {
+  getValuesMainMetricOfOrientedLink(orientedLink: OrientedLinkClass) {
     reqMetricOrientedLink(orientedLink, this.props);
     this.getValuesMainMetric(orientedLink.mainMetric, orientedLink, undefined);
   }
@@ -1015,7 +1012,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * to do
    */
-  private getValuesMainMetric(mainMetric: Metric, orientedLink?: OrientedLinkClass, point?: PointClass) {
+  getValuesMainMetric(mainMetric: Metric, orientedLink?: OrientedLinkClass, point?: PointClass) {
     let valueMainMetric = 0;
     let totalValuesCount = 0;
 
@@ -1094,17 +1091,17 @@ export class SimplePanel extends PureComponent<Props, State> {
     }
   }
 
-  private getValuesAuxiliaryMetricsPoint = (point: PointClass): string[] => {
+  getValuesAuxiliaryMetricsPoint = (point: PointClass): string[] => {
     reqMetricAuxPoint(point, this.props);
     return this.getValuesAuxiliaryMetrics(point.metrics, point.mainMetric);
   };
 
-  private getValuesAuxiliaryMetricsOrientedLink = (orientedLink: OrientedLinkClass): string[] => {
+  getValuesAuxiliaryMetricsOrientedLink = (orientedLink: OrientedLinkClass): string[] => {
     reqMetricAuxOrientedLink(orientedLink, this.props);
     return this.getValuesAuxiliaryMetrics(orientedLink.metrics, orientedLink.mainMetric);
   };
 
-  private getValuesAuxiliaryMetrics = (auxiliaryMetrics: Metric[], mainMatric: Metric): string[] => {
+  getValuesAuxiliaryMetrics = (auxiliaryMetrics: Metric[], mainMatric: Metric): string[] => {
     let valueAuxiliaryMetric: string[] = [];
 
     auxiliaryMetrics.forEach((metric: Metric) => {
@@ -1159,11 +1156,10 @@ export class SimplePanel extends PureComponent<Props, State> {
         valueAuxiliaryMetric.push(result);
       }
     });
-    console.log(valueAuxiliaryMetric);
     return valueAuxiliaryMetric;
   };
 
-  // private defineAssociateLinksToPoint() {
+  // defineAssociateLinksToPoint() {
   // 	const arrayAssociateLinks = this.props.options.arrayLinks;
   // 	const arrayPoints = this.props.options.arrayPoints;
 
@@ -1182,7 +1178,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   // 	});
   // }
 
-  // private defineAssociateOrientedLinksToPoint() {
+  // defineAssociateOrientedLinksToPoint() {
   // 	const arrayOrientedLinks = this.props.options.arrayOrientedLinks;
   // 	const arrayPoints = this.props.options.arrayPoints;
 
@@ -1201,32 +1197,33 @@ export class SimplePanel extends PureComponent<Props, State> {
   // 	});
   // }
 
-  private changeValueButtonToLink = () => {
+  changeValueButtonToLink = () => {
     this.setState({
       valueButton: 'link',
     });
   };
 
-  private changeValueButtonToIncurvedLink = () => {
+  changeValueButtonToIncurvedLink = () => {
     this.setState({
       valueButton: 'incurvedLink',
     });
   };
 
-  private changeValueButtonToPoint = () => {
+  changeValueButtonToPoint = () => {
     this.setState({
       valueButton: 'point',
     });
   };
 
-  // private changeDisplayButtonlegend = () => {
+  // changeDisplayButtonlegend = () => {
   // 	this.setState({
   // 		valueLegend: <div></div>,
   // 	});
   // }
 
-  private getCoordinates = (event: any) => {
+  getCoordinates = (event: any) => {
     const valueButton = this.state.valueButton;
+
     if (this.state.numberClickDiv === 0) {
       return;
     }
@@ -1242,7 +1239,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * add button click to manage region, point, oriented link, position legend
    */
-  private updateButtonCss = () => {
+  updateButtonCss = () => {
     const final: JSX.Element = (
       <div id="allButton">
         <Button style={{ marginLeft: '5%' }} variant={this.state.buttonManage[0] ? 'danger' : 'primary'} className="button" onClick={this.addNode}>
@@ -1281,7 +1278,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     });
   };
 
-  // private display_Button = () => {
+  // display_Button = () => {
   // 	const ultracall = document.getElementById('allButton');
   // 	ultracall?.addEventListener('click', () => {
   // 		ultracall.style.display = 'inline-block';
@@ -1289,7 +1286,7 @@ export class SimplePanel extends PureComponent<Props, State> {
 
   // }
 
-  private callMethod = async () => {
+  callMethod = async () => {
     if (this.state.numberClickDiv === 0) {
       this.setState({ numberClickDiv: 1 });
     } else {
@@ -1303,13 +1300,13 @@ export class SimplePanel extends PureComponent<Props, State> {
     }
   };
 
-  private setAsyncButtonManage = (state: { buttonManage: boolean[] }) => {
+  setAsyncButtonManage = (state: { buttonManage: boolean[] }) => {
     return new Promise(resolve => {
       this.setState(state, resolve);
     });
   };
 
-  private resetButtonManage = async (index: number) => {
+  resetButtonManage = async (index: number) => {
     let tmp: boolean[] = this.state.buttonManage;
     const oldValue: boolean = tmp[index];
 
@@ -1331,7 +1328,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     this.updateButtonCss();
   };
 
-  private addNode = () => {
+  addNode = () => {
     this.setState((prevState: State) => ({
       nbClickButton: prevState.buttonManage[0] ? false : true,
     }));
@@ -1339,7 +1336,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     this.changeValueButtonToPoint();
   };
 
-  private addPoint = () => {
+  addPoint = () => {
     this.setState((prevState: State) => ({
       nbClickButton: prevState.buttonManage[3] ? false : true,
       valueButton: 'point',
@@ -1348,7 +1345,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     this.changeValueButtonToPoint();
   };
 
-  private addLink = () => {
+  addLink = () => {
     this.setState((prevState: State) => ({
       nbClickButton: prevState.buttonManage[1] ? false : true,
     }));
@@ -1356,7 +1353,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     this.changeValueButtonToLink();
   };
 
-  private addIncurvedLink = () => {
+  addIncurvedLink = () => {
     this.setState((prevState: State) => ({
       nbClickButton: prevState.buttonManage[4] ? false : true,
     }));
@@ -1364,7 +1361,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     this.changeValueButtonToIncurvedLink();
   };
 
-  private positionLegend = (e: any) => {
+  positionLegend = (e: any) => {
     if (!this.state.buttonManage[2]) {
       return;
     }
@@ -1390,7 +1387,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   };
 
   // Close legend click on close
-  private handleClick = (event: any): void => {
+  handleClick = (event: any): void => {
     const newLegend: Legend = this.state.legend;
 
     newLegend.hiddenLegend = !this.state.legend.hiddenLegend;
@@ -1407,7 +1404,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     }
   };
 
-  private chargeRegion = () => {
+  chargeRegion = () => {
     this.setState({
       displayRegion: (
         <DrawRectangle
@@ -1424,7 +1421,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     });
   };
 
-  private editIdString = (str: string): string => {
+  editIdString = (str: string): string => {
     const cpyString: string = str.slice();
     let strSplit: string[] = cpyString.split('id="');
     let newStr = '';
@@ -1444,8 +1441,8 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * update button css when mount component
    */
-  componentDidMount() {
-    if (this.props.options.baseMap.modeSVG) {
+  componentDidMount = async () => {
+    if (this.props.options.baseMap.modeSVG && this.props.options.baseMap.image !== '') {
       fetch(this.props.options.baseMap.image)
         .then(res => res.text())
         .then(text => {
@@ -1479,16 +1476,15 @@ export class SimplePanel extends PureComponent<Props, State> {
         });
     }
     this.updateButtonCss();
-  }
+  };
 
   componentDidUpdate(prevProps: Props) {
     if (this.props.options.baseMap.image !== prevProps.options.baseMap.image) {
       this.componentDidMount();
     }
     if (this.props !== prevProps) {
-      // console.log('am here');
       this.chargeRegion();
-      // this.forceUpdate();
+      // console.log(this.props.options.displayButton);
     }
   }
 
@@ -1555,159 +1551,9 @@ export class SimplePanel extends PureComponent<Props, State> {
     });
   };
 
-  // var myicon = document.getElementById("myicon");
-  // var mypopup = document.getElementById("mypopup");
-
-  // myicon.addEventListener("mouseover", showPopup);
-  // myicon.addEventListener("mouseout", hidePopup);
-
-  // function showPopup(evt) {
-  // 	var iconPos = myicon.getBoundingClientRect();
-  // 	mypopup.style.left = (iconPos.right + 20) + "px";
-  // 	mypopup.style.top = (window.scrollY + iconPos.top - 60) + "px";
-  // 	mypopup.style.display = "block";
-  // }
-
-  // function hidePopup(evt) {
-  // 	mypopup.style.display = "none";
-  // }
-
-  // Test in SVG image tooltip computer
-
-  // 	private tooltip_SVGImage = () => {
-
-  // 		const matigoal = document.getElementById('Glasses');
-
-  // 		matigoal?.addEventListener('mouseenter', () => {
-  // 			matigoal.addEventListener('mouseover', () => {
-  // 				const tooltip = document.createElement('span');
-  // 				const texttest = document.createTextNode('salut');
-  // 				tooltip.appendChild(texttest);
-  // 				tooltip.getBoundingClientRect();
-  // 				console.log(tooltip);
-  // 				matigoal.appendChild(tooltip).style.position = 'absolute';
-  // 				matigoal.appendChild(tooltip).style.backgroundColor = '#000000';
-  // 				matigoal.appendChild(tooltip).style.padding = '8px';
-  // 				matigoal.appendChild(tooltip).style.float = 'right';
-  // 				matigoal.appendChild(tooltip).style.color = '#d8d9da';
-  // 				matigoal.appendChild(tooltip).style.boxShadow = '0 0 2px rgba(0, 0, 0, 0.5)';
-  // 				matigoal.appendChild(tooltip).style.borderRadius = '2px';
-  // 				matigoal.appendChild(tooltip).style.fontWeight = '500';
-  // 				matigoal.addEventListener('mouseout', () => {
-  // 					matigoal.appendChild(tooltip).style.visibility = 'hidden';
-
-  // 				});
-  // 			});
-  // 		});
-  // 	}
-
-  // function svgTip(opts) {
-  // 	opts = opts || {};
-  // 	opts.fontsize = opts.fontsize || '12px';
-  // 	opts.padding = opts.padding || '.5rem';
-  // 	opts.bgcolor = opts.bgcolor || '#000';
-  // 	opts.color = opts.color || '#fff';
-  // 	opts.opacity = opts.opacity || 0.6;
-  // 	$.each($('[title]', 'svg'), function (id, obj) {
-  // 		var tt = $(this).attr('title'), that = $('<div class=\'svgtip\'>' + tt + '</div>');
-  // 		that.css({
-  // 			'position': 'absolute',
-  // 			'top': 0,
-  // 			'left': 0,
-  // 			'display': 'none',
-  // 			'background-color': opts.bgcolor,
-  // 			'color': opts.color,
-  // 			'padding': opts.padding,
-  // 			'font-size': opts.fontsize,
-  // 			'opacity': opts.opacity,
-  // 			'pointer-events': 'none'
-  // 		});
-  // 		$(this).hover(function (event) {
-  // 			that.css({
-  // 				'left': event.clientX,
-  // 				'top': event.clientY + $(window).scrollTop()
-  // 			});
-  // 			that.addClass('active');
-  // 			that.show();
-  // 		}, function () {
-  // 			that.hide();
-  // 			that.removeClass('active');
-  // 		});
-  // 		$(this).on('mousemove', function (event) {
-  // 			if (that.hasClass('active')) {
-  // 				that.css({
-  // 					'left': event.clientX,
-  // 					'top': event.clientY + $(window).scrollTop() - that.height()
-  // 				});
-  // 			}
-  // 		});
-  // 		$('body').append(that);
-  // 	});
-  // }
-  // new svgTip({
-  // 	fontsize: '11px',
-  // 	padding: '10px'
-  // });
-  // function lll(msg) {
-  // 	$('#debug').append(msg + '
-  // ');
-  // }
-
-  // 	private TooltipText = (e) => {
-  // 		const targetXtext = document.getElementById('path141');
-  // 		const targetYtext = document.getElementById('rect167');
-
-  // 		const XPos = e.getClientX();
-  // 		const YPos = e.getClientY();
-
-  // 		const newXPosText = document.createTextNode('X Position : ' + XPos);
-  // 		const newYPosText = document.createTextNode('Y Position : ' + YPos);
-
-  // 		targetXtext?.replaceChild(newXPosText, targetXtext.getFirstChild());
-  // 		targetYtext?.replaceChild(newYPosText, targetYtext.getFirstChild());
-  // 	}
-  // private testpart1 =(e)=> {
-  // 	const targetXtext = document.getElementById('XPos');
-  // 		const targetYtext = document.getElementById('YPos');
-
-  // 	const newXPosText = document.createTextNode('X Position : Not over Rectangle');
-  // 	const newYPosText = document.createTextNode('Y Position : Not over Rectangle');
-
-  // 	targetXtext?.replaceChild(newXPosText, targetXtext.getFirstChild());
-  // 	targetYtext?.replaceChild(newYPosText, targetYtext.getFirstChild());
-  // }
-  // private testpart2 = (e) => {
-  // const targetClickText = document.getElementById('ClickPos');
-
-  // 	const XPos = evt.getClientX();
-  // 	const YPos = evt.getClientY();
-
-  // 	const newClickText = document.createTextNode('Last Click made at X=' + XPos + ' Y=' + YPos);
-
-  // 	targetClickText?.replaceChild(newClickText,
-  // 		targetClickText.getFirstChild());
-  // }
-
-  /*************************************** URL change display render ***************************************************/
-
-  // private display_Button = () => {
-  // 	if (window.location.href.indexOf('http://localhost:3000/d/1UbTeXXWk/test_fix?panelId=2&fullscreen&tab=visualization&orgId=1') > -1) {
-
-  // 		document.onvisibilitychange
-  // 		// appearB?.style.visibility = 'hidden';
-  // 	}
-  // 	else {
-  // 		// show button
-  // 		 document.getElementById('allButton');
-  // 		// disappearB?.style.visibility = 'visible';
-  // 	}
-  // }
-
-  /***************************************URL change display render************************** *********************/
-
   /*************************************test create tooltip **********************************************************/
 
-  private SVG_PathImage = () => {
+  SVG_PathImage = () => {
     // const idSVG: HTMLElement | null = document.getElementById('oct' + this.props.options.baseMap.idSVG);
     // if (idSVG) {
     // 	idSVG.style.zIndex = '300';
@@ -1758,46 +1604,42 @@ export class SimplePanel extends PureComponent<Props, State> {
       styleBackground = {
         position: 'absolute',
         textAlign: 'center',
-        top: '15%',
         backgroundRepeat: 'no-repeat',
         height: this.props.options.baseMap.height + 'px',
         width: this.props.options.baseMap.width + 'px',
         opacity: 0.8,
-        // zIndex: 20,
+        zIndex: 4,
       } as React.CSSProperties;
     } else {
       styleBackground = {
         position: 'absolute',
         textAlign: 'center',
-        top: '15%',
         backgroundRepeat: 'no-repeat',
         backgroundImage: 'url(' + this.props.options.baseMap.image + ')',
         backgroundSize: this.props.options.baseMap.width + 'px' + ' ' + this.props.options.baseMap.height + 'px',
         height: this.props.options.baseMap.height + 'px',
         width: this.props.options.baseMap.width + 'px',
         opacity: 0.8,
-        zIndex: 20,
+        zIndex: 4,
       } as React.CSSProperties;
     }
 
     const styleSVG = {
       position: 'absolute',
-      top: '15%',
 
-      zIndex: 5,
+      zIndex: 2,
     } as React.CSSProperties;
 
     const styleSVG_2 = {
       position: 'absolute',
       textAlign: 'center',
-      top: '15%',
       backgroundRepeat: 'no-repeat',
       height: this.props.options.baseMap.height + 'px',
       width: this.props.options.baseMap.width + 'px',
       // opacity: 0.8,
       // zIndex: 20,
       opacity: 0,
-      zIndex: 50,
+      zIndex: 3,
       // backgroundColor: 'red',
       // marginLeft: '20%',
     } as React.CSSProperties;
@@ -1812,15 +1654,10 @@ export class SimplePanel extends PureComponent<Props, State> {
       fontWeight: this.props.options.display.style === 'bold' ? 'bold' : 'normal',
     } as React.CSSProperties;
 
-    // console.log(this.props.data);
-    // console.log(this.props.data.timeRange.);
-    // console.log(this.props.options.regionCoordinateSpace);
-
     return (
       <CustomScrollbar autoHide={false} hideHorizontalTrack>
         <div style={{ textAlign: 'left', position: 'relative', display: 'inline-grid' }}>
-          {this.state.allActionButton}
-          {this.props.options.displayButton}
+          {this.props.options.displayButton && this.state.allActionButton}
         </div>
         <section style={defaultStyle} onClick={this.positionLegend}>
           <div>
@@ -1850,171 +1687,30 @@ export class SimplePanel extends PureComponent<Props, State> {
               data={this.props.data}
               callBack={this.handleClick}
             />
-            {/* <div style={{
-							position: 'relative',
-							left: this.state.legend.x,
-							top: this.state.legend.y,
-							maxWidth: '100%',
-							zIndex: 'auto',
-						}} hidden={this.state.legend.hiddenLegend}>
-							<article
-								style={{
-									width: '250px',
-									position: 'absolute',
-									overflowY: 'scroll',
-									marginLeft: '20%',
-									marginRight: '20%',
-									marginTop: '20%',
-									marginBottom: '20%',
-									border: '5px solid aliceblue',
-									height: '40%',
-
-								}}>
-									<Modal title='Add Region'
-										onDismiss={this.addNode}
-										onClickBackdrop={this.addNode}
-										isOpen={this.state.nbClickButton} >
-										<AddCoordinate options={this.props.options}
-											onOptionsChange={this.props.onOptionsChange}
-											data={this.props.data} />
-									</Modal>
-								</div>
-							}
-							{
-								this.state.buttonManage[2] &&
-
-								<div></div>
-							}
-							{/* <Legend
-							options={this.props.options}
-							onOptionsChange={this.props.onOptionsChange}
-							data={this.props.data}
-							callBack={this.handleClick} 
-						
-							/> */}
-            <div
-              style={{
-                position: 'relative',
-                left: this.state.legend.x,
-                top: this.state.legend.y,
-                maxWidth: '100%',
-                zIndex: 'auto',
-              }}
-              hidden={this.state.legend.hiddenLegend}
-            >
-              <article
-                style={{
-                  width: '170px',
-                  position: 'absolute',
-                  overflowY: 'scroll',
-                  margin: '0',
-                  height: '220px',
-                  backgroundColor: '#FFF',
-                  color: '#000',
-                  border: '4px solid #299c46',
-                  borderRadius: '4px',
-                  scrollbarColor: '#09090b #212124',
-                  scrollbarWidth: 'none',
-                  zIndex: 9999,
-                }}
-              >
-                <div style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
-                  <h5 style={{ width: '100%', fontSize: '20px', display: 'inline-flex' }}>
-                    Legend
-                    <i
-                      style={{
-                        position: 'absolute',
-                        marginLeft: '87%',
-                      }}
-                      className="fa fa-close"
-                      onClick={this.handleClick}
-                    ></i>
-                  </h5>
-                  <p style={{ color: '#d8d9da', fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p>
-                  <p style={{ color: '#d8d9da', fontSize: '11px', marginLeft: '17px' }}>Label</p>
-                </div>
-                <ul>
-                  <li className="LegendMatt">
-                    <span
-                      style={{
-                        padding: 4,
-                        margin: 9,
-                        width: '3.5rem',
-
-                        backgroundColor: '#B3B9BF',
-                        border: '3px solid #299c46',
-                        listStyleType: 'none',
-                        display: 'inline-block',
-                      }}
-                    ></span>
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        verticalAlign: 'middle',
-                        marginBottom: '1.25rem',
-                        fontSize: '9px',
-                      }}
-                    >
-                      0-0%
-                    </span>
-                  </li>
-                  tooltip_SVGImage
-                  <li className="LegendMatt">
-                    <span
-                      style={{
-                        padding: 4,
-                        margin: 9,
-                        width: '3.5rem',
-                        borderRadius: '39%',
-                        backgroundColor: 'red',
-                        border: '3px solid yellow',
-                        listStyleType: 'none',
-                        display: 'inline-block',
-                      }}
-                    ></span>
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        verticalAlign: 'middle',
-                        marginBottom: '1.25rem',
-                        fontSize: '9px',
-                      }}
-                    >
-                      No Variable
-                    </span>
-                  </li>
-                </ul>
-                <p style={{ fontSize: '15px', marginLeft: '10px' }}>Point</p>
-              </article>
-            </div>
             <div onClick={this.callMethod}></div>
             <div>
               <div className="tooltip" />
-              <div
-                style={styleSVG} // onMouseOver={this.SVG_PathImage}
-                dangerouslySetInnerHTML={{ __html: this.state.svg }}
-              />
-              <div
-                id="Intent"
-                style={styleSVG_2}
-                onMouseOver={this.SVG_PathImage}
-                dangerouslySetInnerHTML={{ __html: this.props.options.baseMap.layerImage }}
-              />
-              {/* <div id='Glasses' style={styleSVG_2}
-							onMouseMove={this.tooltip_SVGImage } dangerouslySetInnerHTML={{ __html: this.state.svg }} /> */}
-
-              <div onClick={this.getCoordinates} style={styleBackground} id="mainPanel">
-                {/* <Tooltip placement="top" content='hello World' theme='info' children={}  /> */}
-                {
-                  // this.defineLimit()
-                }
-                <div>
-                  <br />
-                  {this.displayPoint()}
+              <div onClick={this.getCoordinates} id="mainPanel" style={{ position: 'absolute', top: '15%', zIndex: 1 }}>
+                <div
+                  style={styleSVG} // onMouseOver={this.SVG_PathImage}
+                  dangerouslySetInnerHTML={{ __html: this.state.svg }}
+                />
+                <div
+                  id="Intent"
+                  style={styleSVG_2}
+                  onMouseOver={this.SVG_PathImage}
+                  dangerouslySetInnerHTML={{ __html: this.props.options.baseMap.layerImage }}
+                />
+                {/* <div id='Glasses' style={styleSVG_2}
+                onMouseMove={this.tooltip_SVGImage } dangerouslySetInnerHTML={{ __html: this.state.svg }} /> */}
+                <div id="coordinateSpaces" style={styleBackground}>
+                  {/* <Tooltip placement="top" content='hello World' theme='info' children={}  />
+                  {this.defineLimit()} */}
                   {this.displayOrientedLink()}
+                  {this.state.displayRegion}
+                  {this.displayPoint()}
                 </div>
               </div>
-              {this.state.displayRegion}
             </div>
           </div>
         </section>

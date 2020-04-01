@@ -1614,7 +1614,10 @@ var InputSeriesColorPicker = function InputSeriesColorPicker(_a) {
   }, text), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     id: "colorPicker",
     style: {
-      margin: '1%'
+      margin: '0.5%',
+      padding: '0.5%',
+      backgroundColor: '#1f1f20',
+      border: '3px solid black'
     }
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_0__["ColorPicker"], {
     color: color,
@@ -4416,6 +4419,58 @@ function (_super) {
       });
     };
 
+    _this.componentDidMount = function () {
+      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
+        var _this = this;
+
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+          switch (_a.label) {
+            case 0:
+              return [4
+              /*yield*/
+              , Promise.resolve('Success').then(function () {
+                _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+                  displayButton: true
+                }));
+              })];
+
+            case 1:
+              _a.sent();
+
+              return [2
+              /*return*/
+              ];
+          }
+        });
+      });
+    };
+
+    _this.componentWillUnmount = function () {
+      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
+        var _this = this;
+
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+          switch (_a.label) {
+            case 0:
+              return [4
+              /*yield*/
+              , Promise.resolve('Success').then(function () {
+                _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+                  displayButton: false
+                }));
+              })];
+
+            case 1:
+              _a.sent();
+
+              return [2
+              /*return*/
+              ];
+          }
+        });
+      });
+    };
+
     _this.state = {
       collapseDashboardData: false,
       collapsePanelData: false,
@@ -4607,7 +4662,7 @@ function (_super) {
     /**
      * TODO
      */
-    // private fillCoordinate = (): JSX.Element => {
+    // fillCoordinate = (): JSX.Element => {
     // 	const { options } = this.props;
     // 	let mapItems: JSX.Element[];
     // 	mapItems = options.regionCoordinateSpace
@@ -4671,13 +4726,12 @@ function (_super) {
       var yMinPx = (yMin + 100) * (heightPanel / 200);
       var yMax = parseInt(initialSpace.yMax, 10);
       var yMaxPx = (yMax + 100) * (heightPanel / 200);
-      var heightInitialSpace = yMaxPx - yMinPx; //positionX = Math.round(((event.nativeEvent.offsetX) - (widthPanel / 2)) * (100 / widthPanel)) * 2;
-      //positionY = (Math.round(((event.nativeEvent.offsetY) - (heightPanel / 2)) * (100 / heightPanel)) * 2) * (-1);
-
+      var heightInitialSpace = yMaxPx - yMinPx;
       positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
       positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1;
 
       if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'mainPanel') {
+        //event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG) {
         _this.createPointToClick(positionX, positionY);
       }
     };
@@ -4908,7 +4962,7 @@ function (_super) {
       var yMaxPx = (yMax + 100) * (heightPanel / 200);
       var heightInitialSpace = yMaxPx - yMinPx;
 
-      if (event.nativeEvent.target.id === 'initialSpace') {
+      if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'mainPanel') {
         positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
         positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
 
@@ -5058,8 +5112,7 @@ function (_super) {
       var yMaxPx = (yMax + 100) * (heightPanel / 200);
       var heightInitialSpace = yMaxPx - yMinPx;
 
-      if ( //event.nativeEvent.target.id === 'mainPanel' ||
-      event.nativeEvent.target.id === 'initialSpace') {
+      if (event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'initialSpace') {
         positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
         positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
 
@@ -5194,7 +5247,7 @@ function (_super) {
           }
         });
       }
-    }; // private defineAssociateOrientedLinkToRegion(): OrientedLinkClass[] {
+    }; // defineAssociateOrientedLinkToRegion(): OrientedLinkClass[] {
     // 	const arrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
     // 	const arrayAllOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
     // 	const arrayOrientedLinkAssociateRegionIn: OrientedLinkClass[] = [];
@@ -5368,9 +5421,8 @@ function (_super) {
           valueAuxiliaryMetric.push(result);
         }
       });
-      console.log(valueAuxiliaryMetric);
       return valueAuxiliaryMetric;
-    }; // private defineAssociateLinksToPoint() {
+    }; // defineAssociateLinksToPoint() {
     // 	const arrayAssociateLinks = this.props.options.arrayLinks;
     // 	const arrayPoints = this.props.options.arrayPoints;
     // 	arrayPoints.forEach((point) => {
@@ -5387,7 +5439,7 @@ function (_super) {
     // 		});
     // 	});
     // }
-    // private defineAssociateOrientedLinksToPoint() {
+    // defineAssociateOrientedLinksToPoint() {
     // 	const arrayOrientedLinks = this.props.options.arrayOrientedLinks;
     // 	const arrayPoints = this.props.options.arrayPoints;
     // 	arrayPoints.forEach((point) => {
@@ -5422,7 +5474,7 @@ function (_super) {
       _this.setState({
         valueButton: 'point'
       });
-    }; // private changeDisplayButtonlegend = () => {
+    }; // changeDisplayButtonlegend = () => {
     // 	this.setState({
     // 		valueLegend: <div></div>,
     // 	});
@@ -5494,7 +5546,7 @@ function (_super) {
       _this.setState({
         allActionButton: _final
       });
-    }; // private display_Button = () => {
+    }; // display_Button = () => {
     // 	const ultracall = document.getElementById('allButton');
     // 	ultracall?.addEventListener('click', () => {
     // 		ultracall.style.display = 'inline-block';
@@ -5711,6 +5763,65 @@ function (_super) {
       }
 
       return newStr;
+    };
+    /**
+     * update button css when mount component
+     */
+
+
+    _this.componentDidMount = function () {
+      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
+        var _this = this;
+
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+          if (this.props.options.baseMap.modeSVG && this.props.options.baseMap.image !== '') {
+            fetch(this.props.options.baseMap.image).then(function (res) {
+              return res.text();
+            }).then(function (text) {
+              _this.setState({
+                svg: text
+              });
+
+              var result = /id=["']\w*["']/i.exec(text);
+
+              if (result && result.length > 0) {
+                var id = result[0].split('"');
+
+                if (id.length > 1) {
+                  var documentId = document.getElementById(id[1]);
+
+                  if (documentId) {
+                    var newBaseMap = _this.props.options.baseMap;
+                    newBaseMap.idSVG = id[1];
+                    newBaseMap.width = documentId.getAttribute('width') || '';
+                    newBaseMap.height = documentId.getAttribute('height') || '';
+
+                    _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+                      baseMap: newBaseMap
+                    }));
+                  }
+                }
+              }
+            }).then(function () {
+              return _this.chargeRegion();
+            }).then(function () {
+              var newStr = _this.editIdString(_this.state.svg);
+
+              var background = _this.props.options.baseMap;
+              background.layerImage = newStr;
+
+              _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+                baseMap: background
+              }));
+            });
+          }
+
+          this.updateButtonCss();
+          return [2
+          /*return*/
+          ];
+        });
+      });
     }; // Tooltip in Svg
 
 
@@ -5778,136 +5889,7 @@ function (_super) {
           });
         });
       });
-    }; // var myicon = document.getElementById("myicon");
-    // var mypopup = document.getElementById("mypopup");
-    // myicon.addEventListener("mouseover", showPopup);
-    // myicon.addEventListener("mouseout", hidePopup);
-    // function showPopup(evt) {
-    // 	var iconPos = myicon.getBoundingClientRect();
-    // 	mypopup.style.left = (iconPos.right + 20) + "px";
-    // 	mypopup.style.top = (window.scrollY + iconPos.top - 60) + "px";
-    // 	mypopup.style.display = "block";
-    // }
-    // function hidePopup(evt) {
-    // 	mypopup.style.display = "none";
-    // }
-    // Test in SVG image tooltip computer
-    // 	private tooltip_SVGImage = () => {
-    // 		const matigoal = document.getElementById('Glasses');
-    // 		matigoal?.addEventListener('mouseenter', () => {
-    // 			matigoal.addEventListener('mouseover', () => {
-    // 				const tooltip = document.createElement('span');
-    // 				const texttest = document.createTextNode('salut');
-    // 				tooltip.appendChild(texttest);
-    // 				tooltip.getBoundingClientRect();
-    // 				console.log(tooltip);
-    // 				matigoal.appendChild(tooltip).style.position = 'absolute';
-    // 				matigoal.appendChild(tooltip).style.backgroundColor = '#000000';
-    // 				matigoal.appendChild(tooltip).style.padding = '8px';
-    // 				matigoal.appendChild(tooltip).style.float = 'right';
-    // 				matigoal.appendChild(tooltip).style.color = '#d8d9da';
-    // 				matigoal.appendChild(tooltip).style.boxShadow = '0 0 2px rgba(0, 0, 0, 0.5)';
-    // 				matigoal.appendChild(tooltip).style.borderRadius = '2px';
-    // 				matigoal.appendChild(tooltip).style.fontWeight = '500';
-    // 				matigoal.addEventListener('mouseout', () => {
-    // 					matigoal.appendChild(tooltip).style.visibility = 'hidden';
-    // 				});
-    // 			});
-    // 		});
-    // 	}
-    // function svgTip(opts) {
-    // 	opts = opts || {};
-    // 	opts.fontsize = opts.fontsize || '12px';
-    // 	opts.padding = opts.padding || '.5rem';
-    // 	opts.bgcolor = opts.bgcolor || '#000';
-    // 	opts.color = opts.color || '#fff';
-    // 	opts.opacity = opts.opacity || 0.6;
-    // 	$.each($('[title]', 'svg'), function (id, obj) {
-    // 		var tt = $(this).attr('title'), that = $('<div class=\'svgtip\'>' + tt + '</div>');
-    // 		that.css({
-    // 			'position': 'absolute',
-    // 			'top': 0,
-    // 			'left': 0,
-    // 			'display': 'none',
-    // 			'background-color': opts.bgcolor,
-    // 			'color': opts.color,
-    // 			'padding': opts.padding,
-    // 			'font-size': opts.fontsize,
-    // 			'opacity': opts.opacity,
-    // 			'pointer-events': 'none'
-    // 		});
-    // 		$(this).hover(function (event) {
-    // 			that.css({
-    // 				'left': event.clientX,
-    // 				'top': event.clientY + $(window).scrollTop()
-    // 			});
-    // 			that.addClass('active');
-    // 			that.show();
-    // 		}, function () {
-    // 			that.hide();
-    // 			that.removeClass('active');
-    // 		});
-    // 		$(this).on('mousemove', function (event) {
-    // 			if (that.hasClass('active')) {
-    // 				that.css({
-    // 					'left': event.clientX,
-    // 					'top': event.clientY + $(window).scrollTop() - that.height()
-    // 				});
-    // 			}
-    // 		});
-    // 		$('body').append(that);
-    // 	});
-    // }
-    // new svgTip({
-    // 	fontsize: '11px',
-    // 	padding: '10px'
-    // });
-    // function lll(msg) {
-    // 	$('#debug').append(msg + '
-    // ');
-    // }
-    // 	private TooltipText = (e) => {
-    // 		const targetXtext = document.getElementById('path141');
-    // 		const targetYtext = document.getElementById('rect167');
-    // 		const XPos = e.getClientX();
-    // 		const YPos = e.getClientY();
-    // 		const newXPosText = document.createTextNode('X Position : ' + XPos);
-    // 		const newYPosText = document.createTextNode('Y Position : ' + YPos);
-    // 		targetXtext?.replaceChild(newXPosText, targetXtext.getFirstChild());
-    // 		targetYtext?.replaceChild(newYPosText, targetYtext.getFirstChild());
-    // 	}
-    // private testpart1 =(e)=> {
-    // 	const targetXtext = document.getElementById('XPos');
-    // 		const targetYtext = document.getElementById('YPos');
-    // 	const newXPosText = document.createTextNode('X Position : Not over Rectangle');
-    // 	const newYPosText = document.createTextNode('Y Position : Not over Rectangle');
-    // 	targetXtext?.replaceChild(newXPosText, targetXtext.getFirstChild());
-    // 	targetYtext?.replaceChild(newYPosText, targetYtext.getFirstChild());
-    // }
-    // private testpart2 = (e) => {
-    // const targetClickText = document.getElementById('ClickPos');
-    // 	const XPos = evt.getClientX();
-    // 	const YPos = evt.getClientY();
-    // 	const newClickText = document.createTextNode('Last Click made at X=' + XPos + ' Y=' + YPos);
-    // 	targetClickText?.replaceChild(newClickText,
-    // 		targetClickText.getFirstChild());
-    // }
-
-    /*************************************** URL change display render ***************************************************/
-    // private display_Button = () => {
-    // 	if (window.location.href.indexOf('http://localhost:3000/d/1UbTeXXWk/test_fix?panelId=2&fullscreen&tab=visualization&orgId=1') > -1) {
-    // 		document.onvisibilitychange
-    // 		// appearB?.style.visibility = 'hidden';
-    // 	}
-    // 	else {
-    // 		// show button
-    // 		 document.getElementById('allButton');
-    // 		// disappearB?.style.visibility = 'visible';
-    // 	}
-    // }
-
-    /***************************************URL change display render************************** *********************/
-
+    };
     /*************************************test create tooltip **********************************************************/
 
 
@@ -6303,58 +6285,6 @@ function (_super) {
       });
     }
   };
-  /**
-   * update button css when mount component
-   */
-
-
-  SimplePanel.prototype.componentDidMount = function () {
-    var _this = this;
-
-    if (this.props.options.baseMap.modeSVG) {
-      fetch(this.props.options.baseMap.image).then(function (res) {
-        return res.text();
-      }).then(function (text) {
-        _this.setState({
-          svg: text
-        });
-
-        var result = /id=["']\w*["']/i.exec(text);
-
-        if (result && result.length > 0) {
-          var id = result[0].split('"');
-
-          if (id.length > 1) {
-            var documentId = document.getElementById(id[1]);
-
-            if (documentId) {
-              var newBaseMap = _this.props.options.baseMap;
-              newBaseMap.idSVG = id[1];
-              newBaseMap.width = documentId.getAttribute('width') || '';
-              newBaseMap.height = documentId.getAttribute('height') || '';
-
-              _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-                baseMap: newBaseMap
-              }));
-            }
-          }
-        }
-      }).then(function () {
-        return _this.chargeRegion();
-      }).then(function () {
-        var newStr = _this.editIdString(_this.state.svg);
-
-        var background = _this.props.options.baseMap;
-        background.layerImage = newStr;
-
-        _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-          baseMap: background
-        }));
-      });
-    }
-
-    this.updateButtonCss();
-  };
 
   SimplePanel.prototype.componentDidUpdate = function (prevProps) {
     if (this.props.options.baseMap.image !== prevProps.options.baseMap.image) {
@@ -6362,8 +6292,7 @@ function (_super) {
     }
 
     if (this.props !== prevProps) {
-      // console.log('am here');
-      this.chargeRegion(); // this.forceUpdate();
+      this.chargeRegion(); // console.log(this.props.options.displayButton);
     }
   };
   /*************************************test create tooltip **********************************************************/
@@ -6378,43 +6307,40 @@ function (_super) {
       styleBackground = {
         position: 'absolute',
         textAlign: 'center',
-        top: '15%',
         backgroundRepeat: 'no-repeat',
         height: this.props.options.baseMap.height + 'px',
         width: this.props.options.baseMap.width + 'px',
-        opacity: 0.8
+        opacity: 0.8,
+        zIndex: 4
       };
     } else {
       styleBackground = {
         position: 'absolute',
         textAlign: 'center',
-        top: '15%',
         backgroundRepeat: 'no-repeat',
         backgroundImage: 'url(' + this.props.options.baseMap.image + ')',
         backgroundSize: this.props.options.baseMap.width + 'px' + ' ' + this.props.options.baseMap.height + 'px',
         height: this.props.options.baseMap.height + 'px',
         width: this.props.options.baseMap.width + 'px',
         opacity: 0.8,
-        zIndex: 20
+        zIndex: 4
       };
     }
 
     var styleSVG = {
       position: 'absolute',
-      top: '15%',
-      zIndex: 5
+      zIndex: 2
     };
     var styleSVG_2 = {
       position: 'absolute',
       textAlign: 'center',
-      top: '15%',
       backgroundRepeat: 'no-repeat',
       height: this.props.options.baseMap.height + 'px',
       width: this.props.options.baseMap.width + 'px',
       // opacity: 0.8,
       // zIndex: 20,
       opacity: 0,
-      zIndex: 50
+      zIndex: 3
     };
     var defaultStyle = {
       height: '100vh',
@@ -6423,10 +6349,7 @@ function (_super) {
       fontSize: this.props.options.display.size,
       fontStyle: this.props.options.display.style !== 'bold' ? this.props.options.display.style : 'normal',
       fontWeight: this.props.options.display.style === 'bold' ? 'bold' : 'normal'
-    }; // console.log(this.props.data);
-    // console.log(this.props.data.timeRange.);
-    // console.log(this.props.options.regionCoordinateSpace);
-
+    };
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["CustomScrollbar"], {
       autoHide: false,
       hideHorizontalTrack: true
@@ -6436,7 +6359,7 @@ function (_super) {
         position: 'relative',
         display: 'inline-grid'
       }
-    }, this.state.allActionButton, this.props.options.displayButton), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("section", {
+    }, this.props.options.displayButton && this.state.allActionButton), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("section", {
       style: defaultStyle,
       onClick: this.positionLegend
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.buttonManage[0] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -6466,108 +6389,18 @@ function (_super) {
       data: this.props.data,
       callBack: this.handleClick
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      style: {
-        position: 'relative',
-        left: this.state.legend.x,
-        top: this.state.legend.y,
-        maxWidth: '100%',
-        zIndex: 'auto'
-      },
-      hidden: this.state.legend.hiddenLegend
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("article", {
-      style: {
-        width: '170px',
-        position: 'absolute',
-        overflowY: 'scroll',
-        margin: '0',
-        height: '220px',
-        backgroundColor: '#FFF',
-        color: '#000',
-        border: '4px solid #299c46',
-        borderRadius: '4px',
-        scrollbarColor: '#09090b #212124',
-        scrollbarWidth: 'none',
-        zIndex: 9999
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      style: {
-        backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))'
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
-      style: {
-        width: '100%',
-        fontSize: '20px',
-        display: 'inline-flex'
-      }
-    }, "Legend", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-      style: {
-        position: 'absolute',
-        marginLeft: '87%'
-      },
-      className: "fa fa-close",
-      onClick: this.handleClick
-    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-      style: {
-        color: '#d8d9da',
-        fontSize: '15px',
-        marginLeft: '14px',
-        fontWeight: 'bold'
-      }
-    }, "Region"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-      style: {
-        color: '#d8d9da',
-        fontSize: '11px',
-        marginLeft: '17px'
-      }
-    }, "Label")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-      className: "LegendMatt"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-      style: {
-        padding: 4,
-        margin: 9,
-        width: '3.5rem',
-        backgroundColor: '#B3B9BF',
-        border: '3px solid #299c46',
-        listStyleType: 'none',
-        display: 'inline-block'
-      }
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-      style: {
-        display: 'inline-block',
-        verticalAlign: 'middle',
-        marginBottom: '1.25rem',
-        fontSize: '9px'
-      }
-    }, "0-0%")), "tooltip_SVGImage", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-      className: "LegendMatt"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-      style: {
-        padding: 4,
-        margin: 9,
-        width: '3.5rem',
-        borderRadius: '39%',
-        backgroundColor: 'red',
-        border: '3px solid yellow',
-        listStyleType: 'none',
-        display: 'inline-block'
-      }
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-      style: {
-        display: 'inline-block',
-        verticalAlign: 'middle',
-        marginBottom: '1.25rem',
-        fontSize: '9px'
-      }
-    }, "No Variable"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-      style: {
-        fontSize: '15px',
-        marginLeft: '10px'
-      }
-    }, "Point"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       onClick: this.callMethod
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "tooltip"
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      onClick: this.getCoordinates,
+      id: "mainPanel",
+      style: {
+        position: 'absolute',
+        top: '15%',
+        zIndex: 1
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       style: styleSVG,
       dangerouslySetInnerHTML: {
         __html: this.state.svg
@@ -6580,10 +6413,9 @@ function (_super) {
         __html: this.props.options.baseMap.layerImage
       }
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      onClick: this.getCoordinates,
-      style: styleBackground,
-      id: "mainPanel"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), this.displayPoint(), this.displayOrientedLink())), this.state.displayRegion))));
+      id: "coordinateSpaces",
+      style: styleBackground
+    }, this.displayOrientedLink(), this.state.displayRegion, this.displayPoint()))))));
   };
 
   return SimplePanel;
@@ -11807,7 +11639,7 @@ function (_super) {
             borderRadius: '50px',
             padding: size + 'px',
             position: 'absolute',
-            zIndex: 99999,
+            zIndex: 1000,
             left: positionShapeX,
             top: positionShapeY
           },
@@ -11824,7 +11656,7 @@ function (_super) {
             fontSize: size,
             fontWeight: 'bold',
             position: 'absolute',
-            zIndex: 99999,
+            zIndex: 1000,
             color: color,
             left: positionShapeX,
             top: positionShapeY
@@ -12258,7 +12090,6 @@ function (_super) {
     var test = {
       position: 'absolute',
       textAlign: 'center',
-      top: '15%',
       height: this.props.options.baseMap.height + 'px',
       width: this.props.options.baseMap.width + 'px'
     };

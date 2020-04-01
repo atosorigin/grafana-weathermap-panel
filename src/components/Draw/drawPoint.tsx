@@ -207,7 +207,7 @@ export default class DrawPoint extends React.Component<Props, State> {
                 borderRadius: '50px',
                 padding: size + 'px',
                 position: 'absolute',
-                zIndex: 99999,
+                zIndex: 1000,
                 left: positionShapeX,
                 top: positionShapeY,
               }}
@@ -224,7 +224,7 @@ export default class DrawPoint extends React.Component<Props, State> {
                 fontSize: size,
                 fontWeight: 'bold',
                 position: 'absolute',
-                zIndex: 99999,
+                zIndex: 1000,
                 color: color,
                 left: positionShapeX,
                 top: positionShapeY,

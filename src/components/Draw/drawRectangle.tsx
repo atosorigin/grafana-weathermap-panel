@@ -152,7 +152,6 @@ export default class DrawRectangle extends React.Component<Props, State> {
     const test = {
       position: 'absolute',
       textAlign: 'center',
-      top: '15%',
       height: this.props.options.baseMap.height + 'px',
       width: this.props.options.baseMap.width + 'px',
     } as React.CSSProperties;

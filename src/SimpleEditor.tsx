@@ -220,6 +220,24 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
     });
   };
 
+  componentDidMount = async () => {
+    await Promise.resolve('Success').then(() => {
+      this.props.onOptionsChange({
+        ...this.props.options,
+        displayButton: true,
+      });
+    });
+  };
+
+  componentWillUnmount = async () => {
+    await Promise.resolve('Success').then(() => {
+      this.props.onOptionsChange({
+        ...this.props.options,
+        displayButton: false,
+      });
+    });
+  };
+
   /**
    * HTML code
    */
