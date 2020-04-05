@@ -4,7 +4,7 @@ It's Draft
 
 WeatherMap is a plugin for grafana allowing to visualize monitoring...
 
-[Documentation en francais](README_fr.md)
+[Documentation en francais](README-fr.md)
 
 # Table of Contents
 
