@@ -10,7 +10,7 @@ import { act } from 'react-dom/test-utils';
  * - edit coordinates parameters
  */
 describe('CoordinatSpaceInitial tests', () => {
-  let container, component;
+  let container: any, component: any;
   const additionalStep = { value: '1', label: '1' };
   /*
    * Mock "onOptionChange" by re-rendering the component with the new options

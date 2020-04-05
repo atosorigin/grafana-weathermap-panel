@@ -11,8 +11,6 @@ import { SelectableValue } from '@grafana/data';
 export const editGoodParameterPoint = (name: string, editCoor: PointClass, newValue: string, newValueSelect: SelectableValue<any>): PointClass => {
   if (name.startsWith('label')) {
     editCoor.label = newValue;
-  } else if (name.startsWith('linkWithCoordinateSpace')) {
-    editCoor.coordinateSpace = newValueSelect;
   } else if (name.startsWith('drawGraphicMarker')) {
     editCoor.drawGraphicMarker = newValueSelect;
   } else if (name.startsWith('shape')) {

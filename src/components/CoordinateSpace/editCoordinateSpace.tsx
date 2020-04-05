@@ -87,16 +87,29 @@ class EditCoordinateSpace extends React.Component<Props, State> {
 
   /** fill select whith array region object */
   fillSelectRegionSpace = () => {
+    let valueExist = false;
     const valueSelect: SelectRegion[] = [];
     const stockTmpCoordinatesSpace: RegionClass[] = this.props.options.regionCoordinateSpace.slice();
 
     for (const line of stockTmpCoordinatesSpace) {
       valueSelect.push({ value: line, label: line.label });
     }
+    if (this.state.selectCoordinateSpaceDefault) {
+      for (const line of stockTmpCoordinatesSpace) {
+        if (line.id === this.state.selectCoordinateSpaceDefault.value?.id) {
+          valueExist = true;
+          break;
+        }
+      }
+    }
     // dev
     this.setState({
       selectCoordinateSpace: valueSelect,
-      selectCoordinateSpaceDefault: valueSelect.length > 0 ? valueSelect[0] : this.state.selectCoordinateSpaceDefault,
+      selectCoordinateSpaceDefault: valueExist
+        ? this.state.selectCoordinateSpaceDefault
+        : valueSelect.length > 0
+        ? valueSelect[0]
+        : this.state.selectCoordinateSpaceDefault,
     });
     // final
     // this.setState({

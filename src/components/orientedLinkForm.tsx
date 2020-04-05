@@ -130,7 +130,6 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
           element.pointOut,
           element.regionIn,
           element.regionOut,
-          //element.mainMetric.refId, element.mainMetric.key, element.mainMetric.keyValue,
           element.textObj,
           element.lowerLimit,
           element.positionParameter,
@@ -138,7 +137,9 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
           element.pointCPositionY,
           element.isIncurved,
           element.mainMetric,
-          element.metrics
+          element.metrics,
+          element.mainMetricB,
+          element.metricsB
         );
       }, 100);
     }
@@ -214,7 +215,9 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
     pointCPositionY?: string,
     isIncurved?: SelectableValue<boolean>,
     mainMetrics?: Metric,
-    auxiliaryMetrics?: Metric[]
+    auxiliaryMetrics?: Metric[],
+    mainMetricsB?: Metric,
+    auxiliaryMetricsB?: Metric[]
   ) => {
     const num: number = id || this.props.options.indexOrientedLink + 1;
     const zIndex: number = this.props.options.zIndexOrientedLink;
@@ -226,7 +229,7 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
         false,
         '',
         '',
-        '',
+        { bold: false, italic: false, underline: false },
         false,
         {
           legendElement: '',
@@ -254,6 +257,7 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
     const parametrageMetric: LinkURLClass = new LinkURLClass('', '', '');
     const initPositionParameter: PositionParameterClass = positionParameter || new PositionParameterClass('', '', '', '', {}, {});
     const initMainMetrics: Metric = mainMetrics || { key: '', unit: '', format: '', keyValue: '', refId: '', manageValue: 'avg' };
+    const initMainMetricsB: Metric = mainMetricsB || { key: '', unit: '', format: '', keyValue: '', refId: '', manageValue: 'avg' };
 
     this.setState((prevState: State) => ({
       arrayOrientedLinkClass: prevState.arrayOrientedLinkClass.concat(
@@ -295,7 +299,9 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
           zIndex,
           pointCPositionX || '0',
           pointCPositionY || '0',
-          isIncurved || {}
+          isIncurved || {},
+          initMainMetricsB,
+          auxiliaryMetricsB || []
         )
       ),
 
@@ -693,6 +699,7 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
                 mainMetric={this.state.arrayOrientedLinkClass[index].mainMetric}
                 callBackToParent={this.callBackMainMetric}
                 id={index}
+                isLink={true}
               />
             </div>
             <div>
@@ -704,9 +711,7 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
                 metrics={this.state.arrayOrientedLinkClass[index].metrics}
                 callBackToParent={this.callBackAuxiliaryMetric}
                 id={index}
-                isPoint={false}
                 isLink={true}
-                isRegion={false}
               />
             </div>
             <div>

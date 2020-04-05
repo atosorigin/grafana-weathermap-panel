@@ -12,7 +12,7 @@ export const initRegionCoordinateSpace = (index: number): RegionClass => {
     false,
     'rgba(255, 255, 255, 0)',
     'rgba(0, 0, 0, 1)',
-    '',
+    { bold: false, italic: false, underline: false },
     false,
     {
       legendElement: '',
@@ -74,7 +74,7 @@ export const cloneRegionCoordinateSpace = (region: RegionClass): RegionClass => 
     region.textObj.isTextRegion,
     region.textObj.colorBack,
     region.textObj.colorText,
-    region.textObj.styleText,
+    region.textObj.style,
     region.textObj.generateObjectText,
     region.textObj.valueGenerateObjectText,
     region.textObj.generateAuxiliaryElement

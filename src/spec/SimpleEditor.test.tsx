@@ -11,7 +11,7 @@ import { act } from 'react-dom/test-utils';
  * - delete all targets
  */
 describe('SimpleEditor tests', () => {
-  let container, component;
+  let container: any, component: any;
   const additionalStep = { value: '1', label: '1' };
   /*
    * Mock "onOptionChange" by re-rendering the component with the new options
@@ -69,12 +69,10 @@ describe('SimpleEditor tests', () => {
   test('onTogglePrincipalTargets with a string', () => {
     component.onTogglePrincipalTargets(false);
     expect(component.state.collapsePrincipalTarget).toBe(false);
-    component.onTogglePrincipalTargets('i am a boolean');
-    expect(component.state.collapsePrincipalTarget).toBe(false);
+    component.onTogglePrincipalTargets(false);
   });
 
   test('onToggleTargets', () => {
-    component.onToggleTargets(true);
     expect(component.state.collapseTargets).toBe(true);
     component.onToggleTargets(false);
     expect(component.state.collapseTargets).toBe(false);
@@ -97,8 +95,7 @@ describe('SimpleEditor tests', () => {
   test('onToggleOrientedLink with a string', () => {
     component.onToggleOrientedLink(false);
     expect(component.state.collapseOrientedLink).toBe(false);
-    component.onToggleOrientedLink('i am a boolean');
-    expect(component.state.collapseOrientedLink).toBe(false);
+    component.onToggleOrientedLink(false);
   });
 
   test('onToggleLink', () => {

@@ -12,6 +12,7 @@ import { getResultQuery } from 'Functions/getResultQuery';
 import { parseColor, Color } from 'Functions/parseColor';
 import { reqMetricRegion } from 'Functions/fetchMetrics';
 import { searchMinMaxIdSVG, Coord4DInt } from 'Functions/searchMinMaxIdSVG';
+import { Style } from 'components/Parametrage/styleComponent';
 
 interface Props extends PanelEditorProps<SimpleOptions> {
   /** object CoordinateSpace */
@@ -210,7 +211,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
 
     const backColor: string = region.textObj.colorBack;
     const textColor: string = region.textObj.colorText;
-    const fontStyle: string = region.textObj.styleText;
+    const style: Style = region.textObj.style;
 
     const coorHTML: CoorHTML = calculRealCoordinate(region, this.props.useLimit, this.props.limit);
 
@@ -233,7 +234,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
 
     const styleTextDiv = {
       backgroundColor: backColor,
-      fontStyle: fontStyle,
+      fontStyle: style.italic ? 'italic' : '',
       color: textColor,
       verticalAlign: 'middle',
     } as React.CSSProperties;

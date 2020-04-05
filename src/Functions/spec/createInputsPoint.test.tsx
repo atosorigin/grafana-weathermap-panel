@@ -21,7 +21,7 @@ describe('test createInputsPoint', () => {
 
   test('init component', () => {
     const result = createInputsPoint(0, coordinates);
-    expect(result.length).toBe(13);
+    expect(result.length).toBe(8);
 
     expect(result[0].id).toBe('0LinkWithCoordinateSpace'); // newFieldLinkWithCoordonateSpace
     expect(result[1].id).toBe('0drawGraphicMarker'); // newFieldDrawGraphicMarker

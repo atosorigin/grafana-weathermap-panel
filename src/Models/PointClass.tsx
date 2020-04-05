@@ -1,11 +1,10 @@
 import { SelectableValue } from '@grafana/data';
-import { RegionClass } from './RegionClass';
 import { CoordinateSpaceClass } from './CoordinateSpaceClass';
 import { LinkURLClass } from './LinkURLClass';
 import { LowerLimitClass } from './LowerLimitClass';
 import { TextObject } from './TextObjectClass';
 import { Metric } from 'types';
-import { LinkClass } from './LinkClass';
+//import { LinkClass } from './LinkClass';
 import { PositionParameterClass } from './PositionParameterClass';
 
 /**
@@ -14,7 +13,6 @@ import { PositionParameterClass } from './PositionParameterClass';
 export class PointClass extends CoordinateSpaceClass {
   name: string;
   valueMetric: string;
-  coordinateSpace: SelectableValue<RegionClass>;
   drawGraphicMarker: SelectableValue<string>;
   shape: SelectableValue<string>;
   sizeWidth: SelectableValue<string>;
@@ -23,8 +21,6 @@ export class PointClass extends CoordinateSpaceClass {
   positionShapeX: string;
   positionShapeY: string;
   color: string;
-  associateLinkIn: LinkClass[];
-  associateLinkOut: LinkClass[];
   associateOrientedLinksIn: any[];
   associateOrientedLinksOut: any[];
 
@@ -43,7 +39,6 @@ export class PointClass extends CoordinateSpaceClass {
     positionParameter: PositionParameterClass,
     name: string,
     valueMetric: string,
-    coordinateSpace: SelectableValue<RegionClass>,
     drawGraphicMarker: SelectableValue<string>,
     shape: SelectableValue<string>,
     sizeWidth: SelectableValue<string>,
@@ -52,15 +47,12 @@ export class PointClass extends CoordinateSpaceClass {
     positionShapeX: string,
     positionShapeY: string,
     color: string,
-    associateLinkIn: LinkClass[],
-    associateLinkOut: LinkClass[],
     associateOrientedLinksIn: any[],
     associateOrientedLinksOut: any[]
   ) {
     super(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter);
     this.name = name;
     this.valueMetric = valueMetric;
-    this.coordinateSpace = coordinateSpace;
     this.drawGraphicMarker = drawGraphicMarker;
     this.shape = shape;
     this.sizeWidth = sizeWidth;
@@ -69,8 +61,6 @@ export class PointClass extends CoordinateSpaceClass {
     this.positionShapeX = positionShapeX;
     this.positionShapeY = positionShapeY;
     this.color = color;
-    this.associateLinkIn = associateLinkIn;
-    this.associateLinkOut = associateLinkOut;
     this.associateOrientedLinksIn = associateOrientedLinksIn;
     this.associateOrientedLinksOut = associateOrientedLinksOut;
   }

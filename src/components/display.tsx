@@ -5,6 +5,7 @@ import { SelectableValue, PanelEditorProps } from '@grafana/data';
 import { FormField, Switch, FormLabel } from '@grafana/ui';
 
 import InputSelect from 'Functions/Input/inputSelect';
+import StyleComponent, { Style } from './Parametrage/styleComponent';
 
 interface Props extends PanelEditorProps<SimpleOptions> {}
 
@@ -14,7 +15,7 @@ interface State {
   /** size variable for input */
   size: string;
   /** style variable for input */
-  style: string;
+  style: Style;
 }
 
 /**
@@ -81,7 +82,7 @@ class Display extends React.Component<Props, State> {
    */
   setStateAsyncStyle = (state: {
     /** new style value */
-    style: string;
+    style: Style;
   }) => {
     return new Promise(resolve => {
       this.setState(state, resolve);
@@ -101,18 +102,18 @@ class Display extends React.Component<Props, State> {
     this.callParent();
   };
 
-  /**
-   * edit style
-   */
-  handleChangeStyle = async (event: {
-    /** target to input element */
-    target: HTMLInputElement;
-  }) => {
-    await this.setStateAsyncStyle({
-      style: event.target.value,
-    });
-    this.callParent();
-  };
+  // /**
+  //  * edit style
+  //  */
+  // handleChangeStyle = async (event: {
+  //   /** target to input element */
+  //   target: HTMLInputElement;
+  // }) => {
+  //   await this.setStateAsyncStyle({
+  //     style: event.target.value,
+  //   });
+  //   this.callParent();
+  // };
 
   /**
    * edit police
@@ -175,6 +176,10 @@ class Display extends React.Component<Props, State> {
     onOptionsChange({ ...options, baseMap: oldValue });
   };
 
+  saveStyleData = (style: Style): void => {
+    this.setStateAsyncStyle({ style: style });
+  };
+
   /**
    * html
    */
@@ -210,6 +215,8 @@ class Display extends React.Component<Props, State> {
           onChange={this.handleChangesize}
         />
 
+        <StyleComponent oldStyle={this.state.style} saveParent={this.saveStyleData} />
+        {/* 
         <FormField
           label={l10n.textDefault.style}
           labelWidth={10}
@@ -217,12 +224,12 @@ class Display extends React.Component<Props, State> {
           required={true}
           value={this.state.style}
           onChange={this.handleChangeStyle}
-        />
+        /> */}
 
         <div>
           <Switch label="Use SVG" checked={options.baseMap.modeSVG} onChange={this.onChangeSwitchModeSVG} />
         </div>
-        {options.baseMap.modeSVG ? (
+        {/* {options.baseMap.modeSVG ? (
           <FormField
             label={l10n.simpleEditor.pictureLink}
             labelWidth={10}
@@ -231,34 +238,27 @@ class Display extends React.Component<Props, State> {
             onChange={this.onImageChanged}
             value={options.baseMap.image || ''}
           />
-        ) : (
-          <div>
-            <FormField
-              label={'Image'}
-              labelWidth={10}
-              inputWidth={30}
-              type="text"
-              onChange={this.onImageChanged}
-              value={options.baseMap.image || ''}
-            />
-            <FormField
-              label="Height"
-              labelWidth={10}
-              inputWidth={30}
-              type="text"
-              onChange={this.onChangeHeightBaseMap}
-              value={options.baseMap.height || ''}
-            />
-            <FormField
-              label="Width"
-              labelWidth={10}
-              inputWidth={30}
-              type="text"
-              onChange={this.onChangeWidthBaseMap}
-              value={options.baseMap.width || ''}
-            />
-          </div>
-        )}
+        ) : ( */}
+        <div>
+          <FormField label={'Image'} labelWidth={10} inputWidth={30} type="text" onChange={this.onImageChanged} value={options.baseMap.image || ''} />
+          <FormField
+            label="Width"
+            labelWidth={10}
+            inputWidth={30}
+            type="text"
+            onChange={this.onChangeWidthBaseMap}
+            value={options.baseMap.width || ''}
+          />
+          <FormField
+            label="Height"
+            labelWidth={10}
+            inputWidth={30}
+            type="text"
+            onChange={this.onChangeHeightBaseMap}
+            value={options.baseMap.height || ''}
+          />
+        </div>
+        {/* )} */}
       </div>
     );
   }

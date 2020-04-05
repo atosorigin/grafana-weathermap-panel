@@ -3,19 +3,21 @@ import { SimpleOptions, TManageValue, Metric } from '../../types';
 
 import { PanelEditorProps, SelectableValue } from '@grafana/data';
 import { Select, FormField, Collapse, FormLabel, Button } from '@grafana/ui';
+import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
 
 interface Props extends PanelEditorProps<SimpleOptions> {
   /** id coordinate. Use to check if componentDidUpdate launch update */
   idCoordinate: number;
   /** parent data */
   metrics: Metric[];
+  /** */
+  coordinateSpace?: CoordinateSpaceClass;
   /** call function when save data */
   callBackToParent: (metrics: Metric[], id?: number) => void;
-  /** id coordinateSpace for link and point*/
+  /** id coordinateSpace for OrientedLink*/
   id?: number;
-  isPoint: boolean;
+  /** check if coordinateSpace is OrientedLink */
   isLink: boolean;
-  isRegion: boolean;
 }
 
 interface State {
@@ -53,15 +55,26 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
   private getAuxiliaryMetrics = (): Metric[] => {
     let auxiliaryMetrics: Metric[] = [];
 
-    if (this.props.isPoint) {
-      auxiliaryMetrics = this.props.options.arrayPoints[this.props.id || 0].metrics;
-    } else if (this.props.isLink) {
+    if (this.props.isLink) {
       auxiliaryMetrics = this.props.options.arrayOrientedLinks[this.props.id || 0].metrics;
-    } else if (this.props.isRegion) {
-      auxiliaryMetrics = this.props.options.regionCoordinateSpace[this.props.id || 0].metrics;
+    } else {
+      if (this.props.coordinateSpace) {
+        auxiliaryMetrics = this.props.coordinateSpace.metrics;
+      }
     }
-
     return auxiliaryMetrics;
+  };
+
+  private getReferenceMainMetric = (): string => {
+    let refId = '';
+    if (this.props.isLink) {
+      refId = this.props.options.arrayOrientedLinks[this.props.id || 0].mainMetric.refId || '';
+    } else {
+      if (this.props.coordinateSpace) {
+        refId = this.props.coordinateSpace.mainMetric.refId || '';
+      }
+    }
+    return refId;
   };
 
   /** call back to parent */
@@ -79,7 +92,6 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
   private onChangeKey = (event: any) => {
     const newAuxiliaryMetrics: Metric[] = this.state.metrics;
     const id: number = event.currentTarget.id;
-    console.log(id);
     const value: string = event.currentTarget.value;
     newAuxiliaryMetrics[id].key = value;
     this.setState({
@@ -102,7 +114,6 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
   private onChangeManageValue = (event: any) => {
     const newAuxiliaryMetrics: Metric[] = this.state.metrics;
     const id: number = event.id;
-    console.log(event.value);
     newAuxiliaryMetrics[id].manageValue = event.value;
     const newValue: SelectableValue<TManageValue> = { id: event.id, value: event.value, label: event.label };
     this.setState({
@@ -113,7 +124,7 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
   };
 
   private addAuxiliaryMetric = () => {
-    const refIdMetric: string = this.props.options.arrayOrientedLinks[this.props.id || 0].mainMetric.refId || '';
+    const refIdMetric: string = this.getReferenceMainMetric();
     let auxiliaryMetrics: Metric[] = this.state.metrics;
     auxiliaryMetrics.push({
       key: '',
@@ -166,16 +177,24 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
 
   private generateInputs = (index: number): JSX.Element => {
     const id: number = index;
-    const refIdMetric: string = this.props.options.arrayOrientedLinks[this.props.id || 0].mainMetric.refId || '';
+    const refIdMetric: string = this.getReferenceMainMetric();
     const idLink: string = this.props.id?.toString() || '';
 
+    const styleTitle = {
+      marginTop: '10px',
+      textAlign: 'center',
+    } as React.CSSProperties;
+
     const styleMainDiv = {
+      marginTop: '5px',
+      border: '1px solid rgb(23, 23, 24)',
+    } as React.CSSProperties;
+
+    const styleContent = {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      padding: '10px',
       marginBottom: '5px',
-      border: '1px solid rgb(23, 23, 24)',
     } as React.CSSProperties;
 
     const styleSelect = {
@@ -186,62 +205,73 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
 
     const styleReferenceMetric = {
       width: '276px',
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'center',
+      height: '35px',
+      border: '1px solid #262628',
+      borderRadius: '0 3px 3px 0',
+      backgroundColor: '#09090b',
+      padding: '8px',
+      fontSize: '14px',
+      lineHeight: '18px',
+      color: '#d8d9da',
+      marginBottom: '0px',
     } as React.CSSProperties;
 
     const item: JSX.Element = (
       <div key={idLink + 'mainDiv' + id.toString()} style={styleMainDiv}>
-        <div key={idLink + 'inputs' + id.toString()}>
-          <div key={idLink + 'refBloc' + id.toString()} style={styleSelect}>
-            <FormLabel key={idLink + 'labelref' + id.toString()} width={10}>
-              Query
-            </FormLabel>
-            <div key={this.props.id?.toString() || '' + 'refValue' + id.toString()} id={id.toString()} style={styleReferenceMetric}>
-              <p style={{ marginTop: '10px', marginBottom: '0' }}>{refIdMetric}</p>
+        <p key={idLink + 'title' + id.toString()} style={styleTitle}>
+          {'Metric ' + (id + 1).toString()}
+        </p>
+        <div key={idLink + 'content' + id.toString()} style={styleContent}>
+          <div key={idLink + 'inputs' + id.toString()}>
+            <div key={idLink + 'refBloc' + id.toString()} style={styleSelect}>
+              <FormLabel key={idLink + 'labelref' + id.toString()} width={10}>
+                Query
+              </FormLabel>
+              <p key={this.props.id?.toString() || '' + 'refValue' + id.toString()} style={styleReferenceMetric}>
+                {refIdMetric}
+              </p>
+            </div>
+            <FormField
+              key={idLink + 'inputKey' + id.toString()}
+              id={id.toString()}
+              label="Key"
+              labelWidth={10}
+              inputWidth={20}
+              type="text"
+              value={this.state.metrics[id].key}
+              name="key"
+              onChange={this.onChangeKey}
+            />
+            <FormField
+              key={idLink + 'valueKey' + id.toString()}
+              id={id.toString()}
+              label="Value key"
+              labelWidth={10}
+              inputWidth={20}
+              type="text"
+              value={this.state.metrics[id].keyValue}
+              name="valueKey"
+              onChange={this.onChangeValueKey}
+            />
+            <div key={idLink + 'divTypeOfValue' + id.toString()} id={id.toString()} style={styleSelect}>
+              <FormLabel key={idLink + 'labelTypeOfValue' + id.toString()} width={10}>
+                Value
+              </FormLabel>
+              <Select
+                key={idLink + 'selectTypeOfValue' + id.toString()}
+                onChange={this.onChangeManageValue}
+                allowCustomValue={false}
+                options={this.getAllManageValue(id.toString())}
+                width={20}
+                value={this.getCurrentManageValue(id)}
+              />
             </div>
           </div>
-          <FormField
-            key={idLink + 'inputKey' + id.toString()}
-            id={id.toString()}
-            label="Key"
-            labelWidth={10}
-            inputWidth={20}
-            type="text"
-            value={this.state.metrics[id].key}
-            name="key"
-            onChange={this.onChangeKey}
-          />
-          <FormField
-            key={idLink + 'valueKey' + id.toString()}
-            id={id.toString()}
-            label="Value key"
-            labelWidth={10}
-            inputWidth={20}
-            type="text"
-            value={this.state.metrics[id].keyValue}
-            name="valueKey"
-            onChange={this.onChangeValueKey}
-          />
-          <div key={idLink + 'divTypeOfValue' + id.toString()} id={id.toString()} style={styleSelect}>
-            <FormLabel key={idLink + 'labelTypeOfValue' + id.toString()} width={10}>
-              Value
-            </FormLabel>
-            <Select
-              key={idLink + 'selectTypeOfValue' + id.toString()}
-              onChange={this.onChangeManageValue}
-              allowCustomValue={false}
-              options={this.getAllManageValue(id.toString())}
-              width={20}
-              value={this.getCurrentManageValue(id)}
-            />
+          <div key={idLink + 'buttonDelete' + id.toString()}>
+            <Button id={id.toString()} onClick={this.deleteAuxiliaryMetric} variant={'danger'}>
+              Delete
+            </Button>
           </div>
-        </div>
-        <div key={idLink + 'buttonDelete' + id.toString()}>
-          <Button id={id.toString()} onClick={this.deleteAuxiliaryMetric} variant={'danger'}>
-            Delete
-          </Button>
         </div>
       </div>
     );
@@ -273,7 +303,7 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'center',
-      backgroundColor: 'rgb(33, 35, 39)',
+      marginTop: '10px',
     } as React.CSSProperties;
 
     return (

@@ -1,5 +1,6 @@
 {
-    "links": [{
+  "links": [
+    {
       "id": 2,
       "linkURL": {
         "followLink": "",
@@ -45,7 +46,7 @@
         "generateObjectText": false,
         "legendElement": "",
         "numericFormatElement": "",
-        "unityMesureElement": "",
+        "unit": "",
         "displayObjectInText": false,
         "displayObjectPermanently": false,
         "addColorTextElement": false,
@@ -94,5 +95,6 @@
       "regionIn": {},
       "regionOut": {},
       "zIndex": 0
-    }]
-  }
+    }
+  ]
+}

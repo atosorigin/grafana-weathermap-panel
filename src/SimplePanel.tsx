@@ -5,7 +5,7 @@ import { PanelProps, SelectableValue, DataFrame } from '@grafana/data';
 import { CustomScrollbar, Modal, Button } from '@grafana/ui';
 
 import { PointClass } from 'Models/PointClass';
-import { LinkClass } from 'Models/LinkClass';
+//import { LinkClass } from 'Models/LinkClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 import { RegionClass, Coord4D } from 'Models/RegionClass';
 import { TextObject } from 'Models/TextObjectClass';
@@ -22,10 +22,10 @@ import DrawRectangle from './components/Draw/drawRectangle';
 import LegendComponant from './components/legend';
 // import DrawRectangleExtend from './components/Draw/drawRectangleExtend';
 import DrawPoint from './components/Draw/drawPoint';
-import DrawArrow from './components/Draw/drawArrow';
-import DrawLinkWithCoordinates from './components/Draw/drawLinkWithCoordinates';
-import DrawLinkWithPoints from './components/Draw/drawLinkWithPoints';
-import DrawLinkWithRegions from './components/Draw/drawLinkWithRegions';
+//import DrawArrow from './components/Draw/drawArrow';
+// import DrawLinkWithCoordinates from './components/Draw/drawLinkWithCoordinates';
+// import DrawLinkWithPoints from './components/Draw/drawLinkWithPoints';
+// import DrawLinkWithRegions from './components/Draw/drawLinkWithRegions';
 import DrawOrientedLink from './components/Draw/drawOrientedLink';
 import { PositionParameterClass } from 'Models/PositionParameterClass';
 
@@ -194,7 +194,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       false,
       '',
       '',
-      '',
+      { bold: false, italic: false, underline: false },
       false,
       {
         legendElement: '',
@@ -243,7 +243,6 @@ export class SimplePanel extends PureComponent<Props, State> {
       positionParameter,
       'point' + id.toString(),
       '',
-      {},
       { label: 'Yes', value: 'true' },
       { label: 'Circle', value: 'circle' },
       { label: 'Medium', value: 'medium' },
@@ -253,19 +252,21 @@ export class SimplePanel extends PureComponent<Props, State> {
       y.toString(),
       'black',
       [],
-      [],
-      [],
       []
     );
 
     const newArrayPoint: PointClass[] = this.props.options.arrayPoints;
     newArrayPoint.push(newPoint);
 
+    //this.props.options.indexPoint = id;
     this.props.onOptionsChange({
       ...this.props.options,
       indexPoint: id,
       arrayPoints: newArrayPoint,
     });
+
+    console.log('panel');
+    console.log(this.props.options.indexPoint);
 
     setTimeout(() => {
       this.displayPoint();
@@ -277,149 +278,136 @@ export class SimplePanel extends PureComponent<Props, State> {
    */
   displayPoint() {
     const mapItems: JSX.Element[] = [];
-
     this.props.options.arrayPoints.forEach((line: PointClass) => {
       this.getValuesMainMetricOfPoint(line);
+      this.updatePositionOrientedLink(line);
       const valuesAuxiliaryMetrics: string[] = this.getValuesAuxiliaryMetricsPoint(line);
-      if (line.shape.value === 'arrow') {
-        const item: JSX.Element = (
-          <DrawArrow
-            key={'point' + line.id.toString()}
-            coordinateSpace={line.coordinateSpace}
-            drawGraphicmarker={line.drawGraphicMarker}
-            shape={line.shape}
-            sizeWidth={line.sizeWidth}
-            sizeHeight={line.sizeHeight}
-            rotate={line.rotateArrow}
-            positionShapeX={line.positionShapeX}
-            positionShapeY={line.positionShapeY}
-            label={line.label}
-            height={parseInt(this.props.options.baseMap.height, 10)}
-            police={this.props.options.display.police}
-            sizePolice={this.props.options.display.size}
-            color={line.color}
-            idPoint={'point' + line.id.toString()}
-            name={line.name}
-            orientedLinksIn={line.associateOrientedLinksIn}
-            orientedLinksOut={line.associateOrientedLinksOut}
-            textObject={line.textObj}
-            seuil={line.lowerLimit}
-          />
-        );
-
-        mapItems.push(item);
-      } else if (line.shape.value === 'circle' || line.shape.value === 'cross') {
-        const item: JSX.Element = (
-          <DrawPoint
-            key={'point' + line.id.toString()}
-            coordinateSpace={line.coordinateSpace}
-            drawGraphicMarker={line.drawGraphicMarker}
-            shape={line.shape}
-            size={line.sizeWidth}
-            positionShapeX={line.positionShapeX}
-            positionShapeY={line.positionShapeY}
-            label={line.label}
-            widthImage={parseInt(this.props.options.baseMap.width, 10)}
-            heightImage={parseInt(this.props.options.baseMap.height, 10)}
-            police={this.props.options.display.police}
-            sizePolice={this.props.options.display.size}
-            color={line.color}
-            idPoint={'point' + line.id.toString()}
-            name={line.name}
-            options={this.props.options}
-            onOptionsChange={this.props.onOptionsChange}
-            data={this.props.data}
-            textObject={line.textObj}
-            seuil={line.lowerLimit}
-            valueMainMetric={line.valueMetric}
-            refMainMetric={line.mainMetric.refId || ''}
-            associateOrientedLinkIn={line.associateOrientedLinksIn}
-            associateOrientedLinkOut={line.associateOrientedLinksOut}
-            labelPositionX={line.positionParameter.labelAPositionX}
-            labelPositionY={line.positionParameter.labelAPositionY}
-            tooltipPosition={line.positionParameter.tooltipPositionA}
-            auxiliaryMetrics={line.metrics}
-            valuesAuxiliaryMetrics={valuesAuxiliaryMetrics}
-          />
-        );
-
-        mapItems.push(item);
-      }
+      const item: JSX.Element = (
+        <DrawPoint
+          key={'point' + line.id.toString()}
+          drawGraphicMarker={line.drawGraphicMarker}
+          shape={line.shape}
+          size={line.sizeWidth}
+          positionShapeX={line.positionShapeX}
+          positionShapeY={line.positionShapeY}
+          label={line.label}
+          widthImage={parseInt(this.props.options.baseMap.width, 10)}
+          heightImage={parseInt(this.props.options.baseMap.height, 10)}
+          police={this.props.options.display.police}
+          sizePolice={this.props.options.display.size}
+          color={line.color}
+          idPoint={'point' + line.id.toString()}
+          name={line.name}
+          options={this.props.options}
+          onOptionsChange={this.props.onOptionsChange}
+          data={this.props.data}
+          textObject={line.textObj}
+          seuil={line.lowerLimit}
+          valueMainMetric={line.valueMetric}
+          refMainMetric={line.mainMetric.refId || ''}
+          associateOrientedLinkIn={line.associateOrientedLinksIn}
+          associateOrientedLinkOut={line.associateOrientedLinksOut}
+          labelPositionX={line.positionParameter.labelAPositionX}
+          labelPositionY={line.positionParameter.labelAPositionY}
+          tooltipPosition={line.positionParameter.tooltipPositionA}
+          auxiliaryMetrics={line.metrics}
+          valuesAuxiliaryMetrics={valuesAuxiliaryMetrics}
+        />
+      );
+      mapItems.push(item);
     });
 
     return <div>{mapItems}</div>;
   }
 
-  /** display link with coordinate */
-  displayLink() {
-    const { options } = this.props;
-    const mapItems: JSX.Element[] = [];
-    const arrayLinks: LinkClass[] = options.arrayLinks;
-
-    arrayLinks.forEach((link: LinkClass) => {
-      let item: JSX.Element = <div></div>;
-      if (link.defineHowToGetCoordonate.value === 'coordinate') {
-        item = (
-          <DrawLinkWithCoordinates
-            key={'link' + link.id.toString()}
-            pointAPositionX={link.pointAPositionX}
-            pointAPositionY={link.pointAPositionY}
-            pointBPositionX={link.pointBPositionX}
-            pointBPositionY={link.pointBPositionY}
-            colorA={link.colorCoordinateA}
-            colorB={link.colorCoordinateB}
-            orientationLink={link.orientationLink.value || ''}
-            labelA={link.labelLinkA}
-            labelB={link.labelLinkB}
-            labelAPositionX={link.positionXLabelA}
-            labelAPositionY={link.positionYLabelA}
-            labelBPositionX={link.positionXLabelB}
-            labelBPositionY={link.positionYLabelB}
-            height={parseInt(this.props.options.baseMap.height, 10)}
-            name={link.name}
-          />
-        );
-      } else if (link.defineHowToGetCoordonate.value === 'point') {
-        item = (
-          <DrawLinkWithPoints
-            key={'link' + link.id.toString()}
-            pointIn={link.pointIn}
-            pointOut={link.pointOut}
-            labelA={link.labelLinkA}
-            labelB={link.labelLinkB}
-            labelAPositionX={link.positionXLabelA}
-            labelAPositionY={link.positionYLabelA}
-            labelBPositionX={link.positionXLabelB}
-            labelBPositionY={link.positionYLabelB}
-            orientationLink={link.orientationLink.value || ''}
-            height={parseInt(this.props.options.baseMap.height, 10)}
-            name={link.name}
-          />
-        );
-      } else if (link.defineHowToGetCoordonate.value === 'region') {
-        item = (
-          <DrawLinkWithRegions
-            key={'link' + link.id.toString()}
-            regionIn={link.regionIn}
-            regionOut={link.regionOut}
-            colorA={link.colorRegionIn}
-            colorB={link.colorRegionOut}
-            labelA={link.labelLinkA}
-            labelB={link.labelLinkB}
-            labelAPositionX={link.positionXLabelA}
-            labelAPositionY={link.positionYLabelA}
-            labelBPositionX={link.positionXLabelB}
-            labelBPositionY={link.positionYLabelB}
-            orientationLink={link.orientationLink.value || ''}
-            height={parseInt(this.props.options.baseMap.height, 10)}
-            name={link.name}
-          />
-        );
+  private updatePositionOrientedLink = (point: PointClass) => {
+    const arrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+    for (const orientedLink of arrayOrientedLink) {
+      for (const associateOrientedLinkIn of point.associateOrientedLinksIn) {
+        if (associateOrientedLinkIn.name === orientedLink.name) {
+          orientedLink.pointAPositionX = point.positionShapeX;
+          orientedLink.pointAPositionY = point.positionShapeY;
+        }
       }
-      mapItems.push(item);
-    });
-    return <ul>{mapItems}</ul>;
-  }
+      for (const associateOrientedLinkOut of point.associateOrientedLinksOut) {
+        if (associateOrientedLinkOut.name === orientedLink.name) {
+          orientedLink.pointBPositionX = point.positionShapeX;
+          orientedLink.pointBPositionY = point.positionShapeY;
+        }
+      }
+    }
+  };
+
+  // /** display link with coordinate */
+  // displayLink() {
+  //   const { options } = this.props;
+  //   const mapItems: JSX.Element[] = [];
+  //   const arrayLinks: LinkClass[] = options.arrayLinks;
+
+  //   arrayLinks.forEach((link: LinkClass) => {
+  //     let item: JSX.Element = <div></div>;
+  //     if (link.defineHowToGetCoordonate.value === 'coordinate') {
+  //       item = (
+  //         <DrawLinkWithCoordinates
+  //           key={'link' + link.id.toString()}
+  //           pointAPositionX={link.pointAPositionX}
+  //           pointAPositionY={link.pointAPositionY}
+  //           pointBPositionX={link.pointBPositionX}
+  //           pointBPositionY={link.pointBPositionY}
+  //           colorA={link.colorCoordinateA}
+  //           colorB={link.colorCoordinateB}
+  //           orientationLink={link.orientationLink.value || ''}
+  //           labelA={link.labelLinkA}
+  //           labelB={link.labelLinkB}
+  //           labelAPositionX={link.positionXLabelA}
+  //           labelAPositionY={link.positionYLabelA}
+  //           labelBPositionX={link.positionXLabelB}
+  //           labelBPositionY={link.positionYLabelB}
+  //           height={parseInt(this.props.options.baseMap.height, 10)}
+  //           name={link.name}
+  //         />
+  //       );
+  //     } else if (link.defineHowToGetCoordonate.value === 'point') {
+  //       item = (
+  //         <DrawLinkWithPoints
+  //           key={'link' + link.id.toString()}
+  //           pointIn={link.pointIn}
+  //           pointOut={link.pointOut}
+  //           labelA={link.labelLinkA}
+  //           labelB={link.labelLinkB}
+  //           labelAPositionX={link.positionXLabelA}
+  //           labelAPositionY={link.positionYLabelA}
+  //           labelBPositionX={link.positionXLabelB}
+  //           labelBPositionY={link.positionYLabelB}
+  //           orientationLink={link.orientationLink.value || ''}
+  //           height={parseInt(this.props.options.baseMap.height, 10)}
+  //           name={link.name}
+  //         />
+  //       );
+  //     } else if (link.defineHowToGetCoordonate.value === 'region') {
+  //       item = (
+  //         <DrawLinkWithRegions
+  //           key={'link' + link.id.toString()}
+  //           regionIn={link.regionIn}
+  //           regionOut={link.regionOut}
+  //           colorA={link.colorRegionIn}
+  //           colorB={link.colorRegionOut}
+  //           labelA={link.labelLinkA}
+  //           labelB={link.labelLinkB}
+  //           labelAPositionX={link.positionXLabelA}
+  //           labelAPositionY={link.positionYLabelA}
+  //           labelBPositionX={link.positionXLabelB}
+  //           labelBPositionY={link.positionYLabelB}
+  //           orientationLink={link.orientationLink.value || ''}
+  //           height={parseInt(this.props.options.baseMap.height, 10)}
+  //           name={link.name}
+  //         />
+  //       );
+  //     }
+  //     mapItems.push(item);
+  //   });
+  //   return <ul>{mapItems}</ul>;
+  // }
 
   /**
    * to do
@@ -549,7 +537,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     const yMaxPx: number = (yMax + 100) * (heightPanel / 200);
     const heightInitialSpace: number = yMaxPx - yMinPx;
 
-    if (event.nativeEvent.target.id === 'initialSpace'  || event.nativeEvent.target.id === 'mainPanel') {
+    if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'mainPanel') {
       positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
       positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
 
@@ -851,7 +839,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       false,
       '',
       '',
-      '',
+      { bold: false, italic: false, underline: false },
       false,
       {
         legendElement: '',
@@ -916,7 +904,16 @@ export class SimplePanel extends PureComponent<Props, State> {
       zIndex,
       pointC.x,
       pointC.y,
-      isIncurved
+      isIncurved,
+      {
+        key: '',
+        unit: '',
+        format: '',
+        keyValue: '',
+        refId: '',
+        manageValue: 'avg',
+      },
+      []
     );
     const newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
     newArrayOrientedLink.push(newOrientedLink);
@@ -983,14 +980,14 @@ export class SimplePanel extends PureComponent<Props, State> {
           isIncurved={orientedLink.isIncurved}
           auxiliaryMetrics={orientedLink.metrics}
           valuesAuxiliaryMetrics={valuesAuxiliaryMetrics}
+          police={this.props.options.display.police}
+          sizePolice={this.props.options.display.size}
         />
       );
       mapItems.push(item);
     });
     this.updateAssociateOrientedLinkInToPoint();
     this.updateAssociateOrientedLinkOutToPoint();
-    //this.defineAssociateOrientedLinksToPoint();
-    //this.defineAssociateOrientedLinkToRegion();
     return <div>{mapItems}</div>;
   }
 
@@ -1000,8 +997,6 @@ export class SimplePanel extends PureComponent<Props, State> {
   getValuesMainMetricOfPoint(point: PointClass) {
     reqMetricPoint(point, this.props);
     this.getValuesMainMetric(point.mainMetric, undefined, point);
-    // const value: number | null = getResultQuery(point.mainMetric);
-    // point.valueMetric = value ? value.toString() : '-';
   }
 
   getValuesMainMetricOfOrientedLink(orientedLink: OrientedLinkClass) {
@@ -1015,77 +1010,59 @@ export class SimplePanel extends PureComponent<Props, State> {
   getValuesMainMetric(mainMetric: Metric, orientedLink?: OrientedLinkClass, point?: PointClass) {
     let valueMainMetric = 0;
     let totalValuesCount = 0;
-
-    // const value: number | null = getResultQuery(orientedLink.mainMetric);
-    // orientedLink.valueMainMetricA = value ? value.toString() : '-';
-    // orientedLink.valueMainMetricB = value ? value.toString() : '-';
     const key: string = mainMetric.key;
     const keyValue: string = mainMetric.keyValue;
     if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
       mainMetric.returnQuery.forEach((line: DataFrame) => {
         if (line.fields[0].labels) {
-          if (line.fields[0].labels[key] === keyValue) {
-            const sizeQuery: number = line.fields[0].values.length;
-            for (let i = 0; i < sizeQuery; i++) {
+          if (key !== '' && keyValue !== '') {
+            if (line.fields[0].labels[key] === keyValue) {
+              const countValues: number = line.fields[0].values.length;
+              for (let i = 0; i < countValues; i++) {
+                if (line.fields[0].values.get(i)) {
+                  totalValuesCount++;
+                  valueMainMetric += line.fields[0].values.get(i);
+                }
+              }
+            }
+          } else {
+            const countValues: number = line.fields[0].values.length;
+            for (let i = 0; i < countValues; i++) {
               if (line.fields[0].values.get(i)) {
                 totalValuesCount++;
                 valueMainMetric += line.fields[0].values.get(i);
               }
             }
-            if (orientedLink) {
-              if (mainMetric.manageValue === 'avg') {
-                orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
-                orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
-              } else if (orientedLink.mainMetric.manageValue === 'sum') {
+          }
+          if (orientedLink) {
+            if (mainMetric.manageValue === 'avg') {
+              orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
+              orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
+            } else if (orientedLink.mainMetric.manageValue === 'sum') {
+              orientedLink.valueMainMetricA = valueMainMetric.toString();
+              orientedLink.valueMainMetricB = valueMainMetric.toString();
+            } else if (orientedLink.mainMetric.manageValue === 'error') {
+              if (totalValuesCount > 1) {
+                orientedLink.valueMainMetricA = 'error';
+                orientedLink.valueMainMetricB = 'error';
+              } else {
                 orientedLink.valueMainMetricA = valueMainMetric.toString();
                 orientedLink.valueMainMetricB = valueMainMetric.toString();
-              } else if (orientedLink.mainMetric.manageValue === 'error') {
-                if (totalValuesCount > 1) {
-                  orientedLink.valueMainMetricA = 'error';
-                  orientedLink.valueMainMetricB = 'error';
-                } else {
-                  orientedLink.valueMainMetricA = valueMainMetric.toString();
-                  orientedLink.valueMainMetricB = valueMainMetric.toString();
-                }
               }
-            } else if (point) {
-              if (mainMetric.manageValue === 'avg') {
-                point.valueMetric = (valueMainMetric / totalValuesCount).toString();
-              } else if (mainMetric.manageValue === 'sum') {
+            }
+          } else if (point) {
+            if (mainMetric.manageValue === 'avg') {
+              point.valueMetric = (valueMainMetric / totalValuesCount).toString();
+            } else if (mainMetric.manageValue === 'sum') {
+              point.valueMetric = valueMainMetric.toString();
+            } else if (mainMetric.manageValue === 'error') {
+              if (totalValuesCount > 1) {
+                point.valueMetric = 'error';
+              } else {
                 point.valueMetric = valueMainMetric.toString();
-              } else if (mainMetric.manageValue === 'error') {
-                if (totalValuesCount > 1) {
-                  point.valueMetric = 'error';
-                } else {
-                  point.valueMetric = valueMainMetric.toString();
-                }
               }
             }
           }
-          // else if (orientedLink.mainMetric.key === '' || orientedLink.mainMetric.keyValue === '') {
-          // 	const sizeQuery: number = line.fields[0].values.length;
-          // 	for (let i = 0; i < sizeQuery; i++) {
-          // 		if (line.fields[0].values.get(i)) {
-          // 			totalValuesCount++;
-          // 			valueMainMetric += line.fields[0].values.get(i);
-          // 		}
-          // 	}
-          // 	if (orientedLink.mainMetric.manageValue === 'avg') {
-          // 		orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
-          // 		orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
-          // 	} else if (orientedLink.mainMetric.manageValue === 'sum') {
-          // 		orientedLink.valueMainMetricA = valueMainMetric.toString();
-          // 		orientedLink.valueMainMetricB = valueMainMetric.toString();
-          // 	} else if (orientedLink.mainMetric.manageValue === 'error') {
-          // 		if (totalValuesCount > 1) {
-          // 			orientedLink.valueMainMetricA = 'error';
-          // 			orientedLink.valueMainMetricB = 'error';
-          // 		} else {
-          // 			orientedLink.valueMainMetricA = valueMainMetric.toString();
-          // 			orientedLink.valueMainMetricB = valueMainMetric.toString();
-          // 		}
-          // 	}
-          // }
         }
       });
     }
@@ -1101,56 +1078,59 @@ export class SimplePanel extends PureComponent<Props, State> {
     return this.getValuesAuxiliaryMetrics(orientedLink.metrics, orientedLink.mainMetric);
   };
 
-  getValuesAuxiliaryMetrics = (auxiliaryMetrics: Metric[], mainMatric: Metric): string[] => {
+  getValuesAuxiliaryMetrics = (auxiliaryMetrics: Metric[], mainMetric: Metric): string[] => {
     let valueAuxiliaryMetric: string[] = [];
-
+    const countMetrics: number = auxiliaryMetrics.length;
     auxiliaryMetrics.forEach((metric: Metric) => {
-      let totalValue = 0;
+      let countTotalValues = 0;
+      let resultTotalValues = 0;
       let result = '';
       if (metric.returnQuery && metric.returnQuery.length > 0) {
-        metric.returnQuery?.forEach((line: DataFrame) => {
-          if (line.fields[0].labels) {
-            if (line.fields[0].labels[mainMatric.key] === mainMatric.keyValue) {
-              if (line.fields[0].labels[metric.key] === metric.keyValue) {
-                const countValues: number = line.fields[0].values.length;
-                for (let i = 0; i < countValues; i++) {
-                  if (line.fields[0].values.get(i)) {
-                    totalValue += line.fields[0].values.get(i);
+        let numberLoop: number = (metric.returnQuery?.length || 0) / countMetrics;
+        if (metric.key !== '' && metric.keyValue !== '') {
+          for (let i = 0; i < numberLoop; i++) {
+            let line = metric.returnQuery[i];
+            if (line.fields[0].labels) {
+              if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || (mainMetric.key === '' && mainMetric.keyValue === '')) {
+                if (line.fields[0].labels[metric.key] === metric.keyValue) {
+                  const countValues: number = line.fields[0].values.length;
+                  for (let i = 0; i < countValues; i++) {
+                    if (line.fields[0].values.get(i)) {
+                      resultTotalValues += line.fields[0].values.get(i);
+                      countTotalValues++;
+                    }
                   }
                 }
-                if (metric.manageValue === 'avg') {
-                  result = (totalValue / countValues).toString();
-                } else if (metric.manageValue === 'sum') {
-                  result = totalValue.toString();
-                } else if (metric.manageValue === 'error') {
-                  if (countValues > 1) {
-                    result = 'error';
-                  } else {
-                    result = totalValue.toString();
-                  }
-                }
-                // } else if (metric.key === '' && metric.keyValue === '') {
-                // 	let totalValue: number = 0;
-                // 	const countValues: number = line.fields[0].values.length;
-                // 	for(let i = 0; i < countValues; i++) {
-                // 		totalValue += line.fields[0].values.get(i);
-                // 	}
-                // 	if (metric.manageValue === 'avg') {
-                // 		result = (totalValue / countValues).toString();
-                // 	} else if (metric.manageValue === 'sum') {
-                // 		result = totalValue.toString();
-                // 	} else if (metric.manageValue === 'error') {
-                // 		if (countValues > 1) {
-                // 			result = 'error';
-                // 		} else {
-                // 			result = totalValue.toString();
-                // 		}
-                // 	}
-                // }
               }
             }
           }
-        });
+        } else {
+          for (let i = 0; i < numberLoop; i++) {
+            let line = metric.returnQuery[i];
+            if (line.fields[0].labels) {
+              if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || (mainMetric.key === '' && mainMetric.keyValue === '')) {
+                const countValues: number = line.fields[0].values.length;
+                for (let i = 0; i < countValues; i++) {
+                  if (line.fields[0].values.get(i)) {
+                    resultTotalValues += line.fields[0].values.get(i);
+                    countTotalValues++;
+                  }
+                }
+              }
+            }
+          }
+        }
+        if (metric.manageValue === 'avg') {
+          result = (resultTotalValues / countTotalValues).toString();
+        } else if (metric.manageValue === 'sum') {
+          result = resultTotalValues.toString();
+        } else if (metric.manageValue === 'error') {
+          if (countTotalValues > 1) {
+            result = 'error';
+          } else {
+            result = resultTotalValues.toString();
+          }
+        }
       }
       if (result !== '') {
         valueAuxiliaryMetric.push(result);
@@ -1158,44 +1138,6 @@ export class SimplePanel extends PureComponent<Props, State> {
     });
     return valueAuxiliaryMetric;
   };
-
-  // defineAssociateLinksToPoint() {
-  // 	const arrayAssociateLinks = this.props.options.arrayLinks;
-  // 	const arrayPoints = this.props.options.arrayPoints;
-
-  // 	arrayPoints.forEach((point) => {
-  // 		point.associateLinkIn = [];
-  // 		point.associateLinkOut = [];
-  // 	});
-  // 	arrayAssociateLinks.forEach((link) => {
-  // 		arrayPoints.forEach((point) => {
-  // 			if (link.pointIn.value?.id === point.id) {
-  // 				point.associateLinkIn.push(link);
-  // 			} else if (link.pointOut.value?.id === point.id) {
-  // 				point.associateLinkOut.push(link);
-  // 			}
-  // 		});
-  // 	});
-  // }
-
-  // defineAssociateOrientedLinksToPoint() {
-  // 	const arrayOrientedLinks = this.props.options.arrayOrientedLinks;
-  // 	const arrayPoints = this.props.options.arrayPoints;
-
-  // 	arrayPoints.forEach((point) => {
-  // 		point.associateOrientedLinksIn = [];
-  // 		point.associateOrientedLinksOut = [];
-  // 	});
-  // 	arrayOrientedLinks.forEach((orientedLink) => {
-  // 		arrayPoints.forEach((point) => {
-  // 			if (orientedLink.pointIn.value?.id === point.id) {
-  // 				point.associateOrientedLinksIn.push(orientedLink);
-  // 			} else if (orientedLink.pointOut.value?.id === point.id) {
-  // 				point.associateOrientedLinksOut.push(orientedLink);
-  // 			}
-  // 		});
-  // 	});
-  // }
 
   changeValueButtonToLink = () => {
     this.setState({
@@ -1442,6 +1384,10 @@ export class SimplePanel extends PureComponent<Props, State> {
    * update button css when mount component
    */
   componentDidMount = async () => {
+    // this.props.onOptionsChange({
+    //   ...this.props.options,
+    //   displayButton: false,
+    // });
     if (this.props.options.baseMap.modeSVG && this.props.options.baseMap.image !== '') {
       fetch(this.props.options.baseMap.image)
         .then(res => res.text())
@@ -1474,6 +1420,8 @@ export class SimplePanel extends PureComponent<Props, State> {
           background.layerImage = newStr;
           this.props.onOptionsChange({ ...this.props.options, baseMap: background });
         });
+    } else {
+      this.chargeRegion();
     }
     this.updateButtonCss();
   };
@@ -1599,6 +1547,7 @@ export class SimplePanel extends PureComponent<Props, State> {
 
   /** render */
   render() {
+
     let styleBackground;
     if (this.props.options.baseMap.modeSVG) {
       styleBackground = {
@@ -1650,8 +1599,9 @@ export class SimplePanel extends PureComponent<Props, State> {
 
       fontFamily: this.props.options.display.police,
       fontSize: this.props.options.display.size,
-      fontStyle: this.props.options.display.style !== 'bold' ? this.props.options.display.style : 'normal',
-      fontWeight: this.props.options.display.style === 'bold' ? 'bold' : 'normal',
+      fontStyle: this.props.options.display.style.italic ? 'italic' : 'normal',
+      fontWeight: this.props.options.display.style.bold ? 'bold' : 'normal',
+      textDecoration: this.props.options.display.style.underline ? 'underline' : 'none',
     } as React.CSSProperties;
 
     return (
@@ -1676,7 +1626,7 @@ export class SimplePanel extends PureComponent<Props, State> {
                 }}
               >
                 <Modal title="Add Region" onDismiss={this.addNode} onClickBackdrop={this.addNode} isOpen={this.state.nbClickButton}>
-                  <AddCoordinate options={this.props.options} onOptionsChange={this.props.onOptionsChange} data={this.props.data} />
+                  <AddCoordinate options={this.props.options} onOptionsChange={this.props.onOptionsChange} data={this.props.data} isRegion={true} />
                 </Modal>
               </div>
             )}

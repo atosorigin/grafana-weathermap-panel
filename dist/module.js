@@ -1134,8 +1134,10 @@ var createInputsOrientedLink = function createInputsOrientedLink(id, dataCoordin
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createInputsPoint", function() { return createInputsPoint; });
 /* harmony import */ var Models_InputSelectableClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Models/InputSelectableClass */ "./Models/InputSelectableClass.tsx");
+ //import { SelectableValue } from '@grafana/data';
+//import { RegionClass } from 'Models/RegionClass';
 
-var createInputsPoint = function createInputsPoint(id, dataEspaceCoor) {
+var createInputsPoint = function createInputsPoint(id) {
   // const newFieldLinkWithCoordonateSpace: InputSelectableClass = new InputSelectableClass(id.toString() + 'LinkWithCoordinateSpace',
   // 	'Associate region', 'linkWithCoordinateSpace' + id.toString(), 'select',
   // 	dataEspaceCoor, '', true, 'Associate region', undefined);
@@ -1348,8 +1350,6 @@ __webpack_require__.r(__webpack_exports__);
 var editGoodParameterPoint = function editGoodParameterPoint(name, editCoor, newValue, newValueSelect) {
   if (name.startsWith('label')) {
     editCoor.label = newValue;
-  } else if (name.startsWith('linkWithCoordinateSpace')) {
-    editCoor.coordinateSpace = newValueSelect;
   } else if (name.startsWith('drawGraphicMarker')) {
     editCoor.drawGraphicMarker = newValueSelect;
   } else if (name.startsWith('shape')) {
@@ -2502,6 +2502,97 @@ var fetchConfFile = function fetchConfFile(filesUrl) {
 
 /***/ }),
 
+/***/ "./Functions/initPoint.tsx":
+/*!*********************************!*\
+  !*** ./Functions/initPoint.tsx ***!
+  \*********************************/
+/*! exports provided: initPoint, clonePoint */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initPoint", function() { return initPoint; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clonePoint", function() { return clonePoint; });
+/* harmony import */ var _Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Models/TextObjectClass */ "./Models/TextObjectClass.tsx");
+/* harmony import */ var _Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Models/LinkURLClass */ "./Models/LinkURLClass.tsx");
+/* harmony import */ var _Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Models/PositionParameterClass */ "./Models/PositionParameterClass.tsx");
+/* harmony import */ var _Models_PointClass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Models/PointClass */ "./Models/PointClass.tsx");
+
+
+
+
+var initPoint = function initPoint(index) {
+  var newId = index;
+  var initTextObject = new _Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_0__["TextObject"]('', false, 'rgba(255, 255, 255, 0)', 'rgba(0, 0, 0, 1)', {
+    italic: false,
+    bold: false,
+    underline: false
+  }, false, {
+    legendElement: '',
+    numericFormatElement: '',
+    unit: '',
+    displayObjectInText: false,
+    // 'displayObjectPermanently': false,
+    addColorTextElement: false,
+    colorTextElement: 'white',
+    addColorBackElement: false,
+    colorBackElement: 'black'
+  }, {
+    legendElement: '',
+    numericFormatElement: '',
+    unit: '',
+    displayObjectInText: false,
+    // 'displayObjectPermanently': false,
+    addColorTextElement: false,
+    colorTextElement: 'white',
+    addColorBackElement: false,
+    colorBackElement: 'black'
+  });
+  var linkURL = new _Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_1__["LinkURLClass"]('', '', '');
+  var positionParameter = new _Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_2__["PositionParameterClass"]('0', '0', '0', '0', {}, {});
+  var newCoordinate = new _Models_PointClass__WEBPACK_IMPORTED_MODULE_3__["PointClass"](newId, linkURL, '', [], '', initTextObject, {
+    key: '',
+    unit: '',
+    format: '',
+    keyValue: '',
+    refId: '',
+    manageValue: 'avg'
+  }, [], false, false, false, positionParameter, 'point' + newId.toString(), '', {
+    label: 'Yes',
+    value: 'true'
+  }, {
+    label: 'Circle',
+    value: 'circle'
+  }, {
+    label: 'Medium',
+    value: 'medium'
+  }, {
+    label: 'Medium',
+    value: 'medium'
+  }, '0', '0', '0', 'black', [], []);
+  return newCoordinate;
+};
+var clonePoint = function clonePoint(point) {
+  var initTextObject = new _Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_0__["TextObject"]( // point.textObj.legend,
+  point.textObj.value, point.textObj.isTextRegion, point.textObj.colorBack, point.textObj.colorText, point.textObj.style, point.textObj.generateObjectText, point.textObj.valueGenerateObjectText, point.textObj.generateAuxiliaryElement);
+  var linkURL = new _Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_1__["LinkURLClass"](point.linkURL.followLink, point.linkURL.hoveringTooltipLink, point.linkURL.hoveringTooltipText);
+  var positionParameter = new _Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_2__["PositionParameterClass"](point.positionParameter.labelAPositionX, point.positionParameter.labelAPositionY, point.positionParameter.labelBPositionX, point.positionParameter.labelBPositionY, point.positionParameter.tooltipPositionA, point.positionParameter.tooltipPositionB);
+  var mainMetric = {
+    key: point.mainMetric.key,
+    unit: point.mainMetric.unit,
+    format: point.mainMetric.format,
+    keyValue: point.mainMetric.keyValue,
+    refId: point.mainMetric.refId,
+    expr: point.mainMetric.expr,
+    returnQuery: point.mainMetric.returnQuery,
+    manageValue: point.mainMetric.manageValue
+  };
+  var newCoordinate = new _Models_PointClass__WEBPACK_IMPORTED_MODULE_3__["PointClass"](point.id, linkURL, point.meta, point.lowerLimit, point.label, initTextObject, mainMetric, point.metrics, point.colorMode, point.traceBack, point.traceBorder, positionParameter, point.name, point.valueMetric, point.drawGraphicMarker, point.shape, point.sizeWidth, point.sizeHeight, point.rotateArrow, point.positionShapeX, point.positionShapeY, point.color, point.associateOrientedLinksIn, point.associateOrientedLinksOut);
+  return newCoordinate;
+};
+
+/***/ }),
+
 /***/ "./Functions/initRegionCoordinateSpace.tsx":
 /*!*************************************************!*\
   !*** ./Functions/initRegionCoordinateSpace.tsx ***!
@@ -2525,7 +2616,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var initRegionCoordinateSpace = function initRegionCoordinateSpace(index) {
   var newId = index + 1;
-  var initTextObject = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_1__["TextObject"]('', false, 'rgba(255, 255, 255, 0)', 'rgba(0, 0, 0, 1)', '', false, {
+  var initTextObject = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_1__["TextObject"]('', false, 'rgba(255, 255, 255, 0)', 'rgba(0, 0, 0, 1)', {
+    bold: false,
+    italic: false,
+    underline: false
+  }, false, {
     legendElement: '',
     numericFormatElement: '',
     unit: '',
@@ -2566,7 +2661,7 @@ var initRegionCoordinateSpace = function initRegionCoordinateSpace(index) {
 };
 var cloneRegionCoordinateSpace = function cloneRegionCoordinateSpace(region) {
   var initTextObject = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_1__["TextObject"]( // region.textObj.legend,
-  region.textObj.value, region.textObj.isTextRegion, region.textObj.colorBack, region.textObj.colorText, region.textObj.styleText, region.textObj.generateObjectText, region.textObj.valueGenerateObjectText, region.textObj.generateAuxiliaryElement);
+  region.textObj.value, region.textObj.isTextRegion, region.textObj.colorBack, region.textObj.colorText, region.textObj.style, region.textObj.generateObjectText, region.textObj.valueGenerateObjectText, region.textObj.generateAuxiliaryElement);
   var linkURL = new Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_2__["LinkURLClass"](region.linkURL.followLink, region.linkURL.hoveringTooltipLink, region.linkURL.hoveringTooltipText);
   var coords = {
     xMin: region.coords.xMin,
@@ -3831,7 +3926,7 @@ var OrientedLinkClass =
 function (_super) {
   Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(OrientedLinkClass, _super);
 
-  function OrientedLinkClass(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter, name, orientationLink, pointAPositionX, pointAPositionY, colorCoordinateA, pointBPositionX, pointBPositionY, colorCoordinateB, valueMainMetricA, valueMainMetricB, pointIn, pointOut, regionIn, regionOut, zIndex, pointCPositionX, pointCPositionY, isIncurved) {
+  function OrientedLinkClass(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter, name, orientationLink, pointAPositionX, pointAPositionY, colorCoordinateA, pointBPositionX, pointBPositionY, colorCoordinateB, valueMainMetricA, valueMainMetricB, pointIn, pointOut, regionIn, regionOut, zIndex, pointCPositionX, pointCPositionY, isIncurved, mainMetricB, metricsB) {
     var _this = _super.call(this, id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter) || this;
 
     _this.name = name;
@@ -3852,6 +3947,8 @@ function (_super) {
     _this.pointCPositionX = pointCPositionX;
     _this.pointCPositionY = pointCPositionY;
     _this.isIncurved = isIncurved;
+    _this.mainMetricB = mainMetricB;
+    _this.metricsB = metricsB;
     return _this;
   }
 
@@ -3885,12 +3982,11 @@ var PointClass =
 function (_super) {
   Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PointClass, _super);
 
-  function PointClass(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter, name, valueMetric, coordinateSpace, drawGraphicMarker, shape, sizeWidth, sizeHeight, rotateArrow, positionShapeX, positionShapeY, color, associateLinkIn, associateLinkOut, associateOrientedLinksIn, associateOrientedLinksOut) {
+  function PointClass(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter, name, valueMetric, drawGraphicMarker, shape, sizeWidth, sizeHeight, rotateArrow, positionShapeX, positionShapeY, color, associateOrientedLinksIn, associateOrientedLinksOut) {
     var _this = _super.call(this, id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter) || this;
 
     _this.name = name;
     _this.valueMetric = valueMetric;
-    _this.coordinateSpace = coordinateSpace;
     _this.drawGraphicMarker = drawGraphicMarker;
     _this.shape = shape;
     _this.sizeWidth = sizeWidth;
@@ -3899,8 +3995,6 @@ function (_super) {
     _this.positionShapeX = positionShapeX;
     _this.positionShapeY = positionShapeY;
     _this.color = color;
-    _this.associateLinkIn = associateLinkIn;
-    _this.associateLinkOut = associateLinkOut;
     _this.associateOrientedLinksIn = associateOrientedLinksIn;
     _this.associateOrientedLinksOut = associateOrientedLinksOut;
     return _this;
@@ -3995,13 +4089,15 @@ var TextObject =
 /** @class */
 function () {
   function TextObject( // legend: boolean,
-  value, isTextRegion, colorBack, colorText, styleText, generateObjectText, valueGenerateObjectText, generateAuxiliaryElement) {
+  value, isTextRegion, colorBack, colorText, style, // styleText: string,
+  generateObjectText, valueGenerateObjectText, generateAuxiliaryElement) {
     // this.legend = legend;
     this.value = value;
     this.isTextRegion = isTextRegion;
     this.colorBack = colorBack;
     this.colorText = colorText;
-    this.styleText = styleText;
+    this.style = style; // this.styleText = styleText;
+
     this.generateObjectText = generateObjectText;
     this.valueGenerateObjectText = valueGenerateObjectText;
     this.generateAuxiliaryElement = generateAuxiliaryElement;
@@ -4229,10 +4325,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var components_importInput__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! components/importInput */ "./components/importInput.tsx");
 /* harmony import */ var components_CoordinateSpace_manageCoordinateSpace__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! components/CoordinateSpace/manageCoordinateSpace */ "./components/CoordinateSpace/manageCoordinateSpace.tsx");
 /* harmony import */ var _components_orientedLinkForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/orientedLinkForm */ "./components/orientedLinkForm.tsx");
-/* harmony import */ var components_pointForm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! components/pointForm */ "./components/pointForm.tsx");
-/* harmony import */ var components_display__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! components/display */ "./components/display.tsx");
-/* harmony import */ var style_SimpleEditor_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! style/SimpleEditor.css */ "./style/SimpleEditor.css");
-/* harmony import */ var style_SimpleEditor_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(style_SimpleEditor_css__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var components_display__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! components/display */ "./components/display.tsx");
+/* harmony import */ var style_SimpleEditor_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! style/SimpleEditor.css */ "./style/SimpleEditor.css");
+/* harmony import */ var style_SimpleEditor_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(style_SimpleEditor_css__WEBPACK_IMPORTED_MODULE_8__);
 
 
 
@@ -4240,7 +4335,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // import PanelData from 'components/panelData';
-
+//import PointForm from 'components/pointForm';
 
  // import TimeSelector from 'components/timeSelector';
 
@@ -4529,7 +4624,7 @@ function (_super) {
       onChangeTab: function onChangeTab() {
         return _this.goToTab(4);
       }
-    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["TabContent"], null, this.state.tabsVariable[0] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_display__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["TabContent"], null, this.state.tabsVariable[0] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_display__WEBPACK_IMPORTED_MODULE_7__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data
@@ -4564,16 +4659,23 @@ function (_super) {
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["TabContent"], null, this.state.tabsCoordinateSpace[0] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_CoordinateSpace_manageCoordinateSpace__WEBPACK_IMPORTED_MODULE_5__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
-      data: this.props.data
-    }), this.state.tabsCoordinateSpace[1] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_pointForm__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      key: 'pointInputList',
-      callBackFromParent: this.myCallBackArrayPoints.bind(this),
-      regionCoordinateSpace: this.props.options.regionCoordinateSpace,
-      oldArrayPointClass: this.props.options.arrayPoints,
+      data: this.props.data,
+      isRegion: true
+    }), this.state.tabsCoordinateSpace[1] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_CoordinateSpace_manageCoordinateSpace__WEBPACK_IMPORTED_MODULE_5__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
-      data: this.props.data
-    }), this.state.tabsCoordinateSpace[3] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_orientedLinkForm__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      data: this.props.data,
+      isRegion: false
+    }) // <PointForm
+    //   key={'pointInputList'}
+    //   callBackFromParent={this.myCallBackArrayPoints.bind(this)}
+    //   regionCoordinateSpace={this.props.options.regionCoordinateSpace}
+    //   oldArrayPointClass={this.props.options.arrayPoints}
+    //   options={this.props.options}
+    //   onOptionsChange={this.props.onOptionsChange}
+    //   data={this.props.data}
+    // />
+    , this.state.tabsCoordinateSpace[3] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_orientedLinkForm__WEBPACK_IMPORTED_MODULE_6__["default"], {
       arrayPoint: this.props.options.arrayPoints,
       regionCoordinateSpace: this.props.options.regionCoordinateSpace,
       oldArrayOrientedLinkClass: this.props.options.arrayOrientedLinks,
@@ -4620,15 +4722,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Draw_drawRectangle__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Draw/drawRectangle */ "./components/Draw/drawRectangle.tsx");
 /* harmony import */ var _components_legend__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/legend */ "./components/legend.tsx");
 /* harmony import */ var _components_Draw_drawPoint__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Draw/drawPoint */ "./components/Draw/drawPoint.tsx");
-/* harmony import */ var _components_Draw_drawArrow__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Draw/drawArrow */ "./components/Draw/drawArrow.tsx");
-/* harmony import */ var _components_Draw_drawLinkWithCoordinates__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Draw/drawLinkWithCoordinates */ "./components/Draw/drawLinkWithCoordinates.tsx");
-/* harmony import */ var _components_Draw_drawLinkWithPoints__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/Draw/drawLinkWithPoints */ "./components/Draw/drawLinkWithPoints.tsx");
-/* harmony import */ var _components_Draw_drawLinkWithRegions__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/Draw/drawLinkWithRegions */ "./components/Draw/drawLinkWithRegions.tsx");
-/* harmony import */ var _components_Draw_drawOrientedLink__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/Draw/drawOrientedLink */ "./components/Draw/drawOrientedLink.tsx");
-/* harmony import */ var Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! Models/PositionParameterClass */ "./Models/PositionParameterClass.tsx");
+/* harmony import */ var _components_Draw_drawOrientedLink__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Draw/drawOrientedLink */ "./components/Draw/drawOrientedLink.tsx");
+/* harmony import */ var Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! Models/PositionParameterClass */ "./Models/PositionParameterClass.tsx");
 
 
 
+ //import { LinkClass } from 'Models/LinkClass';
 
 
 
@@ -4641,10 +4740,10 @@ __webpack_require__.r(__webpack_exports__);
 
  // import DrawRectangleExtend from './components/Draw/drawRectangleExtend';
 
-
-
-
-
+ //import DrawArrow from './components/Draw/drawArrow';
+// import DrawLinkWithCoordinates from './components/Draw/drawLinkWithCoordinates';
+// import DrawLinkWithPoints from './components/Draw/drawLinkWithPoints';
+// import DrawLinkWithRegions from './components/Draw/drawLinkWithRegions';
 
 
 
@@ -4754,7 +4853,11 @@ function (_super) {
     _this.createPointToClick = function (x, y) {
       var id = _this.defineIdPoint();
 
-      var initTextObject = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_5__["TextObject"]('', false, '', '', '', false, {
+      var initTextObject = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_5__["TextObject"]('', false, '', '', {
+        bold: false,
+        italic: false,
+        underline: false
+      }, false, {
         legendElement: '',
         numericFormatElement: '',
         unit: '',
@@ -4776,7 +4879,7 @@ function (_super) {
         colorBackElement: 'black'
       });
       var parametrageMetric = new Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_6__["LinkURLClass"]('', '', '');
-      var positionParameter = new Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_18__["PositionParameterClass"]('0', '0', '0', '0', {}, {});
+      var positionParameter = new Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_14__["PositionParameterClass"]('0', '0', '0', '0', {}, {});
       var newPoint = new Models_PointClass__WEBPACK_IMPORTED_MODULE_3__["PointClass"](id, parametrageMetric, '', [], '', initTextObject, {
         key: '',
         unit: '',
@@ -4784,7 +4887,7 @@ function (_super) {
         keyValue: '',
         refId: '',
         manageValue: 'avg'
-      }, [], false, false, false, positionParameter, 'point' + id.toString(), '', {}, {
+      }, [], false, false, false, positionParameter, 'point' + id.toString(), '', {
         label: 'Yes',
         value: 'true'
       }, {
@@ -4796,19 +4899,154 @@ function (_super) {
       }, {
         label: 'Medium',
         value: 'medium'
-      }, '0', x.toString(), y.toString(), 'black', [], [], [], []);
+      }, '0', x.toString(), y.toString(), 'black', [], []);
       var newArrayPoint = _this.props.options.arrayPoints;
-      newArrayPoint.push(newPoint);
+      newArrayPoint.push(newPoint); //this.props.options.indexPoint = id;
 
       _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
         indexPoint: id,
         arrayPoints: newArrayPoint
       }));
 
+      console.log('panel');
+      console.log(_this.props.options.indexPoint);
       setTimeout(function () {
         _this.displayPoint();
       }, 100);
     };
+
+    _this.updatePositionOrientedLink = function (point) {
+      var e_1, _a, e_2, _b, e_3, _c;
+
+      var arrayOrientedLink = _this.props.options.arrayOrientedLinks;
+
+      try {
+        for (var arrayOrientedLink_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayOrientedLink), arrayOrientedLink_1_1 = arrayOrientedLink_1.next(); !arrayOrientedLink_1_1.done; arrayOrientedLink_1_1 = arrayOrientedLink_1.next()) {
+          var orientedLink = arrayOrientedLink_1_1.value;
+
+          try {
+            for (var _d = (e_2 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(point.associateOrientedLinksIn)), _e = _d.next(); !_e.done; _e = _d.next()) {
+              var associateOrientedLinkIn = _e.value;
+
+              if (associateOrientedLinkIn.name === orientedLink.name) {
+                orientedLink.pointAPositionX = point.positionShapeX;
+                orientedLink.pointAPositionY = point.positionShapeY;
+              }
+            }
+          } catch (e_2_1) {
+            e_2 = {
+              error: e_2_1
+            };
+          } finally {
+            try {
+              if (_e && !_e.done && (_b = _d["return"])) _b.call(_d);
+            } finally {
+              if (e_2) throw e_2.error;
+            }
+          }
+
+          try {
+            for (var _f = (e_3 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(point.associateOrientedLinksOut)), _g = _f.next(); !_g.done; _g = _f.next()) {
+              var associateOrientedLinkOut = _g.value;
+
+              if (associateOrientedLinkOut.name === orientedLink.name) {
+                orientedLink.pointBPositionX = point.positionShapeX;
+                orientedLink.pointBPositionY = point.positionShapeY;
+              }
+            }
+          } catch (e_3_1) {
+            e_3 = {
+              error: e_3_1
+            };
+          } finally {
+            try {
+              if (_g && !_g.done && (_c = _f["return"])) _c.call(_f);
+            } finally {
+              if (e_3) throw e_3.error;
+            }
+          }
+        }
+      } catch (e_1_1) {
+        e_1 = {
+          error: e_1_1
+        };
+      } finally {
+        try {
+          if (arrayOrientedLink_1_1 && !arrayOrientedLink_1_1.done && (_a = arrayOrientedLink_1["return"])) _a.call(arrayOrientedLink_1);
+        } finally {
+          if (e_1) throw e_1.error;
+        }
+      }
+    }; // /** display link with coordinate */
+    // displayLink() {
+    //   const { options } = this.props;
+    //   const mapItems: JSX.Element[] = [];
+    //   const arrayLinks: LinkClass[] = options.arrayLinks;
+    //   arrayLinks.forEach((link: LinkClass) => {
+    //     let item: JSX.Element = <div></div>;
+    //     if (link.defineHowToGetCoordonate.value === 'coordinate') {
+    //       item = (
+    //         <DrawLinkWithCoordinates
+    //           key={'link' + link.id.toString()}
+    //           pointAPositionX={link.pointAPositionX}
+    //           pointAPositionY={link.pointAPositionY}
+    //           pointBPositionX={link.pointBPositionX}
+    //           pointBPositionY={link.pointBPositionY}
+    //           colorA={link.colorCoordinateA}
+    //           colorB={link.colorCoordinateB}
+    //           orientationLink={link.orientationLink.value || ''}
+    //           labelA={link.labelLinkA}
+    //           labelB={link.labelLinkB}
+    //           labelAPositionX={link.positionXLabelA}
+    //           labelAPositionY={link.positionYLabelA}
+    //           labelBPositionX={link.positionXLabelB}
+    //           labelBPositionY={link.positionYLabelB}
+    //           height={parseInt(this.props.options.baseMap.height, 10)}
+    //           name={link.name}
+    //         />
+    //       );
+    //     } else if (link.defineHowToGetCoordonate.value === 'point') {
+    //       item = (
+    //         <DrawLinkWithPoints
+    //           key={'link' + link.id.toString()}
+    //           pointIn={link.pointIn}
+    //           pointOut={link.pointOut}
+    //           labelA={link.labelLinkA}
+    //           labelB={link.labelLinkB}
+    //           labelAPositionX={link.positionXLabelA}
+    //           labelAPositionY={link.positionYLabelA}
+    //           labelBPositionX={link.positionXLabelB}
+    //           labelBPositionY={link.positionYLabelB}
+    //           orientationLink={link.orientationLink.value || ''}
+    //           height={parseInt(this.props.options.baseMap.height, 10)}
+    //           name={link.name}
+    //         />
+    //       );
+    //     } else if (link.defineHowToGetCoordonate.value === 'region') {
+    //       item = (
+    //         <DrawLinkWithRegions
+    //           key={'link' + link.id.toString()}
+    //           regionIn={link.regionIn}
+    //           regionOut={link.regionOut}
+    //           colorA={link.colorRegionIn}
+    //           colorB={link.colorRegionOut}
+    //           labelA={link.labelLinkA}
+    //           labelB={link.labelLinkB}
+    //           labelAPositionX={link.positionXLabelA}
+    //           labelAPositionY={link.positionYLabelA}
+    //           labelBPositionX={link.positionXLabelB}
+    //           labelBPositionY={link.positionYLabelB}
+    //           orientationLink={link.orientationLink.value || ''}
+    //           height={parseInt(this.props.options.baseMap.height, 10)}
+    //           name={link.name}
+    //         />
+    //       );
+    //     }
+    //     mapItems.push(item);
+    //   });
+    //   return <ul>{mapItems}</ul>;
+    // }
+
     /**
      * to do
      */
@@ -5301,7 +5539,11 @@ function (_super) {
       var objectIn = coordinates[1];
       var objectOut = coordinates[2];
       var pointC = coordinates[3];
-      var initTextObject = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_5__["TextObject"]('', false, '', '', '', false, {
+      var initTextObject = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_5__["TextObject"]('', false, '', '', {
+        bold: false,
+        italic: false,
+        underline: false
+      }, false, {
         legendElement: '',
         numericFormatElement: '',
         unit: '',
@@ -5323,7 +5565,7 @@ function (_super) {
         colorBackElement: 'black'
       });
       var parametrageMetric = new Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_6__["LinkURLClass"]('', '', '');
-      var positionParameter = new Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_18__["PositionParameterClass"]('0', '0', '0', '0', {}, {});
+      var positionParameter = new Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_14__["PositionParameterClass"]('0', '0', '0', '0', {}, {});
       var newOrientedLink = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](id, parametrageMetric, '', [], '', initTextObject, {
         key: '',
         unit: '',
@@ -5334,7 +5576,14 @@ function (_super) {
       }, [], false, false, false, positionParameter, name, {
         label: 'Monodirectional',
         value: 'AB'
-      }, objectIn.x.toString(), objectIn.y.toString(), '#5794F2', objectOut.x.toString(), objectOut.y.toString(), '#E54658', '', '', objectIn.labelPoint, objectOut.labelPoint, objectIn.labelRegion, objectOut.labelRegion, zIndex, pointC.x, pointC.y, isIncurved);
+      }, objectIn.x.toString(), objectIn.y.toString(), '#5794F2', objectOut.x.toString(), objectOut.y.toString(), '#E54658', '', '', objectIn.labelPoint, objectOut.labelPoint, objectIn.labelRegion, objectOut.labelRegion, zIndex, pointC.x, pointC.y, isIncurved, {
+        key: '',
+        unit: '',
+        format: '',
+        keyValue: '',
+        refId: '',
+        manageValue: 'avg'
+      }, []);
       var newArrayOrientedLink = _this.props.options.arrayOrientedLinks;
       newArrayOrientedLink.push(newOrientedLink);
 
@@ -5361,60 +5610,68 @@ function (_super) {
       return _this.getValuesAuxiliaryMetrics(orientedLink.metrics, orientedLink.mainMetric);
     };
 
-    _this.getValuesAuxiliaryMetrics = function (auxiliaryMetrics, mainMatric) {
+    _this.getValuesAuxiliaryMetrics = function (auxiliaryMetrics, mainMetric) {
       var valueAuxiliaryMetric = [];
+      var countMetrics = auxiliaryMetrics.length;
       auxiliaryMetrics.forEach(function (metric) {
         var _a;
 
-        var totalValue = 0;
+        var countTotalValues = 0;
+        var resultTotalValues = 0;
         var result = '';
 
         if (metric.returnQuery && metric.returnQuery.length > 0) {
-          (_a = metric.returnQuery) === null || _a === void 0 ? void 0 : _a.forEach(function (line) {
-            if (line.fields[0].labels) {
-              if (line.fields[0].labels[mainMatric.key] === mainMatric.keyValue) {
-                if (line.fields[0].labels[metric.key] === metric.keyValue) {
-                  var countValues = line.fields[0].values.length;
+          var numberLoop = (((_a = metric.returnQuery) === null || _a === void 0 ? void 0 : _a.length) || 0) / countMetrics;
 
-                  for (var i = 0; i < countValues; i++) {
-                    if (line.fields[0].values.get(i)) {
-                      totalValue += line.fields[0].values.get(i);
+          if (metric.key !== '' && metric.keyValue !== '') {
+            for (var i = 0; i < numberLoop; i++) {
+              var line = metric.returnQuery[i];
+
+              if (line.fields[0].labels) {
+                if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || mainMetric.key === '' && mainMetric.keyValue === '') {
+                  if (line.fields[0].labels[metric.key] === metric.keyValue) {
+                    var countValues = line.fields[0].values.length;
+
+                    for (var i_1 = 0; i_1 < countValues; i_1++) {
+                      if (line.fields[0].values.get(i_1)) {
+                        resultTotalValues += line.fields[0].values.get(i_1);
+                        countTotalValues++;
+                      }
                     }
                   }
-
-                  if (metric.manageValue === 'avg') {
-                    result = (totalValue / countValues).toString();
-                  } else if (metric.manageValue === 'sum') {
-                    result = totalValue.toString();
-                  } else if (metric.manageValue === 'error') {
-                    if (countValues > 1) {
-                      result = 'error';
-                    } else {
-                      result = totalValue.toString();
-                    }
-                  } // } else if (metric.key === '' && metric.keyValue === '') {
-                  // 	let totalValue: number = 0;
-                  // 	const countValues: number = line.fields[0].values.length;
-                  // 	for(let i = 0; i < countValues; i++) {
-                  // 		totalValue += line.fields[0].values.get(i);
-                  // 	}
-                  // 	if (metric.manageValue === 'avg') {
-                  // 		result = (totalValue / countValues).toString();
-                  // 	} else if (metric.manageValue === 'sum') {
-                  // 		result = totalValue.toString();
-                  // 	} else if (metric.manageValue === 'error') {
-                  // 		if (countValues > 1) {
-                  // 			result = 'error';
-                  // 		} else {
-                  // 			result = totalValue.toString();
-                  // 		}
-                  // 	}
-                  // }
-
                 }
               }
             }
-          });
+          } else {
+            for (var i = 0; i < numberLoop; i++) {
+              var line = metric.returnQuery[i];
+
+              if (line.fields[0].labels) {
+                if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || mainMetric.key === '' && mainMetric.keyValue === '') {
+                  var countValues = line.fields[0].values.length;
+
+                  for (var i_2 = 0; i_2 < countValues; i_2++) {
+                    if (line.fields[0].values.get(i_2)) {
+                      resultTotalValues += line.fields[0].values.get(i_2);
+                      countTotalValues++;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          if (metric.manageValue === 'avg') {
+            result = (resultTotalValues / countTotalValues).toString();
+          } else if (metric.manageValue === 'sum') {
+            result = resultTotalValues.toString();
+          } else if (metric.manageValue === 'error') {
+            if (countTotalValues > 1) {
+              result = 'error';
+            } else {
+              result = resultTotalValues.toString();
+            }
+          }
         }
 
         if (result !== '') {
@@ -5422,41 +5679,7 @@ function (_super) {
         }
       });
       return valueAuxiliaryMetric;
-    }; // defineAssociateLinksToPoint() {
-    // 	const arrayAssociateLinks = this.props.options.arrayLinks;
-    // 	const arrayPoints = this.props.options.arrayPoints;
-    // 	arrayPoints.forEach((point) => {
-    // 		point.associateLinkIn = [];
-    // 		point.associateLinkOut = [];
-    // 	});
-    // 	arrayAssociateLinks.forEach((link) => {
-    // 		arrayPoints.forEach((point) => {
-    // 			if (link.pointIn.value?.id === point.id) {
-    // 				point.associateLinkIn.push(link);
-    // 			} else if (link.pointOut.value?.id === point.id) {
-    // 				point.associateLinkOut.push(link);
-    // 			}
-    // 		});
-    // 	});
-    // }
-    // defineAssociateOrientedLinksToPoint() {
-    // 	const arrayOrientedLinks = this.props.options.arrayOrientedLinks;
-    // 	const arrayPoints = this.props.options.arrayPoints;
-    // 	arrayPoints.forEach((point) => {
-    // 		point.associateOrientedLinksIn = [];
-    // 		point.associateOrientedLinksOut = [];
-    // 	});
-    // 	arrayOrientedLinks.forEach((orientedLink) => {
-    // 		arrayPoints.forEach((point) => {
-    // 			if (orientedLink.pointIn.value?.id === point.id) {
-    // 				point.associateOrientedLinksIn.push(orientedLink);
-    // 			} else if (orientedLink.pointOut.value?.id === point.id) {
-    // 				point.associateOrientedLinksOut.push(orientedLink);
-    // 			}
-    // 		});
-    // 	});
-    // }
-
+    };
 
     _this.changeValueButtonToLink = function () {
       _this.setState({
@@ -5774,6 +5997,10 @@ function (_super) {
         var _this = this;
 
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+          // this.props.onOptionsChange({
+          //   ...this.props.options,
+          //   displayButton: false,
+          // });
           if (this.props.options.baseMap.modeSVG && this.props.options.baseMap.image !== '') {
             fetch(this.props.options.baseMap.image).then(function (res) {
               return res.text();
@@ -5814,6 +6041,8 @@ function (_super) {
                 baseMap: background
               }));
             });
+          } else {
+            this.chargeRegion();
           }
 
           this.updateButtonCss();
@@ -5894,7 +6123,7 @@ function (_super) {
 
 
     _this.SVG_PathImage = function () {
-      var e_1, _a;
+      var e_4, _a;
 
       try {
         // const idSVG: HTMLElement | null = document.getElementById('oct' + this.props.options.baseMap.idSVG);
@@ -5939,15 +6168,15 @@ function (_super) {
             }
           }
         }
-      } catch (e_1_1) {
-        e_1 = {
-          error: e_1_1
+      } catch (e_4_1) {
+        e_4 = {
+          error: e_4_1
         };
       } finally {
         try {
           if (_c && !_c.done && (_a = _b["return"])) _a.call(_b);
         } finally {
-          if (e_1) throw e_1.error;
+          if (e_4) throw e_4.error;
         }
       }
     };
@@ -5990,137 +6219,43 @@ function (_super) {
     this.props.options.arrayPoints.forEach(function (line) {
       _this.getValuesMainMetricOfPoint(line);
 
+      _this.updatePositionOrientedLink(line);
+
       var valuesAuxiliaryMetrics = _this.getValuesAuxiliaryMetricsPoint(line);
 
-      if (line.shape.value === 'arrow') {
-        var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawArrow__WEBPACK_IMPORTED_MODULE_13__["default"], {
-          key: 'point' + line.id.toString(),
-          coordinateSpace: line.coordinateSpace,
-          drawGraphicmarker: line.drawGraphicMarker,
-          shape: line.shape,
-          sizeWidth: line.sizeWidth,
-          sizeHeight: line.sizeHeight,
-          rotate: line.rotateArrow,
-          positionShapeX: line.positionShapeX,
-          positionShapeY: line.positionShapeY,
-          label: line.label,
-          height: parseInt(_this.props.options.baseMap.height, 10),
-          police: _this.props.options.display.police,
-          sizePolice: _this.props.options.display.size,
-          color: line.color,
-          idPoint: 'point' + line.id.toString(),
-          name: line.name,
-          orientedLinksIn: line.associateOrientedLinksIn,
-          orientedLinksOut: line.associateOrientedLinksOut,
-          textObject: line.textObj,
-          seuil: line.lowerLimit
-        });
-        mapItems.push(item);
-      } else if (line.shape.value === 'circle' || line.shape.value === 'cross') {
-        var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawPoint__WEBPACK_IMPORTED_MODULE_12__["default"], {
-          key: 'point' + line.id.toString(),
-          coordinateSpace: line.coordinateSpace,
-          drawGraphicMarker: line.drawGraphicMarker,
-          shape: line.shape,
-          size: line.sizeWidth,
-          positionShapeX: line.positionShapeX,
-          positionShapeY: line.positionShapeY,
-          label: line.label,
-          widthImage: parseInt(_this.props.options.baseMap.width, 10),
-          heightImage: parseInt(_this.props.options.baseMap.height, 10),
-          police: _this.props.options.display.police,
-          sizePolice: _this.props.options.display.size,
-          color: line.color,
-          idPoint: 'point' + line.id.toString(),
-          name: line.name,
-          options: _this.props.options,
-          onOptionsChange: _this.props.onOptionsChange,
-          data: _this.props.data,
-          textObject: line.textObj,
-          seuil: line.lowerLimit,
-          valueMainMetric: line.valueMetric,
-          refMainMetric: line.mainMetric.refId || '',
-          associateOrientedLinkIn: line.associateOrientedLinksIn,
-          associateOrientedLinkOut: line.associateOrientedLinksOut,
-          labelPositionX: line.positionParameter.labelAPositionX,
-          labelPositionY: line.positionParameter.labelAPositionY,
-          tooltipPosition: line.positionParameter.tooltipPositionA,
-          auxiliaryMetrics: line.metrics,
-          valuesAuxiliaryMetrics: valuesAuxiliaryMetrics
-        });
-        mapItems.push(item);
-      }
-    });
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, mapItems);
-  };
-  /** display link with coordinate */
-
-
-  SimplePanel.prototype.displayLink = function () {
-    var _this = this;
-
-    var options = this.props.options;
-    var mapItems = [];
-    var arrayLinks = options.arrayLinks;
-    arrayLinks.forEach(function (link) {
-      var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
-
-      if (link.defineHowToGetCoordonate.value === 'coordinate') {
-        item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawLinkWithCoordinates__WEBPACK_IMPORTED_MODULE_14__["default"], {
-          key: 'link' + link.id.toString(),
-          pointAPositionX: link.pointAPositionX,
-          pointAPositionY: link.pointAPositionY,
-          pointBPositionX: link.pointBPositionX,
-          pointBPositionY: link.pointBPositionY,
-          colorA: link.colorCoordinateA,
-          colorB: link.colorCoordinateB,
-          orientationLink: link.orientationLink.value || '',
-          labelA: link.labelLinkA,
-          labelB: link.labelLinkB,
-          labelAPositionX: link.positionXLabelA,
-          labelAPositionY: link.positionYLabelA,
-          labelBPositionX: link.positionXLabelB,
-          labelBPositionY: link.positionYLabelB,
-          height: parseInt(_this.props.options.baseMap.height, 10),
-          name: link.name
-        });
-      } else if (link.defineHowToGetCoordonate.value === 'point') {
-        item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawLinkWithPoints__WEBPACK_IMPORTED_MODULE_15__["default"], {
-          key: 'link' + link.id.toString(),
-          pointIn: link.pointIn,
-          pointOut: link.pointOut,
-          labelA: link.labelLinkA,
-          labelB: link.labelLinkB,
-          labelAPositionX: link.positionXLabelA,
-          labelAPositionY: link.positionYLabelA,
-          labelBPositionX: link.positionXLabelB,
-          labelBPositionY: link.positionYLabelB,
-          orientationLink: link.orientationLink.value || '',
-          height: parseInt(_this.props.options.baseMap.height, 10),
-          name: link.name
-        });
-      } else if (link.defineHowToGetCoordonate.value === 'region') {
-        item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawLinkWithRegions__WEBPACK_IMPORTED_MODULE_16__["default"], {
-          key: 'link' + link.id.toString(),
-          regionIn: link.regionIn,
-          regionOut: link.regionOut,
-          colorA: link.colorRegionIn,
-          colorB: link.colorRegionOut,
-          labelA: link.labelLinkA,
-          labelB: link.labelLinkB,
-          labelAPositionX: link.positionXLabelA,
-          labelAPositionY: link.positionYLabelA,
-          labelBPositionX: link.positionXLabelB,
-          labelBPositionY: link.positionYLabelB,
-          orientationLink: link.orientationLink.value || '',
-          height: parseInt(_this.props.options.baseMap.height, 10),
-          name: link.name
-        });
-      }
-
+      var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawPoint__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        key: 'point' + line.id.toString(),
+        drawGraphicMarker: line.drawGraphicMarker,
+        shape: line.shape,
+        size: line.sizeWidth,
+        positionShapeX: line.positionShapeX,
+        positionShapeY: line.positionShapeY,
+        label: line.label,
+        widthImage: parseInt(_this.props.options.baseMap.width, 10),
+        heightImage: parseInt(_this.props.options.baseMap.height, 10),
+        police: _this.props.options.display.police,
+        sizePolice: _this.props.options.display.size,
+        color: line.color,
+        idPoint: 'point' + line.id.toString(),
+        name: line.name,
+        options: _this.props.options,
+        onOptionsChange: _this.props.onOptionsChange,
+        data: _this.props.data,
+        textObject: line.textObj,
+        seuil: line.lowerLimit,
+        valueMainMetric: line.valueMetric,
+        refMainMetric: line.mainMetric.refId || '',
+        associateOrientedLinkIn: line.associateOrientedLinksIn,
+        associateOrientedLinkOut: line.associateOrientedLinksOut,
+        labelPositionX: line.positionParameter.labelAPositionX,
+        labelPositionY: line.positionParameter.labelAPositionY,
+        tooltipPosition: line.positionParameter.tooltipPositionA,
+        auxiliaryMetrics: line.metrics,
+        valuesAuxiliaryMetrics: valuesAuxiliaryMetrics
+      });
       mapItems.push(item);
     });
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", null, mapItems);
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, mapItems);
   };
   /**
    * to do
@@ -6138,7 +6273,7 @@ function (_super) {
 
       var valuesAuxiliaryMetrics = _this.getValuesAuxiliaryMetricsOrientedLink(orientedLink);
 
-      item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawOrientedLink__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawOrientedLink__WEBPACK_IMPORTED_MODULE_13__["default"], {
         key: 'orientedLink' + orientedLink.id.toString(),
         id: orientedLink.id.toString(),
         orientationLink: orientedLink.orientationLink.value || '',
@@ -6175,14 +6310,14 @@ function (_super) {
         pointCPositionY: orientedLink.pointCPositionY,
         isIncurved: orientedLink.isIncurved,
         auxiliaryMetrics: orientedLink.metrics,
-        valuesAuxiliaryMetrics: valuesAuxiliaryMetrics
+        valuesAuxiliaryMetrics: valuesAuxiliaryMetrics,
+        police: _this.props.options.display.police,
+        sizePolice: _this.props.options.display.size
       });
       mapItems.push(item);
     });
     this.updateAssociateOrientedLinkInToPoint();
-    this.updateAssociateOrientedLinkOutToPoint(); //this.defineAssociateOrientedLinksToPoint();
-    //this.defineAssociateOrientedLinkToRegion();
-
+    this.updateAssociateOrientedLinkOutToPoint();
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, mapItems);
   };
   /**
@@ -6192,8 +6327,7 @@ function (_super) {
 
   SimplePanel.prototype.getValuesMainMetricOfPoint = function (point) {
     Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_7__["reqMetricPoint"])(point, this.props);
-    this.getValuesMainMetric(point.mainMetric, undefined, point); // const value: number | null = getResultQuery(point.mainMetric);
-    // point.valueMetric = value ? value.toString() : '-';
+    this.getValuesMainMetric(point.mainMetric, undefined, point);
   };
 
   SimplePanel.prototype.getValuesMainMetricOfOrientedLink = function (orientedLink) {
@@ -6207,80 +6341,64 @@ function (_super) {
 
   SimplePanel.prototype.getValuesMainMetric = function (mainMetric, orientedLink, point) {
     var valueMainMetric = 0;
-    var totalValuesCount = 0; // const value: number | null = getResultQuery(orientedLink.mainMetric);
-    // orientedLink.valueMainMetricA = value ? value.toString() : '-';
-    // orientedLink.valueMainMetricB = value ? value.toString() : '-';
-
+    var totalValuesCount = 0;
     var key = mainMetric.key;
     var keyValue = mainMetric.keyValue;
 
     if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
       mainMetric.returnQuery.forEach(function (line) {
         if (line.fields[0].labels) {
-          if (line.fields[0].labels[key] === keyValue) {
-            var sizeQuery = line.fields[0].values.length;
+          if (key !== '' && keyValue !== '') {
+            if (line.fields[0].labels[key] === keyValue) {
+              var countValues = line.fields[0].values.length;
 
-            for (var i = 0; i < sizeQuery; i++) {
+              for (var i = 0; i < countValues; i++) {
+                if (line.fields[0].values.get(i)) {
+                  totalValuesCount++;
+                  valueMainMetric += line.fields[0].values.get(i);
+                }
+              }
+            }
+          } else {
+            var countValues = line.fields[0].values.length;
+
+            for (var i = 0; i < countValues; i++) {
               if (line.fields[0].values.get(i)) {
                 totalValuesCount++;
                 valueMainMetric += line.fields[0].values.get(i);
               }
             }
+          }
 
-            if (orientedLink) {
-              if (mainMetric.manageValue === 'avg') {
-                orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
-                orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
-              } else if (orientedLink.mainMetric.manageValue === 'sum') {
+          if (orientedLink) {
+            if (mainMetric.manageValue === 'avg') {
+              orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
+              orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
+            } else if (orientedLink.mainMetric.manageValue === 'sum') {
+              orientedLink.valueMainMetricA = valueMainMetric.toString();
+              orientedLink.valueMainMetricB = valueMainMetric.toString();
+            } else if (orientedLink.mainMetric.manageValue === 'error') {
+              if (totalValuesCount > 1) {
+                orientedLink.valueMainMetricA = 'error';
+                orientedLink.valueMainMetricB = 'error';
+              } else {
                 orientedLink.valueMainMetricA = valueMainMetric.toString();
                 orientedLink.valueMainMetricB = valueMainMetric.toString();
-              } else if (orientedLink.mainMetric.manageValue === 'error') {
-                if (totalValuesCount > 1) {
-                  orientedLink.valueMainMetricA = 'error';
-                  orientedLink.valueMainMetricB = 'error';
-                } else {
-                  orientedLink.valueMainMetricA = valueMainMetric.toString();
-                  orientedLink.valueMainMetricB = valueMainMetric.toString();
-                }
-              }
-            } else if (point) {
-              if (mainMetric.manageValue === 'avg') {
-                point.valueMetric = (valueMainMetric / totalValuesCount).toString();
-              } else if (mainMetric.manageValue === 'sum') {
-                point.valueMetric = valueMainMetric.toString();
-              } else if (mainMetric.manageValue === 'error') {
-                if (totalValuesCount > 1) {
-                  point.valueMetric = 'error';
-                } else {
-                  point.valueMetric = valueMainMetric.toString();
-                }
               }
             }
-          } // else if (orientedLink.mainMetric.key === '' || orientedLink.mainMetric.keyValue === '') {
-          // 	const sizeQuery: number = line.fields[0].values.length;
-          // 	for (let i = 0; i < sizeQuery; i++) {
-          // 		if (line.fields[0].values.get(i)) {
-          // 			totalValuesCount++;
-          // 			valueMainMetric += line.fields[0].values.get(i);
-          // 		}
-          // 	}
-          // 	if (orientedLink.mainMetric.manageValue === 'avg') {
-          // 		orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
-          // 		orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
-          // 	} else if (orientedLink.mainMetric.manageValue === 'sum') {
-          // 		orientedLink.valueMainMetricA = valueMainMetric.toString();
-          // 		orientedLink.valueMainMetricB = valueMainMetric.toString();
-          // 	} else if (orientedLink.mainMetric.manageValue === 'error') {
-          // 		if (totalValuesCount > 1) {
-          // 			orientedLink.valueMainMetricA = 'error';
-          // 			orientedLink.valueMainMetricB = 'error';
-          // 		} else {
-          // 			orientedLink.valueMainMetricA = valueMainMetric.toString();
-          // 			orientedLink.valueMainMetricB = valueMainMetric.toString();
-          // 		}
-          // 	}
-          // }
-
+          } else if (point) {
+            if (mainMetric.manageValue === 'avg') {
+              point.valueMetric = (valueMainMetric / totalValuesCount).toString();
+            } else if (mainMetric.manageValue === 'sum') {
+              point.valueMetric = valueMainMetric.toString();
+            } else if (mainMetric.manageValue === 'error') {
+              if (totalValuesCount > 1) {
+                point.valueMetric = 'error';
+              } else {
+                point.valueMetric = valueMainMetric.toString();
+              }
+            }
+          }
         }
       });
     }
@@ -6347,8 +6465,9 @@ function (_super) {
       width: '100vw',
       fontFamily: this.props.options.display.police,
       fontSize: this.props.options.display.size,
-      fontStyle: this.props.options.display.style !== 'bold' ? this.props.options.display.style : 'normal',
-      fontWeight: this.props.options.display.style === 'bold' ? 'bold' : 'normal'
+      fontStyle: this.props.options.display.style.italic ? 'italic' : 'normal',
+      fontWeight: this.props.options.display.style.bold ? 'bold' : 'normal',
+      textDecoration: this.props.options.display.style.underline ? 'underline' : 'none'
     };
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["CustomScrollbar"], {
       autoHide: false,
@@ -6382,7 +6501,8 @@ function (_super) {
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_CoordinateSpace_addCoordinate__WEBPACK_IMPORTED_MODULE_9__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
-      data: this.props.data
+      data: this.props.data,
+      isRegion: true
     }))), this.state.buttonManage[2] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_legend__WEBPACK_IMPORTED_MODULE_11__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
@@ -6438,7 +6558,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var Functions_initRegionCoordinateSpace__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! Functions/initRegionCoordinateSpace */ "./Functions/initRegionCoordinateSpace.tsx");
-/* harmony import */ var components_CoordinateSpace_coordinateSpace__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! components/CoordinateSpace/coordinateSpace */ "./components/CoordinateSpace/coordinateSpace.tsx");
+/* harmony import */ var Functions_initPoint__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! Functions/initPoint */ "./Functions/initPoint.tsx");
+/* harmony import */ var components_CoordinateSpace_coordinateSpace__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! components/CoordinateSpace/coordinateSpace */ "./components/CoordinateSpace/coordinateSpace.tsx");
+/* harmony import */ var _point_point__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./point/point */ "./components/CoordinateSpace/point/point.tsx");
+
+
 
 
 
@@ -6483,22 +6607,47 @@ function (_super) {
       id += 1;
       return id;
     };
+
+    _this.defineIdPoint = function () {
+      var id = 1;
+
+      if (_this.props.options.arrayPoints.length === 0) {
+        return id;
+      } else {
+        id = _this.props.options.arrayPoints[_this.props.options.arrayPoints.length - 1].id + 1;
+        return id;
+      }
+    };
     /** call init class for coordinate state */
 
 
     _this.componentDidMount = function () {
-      _this.setState({
-        coordinate: Object(Functions_initRegionCoordinateSpace__WEBPACK_IMPORTED_MODULE_2__["initRegionCoordinateSpace"])(_this.props.options.indexRegion)
-      });
+      if (_this.props.isRegion) {
+        _this.setState({
+          coordinate: Object(Functions_initRegionCoordinateSpace__WEBPACK_IMPORTED_MODULE_2__["initRegionCoordinateSpace"])(_this.props.options.indexRegion)
+        });
+      } else {
+        var id = _this.defineIdPoint();
+
+        _this.setState({
+          point: Object(Functions_initPoint__WEBPACK_IMPORTED_MODULE_3__["initPoint"])(id)
+        });
+      }
     };
     /** update onOptionsChange */
 
 
     _this.setAsyncOption = function (newIdx) {
       return Promise.resolve('Success').then(function () {
-        _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-          indexRegion: newIdx
-        }));
+        if (_this.props.isRegion) {
+          _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+            indexRegion: newIdx
+          }));
+        } else {
+          _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+            indexPoint: newIdx
+          }));
+        }
       });
     };
     /** send data for parent */
@@ -6539,9 +6688,48 @@ function (_super) {
         });
       });
     };
+    /** send data for parent */
+
+
+    _this.callBackPoint = function (id, newCoordinate) {
+      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
+        var allCoordinateSpace;
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+          switch (_a.label) {
+            case 0:
+              if (!newCoordinate) return [3
+              /*break*/
+              , 2];
+              allCoordinateSpace = this.props.options.arrayPoints.slice();
+              return [4
+              /*yield*/
+              , this.setAsyncOption(newCoordinate.id)];
+
+            case 1:
+              _a.sent();
+
+              this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.props.options), {
+                arrayPoints: allCoordinateSpace.concat(newCoordinate)
+              }));
+
+              if (this.props.returnEditMode) {
+                this.props.returnEditMode();
+              }
+
+              _a.label = 2;
+
+            case 2:
+              return [2
+              /*return*/
+              ];
+          }
+        });
+      });
+    };
 
     _this.state = {
-      coordinate: undefined
+      coordinate: undefined,
+      point: undefined
     };
     return _this;
   }
@@ -6549,14 +6737,25 @@ function (_super) {
 
 
   AddCoordinate.prototype.render = function () {
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.coordinate && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_CoordinateSpace_coordinateSpace__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      options: this.props.options,
-      onOptionsChange: this.props.onOptionsChange,
-      data: this.props.data,
-      coordinate: this.state.coordinate,
-      callBackToParent: this.callBack,
-      isAddCoordinate: true
-    }));
+    if (this.props.isRegion) {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.coordinate && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_CoordinateSpace_coordinateSpace__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        options: this.props.options,
+        onOptionsChange: this.props.onOptionsChange,
+        data: this.props.data,
+        coordinate: this.state.coordinate,
+        callBackToParent: this.callBack,
+        isAddCoordinate: true
+      }));
+    } else {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.point && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_point_point__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        options: this.props.options,
+        onOptionsChange: this.props.onOptionsChange,
+        data: this.props.data,
+        point: this.state.point,
+        callBackToParent: this.callBackPoint,
+        isAddPoint: true
+      }));
+    }
   };
 
   return AddCoordinate;
@@ -7120,7 +7319,8 @@ function (_super) {
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
       mainMetric: this.state.arrayCoor.mainMetric,
-      callBackToParent: this.callBackMainMetric
+      callBackToParent: this.callBackMainMetric,
+      isLink: false
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Parametrage_parametresGeneriques__WEBPACK_IMPORTED_MODULE_12__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
@@ -7359,8 +7559,11 @@ function (_super) {
 
 
     _this.fillSelectRegionSpace = function () {
-      var e_3, _a;
+      var e_3, _a, e_4, _b;
 
+      var _c;
+
+      var valueExist = false;
       var valueSelect = [];
 
       var stockTmpCoordinatesSpace = _this.props.options.regionCoordinateSpace.slice();
@@ -7383,12 +7586,35 @@ function (_super) {
         } finally {
           if (e_3) throw e_3.error;
         }
+      }
+
+      if (_this.state.selectCoordinateSpaceDefault) {
+        try {
+          for (var stockTmpCoordinatesSpace_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(stockTmpCoordinatesSpace), stockTmpCoordinatesSpace_2_1 = stockTmpCoordinatesSpace_2.next(); !stockTmpCoordinatesSpace_2_1.done; stockTmpCoordinatesSpace_2_1 = stockTmpCoordinatesSpace_2.next()) {
+            var line = stockTmpCoordinatesSpace_2_1.value;
+
+            if (line.id === ((_c = _this.state.selectCoordinateSpaceDefault.value) === null || _c === void 0 ? void 0 : _c.id)) {
+              valueExist = true;
+              break;
+            }
+          }
+        } catch (e_4_1) {
+          e_4 = {
+            error: e_4_1
+          };
+        } finally {
+          try {
+            if (stockTmpCoordinatesSpace_2_1 && !stockTmpCoordinatesSpace_2_1.done && (_b = stockTmpCoordinatesSpace_2["return"])) _b.call(stockTmpCoordinatesSpace_2);
+          } finally {
+            if (e_4) throw e_4.error;
+          }
+        }
       } // dev
 
 
       _this.setState({
         selectCoordinateSpace: valueSelect,
-        selectCoordinateSpaceDefault: valueSelect.length > 0 ? valueSelect[0] : _this.state.selectCoordinateSpaceDefault
+        selectCoordinateSpaceDefault: valueExist ? _this.state.selectCoordinateSpaceDefault : valueSelect.length > 0 ? valueSelect[0] : _this.state.selectCoordinateSpaceDefault
       }); // final
       // this.setState({
       // 	selectCoordinateSpace: valueSelect,
@@ -7488,15 +7714,29 @@ function (_super) {
     _this.getAuxiliaryMetrics = function () {
       var auxiliaryMetrics = [];
 
-      if (_this.props.isPoint) {
-        auxiliaryMetrics = _this.props.options.arrayPoints[_this.props.id || 0].metrics;
-      } else if (_this.props.isLink) {
+      if (_this.props.isLink) {
         auxiliaryMetrics = _this.props.options.arrayOrientedLinks[_this.props.id || 0].metrics;
-      } else if (_this.props.isRegion) {
-        auxiliaryMetrics = _this.props.options.regionCoordinateSpace[_this.props.id || 0].metrics;
+      } else {
+        if (_this.props.coordinateSpace) {
+          auxiliaryMetrics = _this.props.coordinateSpace.metrics;
+        }
       }
 
       return auxiliaryMetrics;
+    };
+
+    _this.getReferenceMainMetric = function () {
+      var refId = '';
+
+      if (_this.props.isLink) {
+        refId = _this.props.options.arrayOrientedLinks[_this.props.id || 0].mainMetric.refId || '';
+      } else {
+        if (_this.props.coordinateSpace) {
+          refId = _this.props.coordinateSpace.mainMetric.refId || '';
+        }
+      }
+
+      return refId;
     };
     /** call back to parent */
 
@@ -7516,7 +7756,6 @@ function (_super) {
     _this.onChangeKey = function (event) {
       var newAuxiliaryMetrics = _this.state.metrics;
       var id = event.currentTarget.id;
-      console.log(id);
       var value = event.currentTarget.value;
       newAuxiliaryMetrics[id].key = value;
 
@@ -7543,7 +7782,6 @@ function (_super) {
     _this.onChangeManageValue = function (event) {
       var newAuxiliaryMetrics = _this.state.metrics;
       var id = event.id;
-      console.log(event.value);
       newAuxiliaryMetrics[id].manageValue = event.value;
       var newValue = {
         id: event.id,
@@ -7560,7 +7798,8 @@ function (_super) {
     };
 
     _this.addAuxiliaryMetric = function () {
-      var refIdMetric = _this.props.options.arrayOrientedLinks[_this.props.id || 0].mainMetric.refId || '';
+      var refIdMetric = _this.getReferenceMainMetric();
+
       var auxiliaryMetrics = _this.state.metrics;
       auxiliaryMetrics.push({
         key: '',
@@ -7632,15 +7871,23 @@ function (_super) {
       var _a, _b;
 
       var id = index;
-      var refIdMetric = _this.props.options.arrayOrientedLinks[_this.props.id || 0].mainMetric.refId || '';
+
+      var refIdMetric = _this.getReferenceMainMetric();
+
       var idLink = ((_a = _this.props.id) === null || _a === void 0 ? void 0 : _a.toString()) || '';
+      var styleTitle = {
+        marginTop: '10px',
+        textAlign: 'center'
+      };
       var styleMainDiv = {
+        marginTop: '5px',
+        border: '1px solid rgb(23, 23, 24)'
+      };
+      var styleContent = {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: '10px',
-        marginBottom: '5px',
-        border: '1px solid rgb(23, 23, 24)'
+        marginBottom: '5px'
       };
       var styleSelect = {
         display: 'flex',
@@ -7649,13 +7896,25 @@ function (_super) {
       };
       var styleReferenceMetric = {
         width: '276px',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center'
+        height: '35px',
+        border: '1px solid #262628',
+        borderRadius: '0 3px 3px 0',
+        backgroundColor: '#09090b',
+        padding: '8px',
+        fontSize: '14px',
+        lineHeight: '18px',
+        color: '#d8d9da',
+        marginBottom: '0px'
       };
       var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         key: idLink + 'mainDiv' + id.toString(),
         style: styleMainDiv
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        key: idLink + 'title' + id.toString(),
+        style: styleTitle
+      }, 'Metric ' + (id + 1).toString()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        key: idLink + 'content' + id.toString(),
+        style: styleContent
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         key: idLink + 'inputs' + id.toString()
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -7664,16 +7923,10 @@ function (_super) {
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
         key: idLink + 'labelref' + id.toString(),
         width: 10
-      }, "Query"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Query"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
         key: ((_b = _this.props.id) === null || _b === void 0 ? void 0 : _b.toString()) || '' + 'refValue' + id.toString(),
-        id: id.toString(),
         style: styleReferenceMetric
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-        style: {
-          marginTop: '10px',
-          marginBottom: '0'
-        }
-      }, refIdMetric))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+      }, refIdMetric)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
         key: idLink + 'inputKey' + id.toString(),
         id: id.toString(),
         label: "Key",
@@ -7713,7 +7966,7 @@ function (_super) {
         id: id.toString(),
         onClick: _this.deleteAuxiliaryMetric,
         variant: 'danger'
-      }, "Delete")));
+      }, "Delete"))));
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         key: idLink + 'listInputOneMetric' + id.toString()
       }, item);
@@ -7768,7 +8021,7 @@ function (_super) {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'center',
-      backgroundColor: 'rgb(33, 35, 39)'
+      marginTop: '10px'
     };
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
       isOpen: this.state.collapse,
@@ -7804,7 +8057,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
 /* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _editCoordinateSpace__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editCoordinateSpace */ "./components/CoordinateSpace/editCoordinateSpace.tsx");
-/* harmony import */ var _addCoordinate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./addCoordinate */ "./components/CoordinateSpace/addCoordinate.tsx");
+/* harmony import */ var _point_editPoint__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./point/editPoint */ "./components/CoordinateSpace/point/editPoint.tsx");
+/* harmony import */ var _addCoordinate__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./addCoordinate */ "./components/CoordinateSpace/addCoordinate.tsx");
+
 
 
 
@@ -7849,6 +8104,26 @@ function (_super) {
       });
     };
 
+    _this.contentTabEdit = function () {
+      var result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+
+      if (_this.props.isRegion) {
+        result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_editCoordinateSpace__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          onOptionsChange: _this.props.onOptionsChange,
+          options: _this.props.options,
+          data: _this.props.data
+        }));
+      } else {
+        result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_point_editPoint__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          onOptionsChange: _this.props.onOptionsChange,
+          options: _this.props.options,
+          data: _this.props.data
+        }));
+      }
+
+      return result;
+    };
+
     _this.state = {
       tabsVariable: [false, true]
     };
@@ -7877,16 +8152,13 @@ function (_super) {
       onChangeTab: function onChangeTab() {
         return _this.goToTab(1);
       }
-    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["TabContent"], null, this.state.tabsVariable[0] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_addCoordinate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["TabContent"], null, this.state.tabsVariable[0] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_addCoordinate__WEBPACK_IMPORTED_MODULE_5__["default"], {
       onOptionsChange: this.props.onOptionsChange,
       options: this.props.options,
       data: this.props.data,
-      returnEditMode: this.returnEditMode
-    })), this.state.tabsVariable[1] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_editCoordinateSpace__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      onOptionsChange: this.props.onOptionsChange,
-      options: this.props.options,
-      data: this.props.data
-    })));
+      returnEditMode: this.returnEditMode,
+      isRegion: this.props.isRegion
+    }), this.state.tabsVariable[1] && this.contentTabEdit()));
   };
 
   return ManageCoordinateSpace;
@@ -8188,6 +8460,163 @@ function (_super) {
       });
     };
 
+    _this.displayHtml = function () {
+      var result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+
+      if (!_this.props.isLink) {
+        result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
+          isOpen: _this.state.collapseMainMetric,
+          label: "Main metric",
+          onToggle: _this.onToggleMainMetric
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+          style: {
+            verticalAlign: 'middle'
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], null, "Query")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+          onChange: function onChange(value) {
+            return _this.onChangeSelectQuery(value);
+          },
+          allowCustomValue: false,
+          options: _this.state.selectQuery,
+          width: 10,
+          value: _this.state.selectQueryDefault
+        }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+          label: "Key",
+          labelWidth: 10,
+          inputWidth: 20,
+          type: "text",
+          value: _this.state.mainMetric.key,
+          name: "key",
+          onChange: function onChange(event) {
+            return _this._handleChangeKey(event.currentTarget.value);
+          }
+        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+          label: "Value key",
+          labelWidth: 10,
+          inputWidth: 20,
+          type: "text",
+          value: _this.state.mainMetric.keyValue,
+          name: "valueKey",
+          onChange: function onChange(event) {
+            return _this._handleChangeKeyValue(event.currentTarget.value);
+          }
+        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+          style: {
+            verticalAlign: 'middle'
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], null, "Manipulate")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+          onChange: function onChange(value) {
+            return _this.onChangeSelectManageValue(value);
+          },
+          allowCustomValue: false,
+          options: _this.state.selectManageValue,
+          width: 10,
+          value: _this.state.selectDefaultManageValue
+        }))));
+      } else if (_this.props.isLink) {
+        var orientedLink = _this.props.options.arrayOrientedLinks[_this.props.id || 0];
+        console.log(orientedLink);
+        var orientationLink = orientedLink.orientationLink.value || '';
+        console.log(orientationLink);
+        result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
+          isOpen: _this.state.collapseMainMetric,
+          label: "Main metric",
+          onToggle: _this.onToggleMainMetric
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+          style: {
+            verticalAlign: 'middle'
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], null, "Query")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+          onChange: function onChange(value) {
+            return _this.onChangeSelectQuery(value);
+          },
+          allowCustomValue: false,
+          options: _this.state.selectQuery,
+          width: 10,
+          value: _this.state.selectQueryDefault
+        }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+          label: "Key",
+          labelWidth: 10,
+          inputWidth: 20,
+          type: "text",
+          value: _this.state.mainMetric.key,
+          name: "key",
+          onChange: function onChange(event) {
+            return _this._handleChangeKey(event.currentTarget.value);
+          }
+        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+          label: "Value key",
+          labelWidth: 10,
+          inputWidth: 20,
+          type: "text",
+          value: _this.state.mainMetric.keyValue,
+          name: "valueKey",
+          onChange: function onChange(event) {
+            return _this._handleChangeKeyValue(event.currentTarget.value);
+          }
+        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+          style: {
+            verticalAlign: 'middle'
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], null, "Manipulate")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+          onChange: function onChange(value) {
+            return _this.onChangeSelectManageValue(value);
+          },
+          allowCustomValue: false,
+          options: _this.state.selectManageValue,
+          width: 10,
+          value: _this.state.selectDefaultManageValue
+        }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+          style: {
+            verticalAlign: 'middle',
+            marginTop: '10px'
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], null, "Query")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+          onChange: function onChange(value) {
+            return _this.onChangeSelectQuery(value);
+          },
+          allowCustomValue: false,
+          options: _this.state.selectQuery,
+          width: 10,
+          value: _this.state.selectQueryDefault
+        }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+          label: "Key",
+          labelWidth: 10,
+          inputWidth: 20,
+          type: "text",
+          value: _this.state.mainMetric.key,
+          name: "key",
+          onChange: function onChange(event) {
+            return _this._handleChangeKey(event.currentTarget.value);
+          }
+        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+          label: "Value key",
+          labelWidth: 10,
+          inputWidth: 20,
+          type: "text",
+          value: _this.state.mainMetric.keyValue,
+          name: "valueKey",
+          onChange: function onChange(event) {
+            return _this._handleChangeKeyValue(event.currentTarget.value);
+          }
+        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+          style: {
+            verticalAlign: 'middle'
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], null, "Manipulate")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+          onChange: function onChange(value) {
+            return _this.onChangeSelectManageValue(value);
+          },
+          allowCustomValue: false,
+          options: _this.state.selectManageValue,
+          width: 10,
+          value: _this.state.selectDefaultManageValue
+        }))));
+      }
+
+      return result;
+    };
+
     _this.state = {
       mainMetric: _this.props.mainMetric,
       collapseMainMetric: false,
@@ -8207,57 +8636,7 @@ function (_super) {
 
 
   ManageQuery.prototype.render = function () {
-    var _this = this;
-
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
-      isOpen: this.state.collapseMainMetric,
-      label: "Main metric",
-      onToggle: this.onToggleMainMetric
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
-      style: {
-        verticalAlign: 'middle'
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], null, "Query")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
-      onChange: function onChange(value) {
-        return _this.onChangeSelectQuery(value);
-      },
-      allowCustomValue: false,
-      options: this.state.selectQuery,
-      width: 10,
-      value: this.state.selectQueryDefault
-    }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
-      label: "Key",
-      labelWidth: 10,
-      inputWidth: 20,
-      type: "text",
-      value: this.state.mainMetric.key,
-      name: "key",
-      onChange: function onChange(event) {
-        return _this._handleChangeKey(event.currentTarget.value);
-      }
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
-      label: "Value key",
-      labelWidth: 10,
-      inputWidth: 20,
-      type: "text",
-      value: this.state.mainMetric.keyValue,
-      name: "valueKey",
-      onChange: function onChange(event) {
-        return _this._handleChangeKeyValue(event.currentTarget.value);
-      }
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
-      style: {
-        verticalAlign: 'middle'
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], null, "Manipulate")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
-      onChange: function onChange(value) {
-        return _this.onChangeSelectManageValue(value);
-      },
-      allowCustomValue: false,
-      options: this.state.selectManageValue,
-      width: 10,
-      value: this.state.selectDefaultManageValue
-    }))));
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.displayHtml());
   };
 
   return ManageQuery;
@@ -8267,10 +8646,10 @@ function (_super) {
 
 /***/ }),
 
-/***/ "./components/Draw/drawArrow.tsx":
-/*!***************************************!*\
-  !*** ./components/Draw/drawArrow.tsx ***!
-  \***************************************/
+/***/ "./components/CoordinateSpace/point/editPoint.tsx":
+/*!********************************************************!*\
+  !*** ./components/CoordinateSpace/point/editPoint.tsx ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -8279,1124 +8658,822 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
+/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _point__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./point */ "./components/CoordinateSpace/point/point.tsx");
 
 
+ // import { initRegionCoordinateSpace } from 'Functions/initRegionCoordinateSpace';
 
-var DrawArrow =
+
+/**
+ * manage coordinate space for simpleEditor
+ */
+
+var EditPoint =
 /** @class */
 function (_super) {
-  Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DrawArrow, _super);
+  Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(EditPoint, _super);
 
-  function DrawArrow(props) {
+  function EditPoint(props) {
     var _this = _super.call(this, props) || this;
+    /**
+     * save data in parent
+     */
 
-    _this.state = {};
+
+    _this.callBack = function (id, newCoordinate) {
+      var e_1, _a, e_2, _b;
+
+      if (newCoordinate) {
+        var oldData = _this.props.options.arrayPoints.slice();
+
+        var i = 0;
+
+        try {
+          for (var oldData_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(oldData), oldData_1_1 = oldData_1.next(); !oldData_1_1.done; oldData_1_1 = oldData_1.next()) {
+            var line = oldData_1_1.value;
+
+            if (line.id === id) {
+              oldData[i] = newCoordinate;
+              break;
+            }
+
+            ++i;
+          }
+        } catch (e_1_1) {
+          e_1 = {
+            error: e_1_1
+          };
+        } finally {
+          try {
+            if (oldData_1_1 && !oldData_1_1.done && (_a = oldData_1["return"])) _a.call(oldData_1);
+          } finally {
+            if (e_1) throw e_1.error;
+          }
+        }
+
+        _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+          arrayPoints: oldData
+        }));
+      } else {
+        var find = false;
+
+        var oldData = _this.props.options.arrayPoints.slice();
+
+        var i = 0;
+
+        try {
+          for (var oldData_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(oldData), oldData_2_1 = oldData_2.next(); !oldData_2_1.done; oldData_2_1 = oldData_2.next()) {
+            var line = oldData_2_1.value;
+
+            if (line.id === id) {
+              find = true;
+              break;
+            }
+
+            ++i;
+          }
+        } catch (e_2_1) {
+          e_2 = {
+            error: e_2_1
+          };
+        } finally {
+          try {
+            if (oldData_2_1 && !oldData_2_1.done && (_b = oldData_2["return"])) _b.call(oldData_2);
+          } finally {
+            if (e_2) throw e_2.error;
+          }
+        }
+
+        if (find) {
+          oldData.splice(i, 1);
+
+          _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+            arrayPoints: oldData
+          }));
+
+          _this.fillSelectPoint();
+        }
+      }
+    };
+    /** change select value to edit */
+
+
+    _this.onChangeSelectCoordinate = function (value) {
+      _this.setState({
+        selectCoordinateSpaceDefault: value
+      });
+    };
+    /** fill select whith array region object */
+
+
+    _this.fillSelectPoint = function () {
+      var e_3, _a;
+
+      var valueSelect = [];
+
+      var stockTmpCoordinatesSpace = _this.props.options.arrayPoints.slice();
+
+      try {
+        for (var stockTmpCoordinatesSpace_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(stockTmpCoordinatesSpace), stockTmpCoordinatesSpace_1_1 = stockTmpCoordinatesSpace_1.next(); !stockTmpCoordinatesSpace_1_1.done; stockTmpCoordinatesSpace_1_1 = stockTmpCoordinatesSpace_1.next()) {
+          var line = stockTmpCoordinatesSpace_1_1.value;
+          var label = line.label || line.name;
+          valueSelect.push({
+            value: line,
+            label: label
+          });
+        }
+      } catch (e_3_1) {
+        e_3 = {
+          error: e_3_1
+        };
+      } finally {
+        try {
+          if (stockTmpCoordinatesSpace_1_1 && !stockTmpCoordinatesSpace_1_1.done && (_a = stockTmpCoordinatesSpace_1["return"])) _a.call(stockTmpCoordinatesSpace_1);
+        } finally {
+          if (e_3) throw e_3.error;
+        }
+      } // dev
+
+
+      _this.setState({
+        selectCoordinateSpace: valueSelect,
+        selectCoordinateSpaceDefault: valueSelect.length > 0 ? valueSelect[0] : _this.state.selectCoordinateSpaceDefault
+      }); // final
+      // this.setState({
+      // 	selectCoordinateSpace: valueSelect,
+      // 	selectCoordinateSpaceDefault: (valueSelect.length > 0) ?
+      // 		valueSelect[0] : this.state.selectCoordinateSpaceDefault,
+      // });
+
+    };
+    /** fill data for select */
+
+
+    _this.componentDidMount = function () {
+      _this.fillSelectPoint();
+    };
+    /** update state if value props change */
+
+
+    _this.componentDidUpdate = function (prevProps) {
+      if (prevProps.options.arrayPoints !== _this.props.options.arrayPoints) {
+        // this.componentDidMount();
+        _this.fillSelectPoint();
+      }
+    };
+
+    _this.state = {
+      selectCoordinateSpace: [],
+      selectCoordinateSpaceDefault: []
+    };
     return _this;
   }
+  /** return html */
 
-  DrawArrow.prototype.defineLimitX = function (coordinateX, coordinateSpace) {
-    var result = coordinateX;
 
-    if (coordinateSpace.value === undefined) {
-      if (coordinateX > 100) {
-        result = 100;
+  EditPoint.prototype.render = function () {
+    var _this = this;
+
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, "Select point to edit")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+      onChange: function onChange(value) {
+        return _this.onChangeSelectCoordinate(value);
+      },
+      allowCustomValue: false,
+      options: this.state.selectCoordinateSpace,
+      width: 10,
+      value: this.state.selectCoordinateSpaceDefault
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
+      style: {
+        marginTop: '2px',
+        marginLeft: '20px'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+      onClick: this.fillSelectPoint
+    }, "Update list Point")))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.selectCoordinateSpaceDefault.value ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_point__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      options: this.props.options,
+      onOptionsChange: this.props.onOptionsChange,
+      data: this.props.data,
+      point: this.state.selectCoordinateSpaceDefault.value,
+      callBackToParent: this.callBack,
+      isAddPoint: false
+    }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Data not set")));
+  };
+
+  return EditPoint;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (EditPoint);
+
+/***/ }),
+
+/***/ "./components/CoordinateSpace/point/point.tsx":
+/*!****************************************************!*\
+  !*** ./components/CoordinateSpace/point/point.tsx ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Functions_CreateInput_createInputsPoint__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Functions/CreateInput/createInputsPoint */ "./Functions/CreateInput/createInputsPoint.tsx");
+/* harmony import */ var _Functions_Input_inputTextPoint__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../Functions/Input/inputTextPoint */ "./Functions/Input/inputTextPoint.tsx");
+/* harmony import */ var _Models_ArrayInputSelectableClass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../Models/ArrayInputSelectableClass */ "./Models/ArrayInputSelectableClass.tsx");
+/* harmony import */ var _Functions_EditParameter_editGoodParameterPoint__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../Functions/EditParameter/editGoodParameterPoint */ "./Functions/EditParameter/editGoodParameterPoint.tsx");
+/* harmony import */ var _Functions_Input_inputSelectPoint__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../Functions/Input/inputSelectPoint */ "./Functions/Input/inputSelectPoint.tsx");
+/* harmony import */ var _Functions_Input_inputSeriesColorPickerPoint__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../Functions/Input/inputSeriesColorPickerPoint */ "./Functions/Input/inputSeriesColorPickerPoint.tsx");
+/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
+/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _manageQuery__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../manageQuery */ "./components/CoordinateSpace/manageQuery.tsx");
+/* harmony import */ var _manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../manageAuxiliaryQuery */ "./components/CoordinateSpace/manageAuxiliaryQuery.tsx");
+/* harmony import */ var _Parametrage_positionParameters__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../Parametrage/positionParameters */ "./components/Parametrage/positionParameters.tsx");
+/* harmony import */ var _Parametrage_parametresGeneriques__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../Parametrage/parametresGeneriques */ "./components/Parametrage/parametresGeneriques.tsx");
+/* harmony import */ var _Parametrage_manageLowerLimit__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../Parametrage/manageLowerLimit */ "./components/Parametrage/manageLowerLimit.tsx");
+/* harmony import */ var Functions_initPoint__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! Functions/initPoint */ "./Functions/initPoint.tsx");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * IndexParametrage
+ */
+
+var Point =
+/** @class */
+function (_super) {
+  Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Point, _super);
+
+  function Point(props) {
+    var _this = _super.call(this, props) || this;
+    /** update state with promise */
+
+
+    _this.setStateAsyncArrayCoor = function (state) {
+      return new Promise(function (resolve) {
+        _this.setState(state, resolve);
+      });
+    };
+    /** update state with promise */
+
+
+    _this.setStateAsyncArrayInput = function (state) {
+      return new Promise(function (resolve) {
+        _this.setState(state, resolve);
+      });
+    };
+    /** add inputs for a new coordiante */
+
+
+    _this.addInput = function (id) {
+      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+          switch (_a.label) {
+            case 0:
+              return [4
+              /*yield*/
+              , this.setStateAsyncArrayInput({
+                arrayInput: this.state.arrayInput.concat([new _Models_ArrayInputSelectableClass__WEBPACK_IMPORTED_MODULE_4__["ArrayInputSelectableClass"](id, Object(_Functions_CreateInput_createInputsPoint__WEBPACK_IMPORTED_MODULE_2__["createInputsPoint"])(id))])
+              })];
+
+            case 1:
+              _a.sent();
+
+              return [2
+              /*return*/
+              ];
+          }
+        });
+      });
+    };
+    /**
+     * Delete array input and value
+     * @param {event} event event click delete button
+     */
+
+
+    _this.deleteOwnInput = function () {
+      var label = _this.state.arrayCoor.label || _this.state.arrayCoor.name;
+      var del = confirm('Delete "' + label + '" ?'); // alert(del);
+
+      if (del) {
+        _this.props.callBackToParent(_this.state.arrayCoor.id, undefined);
+      }
+    };
+    /** call function to return arrayCoor a SimpleEditor */
+
+
+    _this.callBack = function () {
+      var waitAlert = 3000;
+
+      _this.props.callBackToParent(_this.state.arrayCoor.id, _this.state.arrayCoor);
+
+      _this.setState({
+        severityAlert: 'success',
+        titleAlert: 'Save',
+        hiddenAlert: false
+      });
+
+      if (!_this.props.isAddPoint) {
+        setTimeout(function () {
+          _this.setState({
+            hiddenAlert: true
+          });
+        }, waitAlert);
+      }
+    };
+
+    _this.callBackToOther = function (followLink, hoveringTooltipLink, hoveringTooltipText, textObj) {
+      var oldCoor = _this.state.arrayCoor;
+
+      if (followLink) {
+        oldCoor.linkURL.followLink = followLink;
       }
 
-      if (coordinateX < -100) {
-        result = -100;
-      }
-    } else {
-      var xMin = parseInt(coordinateSpace.value.coords.xMin, 10);
-      var xMax = parseInt(coordinateSpace.value.coords.xMax, 10);
-
-      if (xMax < 0) {
-        if (coordinateX < xMax) {
-          result = xMax;
-        } else if (coordinateX > xMin) {
-          result = xMin;
-        }
-      } else {
-        if (coordinateX > xMax) {
-          result = xMax;
-        } else if (coordinateX < xMin) {
-          result = xMin;
-        }
-      }
-    }
-
-    return result;
-  };
-
-  DrawArrow.prototype.defineLimitY = function (coordinateY, coordinateSpace) {
-    var result = coordinateY;
-
-    if (coordinateSpace.value === undefined) {
-      if (coordinateY > 100) {
-        coordinateY = 100;
+      if (hoveringTooltipLink) {
+        oldCoor.linkURL.hoveringTooltipLink = hoveringTooltipLink;
       }
 
-      if (coordinateY < -100) {
-        coordinateY = -100;
+      if (hoveringTooltipText) {
+        oldCoor.linkURL.hoveringTooltipText = hoveringTooltipText;
       }
-    } else {
-      var yMin = parseInt(coordinateSpace.value.coords.yMin, 10);
-      var yMax = parseInt(coordinateSpace.value.coords.yMax, 10);
 
-      if (yMax < 0) {
-        if (coordinateY < yMax) {
-          result = yMax;
-        } else if (coordinateY > yMin) {
-          result = yMin;
-        }
-      } else {
-        if (coordinateY > yMax) {
-          result = yMax;
-        } else if (coordinateY < yMin) {
-          result = yMin;
-        }
+      if (textObj) {
+        oldCoor.textObj = textObj;
       }
-    }
 
-    return result;
-  };
+      _this.setState({
+        arrayCoor: oldCoor
+      });
+    };
+    /** update lower limit */
 
-  DrawArrow.prototype.defineSizeWidth = function (size) {
-    var sizeInt = 0;
 
-    if (size === 'small') {
-      sizeInt = 20;
-    } else if (size === 'medium') {
-      sizeInt = 40;
-    } else if (size === 'large') {
-      sizeInt = 60;
-    }
+    _this.callBackManageLowerLimit = function (coordinate, id) {
+      var newValue = _this.state.arrayCoor;
+      newValue.colorMode = coordinate.colorMode;
+      newValue.traceBorder = coordinate.traceBorder;
+      newValue.traceBack = coordinate.traceBack;
 
-    return sizeInt;
-  };
+      _this.setState({
+        arrayCoor: newValue
+      });
+    };
 
-  DrawArrow.prototype.defineSizeHeight = function (size) {
-    var sizeInt = 0;
+    _this.callBackPositionParameter = function (positionParameter, id) {
+      var newValue = _this.state.arrayCoor;
+      newValue.positionParameter = positionParameter;
 
-    if (size === 'small') {
-      sizeInt = 5;
-    } else if (size === 'medium') {
-      sizeInt = 10;
-    } else if (size === 'large') {
-      sizeInt = 20;
-    }
+      _this.setState({
+        arrayCoor: newValue
+      });
+    };
+    /** save lower limit data */
 
-    return sizeInt;
-  };
 
-  DrawArrow.prototype.definePositionArrowX = function (positionX, coordinateSpace, defineCenter, width) {
-    if (coordinateSpace.value === undefined) {
-      return this.defineLimitX(positionX, coordinateSpace) * (defineCenter / 100) + defineCenter - width;
-    } else {
-      var xMin = parseInt(coordinateSpace.value.coords.xMin, 10);
-      var xMax = parseInt(coordinateSpace.value.coords.xMax, 10);
-      var xMid = (xMin + xMax) / 2;
-      return this.defineLimitX(positionX + xMid, coordinateSpace) * (defineCenter / 100) + defineCenter - width;
-    }
-  };
+    _this.callBackLowerLimit = function (lowerLimit, id) {
+      var newValue = _this.state.arrayCoor;
+      newValue.lowerLimit = lowerLimit;
 
-  DrawArrow.prototype.definePositionArrowY = function (positionY, coordinateSpace, defineCenter, size) {
-    if (coordinateSpace.value === undefined) {
-      return defineCenter - this.defineLimitY(positionY, coordinateSpace) * (defineCenter / 100) - size / 2;
-    } else {
-      var yMin = parseInt(coordinateSpace.value.coords.yMin, 10);
-      var yMax = parseInt(coordinateSpace.value.coords.yMax, 10);
-      var yMid = (yMin + yMax) / 2;
-      return defineCenter - this.defineLimitY(positionY + yMid, coordinateSpace) * (defineCenter / 100) - size / 2;
-    }
-  };
+      _this.setState({
+        arrayCoor: newValue
+      });
+    };
 
-  DrawArrow.prototype.drawArrow = function (widthArrow, heightArrow, rotate, positionX, positionY, color, drawGraphicMarker) {
-    if (drawGraphicMarker === 'true') {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "arrow",
-        style: {
-          transform: 'rotate(' + rotate + ')',
-          position: 'absolute',
-          top: positionY,
-          left: positionX
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          width: '0',
-          height: '0',
-          borderLeft: widthArrow + 'px solid transparent',
-          borderRight: widthArrow + 'px solid transparent',
-          borderBottom: widthArrow + 'px solid ' + color,
-          transform: 'rotate(0deg)'
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          border: '1px solid ' + color,
-          backgroundColor: color,
-          width: widthArrow + 'px',
-          height: heightArrow + 'px',
-          marginLeft: widthArrow / 2
-        }
-      }));
-    } else {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
-    }
-  };
+    _this.callBackMainMetric = function (mainMetric, id) {
+      var newValue = _this.state.arrayCoor;
+      newValue.mainMetric = mainMetric;
 
-  DrawArrow.prototype.defineCenterX = function (coordinateSpace) {
-    var result = 0;
-    result = this.props.height / 2;
-    return result;
-  };
+      _this.setState({
+        arrayCoor: newValue
+      });
+    };
 
-  DrawArrow.prototype.defineCenterY = function (coordinateSpace) {
-    var result = 0;
-    result = this.props.height / 2;
-    return result;
-  };
+    _this.callBackAuxiliaryMetric = function (auxiliaryMetrics, id) {
+      var newValue = _this.state.arrayCoor;
+      newValue.metrics = auxiliaryMetrics;
 
-  DrawArrow.prototype.defineLabel = function (color, positionArrowX, positionArrowY, drawGraphicMarker, heightArrow) {
-    var valueToDisplay = this.props.label;
+      _this.setState({
+        arrayCoor: newValue
+      });
+    };
+    /**
+     * fill input whith data
+     * this function is called by mount and update event
+     */
 
-    if (this.props.label === '') {
-      valueToDisplay = this.props.name;
-    }
 
-    if (drawGraphicMarker === 'true') {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-        style: {
-          position: 'absolute',
-          fontSize: this.props.sizePolice,
-          fontFamily: this.props.police,
-          fontWeight: 'bold',
-          color: color,
-          top: positionArrowY + heightArrow,
-          left: positionArrowX + heightArrow
-        }
-      }, valueToDisplay);
-    }
+    _this.getDataInInput = function () {
+      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+          switch (_a.label) {
+            case 0:
+              return [4
+              /*yield*/
+              , this.addInput(this.props.point.id)];
 
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null);
-  };
+            case 1:
+              _a.sent();
+
+              this.generateInputsPoint();
+              return [2
+              /*return*/
+              ];
+          }
+        });
+      });
+    };
+    /** call function in load component */
+
+
+    _this.componentDidMount = function () {
+      _this.getDataInInput();
+    };
+    /** function is call when props is update. Update state */
+
+
+    _this.componentDidUpdate = function (prevProps, prevState) {
+      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+          switch (_a.label) {
+            case 0:
+              if (!(prevProps.point.id !== this.props.point.id)) return [3
+              /*break*/
+              , 3];
+              return [4
+              /*yield*/
+              , this.setStateAsyncArrayCoor({
+                arrayCoor: Object(Functions_initPoint__WEBPACK_IMPORTED_MODULE_14__["clonePoint"])(this.props.point)
+              })];
+
+            case 1:
+              _a.sent();
+
+              return [4
+              /*yield*/
+              , this.setStateAsyncArrayInput({
+                arrayInput: []
+              })];
+
+            case 2:
+              _a.sent();
+
+              this.getDataInInput();
+              _a.label = 3;
+
+            case 3:
+              return [2
+              /*return*/
+              ];
+          }
+        });
+      });
+    };
+
+    _this.state = {
+      arrayInput: [],
+      arrayCoor: Object(Functions_initPoint__WEBPACK_IMPORTED_MODULE_14__["clonePoint"])(_this.props.point),
+      arrayPointClass: [],
+      debug: false,
+      htmlInput: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null),
+      hiddenAlert: true,
+      titleAlert: 'Error: label is empty',
+      severityAlert: 'error'
+    };
+    return _this;
+  }
   /**
-   * render
+   * Use function if value input change
+   * @param {string} currentTarget new value of input
+   * @param {string} name name of input
+   * @param {number} index id of input
    */
 
 
-  DrawArrow.prototype.render = function () {
-    var coordinateSpace = this.props.coordinateSpace;
-    var widthArrow = this.defineSizeHeight(this.props.sizeHeight.value || '');
-    var heightArrow = this.defineSizeWidth(this.props.sizeWidth.value || '');
-    var sizeArrow = widthArrow + heightArrow;
-    var defineCenterX = this.defineCenterX(coordinateSpace);
-    var defineCenterY = this.defineCenterY(coordinateSpace);
-    var rotate = this.props.rotate + 'deg';
-    var valueInputPositionArrowX = parseInt(this.props.positionShapeX, 10) || 0;
-    var valueInputPositionArrowY = parseInt(this.props.positionShapeY, 10) || 0;
-    var positionArrowX = this.definePositionArrowX(valueInputPositionArrowX, coordinateSpace, defineCenterX, widthArrow);
-    var positionArrowY = this.definePositionArrowY(valueInputPositionArrowY, coordinateSpace, defineCenterY, sizeArrow); //const positionLabelX: number = parseInt(this.props.positionLabelX, 10) || 0;
-    //const positionLabelY: number = ((parseInt(this.props.positionLabelY, 10) || 0) * (-1));
-
-    var drawGraphicMarker = this.props.drawGraphicmarker.value || '';
-    var color = this.props.color;
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      id: this.props.idPoint
-    }, this.defineLabel(color, positionArrowX, positionArrowY, drawGraphicMarker, heightArrow), this.drawArrow(widthArrow, heightArrow, rotate, positionArrowX, positionArrowY, color, drawGraphicMarker));
+  Point.prototype._handleChange = function (currentTarget, name, index) {
+    var tmp = this.state.arrayCoor;
+    tmp = Object(_Functions_EditParameter_editGoodParameterPoint__WEBPACK_IMPORTED_MODULE_5__["editGoodParameterPoint"])(name, tmp, currentTarget, {});
+    this.setState({
+      arrayCoor: tmp
+    });
+    this.generateInputsPoint();
   };
-
-  return DrawArrow;
-}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (DrawArrow);
-
-/***/ }),
-
-/***/ "./components/Draw/drawLinkWithCoordinates.tsx":
-/*!*****************************************************!*\
-  !*** ./components/Draw/drawLinkWithCoordinates.tsx ***!
-  \*****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__);
+  /**
+   * Get value of input with state.arrayPointClass
+   * @param {number} id id of element
+   * @param {string} param name of input
+   * @returns {string} value of the array element
+   */
 
 
+  Point.prototype.getGoodValue = function (id, param) {
+    var value;
+    var valueSelect;
+    value = '';
+    valueSelect = {};
 
+    if (param.startsWith('drawGraphicMarker') || param.startsWith('shape') || param.startsWith('sizeWidth') || param.startsWith('sizeHeight') || param.startsWith('linkWithCoordinateSpace')) {
+      if (param.startsWith('drawGraphicMarker')) {
+        valueSelect = this.state.arrayCoor.drawGraphicMarker;
+      } else if (param.startsWith('shape')) {
+        valueSelect = this.state.arrayCoor.shape;
+      } else if (param.startsWith('sizeWidth')) {
+        valueSelect = this.state.arrayCoor.sizeWidth;
+      } else if (param.startsWith('sizeHeight')) {
+        valueSelect = this.state.arrayCoor.sizeHeight;
+      }
 
-var DrawLinkWithCoordinates =
-/** @class */
-function (_super) {
-  Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DrawLinkWithCoordinates, _super);
-
-  function DrawLinkWithCoordinates(props) {
-    var _this = _super.call(this, props) || this;
-
-    _this.defineValueToolTip = function () {
-      var infosLink = [];
-      infosLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, _this.props.name));
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, infosLink);
-    };
-
-    _this.state = {};
-    return _this;
-  }
-
-  DrawLinkWithCoordinates.prototype.synchroArrowX = function (positionX, defineCenter) {
-    return positionX * (defineCenter / 100) + defineCenter;
-  };
-
-  DrawLinkWithCoordinates.prototype.synchroArrowY = function (positionY, defineCenter) {
-    return defineCenter - positionY * (defineCenter / 100);
-  }; // public drawPoint(xA: number, yA: number, xB: number, yB: number) {
-  //     return (
-  //         <div>
-  //             <div style={{
-  //                 border: '1px solid red',
-  //                 backgroundColor: 'red',
-  //                 borderRadius: '50px',
-  //                 padding: '2px',
-  //                 position: 'absolute',
-  //                 top: yA,
-  //                 left: xA,
-  //             }}></div>
-  //             <div style={{
-  //                 border: '1px solid white',
-  //                 backgroundColor: 'white',
-  //                 borderRadius: '50px',
-  //                 padding: '2px',
-  //                 position: 'absolute',
-  //                 top: yB,
-  //                 left: xB,
-  //             }}></div>
-  //         </div>
-  //     )
-  // }
-
-
-  DrawLinkWithCoordinates.prototype.drawLink = function (xA, yA, xB, yB, colorA, colorB, orientationLink, labelA, labelB, labelAPositionX, labelAPositionY, labelBPositionX, labelBPositionY) {
-    var xC = (xA + xB) / 2;
-    var yC = (yA + yB) / 2;
-    var distanceAC = Math.sqrt((xA - xC) * (xA - xC) + (yA - yC) * (yA - yC));
-    var angleRadianAC = Math.atan2(yA - yC, xA - xC);
-    var angleDegreeAC = angleRadianAC * 180 / Math.PI;
-    var xMidAC = (xA + xC) / 2;
-    var yMidAC = (yA + yC) / 2;
-    var xArrowAC = xMidAC - distanceAC / 2;
-    var yArrowAC = yMidAC;
-    var distanceBC = Math.sqrt((xB - xC) * (xB - xC) + (yB - yC) * (yB - yC));
-    var angleRadianBC = Math.atan2(yB - yC, xB - xC);
-    var angleDegreeBC = angleRadianBC * 180 / Math.PI;
-    var xMidBC = (xB + xC) / 2;
-    var yMidBC = (yB + yC) / 2;
-    var xArrowBC = xMidBC - distanceBC / 2;
-    var yArrowBC = yMidBC;
-    var distanceAB = Math.sqrt((xA - xB) * (xA - xB) + (yA - yB) * (yA - yB));
-    var angleRadianAB = Math.atan2(yA - yB, xA - xB);
-    var angleDegreeAB = angleRadianAB * 180 / Math.PI;
-    var xMidAB = (xA + xB) / 2;
-    var yMidAB = (yA + yB) / 2;
-    var xArrowAB = xMidAB - distanceAB / 2;
-    var yArrowAB = yMidAB;
-    var angleRadianBA = Math.atan2(yB - yA, xB - xA);
-    var angleDegreeBA = angleRadianBA * 180 / Math.PI;
-    var sizeArrowTriangle = 8;
-
-    if (orientationLink === 'double') {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "arrow1",
-        style: {
-          display: 'flex',
-          alignContent: 'stretch',
-          position: 'absolute',
-          top: yArrowAC - sizeArrowTriangle / 2,
-          left: xArrowAC,
-          transform: 'rotate(' + angleDegreeAC + 'deg)',
-          width: distanceAC
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "arrowTriangle",
-        style: {
-          width: '0',
-          height: '0',
-          borderLeft: sizeArrowTriangle + 'px solid transparent',
-          borderRight: sizeArrowTriangle + 'px solid transparent',
-          borderBottom: sizeArrowTriangle + 'px solid ' + colorA,
-          transform: 'rotate(270deg)'
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          border: '1px solid ' + colorA,
-          backgroundColor: colorA,
-          width: distanceAC
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          position: 'absolute',
-          top: yMidAC + labelAPositionY,
-          left: xMidAC + labelAPositionX,
-          fontSize: distanceAC * (10 / 100),
-          //border: '1px solid black',
-          backgroundColor: 'white',
-          color: 'black',
-          padding: '0 5px'
-        }
-      }, labelA)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "arrow2",
-        style: {
-          display: 'flex',
-          alignContent: 'stretch',
-          position: 'absolute',
-          top: yArrowBC - sizeArrowTriangle / 2,
-          left: xArrowBC,
-          transform: 'rotate(' + angleDegreeBC + 'deg)',
-          width: distanceBC
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "arrowTriangle",
-        style: {
-          width: '0',
-          height: '0',
-          borderLeft: sizeArrowTriangle + 'px solid transparent',
-          borderRight: sizeArrowTriangle + 'px solid transparent',
-          borderBottom: sizeArrowTriangle + 'px solid ' + colorB,
-          transform: 'rotate(270deg)'
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          border: '1px solid ' + colorB,
-          backgroundColor: colorB,
-          width: distanceBC
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          position: 'absolute',
-          top: yMidBC + labelBPositionY,
-          left: xMidBC + labelBPositionX,
-          fontSize: distanceBC * (10 / 100),
-          //border: '1px solid black',
-          backgroundColor: 'white',
-          color: 'black',
-          padding: '0 5px'
-        }
-      }, labelB)));
-    } else if (orientationLink === 'AB') {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "arrow1",
-        style: {
-          display: 'flex',
-          position: 'absolute',
-          top: yArrowAB - sizeArrowTriangle / 2,
-          left: xArrowAB,
-          transform: 'rotate(' + angleDegreeAB + 'deg)',
-          width: distanceAB
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "arrowTriangle",
-        style: {
-          width: '0',
-          height: '0',
-          borderLeft: sizeArrowTriangle + 'px solid transparent',
-          borderRight: sizeArrowTriangle + 'px solid transparent',
-          borderBottom: sizeArrowTriangle + 'px solid ' + colorA,
-          transform: 'rotate(270deg)'
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          border: '1px solid ' + colorA,
-          backgroundColor: colorA,
-          width: distanceAB
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          position: 'absolute',
-          top: yMidAB + labelAPositionY,
-          left: xMidAB + labelAPositionX,
-          //border: '1px solid black',
-          backgroundColor: 'white',
-          fontSize: distanceAB * (8 / 100),
-          color: 'black',
-          padding: '0 5px',
-          cursor: 'pointer'
-        }
-      }, labelA));
-    } else if (orientationLink === 'BA') {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "arrow1",
-        style: {
-          display: 'flex',
-          alignContent: 'stretch',
-          position: 'absolute',
-          top: yArrowAB - sizeArrowTriangle / 2,
-          left: xArrowAB,
-          transform: 'rotate(' + angleDegreeBA + 'deg)',
-          width: distanceAB
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "arrowTriangle",
-        style: {
-          width: '0',
-          height: '0',
-          borderLeft: sizeArrowTriangle + 'px solid transparent',
-          borderRight: sizeArrowTriangle + 'px solid transparent',
-          borderBottom: sizeArrowTriangle + 'px solid ' + colorB,
-          transform: 'rotate(270deg)'
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          border: '1px solid ' + colorB,
-          backgroundColor: colorB,
-          width: distanceAB
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          position: 'absolute',
-          top: yMidAB + labelBPositionY,
-          left: xMidAB + labelBPositionX,
-          //border: '1px solid black',
-          backgroundColor: 'white',
-          color: 'black',
-          fontSize: distanceAB * (8 / 100),
-          padding: '0 5px'
-        }
-      }, labelB));
+      return valueSelect;
     } else {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+      if (param.startsWith('rotateArrow')) {
+        value = this.state.arrayCoor.rotateArrow;
+      } else if (param.startsWith('positionShapeX')) {
+        value = this.state.arrayCoor.positionShapeX;
+      } else if (param.startsWith('positionShapeY')) {
+        value = this.state.arrayCoor.positionShapeY;
+      } else if (param.startsWith('label')) {
+        value = this.state.arrayCoor.label;
+      } else if (param.startsWith('color')) {
+        value = this.state.arrayCoor.color;
+      } else if (param.startsWith('refIdMainMetric')) {
+        value = this.state.arrayCoor.mainMetric.refId || '';
+      } else if (param.startsWith('keyMainMetric')) {
+        value = this.state.arrayCoor.mainMetric.key || '';
+      } else if (param.startsWith('keyValueMainMetric')) {
+        value = this.state.arrayCoor.mainMetric.keyValue || '';
+      }
+
+      return value;
     }
   };
-
-  DrawLinkWithCoordinates.prototype.render = function () {
-    var defineCenter = this.props.height / 2;
-    var xA = this.synchroArrowX(parseInt(this.props.pointAPositionX, 10), defineCenter);
-    var yA = this.synchroArrowY(parseInt(this.props.pointAPositionY, 10), defineCenter);
-    var xB = this.synchroArrowX(parseInt(this.props.pointBPositionX, 10), defineCenter);
-    var yB = this.synchroArrowY(parseInt(this.props.pointBPositionY, 10), defineCenter);
-    var colorA = this.props.colorA;
-    var colorB = this.props.colorB;
-    var orientationLink = this.props.orientationLink;
-    var labelA = this.props.labelA;
-    var labelB = this.props.labelB;
-    var labelAPositionX = parseInt(this.props.labelAPositionX, 10);
-    var labelAPositionY = parseInt(this.props.labelAPositionY, 10) * -1;
-    var labelBPositionX = parseInt(this.props.labelBPositionX, 10);
-    var labelBPositionY = parseInt(this.props.labelBPositionY, 10) * -1;
-    var valueToolTip = this.defineValueToolTip();
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
-      content: valueToolTip
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.drawLink(xA, yA, xB, yB, colorA, colorB, orientationLink, labelA, labelB, labelAPositionX, labelAPositionY, labelBPositionX, labelBPositionY)));
-  };
-
-  return DrawLinkWithCoordinates;
-}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (DrawLinkWithCoordinates);
-
-/***/ }),
-
-/***/ "./components/Draw/drawLinkWithPoints.tsx":
-/*!************************************************!*\
-  !*** ./components/Draw/drawLinkWithPoints.tsx ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__);
+  /** create dynamic input */
 
 
+  Point.prototype.generateInputsPoint = function () {
+    var e_1, _a;
 
+    var _this = this;
 
-var DrawLienWithPoints =
-/** @class */
-function (_super) {
-  Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DrawLienWithPoints, _super);
+    var arrayInput = this.state.arrayInput;
+    var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null); //let itemButton: JSX.Element = <div></div>;
 
-  function DrawLienWithPoints(props) {
-    var _this = _super.call(this, props) || this;
+    var mapItems = [];
+    var finalItem = [];
 
-    _this.defineValueToolTip = function () {
-      var infosLink = [];
-      infosLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, _this.props.name));
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, infosLink);
+    var _loop_1 = function _loop_1(line) {
+      mapItems = [];
+      line.uneClassInput.forEach(function (obj) {
+        if (obj.input_type === 'text') {
+          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Functions_Input_inputTextPoint__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            key: obj.id,
+            label: obj.label,
+            name: obj.name,
+            placeholder: obj.placeholder || '',
+            required: obj.required,
+            value: _this.getGoodValue(line.id, obj.name),
+            _handleChange: function _handleChange(event) {
+              _this._handleChange(event.currentTarget.value, obj.name, line.id);
+            },
+            shape: _this.getGoodValue(line.id, 'shape').value
+          });
+        } else if (obj.input_type === 'select') {
+          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Functions_Input_inputSelectPoint__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            key: obj.id,
+            _onChange: function _onChange(value, name, index) {
+              var e_2, _a;
+
+              var i;
+              i = 0;
+
+              var copyOfarrayPointClass = _this.state.arrayPointClass.slice();
+
+              try {
+                for (var copyOfarrayPointClass_1 = (e_2 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(copyOfarrayPointClass)), copyOfarrayPointClass_1_1 = copyOfarrayPointClass_1.next(); !copyOfarrayPointClass_1_1.done; copyOfarrayPointClass_1_1 = copyOfarrayPointClass_1.next()) {
+                  var line_1 = copyOfarrayPointClass_1_1.value;
+
+                  if (line_1.id === index) {
+                    copyOfarrayPointClass[i] = Object(_Functions_EditParameter_editGoodParameterPoint__WEBPACK_IMPORTED_MODULE_5__["editGoodParameterPoint"])(name, copyOfarrayPointClass[i], value.value || '', value || {});
+                    break;
+                  }
+
+                  i++;
+                }
+              } catch (e_2_1) {
+                e_2 = {
+                  error: e_2_1
+                };
+              } finally {
+                try {
+                  if (copyOfarrayPointClass_1_1 && !copyOfarrayPointClass_1_1.done && (_a = copyOfarrayPointClass_1["return"])) _a.call(copyOfarrayPointClass_1);
+                } finally {
+                  if (e_2) throw e_2.error;
+                }
+              }
+
+              _this.setState({
+                arrayPointClass: copyOfarrayPointClass
+              });
+
+              _this.callBack();
+            },
+            name: obj.name,
+            index: line.id,
+            data: obj.optionValues,
+            defaultValue: _this.getGoodValue(line.id, obj.name),
+            shape: _this.getGoodValue(line.id, 'shape').value,
+            label: obj.label
+          });
+        } else if (obj.input_type === 'color') {
+          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Functions_Input_inputSeriesColorPickerPoint__WEBPACK_IMPORTED_MODULE_7__["default"], {
+            key: obj.id,
+            keyInt: parseInt(obj.id, 10),
+            color: _this.getGoodValue(line.id, 'color'),
+            text: obj.label,
+            width: 10,
+            _onChange: function _onChange(keyInt, newColor) {
+              var e_3, _a;
+
+              var i;
+              i = 0;
+
+              var copyOfarrayPointClass = _this.state.arrayPointClass.slice();
+
+              try {
+                for (var copyOfarrayPointClass_2 = (e_3 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(copyOfarrayPointClass)), copyOfarrayPointClass_2_1 = copyOfarrayPointClass_2.next(); !copyOfarrayPointClass_2_1.done; copyOfarrayPointClass_2_1 = copyOfarrayPointClass_2.next()) {
+                  var line_2 = copyOfarrayPointClass_2_1.value;
+
+                  if (line_2.id === keyInt) {
+                    copyOfarrayPointClass[i] = Object(_Functions_EditParameter_editGoodParameterPoint__WEBPACK_IMPORTED_MODULE_5__["editGoodParameterPoint"])(obj.name, copyOfarrayPointClass[i], newColor, {});
+                    break;
+                  }
+
+                  i++;
+                }
+              } catch (e_3_1) {
+                e_3 = {
+                  error: e_3_1
+                };
+              } finally {
+                try {
+                  if (copyOfarrayPointClass_2_1 && !copyOfarrayPointClass_2_1.done && (_a = copyOfarrayPointClass_2["return"])) _a.call(copyOfarrayPointClass_2);
+                } finally {
+                  if (e_3) throw e_3.error;
+                }
+              }
+
+              _this.setState({
+                arrayPointClass: copyOfarrayPointClass
+              });
+
+              _this.callBack();
+
+              obj.setDefaultValueColor(newColor);
+            }
+          });
+        } else {
+          //   itemButton = (
+          //     <InputButtonField
+          //       key={obj.id}
+          //       label={obj.label}
+          //       value={obj.value || ''}
+          //       name={obj.name}
+          //       required={obj.required}
+          //       _handleChange={this.deleteOwnInput}
+          //       id={obj.id}
+          //       withLabel={false}
+          //     />
+          //   );
+          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+        }
+
+        mapItems.push(item);
+      });
+      var newInputList = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        key: 'inputPoint' + line.id.toString(),
+        className: "inputCoor",
+        id: 'point' + line.id.toString()
+      }, mapItems);
+      finalItem = finalItem.concat(newInputList);
     };
 
-    _this.state = {};
-    return _this;
-  }
+    try {
+      for (var arrayInput_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayInput), arrayInput_1_1 = arrayInput_1.next(); !arrayInput_1_1.done; arrayInput_1_1 = arrayInput_1.next()) {
+        var line = arrayInput_1_1.value;
 
-  DrawLienWithPoints.prototype.synchroArrowX = function (positionX, defineCenter) {
-    return positionX * (defineCenter / 100) + defineCenter;
-  };
-
-  DrawLienWithPoints.prototype.synchroArrowY = function (positionY, defineCenter) {
-    return defineCenter - positionY * (defineCenter / 100);
-  };
-
-  DrawLienWithPoints.prototype.defineXRegionOfPointIn = function () {
-    var _a, _b, _c;
-
-    var xRegion = 0;
-
-    if (((_a = this.props.pointIn.value) === null || _a === void 0 ? void 0 : _a.coordinateSpace.value) !== undefined) {
-      var xMin = parseInt(((_b = this.props.pointIn.value.coordinateSpace.value) === null || _b === void 0 ? void 0 : _b.coords.xMin) || '0', 10);
-      var xMax = parseInt(((_c = this.props.pointIn.value.coordinateSpace.value) === null || _c === void 0 ? void 0 : _c.coords.xMax) || '0', 10);
-      xRegion = (xMax + xMin) / 2;
+        _loop_1(line);
+      }
+    } catch (e_1_1) {
+      e_1 = {
+        error: e_1_1
+      };
+    } finally {
+      try {
+        if (arrayInput_1_1 && !arrayInput_1_1.done && (_a = arrayInput_1["return"])) _a.call(arrayInput_1);
+      } finally {
+        if (e_1) throw e_1.error;
+      }
     }
 
-    return xRegion;
+    this.setState(function (prevState) {
+      return {
+        htmlInput: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", null, finalItem)
+      };
+    });
+  };
+  /**
+   * render()
+   */
+
+
+  Point.prototype.render = function () {
+    // const styleMainDiv = {
+    //   display: 'flex',
+    //   flexDirection: 'row',
+    //   justifyContent: 'center',
+    // } as React.CSSProperties;
+    var _this = this;
+
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_manageQuery__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      options: this.props.options,
+      onOptionsChange: this.props.onOptionsChange,
+      data: this.props.data,
+      idCoordinate: this.state.arrayCoor.id,
+      mainMetric: this.state.arrayCoor.mainMetric,
+      callBackToParent: this.callBackMainMetric,
+      isLink: false
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      options: this.props.options,
+      onOptionsChange: this.props.onOptionsChange,
+      data: this.props.data,
+      idCoordinate: this.state.arrayCoor.id,
+      metrics: this.state.arrayCoor.metrics,
+      callBackToParent: this.callBackAuxiliaryMetric,
+      id: this.state.arrayCoor.id,
+      coordinateSpace: this.state.arrayCoor,
+      isLink: false
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_parametresGeneriques__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      options: this.props.options,
+      onOptionsChange: this.props.onOptionsChange,
+      data: this.props.data,
+      coordinateSpace: this.state.arrayCoor,
+      callBackToParent: this.callBackToOther
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_manageLowerLimit__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      coordinate: this.state.arrayCoor,
+      callBack: this.callBackManageLowerLimit,
+      lowerLimitCallBack: this.callBackLowerLimit
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_positionParameters__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      options: this.props.options,
+      onOptionsChange: this.props.onOptionsChange,
+      data: this.props.data,
+      coordinateSpace: this.state.arrayCoor,
+      callBackToParent: this.callBackPositionParameter,
+      callBackToParentZIndex: function callBackToParentZIndex() {},
+      isPoint: true,
+      isLink: false,
+      isRegion: false,
+      id: this.state.arrayCoor.id
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.htmlInput), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        textAlign: 'center'
+      },
+      className: "buttonSave"
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_8__["Button"], {
+      style: {
+        marginRight: '1%'
+      },
+      onClick: function onClick() {
+        return _this.callBack();
+      }
+    }, "Save"), !this.props.isAddPoint && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_8__["Button"], {
+      onClick: this.deleteOwnInput,
+      variant: "danger"
+    }, "Delete")));
   };
 
-  DrawLienWithPoints.prototype.defineYRegionOfPointIn = function () {
-    var _a, _b, _c;
-
-    var yRegion = 0;
-
-    if (((_a = this.props.pointIn.value) === null || _a === void 0 ? void 0 : _a.coordinateSpace.value) !== undefined) {
-      var yMin = parseInt(((_b = this.props.pointIn.value.coordinateSpace.value) === null || _b === void 0 ? void 0 : _b.coords.yMin) || '0', 10);
-      var yMax = parseInt(((_c = this.props.pointIn.value.coordinateSpace.value) === null || _c === void 0 ? void 0 : _c.coords.yMax) || '0', 10);
-      yRegion = (yMax + yMin) / 2;
-    }
-
-    return yRegion;
-  };
-
-  DrawLienWithPoints.prototype.defineXRegionOfPointOut = function () {
-    var _a, _b, _c;
-
-    var xRegion = 0;
-
-    if (((_a = this.props.pointOut.value) === null || _a === void 0 ? void 0 : _a.coordinateSpace.value) !== undefined) {
-      var xMin = parseInt(((_b = this.props.pointOut.value.coordinateSpace.value) === null || _b === void 0 ? void 0 : _b.coords.xMin) || '0', 10);
-      var xMax = parseInt(((_c = this.props.pointOut.value.coordinateSpace.value) === null || _c === void 0 ? void 0 : _c.coords.xMax) || '0', 10);
-      xRegion = (xMax + xMin) / 2;
-    }
-
-    return xRegion;
-  };
-
-  DrawLienWithPoints.prototype.defineYRegionOfPointOut = function () {
-    var _a, _b, _c;
-
-    var yRegion = 0;
-
-    if (((_a = this.props.pointOut.value) === null || _a === void 0 ? void 0 : _a.coordinateSpace.value) !== undefined) {
-      var yMin = parseInt(((_b = this.props.pointOut.value.coordinateSpace.value) === null || _b === void 0 ? void 0 : _b.coords.yMin) || '0', 10);
-      var yMax = parseInt(((_c = this.props.pointOut.value.coordinateSpace.value) === null || _c === void 0 ? void 0 : _c.coords.yMax) || '0', 10);
-      yRegion = (yMax + yMin) / 2;
-    }
-
-    return yRegion;
-  };
-
-  DrawLienWithPoints.prototype.drawLink = function (xA, xB, yA, yB, colorA, colorB, orientationLink, labelA, labelB, labelAPositionX, labelAPositionY, labelBPositionX, labelBPositionY) {
-    var xC = (xA + xB) / 2;
-    var yC = (yA + yB) / 2;
-    var distanceAC = Math.sqrt((xA - xC) * (xA - xC) + (yA - yC) * (yA - yC));
-    var angleRadianAC = Math.atan2(yA - yC, xA - xC);
-    var angleDegreeAC = angleRadianAC * 180 / Math.PI;
-    var xMidAC = (xA + xC) / 2;
-    var yMidAC = (yA + yC) / 2;
-    var xArrowAC = xMidAC - distanceAC / 2;
-    var yArrowAC = yMidAC;
-    var distanceBC = Math.sqrt((xB - xC) * (xB - xC) + (yB - yC) * (yB - yC));
-    var angleRadianBC = Math.atan2(yB - yC, xB - xC);
-    var angleDegreeBC = angleRadianBC * 180 / Math.PI;
-    var xMidBC = (xB + xC) / 2;
-    var yMidBC = (yB + yC) / 2;
-    var xArrowBC = xMidBC - distanceBC / 2;
-    var yArrowBC = yMidBC;
-    var distanceAB = Math.sqrt((xA - xB) * (xA - xB) + (yA - yB) * (yA - yB));
-    var angleRadianAB = Math.atan2(yA - yB, xA - xB);
-    var angleDegreeAB = angleRadianAB * 180 / Math.PI;
-    var xMidAB = (xA + xB) / 2;
-    var yMidAB = (yA + yB) / 2;
-    var xArrowAB = xMidAB - distanceAB / 2;
-    var yArrowAB = yMidAB;
-    var angleRadianBA = Math.atan2(yB - yA, xB - xA);
-    var angleDegreeBA = angleRadianBA * 180 / Math.PI;
-    var sizeArrowTriangle = 8;
-
-    if (orientationLink === 'double') {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "arrow1",
-        style: {
-          display: 'flex',
-          alignContent: 'stretch',
-          position: 'absolute',
-          top: yArrowAC - sizeArrowTriangle / 2,
-          left: xArrowAC,
-          transform: 'rotate(' + angleDegreeAC + 'deg)',
-          width: distanceAC
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          width: '0',
-          height: '0',
-          borderLeft: sizeArrowTriangle + 'px solid transparent',
-          borderRight: sizeArrowTriangle + 'px solid transparent',
-          borderBottom: sizeArrowTriangle + 'px solid ' + colorA,
-          transform: 'rotate(270deg)'
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          border: '1px solid ' + colorA,
-          backgroundColor: colorA,
-          width: distanceAC
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          position: 'absolute',
-          top: yMidAC + labelAPositionY,
-          left: xMidAC + labelAPositionX,
-          fontSize: distanceAC * (10 / 100),
-          backgroundColor: 'white',
-          color: 'black',
-          padding: '0 5px'
-        }
-      }, labelA)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "arrow2",
-        style: {
-          display: 'flex',
-          alignContent: 'stretch',
-          position: 'absolute',
-          top: yArrowBC - sizeArrowTriangle / 2,
-          left: xArrowBC,
-          transform: 'rotate(' + angleDegreeBC + 'deg)',
-          width: distanceBC
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          width: '0',
-          height: '0',
-          borderLeft: sizeArrowTriangle + 'px solid transparent',
-          borderRight: sizeArrowTriangle + 'px solid transparent',
-          borderBottom: sizeArrowTriangle + 'px solid ' + colorB,
-          transform: 'rotate(270deg)'
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          border: '1px solid ' + colorB,
-          backgroundColor: colorB,
-          width: distanceBC
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          position: 'absolute',
-          top: yMidBC + labelBPositionY,
-          left: xMidBC + labelBPositionX,
-          fontSize: distanceBC * (10 / 100),
-          backgroundColor: 'white',
-          color: 'black',
-          padding: '0 5px'
-        }
-      }, labelB)));
-    } else if (orientationLink === 'AB') {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "arrow1",
-        style: {
-          display: 'flex',
-          alignContent: 'stretch',
-          position: 'absolute',
-          top: yArrowAB - sizeArrowTriangle / 2,
-          left: xArrowAB,
-          transform: 'rotate(' + angleDegreeAB + 'deg)',
-          width: distanceAB
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          width: '0',
-          height: '0',
-          borderLeft: sizeArrowTriangle + 'px solid transparent',
-          borderRight: sizeArrowTriangle + 'px solid transparent',
-          borderBottom: sizeArrowTriangle + 'px solid ' + colorA,
-          transform: 'rotate(270deg)'
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          border: '1px solid ' + colorA,
-          backgroundColor: colorA,
-          width: distanceAB
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          position: 'absolute',
-          top: yMidAB + labelAPositionY,
-          left: xMidAB + labelAPositionX,
-          fontSize: distanceAB * (8 / 100),
-          backgroundColor: 'white',
-          color: 'black',
-          padding: '0 5px'
-        }
-      }, labelA));
-    } else if (orientationLink === 'BA') {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "arrow1",
-        style: {
-          display: 'flex',
-          alignContent: 'stretch',
-          position: 'absolute',
-          top: yArrowAB - sizeArrowTriangle / 2,
-          left: xArrowAB,
-          transform: 'rotate(' + angleDegreeBA + 'deg)',
-          width: distanceAB
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          width: '0',
-          height: '0',
-          borderLeft: sizeArrowTriangle + 'px solid transparent',
-          borderRight: sizeArrowTriangle + 'px solid transparent',
-          borderBottom: sizeArrowTriangle + 'px solid ' + colorB,
-          transform: 'rotate(270deg)'
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          border: '1px solid ' + colorB,
-          backgroundColor: colorB,
-          width: distanceAB
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          position: 'absolute',
-          top: yMidAB + labelBPositionY,
-          left: xMidAB + labelBPositionX,
-          fontSize: distanceAB * (8 / 100),
-          backgroundColor: 'white',
-          color: 'black',
-          padding: '0 5px'
-        }
-      }, labelB));
-    }
-
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
-  };
-
-  DrawLienWithPoints.prototype.render = function () {
-    var _a, _b, _c, _d, _e, _f;
-
-    var defineCenter = this.props.height / 2;
-    var xA = this.synchroArrowX(parseInt(((_a = this.props.pointIn.value) === null || _a === void 0 ? void 0 : _a.positionShapeX) || '0', 10) + this.defineXRegionOfPointIn(), defineCenter);
-    var yA = this.synchroArrowY(parseInt(((_b = this.props.pointIn.value) === null || _b === void 0 ? void 0 : _b.positionShapeY) || '0', 10) + this.defineYRegionOfPointIn(), defineCenter);
-    var xB = this.synchroArrowX(parseInt(((_c = this.props.pointOut.value) === null || _c === void 0 ? void 0 : _c.positionShapeX) || '0', 10) + this.defineXRegionOfPointOut(), defineCenter);
-    var yB = this.synchroArrowY(parseInt(((_d = this.props.pointOut.value) === null || _d === void 0 ? void 0 : _d.positionShapeY) || '0', 10) + this.defineYRegionOfPointOut(), defineCenter);
-    var colorA = ((_e = this.props.pointIn.value) === null || _e === void 0 ? void 0 : _e.color) || 'white';
-    var colorB = ((_f = this.props.pointOut.value) === null || _f === void 0 ? void 0 : _f.color) || 'white';
-    var orientationLink = this.props.orientationLink;
-    var labelA = this.props.labelA;
-    var labelB = this.props.labelB;
-    var labelAPositionX = parseInt(this.props.labelAPositionX, 10);
-    var labelAPositionY = parseInt(this.props.labelAPositionY, 10) * -1;
-    var labelBPositionX = parseInt(this.props.labelBPositionX, 10);
-    var labelBPositionY = parseInt(this.props.labelBPositionY, 10) * -1;
-    var valueToolTip = this.defineValueToolTip();
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
-      content: valueToolTip
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.drawLink(xA, xB, yA, yB, colorA, colorB, orientationLink, labelA, labelB, labelAPositionX, labelAPositionY, labelBPositionX, labelBPositionY)));
-  };
-
-  return DrawLienWithPoints;
+  return Point;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (DrawLienWithPoints);
-
-/***/ }),
-
-/***/ "./components/Draw/drawLinkWithRegions.tsx":
-/*!*************************************************!*\
-  !*** ./components/Draw/drawLinkWithRegions.tsx ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__);
-
-
-
-
-var DrawLienWithRegions =
-/** @class */
-function (_super) {
-  Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DrawLienWithRegions, _super);
-
-  function DrawLienWithRegions(props) {
-    var _this = _super.call(this, props) || this;
-
-    _this.defineValueToolTip = function () {
-      var infosLink = [];
-      infosLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, _this.props.name));
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, infosLink);
-    };
-
-    _this.state = {};
-    return _this;
-  }
-
-  DrawLienWithRegions.prototype.synchroX = function (positionX) {
-    var defineCenter = this.props.height / 2;
-    return positionX * (defineCenter / 100) + defineCenter;
-  };
-
-  DrawLienWithRegions.prototype.synchroY = function (positionY) {
-    var defineCenter = this.props.height / 2;
-    return defineCenter - positionY * (defineCenter / 100);
-  };
-
-  DrawLienWithRegions.prototype.drawLink = function (xA, yA, xB, yB, colorA, colorB, orientationLink, labelA, labelB, diagonalRegionIn, diagonalRegionOut, labelAPositionX, labelAPositionY, labelBPositionX, labelBPositionY) {
-    var xC = (xA + xB) / 2;
-    var yC = (yA + yB) / 2;
-    var distanceAC = Math.sqrt((xA - xC) * (xA - xC) + (yA - yC) * (yA - yC));
-    var angleRadianAC = Math.atan2(yA - yC, xA - xC);
-    var angleDegreeAC = angleRadianAC * 180 / Math.PI;
-    var xMidAC = (xA + xC) / 2;
-    var yMidAC = (yA + yC) / 2;
-    var xArrowAC = xMidAC - distanceAC / 2;
-    var yArrowAC = yMidAC;
-    var distanceBC = Math.sqrt((xB - xC) * (xB - xC) + (yB - yC) * (yB - yC));
-    var angleRadianBC = Math.atan2(yB - yC, xB - xC);
-    var angleDegreeBC = angleRadianBC * 180 / Math.PI;
-    var xMidBC = (xB + xC) / 2;
-    var yMidBC = (yB + yC) / 2;
-    var xArrowBC = xMidBC - distanceBC / 2;
-    var yArrowBC = yMidBC;
-    var distanceAB = Math.sqrt((xA - xB) * (xA - xB) + (yA - yB) * (yA - yB));
-    var angleRadianAB = Math.atan2(yA - yB, xA - xB);
-    var angleDegreeAB = angleRadianAB * 180 / Math.PI;
-    var xMidAB = (xA + xB) / 2;
-    var yMidAB = (yA + yB) / 2;
-    var xArrowAB = xMidAB - distanceAB / 2;
-    var yArrowAB = yMidAB;
-    var distanceBA = Math.sqrt((xA - xB) * (xA - xB) + (yA - yB) * (yA - yB));
-    var angleRadianBA = Math.atan2(yB - yA, xB - xA);
-    var angleDegreeBA = angleRadianBA * 180 / Math.PI;
-    var xMidBA = (xA + xB) / 2;
-    var yMidBA = (yA + yB) / 2;
-    var xArrowBA = xMidBA - distanceBA / 2;
-    var yArrowBA = yMidBA;
-    var sizeArrowTriangle = 8;
-
-    if (orientationLink === 'double') {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "arrow1",
-        style: {
-          display: 'flex',
-          alignContent: 'stretch',
-          position: 'absolute',
-          top: yArrowAC - sizeArrowTriangle / 2,
-          left: xArrowAC,
-          transform: 'rotate(' + angleDegreeAC + 'deg)',
-          width: distanceAC
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          width: '0',
-          height: '0',
-          borderLeft: sizeArrowTriangle + 'px solid transparent',
-          borderRight: sizeArrowTriangle + 'px solid transparent',
-          borderBottom: sizeArrowTriangle + 'px solid ' + colorA,
-          transform: 'rotate(270deg)'
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          border: '1px solid ' + colorA,
-          backgroundColor: colorA,
-          width: distanceAC
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          position: 'absolute',
-          top: yMidAC + labelAPositionY,
-          left: xMidAC + labelAPositionX,
-          fontSize: distanceAC * (10 / 100),
-          backgroundColor: 'white',
-          color: 'black',
-          padding: '0 5px'
-        }
-      }, labelA)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "arrow2",
-        style: {
-          display: 'flex',
-          alignContent: 'stretch',
-          position: 'absolute',
-          top: yArrowBC - sizeArrowTriangle / 2,
-          left: xArrowBC,
-          transform: 'rotate(' + angleDegreeBC + 'deg)',
-          width: distanceBC
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          width: '0',
-          height: '0',
-          borderLeft: sizeArrowTriangle + 'px solid transparent',
-          borderRight: sizeArrowTriangle + 'px solid transparent',
-          borderBottom: sizeArrowTriangle + 'px solid ' + colorB,
-          transform: 'rotate(270deg)'
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          border: '1px solid ' + colorB,
-          backgroundColor: colorB,
-          width: distanceBC
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          position: 'absolute',
-          top: yMidBC + labelBPositionY,
-          left: xMidBC + labelBPositionX,
-          fontSize: distanceBC * (10 / 100),
-          backgroundColor: 'white',
-          color: 'black',
-          padding: '0 5px'
-        }
-      }, labelB)));
-    } else if (orientationLink === 'AB') {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "arrow1",
-        style: {
-          display: 'flex',
-          alignContent: 'stretch',
-          position: 'absolute',
-          top: yArrowAB - sizeArrowTriangle / 2,
-          left: xArrowAB,
-          transform: 'rotate(' + angleDegreeAB + 'deg)',
-          width: distanceAB
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          width: '0',
-          height: '0',
-          borderLeft: sizeArrowTriangle + 'px solid transparent',
-          borderRight: sizeArrowTriangle + 'px solid transparent',
-          borderBottom: sizeArrowTriangle + 'px solid ' + colorA,
-          transform: 'rotate(270deg)'
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          border: '1px solid ' + colorA,
-          backgroundColor: colorA,
-          width: distanceAB
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          position: 'absolute',
-          top: yMidAB + labelAPositionY,
-          left: xMidAB + labelAPositionX,
-          fontSize: distanceAB * (8 / 100),
-          backgroundColor: 'white',
-          color: 'black',
-          padding: '0 5px'
-        }
-      }, labelA));
-    } else if (orientationLink === 'BA') {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "arrow1",
-        style: {
-          display: 'flex',
-          alignContent: 'stretch',
-          position: 'absolute',
-          top: yArrowBA - sizeArrowTriangle / 2,
-          left: xArrowBA,
-          transform: 'rotate(' + angleDegreeBA + 'deg)',
-          width: distanceBA
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          width: '0',
-          height: '0',
-          borderLeft: sizeArrowTriangle + 'px solid transparent',
-          borderRight: sizeArrowTriangle + 'px solid transparent',
-          borderBottom: sizeArrowTriangle + 'px solid ' + colorB,
-          transform: 'rotate(270deg)'
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          border: '1px solid ' + colorB,
-          backgroundColor: colorB,
-          width: distanceBA
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          position: 'absolute',
-          top: yMidBA + labelBPositionY,
-          left: xMidBA + labelBPositionX,
-          fontSize: distanceBA * (8 / 100),
-          backgroundColor: 'white',
-          color: 'black',
-          padding: '0 5px'
-        }
-      }, labelB));
-    }
-
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
-  };
-
-  DrawLienWithRegions.prototype.defineDiagonal = function (xMin, xMax, yMin, yMax) {
-    var sideA = xMax - xMin < 0 ? xMin - xMax : xMax - xMin;
-    var sideB = yMax - yMin < 0 ? yMin - yMax : yMax - yMin;
-    var diagonal = 0;
-
-    if (yMax - yMin === xMax - xMin) {
-      // square
-      diagonal = sideA * Math.sqrt(2);
-    } else {
-      // rectangle
-      diagonal = Math.sqrt(sideA * sideA + sideB * sideB);
-    }
-
-    return diagonal;
-  };
-
-  DrawLienWithRegions.prototype.render = function () {
-    var _a, _b, _c, _d, _e, _f, _g, _h;
-
-    var colorA = this.props.colorA;
-    var colorB = this.props.colorB;
-    var xMinRegionIn = parseInt(((_a = this.props.regionIn.value) === null || _a === void 0 ? void 0 : _a.coords.xMin) || '0', 10);
-    var xMaxRegionIn = parseInt(((_b = this.props.regionIn.value) === null || _b === void 0 ? void 0 : _b.coords.xMax) || '0', 10);
-    var xMinRegionOut = parseInt(((_c = this.props.regionOut.value) === null || _c === void 0 ? void 0 : _c.coords.xMin) || '0', 10);
-    var xMaxRegionOut = parseInt(((_d = this.props.regionOut.value) === null || _d === void 0 ? void 0 : _d.coords.xMax) || '0', 10);
-    var yMinRegionIn = parseInt(((_e = this.props.regionIn.value) === null || _e === void 0 ? void 0 : _e.coords.yMin) || '0', 10);
-    var yMaxRegionIn = parseInt(((_f = this.props.regionIn.value) === null || _f === void 0 ? void 0 : _f.coords.yMax) || '0', 10);
-    var yMinRegionOut = parseInt(((_g = this.props.regionOut.value) === null || _g === void 0 ? void 0 : _g.coords.yMin) || '0', 10);
-    var yMaxRegionOut = parseInt(((_h = this.props.regionOut.value) === null || _h === void 0 ? void 0 : _h.coords.yMax) || '0', 10);
-    var xA = this.synchroX((xMaxRegionIn + xMinRegionIn) / 2);
-    var yA = this.synchroY((yMaxRegionIn + yMinRegionIn) / 2);
-    var xB = this.synchroX((xMaxRegionOut + xMinRegionOut) / 2);
-    var yB = this.synchroY((yMaxRegionOut + yMinRegionOut) / 2);
-    var orientationLink = this.props.orientationLink;
-    var labelA = this.props.labelA;
-    var labelB = this.props.labelB;
-    var diagonalRegionIn = this.defineDiagonal(xMinRegionIn, xMaxRegionIn, yMinRegionIn, yMaxRegionIn);
-    var diagonalRegionOut = this.defineDiagonal(xMinRegionOut, xMaxRegionOut, yMinRegionOut, yMaxRegionOut);
-    var labelAPositionX = parseInt(this.props.labelAPositionX, 10);
-    var labelAPositionY = parseInt(this.props.labelAPositionY, 10) * -1;
-    var labelBPositionX = parseInt(this.props.labelBPositionX, 10);
-    var labelBPositionY = parseInt(this.props.labelBPositionY, 10) * -1;
-    var valueToolTip = this.defineValueToolTip();
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
-      content: valueToolTip
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.drawLink(xA, yA, xB, yB, colorA, colorB, orientationLink, labelA, labelB, diagonalRegionIn, diagonalRegionOut, labelAPositionX, labelAPositionY, labelBPositionX, labelBPositionY)));
-  };
-
-  return DrawLienWithRegions;
-}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (DrawLienWithRegions);
+/* harmony default export */ __webpack_exports__["default"] = (Point);
 
 /***/ }),
 
@@ -10610,118 +10687,101 @@ function (_super) {
     };
 
     _this.defineValueTooptip = function (typeLink, link) {
-      var infosOrientedLink = [];
+      var contentTooltip = [];
       var valueMainMetricA = _this.props.valueMainMetricA;
       var valueMainMetricB = _this.props.valueMainMetricB;
       var refMainMetric = _this.props.refMainMetric;
-      infosOrientedLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+      var styleMainTitle = {
+        fontFamily: _this.props.police,
+        fontSize: '11px',
+        marginBottom: '0px',
+        textAlign: 'center'
+      };
+      var styleTitle = {
+        fontFamily: _this.props.police,
+        fontSize: '10px',
+        marginTop: '5px',
+        marginBottom: '0px'
+      };
+      var styleTitle2 = {
+        fontFamily: _this.props.police,
+        fontSize: '10px',
+        marginTop: '5px',
+        marginLeft: '5px',
+        marginBottom: '0px'
+      };
+      var styleContentMetrics = {
+        fontFamily: _this.props.police,
+        fontSize: '9px',
+        marginLeft: '10px',
+        marginBottom: '0px'
+      };
+      contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
         key: 'contentTooltip1' + _this.props.name,
-        style: {
-          fontSize: '12px',
-          marginBottom: '0px'
-        }
-      }, _this.props.label || _this.props.name));
-      infosOrientedLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        style: styleMainTitle
+      }, _this.props.label || _this.props.name.toUpperCase()));
+      contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
         key: 'contentTooltip2' + _this.props.name,
-        style: {
-          fontSize: '10px',
-          marginTop: '5px',
-          marginBottom: '0px'
-        }
+        style: styleTitle
       }, "Main Metric"));
 
       if (typeLink === 'bidirectional') {
-        infosOrientedLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
           key: 'contentTooltip3' + _this.props.name,
-          style: {
-            fontSize: '8px',
-            marginBottom: '0px',
-            marginTop: '5px'
-          }
+          style: styleTitle2
         }, '+ Link' + link + ' : '));
-        infosOrientedLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
           key: 'contentTooltip4' + _this.props.name,
-          style: {
-            fontSize: '8px',
-            marginBottom: '0px'
-          }
+          style: styleContentMetrics
         }, ' ', "- Reference : ", refMainMetric));
-        infosOrientedLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
           key: 'contentTooltip5' + _this.props.name,
-          style: {
-            fontSize: '8px',
-            marginBottom: '0px'
-          }
+          style: styleContentMetrics
         }, ' ', "- Value : ", valueMainMetricB));
       } else if (typeLink === 'monodirectional') {
-        infosOrientedLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
           key: 'contentTooltip6' + _this.props.name,
-          style: {
-            fontSize: '8px',
-            marginBottom: '0px'
-          }
-        }, ' ', "+ Reference : ", refMainMetric));
-        infosOrientedLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          style: styleContentMetrics
+        }, ' ', "- Reference : ", refMainMetric));
+        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
           key: 'contentTooltip7' + _this.props.name,
-          style: {
-            fontSize: '8px',
-            marginBottom: '0px'
-          }
-        }, ' ', "+ Value : ", valueMainMetricA));
+          style: styleContentMetrics
+        }, ' ', "- Value : ", valueMainMetricA));
       }
 
       if (_this.props.auxiliaryMetrics.length > 0) {
-        infosOrientedLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
           key: 'contentTooltip8' + _this.props.name,
-          style: {
-            fontSize: '10px',
-            marginTop: '5px',
-            marginBottom: '0px'
-          }
+          style: styleTitle
         }, "Auxiliary Metric"));
         var index_1 = 1;
 
         _this.props.auxiliaryMetrics.forEach(function (metric) {
-          infosOrientedLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
             key: index_1.toString() + 'contentTooltip9' + _this.props.name,
-            style: {
-              fontSize: '8px',
-              marginBottom: '0px'
-            }
-          }, "+ ", index_1));
-          infosOrientedLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+            style: styleTitle2
+          }, "+ Metric ", index_1));
+          contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
             key: index_1.toString() + 'contentTooltip10' + _this.props.name,
-            style: {
-              fontSize: '8px',
-              marginBottom: '0px'
-            }
+            style: styleContentMetrics
           }, "- Value : ", _this.props.valuesAuxiliaryMetrics[index_1 - 1]));
-          infosOrientedLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
             key: index_1.toString() + 'contentTooltip11' + _this.props.name,
-            style: {
-              fontSize: '8px',
-              marginBottom: '0px'
-            }
+            style: styleContentMetrics
           }, "- Key : ", metric.key));
-          infosOrientedLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
             key: index_1.toString() + 'contentTooltip12' + _this.props.name,
-            style: {
-              fontSize: '8px',
-              marginBottom: '0px'
-            }
+            style: styleContentMetrics
           }, "- KeyValue : ", metric.keyValue));
-          infosOrientedLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
             key: index_1.toString() + 'contentTooltip13' + _this.props.name,
-            style: {
-              fontSize: '8px',
-              marginBottom: '0px'
-            }
+            style: styleContentMetrics
           }, "- Type : ", metric.manageValue));
           index_1++;
         });
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, infosOrientedLink);
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, contentTooltip);
     };
 
     _this.state = {};
@@ -11470,7 +11530,7 @@ function (_super) {
   /**
    * to do
    * @param coordinateX
-   * @param coordinateSpace
+   *
    */
 
 
@@ -11490,7 +11550,7 @@ function (_super) {
   /**
    * to do
    * @param coordinateY
-   * @param coordinateSpace
+   *
    */
 
 
@@ -11624,7 +11684,7 @@ function (_super) {
 
 
   DrawPoint.prototype.drawPoint = function (drawGraphicMarker, size, positionShapeX, positionShapeY, shape, color) {
-    var valueToolTip = this.defineContentTooltip();
+    var valueToolTip = this.defineContentTooltip('point');
 
     if (drawGraphicMarker === 'true') {
       if (shape === 'circle') {
@@ -11675,7 +11735,7 @@ function (_super) {
       valueToDisplay = name;
     }
 
-    var valueToolTip = this.defineContentTooltip();
+    var valueToolTip = this.defineContentTooltip('label');
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
       key: 'tooltipLabel' + this.props.name,
       content: valueToolTip,
@@ -11693,84 +11753,112 @@ function (_super) {
     }, valueToDisplay));
   };
 
-  DrawPoint.prototype.defineContentTooltip = function () {
+  DrawPoint.prototype.defineContentTooltip = function (localisation) {
     var _this = this;
 
     var arrayOrientedLinksIn = this.props.associateOrientedLinkIn;
     var arrayOrientedLinksOut = this.props.associateOrientedLinkOut;
     var valueMainMetric = this.props.valueMainMetric;
     var refMainMetric = this.props.refMainMetric;
-    var label = this.props.label !== '' ? this.props.label : this.props.name;
     var contentTooltip = [];
+    var styleMainTitle = {
+      fontFamily: this.props.police,
+      fontSize: '11px',
+      marginBottom: '0px',
+      textAlign: 'center'
+    };
+    var styleTitle = {
+      fontFamily: this.props.police,
+      fontSize: '10px',
+      marginTop: '5px',
+      marginBottom: '0px'
+    };
+    var styleTitle2 = {
+      fontFamily: this.props.police,
+      fontSize: '10px',
+      marginTop: '5px',
+      marginLeft: '5px',
+      marginBottom: '0px'
+    };
+    var styleContent = {
+      fontFamily: this.props.police,
+      fontSize: '9px',
+      marginLeft: '10px',
+      marginBottom: '0px'
+    };
     contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-      style: {
-        fontFamily: this.props.police,
-        fontSize: '12px',
-        marginBottom: '0px'
-      }
-    }, label));
+      key: localisation + 'ContentTooltip1' + this.props.name,
+      style: styleMainTitle
+    }, this.props.label || this.props.name.toUpperCase()));
     contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-      style: {
-        fontFamily: this.props.police,
-        fontSize: '10px',
-        marginTop: '5px',
-        marginBottom: '0px'
-      }
+      key: localisation + 'ContentTooltip2' + this.props.name,
+      style: styleTitle
     }, "Main Metric"));
     contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-      style: {
-        fontFamily: this.props.police,
-        fontSize: '8px',
-        marginBottom: '0px'
-      }
-    }, "+ Reference : ", refMainMetric));
+      key: localisation + 'ContentTooltip3' + this.props.name,
+      style: styleContent
+    }, "- Reference : ", refMainMetric));
     contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-      style: {
-        fontFamily: this.props.police,
-        fontSize: '8px',
-        marginBottom: '0px'
-      }
-    }, "+ Value : ", valueMainMetric + this.props.textObject.valueGenerateObjectText.unit));
+      key: localisation + 'ContentTooltip4' + this.props.name,
+      style: styleContent
+    }, "- Value : ", valueMainMetric + this.props.textObject.valueGenerateObjectText.unit));
+
+    if (this.props.auxiliaryMetrics.length > 0) {
+      contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        key: localisation + 'ContentTooltip5' + this.props.name,
+        style: styleTitle
+      }, "Auxiliary Metric"));
+      var index_1 = 1;
+      this.props.auxiliaryMetrics.forEach(function (metric) {
+        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          key: index_1.toString() + localisation + 'ContentTooltip6' + _this.props.name,
+          style: styleTitle2
+        }, "+ Metric ", index_1));
+        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          key: index_1.toString() + localisation + 'ContentTooltip7' + _this.props.name,
+          style: styleContent
+        }, "- Value : ", _this.props.valuesAuxiliaryMetrics[index_1 - 1]));
+        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          key: index_1.toString() + localisation + 'ContentTooltip8' + _this.props.name,
+          style: styleContent
+        }, "- Key : ", metric.key));
+        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          key: index_1.toString() + localisation + 'ContentTooltip9' + _this.props.name,
+          style: styleContent
+        }, "- KeyValue : ", metric.keyValue));
+        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          key: index_1.toString() + localisation + 'ContentTooltip10' + _this.props.name,
+          style: styleContent
+        }, "- Type : ", metric.manageValue));
+        index_1++;
+      });
+    }
 
     if (arrayOrientedLinksIn.length !== 0) {
       contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-        style: {
-          fontFamily: this.props.police,
-          fontSize: '10px',
-          marginTop: '5px',
-          marginBottom: '0px'
-        }
+        key: localisation + 'ContentTooltip11' + this.props.name,
+        style: styleTitle2
       }, "Associate Link In :"));
       arrayOrientedLinksIn.forEach(function (orientedLinkIn) {
         var nameOrientedLink = orientedLinkIn.label || orientedLinkIn.name;
         contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-          style: {
-            fontFamily: _this.props.police,
-            fontSize: '8px',
-            marginBottom: '0px'
-          }
-        }, "+ ", nameOrientedLink));
+          key: localisation + 'ContentTooltip12' + _this.props.name,
+          style: styleContent
+        }, "- ", nameOrientedLink));
       });
     }
 
     if (arrayOrientedLinksOut.length !== 0) {
       contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-        style: {
-          fontFamily: this.props.police,
-          fontSize: '10px',
-          marginTop: '5px',
-          marginBottom: '0px'
-        }
+        key: localisation + 'ContentTooltip13' + this.props.name,
+        style: styleTitle2
       }, "Associate Link Out :"));
       arrayOrientedLinksOut.forEach(function (orientedLinkOut) {
         var nameOrientedLink = orientedLinkOut.label || orientedLinkOut.name;
         contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-          style: {
-            fontFamily: _this.props.police,
-            fontSize: '8px',
-            marginBottom: '0px'
-          }
-        }, "+ ", nameOrientedLink));
+          key: localisation + 'ContentTooltip14' + _this.props.name,
+          style: styleContent
+        }, "- ", nameOrientedLink));
       });
     }
 
@@ -12285,7 +12373,7 @@ function (_super) {
 
       var backColor = region.textObj.colorBack;
       var textColor = region.textObj.colorText;
-      var fontStyle = region.textObj.styleText;
+      var style = region.textObj.style;
       var coorHTML = Object(Functions_otherFunction__WEBPACK_IMPORTED_MODULE_3__["calculRealCoordinate"])(region, _this.props.useLimit, _this.props.limit);
       var styleDiv = {
         border: pBorder,
@@ -12305,7 +12393,7 @@ function (_super) {
       };
       var styleTextDiv = {
         backgroundColor: backColor,
-        fontStyle: fontStyle,
+        fontStyle: style.italic ? 'italic' : '',
         color: textColor,
         verticalAlign: 'middle'
       };
@@ -14359,6 +14447,113 @@ function (_super) {
 
 /***/ }),
 
+/***/ "./components/Parametrage/styleComponent.tsx":
+/*!***************************************************!*\
+  !*** ./components/Parametrage/styleComponent.tsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
+/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+/**
+ * def
+ */
+
+var StyleComponent =
+/** @class */
+function (_super) {
+  Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(StyleComponent, _super);
+
+  function StyleComponent(props) {
+    var _this = _super.call(this, props) || this;
+    /** save data in Parent */
+
+
+    _this.callBack = function () {
+      _this.props.saveParent(_this.state.style);
+    };
+    /** change bold */
+
+
+    _this.onChangeBold = function () {
+      var style = _this.state.style;
+      style.bold = !style.bold;
+
+      _this.setState({
+        style: style
+      });
+
+      _this.callBack();
+    };
+    /** change italic */
+
+
+    _this.onChangeItalic = function () {
+      var style = _this.state.style;
+      style.italic = !style.italic;
+
+      _this.setState({
+        style: style
+      });
+
+      _this.callBack();
+    };
+    /** change underline */
+
+
+    _this.onChangeUnderline = function () {
+      var style = _this.state.style;
+      style.underline = !style.underline;
+
+      _this.setState({
+        style: style
+      });
+
+      _this.callBack();
+    };
+
+    _this.state = {
+      style: _this.props.oldStyle
+    };
+    return _this;
+  }
+  /**
+   * result
+   */
+
+
+  StyleComponent.prototype.render = function () {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: "Bold",
+      checked: this.state.style.bold,
+      onChange: this.onChangeBold
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: "Italic",
+      checked: this.state.style.italic,
+      onChange: this.onChangeItalic
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: "Underline",
+      checked: this.state.style.underline,
+      onChange: this.onChangeUnderline
+    }));
+  };
+
+  return StyleComponent;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (StyleComponent);
+
+/***/ }),
+
 /***/ "./components/Parametrage/textObjects.tsx":
 /*!************************************************!*\
   !*** ./components/Parametrage/textObjects.tsx ***!
@@ -14373,8 +14568,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
 /* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var Functions_Input_inputText__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! Functions/Input/inputText */ "./Functions/Input/inputText.tsx");
-/* harmony import */ var Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! Functions/Input/inputSeriesColorPicker */ "./Functions/Input/inputSeriesColorPicker.tsx");
+/* harmony import */ var components_Parametrage_styleComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! components/Parametrage/styleComponent */ "./components/Parametrage/styleComponent.tsx");
+/* harmony import */ var Functions_Input_inputText__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! Functions/Input/inputText */ "./Functions/Input/inputText.tsx");
+/* harmony import */ var Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! Functions/Input/inputSeriesColorPicker */ "./Functions/Input/inputSeriesColorPicker.tsx");
+
 
 
 
@@ -14497,33 +14694,16 @@ function (_super) {
       });
     };
     /** change value for style text region */
+    // onChangeStyleText = async (event: {
+    //   /** target for style text region input */
+    //   currentTarget: HTMLInputElement;
+    // }) => {
+    //   const newTextObject: TextObject = this.state.textObject;
+    //   newTextObject.styleText = event.currentTarget.value;
+    //   await this.stateAsyncTextObject({ textObject: newTextObject });
+    //   this.callBack();
+    // };
 
-
-    _this.onChangeStyleText = function (event) {
-      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
-        var newTextObject;
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
-          switch (_a.label) {
-            case 0:
-              newTextObject = this.state.textObject;
-              newTextObject.styleText = event.currentTarget.value;
-              return [4
-              /*yield*/
-              , this.stateAsyncTextObject({
-                textObject: newTextObject
-              })];
-
-            case 1:
-              _a.sent();
-
-              this.callBack();
-              return [2
-              /*return*/
-              ];
-          }
-        });
-      });
-    };
     /** switch value for generate text object */
 
 
@@ -15045,6 +15225,15 @@ function (_super) {
       });
     };
 
+    _this.saveData = function (style) {
+      var newText = _this.state.textObject;
+      newText.style = style;
+
+      _this.setState({
+        textObject: newText
+      });
+    };
+
     _this.state = {
       textObject: _this.props.coordinateSpace.textObj
     };
@@ -15066,42 +15255,38 @@ function (_super) {
       hidden: this.state.textObject.isTextRegion
     }, l10n.textObject.textRegion), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
       hidden: !this.state.textObject.isTextRegion
-    }, l10n.textObject.textBubble), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }, l10n.textObject.textBubble), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"], {
       color: this.state.textObject.colorBack,
       keyInt: 0,
       text: l10n.textObject.colorBackground,
       _onChange: this.onChangeBackColor
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"], {
       color: this.state.textObject.colorText,
       keyInt: 0,
       text: l10n.textObject.colorText,
       _onChange: this.onChangeColorText
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      label: l10n.textObject.textStyle,
-      name: "textStyleTextObject",
-      placeholder: l10n.textObject.style,
-      required: false,
-      value: this.state.textObject.styleText,
-      _handleChange: this.onChangeStyleText
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Parametrage_styleComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      oldStyle: this.state.textObject.style,
+      saveParent: this.saveData
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, "Generate text object"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
       label: l10n.textObject.generateTextObject,
       checked: this.state.textObject.generateObjectText,
       onChange: this.onSwitchGenerateObjectText
-    }), this.state.textObject.generateObjectText && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }), this.state.textObject.generateObjectText && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputText__WEBPACK_IMPORTED_MODULE_4__["default"], {
       label: l10n.textObject.legend,
       name: "legendTextObject",
       placeholder: l10n.textObject.legend,
       required: false,
       value: this.state.textObject.valueGenerateObjectText.legendElement,
       _handleChange: this.onChangeValueGenerateObjectTextLegendElement
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputText__WEBPACK_IMPORTED_MODULE_4__["default"], {
       label: l10n.textObject.digitalFormatting,
       name: "formatageNumeriqueTextObject",
       placeholder: l10n.textObject.digitalFormatting,
       required: false,
       value: this.state.textObject.valueGenerateObjectText.numericFormatElement,
       _handleChange: this.onChangeValueGenerateObjectTextFormatageNumeriqueTextObject
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputText__WEBPACK_IMPORTED_MODULE_4__["default"], {
       label: l10n.textObject.mesureUnit,
       name: "mesureUnityTextObject",
       placeholder: l10n.textObject.unit,
@@ -15116,7 +15301,7 @@ function (_super) {
       label: l10n.textObject.colorText,
       checked: this.state.textObject.valueGenerateObjectText.addColorTextElement,
       onChange: this.onSwitchValueGenerateObjectTextAddColorTextElement
-    }), this.state.textObject.valueGenerateObjectText.addColorTextElement && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }), this.state.textObject.valueGenerateObjectText.addColorTextElement && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"], {
       color: this.state.textObject.valueGenerateObjectText.colorTextElement,
       keyInt: 0,
       text: l10n.textObject.colorTextOptional,
@@ -15125,26 +15310,26 @@ function (_super) {
       label: l10n.textObject.backgroundColor,
       checked: this.state.textObject.valueGenerateObjectText.addColorBackElement,
       onChange: this.onSwitchValueGenerateObjectTextAddColorBackElement
-    }), this.state.textObject.valueGenerateObjectText.addColorBackElement && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }), this.state.textObject.valueGenerateObjectText.addColorBackElement && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"], {
       color: this.state.textObject.valueGenerateObjectText.colorBackElement,
       keyInt: 0,
       text: l10n.textObject.optionalBackgroundColor,
       _onChange: this.onChangeValueGenerateObjectTextColorBackElement
-    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, l10n.textObject.auxiliaryElement), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, l10n.textObject.auxiliaryElement), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputText__WEBPACK_IMPORTED_MODULE_4__["default"], {
       label: l10n.textObject.legend,
       name: "legendTextObject",
       placeholder: l10n.textObject.legend,
       required: false,
       value: this.state.textObject.generateAuxiliaryElement.legendElement,
       _handleChange: this.onChangeLegendElement
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputText__WEBPACK_IMPORTED_MODULE_4__["default"], {
       label: l10n.textObject.digitalFormatting,
       name: "formatageNumeriqueTextObject",
       placeholder: l10n.textObject.digitalFormatting,
       required: false,
       value: this.state.textObject.generateAuxiliaryElement.numericFormatElement,
       _handleChange: this.onChangeFormatageNumeriqueTextObject
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputText__WEBPACK_IMPORTED_MODULE_4__["default"], {
       label: l10n.textObject.mesureUnit,
       name: "mesureUnityTextObject",
       placeholder: l10n.textObject.unit,
@@ -15159,7 +15344,7 @@ function (_super) {
       label: l10n.textObject.colorText,
       checked: this.state.textObject.generateAuxiliaryElement.addColorTextElement,
       onChange: this.onSwitchAddColorTextElement
-    }), this.state.textObject.generateAuxiliaryElement.addColorTextElement && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }), this.state.textObject.generateAuxiliaryElement.addColorTextElement && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"], {
       color: this.state.textObject.generateAuxiliaryElement.colorTextElement,
       keyInt: 0,
       text: l10n.textObject.colorTextOptional,
@@ -15168,7 +15353,7 @@ function (_super) {
       label: l10n.textObject.backgroundColor,
       checked: this.state.textObject.generateAuxiliaryElement.addColorBackElement,
       onChange: this.onSwitchAddColorBackElement
-    }), this.state.textObject.generateAuxiliaryElement.addColorBackElement && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }), this.state.textObject.generateAuxiliaryElement.addColorBackElement && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"], {
       color: this.state.textObject.generateAuxiliaryElement.colorBackElement,
       keyInt: 0,
       text: l10n.textObject.optionalBackgroundColor,
@@ -15366,6 +15551,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
 /* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var Functions_Input_inputSelect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! Functions/Input/inputSelect */ "./Functions/Input/inputSelect.tsx");
+/* harmony import */ var _Parametrage_styleComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Parametrage/styleComponent */ "./components/Parametrage/styleComponent.tsx");
+
 
 
 
@@ -15459,34 +15646,19 @@ function (_super) {
           }
         });
       });
-    };
-    /**
-     * edit style
-     */
+    }; // /**
+    //  * edit style
+    //  */
+    // handleChangeStyle = async (event: {
+    //   /** target to input element */
+    //   target: HTMLInputElement;
+    // }) => {
+    //   await this.setStateAsyncStyle({
+    //     style: event.target.value,
+    //   });
+    //   this.callParent();
+    // };
 
-
-    _this.handleChangeStyle = function (event) {
-      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
-          switch (_a.label) {
-            case 0:
-              return [4
-              /*yield*/
-              , this.setStateAsyncStyle({
-                style: event.target.value
-              })];
-
-            case 1:
-              _a.sent();
-
-              this.callParent();
-              return [2
-              /*return*/
-              ];
-          }
-        });
-      });
-    };
     /**
      * edit police
      */
@@ -15568,6 +15740,12 @@ function (_super) {
       }));
     };
 
+    _this.saveStyleData = function (style) {
+      _this.setStateAsyncStyle({
+        style: style
+      });
+    };
+
     _this.state = {
       newPolice: {
         value: _this.props.options.display.police,
@@ -15616,25 +15794,14 @@ function (_super) {
       required: true,
       value: this.state.size,
       onChange: this.handleChangesize
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
-      label: l10n.textDefault.style,
-      labelWidth: 10,
-      inputWidth: 15,
-      required: true,
-      value: this.state.style,
-      onChange: this.handleChangeStyle
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_styleComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      oldStyle: this.state.style,
+      saveParent: this.saveStyleData
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
       label: "Use SVG",
       checked: options.baseMap.modeSVG,
       onChange: this.onChangeSwitchModeSVG
-    })), options.baseMap.modeSVG ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
-      label: l10n.simpleEditor.pictureLink,
-      labelWidth: 10,
-      inputWidth: 30,
-      type: "text",
-      onChange: this.onImageChanged,
-      value: options.baseMap.image || ''
-    }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: 'Image',
       labelWidth: 10,
       inputWidth: 30,
@@ -15642,19 +15809,19 @@ function (_super) {
       onChange: this.onImageChanged,
       value: options.baseMap.image || ''
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
-      label: "Height",
-      labelWidth: 10,
-      inputWidth: 30,
-      type: "text",
-      onChange: this.onChangeHeightBaseMap,
-      value: options.baseMap.height || ''
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "Width",
       labelWidth: 10,
       inputWidth: 30,
       type: "text",
       onChange: this.onChangeWidthBaseMap,
       value: options.baseMap.width || ''
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+      label: "Height",
+      labelWidth: 10,
+      inputWidth: 30,
+      type: "text",
+      onChange: this.onChangeHeightBaseMap,
+      value: options.baseMap.height || ''
     })));
   };
 
@@ -15801,7 +15968,7 @@ function (_super) {
 
 
     _this.loadMonoPoint = function (point) {
-      var toLoad = new _Models_PointClass__WEBPACK_IMPORTED_MODULE_3__["PointClass"](point.id, point.linkURL, point.meta, point.lowerLimit, point.label, point.textObj, point.mainMetric, point.metrics, point.colorMode, point.traceBack, point.traceBorder, point.positionParameter, point.name, point.valueMetric, point.coordinateSpace, point.drawGraphicMarker, point.shape, point.sizeWidth, point.sizeHeight, point.rotateArrow, point.positionShapeX, point.positionShapeY, point.color, point.associateLinkIn, point.associateLinkOut, point.associateOrientedLinksIn, point.associateOrientedLinksOut);
+      var toLoad = new _Models_PointClass__WEBPACK_IMPORTED_MODULE_3__["PointClass"](point.id, point.linkURL, point.meta, point.lowerLimit, point.label, point.textObj, point.mainMetric, point.metrics, point.colorMode, point.traceBack, point.traceBorder, point.positionParameter, point.name, point.valueMetric, point.drawGraphicMarker, point.shape, point.sizeWidth, point.sizeHeight, point.rotateArrow, point.positionShapeX, point.positionShapeY, point.color, point.associateOrientedLinksIn, point.associateOrientedLinksOut);
       console.log(toLoad); // Do some test here to see if your already load a coordinatespace with this id
 
       if (_this.PointValidator(toLoad) === true) {
@@ -15841,7 +16008,8 @@ function (_super) {
     };
 
     _this.loadMonoLink = function (link) {
-      var toLoad = new _Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_5__["OrientedLinkClass"](link.id, link.linkURL, link.meta, link.lowerLimit, link.label, link.textObj, link.mainMetric, link.metrics, link.colorMode, link.traceBack, link.traceBorder, link.positionParameter, link.name, link.orientationLink, link.pointAPositionX, link.pointAPositionY, link.colorCoordinateA, link.pointBPositionX, link.pointBPositionY, link.colorCoordinateB, link.valueMainMetricA, link.valueMainMetricB, link.pointIn, link.pointOut, link.regionIn, link.regionOut, link.zIndex, link.pointCPositionX, link.pointCPositionY, link.isIncurved); // Do some test here to see if your already load a coordinatespace with this id
+      var toLoad = new _Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_5__["OrientedLinkClass"](link.id, link.linkURL, link.meta, link.lowerLimit, link.label, link.textObj, link.mainMetric, link.metrics, link.colorMode, link.traceBack, link.traceBorder, link.positionParameter, link.name, link.orientationLink, link.pointAPositionX, link.pointAPositionY, link.colorCoordinateA, link.pointBPositionX, link.pointBPositionY, link.colorCoordinateB, link.valueMainMetricA, link.valueMainMetricB, link.pointIn, link.pointOut, link.regionIn, link.regionOut, link.zIndex, link.pointCPositionX, link.pointCPositionY, link.isIncurved, link.mainMetricB, link.metricsB);
+      console.log(toLoad); // Do some test here to see if your already load a coordinatespace with this id
 
       if (_this.LinkValidator(toLoad) === true) {
         _this.props.options.arrayOrientedLinks.push(toLoad);
@@ -15863,8 +16031,6 @@ function (_super) {
 
     _this.loadMultiLinks = function (links) {
       links.links.forEach(function (link) {
-        console.log(link);
-
         _this.loadMonoLink(link);
       });
     }; //Total
@@ -15872,7 +16038,7 @@ function (_super) {
 
     _this.loadTotal = function (panel) {
       //console.log(panel.imageUrl);
-      _this.props.options.baseMap.image = panel.imageUrl;
+      _this.props.options.baseMap = panel.baseMap;
       _this.props.options.display.police = panel.texteSettings.police;
       _this.props.options.display.size = panel.texteSettings.size;
       _this.props.options.display.style = panel.texteSettings.styleText;
@@ -15941,7 +16107,7 @@ function (_super) {
 
     _this.fetchTotal = function () {
       _this.totalResult = Object(_Functions_importConfig__WEBPACK_IMPORTED_MODULE_6__["fetchConfFile"])(_this.props.options.saveImportUrl.total);
-      console.log('dwnloadTotal');
+      console.log('downloadTotal');
     }; // loaderSelector = () => {
     //     // this.loadMultiRegions(multiRegionClassImport);
     // 	// console.table(this.props.options.arrayCoordinateSpace);
@@ -15966,12 +16132,15 @@ function (_super) {
       //this.result = fetchConfFile(this.props.options.saveImportUrl.multi);
       _this.props.options.saveImportUrl.multi.forEach(function (url) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
-          var response, file, error_2;
+          var file, response, error_2;
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
             switch (_a.label) {
               case 0:
                 _a.trys.push([0, 3,, 4]);
 
+                console.log(url);
+                file = {};
+                console.log(file);
                 return [4
                 /*yield*/
                 , fetch(url)];
@@ -15996,6 +16165,7 @@ function (_super) {
                 }
 
                 if (file.hasOwnProperty('links')) {
+                  //console.log(file);
                   this.loadMultiLinks(file);
                   console.log('Load Links');
                 }
@@ -16727,8 +16897,7 @@ function (_super) {
 
       var _loop_1 = function _loop_1(element) {
         setTimeout(function () {
-          _this.addInput(element.id, element.label, element.orientationLink, element.pointAPositionX, element.pointAPositionY, element.colorCoordinateA, element.pointBPositionX, element.pointBPositionY, element.colorCoordinateB, element.pointIn, element.pointOut, element.regionIn, element.regionOut, //element.mainMetric.refId, element.mainMetric.key, element.mainMetric.keyValue,
-          element.textObj, element.lowerLimit, element.positionParameter, element.pointCPositionX, element.pointCPositionY, element.isIncurved, element.mainMetric, element.metrics);
+          _this.addInput(element.id, element.label, element.orientationLink, element.pointAPositionX, element.pointAPositionY, element.colorCoordinateA, element.pointBPositionX, element.pointBPositionY, element.colorCoordinateB, element.pointIn, element.pointOut, element.regionIn, element.regionOut, element.textObj, element.lowerLimit, element.positionParameter, element.pointCPositionX, element.pointCPositionY, element.isIncurved, element.mainMetric, element.metrics, element.mainMetricB, element.metricsB);
         }, 100);
       };
 
@@ -16762,11 +16931,15 @@ function (_super) {
 
 
     _this.addInput = function (id, label, orientationLink, pointAPositionX, pointAPositionY, colorCoordinateA, pointBPositionX, pointBPositionY, colorCoordinateB, pointIn, pointOut, regionIn, regionOut, //refIdMainMetric?: string, keyMainMetric?: string, keyValueMainMetric?: string,
-    textObj, seuil, positionParameter, pointCPositionX, pointCPositionY, isIncurved, mainMetrics, auxiliaryMetrics) {
+    textObj, seuil, positionParameter, pointCPositionX, pointCPositionY, isIncurved, mainMetrics, auxiliaryMetrics, mainMetricsB, auxiliaryMetricsB) {
       var num = id || _this.props.options.indexOrientedLink + 1;
       var zIndex = _this.props.options.zIndexOrientedLink;
       var finalArray = Object(Functions_CreateInput_createInputsOrientedLink__WEBPACK_IMPORTED_MODULE_8__["createInputsOrientedLink"])(num, _this.defineDataRegion(), _this.defineDataPoint());
-      var initTextObject = textObj || new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_10__["TextObject"]('', false, '', '', '', false, {
+      var initTextObject = textObj || new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_10__["TextObject"]('', false, '', '', {
+        bold: false,
+        italic: false,
+        underline: false
+      }, false, {
         legendElement: '',
         numericFormatElement: '',
         unit: '',
@@ -16797,6 +16970,14 @@ function (_super) {
         refId: '',
         manageValue: 'avg'
       };
+      var initMainMetricsB = mainMetricsB || {
+        key: '',
+        unit: '',
+        format: '',
+        keyValue: '',
+        refId: '',
+        manageValue: 'avg'
+      };
 
       _this.setState(function (prevState) {
         return {
@@ -16811,7 +16992,7 @@ function (_super) {
           initMainMetrics, auxiliaryMetrics || [], false, false, false, initPositionParameter, 'orientedLink' + num.toString(), orientationLink || {
             label: 'double',
             value: 'double'
-          }, pointAPositionX || '0', pointAPositionY || '0', colorCoordinateA || '#5794F2', pointBPositionX || '0', pointBPositionY || '0', colorCoordinateB || '#E54658', '', '', pointIn || '', pointOut || '', regionIn || '', regionOut || '', zIndex, pointCPositionX || '0', pointCPositionY || '0', isIncurved || {})),
+          }, pointAPositionX || '0', pointAPositionY || '0', colorCoordinateA || '#5794F2', pointBPositionX || '0', pointBPositionY || '0', colorCoordinateB || '#E54658', '', '', pointIn || '', pointOut || '', regionIn || '', regionOut || '', zIndex, pointCPositionX || '0', pointCPositionY || '0', isIncurved || {}, initMainMetricsB, auxiliaryMetricsB || [])),
           arrayInput: prevState.arrayInput.concat([new Models_ArrayInputSelectableClass__WEBPACK_IMPORTED_MODULE_2__["ArrayInputSelectableClass"](num, finalArray)])
         };
       });
@@ -17380,7 +17561,8 @@ function (_super) {
         data: this_1.props.data,
         mainMetric: this_1.state.arrayOrientedLinkClass[index].mainMetric,
         callBackToParent: this_1.callBackMainMetric,
-        id: index
+        id: index,
+        isLink: true
       })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_CoordinateSpace_manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_18__["default"], {
         options: this_1.props.options,
         idCoordinate: this_1.state.arrayOrientedLinkClass[index].id,
@@ -17389,9 +17571,7 @@ function (_super) {
         metrics: this_1.state.arrayOrientedLinkClass[index].metrics,
         callBackToParent: this_1.callBackAuxiliaryMetric,
         id: index,
-        isPoint: false,
-        isLink: true,
-        isRegion: false
+        isLink: true
       })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_parametresGeneriques__WEBPACK_IMPORTED_MODULE_13__["default"], {
         options: this_1.props.options,
         onOptionsChange: this_1.props.onOptionsChange,
@@ -17493,867 +17673,6 @@ function (_super) {
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (OrientedLinkForm);
-
-/***/ }),
-
-/***/ "./components/pointForm.tsx":
-/*!**********************************!*\
-  !*** ./components/pointForm.tsx ***!
-  \**********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var Functions_CreateInput_createInputsPoint__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! Functions/CreateInput/createInputsPoint */ "./Functions/CreateInput/createInputsPoint.tsx");
-/* harmony import */ var Functions_Input_inputTextPoint__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! Functions/Input/inputTextPoint */ "./Functions/Input/inputTextPoint.tsx");
-/* harmony import */ var Functions_Input_inputButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! Functions/Input/inputButton */ "./Functions/Input/inputButton.tsx");
-/* harmony import */ var Models_ArrayInputSelectableClass__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! Models/ArrayInputSelectableClass */ "./Models/ArrayInputSelectableClass.tsx");
-/* harmony import */ var Functions_EditParameter_editGoodParameterPoint__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! Functions/EditParameter/editGoodParameterPoint */ "./Functions/EditParameter/editGoodParameterPoint.tsx");
-/* harmony import */ var Models_PointClass__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! Models/PointClass */ "./Models/PointClass.tsx");
-/* harmony import */ var Functions_Input_inputSelectPoint__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! Functions/Input/inputSelectPoint */ "./Functions/Input/inputSelectPoint.tsx");
-/* harmony import */ var Functions_Input_inputSeriesColorPickerPoint__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! Functions/Input/inputSeriesColorPickerPoint */ "./Functions/Input/inputSeriesColorPickerPoint.tsx");
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! Models/TextObjectClass */ "./Models/TextObjectClass.tsx");
-/* harmony import */ var Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! Models/LinkURLClass */ "./Models/LinkURLClass.tsx");
-/* harmony import */ var components_Parametrage_parametresGeneriques__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! components/Parametrage/parametresGeneriques */ "./components/Parametrage/parametresGeneriques.tsx");
-/* harmony import */ var components_Parametrage_manageLowerLimit__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! components/Parametrage/manageLowerLimit */ "./components/Parametrage/manageLowerLimit.tsx");
-/* harmony import */ var _components_Parametrage_positionParameters__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/Parametrage/positionParameters */ "./components/Parametrage/positionParameters.tsx");
-/* harmony import */ var Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! Models/PositionParameterClass */ "./Models/PositionParameterClass.tsx");
-/* harmony import */ var _CoordinateSpace_manageQuery__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./CoordinateSpace/manageQuery */ "./components/CoordinateSpace/manageQuery.tsx");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * IndexParametrage
- */
-
-var PointForm =
-/** @class */
-function (_super) {
-  Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PointForm, _super);
-
-  function PointForm(props) {
-    var _this = _super.call(this, props) || this;
-    /**
-     * to do
-     */
-
-
-    _this.callBack = function () {
-      _this.props.callBackFromParent(_this.state.arrayPointClass);
-    };
-    /**
-     * to do
-     */
-
-
-    _this.loadCoorParent = function () {
-      var e_1, _a;
-
-      var oldArrayPointClass = _this.props.oldArrayPointClass;
-
-      if (oldArrayPointClass.length === 0 || _this.state.debug === true) {
-        if (!_this.state.debug) {
-          _this.setState(function (prevState) {
-            return {
-              debug: !prevState.debug
-            };
-          });
-        }
-
-        return;
-      }
-
-      var _loop_1 = function _loop_1(element) {
-        setTimeout(function () {
-          _this.addInput(element.id, element.label, element.coordinateSpace, element.drawGraphicMarker, element.shape, element.sizeWidth, element.sizeHeight, element.rotateArrow, element.positionShapeX, element.positionShapeY, element.color, //element.mainMetric.refId, element.mainMetric.key, element.mainMetric.keyValue,
-          element.textObj, element.lowerLimit, element.positionParameter, element.associateOrientedLinksIn, element.associateOrientedLinksOut, element.mainMetric);
-        }, 100);
-      };
-
-      try {
-        for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(_this.props.options.arrayPoints), _c = _b.next(); !_c.done; _c = _b.next()) {
-          var element = _c.value;
-
-          _loop_1(element);
-        }
-      } catch (e_1_1) {
-        e_1 = {
-          error: e_1_1
-        };
-      } finally {
-        try {
-          if (_c && !_c.done && (_a = _b["return"])) _a.call(_b);
-        } finally {
-          if (e_1) throw e_1.error;
-        }
-      }
-
-      _this.setState(function (prevState) {
-        return {
-          debug: !prevState.debug
-        };
-      });
-    };
-    /**
-     * add inputs for a new coordiante
-     */
-
-
-    _this.addInput = function (id, label, coordinateSpaceAssociate, drawGraphicMarker, shape, sizeWidth, sizeHeight, rotateArrow, positionShapeX, positionShapeY, color, //refIdMainMetric?: string, keyMainMetric?: string, keyValueMainMetric?: string,
-    textObj, seuil, positionParameter, associateOrientedLinkIn, associateOrientedLinkOut, mainMetrics) {
-      var num = id || _this.props.options.indexPoint + 1;
-      var finalArray = Object(Functions_CreateInput_createInputsPoint__WEBPACK_IMPORTED_MODULE_2__["createInputsPoint"])(num, _this.defineDataCoordinateSpace());
-      var initTextObject = textObj || new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_11__["TextObject"]('', false, '', '', '', false, {
-        legendElement: '',
-        numericFormatElement: '',
-        unit: '',
-        displayObjectInText: false,
-        // 'displayObjectPermanently': false,
-        addColorTextElement: false,
-        colorTextElement: 'white',
-        addColorBackElement: false,
-        colorBackElement: 'black'
-      }, {
-        legendElement: '',
-        numericFormatElement: '',
-        unit: '',
-        displayObjectInText: false,
-        // 'displayObjectPermanently': false,
-        addColorTextElement: false,
-        colorTextElement: 'white',
-        addColorBackElement: false,
-        colorBackElement: 'black'
-      });
-      var parametrageMetric = new Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_12__["LinkURLClass"]('', '', '');
-      var initPositionParameter = positionParameter || new Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_16__["PositionParameterClass"]('0', '0', '0', '0', {}, {});
-      var initMainMetrics = mainMetrics || {
-        key: '',
-        unit: '',
-        format: '',
-        keyValue: '',
-        refId: '',
-        manageValue: 'avg'
-      };
-
-      _this.setState(function (prevState) {
-        return {
-          arrayPointClass: prevState.arrayPointClass.concat(new Models_PointClass__WEBPACK_IMPORTED_MODULE_7__["PointClass"](num, parametrageMetric, '', seuil || [], label || '', initTextObject, // {
-          // 	'key': keyMainMetric || '',
-          // 	'unit': '',
-          // 	'format': '',
-          // 	'keyValue': keyValueMainMetric || '',
-          // 	'refId': refIdMainMetric || '',
-          // 	'manageValue': 'avg',
-          // },
-          initMainMetrics, [], false, false, false, initPositionParameter, 'point' + num.toString(), '', coordinateSpaceAssociate || {}, drawGraphicMarker || {
-            label: 'Yes',
-            value: 'true'
-          }, shape || {
-            label: 'Circle',
-            value: 'circle'
-          }, sizeWidth || {
-            label: 'Small',
-            value: 'small'
-          }, sizeHeight || {
-            label: 'Small',
-            value: 'small'
-          }, rotateArrow || '0', positionShapeX || '0', positionShapeY || '0', color || 'black', [], [], associateOrientedLinkIn || [], associateOrientedLinkOut || [])),
-          arrayInput: prevState.arrayInput.concat([new Models_ArrayInputSelectableClass__WEBPACK_IMPORTED_MODULE_5__["ArrayInputSelectableClass"](num, finalArray)])
-        };
-      });
-
-      _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-        indexPoint: num
-      })); //this.props.options.indexPoint + 1;
-
-    };
-    /**
-     * dsgs
-     */
-
-
-    _this.addNewFormPoint = function (event) {
-      _this.addInput();
-    };
-    /**
-     * Delete array input and value
-     * @param {event} event event click delete button
-     */
-    // React.MouseEvent<HTMLInputElement, MouseEvent>
-
-
-    _this.deleteOwnInput = function (event) {
-      var e_2, _a;
-
-      var arrayInput = _this.state.arrayInput;
-      var id = event.currentTarget.id;
-
-      var _loop_2 = function _loop_2(obj) {
-        var e_3, _a;
-
-        try {
-          for (var _b = (e_3 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(obj.uneClassInput)), _c = _b.next(); !_c.done; _c = _b.next()) {
-            var line = _c.value;
-
-            if (line.input_type === 'button') {
-              if (line.id === id) {
-                var updateArrayInput = arrayInput.filter(function (value) {
-                  return value.id !== obj.id;
-                });
-
-                _this.setState({
-                  arrayInput: updateArrayInput
-                });
-
-                _this.deletearrayPointClass(parseInt(id, 10));
-
-                return {
-                  value: void 0
-                };
-              }
-            }
-          }
-        } catch (e_3_1) {
-          e_3 = {
-            error: e_3_1
-          };
-        } finally {
-          try {
-            if (_c && !_c.done && (_a = _b["return"])) _a.call(_b);
-          } finally {
-            if (e_3) throw e_3.error;
-          }
-        }
-      };
-
-      try {
-        for (var arrayInput_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayInput), arrayInput_1_1 = arrayInput_1.next(); !arrayInput_1_1.done; arrayInput_1_1 = arrayInput_1.next()) {
-          var obj = arrayInput_1_1.value;
-
-          var state_1 = _loop_2(obj);
-
-          if (_typeof(state_1) === "object") return state_1.value;
-        }
-      } catch (e_2_1) {
-        e_2 = {
-          error: e_2_1
-        };
-      } finally {
-        try {
-          if (arrayInput_1_1 && !arrayInput_1_1.done && (_a = arrayInput_1["return"])) _a.call(arrayInput_1);
-        } finally {
-          if (e_2) throw e_2.error;
-        }
-      }
-    };
-    /**
-     * to do
-     */
-
-
-    _this.defineListCollapse = function () {
-      _this.props.options.listCollapsePoint = [];
-      var arrayPoints = _this.state.arrayPointClass;
-      arrayPoints.forEach(function (point) {
-        _this.props.options.listCollapsePoint.push(false);
-      });
-    };
-
-    _this.callBackToOther = function (followLink, hoveringTooltipLink, hoveringTooltipText, textObj, id) {
-      var oldCoor = _this.state.arrayPointClass[id || 0];
-
-      if (followLink) {
-        oldCoor.linkURL.followLink = followLink;
-      }
-
-      if (hoveringTooltipLink) {
-        oldCoor.linkURL.hoveringTooltipLink = hoveringTooltipLink;
-      }
-
-      if (hoveringTooltipText) {
-        oldCoor.linkURL.hoveringTooltipText = hoveringTooltipText;
-      }
-
-      if (textObj) {
-        oldCoor.textObj = textObj;
-      }
-
-      var arrayPoint = _this.props.options.arrayPoints;
-      arrayPoint[id || 0] = oldCoor;
-
-      _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-        arrayPoints: arrayPoint
-      }));
-    };
-    /** update lower limit */
-
-
-    _this.callBackManageLowerLimit = function (coordiante, id) {
-      var newValue = _this.state.arrayPointClass[id || 0];
-      newValue.colorMode = coordiante.colorMode;
-      newValue.traceBorder = coordiante.traceBorder;
-      newValue.traceBack = coordiante.traceBack;
-      _this.props.options.arrayPoints[id || 0] = newValue;
-
-      _this.callBack();
-    };
-
-    _this.callBackPositionParameter = function (positionParameter, id) {
-      var pointToUpdate = _this.state.arrayPointClass[id || 0];
-      pointToUpdate.positionParameter = positionParameter;
-      _this.props.options.arrayPoints[id || 0] = pointToUpdate;
-
-      _this.callBack();
-    };
-    /** save lower limit data */
-
-
-    _this.callBackLowerLimit = function (lowerLimit, id) {
-      var pointToUpdate = _this.state.arrayPointClass[id || 0];
-      pointToUpdate.lowerLimit = lowerLimit;
-      _this.props.options.arrayPoints[id || 0] = pointToUpdate;
-
-      _this.callBack();
-    };
-
-    _this.callBackMainMetric = function (mainMetric, id) {
-      var newValue = _this.state.arrayPointClass[id || 0];
-      newValue.mainMetric = mainMetric;
-      _this.props.options.arrayPoints[id || 0] = newValue;
-
-      _this.callBack();
-    };
-
-    _this.onTogglePoint = function (isOpen) {
-      _this.setState({
-        openCollapsePoint: isOpen
-      });
-    };
-    /** update state when props uneCoor change */
-    // private componentDidUpdate(prevProps: IProps) {
-    // 	console.log('update')
-    // 	if (prevProps.oldArrayPointClass.length !== this.props.oldArrayPointClass.length) {
-    // 		this.loadCoorParent();
-    // 		this.generateInputsPoints();
-    // 	}
-    // }
-
-
-    _this.componentDidMount = function () {
-      _this.loadCoorParent();
-    }; // private componentWillReceiveProps() {
-    // 	this.loadCoorParent();
-    // 	this.generateInputsPoints();
-    // }
-    // private setStateAsync = (state: {
-    // 	arrayInput: ArrayInputSelectableClass[],
-    // 	arrayPointClass: PointClass[],
-    // 	debug: boolean,
-    // }) => {
-    // 	return new Promise((resolve) => this.setState(state, resolve));
-    // }
-
-    /** update state when props uneCoor change */
-
-
-    _this.componentDidUpdate = function (prevProps) {
-      _this.loadCoorParent();
-
-      _this.generateInputsPoints();
-    };
-
-    _this.state = {
-      arrayInput: [],
-      arrayPointClass: [],
-      index: 1,
-      listCollapsePoint: [],
-      openCollapsePoint: false,
-      oldArrayPointClass: [],
-      debug: false
-    };
-    return _this;
-  }
-
-  PointForm.prototype.defineDataCoordinateSpace = function () {
-    var regionCoordinateSpace = this.props.regionCoordinateSpace;
-    var dataEspaceCoor = [];
-    var optionNull = {
-      label: 'Initial space'
-    }; // Par défault, on ajoute une option qui permet de ne pas sélectionner d'espace de coordonnées
-
-    dataEspaceCoor.push(optionNull); // On ajoute aux options de choix les espace de coordonnées existant
-
-    regionCoordinateSpace.forEach(function (coordinateSpace) {
-      var option = {
-        label: coordinateSpace.label,
-        value: coordinateSpace
-      };
-      dataEspaceCoor.push(option);
-    });
-    return dataEspaceCoor;
-  };
-  /**
-   * Delete array coordinate in state.arrayPointClass
-   * @param {number} id id of object element to delete
-   */
-
-
-  PointForm.prototype.deletearrayPointClass = function (id) {
-    var _this = this;
-
-    var newPointClass = this.state.arrayPointClass.filter(function (value) {
-      return value.id !== id;
-    });
-    this.setState({
-      arrayPointClass: newPointClass
-    });
-    setTimeout(function () {
-      _this.callBack();
-    }, 100); //this.generateInputsPoints();
-  };
-  /**
-   * Use function if value input change
-   * @param {string} currentTarget new value of input
-   * @param {string} name name of input
-   * @param {number} index id of input
-   */
-
-
-  PointForm.prototype._handleChange = function (currentTarget, name, index) {
-    var e_4, _a;
-
-    var i;
-    i = 0;
-    var copyOfarrayPointClass = this.state.arrayPointClass.slice();
-
-    try {
-      for (var copyOfarrayPointClass_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(copyOfarrayPointClass), copyOfarrayPointClass_1_1 = copyOfarrayPointClass_1.next(); !copyOfarrayPointClass_1_1.done; copyOfarrayPointClass_1_1 = copyOfarrayPointClass_1.next()) {
-        var line = copyOfarrayPointClass_1_1.value;
-
-        if (line.id === index) {
-          copyOfarrayPointClass[i] = Object(Functions_EditParameter_editGoodParameterPoint__WEBPACK_IMPORTED_MODULE_6__["editGoodParameterPoint"])(name, copyOfarrayPointClass[i], currentTarget, {});
-          break;
-        }
-
-        i++;
-      }
-    } catch (e_4_1) {
-      e_4 = {
-        error: e_4_1
-      };
-    } finally {
-      try {
-        if (copyOfarrayPointClass_1_1 && !copyOfarrayPointClass_1_1.done && (_a = copyOfarrayPointClass_1["return"])) _a.call(copyOfarrayPointClass_1);
-      } finally {
-        if (e_4) throw e_4.error;
-      }
-    }
-
-    this.setState({
-      arrayPointClass: copyOfarrayPointClass
-    });
-    this.callBack();
-  };
-  /**
-   * Get value of input with state.arrayPointClass
-   * @param {number} id id of element
-   * @param {string} param name of input
-   * @returns {string} value of the array element
-   */
-
-
-  PointForm.prototype.getGoodValue = function (id, param) {
-    var e_5, _a;
-
-    var value;
-    var valueSelect;
-    var idx = -1;
-    var index = 0;
-    value = '';
-    valueSelect = {};
-
-    try {
-      for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(this.state.arrayPointClass), _c = _b.next(); !_c.done; _c = _b.next()) {
-        var line = _c.value;
-
-        if (line.id === id) {
-          idx = index;
-          break;
-        }
-
-        ++index;
-      }
-    } catch (e_5_1) {
-      e_5 = {
-        error: e_5_1
-      };
-    } finally {
-      try {
-        if (_c && !_c.done && (_a = _b["return"])) _a.call(_b);
-      } finally {
-        if (e_5) throw e_5.error;
-      }
-    }
-
-    if (idx === -1) {
-      return value;
-    }
-
-    if (param.startsWith('drawGraphicMarker') || param.startsWith('shape') || param.startsWith('sizeWidth') || param.startsWith('sizeHeight') || param.startsWith('linkWithCoordinateSpace')) {
-      if (param.startsWith('drawGraphicMarker')) {
-        valueSelect = this.state.arrayPointClass[idx].drawGraphicMarker;
-      } else if (param.startsWith('shape')) {
-        valueSelect = this.state.arrayPointClass[idx].shape;
-      } else if (param.startsWith('sizeWidth')) {
-        valueSelect = this.state.arrayPointClass[idx].sizeWidth;
-      } else if (param.startsWith('sizeHeight')) {
-        valueSelect = this.state.arrayPointClass[idx].sizeHeight;
-      } else if (param.startsWith('linkWithCoordinateSpace')) {
-        valueSelect = this.state.arrayPointClass[idx].coordinateSpace;
-      }
-
-      return valueSelect;
-    } else {
-      if (param.startsWith('rotateArrow')) {
-        value = this.state.arrayPointClass[idx].rotateArrow;
-      } else if (param.startsWith('positionShapeX')) {
-        value = this.state.arrayPointClass[idx].positionShapeX;
-      } else if (param.startsWith('positionShapeY')) {
-        value = this.state.arrayPointClass[idx].positionShapeY;
-      } else if (param.startsWith('label')) {
-        value = this.state.arrayPointClass[idx].label;
-      } else if (param.startsWith('color')) {
-        value = this.state.arrayPointClass[idx].color;
-      } else if (param.startsWith('refIdMainMetric')) {
-        value = this.state.arrayPointClass[idx].mainMetric.refId || '';
-      } else if (param.startsWith('keyMainMetric')) {
-        value = this.state.arrayPointClass[idx].mainMetric.key || '';
-      } else if (param.startsWith('keyValueMainMetric')) {
-        value = this.state.arrayPointClass[idx].mainMetric.keyValue || '';
-      }
-
-      return value;
-    }
-  };
-
-  PointForm.prototype.defineLabelCollapse = function (id) {
-    var label = this.getGoodValue(id, 'label');
-
-    if (this.getGoodValue(id, 'label') === '') {
-      label = 'Point ' + id.toString();
-    }
-
-    return label;
-  };
-  /**
-   * create dynamic input
-   */
-
-
-  PointForm.prototype.generateInputsPoints = function () {
-    var e_6, _a;
-
-    var _this = this;
-
-    var index = 0;
-    this.defineListCollapse();
-    var arrayInput = this.state.arrayInput;
-    var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
-    var itemButton = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
-    var mapItems = [];
-    var finalItem = [];
-
-    var _loop_3 = function _loop_3(line) {
-      mapItems = [];
-      line.uneClassInput.forEach(function (obj) {
-        if (obj.input_type === 'text') {
-          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputTextPoint__WEBPACK_IMPORTED_MODULE_3__["default"], {
-            key: obj.id,
-            label: obj.label,
-            name: obj.name,
-            placeholder: obj.placeholder || '',
-            required: obj.required,
-            value: _this.getGoodValue(line.id, obj.name),
-            _handleChange: function _handleChange(event) {
-              _this._handleChange(event.currentTarget.value, obj.name, line.id);
-            },
-            shape: _this.getGoodValue(line.id, 'shape').value
-          });
-        } else if (obj.input_type === 'select') {
-          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSelectPoint__WEBPACK_IMPORTED_MODULE_8__["default"], {
-            key: obj.id,
-            _onChange: function _onChange(value, name, index) {
-              var e_7, _a;
-
-              var i;
-              i = 0;
-
-              var copyOfarrayPointClass = _this.state.arrayPointClass.slice();
-
-              try {
-                for (var copyOfarrayPointClass_2 = (e_7 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(copyOfarrayPointClass)), copyOfarrayPointClass_2_1 = copyOfarrayPointClass_2.next(); !copyOfarrayPointClass_2_1.done; copyOfarrayPointClass_2_1 = copyOfarrayPointClass_2.next()) {
-                  var line_1 = copyOfarrayPointClass_2_1.value;
-
-                  if (line_1.id === index) {
-                    copyOfarrayPointClass[i] = Object(Functions_EditParameter_editGoodParameterPoint__WEBPACK_IMPORTED_MODULE_6__["editGoodParameterPoint"])(name, copyOfarrayPointClass[i], value.value || '', value || {});
-                    break;
-                  }
-
-                  i++;
-                }
-              } catch (e_7_1) {
-                e_7 = {
-                  error: e_7_1
-                };
-              } finally {
-                try {
-                  if (copyOfarrayPointClass_2_1 && !copyOfarrayPointClass_2_1.done && (_a = copyOfarrayPointClass_2["return"])) _a.call(copyOfarrayPointClass_2);
-                } finally {
-                  if (e_7) throw e_7.error;
-                }
-              }
-
-              _this.setState({
-                arrayPointClass: copyOfarrayPointClass
-              });
-
-              _this.callBack();
-            },
-            name: obj.name,
-            index: line.id,
-            data: obj.optionValues,
-            defaultValue: _this.getGoodValue(line.id, obj.name),
-            shape: _this.getGoodValue(line.id, 'shape').value,
-            label: obj.label
-          });
-        } else if (obj.input_type === 'color') {
-          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPickerPoint__WEBPACK_IMPORTED_MODULE_9__["default"], {
-            key: obj.id,
-            keyInt: parseInt(obj.id, 10),
-            color: _this.getGoodValue(line.id, 'color'),
-            text: obj.label,
-            width: 10,
-            _onChange: function _onChange(keyInt, newColor) {
-              var e_8, _a;
-
-              var i;
-              i = 0;
-
-              var copyOfarrayPointClass = _this.state.arrayPointClass.slice();
-
-              try {
-                for (var copyOfarrayPointClass_3 = (e_8 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(copyOfarrayPointClass)), copyOfarrayPointClass_3_1 = copyOfarrayPointClass_3.next(); !copyOfarrayPointClass_3_1.done; copyOfarrayPointClass_3_1 = copyOfarrayPointClass_3.next()) {
-                  var line_2 = copyOfarrayPointClass_3_1.value;
-
-                  if (line_2.id === keyInt) {
-                    copyOfarrayPointClass[i] = Object(Functions_EditParameter_editGoodParameterPoint__WEBPACK_IMPORTED_MODULE_6__["editGoodParameterPoint"])(obj.name, copyOfarrayPointClass[i], newColor, {});
-                    break;
-                  }
-
-                  i++;
-                }
-              } catch (e_8_1) {
-                e_8 = {
-                  error: e_8_1
-                };
-              } finally {
-                try {
-                  if (copyOfarrayPointClass_3_1 && !copyOfarrayPointClass_3_1.done && (_a = copyOfarrayPointClass_3["return"])) _a.call(copyOfarrayPointClass_3);
-                } finally {
-                  if (e_8) throw e_8.error;
-                }
-              }
-
-              _this.setState({
-                arrayPointClass: copyOfarrayPointClass
-              });
-
-              _this.callBack();
-
-              obj.setDefaultValueColor(newColor);
-            }
-          });
-        } else {
-          itemButton = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputButton__WEBPACK_IMPORTED_MODULE_4__["default"], {
-            key: obj.id,
-            label: obj.label,
-            value: obj.value || '',
-            name: obj.name,
-            required: obj.required,
-            _handleChange: _this.deleteOwnInput,
-            id: obj.id,
-            withLabel: false
-          });
-          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
-        }
-
-        mapItems.push(item);
-      });
-      var divKey = 'inputPoint' + line.id.toString();
-      var newInputList = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        key: divKey,
-        className: "inputCoor",
-        id: 'point' + line.id.toString(),
-        style: {
-          display: 'flex',
-          flexDirection: 'row',
-          marginBottom: '5px'
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_10__["Collapse"], {
-        isOpen: this_1.state.listCollapsePoint[line.id - 1],
-        label: this_1.defineLabelCollapse(line.id),
-        onToggle: function onToggle(isOpen) {
-          _this.props.options.listCollapsePoint[line.id - 1] = isOpen;
-
-          _this.setState({
-            listCollapsePoint: _this.props.options.listCollapsePoint
-          });
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_CoordinateSpace_manageQuery__WEBPACK_IMPORTED_MODULE_17__["default"], {
-        options: this_1.props.options,
-        idCoordinate: this_1.state.arrayPointClass[index].id,
-        onOptionsChange: this_1.props.onOptionsChange,
-        data: this_1.props.data,
-        mainMetric: this_1.state.arrayPointClass[index].mainMetric,
-        callBackToParent: this_1.callBackMainMetric,
-        id: index
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Parametrage_parametresGeneriques__WEBPACK_IMPORTED_MODULE_13__["default"], {
-        options: this_1.props.options,
-        onOptionsChange: this_1.props.onOptionsChange,
-        data: this_1.props.data,
-        coordinateSpace: this_1.state.arrayPointClass[index],
-        callBackToParent: this_1.callBackToOther,
-        id: index
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Parametrage_manageLowerLimit__WEBPACK_IMPORTED_MODULE_14__["default"], {
-        coordinate: this_1.state.arrayPointClass[index],
-        callBack: this_1.callBackManageLowerLimit,
-        lowerLimitCallBack: this_1.callBackLowerLimit,
-        id: index
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Parametrage_positionParameters__WEBPACK_IMPORTED_MODULE_15__["default"], {
-        options: this_1.props.options,
-        onOptionsChange: this_1.props.onOptionsChange,
-        data: this_1.props.data,
-        coordinateSpace: this_1.state.arrayPointClass[index],
-        callBackToParent: this_1.callBackPositionParameter,
-        callBackToParentZIndex: function callBackToParentZIndex() {},
-        isPoint: true,
-        isLink: false,
-        isRegion: false,
-        id: index
-      })), mapItems), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          marginTop: '4px'
-        }
-      }, itemButton));
-      finalItem = finalItem.concat(newInputList);
-      index++;
-    };
-
-    var this_1 = this;
-
-    try {
-      for (var arrayInput_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayInput), arrayInput_2_1 = arrayInput_2.next(); !arrayInput_2_1.done; arrayInput_2_1 = arrayInput_2.next()) {
-        var line = arrayInput_2_1.value;
-
-        _loop_3(line);
-      }
-    } catch (e_6_1) {
-      e_6 = {
-        error: e_6_1
-      };
-    } finally {
-      try {
-        if (arrayInput_2_1 && !arrayInput_2_1.done && (_a = arrayInput_2["return"])) _a.call(arrayInput_2);
-      } finally {
-        if (e_6) throw e_6.error;
-      }
-    }
-
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, finalItem);
-  };
-
-  PointForm.prototype.defineOptionsSelectPoint = function () {
-    var options = [];
-    var arrayPoints = this.props.options.arrayPoints;
-    arrayPoints.forEach(function (point) {
-      options.push({
-        label: point.name
-      });
-    });
-    return options;
-  };
-  /** update state when props uneCoor change */
-  //private componentWillUpdate(prevProps: IProps) {
-  // if (prevProps.oldArrayPointClass.length !== this.props.oldArrayPointClass.length) {
-  // 	this.loadCoorParent();
-  // 	this.generateInputsPoints();
-  // 	console.log(this.props.oldArrayPointClass);
-  // }
-  //}
-
-  /**
-   * render()
-   */
-
-
-  PointForm.prototype.render = function () {
-    var _this = this;
-
-    var styleMainDiv = {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'center'
-    };
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.generateInputsPoints(), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      style: styleMainDiv
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      style: {
-        marginRight: '5px'
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_10__["Button"], {
-      onClick: this.addNewFormPoint
-    }, "Add point")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_10__["Button"], {
-      onClick: function onClick() {
-        _this.setState({
-          arrayInput: [],
-          arrayPointClass: [],
-          debug: false
-        });
-
-        _this.loadCoorParent();
-
-        _this.generateInputsPoints();
-      }
-    }, "Load Points")));
-  };
-
-  return PointForm;
-}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (PointForm);
 
 /***/ }),
 
@@ -18482,7 +17801,11 @@ var defaults = {
   display: {
     police: 'Helvetica',
     size: '1em',
-    style: 'normal'
+    style: {
+      italic: false,
+      bold: false,
+      underline: false
+    }
   },
   fondIsActive: true,
   contourIsActive: true,

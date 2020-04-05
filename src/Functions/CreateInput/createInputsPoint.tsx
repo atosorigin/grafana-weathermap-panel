@@ -1,8 +1,8 @@
 import { InputSelectableClass } from 'Models/InputSelectableClass';
-import { SelectableValue } from '@grafana/data';
-import { RegionClass } from 'Models/RegionClass';
+//import { SelectableValue } from '@grafana/data';
+//import { RegionClass } from 'Models/RegionClass';
 
-export const createInputsPoint = (id: number, dataEspaceCoor: Array<SelectableValue<RegionClass>>): InputSelectableClass[] => {
+export const createInputsPoint = (id: number): InputSelectableClass[] => {
   // const newFieldLinkWithCoordonateSpace: InputSelectableClass = new InputSelectableClass(id.toString() + 'LinkWithCoordinateSpace',
   // 	'Associate region', 'linkWithCoordinateSpace' + id.toString(), 'select',
   // 	dataEspaceCoor, '', true, 'Associate region', undefined);

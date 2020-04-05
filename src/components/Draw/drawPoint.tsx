@@ -7,7 +7,6 @@ import { TextObject } from 'Models/TextObjectClass';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
 
 interface Props extends PanelEditorProps<SimpleOptions> {
-  coordinateSpace: SelectableValue<RegionClass>;
   drawGraphicMarker: SelectableValue<string>;
   shape: SelectableValue<string>;
   size: SelectableValue<string>;
@@ -48,7 +47,7 @@ export default class DrawPoint extends React.Component<Props, State> {
   /**
    * to do
    * @param coordinateX
-   * @param coordinateSpace
+   *
    */
   private defineLimitX(coordinateX: number) {
     let result: number = coordinateX;
@@ -64,7 +63,7 @@ export default class DrawPoint extends React.Component<Props, State> {
   /**
    * to do
    * @param coordinateY
-   * @param coordinateSpace
+   *
    */
   private defineLimitY(coordinateY: number) {
     let result: number = coordinateY;
@@ -194,7 +193,7 @@ export default class DrawPoint extends React.Component<Props, State> {
    * @param shapeGraphicMarker
    */
   private drawPoint(drawGraphicMarker: string, size: number, positionShapeX: number, positionShapeY: number, shape: string, color: string): any {
-    const valueToolTip: JSX.Element = this.defineContentTooltip();
+    const valueToolTip: JSX.Element = this.defineContentTooltip('point');
 
     if (drawGraphicMarker === 'true') {
       if (shape === 'circle') {
@@ -280,7 +279,7 @@ export default class DrawPoint extends React.Component<Props, State> {
       valueToDisplay = name;
     }
 
-    const valueToolTip: JSX.Element = this.defineContentTooltip();
+    const valueToolTip: JSX.Element = this.defineContentTooltip('label');
 
     return (
       <Tooltip key={'tooltipLabel' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
@@ -301,63 +300,114 @@ export default class DrawPoint extends React.Component<Props, State> {
     );
   }
 
-  private defineContentTooltip() {
+  private defineContentTooltip(localisation: string) {
     const arrayOrientedLinksIn: any[] = this.props.associateOrientedLinkIn;
     const arrayOrientedLinksOut: any[] = this.props.associateOrientedLinkOut;
     const valueMainMetric: string = this.props.valueMainMetric;
     const refMainMetric: string = this.props.refMainMetric;
-
-    const label: string = this.props.label !== '' ? this.props.label : this.props.name;
-
     const contentTooltip: JSX.Element[] = [];
 
+    const styleMainTitle = {
+      fontFamily: this.props.police,
+      fontSize: '11px',
+      marginBottom: '0px',
+      textAlign: 'center',
+    } as React.CSSProperties;
+
+    const styleTitle = {
+      fontFamily: this.props.police,
+      fontSize: '10px',
+      marginTop: '5px',
+      marginBottom: '0px',
+    } as React.CSSProperties;
+
+    const styleTitle2 = {
+      fontFamily: this.props.police,
+      fontSize: '10px',
+      marginTop: '5px',
+      marginLeft: '5px',
+      marginBottom: '0px',
+    } as React.CSSProperties;
+
+    const styleContent = {
+      fontFamily: this.props.police,
+      fontSize: '9px',
+      marginLeft: '10px',
+      marginBottom: '0px',
+    } as React.CSSProperties;
+
     contentTooltip.push(
-      <p //key={'contentTooltip1' + this.props.name}
-        style={{ fontFamily: this.props.police, fontSize: '12px', marginBottom: '0px' }}
-      >
-        {label}
+      <p key={localisation + 'ContentTooltip1' + this.props.name} style={styleMainTitle}>
+        {this.props.label || this.props.name.toUpperCase()}
       </p>
     );
 
     contentTooltip.push(
-      <p //key={'contentTooltip2' + this.props.name}
-        style={{ fontFamily: this.props.police, fontSize: '10px', marginTop: '5px', marginBottom: '0px' }}
-      >
+      <p key={localisation + 'ContentTooltip2' + this.props.name} style={styleTitle}>
         Main Metric
       </p>
     );
 
     contentTooltip.push(
-      <p //key={'contentTooltip3' + this.props.name}
-        style={{ fontFamily: this.props.police, fontSize: '8px', marginBottom: '0px' }}
-      >
-        + Reference : {refMainMetric}
+      <p key={localisation + 'ContentTooltip3' + this.props.name} style={styleContent}>
+        - Reference : {refMainMetric}
       </p>
     );
 
     contentTooltip.push(
-      <p //key={'contentTooltip4' + this.props.name}
-        style={{ fontFamily: this.props.police, fontSize: '8px', marginBottom: '0px' }}
-      >
-        + Value : {valueMainMetric + this.props.textObject.valueGenerateObjectText.unit}
+      <p key={localisation + 'ContentTooltip4' + this.props.name} style={styleContent}>
+        - Value : {valueMainMetric + this.props.textObject.valueGenerateObjectText.unit}
       </p>
     );
 
+    if (this.props.auxiliaryMetrics.length > 0) {
+      contentTooltip.push(
+        <p key={localisation + 'ContentTooltip5' + this.props.name} style={styleTitle}>
+          Auxiliary Metric
+        </p>
+      );
+      let index = 1;
+      this.props.auxiliaryMetrics.forEach(metric => {
+        contentTooltip.push(
+          <p key={index.toString() + localisation + 'ContentTooltip6' + this.props.name} style={styleTitle2}>
+            + Metric {index}
+          </p>
+        );
+        contentTooltip.push(
+          <p key={index.toString() + localisation + 'ContentTooltip7' + this.props.name} style={styleContent}>
+            - Value : {this.props.valuesAuxiliaryMetrics[index - 1]}
+          </p>
+        );
+        contentTooltip.push(
+          <p key={index.toString() + localisation + 'ContentTooltip8' + this.props.name} style={styleContent}>
+            - Key : {metric.key}
+          </p>
+        );
+        contentTooltip.push(
+          <p key={index.toString() + localisation + 'ContentTooltip9' + this.props.name} style={styleContent}>
+            - KeyValue : {metric.keyValue}
+          </p>
+        );
+        contentTooltip.push(
+          <p key={index.toString() + localisation + 'ContentTooltip10' + this.props.name} style={styleContent}>
+            - Type : {metric.manageValue}
+          </p>
+        );
+        index++;
+      });
+    }
+
     if (arrayOrientedLinksIn.length !== 0) {
       contentTooltip.push(
-        <p //key={'contentTooltip5' + this.props.name}
-          style={{ fontFamily: this.props.police, fontSize: '10px', marginTop: '5px', marginBottom: '0px' }}
-        >
+        <p key={localisation + 'ContentTooltip11' + this.props.name} style={styleTitle2}>
           Associate Link In :
         </p>
       );
       arrayOrientedLinksIn.forEach(orientedLinkIn => {
         const nameOrientedLink: string = orientedLinkIn.label || orientedLinkIn.name;
         contentTooltip.push(
-          <p //key={'contentTooltip6' + this.props.name}
-            style={{ fontFamily: this.props.police, fontSize: '8px', marginBottom: '0px' }}
-          >
-            + {nameOrientedLink}
+          <p key={localisation + 'ContentTooltip12' + this.props.name} style={styleContent}>
+            - {nameOrientedLink}
           </p>
         );
       });
@@ -365,19 +415,15 @@ export default class DrawPoint extends React.Component<Props, State> {
 
     if (arrayOrientedLinksOut.length !== 0) {
       contentTooltip.push(
-        <p //key={'contentTooltip7' + this.props.name}
-          style={{ fontFamily: this.props.police, fontSize: '10px', marginTop: '5px', marginBottom: '0px' }}
-        >
+        <p key={localisation + 'ContentTooltip13' + this.props.name} style={styleTitle2}>
           Associate Link Out :
         </p>
       );
       arrayOrientedLinksOut.forEach(orientedLinkOut => {
         const nameOrientedLink: string = orientedLinkOut.label || orientedLinkOut.name;
         contentTooltip.push(
-          <p //key={'contentTooltip8' + this.props.name}
-            style={{ fontFamily: this.props.police, fontSize: '8px', marginBottom: '0px' }}
-          >
-            + {nameOrientedLink}
+          <p key={localisation + 'ContentTooltip14' + this.props.name} style={styleContent}>
+            - {nameOrientedLink}
           </p>
         );
       });

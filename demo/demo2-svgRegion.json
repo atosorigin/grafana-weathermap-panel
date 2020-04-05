@@ -1,4 +1,5 @@
-{ "regions": [
+{
+  "regions": [
     {
       "colorMode": false,
       "coords": {
@@ -134,7 +135,7 @@
         "numericFormatElement": "",
         "styleText": "",
         "unit": "",
-        "unityMesureElement": "",
+        "unit": "",
         "value": ""
       },
       "traceBack": true,
@@ -206,7 +207,7 @@
         "numericFormatElement": "",
         "styleText": "",
         "unit": "",
-        "unityMesureElement": "",
+        "unit": "",
         "value": ""
       },
       "traceBack": true,
@@ -363,10 +364,11 @@
         "numericFormatElement": "0.1",
         "styleText": "el",
         "unit": "um",
-        "unityMesureElement": "el",
+        "unit": "el",
         "value": ""
       },
       "traceBack": true,
       "traceBorder": true
     }
-  ]}
+  ]
+}

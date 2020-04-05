@@ -1,0 +1,90 @@
+{
+"regions": [
+    {
+      "colorMode": false,
+      "coords": {
+          "xMin": "0",
+          "xMax": "-50",
+          "yMin": "0",
+          "yMax": "-50"
+      },
+      "id": 1,
+      "idSVG": "",
+      "img": "",
+      "label": "zone",
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "lowerLimit": [
+        {
+        "backColor": "#C4162A",
+        "borderColor": "#FF0000",
+        "id": 0,
+        "lowerLimitMax": "",
+        "lowerLimitMin": "",
+        "sizeBorder": "5"
+        }
+      ],
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": "",
+        "manageValue": "avg",
+        "refId": "",
+        "returnQuery": [],
+        "unit": ""
+      },
+      "meta": "",
+      "metrics": [],
+      "mode": false,
+      "orientedLink": [],
+      "positionParameter": {
+        "labelAPositionX": "0",
+        "labelAPositionY": "0",
+        "labelBPositionX": "0",
+        "labelBPositionY": "0",
+        "tooltipPositionA": {},
+        "tooltipPositionB": {}
+      },
+      "textObj": {
+        "colorBack": "rgba(255, 255, 255, 0)",
+        "colorText": "rgba(0, 0, 0, 1)",
+        "generateAuxiliaryElement": {
+          "addColorBackElement": false,
+          "addColorTextElement": false,
+          "colorBackElement": "black",
+          "colorTextElement": "white",
+          "displayObjectInText": false,
+          "displayObjectPermanently": false,
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unityMesureElement": ""
+        },
+        "generateObjectText": false,
+        "isTextRegion": false,
+        "legend": "",
+        "style": {
+          "bold": true,
+          "italic": false,
+          "underline": true
+        },
+        "unit": "",
+        "value": "",
+        "valueGenerateObjectText": {
+          "addColorBackElement": false,
+          "addColorTextElement": false,
+          "colorBackElement": "black",
+          "colorTextElement": "white",
+          "displayObjectInText": false,
+          "displayObjectPermanently": false,
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unityMesureElement": ""
+        }
+      },
+      "traceBack": true,
+      "traceBorder": true
+    }
+  ]}

@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.4.4 (2020-04-03)
+
+- update legend
+- update bidirectional link with 2 queries
+- update import file
+- Fixed build
+- Fixed assocation point and oriented link
+
 ## v0.4.3 (2020-04-01)
 
 - Add fixed plugin

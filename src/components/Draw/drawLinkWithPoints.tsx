@@ -25,57 +25,57 @@ export default class DrawLienWithPoints extends React.Component<Props, State> {
     this.state = {};
   }
 
-  private synchroArrowX(positionX: number, defineCenter: number): number {
-    return positionX * (defineCenter / 100) + defineCenter;
-  }
+  // private synchroArrowX(positionX: number, defineCenter: number): number {
+  //   return positionX * (defineCenter / 100) + defineCenter;
+  // }
 
-  private synchroArrowY(positionY: number, defineCenter: number): number {
-    return defineCenter - positionY * (defineCenter / 100);
-  }
+  // private synchroArrowY(positionY: number, defineCenter: number): number {
+  //   return defineCenter - positionY * (defineCenter / 100);
+  // }
 
-  private defineXRegionOfPointIn(): number {
-    let xRegion = 0;
+  // private defineXRegionOfPointIn(): number {
+  //   let xRegion = 0;
 
-    if (this.props.pointIn.value?.coordinateSpace.value !== undefined) {
-      const xMin: number = parseInt(this.props.pointIn.value.coordinateSpace.value?.coords.xMin || '0', 10);
-      const xMax: number = parseInt(this.props.pointIn.value.coordinateSpace.value?.coords.xMax || '0', 10);
-      xRegion = (xMax + xMin) / 2;
-    }
-    return xRegion;
-  }
+  //   if (this.props.pointIn.value?.coordinateSpace.value !== undefined) {
+  //     const xMin: number = parseInt(this.props.pointIn.value.coordinateSpace.value?.coords.xMin || '0', 10);
+  //     const xMax: number = parseInt(this.props.pointIn.value.coordinateSpace.value?.coords.xMax || '0', 10);
+  //     xRegion = (xMax + xMin) / 2;
+  //   }
+  //   return xRegion;
+  // }
 
-  private defineYRegionOfPointIn(): number {
-    let yRegion = 0;
+  // private defineYRegionOfPointIn(): number {
+  //   let yRegion = 0;
 
-    if (this.props.pointIn.value?.coordinateSpace.value !== undefined) {
-      const yMin: number = parseInt(this.props.pointIn.value.coordinateSpace.value?.coords.yMin || '0', 10);
-      const yMax: number = parseInt(this.props.pointIn.value.coordinateSpace.value?.coords.yMax || '0', 10);
-      yRegion = (yMax + yMin) / 2;
-    }
-    return yRegion;
-  }
+  //   if (this.props.pointIn.value?.coordinateSpace.value !== undefined) {
+  //     const yMin: number = parseInt(this.props.pointIn.value.coordinateSpace.value?.coords.yMin || '0', 10);
+  //     const yMax: number = parseInt(this.props.pointIn.value.coordinateSpace.value?.coords.yMax || '0', 10);
+  //     yRegion = (yMax + yMin) / 2;
+  //   }
+  //   return yRegion;
+  // }
 
-  private defineXRegionOfPointOut(): number {
-    let xRegion = 0;
+  // private defineXRegionOfPointOut(): number {
+  //   let xRegion = 0;
 
-    if (this.props.pointOut.value?.coordinateSpace.value !== undefined) {
-      const xMin: number = parseInt(this.props.pointOut.value.coordinateSpace.value?.coords.xMin || '0', 10);
-      const xMax: number = parseInt(this.props.pointOut.value.coordinateSpace.value?.coords.xMax || '0', 10);
-      xRegion = (xMax + xMin) / 2;
-    }
-    return xRegion;
-  }
+  //   if (this.props.pointOut.value?.coordinateSpace.value !== undefined) {
+  //     const xMin: number = parseInt(this.props.pointOut.value.coordinateSpace.value?.coords.xMin || '0', 10);
+  //     const xMax: number = parseInt(this.props.pointOut.value.coordinateSpace.value?.coords.xMax || '0', 10);
+  //     xRegion = (xMax + xMin) / 2;
+  //   }
+  //   return xRegion;
+  // }
 
-  private defineYRegionOfPointOut(): number {
-    let yRegion = 0;
+  // private defineYRegionOfPointOut(): number {
+  //   let yRegion = 0;
 
-    if (this.props.pointOut.value?.coordinateSpace.value !== undefined) {
-      const yMin: number = parseInt(this.props.pointOut.value.coordinateSpace.value?.coords.yMin || '0', 10);
-      const yMax: number = parseInt(this.props.pointOut.value.coordinateSpace.value?.coords.yMax || '0', 10);
-      yRegion = (yMax + yMin) / 2;
-    }
-    return yRegion;
-  }
+  //   if (this.props.pointOut.value?.coordinateSpace.value !== undefined) {
+  //     const yMin: number = parseInt(this.props.pointOut.value.coordinateSpace.value?.coords.yMin || '0', 10);
+  //     const yMax: number = parseInt(this.props.pointOut.value.coordinateSpace.value?.coords.yMax || '0', 10);
+  //     yRegion = (yMax + yMin) / 2;
+  //   }
+  //   return yRegion;
+  // }
 
   private drawLink(
     xA: number,
@@ -328,23 +328,27 @@ export default class DrawLienWithPoints extends React.Component<Props, State> {
   };
 
   render() {
-    const defineCenter: number = this.props.height / 2;
-    const xA: number = this.synchroArrowX(
-      parseInt(this.props.pointIn.value?.positionShapeX || '0', 10) + this.defineXRegionOfPointIn(),
-      defineCenter
-    );
-    const yA: number = this.synchroArrowY(
-      parseInt(this.props.pointIn.value?.positionShapeY || '0', 10) + this.defineYRegionOfPointIn(),
-      defineCenter
-    );
-    const xB: number = this.synchroArrowX(
-      parseInt(this.props.pointOut.value?.positionShapeX || '0', 10) + this.defineXRegionOfPointOut(),
-      defineCenter
-    );
-    const yB: number = this.synchroArrowY(
-      parseInt(this.props.pointOut.value?.positionShapeY || '0', 10) + this.defineYRegionOfPointOut(),
-      defineCenter
-    );
+    // const defineCenter: number = this.props.height / 2;
+    // const xA: number = this.synchroArrowX(
+    //   parseInt(this.props.pointIn.value?.positionShapeX || '0', 10) + this.defineXRegionOfPointIn(),
+    //   defineCenter
+    // );
+    // const yA: number = this.synchroArrowY(
+    //   parseInt(this.props.pointIn.value?.positionShapeY || '0', 10) + this.defineYRegionOfPointIn(),
+    //   defineCenter
+    // );
+    // const xB: number = this.synchroArrowX(
+    //   parseInt(this.props.pointOut.value?.positionShapeX || '0', 10) + this.defineXRegionOfPointOut(),
+    //   defineCenter
+    // );
+    // const yB: number = this.synchroArrowY(
+    //   parseInt(this.props.pointOut.value?.positionShapeY || '0', 10) + this.defineYRegionOfPointOut(),
+    //   defineCenter
+    // );
+    const xA = 0;
+    const yA = 0;
+    const xB = 0;
+    const yB = 0;
     const colorA: string = this.props.pointIn.value?.color || 'white';
     const colorB: string = this.props.pointOut.value?.color || 'white';
     const orientationLink: string = this.props.orientationLink;

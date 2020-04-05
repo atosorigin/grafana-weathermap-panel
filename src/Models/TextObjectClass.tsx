@@ -1,3 +1,5 @@
+import { Style } from 'components/Parametrage/styleComponent';
+
 interface GenerateTextObject {
   /** legend element */
   legendElement: string;
@@ -31,8 +33,10 @@ export class TextObject {
   colorBack: string;
   /** color text region */
   colorText: string;
+  /** style */
+  style: Style;
   /** style text region */
-  styleText: string;
+  // styleText: string;
   /** generate object text */
   generateObjectText: boolean;
   /** if generateObjectText is true when use variable to stock data */
@@ -46,7 +50,8 @@ export class TextObject {
     isTextRegion: boolean,
     colorBack: string,
     colorText: string,
-    styleText: string,
+    style: Style,
+    // styleText: string,
     generateObjectText: boolean,
     valueGenerateObjectText: GenerateTextObject,
     generateAuxiliaryElement: GenerateTextObject
@@ -56,7 +61,8 @@ export class TextObject {
     this.isTextRegion = isTextRegion;
     this.colorBack = colorBack;
     this.colorText = colorText;
-    this.styleText = styleText;
+    this.style = style;
+    // this.styleText = styleText;
     this.generateObjectText = generateObjectText;
     this.valueGenerateObjectText = valueGenerateObjectText;
     this.generateAuxiliaryElement = generateAuxiliaryElement;

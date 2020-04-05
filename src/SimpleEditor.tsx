@@ -14,7 +14,7 @@ import ImportInput from 'components/importInput';
 import ManageCoordinateSpace from 'components/CoordinateSpace/manageCoordinateSpace';
 import OrientedLinkForm from './components/orientedLinkForm';
 // import PanelData from 'components/panelData';
-import PointForm from 'components/pointForm';
+//import PointForm from 'components/pointForm';
 import Display from 'components/display';
 // import TimeSelector from 'components/timeSelector';
 
@@ -301,18 +301,29 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
               </TabsBar>
               <TabContent>
                 {this.state.tabsCoordinateSpace[0] && (
-                  <ManageCoordinateSpace options={this.props.options} onOptionsChange={this.props.onOptionsChange} data={this.props.data} />
-                )}
-                {this.state.tabsCoordinateSpace[1] && (
-                  <PointForm
-                    key={'pointInputList'}
-                    callBackFromParent={this.myCallBackArrayPoints.bind(this)}
-                    regionCoordinateSpace={this.props.options.regionCoordinateSpace}
-                    oldArrayPointClass={this.props.options.arrayPoints}
+                  <ManageCoordinateSpace
                     options={this.props.options}
                     onOptionsChange={this.props.onOptionsChange}
                     data={this.props.data}
+                    isRegion={true}
                   />
+                )}
+                {this.state.tabsCoordinateSpace[1] && (
+                  <ManageCoordinateSpace
+                    options={this.props.options}
+                    onOptionsChange={this.props.onOptionsChange}
+                    data={this.props.data}
+                    isRegion={false}
+                  />
+                  // <PointForm
+                  //   key={'pointInputList'}
+                  //   callBackFromParent={this.myCallBackArrayPoints.bind(this)}
+                  //   regionCoordinateSpace={this.props.options.regionCoordinateSpace}
+                  //   oldArrayPointClass={this.props.options.arrayPoints}
+                  //   options={this.props.options}
+                  //   onOptionsChange={this.props.onOptionsChange}
+                  //   data={this.props.data}
+                  // />
                 )}
                 {/* {
 									this.state.tabsCoordinateSpace[2] &&

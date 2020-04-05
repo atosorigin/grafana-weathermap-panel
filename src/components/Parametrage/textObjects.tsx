@@ -2,6 +2,9 @@ import React from 'react';
 
 import { Switch } from '@grafana/ui';
 
+import { Style } from 'components/Parametrage/styleComponent';
+import StyleComponent from 'components/Parametrage/styleComponent';
+
 import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
 import { TextObject } from 'Models/TextObjectClass';
 
@@ -85,16 +88,16 @@ class TextObjects extends React.Component<Props, State> {
   };
 
   /** change value for style text region */
-  onChangeStyleText = async (event: {
-    /** target for style text region input */
-    currentTarget: HTMLInputElement;
-  }) => {
-    const newTextObject: TextObject = this.state.textObject;
+  // onChangeStyleText = async (event: {
+  //   /** target for style text region input */
+  //   currentTarget: HTMLInputElement;
+  // }) => {
+  //   const newTextObject: TextObject = this.state.textObject;
 
-    newTextObject.styleText = event.currentTarget.value;
-    await this.stateAsyncTextObject({ textObject: newTextObject });
-    this.callBack();
-  };
+  //   newTextObject.styleText = event.currentTarget.value;
+  //   await this.stateAsyncTextObject({ textObject: newTextObject });
+  //   this.callBack();
+  // };
 
   /** switch value for generate text object */
   onSwitchGenerateObjectText = async () => {
@@ -299,6 +302,14 @@ class TextObjects extends React.Component<Props, State> {
     this.callBack();
   };
 
+  saveData = (style: Style): void => {
+    const newText = this.state.textObject;
+    newText.style = style;
+    this.setState({
+      textObject: newText,
+    });
+  };
+
   /**
    * result
    */
@@ -338,14 +349,16 @@ class TextObjects extends React.Component<Props, State> {
             _onChange={this.onChangeColorText}
           />
 
-          <InputTextField
+          <StyleComponent oldStyle={this.state.textObject.style} saveParent={this.saveData} />
+
+          {/* <InputTextField
             label={l10n.textObject.textStyle}
             name="textStyleTextObject"
             placeholder={l10n.textObject.style}
             required={false}
             value={this.state.textObject.styleText}
             _handleChange={this.onChangeStyleText}
-          />
+          /> */}
           <br />
           <br />
         </div>

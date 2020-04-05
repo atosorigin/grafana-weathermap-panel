@@ -18,7 +18,7 @@ describe('test createInputCoor', () => {
   });
 
   test('initial false', () => {
-    const result = createInputCoor(5, false);
+    const result = createInputCoor(6, false);
 
     expect(result.length).toBe(9);
     expect(result[0].id).toBe('5label');

@@ -4,6 +4,7 @@ import { PointClass } from 'Models/PointClass';
 import { LinkClass } from 'Models/LinkClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 import { RegionClass, Coord4D } from 'Models/RegionClass';
+import { Style } from 'components/Parametrage/styleComponent';
 
 /**
  * interface to save texte settings (police, size, style)
@@ -14,7 +15,7 @@ export interface TexteSettings {
   /** size simple panel */
   size: string;
   /** style simple panel */
-  style: string;
+  style: Style;
 }
 
 export declare type TManageValue = 'avg' | 'sum' | 'error';
@@ -359,7 +360,7 @@ export const defaults: SimpleOptions = {
   display: {
     police: 'Helvetica',
     size: '1em',
-    style: 'normal',
+    style: { italic: false, bold: false, underline: false },
   },
   fondIsActive: true,
   contourIsActive: true,

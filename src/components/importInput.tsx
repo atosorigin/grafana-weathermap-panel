@@ -126,7 +126,6 @@ class ImportInput extends React.Component<Props, State> {
       point.positionParameter,
       point.name,
       point.valueMetric,
-      point.coordinateSpace,
       point.drawGraphicMarker,
       point.shape,
       point.sizeWidth,
@@ -135,8 +134,6 @@ class ImportInput extends React.Component<Props, State> {
       point.positionShapeX,
       point.positionShapeY,
       point.color,
-      point.associateLinkIn,
-      point.associateLinkOut,
       point.associateOrientedLinksIn,
       point.associateOrientedLinksOut
     );
@@ -221,8 +218,11 @@ class ImportInput extends React.Component<Props, State> {
       link.zIndex,
       link.pointCPositionX,
       link.pointCPositionY,
-      link.isIncurved
+      link.isIncurved,
+      link.mainMetricB,
+      link.metricsB
     );
+    console.log(toLoad);
     // Do some test here to see if your already load a coordinatespace with this id
     if (this.LinkValidator(toLoad) === true) {
       this.props.options.arrayOrientedLinks.push(toLoad);
@@ -244,7 +244,6 @@ class ImportInput extends React.Component<Props, State> {
 
   loadMultiLinks = (links: any) => {
     links.links.forEach((link: any) => {
-      console.log(link);
       this.loadMonoLink(link);
     });
   };
@@ -252,7 +251,7 @@ class ImportInput extends React.Component<Props, State> {
   //Total
   loadTotal = (panel: any) => {
     //console.log(panel.imageUrl);
-    this.props.options.baseMap.image = panel.imageUrl;
+    this.props.options.baseMap = panel.baseMap;
     this.props.options.display.police = panel.texteSettings.police;
     this.props.options.display.size = panel.texteSettings.size;
     this.props.options.display.style = panel.texteSettings.styleText;
@@ -288,7 +287,7 @@ class ImportInput extends React.Component<Props, State> {
 
   fetchTotal = () => {
     this.totalResult = fetchConfFile(this.props.options.saveImportUrl.total);
-    console.log('dwnloadTotal');
+    console.log('downloadTotal');
   };
 
   // loaderSelector = () => {
@@ -314,8 +313,11 @@ class ImportInput extends React.Component<Props, State> {
     //this.result = fetchConfFile(this.props.options.saveImportUrl.multi);
     this.props.options.saveImportUrl.multi.forEach(async url => {
       try {
+        console.log(url);
+        let file = {};
+        console.log(file);
         let response = await fetch(url);
-        let file = await response.json();
+        file = await response.json();
         if (file.hasOwnProperty('regions')) {
           this.loadMultiRegions(file);
           console.log('Load Region');
@@ -325,6 +327,7 @@ class ImportInput extends React.Component<Props, State> {
           console.log('Load Point');
         }
         if (file.hasOwnProperty('links')) {
+          //console.log(file);
           this.loadMultiLinks(file);
           console.log('Load Links');
         }

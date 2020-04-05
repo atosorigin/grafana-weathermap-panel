@@ -416,6 +416,7 @@ class CoordinateSpace extends React.Component<Props, State> {
             data={this.props.data}
             mainMetric={this.state.arrayCoor.mainMetric}
             callBackToParent={this.callBackMainMetric}
+            isLink={false}
           />
         </div>
         <div>

@@ -3,6 +3,7 @@ import { SimpleOptions, TManageValue, Metric } from 'types';
 
 import { PanelEditorProps, SelectableValue, DataFrame } from '@grafana/data';
 import { Select, FormField, Collapse, FormLabel } from '@grafana/ui';
+import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 
 interface Prop extends PanelEditorProps<SimpleOptions> {
   /** id coordinate. Use to check if componentDidUpdate launch update */
@@ -13,6 +14,8 @@ interface Prop extends PanelEditorProps<SimpleOptions> {
   callBackToParent: (mainMetric: Metric, id?: number) => void;
   /** id coordinateSpace for link and point*/
   id?: number;
+  /** check if is OrientedLink */
+  isLink: boolean;
 }
 
 interface State {
@@ -188,62 +191,175 @@ class ManageQuery extends React.Component<Prop, State> {
     }
   };
 
+  private displayHtml = (): JSX.Element => {
+    let result: JSX.Element = <div></div>;
+    if (!this.props.isLink) {
+      result = (
+        <Collapse isOpen={this.state.collapseMainMetric} label="Main metric" onToggle={this.onToggleMainMetric}>
+          <tr style={{ verticalAlign: 'middle' }}>
+            <td>
+              <FormLabel>Query</FormLabel>
+            </td>
+            <td>
+              <Select
+                onChange={value => this.onChangeSelectQuery(value)}
+                allowCustomValue={false}
+                options={this.state.selectQuery}
+                width={10}
+                value={this.state.selectQueryDefault}
+              />
+            </td>
+          </tr>
+          {/* <br /> */}
+          <FormField
+            label="Key"
+            labelWidth={10}
+            inputWidth={20}
+            type="text"
+            value={this.state.mainMetric.key}
+            name="key"
+            onChange={event => this._handleChangeKey(event.currentTarget.value)}
+          />
+          <FormField
+            label="Value key"
+            labelWidth={10}
+            inputWidth={20}
+            type="text"
+            value={this.state.mainMetric.keyValue}
+            name="valueKey"
+            onChange={event => this._handleChangeKeyValue(event.currentTarget.value)}
+          />
+          {/* <br /> */}
+          <tr style={{ verticalAlign: 'middle' }}>
+            <td>
+              <FormLabel>Manipulate</FormLabel>
+            </td>
+            <td>
+              <Select
+                onChange={value => this.onChangeSelectManageValue(value)}
+                allowCustomValue={false}
+                options={this.state.selectManageValue}
+                width={10}
+                value={this.state.selectDefaultManageValue}
+              />
+            </td>
+          </tr>
+        </Collapse>
+      );
+    } else if (this.props.isLink) {
+      const orientedLink: OrientedLinkClass = this.props.options.arrayOrientedLinks[this.props.id || 0];
+      console.log(orientedLink);
+      const orientationLink: string = orientedLink.orientationLink.value || '';
+      console.log(orientationLink);
+      result = (
+        <Collapse isOpen={this.state.collapseMainMetric} label="Main metric" onToggle={this.onToggleMainMetric}>
+          <tr style={{ verticalAlign: 'middle' }}>
+            <td>
+              <FormLabel>Query</FormLabel>
+            </td>
+            <td>
+              <Select
+                onChange={value => this.onChangeSelectQuery(value)}
+                allowCustomValue={false}
+                options={this.state.selectQuery}
+                width={10}
+                value={this.state.selectQueryDefault}
+              />
+            </td>
+          </tr>
+          {/* <br /> */}
+          <FormField
+            label="Key"
+            labelWidth={10}
+            inputWidth={20}
+            type="text"
+            value={this.state.mainMetric.key}
+            name="key"
+            onChange={event => this._handleChangeKey(event.currentTarget.value)}
+          />
+          <FormField
+            label="Value key"
+            labelWidth={10}
+            inputWidth={20}
+            type="text"
+            value={this.state.mainMetric.keyValue}
+            name="valueKey"
+            onChange={event => this._handleChangeKeyValue(event.currentTarget.value)}
+          />
+          {/* <br /> */}
+          <tr style={{ verticalAlign: 'middle' }}>
+            <td>
+              <FormLabel>Manipulate</FormLabel>
+            </td>
+            <td>
+              <Select
+                onChange={value => this.onChangeSelectManageValue(value)}
+                allowCustomValue={false}
+                options={this.state.selectManageValue}
+                width={10}
+                value={this.state.selectDefaultManageValue}
+              />
+            </td>
+          </tr>
+          <tr style={{ verticalAlign: 'middle', marginTop: '10px' }}>
+            <td>
+              <FormLabel>Query</FormLabel>
+            </td>
+            <td>
+              <Select
+                onChange={value => this.onChangeSelectQuery(value)}
+                allowCustomValue={false}
+                options={this.state.selectQuery}
+                width={10}
+                value={this.state.selectQueryDefault}
+              />
+            </td>
+          </tr>
+          {/* <br /> */}
+          <FormField
+            label="Key"
+            labelWidth={10}
+            inputWidth={20}
+            type="text"
+            value={this.state.mainMetric.key}
+            name="key"
+            onChange={event => this._handleChangeKey(event.currentTarget.value)}
+          />
+          <FormField
+            label="Value key"
+            labelWidth={10}
+            inputWidth={20}
+            type="text"
+            value={this.state.mainMetric.keyValue}
+            name="valueKey"
+            onChange={event => this._handleChangeKeyValue(event.currentTarget.value)}
+          />
+          {/* <br /> */}
+          <tr style={{ verticalAlign: 'middle' }}>
+            <td>
+              <FormLabel>Manipulate</FormLabel>
+            </td>
+            <td>
+              <Select
+                onChange={value => this.onChangeSelectManageValue(value)}
+                allowCustomValue={false}
+                options={this.state.selectManageValue}
+                width={10}
+                value={this.state.selectDefaultManageValue}
+              />
+            </td>
+          </tr>
+        </Collapse>
+      );
+    }
+    return result;
+  };
+
   /**
    * result
    */
   render() {
-    return (
-      <Collapse isOpen={this.state.collapseMainMetric} label="Main metric" onToggle={this.onToggleMainMetric}>
-        <tr style={{ verticalAlign: 'middle' }}>
-          <td>
-            <FormLabel>Query</FormLabel>
-          </td>
-          <td>
-            <Select
-              onChange={value => this.onChangeSelectQuery(value)}
-              allowCustomValue={false}
-              options={this.state.selectQuery}
-              width={10}
-              value={this.state.selectQueryDefault}
-            />
-          </td>
-        </tr>
-        {/* <br /> */}
-        <FormField
-          label="Key"
-          labelWidth={10}
-          inputWidth={20}
-          type="text"
-          value={this.state.mainMetric.key}
-          name="key"
-          onChange={event => this._handleChangeKey(event.currentTarget.value)}
-        />
-        <FormField
-          label="Value key"
-          labelWidth={10}
-          inputWidth={20}
-          type="text"
-          value={this.state.mainMetric.keyValue}
-          name="valueKey"
-          onChange={event => this._handleChangeKeyValue(event.currentTarget.value)}
-        />
-        {/* <br /> */}
-        <tr style={{ verticalAlign: 'middle' }}>
-          <td>
-            <FormLabel>Manipulate</FormLabel>
-          </td>
-          <td>
-            <Select
-              onChange={value => this.onChangeSelectManageValue(value)}
-              allowCustomValue={false}
-              options={this.state.selectManageValue}
-              width={10}
-              value={this.state.selectDefaultManageValue}
-            />
-          </td>
-        </tr>
-      </Collapse>
-    );
+    return <div>{this.displayHtml()}</div>;
   }
 }
 export default ManageQuery;

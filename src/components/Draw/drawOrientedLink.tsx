@@ -42,6 +42,8 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   isIncurved: SelectableValue<boolean>;
   auxiliaryMetrics: Metric[];
   valuesAuxiliaryMetrics: string[];
+  police: string;
+  sizePolice: string;
 }
 
 interface State {}
@@ -1905,85 +1907,114 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
   }
 
   private defineValueTooptip = (typeLink: string, link?: string) => {
-    const infosOrientedLink: JSX.Element[] = [];
+    const contentTooltip: JSX.Element[] = [];
     const valueMainMetricA = this.props.valueMainMetricA;
     const valueMainMetricB = this.props.valueMainMetricB;
     const refMainMetric = this.props.refMainMetric;
 
-    infosOrientedLink.push(
-      <p key={'contentTooltip1' + this.props.name} style={{ fontSize: '12px', marginBottom: '0px' }}>
-        {this.props.label || this.props.name}
+    const styleMainTitle = {
+      fontFamily: this.props.police,
+      fontSize: '11px',
+      marginBottom: '0px',
+      textAlign: 'center',
+    } as React.CSSProperties;
+
+    const styleTitle = {
+      fontFamily: this.props.police,
+      fontSize: '10px',
+      marginTop: '5px',
+      marginBottom: '0px',
+    } as React.CSSProperties;
+
+    const styleTitle2 = {
+      fontFamily: this.props.police,
+      fontSize: '10px',
+      marginTop: '5px',
+      marginLeft: '5px',
+      marginBottom: '0px',
+    } as React.CSSProperties;
+
+    const styleContentMetrics = {
+      fontFamily: this.props.police,
+      fontSize: '9px',
+      marginLeft: '10px',
+      marginBottom: '0px',
+    } as React.CSSProperties;
+
+    contentTooltip.push(
+      <p key={'contentTooltip1' + this.props.name} style={styleMainTitle}>
+        {this.props.label || this.props.name.toUpperCase()}
       </p>
     );
 
-    infosOrientedLink.push(
-      <p key={'contentTooltip2' + this.props.name} style={{ fontSize: '10px', marginTop: '5px', marginBottom: '0px' }}>
+    contentTooltip.push(
+      <p key={'contentTooltip2' + this.props.name} style={styleTitle}>
         Main Metric
       </p>
     );
 
     if (typeLink === 'bidirectional') {
-      infosOrientedLink.push(
-        <p key={'contentTooltip3' + this.props.name} style={{ fontSize: '8px', marginBottom: '0px', marginTop: '5px' }}>
+      contentTooltip.push(
+        <p key={'contentTooltip3' + this.props.name} style={styleTitle2}>
           {'+ Link' + link + ' : '}
         </p>
       );
-      infosOrientedLink.push(
-        <p key={'contentTooltip4' + this.props.name} style={{ fontSize: '8px', marginBottom: '0px' }}>
+      contentTooltip.push(
+        <p key={'contentTooltip4' + this.props.name} style={styleContentMetrics}>
           {' '}
           - Reference : {refMainMetric}
         </p>
       );
-      infosOrientedLink.push(
-        <p key={'contentTooltip5' + this.props.name} style={{ fontSize: '8px', marginBottom: '0px' }}>
+      contentTooltip.push(
+        <p key={'contentTooltip5' + this.props.name} style={styleContentMetrics}>
           {' '}
           - Value : {valueMainMetricB}
         </p>
       );
     } else if (typeLink === 'monodirectional') {
-      infosOrientedLink.push(
-        <p key={'contentTooltip6' + this.props.name} style={{ fontSize: '8px', marginBottom: '0px' }}>
+      contentTooltip.push(
+        <p key={'contentTooltip6' + this.props.name} style={styleContentMetrics}>
           {' '}
-          + Reference : {refMainMetric}
+          - Reference : {refMainMetric}
         </p>
       );
-      infosOrientedLink.push(
-        <p key={'contentTooltip7' + this.props.name} style={{ fontSize: '8px', marginBottom: '0px' }}>
+      contentTooltip.push(
+        <p key={'contentTooltip7' + this.props.name} style={styleContentMetrics}>
           {' '}
-          + Value : {valueMainMetricA}
+          - Value : {valueMainMetricA}
         </p>
       );
     }
     if (this.props.auxiliaryMetrics.length > 0) {
-      infosOrientedLink.push(
-        <p key={'contentTooltip8' + this.props.name} style={{ fontSize: '10px', marginTop: '5px', marginBottom: '0px' }}>
+      contentTooltip.push(
+        <p key={'contentTooltip8' + this.props.name} style={styleTitle}>
           Auxiliary Metric
         </p>
       );
       let index = 1;
       this.props.auxiliaryMetrics.forEach(metric => {
-        infosOrientedLink.push(
-          <p key={index.toString() + 'contentTooltip9' + this.props.name} style={{ fontSize: '8px', marginBottom: '0px' }}>
-            + {index}
+        contentTooltip.push(
+          <p key={index.toString() + 'contentTooltip9' + this.props.name} style={styleTitle2}>
+            + Metric {index}
           </p>
         );
-        infosOrientedLink.push(
-          <p key={index.toString() + 'contentTooltip10' + this.props.name} style={{ fontSize: '8px', marginBottom: '0px' }}>
+        contentTooltip.push(
+          <p key={index.toString() + 'contentTooltip10' + this.props.name} style={styleContentMetrics}>
             - Value : {this.props.valuesAuxiliaryMetrics[index - 1]}
           </p>
         );
-        infosOrientedLink.push(
-          <p key={index.toString() + 'contentTooltip11' + this.props.name} style={{ fontSize: '8px', marginBottom: '0px' }}>
+        contentTooltip.push(
+          <p key={index.toString() + 'contentTooltip11' + this.props.name} style={styleContentMetrics}>
             - Key : {metric.key}
           </p>
         );
-        infosOrientedLink.push(
-          <p key={index.toString() + 'contentTooltip12' + this.props.name} style={{ fontSize: '8px', marginBottom: '0px' }}>
+        contentTooltip.push(
+          <p key={index.toString() + 'contentTooltip12' + this.props.name} style={styleContentMetrics}>
             - KeyValue : {metric.keyValue}
           </p>
         );
-        infosOrientedLink.push(
-          <p key={index.toString() + 'contentTooltip13' + this.props.name} style={{ fontSize: '8px', marginBottom: '0px' }}>
+        contentTooltip.push(
+          <p key={index.toString() + 'contentTooltip13' + this.props.name} style={styleContentMetrics}>
             - Type : {metric.manageValue}
           </p>
         );
@@ -1991,7 +2022,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       });
     }
 
-    return <div>{infosOrientedLink}</div>;
+    return <div>{contentTooltip}</div>;
   };
 
   render() {

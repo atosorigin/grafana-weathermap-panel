@@ -56,7 +56,7 @@ describe('test createInputsLink', () => {
 
   test('init component', () => {
     const result = createInputsLink(0, points, coordinates);
-    expect(result.length).toBe(21);
+    expect(result.length).toBe(11);
 
     expect(result[0].id).toBe('0GetCoordinate');
     expect(result[1].id).toBe('0orientationLink');
