@@ -12,8 +12,7 @@ This project is still in development.
 
 ## Dependencies
 
-- Grafana 6.6.x or 6.7.x
-- Yarn 1.21.1
+- Grafana 6.6.x or +
 
 
 ## Official version
@@ -44,17 +43,7 @@ Install the plugins
 ```sh
 $ cd /var/lib/grafana/plugins
 $ cd grafana-weathermap-panel
-$ yarn install
-$ yarn watch
 $ systemctl restart grafana-server
-```
-
-This will run linting tools and applu prettier Fix
-
-To build the plugin run :
-
-```sh
-$ yarn build
 ```
 
 
