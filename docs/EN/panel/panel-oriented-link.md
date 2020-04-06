@@ -1,19 +1,19 @@
-
-
-# oriented link
+# Oriented link
 
 ![menu](../../screenshots/panel/oriented-link.jpg)
 
-Après avoir cliquer sur le bouton **oriented link**
+After clicking on the **oriented link** button
 
 
 
-Il n'est pas disponible d'avoir un écran de configuration
+It is not available to have a configuration screen.
 
-L'affichage se fait par le clic de la souris à l'endroit de votre choix
+The display is done by clicking the mouse at the location of your choice. It is necessary to click twice on the image to position point A and point B.
 
 
 
-Le résultat obtenu sera automatiquement
+The result obtained will be automatically
 
-L'édition du point s'effectue à partir du formulaire de l'[éditeur oriented link](../editor/coordinates-space-link.md)
+The point is edited using the [editor oriented link](../editor/coordinates-space-link.md) form.
+
+To access it, click on **Coordinate space**, then **OrientedLink**, then on your link

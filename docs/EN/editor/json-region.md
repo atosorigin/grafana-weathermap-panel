@@ -1,0 +1,73 @@
+- **regions**: Table containing 1 or more regions
+    - **0** : First region
+        - **colorMode**: If the color of the region is unique, enter "false". If the color is variable depending on the query value, enter "true". 
+        - **coords**: Fill in the coordinates of the region to draw only if you don't use an idSVG. If this is the case, leave all to 0.
+        - id : id of the region
+        - idSVG: id of the SVG field, if you use a SVG field. Otherwise, leave blank.
+        - img : allows you to fill in an image other than svg
+        - label: Name of the area
+        - linkURL	
+            - followLink: Allows a redirection to the link by clicking on the region
+            - hoveringTooltipLink : Allows a redirection to the link filled in the tool type by clicking on the link.
+            - hoveringTooltipText: Displays the link in the tool type that appears when the cursor is passed over the area or point.
+        - lowerLimit : If **colorMode** is false, you can enter a color for the interior and the contour of the zone. If **ColorMode** is true, allows to define colors depending on the values of the associated query.
+            - 0 : First color
+                - backColor: Fill in a color in the form #7FFF00 for example for the background
+                - borderColor: Enter a color in the form #7FFF00 for example for the border.
+                - id : color id
+                - lowerLimitMax: Maximum value for this colour
+                - lowerLimitMin: Minimum value for this color
+                - sizeBorder: border thickness
+        - mainMetric	
+            - format ""
+            - key	""
+            - keyValue	""
+            - manageValue : Vous avez le choix entre "total", "avg" ou "erreur"
+            - refId	"A"
+            - returnQuery : ""           
+            - unit	""
+        - meta	""
+        - metrics	[]
+        - mode	true
+        - orientedLink	[]
+        - positionParameter	
+            - labelAPositionX	"0"
+            - labelAPositionY	"0"
+            - labelBPositionX	"0"
+            - labelBPositionY	"0"
+            - tooltipPositionA	{}
+            - tooltipPositionB	{}
+        - textObj	
+            - colorBack	"rgba(255, 255, 255, 0)"
+            - colorText	"rgba(0, 0, 0, 1)"
+            - generateAuxiliaryElement	
+                - addColorBackElement	false
+                - addColorTextElement	false
+                - colorBackElement	"black"
+                - colorTextElement	"white"
+                - displayObjectInText	false
+                - displayObjectPermanently	false
+                - legendElement	""
+                - numericFormatElement	""
+                - unityMesureElement	""
+            - generateObjectText	false
+            - isTextRegion	false
+            - legend	""
+            - style	
+                - bold	true
+                - italic	false
+                - underline	true
+            - unit	""
+            - value	""
+            - valueGenerateObjectText	
+                - addColorBackElement	false
+                - addColorTextElement	false
+                - colorBackElement	"black"
+                - colorTextElement	"white"
+                - displayObjectInText	false
+                - displayObjectPermanently	false
+                - legendElement	""
+                - numericFormatElement	""
+                - unityMesureElement	""
+        - traceBack	true
+        - traceBorder	true

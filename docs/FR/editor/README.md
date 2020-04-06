@@ -15,7 +15,6 @@ Ce panel d'édition propose différent menu
     - [Region](coordinates-space-region.md)
     - [Point](coordinates-space-point.md)
     - [Oriented link](coordinates-space-link.md)
-  - [Visibility of objects](visibility-objets.md)
   - [Import files](import.md)
 
 

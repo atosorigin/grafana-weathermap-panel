@@ -48,7 +48,7 @@ pour cela, vous ajoutez un nouveau point en position X et Y
 
 ## Main metric
 
-une page dédiée pour remplir les champs sont disponible [ici](coordinates-space-main-metric.md)
+Une page dédiée pour remplir les champs sont disponible [ici](coordinates-space-main-metric.md)
 
 
 
@@ -56,14 +56,14 @@ une page dédiée pour remplir les champs sont disponible [ici](coordinates-spac
 ## Auxiliary metrics
 
 
-to be continued...
+Une page dédiée pour remplir les champs sont disponible [ici](coordinates-auxiliary-metric.md)
 
 
 
 
 ## Manage link
 
-une page dédiée pour remplir les champs sont disponible [ici](coordinates-manage-link.md)
+Une page dédiée pour remplir les champs sont disponible [ici](coordinates-manage-link.md)
 
 
 
@@ -71,16 +71,15 @@ une page dédiée pour remplir les champs sont disponible [ici](coordinates-mana
 ## Text object
 
 
-une page dédié pour remplir les champs sont disponible [ici](coordinates-text-object.md)
+Une page dédié pour remplir les champs sont disponible [ici](coordinates-text-object.md)
 
 
 
-
-## lowerLimit
-
+## LowerLimit
 
 
-une page dédié pour remplir les champs sont disponible [ici](coordinates-lower-limit.md)
+
+Une page dédié pour remplir les champs sont disponible [ici](coordinates-lower-limit.md)
 
 
 
@@ -89,17 +88,17 @@ une page dédié pour remplir les champs sont disponible [ici](coordinates-lower
 
 ![position parameter](../../screenshots/editor/coordinates/screen-point/position-parameter.jpg)
 
-vous pouvez définir la position du paramètre 
+Vous pouvez définir la position du e différent paramètre.
 
 
-  - la position du label en X et Y
+  - La position du label en X et Y
 
 
-  - la position tooltip : 
+  - La position tooltip : 
 haut / bas....
 
 
-  - layer level
+  - Layer level
 
 
 

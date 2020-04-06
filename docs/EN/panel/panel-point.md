@@ -1,5 +1,5 @@
 
-# point
+# Point
 
 
 
@@ -8,18 +8,20 @@
 
 
 
-Après avoir cliquer sur le bouton **point**
+After clicking on the **point** button
 
 
 
-Il n'est pas disponible d'avoir un écran de configuration
+It is not available to have a configuration screen.
 
-L'affichage d'un point se fait par le clic de la souris à l'endroit de votre choix
+The display of a point is done by clicking the mouse at the location of your choice. 
 
 
 ![menu](../../screenshots/panel/point-view.jpg)
 
 
-Le résultat obtenu sera automatiquement
+The result will be automatically obtained.
 
-L'édition du point s'effectue à partir du formulaire de l'[éditeur Point](../editor/coordinates-space-point.md)
+The editing of the point is done from the form of the [Point editor](../editor/coordinates-space-point.md). 
+
+To access it, click on **Coordinate space**, then **Point**, then **Edit coordinate space**.

@@ -3,11 +3,11 @@
 
 
 
-Le panel est le résultat affiché par rapport aux données et aux panneaux édités.
+The panel is the result displayed in relation to the data and the edited panels.
 
-Il est possible de générer dynamiquement la construction de l'espace
+It is possible to dynamically generate the construction of the space
 
-pour cela, différentes fonctions sont disponibles à partir de la barre du menu
+To do this, various functions are available from the menu bar
 
 
 

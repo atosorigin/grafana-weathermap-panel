@@ -1,8 +1,6 @@
+## Oriented Link
 
-
-
-## oriented Link
-Définir les coordonnées d'un oriented link
+Defining the coordinates of an oriented link
 
 
 ## Informations obligatoires
@@ -11,76 +9,64 @@ Définir les coordonnées d'un oriented link
 ![saisie oriented link](../../screenshots/editor/coordinates/screen-oriented-link/obligatoire.jpg)
 
 
-les informations obligatoires pour afficher les points sont : 
+The required information to display the points is : 
 
 
 
 ### Label 
 
-il s'agit d'une clé permettant d'ajouter le résultat d'une valeur à des paramètres 
+This is a key to add the result of a value to the parameters 
 
 ### orientation
 
-2 orientations sont possibles : 
+2 orientations are possible: 
 
-- monodirectionnel
-- birectionnel
+- monodirectional
+- bi-directional
 
 
 
 ### Position
 
-Un lien se fait par 2 points A et B
+A link is made by 2 points A and B
 
-c'est pourquoi chaque point à ces coordoonées, en position X et Y
+therefore each point at these coordoonées, in position X and Y
 
 
 ### Incurved
 
-Il est possible d'ajouter un point pour faire une courbe incurved
+It is possible to add a point to make a curved curve.
 
-pour cela, vous ajoutez un nouveau point en position X et Y
-
-
-
+To do this, you add a new point C in the X and Y position.
 
 
 
 ## Main metric
 
-une page dédiée pour remplir les champs sont disponible [ici](coordinates-space-main-metric.md)
-
+A dedicated page to fill in the fields is available [here](coordinates-space-main-metric.md)
 
 
 
 ## Auxiliary metrics
 
-
-to be continued...
-
-
+A dedicated page for filling in the fields is available [here](coordinates-auxiliary-metric.md)
 
 
 ## Manage link
 
-une page dédiée pour remplir les champs sont disponible [ici](coordinates-manage-link.md)
-
-
+A dedicated page to fill in the fields is available [here](coordinates-manage-link.md)
 
 
 ## Text object
 
 
-une page dédié pour remplir les champs sont disponible [ici](coordinates-text-object.md)
+A dedicated page to fill in the fields is available [here](coordinates-text-object.md)
 
 
+## LowerLimit
 
 
-## lowerLimit
-
-
-
-une page dédié pour remplir les champs sont disponible [ici](coordinates-lower-limit.md)
+A dedicated page to fill in the fields is available [here](coordinates-lower-limit.md)
 
 
 
@@ -89,17 +75,17 @@ une page dédié pour remplir les champs sont disponible [ici](coordinates-lower
 
 ![position parameter](../../screenshots/editor/coordinates/screen-point/position-parameter.jpg)
 
-vous pouvez définir la position du paramètre 
+you can define the position of the 
 
 
-  - la position du label en X et Y
+  - The position of the label in X and Y
 
 
-  - la position tooltip : 
-haut / bas....
+  - The tooltip position : 
+up / down...
 
 
-  - layer level
+  - Layer level
 
 
 

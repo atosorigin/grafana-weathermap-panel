@@ -1,18 +1,12 @@
 
-
-
-
-# legend
-
+# Legend
 
 
 ![legend](../../screenshots/panel/legend.jpg)
 
+The legend will allow you to see what values each colour corresponds to for the different regions and points.
 
+After selecting the legend, it is possible to click in space to position the legend
 
-Après avoir sélectionner la légende
-
-il est possible de cliquer dans l'espage pour positionner la légende
-
-Après avoir choisi l'emplacement, il faut resélectionner le même bouton
+After choosing the location, the same button must be reselected to lock the legend location.
 

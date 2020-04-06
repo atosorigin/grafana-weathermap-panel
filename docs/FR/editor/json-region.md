@@ -1,0 +1,73 @@
+- **regions** : Tableau contenant 1 ou plusieurs régions
+    - **0** : Première région
+        - **colorMode** : Si la couleur de la région est unique, saisir "false". Si la couleur est variable dépendamment de la valeur de la query, saisir "true". 
+        - **coords** : Renseigner les coordonnées de la région à dessiner seulement si vous n'utiliser pas un idSVG. Si c'est la cas, laisser tous à 0.
+        - id : id de la région
+        - idSVG	: id de la zone SVG, si vous utilisez une zoneSVG. Sinon, laisser vide.
+        - img : permet de renseigner une image autre que svg
+        - label	: Nom de la zone
+        - linkURL	
+            - followLink : Permet une redirection vers le lien renseigné en cliquant sur la region
+            - hoveringTooltipLink : Permet une redirection vers le lien renseigné dans le tool type en cliquant sur le lien
+            - hoveringTooltipText : Affiche le lien dans le tool type qui apparait quand on passe le curseur sur la zone ou sur le point
+        - lowerLimit : Si **colorMode** est false, premet de renseigner une couleur pour l'interieur et le contour de la zone. Si **ColorMode** est true, permet de définir des couleurs dépendamment des valeurs de la query associé.
+            - 0	: Première couleur
+                - backColor	: Renseigner une couleur sous la forme #7FFF00 par exemple pour la background
+                - borderColor : Renseigner une couleur sous la forme #7FFF00 par exemple pour la bordure
+                - id : id de la couleur
+                - lowerLimitMax	: Valeur maximume pour cette couleur
+                - lowerLimitMin	: Valeur minimal pour cette couleur
+                - sizeBorder : epaisseur de la bordure
+        - mainMetric	
+            - format ""
+            - key	""
+            - keyValue	""
+            - manageValue : Vous avez le choix entre "total", "avg" ou "erreur"
+            - refId	"A"
+            - returnQuery : ""           
+            - unit	""
+        - meta	""
+        - metrics	[]
+        - mode	true
+        - orientedLink	[]
+        - positionParameter	
+            - labelAPositionX	"0"
+            - labelAPositionY	"0"
+            - labelBPositionX	"0"
+            - labelBPositionY	"0"
+            - tooltipPositionA	{}
+            - tooltipPositionB	{}
+        - textObj	
+            - colorBack	"rgba(255, 255, 255, 0)"
+            - colorText	"rgba(0, 0, 0, 1)"
+            - generateAuxiliaryElement	
+                - addColorBackElement	false
+                - addColorTextElement	false
+                - colorBackElement	"black"
+                - colorTextElement	"white"
+                - displayObjectInText	false
+                - displayObjectPermanently	false
+                - legendElement	""
+                - numericFormatElement	""
+                - unityMesureElement	""
+            - generateObjectText	false
+            - isTextRegion	false
+            - legend	""
+            - style	
+                - bold	true
+                - italic	false
+                - underline	true
+            - unit	""
+            - value	""
+            - valueGenerateObjectText	
+                - addColorBackElement	false
+                - addColorTextElement	false
+                - colorBackElement	"black"
+                - colorTextElement	"white"
+                - displayObjectInText	false
+                - displayObjectPermanently	false
+                - legendElement	""
+                - numericFormatElement	""
+                - unityMesureElement	""
+        - traceBack	true
+        - traceBorder	true

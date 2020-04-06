@@ -1,8 +1,8 @@
 # About WeatherMap plugin
 
-It's Draft
+C'est un projet
 
-WeatherMap is a plugin for grafana allowing to visualize monitoring...
+WeatherMap est un plugin pour grafana permettant de visualiser la surveillance...
 
 
 # Table des matières
@@ -16,13 +16,13 @@ WeatherMap is a plugin for grafana allowing to visualize monitoring...
   - [initial viewing space](FR/editor/initial-viewing-space.md)
   - [Coordinates space](FR/editor/coordinates.md)
   - [Visibility of objects](FR/editor/visibility-objets.md)
-  - [Inport files](FR/editor/import.md)
+  - [Import files](FR/editor/import.md)
 - [Panel](FR/panel/README.md)
-  - [Add region](FR/panel/region.md)
-  - [Add point](FR/panel/point.md)
-  - [Add oriented link](FR/panel/oriented-link.md)
-  - [Add incurved oriented link](FR/panel/incurved-link.md)
-  - [Position Legend](FR/panel/position-legend.md)
+  - [Add region](FR/panel/panel-region.md)
+  - [Add point](FR/panel/panel-point.md)
+  - [Add oriented link](FR/panel/panel-oriented-link.md)
+  - [Add incurved oriented link](FR/panel/panel-incurved-link.md)
+  - [Position Legend](FR/panel/panel-position-legend.md)
 - [Demo / Tutorial](FR/demo/README.md)
 - [Appendix](FR/appendix/README.md)
   - [SVG](FR/appendix/svg.md)

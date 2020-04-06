@@ -1,23 +1,21 @@
-
-
-# incurved link
+# Incurved link
 
 
 ![menu](../../screenshots/panel/incurved.jpg)
 
  
-Après avoir cliquer sur le bouton **incurved oriented link**
+After clicking on the **incurved oriented link** button
 
 
 
-Il n'est pas disponible d'avoir un écran de configuration
+It is not available to have a configuration screen.
 
-L'affichage se fait par le clic de la souris à l'endroit de votre choix
-
-
+The display is done by clicking the mouse at the location of your choice. It is necessary to click three times on the image to position the point A then the point B which will represent the direction, then the point C which will define the curvature.
 
 
 
-Le résultat obtenu sera automatiquement
+The result obtained will be automatically
 
-L'édition du point s'effectue à partir du formulaire de l'[éditeur oriented link](../editor/coordinates-space-link.md)
+The point is edited using the [editor oriented link](../editor/coordinates-space-link.md) form.
+
+To access it, click on **Coordinate space**, then **OrientedLink**, then on your link

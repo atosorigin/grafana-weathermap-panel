@@ -1,20 +1,16 @@
+# Main metric
 
 
-# Auxiliary metric
-
-This function is common for 
-
-- Region
-- Point
-- OrientedLink
+![main metric](../../screenshots/editor/coordinates/main-metric/OrientedLink-MainMetric.png)
 
 
-![main metric](../../screenshots/editor/coordinates/main-metric/main-metric.jpg)
+The following parameter is used to 
+
+- Associate two predefined Queries A and B to a region or point. This will display the two values on either side of the arrow.
+
+![main metric](../../screenshots/editor/coordinates/main-metric/main-metric-query-a.jpg)
 
 
-
-- It is in the interest of the auxiliary metric to add other values to a region or a point.
-- The query of the metric hand is copied here. 
 - "Key" and "Value key" allow you to filter the data received by the query to keep only what is important to you.
 
 for example 

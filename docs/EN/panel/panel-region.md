@@ -1,11 +1,11 @@
-# region
+# Region
 
 ![region](../../screenshots/panel/region.jpg)
 
 
-Après avoir cliquer sur le bouton **region**
+After clicking on the **region** button
 
-Un formulaire d'édition est proposé. L'ensemble de l'écran de saisie sont représentés comme ceci : 
+An output form is proposed. The entire entry screen is represented as follows: 
 
 
 
@@ -16,8 +16,7 @@ Un formulaire d'édition est proposé. L'ensemble de l'écran de saisie sont rep
 
 
 
-L'édition de la région s'effectue à partir du formulaire de l'[éditeur Region](../editor/coordinates-space-region.md)
+The region is edited using the [Region editor](../editor/coordinates-space-region.md) form.
 
 
-todo
 
