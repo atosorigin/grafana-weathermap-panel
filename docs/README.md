@@ -10,8 +10,9 @@ WeatherMap is a plugin for grafana allowing to visualize monitoring...
 
 - [Introduction](EN/init/introduction.md)
 - [Environment](EN/init/README.md)
-  - [Configuration](EN/init/configuration.md)
   - [Installation](EN/init/installation.md)
+  - [Configuration data source](EN/init/confif-data-source.md)
+  - [Configuration](EN/init/configuration.md)
 - [Editor](EN/editor/README.md)
   - [Display](EN/editor/display.md)
   - [initial viewing space](EN/editor/initial-viewing-space.md)

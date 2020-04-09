@@ -87,6 +87,7 @@ class EditPoint extends React.Component<Props, State> {
 
   /** fill select whith array region object */
   fillSelectPoint = () => {
+    let valueExist = false;
     const valueSelect: SelectPoint[] = [];
     const stockTmpCoordinatesSpace: PointClass[] = this.props.options.arrayPoints.slice();
 
@@ -94,10 +95,22 @@ class EditPoint extends React.Component<Props, State> {
       let label = line.label || line.name;
       valueSelect.push({ value: line, label: label });
     }
+    if (this.state.selectCoordinateSpaceDefault) {
+      for (const line of stockTmpCoordinatesSpace) {
+        if (line.id === this.state.selectCoordinateSpaceDefault.value?.id) {
+          valueExist = true;
+          break;
+        }
+      }
+    }
     // dev
     this.setState({
       selectCoordinateSpace: valueSelect,
-      selectCoordinateSpaceDefault: valueSelect.length > 0 ? valueSelect[0] : this.state.selectCoordinateSpaceDefault,
+      selectCoordinateSpaceDefault: valueExist
+        ? this.state.selectCoordinateSpaceDefault
+        : valueSelect.length > 0
+        ? valueSelect[0]
+        : this.state.selectCoordinateSpaceDefault,
     });
     // final
     // this.setState({

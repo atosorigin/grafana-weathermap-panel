@@ -34,7 +34,7 @@ Les paramètres obligatoires à cocher sont `shadow` and `embed images`
 
 ## Sauvegarde
 
-![main metric](../../screenshots/appendix/draw-export-svg.png)
+![main metric](../../screenshots/appendix/draw-export-svg.jpg)
 
 Il est important que chaque élément doit posséder une clef `ID` pour que le fichier créé puisse être importer dans le plugin.
 

@@ -30,7 +30,7 @@ interface State {
 /**
  * def
  */
-class LinkURLClassPrincipale extends React.Component<Props, State> {
+class ManageLink extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -120,7 +120,7 @@ class LinkURLClassPrincipale extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps: Props) {
-    if (prevProps.coordinateSpace !== this.props.coordinateSpace) {
+    if (prevProps.coordinateSpace.id !== this.props.coordinateSpace.id) {
       this.setState({
         followLink: prevProps.coordinateSpace.linkURL.followLink,
         hoveringTooltipLink: prevProps.coordinateSpace.linkURL.hoveringTooltipLink,
@@ -169,4 +169,4 @@ class LinkURLClassPrincipale extends React.Component<Props, State> {
     );
   }
 }
-export default LinkURLClassPrincipale;
+export default ManageLink;

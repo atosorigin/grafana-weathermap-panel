@@ -1,0 +1,101 @@
+- **points** :
+    - **0** :
+        - **associateLinkIn**:
+        - **associateLinkOut**:
+        - **associateOrientedLinksIn** []
+        - **associateOrientedLinksOut** []
+        - **color**: Allows you to choose the color of the point.
+        - **colorMode**: Gives you the choice of being able to choose a color. "true" or "false" 
+        - **coordinateSpace** {}
+        - **drawGraphicMarker**	
+            - **label** : Choose a label
+            - **value**: Choose a value. "true" or "false"
+        - **id** : Id of the point
+        - **label** Choose a label for the point
+         - **linkURL**
+            - **followLink** : Allows a redirection to the link by clicking on the region.
+            - **hoveringTooltipLink** : Allows a redirection to the link filled in the tool type by clicking on the link.
+            - **hoveringTooltipText** : Displays the link in the tool type that appears when the cursor is passed over the area or point.
+        - **lowerLimit**: If **colorMode** is false, set a color for the interior and the contour of the area. If **ColorMode** is true, allows to define colors depending on the values of the associated query.
+            - **0** : First color
+                - **backColor**: Enter a color in the form #7FFF00 for example for the background
+                - **BorderColor** : Enter a color in the form #7FFF00 for example for the border.
+                - **id** : color id
+                - **lowerLimitMax**: Maximum value for this colour
+                - **lowerLimitMin**: Minimum value for this colour
+                - **sizeBorder**: thickness of the border
+        - **mainMetric**	
+            - **expr** :
+            - **format** "" (Leaves blank)
+            - **key**: allows you to filter the data received by the Query to keep only what is important to you.
+            - **keyValue** : allows you to filter the data received by the Query to keep only what is important to you.
+            - manageValue** : You can choose between "sum", "avg" or "error".
+            - **refId**: metric reference associated with this region
+            - **returnQuery**: Do not ask.      
+            - **unit** : (Leave blank)
+        - **meta** : ""
+         - **metrics** : This is a table of to add metrics to the auxilaries.
+            - **0** 
+                - **expr** :
+                - **format** "" (Leaves blank)
+                - **key**: allows you to filter the data received by the Query to keep only what is important to you.
+                - **keyValue** : allows you to filter the data received by the Query to keep only what is important to you.
+                - manageValue** : You can choose between "sum", "avg" or "error".
+                - **refId**: metric reference associated with this region
+                - **returnQuery**: Do not ask.      
+                - **unit** : (Leave blank)
+            - **1**
+                - ...
+        - **name**: Give your point a name
+        - **Parameter position**
+            - **labelAPositionX** : Choose the horizontal position of label A between "-100" and "100".
+            - **labelAPositionY** : Choose the vertical position of label A between "-100" and "100".
+            - **labelBPositionX** : Choose the horizontal position of label B between "-100" and "100".
+            - **labelBPositionY** : Choose the vertical position of label B between "-100" and "100".
+            - **tooltipPositionA**: Tooltip A position
+            - **tooltipPositionB**: Tooltip position B
+        - **ShapeXposition** : Choose the horizontal position of the shape between "-100" and "100". 
+        - **ShapeYposition**: Choose the vertical position of the shape between "-100" and "100".
+        - **rotateArrow** : "0"
+        - **shape**: Allows you to define a shape for the point	
+            - **label** : Choose a label for the form
+            - **value**: Choose a value for the form
+        - **sizeHeight**	
+            - **label** : Choose a label for the size in height
+            - **value**: Choose a value for height
+        - **sizeWidth**	
+            - **label** : Choose a label for the width size
+            - **value**: Choose a value for the width size 
+        - **textObj**	
+            - **colorBack**: Choose the background color of the text in rgba. Example: rgba(255, 255, 255, 0)
+            - **colorText**: Choose the color of the text in rgba. Example : rgba(0, 0, 0, 1)
+            - **generateAuxiliaryElement**: Displays 
+                - **addColorBackElement**: Add a color to the background. "true" or "false"
+                - **addColorTextElement**: Add a color to the text. "true or "false"
+                - **colorBackElement**: Choose the background color
+                - **displayObjectInText**: Display the object in the text. "true" or "false"
+                - **legendElement** : Associate a legend to your element 
+                - **numericFormatElement**: numeric format element 
+                - **unit**: Displays a unit of measure
+            - **generateObjectText**: Generate a text object. "true" or "false"
+            - **isTextRegion**: display text in the element or tooltip
+           - **style**	
+                - **bold** : "True" or "False" to put the text in bold.
+                - **italic**: "True" or "False" to italicize text
+                - **underline**: "True" or "False" to put the text in underline
+            - **value**: Value of the object
+            - **valueGenerateObjectText**
+                - **addColorBackElement**: Add a color to the background. "true" or "false"
+                - **addColorTextElement**: Add a color to the text. "true or "false"
+                - **colorBackElement**: Choose the background color
+                - **colorTextElement** : Choose the color of the text 
+                - **displayObjectInText**: Display the object in the text. "true" or "false"
+                - **legendElement** : Associate a legend to your element 
+                - **numericFormatElement**: numeric format element 
+                - **unit**: Displays a unit of measure
+        - **traceBack**: Allows to associate a color to the background. "true" or "false"
+        - **traceBorder**: Allows to associate a color to the border. "true" or "false"
+    - **1** : Second region
+        - ...
+            - ...
+                - ...

@@ -59,11 +59,22 @@ class AddCoordinate extends React.Component<Props, State> {
     }
   };
 
+  lastId = () => {
+    const allRegion = this.props.options.regionCoordinateSpace;
+    let id = 0;
+    for (const line of allRegion) {
+      if (line.id > id) {
+        id = line.id;
+      }
+    }
+    return id;
+  };
+
   /** call init class for coordinate state */
   componentDidMount = (): void => {
     if (this.props.isRegion) {
       this.setState({
-        coordinate: initRegionCoordinateSpace(this.props.options.indexRegion),
+        coordinate: initRegionCoordinateSpace(this.lastId()),
       });
     } else {
       let id = this.defineIdPoint();

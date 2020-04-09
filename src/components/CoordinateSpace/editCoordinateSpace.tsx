@@ -7,8 +7,6 @@ import { Select, FormLabel } from '@grafana/ui';
 
 import { RegionClass } from 'Models/RegionClass';
 
-// import { initRegionCoordinateSpace } from 'Functions/initRegionCoordinateSpace';
-
 import CoordinateSpace from './coordinateSpace';
 
 interface Props extends PanelEditorProps<SimpleOptions> {}
@@ -111,12 +109,6 @@ class EditCoordinateSpace extends React.Component<Props, State> {
         ? valueSelect[0]
         : this.state.selectCoordinateSpaceDefault,
     });
-    // final
-    // this.setState({
-    // 	selectCoordinateSpace: valueSelect,
-    // 	selectCoordinateSpaceDefault: (valueSelect.length > 0) ?
-    // 		valueSelect[0] : this.state.selectCoordinateSpaceDefault,
-    // });
   };
 
   /** fill data for select */
@@ -127,7 +119,6 @@ class EditCoordinateSpace extends React.Component<Props, State> {
   /** update state if value props change */
   componentDidUpdate = (prevProps: Props) => {
     if (prevProps.options.regionCoordinateSpace !== this.props.options.regionCoordinateSpace) {
-      // this.componentDidMount();
       this.fillSelectRegionSpace();
     }
   };
@@ -167,8 +158,6 @@ class EditCoordinateSpace extends React.Component<Props, State> {
             <p>Data not set</p>
           )}
         </div>
-        {/* <Button onClick={() => console.log(this.props.options.regionCoordinateSpace)}>Info region</Button>
-				<Button onClick={() => console.log(this.state.selectCoordinateSpaceDefault)}>Info region</Button> */}
       </div>
     );
   }

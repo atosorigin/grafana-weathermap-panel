@@ -5,29 +5,23 @@ import { PanelProps, SelectableValue, DataFrame } from '@grafana/data';
 import { CustomScrollbar, Modal, Button } from '@grafana/ui';
 
 import { PointClass } from 'Models/PointClass';
-//import { LinkClass } from 'Models/LinkClass';
+import { PositionParameterClass } from 'Models/PositionParameterClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 import { RegionClass, Coord4D } from 'Models/RegionClass';
 import { TextObject } from 'Models/TextObjectClass';
 import { LinkURLClass } from 'Models/LinkURLClass';
-// import { LowerLimitClass } from 'Models/LowerLimitClass';
 
-//import { getResultQuery } from 'Functions/getResultQuery';
-
+import { coordinateIsInInitialSpace } from 'Functions/coodinateIsInInitialSpace';
 import { reqMetricPoint, reqMetricOrientedLink, reqMetricAuxOrientedLink, reqMetricAuxPoint } from 'Functions/fetchMetrics';
 import { getResultQuery } from 'Functions/getResultQuery';
 
 import AddCoordinate from 'components/CoordinateSpace/addCoordinate';
 import DrawRectangle from './components/Draw/drawRectangle';
-import LegendComponant from './components/legend';
-// import DrawRectangleExtend from './components/Draw/drawRectangleExtend';
 import DrawPoint from './components/Draw/drawPoint';
-//import DrawArrow from './components/Draw/drawArrow';
-// import DrawLinkWithCoordinates from './components/Draw/drawLinkWithCoordinates';
-// import DrawLinkWithPoints from './components/Draw/drawLinkWithPoints';
-// import DrawLinkWithRegions from './components/Draw/drawLinkWithRegions';
 import DrawOrientedLink from './components/Draw/drawOrientedLink';
-import { PositionParameterClass } from 'Models/PositionParameterClass';
+import LegendComponant from './components/legend';
+
+import DrawRectangleExtend from 'components/Draw/drawRectangleExtend';
 
 interface Props extends PanelProps<SimpleOptions> {}
 
@@ -168,8 +162,24 @@ export class SimplePanel extends PureComponent<Props, State> {
     positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
     positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1;
 
-    if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'mainPanel') {
-      //event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG) {
+    if (
+      !coordinateIsInInitialSpace(
+        parseInt(event.nativeEvent.offsetX, 10),
+        parseInt(event.nativeEvent.offsetY, 10),
+        this.props.options.coordinateSpaceInitial,
+        this.props.options.baseMap
+      )
+    ) {
+      console.error('is not initial space');
+      return;
+    }
+    console.log(positionX.toString() + ' ' + positionY.toString());
+
+    if (
+      event.nativeEvent.target.id === 'initialSpace' ||
+      event.nativeEvent.target.id === 'mainPanel' ||
+      event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG
+    ) {
       this.createPointToClick(positionX, positionY);
     }
   };
@@ -265,9 +275,6 @@ export class SimplePanel extends PureComponent<Props, State> {
       arrayPoints: newArrayPoint,
     });
 
-    console.log('panel');
-    console.log(this.props.options.indexPoint);
-
     setTimeout(() => {
       this.displayPoint();
     }, 100);
@@ -279,7 +286,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   displayPoint() {
     const mapItems: JSX.Element[] = [];
     this.props.options.arrayPoints.forEach((line: PointClass) => {
-      this.getValuesMainMetricOfPoint(line);
+      this.getValuesMainMetricPoint(line);
       this.updatePositionOrientedLink(line);
       const valuesAuxiliaryMetrics: string[] = this.getValuesAuxiliaryMetricsPoint(line);
       const item: JSX.Element = (
@@ -537,7 +544,11 @@ export class SimplePanel extends PureComponent<Props, State> {
     const yMaxPx: number = (yMax + 100) * (heightPanel / 200);
     const heightInitialSpace: number = yMaxPx - yMinPx;
 
-    if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'mainPanel') {
+    if (
+      event.nativeEvent.target.id === 'initialSpace' ||
+      event.nativeEvent.target.id === 'mainPanel' ||
+      event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG
+    ) {
       positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
       positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
 
@@ -913,7 +924,11 @@ export class SimplePanel extends PureComponent<Props, State> {
         refId: '',
         manageValue: 'avg',
       },
-      []
+      [],
+      [],
+      false,
+      false,
+      false
     );
     const newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
     newArrayOrientedLink.push(newOrientedLink);
@@ -939,8 +954,10 @@ export class SimplePanel extends PureComponent<Props, State> {
     const mapItems: JSX.Element[] = [];
     let item: JSX.Element = <div></div>;
     arrayOrientedLink.forEach((orientedLink: OrientedLinkClass) => {
-      this.getValuesMainMetricOfOrientedLink(orientedLink);
+      this.getValuesMainMetricOrientedLink(orientedLink);
+      this.getValuesMainMetricOrientedLinkB(orientedLink);
       const valuesAuxiliaryMetrics: string[] = this.getValuesAuxiliaryMetricsOrientedLink(orientedLink);
+      const valuesAuxiliaryMetricsB: string[] = this.getValuesAuxiliaryMetricsOrientedLinkB(orientedLink);
       item = (
         <DrawOrientedLink
           key={'orientedLink' + orientedLink.id.toString()}
@@ -962,12 +979,14 @@ export class SimplePanel extends PureComponent<Props, State> {
           name={orientedLink.name}
           valueMainMetricA={orientedLink.valueMainMetricA}
           valueMainMetricB={orientedLink.valueMainMetricB}
-          refMainMetric={orientedLink.mainMetric.refId || ''}
+          refMainMetricA={orientedLink.mainMetric.refId || ''}
+          refMainMetricB={orientedLink.mainMetricB.refId || ''}
           options={this.props.options}
           onOptionsChange={this.props.onOptionsChange}
           data={this.props.data}
           textObject={orientedLink.textObj}
           seuil={orientedLink.lowerLimit}
+          seuilB={orientedLink.lowerLimitB}
           labelAPositionX={orientedLink.positionParameter.labelAPositionX}
           labelAPositionY={orientedLink.positionParameter.labelAPositionY}
           labelBPositionX={orientedLink.positionParameter.labelBPositionX}
@@ -979,9 +998,12 @@ export class SimplePanel extends PureComponent<Props, State> {
           pointCPositionY={orientedLink.pointCPositionY}
           isIncurved={orientedLink.isIncurved}
           auxiliaryMetrics={orientedLink.metrics}
+          auxiliaryMetricsB={orientedLink.metricsB}
           valuesAuxiliaryMetrics={valuesAuxiliaryMetrics}
+          valuesAuxiliaryMetricsB={valuesAuxiliaryMetricsB}
           police={this.props.options.display.police}
           sizePolice={this.props.options.display.size}
+          linkUrl={orientedLink.linkURL}
         />
       );
       mapItems.push(item);
@@ -994,20 +1016,25 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * to do
    */
-  getValuesMainMetricOfPoint(point: PointClass) {
+  getValuesMainMetricPoint(point: PointClass) {
     reqMetricPoint(point, this.props);
     this.getValuesMainMetric(point.mainMetric, undefined, point);
   }
 
-  getValuesMainMetricOfOrientedLink(orientedLink: OrientedLinkClass) {
+  getValuesMainMetricOrientedLink(orientedLink: OrientedLinkClass) {
     reqMetricOrientedLink(orientedLink, this.props);
-    this.getValuesMainMetric(orientedLink.mainMetric, orientedLink, undefined);
+    this.getValuesMainMetric(orientedLink.mainMetric, orientedLink, undefined, false);
+  }
+
+  getValuesMainMetricOrientedLinkB(orientedLink: OrientedLinkClass) {
+    reqMetricOrientedLink(orientedLink, this.props);
+    this.getValuesMainMetric(orientedLink.mainMetricB, orientedLink, undefined, true);
   }
 
   /**
    * to do
    */
-  getValuesMainMetric(mainMetric: Metric, orientedLink?: OrientedLinkClass, point?: PointClass) {
+  getValuesMainMetric(mainMetric: Metric, orientedLink?: OrientedLinkClass, point?: PointClass, isBidirectionnal?: boolean) {
     let valueMainMetric = 0;
     let totalValuesCount = 0;
     const key: string = mainMetric.key;
@@ -1034,37 +1061,47 @@ export class SimplePanel extends PureComponent<Props, State> {
               }
             }
           }
-          if (orientedLink) {
-            if (mainMetric.manageValue === 'avg') {
-              orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
-              orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
-            } else if (orientedLink.mainMetric.manageValue === 'sum') {
+        }
+      });
+      if (orientedLink) {
+        if (!isBidirectionnal) {
+          if (mainMetric.manageValue === 'avg') {
+            orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
+          } else if (mainMetric.manageValue === 'sum') {
+            orientedLink.valueMainMetricA = valueMainMetric.toString();
+          } else if (mainMetric.manageValue === 'err') {
+            if (totalValuesCount > 1) {
+              orientedLink.valueMainMetricA = 'error';
+            } else {
               orientedLink.valueMainMetricA = valueMainMetric.toString();
-              orientedLink.valueMainMetricB = valueMainMetric.toString();
-            } else if (orientedLink.mainMetric.manageValue === 'error') {
-              if (totalValuesCount > 1) {
-                orientedLink.valueMainMetricA = 'error';
-                orientedLink.valueMainMetricB = 'error';
-              } else {
-                orientedLink.valueMainMetricA = valueMainMetric.toString();
-                orientedLink.valueMainMetricB = valueMainMetric.toString();
-              }
             }
-          } else if (point) {
-            if (mainMetric.manageValue === 'avg') {
-              point.valueMetric = (valueMainMetric / totalValuesCount).toString();
-            } else if (mainMetric.manageValue === 'sum') {
-              point.valueMetric = valueMainMetric.toString();
-            } else if (mainMetric.manageValue === 'error') {
-              if (totalValuesCount > 1) {
-                point.valueMetric = 'error';
-              } else {
-                point.valueMetric = valueMainMetric.toString();
-              }
+          }
+        } else {
+          if (mainMetric.manageValue === 'avg') {
+            orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
+          } else if (mainMetric.manageValue === 'sum') {
+            orientedLink.valueMainMetricB = valueMainMetric.toString();
+          } else if (mainMetric.manageValue === 'err') {
+            if (totalValuesCount > 1) {
+              orientedLink.valueMainMetricB = 'error';
+            } else {
+              orientedLink.valueMainMetricB = valueMainMetric.toString();
             }
           }
         }
-      });
+      } else if (point) {
+        if (mainMetric.manageValue === 'avg') {
+          point.valueMetric = (valueMainMetric / totalValuesCount).toString();
+        } else if (mainMetric.manageValue === 'sum') {
+          point.valueMetric = valueMainMetric.toString();
+        } else if (mainMetric.manageValue === 'err') {
+          if (totalValuesCount > 1) {
+            point.valueMetric = 'error';
+          } else {
+            point.valueMetric = valueMainMetric.toString();
+          }
+        }
+      }
     }
   }
 
@@ -1078,8 +1115,14 @@ export class SimplePanel extends PureComponent<Props, State> {
     return this.getValuesAuxiliaryMetrics(orientedLink.metrics, orientedLink.mainMetric);
   };
 
+  getValuesAuxiliaryMetricsOrientedLinkB = (orientedLink: OrientedLinkClass): string[] => {
+    reqMetricAuxOrientedLink(orientedLink, this.props);
+    return this.getValuesAuxiliaryMetrics(orientedLink.metricsB, orientedLink.mainMetricB);
+  };
+
   getValuesAuxiliaryMetrics = (auxiliaryMetrics: Metric[], mainMetric: Metric): string[] => {
     let valueAuxiliaryMetric: string[] = [];
+    // console.log(auxiliaryMetrics);
     const countMetrics: number = auxiliaryMetrics.length;
     auxiliaryMetrics.forEach((metric: Metric) => {
       let countTotalValues = 0;
@@ -1124,7 +1167,7 @@ export class SimplePanel extends PureComponent<Props, State> {
           result = (resultTotalValues / countTotalValues).toString();
         } else if (metric.manageValue === 'sum') {
           result = resultTotalValues.toString();
-        } else if (metric.manageValue === 'error') {
+        } else if (metric.manageValue === 'err') {
           if (countTotalValues > 1) {
             result = 'error';
           } else {
@@ -1502,10 +1545,6 @@ export class SimplePanel extends PureComponent<Props, State> {
   /*************************************test create tooltip **********************************************************/
 
   SVG_PathImage = () => {
-    // const idSVG: HTMLElement | null = document.getElementById('oct' + this.props.options.baseMap.idSVG);
-    // if (idSVG) {
-    // 	idSVG.style.zIndex = '300';
-    // }
     for (const line of this.props.options.regionCoordinateSpace) {
       if (line.mode) {
         const id: HTMLElement | null = document.getElementById('oct' + line.idSVG);
@@ -1520,11 +1559,10 @@ export class SimplePanel extends PureComponent<Props, State> {
             title.setAttributeNS('http://www.w3.org/1999/xlink', 'fill', 'yellow');
             // title.setAttributeNS('http://www.w3.org/2000/xmlns/', 'fill', 'yellow');
 
-            // title.setAttribute("fill", "red");
-            // title.setAttributeNS('title', 'fill' , 'red');
-            // title.setAttributeNS('title', 'stroke' , 'red');
-            title.innerHTML = '<div><p style="color: red;">' + (valueQuery ? valueQuery.toString() : '') + '</p></div>';
-            // title.textContent = valueQuery ? valueQuery.toString() : '';
+            title.setAttribute('fill', 'red');
+            title.setAttributeNS('title', 'fill', 'red');
+            // title.innerHTML = '<div><p style="color: red;">' + (valueQuery ? valueQuery.toString() : '') + '</p></div>';
+            title.textContent = valueQuery ? valueQuery.toString() : '';
             title.id = 'jeSuisLa' + line.id;
             // title.style.
             title.style.fill = 'red';
@@ -1543,21 +1581,47 @@ export class SimplePanel extends PureComponent<Props, State> {
     }
   };
 
+  fillCoordinate = (): JSX.Element => {
+    const { options } = this.props;
+    const styleRegion = {
+      position: 'absolute',
+      width: options.baseMap.width + 'px',
+      height: options.baseMap.height + 'px',
+      top: '15%',
+      left: 0,
+    } as React.CSSProperties;
+    let mapItems: JSX.Element[];
+
+    mapItems = options.regionCoordinateSpace.map((line: RegionClass, index: number) => (
+      <DrawRectangleExtend
+        key={'drawRectangleExtend' + index.toString()}
+        uneCoor={line}
+        useLimit={false}
+        limit={options.coordinateSpaceInitial.coordinate}
+        onOptionsChange={this.props.onOptionsChange}
+        options={this.props.options}
+        data={this.props.data}
+        id={'region' + line.id.toString()}
+        isEnabled={false}
+      />
+    ));
+    return <ul style={styleRegion}>{mapItems}</ul>;
+  };
+
   /*************************************test create tooltip **********************************************************/
 
   /** render */
   render() {
-
     let styleBackground;
     if (this.props.options.baseMap.modeSVG) {
       styleBackground = {
-        position: 'absolute',
-        textAlign: 'center',
-        backgroundRepeat: 'no-repeat',
-        height: this.props.options.baseMap.height + 'px',
-        width: this.props.options.baseMap.width + 'px',
-        opacity: 0.8,
-        zIndex: 4,
+        // position: 'absolute',
+        // textAlign: 'center',
+        // backgroundRepeat: 'no-repeat',
+        // height: this.props.options.baseMap.height + 'px',
+        // width: this.props.options.baseMap.width + 'px',
+        // opacity: 0.8,
+        // zIndex: 4,
       } as React.CSSProperties;
     } else {
       styleBackground = {
@@ -1588,7 +1652,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       // opacity: 0.8,
       // zIndex: 20,
       opacity: 0,
-      zIndex: 3,
+      zIndex: 2,
       // backgroundColor: 'red',
       // marginLeft: '20%',
     } as React.CSSProperties;
@@ -1638,26 +1702,27 @@ export class SimplePanel extends PureComponent<Props, State> {
               callBack={this.handleClick}
             />
             <div onClick={this.callMethod}></div>
-            <div>
-              <div className="tooltip" />
-              <div onClick={this.getCoordinates} id="mainPanel" style={{ position: 'absolute', top: '15%', zIndex: 1 }}>
-                <div
-                  style={styleSVG} // onMouseOver={this.SVG_PathImage}
-                  dangerouslySetInnerHTML={{ __html: this.state.svg }}
-                />
-                <div
-                  id="Intent"
-                  style={styleSVG_2}
-                  onMouseOver={this.SVG_PathImage}
-                  dangerouslySetInnerHTML={{ __html: this.props.options.baseMap.layerImage }}
-                />
-                {/* <div id='Glasses' style={styleSVG_2}
+            <div id="coordinateSpaces" style={styleBackground}>
+              <div>
+                <div className="tooltip" />
+                {this.fillCoordinate()}
+                <div onClick={this.getCoordinates} id="mainPanel" style={{ position: 'absolute', top: '15%', zIndex: 1 }}>
+                  <div
+                    style={styleSVG} // onMouseOver={this.SVG_PathImage}
+                    dangerouslySetInnerHTML={{ __html: this.state.svg }}
+                  />
+                  <div
+                    id="Intent"
+                    style={styleSVG_2}
+                    onMouseOver={this.SVG_PathImage}
+                    dangerouslySetInnerHTML={{ __html: this.props.options.baseMap.layerImage }}
+                  />
+                  {/* <div id='Glasses' style={styleSVG_2}
                 onMouseMove={this.tooltip_SVGImage } dangerouslySetInnerHTML={{ __html: this.state.svg }} /> */}
-                <div id="coordinateSpaces" style={styleBackground}>
                   {/* <Tooltip placement="top" content='hello World' theme='info' children={}  />
                   {this.defineLimit()} */}
                   {this.displayOrientedLink()}
-                  {this.state.displayRegion}
+                  {/* {this.state.displayRegion} */}
                   {this.displayPoint()}
                 </div>
               </div>

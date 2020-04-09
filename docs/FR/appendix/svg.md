@@ -29,12 +29,12 @@ L'éditeur [Draw.io](https://draw.io/) est accessible à partir d'un navigateur.
 Vous devez activer une des librairies shapes `networking` pour obtenir la représentation graphique de votre réseau.
 
 Vous devez exporter l'image au format SVG
-Les paramètres obligatoires à cocher sont `shadow` and `embed images`
+Les paramètres obligatoires à cocher sont  `embed images`
 
 
 ## Sauvegarde
 
-![main metric](../../screenshots/appendix/draw-export-svg.png)
+![main metric](../../screenshots/appendix/draw-export-svg.jpg)
 
 
 Il est important que chaque élément doit posséder une clef `ID` pour que le fichier créé puisse être importer dans le plugin.

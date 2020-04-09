@@ -290,6 +290,7 @@ export default class DrawPoint extends React.Component<Props, State> {
             fontWeight: 'bold',
             color: this.props.textObject.colorText || 'black',
             position: 'absolute',
+            zIndex: 1000,
             top: this.definePositionLabelY(positionY),
             left: this.definePositionLabelX(positionX),
           }}
@@ -399,7 +400,7 @@ export default class DrawPoint extends React.Component<Props, State> {
 
     if (arrayOrientedLinksIn.length !== 0) {
       contentTooltip.push(
-        <p key={localisation + 'ContentTooltip11' + this.props.name} style={styleTitle2}>
+        <p key={localisation + 'ContentTooltip11' + this.props.name} style={styleTitle}>
           Associate Link In :
         </p>
       );
@@ -415,7 +416,7 @@ export default class DrawPoint extends React.Component<Props, State> {
 
     if (arrayOrientedLinksOut.length !== 0) {
       contentTooltip.push(
-        <p key={localisation + 'ContentTooltip13' + this.props.name} style={styleTitle2}>
+        <p key={localisation + 'ContentTooltip13' + this.props.name} style={styleTitle}>
           Associate Link Out :
         </p>
       );
@@ -435,8 +436,8 @@ export default class DrawPoint extends React.Component<Props, State> {
     let colorBackground = '';
 
     if (this.props.seuil.length > 0) {
-      if (this.props.seuil[0].borderColor !== '') {
-        colorBackground = this.props.seuil[0].borderColor;
+      if (this.props.seuil[0].backColor !== '') {
+        colorBackground = this.props.seuil[0].backColor;
       } else {
         colorBackground = 'black';
       }

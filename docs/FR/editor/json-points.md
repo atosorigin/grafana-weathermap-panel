@@ -1,0 +1,102 @@
+- **points** :
+    - **0** :
+        - **associateLinkIn**	:
+        - **associateLinkOut** :
+        - **associateOrientedLinksIn**	[]
+        - **associateOrientedLinksOut**	[]
+        - **color** : Permet de choisir la couleur du point.
+        - **colorMode** : Vous donne le choix de pouvoir choisir une couleur. "true" ou "false" 
+        - **coordinateSpace**	{}
+        - **drawGraphicMarker**	
+            - **label**	: Choisissez un label
+            - **value**	: Choisissez une valeur. "true" ou "false"
+        - **id** : Id du point
+        - **label**	Choisissez un label pour le point
+         - **linkURL**
+            - **followLink** : Permet une redirection vers le lien renseigné en cliquant sur la region
+            - **hoveringTooltipLink** : Permet une redirection vers le lien renseigné dans le tool type en cliquant sur le lien
+            - **hoveringTooltipText** : Affiche le lien dans le tool type qui apparait quand on passe le curseur sur la zone ou sur le point
+        - **lowerLimit** : Si **colorMode** est false, premet de renseigner une couleur pour l'interieur et le contour de la zone. Si **ColorMode** est true, permet de définir des couleurs dépendamment des valeurs de la query associé.
+            - **0**	: Première couleur
+                - **backColor**	: Renseigner une couleur sous la forme #7FFF00 par exemple pour la background
+                - **borderColor** : Renseigner une couleur sous la forme #7FFF00 par exemple pour la bordure
+                - **id** : id de la couleur
+                - **lowerLimitMax** : Valeur maximume pour cette couleur
+                - **lowerLimitMin** : Valeur minimal pour cette couleur
+                - **sizeBorder** : epaisseur de la bordure
+        - **mainMetric**	
+            - **expr** :
+            - **format** "" (Laisser vide)
+            - **key** : permet de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
+            - **keyValue** : permet de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
+            - **manageValue** : Vous avez le choix entre "sum", "avg" ou "error"
+            - **refId** : Référence de la metric associé a cette région
+            - **returnQuery** : Ne pas renseigner.      
+            - **unit** : (Laisser vide)
+        - **meta** : ""
+         - **metrics** : Ceci est une table de pour ajouter des metrics auxilières
+            - **0** 
+                - **expr** :
+                - **format** "" (Laisser vide)
+                - **key** : permet de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
+                - **keyValue** : permet de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
+                - **manageValue** : Vous avez le choix entre "sum", "avg" ou "error"
+                - **refId** : Référence de la metric associé a cette région
+                - **returnQuery** : Ne pas renseigner.      
+                - **unit** : (Laisser vide)
+            - **1**
+                - ...
+        - **name** : Donner un nom a votre point
+        - **positionParameter**
+            - **labelAPositionX** : Choisir la position horizontal du label A entre "-100" et "100"
+            - **labelAPositionY** : Choisir la position vertical du label A entre "-100" et "100"
+            - **labelBPositionX** : Choisir la position horizontal du label B entre "-100" et "100"
+            - **labelBPositionY** : Choisir la position vertical du label B entre "-100" et "100"
+            - **tooltipPositionA** : Position du tooltip A
+            - **tooltipPositionB** : Position du tooltip B
+        - **positionShapeX** : Choisir la position horizontal de la forme entre "-100" et "100" 
+        - **positionShapeY** : Choisir la position vertical de la forme entre "-100" et "100"
+        - **rotateArrow** : "0"
+        - **shape** : Vous permet de définir un forme pour le point	
+            - **label**	: Choisissez un label pour la forme
+            - **value**	: Choisissez une valeur pour la forme
+        - **sizeHeight**	
+            - **label**	: Choisissez un label pour la taille en hauteur
+            - **value**	: Choisissez une valeur pour la taille en hauteur
+        - **sizeWidth**	
+            - **label**	: Choisissez un label pour la taille en largeur
+            - **value**	: Choisissez une valeur pour la taille en largeur 
+        - **textObj**	
+            - **colorBack** : Choisir la couleur du background du texte en rgba. Exemple : rgba(255, 255, 255, 0)
+            - **colorText** : Choisir la couleur du texte en rgba. Exemple : rgba(0, 0, 0, 1)
+            - **generateAuxiliaryElement** : Permet d'afficher 
+                - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
+                - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
+                - **colorBackElement** : Choisir la couleur du background
+                - **colorTextElement** :  Choisir la couelur du texte 
+                - **displayObjectInText** : Afficher l'object dans le texte. "true" ou "false"
+                - **legendElement** : Associer une légende à votre élément 
+                - **numericFormatElement** : élément de format numérique 
+                - **unit** : Affiche une unité de mesure
+            - **generateObjectText** : Généré un objet texte. "true" ou "false"
+            - **isTextRegion** : affichage du texte dans l'élément ou l'infobulle
+           - **style**	
+                - **bold** : "True" ou "False" pour mettre le texte en gras
+                - **italic** : "True" ou "False" pour mettre le texte en italique
+                - **underline** : "True" ou "False" pour mettre le texte en sousligné
+            - **value**	: Valeur de l'objet
+            - **valueGenerateObjectText**	
+                - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
+                - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
+                - **colorBackElement** : Choisir la couleur du background
+                - **colorTextElement** :  Choisir la couelur du texte 
+                - **displayObjectInText** : Afficher l'object dans le texte. "true" ou "false"
+                - **legendElement** : Associer une légende à votre élément 
+                - **numericFormatElement** : élément de format numérique 
+                - **unit** : Affiche une unité de mesure
+        - **traceBack** : Permet d'associer une couleur au background. "true" ou "false"
+        - **traceBorder** : Permet d'associer une couleur à la bordure. "true" ou "false"
+    - **1** : Deuxième région
+        - ...
+            - ...
+                - ...

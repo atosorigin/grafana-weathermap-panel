@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { CSSProperties } from 'react';
 import { SimpleOptions } from 'types';
 
@@ -13,6 +14,8 @@ import { parseColor, Color } from 'Functions/parseColor';
 import { reqMetricRegion } from 'Functions/fetchMetrics';
 import { searchMinMaxIdSVG, Coord4DInt } from 'Functions/searchMinMaxIdSVG';
 import { Style } from 'components/Parametrage/styleComponent';
+// import { Coor4DNum, pixelToPercent } from 'Functions/searchIDLimit';
+// import { Coor4DNum } from 'Functions/searchIDLimit';
 
 interface Props extends PanelEditorProps<SimpleOptions> {
   /** object CoordinateSpace */
@@ -104,22 +107,30 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     } as CSSProperties;
 
     const styleMetrics = {
-      color: region.textObj.valueGenerateObjectText.colorTextElement,
-      backgroundColor: region.textObj.valueGenerateObjectText.colorBackElement,
+      color: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorTextElement : 'white',
+      backgroundColor: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorBackElement : 'black',
     } as CSSProperties;
 
     let converValueQuery = 'NaN';
-    const roundMetrics: number = parseInt(region.textObj.valueGenerateObjectText.numericFormatElement, 10);
+    const roundMetrics: number = region.textObj.valueGenerateObjectText
+      ? parseInt(region.textObj.valueGenerateObjectText.numericFormatElement, 10)
+      : 1;
 
-    if (valueQuery && region.textObj.valueGenerateObjectText.numericFormatElement !== '' && roundMetrics) {
+    if (valueQuery && region.textObj.valueGenerateObjectText && region.textObj.valueGenerateObjectText.numericFormatElement !== '' && roundMetrics) {
       converValueQuery = valueQuery.toFixed(roundMetrics).toString();
     } else if (valueQuery) {
       converValueQuery = valueQuery.toString();
     }
     // (Math.round(valueQuery * roundMetrics + Number.EPSILON) / roundMetrics).toString()
-    const value: string = converValueQuery + (region.textObj.valueGenerateObjectText.unit ? ' ' + region.textObj.valueGenerateObjectText.unit : '');
+    const value: string =
+      converValueQuery +
+      (region.textObj.valueGenerateObjectText
+        ? (region.textObj.valueGenerateObjectText.unit
+          ? ' ' + region.textObj.valueGenerateObjectText.unit
+          : '')
+        : '');
 
-    const valueQueryResult: string = region.textObj.valueGenerateObjectText.legendElement + ' ' + value;
+    const valueQueryResult: string = (region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.legendElement : '') + ' ' + value;
 
     const tooltipValue: JSX.Element = (
       <div>
@@ -128,7 +139,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
           {region.textObj.isTextRegion && <p>{region.label}</p>}
         </div>
         <div style={styleMetrics}>
-          {region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInText && <p>{valueQueryResult}</p>}
+          {region.textObj.generateObjectText && region.textObj.valueGenerateObjectText && region.textObj.valueGenerateObjectText.displayObjectInText && <p>{valueQueryResult}</p>}
         </div>
       </div>
     );
@@ -159,11 +170,11 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
           stateIsFill = true;
           const styleWrite = {
             position: 'absolute',
-            zIndex: 999,
+            zIndex: 1000,
             left: coordinateWrite.xMax - (coordinateWrite.xMax - coordinateWrite.xMin),
             top: coordinateWrite.yMax,
-            backgroundColor: region.textObj.valueGenerateObjectText.colorBackElement,
-            color: region.textObj.valueGenerateObjectText.colorTextElement,
+            backgroundColor: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorBackElement : 'black',
+            color: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorTextElement : 'white',
           } as CSSProperties;
           this.setState({
             htmlResult: <div style={styleWrite}>{resultTooltip.valueQuery}</div>,
@@ -214,22 +225,27 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     const style: Style = region.textObj.style;
 
     const coorHTML: CoorHTML = calculRealCoordinate(region, this.props.useLimit, this.props.limit);
+    // console.log(coorHTML);
+    // region.
+    // const tt: Coord4D = { xMin: coorHTML.right, xMax: coorHTML.left, yMin: coorHTML.top, yMax: coorHTML.bottom };
+    // const cc: Coor4DNum = pixelToPercent(tt, this.props.options.baseMap);
+// console.log(this.props.uneCoor.label);
 
     const styleDiv = {
+      position: 'absolute',
       border: pBorder,
+      top: coorHTML.top,
       bottom: coorHTML.bottom,
       left: coorHTML.left,
-      position: 'absolute',
       right: coorHTML.right,
-      top: coorHTML.top,
-      zIndex: 9999,
-      display: 'flex',
-      flexDirection: 'column',
+      zIndex: 1000,
+      // display: 'flex',
+      // flexDirection: 'column',
       justifyContent: 'center',
       background: 'url(' + region.img + ') no-repeat center center',
       backgroundColor: this.state.backgroundColor,
-      backgroundSize: 'contain',
-      cursor: 'pointer',
+      // backgroundSize: 'contain',
+      // cursor: 'pointer',
     } as React.CSSProperties;
 
     const styleTextDiv = {
@@ -240,8 +256,8 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     } as React.CSSProperties;
 
     const styleMetricsDiv = {
-      backgroundColor: region.textObj.valueGenerateObjectText.colorBackElement,
-      color: region.textObj.valueGenerateObjectText.colorTextElement,
+      backgroundColor: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorBackElement : 'black',
+      color: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorTextElement : 'white',
       verticalAlign: 'middle',
     } as React.CSSProperties;
 
@@ -266,6 +282,8 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
         value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
       }
     } else {
+      // console.log('je suis la ' + this.props.uneCoor.label);
+      // console.log(cc);
       value = (
         <div style={styleDiv} id={this.props.id}>
           {(!region.textObj.isTextRegion || region.textObj.generateObjectText) && (
@@ -314,6 +332,6 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
 
   /** render */
   render() {
-    return <div>{this.state.htmlResult}</div>;
+    return this.state.htmlResult;
   }
 }

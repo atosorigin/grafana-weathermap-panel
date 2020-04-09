@@ -13,7 +13,7 @@ const searchNameIsKey = (query: DataFrame, mainMetric: Metric): boolean => {
   if (nameQuery && nameQuery.length > 0) {
     for (const oneQuery of nameQuery) {
       const keyValue: string[] = oneQuery.split('=');
-      if (oneQuery.length === 2) {
+      if (keyValue.length === 2) {
         if (keyValue[0] === mainMetric.key && keyValue[1] === mainMetric.keyValue) {
           return true;
         }
@@ -32,7 +32,8 @@ export const getResultQuery = (mainMetric: Metric) => {
 
     cnt = 0;
     for (const line of mainMetric.returnQuery) {
-      if (searchNameIsKey(line, mainMetric).toString()) {
+      const result = searchNameIsKey(line, mainMetric);
+      if (result) {
         const sizeQuery: number = line.fields[0].values.length;
 
         for (let i = 0; i < sizeQuery; i++) {
@@ -46,7 +47,7 @@ export const getResultQuery = (mainMetric: Metric) => {
     }
     if (mainMetric.manageValue === 'avg') {
       cnt /= countValue;
-    } else if (mainMetric.manageValue === 'error') {
+    } else if (mainMetric.manageValue === 'err') {
       if (countValue > 1) {
         cnt = null;
       }

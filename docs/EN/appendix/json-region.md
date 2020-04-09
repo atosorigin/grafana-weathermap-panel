@@ -1,9 +1,9 @@
-# Fichier `region`
+# File `region`
 
-le script complet [sample-region.json](../../../demo/sample-region.json) est disponible, dont le détail de construction se trouve ci-dessous.
+The full [sample-region.json](../../../../demo/sample-region.json) script is available, with construction details below.
 
 
-Le fichier **region** doit être déclaré sous la forme d'un fichier JSON comme ceci:
+The **region** file must be declared as a JSON file like this:
 
 ```
 
@@ -12,24 +12,49 @@ Le fichier **region** doit être déclaré sous la forme d'un fichier JSON comme
 ]}
 
 ```
+## Structure 
 
-
+```
+{
+  "points": 
+  [
+    {
+      "colorMode"	:false,
+      "coords":	{},
+      "id": 1,
+      "idSVG": "path147",
+      "img": "",
+      "label": "PC",
+      "linkURL": {},
+      "lowerLimit": [],
+      "mainMetric": {},
+      "meta": "",
+      "metrics": [],
+      "mode": true,
+      "orientedLink": [],
+      "positionParameter": {},
+      "textObj": {},
+      "traceBack": true,
+      "traceBorder": true,
+    }
+  ]
+}
+```
 ## Région
 
-Il existe 2 façons de créer une région : 
+There are 2 ways to create a region: 
 
-- Région SVG
-- Région coordonnées
+- SVG Region
+- Coordinated region
 
 ### Region SVG
 
-La création d'une région à partir d'un élément SVG doit contenir obligatoirement les valeurs suivantes
+The creation of a region from an SVG element must contain the following values
 
-- **ID** est un compteur
-- **Label** est nom de la région
-- **mode** à true
-- **idSVG** à nom de l'ID de l'événement
-
+- **id** is the id of the region. Working as a counter
+- **Label** is the name of the region
+- **mode** to true
+- **idSVG** to name of event ID
 ```
 
 { "regions": [
@@ -63,13 +88,13 @@ La création d'une région à partir d'un élément SVG doit contenir obligatoir
 
 ### Region coordonnées
 
-La création d'une région à partir de coordonnées doit contenir obligatoirement les valeurs suivantes
+The creation of a region from coordinates must necessarily contain the following values
 
-- **id** est un compteur
-- **mode** à false
-- **Label** est nom de la région
-- **idSVG** à vide
-- **coords** les coordonnées
+- **id** is the id of the region. Working as a counter
+- **mode** to false
+- **Label** is the name of the region
+- **idSVG** empty
+- **coords** coordinates
 
 
 ```
@@ -80,10 +105,10 @@ La création d'une région à partir de coordonnées doit contenir obligatoireme
       "label": "PC",
       "colorMode": false,
       "coords": {
-        "xMax": "0",
-        "xMin": "0",
-        "yMax": "0",
-        "yMin": "0"
+        "xMax": "50",
+        "xMin": "-20",
+        "yMax": "30",
+        "yMin": "10"
       },
       "img": "",
       "linkURL": {},
@@ -104,21 +129,22 @@ La création d'une région à partir de coordonnées doit contenir obligatoireme
 
 ## lowerLimit
 
-il est possible de changer choisir 2 méthodes de couleurs : 
 
-- couleur fixe
-- couleur variable
+It is possible to choose between 2 color methods : 
+
+- fixed color
+- variable colour
 
 ### Couleur fixe
 
 
-Si `colorMode` est à False
+If `colorMode` is in false
 
 ```
 "colorMode": false,
 ```
 
-Alors La couleur sera définit comme ceci
+Then the color will be defined like this
 
 ```
 "lowerLimit": [
@@ -134,17 +160,25 @@ Alors La couleur sera définit comme ceci
 
 ```
 
+With:
+  - **backColor**: Fill in a color for the background under the form #7FFF00 for example
+  - **borderColor** : Fill in a color for the border under the form #7FFF00 for example. 
+  - **id** : color id
+  - **lowerLimitMax** : Maximum value of the metric for this colour
+  - **lowerLimitMin**: Minimum metric value for this colour
+  - **sizeBorder** : thickness of the border
+
 ### Couleur variable
 
-les couleurs variables permettent de changer la couleur suivant des tranches définis.
+Variable colors allow you to change the color according to defined ranges.
 
-Si `colorMode` est à True
+If `colorMode` is set to True
 
 ```
 "colorMode": true,
 ```
 
-Alors La couleur sera définit comme ceci
+Then the color will be defined like this
 
 ```
 "lowerLimit": [
@@ -175,14 +209,19 @@ Alors La couleur sera définit comme ceci
  ],
 
 ```
-
-
+With similarly:
+  - **backColor**: Fill in a color for the background under the form #7FFF00 for example
+  - **borderColor** : Fill in a color for the border under the form #7FFF00 for example. 
+  - **id** : color id
+  - **lowerLimitMax** : Maximum value of the metric for this colour
+  - **lowerLimitMin**: Minimum metric value for this colour
+  - **sizeBorder** : thickness of the border
 
 ## img
 
-il s'agit du chemin représentant une représentation graphique 
+This is the path representing a graphical representation 
 
-Le format compatible est JPG / PNG / GIF / SVG
+Compatible format is JPG / PNG / GIF / SVG
 
 ```
       "img": "",
@@ -190,7 +229,10 @@ Le format compatible est JPG / PNG / GIF / SVG
 
 ## linkURL
 
-Il s'agit de rendre des régions cliquables
+ - **linkURL**
+    - **followLink**: Allows a redirection to the link by clicking on the region.
+    - **hoveringTooltipLink** : Allows a redirection to the link filled in the tool type by clicking on the link.
+    - **hoveringTooltipText** : Displays the link in the tool type that appears when the cursor is passed over the area or point.
 
 
 ```
@@ -204,6 +246,16 @@ Il s'agit de rendre des régions cliquables
 
 
 ## mainMetric
+
+ - **mainMetric**	
+    - **expr** : Expression in PrompQL
+    - **format** "" (Leaves blank)
+    - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
+    - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
+    - **manageValue** : You can choose between "sum", "avg" or "err".
+    - **refId**: Metric reference associated with this region
+    - **returnQuery**: (Leave blank) 
+    - **unit** : (Leave blank)
 
 ```
        "mainMetric": {
@@ -222,23 +274,91 @@ Il s'agit de rendre des régions cliquables
 
 ## meta
 
+A FAIRE, Laisser vide pour le moment
+
 ```
 
 ```
 
 ## metrics
 
+ - **metrics** : This is a metric table to add auxilary metrics.
+    - **0**
+        - **expr** : Expression in PrompQL
+        - **format** : (Leaves blank)
+        - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
+        - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
+        - **manageValue** : You can choose between "sum", "avg" or "err".
+        - **refId**: Metric reference associated with this region
+        - **returnQuery**: (Leave blank)    
+        - **unit** : (Leave blank)
+    - **1**
+        - ...
+
 ```
+   "metrics": [
+     "0": 
+        {
+            "expr": "",
+            "format": "",
+            "key": "",
+            "keyValue": "",
+            "manageValue": "avg",
+            "refId": "",
+            "returnQuery": [],
+            "unit": ""
+        }
+      "1":
+        {
+            "expr": "",
+            "format": "",
+            "key": "",
+            "keyValue": "",
+            "manageValue": "avg",
+            "refId": "",
+            "returnQuery": [],
+            "unit": ""
+        }
+   ]
 
 ```
 
 ## orientedLink
 
-```
+ - **orientedLink** :
+      - **0**
+        - **name** : Corresponds to the label or the name of the link
+        - **Link orientation**: Choose "monodirectional" or "bidirectional".
+        - **pointAPositionX** : Choose the horizontal position of point A between "-100" and "100".
+        - **pointAPositionY** : Choose the vertical position of point A between "-100" and "100".
+        - **colorCoordinateA**: Choose the color of the coordinate A
+        - **pointBPositionX** : Choose the horizontal position of point B between "-100" and "100".
+        - **pointBPositionY** : Choose the vertical position of point B between "-100" and "100".
+        - **colorCoordinateB**: Choose the color of the coordinate B
+        - **valueMainMetricA**: Value of the main Metric of point A
+        - **valueMainMetricB**: Value of the main Metric of point B
+        - **pointIn** : Name of the incoming point
+        - **pointOut** : Name of the outgoing point
+        - **regionIn** : Name of the incoming region 
+        - **regionOut** : Name of the outgoing region
+        - **zIndex**: The larger the number, the more the link will be highlighted on the image in terms of layer.
+        - **pointCPositionX**: Choose the horizontal position of point A between "-100" and "100";
+        - **pointCPpositionY** : Choose the horizontal position of point A between "-100" and "100";
+        - **isIncurved** : Enter "true" if your link is curved. Otherwise, enter "false".
+        - **mainMetricB** : Inform the metric of B
+        - **metricsB**: Inform the metrics auxilière of B
 
 ```
 
-## positionParameter
+```
+
+- **Parameter position**
+    - **labelAPositionX** : Choose the horizontal position of label A between "-100" and "100".
+    - **labelAPositionY** : Choose the vertical position of label A between "-100" and "100".
+    - **labelBPositionX** : Choose the horizontal position of label B between "-100" and "100".
+    - **labelBPositionY** : Choose the vertical position of label B between "-100" and "100".
+    - **tooltipPositionA**: Tooltip A position
+    - **tooltipPositionB**: Tooltip B position 
 
 ```
       "positionParameter": {
@@ -253,6 +373,39 @@ Il s'agit de rendre des régions cliquables
 ```
 
 ## textObj
+
+ - **textObj**
+    - **colorBack**: Choose the background color of the text in rgba. Example: rgba(255, 255, 255, 0)
+    - **colorText**: Choose the color of the text in rgba. Example : rgba(0, 0, 0, 1)
+    - **generateAuxiliaryElement**: Allows to generate an auxiliary element 
+        - **addColorBackElement**: Add a color to the background. "true" or "false"
+        - **addColorTextElement**: Add a color to the text. "true or "false"
+        - **colorBackElement**: Choose the background color
+        - **colorTextElement** : Choose the color of the text 
+        - **displayObjectInText**: Display the object in the text. "true" or "false"
+        - **displayObjectPermanently**: Display the object permanently. "true" or false"
+        - **legendElement** : Associate a legend to your element 
+        - **numericFormatElement**: Allows to round the result of the Query
+        - **unityMesureElement**: Displays a unit of measurement
+    - **generateObjectText**: Generate a text object. "true" or "false"
+    - **isTextRegion**: display text in the element or tooltip
+    - **legend** : Allows to add a legend
+    - **style**	
+        - **bold** : "True" or "False" to put the text in bold.
+        - **italic**: "True" or "False" to italicize text
+        - **underline**: "True" or "False" to put the text in underline
+    - **unit** : Allows to display a unit of measurement
+    - **value**: Value of the object
+    - **valueGenerateObjectText**: Use and fill in if generateObjectText is true when using the variable to store data.
+        - **addColorBackElement**: Add a color to the background. "true" or "false"
+        - **addColorTextElement**: Add a color to the text. "true or "false"
+        - **colorBackElement**: Choose the background color
+        - **colorTextElement** : Choose the color of the text 
+        - **displayObjectInText**: Display the object in the text. "true" or "false"
+        - **displayObjectPermanently**: Display the object permanently. "true" or false"
+        - **legendElement** : Associate a legend to your element 
+        - **numericFormatElement**: Allows to round the result of the Query
+        - **unityMesureElement**: Displays a unit of measurement
 
 ```
    "textObj": {
@@ -296,6 +449,9 @@ Il s'agit de rendre des régions cliquables
 
 ## traceBack
 
+ - **traceBack**: Allows to associate a color to the background. "true" or "false"
+
+
 ```
      "traceBack": true,
 
@@ -303,9 +459,8 @@ Il s'agit de rendre des régions cliquables
 
 ## traceBorder
 
+  - **traceBorder**: Allows to associate a color to the border. "true" or "false"
 
 ```
       "traceBorder": false
 ```
-
-

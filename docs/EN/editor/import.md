@@ -31,11 +31,11 @@ With:
     - height : Choice of height if you don't have an SVG image. If you have one, leave blank
     - idSVG ""
 - regions	
-    - 0 : Link to the .json file of the regions [Click here to know how to fill them](json-region.md)
+    - 0 : Link to the .json file of the regions [Click here to know how to fill them](./../appendix/json-region.md)
 - points	
-    - 0 : Link to the .json file of the points [Click here to know how to fill them](json-points.md)
+    - 0 : Link to the .json file of the points [Click here to know how to fill them](./../appendix/json-point.md)
 - links	
-    - 0 : Link to the .json links file [Click here to know how to fill them](json-links.md)
+    - 0 : Link to the .json links file [Click here to know how to fill them](./../appendix/json-links.md)
  
 
 ## Multi URL Import
@@ -43,12 +43,16 @@ With:
 
 ![coordinate mode](../../screenshots/editor/import/url-import.jpg)
 
+For the Multi URL Import, you have to enter the required URLs in the field. 
+The different URLs are those of regions, points, and links. 
+You can find templates of the json type of these files at the following links:
 
+- [region.json](./../appendix/json-region.md)
+- [point.json](./../appendix/json-points.md)
+- [lien.json](./../appendix/json-links.md)
 
-You enter the url in its field
-
-
-After that, you click the `add` button, followed by the `finish` button.
+Afterwards, you click on the `add` button if you want to add more URLs
+To finish you have to click on `finish`.
 
 
 The result is instantaneous
@@ -58,8 +62,6 @@ You can add additional import files at will
 
 
 
-
- 
 ## Multi local Import
 
 
@@ -67,7 +69,7 @@ You can add additional import files at will
 
 
 
-You select the file on your hard drive from the `parcourir` button.
+You select the file on your hard drive from the `Browse..` button.
 
 
 After that, you click the `add` button, followed by the `finish` button.

@@ -1,28 +1,22 @@
 import React from 'react';
-import { CoordinateSpaceClass } from '../../Models/CoordinateSpaceClass';
 import { PanelEditorProps, SelectableValue } from '@grafana/data';
 import { SimpleOptions } from 'types';
 import { FormField, Collapse, Select, FormLabel, Button } from '@grafana/ui';
 import { PositionParameterClass } from 'Models/PositionParameterClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
+import { PointClass } from 'Models/PointClass';
+import { RegionClass } from 'Models/RegionClass';
 
 interface Props extends PanelEditorProps<SimpleOptions> {
-  /** id coordinate */
-  coordinateSpace: CoordinateSpaceClass;
-  /** call function to save data in parent */
-  callBackToParent: (positionParameter: PositionParameterClass, id?: number) => void;
   callBackToParentZIndex: (zIndex: number, id: number) => void;
   isPoint: boolean;
   isLink: boolean;
   isRegion: boolean;
-  id?: number;
-  orientedLink?: OrientedLinkClass;
+  id: number;
 }
 
 interface State {
   /** get text object */
-  coordinateSpace: CoordinateSpaceClass;
-  positionParameter: PositionParameterClass;
   collapsepositionParameter: boolean;
   collapseLabel: boolean;
   collapseTooltip: boolean;
@@ -42,77 +36,140 @@ class PositionParameter extends React.Component<Props, State> {
       collapseLabel: false,
       collapseTooltip: false,
       collapseLayerLevel: false,
-      coordinateSpace: this.props.coordinateSpace,
-      positionParameter: this.props.coordinateSpace.positionParameter,
       orientedLinkComparedToDowngrade: {},
       orientedLinkComparedToUpgrade: {},
     };
   }
 
-  private callBack() {
-    this.props.callBackToParent(this.state.positionParameter, this.props.id || 0);
-  }
+  private savePositionParameter = (newPositionParameter: PositionParameterClass) => {
+    const idCurrentCoordinateSpace: number = this.props.id || 0;
+    if (this.props.isPoint) {
+      const newArrayPoints: PointClass[] = this.props.options.arrayPoints;
+      for (const point of newArrayPoints) {
+        if (point.id === idCurrentCoordinateSpace) {
+          point.positionParameter = newPositionParameter;
+        }
+      }
+      this.props.onOptionsChange({
+        ...this.props.options,
+        arrayPoints: newArrayPoints,
+      });
+    } else if (this.props.isLink) {
+      const newArrayLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+      newArrayLink[idCurrentCoordinateSpace].positionParameter = newPositionParameter;
+      this.props.onOptionsChange({
+        ...this.props.options,
+        arrayOrientedLinks: newArrayLink,
+      });
+    } else if (this.props.isRegion) {
+      const newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
+      newArrayRegion[idCurrentCoordinateSpace].positionParameter = newPositionParameter;
+      this.props.onOptionsChange({
+        ...this.props.options,
+        regionCoordinateSpace: newArrayRegion,
+      });
+    }
+  };
+
+  private getPositionParameter = (): PositionParameterClass => {
+    let positionParameter: PositionParameterClass = {
+      labelAPositionX: '0',
+      labelAPositionY: '0',
+      labelBPositionX: '0',
+      labelBPositionY: '0',
+      tooltipPositionA: {},
+      tooltipPositionB: {},
+    };
+    const idCurrentCoordinateSpace: number = this.props.id || 0;
+    if (this.props.isLink) {
+      positionParameter = this.props.options.arrayOrientedLinks[idCurrentCoordinateSpace].positionParameter;
+    } else if (this.props.isPoint) {
+      const arrayPoints: PointClass[] = this.props.options.arrayPoints;
+      for (const point of arrayPoints) {
+        if (point.id === idCurrentCoordinateSpace) {
+          positionParameter = point.positionParameter;
+        }
+      }
+    } else if (this.props.isRegion) {
+      const arrayRegions: RegionClass[] = this.props.options.regionCoordinateSpace;
+      for (const region of arrayRegions) {
+        if (region.id === idCurrentCoordinateSpace) {
+          positionParameter = region.positionParameter;
+        }
+      }
+    }
+    return positionParameter;
+  };
+
+  // private callBack() {
+  //   this.props.callBackToParent(this.state.positionParameter, this.props.id || 0);
+  // }
 
   private callBackZIndex(zIndex: number, id: number) {
     this.props.callBackToParentZIndex(zIndex, id);
   }
 
   private handleChangeLabelAPositionX = (event: any) => {
-    const newPositionParameter = this.state.positionParameter;
+    const newPositionParameter = this.getPositionParameter();
     newPositionParameter.labelAPositionX = event.currentTarget.value;
-    this.setState({
-      positionParameter: newPositionParameter,
-    });
-    this.callBack();
+    this.savePositionParameter(newPositionParameter);
+    // this.setState({
+    //   positionParameter: newPositionParameter,
+    // });
+    // this.callBack();
   };
 
   private handleChangeLabelAPositionY = (event: any) => {
-    const newPositionParameter = this.state.positionParameter;
+    const newPositionParameter = this.getPositionParameter();
     newPositionParameter.labelAPositionY = event.currentTarget.value;
-    this.setState({
-      positionParameter: newPositionParameter,
-    });
-    this.callBack();
+    this.savePositionParameter(newPositionParameter);
+    // this.setState({
+    //   positionParameter: newPositionParameter,
+    // });
+    // this.callBack();
   };
 
   private handleChangeLabelBPositionX = (event: any) => {
-    const newPositionParameter = this.state.positionParameter;
+    const newPositionParameter = this.getPositionParameter();
     newPositionParameter.labelBPositionX = event.currentTarget.value;
-    this.setState({
-      positionParameter: newPositionParameter,
-    });
-    this.callBack();
+    this.savePositionParameter(newPositionParameter);
+    // this.setState({
+    //   positionParameter: newPositionParameter,
+    // });
+    // this.callBack();
   };
 
   private handleChangeLabelBPositionY = (event: any) => {
-    const newPositionParameter = this.state.positionParameter;
+    const newPositionParameter = this.getPositionParameter();
     newPositionParameter.labelBPositionY = event.currentTarget.value;
-    this.setState({
-      positionParameter: newPositionParameter,
-    });
-    this.callBack();
+    this.savePositionParameter(newPositionParameter);
+    // this.setState({
+    //   positionParameter: newPositionParameter,
+    // });
+    // this.callBack();
   };
 
   private handleChangeTooltipPositionA = (event: any) => {
-    const newPositionParameter = this.state.positionParameter;
+    const newPositionParameter = this.getPositionParameter();
     newPositionParameter.tooltipPositionA = { label: event.value, value: event.value };
-    this.setState({
-      positionParameter: newPositionParameter,
-    });
-    this.callBack();
+    this.savePositionParameter(newPositionParameter);
+    // this.setState({
+    //   positionParameter: newPositionParameter,
+    // });
+    // this.callBack();
   };
 
   private handleChangeTooltipPositionB = (event: any) => {
-    const newPositionParameter = this.state.positionParameter;
+    const newPositionParameter = this.getPositionParameter();
     newPositionParameter.tooltipPositionB = { label: event.value, value: event.value };
-    this.setState({
-      positionParameter: newPositionParameter,
-    });
-    this.callBack();
+    this.savePositionParameter(newPositionParameter);
+    // this.setState({
+    //   positionParameter: newPositionParameter,
+    // });
+    // this.callBack();
   };
 
   private handleChangeSelectOrientedLinkToUpgrade = (event: any) => {
-    console.log(event);
     const newOrientedLinkComparedToToUpgrade: SelectableValue<OrientedLinkClass> = {
       label: event.label,
       value: event.value,
@@ -160,8 +217,9 @@ class PositionParameter extends React.Component<Props, State> {
 
   private defineLabelPositionInputs = (): JSX.Element => {
     let item: JSX.Element = <div></div>;
+    const positionParameter: PositionParameterClass = this.getPositionParameter();
 
-    if (this.props.isLink && this.props.orientedLink?.orientationLink.value === 'double') {
+    if (this.props.isLink && this.props.options.arrayOrientedLinks[this.props.id].orientationLink.value === 'double') {
       item = (
         <div>
           <div>
@@ -171,7 +229,7 @@ class PositionParameter extends React.Component<Props, State> {
                 labelWidth={10}
                 inputWidth={20}
                 type="text"
-                value={this.state.positionParameter.labelAPositionX}
+                value={positionParameter.labelAPositionX}
                 onChange={this.handleChangeLabelAPositionX}
                 placeholder={'Label A Position X'}
               />
@@ -180,7 +238,7 @@ class PositionParameter extends React.Component<Props, State> {
                 labelWidth={10}
                 inputWidth={20}
                 type="text"
-                value={this.state.positionParameter.labelAPositionY}
+                value={positionParameter.labelAPositionY}
                 onChange={this.handleChangeLabelAPositionY}
                 placeholder={'Label A Position Y'}
               />
@@ -193,7 +251,7 @@ class PositionParameter extends React.Component<Props, State> {
                 labelWidth={10}
                 inputWidth={20}
                 type="text"
-                value={this.state.positionParameter.labelBPositionX}
+                value={positionParameter.labelBPositionX}
                 onChange={this.handleChangeLabelBPositionX}
                 placeholder={'Label B Position X'}
               />
@@ -202,7 +260,7 @@ class PositionParameter extends React.Component<Props, State> {
                 labelWidth={10}
                 inputWidth={20}
                 type="text"
-                value={this.state.positionParameter.labelBPositionY}
+                value={positionParameter.labelBPositionY}
                 onChange={this.handleChangeLabelBPositionY}
                 placeholder={'Label B Position Y'}
               />
@@ -218,7 +276,7 @@ class PositionParameter extends React.Component<Props, State> {
             labelWidth={10}
             inputWidth={20}
             type="text"
-            value={this.state.positionParameter.labelAPositionX}
+            value={positionParameter.labelAPositionX}
             onChange={this.handleChangeLabelAPositionX}
             placeholder={'Position X'}
           />
@@ -227,7 +285,7 @@ class PositionParameter extends React.Component<Props, State> {
             labelWidth={10}
             inputWidth={20}
             type="text"
-            value={this.state.positionParameter.labelAPositionY}
+            value={positionParameter.labelAPositionY}
             onChange={this.handleChangeLabelAPositionY}
             placeholder={'Position Y'}
           />
@@ -246,8 +304,9 @@ class PositionParameter extends React.Component<Props, State> {
       { label: 'Left', value: 'left' },
       { label: 'Right', value: 'right' },
     ];
+    const positionParameter: PositionParameterClass = this.getPositionParameter();
 
-    if (this.props.isLink && this.props.orientedLink?.orientationLink.value === 'double') {
+    if (this.props.isLink && this.props.options.arrayOrientedLinks[this.props.id].orientationLink.value === 'double') {
       item = (
         <div>
           <div style={{ display: 'flex' }}>
@@ -256,7 +315,7 @@ class PositionParameter extends React.Component<Props, State> {
               onChange={this.handleChangeTooltipPositionA}
               allowCustomValue={false}
               options={optionsSelectTooltipPosition}
-              value={this.state.positionParameter.tooltipPositionA}
+              value={positionParameter.tooltipPositionA}
               width={20}
             />
           </div>
@@ -266,7 +325,7 @@ class PositionParameter extends React.Component<Props, State> {
               onChange={this.handleChangeTooltipPositionB}
               allowCustomValue={false}
               options={optionsSelectTooltipPosition}
-              value={this.state.positionParameter.tooltipPositionB}
+              value={positionParameter.tooltipPositionB}
               width={20}
             />
           </div>
@@ -280,7 +339,7 @@ class PositionParameter extends React.Component<Props, State> {
             onChange={this.handleChangeTooltipPositionA}
             allowCustomValue={false}
             options={optionsSelectTooltipPosition}
-            value={this.state.positionParameter.tooltipPositionA}
+            value={positionParameter.tooltipPositionA}
             width={20}
           />
         </div>

@@ -1,4 +1,4 @@
 # Environment
 
-- [Configuration](init/configuration.md)
-- [Installation](init/installation.md)
+- [Configuration](configuration.md)
+- [Installation](installation.md)

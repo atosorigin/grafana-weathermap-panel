@@ -18,7 +18,7 @@ export interface TexteSettings {
   style: Style;
 }
 
-export declare type TManageValue = 'avg' | 'sum' | 'error';
+export declare type TManageValue = 'avg' | 'sum' | 'err';
 
 export interface Metric {
   key: string;

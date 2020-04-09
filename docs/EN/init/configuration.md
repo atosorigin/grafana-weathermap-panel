@@ -1,3 +1,10 @@
+
+file TMP
+
+
+
+
+
 # Configuration
 
 https://www.howtoforge.com/tutorial/how-to-install-prometheus-and-node-exporter-on-centos-8/

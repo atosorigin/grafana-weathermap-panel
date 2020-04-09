@@ -43,12 +43,16 @@ class ImportInput extends React.Component<Props, State> {
 
   /**************************************CATCH******************************************/
   PointValidator = (newSpace: PointClass) => {
-    let resultId = true;
+    let resultId = 0;
     let resultTarget = 1;
     this.props.options.arrayPoints.forEach(point => {
       if (newSpace.id === point.id) {
-        console.error('Id of point named "' + newSpace.name + '" already given fail to load!');
-        resultId = false;
+        if (newSpace.label === point.label) {
+          resultId = 2;
+        } else {
+          console.error('Id of point named "' + newSpace.name + '" already given fail to load!');
+          resultId = 1;
+        }
       }
       this.props.data.request?.targets.forEach(target => {
         resultTarget = 0;
@@ -77,12 +81,16 @@ class ImportInput extends React.Component<Props, State> {
   };
 
   LinkValidator = (newSpace: OrientedLinkClass) => {
-    let resultId = true;
+    let resultId = 0;
     let resultTarget = 1;
     this.props.options.arrayOrientedLinks.forEach(lien => {
       if (newSpace.id === lien.id) {
-        console.error('Id of link named "' + newSpace.name + '" already given, fail to load!');
-        resultId = false;
+        if (newSpace.label === lien.label) {
+          resultId = 2;
+        } else {
+          console.error('Id of link named "' + newSpace.name + '" already given, fail to load!');
+          resultId = 1;
+        }
       }
       this.props.data.request?.targets.forEach(target => {
         if (target.refId === newSpace.mainMetric.refId) {
@@ -109,6 +117,17 @@ class ImportInput extends React.Component<Props, State> {
 
   /**************************************LOADER******************************************/
   // Mono
+  pointUpdate = (updatedPoint: PointClass) => {
+    this.props.options.regionCoordinateSpace.forEach((point, index) => {
+      //Id
+      if (updatedPoint.id === point.id) {
+        if (updatedPoint.label === point.label) {
+          this.props.options.arrayPoints[index] = updatedPoint;
+          this.props.onOptionsChange({ ...this.props.options, arrayPoints: this.props.options.arrayPoints });
+        }
+      }
+    });
+  };
   //Looking for a update after Point rework
   loadMonoPoint = (point: any) => {
     const toLoad = new PointClass(
@@ -138,9 +157,13 @@ class ImportInput extends React.Component<Props, State> {
       point.associateOrientedLinksOut
     );
     console.log(toLoad);
+    let selector: number = this.PointValidator(toLoad);
     // Do some test here to see if your already load a coordinatespace with this id
-    if (this.PointValidator(toLoad) === true) {
+    if (selector === 0) {
       this.props.options.arrayPoints.push(toLoad);
+    }
+    if (selector === 2) {
+      this.pointUpdate(toLoad);
     }
   };
 
@@ -187,6 +210,17 @@ class ImportInput extends React.Component<Props, State> {
     }
   };
 
+  linkUpdate = (updatedLink: OrientedLinkClass) => {
+    this.props.options.regionCoordinateSpace.forEach((link, index) => {
+      //Id
+      if (updatedLink.id === link.id) {
+        if (updatedLink.label === link.label) {
+          this.props.options.arrayOrientedLinks[index] = updatedLink;
+          this.props.onOptionsChange({ ...this.props.options, arrayOrientedLinks: this.props.options.arrayOrientedLinks });
+        }
+      }
+    });
+  };
   loadMonoLink = (link: any) => {
     const toLoad = new OrientedLinkClass(
       link.id,
@@ -220,12 +254,20 @@ class ImportInput extends React.Component<Props, State> {
       link.pointCPositionY,
       link.isIncurved,
       link.mainMetricB,
-      link.metricsB
+      link.metricsB,
+      link.lowerLimitB,
+      link.colorModeB,
+      link.traceBackB,
+      link.traceBorderB
     );
     console.log(toLoad);
     // Do some test here to see if your already load a coordinatespace with this id
-    if (this.LinkValidator(toLoad) === true) {
+    let selector: number = this.LinkValidator(toLoad);
+    if (selector === 0) {
       this.props.options.arrayOrientedLinks.push(toLoad);
+    }
+    if (selector === 2) {
+      this.linkUpdate(toLoad);
     }
   };
 

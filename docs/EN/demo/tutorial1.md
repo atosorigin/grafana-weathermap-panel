@@ -13,7 +13,7 @@ L'ajout d'une image en arrière plan s'effectue à partir du menu `display`.
 
 L'image sélectionnée sera [demo2-background.svg](https://github.com/atosorigin/grafana-weathermap-panel/blob/master/demo/demo2-background.svg). Pour cela, nous la téléchargeons en base64 avec la  fonction `Copier l'adresse de l'image`
 
-Il est possible d'avoir plus de détails avec la page [display](../editor/display.md)
+Il est possible d'avoir plus de détails avec la page [display](../EN/editor/display.md)
 
 Il faut sauvergarder et recharger la page.
 

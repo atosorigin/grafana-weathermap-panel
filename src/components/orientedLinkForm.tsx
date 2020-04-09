@@ -139,7 +139,8 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
           element.mainMetric,
           element.metrics,
           element.mainMetricB,
-          element.metricsB
+          element.metricsB,
+          element.lowerLimitB
         );
       }, 100);
     }
@@ -217,7 +218,8 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
     mainMetrics?: Metric,
     auxiliaryMetrics?: Metric[],
     mainMetricsB?: Metric,
-    auxiliaryMetricsB?: Metric[]
+    auxiliaryMetricsB?: Metric[],
+    seuilB?: LowerLimitClass[]
   ) => {
     const num: number = id || this.props.options.indexOrientedLink + 1;
     const zIndex: number = this.props.options.zIndexOrientedLink;
@@ -254,6 +256,7 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
           colorBackElement: 'black',
         }
       );
+
     const parametrageMetric: LinkURLClass = new LinkURLClass('', '', '');
     const initPositionParameter: PositionParameterClass = positionParameter || new PositionParameterClass('', '', '', '', {}, {});
     const initMainMetrics: Metric = mainMetrics || { key: '', unit: '', format: '', keyValue: '', refId: '', manageValue: 'avg' };
@@ -301,7 +304,11 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
           pointCPositionY || '0',
           isIncurved || {},
           initMainMetricsB,
-          auxiliaryMetricsB || []
+          auxiliaryMetricsB || [],
+          seuilB || [],
+          false,
+          false,
+          false
         )
       ),
 
@@ -475,6 +482,14 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
     this.callBack();
   };
 
+  /** save lower limit data for link B if orientedLink is bidirectionnal */
+  private callBackLowerLimitB = (lowerLimit: LowerLimitClass[], id?: number) => {
+    const newValue: OrientedLinkClass = this.state.arrayOrientedLinkClass[id || 0];
+    newValue.lowerLimitB = lowerLimit;
+    this.props.options.arrayOrientedLinks[id || 0] = newValue;
+    this.callBack();
+  };
+
   /**
    * to do
    */
@@ -524,12 +539,12 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
     return label;
   }
 
-  private callBackPositionParameter = (positionParameter: PositionParameterClass, id?: number) => {
-    const orientedLinkToUpdate: OrientedLinkClass = this.state.arrayOrientedLinkClass[id || 0];
-    orientedLinkToUpdate.positionParameter = positionParameter;
-    this.props.options.arrayOrientedLinks[id || 0] = orientedLinkToUpdate;
-    this.callBack();
-  };
+  // private callBackPositionParameter = (positionParameter: PositionParameterClass, id?: number) => {
+  //   const orientedLinkToUpdate: OrientedLinkClass = this.state.arrayOrientedLinkClass[id || 0];
+  //   orientedLinkToUpdate.positionParameter = positionParameter;
+  //   this.props.options.arrayOrientedLinks[id || 0] = orientedLinkToUpdate;
+  //   this.callBack();
+  // };
 
   private callBackZIndex(zIndexUpdated: number, id: number) {
     this.props.options.arrayOrientedLinks[id].zIndex = zIndexUpdated;
@@ -543,12 +558,12 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
     this.callBack();
   };
 
-  private callBackAuxiliaryMetric = (auxiliaryMetrics: Metric[], id?: number): void => {
-    const newValue: OrientedLinkClass = this.state.arrayOrientedLinkClass[id || 0];
-    newValue.metrics = auxiliaryMetrics;
-    this.props.options.arrayOrientedLinks[id || 0] = newValue;
-    this.callBack();
-  };
+  // private callBackAuxiliaryMetric = (auxiliaryMetrics: Metric[], id?: number): void => {
+  //   const newValue: OrientedLinkClass = this.state.arrayOrientedLinkClass[id || 0];
+  //   newValue.metrics = auxiliaryMetrics;
+  //   this.props.options.arrayOrientedLinks[id || 0] = newValue;
+  //   this.callBack();
+  // };
 
   /**
    * create dynamic input
@@ -697,6 +712,7 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
                 onOptionsChange={this.props.onOptionsChange}
                 data={this.props.data}
                 mainMetric={this.state.arrayOrientedLinkClass[index].mainMetric}
+                mainMetricB={this.state.arrayOrientedLinkClass[index].mainMetricB}
                 callBackToParent={this.callBackMainMetric}
                 id={index}
                 isLink={true}
@@ -705,12 +721,11 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
             <div>
               <ManageAuxiliaryQuery
                 options={this.props.options}
-                idCoordinate={this.state.arrayOrientedLinkClass[index].id}
+                idCoordinate={index}
                 onOptionsChange={this.props.onOptionsChange}
                 data={this.props.data}
                 metrics={this.state.arrayOrientedLinkClass[index].metrics}
-                callBackToParent={this.callBackAuxiliaryMetric}
-                id={index}
+                //callBackToParent={this.callBackAuxiliaryMetric}
                 isLink={true}
               />
             </div>
@@ -726,10 +741,16 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
             </div>
             <div>
               <ManageLowerLimit
+                options={this.props.options}
+                onOptionsChange={this.props.onOptionsChange}
+                data={this.props.data}
                 coordinate={this.state.arrayOrientedLinkClass[index]}
+                orientedLink={this.state.arrayOrientedLinkClass[index]}
                 callBack={this.callBackManageLowerLimit}
                 lowerLimitCallBack={this.callBackLowerLimit}
+                lowerLimitCallBackB={this.callBackLowerLimitB}
                 id={index}
+                isLink={true}
               />
             </div>
             <div>
@@ -737,14 +758,11 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
                 options={this.props.options}
                 onOptionsChange={this.props.onOptionsChange}
                 data={this.props.data}
-                coordinateSpace={this.state.arrayOrientedLinkClass[index]}
-                callBackToParent={this.callBackPositionParameter}
                 callBackToParentZIndex={this.callBackZIndex.bind(this)}
                 isPoint={false}
                 isLink={true}
                 isRegion={false}
                 id={index}
-                orientedLink={this.state.arrayOrientedLinkClass[index]}
               />
             </div>
             {mapItems}

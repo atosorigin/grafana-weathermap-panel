@@ -255,13 +255,13 @@ class CoordinateSpace extends React.Component<Props, State> {
   /** save data in parent */
   callBackToOther = (followLink?: string, hoveringTooltipLink?: string, hoveringTooltipText?: string, textObj?: TextObject): void => {
     const oldCoor: RegionClass = this.state.arrayCoor;
-    if (followLink) {
+    if (followLink || followLink === '') {
       oldCoor.linkURL.followLink = followLink;
     }
-    if (hoveringTooltipLink) {
+    if (hoveringTooltipLink || hoveringTooltipLink === '') {
       oldCoor.linkURL.hoveringTooltipLink = hoveringTooltipLink;
     }
-    if (hoveringTooltipText) {
+    if (hoveringTooltipText || hoveringTooltipText === '') {
       oldCoor.linkURL.hoveringTooltipText = hoveringTooltipText;
     }
     if (textObj) {
@@ -287,7 +287,6 @@ class CoordinateSpace extends React.Component<Props, State> {
   /** save lower limit data */
   callBackLowerLimit = (lowerLimit: LowerLimitClass[]) => {
     const newValue: RegionClass = this.state.arrayCoor;
-
     newValue.lowerLimit = lowerLimit;
     this.setState({
       arrayCoor: newValue,
@@ -297,7 +296,6 @@ class CoordinateSpace extends React.Component<Props, State> {
   /** save mainMetric data */
   callBackMainMetric = (mainMetric: Metric): void => {
     const newValue: RegionClass = this.state.arrayCoor;
-
     newValue.mainMetric = mainMetric;
     this.setState({
       arrayCoor: newValue,
@@ -429,7 +427,14 @@ class CoordinateSpace extends React.Component<Props, State> {
           />
         </div>
         <div>
-          <ManageLowerLimit coordinate={this.state.arrayCoor} callBack={this.callBackManageLowerLimit} lowerLimitCallBack={this.callBackLowerLimit} />
+          <ManageLowerLimit
+            options={this.props.options}
+            onOptionsChange={this.props.onOptionsChange}
+            data={this.props.data}
+            coordinate={this.state.arrayCoor}
+            callBack={this.callBackManageLowerLimit}
+            lowerLimitCallBack={this.callBackLowerLimit}
+          />
         </div>
         <br />
         <div>

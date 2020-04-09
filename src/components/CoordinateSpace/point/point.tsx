@@ -18,7 +18,6 @@ import ManageAuxiliaryQuery from '../manageAuxiliaryQuery';
 import { TextObject } from '../../../Models/TextObjectClass';
 import { CoordinateSpaceClass } from '../../../Models/CoordinateSpaceClass';
 import { LowerLimitClass } from '../../../Models/LowerLimitClass';
-import { PositionParameterClass } from '../../../Models/PositionParameterClass';
 import PositionParameter from '../../Parametrage/positionParameters';
 import ParametresGeneriques from '../../Parametrage/parametresGeneriques';
 import ManageLowerLimit from '../../Parametrage/manageLowerLimit';
@@ -177,12 +176,6 @@ export default class Point extends React.Component<Props, State> {
         value = this.state.arrayCoor.label;
       } else if (param.startsWith('color')) {
         value = this.state.arrayCoor.color;
-      } else if (param.startsWith('refIdMainMetric')) {
-        value = this.state.arrayCoor.mainMetric.refId || '';
-      } else if (param.startsWith('keyMainMetric')) {
-        value = this.state.arrayCoor.mainMetric.key || '';
-      } else if (param.startsWith('keyValueMainMetric')) {
-        value = this.state.arrayCoor.mainMetric.keyValue || '';
       }
       return value;
     }
@@ -361,13 +354,13 @@ export default class Point extends React.Component<Props, State> {
     });
   };
 
-  private callBackPositionParameter = (positionParameter: PositionParameterClass, id?: number) => {
-    const newValue: PointClass = this.state.arrayCoor;
-    newValue.positionParameter = positionParameter;
-    this.setState({
-      arrayCoor: newValue,
-    });
-  };
+  // private callBackPositionParameter = (positionParameter: PositionParameterClass, id?: number) => {
+  //   const newValue: PointClass = this.state.arrayCoor;
+  //   newValue.positionParameter = positionParameter;
+  //   this.setState({
+  //     arrayCoor: newValue,
+  //   });
+  // };
 
   /** save lower limit data */
   private callBackLowerLimit = (lowerLimit: LowerLimitClass[], id?: number) => {
@@ -381,14 +374,6 @@ export default class Point extends React.Component<Props, State> {
   private callBackMainMetric = (mainMetric: Metric, id?: number): void => {
     const newValue: PointClass = this.state.arrayCoor;
     newValue.mainMetric = mainMetric;
-    this.setState({
-      arrayCoor: newValue,
-    });
-  };
-
-  private callBackAuxiliaryMetric = (auxiliaryMetrics: Metric[], id?: number): void => {
-    const newValue: PointClass = this.state.arrayCoor;
-    newValue.metrics = auxiliaryMetrics;
     this.setState({
       arrayCoor: newValue,
     });
@@ -428,12 +413,6 @@ export default class Point extends React.Component<Props, State> {
    * render()
    */
   render() {
-    // const styleMainDiv = {
-    //   display: 'flex',
-    //   flexDirection: 'row',
-    //   justifyContent: 'center',
-    // } as React.CSSProperties;
-
     return (
       <div>
         <div>
@@ -454,10 +433,8 @@ export default class Point extends React.Component<Props, State> {
             data={this.props.data}
             idCoordinate={this.state.arrayCoor.id}
             metrics={this.state.arrayCoor.metrics}
-            callBackToParent={this.callBackAuxiliaryMetric}
-            id={this.state.arrayCoor.id}
-            coordinateSpace={this.state.arrayCoor}
-            isLink={false}
+            //callBackToParent={this.callBackAuxiliaryMetric}
+            isPoint={true}
           />
         </div>
         <div>
@@ -470,15 +447,20 @@ export default class Point extends React.Component<Props, State> {
           />
         </div>
         <div>
-          <ManageLowerLimit coordinate={this.state.arrayCoor} callBack={this.callBackManageLowerLimit} lowerLimitCallBack={this.callBackLowerLimit} />
+          <ManageLowerLimit
+            options={this.props.options}
+            onOptionsChange={this.props.onOptionsChange}
+            data={this.props.data}
+            coordinate={this.state.arrayCoor}
+            callBack={this.callBackManageLowerLimit}
+            lowerLimitCallBack={this.callBackLowerLimit}
+          />
         </div>
         <div>
           <PositionParameter
             options={this.props.options}
             onOptionsChange={this.props.onOptionsChange}
             data={this.props.data}
-            coordinateSpace={this.state.arrayCoor}
-            callBackToParent={this.callBackPositionParameter}
             callBackToParentZIndex={() => {}}
             isPoint={true}
             isLink={false}

@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.4.5 (2020-04-08)
+
+- fixed
+-
+
 ## v0.4.4 (2020-04-03)
 
 - update legend

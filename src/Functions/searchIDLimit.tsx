@@ -2,6 +2,13 @@ import { Background } from 'types';
 
 import { Coord4D } from 'Models/RegionClass';
 
+export interface Coor4DNum {
+  xMin: number;
+  xMax: number;
+  yMin: number;
+  yMax: number;
+}
+
 /** verif limit for one coordinate */
 const verifAllLimit = (n: number, limit: number[], isWith: boolean) => {
   if (isWith) {
@@ -110,6 +117,39 @@ const convertInitialCoordinate = (n: number) => {
   return n;
 };
 
+export const pixelToPercent = (coordinate: Coord4D, baseMap: Background): Coor4DNum => {
+  const limit: number[] = [
+    parseInt(coordinate.xMin, 10),
+    parseInt(coordinate.xMax, 10),
+    parseInt(coordinate.yMin, 10),
+    parseInt(coordinate.yMax, 10),
+  ];
+
+  limit[0] = convertInitialCoordinate(limit[0]);
+  limit[1] = convertInitialCoordinate(limit[1]);
+  limit[2] = convertInitialCoordinate(limit[2]);
+  limit[3] = convertInitialCoordinate(limit[3]);
+
+  const sizeHeight: number = parseInt(baseMap.height, 10);
+  const sizeWidth: number = parseInt(baseMap.width, 10);
+  const percent = 100;
+
+  limit[0] = limit[0] / percent || 0;
+  limit[0] = sizeWidth * limit[0];
+  limit[1] = limit[1] / percent || 0;
+  limit[1] = sizeWidth * limit[1];
+  limit[2] = limit[2] / percent || 0;
+  limit[2] = sizeHeight * limit[2];
+  limit[3] = limit[3] / percent || 0;
+  limit[3] = sizeHeight * limit[3];
+  return {
+    xMin: limit[0],
+    xMax: limit[1],
+    yMin: limit[2],
+    yMax: limit[3],
+  };
+};
+
 /** return all id list in principal id */
 export const returnAllId = (coordinate: Coord4D, baseMap: Background): string[] => {
   const arrId: string[] = [];
@@ -117,30 +157,32 @@ export const returnAllId = (coordinate: Coord4D, baseMap: Background): string[] 
   const listElement: NodeListOf<Element> | undefined = document.getElementById(baseMap.idSVG)?.querySelectorAll('*[id]');
 
   if (listElement) {
-    const limit: number[] = [
-      parseInt(coordinate.xMin, 10),
-      parseInt(coordinate.xMax, 10),
-      parseInt(coordinate.yMin, 10),
-      parseInt(coordinate.yMax, 10),
-    ];
+    // const limit: number[] = [
+    //   parseInt(coordinate.xMin, 10),
+    //   parseInt(coordinate.xMax, 10),
+    //   parseInt(coordinate.yMin, 10),
+    //   parseInt(coordinate.yMax, 10),
+    // ];
 
-    limit[0] = convertInitialCoordinate(limit[0]);
-    limit[1] = convertInitialCoordinate(limit[1]);
-    limit[2] = convertInitialCoordinate(limit[2]);
-    limit[3] = convertInitialCoordinate(limit[3]);
+    // limit[0] = convertInitialCoordinate(limit[0]);
+    // limit[1] = convertInitialCoordinate(limit[1]);
+    // limit[2] = convertInitialCoordinate(limit[2]);
+    // limit[3] = convertInitialCoordinate(limit[3]);
 
-    const sizeHeight: number = parseInt(baseMap.height, 10);
-    const sizeWidth: number = parseInt(baseMap.width, 10);
-    const percent = 100;
+    // const sizeHeight: number = parseInt(baseMap.height, 10);
+    // const sizeWidth: number = parseInt(baseMap.width, 10);
+    // const percent = 100;
 
-    limit[0] = limit[0] / percent || 0;
-    limit[0] = sizeWidth * limit[0];
-    limit[1] = limit[1] / percent || 0;
-    limit[1] = sizeWidth * limit[1];
-    limit[2] = limit[2] / percent || 0;
-    limit[2] = sizeHeight * limit[2];
-    limit[3] = limit[3] / percent || 0;
-    limit[3] = sizeHeight * limit[3];
+    // limit[0] = limit[0] / percent || 0;
+    // limit[0] = sizeWidth * limit[0];
+    // limit[1] = limit[1] / percent || 0;
+    // limit[1] = sizeWidth * limit[1];
+    // limit[2] = limit[2] / percent || 0;
+    // limit[2] = sizeHeight * limit[2];
+    // limit[3] = limit[3] / percent || 0;
+    // limit[3] = sizeHeight * limit[3];
+    const coordInt = pixelToPercent(coordinate, baseMap);
+    const limit: number[] = [coordInt.xMin, coordInt.xMax, coordInt.yMin, coordInt.yMax];
     Array.from(listElement).forEach((e: Element) => {
       if (!regionIsOverLimit(document.getElementById(e.id), limit)) {
         arrId.push(e.id);

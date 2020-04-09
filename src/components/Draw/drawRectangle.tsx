@@ -125,7 +125,7 @@ export default class DrawRectangle extends React.Component<Props, State> {
         }}
         id={this.props.id}
       >
-        {this.fillCoordinate()}
+        {/* {this.fillCoordinate()} */}
       </div>
     );
     this.setState({

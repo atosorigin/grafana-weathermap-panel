@@ -1,0 +1,115 @@
+- **links**
+    - **0**
+        - **colorCoordinateA**: Choose the color. For example "#5794F2"
+        - **colorCoordinateB**: Choose the color. For example "#5794F2"
+        - **colorMode**: If the color of the region is unique, enter "false". If the color is variable depending on the query value, enter "true". 
+        - **id** : id of the link
+        - **mainMetric**	
+            - **format** "" (Leaves blank)
+            - **key**: allows you to filter the data received by the Query to keep only what is important to you.
+            - **keyValue** : allows you to filter the data received by the Query to keep only what is important to you.
+            - **manageValue** : You can choose between "sum", "avg" or "error".
+            - **refId**: metric reference associated with this region
+            - **returnQuery**: Do not ask.      
+            - **unit** : (Leave blank)
+        - **isIncurved** : Will allow to define on there will be a third point to make a curvature	
+            - **label** : Enter a label
+            - **value**: Choose whether you want a curvature or not. "true" or "false"
+        - **label** : Choose a label for the link
+        - **linkURL**
+            - **followLink**: Allows a redirection to the link by clicking on the region.
+            - **hoveringTooltipLink** : Allows a redirection to the link filled in the tool type by clicking on the link.
+            - **hoveringTooltipText** : Displays the link in the tool type that appears when the cursor is passed over the area or point.
+        - **lowerLimit**: If **colorMode** is false, set a color for the interior and the contour of the area. If **ColorMode** is true, allows to define colors depending on the values of the associated query.
+            - **0** : First color
+                - **backColor**: Enter a color in the form #7FFF00 for example for the background
+                - **borderColor** : Enter a color in the form #7FFF00 for example for the border.
+                - **id** : color id
+                - **lowerLimitMax**: Maximum value for this colour
+                - **lowerLimitMin**: Minimum value for this colour
+                - **sizeBorder**: thickness of the border
+        - **meta** ""
+        - **metrics** : This is a metric table to add metrics to the auxilary metrics.
+            - **0**
+                - **format** "" (Leaves blank)
+                - **key**: allows you to filter the data received by the Query to keep only what is important to you.
+                - **keyValue** : allows you to filter the data received by the Query to keep only what is important to you.
+                - **manageValue** : You can choose between "sum", "avg" or "error".
+                - **refId**: metric reference associated with this region
+                - **returnQuery**: Do not ask.      
+                - **unit** : (Leave blank)
+            - **1**
+                - ...
+        - **name** : Give a name to your link
+        - **Link orientation**	
+            - **label**: Choose a label for orientation. (monodirectional or bi-directional)
+            - **value**: Choose the value of the orientation. For example "AB".
+        - **pointAPositionX**: Choose the horizontal position of point A between "-100" and "100".
+        - **pointAPositionY** : Choose the vertical position of point A between "-100" and "100".
+        - **pointBPositionX** : Choose the horizontal position of point B between "-100" and "100".
+        - **pointBPositionY** : Choose the vertical position of point B between "-100" and "100".     
+        - **pointCPositionX**: Choose the horizontal position of point A between "-100" and "100";
+        - **pointCPpositionY** : Choose the horizontal position of point A between "-100" and "100";
+        - **pointIn** : Enter the name of the incoming point. For example "point2".
+        - **pointOut**: Fill in the name of the outgoing point. For example "dot1".
+        - **Parameter position**
+            - **labelAPositionX** : Choose the horizontal position of label A between "-100" and "100".
+            - **labelAPositionY** : Choose the vertical position of label A between "-100" and "100".
+            - **labelBPositionX** : Choose the horizontal position of label B between "-100" and "100".
+            - **labelBPositionY** : Choose the vertical position of label B between "-100" and "100".
+            - **tooltipPositionA**: Tooltip A position
+            - **tooltipPositionB**: Tooltip position B
+        - **regionIn** : Fill in the name of the incoming region. For example "region2"
+        - **regionOut** : Fill in the name of the outgoing region. For example "region1"
+        - **textObj**	
+            - **colorBack**: Choose the background color of the text in rgba. Example: rgba(255, 255, 255, 0)
+            - **colorText**: Choose the color of the text in rgba. Example : rgba(0, 0, 0, 1)
+            - **generateAuxiliaryElement**: Displays 
+                - **addColorBackElement**: Add a color to the background. "true" or "false"
+                - **addColorTextElement**: Add a color to the text. "true or "false"
+                - **colorBackElement**: Choose the background color
+                - **colorTextElement** : Choose the color of the text 
+                - **displayObjectInText**: Display the object in the text. "true" or "false"
+                - **legendElement** : Associate a legend to your element 
+                - **numericFormatElement**: numeric format element 
+                - **unit**: Displays a unit of measure
+            - **generateObjectText**: Generate a text object. "true" or "false"
+            - **isTextRegion**: display text in the element or tooltip
+           - **style**	
+                - **bold** : "True" or "False" to put the text in bold.
+                - **italic**: "True" or "False" to italicize text
+                - **underline**: "True" or "False" to put the text in underline
+            - **value**: Value of the object
+            - **valueGenerateObjectText**	
+                - **addColorBackElement**: Add a color to the background. "true" or "false"
+                - **addColorTextElement**: Add a color to the text. "true or "false"
+                - **colorBackElement**: Choose the background color
+                - **colorTextElement** : Choose the color of the text 
+                - **displayObjectInText**: Display the object in the text. "true" or "false"
+                - **legendElement** : Associate a legend to your element 
+                - **numericFormatElement**: numeric format element 
+                - **unit**: Displays a unit of measure
+        - **traceBack**: Allows to associate a color to the background. "true" or "false"
+        - **traceBorder**: Allows to associate a color to the border. "true" or "false"
+        - **MainMetricA value**: Choose the value of the Metric of A
+        - **valueMainMetricB**: Choose the value of the Metric of B
+        - **zIndex** : The higher the value, the more the object will be put in the foreground compared to the others.
+        - **mainMetricB** : Add a metric hand to B
+            - **format** "" (Leaves blank)
+            - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
+            - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
+            - **manageValue** : You can choose between "sum", "avg" or "error".
+            - **refId**: metric reference associated with this region
+            - **returnQuery**: Do not ask.      
+            - **unit** : (Leave blank)
+         - **metricsB**: This is a metric table for adding auxilary metrics to B
+            - **0**
+                - **format** "" (Leaves blank)
+                - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
+                - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
+                - **manageValue** : You can choose between "sum", "avg" or "error".
+                - **refId**: metric reference associated with this region
+                - **returnQuery**: Do not ask.      
+                - **unit** : (Leave blank)
+            - **1**
+                - ...

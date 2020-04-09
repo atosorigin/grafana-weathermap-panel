@@ -7,7 +7,7 @@ import { PanelEditorProps } from '@grafana/data';
 // import { RegionClass } from 'Models/RegionClass';
 import { TextObject } from 'Models/TextObjectClass';
 
-import LinkURLClassPrincipale from './parametrageMetriquePrincipale';
+import ManageLink from './manageLink';
 import TextObjects from './textObjects';
 import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
 
@@ -73,7 +73,7 @@ class ParametresGeneriques extends React.Component<Props, State> {
       <div>
         <Collapse isOpen={this.state.collapseLink} label="Manage link" onToggle={this.onToggleLinkCollapse}>
           <div>
-            <LinkURLClassPrincipale coordinateSpace={this.props.coordinateSpace} callBackToParent={this.props.callBackToParent} id={this.props.id} />
+            <ManageLink coordinateSpace={this.props.coordinateSpace} callBackToParent={this.props.callBackToParent} id={this.props.id} />
           </div>
         </Collapse>
 

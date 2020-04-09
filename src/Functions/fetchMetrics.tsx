@@ -72,16 +72,22 @@ export const reqMetricAuxLink = (link: OrientedLinkClass, props: any) => {
 
 export const reqMetricOrientedLink = (orientedLink: OrientedLinkClass, props: any) => {
   const data: DataFrame[] = [];
+  const dataB: DataFrame[] = [];
   for (const line of props.data.series) {
     if (line.refId === orientedLink.mainMetric.refId) {
       data.push(line);
     }
+    if (line.refId === orientedLink.mainMetricB.refId) {
+      dataB.push(line);
+    }
   }
   orientedLink.mainMetric.returnQuery = data;
+  orientedLink.mainMetricB.returnQuery = dataB;
 };
 
 export const reqMetricAuxOrientedLink = (orientedLink: OrientedLinkClass, props: any) => {
   const data: DataFrame[] = [];
+  const dataB: DataFrame[] = [];
   for (const metric of orientedLink.metrics) {
     for (const line of props.data.series) {
       if (line.refId === metric.refId) {
@@ -89,6 +95,14 @@ export const reqMetricAuxOrientedLink = (orientedLink: OrientedLinkClass, props:
       }
     }
     metric.returnQuery = data;
+  }
+  for (const metric of orientedLink.metricsB) {
+    for (const line of props.data.series) {
+      if (line.refId === metric.refId) {
+        dataB.push(line);
+      }
+    }
+    metric.returnQuery = dataB;
   }
 };
 
