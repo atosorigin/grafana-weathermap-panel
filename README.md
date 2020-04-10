@@ -43,7 +43,18 @@ Install the plugins
 
 ```sh
 $ cd /var/lib/grafana/plugins
+$ cd grafana-weathermap-panel
+$ yarn install
+$ yarn watch
 $ systemctl restart grafana-server
+```
+
+This will run linting tools and applu prettier Fix
+
+To build the plugin run :
+
+```sh
+$ yarn build
 ```
 
 

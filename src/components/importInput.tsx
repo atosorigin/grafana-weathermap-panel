@@ -7,7 +7,7 @@ import { FormField, Button, Collapse } from '@grafana/ui';
 import { PointClass } from '../Models/PointClass';
 import { RegionClass } from 'Models/RegionClass';
 import { OrientedLinkClass } from '../Models/OrientedLinkClass';
-import { fetchConfFile } from '../Functions/importConfig';
+//import { fetchConfFile } from '../Functions/importConfig';
 import DropZone from '../Models/dropZone';
 
 interface Props extends PanelEditorProps<SimpleOptions> {}
@@ -44,21 +44,14 @@ class ImportInput extends React.Component<Props, State> {
   /**************************************CATCH******************************************/
   PointValidator = (newSpace: PointClass) => {
     let resultId = 0;
-    let resultTarget = 1;
     this.props.options.arrayPoints.forEach(point => {
       if (newSpace.id === point.id) {
-        if (newSpace.label === point.label) {
+        if (newSpace.name === point.name) {
           resultId = 2;
         } else {
           console.error('Id of point named "' + newSpace.name + '" already given fail to load!');
           resultId = 1;
         }
-      }
-      this.props.data.request?.targets.forEach(target => {
-        resultTarget = 0;
-      });
-      if (resultTarget === 1) {
-        console.error('Warning you load a point named "' + newSpace.name + '" without refId you can\'t get data!');
       }
     });
     return resultId;
@@ -82,23 +75,14 @@ class ImportInput extends React.Component<Props, State> {
 
   LinkValidator = (newSpace: OrientedLinkClass) => {
     let resultId = 0;
-    let resultTarget = 1;
     this.props.options.arrayOrientedLinks.forEach(lien => {
       if (newSpace.id === lien.id) {
-        if (newSpace.label === lien.label) {
+        if (newSpace.name === lien.name) {
           resultId = 2;
         } else {
           console.error('Id of link named "' + newSpace.name + '" already given, fail to load!');
           resultId = 1;
         }
-      }
-      this.props.data.request?.targets.forEach(target => {
-        if (target.refId === newSpace.mainMetric.refId) {
-          resultTarget = 0;
-        }
-      });
-      if (resultTarget === 1) {
-        console.error('Warning you load a link named "' + newSpace.name + '"  without refId you can\'t get data!');
       }
     });
     return resultId;
@@ -106,8 +90,8 @@ class ImportInput extends React.Component<Props, State> {
 
   UrlValidator = (url: string) => {
     let result = true;
-    for (let savedUrl in this.props.options.saveImportUrl.multi) {
-      if (savedUrl === url) {
+    for (let index in this.props.options.saveImportUrl.multi) {
+      if (this.props.options.saveImportUrl.multi[index] === url) {
         result = false;
         break;
       }
@@ -118,10 +102,10 @@ class ImportInput extends React.Component<Props, State> {
   /**************************************LOADER******************************************/
   // Mono
   pointUpdate = (updatedPoint: PointClass) => {
-    this.props.options.regionCoordinateSpace.forEach((point, index) => {
+    this.props.options.arrayPoints.forEach((point, index) => {
       //Id
       if (updatedPoint.id === point.id) {
-        if (updatedPoint.label === point.label) {
+        if (updatedPoint.name === point.name) {
           this.props.options.arrayPoints[index] = updatedPoint;
           this.props.onOptionsChange({ ...this.props.options, arrayPoints: this.props.options.arrayPoints });
         }
@@ -167,7 +151,7 @@ class ImportInput extends React.Component<Props, State> {
     }
   };
 
-  reagionUpdate = (updatedRegion: RegionClass) => {
+  regionUpdate = (updatedRegion: RegionClass) => {
     this.props.options.regionCoordinateSpace.forEach((region, index) => {
       //Id
       if (updatedRegion.id === region.id) {
@@ -206,15 +190,15 @@ class ImportInput extends React.Component<Props, State> {
       this.props.options.regionCoordinateSpace.push(toLoad);
     }
     if (selector === 2) {
-      this.reagionUpdate(toLoad);
+      this.regionUpdate(toLoad);
     }
   };
 
   linkUpdate = (updatedLink: OrientedLinkClass) => {
-    this.props.options.regionCoordinateSpace.forEach((link, index) => {
+    this.props.options.arrayOrientedLinks.forEach((link, index) => {
       //Id
       if (updatedLink.id === link.id) {
-        if (updatedLink.label === link.label) {
+        if (updatedLink.name === link.name) {
           this.props.options.arrayOrientedLinks[index] = updatedLink;
           this.props.onOptionsChange({ ...this.props.options, arrayOrientedLinks: this.props.options.arrayOrientedLinks });
         }
@@ -296,8 +280,8 @@ class ImportInput extends React.Component<Props, State> {
     this.props.options.baseMap = panel.baseMap;
     this.props.options.display.police = panel.texteSettings.police;
     this.props.options.display.size = panel.texteSettings.size;
-    this.props.options.display.style = panel.texteSettings.styleText;
-    this.props.options.coordinateSpaceInitial = panel.texteSettings.coordinateSpaceInitial;
+    this.props.options.display.style = panel.texteSettings.style;
+    this.props.options.coordinateSpaceInitial = panel.coordinateSpaceInitial;
     panel.regions.forEach((url: string) => {
       if (this.UrlValidator(url) === true) {
         this.props.options.saveImportUrl.multi.push(url);
@@ -327,10 +311,10 @@ class ImportInput extends React.Component<Props, State> {
     }
   };
 
-  fetchTotal = () => {
-    this.totalResult = fetchConfFile(this.props.options.saveImportUrl.total);
-    console.log('downloadTotal');
-  };
+  // fetchTotal = () => {
+  //   this.totalResult = fetchConfFile(this.props.options.saveImportUrl.total);
+  //   console.log('downloadTotal');
+  // };
 
   // loaderSelector = () => {
   //     // this.loadMultiRegions(multiRegionClassImport);
@@ -405,17 +389,17 @@ class ImportInput extends React.Component<Props, State> {
   // 	});
   // }
 
-  saveUrl = (url: string, mode: number) => {
-    // if (mode === 0){
-    //     this.props.options.saveImportUrl.mono.push(url);
-    // }
-    if (mode === 1) {
-      this.props.options.saveImportUrl.multi.push(url);
-    }
-    if (mode === 2) {
-      this.props.options.saveImportUrl.total.push(url);
-    }
-  };
+  // saveUrl = (url: string, mode: number) => {
+  //   // if (mode === 0){
+  //   //     this.props.options.saveImportUrl.mono.push(url);
+  //   // }
+  //   if (mode === 1) {
+  //     this.props.options.saveImportUrl.multi.push(url);
+  //   }
+  //   if (mode === 2) {
+  //     this.props.options.saveImportUrl.total.push(url);
+  //   }
+  // };
 
   onTotalUrlChanged = (event: { currentTarget: HTMLInputElement }) => {
     let newData = '';

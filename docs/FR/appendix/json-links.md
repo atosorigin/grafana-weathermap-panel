@@ -186,12 +186,12 @@ La couleur sera alors définie comme suit
 ```
 
 Avec :
-  - **backColor**: Fill in a color for the background under the form #7FFF00 for example
-  - **borderColor** : Fill in a color for the border under the form #7FFF00 for example. 
-  - **id** : color id
-  - **lowerLimitMax** : Maximum value of the metric for this colour
-  - **lowerLimitMin**: Minimum metric value for this colour
-  - **sizeBorder** : thickness of the border
+  - **backColor**: Choisissez une couleur pour le background sous la forme #7FFF00 par exemple
+  - **borderColor** : Choisissez une couleur pour la bordure sous la forme #7FFF00 par exemple
+  - **id** : id de la couleur
+  - **lowerLimitMax** : Valeur maximale de la métrique pour cette couleur
+  - **lowerLimitMin**: Valeur minimale de la métrique pour cette couleur
+  - **sizeBorder** : Épaisseur de la frontière
 
 ### Couleur variable
 
@@ -235,12 +235,12 @@ La couleur sera alors définie comme suit
 
 ```
 Avec de même :
-  - **backColor**: Fill in a color for the background under the form #7FFF00 for example
-  - **borderColor** : Fill in a color for the border under the form #7FFF00 for example. 
-  - **id** : color id
-  - **lowerLimitMax** : Maximum value of the metric for this colour
-  - **lowerLimitMin**: Minimum metric value for this colour
-  - **sizeBorder** : thickness of the border
+- **backColor**: Choisissez une couleur pour le background sous la forme #7FFF00 par exemple
+- **borderColor** : Choisissez une couleur pour la bordure sous la forme #7FFF00 par exemple
+- **id** : id de la couleur
+- **lowerLimitMax** : Valeur maximale de la métrique pour cette couleur
+- **lowerLimitMin**: Valeur minimale de la métrique pour cette couleur
+- **sizeBorder** : Épaisseur de la frontière
 
 
 ## meta
@@ -374,14 +374,14 @@ Avec de même :
 
 - **colorBack** : Choisir la couleur du background du texte en rgba. Exemple : rgba(255, 255, 255, 0)
     - **colorText** : Choisir la couleur du texte en rgba. Exemple : rgba(0, 0, 0, 1)
-    - **generateAuxiliaryElement** : Permet d'afficher 
+    - **generateAuxiliaryElement** : Permet de générer un élément auxiliaire 
         - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
         - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
         - **colorBackElement** : Choisir la couleur du background
         - **colorTextElement** :  Choisir la couelur du texte 
         - **displayObjectInText** : Afficher l'object dans le texte. "true" ou "false"
         - **legendElement** : Associer une légende à votre élément 
-        - **numericFormatElement** : élément de format numérique 
+        - **numericFormatElement** : Permet d'arrondir le résultat de la query
         - **unit** : Affiche une unité de mesure
     - **generateObjectText** : Généré un objet texte. "true" ou "false"
     - **isTextRegion** : affichage du texte dans l'élément ou l'infobulle
@@ -397,7 +397,7 @@ Avec de même :
         - **colorTextElement** :  Choisir la couelur du texte 
         - **displayObjectInText** : Afficher l'object dans le texte. "true" ou "false"
         - **legendElement** : Associer une légende à votre élément 
-        - **numericFormatElement** : élément de format numérique 
+        - **numericFormatElement** : Permet d'arrondir le résultat de la query
         - **unit** : Affiche une unité de mesure
 
 ```

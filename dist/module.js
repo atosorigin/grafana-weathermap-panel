@@ -1973,11 +1973,10 @@ var reqMetricRegion = function reqMetricRegion(region, props) {
 var reqMetricAuxRegion = function reqMetricAuxRegion(region, props) {
   var e_2, _a, e_3, _b;
 
-  var data = [];
-
   try {
     for (var _c = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(region.metrics), _d = _c.next(); !_d.done; _d = _c.next()) {
       var metric = _d.value;
+      var data = [];
 
       try {
         for (var _e = (e_3 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(props.data.series)), _f = _e.next(); !_f.done; _f = _e.next()) {
@@ -2043,11 +2042,10 @@ var reqMetricPoint = function reqMetricPoint(point, props) {
 var reqMetricAuxPoint = function reqMetricAuxPoint(point, props) {
   var e_5, _a, e_6, _b;
 
-  var data = [];
-
   try {
     for (var _c = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(point.metrics), _d = _c.next(); !_d.done; _d = _c.next()) {
       var metric = _d.value;
+      var data = [];
 
       try {
         for (var _e = (e_6 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(props.data.series)), _f = _e.next(); !_f.done; _f = _e.next()) {
@@ -2113,11 +2111,10 @@ var reqMetricLink = function reqMetricLink(link, props) {
 var reqMetricAuxLink = function reqMetricAuxLink(link, props) {
   var e_8, _a, e_9, _b;
 
-  var data = [];
-
   try {
     for (var _c = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(link.metrics), _d = _c.next(); !_d.done; _d = _c.next()) {
       var metric = _d.value;
+      var data = [];
 
       try {
         for (var _e = (e_9 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(props.data.series)), _f = _e.next(); !_f.done; _f = _e.next()) {
@@ -2189,12 +2186,10 @@ var reqMetricOrientedLink = function reqMetricOrientedLink(orientedLink, props) 
 var reqMetricAuxOrientedLink = function reqMetricAuxOrientedLink(orientedLink, props) {
   var e_11, _a, e_12, _b, e_13, _c, e_14, _d;
 
-  var data = [];
-  var dataB = [];
-
   try {
     for (var _e = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(orientedLink.metrics), _f = _e.next(); !_f.done; _f = _e.next()) {
       var metric = _f.value;
+      var data = [];
 
       try {
         for (var _g = (e_12 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(props.data.series)), _h = _g.next(); !_h.done; _h = _g.next()) {
@@ -2233,6 +2228,7 @@ var reqMetricAuxOrientedLink = function reqMetricAuxOrientedLink(orientedLink, p
   try {
     for (var _j = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(orientedLink.metricsB), _k = _j.next(); !_k.done; _k = _j.next()) {
       var metric = _k.value;
+      var dataB = [];
 
       try {
         for (var _l = (e_14 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(props.data.series)), _m = _l.next(); !_m.done; _m = _l.next()) {
@@ -2522,71 +2518,6 @@ var getResultQuery = function getResultQuery(mainMetric) {
   }
 
   return cnt;
-};
-
-/***/ }),
-
-/***/ "./Functions/importConfig.tsx":
-/*!************************************!*\
-  !*** ./Functions/importConfig.tsx ***!
-  \************************************/
-/*! exports provided: fetchConfFile */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchConfFile", function() { return fetchConfFile; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
-// const header : RequestInit = {
-//     method: 'GET',
-//     headers: new Headers(),
-//     mode: 'cors',
-//     cache: "default"
-// };
-
-var fetchConfFile = function fetchConfFile(filesUrl) {
-  var completFile = [];
-  filesUrl.forEach(function (url) {
-    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(void 0, void 0, void 0, function () {
-      var response, responseJson, error_1;
-      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
-        switch (_a.label) {
-          case 0:
-            _a.trys.push([0, 3,, 4]);
-
-            return [4
-            /*yield*/
-            , fetch(url)];
-
-          case 1:
-            response = _a.sent();
-            return [4
-            /*yield*/
-            , response.json()];
-
-          case 2:
-            responseJson = _a.sent();
-            completFile.push(responseJson);
-            return [3
-            /*break*/
-            , 4];
-
-          case 3:
-            error_1 = _a.sent();
-            console.error(error_1);
-            return [3
-            /*break*/
-            , 4];
-
-          case 4:
-            return [2
-            /*return*/
-            ];
-        }
-      });
-    });
-  });
-  return completFile;
 };
 
 /***/ }),
@@ -4340,11 +4271,7 @@ function (_super) {
 
 
     _this.test = function () {
-      _this.props.options.saveImportFile = [];
-
-      _this.props.options.saveImportFile.forEach(function (element) {
-        console.log(element.name);
-      });
+      console.log(JSON.stringify(_this.props));
     };
 
     _this.onMultiListFileChanged = function (event) {
@@ -4419,9 +4346,7 @@ function (_super) {
       onClick: this.save
     }, "finish")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.multiUploadDisplay, {
       file: this.props.options.saveImportFile
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-      onClick: this.test
-    }, "test")));
+    })));
   };
 
   return DropZone;
@@ -17075,15 +17000,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Models_PointClass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Models/PointClass */ "./Models/PointClass.tsx");
 /* harmony import */ var Models_RegionClass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! Models/RegionClass */ "./Models/RegionClass.tsx");
 /* harmony import */ var _Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Models/OrientedLinkClass */ "./Models/OrientedLinkClass.tsx");
-/* harmony import */ var _Functions_importConfig__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Functions/importConfig */ "./Functions/importConfig.tsx");
-/* harmony import */ var _Models_dropZone__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Models/dropZone */ "./Models/dropZone.tsx");
+/* harmony import */ var _Models_dropZone__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Models/dropZone */ "./Models/dropZone.tsx");
 
 
  //import /*pointClassImport, regionClassImport, multiPointClassImport, multiRegionClassImport */ '../../config/testVariable';
 
 
 
-
+ //import { fetchConfFile } from '../Functions/importConfig';
 
 
 /*
@@ -17110,26 +17034,15 @@ function (_super) {
 
     _this.PointValidator = function (newSpace) {
       var resultId = 0;
-      var resultTarget = 1;
 
       _this.props.options.arrayPoints.forEach(function (point) {
-        var _a;
-
         if (newSpace.id === point.id) {
-          if (newSpace.label === point.label) {
+          if (newSpace.name === point.name) {
             resultId = 2;
           } else {
             console.error('Id of point named "' + newSpace.name + '" already given fail to load!');
             resultId = 1;
           }
-        }
-
-        (_a = _this.props.data.request) === null || _a === void 0 ? void 0 : _a.targets.forEach(function (target) {
-          resultTarget = 0;
-        });
-
-        if (resultTarget === 1) {
-          console.error('Warning you load a point named "' + newSpace.name + '" without refId you can\'t get data!');
         }
       });
 
@@ -17156,28 +17069,15 @@ function (_super) {
 
     _this.LinkValidator = function (newSpace) {
       var resultId = 0;
-      var resultTarget = 1;
 
       _this.props.options.arrayOrientedLinks.forEach(function (lien) {
-        var _a;
-
         if (newSpace.id === lien.id) {
-          if (newSpace.label === lien.label) {
+          if (newSpace.name === lien.name) {
             resultId = 2;
           } else {
             console.error('Id of link named "' + newSpace.name + '" already given, fail to load!');
             resultId = 1;
           }
-        }
-
-        (_a = _this.props.data.request) === null || _a === void 0 ? void 0 : _a.targets.forEach(function (target) {
-          if (target.refId === newSpace.mainMetric.refId) {
-            resultTarget = 0;
-          }
-        });
-
-        if (resultTarget === 1) {
-          console.error('Warning you load a link named "' + newSpace.name + '"  without refId you can\'t get data!');
         }
       });
 
@@ -17187,8 +17087,8 @@ function (_super) {
     _this.UrlValidator = function (url) {
       var result = true;
 
-      for (var savedUrl in _this.props.options.saveImportUrl.multi) {
-        if (savedUrl === url) {
+      for (var index in _this.props.options.saveImportUrl.multi) {
+        if (_this.props.options.saveImportUrl.multi[index] === url) {
           result = false;
           break;
         }
@@ -17201,10 +17101,10 @@ function (_super) {
 
 
     _this.pointUpdate = function (updatedPoint) {
-      _this.props.options.regionCoordinateSpace.forEach(function (point, index) {
+      _this.props.options.arrayPoints.forEach(function (point, index) {
         //Id
         if (updatedPoint.id === point.id) {
-          if (updatedPoint.label === point.label) {
+          if (updatedPoint.name === point.name) {
             _this.props.options.arrayPoints[index] = updatedPoint;
 
             _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
@@ -17232,7 +17132,7 @@ function (_super) {
       }
     };
 
-    _this.reagionUpdate = function (updatedRegion) {
+    _this.regionUpdate = function (updatedRegion) {
       _this.props.options.regionCoordinateSpace.forEach(function (region, index) {
         //Id
         if (updatedRegion.id === region.id) {
@@ -17259,15 +17159,15 @@ function (_super) {
       }
 
       if (selector === 2) {
-        _this.reagionUpdate(toLoad);
+        _this.regionUpdate(toLoad);
       }
     };
 
     _this.linkUpdate = function (updatedLink) {
-      _this.props.options.regionCoordinateSpace.forEach(function (link, index) {
+      _this.props.options.arrayOrientedLinks.forEach(function (link, index) {
         //Id
         if (updatedLink.id === link.id) {
-          if (updatedLink.label === link.label) {
+          if (updatedLink.name === link.name) {
             _this.props.options.arrayOrientedLinks[index] = updatedLink;
 
             _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
@@ -17318,8 +17218,8 @@ function (_super) {
       _this.props.options.baseMap = panel.baseMap;
       _this.props.options.display.police = panel.texteSettings.police;
       _this.props.options.display.size = panel.texteSettings.size;
-      _this.props.options.display.style = panel.texteSettings.styleText;
-      _this.props.options.coordinateSpaceInitial = panel.texteSettings.coordinateSpaceInitial;
+      _this.props.options.display.style = panel.texteSettings.style;
+      _this.props.options.coordinateSpaceInitial = panel.coordinateSpaceInitial;
       panel.regions.forEach(function (url) {
         if (_this.UrlValidator(url) === true) {
           _this.props.options.saveImportUrl.multi.push(url);
@@ -17380,12 +17280,11 @@ function (_super) {
           }
         });
       });
-    };
-
-    _this.fetchTotal = function () {
-      _this.totalResult = Object(_Functions_importConfig__WEBPACK_IMPORTED_MODULE_6__["fetchConfFile"])(_this.props.options.saveImportUrl.total);
-      console.log('downloadTotal');
-    }; // loaderSelector = () => {
+    }; // fetchTotal = () => {
+    //   this.totalResult = fetchConfFile(this.props.options.saveImportUrl.total);
+    //   console.log('downloadTotal');
+    // };
+    // loaderSelector = () => {
     //     // this.loadMultiRegions(multiRegionClassImport);
     // 	// console.table(this.props.options.arrayCoordinateSpace);
     // 	this.result.forEach(file => {
@@ -17491,20 +17390,18 @@ function (_super) {
     // 		collapseMonoUrl: isOpen,
     // 	});
     // }
+    // saveUrl = (url: string, mode: number) => {
+    //   // if (mode === 0){
+    //   //     this.props.options.saveImportUrl.mono.push(url);
+    //   // }
+    //   if (mode === 1) {
+    //     this.props.options.saveImportUrl.multi.push(url);
+    //   }
+    //   if (mode === 2) {
+    //     this.props.options.saveImportUrl.total.push(url);
+    //   }
+    // };
 
-
-    _this.saveUrl = function (url, mode) {
-      // if (mode === 0){
-      //     this.props.options.saveImportUrl.mono.push(url);
-      // }
-      if (mode === 1) {
-        _this.props.options.saveImportUrl.multi.push(url);
-      }
-
-      if (mode === 2) {
-        _this.props.options.saveImportUrl.total.push(url);
-      }
-    };
 
     _this.onTotalUrlChanged = function (event) {
       var newData = '';
@@ -17763,7 +17660,7 @@ function (_super) {
       isOpen: this.state.collapseMultiUpload,
       label: "Multi Local Import",
       onToggle: this.onToggleMultiUpload
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Models_dropZone__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Models_dropZone__WEBPACK_IMPORTED_MODULE_6__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data

@@ -1,130 +1,135 @@
 
-## Add a background image
+
+## Création d'un région dynamique
+
+
+### Etape 1 : Ajouter une image en arrière plan
+
 
 ![step 01](../../screenshots/demo/tutorial1/step01.jpg)
 
 
-Adding a background image is done from the `display` menu.
+L'ajout d'une image en arrière plan s'effectue à partir du menu `display`.
 
-The selected image will be [demo2-background.svg](https://github.com/atosorigin/grafana-weathermap-panel/blob/master/demo/demo2-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+L'image sélectionnée sera [demo2-background.svg](https://github.com/atosorigin/grafana-weathermap-panel/blob/master/demo/demo2-background.svg). Pour cela, nous la téléchargeons en base64 avec la  fonction `Copier l'adresse de l'image`
 
-It is possible to have more details with the [display](../editor/display.md) page.
+Il est possible d'avoir plus de détails avec la page [display](../EN/editor/display.md)
 
-You have to save and reload the page.
-
-
-## Creating a dynamic region
+Il faut sauvergarder et recharger la page.
 
 
-### Step 1: Define an SVG region
+
+### Etape 2 : Définir une région SVG
 
 
 ![step 02](../../screenshots/demo/tutorial1/step02.jpg)
 
 
-The creation of a region in an SVG image is done from the `Coordinates space`, `region` and `Add coordinate space` menu.
+La création d'une région dans dans une image SVG s'effectue à partir du menu `Coordinates space`, `region` et `Àdd coordinate space`
 
-You have to fill out the form like this: 
+Vous devez remplir le formulaire comme ceci : 
 
-- Enter a `label` for example Computer
-- Select `SVG label`.
-- Choose the `path 147` line from the drop-down list.
-- Click on the `load` button
+- Saisir un `label` par exemple Computer
+- Sélectionner `SVG label`
+- Choisir dans la liste déroulante, la ligne `path 147`
+- Cliquer sur le bouton `load`
 
 
-### Step 2: Add a color to the SVG element
+### Etape 3 : Ajouter une couleur à l'élément SVG
 
 
 
 ![step 03](../../screenshots/demo/tutorial1/step03.jpg)
 
 
-Adding a color to a SVG element is done from the `Coordinates space`, `region` and `Edit coordinate space` menu.
+L'ajout d'une couleur à un élément SVG s'effectue à partir du menu `Coordinates space`, `region` et `Edit coordinate space`
 
-You select the `Lower limit' line and then complete the form like this: 
+Vous sélectionnez la ligne `Lower limit` pour compléter le formulaire comme ceci : 
  
 
-- Enable `Trace the background` to activate the background color. 
-- Select the `green` color in the `Edit background color` line.
-- Enable `Trace the border` to activate the border color.
-- Select the `red` color in the `Edit border color` line.
-- Enter a value to set the size of the border `size border` for example 3
-- Click on the "load" button
+- Activer `Trace the background` pour activer la couleur d'arrière plan 
+- Sélectionner la couleur `vert` à la ligne `Edit background color`
+- Activer `Trace the border` pour activer la couleur de bordure
+- Sélectionner la couleur `rouge` à la ligne `Edit border color`
+- Saisir une valeur pour définir la taille de la bordure `size border` par exemple 3
+- Cliquer sur le bouton `load`
 
 
-You get the following result
+Vous obtenez le résultat suivant
 
 ![step 04](../../screenshots/demo/tutorial1/step04.jpg)
 
 
-It is possible to define other parameters, referring to the [coordinates lower limit](../editor/coordinates-lower-limit.md) page.
+Il est possible de définir d'autres paramètres, en vous référant à la page [coordinates lower limit](../editor/coordinates-lower-limit.md)
 
 
 
-### Step 3: Adding a Query to an SVG element
+### Etape 4 : Ajouter une Query à un élément SVG
 
 
 ![step 05](../../screenshots/demo/tutorial1/step05.jpg)
 
 
-The first step is through the `Queries` tab.
+La première étape passe par l'onglet `Queries`
 
-You must:
+Vous devez :
 
-- Complete the line `metrics` with the following line
+- compléter la ligne `métrics` avec la ligne suivante
 
 ```
 rate(go_memstats_gc_cpu_fraction[5m]) * 100000
 ```
 
-The "A" marker will be used to identify this query as you can see below.
+Le point de repère sera `A` qui sera le code utilisé ci-dessous
+
+Les paramétrages complémentaires sont disponible à la page ......
 
 
 
 ![step 06](../../screenshots/demo/tutorial1/step06.jpg)
 
-The second step is from the `Coordinates space`, `region` and `Edit coordinate space` menu of the `visualization` tab.
+La deuxième étape s'effectue à partir du menu `Coordinates space`, `region` et `Edit coordinate space` de l'onglet `visualization`
 
-You select the `Main metric` line to complete the form like this: 
+Vous sélectionnez la ligne `Main metric` pour compléter le formulaire comme ceci : 
 
-- Enter a `Query` for example A
-- Click on the `load` button
-
-
-The value will be automatically displayed after the page is refreshed.
+- Saisir un `Query` par exemple A
+- Cliquer sur le bouton `load`
 
 
-It is possible to fill in the other fields with the additional settings available on the page [coordinates space region](../editor/coordinates-space-region.md)
+La valeur sera automatiquement affichée après le rafraichissement de la page
+
+
+Il est possible de compléter les autres champs avec les paramétrages complémentaires disponible à la page ....
 
 
 
 
-### Step 4: Formatting SVG element information
+### Etape 5 : Mise en forme des informations de l'élément SVG
 
 
 ![step 07](../../screenshots/demo/tutorial1/step07.jpg)
 
 
-The formatting of the SVG element information is done from the `Coordinates space`, `Region` and `Edit coordinate space` menu.
+La mise en forme des informations de l'élément SVG s'effectue à partir du menu `Coordinates space`, `region` et `Edit coordinate space`
 
-You select the `Text object` line to complete the `Generate text object` form like this: 
+Vous sélectionnez la ligne `Text object` pour compléter le formulaire `Generate text object`comme ceci : 
 
-
-- Enter a `legend`.
-- Enter the number of digits after the decimal point in `Digital formating` e.g. 2
-- Enter a unit of measurement in the line `unit of measurement` like qw
-- Choose a background color
-- Choose a text color
-- Click on the "load" button
+- Saisir une `légende`
+- Saisir le nombre de chiffre après la virgule dans `Digital formating` par exemple 2
+- Saisir une unité de mesure à la ligne `unit of mesure` comme qw
+- Choisir une couleur d'arrière plan
+- Choisir une couleur de texte
+- Cliquer sur le bouton `load`
 
 ### Résultat
 
-The end result will be like this: 
+Le résultat final sera comme cela : 
 
 ![step 08](../../screenshots/demo/tutorial1/step08.jpg)
 
 
 ## Création d'un point 
+
 
 ### Etape 1 : Placer un point
 
@@ -230,18 +235,3 @@ The value will be automatically displayed after the page is refreshed.
 
 It is possible to fill in the other fields with the additional settings available on the page [coordinates space link](../editor/coordinates-space-link.md)
 
-### Result
-
-![step 06](../../screenshots/demo/tutorial1/final-result-link.png)
-
-## Add everything with JSON
-
-### Import JSON file
-
-- It is possible to add all of those configuration through json files by doing an import. To know how to do it, [follow this link](../editor/import.md)
-
-And here is the different JSON file :
-- https://framagit.org/hellosct1/atos_grafana/-/tree/master/demo/demo2-global.json
-- https://framagit.org/hellosct1/atos_grafana/-/tree/master/demo/demo2-link.json
-- https://framagit.org/hellosct1/atos_grafana/-/tree/master/demo/demo2-point.json
-- https://framagit.org/hellosct1/atos_grafana/-/tree/master/demo/demo2-svgRegion.json 

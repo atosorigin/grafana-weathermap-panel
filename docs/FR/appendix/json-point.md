@@ -1,4 +1,4 @@
-# Fichier`point`
+# Fichier `point`
 
 le script complet [sample-point.json](../../../demo/sample-point.json) est disponible, dont le détail de construction se trouve ci-dessous.
 
@@ -11,6 +11,7 @@ Le fichier **point** doit être déclaré sous la forme d'un fichier JSON comme 
 ]}
 
 ```
+
 
 ## Structure
 
@@ -97,7 +98,7 @@ Le fichier **point** doit être déclaré sous la forme d'un fichier JSON comme 
 
 - **drawGraphicMarker**	
     - **label** : Choisissez un label
-    - **value**: CChoisissez une valeur. "true" ou "false"
+    - **value**: Choisissez une valeur. "true" ou "false"
 
 ``` 
 "drawGraphicMarker": {
@@ -174,12 +175,12 @@ La couleur sera alors définie comme suit
 ```
 
 Avec :
-  - **backColor**: Fill in a color for the background under the form #7FFF00 for example
-  - **borderColor** : Fill in a color for the border under the form #7FFF00 for example. 
-  - **id** : color id
-  - **lowerLimitMax** : Maximum value of the metric for this colour
-  - **lowerLimitMin**: Minimum metric value for this colour
-  - **sizeBorder** : thickness of the border
+  - **backColor**: Choisissez une couleur pour le background sous la forme #7FFF00 par exemple
+  - **borderColor** : Choisissez une couleur pour la bordure sous la forme #7FFF00 par exemple
+  - **id** : id de la couleur
+  - **lowerLimitMax** : Valeur maximale de la métrique pour cette couleur
+  - **lowerLimitMin**: Valeur minimale de la métrique pour cette couleur
+  - **sizeBorder** : Épaisseur de la frontière
 
 ### Couleur variable
 
@@ -223,12 +224,12 @@ La couleur sera alors définie comme suit
 
 ```
 Avec de même :
-  - **backColor**: Fill in a color for the background under the form #7FFF00 for example
-  - **borderColor** : Fill in a color for the border under the form #7FFF00 for example. 
-  - **id** : color id
-  - **lowerLimitMax** : Maximum value of the metric for this colour
-  - **lowerLimitMin**: Minimum metric value for this colour
-  - **sizeBorder** : thickness of the border
+  - **backColor**: Choisissez une couleur pour le background sous la forme #7FFF00 par exemple
+  - **borderColor** : Choisissez une couleur pour la bordure sous la forme #7FFF00 par exemple
+  - **id** : id de la couleur
+  - **lowerLimitMax** : Valeur maximale de la métrique pour cette couleur
+  - **lowerLimitMin**: Valeur minimale de la métrique pour cette couleur
+  - **sizeBorder** : Épaisseur de la frontière
 
 ## mainMetric
 
@@ -403,7 +404,7 @@ Avec de même :
  - **textObj**
   - **colorBack** : Choisir la couleur du background du texte en rgba. Exemple : rgba(255, 255, 255, 0)
   - **colorText** : Choisir la couleur du texte en rgba. Exemple : rgba(0, 0, 0, 1)
-  - **generateAuxiliaryElement** : Permet d'afficher 
+  - **generateAuxiliaryElement** : Permet de générer un élément auxiliaire 
       - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
       - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
       - **colorBackElement** : Choisir la couleur du background
@@ -411,7 +412,7 @@ Avec de même :
       - **displayObjectInText** : Afficher l'object dans le texte. "true" ou "false"
       - **displayObjectPermanently** : Afficher l'objet de facon permanente. "true" ou false"
       - **legendElement** : Associer une légende à votre élément 
-      - **numericFormatElement** : élément de format numérique 
+      - **numericFormatElement** : Permet d'arrondir le résultat de la query
       - **unityMesureElement** : Affiche une unité de mesure
   - **generateObjectText** : Généré un objet texte. "true" ou "false"
   - **isTextRegion** : affichage du texte dans l'élément ou l'infobulle
@@ -430,7 +431,7 @@ Avec de même :
       - **displayObjectInText** : Afficher l'object dans le texte. "true" ou "false"
       - **displayObjectPermanently** : Afficher l'objet de facon permanente. "true" ou false"
       - **legendElement**	: Associer une légende à votre élément 
-      - **numericFormatElement** : élément de format numérique 
+      - **numericFormatElement** : Permet d'arrondir le résultat de la query
       - **unityMesureElement**: Affiche une unité de mesure
 
 ```
@@ -473,33 +474,6 @@ Avec de même :
       
 ```
 
-
-
-
-
-## lowerLimit
-
-  - **lowerLimit**: If **colorMode** is false, set a color for the interior and the contour of the area. If **ColorMode** is true, allows to define colors depending on the values of the associated query.
-    - **0** : First color
-        - **backColor**: Enter a color in the form #7FFF00 for example for the background
-        - **BorderColor** : Enter a color in the form #7FFF00 for example for the border.
-        - **id** : color id
-        - **lowerLimitMax**: Maximum value for this colour
-        - **lowerLimitMin**: Minimum value for this colour
-        - **sizeBorder**: thickness of the border
-
-```
-            "lowerLimit": [
-              {
-                "backColor": "#FF00FF",
-                "borderColor": "#7FFF00",
-                "id": 0,
-                "lowerLimitMax": "",
-                "lowerLimitMin": "",
-                "sizeBorder": "3"
-              }
-            ],
-```
 
 
 ## traceBack

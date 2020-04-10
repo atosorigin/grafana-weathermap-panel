@@ -54,7 +54,7 @@ The creation of a region from an SVG element must contain the following values
 - **id** is the id of the region. Working as a counter
 - **Label** is the name of the region
 - **mode** to true
-- **idSVG** to name of event ID
+- **idSVG** is the id of the desired SVG area as region
 ```
 
 { "regions": [

@@ -1,10 +1,12 @@
+
+
 # Configuration
 
 https://www.howtoforge.com/tutorial/how-to-install-prometheus-and-node-exporter-on-centos-8/
 
 ### Prerequisites
 
-It is possible to see to follow a metric in an environment
+Il est possible de pouvoir suivre une metric dans un environnement
 
 Example : node_cpu{cpu="cpu0",mode="idle"}
 
@@ -15,9 +17,9 @@ Example : node_cpu{cpu="cpu0",mode="idle"}
 
 ## Testing Node_exporter
 
-To see the available metrics, open the browser and type this:
+Pour voir les Metrics disponibles, ouvrez le navigateur et tapez ceci :
 
-```sh
+```
 http://localhost:9100/metrics
 ```
 
@@ -26,7 +28,7 @@ http://localhost:9100/metrics
 
 ## Testing Prometheus
 
-```sh
+```
 http://localhost:9090/
 ```
 
@@ -35,17 +37,17 @@ http://localhost:9090/
 
 ## Testing Grafana
 
-From the `data sources` menu in Grafana, choose Prometheus
+Dans le menu "data sources" de Grafana, choisissez Prometheus
 
-Complete the form and the line
+Remplissez le formulaire et la ligne
 
-url : http://localhost:9090
+url : http://\<ip\>:9090
 
-You have to go to the `New dashboard` menu...
+Il faut aller dans le menu "New dashboard"...
 
-- Select the `graph` display
-- Selected the `Queries` tab
+- Sélectionnez l'affichage `graph`
+- Sélectionné l'onglet `Queries`
 
-Complete the targets to see the result
+Compléter les étapes pour voir le résultat
 
 ![metrics graph](../../screenshots/init/graph.png)

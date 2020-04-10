@@ -13,7 +13,35 @@ Le fichier **region** doit être déclaré sous la forme d'un fichier JSON comme
 
 ```
 
+## Structure 
 
+```
+{
+  "points": 
+  [
+    {
+      "colorMode"	:false,
+      "coords":	{},
+      "id": 1,
+      "idSVG": "path147",
+      "img": "",
+      "label": "PC",
+      "linkURL": {},
+      "lowerLimit": [],
+      "mainMetric": {},
+      "meta": "",
+      "metrics": [],
+      "mode": true,
+      "orientedLink": [],
+      "positionParameter": {},
+      "textObj": {},
+      "traceBack": true,
+      "traceBorder": true,
+    }
+  ]
+}
+
+```
 ## Région
 
 Il existe 2 façons de créer une région : 
@@ -25,10 +53,10 @@ Il existe 2 façons de créer une région :
 
 La création d'une région à partir d'un élément SVG doit contenir obligatoirement les valeurs suivantes
 
-- **ID** est un compteur
-- **Label** est nom de la région
+- **id** est l'identité de la région. Fonctionnant comme un compteur
+- **label** est le label de la région
 - **mode** à true
-- **idSVG** à nom de l'ID de l'événement
+- **idSVG** est l'id de la zone du SVG desiré comme région
 
 ```
 
@@ -65,9 +93,9 @@ La création d'une région à partir d'un élément SVG doit contenir obligatoir
 
 La création d'une région à partir de coordonnées doit contenir obligatoirement les valeurs suivantes
 
-- **id** est un compteur
+- **id** est l'identité de la région. Fonctionnant comme un compteur
 - **mode** à false
-- **Label** est nom de la région
+- **label** est le label de la région
 - **idSVG** à vide
 - **coords** les coordonnées
 
@@ -105,7 +133,7 @@ La création d'une région à partir de coordonnées doit contenir obligatoireme
 ## lowerLimit
 
 
-il est possible de changer choisir 2 méthodes de couleurs : 
+Il est possible de choisir entre 2 méthodes de couleurs : 
 
 - couleur fixe
 - couleur variable
@@ -113,7 +141,7 @@ il est possible de changer choisir 2 méthodes de couleurs :
 ### Couleur fixe
 
 
-Si `colorMode` est à False
+Si `colorMode` est à false
 
 ```
 "colorMode": false,
@@ -136,12 +164,12 @@ Alors La couleur sera définit comme ceci
 ```
 
 Avec :
-  - **backColor**	: Renseigner une couleur sous la forme #7FFF00 par exemple pour la background
-  - **borderColor** : Renseigner une couleur sous la forme #7FFF00 par exemple pour la bordure
+  - **backColor**: Choisissez une couleur pour le background sous la forme #7FFF00 par exemple
+  - **borderColor** : Choisissez une couleur pour la bordure sous la forme #7FFF00 par exemple
   - **id** : id de la couleur
-  - **lowerLimitMax** : Valeur maximume pour cette couleur
-  - **lowerLimitMin** : Valeur minimal pour cette couleur
-  - **sizeBorder** : epaisseur de la bordure
+  - **lowerLimitMax** : Valeur maximale de la métrique pour cette couleur
+  - **lowerLimitMin**: Valeur minimale de la métrique pour cette couleur
+  - **sizeBorder** : Épaisseur de la frontière
 
 ### Couleur variable
 
@@ -185,16 +213,16 @@ Alors La couleur sera définit comme ceci
 
 ```
 Avec de même :
-  - **backColor**	: Renseigner une couleur sous la forme #7FFF00 par exemple pour la background
-  - **borderColor** : Renseigner une couleur sous la forme #7FFF00 par exemple pour la bordure
+  - **backColor**: Choisissez une couleur pour le background sous la forme #7FFF00 par exemple
+  - **borderColor** : Choisissez une couleur pour la bordure sous la forme #7FFF00 par exemple
   - **id** : id de la couleur
-  - **lowerLimitMax** : Valeur maximume pour cette couleur
-  - **lowerLimitMin** : Valeur minimal pour cette couleur
-  - **sizeBorder** : epaisseur de la bordure
+  - **lowerLimitMax** : Valeur maximale de la métrique pour cette couleur
+  - **lowerLimitMin**: Valeur minimale de la métrique pour cette couleur
+  - **sizeBorder** : Épaisseur de la frontière
 
 ## img
 
-il s'agit du chemin représentant une représentation graphique 
+Il s'agit du chemin représentant une représentation graphique 
 
 Le format compatible est JPG / PNG / GIF / SVG
 
@@ -207,7 +235,7 @@ Le format compatible est JPG / PNG / GIF / SVG
  - **linkURL** : Permet de rendre les regions cliquables 
     - **followLink** : Permet une redirection vers le lien renseigné en cliquant sur la region
     - **hoveringTooltipLink** : Permet une redirection vers le lien renseigné dans le tool type en cliquant sur le lien
-    - **hoveringTooltipText** : Affiche le lien dans le tool type qui apparait quand on passe le curseur sur la zone ou sur le point
+    - **hoveringTooltipText** : Affiche le lien dans le tool type qui apparait quand on passe le curseur sur la région
 
 
 ```
@@ -302,21 +330,21 @@ A FAIRE, Laisser vide pour le moment
 
  - **orientedLink** :
       - **0**
-        - **name** : string;
+        - **name** : Correspond au label ou au nom du lien;
         - **orientationLink** : Choisir "monodirectional" ou "bidirectional"
         - **pointAPositionX** : Choisir la position horizontal du point A entre "-100" et "100"
         - **pointAPositionY** : Choisir la position vertical du point A entre "-100" et "100"
-        - **colorCoordinateA** : string;
+        - **colorCoordinateA** : Choisissez la couleur de la coordonnée A;
         - **pointBPositionX** : Choisir la position horizontal du point B entre "-100" et "100"
         - **pointBPositionY** : Choisir la position vertical du point B entre "-100" et "100"
-        - **colorCoordinateB** : string;
-        - **valueMainMetricA** : string;
-        - **valueMainMetricB** : string;
-        - **pointIn** : string;
-        - **pointOut** : string;
-        - **regionIn** : string;
-        - **regionOut** : string;
-        - **zIndex** : number;
+        - **colorCoordinateB** : Choisissez la couleur de la coordonnée B;
+        - **valueMainMetricA** : Valeur de la Main métrique du point B;
+        - **valueMainMetricB** : Valeur de la Main métrique du point A;
+        - **pointIn** : Nom du point d'entré;
+        - **pointOut** : Nom du point sortant;;
+        - **regionIn** : Nom de la région d'entrée;
+        - **regionOut** : Nom de la région sortante;
+        - **zIndex** : Plus le nombre est grand, plus le lien sera mis en évidence sur l'image en termes de couche.;
         - **pointCPositionX** : Choisir la position horizontal du point A entre "-100" et "100";
         - **pointCPositionY** : Choisir la position horizontal du point A entre "-100" et "100";
         - **isIncurved** : Saisir "true" si votre lien est incurvé. Sinon, saisir "false"
@@ -354,7 +382,7 @@ A FAIRE, Laisser vide pour le moment
  - **textObj**
   - **colorBack** : Choisir la couleur du background du texte en rgba. Exemple : rgba(255, 255, 255, 0)
   - **colorText** : Choisir la couleur du texte en rgba. Exemple : rgba(0, 0, 0, 1)
-  - **generateAuxiliaryElement** : Permet d'afficher 
+  - **generateAuxiliaryElement** : Permet de générer un élément auxiliaire 
       - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
       - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
       - **colorBackElement** : Choisir la couleur du background
@@ -362,10 +390,10 @@ A FAIRE, Laisser vide pour le moment
       - **displayObjectInText** : Afficher l'object dans le texte. "true" ou "false"
       - **displayObjectPermanently** : Afficher l'objet de facon permanente. "true" ou false"
       - **legendElement** : Associer une légende à votre élément 
-      - **numericFormatElement** : élément de format numérique 
+      - **numericFormatElement** : Permet d'arrondir le résultat de la query
       - **unityMesureElement** : Affiche une unité de mesure
   - **generateObjectText** : Généré un objet texte. "true" ou "false"
-  - **isTextRegion** : affichage du texte dans l'élément ou l'infobulle
+  - **isTextRegion** : Affichage du texte dans l'élément ou l'infobulle
   - **legend** : Permet d'ajouter une légende
   - **style**	
       - **bold** : "True" ou "False" pour mettre le texte en gras
@@ -381,7 +409,7 @@ A FAIRE, Laisser vide pour le moment
       - **displayObjectInText** : Afficher l'object dans le texte. "true" ou "false"
       - **displayObjectPermanently** : Afficher l'objet de facon permanente. "true" ou false"
       - **legendElement**	: Associer une légende à votre élément 
-      - **numericFormatElement** : élément de format numérique 
+      - **numericFormatElement** : Permet d'arrondir le résultat de la query
       - **unityMesureElement**: Affiche une unité de mesure
 
 ```
