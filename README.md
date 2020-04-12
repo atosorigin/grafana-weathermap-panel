@@ -13,7 +13,6 @@ This project is still in development.
 ## Dependencies
 
 - Grafana 6.6.x or 6.7.x
-- Yarn 1.21.1
 
 
 ## Official version
@@ -37,35 +36,20 @@ move the folder to grafana's plugins folder
 
 ```sh
 $ mv grafana-weathermap-panel /var/lib/grafana/plugins
-```
-
-Install the plugins
-
-```sh
-$ cd /var/lib/grafana/plugins
-$ cd grafana-weathermap-panel
-$ yarn install
-$ yarn watch
 $ systemctl restart grafana-server
 ```
-
-This will run linting tools and applu prettier Fix
-
-To build the plugin run :
-
-```sh
-$ yarn build
-```
-
-
 
 # Getting Help
 
 * [WeatherMap documentation](https://github.com/atosorigin/grafana-weathermap-panel/tree/master/docs)
 
-* [WeatherMap Demo](https://github.com/atosorigin/grafana-weathermap-panel/tree/master/demo)
+* [WeatherMap Tutorial](https://github.com/atosorigin/grafana-weathermap-panel/tree/master/docs/EN/demo)
 
 
 # History
 
 * [Changelog](https://github.com/atosorigin/grafana-weathermap-panel/blob/master/CHANGELOG.md)
+
+
+# Sreenshots
+

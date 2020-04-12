@@ -1,0 +1,78 @@
+{
+  "regions": [
+    {
+    "colorMode": false,
+    "coords": {
+      "xMax": "-100",
+      "xMin": "-10",
+      "yMax": "-100",
+      "yMin": "-10"
+    },
+    "id": 1,
+    "idSVG": "",
+    "img": "http://localhost/demo/computer-svg.svg",
+    "label": "computer",
+    "linkURL": {
+      "followLink": "",
+      "hoveringTooltipLink": "",
+      "hoveringTooltipText": ""
+    },
+    "lowerLimit": [],
+    "mainMetric": {
+      "format": "",
+      "key": "",
+      "keyValue": "",
+      "manageValue": "avg",
+      "refId": "",
+      "returnQuery": [],
+      "unit": ""
+    },
+    "meta": "",
+    "metrics": [],
+    "mode": false,
+    "orientedLink": [],
+    "positionParameter": {
+      "labelAPositionX": "0",
+      "labelAPositionY": "0",
+      "labelBPositionX": "0",
+      "labelBPositionY": "0",
+      "tooltipPositionA": {},
+      "tooltipPositionB": {}
+    },
+    "textObj": {
+      "colorBack": "rgba(255, 255, 255, 0)",
+      "colorText": "rgba(0, 0, 0, 1)",
+      "generateAuxiliaryElement": {
+        "addColorBackElement": false,
+        "addColorTextElement": false,
+        "colorBackElement": "black",
+        "colorTextElement": "white",
+        "displayObjectInText": false,
+        "legendElement": "",
+        "numericFormatElement": "",
+        "unit": ""
+      },
+      "generateObjectText": false,
+      "isTextRegion": false,
+      "style": {
+        "bold": false,
+        "italic": false,
+        "underline": false
+      },
+      "value": "",
+      "valueGenerateObjectText": {
+        "addColorBackElement": false,
+        "addColorTextElement": false,
+        "colorBackElement": "black",
+        "colorTextElement": "white",
+        "displayObjectInText": false,
+        "legendElement": "",
+        "numericFormatElement": "",
+        "unit": ""
+      }
+    },
+    "traceBack": false,
+    "traceBorder": false
+  }
+]
+}

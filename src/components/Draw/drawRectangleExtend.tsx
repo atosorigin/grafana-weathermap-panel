@@ -282,7 +282,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
         value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
       }
     } else {
-      // console.log('je suis la ' + this.props.uneCoor.label);
+      console.log('je suis la ' + this.props.uneCoor.label);
       // console.log(cc);
       value = (
         <div style={styleDiv} id={this.props.id}>

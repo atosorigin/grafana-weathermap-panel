@@ -1,6 +1,6 @@
 # File `region`
 
-The full [sample-region.json](../../../../demo/sample-region.json) script is available, with construction details below.
+The full [sample-region.json](../../resource/sampleJson/sample-region.json) script is available, with construction details below.
 
 
 The **region** file must be declared as a JSON file like this:

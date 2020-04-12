@@ -1,0 +1,189 @@
+{
+    "points": [
+  {
+    "associateOrientedLinksIn": [],
+    "associateOrientedLinksOut": [],
+    "color": "black",
+    "colorMode": false,
+    "drawGraphicMarker": {
+      "label": "Yes",
+      "value": "true"
+    },
+    "id": 1,
+    "label": "",
+    "linkURL": {
+      "followLink": "",
+      "hoveringTooltipLink": "",
+      "hoveringTooltipText": ""
+    },
+    "lowerLimit": [],
+    "mainMetric": {
+      "format": "",
+      "key": "",
+      "keyValue": "",
+      "manageValue": "avg",
+      "refId": "",
+      "returnQuery": [],
+      "unit": ""
+    },
+    "meta": "",
+    "metrics": [],
+    "name": "point1",
+    "positionParameter": {
+      "labelAPositionX": "0",
+      "labelAPositionY": "0",
+      "labelBPositionX": "0",
+      "labelBPositionY": "0",
+      "tooltipPositionA": {},
+      "tooltipPositionB": {}
+    },
+    "positionShapeX": "-20",
+    "positionShapeY": "-20",
+    "rotateArrow": "0",
+    "shape": {
+      "label": "Circle",
+      "value": "circle"
+    },
+    "sizeHeight": {
+      "label": "Medium",
+      "value": "medium"
+    },
+    "sizeWidth": {
+      "label": "Medium",
+      "value": "medium"
+    },
+    "textObj": {
+      "colorBack": "rgba(255, 255, 255, 0)",
+      "colorText": "rgba(0, 0, 0, 1)",
+      "generateAuxiliaryElement": {
+        "addColorBackElement": false,
+        "addColorTextElement": false,
+        "colorBackElement": "black",
+        "colorTextElement": "white",
+        "displayObjectInText": false,
+        "legendElement": "",
+        "numericFormatElement": "",
+        "unit": ""
+      },
+      "generateObjectText": false,
+      "isTextRegion": false,
+      "style": {
+        "bold": false,
+        "italic": false,
+        "underline": false
+      },
+      "value": "",
+      "valueGenerateObjectText": {
+        "addColorBackElement": false,
+        "addColorTextElement": false,
+        "colorBackElement": "black",
+        "colorTextElement": "white",
+        "displayObjectInText": false,
+        "legendElement": "",
+        "numericFormatElement": "",
+        "unit": ""
+      }
+    },
+    "traceBack": false,
+    "traceBorder": false,
+    "valueMetric": ""
+  },
+  {
+    "associateOrientedLinksIn": [],
+    "associateOrientedLinksOut": [],
+    "color": "black",
+    "colorMode": false,
+    "drawGraphicMarker": {
+      "label": "Yes",
+      "value": "true"
+    },
+    "id": 2,
+    "label": "www.atos.fr",
+    "linkURL": {
+      "followLink": "",
+      "hoveringTooltipLink": "",
+      "hoveringTooltipText": ""
+    },
+    "lowerLimit": [
+      {
+        "backColor": "",
+        "borderColor": "rgb(199, 208, 222)",
+        "id": 0,
+        "lowerLimitMax": "",
+        "lowerLimitMin": "",
+        "sizeBorder": "1"
+      }
+    ],
+    "mainMetric": {
+      "format": "",
+      "key": "",
+      "keyValue": "",
+      "manageValue": "avg",
+      "refId": "",
+      "returnQuery": [],
+      "unit": ""
+    },
+    "meta": "",
+    "metrics": [],
+    "name": "point2",
+    "positionParameter": {
+      "labelAPositionX": "0",
+      "labelAPositionY": "0",
+      "labelBPositionX": "0",
+      "labelBPositionY": "0",
+      "tooltipPositionA": {},
+      "tooltipPositionB": {}
+    },
+    "positionShapeX": "50",
+    "positionShapeY": "20",
+    "rotateArrow": "0",
+    "shape": {
+      "label": "Circle",
+      "value": "circle"
+    },
+    "sizeHeight": {
+      "label": "Medium",
+      "value": "medium"
+    },
+    "sizeWidth": {
+      "label": "Medium",
+      "value": "medium"
+    },
+    "textObj": {
+      "colorBack": "rgba(255, 255, 255, 0)",
+      "colorText": "rgba(0, 0, 0, 1)",
+      "generateAuxiliaryElement": {
+        "addColorBackElement": false,
+        "addColorTextElement": false,
+        "colorBackElement": "black",
+        "colorTextElement": "white",
+        "displayObjectInText": false,
+        "legendElement": "",
+        "numericFormatElement": "",
+        "unit": ""
+      },
+      "generateObjectText": false,
+      "isTextRegion": false,
+      "style": {
+        "bold": false,
+        "italic": false,
+        "underline": false
+      },
+      "value": "",
+      "valueGenerateObjectText": {
+        "addColorBackElement": false,
+        "addColorTextElement": false,
+        "colorBackElement": "black",
+        "colorTextElement": "white",
+        "displayObjectInText": false,
+        "legendElement": "",
+        "numericFormatElement": "",
+        "unit": ""
+      }
+    },
+    "traceBack": false,
+    "traceBorder": true,
+    "valueMetric": ""
+  }
+]
+}

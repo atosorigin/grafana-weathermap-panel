@@ -1,150 +1,92 @@
- 
-# create file modelisation
+# Create Dashboard import JSON file
+
+
+
+
+![demo6 step 01](../../screenshots/demo/demo6.jpg)
+
+
+
+- background : demo6-background.svg
+
+Import file
+
+- [region](demo6-region-svg.json)
+- [point](demo6-point.json)
+- [link](demo6-link.json)
+
+faire une relation entre query et OrientedLink
 
 
 
 
 
-prometheus_http_request_duration_seconds_bucket{handler="/"}
+
+## Etape 1 : Création des queries
+
+
+![step 01](../../screenshots/demo/tutorial4/step01.jpg)
+
+
+Nous complétons les formulaires pour obtenir 2 requêtes.
+
+La premère requette permet de connaitre les données reçues par la carte réseau
+
+```
+rate(node_network_receive_bytes{device="enp0s3"}[10s])*8/1024/1024
+```
+
+La deuxième requette permet de connaitre les données envoyées par la carte réseau
+
+```
+rate(node_network_transmit_bytes{device="enp0s3"}[10s])*8/1024/1024
+
+```
+
+## Etape 2 : Un serveur de stockage
+
+
+[Installation du serveur](../appendix/server.md)
+
+
+## Etape 3 : création d'une image d'arrière plan
 
 
 
+![step 03](../../screenshots/demo/tutorial4/step02.jpg)
 
-![tutorial 4 step 01](../../screenshots/demo/tutorial4/step01.jpg)
 
 
-Dans une query, nous voulons analyser ce que reçoit la carte réseau
+L'ajout d'une image en arrière plan s'effectue à partir du menu `display`.
+
+L'image sélectionnée sera [demo6-background.svg](https://github.com/atosorigin/grafana-weathermap-panel/blob/master/demo/demo6-background.svg). Pour cela, nous la téléchargeons en base64 avec la  fonction `Copier l'adresse de l'image`
 
 
 ```
-node_network_receive_bytes
-
-```
-
-
-
-le résultat montre plusieurs résultats possibles
-
-
-```
-node_network_receive_bytes{device="enp0s3",instance="localhost:9100",job="node_exporter"}
-
-node_network_receive_bytes{device="lo",instance="localhost:9100",job="node_exporter"}
-
-```
-
-La différence montre 2 types de devices 
-
-- enp0s3
-- lo
-
-
-
-Il faut associer 1 metrics par region ou points...
-
-comme ceci
-
-
-Region 1
-
-![tutorial 4 step 02](../../screenshots/demo/tutorial4/step02.jpg)
-
-
-Region 2
-
-![tutorial 4 step 03](../../screenshots/demo/tutorial4/step03.jpg)
-
-
-Le resultat affiche 2 valeurs
-
-![tutorial 4 step 04](../../screenshots/demo/tutorial4/step04.jpg)
-
-
-
-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-
-
-
-# essai 2
-
-
-![tutorial 4 step 05](../../screenshots/demo/tutorial4/step05.jpg)
-
-
-http_request_duration_microseconds
-
-Nous obtenons de nombreux résultats 
-
-
-
-```
-http_request_duration_microseconds{handler="alertmanagers",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="alertmanagers",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="alertmanagers",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="alerts",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="alerts",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="alerts",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="config",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="config",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="config",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="flags",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="flags",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="flags",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="graph",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="graph",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="graph",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="heap",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="heap",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="heap",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="label_values",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="label_values",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="label_values",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="options",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="options",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="options",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="prometheus",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="prometheus",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="prometheus",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="query",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="query",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="query",instance="localhost:9090",job="prometheus",quantile="0.99"}
+http://localhost/demo/demo6-background.svg
 
 ```
 
 
-![tutorial 4 step 06](../../screenshots/demo/tutorial4/step06.jpg)
-
-
-nous sélections une query 
+Il est possible d'avoir plus de détails avec la page [display](../EN/editor/display.md)
 
 
 
-
-l'élément handler sera utilisé comme argument variable 
-
+## Etape 3 : Importation des fichiers
 
 
-![tutorial 4 step 07](../../screenshots/demo/tutorial4/step07.jpg)
+L'importation des fichiers s'effectue à partir du menu `Import files`
 
 
+```
 
+http://localhost/demo/demo6-region-svg.json
 
+http://localhost/demo/demo6-point.json
 
+http://localhost/demo/demo6-link.json
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
 
 
 

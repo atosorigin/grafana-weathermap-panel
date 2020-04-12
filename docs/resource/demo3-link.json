@@ -1,0 +1,229 @@
+{
+    "links": [
+  {
+    "colorCoordinateA": "#5794F2",
+    "colorCoordinateB": "#E54658",
+    "colorMode": false,
+    "colorModeB": false,
+    "id": 1,
+    "isIncurved": {
+      "label": "Yes",
+      "value": true
+    },
+    "label": "",
+    "linkURL": {
+      "followLink": "",
+      "hoveringTooltipLink": "",
+      "hoveringTooltipText": ""
+    },
+    "lowerLimit": [
+      {
+        "backColor": "",
+        "borderColor": "#E0B400",
+        "id": 0,
+        "lowerLimitMax": "",
+        "lowerLimitMin": "",
+        "sizeBorder": "10"
+      }
+    ],
+    "lowerLimitB": [],
+    "mainMetric": {
+      "expr": "",
+      "format": "",
+      "key": "",
+      "keyValue": "",
+      "manageValue": "avg",
+      "refId": "A",
+      "returnQuery": [],
+      "unit": ""
+    },
+    "mainMetricB": {
+      "format": "",
+      "key": "",
+      "keyValue": "",
+      "manageValue": "avg",
+      "refId": "",
+      "returnQuery": [],
+      "unit": ""
+    },
+    "meta": "",
+    "metrics": [],
+    "metricsB": [],
+    "name": "orientedLink1",
+    "orientationLink": {
+      "label": "Monodirectional",
+      "value": "AB"
+    },
+    "pointAPositionX": "-14",
+    "pointAPositionY": "88",
+    "pointBPositionX": "60",
+    "pointBPositionY": "20",
+    "pointCPositionX": "59",
+    "pointCPositionY": "-10",
+    "pointIn": "www.atos.fr",
+    "pointOut": "point1",
+    "positionParameter": {
+      "labelAPositionX": "0",
+      "labelAPositionY": "0",
+      "labelBPositionX": "0",
+      "labelBPositionY": "0",
+      "tooltipPositionA": {},
+      "tooltipPositionB": {}
+    },
+    "regionIn": "",
+    "regionOut": "",
+    "textObj": {
+      "colorBack": "",
+      "colorText": "",
+      "generateAuxiliaryElement": {
+        "addColorBackElement": false,
+        "addColorTextElement": false,
+        "colorBackElement": "black",
+        "colorTextElement": "white",
+        "displayObjectInText": false,
+        "legendElement": "",
+        "numericFormatElement": "",
+        "unit": ""
+      },
+      "generateObjectText": false,
+      "isTextRegion": false,
+      "style": {
+        "bold": true,
+        "italic": false,
+        "underline": true
+      },
+      "value": "",
+      "valueGenerateObjectText": {
+        "addColorBackElement": false,
+        "addColorTextElement": false,
+        "colorBackElement": "black",
+        "colorTextElement": "white",
+        "displayObjectInText": false,
+        "legendElement": "",
+        "numericFormatElement": "",
+        "unit": ""
+      }
+    },
+    "traceBack": false,
+    "traceBackB": false,
+    "traceBorder": false,
+    "traceBorderB": false,
+    "valueMainMetricA": "",
+    "valueMainMetricB": "",
+    "zIndex": 1
+  },
+  {
+    "colorCoordinateA": "#5794F2",
+    "colorCoordinateB": "#E54658",
+    "colorMode": false,
+    "colorModeB": false,
+    "id": 2,
+    "isIncurved": {
+      "label": "Yes",
+      "value": true
+    },
+    "label": "",
+    "linkURL": {
+      "followLink": "",
+      "hoveringTooltipLink": "",
+      "hoveringTooltipText": ""
+    },
+    "lowerLimit": [
+      {
+        "backColor": "",
+        "borderColor": "#8F3BB8",
+        "id": 0,
+        "lowerLimitMax": "",
+        "lowerLimitMin": "",
+        "sizeBorder": "10"
+      }
+    ],
+    "lowerLimitB": [],
+    "mainMetric": {
+      "expr": "",
+      "format": "",
+      "key": "",
+      "keyValue": "",
+      "manageValue": "avg",
+      "refId": "A",
+      "returnQuery": [],
+      "unit": ""
+    },
+    "mainMetricB": {
+      "format": "",
+      "key": "",
+      "keyValue": "",
+      "manageValue": "avg",
+      "refId": "",
+      "returnQuery": [],
+      "unit": ""
+    },
+    "meta": "",
+    "metrics": [],
+    "metricsB": [],
+    "name": "orientedLink2",
+    "orientationLink": {
+      "label": "Monodirectional",
+      "value": "AB"
+    },
+    "pointAPositionX": "60",
+    "pointAPositionY": "20",
+    "pointBPositionX": "-14",
+    "pointBPositionY": "88",
+    "pointCPositionX": "-19",
+    "pointCPositionY": "79",
+    "pointIn": "point1",
+    "pointOut": "www.atos.fr",
+    "positionParameter": {
+      "labelAPositionX": "0",
+      "labelAPositionY": "0",
+      "labelBPositionX": "0",
+      "labelBPositionY": "0",
+      "tooltipPositionA": {},
+      "tooltipPositionB": {}
+    },
+    "regionIn": "",
+    "regionOut": "",
+    "textObj": {
+      "colorBack": "",
+      "colorText": "",
+      "generateAuxiliaryElement": {
+        "addColorBackElement": false,
+        "addColorTextElement": false,
+        "colorBackElement": "black",
+        "colorTextElement": "white",
+        "displayObjectInText": false,
+        "legendElement": "",
+        "numericFormatElement": "",
+        "unit": ""
+      },
+      "generateObjectText": false,
+      "isTextRegion": false,
+      "style": {
+        "bold": true,
+        "italic": false,
+        "underline": true
+      },
+      "value": "",
+      "valueGenerateObjectText": {
+        "addColorBackElement": false,
+        "addColorTextElement": false,
+        "colorBackElement": "black",
+        "colorTextElement": "white",
+        "displayObjectInText": false,
+        "legendElement": "",
+        "numericFormatElement": "",
+        "unit": ""
+      }
+    },
+    "traceBack": false,
+    "traceBackB": false,
+    "traceBorder": false,
+    "traceBorderB": false,
+    "valueMainMetricA": "",
+    "valueMainMetricB": "",
+    "zIndex": 1
+  }
+
+]
+}

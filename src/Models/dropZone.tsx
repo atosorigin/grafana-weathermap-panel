@@ -87,7 +87,10 @@ class DropZone extends React.Component<Props, State> {
   // }
 
   test = () => {
-    console.log(JSON.stringify(this.props));
+    this.props.options.saveImportFile = [];
+    this.props.options.saveImportFile.forEach(element => {
+      console.log(element.name);
+    });
   };
 
   onMultiListFileChanged = (event: { currentTarget: HTMLInputElement }) => {
@@ -142,6 +145,7 @@ class DropZone extends React.Component<Props, State> {
         </div>
         <div>
           <this.multiUploadDisplay file={this.props.options.saveImportFile} />
+          <Button onClick={this.test}>test</Button>
         </div>
       </div>
     );

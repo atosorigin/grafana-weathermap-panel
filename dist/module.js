@@ -6522,6 +6522,14 @@ function (_super) {
 
 
   SimplePanel.prototype.render = function () {
+    console.log('---coordinate');
+    console.log(this.props.options.coordinateSpaceInitial);
+    console.log('---region');
+    console.log(this.props.options.regionCoordinateSpace);
+    console.log('---points');
+    console.log(this.props.options.arrayPoints);
+    console.log('---links');
+    console.log(this.props.options.arrayOrientedLinks);
     var styleBackground;
 
     if (this.props.options.baseMap.modeSVG) {

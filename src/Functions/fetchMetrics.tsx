@@ -15,8 +15,8 @@ export const reqMetricRegion = (region: RegionClass, props: any) => {
 };
 
 export const reqMetricAuxRegion = (region: RegionClass, props: any) => {
+  const data: DataFrame[] = [];
   for (const metric of region.metrics) {
-    const data: DataFrame[] = [];
     for (const line of props.data.series) {
       if (line.refId === metric.refId) {
         data.push(line);
@@ -37,8 +37,8 @@ export const reqMetricPoint = (point: PointClass, props: any) => {
 };
 
 export const reqMetricAuxPoint = (point: PointClass, props: any) => {
+  const data: DataFrame[] = [];
   for (const metric of point.metrics) {
-    const data: DataFrame[] = [];
     for (const line of props.data.series) {
       if (line.refId === metric.refId) {
         data.push(line);
@@ -59,8 +59,8 @@ export const reqMetricLink = (link: OrientedLinkClass, props: any) => {
 };
 
 export const reqMetricAuxLink = (link: OrientedLinkClass, props: any) => {
+  const data: DataFrame[] = [];
   for (const metric of link.metrics) {
-    const data: DataFrame[] = [];
     for (const line of props.data.series) {
       if (line.refId === metric.refId) {
         data.push(line);
@@ -86,8 +86,9 @@ export const reqMetricOrientedLink = (orientedLink: OrientedLinkClass, props: an
 };
 
 export const reqMetricAuxOrientedLink = (orientedLink: OrientedLinkClass, props: any) => {
+  const data: DataFrame[] = [];
+  const dataB: DataFrame[] = [];
   for (const metric of orientedLink.metrics) {
-    const data: DataFrame[] = [];
     for (const line of props.data.series) {
       if (line.refId === metric.refId) {
         data.push(line);
@@ -96,7 +97,6 @@ export const reqMetricAuxOrientedLink = (orientedLink: OrientedLinkClass, props:
     metric.returnQuery = data;
   }
   for (const metric of orientedLink.metricsB) {
-    const dataB: DataFrame[] = [];
     for (const line of props.data.series) {
       if (line.refId === metric.refId) {
         dataB.push(line);

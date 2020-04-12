@@ -13,7 +13,7 @@ const searchNameIsKey = (query: DataFrame, mainMetric: Metric): boolean => {
   if (nameQuery && nameQuery.length > 0) {
     for (const oneQuery of nameQuery) {
       const keyValue: string[] = oneQuery.split('=');
-      if (keyValue.length === 2) {
+      if (oneQuery.length === 2) {
         if (keyValue[0] === mainMetric.key && keyValue[1] === mainMetric.keyValue) {
           return true;
         }
@@ -32,8 +32,7 @@ export const getResultQuery = (mainMetric: Metric) => {
 
     cnt = 0;
     for (const line of mainMetric.returnQuery) {
-      const result = searchNameIsKey(line, mainMetric);
-      if (result) {
+      if (searchNameIsKey(line, mainMetric).toString()) {
         const sizeQuery: number = line.fields[0].values.length;
 
         for (let i = 0; i < sizeQuery; i++) {

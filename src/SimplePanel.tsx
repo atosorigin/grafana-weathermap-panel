@@ -1612,6 +1612,20 @@ export class SimplePanel extends PureComponent<Props, State> {
 
   /** render */
   render() {
+
+
+
+
+	console.log ('---coordinate');
+	console.log(this.props.options.coordinateSpaceInitial);
+console.log ('---region');
+	console.log(this.props.options.regionCoordinateSpace);
+console.log ('---points');
+	console.log(this.props.options.arrayPoints);
+	console.log ('---links');
+console.log(this.props.options.arrayOrientedLinks);
+
+
     let styleBackground;
     if (this.props.options.baseMap.modeSVG) {
       styleBackground = {

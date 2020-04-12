@@ -1,6 +1,6 @@
 # File `links`
 
-The complete [sample-link.json](../../../demo/sample-link.json) script is available, the construction details of which can be found below.
+The complete [sample-link.json](../../resource/sampleJson/sample-link.json) script is available, the construction details of which can be found below.
 
 
 The **link** file must be declared as a JSON file like this:

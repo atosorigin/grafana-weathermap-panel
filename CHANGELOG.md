@@ -1,9 +1,18 @@
 # Changelog
 
-## v0.4.5 (2020-04-08)
+## v0.4.6 (2020-04-12)
 
-- fixed
--
+- Add new docs
+- Add new tutorial
+- Updated Main metric file import
+- fixed coordinate region
+
+
+## v0.4.5 (2020-04-09)
+
+- Updated Main metric
+- fixed build 
+
 
 ## v0.4.4 (2020-04-03)
 

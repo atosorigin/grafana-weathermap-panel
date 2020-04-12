@@ -1,6 +1,6 @@
 # File `point`
 
-The full [sample-point.json](../../../demo/sample-point.json) script is available, the construction details of which can be found below.
+The full [sample-point.json](../../resource/sampleJson/sample-point.json) script is available, the construction details of which can be found below.
 
 
 The **point** file must be declared as a JSON file like this:

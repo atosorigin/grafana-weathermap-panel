@@ -23,6 +23,3 @@
   - [serveur de stockage](server.md)
 
 
-
-
-  

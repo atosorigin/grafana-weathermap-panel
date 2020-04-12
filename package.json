@@ -1,6 +1,6 @@
 {
   "name": "weathermap",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "description": "WeatherMap Panel Plugin for Grafana",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
@@ -17,21 +17,15 @@
     "@grafana/data": "^6.6.0",
     "@grafana/toolkit": "^6.6.0",
     "babel-jest": "^25.1.0",
-    "css-loader": "^3.4.2",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-prettier": "^3.1.2",
-    "jest": "^25.1.0",
-    "jest-html-reporter": "^2.8.0",
-    "prettier-eslint": "^9.0.1",
-    "prettier-eslint-cli": "^5.0.0"
+    "css-loader": "^3.4.2"
   },
   "dependencies": {
     "@grafana/ui": "^6.6.0",
     "@types/react-tabs": "^2.3.1",
-    "eslint": "^6.8.0",
     "global": "^4.4.0",
     "react-tabs": "^3.1.0",
     "reactstrap": "^8.4.0",
+    "babel-loader": "^8.1.0",
     "redux": "^4.0.5"
   }
 }

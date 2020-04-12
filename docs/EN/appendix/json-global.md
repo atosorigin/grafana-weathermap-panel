@@ -1,6 +1,6 @@
 # Global file
 
-the full [sample-global.json](../../../../demo/sample-global.json) script is available, with construction details below.
+the full [sample-global.json](../../resource/sampleJson/sample-global.json) script is available, with construction details below.
 
 
 
