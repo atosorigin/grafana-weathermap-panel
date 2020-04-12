@@ -43,7 +43,7 @@ $ systemctl restart grafana-server
 
 * [WeatherMap documentation](https://github.com/atosorigin/grafana-weathermap-panel/tree/master/docs)
 
-* [WeatherMap Tutorial](https://github.com/atosorigin/grafana-weathermap-panel/tree/master/docs/EN/demo)
+* [WeatherMap Demo / Tutorial](https://github.com/atosorigin/grafana-weathermap-panel/tree/master/docs/EN/demo)
 
 
 # History
@@ -51,5 +51,22 @@ $ systemctl restart grafana-server
 * [Changelog](https://github.com/atosorigin/grafana-weathermap-panel/blob/master/CHANGELOG.md)
 
 
-# Sreenshots
+# Usage
 
+## Editor
+
+![editor](docs/screenshots/editor/editor.jpg)
+
+## Panel
+
+**Tutorial 2**
+
+![demo2](docs/screenshots/demo/demo2.png)
+
+**Tutorial 3**
+
+![demo3](docs/screenshots/demo/demo3.jpg)
+
+**Tutorial 7**
+
+![demo7](docs/screenshots/demo/demo7.jpg)
