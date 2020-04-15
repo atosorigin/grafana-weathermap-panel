@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.4.7 (2020-04-16)
+
+- add button zoom
+- Updated association between orientedLink and region
+- Updated assocaition between orientedLink and point
+- Fixed position point B and link
+- Fixed change the size of a point in the editor
+
+
 ## v0.4.6 (2020-04-12)
 
 - Add new docs

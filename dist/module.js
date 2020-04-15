@@ -2346,6 +2346,163 @@ var reqUpdateMetrics = function reqUpdateMetrics(props) {
 
 /***/ }),
 
+/***/ "./Functions/getInfoDisplayRegion.tsx":
+/*!********************************************!*\
+  !*** ./Functions/getInfoDisplayRegion.tsx ***!
+  \********************************************/
+/*! exports provided: getInfoDisplayRegion */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getInfoDisplayRegion", function() { return getInfoDisplayRegion; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _fetchMetrics__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fetchMetrics */ "./Functions/fetchMetrics.tsx");
+/* harmony import */ var _getResultQuery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getResultQuery */ "./Functions/getResultQuery.tsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+
+
+ // import { getLowerLimit, LowerLimit } from './getLowerLimit';
+
+
+
+var getTextGenerate = function getTextGenerate(region, valueMetric) {
+  if (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText) {
+    var roundMetrics = region.textObj.valueGenerateObjectText ? parseInt(region.textObj.valueGenerateObjectText.numericFormatElement, 10) : 1;
+    var style = {
+      color: region.textObj.valueGenerateObjectText.addColorTextElement ? region.textObj.valueGenerateObjectText.colorTextElement : 'black',
+      backgroundColor: region.textObj.valueGenerateObjectText.addColorBackElement ? region.textObj.valueGenerateObjectText.colorBackElement : 'rgba(0, 0, 0, 0)'
+    };
+    var convertValue = '';
+
+    if (valueMetric && region.textObj.valueGenerateObjectText && region.textObj.valueGenerateObjectText.numericFormatElement !== '' && roundMetrics) {
+      convertValue = (valueMetric || 0).toPrecision(roundMetrics).toString();
+    } else if (valueMetric) {
+      convertValue = valueMetric.toString();
+    }
+
+    var modeText = region.textObj.valueGenerateObjectText.legendElement + ' ' + convertValue + ' ' + region.textObj.valueGenerateObjectText.unit;
+    var modeHTML = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+      style: style
+    }, region.textObj.valueGenerateObjectText.legendElement, convertValue, region.textObj.valueGenerateObjectText.unit);
+    return {
+      modeHTML: modeHTML,
+      modeText: modeText
+    };
+  }
+
+  return {
+    modeHTML: null,
+    modeText: null
+  };
+};
+
+var getTextRegion = function getTextRegion(region) {
+  var style = {
+    color: region.textObj.colorText,
+    backgroundColor: region.textObj.colorBack,
+    fontWeight: region.textObj.style.bold ? 'bold' : 'normal',
+    fontStyle: region.textObj.style.italic ? 'italic' : 'normal',
+    textDecoration: region.textObj.style.underline ? 'underline' : 'none'
+  };
+  var modeText = region.label;
+  var modeHTML = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+    style: style
+  }, region.label);
+  return {
+    modeHTML: modeHTML,
+    modeText: modeText
+  };
+};
+
+var getText = function getText(region, valueMetric) {
+  var generateText = {
+    modeHTML: null,
+    modeText: null
+  };
+  var generateTextRegion = {
+    modeHTML: null,
+    modeText: null
+  };
+
+  if (!region.textObj.valueGenerateObjectText.displayObjectInTooltip) {
+    generateText = getTextGenerate(region, valueMetric);
+  }
+
+  if (!region.textObj.isTextTooltip) {
+    generateTextRegion = getTextRegion(region);
+  }
+
+  var modeHTML = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", null, generateTextRegion.modeHTML && generateTextRegion.modeHTML, generateText.modeHTML && generateText.modeHTML);
+  var modeText = (generateTextRegion.modeText ? generateTextRegion.modeText + ' ' : '') + (generateText.modeText ? generateText.modeText : '');
+  return {
+    modeHTML: modeHTML,
+    modeText: modeText
+  };
+};
+
+var getTooltip = function getTooltip(region, valueMetric) {
+  var generateText = {
+    modeHTML: null,
+    modeText: null
+  };
+  var generateTextRegion = {
+    modeHTML: null,
+    modeText: null
+  };
+
+  if (region.textObj.valueGenerateObjectText.displayObjectInTooltip) {
+    generateText = getTextGenerate(region, valueMetric);
+  }
+
+  if (region.textObj.isTextTooltip) {
+    generateTextRegion = getTextRegion(region);
+  }
+
+  var modeHTML = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", null, generateTextRegion.modeHTML && generateTextRegion.modeHTML, generateText.modeHTML && generateText.modeHTML);
+  var modeText = (generateTextRegion.modeText ? generateTextRegion.modeText + ' ' : '') + (generateText.modeText ? generateText.modeText : '');
+  return {
+    modeHTML: modeHTML,
+    modeText: modeText
+  };
+};
+
+var updateMetrics = function updateMetrics(region, props) {
+  return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(void 0, void 0, void 0, function () {
+    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+      switch (_a.label) {
+        case 0:
+          return [4
+          /*yield*/
+          , Promise.resolve('Success').then(function () {
+            Object(_fetchMetrics__WEBPACK_IMPORTED_MODULE_1__["reqMetricRegion"])(region, props);
+          })];
+
+        case 1:
+          _a.sent();
+
+          return [2
+          /*return*/
+          ];
+      }
+    });
+  });
+};
+
+var getInfoDisplayRegion = function getInfoDisplayRegion(region, props) {
+  updateMetrics(region, props);
+  var valueMetric = Object(_getResultQuery__WEBPACK_IMPORTED_MODULE_2__["getResultQuery"])(region.mainMetric);
+  var text = getText(region, valueMetric);
+  var tooltip = getTooltip(region, valueMetric);
+  return {
+    tooltip: tooltip,
+    text: text
+  };
+};
+
+/***/ }),
+
 /***/ "./Functions/getLowerLimit.tsx":
 /*!*************************************!*\
   !*** ./Functions/getLowerLimit.tsx ***!
@@ -2551,7 +2708,7 @@ var initPoint = function initPoint(index) {
     legendElement: '',
     numericFormatElement: '',
     unit: '',
-    displayObjectInText: false,
+    displayObjectInTooltip: false,
     // 'displayObjectPermanently': false,
     addColorTextElement: false,
     colorTextElement: 'white',
@@ -2561,7 +2718,7 @@ var initPoint = function initPoint(index) {
     legendElement: '',
     numericFormatElement: '',
     unit: '',
-    displayObjectInText: false,
+    displayObjectInTooltip: false,
     // 'displayObjectPermanently': false,
     addColorTextElement: false,
     colorTextElement: 'white',
@@ -2594,7 +2751,7 @@ var initPoint = function initPoint(index) {
 };
 var clonePoint = function clonePoint(point) {
   var initTextObject = new _Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_0__["TextObject"]( // point.textObj.legend,
-  point.textObj.value, point.textObj.isTextRegion, point.textObj.colorBack, point.textObj.colorText, point.textObj.style, point.textObj.generateObjectText, point.textObj.valueGenerateObjectText, point.textObj.generateAuxiliaryElement);
+  point.textObj.value, point.textObj.isTextTooltip, point.textObj.colorBack, point.textObj.colorText, point.textObj.style, point.textObj.generateObjectText, point.textObj.valueGenerateObjectText, point.textObj.generateAuxiliaryElement);
   var linkURL = new _Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_1__["LinkURLClass"](point.linkURL.followLink, point.linkURL.hoveringTooltipLink, point.linkURL.hoveringTooltipText);
   var positionParameter = new _Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_2__["PositionParameterClass"](point.positionParameter.labelAPositionX, point.positionParameter.labelAPositionY, point.positionParameter.labelBPositionX, point.positionParameter.labelBPositionY, point.positionParameter.tooltipPositionA, point.positionParameter.tooltipPositionB);
   var mainMetric = {
@@ -2644,7 +2801,7 @@ var initRegionCoordinateSpace = function initRegionCoordinateSpace(index) {
     legendElement: '',
     numericFormatElement: '',
     unit: '',
-    displayObjectInText: false,
+    displayObjectInTooltip: false,
     // 'displayObjectPermanently': false,
     addColorTextElement: false,
     colorTextElement: 'white',
@@ -2654,7 +2811,7 @@ var initRegionCoordinateSpace = function initRegionCoordinateSpace(index) {
     legendElement: '',
     numericFormatElement: '',
     unit: '',
-    displayObjectInText: false,
+    displayObjectInTooltip: false,
     // 'displayObjectPermanently': false,
     addColorTextElement: false,
     colorTextElement: 'white',
@@ -2681,7 +2838,7 @@ var initRegionCoordinateSpace = function initRegionCoordinateSpace(index) {
 };
 var cloneRegionCoordinateSpace = function cloneRegionCoordinateSpace(region) {
   var initTextObject = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_1__["TextObject"]( // region.textObj.legend,
-  region.textObj.value, region.textObj.isTextRegion, region.textObj.colorBack, region.textObj.colorText, region.textObj.style, region.textObj.generateObjectText, region.textObj.valueGenerateObjectText, region.textObj.generateAuxiliaryElement);
+  region.textObj.value, region.textObj.isTextTooltip, region.textObj.colorBack, region.textObj.colorText, region.textObj.style, region.textObj.generateObjectText, region.textObj.valueGenerateObjectText, region.textObj.generateAuxiliaryElement);
   var linkURL = new Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_2__["LinkURLClass"](region.linkURL.followLink, region.linkURL.hoveringTooltipLink, region.linkURL.hoveringTooltipText);
   var coords = {
     xMin: region.coords.xMin,
@@ -3978,7 +4135,7 @@ var OrientedLinkClass =
 function (_super) {
   Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(OrientedLinkClass, _super);
 
-  function OrientedLinkClass(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter, name, orientationLink, pointAPositionX, pointAPositionY, colorCoordinateA, pointBPositionX, pointBPositionY, colorCoordinateB, valueMainMetricA, valueMainMetricB, pointIn, pointOut, regionIn, regionOut, zIndex, pointCPositionX, pointCPositionY, isIncurved, mainMetricB, metricsB, lowerLimitB, colorModeB, traceBackB, traceBorderB) {
+  function OrientedLinkClass(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter, name, orientationLink, pointAPositionX, pointAPositionY, colorCoordinateA, pointBPositionX, pointBPositionY, colorCoordinateB, valueMainMetricA, valueMainMetricB, pointIn, pointOut, regionIn, regionOut, zIndex, pointCPositionX, pointCPositionY, isIncurved, mainMetricB, metricsB) {
     var _this = _super.call(this, id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter) || this;
 
     _this.name = name;
@@ -4001,10 +4158,6 @@ function (_super) {
     _this.isIncurved = isIncurved;
     _this.mainMetricB = mainMetricB;
     _this.metricsB = metricsB;
-    _this.lowerLimitB = lowerLimitB;
-    _this.traceBorderB = traceBorderB;
-    _this.traceBackB = traceBackB;
-    _this.colorModeB = colorModeB;
     return _this;
   }
 
@@ -4145,11 +4298,11 @@ var TextObject =
 /** @class */
 function () {
   function TextObject( // legend: boolean,
-  value, isTextRegion, colorBack, colorText, style, // styleText: string,
+  value, isTextTooltip, colorBack, colorText, style, // styleText: string,
   generateObjectText, valueGenerateObjectText, generateAuxiliaryElement) {
     // this.legend = legend;
     this.value = value;
-    this.isTextRegion = isTextRegion;
+    this.isTextTooltip = isTextTooltip;
     this.colorBack = colorBack;
     this.colorText = colorText;
     this.style = style; // this.styleText = styleText;
@@ -4769,7 +4922,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! Models/LinkURLClass */ "./Models/LinkURLClass.tsx");
 /* harmony import */ var Functions_coodinateIsInInitialSpace__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! Functions/coodinateIsInInitialSpace */ "./Functions/coodinateIsInInitialSpace.tsx");
 /* harmony import */ var Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! Functions/fetchMetrics */ "./Functions/fetchMetrics.tsx");
-/* harmony import */ var Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! Functions/getResultQuery */ "./Functions/getResultQuery.tsx");
+/* harmony import */ var Functions_getInfoDisplayRegion__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! Functions/getInfoDisplayRegion */ "./Functions/getInfoDisplayRegion.tsx");
 /* harmony import */ var components_CoordinateSpace_addCoordinate__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! components/CoordinateSpace/addCoordinate */ "./components/CoordinateSpace/addCoordinate.tsx");
 /* harmony import */ var _components_Draw_drawRectangle__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Draw/drawRectangle */ "./components/Draw/drawRectangle.tsx");
 /* harmony import */ var _components_Draw_drawPoint__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Draw/drawPoint */ "./components/Draw/drawPoint.tsx");
@@ -4785,6 +4938,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+ // import { getResultQuery } from 'Functions/getResultQuery';
 
 
 
@@ -4804,32 +4958,6 @@ function (_super) {
 
   function SimplePanel(props) {
     var _this = _super.call(this, props) || this;
-    /**
-     * TODO
-     */
-    // fillCoordinate = (): JSX.Element => {
-    // 	const { options } = this.props;
-    // 	let mapItems: JSX.Element[];
-    // 	mapItems = options.regionCoordinateSpace
-    // 		.map((line: RegionClass, index) =>
-    // 			<DrawRectangleExtend
-    // 				key={'drawRectangleExtend' + index.toString()}
-    // 				uneCoor={line}
-    // 				useLimit={false}
-    // 				limit={options.coordinateSpaceInitial}
-    // 				onOptionsChange={this.props.onOptionsChange}
-    // 				options={this.props.options}
-    // 				data={this.props.data}
-    // 				id={'region' + line.id.toString()}
-    // 				isEnabled={!this.state.buttonManage[1]} />
-    // 		);
-    // 	return (
-    // 		<ul>
-    // 			{mapItems}
-    // 		</ul>
-    // 	);
-    // }
-
     /**
      * Display limit (coordinateSpaceInitial)
      * @returns JSX.Element
@@ -4913,7 +5041,7 @@ function (_super) {
         legendElement: '',
         numericFormatElement: '',
         unit: '',
-        displayObjectInText: false,
+        displayObjectInTooltip: false,
         // 'displayObjectPermanently': false,
         addColorTextElement: false,
         colorTextElement: 'white',
@@ -4923,7 +5051,7 @@ function (_super) {
         legendElement: '',
         numericFormatElement: '',
         unit: '',
-        displayObjectInText: false,
+        displayObjectInTooltip: false,
         // 'displayObjectPermanently': false,
         addColorTextElement: false,
         colorTextElement: 'white',
@@ -5597,7 +5725,7 @@ function (_super) {
         legendElement: '',
         numericFormatElement: '',
         unit: '',
-        displayObjectInText: false,
+        displayObjectInTooltip: false,
         // 'displayObjectPermanently': false,
         addColorTextElement: false,
         colorTextElement: 'white',
@@ -5607,7 +5735,7 @@ function (_super) {
         legendElement: '',
         numericFormatElement: '',
         unit: '',
-        displayObjectInText: false,
+        displayObjectInTooltip: false,
         // 'displayObjectPermanently': false,
         addColorTextElement: false,
         colorTextElement: 'white',
@@ -5633,7 +5761,7 @@ function (_super) {
         keyValue: '',
         refId: '',
         manageValue: 'avg'
-      }, [], [], false, false, false);
+      }, []);
       var newArrayOrientedLink = _this.props.options.arrayOrientedLinks;
       newArrayOrientedLink.push(newOrientedLink);
 
@@ -5753,12 +5881,7 @@ function (_super) {
       _this.setState({
         valueButton: 'point'
       });
-    }; // changeDisplayButtonlegend = () => {
-    // 	this.setState({
-    // 		valueLegend: <div></div>,
-    // 	});
-    // }
-
+    };
 
     _this.getCoordinates = function (event) {
       var valueButton = _this.state.valueButton;
@@ -5825,13 +5948,7 @@ function (_super) {
       _this.setState({
         allActionButton: _final
       });
-    }; // display_Button = () => {
-    // 	const ultracall = document.getElementById('allButton');
-    // 	ultracall?.addEventListener('click', () => {
-    // 		ultracall.style.display = 'inline-block';
-    // 	})
-    // }
-
+    };
 
     _this.callMethod = function () {
       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
@@ -5985,8 +6102,7 @@ function (_super) {
 
       _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
         legend: newLegend
-      })); // this.changeDisplayButtonlegend();
-
+      }));
     }; // Close legend click on close
 
 
@@ -6107,7 +6223,52 @@ function (_super) {
           ];
         });
       });
-    }; // Tooltip in Svg
+    }; // Zoom in Panel
+
+    /********************************  Zoom Panel*********************************** */
+    // Zoom Plus
+
+
+    _this.ZoomIn = function () {
+      var _a;
+
+      var intialfirst = document.getElementById('more');
+      (_a = intialfirst) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
+        var elmnt = document.getElementById('mainPanel');
+
+        if (elmnt) {
+          elmnt.style.transform += 'scale(1.01,1.01)';
+        }
+      });
+    }; // Zoom Negative
+
+
+    _this.ZoomOut = function () {
+      var _a;
+
+      var intialsecond = document.getElementById('less');
+      (_a = intialsecond) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
+        var elmnt = document.getElementById('mainPanel');
+
+        if (elmnt) {
+          elmnt.style.transform += 'scale(0.99,0.99)';
+        }
+
+        console.log('-');
+      });
+    }; // Zoom Initial
+    // ZoomInitial = () => {
+    //   const intialsecond = document.getElementById('init');
+    //   intialsecond?.addEventListener('click', () => {
+    //     const elmnt = document.getElementById('mainPanel');
+    //     if(elmnt ){
+    //       elmnt.style.transform = 'scale(1,1)';
+    //     }
+    //   });
+    // };
+
+    /********************************  Zoom Panel*********************************** */
+    // Tooltip in Svg
 
 
     _this.tooltip_SVG = function () {
@@ -6189,33 +6350,28 @@ function (_super) {
             var id = document.getElementById('oct' + line.idSVG);
 
             if (id) {
-              var valueQuery = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_10__["getResultQuery"])(line.mainMetric);
+              // const valueQuery = getResultQuery(line.mainMetric);
               var test_1 = document.getElementById('jeSuisLa' + line.id);
 
               if (test_1) {
                 test_1.style.fill = 'red';
               } else {
-                var title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
-                title.setAttribute('fill', 'yellow');
-                title.setAttributeNS('http://www.w3.org/1999/xlink', 'fill', 'yellow'); // title.setAttributeNS('http://www.w3.org/2000/xmlns/', 'fill', 'yellow');
+                var textObj = line.textObj;
 
-                title.setAttribute('fill', 'red');
-                title.setAttributeNS('title', 'fill', 'red'); // title.innerHTML = '<div><p style="color: red;">' + (valueQuery ? valueQuery.toString() : '') + '</p></div>';
+                if (textObj.isTextTooltip || textObj.generateObjectText && textObj.valueGenerateObjectText && textObj.valueGenerateObjectText.displayObjectInTooltip) {
+                  var title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                  title.setAttribute('fill', 'yellow');
+                  title.setAttributeNS('http://www.w3.org/1999/xlink', 'fill', 'yellow');
+                  title.setAttribute('fill', 'red');
+                  title.setAttributeNS('title', 'fill', 'red');
+                  var text = Object(Functions_getInfoDisplayRegion__WEBPACK_IMPORTED_MODULE_10__["getInfoDisplayRegion"])(line, _this.props);
+                  title.innerHTML = text.tooltip.modeText || ''; // title.textContent = valueQuery ? valueQuery.toString() : '';
 
-                title.textContent = valueQuery ? valueQuery.toString() : '';
-                title.id = 'jeSuisLa' + line.id; // title.style.
-
-                title.style.fill = 'red';
-                id.appendChild(title);
-              } // id.appendChild(title).style.backgroundColor = 'red';
-              // id.appendChild(title).style.fill = 'red';
-              // id.appendChild(title).style.padding = '2px';
-              // id.appendChild(title).style.float = 'right';
-              // id.appendChild(title).style.color = 'blue';
-              // id.appendChild(title).style.boxShadow = '0 0 2px red';//rgba(0, 0, 0, 0.5)';
-              // id.appendChild(title).style.borderRadius = '2px';
-              // id.appendChild(title).style.fontWeight = '5000';
-
+                  title.id = 'jeSuisLa' + line.id;
+                  title.style.fill = 'red';
+                  id.appendChild(title);
+                }
+              }
             }
           }
         }
@@ -6252,7 +6408,7 @@ function (_super) {
           options: _this.props.options,
           data: _this.props.data,
           id: 'region' + line.id.toString(),
-          isEnabled: false
+          isEnabled: true
         });
       });
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
@@ -6261,27 +6417,19 @@ function (_super) {
     };
 
     _this.state = {
-      // isUpdate: false,
-      // sizePanel: 300,
       idOrientedLink: _this.props.options.indexOrientedLink,
       valueButton: '',
       buttonManage: [false, false, false, false, false],
       numberClickDiv: 0,
       allActionButton: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null),
-      // valueLegend: <div></div>,
-      // seuil: [],
       nbClickButton: false,
       legend: {
         hiddenLegend: true,
         x: 0,
         y: 0
       },
-      // img: <div></div>,
       svg: '',
-      // loading: false,
-      // url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/tiger.svg',
       displayRegion: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null),
-      // idSVG: '',
       tooltip: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "salut")
     };
     return _this;
@@ -6383,7 +6531,6 @@ function (_super) {
         data: _this.props.data,
         textObject: orientedLink.textObj,
         seuil: orientedLink.lowerLimit,
-        seuilB: orientedLink.lowerLimitB,
         labelAPositionX: orientedLink.positionParameter.labelAPositionX,
         labelAPositionY: orientedLink.positionParameter.labelAPositionY,
         labelBPositionX: orientedLink.positionParameter.labelBPositionX,
@@ -6513,7 +6660,7 @@ function (_super) {
     }
 
     if (this.props !== prevProps) {
-      this.chargeRegion(); // console.log(this.props.options.displayButton);
+      this.chargeRegion();
     }
   };
   /*************************************test create tooltip **********************************************************/
@@ -6522,24 +6669,15 @@ function (_super) {
 
 
   SimplePanel.prototype.render = function () {
-    console.log('---coordinate');
-    console.log(this.props.options.coordinateSpaceInitial);
-    console.log('---region');
-    console.log(this.props.options.regionCoordinateSpace);
-    console.log('---points');
-    console.log(this.props.options.arrayPoints);
-    console.log('---links');
-    console.log(this.props.options.arrayOrientedLinks);
     var styleBackground;
 
     if (this.props.options.baseMap.modeSVG) {
-      styleBackground = {// position: 'absolute',
+      styleBackground = {
+        // position: 'absolute',
         // textAlign: 'center',
         // backgroundRepeat: 'no-repeat',
-        // height: this.props.options.baseMap.height + 'px',
-        // width: this.props.options.baseMap.width + 'px',
-        // opacity: 0.8,
-        // zIndex: 4,
+        height: this.props.options.baseMap.height + 'px',
+        width: this.props.options.baseMap.width + 'px'
       };
     } else {
       styleBackground = {
@@ -6565,8 +6703,6 @@ function (_super) {
       backgroundRepeat: 'no-repeat',
       height: this.props.options.baseMap.height + 'px',
       width: this.props.options.baseMap.width + 'px',
-      // opacity: 0.8,
-      // zIndex: 20,
       opacity: 0,
       zIndex: 2
     };
@@ -6583,6 +6719,21 @@ function (_super) {
       autoHide: false,
       hideHorizontalTrack: true
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      id: "zoom",
+      style: {
+        display: 'inline-flex',
+        marginTop: '-7px',
+        marginLeft: '86%'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+      id: "more",
+      onClick: this.ZoomIn,
+      variant: 'primary'
+    }, "+"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+      id: "less",
+      onClick: this.ZoomOut,
+      variant: 'primary'
+    }, "-")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       style: {
         textAlign: 'left',
         position: 'relative',
@@ -6613,19 +6764,20 @@ function (_super) {
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
       isRegion: true
-    }))), this.state.buttonManage[2] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_legend__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    }))), this.state.buttonManage[2] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_legend__WEBPACK_IMPORTED_MODULE_15__["default"], Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
-      data: this.props.data,
+      data: this.props.data
+    }, this.props.options.legend, {
       callBack: this.handleClick
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       onClick: this.callMethod
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       id: "coordinateSpaces",
       style: styleBackground
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "tooltip"
-    }), this.fillCoordinate(), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       onClick: this.getCoordinates,
       id: "mainPanel",
       style: {
@@ -6645,7 +6797,7 @@ function (_super) {
       dangerouslySetInnerHTML: {
         __html: this.props.options.baseMap.layerImage
       }
-    }), this.displayOrientedLink(), this.displayPoint()))))));
+    }), this.fillCoordinate(), this.displayOrientedLink(), this.displayPoint()))))));
   };
 
   return SimplePanel;
@@ -7472,7 +7624,8 @@ function (_super) {
       data: this.props.data,
       coordinate: this.state.arrayCoor,
       callBack: this.callBackManageLowerLimit,
-      lowerLimitCallBack: this.callBackLowerLimit
+      lowerLimitCallBack: this.callBackLowerLimit,
+      isLink: false
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "radio"
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
@@ -9842,6 +9995,7 @@ function (_super) {
       arrayCoor: tmp
     });
     this.generateInputsPoint();
+    this.callBack();
   };
   /**
    * Get value of input with state.arrayPointClass
@@ -9919,39 +10073,14 @@ function (_super) {
           item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Functions_Input_inputSelectPoint__WEBPACK_IMPORTED_MODULE_6__["default"], {
             key: obj.id,
             _onChange: function _onChange(value, name, index) {
-              var e_2, _a;
-
-              var i;
-              i = 0;
-
-              var copyOfarrayPointClass = _this.state.arrayPointClass.slice();
-
-              try {
-                for (var copyOfarrayPointClass_1 = (e_2 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(copyOfarrayPointClass)), copyOfarrayPointClass_1_1 = copyOfarrayPointClass_1.next(); !copyOfarrayPointClass_1_1.done; copyOfarrayPointClass_1_1 = copyOfarrayPointClass_1.next()) {
-                  var line_1 = copyOfarrayPointClass_1_1.value;
-
-                  if (line_1.id === index) {
-                    copyOfarrayPointClass[i] = Object(_Functions_EditParameter_editGoodParameterPoint__WEBPACK_IMPORTED_MODULE_5__["editGoodParameterPoint"])(name, copyOfarrayPointClass[i], value.value || '', value || {});
-                    break;
-                  }
-
-                  i++;
-                }
-              } catch (e_2_1) {
-                e_2 = {
-                  error: e_2_1
-                };
-              } finally {
-                try {
-                  if (copyOfarrayPointClass_1_1 && !copyOfarrayPointClass_1_1.done && (_a = copyOfarrayPointClass_1["return"])) _a.call(copyOfarrayPointClass_1);
-                } finally {
-                  if (e_2) throw e_2.error;
-                }
-              }
+              var newPoint = _this.state.arrayCoor;
+              Object(_Functions_EditParameter_editGoodParameterPoint__WEBPACK_IMPORTED_MODULE_5__["editGoodParameterPoint"])(name, newPoint, '', value);
 
               _this.setState({
-                arrayPointClass: copyOfarrayPointClass
+                arrayCoor: newPoint
               });
+
+              _this.generateInputsPoint();
 
               _this.callBack();
             },
@@ -9970,7 +10099,7 @@ function (_super) {
             text: obj.label,
             width: 10,
             _onChange: function _onChange(keyInt, newColor) {
-              var e_3, _a;
+              var e_2, _a;
 
               var i;
               i = 0;
@@ -9978,25 +10107,25 @@ function (_super) {
               var copyOfarrayPointClass = _this.state.arrayPointClass.slice();
 
               try {
-                for (var copyOfarrayPointClass_2 = (e_3 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(copyOfarrayPointClass)), copyOfarrayPointClass_2_1 = copyOfarrayPointClass_2.next(); !copyOfarrayPointClass_2_1.done; copyOfarrayPointClass_2_1 = copyOfarrayPointClass_2.next()) {
-                  var line_2 = copyOfarrayPointClass_2_1.value;
+                for (var copyOfarrayPointClass_1 = (e_2 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(copyOfarrayPointClass)), copyOfarrayPointClass_1_1 = copyOfarrayPointClass_1.next(); !copyOfarrayPointClass_1_1.done; copyOfarrayPointClass_1_1 = copyOfarrayPointClass_1.next()) {
+                  var line_1 = copyOfarrayPointClass_1_1.value;
 
-                  if (line_2.id === keyInt) {
+                  if (line_1.id === keyInt) {
                     copyOfarrayPointClass[i] = Object(_Functions_EditParameter_editGoodParameterPoint__WEBPACK_IMPORTED_MODULE_5__["editGoodParameterPoint"])(obj.name, copyOfarrayPointClass[i], newColor, {});
                     break;
                   }
 
                   i++;
                 }
-              } catch (e_3_1) {
-                e_3 = {
-                  error: e_3_1
+              } catch (e_2_1) {
+                e_2 = {
+                  error: e_2_1
                 };
               } finally {
                 try {
-                  if (copyOfarrayPointClass_2_1 && !copyOfarrayPointClass_2_1.done && (_a = copyOfarrayPointClass_2["return"])) _a.call(copyOfarrayPointClass_2);
+                  if (copyOfarrayPointClass_1_1 && !copyOfarrayPointClass_1_1.done && (_a = copyOfarrayPointClass_1["return"])) _a.call(copyOfarrayPointClass_1);
                 } finally {
-                  if (e_3) throw e_3.error;
+                  if (e_2) throw e_2.error;
                 }
               }
 
@@ -10095,7 +10224,8 @@ function (_super) {
       data: this.props.data,
       coordinate: this.state.arrayCoor,
       callBack: this.callBackManageLowerLimit,
-      lowerLimitCallBack: this.callBackLowerLimit
+      lowerLimitCallBack: this.callBackLowerLimit,
+      isLink: false
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_positionParameters__WEBPACK_IMPORTED_MODULE_11__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
@@ -12062,14 +12192,12 @@ function (_super) {
     var _this = this;
 
     var colorBorder = '';
-    var seuil = [];
+    var seuil = this.props.seuil;
     var valueMainMetric = 0;
 
     if (link === 'A') {
-      seuil = this.props.seuil;
       valueMainMetric = parseInt(this.props.valueMainMetricA, 10);
     } else {
-      seuil = this.props.seuilB;
       valueMainMetric = parseInt(this.props.valueMainMetricB, 10);
     }
 
@@ -12081,7 +12209,11 @@ function (_super) {
       }
     } else {
       colorBorder = 'black';
-    }
+    } // console.log('valueMainMetric');
+    // console.log(valueMainMetric);
+    // console.log('seuil');
+    // console.log(seuil);
+
 
     var index = 0;
     seuil.forEach(function (level) {
@@ -12114,14 +12246,12 @@ function (_super) {
     var _this = this;
 
     var sizeBorder = '';
-    var seuil = [];
+    var seuil = this.props.seuil;
     var valueMainMetric = 0;
 
     if (link === 'A') {
-      seuil = this.props.seuil;
       valueMainMetric = parseInt(this.props.valueMainMetricA, 10);
     } else {
-      seuil = this.props.seuilB;
       valueMainMetric = parseInt(this.props.valueMainMetricB, 10);
     }
 
@@ -12680,6 +12810,11 @@ function (_super) {
 
       index++;
     });
+
+    if (colorBackground === '') {
+      colorBackground = 'black';
+    }
+
     return colorBackground;
   };
 
@@ -13020,7 +13155,9 @@ function (_super) {
     _this.editColorSvgZone = function (id, color, border, sizeBorder) {
       var colorSVG = Object(Functions_parseColor__WEBPACK_IMPORTED_MODULE_6__["parseColor"])(color);
       var colorBorderSVG = Object(Functions_parseColor__WEBPACK_IMPORTED_MODULE_6__["parseColor"])(border);
-      var changeColorElement = document.getElementById(id);
+      var changeColorElement = document.getElementById(id); // if (id === 'rect45') {
+      //   console.log('am here');
+      // }
 
       if (changeColorElement) {
         changeColorElement.style.fill = colorSVG.color;
@@ -13029,6 +13166,26 @@ function (_super) {
         changeColorElement.style.strokeOpacity = colorBorderSVG.transparency;
         changeColorElement.style.strokeWidth = sizeBorder;
       }
+    };
+
+    _this.generateValueMetricElement = function (region, valueQuery) {
+      var converValueQuery = 'NaN';
+      var roundMetrics = region.textObj.valueGenerateObjectText ? parseInt(region.textObj.valueGenerateObjectText.numericFormatElement, 10) : 1;
+
+      if (valueQuery && region.textObj.valueGenerateObjectText && region.textObj.valueGenerateObjectText.numericFormatElement !== '' && roundMetrics) {
+        converValueQuery = (valueQuery || 0).toPrecision(roundMetrics).toString();
+      } else if (valueQuery) {
+        converValueQuery = valueQuery.toString();
+      } // (Math.round(valueQuery * roundMetrics + Number.EPSILON) / roundMetrics).toString()
+
+
+      var value = converValueQuery;
+
+      if (region.textObj.valueGenerateObjectText) {
+        value = region.textObj.valueGenerateObjectText.legendElement + ' ' + converValueQuery + ' ' + region.textObj.valueGenerateObjectText.unit;
+      }
+
+      return value;
     };
     /** fill state for tooltip, color zone and calc round query */
 
@@ -13042,25 +13199,16 @@ function (_super) {
         color: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorTextElement : 'white',
         backgroundColor: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorBackElement : 'black'
       };
-      var converValueQuery = 'NaN';
-      var roundMetrics = region.textObj.valueGenerateObjectText ? parseInt(region.textObj.valueGenerateObjectText.numericFormatElement, 10) : 1;
 
-      if (valueQuery && region.textObj.valueGenerateObjectText && region.textObj.valueGenerateObjectText.numericFormatElement !== '' && roundMetrics) {
-        converValueQuery = valueQuery.toFixed(roundMetrics).toString();
-      } else if (valueQuery) {
-        converValueQuery = valueQuery.toString();
-      } // (Math.round(valueQuery * roundMetrics + Number.EPSILON) / roundMetrics).toString()
+      var valueQueryResult = _this.generateValueMetricElement(region, valueQuery);
 
-
-      var value = converValueQuery + (region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.unit ? ' ' + region.textObj.valueGenerateObjectText.unit : '' : '');
-      var valueQueryResult = (region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.legendElement : '') + ' ' + value;
       var tooltipValue = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         style: styleTooltip
       }, link && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
         href: region.linkURL.hoveringTooltipLink
-      }, region.linkURL.hoveringTooltipText), region.textObj.isTextRegion && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, region.label)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, region.linkURL.hoveringTooltipText), region.textObj.isTextTooltip && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, region.label)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         style: styleMetrics
-      }, region.textObj.generateObjectText && region.textObj.valueGenerateObjectText && region.textObj.valueGenerateObjectText.displayObjectInText && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, valueQueryResult)));
+      }, region.textObj.generateObjectText && region.textObj.valueGenerateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, valueQueryResult)));
       return {
         tooltipValue: tooltipValue,
         backgroundColor: lowerLimit.colorBack,
@@ -13068,6 +13216,14 @@ function (_super) {
         sizeBorder: lowerLimit.sizeBorder,
         valueQuery: valueQueryResult
       };
+    };
+
+    _this.displayValueQuery = function (region) {
+      if (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInTooltip) {
+        return true;
+      }
+
+      return false;
     };
     /** generate tooltip for metrics and apply color with lower limit */
 
@@ -13083,24 +13239,25 @@ function (_super) {
       var resultTooltip = _this.setStateTooltip(lowerLimit, region, valueQuery, _this.props.isEnabled);
 
       if (valueQuery) {
-        if (region.mode) {
+        if (region.mode && (!region.textObj.isTextTooltip || _this.displayValueQuery(region))) {
           var coordinateWrite = Object(Functions_searchMinMaxIdSVG__WEBPACK_IMPORTED_MODULE_8__["searchMinMaxIdSVG"])(region.idSVG);
 
           if (coordinateWrite) {
             stateIsFill = true;
             var styleWrite = {
               position: 'absolute',
-              zIndex: 1000,
+              zIndex: 999,
               left: coordinateWrite.xMax - (coordinateWrite.xMax - coordinateWrite.xMin),
               top: coordinateWrite.yMax,
               backgroundColor: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorBackElement : 'black',
               color: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorTextElement : 'white'
             };
+            var htmlResult = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+              style: styleWrite
+            }, !region.textObj.isTextTooltip && region.label, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), _this.displayValueQuery(region) && resultTooltip.valueQuery);
 
             _this.setState({
-              htmlResult: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-                style: styleWrite
-              }, resultTooltip.valueQuery),
+              htmlResult: htmlResult,
               tooltipValue: resultTooltip.tooltipValue,
               backgroundColor: resultTooltip.backgroundColor,
               borderColor: resultTooltip.borderColor,
@@ -13151,12 +13308,7 @@ function (_super) {
       var backColor = region.textObj.colorBack;
       var textColor = region.textObj.colorText;
       var style = region.textObj.style;
-      var coorHTML = Object(Functions_otherFunction__WEBPACK_IMPORTED_MODULE_3__["calculRealCoordinate"])(region, _this.props.useLimit, _this.props.limit); // console.log(coorHTML);
-      // region.
-      // const tt: Coord4D = { xMin: coorHTML.right, xMax: coorHTML.left, yMin: coorHTML.top, yMax: coorHTML.bottom };
-      // const cc: Coor4DNum = pixelToPercent(tt, this.props.options.baseMap);
-      // console.log(this.props.uneCoor.label);
-
+      var coorHTML = Object(Functions_otherFunction__WEBPACK_IMPORTED_MODULE_3__["calculRealCoordinate"])(region, _this.props.useLimit, _this.props.limit);
       var styleDiv = {
         position: 'absolute',
         border: pBorder,
@@ -13164,12 +13316,12 @@ function (_super) {
         bottom: coorHTML.bottom,
         left: coorHTML.left,
         right: coorHTML.right,
-        zIndex: 1000,
-        // display: 'flex',
-        // flexDirection: 'column',
+        zIndex: 999,
         justifyContent: 'center',
         background: 'url(' + region.img + ') no-repeat center center',
-        backgroundColor: _this.state.backgroundColor
+        backgroundColor: _this.state.backgroundColor,
+        backgroundSize: 'contain',
+        cursor: 'pointer'
       };
       var styleTextDiv = {
         backgroundColor: backColor,
@@ -13185,35 +13337,38 @@ function (_super) {
       var value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
 
       if (_this.props.isEnabled && region.linkURL.followLink !== '') {
-        value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-          href: region.linkURL.followLink
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: styleDiv,
           id: _this.props.id
-        }, (!region.textObj.isTextRegion || region.textObj.generateObjectText) && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+          href: region.linkURL.followLink
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          style: {
+            height: '100%',
+            width: '100%'
+          }
+        }, (!region.textObj.isTextTooltip || region.textObj.generateObjectText) && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: styleTextDiv
-        }, !region.textObj.isTextRegion && region.label), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        }, !region.textObj.isTextTooltip && region.label), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: styleMetricsDiv
-        }, region.textObj.generateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInText && _this.state.valueQuery))));
+        }, region.textObj.generateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInTooltip && _this.state.valueQuery)))));
 
-        if (region.textObj.isTextRegion || region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInText) {
+        if (region.textObj.isTextTooltip || region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip) {
           value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
             content: _this.state.tooltipValue
           }, value);
         }
       } else {
-        // console.log('je suis la ' + this.props.uneCoor.label);
-        // console.log(cc);
         value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: styleDiv,
           id: _this.props.id
-        }, (!region.textObj.isTextRegion || region.textObj.generateObjectText) && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        }, (!region.textObj.isTextTooltip || region.textObj.generateObjectText) && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: styleTextDiv
-        }, !region.textObj.isTextRegion && region.label), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        }, !region.textObj.isTextTooltip && region.label), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: styleMetricsDiv
-        }, region.textObj.generateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInText && _this.state.valueQuery)));
+        }, region.textObj.generateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInTooltip && _this.state.valueQuery)));
 
-        if (region.textObj.isTextRegion || region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInText) {
+        if (region.textObj.isTextTooltip || region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip) {
           value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
             content: _this.state.tooltipValue
           }, value);
@@ -13776,6 +13931,11 @@ function (_super) {
               /*break*/
               , 4];
               newSeuil = seuil ? seuil[i] : new Models_LowerLimitClass__WEBPACK_IMPORTED_MODULE_5__["LowerLimitClass"](i, '', '', '', '', '');
+
+              if (this.props.isLink) {
+                newSeuil = seuil ? seuil[i] : new Models_LowerLimitClass__WEBPACK_IMPORTED_MODULE_5__["LowerLimitClass"](i, '', '', '', '', '10');
+              }
+
               return [4
               /*yield*/
               , this.addInput(i, newSeuil)];
@@ -14033,8 +14193,6 @@ function (_super) {
   Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(FixColor, _super);
 
   function FixColor(props) {
-    var _a;
-
     var _this = _super.call(this, props) || this;
     /**
      * edit background color with Promise
@@ -14047,32 +14205,12 @@ function (_super) {
       });
     };
     /**
-     * edit background color link B if orientedLink is bidirectionnal with Promise
-     */
-
-
-    _this.setStateAsyncSeuilB = function (state) {
-      return new Promise(function (resolve) {
-        _this.setState(state, resolve);
-      });
-    };
-    /**
      * save data
      */
 
 
     _this.callBack = function () {
       _this.props.lowerLimitCallBack(_this.state.lowerLimit, _this.props.id);
-    };
-    /**
-     * save data
-     */
-
-
-    _this.callBackB = function () {
-      if (_this.props.lowerLimitCallBackB) {
-        _this.props.lowerLimitCallBackB(_this.state.lowerLimitB, _this.props.id);
-      }
     };
     /**
      * change background color
@@ -14137,37 +14275,6 @@ function (_super) {
       });
     };
     /**
-     * change contour color link B if orientedLink is bidirectionnal
-     */
-
-
-    _this.onChangeColorContourB = function (key, color) {
-      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
-        var newSeuil;
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
-          switch (_a.label) {
-            case 0:
-              newSeuil = this.state.lowerLimitB;
-              newSeuil[0].borderColor = color;
-              return [4
-              /*yield*/
-              , this.setStateAsyncSeuilB({
-                lowerLimitB: newSeuil
-              })];
-
-            case 1:
-              _a.sent();
-
-              this.callBackB();
-              this.initComponent();
-              return [2
-              /*return*/
-              ];
-          }
-        });
-      });
-    };
-    /**
      * change size color
      */
 
@@ -14199,37 +14306,6 @@ function (_super) {
       });
     };
     /**
-     * change size color link B if orientedLink is bidirectionnal
-     */
-
-
-    _this.onChangeSzContourB = function (value) {
-      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
-        var newSeuil;
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
-          switch (_a.label) {
-            case 0:
-              newSeuil = this.state.lowerLimitB;
-              newSeuil[0].sizeBorder = value;
-              return [4
-              /*yield*/
-              , this.setStateAsyncSeuilB({
-                lowerLimitB: newSeuil
-              })];
-
-            case 1:
-              _a.sent();
-
-              this.callBackB();
-              this.initComponent();
-              return [2
-              /*return*/
-              ];
-          }
-        });
-      });
-    };
-    /**
      * add button color
      */
 
@@ -14245,95 +14321,34 @@ function (_super) {
       var placeHolderSize = '';
 
       if (_this.props.isLink) {
-        textInputColor = 'Edit color A';
-        labelSize = 'Size A';
-        placeHolderSize = 'Size A';
+        textInputColor = 'Edit color';
+        labelSize = 'Edit size';
+        placeHolderSize = 'Edit size';
       } else {
         textInputColor = l10n.colorVariable.switchOutlineColor;
         labelSize = l10n.colorVariable.thicknessOutline;
         placeHolderSize = l10n.colorVariable.thicknessOutline;
       }
 
-      if (_this.props.isLink && _this.props.orientedLink && _this.props.orientedLink.orientationLink.value === 'double') {
-        if (_this.props.traceBorder && _this.props.traceBorderB) {
-          if (_this.state.lowerLimitB) {
-            var keyContourDiv = key + 'ContourDiv';
-            couleur.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-              key: keyContourDiv
-            }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              color: _this.state.lowerLimit[0].borderColor,
-              keyInt: 0,
-              text: textInputColor,
-              _onChange: _this.onChangeColorContour
-            }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
-              labelWidth: 10,
-              label: labelSize,
-              name: "epaisseurContour",
-              placeholder: placeHolderSize,
-              value: _this.state.lowerLimit[0].sizeBorder,
-              onChange: function onChange(event) {
-                return _this.onChangeSzContour(event.currentTarget.value);
-              }
-            })));
-            couleur.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-              key: keyContourDiv
-            }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              color: _this.state.lowerLimitB[0].borderColor,
-              keyInt: 0,
-              text: 'Edit color B',
-              _onChange: _this.onChangeColorContourB
-            }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
-              labelWidth: 10,
-              label: 'Size B',
-              name: "epaisseurContour",
-              placeholder: 'Size B',
-              value: _this.state.lowerLimitB[0].sizeBorder,
-              onChange: function onChange(event) {
-                return _this.onChangeSzContourB(event.currentTarget.value);
-              }
-            })));
+      if (_this.props.isLink && _this.props.traceBorder) {
+        var keyContourDiv = key + 'ContourDiv';
+        couleur.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          key: keyContourDiv
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          color: _this.state.lowerLimit[0].borderColor,
+          keyInt: 0,
+          text: textInputColor,
+          _onChange: _this.onChangeColorContour
+        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+          labelWidth: 10,
+          label: labelSize,
+          name: "epaisseurContour",
+          placeholder: placeHolderSize,
+          value: _this.state.lowerLimit[0].sizeBorder,
+          onChange: function onChange(event) {
+            return _this.onChangeSzContour(event.currentTarget.value);
           }
-        } else if (!_this.props.traceBorder && _this.props.traceBorderB) {
-          if (_this.state.lowerLimitB) {
-            var keyContourDiv = key + 'ContourDiv';
-            couleur.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-              key: keyContourDiv
-            }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              color: _this.state.lowerLimitB[0].borderColor,
-              keyInt: 0,
-              text: 'Edit color B',
-              _onChange: _this.onChangeColorContourB
-            }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
-              labelWidth: 10,
-              label: 'Size B',
-              name: "epaisseurContour",
-              placeholder: 'Size B',
-              value: _this.state.lowerLimitB[0].sizeBorder,
-              onChange: function onChange(event) {
-                return _this.onChangeSzContourB(event.currentTarget.value);
-              }
-            })));
-          }
-        } else if (_this.props.traceBorder && !_this.props.traceBorderB) {
-          var keyContourDiv = key + 'ContourDiv';
-          couleur.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-            key: keyContourDiv
-          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_4__["default"], {
-            color: _this.state.lowerLimit[0].borderColor,
-            keyInt: 0,
-            text: textInputColor,
-            _onChange: _this.onChangeColorContour
-          }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
-            labelWidth: 10,
-            label: labelSize,
-            name: "epaisseurContour",
-            placeholder: placeHolderSize,
-            value: _this.state.lowerLimit[0].sizeBorder,
-            onChange: function onChange(event) {
-              return _this.onChangeSzContour(event.currentTarget.value);
-            }
-          })));
-        }
+        })));
       } else {
         if (_this.props.traceBack) {
           var keyFondColorPicker = key + 'FondcolorPicker';
@@ -14408,21 +14423,6 @@ function (_super) {
               _a.label = 2;
 
             case 2:
-              if (!(this.state.lowerLimitB.length === 0)) return [3
-              /*break*/
-              , 4];
-              return [4
-              /*yield*/
-              , this.setStateAsyncSeuilB({
-                lowerLimitB: [new Models_LowerLimitClass__WEBPACK_IMPORTED_MODULE_3__["LowerLimitClass"](0, '', '', '', '', '10')]
-              })];
-
-            case 3:
-              _a.sent();
-
-              _a.label = 4;
-
-            case 4:
               this.initComponent();
               return [2
               /*return*/
@@ -14438,17 +14438,10 @@ function (_super) {
       if (prevProps.traceBorder !== _this.props.traceBorder || prevProps.traceBack !== _this.props.traceBack) {
         _this.initComponent();
       }
-
-      if (_this.props.isLink && _this.props.orientedLink && _this.props.orientedLink.orientationLink.value === 'double') {
-        if (prevProps.traceBorderB !== _this.props.traceBorderB) {
-          _this.initComponent();
-        }
-      }
     };
 
     _this.state = {
       lowerLimit: _this.props.lowerLimit,
-      lowerLimitB: ((_a = _this.props.orientedLink) === null || _a === void 0 ? void 0 : _a.lowerLimitB) || [],
       htmlResult: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null)
     };
     return _this;
@@ -14741,10 +14734,6 @@ function (_super) {
       _this.props.callBack(_this.props.coordinate, _this.props.id);
 
       _this.props.lowerLimitCallBack(_this.state.coordinate.lowerLimit, _this.props.id);
-
-      if (_this.props.lowerLimitCallBackB) {
-        _this.props.lowerLimitCallBackB(_this.props.options.arrayOrientedLinks[_this.props.id || 0].lowerLimitB, _this.props.id);
-      }
     };
     /**
      * Edit fondIsChecked with switch
@@ -14803,28 +14792,6 @@ function (_super) {
               /*return*/
               ];
           }
-        });
-      });
-    };
-    /**
-     * Edit contourIsChecked with switch for linkB if bidirectionnal
-     */
-
-
-    _this.onSwitchContourB = function () {
-      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
-        var newValue, newArrayOrientedLink;
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
-          newValue = this.props.options.arrayOrientedLinks[this.props.id || 0];
-          newValue.traceBorderB = !newValue.traceBorderB;
-          newArrayOrientedLink = this.props.options.arrayOrientedLinks;
-          newArrayOrientedLink[this.props.id || 0] = newValue;
-          this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.props.options), {
-            arrayOrientedLinks: newArrayOrientedLink
-          }));
-          return [2
-          /*return*/
-          ];
         });
       });
     };
@@ -14960,14 +14927,6 @@ function (_super) {
       label: l10n.genericParameter.traceContour,
       checked: this.state.coordinate.traceBorder,
       onChange: this.onSwitchContour
-    })) : this.props.options.arrayOrientedLinks[this.props.id || 0].orientationLink.value === 'double' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: 'Color Link A',
-      checked: this.state.coordinate.traceBorder,
-      onChange: this.onSwitchContour
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: 'Color Link B',
-      checked: this.props.options.arrayOrientedLinks[this.props.id || 0].traceBorderB,
-      onChange: this.onSwitchContourB
     })) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
       label: 'Color',
       checked: this.state.coordinate.traceBorder,
@@ -14977,20 +14936,8 @@ function (_super) {
       traceBack: this.state.coordinate.traceBack,
       lowerLimit: this.state.coordinate.lowerLimit,
       lowerLimitCallBack: this.props.lowerLimitCallBack,
+      isLink: this.props.isLink,
       id: this.props.id
-    }) : this.props.isLink && this.props.options.arrayOrientedLinks[this.props.id || 0].orientationLink.value === 'double' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Parametrage_fixColor__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      options: this.props.options,
-      onOptionsChange: this.props.onOptionsChange,
-      data: this.props.data,
-      traceBorder: this.state.coordinate.traceBorder,
-      traceBorderB: this.props.options.arrayOrientedLinks[this.props.id || 0].traceBorderB,
-      traceBack: this.state.coordinate.traceBack,
-      lowerLimit: this.state.coordinate.lowerLimit,
-      lowerLimitCallBack: this.props.lowerLimitCallBack,
-      lowerLimitCallBackB: this.props.lowerLimitCallBackB,
-      id: this.props.id,
-      isLink: this.props.isLink || false,
-      orientedLink: this.props.options.arrayOrientedLinks[this.props.id || 0]
     }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Parametrage_fixColor__WEBPACK_IMPORTED_MODULE_4__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
@@ -15000,7 +14947,7 @@ function (_super) {
       lowerLimit: this.state.coordinate.lowerLimit,
       lowerLimitCallBack: this.props.lowerLimitCallBack,
       id: this.props.id,
-      isLink: this.props.isLink || false
+      isLink: this.props.isLink
     })));
   };
 
@@ -15978,14 +15925,14 @@ function (_super) {
     /** switch value for display object text */
 
 
-    _this.onSwitchDisplayObjectInText = function () {
+    _this.onSwitchdisplayObjectInTooltip = function () {
       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
         var newTextObject;
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
           switch (_a.label) {
             case 0:
               newTextObject = this.state.textObject;
-              newTextObject.generateAuxiliaryElement.displayObjectInText = !this.state.textObject.generateAuxiliaryElement.displayObjectInText;
+              newTextObject.generateAuxiliaryElement.displayObjectInTooltip = !this.state.textObject.generateAuxiliaryElement.displayObjectInTooltip;
               return [4
               /*yield*/
               , this.stateAsyncTextObject({
@@ -16070,14 +16017,14 @@ function (_super) {
     /** switch display text */
 
 
-    _this.onSwitchIsTextRegion = function () {
+    _this.onSwitchisTextTooltip = function () {
       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
         var newTextObject;
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
           switch (_a.label) {
             case 0:
               newTextObject = this.state.textObject;
-              newTextObject.isTextRegion = !this.state.textObject.isTextRegion;
+              newTextObject.isTextTooltip = !this.state.textObject.isTextTooltip;
               return [4
               /*yield*/
               , this.stateAsyncTextObject({
@@ -16238,14 +16185,14 @@ function (_super) {
     /** switch value for display object text */
 
 
-    _this.onSwitchValueGenerateObjectTextDisplayObjectInText = function () {
+    _this.onSwitchValueGenerateObjectTextdisplayObjectInTooltip = function () {
       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
         var newTextObject;
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
           switch (_a.label) {
             case 0:
               newTextObject = this.state.textObject;
-              newTextObject.valueGenerateObjectText.displayObjectInText = !this.state.textObject.valueGenerateObjectText.displayObjectInText;
+              newTextObject.valueGenerateObjectText.displayObjectInTooltip = !this.state.textObject.valueGenerateObjectText.displayObjectInTooltip;
               return [4
               /*yield*/
               , this.stateAsyncTextObject({
@@ -16408,12 +16355,12 @@ function (_super) {
 
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, l10n.textObject.principalMetric), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
       label: "Display text in region or tooltip",
-      checked: this.state.textObject.isTextRegion,
-      onChange: this.onSwitchIsTextRegion
+      checked: this.state.textObject.isTextTooltip,
+      onChange: this.onSwitchisTextTooltip
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
-      hidden: this.state.textObject.isTextRegion
+      hidden: this.state.textObject.isTextTooltip
     }, l10n.textObject.textRegion), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
-      hidden: !this.state.textObject.isTextRegion
+      hidden: !this.state.textObject.isTextTooltip
     }, l10n.textObject.textBubble), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"], {
       color: this.state.textObject.colorBack,
       keyInt: 0,
@@ -16454,8 +16401,8 @@ function (_super) {
       _handleChange: this.onChangeValueGenerateObjectTextunit
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
       label: l10n.textObject.objectDisplayTextTooltip,
-      checked: this.state.textObject.valueGenerateObjectText.displayObjectInText,
-      onChange: this.onSwitchValueGenerateObjectTextDisplayObjectInText
+      checked: this.state.textObject.valueGenerateObjectText.displayObjectInTooltip,
+      onChange: this.onSwitchValueGenerateObjectTextdisplayObjectInTooltip
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
       label: l10n.textObject.colorText,
       checked: this.state.textObject.valueGenerateObjectText.addColorTextElement,
@@ -16497,8 +16444,8 @@ function (_super) {
       _handleChange: this.onChangeunit
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
       label: l10n.textObject.objectDisplayTextTooltip,
-      checked: this.state.textObject.generateAuxiliaryElement.displayObjectInText,
-      onChange: this.onSwitchDisplayObjectInText
+      checked: this.state.textObject.generateAuxiliaryElement.displayObjectInTooltip,
+      onChange: this.onSwitchdisplayObjectInTooltip
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
       label: l10n.textObject.colorText,
       checked: this.state.textObject.generateAuxiliaryElement.addColorTextElement,
@@ -17187,7 +17134,7 @@ function (_super) {
     };
 
     _this.loadMonoLink = function (link) {
-      var toLoad = new _Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_5__["OrientedLinkClass"](link.id, link.linkURL, link.meta, link.lowerLimit, link.label, link.textObj, link.mainMetric, link.metrics, link.colorMode, link.traceBack, link.traceBorder, link.positionParameter, link.name, link.orientationLink, link.pointAPositionX, link.pointAPositionY, link.colorCoordinateA, link.pointBPositionX, link.pointBPositionY, link.colorCoordinateB, link.valueMainMetricA, link.valueMainMetricB, link.pointIn, link.pointOut, link.regionIn, link.regionOut, link.zIndex, link.pointCPositionX, link.pointCPositionY, link.isIncurved, link.mainMetricB, link.metricsB, link.lowerLimitB, link.colorModeB, link.traceBackB, link.traceBorderB);
+      var toLoad = new _Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_5__["OrientedLinkClass"](link.id, link.linkURL, link.meta, link.lowerLimit, link.label, link.textObj, link.mainMetric, link.metrics, link.colorMode, link.traceBack, link.traceBorder, link.positionParameter, link.name, link.orientationLink, link.pointAPositionX, link.pointAPositionY, link.colorCoordinateA, link.pointBPositionX, link.pointBPositionY, link.colorCoordinateB, link.valueMainMetricA, link.valueMainMetricB, link.pointIn, link.pointOut, link.regionIn, link.regionOut, link.zIndex, link.pointCPositionX, link.pointCPositionY, link.isIncurved, link.mainMetricB, link.metricsB);
       console.log(toLoad); // Do some test here to see if your already load a coordinatespace with this id
 
       var selector = _this.LinkValidator(toLoad);
@@ -17729,6 +17676,8 @@ function (_super) {
       var e_1, _a;
 
       var allLimit = [];
+      var i = 0;
+      var max = lowerLimit.length - 1;
 
       try {
         for (var lowerLimit_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(lowerLimit), lowerLimit_1_1 = lowerLimit_1.next(); !lowerLimit_1_1.done; lowerLimit_1_1 = lowerLimit_1.next()) {
@@ -17753,7 +17702,8 @@ function (_super) {
               marginBottom: '1.25rem',
               fontSize: '9px'
             }
-          }, lower.lowerLimitMin, " - ", lower.lowerLimitMax)));
+          }, i === 0 ? '-∞' : lower.lowerLimitMin, " - ", i === max ? '+∞' : lower.lowerLimitMax)));
+          ++i;
         }
       } catch (e_1_1) {
         e_1 = {
@@ -17853,17 +17803,17 @@ function (_super) {
                 hidden: this.state.legend.hiddenLegend
               }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("article", {
                 style: {
-                  width: '250px',
+                  width: '170px',
                   position: 'absolute',
                   overflowY: 'scroll',
                   margin: '0',
-                  height: '170px',
-                  backgroundColor: '#212124',
-                  color: '#d8d9da',
+                  height: '220px',
+                  backgroundColor: '#FFF',
+                  color: '#000',
                   border: '4px solid #299c46',
                   borderRadius: '4px',
                   scrollbarColor: '#09090b #212124',
-                  scrollbarWidth: 'thin',
+                  scrollbarWidth: 'none',
                   zIndex: 9999
                 }
               }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -17876,13 +17826,20 @@ function (_super) {
                   fontSize: '20px',
                   display: 'inline-flex'
                 }
-              }, "Legend", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+              }, "Legend"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
                 style: {
-                  marginLeft: '78%'
-                },
-                className: "fa fa-close",
-                onClick: this.props.callBack
-              }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+                  color: '#d8d9da',
+                  fontSize: '15px',
+                  marginLeft: '14px',
+                  fontWeight: 'bold'
+                }
+              }, "Region"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                style: {
+                  color: '#d8d9da',
+                  fontSize: '11px',
+                  marginLeft: '17px'
+                }
+              }, "Label")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
                 style: {
                   backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))'
                 }
@@ -17893,7 +17850,7 @@ function (_super) {
                   fontWeight: 'bold'
                 }
               }, "Region")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-                key: Math.random().toString()
+                key: "regionLegend"
               }, this.fillRegion()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
                 style: {
                   backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))'
@@ -17905,7 +17862,7 @@ function (_super) {
                   fontWeight: 'bold'
                 }
               }, "Point")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-                key: Math.random().toString()
+                key: "pointLegend"
               }, this.fillPoint())));
               return [4
               /*yield*/
@@ -18079,7 +18036,8 @@ function (_super) {
 
       var _loop_1 = function _loop_1(element) {
         setTimeout(function () {
-          _this.addInput(element.id, element.label, element.orientationLink, element.pointAPositionX, element.pointAPositionY, element.colorCoordinateA, element.pointBPositionX, element.pointBPositionY, element.colorCoordinateB, element.pointIn, element.pointOut, element.regionIn, element.regionOut, element.textObj, element.lowerLimit, element.positionParameter, element.pointCPositionX, element.pointCPositionY, element.isIncurved, element.mainMetric, element.metrics, element.mainMetricB, element.metricsB, element.lowerLimitB);
+          _this.addInput(element.id, element.label, element.orientationLink, element.pointAPositionX, element.pointAPositionY, element.colorCoordinateA, element.pointBPositionX, element.pointBPositionY, element.colorCoordinateB, element.pointIn, element.pointOut, element.regionIn, element.regionOut, element.textObj, element.lowerLimit, element.positionParameter, element.pointCPositionX, element.pointCPositionY, element.isIncurved, element.mainMetric, element.metrics, element.mainMetricB, element.metricsB, element.colorMode, element.traceBorder //element.traceBack
+          );
         }, 100);
       };
 
@@ -18113,7 +18071,8 @@ function (_super) {
 
 
     _this.addInput = function (id, label, orientationLink, pointAPositionX, pointAPositionY, colorCoordinateA, pointBPositionX, pointBPositionY, colorCoordinateB, pointIn, pointOut, regionIn, regionOut, //refIdMainMetric?: string, keyMainMetric?: string, keyValueMainMetric?: string,
-    textObj, seuil, positionParameter, pointCPositionX, pointCPositionY, isIncurved, mainMetrics, auxiliaryMetrics, mainMetricsB, auxiliaryMetricsB, seuilB) {
+    textObj, seuil, positionParameter, pointCPositionX, pointCPositionY, isIncurved, mainMetrics, auxiliaryMetrics, mainMetricsB, auxiliaryMetricsB, colorMode, traceBorder //traceBack?: boolean
+    ) {
       var num = id || _this.props.options.indexOrientedLink + 1;
       var zIndex = _this.props.options.zIndexOrientedLink;
       var finalArray = Object(Functions_CreateInput_createInputsOrientedLink__WEBPACK_IMPORTED_MODULE_8__["createInputsOrientedLink"])(num, _this.defineDataRegion(), _this.defineDataPoint());
@@ -18125,7 +18084,7 @@ function (_super) {
         legendElement: '',
         numericFormatElement: '',
         unit: '',
-        displayObjectInText: false,
+        displayObjectInTooltip: false,
         // 'displayObjectPermanently': false,
         addColorTextElement: false,
         colorTextElement: 'white',
@@ -18135,7 +18094,7 @@ function (_super) {
         legendElement: '',
         numericFormatElement: '',
         unit: '',
-        displayObjectInText: false,
+        displayObjectInTooltip: false,
         // 'displayObjectPermanently': false,
         addColorTextElement: false,
         colorTextElement: 'white',
@@ -18171,10 +18130,10 @@ function (_super) {
           // 	'refId': refIdMainMetric || '',
           // 	'manageValue': 'avg',
           // }
-          initMainMetrics, auxiliaryMetrics || [], false, false, false, initPositionParameter, 'orientedLink' + num.toString(), orientationLink || {
+          initMainMetrics, auxiliaryMetrics || [], colorMode || false, false, traceBorder || false, initPositionParameter, 'orientedLink' + num.toString(), orientationLink || {
             label: 'double',
             value: 'double'
-          }, pointAPositionX || '0', pointAPositionY || '0', colorCoordinateA || '#5794F2', pointBPositionX || '0', pointBPositionY || '0', colorCoordinateB || '#E54658', '', '', pointIn || '', pointOut || '', regionIn || '', regionOut || '', zIndex, pointCPositionX || '0', pointCPositionY || '0', isIncurved || {}, initMainMetricsB, auxiliaryMetricsB || [], seuilB || [], false, false, false)),
+          }, pointAPositionX || '0', pointAPositionY || '0', colorCoordinateA || '#5794F2', pointBPositionX || '0', pointBPositionY || '0', colorCoordinateB || '#E54658', '', '', pointIn || '', pointOut || '', regionIn || '', regionOut || '', zIndex, pointCPositionX || '0', pointCPositionY || '0', isIncurved || {}, initMainMetricsB, auxiliaryMetricsB || [])),
           arrayInput: prevState.arrayInput.concat([new Models_ArrayInputSelectableClass__WEBPACK_IMPORTED_MODULE_2__["ArrayInputSelectableClass"](num, finalArray)])
         };
       });
@@ -18259,8 +18218,8 @@ function (_super) {
     _this.callBackManageLowerLimit = function (coordiante, id) {
       var newValue = _this.state.arrayOrientedLinkClass[id || 0];
       newValue.colorMode = coordiante.colorMode;
-      newValue.traceBorder = coordiante.traceBorder;
-      newValue.traceBack = coordiante.traceBack; // newValue.lowerLimit = coordiante.lowerLimit;
+      newValue.traceBorder = coordiante.traceBorder; //newValue.traceBack = coordiante.traceBack;
+      // newValue.lowerLimit = coordiante.lowerLimit;
 
       _this.props.options.arrayOrientedLinks[id || 0] = newValue;
 
@@ -18270,18 +18229,9 @@ function (_super) {
 
 
     _this.callBackLowerLimit = function (lowerLimit, id) {
+      console.log(lowerLimit);
       var newValue = _this.state.arrayOrientedLinkClass[id || 0];
       newValue.lowerLimit = lowerLimit;
-      _this.props.options.arrayOrientedLinks[id || 0] = newValue;
-
-      _this.callBack();
-    };
-    /** save lower limit data for link B if orientedLink is bidirectionnal */
-
-
-    _this.callBackLowerLimitB = function (lowerLimit, id) {
-      var newValue = _this.state.arrayOrientedLinkClass[id || 0];
-      newValue.lowerLimitB = lowerLimit;
       _this.props.options.arrayOrientedLinks[id || 0] = newValue;
 
       _this.callBack();
@@ -18775,7 +18725,6 @@ function (_super) {
         orientedLink: this_1.state.arrayOrientedLinkClass[index],
         callBack: this_1.callBackManageLowerLimit,
         lowerLimitCallBack: this_1.callBackLowerLimit,
-        lowerLimitCallBackB: this_1.callBackLowerLimitB,
         id: index,
         isLink: true
       })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_positionParameters__WEBPACK_IMPORTED_MODULE_16__["default"], {

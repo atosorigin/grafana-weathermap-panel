@@ -140,7 +140,9 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
           element.metrics,
           element.mainMetricB,
           element.metricsB,
-          element.lowerLimitB
+          element.colorMode,
+          element.traceBorder
+          //element.traceBack
         );
       }, 100);
     }
@@ -219,7 +221,9 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
     auxiliaryMetrics?: Metric[],
     mainMetricsB?: Metric,
     auxiliaryMetricsB?: Metric[],
-    seuilB?: LowerLimitClass[]
+    colorMode?: boolean,
+    traceBorder?: boolean
+    //traceBack?: boolean
   ) => {
     const num: number = id || this.props.options.indexOrientedLink + 1;
     const zIndex: number = this.props.options.zIndexOrientedLink;
@@ -237,7 +241,7 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
           legendElement: '',
           numericFormatElement: '',
           unit: '',
-          displayObjectInText: false,
+          displayObjectInTooltip: false,
           // 'displayObjectPermanently': false,
           addColorTextElement: false,
           colorTextElement: 'white',
@@ -248,7 +252,7 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
           legendElement: '',
           numericFormatElement: '',
           unit: '',
-          displayObjectInText: false,
+          displayObjectInTooltip: false,
           // 'displayObjectPermanently': false,
           addColorTextElement: false,
           colorTextElement: 'white',
@@ -281,9 +285,9 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
           // }
           initMainMetrics,
           auxiliaryMetrics || [],
+          colorMode || false,
           false,
-          false,
-          false,
+          traceBorder || false,
           initPositionParameter,
           'orientedLink' + num.toString(),
           orientationLink || { label: 'double', value: 'double' },
@@ -304,11 +308,7 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
           pointCPositionY || '0',
           isIncurved || {},
           initMainMetricsB,
-          auxiliaryMetricsB || [],
-          seuilB || [],
-          false,
-          false,
-          false
+          auxiliaryMetricsB || []
         )
       ),
 
@@ -468,7 +468,7 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
     const newValue: OrientedLinkClass = this.state.arrayOrientedLinkClass[id || 0];
     newValue.colorMode = coordiante.colorMode;
     newValue.traceBorder = coordiante.traceBorder;
-    newValue.traceBack = coordiante.traceBack;
+    //newValue.traceBack = coordiante.traceBack;
     // newValue.lowerLimit = coordiante.lowerLimit;
     this.props.options.arrayOrientedLinks[id || 0] = newValue;
     this.callBack();
@@ -476,16 +476,9 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
 
   /** save lower limit data */
   private callBackLowerLimit = (lowerLimit: LowerLimitClass[], id?: number) => {
+    console.log(lowerLimit);
     const newValue: OrientedLinkClass = this.state.arrayOrientedLinkClass[id || 0];
     newValue.lowerLimit = lowerLimit;
-    this.props.options.arrayOrientedLinks[id || 0] = newValue;
-    this.callBack();
-  };
-
-  /** save lower limit data for link B if orientedLink is bidirectionnal */
-  private callBackLowerLimitB = (lowerLimit: LowerLimitClass[], id?: number) => {
-    const newValue: OrientedLinkClass = this.state.arrayOrientedLinkClass[id || 0];
-    newValue.lowerLimitB = lowerLimit;
     this.props.options.arrayOrientedLinks[id || 0] = newValue;
     this.callBack();
   };
@@ -748,7 +741,6 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
                 orientedLink={this.state.arrayOrientedLinkClass[index]}
                 callBack={this.callBackManageLowerLimit}
                 lowerLimitCallBack={this.callBackLowerLimit}
-                lowerLimitCallBackB={this.callBackLowerLimitB}
                 id={index}
                 isLink={true}
               />
@@ -775,6 +767,7 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
     }
 
     return <div>{finalItem}</div>;
+    
   }
 
   /**
@@ -821,6 +814,10 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
           >
             Load Oriented Links
           </Button>
+    
+             
+
+          
         </div>
       </div>
     );

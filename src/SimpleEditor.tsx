@@ -345,6 +345,7 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
                     data={this.props.data}
                   />
                 )}
+              
               </TabContent>
             </div>
           )}

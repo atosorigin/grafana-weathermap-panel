@@ -1,6 +1,6 @@
 {
   "name": "weathermap",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "WeatherMap Panel Plugin for Grafana",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
@@ -10,7 +10,7 @@
   },
   "author": "ATOS OpenSource",
   "license": "Apache-2.0",
-  "devDependencies": {
+   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-typescript": "^7.9.0",

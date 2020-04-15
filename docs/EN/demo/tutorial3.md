@@ -2,119 +2,144 @@
 
 
 
-## Etape 1 : Création des queries
+## Step 1 : Creation of queries
 
 ![step 01](../../screenshots/demo/tutorial3/query.jpg)
 
+The first step is through the `Queries` tab.
 
+You must:
+
+- Complete the line `metrics` with the following line
+
+```
 rate(node_network_receive_bytes{device="enp0s3"}[10s])*8/1024/1024
 
-
 rate(node_network_transmit_bytes{device="enp0s3"}[10s])*8/1024/1024
+```
+
+The "A" marker will be used to identify this query as you can see below.
 
 
 
 
-## Etape 2 : Déterminer un espace
+## Step 2: Determining a space
 
 
 
 ![step 02](../../screenshots/demo/tutorial3/display.jpg)
 
 
-La création d'un espace en arrière plan s'effectue à partir du menu `display`.
+The creation of a background space is done from the `display' menu.
 
-Nous saisissons 
+It requires 
 
-- Décochons `use svg`
-- largeur
-- hauteur
+- Uncheck `use svg`
+- Enter the width
+- Enter height
 
 
 
-## Etape 3 : Ajout d'un point 1
+## Step 3: Add a point 1
 
 ![step 03](../../screenshots/demo/tutorial3/point1.jpg)
 
 
-La création d'un point s'effectue à partir du menu `Coordinates space`, `point` et `Àdd point`
+The creation of a point is done from the `Coordinates space`, `point` and `Add point` menu.
 
-Vous devez remplir le formulaire comme ceci : 
+You have to fill out the form like this: 
 
-- Saisir un `label` par exemple Computer
-- La taille `size`
+- Enter a `label' for example Computer
+- The `size` 
 - position `X`
 - position `Y`
-- Cliquer sur le bouton `load`
+- Click on the "load" button
 
 
 
 
 ![step 04](../../screenshots/demo/tutorial3/point1-color.jpg)
 
-Nous en profitons der changer la couleur de notre point. Pour cela, nous ajoutons une couleur à notre point comme ceci : 
+We take advantage of this by changing the colour of our point. To do this, we add a color to our point like this: 
 
-- Activer `trace the color`
-- Choisissons la couleur comme `verte` à la ligne `edit border color`
-- L'épaisseur à 1
+- Enable `trace the color`
+- Let's choose the color as `green` to the line `edit border color`.
+- Thickness at 1
 
 
-
-## Etape 4 : Ajout d'un point 2
+## Step 4: Add a second point
 
 
 ![step 05](../../screenshots/demo/tutorial3/point2-sample.jpg)
 
-
-- clic sur la barre
-- Clic dans l'espace 
-
-
+You can also add a point using the panel available on the dashboard. A tutorial is [available here](../panel/panel-point.md)
 
 
 ![step 06](../../screenshots/demo/tutorial3/point2-color.jpg)
 
-Nous en profitons der changer la couleur de notre point. Pour cela, nous ajoutons une couleur à notre point comme ceci : 
 
-- Activer `trace the color`
-- Choisissons la couleur comme `bleu` à la ligne `edit border color`
-- L'épaisseur à 1
+We take advantage of this by changing the colour of our point. To do this, we add a color to our point like this: 
+
+- Enable `trace the color`.
+- Let's choose the color as `blue` to the line `edit border color`.
+- Thickness at 1
 
 
-- Cliquer sur le bouton `load`
+- Click on the `load` button
 
 
 
 ![step 03](../../screenshots/demo/tutorial3/point2-text.jpg)
 
-nous ajoutons des couleurs visibles pour le texte du point 2
+We add visible colours for the text in point 2
 
 
-## Etape 5 : Ajouter une illustration au point 1
+## Etape 5 : Add an image 
+
+
+To add an illustraton to our point, go to `Coordinates space`, `region` and `Add coordinate space` menu. And choose our point.
+
+![step 02](../../screenshots/demo/tutorial1/CoordinateMode.png)
+
+You have to fill out the form like this: 
+
+- Enter a `label` for example New Computer
+- Select `Coordinate mode`.
+- Then choose an image
+
+- Then choose an image
+
+The selected image will be [cumputer-svg.svg](../../resource/computer-svg.svg). To do this, fill the input with the adresse of the svg file
+
+Then chosse the size of the region for your image. Here we choose :
+- X Min : -10
+- X Max : -50
+- Y Min : -10
+- Y Max : -50
+
+To finish
+- Click on the `load` button
 
 
 ![illustration1](../../screenshots/demo/tutorial3/illustration1.jpg)
 
-Nous ajoutons une illustration à notre point
-
-image SVG
 
 
 
 
+## Step 5 : Define incurved oriented links
 
-
-
-## Etape 5 ; ajouter lien oriented
-
-
-TODO
-
+To create an oriented link you have to pass by [the panel menu](../panel/panel-incurved-link.md).
 
 ## Etape 6 : main metric
 
+To add a main metric to our link, go to `Coordinates space`, `OrientedLink` and click on you link.
 
-associe query et oriented link
+Then in `Main metric`, choose you metric.
+
+![resultat](../../screenshots/demo/tutorial3/MainMetricLink.png)
+
+
 
 
 ## Resultat
@@ -123,19 +148,13 @@ associe query et oriented link
 ![resultat](../../screenshots/demo/tutorial3/resultat.jpg)
 
 
-### Import JSON file
-
-TODO
-
-
-
-
 
 ### Import JSON file
 
 - It is possible to add all of those configuration through json files by doing an import. To know how to do it, [follow this link](../editor/import.md)
 
 And here is the different JSON file :
+
 - [demo3-svgRegion](../../resource/demo3-region.json) 
 - [demo3-point](../../resource/demo3-point.json)
 - [demo3-link](../../resource/demo3-link.json)

@@ -13,7 +13,6 @@ This project is still in development.
 ## Dependencies
 
 - Grafana 6.6.x or 6.7.x
-- Yarn 1.21.1
 
 
 ## Official version
@@ -40,15 +39,34 @@ $ mv grafana-weathermap-panel /var/lib/grafana/plugins
 $ systemctl restart grafana-server
 ```
 
-
-
 # Getting Help
 
 * [WeatherMap documentation](https://github.com/atosorigin/grafana-weathermap-panel/tree/master/docs)
 
-* [WeatherMap Demo](https://github.com/atosorigin/grafana-weathermap-panel/tree/master/demo)
+* [WeatherMap Demo / Tutorial](https://github.com/atosorigin/grafana-weathermap-panel/tree/master/docs/EN/demo)
 
 
 # History
 
 * [Changelog](https://github.com/atosorigin/grafana-weathermap-panel/blob/master/CHANGELOG.md)
+
+
+# Usage
+
+## Editor
+
+![editor](docs/screenshots/editor/editor.jpg)
+
+## Panel
+
+**Tutorial 1**
+
+![demo1](docs/screenshots/demo/demo1.png)
+
+**Tutorial 3**
+
+![demo3](docs/screenshots/demo/demo3.jpg)
+
+**Tutorial 7**
+
+![demo7](docs/screenshots/demo/demo7.jpg)

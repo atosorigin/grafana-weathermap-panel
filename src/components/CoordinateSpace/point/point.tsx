@@ -133,6 +133,7 @@ export default class Point extends React.Component<Props, State> {
       arrayCoor: tmp,
     });
     this.generateInputsPoint();
+    this.callBack();
   }
 
   /**
@@ -217,22 +218,12 @@ export default class Point extends React.Component<Props, State> {
             <InputSelectPoint
               key={obj.id}
               _onChange={(value: SelectableValue<string>, name: string, index: number) => {
-                let i: number;
-                i = 0;
-                const copyOfarrayPointClass: PointClass[] = this.state.arrayPointClass.slice();
-
-                for (const line of copyOfarrayPointClass) {
-                  if (line.id === index) {
-                    copyOfarrayPointClass[i] = editGoodParameterPoint(name, copyOfarrayPointClass[i], value.value || '', value || {});
-                    break;
-                  }
-                  i++;
-                }
-
+                const newPoint: PointClass = this.state.arrayCoor;
+                editGoodParameterPoint(name, newPoint, '', value);
                 this.setState({
-                  arrayPointClass: copyOfarrayPointClass,
+                  arrayCoor: newPoint,
                 });
-
+                this.generateInputsPoint();
                 this.callBack();
               }}
               name={obj.name}
@@ -454,6 +445,7 @@ export default class Point extends React.Component<Props, State> {
             coordinate={this.state.arrayCoor}
             callBack={this.callBackManageLowerLimit}
             lowerLimitCallBack={this.callBackLowerLimit}
+            isLink={false}
           />
         </div>
         <div>

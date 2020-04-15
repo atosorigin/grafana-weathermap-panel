@@ -53,14 +53,6 @@ The **point** file must be declared as a JSON file like this:
 
 
 ```
-## associateLink In/Out
-
-- **associateLinkIn** and **associateLinkOut** : TO DO
-
-```
-    "associateLinkIn": 
-    "associateLinkOut": 
-```
 
 ## associateOrientedLinks In/Out
 
@@ -84,13 +76,6 @@ The **point** file must be declared as a JSON file like this:
     "colorMode": false,
 ```
 
-## coordinateSpace
-
-- **coordinateSpace** : TO DO
-
-```
-    "coordinateSpace": {},
-```
 
 ## drawGraphicMarker
 

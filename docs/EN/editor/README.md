@@ -1,7 +1,7 @@
 
 
 
-# Editeur
+# Editor
 
 The editor is the manual configuration screen to build your space.
 

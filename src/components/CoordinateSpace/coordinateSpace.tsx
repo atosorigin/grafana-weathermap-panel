@@ -434,6 +434,7 @@ class CoordinateSpace extends React.Component<Props, State> {
             coordinate={this.state.arrayCoor}
             callBack={this.callBackManageLowerLimit}
             lowerLimitCallBack={this.callBackLowerLimit}
+            isLink={false}
           />
         </div>
         <br />

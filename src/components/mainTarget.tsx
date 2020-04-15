@@ -1,5 +1,5 @@
 import React from 'react';
-import { SimpleOptions, ITarget } from '../types';
+import { SimpleOptions, Target } from '../types';
 import { PanelEditorProps } from '@grafana/data';
 import { FormField, Button } from '@grafana/ui';
 
@@ -14,7 +14,7 @@ class MainTarget extends React.Component<Props> {
   }
 
   onMainTargetChanged = (event: { currentTarget: HTMLInputElement }) => {
-    const newData: ITarget = { expr: '' };
+    const newData: Target = { expr: '' };
     newData.expr = event.currentTarget.value;
     this.props.onOptionsChange({ ...this.props.options, mainTarget: newData });
   };

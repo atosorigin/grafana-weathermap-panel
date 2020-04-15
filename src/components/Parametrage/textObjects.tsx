@@ -145,10 +145,10 @@ class TextObjects extends React.Component<Props, State> {
   };
 
   /** switch value for display object text */
-  onSwitchDisplayObjectInText = async () => {
+  onSwitchdisplayObjectInTooltip = async () => {
     const newTextObject: TextObject = this.state.textObject;
 
-    newTextObject.generateAuxiliaryElement.displayObjectInText = !this.state.textObject.generateAuxiliaryElement.displayObjectInText;
+    newTextObject.generateAuxiliaryElement.displayObjectInTooltip = !this.state.textObject.generateAuxiliaryElement.displayObjectInTooltip;
     await this.stateAsyncTextObject({ textObject: newTextObject });
     this.callBack();
   };
@@ -182,13 +182,13 @@ class TextObjects extends React.Component<Props, State> {
   };
 
   /** switch display text */
-  onSwitchIsTextRegion = async () => {
+  onSwitchisTextTooltip = async () => {
     // console.clear();
     // console.log('am here --');
 
     const newTextObject: TextObject = this.state.textObject;
 
-    newTextObject.isTextRegion = !this.state.textObject.isTextRegion;
+    newTextObject.isTextTooltip = !this.state.textObject.isTextTooltip;
     await this.stateAsyncTextObject({ textObject: newTextObject });
     this.callBack();
   };
@@ -248,10 +248,10 @@ class TextObjects extends React.Component<Props, State> {
   };
 
   /** switch value for display object text */
-  onSwitchValueGenerateObjectTextDisplayObjectInText = async () => {
+  onSwitchValueGenerateObjectTextdisplayObjectInTooltip = async () => {
     const newTextObject: TextObject = this.state.textObject;
 
-    newTextObject.valueGenerateObjectText.displayObjectInText = !this.state.textObject.valueGenerateObjectText.displayObjectInText;
+    newTextObject.valueGenerateObjectText.displayObjectInTooltip = !this.state.textObject.valueGenerateObjectText.displayObjectInTooltip;
     await this.stateAsyncTextObject({ textObject: newTextObject });
     this.callBack();
   };
@@ -330,10 +330,10 @@ class TextObjects extends React.Component<Props, State> {
         <div>
           <h4>{l10n.textObject.principalMetric}</h4>
 
-          <Switch label="Display text in region or tooltip" checked={this.state.textObject.isTextRegion} onChange={this.onSwitchIsTextRegion} />
+          <Switch label="Display text in region or tooltip" checked={this.state.textObject.isTextTooltip} onChange={this.onSwitchisTextTooltip} />
 
-          <h5 hidden={this.state.textObject.isTextRegion}>{l10n.textObject.textRegion}</h5>
-          <h5 hidden={!this.state.textObject.isTextRegion}>{l10n.textObject.textBubble}</h5>
+          <h5 hidden={this.state.textObject.isTextTooltip}>{l10n.textObject.textRegion}</h5>
+          <h5 hidden={!this.state.textObject.isTextTooltip}>{l10n.textObject.textBubble}</h5>
 
           <InputSeriesColorPicker
             color={this.state.textObject.colorBack}
@@ -398,8 +398,8 @@ class TextObjects extends React.Component<Props, State> {
               />
               <Switch
                 label={l10n.textObject.objectDisplayTextTooltip}
-                checked={this.state.textObject.valueGenerateObjectText.displayObjectInText}
-                onChange={this.onSwitchValueGenerateObjectTextDisplayObjectInText}
+                checked={this.state.textObject.valueGenerateObjectText.displayObjectInTooltip}
+                onChange={this.onSwitchValueGenerateObjectTextdisplayObjectInTooltip}
               />
               {/* <Switch
 								label={l10n.textObject.objectDisplayInPermanentlyHover}
@@ -466,8 +466,8 @@ class TextObjects extends React.Component<Props, State> {
           />
           <Switch
             label={l10n.textObject.objectDisplayTextTooltip}
-            checked={this.state.textObject.generateAuxiliaryElement.displayObjectInText}
-            onChange={this.onSwitchDisplayObjectInText}
+            checked={this.state.textObject.generateAuxiliaryElement.displayObjectInTooltip}
+            onChange={this.onSwitchdisplayObjectInTooltip}
           />
           {/* <Switch
 						label={l10n.textObject.objectDisplayInPermanentlyHover}

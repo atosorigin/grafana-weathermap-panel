@@ -25,7 +25,7 @@ The **link** file must be declared as a JSON file like this:
         "mainMetric": {},
         "isIncurved": {},
         "label": "",
-        "linkURL": { },
+        "linkURL": {},
         "lowerLimit": [],
         "meta": "",
         "metrics": [],
@@ -69,7 +69,7 @@ The **link** file must be declared as a JSON file like this:
 
 ## colorMode
 
-- **colorMode** : TO DO
+- **colorMode** : "true" if you want to use differents colors for this point. "false" if you want a unique color.
 
 ```
     "colorMode": false,
@@ -472,8 +472,8 @@ TO DO , Laisser vide pour le moment
 - **valueMainMetricA** and **valueMainMetricB** : Value of the main Metric of point A and B
 
 ```
-    "valueMainMetricA": TO DO,
-    "valueMainMetricA": TO DO,
+    "valueMainMetricA": "50",
+    "valueMainMetricB": "30",
 
 ```
 

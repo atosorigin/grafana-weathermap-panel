@@ -21,7 +21,10 @@ interface Props {
   /** function parent to save lower limit */
   lowerLimitCallBack: (lowerLimit: LowerLimitClass[], id?: number) => void;
 
+  isLink: boolean;
+
   id?: number;
+
 }
 
 interface State {
@@ -194,7 +197,6 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
    */
   onChangeColorFond = async (key: number, color: string) => {
     const cpy: LowerLimitClass[] = this.state.lowerLimit;
-
     cpy[key].backColor = color;
     await this.setStateAsyncLowerLimit({
       lowerLimit: cpy,
@@ -332,7 +334,10 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
   /** add new lower limit */
   addVariation = async (nb: number, seuil?: LowerLimitClass[]) => {
     for (let i = 0; i < nb; i++) {
-      const newSeuil: LowerLimitClass = seuil ? seuil[i] : new LowerLimitClass(i, '', '', '', '', '');
+      let newSeuil: LowerLimitClass = seuil ? seuil[i] : new LowerLimitClass(i, '', '', '', '', '');
+      if (this.props.isLink) {
+        newSeuil = seuil ? seuil[i] : new LowerLimitClass(i, '', '', '', '', '10');
+      }
       await this.addInput(i, newSeuil);
     }
     this.fillVarInput();

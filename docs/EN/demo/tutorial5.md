@@ -1,7 +1,7 @@
  
 # create file modelisation
 
-l'exemple montre comment utiliser les filtres des query pour obtenir des metrics précises
+The example shows how to use query filters to obtain precise metrics
 
 
 
@@ -9,7 +9,7 @@ l'exemple montre comment utiliser les filtres des query pour obtenir des metrics
 ![step 01](../../screenshots/demo/tutorial5/step01.jpg)
 
 
-Dans une query, nous voulons analyser ce que reçoit la carte réseau
+In a query, we want to analyze what the network card receives
 
 
 ```
@@ -19,7 +19,7 @@ node_network_receive_bytes
 
 
 
-le résultat montre plusieurs résultats possibles
+The result shows several possible outcomes
 
 
 ```
@@ -29,7 +29,7 @@ node_network_receive_bytes{device="lo",instance="localhost:9100",job="node_expor
 
 ```
 
-La différence montre 2 types de devices 
+The difference shows 2 types of devices 
 
 - enp0s3
 - lo

@@ -6,13 +6,25 @@ The `dashboard` directory offers different examples for the WeatcherMap plugin o
 
 the above demos were made with an associated server. The configuration of this one is explained on the dedicated page : [settings server](../docs/annex/server.md)
 
-
-
 ## Demo1
 
 The associated files you can import are =>
 
-![demo1](../docs/screenshots/demo/demo1.png)
+![demo1](../screenshots/demo/demo1.png)
+
+  - Picture background SVG => file *demo1-background.svg*        
+  - Displays a selected element SVG => file *demo1-coordRegion.json*      
+  - Adds links => file *demo1-Links.json*            
+  - Adds points => file *demo1-Point.json*            
+  - Settings demo1 => file *demo1-total.json*
+
+To see the tutorial, [follow this link](../EN/demo/tutorial1.md)
+
+## Demo2
+
+The associated files you can import are =>
+
+![demo1](../screenshots/demo/demo1.jpg)
 
   - Picture background SVG => file *demo1-background.svg*        
   - Displays a selected element SVG => file *demo1-coordRegion.json*      
@@ -25,11 +37,11 @@ To see the tutorial, [follow this link](../docs/EN/demo/tutorial1.md)
 
   
     
-## Demo2
+## Demo3
 
 The associated files you can import are =>
 
-![demo3](../docs/screenshots/demo/demo3.jpg)
+![demo3](../screenshots/demo/demo3.jpg)
 
   - Picture background SVG => file *demo3-background.svg*        
   - Displays a selected element SVG and selected region => file *demo3-coordRegion.json*     

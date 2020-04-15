@@ -90,6 +90,11 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     const colorBorderSVG: Color = parseColor(border);
     const changeColorElement: HTMLElement | null = document.getElementById(id);
 
+    // if (id === 'rect45') {
+    //   console.log('am here');
+    // }
+
+
     if (changeColorElement) {
       changeColorElement.style.fill = colorSVG.color;
       changeColorElement.style.fillOpacity = colorSVG.transparency;
@@ -99,8 +104,38 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     }
   };
 
+  generateValueMetricElement = (region: RegionClass, valueQuery: number | null): string => {
+    let converValueQuery = 'NaN';
+    const roundMetrics: number = region.textObj.valueGenerateObjectText
+      ? parseInt(region.textObj.valueGenerateObjectText.numericFormatElement, 10)
+      : 1;
+
+    if (
+      valueQuery
+      && region.textObj.valueGenerateObjectText
+      && region.textObj.valueGenerateObjectText.numericFormatElement !== ''
+      && roundMetrics
+    ) {
+      converValueQuery = (valueQuery || 0).toPrecision(roundMetrics).toString();
+    } else if (valueQuery) {
+      converValueQuery = valueQuery.toString();
+    }
+    // (Math.round(valueQuery * roundMetrics + Number.EPSILON) / roundMetrics).toString()
+    let value: string = converValueQuery;
+    if (region.textObj.valueGenerateObjectText) {
+      value = region.textObj.valueGenerateObjectText.legendElement + ' ' + converValueQuery + ' ' + region.textObj.valueGenerateObjectText.unit;
+    }
+
+    return value;
+  };
+
   /** fill state for tooltip, color zone and calc round query */
-  setStateTooltip = (lowerLimit: LowerLimit, region: RegionClass, valueQuery: number | null, link: boolean): Tooltip => {
+  setStateTooltip = (
+    lowerLimit: LowerLimit,
+    region: RegionClass,
+    valueQuery: number | null,
+    link: boolean
+  ): Tooltip => {
     const styleTooltip = {
       color: region.textObj.colorText,
       backgroundColor: region.textObj.colorBack,
@@ -111,35 +146,16 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       backgroundColor: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorBackElement : 'black',
     } as CSSProperties;
 
-    let converValueQuery = 'NaN';
-    const roundMetrics: number = region.textObj.valueGenerateObjectText
-      ? parseInt(region.textObj.valueGenerateObjectText.numericFormatElement, 10)
-      : 1;
-
-    if (valueQuery && region.textObj.valueGenerateObjectText && region.textObj.valueGenerateObjectText.numericFormatElement !== '' && roundMetrics) {
-      converValueQuery = valueQuery.toFixed(roundMetrics).toString();
-    } else if (valueQuery) {
-      converValueQuery = valueQuery.toString();
-    }
-    // (Math.round(valueQuery * roundMetrics + Number.EPSILON) / roundMetrics).toString()
-    const value: string =
-      converValueQuery +
-      (region.textObj.valueGenerateObjectText
-        ? (region.textObj.valueGenerateObjectText.unit
-          ? ' ' + region.textObj.valueGenerateObjectText.unit
-          : '')
-        : '');
-
-    const valueQueryResult: string = (region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.legendElement : '') + ' ' + value;
+    const valueQueryResult: string = this.generateValueMetricElement(region, valueQuery);
 
     const tooltipValue: JSX.Element = (
       <div>
         <div style={styleTooltip}>
           {link && <a href={region.linkURL.hoveringTooltipLink}>{region.linkURL.hoveringTooltipText}</a>}
-          {region.textObj.isTextRegion && <p>{region.label}</p>}
+          {region.textObj.isTextTooltip && <p>{region.label}</p>}
         </div>
         <div style={styleMetrics}>
-          {region.textObj.generateObjectText && region.textObj.valueGenerateObjectText && region.textObj.valueGenerateObjectText.displayObjectInText && <p>{valueQueryResult}</p>}
+          {region.textObj.generateObjectText && region.textObj.valueGenerateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip && <p>{valueQueryResult}</p>}
         </div>
       </div>
     );
@@ -150,6 +166,13 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       sizeBorder: lowerLimit.sizeBorder,
       valueQuery: valueQueryResult,
     };
+  };
+
+  displayValueQuery = (region: RegionClass): boolean => {
+    if (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText && (!region.textObj.valueGenerateObjectText.displayObjectInTooltip)) {
+      return true;
+    }
+    return false;
   };
 
   /** generate tooltip for metrics and apply color with lower limit */
@@ -163,21 +186,22 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
 
     const resultTooltip: Tooltip = this.setStateTooltip(lowerLimit, region, valueQuery, this.props.isEnabled);
     if (valueQuery) {
-      if (region.mode) {
+      if (region.mode && ((!region.textObj.isTextTooltip) || this.displayValueQuery(region))) {
         const coordinateWrite: Coord4DInt | null = searchMinMaxIdSVG(region.idSVG);
 
         if (coordinateWrite) {
           stateIsFill = true;
           const styleWrite = {
             position: 'absolute',
-            zIndex: 1000,
+            zIndex: 999,
             left: coordinateWrite.xMax - (coordinateWrite.xMax - coordinateWrite.xMin),
             top: coordinateWrite.yMax,
             backgroundColor: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorBackElement : 'black',
             color: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorTextElement : 'white',
           } as CSSProperties;
+          const htmlResult = <div style={styleWrite}>{(!region.textObj.isTextTooltip) && region.label}<br />{this.displayValueQuery(region) && resultTooltip.valueQuery}</div>;
           this.setState({
-            htmlResult: <div style={styleWrite}>{resultTooltip.valueQuery}</div>,
+            htmlResult: htmlResult,
             tooltipValue: resultTooltip.tooltipValue,
             backgroundColor: resultTooltip.backgroundColor,
             borderColor: resultTooltip.borderColor,
@@ -225,11 +249,6 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     const style: Style = region.textObj.style;
 
     const coorHTML: CoorHTML = calculRealCoordinate(region, this.props.useLimit, this.props.limit);
-    // console.log(coorHTML);
-    // region.
-    // const tt: Coord4D = { xMin: coorHTML.right, xMax: coorHTML.left, yMin: coorHTML.top, yMax: coorHTML.bottom };
-    // const cc: Coor4DNum = pixelToPercent(tt, this.props.options.baseMap);
-// console.log(this.props.uneCoor.label);
 
     const styleDiv = {
       position: 'absolute',
@@ -238,14 +257,12 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       bottom: coorHTML.bottom,
       left: coorHTML.left,
       right: coorHTML.right,
-      zIndex: 1000,
-      // display: 'flex',
-      // flexDirection: 'column',
+      zIndex: 999,
       justifyContent: 'center',
       background: 'url(' + region.img + ') no-repeat center center',
       backgroundColor: this.state.backgroundColor,
-      // backgroundSize: 'contain',
-      // cursor: 'pointer',
+      backgroundSize: 'contain',
+      cursor: 'pointer',
     } as React.CSSProperties;
 
     const styleTextDiv = {
@@ -264,39 +281,40 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     let value: JSX.Element = <div></div>;
 
     if (this.props.isEnabled && region.linkURL.followLink !== '') {
+
       value = (
-        <a href={region.linkURL.followLink}>
-          <div style={styleDiv} id={this.props.id}>
-            {(!region.textObj.isTextRegion || region.textObj.generateObjectText) && (
-              <div>
-                <div style={styleTextDiv}>{!region.textObj.isTextRegion && region.label}</div>
-                <div style={styleMetricsDiv}>
-                  {region.textObj.generateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInText && this.state.valueQuery}
+        <div style={styleDiv} id={this.props.id}>
+          <a href={region.linkURL.followLink}>
+            <div style={{height: '100%', width: '100%'}} >
+              {(!region.textObj.isTextTooltip || region.textObj.generateObjectText) && (
+                <div>
+                  <div style={styleTextDiv}>{!region.textObj.isTextTooltip && region.label}</div>
+                  <div style={styleMetricsDiv}>
+                    {region.textObj.generateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInTooltip && this.state.valueQuery}
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
-        </a>
+              )}
+            </div>
+          </a>
+        </div>
       );
-      if (region.textObj.isTextRegion || (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInText)) {
+      if (region.textObj.isTextTooltip || (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip)) {
         value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
       }
     } else {
-      console.log('je suis la ' + this.props.uneCoor.label);
-      // console.log(cc);
       value = (
         <div style={styleDiv} id={this.props.id}>
-          {(!region.textObj.isTextRegion || region.textObj.generateObjectText) && (
+          {(!region.textObj.isTextTooltip || region.textObj.generateObjectText) && (
             <div>
-              <div style={styleTextDiv}>{!region.textObj.isTextRegion && region.label}</div>
+              <div style={styleTextDiv}>{!region.textObj.isTextTooltip && region.label}</div>
               <div style={styleMetricsDiv}>
-                {region.textObj.generateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInText && this.state.valueQuery}
+                {region.textObj.generateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInTooltip && this.state.valueQuery}
               </div>
             </div>
           )}
         </div>
       );
-      if (region.textObj.isTextRegion || (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInText)) {
+      if (region.textObj.isTextTooltip || (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip)) {
         value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
       }
     }

@@ -1,5 +1,4 @@
 
-
 # Display
 
 
@@ -34,7 +33,7 @@ Pour cela, il est possible de charger une image en arrière plan suivant une des
 
 Il s'agit d'une image vectoriel au format SVG. La création du fichier SVG est décrite dans la page dédié : [Construire un fichier SVG](../appendix/svg.md)
 
-![display](../../screenshots/editor/display/display-svg-background.jpg)
+![display](../../screenshots/editor/display/svg-background.jpg)
 
 Après avoir saisie l'url du fichier
 
@@ -42,7 +41,7 @@ Après avoir saisie l'url du fichier
 Il faut sauvegarder le dashboard, comme ceci
 
 
-![display](../../screenshots/editor/display/display-save-dashboard.jpg)
+![display](../../screenshots/editor/display/save-dashboard.jpg)
 
 
 ## Si vous n'utilisez pas une image SVG
@@ -51,7 +50,7 @@ Il faut sauvegarder le dashboard, comme ceci
 
 Il s'agit d'une image créé point par point dont le contenu n'est dynamique, ni vectoriel
 
-![display](../../screenshots/editor/display/display-jpg-background.jpg)
+![display](../../screenshots/editor/display/jpg-background.jpg)
 
 
 Il est possible de charger une image en arrière plan au format : 
@@ -67,7 +66,7 @@ Il faut renseigner l'espace nécessaire pour créer votre environnement
 
 pour obtenir le résultat suivant
 
-![display](../../screenshots/editor/display/display-jpg-resultat.jpg)
+![display](../../screenshots/editor/display/jpg-resultat.jpg)
 
 
 Après avoir saisie l'url du fichier, la largeur et la hauteur
@@ -76,7 +75,7 @@ Après avoir saisie l'url du fichier, la largeur et la hauteur
 Il faut sauvegarder le dashboard, comme ceci
 
 
-![display](../../screenshots/editor/display/display-save-dashboard.jpg)
+![display](../../screenshots/editor/display/save-dashboard.jpg)
 
 
 
@@ -87,12 +86,12 @@ Il faut sauvegarder le dashboard, comme ceci
 Il est possible de charger une image en *base 64* comme ceci : 
 
 
-![display](../../screenshots/editor/display/display-base64-picture.jpg)
+![display](../../screenshots/editor/display/base64-picture.jpg)
 
 
 pour cela, il faut *copier l'adresse de l'image*
 
-![display](../../screenshots/editor/display/display-base64-capture.jpg)
+![display](../../screenshots/editor/display/base64-capture.jpg)
 
 
 
@@ -104,5 +103,5 @@ Après avoir saisie l'url du fichier
 Il faut sauvegarder le dashboard, comme ceci
 
 
-![display](../../screenshots/editor/display/display-save-dashboard.jpg)
+![display](../../screenshots/editor/display/save-dashboard.jpg)
 

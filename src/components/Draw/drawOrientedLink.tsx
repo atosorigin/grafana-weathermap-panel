@@ -32,7 +32,6 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   valueMainMetricB: string;
   textObject: TextObject;
   seuil: LowerLimitClass[];
-  seuilB: LowerLimitClass[];
   labelAPositionX: string;
   labelAPositionY: string;
   labelBPositionX: string;
@@ -1839,14 +1838,12 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
 
   private defineBorderColor(link: string) {
     let colorBorder = '';
-    let seuil: LowerLimitClass[] = [];
+    let seuil: LowerLimitClass[] = this.props.seuil;
     let valueMainMetric = 0;
 
     if (link === 'A') {
-      seuil = this.props.seuil;
       valueMainMetric = parseInt(this.props.valueMainMetricA, 10);
     } else {
-      seuil = this.props.seuilB;
       valueMainMetric = parseInt(this.props.valueMainMetricB, 10);
     }
 
@@ -1859,6 +1856,11 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     } else {
       colorBorder = 'black';
     }
+
+    // console.log('valueMainMetric');
+    // console.log(valueMainMetric);
+    // console.log('seuil');
+    // console.log(seuil);
 
     let index = 0;
     seuil.forEach((level: LowerLimitClass) => {
@@ -1890,14 +1892,12 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
 
   defineBorderSize(link: string) {
     let sizeBorder = '';
-    let seuil: LowerLimitClass[] = [];
+    let seuil: LowerLimitClass[] = this.props.seuil;
     let valueMainMetric = 0;
 
     if (link === 'A') {
-      seuil = this.props.seuil;
       valueMainMetric = parseInt(this.props.valueMainMetricA, 10);
     } else {
-      seuil = this.props.seuilB;
       valueMainMetric = parseInt(this.props.valueMainMetricB, 10);
     }
 

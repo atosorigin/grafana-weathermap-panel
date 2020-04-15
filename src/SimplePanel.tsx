@@ -13,7 +13,8 @@ import { LinkURLClass } from 'Models/LinkURLClass';
 
 import { coordinateIsInInitialSpace } from 'Functions/coodinateIsInInitialSpace';
 import { reqMetricPoint, reqMetricOrientedLink, reqMetricAuxOrientedLink, reqMetricAuxPoint } from 'Functions/fetchMetrics';
-import { getResultQuery } from 'Functions/getResultQuery';
+// import { getResultQuery } from 'Functions/getResultQuery';
+import { getInfoDisplayRegion } from 'Functions/getInfoDisplayRegion';
 
 import AddCoordinate from 'components/CoordinateSpace/addCoordinate';
 import DrawRectangle from './components/Draw/drawRectangle';
@@ -67,53 +68,18 @@ export class SimplePanel extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      // isUpdate: false,
-      // sizePanel: 300,
       idOrientedLink: this.props.options.indexOrientedLink,
       valueButton: '',
       buttonManage: [false, false, false, false, false],
       numberClickDiv: 0,
       allActionButton: <div></div>,
-      // valueLegend: <div></div>,
-      // seuil: [],
       nbClickButton: false,
       legend: { hiddenLegend: true, x: 0, y: 0 },
-      // img: <div></div>,
       svg: '',
-      // loading: false,
-      // url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/tiger.svg',
       displayRegion: <div></div>,
-      // idSVG: '',
       tooltip: <div>salut</div>,
     };
   }
-
-  /**
-   * TODO
-   */
-  // fillCoordinate = (): JSX.Element => {
-  // 	const { options } = this.props;
-  // 	let mapItems: JSX.Element[];
-
-  // 	mapItems = options.regionCoordinateSpace
-  // 		.map((line: RegionClass, index) =>
-  // 			<DrawRectangleExtend
-  // 				key={'drawRectangleExtend' + index.toString()}
-  // 				uneCoor={line}
-  // 				useLimit={false}
-  // 				limit={options.coordinateSpaceInitial}
-  // 				onOptionsChange={this.props.onOptionsChange}
-  // 				options={this.props.options}
-  // 				data={this.props.data}
-  // 				id={'region' + line.id.toString()}
-  // 				isEnabled={!this.state.buttonManage[1]} />
-  // 		);
-  // 	return (
-  // 		<ul>
-  // 			{mapItems}
-  // 		</ul>
-  // 	);
-  // }
 
   /**
    * Display limit (coordinateSpaceInitial)
@@ -210,7 +176,7 @@ export class SimplePanel extends PureComponent<Props, State> {
         legendElement: '',
         numericFormatElement: '',
         unit: '',
-        displayObjectInText: false,
+        displayObjectInTooltip: false,
         // 'displayObjectPermanently': false,
         addColorTextElement: false,
         colorTextElement: 'white',
@@ -221,7 +187,7 @@ export class SimplePanel extends PureComponent<Props, State> {
         legendElement: '',
         numericFormatElement: '',
         unit: '',
-        displayObjectInText: false,
+        displayObjectInTooltip: false,
         // 'displayObjectPermanently': false,
         addColorTextElement: false,
         colorTextElement: 'white',
@@ -856,7 +822,7 @@ export class SimplePanel extends PureComponent<Props, State> {
         legendElement: '',
         numericFormatElement: '',
         unit: '',
-        displayObjectInText: false,
+        displayObjectInTooltip: false,
         // 'displayObjectPermanently': false,
         addColorTextElement: false,
         colorTextElement: 'white',
@@ -867,7 +833,7 @@ export class SimplePanel extends PureComponent<Props, State> {
         legendElement: '',
         numericFormatElement: '',
         unit: '',
-        displayObjectInText: false,
+        displayObjectInTooltip: false,
         // 'displayObjectPermanently': false,
         addColorTextElement: false,
         colorTextElement: 'white',
@@ -924,11 +890,7 @@ export class SimplePanel extends PureComponent<Props, State> {
         refId: '',
         manageValue: 'avg',
       },
-      [],
-      [],
-      false,
-      false,
-      false
+      []
     );
     const newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
     newArrayOrientedLink.push(newOrientedLink);
@@ -986,7 +948,6 @@ export class SimplePanel extends PureComponent<Props, State> {
           data={this.props.data}
           textObject={orientedLink.textObj}
           seuil={orientedLink.lowerLimit}
-          seuilB={orientedLink.lowerLimitB}
           labelAPositionX={orientedLink.positionParameter.labelAPositionX}
           labelAPositionY={orientedLink.positionParameter.labelAPositionY}
           labelBPositionX={orientedLink.positionParameter.labelBPositionX}
@@ -1200,12 +1161,6 @@ export class SimplePanel extends PureComponent<Props, State> {
     });
   };
 
-  // changeDisplayButtonlegend = () => {
-  // 	this.setState({
-  // 		valueLegend: <div></div>,
-  // 	});
-  // }
-
   getCoordinates = (event: any) => {
     const valueButton = this.state.valueButton;
 
@@ -1262,14 +1217,6 @@ export class SimplePanel extends PureComponent<Props, State> {
       allActionButton: final,
     });
   };
-
-  // display_Button = () => {
-  // 	const ultracall = document.getElementById('allButton');
-  // 	ultracall?.addEventListener('click', () => {
-  // 		ultracall.style.display = 'inline-block';
-  // 	})
-
-  // }
 
   callMethod = async () => {
     if (this.state.numberClickDiv === 0) {
@@ -1367,8 +1314,6 @@ export class SimplePanel extends PureComponent<Props, State> {
       ...this.props.options,
       legend: newLegend,
     });
-
-    // this.changeDisplayButtonlegend();
   };
 
   // Close legend click on close
@@ -1475,9 +1420,58 @@ export class SimplePanel extends PureComponent<Props, State> {
     }
     if (this.props !== prevProps) {
       this.chargeRegion();
-      // console.log(this.props.options.displayButton);
     }
   }
+
+  // Zoom in Panel
+  /********************************  Zoom Panel*********************************** */
+
+  // Zoom Plus
+  ZoomIn = () => {
+    
+
+    const intialfirst = document.getElementById('more');
+    intialfirst?.addEventListener('click', () => {
+      let elmnt = document.getElementById('mainPanel');
+      if(elmnt ){
+        elmnt.style.transform += 'scale(1.01,1.01)';
+      }
+      
+    });
+  };
+
+  // Zoom Negative
+
+  ZoomOut = () => {
+    
+    
+    const intialsecond = document.getElementById('less');
+    intialsecond?.addEventListener('click', () => {
+      let elmnt = document.getElementById('mainPanel');
+      
+      if(elmnt ){
+        elmnt.style.transform += 'scale(0.99,0.99)';
+      }
+      
+      console.log('-');
+    });
+  };
+  // Zoom Initial
+  // ZoomInitial = () => {
+   
+
+  //   const intialsecond = document.getElementById('init');
+  //   intialsecond?.addEventListener('click', () => {
+  //     const elmnt = document.getElementById('mainPanel');
+      
+  //     if(elmnt ){
+  //       elmnt.style.transform = 'scale(1,1)';
+  //     }
+      
+  //   });
+  // };
+
+  /********************************  Zoom Panel*********************************** */
 
   // Tooltip in Svg
 
@@ -1549,33 +1543,31 @@ export class SimplePanel extends PureComponent<Props, State> {
       if (line.mode) {
         const id: HTMLElement | null = document.getElementById('oct' + line.idSVG);
         if (id) {
-          const valueQuery = getResultQuery(line.mainMetric);
+          // const valueQuery = getResultQuery(line.mainMetric);
           const test = document.getElementById('jeSuisLa' + line.id);
           if (test) {
             test.style.fill = 'red';
           } else {
-            const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
-            title.setAttribute('fill', 'yellow');
-            title.setAttributeNS('http://www.w3.org/1999/xlink', 'fill', 'yellow');
-            // title.setAttributeNS('http://www.w3.org/2000/xmlns/', 'fill', 'yellow');
+            const textObj: TextObject = line.textObj;
+            if (
+              textObj.isTextTooltip ||
+              (textObj.generateObjectText && textObj.valueGenerateObjectText && textObj.valueGenerateObjectText.displayObjectInTooltip)
+            ) {
+              const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+              title.setAttribute('fill', 'yellow');
+              title.setAttributeNS('http://www.w3.org/1999/xlink', 'fill', 'yellow');
 
-            title.setAttribute('fill', 'red');
-            title.setAttributeNS('title', 'fill', 'red');
-            // title.innerHTML = '<div><p style="color: red;">' + (valueQuery ? valueQuery.toString() : '') + '</p></div>';
-            title.textContent = valueQuery ? valueQuery.toString() : '';
-            title.id = 'jeSuisLa' + line.id;
-            // title.style.
-            title.style.fill = 'red';
-            id.appendChild(title);
+              title.setAttribute('fill', 'red');
+              title.setAttributeNS('title', 'fill', 'red');
+              const text = getInfoDisplayRegion(line, this.props);
+
+              title.innerHTML = text.tooltip.modeText || '';
+              // title.textContent = valueQuery ? valueQuery.toString() : '';
+              title.id = 'jeSuisLa' + line.id;
+              title.style.fill = 'red';
+              id.appendChild(title);
+            }
           }
-          // id.appendChild(title).style.backgroundColor = 'red';
-          // id.appendChild(title).style.fill = 'red';
-          // id.appendChild(title).style.padding = '2px';
-          // id.appendChild(title).style.float = 'right';
-          // id.appendChild(title).style.color = 'blue';
-          // id.appendChild(title).style.boxShadow = '0 0 2px red';//rgba(0, 0, 0, 0.5)';
-          // id.appendChild(title).style.borderRadius = '2px';
-          // id.appendChild(title).style.fontWeight = '5000';
         }
       }
     }
@@ -1602,7 +1594,7 @@ export class SimplePanel extends PureComponent<Props, State> {
         options={this.props.options}
         data={this.props.data}
         id={'region' + line.id.toString()}
-        isEnabled={false}
+        isEnabled={true}
       />
     ));
     return <ul style={styleRegion}>{mapItems}</ul>;
@@ -1618,8 +1610,8 @@ export class SimplePanel extends PureComponent<Props, State> {
         // position: 'absolute',
         // textAlign: 'center',
         // backgroundRepeat: 'no-repeat',
-        // height: this.props.options.baseMap.height + 'px',
-        // width: this.props.options.baseMap.width + 'px',
+        height: this.props.options.baseMap.height + 'px',
+        width: this.props.options.baseMap.width + 'px',
         // opacity: 0.8,
         // zIndex: 4,
       } as React.CSSProperties;
@@ -1649,12 +1641,8 @@ export class SimplePanel extends PureComponent<Props, State> {
       backgroundRepeat: 'no-repeat',
       height: this.props.options.baseMap.height + 'px',
       width: this.props.options.baseMap.width + 'px',
-      // opacity: 0.8,
-      // zIndex: 20,
       opacity: 0,
       zIndex: 2,
-      // backgroundColor: 'red',
-      // marginLeft: '20%',
     } as React.CSSProperties;
 
     const defaultStyle = {
@@ -1670,6 +1658,25 @@ export class SimplePanel extends PureComponent<Props, State> {
 
     return (
       <CustomScrollbar autoHide={false} hideHorizontalTrack>
+        <div
+          id="zoom"
+          style={{
+            display: 'inline-flex',
+            marginTop: '-7px',
+            marginLeft: '86%',
+          }}
+        >
+          <Button id="more" onClick={this.ZoomIn} variant={'primary'}>
+            +
+          </Button>
+          <Button id="less" onClick={this.ZoomOut} variant={'primary'}>
+          -
+          </Button>
+
+          {/* <Button id="init" onClick={this.ZoomInitial} variant={'secondary'}>
+            =
+          </Button> */}
+        </div>
         <div style={{ textAlign: 'left', position: 'relative', display: 'inline-grid' }}>
           {this.props.options.displayButton && this.state.allActionButton}
         </div>
@@ -1694,18 +1701,21 @@ export class SimplePanel extends PureComponent<Props, State> {
                 </Modal>
               </div>
             )}
+
             {this.state.buttonManage[2] && <div></div>}
             <LegendComponant
               options={this.props.options}
               onOptionsChange={this.props.onOptionsChange}
               data={this.props.data}
+              // legend={this.props.options.legend}
+              {...this.props.options.legend}
               callBack={this.handleClick}
             />
             <div onClick={this.callMethod}></div>
             <div id="coordinateSpaces" style={styleBackground}>
               <div>
                 <div className="tooltip" />
-                {this.fillCoordinate()}
+                {/* {this.fillCoordinate()} */}
                 <div onClick={this.getCoordinates} id="mainPanel" style={{ position: 'absolute', top: '15%', zIndex: 1 }}>
                   <div
                     style={styleSVG} // onMouseOver={this.SVG_PathImage}
@@ -1717,12 +1727,9 @@ export class SimplePanel extends PureComponent<Props, State> {
                     onMouseOver={this.SVG_PathImage}
                     dangerouslySetInnerHTML={{ __html: this.props.options.baseMap.layerImage }}
                   />
-                  {/* <div id='Glasses' style={styleSVG_2}
-                onMouseMove={this.tooltip_SVGImage } dangerouslySetInnerHTML={{ __html: this.state.svg }} /> */}
-                  {/* <Tooltip placement="top" content='hello World' theme='info' children={}  />
-                  {this.defineLimit()} */}
+                  {this.fillCoordinate()}
+
                   {this.displayOrientedLink()}
-                  {/* {this.state.displayRegion} */}
                   {this.displayPoint()}
                 </div>
               </div>

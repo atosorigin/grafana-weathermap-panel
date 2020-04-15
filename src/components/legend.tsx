@@ -47,6 +47,9 @@ class LegendComponent extends React.Component<Props, State> {
   /** fill lowerlimit in JSX.Element */
   fillLowerLimit = (lowerLimit: LowerLimitClass[]): JSX.Element[] => {
     const allLimit: JSX.Element[] = [];
+    let i = 0;
+    const max: number = lowerLimit.length - 1;
+ 
     for (const lower of lowerLimit) {
       allLimit.push(
         <li className="LegendMatt">
@@ -71,11 +74,12 @@ class LegendComponent extends React.Component<Props, State> {
                 fontSize: '9px',
               }}
             >
-              {lower.lowerLimitMin} - {lower.lowerLimitMax}
+              {i === 0 ? '-∞' : lower.lowerLimitMin} - {i === max ? '+∞' : lower.lowerLimitMax}
             </span>
           )}
         </li>
       );
+      ++i;
     }
     return allLimit;
   };
@@ -131,35 +135,36 @@ class LegendComponent extends React.Component<Props, State> {
       >
         <article
           style={{
-            width: '250px',
+            width: '170px',
             position: 'absolute',
             overflowY: 'scroll',
             margin: '0',
-            height: '170px',
-            backgroundColor: '#212124',
-            color: '#d8d9da',
+            height: '220px',
+            backgroundColor: '#FFF',
+            color: '#000',
             border: '4px solid #299c46',
             borderRadius: '4px',
             scrollbarColor: '#09090b #212124',
-            scrollbarWidth: 'thin',
+            scrollbarWidth: 'none',
             zIndex: 9999,
           }}
         >
           <div style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
-            <h5 style={{ width: '100%', fontSize: '20px', display: 'inline-flex' }}>
-              Legend
-              <i style={{ marginLeft: '78%' }} className="fa fa-close" onClick={this.props.callBack}></i>
-            </h5>
+            <h5 style={{ width: '100%', fontSize: '20px', display: 'inline-flex' }}>Legend</h5>
+            <p style={{ color: '#d8d9da', fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p>
+            <p style={{ color: '#d8d9da', fontSize: '11px', marginLeft: '17px' }}>Label</p>
+       </div>
+            
             {/* <p style={{ fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p> */}
-          </div>
+         
           <div style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
             <p style={{ fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p>
           </div>
-          <ul key={Math.random().toString()}>{this.fillRegion()}</ul>
+          <ul key="regionLegend">{this.fillRegion()}</ul>
           <div style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
             <p style={{ fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Point</p>
           </div>
-          <ul key={Math.random().toString()}>{this.fillPoint()}</ul>
+          <ul key="pointLegend">{this.fillPoint()}</ul>
         </article>
       </div>
     );
@@ -195,3 +200,4 @@ class LegendComponent extends React.Component<Props, State> {
   }
 }
 export default LegendComponent;
+

@@ -8,7 +8,7 @@ interface GenerateTextObject {
   /** unity mesure element */
   unit: string;
   /** display object in text */
-  displayObjectInText: boolean;
+  displayObjectInTooltip: boolean;
   /** display object permanently */
   // displayObjectPermanently: boolean;
   /** color text element active */
@@ -28,7 +28,7 @@ export class TextObject {
   /** object value */
   value: string;
   /** text display in element or tooltip */
-  isTextRegion: boolean;
+  isTextTooltip: boolean;
   /** back color region */
   colorBack: string;
   /** color text region */
@@ -47,7 +47,7 @@ export class TextObject {
   constructor(
     // legend: boolean,
     value: string,
-    isTextRegion: boolean,
+    isTextTooltip: boolean,
     colorBack: string,
     colorText: string,
     style: Style,
@@ -58,7 +58,7 @@ export class TextObject {
   ) {
     // this.legend = legend;
     this.value = value;
-    this.isTextRegion = isTextRegion;
+    this.isTextTooltip = isTextTooltip;
     this.colorBack = colorBack;
     this.colorText = colorText;
     this.style = style;

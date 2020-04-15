@@ -18,10 +18,8 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   callBack: (coordinate: CoordinateSpaceClass, id?: number) => void;
   /** function parent to save lower limit */
   lowerLimitCallBack: (lowerLimit: LowerLimitClass[], id?: number) => void;
-  /** function parent to save lower limit B of orientedLink if is bidirectionnal */
-  lowerLimitCallBackB?: (lowerLimit: LowerLimitClass[], id?: number) => void;
 
-  isLink?: boolean;
+  isLink: boolean;
 
   orientedLink?: OrientedLinkClass;
 
@@ -75,9 +73,6 @@ class ManageLowerLimit extends React.Component<Props, State> {
     // console.log(this.props.id);
     this.props.callBack(this.props.coordinate, this.props.id);
     this.props.lowerLimitCallBack(this.state.coordinate.lowerLimit, this.props.id);
-    if (this.props.lowerLimitCallBackB) {
-      this.props.lowerLimitCallBackB(this.props.options.arrayOrientedLinks[this.props.id || 0].lowerLimitB, this.props.id);
-    }
   };
 
   /**
@@ -100,22 +95,6 @@ class ManageLowerLimit extends React.Component<Props, State> {
     newValue.traceBorder = !newValue.traceBorder;
     await this.setStateAsyncCoordinate({ coordinate: newValue });
     this.onSave();
-  };
-
-  /**
-   * Edit contourIsChecked with switch for linkB if bidirectionnal
-   */
-  onSwitchContourB = async () => {
-    const newValue: OrientedLinkClass = this.props.options.arrayOrientedLinks[this.props.id || 0];
-    newValue.traceBorderB = !newValue.traceBorderB;
-    const newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
-    newArrayOrientedLink[this.props.id || 0] = newValue;
-    this.props.onOptionsChange({
-      ...this.props.options,
-      arrayOrientedLinks: newArrayOrientedLink,
-    });
-    //await this.setStateAsyncCoordinate({ coordinate: newValue });
-    //this.onSave();
   };
 
   /**
@@ -171,15 +150,6 @@ class ManageLowerLimit extends React.Component<Props, State> {
               <Switch label={l10n.genericParameter.traceBackground} checked={this.state.coordinate.traceBack} onChange={this.onSwitchFond} />
               <Switch label={l10n.genericParameter.traceContour} checked={this.state.coordinate.traceBorder} onChange={this.onSwitchContour} />
             </div>
-          ) : this.props.options.arrayOrientedLinks[this.props.id || 0].orientationLink.value === 'double' ? (
-            <div>
-              <Switch label={'Color Link A'} checked={this.state.coordinate.traceBorder} onChange={this.onSwitchContour} />
-              <Switch
-                label={'Color Link B'}
-                checked={this.props.options.arrayOrientedLinks[this.props.id || 0].traceBorderB}
-                onChange={this.onSwitchContourB}
-              />
-            </div>
           ) : (
             <Switch label={'Color'} checked={this.state.coordinate.traceBorder} onChange={this.onSwitchContour} />
           )}
@@ -190,22 +160,8 @@ class ManageLowerLimit extends React.Component<Props, State> {
               traceBack={this.state.coordinate.traceBack}
               lowerLimit={this.state.coordinate.lowerLimit}
               lowerLimitCallBack={this.props.lowerLimitCallBack}
+              isLink={this.props.isLink}
               id={this.props.id}
-            />
-          ) : this.props.isLink && this.props.options.arrayOrientedLinks[this.props.id || 0].orientationLink.value === 'double' ? (
-            <FixColor
-              options={this.props.options}
-              onOptionsChange={this.props.onOptionsChange}
-              data={this.props.data}
-              traceBorder={this.state.coordinate.traceBorder}
-              traceBorderB={this.props.options.arrayOrientedLinks[this.props.id || 0].traceBorderB}
-              traceBack={this.state.coordinate.traceBack}
-              lowerLimit={this.state.coordinate.lowerLimit}
-              lowerLimitCallBack={this.props.lowerLimitCallBack}
-              lowerLimitCallBackB={this.props.lowerLimitCallBackB}
-              id={this.props.id}
-              isLink={this.props.isLink || false}
-              orientedLink={this.props.options.arrayOrientedLinks[this.props.id || 0]}
             />
           ) : (
             <FixColor
@@ -217,7 +173,7 @@ class ManageLowerLimit extends React.Component<Props, State> {
               lowerLimit={this.state.coordinate.lowerLimit}
               lowerLimitCallBack={this.props.lowerLimitCallBack}
               id={this.props.id}
-              isLink={this.props.isLink || false}
+              isLink={this.props.isLink}
             />
           )}
         </Collapse>

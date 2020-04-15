@@ -59,9 +59,9 @@ $ systemctl restart grafana-server
 
 ## Panel
 
-**Tutorial 2**
+**Tutorial 1**
 
-![demo2](docs/screenshots/demo/demo2.png)
+![demo1](docs/screenshots/demo/demo1.png)
 
 **Tutorial 3**
 

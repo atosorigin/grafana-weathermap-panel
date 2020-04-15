@@ -472,6 +472,10 @@ export default class DrawPoint extends React.Component<Props, State> {
       index++;
     });
 
+    if (colorBackground === '') {
+      colorBackground = 'black';
+    }
+
     return colorBackground;
   }
 
