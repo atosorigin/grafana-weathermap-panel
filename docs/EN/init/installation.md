@@ -7,7 +7,6 @@
 ## Dependencies
 
 - Grafana 6.6.x or 6.7.x
-- Yarn 1.21.1
 
 
 ## Official version

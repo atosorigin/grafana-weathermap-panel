@@ -8,6 +8,7 @@ import { LowerLimitClass } from 'Models/LowerLimitClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 import { PointClass } from 'Models/PointClass';
 import { LinkURLClass } from 'Models/LinkURLClass';
+import { Style } from 'components/Parametrage/styleComponent';
 
 interface Props extends PanelEditorProps<SimpleOptions> {
   id: string;
@@ -1399,6 +1400,20 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
         indexOrientedLink++;
       });
+    } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
+      xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
+      yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
+      xB = xB0;
+      yB = yB0;
+      xCByClick = xCByClick0 || (xA + xB) / 2;
+      yCByClick = yCByClick0 || (yA + yB) / 2;
+    } else if (this.props.associateRegionOut !== '' && this.props.associateRegionIn === '' && this.props.associatePointIn === '') {
+      xA = xA0;
+      yA = yA0;
+      xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
+      yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
+      xCByClick = xCByClick0 || (xA + xB) / 2;
+      yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
@@ -1406,18 +1421,39 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
-    } else if (this.props.associateRegionOut !== '') {
+    } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
+      xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
+      yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
+      xB = xB0;
+      yB = yB0;
+      xCByClick = xCByClick0 || (xA + xB) / 2;
+      yCByClick = yCByClick0 || (yA + yB) / 2;
+    } else if (this.props.associatePointOut !== '' && this.props.associatePointIn === '' && this.props.associateRegionIn === '') {
       xA = xA0;
       yA = yA0;
+      xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
+      yB = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(false, 2));
+      xCByClick = xCByClick0 || (xA + xB) / 2;
+      yCByClick = yCByClick0 || (yA + yB) / 2;
+    } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
+      xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
+      yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
+      xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
+      yB = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(false, 2));
+      xCByClick = xCByClick0 || (xA + xB) / 2;
+      yCByClick = yCByClick0 || (yA + yB) / 2;
+    } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
+      xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
+      yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
       yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
-    } else if (this.props.associateRegionIn !== '') {
+    } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
-      xB = xB0;
-      yB = yB0;
+      xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
+      yB = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(false, 2));
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else {
@@ -1525,6 +1561,9 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             <div
               id={'labelMainMetric' + this.props.id}
               style={{
+                textDecoration: this.defineTextDecoration(),
+                fontStyle: this.defineFontStyle(),
+                fontWeight: this.defineFontWeight(),
                 position: 'absolute',
                 zIndex: 9999,
                 top: yMidAC + parseInt(this.props.labelAPositionY, 10) * inverseAxeY - this.labelSynchroY('A'),
@@ -1532,7 +1571,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 fontSize: '8px',
                 //border: '1px solid black',
                 backgroundColor: 'white',
-                color: 'black',
+                color: this.defineColorTextLabel(),
                 padding: '0 5px',
               }}
             >
@@ -1584,6 +1623,9 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             <div
               id={'labelMainMetricB' + this.props.id}
               style={{
+                textDecoration: this.defineTextDecoration(),
+                fontStyle: this.defineFontStyle(),
+                fontWeight: this.defineFontWeight(),
                 position: 'absolute',
                 zIndex: 9999,
                 top: yMidBC + parseInt(this.props.labelBPositionY, 10) * inverseAxeY - this.labelSynchroY('B'),
@@ -1591,7 +1633,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 fontSize: '8px',
                 //border: '1px solid black',
                 backgroundColor: 'white',
-                color: 'black',
+                color: this.defineColorTextLabel(),
                 padding: '0 5px',
               }}
             >
@@ -1619,7 +1661,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               >
                 <div
                   style={{
-                    padding: '3px',
+                    padding: parseInt(this.defineBorderSize('A'), 10) / 2 + 'px',
                     border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
                     backgroundColor: this.defineBorderColor('A'),
                     width: distanceAC,
@@ -1670,13 +1712,16 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             <div
               id={'labelMainMetric' + this.props.id}
               style={{
+                textDecoration: this.defineTextDecoration(),
+                fontStyle: this.defineFontStyle(),
+                fontWeight: this.defineFontWeight(),
                 position: 'absolute',
                 zIndex: 9999,
                 top: yC + parseInt(this.props.labelAPositionY, 10) * inverseAxeY - this.labelSynchroY('A'),
                 left: xC + parseInt(this.props.labelAPositionX, 10) - this.labelSynchroX('A'),
                 backgroundColor: 'white',
                 fontSize: '8px',
-                color: 'black',
+                color: this.defineColorTextLabel(),
                 padding: '0 5px',
                 cursor: 'pointer',
               }}
@@ -1731,13 +1776,16 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             <div
               id={'labelMainMetric' + this.props.id}
               style={{
+                textDecoration: this.defineTextDecoration(),
+                fontStyle: this.defineFontStyle(),
+                fontWeight: this.defineFontWeight(),
                 position: 'absolute',
                 zIndex: 9999,
                 top: yMidAB + parseInt(this.props.labelAPositionY, 10) * inverseAxeY - this.labelSynchroY('A'),
                 left: xMidAB + parseInt(this.props.labelAPositionX, 10) - this.labelSynchroX('A'),
                 backgroundColor: 'white',
                 fontSize: '8px',
-                color: 'black',
+                color: this.defineColorTextLabel(),
                 padding: '0 5px',
                 cursor: 'pointer',
               }}
@@ -1856,11 +1904,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     } else {
       colorBorder = 'black';
     }
-
-    // console.log('valueMainMetric');
-    // console.log(valueMainMetric);
-    // console.log('seuil');
-    // console.log(seuil);
 
     let index = 0;
     seuil.forEach((level: LowerLimitClass) => {
@@ -2166,6 +2209,61 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     }
 
     return <div>{contentTooltip}</div>;
+  };
+
+  private defineTextDecoration = (): string => {
+    const mainStyle: Style = this.props.textObject.style;
+    let result = '';
+    if (mainStyle.underline) {
+      result = 'underline';
+    } else {
+      if (this.props.options.display.style.underline) {
+        result = 'underline';
+      } else {
+        result = 'none';
+      }
+    }
+    return result;
+  };
+
+  private defineFontStyle = (): string => {
+    const mainStyle: Style = this.props.textObject.style;
+    let result = '';
+    if (mainStyle.italic) {
+      result = 'italic';
+    } else {
+      if (this.props.options.display.style.italic) {
+        result = 'italic';
+      } else {
+        result = 'normal';
+      }
+    }
+    return result;
+  };
+
+  private defineFontWeight = (): any => {
+    const mainStyle: Style = this.props.textObject.style;
+    let result = '';
+    if (mainStyle.bold) {
+      result = 'bold';
+    } else {
+      if (this.props.options.display.style.bold) {
+        result = 'bold';
+      } else {
+        result = 'normal';
+      }
+    }
+    return result;
+  };
+
+  private defineColorTextLabel = () => {
+    let result = '';
+    if (this.props.textObject.colorText) {
+      result = this.props.textObject.colorText;
+    } else {
+      result = 'black';
+    }
+    return result;
   };
 
   render() {

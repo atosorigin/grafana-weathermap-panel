@@ -2,13 +2,15 @@
 
 
 
-Cette partie est commune pour 
+This part is common for 
 
-- Region
-- Point
+- [Region](coordinates-space-region.md)
+- [Point](coordinates-space-point.md)
+- [Oriented Link](coordinates-space-link.md)
 
 
-### Fixe color
+
+### color fixed
 
 
 ![lower limit](../../screenshots/editor/coordinates/lower-limit/fixe-color.jpg)

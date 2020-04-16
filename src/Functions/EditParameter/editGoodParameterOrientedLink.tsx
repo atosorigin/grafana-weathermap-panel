@@ -42,15 +42,14 @@ export const editGoodParameterOrientedLink = (
     editCoor.pointCPositionX = newValue;
   } else if (name.startsWith('pointCY')) {
     editCoor.pointCPositionY = newValue;
+  } else if (name.startsWith('pointIn')) {
+    editCoor.pointIn = newValue;
+  } else if (name.startsWith('pointOut')) {
+    editCoor.pointOut = newValue;
+  } else if (name.startsWith('regionIn')) {
+    editCoor.regionIn = newValue;
+  } else if (name.startsWith('regionOut')) {
+    editCoor.regionOut = newValue;
   }
-  //else if (name.startsWith('positionXLabelLinkA')) {
-  // 	editCoor.positionXLabelA = newValue;
-  // } else if (name.startsWith('positionYLabelLinkA')) {
-  // 	editCoor.positionYLabelA = newValue;
-  // } else if (name.startsWith('positionXLabelLinkB')) {
-  // 	editCoor.positionXLabelB = newValue;
-  // } else if (name.startsWith('positionYLabelLinkB')) {
-  // 	editCoor.positionYLabelB = newValue;
-  // }
   return editCoor;
 };

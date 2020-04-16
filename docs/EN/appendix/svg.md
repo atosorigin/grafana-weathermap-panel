@@ -1,43 +1,42 @@
 
-## logiciels SVG
+## Build an SVG file
 
 ### Background
 
-L'image de fond est une part entière du plugins.
+The background image is an integral part of the plugin.
 
-Il est rendu possible de le rendre dynamique. Pour cela, l'image de fond doit être au format vectorisé [SVG](https://fr.wikipedia.org/wiki/Scalable_Vector_Graphics)
+It is made possible to make it dynamic. To do so, the background image must be in vectorized format [SVG](https://fr.wikipedia.org/wiki/Scalable_Vector_Graphics)
 
 
-## Editeur
+## Editor
 
-### inkscape
+### Inkscape
 
-Le logiciel préconisé pour réaliser une image de fond sera [Inkscape](https://inkscape.org). Il est disponible pour les environnements :
+The recommended software to make a background image will be [Inkscape](https://inkscape.org). It is available for :
 
   - Linux
   - Windows
   - Mac
 
-  le fichier sera sauvegardé au format **SVG simple** ou **SVG Inkscape**
-
+  the file will be saved as **Simple SVG** or **SVG Inkscape**.
 
 
 ### Draw.io
 
-L'éditeur [Draw.io](https://draw.io/) est accessible à partir d'un navigateur.
+The [Draw.io](https://draw.io/) editor is accessible from a browser.
 
-Vous devez activer une des librairies shapes `networking` pour obtenir la représentation graphique de votre réseau.
+You must activate one of the `networking` shapes libraries to get a graphical representation of your network.
 
-Vous devez exporter l'image au format SVG
-Les paramètres obligatoires à cocher sont `shadow` and `embed images`
+You must export the image in SVG format.
+The mandatory parameters to check are `shadow` and `embed images`.
 
 
-## Sauvegarde
+## Backup
 
 ![main metric](../../screenshots/appendix/draw-export-svg.jpg)
 
-Il est important que chaque élément doit posséder une clef `ID` pour que le fichier créé puisse être importer dans le plugin.
+It is important that each element must have an `ID` key so that the created file can be imported into the plugin.
 
 
-> Attention : 
-> il ne faut pas sauvegarder au format à plat, ni compresser le fichier
+> Warning: 
+> you must not save in flat format, nor compress the file

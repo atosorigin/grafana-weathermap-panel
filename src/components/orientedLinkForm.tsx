@@ -152,27 +152,27 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
     }));
   };
 
-  private defineDataRegion(): Array<SelectableValue<RegionClass>> {
+  private defineDataRegion(): Array<SelectableValue<string>> {
     const { regionCoordinateSpace } = this.props;
-    const optionRegionNull: SelectableValue<RegionClass> = { label: 'No selected region' };
-    const arrayOptionsRegion: Array<SelectableValue<RegionClass>> = [];
+    const optionRegionNull: SelectableValue<string> = { label: 'None', value: '' };
+    const arrayOptionsRegion: Array<SelectableValue<string>> = [];
 
     arrayOptionsRegion.push(optionRegionNull);
 
     regionCoordinateSpace.forEach(region => {
-      const optionRegion: SelectableValue<RegionClass> = {
+      const optionRegion: SelectableValue<string> = {
         label: region.label,
-        value: region,
+        value: region.label,
       };
       arrayOptionsRegion.push(optionRegion);
     });
     return arrayOptionsRegion;
   }
 
-  private defineDataPoint(): Array<SelectableValue<PointClass>> {
+  private defineDataPoint(): Array<SelectableValue<string>> {
     const { arrayPoint } = this.props;
-    const optionPointNull: SelectableValue<PointClass> = { label: 'No selected point' };
-    const arrayOptionsPoint: Array<SelectableValue<PointClass>> = [];
+    const optionPointNull: SelectableValue<string> = { label: 'None', value: '' };
+    const arrayOptionsPoint: Array<SelectableValue<string>> = [];
 
     arrayOptionsPoint.push(optionPointNull);
 
@@ -183,9 +183,9 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
         valueLabel = point.name;
       }
 
-      const optionPoint: SelectableValue<PointClass> = {
+      const optionPoint: SelectableValue<string> = {
         label: valueLabel,
-        value: point,
+        value: point.name,
       };
       arrayOptionsPoint.push(optionPoint);
     });
@@ -410,11 +410,38 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
       return value;
     }
 
-    if (name.startsWith('orientationLink') || name.startsWith('isIncurved')) {
+    if (
+      name.startsWith('orientationLink') ||
+      name.startsWith('isIncurved') ||
+      name.startsWith('pointIn') ||
+      name.startsWith('pointOut') ||
+      name.startsWith('regionIn') ||
+      name.startsWith('regionOut')
+    ) {
       if (name.startsWith('orientationLink')) {
         valueSelect = this.state.arrayOrientedLinkClass[idx].orientationLink;
       } else if (name.startsWith('isIncurved')) {
         valueSelect = this.state.arrayOrientedLinkClass[idx].isIncurved;
+      } else if (name.startsWith('pointIn')) {
+        valueSelect = {
+          label: this.state.arrayOrientedLinkClass[idx].pointIn,
+          value: this.state.arrayOrientedLinkClass[idx].pointIn,
+        };
+      } else if (name.startsWith('pointOut')) {
+        valueSelect = {
+          label: this.state.arrayOrientedLinkClass[idx].pointOut,
+          value: this.state.arrayOrientedLinkClass[idx].pointOut,
+        };
+      } else if (name.startsWith('regionIn')) {
+        valueSelect = {
+          label: this.state.arrayOrientedLinkClass[idx].regionIn,
+          value: this.state.arrayOrientedLinkClass[idx].regionIn,
+        };
+      } else if (name.startsWith('regionOut')) {
+        valueSelect = {
+          label: this.state.arrayOrientedLinkClass[idx].regionOut,
+          value: this.state.arrayOrientedLinkClass[idx].regionOut,
+        };
       }
       return valueSelect;
     } else if (name.startsWith('mainMetric')) {
@@ -446,18 +473,14 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
       } else if (name.startsWith('pointCY')) {
         value = this.state.arrayOrientedLinkClass[idx].pointCPositionY;
       }
-      // else if (name.startsWith('labelLinkA')) {
-      // 	value = this.state.oldArrayOrientedLinkClass[idx].labelLinkA;
-      // } else if (name.startsWith('labelLinkB')) {
-      // 	value = this.state.oldArrayOrientedLinkClass[idx].labelLinkB;
-      // } else if (name.startsWith('positionXLabelLinkA')) {
-      // 	value = this.state.oldArrayOrientedLinkClass[idx].positionXLabelA;
-      // } else if (name.startsWith('positionYLabelLinkA')) {
-      // 	value = this.state.oldArrayOrientedLinkClass[idx].positionYLabelA;
-      // } else if (name.startsWith('positionXLabelLinkB')) {
-      // 	value = this.state.oldArrayOrientedLinkClass[idx].positionXLabelB;
-      // } else if (name.startsWith('positionYLabelLinkB')) {
-      // 	value = this.state.oldArrayOrientedLinkClass[idx].positionYLabelB;
+      // else if (name.startsWith('pointIn')) {
+      //   value = this.state.arrayOrientedLinkClass[idx].pointIn;
+      // } else if (name.startsWith('pointOut')) {
+      //   value = this.state.arrayOrientedLinkClass[idx].pointIn;
+      // } else if (name.startsWith('regionIn')) {
+      //   value = this.state.arrayOrientedLinkClass[idx].pointIn;
+      // } else if (name.startsWith('regionOut')) {
+      //   value = this.state.arrayOrientedLinkClass[idx].pointIn;
       // }
       return value;
     }
@@ -476,7 +499,6 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
 
   /** save lower limit data */
   private callBackLowerLimit = (lowerLimit: LowerLimitClass[], id?: number) => {
-    console.log(lowerLimit);
     const newValue: OrientedLinkClass = this.state.arrayOrientedLinkClass[id || 0];
     newValue.lowerLimit = lowerLimit;
     this.props.options.arrayOrientedLinks[id || 0] = newValue;
@@ -501,27 +523,30 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
     textObj?: TextObject,
     id?: number
   ): void => {
-    const oldCoor: OrientedLinkClass = this.state.arrayOrientedLinkClass[id || 0];
+    const newValue: OrientedLinkClass = this.state.arrayOrientedLinkClass[id || 0];
     if (followLink) {
-      oldCoor.linkURL.followLink = followLink;
+      newValue.linkURL.followLink = followLink;
     }
     if (hoveringTooltipLink) {
-      oldCoor.linkURL.hoveringTooltipLink = hoveringTooltipLink;
+      newValue.linkURL.hoveringTooltipLink = hoveringTooltipLink;
     }
     if (hoveringTooltipText) {
-      oldCoor.linkURL.hoveringTooltipText = hoveringTooltipText;
+      newValue.linkURL.hoveringTooltipText = hoveringTooltipText;
     }
     if (textObj) {
-      oldCoor.textObj = textObj;
+      newValue.textObj = textObj;
     }
-    const arrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
 
-    arrayOrientedLink[id || 0] = oldCoor;
+    this.props.options.arrayOrientedLinks[id || 0] = newValue;
+    this.callBack();
+    // const arrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
 
-    this.props.onOptionsChange({
-      ...this.props.options,
-      arrayOrientedLinks: arrayOrientedLink,
-    });
+    // arrayOrientedLink[id || 0] = oldCoor;
+
+    // this.props.onOptionsChange({
+    //   ...this.props.options,
+    //   arrayOrientedLinks: arrayOrientedLink,
+    // });
   };
 
   private defineLabelCollapse(id: number): string {
@@ -549,6 +574,19 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
     newValue.mainMetric = mainMetric;
     this.props.options.arrayOrientedLinks[id || 0] = newValue;
     this.callBack();
+  };
+
+  private updateAssociatePointAndRegion = (orientedLink: OrientedLinkClass, name: string) => {
+    const value: SelectableValue<any> = {};
+    if (name.startsWith('pointIn')) {
+      orientedLink = editGoodParameterOrientedLink('regionIn', orientedLink, '', value || {});
+    } else if (name.startsWith('regionIn')) {
+      orientedLink = editGoodParameterOrientedLink('pointIn', orientedLink, '', value || {});
+    } else if (name.startsWith('pointOut')) {
+      orientedLink = editGoodParameterOrientedLink('regionOut', orientedLink, '', value || {});
+    } else if (name.startsWith('regionOut')) {
+      orientedLink = editGoodParameterOrientedLink('pointOut', orientedLink, '', value || {});
+    }
   };
 
   // private callBackAuxiliaryMetric = (auxiliaryMetrics: Metric[], id?: number): void => {
@@ -610,6 +648,7 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
                       value.value || '',
                       value || {}
                     );
+                    this.updateAssociatePointAndRegion(copyOfoldArrayOrientedLinkClass[i], name);
                     break;
                   }
                   i++;
@@ -618,6 +657,8 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
                 this.setState({
                   arrayOrientedLinkClass: copyOfoldArrayOrientedLinkClass,
                 });
+
+                console.log(this.state.arrayOrientedLinkClass);
 
                 this.callBack();
               }}
@@ -767,7 +808,6 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
     }
 
     return <div>{finalItem}</div>;
-    
   }
 
   /**
@@ -814,10 +854,6 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
           >
             Load Oriented Links
           </Button>
-    
-             
-
-          
         </div>
       </div>
     );

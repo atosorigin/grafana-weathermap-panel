@@ -8,6 +8,12 @@ Adding a background image is done from the `display` menu.
 
 The selected image will be [demo1-background.svg](../../resource/demo1-background.svg). To do this, we download it in base64 with the `Copy image address` function.
 
+
+```
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-background.svg
+
+```
+
 It is possible to have more details with the [display](../editor/display.md) page.
 
 You have to save and reload the page.

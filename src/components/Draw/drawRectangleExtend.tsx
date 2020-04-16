@@ -246,9 +246,10 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
 
     const backColor: string = region.textObj.colorBack;
     const textColor: string = region.textObj.colorText;
-    const style: Style = region.textObj.style;
 
     const coorHTML: CoorHTML = calculRealCoordinate(region, this.props.useLimit, this.props.limit);
+
+    const style: Style = region.textObj.style;
 
     const styleDiv = {
       position: 'absolute',
@@ -267,7 +268,9 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
 
     const styleTextDiv = {
       backgroundColor: backColor,
-      fontStyle: style.italic ? 'italic' : '',
+      textDecoration: this.defineTextDecoration(style),
+      fontStyle: this.defineFontStyle(style),
+      fontWeight: this.defineFontWeight(style),
       color: textColor,
       verticalAlign: 'middle',
     } as React.CSSProperties;
@@ -331,6 +334,48 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     await Promise.resolve('Success').then(() => {
       this.renduFinal();
     });
+  };
+
+  private defineTextDecoration = (mainStyle: Style): string => {
+    let result = '';
+    if (mainStyle.underline) {
+      result = 'underline';
+    } else {
+      if (this.props.options.display.style.underline) {
+        result = 'underline';
+      } else {
+        result = 'none';
+      }
+    }
+    return result;
+  };
+
+  private defineFontStyle = (mainStyle: Style): string => {
+    let result = '';
+    if (mainStyle.italic) {
+      result = 'italic';
+    } else {
+      if (this.props.options.display.style.italic) {
+        result = 'italic';
+      } else {
+        result = 'normal';
+      }
+    }
+    return result;
+  };
+
+  private defineFontWeight = (mainStyle: Style): any => {
+    let result = '';
+    if (mainStyle.bold) {
+      result = 'bold';
+    } else {
+      if (this.props.options.display.style.bold) {
+        result = 'bold';
+      } else {
+        result = 'normal';
+      }
+    }
+    return result;
   };
 
   /**

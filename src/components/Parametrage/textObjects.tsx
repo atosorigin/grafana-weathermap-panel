@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Switch } from '@grafana/ui';
 
 import { Style } from 'components/Parametrage/styleComponent';
@@ -43,6 +42,7 @@ class TextObjects extends React.Component<Props, State> {
   }) => {
     return new Promise(resolve => {
       this.setState(state, resolve);
+      //this.callBack();
     });
   };
 
@@ -308,6 +308,7 @@ class TextObjects extends React.Component<Props, State> {
     this.setState({
       textObject: newText,
     });
+    this.callBack();
   };
 
   /**

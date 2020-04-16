@@ -151,7 +151,7 @@ class ManageLowerLimit extends React.Component<Props, State> {
               <Switch label={l10n.genericParameter.traceContour} checked={this.state.coordinate.traceBorder} onChange={this.onSwitchContour} />
             </div>
           ) : (
-            <Switch label={'Color'} checked={this.state.coordinate.traceBorder} onChange={this.onSwitchContour} />
+            <Switch label={'Color/Size'} checked={this.state.coordinate.traceBorder} onChange={this.onSwitchContour} />
           )}
 
           {this.state.coordinate.colorMode ? (

@@ -1,10 +1,11 @@
 
 # Point
-Définir les coordonnées des points
+
+Define the coordinates of the points
 
 
 
-## Informations obligatoires
+## Mandatory information
 
 
 ![saisie point](../../screenshots/editor/coordinates/screen-point/obligatoire.jpg)
@@ -15,11 +16,8 @@ The required information to display the points is :
 
 
 - Label : This is a key to add the result of a value to the parameters 
-
 - Display : Show or not show the point
-
 - Size : Choose you size small / medium / large
-
 - Position : X and Y position
 
 
@@ -43,7 +41,7 @@ A dedicated page to fill in the fields is available [here](coordinates-manage-li
 ## Text object
 
 
-A dedicated page to fill in the fields is available [here](coordinates-text-object.md)
+A dedicated page to fill in the fields is available [here](coordinates-object-text.md)
 
 
 ## Lower Limit

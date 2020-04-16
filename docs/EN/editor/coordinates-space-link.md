@@ -60,7 +60,7 @@ A dedicated page to fill in the fields is available [here](coordinates-manage-li
 ## Text object
 
 
-A dedicated page to fill in the fields is available [here](coordinates-text-object.md)
+A dedicated page to fill in the fields is available [here](coordinates-object-text.md)
 
 
 ## LowerLimit

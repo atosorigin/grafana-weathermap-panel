@@ -5,6 +5,8 @@ import { Tooltip } from '@grafana/ui';
 import { SimpleOptions, Metric } from 'types';
 import { TextObject } from 'Models/TextObjectClass';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
+import { LinkURLClass } from 'Models/LinkURLClass';
+import { Style } from 'components/Parametrage/styleComponent';
 
 interface Props extends PanelEditorProps<SimpleOptions> {
   drawGraphicMarker: SelectableValue<string>;
@@ -18,6 +20,7 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   heightImage: number;
   police: string;
   sizePolice: string;
+  //style: Style;
   idPoint: string;
   name: string;
   textObject: TextObject;
@@ -31,6 +34,8 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   tooltipPosition: SelectableValue<any>;
   auxiliaryMetrics: Metric[];
   valuesAuxiliaryMetrics: string[];
+  linkUrl: LinkURLClass;
+  buttonAddLinkIsActive: boolean;
 }
 
 interface State {}
@@ -194,26 +199,48 @@ export default class DrawPoint extends React.Component<Props, State> {
    */
   private drawPoint(drawGraphicMarker: string, size: number, positionShapeX: number, positionShapeY: number, shape: string, color: string): any {
     const valueToolTip: JSX.Element = this.defineContentTooltip('point');
+    const linkUrlPoint = this.props.linkUrl.followLink;
 
     if (drawGraphicMarker === 'true') {
       if (shape === 'circle') {
-        return (
-          <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
-            <div
-              style={{
-                border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
-                backgroundColor: this.defineBackgroundColor(),
-                borderRadius: '50px',
-                padding: size + 'px',
-                position: 'absolute',
-                zIndex: 1000,
-                left: positionShapeX,
-                top: positionShapeY,
-              }}
-              id={this.props.idPoint}
-            ></div>
-          </Tooltip>
-        );
+        if (this.props.buttonAddLinkIsActive) {
+          return (
+            <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
+              <div
+                style={{
+                  border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
+                  backgroundColor: this.defineBackgroundColor(),
+                  borderRadius: '50px',
+                  padding: size + 'px',
+                  position: 'absolute',
+                  zIndex: 1000,
+                  left: positionShapeX,
+                  top: positionShapeY,
+                }}
+                id={this.props.idPoint}
+              ></div>
+            </Tooltip>
+          );
+        } else {
+          return (
+            <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
+              <a
+                href={linkUrlPoint}
+                style={{
+                  border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
+                  backgroundColor: this.defineBackgroundColor(),
+                  borderRadius: '50px',
+                  padding: size + 'px',
+                  position: 'absolute',
+                  zIndex: 1000,
+                  left: positionShapeX,
+                  top: positionShapeY,
+                }}
+                id={this.props.idPoint}
+              ></a>
+            </Tooltip>
+          );
+        }
       } else if (shape === 'cross') {
         return (
           <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
@@ -285,9 +312,11 @@ export default class DrawPoint extends React.Component<Props, State> {
       <Tooltip key={'tooltipLabel' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
         <div
           style={{
+            textDecoration: this.defineTextDecoration(),
+            fontStyle: this.defineFontStyle(),
+            fontWeight: this.defineFontWeight(),
             fontSize: '12px',
             fontFamily: police,
-            fontWeight: 'bold',
             color: this.props.textObject.colorText || 'black',
             position: 'absolute',
             zIndex: 1000,
@@ -307,6 +336,7 @@ export default class DrawPoint extends React.Component<Props, State> {
     const valueMainMetric: string = this.props.valueMainMetric;
     const refMainMetric: string = this.props.refMainMetric;
     const contentTooltip: JSX.Element[] = [];
+    const linkUrlTooltip = this.props.linkUrl.hoveringTooltipLink;
 
     const styleMainTitle = {
       fontFamily: this.props.police,
@@ -429,7 +459,7 @@ export default class DrawPoint extends React.Component<Props, State> {
         );
       });
     }
-    return <div>{contentTooltip}</div>;
+    return <a href={linkUrlTooltip}>{contentTooltip}</a>;
   }
 
   private defineBackgroundColor() {
@@ -554,12 +584,56 @@ export default class DrawPoint extends React.Component<Props, State> {
       } else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
         sizeBorder = level.sizeBorder;
       }
-
       index++;
     });
 
     return sizeBorder;
   }
+
+  private defineTextDecoration = (): string => {
+    const mainStyle: Style = this.props.textObject.style;
+    let result = '';
+    if (mainStyle.underline) {
+      result = 'underline';
+    } else {
+      if (this.props.options.display.style.underline) {
+        result = 'underline';
+      } else {
+        result = 'none';
+      }
+    }
+    return result;
+  };
+
+  private defineFontStyle = (): string => {
+    const mainStyle: Style = this.props.textObject.style;
+    let result = '';
+    if (mainStyle.italic) {
+      result = 'italic';
+    } else {
+      if (this.props.options.display.style.italic) {
+        result = 'italic';
+      } else {
+        result = 'normal';
+      }
+    }
+    return result;
+  };
+
+  private defineFontWeight = (): any => {
+    const mainStyle: Style = this.props.textObject.style;
+    let result = '';
+    if (mainStyle.bold) {
+      result = 'bold';
+    } else {
+      if (this.props.options.display.style.bold) {
+        result = 'bold';
+      } else {
+        result = 'normal';
+      }
+    }
+    return result;
+  };
 
   /**
    * render

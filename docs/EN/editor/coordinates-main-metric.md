@@ -1,11 +1,13 @@
-
-
 # Main metric
 
-This function is common for 
 
-- Region
-- Point
+
+This part is common for 
+
+- [Region](coordinates-space-region.md)
+- [Point](coordinates-space-point.md)
+- [Oriented Link](coordinates-space-link.md)
+
 
 
 ![main metric](../../screenshots/editor/coordinates/main-metric/main-metric.jpg)

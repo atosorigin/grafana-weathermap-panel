@@ -55,6 +55,7 @@ The creation of a region from an SVG element must contain the following values
 - **Label** is the name of the region
 - **mode** to true
 - **idSVG** is the id of the desired SVG area as region
+
 ```
 
 { "regions": [
@@ -135,7 +136,7 @@ It is possible to choose between 2 color methods :
 - fixed color
 - variable colour
 
-### Couleur fixe
+### fixed color
 
 
 If `colorMode` is in false
@@ -161,14 +162,15 @@ Then the color will be defined like this
 ```
 
 With:
-  - **backColor**: Fill in a color for the background under the form #7FFF00 for example
-  - **borderColor** : Fill in a color for the border under the form #7FFF00 for example. 
-  - **id** : color id
-  - **lowerLimitMax** : Maximum value of the metric for this colour
-  - **lowerLimitMin**: Minimum metric value for this colour
-  - **sizeBorder** : thickness of the border
 
-### Couleur variable
+  - **backColor** Fill in a color for the background under the form #7FFF00 for example
+  - **borderColor**  Fill in a color for the border under the form #7FFF00 for example. 
+  - **id**  color id
+  - **lowerLimitMax**  Maximum value of the metric for this colour
+  - **lowerLimitMin** Minimum metric value for this colour
+  - **sizeBorder**  thickness of the border
+
+### Variable colors
 
 Variable colors allow you to change the color according to defined ranges.
 

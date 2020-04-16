@@ -59,6 +59,8 @@ interface State {
   displayRegion: JSX.Element;
   // idSVG: string;
   tooltip: JSX.Element;
+
+  buttonAddLinkIsActive: boolean;
 }
 
 /**
@@ -78,6 +80,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       svg: '',
       displayRegion: <div></div>,
       tooltip: <div>salut</div>,
+      buttonAddLinkIsActive: false,
     };
   }
 
@@ -268,6 +271,7 @@ export class SimplePanel extends PureComponent<Props, State> {
           heightImage={parseInt(this.props.options.baseMap.height, 10)}
           police={this.props.options.display.police}
           sizePolice={this.props.options.display.size}
+          //style={this.props.options.display.style}
           color={line.color}
           idPoint={'point' + line.id.toString()}
           name={line.name}
@@ -285,6 +289,8 @@ export class SimplePanel extends PureComponent<Props, State> {
           tooltipPosition={line.positionParameter.tooltipPositionA}
           auxiliaryMetrics={line.metrics}
           valuesAuxiliaryMetrics={valuesAuxiliaryMetrics}
+          linkUrl={line.linkURL}
+          buttonAddLinkIsActive={this.state.buttonAddLinkIsActive}
         />
       );
       mapItems.push(item);
@@ -646,7 +652,11 @@ export class SimplePanel extends PureComponent<Props, State> {
     const yMaxPx: number = (yMax + 100) * (heightPanel / 200);
     const heightInitialSpace: number = yMaxPx - yMinPx;
 
-    if (event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'initialSpace') {
+    if (
+      event.nativeEvent.target.id === 'mainPanel' ||
+      event.nativeEvent.target.id === 'initialSpace' ||
+      event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG
+    ) {
       positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
       positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
 
@@ -1083,7 +1093,6 @@ export class SimplePanel extends PureComponent<Props, State> {
 
   getValuesAuxiliaryMetrics = (auxiliaryMetrics: Metric[], mainMetric: Metric): string[] => {
     let valueAuxiliaryMetric: string[] = [];
-    // console.log(auxiliaryMetrics);
     const countMetrics: number = auxiliaryMetrics.length;
     auxiliaryMetrics.forEach((metric: Metric) => {
       let countTotalValues = 0;
@@ -1280,6 +1289,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   addLink = () => {
     this.setState((prevState: State) => ({
       nbClickButton: prevState.buttonManage[1] ? false : true,
+      buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive,
     }));
     this.resetButtonManage(1);
     this.changeValueButtonToLink();
@@ -1428,46 +1438,38 @@ export class SimplePanel extends PureComponent<Props, State> {
 
   // Zoom Plus
   ZoomIn = () => {
-    
-
     const intialfirst = document.getElementById('more');
     intialfirst?.addEventListener('click', () => {
       let elmnt = document.getElementById('mainPanel');
-      if(elmnt ){
+      if (elmnt) {
         elmnt.style.transform += 'scale(1.01,1.01)';
       }
-      
     });
   };
 
   // Zoom Negative
 
   ZoomOut = () => {
-    
-    
     const intialsecond = document.getElementById('less');
     intialsecond?.addEventListener('click', () => {
       let elmnt = document.getElementById('mainPanel');
-      
-      if(elmnt ){
+      if (elmnt) {
         elmnt.style.transform += 'scale(0.99,0.99)';
       }
-      
       console.log('-');
     });
   };
   // Zoom Initial
   // ZoomInitial = () => {
-   
 
   //   const intialsecond = document.getElementById('init');
   //   intialsecond?.addEventListener('click', () => {
   //     const elmnt = document.getElementById('mainPanel');
-      
+
   //     if(elmnt ){
   //       elmnt.style.transform = 'scale(1,1)';
   //     }
-      
+
   //   });
   // };
 
@@ -1670,7 +1672,7 @@ export class SimplePanel extends PureComponent<Props, State> {
             +
           </Button>
           <Button id="less" onClick={this.ZoomOut} variant={'primary'}>
-          -
+            -
           </Button>
 
           {/* <Button id="init" onClick={this.ZoomInitial} variant={'secondary'}>
@@ -1727,9 +1729,8 @@ export class SimplePanel extends PureComponent<Props, State> {
                     onMouseOver={this.SVG_PathImage}
                     dangerouslySetInnerHTML={{ __html: this.props.options.baseMap.layerImage }}
                   />
-                  {this.fillCoordinate()}
-
                   {this.displayOrientedLink()}
+                  {this.fillCoordinate()}
                   {this.displayPoint()}
                 </div>
               </div>

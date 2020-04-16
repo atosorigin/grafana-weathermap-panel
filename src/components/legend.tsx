@@ -49,7 +49,7 @@ class LegendComponent extends React.Component<Props, State> {
     const allLimit: JSX.Element[] = [];
     let i = 0;
     const max: number = lowerLimit.length - 1;
- 
+
     for (const lower of lowerLimit) {
       allLimit.push(
         <li className="LegendMatt">
@@ -153,10 +153,8 @@ class LegendComponent extends React.Component<Props, State> {
             <h5 style={{ width: '100%', fontSize: '20px', display: 'inline-flex' }}>Legend</h5>
             <p style={{ color: '#d8d9da', fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p>
             <p style={{ color: '#d8d9da', fontSize: '11px', marginLeft: '17px' }}>Label</p>
-       </div>
-            
-            {/* <p style={{ fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p> */}
-         
+          </div>
+          {/* <p style={{ fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p> */}
           <div style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
             <p style={{ fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p>
           </div>
@@ -200,4 +198,3 @@ class LegendComponent extends React.Component<Props, State> {
   }
 }
 export default LegendComponent;
-

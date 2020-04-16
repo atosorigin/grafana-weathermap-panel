@@ -1,12 +1,10 @@
 import { InputSelectableClass } from 'Models/InputSelectableClass';
 import { SelectableValue } from '@grafana/data';
-import { RegionClass } from 'Models/RegionClass';
-import { PointClass } from 'Models/PointClass';
 
 export const createInputsOrientedLink = (
   id: number,
-  dataCoordinateSpace: Array<SelectableValue<RegionClass>>,
-  dataPoint: Array<SelectableValue<PointClass>>
+  dataCoordinateSpace: Array<SelectableValue<string>>,
+  dataPoint: Array<SelectableValue<string>>
 ): InputSelectableClass[] => {
   const newFieldOrientationLink: InputSelectableClass = new InputSelectableClass(
     id.toString() + 'orientationLink',
@@ -24,7 +22,7 @@ export const createInputsOrientedLink = (
   );
   const newFieldPointAPositionX: InputSelectableClass = new InputSelectableClass(
     id.toString() + 'pointAX',
-    'Point A - X',
+    'CoordinateClick A - X',
     'pointAX' + id.toString(),
     'text',
     [],
@@ -35,7 +33,7 @@ export const createInputsOrientedLink = (
   );
   const newFieldPointAPositionY: InputSelectableClass = new InputSelectableClass(
     id.toString() + 'pointAY',
-    'Point A - Y',
+    'CoordinateClick A - Y',
     'pointAY' + id.toString(),
     'text',
     [],
@@ -44,12 +42,9 @@ export const createInputsOrientedLink = (
     'PointA-Y',
     undefined
   );
-  // const newFieldColorCoordinateA: InputSelectableClass = new InputSelectableClass(id.toString() + 'colorCoordinateA',
-  // 	'Color A', 'colorCoordinateA' + id.toString(), 'color',
-  // 	[], '', true, '', undefined);
   const newFieldPointBPositionX: InputSelectableClass = new InputSelectableClass(
     id.toString() + 'pointBX',
-    'Point B - X',
+    'CoordinateClick B - X',
     'pointBX' + id.toString(),
     'text',
     [],
@@ -60,7 +55,7 @@ export const createInputsOrientedLink = (
   );
   const newFieldPointBPositionY: InputSelectableClass = new InputSelectableClass(
     id.toString() + 'pointBY',
-    'Point B - Y',
+    'CoordinateClick B - Y',
     'pointBY' + id.toString(),
     'text',
     [],
@@ -69,9 +64,6 @@ export const createInputsOrientedLink = (
     'PointB-Y',
     undefined
   );
-  // const newFieldColorCoordinateB: InputSelectableClass = new InputSelectableClass(id.toString() + 'colorCoordinateB',
-  // 	'Color B', 'colorCoordinateB' + id.toString(), 'color',
-  // 	[], '', true, '', undefined);
   const newFieldLabelLink: InputSelectableClass = new InputSelectableClass(
     id.toString() + 'labelLink',
     'Label',
@@ -83,42 +75,50 @@ export const createInputsOrientedLink = (
     'Label',
     undefined
   );
-  // const newFieldLabelLinkB: InputSelectableClass = new InputSelectableClass(id.toString() + 'labelLinkB',
-  // 	'Label B', 'labelLinkB' + id.toString(), 'text',
-  // 	[], '', true, 'Label B', undefined);
-  // const newFieldLabelLinkAPositionX: InputSelectableClass = new InputSelectableClass(id.toString() + 'positionXLabelLinkA',
-  // 	'Label A - X', 'positionXLabelLinkA' + id.toString(), 'text',
-  // 	[], '', true, 'Label A - Position X', undefined);
-  // const newFieldLabelLinkAPositionY: InputSelectableClass = new InputSelectableClass(id.toString() + 'posiitonYLabelLinkA',
-  // 	'Label A - Y', 'positionYLabelLinkA' + id.toString(), 'text',
-  // 	[], '', true, 'Label A - Position Y', undefined);
-  // const newFieldLabelLinkBPositionX: InputSelectableClass = new InputSelectableClass(id.toString() + 'positionXLabelLinkB',
-  // 	'Label B - X', 'positionXLabelLinkB' + id.toString(), 'text',
-  // 	[], '', true, 'Label B - Position X', undefined);
-  // const newFieldLabelLinkBPositionY: InputSelectableClass = new InputSelectableClass(id.toString() + 'posiitonYLabelLinkB',
-  // 	'Label B - Y', 'positionYLabelLinkB' + id.toString(), 'text',
-  // 	[], '', true, 'Label B - Position Y', undefined);
-  // const newFieldRegionIn: InputSelectableClass = new InputSelectableClass(id.toString() + 'CoordinateSpaceAssociatePointA',
-  // 	'AssociateRegionIn', 'CoordinateSpaceAssociatePointA' + id.toString(), 'select',
-  // 	dataCoordinateSpace, '', true, 'Associate Region In', undefined);
-  // const newFieldRegionOut: InputSelectableClass = new InputSelectableClass(id.toString() + 'CoordinateSpaceAssociatePointB',
-  // 	'AssociateRegionOut', 'CoordinateSpaceAssociatePointB' + id.toString(), 'select',
-  // 	dataCoordinateSpace, '', true, 'Associate Region Out', undefined);
-  // const newFieldPointIn: InputSelectableClass = new InputSelectableClass(id.toString() + 'pointIn',
-  // 	'AssociatePointIn', 'pointIn' + id.toString(), 'select',
-  // 	dataPoint, '', true, 'Associate Point In', undefined);
-  // const newFieldPointOut: InputSelectableClass = new InputSelectableClass(id.toString() + 'pointOut',
-  // 	'AssociatePointOut', 'pointOut' + id.toString(), 'select',
-  // 	dataPoint, '', true, 'Associate Point Out', undefined);
-  // const newFieldMainMetric: InputSelectableClass = new InputSelectableClass(id.toString() + 'refIdMainMetricLink',
-  // 	'Ref Id Main Metric', 'refIdMainMetric' + id.toString(), 'text',
-  // 	[], '', true, 'RefId Main Metric', undefined);
-  // const newFieldKeyMainMetric: InputSelectableClass = new InputSelectableClass(id.toString() + 'keyMainMetricLink',
-  // 	'Key Main Metric', 'keyMainMetric' + id.toString(), 'text',
-  // 	[], '', true, 'Key Main Metric', undefined);
-  // const newFieldKeyValueMainMetric: InputSelectableClass = new InputSelectableClass(id.toString() + 'keyValueMainMetricLink',
-  // 	'Key Value Main Metric', 'keyValueMainMetric' + id.toString(), 'text',
-  // 	[], '', true, 'Key Value Main Metric', undefined);
+  const newFieldRegionIn: InputSelectableClass = new InputSelectableClass(
+    id.toString() + 'regionIn',
+    'AssociateRegionIn',
+    'regionIn' + id.toString(),
+    'select',
+    dataCoordinateSpace,
+    '',
+    true,
+    'Associate Region In',
+    undefined
+  );
+  const newFieldRegionOut: InputSelectableClass = new InputSelectableClass(
+    id.toString() + 'regionOut',
+    'AssociateRegionOut',
+    'regionOut' + id.toString(),
+    'select',
+    dataCoordinateSpace,
+    '',
+    true,
+    'Associate Region Out',
+    undefined
+  );
+  const newFieldPointIn: InputSelectableClass = new InputSelectableClass(
+    id.toString() + 'pointIn',
+    'AssociatePointIn',
+    'pointIn' + id.toString(),
+    'select',
+    dataPoint,
+    '',
+    true,
+    'Associate Point In',
+    undefined
+  );
+  const newFieldPointOut: InputSelectableClass = new InputSelectableClass(
+    id.toString() + 'pointOut',
+    'AssociatePointOut',
+    'pointOut' + id.toString(),
+    'select',
+    dataPoint,
+    '',
+    true,
+    'Associate Point Out',
+    undefined
+  );
   const newFieldIsIncurved: InputSelectableClass = new InputSelectableClass(
     id.toString() + 'isIncurved',
     'Incurved',
@@ -135,7 +135,7 @@ export const createInputsOrientedLink = (
   );
   const newFieldPointCPositionX: InputSelectableClass = new InputSelectableClass(
     id.toString() + 'pointCX',
-    'Point C - X',
+    'CoordinateClick C - X',
     'pointCX' + id.toString(),
     'text',
     [],
@@ -146,7 +146,7 @@ export const createInputsOrientedLink = (
   );
   const newFieldPointCPositionY: InputSelectableClass = new InputSelectableClass(
     id.toString() + 'pointCY',
-    'Point C - Y',
+    'CoordinateClick C - Y',
     'pointCY' + id.toString(),
     'text',
     [],
@@ -170,24 +170,14 @@ export const createInputsOrientedLink = (
   const finalArray: InputSelectableClass[] = [
     newFieldLabelLink,
     newFieldOrientationLink,
-    //newFieldPointIn,
-    //newFieldRegionIn,
+    newFieldPointIn,
+    newFieldRegionIn,
     newFieldPointAPositionX,
     newFieldPointAPositionY,
-    //newFieldLabelLinkAPositionX,
-    //newFieldLabelLinkAPositionY,
-    //newFieldColorCoordinateA,
-    //newFieldPointOut,
-    //newFieldRegionOut,
+    newFieldPointOut,
+    newFieldRegionOut,
     newFieldPointBPositionX,
     newFieldPointBPositionY,
-    //newFieldLabelLinkB,
-    //newFieldLabelLinkBPositionX,
-    //newFieldLabelLinkBPositionY,
-    //newFieldColorCoordinateB,
-    // newFieldMainMetric,
-    // newFieldKeyMainMetric,
-    // newFieldKeyValueMainMetric,
     newFieldIsIncurved,
     newFieldPointCPositionX,
     newFieldPointCPositionY,

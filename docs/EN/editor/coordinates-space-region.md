@@ -34,11 +34,6 @@ Allows you to define the coordinates of a region on the same basis as the "Initi
 A dedicated page for filling in the fields is available [here](coordinates-main-metric.md)
 
 
-## Auxiliary metrics
-
-A dedicated page for filling in the fields is available [here](coordinates-auxiliary-metric.md)
-
-
 ## Manage link
 
 A dedicated page to fill in the fields is available [here](coordinates-manage-link.md)
@@ -48,7 +43,7 @@ A dedicated page to fill in the fields is available [here](coordinates-manage-li
 ## Text object
 
 
-A dedicated page to fill in the fields is available [here](coordinates-text-object.md)
+A dedicated page to fill in the fields is available [here](coordinates-object-text.md)
 
 
 ## Lower Limit

@@ -4,9 +4,9 @@
 
 This function is common for 
 
-- Region
-- Point
-- OrientedLink
+- [Point](coordinates-space-point.md)
+- [Oriented Link](coordinates-space-link.md)
+
 
 
 ![main metric](../../screenshots/editor/coordinates/main-metric/main-metric.jpg)

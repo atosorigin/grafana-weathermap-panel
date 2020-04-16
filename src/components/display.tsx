@@ -62,6 +62,7 @@ class Display extends React.Component<Props, State> {
   }) => {
     return new Promise(resolve => {
       this.setState(state, resolve);
+      this.callParent();
     });
   };
 
@@ -74,6 +75,7 @@ class Display extends React.Component<Props, State> {
   }) => {
     return new Promise(resolve => {
       this.setState(state, resolve);
+      this.callParent();
     });
   };
 
@@ -86,6 +88,7 @@ class Display extends React.Component<Props, State> {
   }) => {
     return new Promise(resolve => {
       this.setState(state, resolve);
+      this.callParent();
     });
   };
 

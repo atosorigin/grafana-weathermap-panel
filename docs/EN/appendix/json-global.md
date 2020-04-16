@@ -117,7 +117,6 @@ The **global** file must be declared as a JSON file like this:
         "http://localhost/demo/sample-point.json"
     ],
     
-    
 ```
 
 
@@ -130,6 +129,7 @@ The **global** file must be declared as a JSON file like this:
     "links": [
         "http://localhost/demo/sample-link.json"
     ]
-
+    
+```
 
 

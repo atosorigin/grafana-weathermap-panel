@@ -315,25 +315,7 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
                     data={this.props.data}
                     isRegion={false}
                   />
-                  // <PointForm
-                  //   key={'pointInputList'}
-                  //   callBackFromParent={this.myCallBackArrayPoints.bind(this)}
-                  //   regionCoordinateSpace={this.props.options.regionCoordinateSpace}
-                  //   oldArrayPointClass={this.props.options.arrayPoints}
-                  //   options={this.props.options}
-                  //   onOptionsChange={this.props.onOptionsChange}
-                  //   data={this.props.data}
-                  // />
                 )}
-                {/* {
-									this.state.tabsCoordinateSpace[2] &&
-
-									<LinkForm regionCoordinateSpace={this.props.options.regionCoordinateSpace}
-										oldArrayLinkClass={this.props.options.arrayLinks}
-										arrayPointClass={this.props.options.arrayPoints}
-										callBackFromParent={this.myCallBackArrayLinks.bind(this)}
-									/>
-								} */}
                 {this.state.tabsCoordinateSpace[3] && (
                   <OrientedLinkForm
                     arrayPoint={this.props.options.arrayPoints}
@@ -345,7 +327,6 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
                     data={this.props.data}
                   />
                 )}
-              
               </TabContent>
             </div>
           )}

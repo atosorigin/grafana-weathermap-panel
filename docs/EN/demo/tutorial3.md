@@ -155,7 +155,7 @@ Then in `Main metric`, choose you metric.
 
 And here is the different JSON file :
 
-- [demo3-svgRegion](../../resource/demo3-region.json) 
+- [demo3-region](../../resource/demo3-region.json) 
 - [demo3-point](../../resource/demo3-point.json)
 - [demo3-link](../../resource/demo3-link.json)
 
