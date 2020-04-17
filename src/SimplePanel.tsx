@@ -23,6 +23,7 @@ import DrawOrientedLink from './components/Draw/drawOrientedLink';
 import LegendComponant from './components/legend';
 
 import DrawRectangleExtend from 'components/Draw/drawRectangleExtend';
+// import { identity } from 'rxjs';
 
 interface Props extends PanelProps<SimpleOptions> {}
 
@@ -57,7 +58,7 @@ interface State {
   // loading: boolean;
   // url: string;
   displayRegion: JSX.Element;
-  // idSVG: string;
+  idSVG: string;
   tooltip: JSX.Element;
 
   buttonAddLinkIsActive: boolean;
@@ -80,6 +81,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       svg: '',
       displayRegion: <div></div>,
       tooltip: <div>salut</div>,
+      idSVG: '',
       buttonAddLinkIsActive: false,
     };
   }
@@ -732,7 +734,7 @@ export class SimplePanel extends PureComponent<Props, State> {
               objectOut.labelRegion = region.label;
               objectOut.region = region;
               coordinates[0].id++;
-            } else if (coordinates[0].id === 0) {
+            } else if (coordinates[0].id === 2) {
               pointC.x = positionX;
               pointC.y = positionY;
               coordinates[0].id = 0;
@@ -1602,6 +1604,44 @@ export class SimplePanel extends PureComponent<Props, State> {
     return <ul style={styleRegion}>{mapItems}</ul>;
   };
 
+  /*************************************** create link regionbyid**************************************** */
+
+  CreateLinkArea = () => {
+    // All Id in SVG
+    const allidSvg = document.getElementById('octsvg213');
+    allidSvg?.addEventListener('click', () => {
+      const elms = allidSvg.querySelectorAll('[id]');
+      console.log(elms);
+    });
+
+    // All Region in SVG
+    const allidSvg2 = document.getElementById('octsvg213');
+    allidSvg2?.addEventListener('click', () => {
+      this.props.options.regionCoordinateSpace.forEach(region => {
+        console.log(region.idSVG);
+        console.log(region.linkURL.followLink);
+      });
+    });
+
+    // const elms = document.querySelectorAll('[id]');
+    // for (var i = 0; i < elms.length; i++) {
+    //   let lpo = document.getElementById('octsvg213');
+    //   lpo?.addEventListener('click', () => {
+    //     console.log('rer');
+    //   });
+    //   let lpo1 = document.getElementById('octsvg213');
+    //   lpo1?.addEventListener('click', () => {
+    //     console.log('rer1');
+    //   });
+    //   let lpo2 = document.getElementById('octsvg213');
+    //   lpo2?.addEventListener('click', () => {
+    //     console.log('rer2');
+    //   });
+    // }
+  };
+
+  /*************************************** create link regionbyid**************************************** */
+
   /*************************************test create tooltip **********************************************************/
 
   /** render */
@@ -1726,7 +1766,7 @@ export class SimplePanel extends PureComponent<Props, State> {
                   <div
                     id="Intent"
                     style={styleSVG_2}
-                    onMouseOver={this.SVG_PathImage}
+                    onMouseOver={this.SVG_PathImage && this.CreateLinkArea}
                     dangerouslySetInnerHTML={{ __html: this.props.options.baseMap.layerImage }}
                   />
                   {this.displayOrientedLink()}

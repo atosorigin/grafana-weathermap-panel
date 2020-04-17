@@ -202,7 +202,7 @@ class Display extends React.Component<Props, State> {
       <div>
         <tr style={{ verticalAlign: 'middle' }}>
           <td>
-            <FormLabel>Police</FormLabel>
+            <FormLabel width={10}>Police</FormLabel>
           </td>
           <td>
             <InputSelect _onChange={this.onChangePolice} data={police} defaultValue={this.state.newPolice} />
@@ -212,7 +212,7 @@ class Display extends React.Component<Props, State> {
         <FormField
           label={l10n.textDefault.size}
           labelWidth={10}
-          inputWidth={15}
+          inputWidth={10}
           required={true}
           value={this.state.size}
           onChange={this.handleChangesize}

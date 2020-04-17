@@ -9,7 +9,6 @@ interface Props extends PanelEditorProps<SimpleOptions> {}
 interface State {
   selectedFile: any;
   readerFile: FileReader;
-  loaded: number;
 }
 
 class DropZone extends React.Component<Props, State> {
@@ -20,7 +19,6 @@ class DropZone extends React.Component<Props, State> {
     this.state = {
       selectedFile: null,
       readerFile: new FileReader(),
-      loaded: 0,
     };
   }
 
@@ -28,14 +26,12 @@ class DropZone extends React.Component<Props, State> {
     this.setState({
       selectedFile: event.target.files[0],
       readerFile: new FileReader(),
-      loaded: 0,
     });
   };
 
   upload = () => {
     this.state.selectedFile.onload = function(event: any) {
       if (event.target?.result != null) {
-        console.log(event.target.result);
         this.props.options.saveImportFile.push(this.state.readerFile.result as string);
         this.props.onOptionsChange({ ...this.props.options, saveImportFile: this.props.options.saveImportFile });
       }

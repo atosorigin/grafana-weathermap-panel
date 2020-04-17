@@ -1441,7 +1441,7 @@ var InputSelectOrientedLink = function InputSelectOrientedLink(_a) {
       marginBottom: '2px'
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_1__["FormLabel"], {
-    width: 10
+    width: 15
   }, label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_1__["Select"], {
     onChange: function onChange(value) {
       return _onChange(value, name, index);
@@ -1557,7 +1557,7 @@ var InputSeriesColorPicker = function InputSeriesColorPicker(_a) {
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-field"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_0__["FormLabel"], {
-    width: width || Math.round(text.length * 1.7)
+    width: 25
   }, text), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     id: "colorPicker",
     style: {
@@ -1573,7 +1573,7 @@ var InputSeriesColorPicker = function InputSeriesColorPicker(_a) {
     }
   })));
 };
-/* harmony default export */ __webpack_exports__["default"] = (InputSeriesColorPicker);
+/* harmony default export */ __webpack_exports__["default"] = (InputSeriesColorPicker); // width || Math.round(text.length * 1.7)
 
 /***/ }),
 
@@ -1602,7 +1602,7 @@ var InputSeriesColorPickerOrientedLink = function InputSeriesColorPickerOriented
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-field"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_0__["FormLabel"], {
-    width: width || Math.round(text.length * 1.7)
+    width: 15
   }, text), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     id: "colorPicker",
     style: {
@@ -1616,7 +1616,7 @@ var InputSeriesColorPickerOrientedLink = function InputSeriesColorPickerOriented
     }
   })));
 };
-/* harmony default export */ __webpack_exports__["default"] = (InputSeriesColorPickerOrientedLink);
+/* harmony default export */ __webpack_exports__["default"] = (InputSeriesColorPickerOrientedLink); // width || Math.round(text.length * 1.7)
 
 /***/ }),
 
@@ -1694,8 +1694,8 @@ var InputTextField = function InputTextField(_a) {
       disabled = _a.disabled;
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_0__["FormField"], {
     label: label,
-    labelWidth: Math.round((label && label.length > 0 ? label.length : 1) * 1.7),
-    inputWidth: 20,
+    labelWidth: 15,
+    inputWidth: 15,
     type: "text",
     required: required,
     name: name,
@@ -1705,7 +1705,7 @@ var InputTextField = function InputTextField(_a) {
     disabled: disabled ? disabled : false
   }));
 };
-/* harmony default export */ __webpack_exports__["default"] = (InputTextField);
+/* harmony default export */ __webpack_exports__["default"] = (InputTextField); // Math.round((label && label.length > 0 ? label.length : 1) * 1.7)
 
 /***/ }),
 
@@ -1738,8 +1738,8 @@ var InputTextOrientedLink = function InputTextOrientedLink(_a) {
     if (isIncurved.value) {
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_0__["FormField"], {
         label: label,
-        labelWidth: 10,
-        inputWidth: 20,
+        labelWidth: 15,
+        inputWidth: 15,
         type: "text",
         required: required,
         name: name,
@@ -4299,8 +4299,7 @@ function (_super) {
     _this.onChangeHandler = function (event) {
       _this.setState({
         selectedFile: event.target.files[0],
-        readerFile: new FileReader(),
-        loaded: 0
+        readerFile: new FileReader()
       });
     };
 
@@ -4309,7 +4308,6 @@ function (_super) {
         var _a;
 
         if (((_a = event.target) === null || _a === void 0 ? void 0 : _a.result) != null) {
-          console.log(event.target.result);
           this.props.options.saveImportFile.push(this.state.readerFile.result);
           this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.props.options), {
             saveImportFile: this.props.options.saveImportFile
@@ -4429,8 +4427,7 @@ function (_super) {
 
     _this.state = {
       selectedFile: null,
-      readerFile: new FileReader(),
-      loaded: 0
+      readerFile: new FileReader()
     };
     return _this;
   }
@@ -5552,7 +5549,7 @@ function (_super) {
                 objectOut.labelRegion = region.label;
                 objectOut.region = region;
                 coordinates_5[0].id++;
-              } else if (coordinates_5[0].id === 0) {
+              } else if (coordinates_5[0].id === 2) {
                 pointC.x = positionX;
                 pointC.y = positionY;
                 coordinates_5[0].id = 0;
@@ -6353,6 +6350,41 @@ function (_super) {
         style: styleRegion
       }, mapItems);
     };
+    /*************************************** create link regionbyid**************************************** */
+
+
+    _this.CreateLinkArea = function () {
+      var _a, _b; // All Id in SVG
+
+
+      var allidSvg = document.getElementById('octsvg213');
+      (_a = allidSvg) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
+        var elms = allidSvg.querySelectorAll('[id]');
+        console.log(elms);
+      }); // All Region in SVG
+
+      var allidSvg2 = document.getElementById('octsvg213');
+      (_b = allidSvg2) === null || _b === void 0 ? void 0 : _b.addEventListener('click', function () {
+        _this.props.options.regionCoordinateSpace.forEach(function (region) {
+          console.log(region.idSVG);
+          console.log(region.linkURL.followLink);
+        });
+      }); // const elms = document.querySelectorAll('[id]');
+      // for (var i = 0; i < elms.length; i++) {
+      //   let lpo = document.getElementById('octsvg213');
+      //   lpo?.addEventListener('click', () => {
+      //     console.log('rer');
+      //   });
+      //   let lpo1 = document.getElementById('octsvg213');
+      //   lpo1?.addEventListener('click', () => {
+      //     console.log('rer1');
+      //   });
+      //   let lpo2 = document.getElementById('octsvg213');
+      //   lpo2?.addEventListener('click', () => {
+      //     console.log('rer2');
+      //   });
+      // }
+    };
 
     _this.state = {
       idOrientedLink: _this.props.options.indexOrientedLink,
@@ -6369,6 +6401,7 @@ function (_super) {
       svg: '',
       displayRegion: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null),
       tooltip: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "salut"),
+      idSVG: '',
       buttonAddLinkIsActive: false
     };
     return _this;
@@ -6605,6 +6638,8 @@ function (_super) {
       this.chargeRegion();
     }
   };
+  /*************************************** create link regionbyid**************************************** */
+
   /*************************************test create tooltip **********************************************************/
 
   /** render */
@@ -6735,7 +6770,7 @@ function (_super) {
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       id: "Intent",
       style: styleSVG_2,
-      onMouseOver: this.SVG_PathImage,
+      onMouseOver: this.SVG_PathImage && this.CreateLinkArea,
       dangerouslySetInnerHTML: {
         __html: this.props.options.baseMap.layerImage
       }
@@ -7848,9 +7883,11 @@ function (_super) {
       } // dev
 
 
-      _this.setState({
-        selectCoordinateSpace: valueSelect,
-        selectCoordinateSpaceDefault: valueExist ? _this.state.selectCoordinateSpaceDefault : valueSelect.length > 0 ? valueSelect[0] : _this.state.selectCoordinateSpaceDefault
+      _this.setState(function (prevState) {
+        return {
+          selectCoordinateSpace: valueSelect,
+          selectCoordinateSpaceDefault: valueExist ? prevState.selectCoordinateSpaceDefault : valueSelect.length > 0 ? valueSelect[0] : prevState.selectCoordinateSpaceDefault
+        };
       });
     };
     /** fill data for select */
@@ -8407,7 +8444,7 @@ function (_super) {
         color: '#d8d9da',
         marginBottom: '0px'
       };
-      var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+      var item;
 
       if (isLinkB) {
         item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -8697,7 +8734,7 @@ function (_super) {
     };
 
     _this.contentTabEdit = function () {
-      var result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+      var result;
 
       if (_this.props.isRegion) {
         result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_editCoordinateSpace__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -8801,9 +8838,11 @@ function (_super) {
       var newMainMetric = _this.state.mainMetric;
       newMainMetric.manageValue = value.value || 'err';
 
-      _this.setState({
-        mainMetric: newMainMetric,
-        selectDefaultManageValue: value || _this.state.selectDefaultManageValue
+      _this.setState(function (prevState) {
+        return {
+          mainMetric: newMainMetric,
+          selectDefaultManageValue: value || prevState.selectDefaultManageValue
+        };
       });
 
       _this.callBack();
@@ -9192,7 +9231,7 @@ function (_super) {
     };
 
     _this.displayHtml = function () {
-      var result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+      var result;
 
       if (_this.props.isLink && _this.props.options.arrayOrientedLinks[_this.props.id || 0].orientationLink.value === 'double') {
         result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
@@ -9568,9 +9607,11 @@ function (_super) {
       } // dev
 
 
-      _this.setState({
-        selectCoordinateSpace: valueSelect,
-        selectCoordinateSpaceDefault: valueExist ? _this.state.selectCoordinateSpaceDefault : valueSelect.length > 0 ? valueSelect[0] : _this.state.selectCoordinateSpaceDefault
+      _this.setState(function (prevState) {
+        return {
+          selectCoordinateSpace: valueSelect,
+          selectCoordinateSpaceDefault: valueExist ? prevState.selectCoordinateSpaceDefault : valueSelect.length > 0 ? valueSelect[0] : prevState.selectCoordinateSpaceDefault
+        };
       }); // final
       // this.setState({
       // 	selectCoordinateSpace: valueSelect,
@@ -12105,7 +12146,8 @@ function (_super) {
       } else {
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
           href: linkUrlOrientedLink,
-          target: "_blank"
+          target: "_blank",
+          rel: "noopener noreferrer"
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
           content: valueTooltipMonodirectional,
           placement: this.props.tooltipPositionA.value
@@ -13462,7 +13504,7 @@ function (_super) {
         color: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorTextElement : 'white',
         verticalAlign: 'middle'
       };
-      var value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+      var value;
 
       if (_this.props.isEnabled && region.linkURL.followLink !== '') {
         value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -15500,7 +15542,7 @@ function (_super) {
     };
 
     _this.defineLabelPositionInputs = function () {
-      var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+      var item;
 
       var positionParameter = _this.getPositionParameter();
 
@@ -15562,7 +15604,7 @@ function (_super) {
     };
 
     _this.defineTooltipPositionInputs = function () {
-      var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+      var item;
       var optionsSelectTooltipPosition = [{
         label: 'Top',
         value: 'top'
@@ -15625,7 +15667,7 @@ function (_super) {
     };
 
     _this.defineLayerLevel = function () {
-      var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+      var item;
 
       var options = _this.defineListOrientedLink();
 
@@ -16720,8 +16762,10 @@ function (_super) {
 
 
   CoordinateSpaceInitialClass.prototype._handleChange = function (currentTarget, name) {
-    this.setState({
-      arrayCoor: Object(Functions_EditParameter_editGoodParameter__WEBPACK_IMPORTED_MODULE_3__["editGoodParameter"])(name, this.state.arrayCoor, currentTarget)
+    this.setState(function (prevState) {
+      return {
+        arrayCoor: Object(Functions_EditParameter_editGoodParameter__WEBPACK_IMPORTED_MODULE_3__["editGoodParameter"])(name, prevState.arrayCoor, currentTarget)
+      };
     });
     this.callBack();
   };
@@ -17074,14 +17118,16 @@ function (_super) {
       style: {
         verticalAlign: 'middle'
       }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], null, "Police")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSelect__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 10
+    }, "Police")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSelect__WEBPACK_IMPORTED_MODULE_3__["default"], {
       _onChange: this.onChangePolice,
       data: police,
       defaultValue: this.state.newPolice
     }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: l10n.textDefault.size,
       labelWidth: 10,
-      inputWidth: 15,
+      inputWidth: 10,
       required: true,
       value: this.state.size,
       onChange: this.handleChangesize

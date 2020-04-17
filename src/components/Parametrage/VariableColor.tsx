@@ -24,7 +24,6 @@ interface Props {
   isLink: boolean;
 
   id?: number;
-
 }
 
 interface State {

@@ -52,7 +52,7 @@ class ManageCoordinateSpace extends React.Component<Props, State> {
   };
 
   private contentTabEdit = (): JSX.Element => {
-    let result: JSX.Element = <div></div>;
+    let result: JSX.Element;
     if (this.props.isRegion) {
       result = (
         <div>

@@ -373,7 +373,7 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
       marginBottom: '0px',
     } as React.CSSProperties;
 
-    let item: JSX.Element = <div></div>;
+    let item: JSX.Element;
 
     if (isLinkB) {
       item = (

@@ -216,7 +216,7 @@ class PositionParameter extends React.Component<Props, State> {
   };
 
   private defineLabelPositionInputs = (): JSX.Element => {
-    let item: JSX.Element = <div></div>;
+    let item: JSX.Element;
     const positionParameter: PositionParameterClass = this.getPositionParameter();
 
     if (this.props.isLink && this.props.options.arrayOrientedLinks[this.props.id].orientationLink.value === 'double') {
@@ -297,7 +297,7 @@ class PositionParameter extends React.Component<Props, State> {
   };
 
   private defineTooltipPositionInputs = (): JSX.Element => {
-    let item: JSX.Element = <div></div>;
+    let item: JSX.Element;
     const optionsSelectTooltipPosition: Array<SelectableValue<string>> = [
       { label: 'Top', value: 'top' },
       { label: 'Bottom', value: 'bottom' },
@@ -349,7 +349,7 @@ class PositionParameter extends React.Component<Props, State> {
   };
 
   defineLayerLevel = (): JSX.Element => {
-    let item: JSX.Element = <div></div>;
+    let item: JSX.Element;
     const options: Array<SelectableValue<OrientedLinkClass>> = this.defineListOrientedLink();
 
     if (this.props.isLink) {

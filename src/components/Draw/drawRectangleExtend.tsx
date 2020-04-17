@@ -281,7 +281,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       verticalAlign: 'middle',
     } as React.CSSProperties;
 
-    let value: JSX.Element = <div></div>;
+    let value: JSX.Element;
 
     if (this.props.isEnabled && region.linkURL.followLink !== '') {
 

@@ -1732,7 +1732,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         );
       } else {
         return (
-          <a href={linkUrlOrientedLink} target="_blank">
+          <a href={linkUrlOrientedLink} target="_blank" rel="noopener noreferrer">
             <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
               <a
                 href={linkUrlTooltip}

@@ -69,10 +69,10 @@ class ManageQuery extends React.Component<Prop, State> {
   onChangeSelectManageValue = (value: SelectableValue<TManageValue>) => {
     const newMainMetric: Metric = this.state.mainMetric;
     newMainMetric.manageValue = value.value || 'err';
-    this.setState({
+    this.setState(prevState => ({
       mainMetric: newMainMetric,
-      selectDefaultManageValue: value || this.state.selectDefaultManageValue,
-    });
+      selectDefaultManageValue: value || prevState.selectDefaultManageValue,
+    }));
     this.callBack();
   };
 
@@ -282,7 +282,7 @@ class ManageQuery extends React.Component<Prop, State> {
   };
 
   private displayHtml = (): JSX.Element => {
-    let result: JSX.Element = <div></div>;
+    let result: JSX.Element;
     if (this.props.isLink && this.props.options.arrayOrientedLinks[this.props.id || 0].orientationLink.value === 'double') {
       result = (
         <Collapse isOpen={this.state.collapseMainMetric} label="Main metric" onToggle={this.onToggleMainMetric}>

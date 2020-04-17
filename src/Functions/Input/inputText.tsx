@@ -19,8 +19,8 @@ export const InputTextField: FunctionComponent<InputTextFieldProps> = ({ label, 
   <div>
     <FormField
       label={label}
-      labelWidth={Math.round((label && label.length > 0 ? label.length : 1) * 1.7)}
-      inputWidth={20}
+      labelWidth={15}
+      inputWidth={15}
       type="text"
       required={required}
       name={name}
@@ -33,3 +33,5 @@ export const InputTextField: FunctionComponent<InputTextFieldProps> = ({ label, 
 );
 
 export default InputTextField;
+
+// Math.round((label && label.length > 0 ? label.length : 1) * 1.7)

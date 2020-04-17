@@ -3,7 +3,7 @@
 
 ## Add a dashboard SVG
 
-![step 01](../../screenshots/demo/tutorial2/step01.jpg)
+![step 01](../../screenshots/demo/tutorial1/step01.jpg)
 
 
 Adding a background image is done from the `display` menu.
@@ -21,7 +21,7 @@ You have to save and reload the page.
 ### Step 1: Define an SVG region
 
 
-![step 02](../../screenshots/demo/tutorial2/step02.jpg)
+![step 02](../../screenshots/demo/tutorial1/step02.jpg)
 
 
 The creation of a region in an SVG image is done from the `Coordinates space`, `region` and `Add coordinate space` menu.
@@ -64,31 +64,6 @@ Repeat the same things for the Routeur et choose the color red
 It is possible to define other parameters, referring to the [coordinates lower limit](../editor/coordinates-lower-limit.md) page.
 
 
-## Add Routeur and ProxyServer points
-
-### Step 1 : add the routeur point
-
-
-![step 09](../../screenshots/demo/tutorial2/add-coordinate.png)
-
-- To place a point, go to `Visualization`, then `Coordinates space`, `Point` and `Add coordinate space`.
-
-![step 09](../../screenshots/demo/tutorial7/PointRouteur.png)
-
-You have to fill out the form like this: 
-
-- Fill in the "label" of the point
-- Inform his " size".
-- Enter the X and Y position where you want the point to appear.
-
-
-### Step 2 : Add the proxy point
-
-
-You can also add a point using the panel available on the dashboard. A tutorial is [available here](../panel/panel-point.md)
-
-
-
 ## Add bi directionnel link between two points
 
 ### Step 1 : Add the link bidirectional
@@ -109,9 +84,42 @@ The option of direction is done from the `Coordinates space`, `OrientedLink` men
 
 ![Metric](../../screenshots/demo/tutorial7/orientedLinkMetric.png)
 
+## Add clickable link
+
+### Step 1 : Add a region with Coordinate Mode
+
+The creation of a region in a coordinate mode is done from the `Coordinates space`, `region` and `Add coordinate space` menu.
+
+You have to fill out the form like this: 
+
+- Enter a `label` for example Computer
+- Select `coordinate mode`.
+- Fill the coordinate of your region
+- Click on the `load` button
+
+
+![Metric](../../screenshots/demo/tutorial7/Cumputers.png)
+![Metric](../../screenshots/demo/tutorial7/CoordonateMode.png)
+
+### Step 2 : Add a link
+
+On this same region, it is possible to add a clickable link.
+Do to that, go to Manage link and fill the form like follow :
+
+- `Following link` : Allows a redirection towards the link by clicking on the region or on the point.
+
+- `Link tooltip` : Allows a redirection to the link filled in the tool type by clicking on the link.
+
+- `Text in tooltip` : Displays the link in the tooltip that appears when the cursor is passed over the area or point.
+
+![Metric](../../screenshots/demo/tutorial7/ManegeLink.png)
+
+Then you can this on this picture that the link is clickable
+![Metric](../../screenshots/demo/tutorial7/Link-ConvertImage.jpg)
+
 ## Result
 
-![step 99](../../screenshots/demo/demo7.jpg)
+![result](../../screenshots/demo/demo7.png)
 
 ## Import JSON file
 

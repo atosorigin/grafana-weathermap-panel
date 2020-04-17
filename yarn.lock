@@ -911,7 +911,7 @@
     "@babel/helper-plugin-utils" "^7.8.3"
     "@babel/plugin-transform-typescript" "^7.9.0"
 
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.0":
   version "7.9.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.2.tgz#d90df0583a3a252f09aaa619665367bae518db06"
   integrity sha512-NE2DtOdufG7R5vnfQUTehdTfNycfUANEtCa9PssN9O/xmTzP4E08UI797ixaei6hBEVL9BI/PsdJS5x7mWoB9Q==
@@ -4589,9 +4589,9 @@ ecc-jsbn@~0.1.1:
     safer-buffer "^2.1.0"
 
 electron-to-chromium@^1.3.247, electron-to-chromium@^1.3.390:
-  version "1.3.410"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.410.tgz#00e0ec61c22933daa8b4de172c03932678783adc"
-  integrity sha512-DbCBdwtARI0l3e3m6ZIxVaTNahb6dSsmGjuag/twiVcWuM4MSpL5IfsJsJSyqLqxosE/m0CXlZaBmxegQW/dAg==
+  version "1.3.412"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.412.tgz#da0475c653b48e5935f300aa9c875377bf8ddcf9"
+  integrity sha512-4bVdSeJScR8fT7ERveLWbxemY5uXEHVseqMRyORosiKcTUSGtVwBkV8uLjXCqoFLeImA57Z9hbz3TOid01U4Hw==
 
 elliptic@^6.0.0:
   version "6.5.2"
@@ -4863,11 +4863,11 @@ esprima@~3.1.0:
   integrity sha1-/cpRzuYTOJXjyI1TXOSdv/YqRjM=
 
 esquery@^1.0.1:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/esquery/-/esquery-1.3.0.tgz#e5e29a6f66a837840d34f68cb9ce355260d1128b"
-  integrity sha512-/5qB+Mb0m2bh86tjGbA8pB0qBfdmCIK6ZNPjcw4/TtEH0+tTf0wLA5HK4KMTweSMwLGHwBDWCBV+6+2+EuHmgg==
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/esquery/-/esquery-1.3.1.tgz#b78b5828aa8e214e29fb74c4d5b752e1c033da57"
+  integrity sha512-olpvt9QG0vniUBZspVRN6lwB7hOZoTRtT+jzR+tS4ffYx2mzbw+z0XCOk44aaLYKApNX5nMm+E+P6o25ip/DHQ==
   dependencies:
-    estraverse "^5.0.0"
+    estraverse "^5.1.0"
 
 esrecurse@^4.1.0:
   version "4.2.1"
@@ -4886,7 +4886,7 @@ estraverse@^4.1.0, estraverse@^4.1.1, estraverse@^4.2.0:
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.3.0.tgz#398ad3f3c5a24948be7725e83d11a7de28cdbd1d"
   integrity sha512-39nnKffWz8xN1BU/2c79n9nB9HDzo0niYUqx6xyqUnyoAnQyyWpOTdZEeiCch8BBu515t4wp9ZmgVfVhn9EBpw==
 
-estraverse@^5.0.0:
+estraverse@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-5.1.0.tgz#374309d39fd935ae500e7b92e8a6b4c720e59642"
   integrity sha512-FyohXK+R0vE+y1nHLoBM7ZTyqRpqAlhdZHCWIWEviFLiGB8b04H6bQs8G+XTthacvT8VuwvteiP7RJSxMs8UEw==
@@ -8526,11 +8526,11 @@ pirates@^4.0.1:
     node-modules-regexp "^1.0.0"
 
 pixelmatch@^5.0.2:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/pixelmatch/-/pixelmatch-5.1.0.tgz#b640f0e5a03a09f235a4b818ef3b9b98d9d0b911"
-  integrity sha512-HqtgvuWN12tBzKJf7jYsc38Ha28Q2NYpmBL9WostEGgDHJqbTLkjydZXL1ZHM02ZnB+Dkwlxo87HBY38kMiD6A==
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/pixelmatch/-/pixelmatch-5.2.0.tgz#6433386c6a830b0d9ee3962f9ad59695500677cd"
+  integrity sha512-TdleROuanI+Uo/4PcOAH7b7qgO4kjzJO8K4y/TBAo1wx/5BE8cn1B0I6Jfk3mKcJsGpWvX7zjM8OjU5o9i+aog==
   dependencies:
-    pngjs "^3.4.0"
+    pngjs "^4.0.1"
 
 pkg-dir@^3.0.0:
   version "3.0.0"
@@ -8555,6 +8555,11 @@ pngjs@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-3.4.0.tgz#99ca7d725965fb655814eaf65f38f12bbdbf555f"
   integrity sha512-NCrCHhWmnQklfH4MtJMRjZ2a8c80qXeMlQMv2uVp9ISJMTt562SbGd6n2oq0PaPgKm7Z6pL9E2UlLIhC+SHL3w==
+
+pngjs@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-4.0.1.tgz#f803869bb2fc1bfe1bf99aa4ec21c108117cfdbe"
+  integrity sha512-rf5+2/ioHeQxR6IxuYNYGFytUyG3lma/WW1nsmjeHlWwtb2aByla6dkVc8pmJ9nplzkTA0q2xx7mMWrOTqT4Gg==
 
 popper.js@^1.14.4:
   version "1.16.1"
@@ -10366,9 +10371,9 @@ schema-utils@^1.0.0:
     ajv-keywords "^3.1.0"
 
 schema-utils@^2.5.0, schema-utils@^2.6.5:
-  version "2.6.5"
-  resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-2.6.5.tgz#c758f0a7e624263073d396e29cd40aa101152d8a"
-  integrity sha512-5KXuwKziQrTVHh8j/Uxz+QUbxkaLW9X/86NBlx/gnKgtsZA2GIVMUn17qWhRFwF8jdYb3Dig5hRO/W5mZqy6SQ==
+  version "2.6.6"
+  resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-2.6.6.tgz#299fe6bd4a3365dc23d99fd446caff8f1d6c330c"
+  integrity sha512-wHutF/WPSbIi9x6ctjGGk2Hvl0VOz5l3EKEuKbjPlB30mKZUzb9A5k9yEXRX3pwyqVLPvpfZZEllaFq/M718hA==
   dependencies:
     ajv "^6.12.0"
     ajv-keywords "^3.4.1"
@@ -12044,11 +12049,11 @@ yallist@^3.0.0, yallist@^3.0.2, yallist@^3.0.3:
   integrity sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==
 
 yaml@^1.7.2:
-  version "1.8.3"
-  resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.8.3.tgz#2f420fca58b68ce3a332d0ca64be1d191dd3f87a"
-  integrity sha512-X/v7VDnK+sxbQ2Imq4Jt2PRUsRsP7UcpSl3Llg6+NRRqWLIvxkMFYtH1FmvwNGYRKKPa+EPA4qDBlI9WVG1UKw==
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.9.0.tgz#dc1ff3e24837b62bc3c8ae02c28e16ee5742b9d6"
+  integrity sha512-3GLZOj8A9Gsp0Fw3kOyj0zqk4xMq+YvhbHSDYALd2NMOfIpyZeBhz32ZiNU7AtX1MtXX/9JJgxSElGRwvv9enA==
   dependencies:
-    "@babel/runtime" "^7.8.7"
+    "@babel/runtime" "^7.9.0"
 
 yargs-parser@10.x:
   version "10.1.0"
@@ -12074,9 +12079,9 @@ yargs-parser@^13.1.2:
     decamelize "^1.2.0"
 
 yargs-parser@^18.1.1:
-  version "18.1.2"
-  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-18.1.2.tgz#2f482bea2136dbde0861683abea7756d30b504f1"
-  integrity sha512-hlIPNR3IzC1YuL1c2UwwDKpXlNFBqD1Fswwh1khz5+d8Cq/8yc/Mn0i+rQXduu8hcrFKvO7Eryk+09NecTQAAQ==
+  version "18.1.3"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-18.1.3.tgz#be68c4975c6b2abf469236b0c870362fab09a7b0"
+  integrity sha512-o50j0JeToy/4K6OZcaQmW6lyXXKhq7csREXcDwk2omFPJEwUNOVtJKvmDr9EI1fAJZUyZcRF7kxGBWmRXudrCQ==
   dependencies:
     camelcase "^5.0.0"
     decamelize "^1.2.0"

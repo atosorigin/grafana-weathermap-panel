@@ -81,6 +81,9 @@ Then you can choose between "manipulate the average", if you want an average of 
 
 ![total](../../screenshots/demo/tutorial5/total.png)
 
+If your measurement is to return only one value, you must select "handling error". 
+This will display its value, if it is unique, and will display an error if there are other values.
+
 
 
 
