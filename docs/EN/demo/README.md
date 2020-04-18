@@ -14,7 +14,7 @@ In the form of a **demo**, you will learn how to use the plugin to get a dynamic
     
 - 3 [Create dashboard Avanced with link directionnel](tutorial3.md)
 
-    ![demo3](../../screenshots/demo/demo3.jpg)
+    ![demo3](../../screenshots/demo/demo3.png)
 
 - 4 [How to create and add your own SVG image in Grafana](tutorial4.md)
 
