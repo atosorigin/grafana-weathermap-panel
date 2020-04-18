@@ -111,7 +111,7 @@ To create an oriented link you have to pass by [the panel menu](../panel/panel-o
 
 ## Final Result 
 
-![demo2](../../screenshots/demo/demo2.png)
+![demo2](../../screenshots/demo/tutorial2/demo2.png)
 
 ## Add everything with JSON
 

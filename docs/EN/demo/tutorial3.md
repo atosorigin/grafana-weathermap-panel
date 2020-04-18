@@ -145,7 +145,7 @@ Then in `Main metric`, choose you metric.
 ## Resultat
 
 
-![resultat](../../screenshots/demo/tutorial3/resultat.jpg)
+![resultat](../../screenshots/demo/tutorial3/resultat.png)
 
 
 

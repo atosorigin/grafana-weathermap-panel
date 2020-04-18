@@ -1,25 +1,25 @@
 # Settings server
 
-L'importation de fichiers par liens s'effectue par un serveur associé.
+The import of files by links is done by an associated server.
 
-Si vous n'effectuez pas l'opération, vous ne pourrez pas bénéficier de la fonctionnalité car vous aurez le message d'erreur [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) 
+If you do not perform the operation, you will not be able to take advantage of the functionality because you will get the error message [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) 
 
-La résolution s'effectue avec un serveur associén soit en installant [Apache]() ou [Nginx]()
+The resolution is done with an associated server either by installing [Apache](https://www.apache.org/)
 
 
 
 # Apache 2
 
 
-Il vous faut au préalable avoir installer la version Apache 2.4.x
+You need to have Apache 2.4.x installed first.
 
 
 
 ## Enable CORS header on apache2
 
-Il faut modifier le fichier de configuration de la manière suivante
+The configuration file must be modified as follows
 
-A partir du terminal : 
+From the terminal: 
 
 ```
 sudo /etc/apache2/apache2.conf
@@ -47,7 +47,7 @@ to:
     </Directory>
 ```
     
-Après avoir sauvegarder, vous chargez l'entete et relancer le service : 
+After saving, you load the header and restart the service: 
 
 ```
 $ sudo a2enmod headers
@@ -56,14 +56,14 @@ $ sudo systemctl restart apache2
 
 ```
 
-Vous placez les fichiers demo dans le dossier
+You place the demo files in the folder
 
 ```
 /var/www/html
 
 ```
 
-pour obtenir le résultat suivant
+to get the following result
 
 
 
@@ -71,6 +71,3 @@ pour obtenir le résultat suivant
 
 
 
-
-
-# Nginx

@@ -107,25 +107,25 @@ On this same region, it is possible to add a clickable link.
 Do to that, go to Manage link and fill the form like follow :
 
 - `Following link` : Allows a redirection towards the link by clicking on the region or on the point.
-
 - `Link tooltip` : Allows a redirection to the link filled in the tool type by clicking on the link.
-
 - `Text in tooltip` : Displays the link in the tooltip that appears when the cursor is passed over the area or point.
 
 ![Metric](../../screenshots/demo/tutorial7/ManegeLink.png)
 
 Then you can this on this picture that the link is clickable
+
 ![Metric](../../screenshots/demo/tutorial7/Link-ConvertImage.jpg)
 
 ## Result
 
-![result](../../screenshots/demo/demo7.png)
+![result](../../screenshots/demo/tutorial7/demo7.png)
 
 ## Import JSON file
 
 - It is possible to add all of those configuration through json files by doing an import. To know how to do it, [follow this link](../editor/import.md)
 
 And here is the different JSON file :
+
 - [demo7-Region](../../resource/demo7-region-svg.json) 
 - [demo7-point](../../resource/demo7-point.json)
 - [demo7-link](../../resource/demo7-link.json)

@@ -157,6 +157,7 @@ Then the color will be defined like this
 ```
 
 With:
+
   - **backColor**: Fill in a color for the background under the form #7FFF00 for example
   - **borderColor** : Fill in a color for the border under the form #7FFF00 for example. 
   - **id** : color id
@@ -206,6 +207,7 @@ Then the color will be defined like this
 
 ```
 With similarly:
+
   - **backColor**: Fill in a color for the background under the form #7FFF00 for example
   - **borderColor** : Fill in a color for the border under the form #7FFF00 for example. 
   - **id** : color id
@@ -216,15 +218,15 @@ With similarly:
 
 ## mainMetric
 
- - **mainMetric**	
-    - **expr** : Expression in PrompQL
-    - **format** "" (Leaves blank)
-    - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
-    - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
-    - **manageValue** : You can choose between "sum", "avg" or "err".
-    - **refId**: Metric reference associated with this region
-    - **returnQuery**: (Leave blank) 
-    - **unit** : (Leave blank)
+ 
+  - **expr** : Expression in PrompQL
+  - **format** "" (Leaves blank)
+  - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
+  - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
+  - **manageValue** : You can choose between "sum", "avg" or "err".
+  - **refId**: Metric reference associated with this region
+  - **returnQuery**: (Leave blank) 
+  - **unit** : (Leave blank)
 
 ```
        "mainMetric": {

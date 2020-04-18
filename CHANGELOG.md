@@ -1,7 +1,9 @@
 # Changelog
 
-## v0.4.8 (2020-04-xx)
+## v0.4.8 (2020-04-18)
 
+- Update Documentations
+- fixed interface
 
 ## v0.4.7 (2020-04-16)
 

@@ -1,11 +1,10 @@
 # Realised
 
 
-Projet réalisé par Atos Open sources
+Project carried out by Atos Open sources
 
 
-
-L'équipe qui a réalisé le plugin est :
+The team that made the plugin is:
 
  - [Adrien]()
  - [Christophe Villeneuve]()

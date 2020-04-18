@@ -212,6 +212,7 @@ Then the color will be defined like this
 
 ```
 With similarly:
+
   - **backColor**: Fill in a color for the background under the form #7FFF00 for example
   - **borderColor** : Fill in a color for the border under the form #7FFF00 for example. 
   - **id** : color id
@@ -231,10 +232,9 @@ Compatible format is JPG / PNG / GIF / SVG
 
 ## linkURL
 
- - **linkURL**
-    - **followLink**: Allows a redirection to the link by clicking on the region.
-    - **hoveringTooltipLink** : Allows a redirection to the link filled in the tool type by clicking on the link.
-    - **hoveringTooltipText** : Displays the link in the tool type that appears when the cursor is passed over the area or point.
+  - **followLink**: Allows a redirection to the link by clicking on the region.
+  - **hoveringTooltipLink** : Allows a redirection to the link filled in the tool type by clicking on the link.
+  - **hoveringTooltipText** : Displays the link in the tool type that appears when the cursor is passed over the area or point.
 
 
 ```
@@ -249,15 +249,15 @@ Compatible format is JPG / PNG / GIF / SVG
 
 ## mainMetric
 
- - **mainMetric**	
-    - **expr** : Expression in PrompQL
-    - **format** "" (Leaves blank)
-    - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
-    - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
-    - **manageValue** : You can choose between "sum", "avg" or "err".
-    - **refId**: Metric reference associated with this region
-    - **returnQuery**: (Leave blank) 
-    - **unit** : (Leave blank)
+
+  - **expr** : Expression in PrompQL
+  - **format** "" (Leaves blank)
+  - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
+  - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
+  - **manageValue** : You can choose between "sum", "avg" or "err".
+  - **refId**: Metric reference associated with this region
+  - **returnQuery**: (Leave blank) 
+  - **unit** : (Leave blank)
 
 ```
        "mainMetric": {
@@ -276,7 +276,6 @@ Compatible format is JPG / PNG / GIF / SVG
 
 ## meta
 
-A FAIRE, Laisser vide pour le moment
 
 ```
 
@@ -284,8 +283,10 @@ A FAIRE, Laisser vide pour le moment
 
 ## metrics
 
- - **metrics** : This is a metric table to add auxilary metrics.
+ This is a metric table to add auxilary metrics.
+ 
     - **0**
+    
         - **expr** : Expression in PrompQL
         - **format** : (Leaves blank)
         - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
@@ -294,6 +295,7 @@ A FAIRE, Laisser vide pour le moment
         - **refId**: Metric reference associated with this region
         - **returnQuery**: (Leave blank)    
         - **unit** : (Leave blank)
+
     - **1**
         - ...
 

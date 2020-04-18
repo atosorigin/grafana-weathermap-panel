@@ -8,9 +8,4 @@ Many settings are available to customize the rendering.
 
 
 
-
-TODO
-
-
-
-![resultat](../../screenshots/init/resultat.png)
+to be continued...
