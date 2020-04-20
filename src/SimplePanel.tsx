@@ -36,7 +36,6 @@ interface Legend {
 interface State {
   // isUpdate: boolean;
   // sizePanel: number;
-  idOrientedLink: number;
   valueButton: string;
   /**
    * manage button
@@ -60,8 +59,10 @@ interface State {
   displayRegion: JSX.Element;
   idSVG: string;
   tooltip: JSX.Element;
-
+  // check if button Add Oriented Link is active
   buttonAddLinkIsActive: boolean;
+  // check if button Add Incurved Oriented Link is active
+  buttonAddIncurvedLinkIsActive: boolean;
 }
 
 /**
@@ -71,7 +72,6 @@ export class SimplePanel extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      idOrientedLink: this.props.options.indexOrientedLink,
       valueButton: '',
       buttonManage: [false, false, false, false, false],
       numberClickDiv: 0,
@@ -83,6 +83,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       tooltip: <div>salut</div>,
       idSVG: '',
       buttonAddLinkIsActive: false,
+      buttonAddIncurvedLinkIsActive: false,
     };
   }
 
@@ -244,7 +245,10 @@ export class SimplePanel extends PureComponent<Props, State> {
       ...this.props.options,
       indexPoint: id,
       arrayPoints: newArrayPoint,
+      //newPoint: true,
     });
+
+    this.props.options.newPoint = true;
 
     setTimeout(() => {
       this.displayPoint();
@@ -293,6 +297,7 @@ export class SimplePanel extends PureComponent<Props, State> {
           valuesAuxiliaryMetrics={valuesAuxiliaryMetrics}
           linkUrl={line.linkURL}
           buttonAddLinkIsActive={this.state.buttonAddLinkIsActive}
+          buttonAddIncurvedLinkIsActive={this.state.buttonAddIncurvedLinkIsActive}
         />
       );
       mapItems.push(item);
@@ -878,6 +883,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       positionParameter,
       name,
       { label: 'Monodirectional', value: 'AB' },
+      { label: 'Medium', value: 'Medium' },
       objectIn.x.toString(),
       objectIn.y.toString(),
       '#5794F2',
@@ -906,12 +912,16 @@ export class SimplePanel extends PureComponent<Props, State> {
     );
     const newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
     newArrayOrientedLink.push(newOrientedLink);
+    //const newValue = true;
     this.props.onOptionsChange({
       ...this.props.options,
       arrayOrientedLinks: newArrayOrientedLink,
       indexOrientedLink: id,
       zIndexOrientedLink: zIndex,
+      newOrientedLink: true,
     });
+
+    this.props.options.newOrientedLink = true;
 
     this.addAssociateOrientedLinkToPoint(objectIn.labelPoint || '', objectOut.labelPoint || '', newOrientedLink.id);
 
@@ -977,6 +987,7 @@ export class SimplePanel extends PureComponent<Props, State> {
           police={this.props.options.display.police}
           sizePolice={this.props.options.display.size}
           linkUrl={orientedLink.linkURL}
+          size={orientedLink.size}
         />
       );
       mapItems.push(item);
@@ -1218,7 +1229,19 @@ export class SimplePanel extends PureComponent<Props, State> {
           style={{ marginLeft: '5%' }}
           variant={this.state.buttonManage[2] ? 'danger' : 'primary'}
           className="button"
-          onClick={() => this.resetButtonManage(2)}
+          onClick={() => {
+            if (this.state.buttonAddIncurvedLinkIsActive) {
+              this.setState((prevState: State) => ({
+                buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive,
+              }));
+            }
+            if (this.state.buttonAddLinkIsActive) {
+              this.setState((prevState: State) => ({
+                buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive,
+              }));
+            }
+            this.resetButtonManage(2);
+          }}
         >
           Position Legend
         </Button>
@@ -1272,6 +1295,16 @@ export class SimplePanel extends PureComponent<Props, State> {
   };
 
   addNode = () => {
+    if (this.state.buttonAddIncurvedLinkIsActive) {
+      this.setState((prevState: State) => ({
+        buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive,
+      }));
+    }
+    if (this.state.buttonAddLinkIsActive) {
+      this.setState((prevState: State) => ({
+        buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive,
+      }));
+    }
     this.setState((prevState: State) => ({
       nbClickButton: prevState.buttonManage[0] ? false : true,
     }));
@@ -1280,6 +1313,16 @@ export class SimplePanel extends PureComponent<Props, State> {
   };
 
   addPoint = () => {
+    if (this.state.buttonAddIncurvedLinkIsActive) {
+      this.setState((prevState: State) => ({
+        buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive,
+      }));
+    }
+    if (this.state.buttonAddLinkIsActive) {
+      this.setState((prevState: State) => ({
+        buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive,
+      }));
+    }
     this.setState((prevState: State) => ({
       nbClickButton: prevState.buttonManage[3] ? false : true,
       valueButton: 'point',
@@ -1289,6 +1332,11 @@ export class SimplePanel extends PureComponent<Props, State> {
   };
 
   addLink = () => {
+    if (this.state.buttonAddIncurvedLinkIsActive) {
+      this.setState((prevState: State) => ({
+        buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive,
+      }));
+    }
     this.setState((prevState: State) => ({
       nbClickButton: prevState.buttonManage[1] ? false : true,
       buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive,
@@ -1298,8 +1346,14 @@ export class SimplePanel extends PureComponent<Props, State> {
   };
 
   addIncurvedLink = () => {
+    if (this.state.buttonAddLinkIsActive) {
+      this.setState((prevState: State) => ({
+        buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive,
+      }));
+    }
     this.setState((prevState: State) => ({
       nbClickButton: prevState.buttonManage[4] ? false : true,
+      buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive,
     }));
     this.resetButtonManage(4);
     this.changeValueButtonToIncurvedLink();

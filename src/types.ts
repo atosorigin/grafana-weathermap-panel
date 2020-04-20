@@ -337,6 +337,9 @@ export interface SimpleOptions extends MetricSettings {
   orientedLinkToUpgrade: SelectableValue<OrientedLinkClass>;
   orientedLinkToDowngrade: SelectableValue<OrientedLinkClass>;
   checkIndexMultiLink: number;
+
+  newPoint: boolean;
+  newOrientedLink: boolean;
 }
 
 export const defaults: SimpleOptions = {
@@ -461,4 +464,6 @@ export const defaults: SimpleOptions = {
   orientedLinkToUpgrade: {},
   orientedLinkToDowngrade: {},
   checkIndexMultiLink: 0,
+  newPoint: true,
+  newOrientedLink: false,
 };

@@ -50,6 +50,7 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   police: string;
   sizePolice: string;
   linkUrl: LinkURLClass;
+  size: SelectableValue<string>;
 }
 
 interface State {}
@@ -196,7 +197,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
 
     if (this.props.associatePointIn !== '') {
       arrayPoints.forEach(point => {
-        if (point.name === this.props.associatePointIn) {
+        let name: string = point.label || point.name;
+        if (name === this.props.associatePointIn) {
           xMinIn = parseInt(point.positionShapeX, 10);
           xMaxIn = parseInt(point.positionShapeX, 10);
           yMinIn = parseInt(point.positionShapeY, 10);
@@ -228,7 +230,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       });
 
       arrayPoints.forEach(point => {
-        if (point.name === this.props.associatePointOut) {
+        let name: string = point.label || point.name;
+        if (name === this.props.associatePointOut) {
           xMinOut = parseInt(point.positionShapeX, 10);
           xMaxOut = parseInt(point.positionShapeX, 10);
           yMinOut = parseInt(point.positionShapeY, 10);
@@ -401,7 +404,9 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       } else if (idMultiLink === 2) {
         if (yMidIn > yMidOut) {
-          if (xMidIn > xMidOut) {
+          if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
+            xResult = (xMinIn + xMaxIn) / 2;
+          } else if (xMidIn > xMidOut) {
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMaxIn;
             } else {
@@ -417,7 +422,9 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             xResult = (xMinIn + xMaxIn) / 2;
           }
         } else if (yMidIn < yMidOut) {
-          if (xMidIn > xMidOut) {
+          if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
+            xResult = (xMinIn + xMaxIn) / 2;
+          } else if (xMidIn > xMidOut) {
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMaxIn;
             } else {
@@ -433,7 +440,9 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             xResult = (xMinIn + xMaxIn) / 2;
           }
         } else if (yMidIn === yMidOut) {
-          if (xMidIn > xMidOut) {
+          if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
+            xResult = (xMinIn + xMaxIn) / 2;
+          } else if (xMidIn > xMidOut) {
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMaxIn;
             } else {
@@ -553,7 +562,9 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       } else if (idMultiLink === 2) {
         if (yMidIn > yMidOut) {
-          if (xMidIn > xMidOut) {
+          if ((xMidIn > xMinOut && xMidIn < xMaxOut) || (xMidIn < xMinOut && xMidIn > xMaxOut)) {
+            xResult = (xMinOut + xMaxOut) / 2;
+          } else if (xMidIn > xMidOut) {
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMinOut;
             } else {
@@ -569,7 +580,9 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             xResult = (xMinOut + xMaxOut) / 2;
           }
         } else if (yMidIn < yMidOut) {
-          if (xMidIn > xMidOut) {
+          if ((xMidIn > xMinOut && xMidIn < xMaxOut) || (xMidIn < xMinOut && xMidIn > xMaxOut)) {
+            xResult = (xMinOut + xMaxOut) / 2;
+          } else if (xMidIn > xMidOut) {
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMinOut;
             } else {
@@ -626,7 +639,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
 
     if (this.props.associatePointIn !== '') {
       arrayPoints.forEach(point => {
-        if (point.name === this.props.associatePointIn) {
+        let name: string = point.label || point.name;
+        if (name === this.props.associatePointIn) {
           xMinIn = parseInt(point.positionShapeX, 10);
           xMaxIn = parseInt(point.positionShapeX, 10);
           yMinIn = parseInt(point.positionShapeY, 10);
@@ -658,7 +672,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       });
 
       arrayPoints.forEach(point => {
-        if (point.name === this.props.associatePointOut) {
+        let name: string = point.label || point.name;
+        if (name === this.props.associatePointOut) {
           xMinOut = parseInt(point.positionShapeX, 10);
           xMaxOut = parseInt(point.positionShapeX, 10);
           yMinOut = parseInt(point.positionShapeY, 10);
@@ -730,20 +745,46 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
 
     if (isIn) {
       if (idMultiLink === 0) {
-        if (xMidIn > xMidOut) {
+        if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
           if (yMidIn > yMidOut) {
+            console.log('y1');
             if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMinIn;
-            } else {
               yResult = yMaxIn;
+            } else {
+              yResult = yMinIn;
             }
           } else if (yMidIn < yMidOut) {
+            console.log('y2');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMinIn;
             } else {
               yResult = yMaxIn;
             }
           } else if (yMidIn === yMidOut) {
+            console.log('y3');
+            if (yMinIn < 0 && yMaxIn < 0) {
+              yResult = yMinIn;
+            } else {
+              yResult = yMaxIn;
+            }
+          }
+        } else if (xMidIn > xMidOut) {
+          if (yMidIn > yMidOut) {
+            console.log('y4');
+            if (yMinIn < 0 && yMaxIn < 0) {
+              yResult = yMinIn;
+            } else {
+              yResult = yMaxIn;
+            }
+          } else if (yMidIn < yMidOut) {
+            console.log('y5');
+            if (yMinIn < 0 && yMaxIn < 0) {
+              yResult = yMinIn;
+            } else {
+              yResult = yMaxIn;
+            }
+          } else if (yMidIn === yMidOut) {
+            console.log('y6');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMinIn;
             } else {
@@ -752,18 +793,21 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           }
         } else if (xMidIn < xMidOut) {
           if (yMidIn > yMidOut) {
+            console.log('y7');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMinIn;
             } else {
               yResult = yMaxIn;
             }
           } else if (yMidIn < yMidOut) {
+            console.log('y8');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMinIn;
             } else {
               yResult = yMaxIn;
             }
           } else if (yMidIn === yMidOut) {
+            console.log('y9');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMinIn;
             } else {
@@ -772,18 +816,14 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           }
         } else if (xMidIn === xMidOut) {
           if (yMidIn > yMidOut) {
+            console.log('y10');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMaxIn;
             } else {
               yResult = yMinIn;
             }
           } else if (yMidIn < yMidOut) {
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMinIn;
-            } else {
-              yResult = yMaxIn;
-            }
-          } else if (yMidIn === yMidOut) {
+            console.log('y11');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMinIn;
             } else {
@@ -792,7 +832,31 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           }
         }
       } else if (idMultiLink === 1) {
-        if (xMidIn > xMidOut) {
+        if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
+          if (yMidIn > yMidOut) {
+            console.log('y12');
+            if (yMinIn < 0 && yMaxIn < 0) {
+              yResult = yMaxIn;
+            } else {
+              yResult = yMinIn;
+            }
+          } else if (yMidIn < yMidOut) {
+            console.log('y13');
+            if (yMinIn < 0 && yMaxIn < 0) {
+              yResult = yMinIn;
+            } else {
+              yResult = yMaxIn;
+            }
+          } else if (yMidIn === yMidOut) {
+            console.log('y14');
+            if (yMinIn < 0 && yMaxIn < 0) {
+              yResult = yMinOut;
+            } else {
+              yResult = yMaxOut;
+            }
+          }
+        } else if (xMidIn > xMidOut) {
+          console.log('y16');
           if (yMidIn > yMidOut) {
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMaxIn;
@@ -800,12 +864,14 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               yResult = yMinIn;
             }
           } else if (yMidIn < yMidOut) {
+            console.log('y17');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMaxIn;
             } else {
               yResult = yMinIn;
             }
           } else if (yMidIn === yMidOut) {
+            console.log('y18');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMaxIn;
             } else {
@@ -814,18 +880,21 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           }
         } else if (xMidIn < xMidOut) {
           if (yMidIn > yMidOut) {
+            console.log('y19');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMaxIn;
             } else {
               yResult = yMinIn;
             }
           } else if (yMidIn < yMidOut) {
+            console.log('y20');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMaxIn;
             } else {
               yResult = yMinIn;
             }
           } else if (yMidIn === yMidOut) {
+            console.log('y21');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMaxIn;
             } else {
@@ -834,18 +903,14 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           }
         } else if (xMidIn === xMidOut) {
           if (yMidIn > yMidOut) {
+            console.log('y22');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMaxIn;
             } else {
               yResult = yMinIn;
             }
           } else if (yMidIn < yMidOut) {
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMinIn;
-            } else {
-              yResult = yMaxIn;
-            }
-          } else if (yMidIn === yMidOut) {
+            console.log('y23');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMinIn;
             } else {
@@ -854,52 +919,77 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           }
         }
       } else if (idMultiLink === 2) {
-        if (xMidIn > xMidOut) {
+        if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
           if (yMidIn > yMidOut) {
+            console.log('y24');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMaxIn;
             } else {
               yResult = yMinIn;
             }
           } else if (yMidIn < yMidOut) {
+            console.log('y25');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMinIn;
             } else {
               yResult = yMaxIn;
             }
           } else if (yMidIn === yMidOut) {
+            console.log('y26');
+            if (yMinIn < 0 && yMaxIn < 0) {
+              yResult = yMinOut;
+            } else {
+              yResult = yMaxOut;
+            }
+          }
+        } else if (xMidIn > xMidOut) {
+          if (yMidIn > yMidOut) {
+            console.log('y28');
+            if (yMinIn < 0 && yMaxIn < 0) {
+              yResult = yMaxIn;
+            } else {
+              yResult = yMinIn;
+            }
+          } else if (yMidIn < yMidOut) {
+            console.log('y29');
+            if (yMinIn < 0 && yMaxIn < 0) {
+              yResult = yMinIn;
+            } else {
+              yResult = yMaxIn;
+            }
+          } else if (yMidIn === yMidOut) {
+            console.log('y30');
             yResult = (yMinIn + yMaxIn) / 2;
           }
         } else if (xMidIn < xMidOut) {
           if (yMidIn > yMidOut) {
+            console.log('y31');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMaxIn;
             } else {
               yResult = yMinIn;
             }
           } else if (yMidIn < yMidOut) {
+            console.log('y32');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMinIn;
             } else {
               yResult = yMaxIn;
             }
           } else if (yMidIn === yMidOut) {
+            console.log('y33');
             yResult = (yMinIn + yMaxIn) / 2;
           }
         } else if (xMidIn === xMidOut) {
           if (yMidIn > yMidOut) {
+            console.log('y34');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMaxIn;
             } else {
               yResult = yMinIn;
             }
           } else if (yMidIn < yMidOut) {
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMinIn;
-            } else {
-              yResult = yMaxIn;
-            }
-          } else if (yMidIn === yMidOut) {
+            console.log('y35');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMinIn;
             } else {
@@ -910,20 +1000,46 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       }
     } else {
       if (idMultiLink === 0) {
-        if (xMidIn > xMidOut) {
+        if ((xMidIn > xMinOut && xMidIn < xMaxOut) || (xMidIn < xMinOut && xMidIn > xMaxOut)) {
           if (yMidIn > yMidOut) {
+            console.log('y37');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMinOut;
             } else {
               yResult = yMaxOut;
             }
           } else if (yMidIn < yMidOut) {
+            console.log('y38');
+            if (yMinOut < 0 && yMaxOut < 0) {
+              yResult = yMaxOut;
+            } else {
+              yResult = yMinOut;
+            }
+          } else if (yMidIn === yMidOut) {
+            console.log('y39');
+            if (yMinOut < 0 && yMaxOut < 0) {
+              yResult = yMinOut;
+            } else {
+              yResult = yMaxOut;
+            }
+          }
+        } else if (xMidIn > xMidOut) {
+          if (yMidIn > yMidOut) {
+            console.log('y40');
+            if (yMinOut < 0 && yMaxOut < 0) {
+              yResult = yMinOut;
+            } else {
+              yResult = yMaxOut;
+            }
+          } else if (yMidIn < yMidOut) {
+            console.log('y41');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMinOut;
             } else {
               yResult = yMaxOut;
             }
           } else if (yMidIn === yMidOut) {
+            console.log('y42');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMinOut;
             } else {
@@ -932,18 +1048,21 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           }
         } else if (xMidIn < xMidOut) {
           if (yMidIn > yMidOut) {
+            console.log('y43');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMinOut;
             } else {
               yResult = yMaxOut;
             }
           } else if (yMidIn < yMidOut) {
+            console.log('y44');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMinOut;
             } else {
               yResult = yMaxOut;
             }
           } else if (yMidIn === yMidOut) {
+            console.log('y45');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMinOut;
             } else {
@@ -952,18 +1071,14 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           }
         } else if (xMidIn === xMidOut) {
           if (yMidIn > yMidOut) {
+            console.log('y46');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMinOut;
             } else {
               yResult = yMaxOut;
             }
           } else if (yMidIn < yMidOut) {
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMaxOut;
-            } else {
-              yResult = yMinOut;
-            }
-          } else if (yMidIn === yMidOut) {
+            console.log('y47');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMaxOut;
             } else {
@@ -972,20 +1087,46 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           }
         }
       } else if (idMultiLink === 1) {
-        if (xMidIn > xMidOut) {
+        if ((xMidIn > xMinOut && xMidIn < xMaxOut) || (xMidIn < xMinOut && xMidIn > xMaxOut)) {
           if (yMidIn > yMidOut) {
+            console.log('y49');
             if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMaxOut;
-            } else {
               yResult = yMinOut;
+            } else {
+              yResult = yMaxOut;
             }
           } else if (yMidIn < yMidOut) {
+            console.log('y50');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMaxOut;
             } else {
               yResult = yMinOut;
             }
           } else if (yMidIn === yMidOut) {
+            console.log('y51');
+            if (yMinOut < 0 && yMaxOut < 0) {
+              yResult = yMinOut;
+            } else {
+              yResult = yMaxOut;
+            }
+          }
+        } else if (xMidIn > xMidOut) {
+          if (yMidIn > yMidOut) {
+            console.log('y52');
+            if (yMinOut < 0 && yMaxOut < 0) {
+              yResult = yMaxOut;
+            } else {
+              yResult = yMinOut;
+            }
+          } else if (yMidIn < yMidOut) {
+            console.log('y53');
+            if (yMinOut < 0 && yMaxOut < 0) {
+              yResult = yMaxOut;
+            } else {
+              yResult = yMinOut;
+            }
+          } else if (yMidIn === yMidOut) {
+            console.log('y54');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMaxOut;
             } else {
@@ -994,18 +1135,21 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           }
         } else if (xMidIn < xMidOut) {
           if (yMidIn > yMidOut) {
+            console.log('y55');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMaxOut;
             } else {
               yResult = yMinOut;
             }
           } else if (yMidIn < yMidOut) {
+            console.log('y56');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMaxOut;
             } else {
               yResult = yMinOut;
             }
           } else if (yMidIn === yMidOut) {
+            console.log('y57');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMaxOut;
             } else {
@@ -1014,18 +1158,14 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           }
         } else if (xMidIn === xMidOut) {
           if (yMidIn > yMidOut) {
+            console.log('y58');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMinOut;
             } else {
               yResult = yMaxOut;
             }
           } else if (yMidIn < yMidOut) {
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMaxOut;
-            } else {
-              yResult = yMinOut;
-            }
-          } else if (yMidIn === yMidOut) {
+            console.log('y59');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMaxOut;
             } else {
@@ -1034,52 +1174,73 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           }
         }
       } else if (idMultiLink === 2) {
-        if (xMidIn > xMidOut) {
+        if ((xMidIn > xMinOut && xMidIn < xMaxOut) || (xMidIn < xMinOut && xMidIn > xMaxOut)) {
           if (yMidIn > yMidOut) {
+            console.log('y61');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMinOut;
             } else {
               yResult = yMaxOut;
             }
           } else if (yMidIn < yMidOut) {
+            console.log('y62');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMaxOut;
             } else {
               yResult = yMinOut;
             }
           } else if (yMidIn === yMidOut) {
+            console.log('y64');
+            yResult = (yMinOut + yMaxOut) / 2;
+          }
+        } else if (xMidIn > xMidOut) {
+          if (yMidIn > yMidOut) {
+            console.log('y65');
+            if (yMinOut < 0 && yMaxOut < 0) {
+              yResult = yMinOut;
+            } else {
+              yResult = yMaxOut;
+            }
+          } else if (yMidIn < yMidOut) {
+            console.log('y66');
+            if (yMinOut < 0 && yMaxOut < 0) {
+              yResult = yMaxOut;
+            } else {
+              yResult = yMinOut;
+            }
+          } else if (yMidIn === yMidOut) {
+            console.log('y67');
             yResult = (yMinOut + yMaxOut) / 2;
           }
         } else if (xMidIn < xMidOut) {
           if (yMidIn > yMidOut) {
+            console.log('y68');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMinOut;
             } else {
               yResult = yMaxOut;
             }
           } else if (yMidIn < yMidOut) {
+            console.log('y69');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMaxOut;
             } else {
               yResult = yMinOut;
             }
           } else if (yMidIn === yMidOut) {
+            console.log('y70');
             yResult = (yMinOut + yMaxOut) / 2;
           }
         } else if (xMidIn === xMidOut) {
           if (yMidIn > yMidOut) {
+            console.log('y71');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMinOut;
             } else {
               yResult = yMaxOut;
             }
           } else if (yMidIn < yMidOut) {
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMaxOut;
-            } else {
-              yResult = yMinOut;
-            }
-          } else if (yMidIn === yMidOut) {
+            console.log('y72');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMaxOut;
             } else {
@@ -1101,11 +1262,12 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     let yOut = 0;
     const ajustPosition = 5;
     arrayPoints.forEach(point => {
-      if (point.name === this.props.associatePointIn) {
+      let name: string = point.label || point.name;
+      if (name === this.props.associatePointIn) {
         xIn = parseInt(point.positionShapeX, 10);
         yIn = parseInt(point.positionShapeY, 10);
       }
-      if (point.name === this.props.associatePointOut) {
+      if (name === this.props.associatePointOut) {
         xOut = parseInt(point.positionShapeX, 10);
         yOut = parseInt(point.positionShapeY, 10);
       }
@@ -1187,7 +1349,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         xResult = xOut;
       }
     }
-
     return xResult;
   };
 
@@ -1200,11 +1361,12 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     let yOut = 0;
     const ajustPosition = 5;
     arrayPoints.forEach(point => {
-      if (point.name === this.props.associatePointIn) {
+      let name: string = point.label || point.name;
+      if (name === this.props.associatePointIn) {
         xIn = parseInt(point.positionShapeX, 10);
         yIn = parseInt(point.positionShapeY, 10);
       }
-      if (point.name === this.props.associatePointOut) {
+      if (name === this.props.associatePointOut) {
         xOut = parseInt(point.positionShapeX, 10);
         yOut = parseInt(point.positionShapeY, 10);
       }
@@ -1293,7 +1455,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
    * to do
    */
   private drawLink(xA0: number, yA0: number, xB0: number, yB0: number, xCByClick0: number, yCByClick0: number, orientationLink: string) {
-    //this.defineParallelOrientedLinks();
     const listParallelOrientedLinks: number[] = this.defineParallelOrientedLinks();
     let xA = 0;
     let yA = 0;
@@ -1568,7 +1729,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 zIndex: 9999,
                 top: yMidAC + parseInt(this.props.labelAPositionY, 10) * inverseAxeY - this.labelSynchroY('A'),
                 left: xMidAC + parseInt(this.props.labelAPositionX, 10) - this.labelSynchroX('A'),
-                fontSize: '8px',
+                fontSize: this.props.sizePolice,
                 //border: '1px solid black',
                 backgroundColor: 'white',
                 color: this.defineColorTextLabel(),
@@ -1630,7 +1791,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 zIndex: 9999,
                 top: yMidBC + parseInt(this.props.labelBPositionY, 10) * inverseAxeY - this.labelSynchroY('B'),
                 left: xMidBC + parseInt(this.props.labelBPositionX, 10) - this.labelSynchroX('B'),
-                fontSize: '8px',
+                fontSize: this.props.sizePolice,
                 //border: '1px solid black',
                 backgroundColor: 'white',
                 color: this.defineColorTextLabel(),
@@ -1720,7 +1881,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 top: yC + parseInt(this.props.labelAPositionY, 10) * inverseAxeY - this.labelSynchroY('A'),
                 left: xC + parseInt(this.props.labelAPositionX, 10) - this.labelSynchroX('A'),
                 backgroundColor: 'white',
-                fontSize: '8px',
+                fontSize: this.props.sizePolice,
                 color: this.defineColorTextLabel(),
                 padding: '0 5px',
                 cursor: 'pointer',
@@ -1750,6 +1911,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                   id="arrow1"
                   style={{
                     display: 'flex',
+                    justifyContent: 'center',
                   }}
                 >
                   <div
@@ -1784,7 +1946,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 top: yMidAB + parseInt(this.props.labelAPositionY, 10) * inverseAxeY - this.labelSynchroY('A'),
                 left: xMidAB + parseInt(this.props.labelAPositionX, 10) - this.labelSynchroX('A'),
                 backgroundColor: 'white',
-                fontSize: '8px',
+                fontSize: this.props.sizePolice,
                 color: this.defineColorTextLabel(),
                 padding: '0 5px',
                 cursor: 'pointer',
@@ -1948,10 +2110,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       if (seuil[0].sizeBorder !== '') {
         sizeBorder = seuil[0].sizeBorder;
       } else {
-        sizeBorder = '10';
+        sizeBorder = this.defineSizeLink();
       }
     } else {
-      sizeBorder = '10';
+      sizeBorder = this.defineSizeLink();
     }
 
     let index = 0;
@@ -2262,6 +2424,23 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       result = this.props.textObject.colorText;
     } else {
       result = 'black';
+    }
+    return result;
+  };
+
+  private defineSizeLink = (): string => {
+    let result = '';
+    if (this.props.size) {
+      const size: string = this.props.size.value || '';
+      if (size === 'Small') {
+        result = '8';
+      } else if (size === 'Medium') {
+        result = '9';
+      } else if (size === 'Large') {
+        result = '10';
+      }
+    } else {
+      result = '9';
     }
     return result;
   };

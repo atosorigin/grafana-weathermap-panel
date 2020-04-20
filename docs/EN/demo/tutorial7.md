@@ -3,12 +3,16 @@
 
 ## Add a dashboard SVG
 
-![step 01](../../screenshots/demo/tutorial1/step01.jpg)
+![step 01](../../screenshots/demo/tutorial7/background.jpg)
 
 
 Adding a background image is done from the `display` menu.
 
 The selected image will be [demo7-background.svg](../../resource/demo7-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+
+```
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo7-background.svg
+```
 
 It is possible to have more details with the [display](../editor/display.md) page.
 
@@ -65,6 +69,26 @@ It is possible to define other parameters, referring to the [coordinates lower l
 
 
 ## Add bi directionnel link between two points
+
+
+
+![query](../../screenshots/demo/tutorial7/query.png)
+
+
+
+```
+Metric A :
+
+rate(node_network_receive_bytes{device="enp0s3"}[10s])*100*8/1024/1024
+
+
+Metric B : 
+
+rate(node_network_transmit_bytes{device="enp0s3"}[10s])*100*8/1024/1024
+```
+
+
+
 
 ### Step 1 : Add the link bidirectional
 

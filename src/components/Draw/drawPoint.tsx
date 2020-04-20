@@ -36,6 +36,7 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   valuesAuxiliaryMetrics: string[];
   linkUrl: LinkURLClass;
   buttonAddLinkIsActive: boolean;
+  buttonAddIncurvedLinkIsActive: boolean;
 }
 
 interface State {}
@@ -203,7 +204,7 @@ export default class DrawPoint extends React.Component<Props, State> {
 
     if (drawGraphicMarker === 'true') {
       if (shape === 'circle') {
-        if (this.props.buttonAddLinkIsActive) {
+        if (this.props.buttonAddLinkIsActive || this.props.buttonAddIncurvedLinkIsActive) {
           return (
             <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
               <div
@@ -307,7 +308,6 @@ export default class DrawPoint extends React.Component<Props, State> {
     }
 
     const valueToolTip: JSX.Element = this.defineContentTooltip('label');
-
     return (
       <Tooltip key={'tooltipLabel' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
         <div
@@ -315,7 +315,7 @@ export default class DrawPoint extends React.Component<Props, State> {
             textDecoration: this.defineTextDecoration(),
             fontStyle: this.defineFontStyle(),
             fontWeight: this.defineFontWeight(),
-            fontSize: '12px',
+            fontSize: this.props.sizePolice,
             fontFamily: police,
             color: this.props.textObject.colorText || 'black',
             position: 'absolute',

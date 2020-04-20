@@ -9,6 +9,7 @@ import { PositionParameterClass } from './PositionParameterClass';
 export class OrientedLinkClass extends CoordinateSpaceClass {
   name: string;
   orientationLink: SelectableValue<string>;
+  size: SelectableValue<string>;
   pointAPositionX: string;
   pointAPositionY: string;
   colorCoordinateA: string;
@@ -43,6 +44,7 @@ export class OrientedLinkClass extends CoordinateSpaceClass {
     positionParameter: PositionParameterClass,
     name: string,
     orientationLink: SelectableValue<string>,
+    size: SelectableValue<string>,
     pointAPositionX: string,
     pointAPositionY: string,
     colorCoordinateA: string,
@@ -65,6 +67,7 @@ export class OrientedLinkClass extends CoordinateSpaceClass {
     super(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter);
     this.name = name;
     this.orientationLink = orientationLink;
+    this.size = size;
     this.pointAPositionX = pointAPositionX;
     this.pointAPositionY = pointAPositionY;
     this.colorCoordinateA = colorCoordinateA;

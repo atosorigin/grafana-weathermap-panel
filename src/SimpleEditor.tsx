@@ -27,18 +27,6 @@ interface State {
   collapseTimeSelector: boolean;
   collapsePanelData: boolean;
 
-  /** collapse */
-  collapsePoint: boolean;
-
-  /** collapse */
-  collapseOrientedLink: boolean;
-
-  /** Tableau d'objets PointCLass */
-  arrayPoints: PointClass[];
-
-  /** Tableau d'objets LinkClass */
-  arrayLinks: LinkClass[];
-
   /** Tableau d'objets OrientedLinkClass */
   arrayOrientedLinks: OrientedLinkClass[];
 
@@ -62,10 +50,6 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
       collapseDashboardData: false,
       collapsePanelData: false,
       collapseTimeSelector: false,
-      collapsePoint: false,
-      collapseOrientedLink: false,
-      arrayPoints: this.props.options.arrayPoints,
-      arrayLinks: this.props.options.arrayLinks,
       arrayOrientedLinks: this.props.options.arrayOrientedLinks,
       collapsePrincipalTarget: false,
       tabsVariable: [true, false, false, false, false],
@@ -100,10 +84,6 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
   // }
 
   myCallBackArrayPoints = (dataFromChild: PointClass[]) => {
-    this.setState({
-      arrayPoints: dataFromChild,
-    });
-
     this.props.onOptionsChange({
       ...this.props.options,
       arrayPoints: dataFromChild,
@@ -111,10 +91,6 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
   };
 
   myCallBackArrayLinks = (dataFromChild: LinkClass[]) => {
-    this.setState({
-      arrayLinks: dataFromChild,
-    });
-
     this.props.onOptionsChange({
       ...this.props.options,
       arrayLinks: dataFromChild,
@@ -167,23 +143,11 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
     });
   };
 
-  onTogglePoint = (isOpen: boolean): void => {
-    this.setState({
-      collapsePoint: isOpen,
-    });
-  };
-
   // private onToggleLink = (isOpen: boolean): void => {
   // 	this.setState({
   // 		collapseLink: isOpen,
   // 	});
   // }
-
-  onToggleOrientedLink = (isOpen: boolean): void => {
-    this.setState({
-      collapseOrientedLink: isOpen,
-    });
-  };
 
   onTogglePrincipalTargets = (isOpen: boolean): void => {
     this.setState({

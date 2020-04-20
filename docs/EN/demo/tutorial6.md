@@ -4,8 +4,10 @@
 ## Select query
 
 Let's choose those two queries :
+
 - node_cpu_frequency_hertz
 - node_network_carrier
+
 
 See what they return :
 
@@ -65,16 +67,16 @@ Once the regions are created, go to Main metric and add the one you want.
 
 Then you can choose between "manipulate the average", if you want an average of the metric values. Or "manipulate the total", if you want a sum of the metric values.
 
-![average](../../screenshots/demo/tutorial5/average.png)
+![average](../../screenshots/demo/tutorial6/average.png)
 
 
-![total](../../screenshots/demo/tutorial5/total.png)
+![total](../../screenshots/demo/tutorial6/total.png)
 
 If your measurement is to return only one value, you must select "handling error". 
 This will display its value, if it is unique, and will display an error if there are other values.
 
 
-
+![demo6](../../screenshots/demo/tutorial6/result.png)
 
 
 

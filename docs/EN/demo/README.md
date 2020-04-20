@@ -14,7 +14,7 @@ In the form of a **demo**, you will learn how to use the plugin to get a dynamic
     
 - 3 [Create dashboard Avanced with link directionnel](tutorial3.md)
 
-    ![demo3](../../screenshots/demo/demo3.jpg)
+    ![demo3](../../screenshots/demo/demo3.png)
 
 - 4 [How to create and add your own SVG image in Grafana](tutorial4.md)
 
@@ -26,13 +26,13 @@ In the form of a **demo**, you will learn how to use the plugin to get a dynamic
 
 - 6 [Create modelisation advanced](tutorial6.md)
 
+    ![demo6](../../screenshots/demo/demo6.png)
 
 - 7 [Create bi directionnel](tutorial7.md)
 
     ![demo7](../../screenshots/demo/demo7.png)
 
 - 8 [How to use auxiliere metric](tutorial8.md)
-
 
     ![demo8](../../screenshots/demo/demo8.png)
 

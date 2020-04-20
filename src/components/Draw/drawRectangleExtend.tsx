@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { CSSProperties } from 'react';
-import { SimpleOptions } from 'types';
+import { SimpleOptions, Metric } from 'types';
 
 import { PanelEditorProps } from '@grafana/data';
 import { Tooltip } from '@grafana/ui';
@@ -11,7 +11,7 @@ import { calculRealCoordinate } from 'Functions/otherFunction';
 import { getLowerLimit, LowerLimit } from 'Functions/getLowerLimit';
 import { getResultQuery } from 'Functions/getResultQuery';
 import { parseColor, Color } from 'Functions/parseColor';
-import { reqMetricRegion } from 'Functions/fetchMetrics';
+import { reqMetricRegion, reqMetricAuxRegion } from 'Functions/fetchMetrics';
 import { searchMinMaxIdSVG, Coord4DInt } from 'Functions/searchMinMaxIdSVG';
 import { Style } from 'components/Parametrage/styleComponent';
 // import { Coor4DNum, pixelToPercent } from 'Functions/searchIDLimit';
@@ -236,6 +236,71 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     }
   };
 
+  getValuesAuxiliaryMetrics = (): string[] => {
+    const region: RegionClass = this.props.uneCoor;
+    reqMetricAuxRegion(region, this.props);
+    const mainMetric: Metric = region.mainMetric;
+    const auxiliaryMetrics: Metric[] = region.metrics;
+    let valueAuxiliaryMetric: string[] = [];
+    const countMetrics: number = auxiliaryMetrics.length;
+    auxiliaryMetrics.forEach((metric: Metric) => {
+      let countTotalValues = 0;
+      let resultTotalValues = 0;
+      let result = '';
+      if (metric.returnQuery && metric.returnQuery.length > 0) {
+        let numberLoop: number = (metric.returnQuery?.length || 0) / countMetrics;
+        if (metric.key !== '' && metric.keyValue !== '') {
+          for (let i = 0; i < numberLoop; i++) {
+            let line = metric.returnQuery[i];
+            if (line.fields[0].labels) {
+              if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || (mainMetric.key === '' && mainMetric.keyValue === '')) {
+                if (line.fields[0].labels[metric.key] === metric.keyValue) {
+                  const countValues: number = line.fields[0].values.length;
+                  for (let i = 0; i < countValues; i++) {
+                    if (line.fields[0].values.get(i)) {
+                      resultTotalValues += line.fields[0].values.get(i);
+                      countTotalValues++;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        } else {
+          for (let i = 0; i < numberLoop; i++) {
+            let line = metric.returnQuery[i];
+            if (line.fields[0].labels) {
+              if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || (mainMetric.key === '' && mainMetric.keyValue === '')) {
+                const countValues: number = line.fields[0].values.length;
+                for (let i = 0; i < countValues; i++) {
+                  if (line.fields[0].values.get(i)) {
+                    resultTotalValues += line.fields[0].values.get(i);
+                    countTotalValues++;
+                  }
+                }
+              }
+            }
+          }
+        }
+        if (metric.manageValue === 'avg') {
+          result = (resultTotalValues / countTotalValues).toString();
+        } else if (metric.manageValue === 'sum') {
+          result = resultTotalValues.toString();
+        } else if (metric.manageValue === 'err') {
+          if (countTotalValues > 1) {
+            result = 'error';
+          } else {
+            result = resultTotalValues.toString();
+          }
+        }
+      }
+      if (result !== '') {
+        valueAuxiliaryMetric.push(result);
+      }
+    });
+    return valueAuxiliaryMetric;
+  };
+
   /** final region zone . Call function after reqMetrics*/
   renduFinal = () => {
     if (this.props.uneCoor.mode) {
@@ -395,6 +460,8 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
 
   /** render */
   render() {
+    //console.log(this.props.uneCoor.metrics);
+    //console.log(this.getValuesAuxiliaryMetrics());
     return this.state.htmlResult;
   }
 }

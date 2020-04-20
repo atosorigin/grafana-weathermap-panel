@@ -50,3 +50,23 @@ $ systemctl restart grafana-server
 
 * [Changelog](https://github.com/atosorigin/grafana-weathermap-panel/blob/master/CHANGELOG.md)
 
+
+# Usage
+
+## Editor
+
+![editor](docs/screenshots/editor/editor.jpg)
+
+## Panel
+
+**Tutorial 1**
+
+![demo1](docs/screenshots/demo/demo1.png)
+
+**Tutorial 3**
+
+![demo3](docs/screenshots/demo/demo3.jpg)
+
+**Tutorial 7**
+
+![demo7](docs/screenshots/demo/demo7.jpg)

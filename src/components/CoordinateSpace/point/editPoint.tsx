@@ -3,7 +3,7 @@ import React from 'react';
 import { SimpleOptions } from '../../../types';
 
 import { PanelEditorProps, SelectableValue } from '@grafana/data';
-import { Select, FormLabel, Button } from '@grafana/ui';
+import { Select, FormLabel } from '@grafana/ui';
 
 import { PointClass } from '../../../Models/PointClass';
 
@@ -56,6 +56,7 @@ class EditPoint extends React.Component<Props, State> {
         ...this.props.options,
         arrayPoints: oldData,
       });
+      //this.fillSelectPoint();
     } else {
       let find = false;
       const oldData: PointClass[] = this.props.options.arrayPoints.slice();
@@ -128,8 +129,12 @@ class EditPoint extends React.Component<Props, State> {
   /** update state if value props change */
   componentDidUpdate = (prevProps: Props) => {
     if (prevProps.options.arrayPoints !== this.props.options.arrayPoints) {
-      // this.componentDidMount();
       this.fillSelectPoint();
+    }
+    // console.log(prevProps.options.newPoint);
+    if (prevProps.options.newPoint) {
+      this.fillSelectPoint();
+      this.props.options.newPoint = false;
     }
   };
 
@@ -140,7 +145,7 @@ class EditPoint extends React.Component<Props, State> {
         <div>
           <tr style={{ display: 'flex' }}>
             <td>
-              <FormLabel width={15}>Select point to edit</FormLabel>
+              <FormLabel width={15}>Select Point</FormLabel>
             </td>
             <td>
               <Select
@@ -151,9 +156,9 @@ class EditPoint extends React.Component<Props, State> {
                 value={this.state.selectCoordinateSpaceDefault}
               />
             </td>
-            <td style={{ marginTop: '2px', marginLeft: '20px' }}>
+            {/* <td style={{ marginTop: '2px', marginLeft: '20px' }}>
               <Button onClick={this.fillSelectPoint}>Update list Point</Button>
-            </td>
+            </td> */}
           </tr>
         </div>
         <br />
@@ -168,7 +173,15 @@ class EditPoint extends React.Component<Props, State> {
               isAddPoint={false}
             />
           ) : (
-            <p>Data not set</p>
+            <p
+              style={{
+                textAlign: 'center',
+                fontSize: '20px',
+                marginTop: '50px',
+              }}
+            >
+              Data not set
+            </p>
           )}
         </div>
         {/* <Button onClick={() => console.log(this.props.options.regionCoordinateSpace)}>Info region</Button>

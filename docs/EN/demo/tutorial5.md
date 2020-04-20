@@ -54,13 +54,19 @@ Here we want to filter the result to display only the device we are interested i
 
 ## Create regions and filter the Metric
 
-### Step 1 : Import our SVG
+### Step 1 : Import our file PNG
 
 Adding a background image is done from the `display` menu.
 
 The selected image will be [demo1-background.svg](../../resource/demo1-background.svg). To do this, we download it in base64 with the `Copy image address` function.
 
 It is possible to have more details with the [display](../editor/display.md) page.
+
+
+```
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-background.svg
+
+```
 
 You have to save and reload the page.
 

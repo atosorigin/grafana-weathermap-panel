@@ -23,6 +23,7 @@ import ManageQuery from './manageQuery';
 import ParametresGeneriques from 'components/Parametrage/parametresGeneriques';
 
 import 'style/CoordinateSpace.css';
+import ManageAuxiliaryQuery from './manageAuxiliaryQuery';
 
 export declare type AlertVariant = 'success' | 'warning' | 'error' | 'info';
 
@@ -129,6 +130,9 @@ class CoordinateSpace extends React.Component<Props, State> {
       arrayCoor: tmp,
     });
     this.fillInputEspaceCoor();
+    if (this.props.isAddCoordinate === false) {
+      this.callBack();
+    }
   }
 
   /**
@@ -218,6 +222,9 @@ class CoordinateSpace extends React.Component<Props, State> {
       selectedDefaultSVG: value,
       arrayCoor: coordinate,
     });
+    if (this.props.isAddCoordinate === false) {
+      this.callBack();
+    }
   };
 
   /** call function to return arrayCoor a SimpleEditor */
@@ -235,20 +242,21 @@ class CoordinateSpace extends React.Component<Props, State> {
           hiddenAlert: true,
         });
       }, waitAlert);
+      console.log('ok');
     } else {
       this.props.callBackToParent(this.state.arrayCoor.id, this.state.arrayCoor);
-    }
-    this.setState({
-      severityAlert: 'success',
-      titleAlert: 'Save',
-      hiddenAlert: false,
-    });
-    if (!this.props.isAddCoordinate) {
-      setTimeout(() => {
-        this.setState({
-          hiddenAlert: true,
-        });
-      }, waitAlert);
+      this.setState({
+        severityAlert: 'success',
+        titleAlert: 'Save',
+        hiddenAlert: false,
+      });
+      if (!this.props.isAddCoordinate) {
+        setTimeout(() => {
+          this.setState({
+            hiddenAlert: true,
+          });
+        }, waitAlert);
+      }
     }
   };
 
@@ -270,6 +278,9 @@ class CoordinateSpace extends React.Component<Props, State> {
     this.setState({
       arrayCoor: oldCoor,
     });
+    if (this.props.isAddCoordinate === false) {
+      this.callBack();
+    }
   };
 
   /** update lower limit */
@@ -282,6 +293,9 @@ class CoordinateSpace extends React.Component<Props, State> {
     this.setState({
       arrayCoor: newValue,
     });
+    if (this.props.isAddCoordinate === false) {
+      this.callBack();
+    }
   };
 
   /** save lower limit data */
@@ -291,6 +305,9 @@ class CoordinateSpace extends React.Component<Props, State> {
     this.setState({
       arrayCoor: newValue,
     });
+    if (this.props.isAddCoordinate === false) {
+      this.callBack();
+    }
   };
 
   /** save mainMetric data */
@@ -300,6 +317,9 @@ class CoordinateSpace extends React.Component<Props, State> {
     this.setState({
       arrayCoor: newValue,
     });
+    if (this.props.isAddCoordinate === false) {
+      this.callBack();
+    }
   };
 
   /** change value radio button checker to pass svg or coordinate mode */
@@ -314,6 +334,9 @@ class CoordinateSpace extends React.Component<Props, State> {
       selectedRadio: event.currentTarget.value,
       arrayCoor: coordinate,
     });
+    if (this.props.isAddCoordinate === false) {
+      this.callBack();
+    }
   };
 
   /** add all id SVG in select */
@@ -409,12 +432,23 @@ class CoordinateSpace extends React.Component<Props, State> {
         <div>
           <ManageQuery
             options={this.props.options}
-            idCoordinate={this.state.arrayCoor.id}
             onOptionsChange={this.props.onOptionsChange}
             data={this.props.data}
+            idCoordinate={this.state.arrayCoor.id}
             mainMetric={this.state.arrayCoor.mainMetric}
             callBackToParent={this.callBackMainMetric}
             isLink={false}
+          />
+        </div>
+        <div>
+          <ManageAuxiliaryQuery
+            options={this.props.options}
+            onOptionsChange={this.props.onOptionsChange}
+            data={this.props.data}
+            idCoordinate={this.state.arrayCoor.id}
+            metrics={this.state.arrayCoor.metrics}
+            //callBackToParent={this.callBackAuxiliaryMetric}
+            isRegion={true}
           />
         </div>
         <div>
@@ -521,9 +555,11 @@ class CoordinateSpace extends React.Component<Props, State> {
         </div>
         <br />
         <div style={{ textAlign: 'center' }} className="buttonSave">
-          <Button style={{ marginRight: '1%' }} onClick={() => this.callBack()}>
-            Load
-          </Button>
+          {this.props.isAddCoordinate && (
+            <Button style={{ marginRight: '1%' }} onClick={() => this.callBack()}>
+              Save
+            </Button>
+          )}
           {!this.props.isAddCoordinate && (
             <Button onClick={this.deleteOwnInput} variant="danger">
               Delete

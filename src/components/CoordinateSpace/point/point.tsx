@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { createInputsPoint } from '../../../Functions/CreateInput/createInputsPoint';
 import InputTextPoint from '../../../Functions/Input/inputTextPoint';
 //import InputButtonField from '../Functions/Input/inputButton';
@@ -9,7 +9,7 @@ import { PointClass } from '../../../Models/PointClass';
 import InputSelectPoint from '../../../Functions/Input/inputSelectPoint';
 import { SelectableValue, PanelEditorProps } from '@grafana/data';
 import InputSeriesColorPickerPoint from '../../../Functions/Input/inputSeriesColorPickerPoint';
-import { Button, AlertVariant } from '@grafana/ui';
+import { Button, AlertVariant, Alert } from '@grafana/ui';
 //import { RegionClass } from '../Models/RegionClass';
 import { SimpleOptions, Metric } from '../../../types';
 
@@ -133,7 +133,9 @@ export default class Point extends React.Component<Props, State> {
       arrayCoor: tmp,
     });
     this.generateInputsPoint();
-    this.callBack();
+    if (this.props.isAddPoint === false) {
+      this.callBack();
+    }
   }
 
   /**
@@ -224,7 +226,9 @@ export default class Point extends React.Component<Props, State> {
                   arrayCoor: newPoint,
                 });
                 this.generateInputsPoint();
-                this.callBack();
+                if (this.props.isAddPoint === false) {
+                  this.callBack();
+                }
               }}
               name={obj.name}
               index={line.id}
@@ -299,18 +303,32 @@ export default class Point extends React.Component<Props, State> {
   callBack = (): void => {
     const waitAlert = 3000;
 
-    this.props.callBackToParent(this.state.arrayCoor.id, this.state.arrayCoor);
-    this.setState({
-      severityAlert: 'success',
-      titleAlert: 'Save',
-      hiddenAlert: false,
-    });
-    if (!this.props.isAddPoint) {
+    if (this.state.arrayCoor.label === '') {
+      this.setState({
+        severityAlert: 'error',
+        titleAlert: 'Error: label is empty',
+        hiddenAlert: false,
+      });
       setTimeout(() => {
         this.setState({
           hiddenAlert: true,
         });
       }, waitAlert);
+      console.log('ok');
+    } else {
+      this.props.callBackToParent(this.state.arrayCoor.id, this.state.arrayCoor);
+      this.setState({
+        severityAlert: 'success',
+        titleAlert: 'Save',
+        hiddenAlert: false,
+      });
+      if (!this.props.isAddPoint) {
+        setTimeout(() => {
+          this.setState({
+            hiddenAlert: true,
+          });
+        }, waitAlert);
+      }
     }
   };
 
@@ -332,6 +350,9 @@ export default class Point extends React.Component<Props, State> {
     this.setState({
       arrayCoor: oldCoor,
     });
+    if (this.props.isAddPoint === false) {
+      this.callBack();
+    }
   };
 
   /** update lower limit */
@@ -343,6 +364,9 @@ export default class Point extends React.Component<Props, State> {
     this.setState({
       arrayCoor: newValue,
     });
+    if (this.props.isAddPoint === false) {
+      this.callBack();
+    }
   };
 
   // private callBackPositionParameter = (positionParameter: PositionParameterClass, id?: number) => {
@@ -360,6 +384,9 @@ export default class Point extends React.Component<Props, State> {
     this.setState({
       arrayCoor: newValue,
     });
+    if (this.props.isAddPoint === false) {
+      this.callBack();
+    }
   };
 
   private callBackMainMetric = (mainMetric: Metric, id?: number): void => {
@@ -368,6 +395,9 @@ export default class Point extends React.Component<Props, State> {
     this.setState({
       arrayCoor: newValue,
     });
+    if (this.props.isAddPoint === false) {
+      this.callBack();
+    }
   };
 
   /**
@@ -404,8 +434,18 @@ export default class Point extends React.Component<Props, State> {
    * render()
    */
   render() {
+    const styleAlert = {
+      position: 'fixed',
+      bottom: '5%',
+      right: '5%',
+      zIndex: 9999,
+    } as CSSProperties;
+
     return (
       <div>
+        <div style={styleAlert} hidden={this.state.hiddenAlert}>
+          <Alert title={this.state.titleAlert} severity={this.state.severityAlert} />
+        </div>
         <div>
           <ManageQuery
             options={this.props.options}
@@ -462,9 +502,11 @@ export default class Point extends React.Component<Props, State> {
         </div>
         <div>{this.state.htmlInput}</div>
         <div style={{ textAlign: 'center' }} className="buttonSave">
-          <Button style={{ marginRight: '1%' }} onClick={() => this.callBack()}>
-            Save
-          </Button>
+          {this.props.isAddPoint && (
+            <Button style={{ marginRight: '1%' }} onClick={() => this.callBack()}>
+              Save
+            </Button>
+          )}
           {!this.props.isAddPoint && (
             <Button onClick={this.deleteOwnInput} variant="danger">
               Delete

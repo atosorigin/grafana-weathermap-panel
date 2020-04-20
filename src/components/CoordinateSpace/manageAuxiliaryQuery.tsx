@@ -23,8 +23,6 @@ interface Props extends PanelEditorProps<SimpleOptions> {
 }
 
 interface State {
-  /** data for manipulate mainMetric */
-  metrics: Metric[];
   /** collapse AuxMetric open or close */
   collapse: boolean;
   /** collapse linkA if orientedLink is bidirectionnal open or close */
@@ -33,8 +31,6 @@ interface State {
   collapseLinkB: boolean;
   /** default value for manage value */
   selectDefaultManageValue: SelectableValue<TManageValue>;
-  /** list of auxiliaryMetric Inputs to display */
-  mapItems: JSX.Element[];
 }
 
 /**
@@ -44,12 +40,10 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      metrics: this.props.metrics,
       collapse: false,
       collapseLinkA: false,
       collapseLinkB: false,
       selectDefaultManageValue: { value: 'avg', label: 'avg' },
-      mapItems: [],
     };
   }
 
@@ -76,6 +70,17 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
       this.props.onOptionsChange({
         ...this.props.options,
         arrayOrientedLinks: newArrayLink,
+      });
+    } else if (this.props.isRegion) {
+      const newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
+      for (const region of newArrayRegion) {
+        if (region.id === idCurrentCoordinateSpace) {
+          region.metrics = newAuxMetrics;
+        }
+      }
+      this.props.onOptionsChange({
+        ...this.props.options,
+        regionCoordinateSpace: newArrayRegion,
       });
     }
   };

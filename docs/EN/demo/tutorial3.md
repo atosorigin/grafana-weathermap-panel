@@ -42,7 +42,7 @@ It requires
 
 ## Step 3: Add a point 1
 
-![step 03](../../screenshots/demo/tutorial3/point1.jpg)
+![step 03](../../screenshots/demo/tutorial3/point1.png)
 
 
 The creation of a point is done from the `Coordinates space`, `point` and `Add point` menu.
@@ -67,39 +67,13 @@ We take advantage of this by changing the colour of our point. To do this, we ad
 - Thickness at 1
 
 
-## Step 4: Add a second point
 
-
-![step 05](../../screenshots/demo/tutorial3/point2-sample.jpg)
-
-You can also add a point using the panel available on the dashboard. A tutorial is [available here](../panel/panel-point.md)
-
-
-![step 06](../../screenshots/demo/tutorial3/point2-color.jpg)
-
-
-We take advantage of this by changing the colour of our point. To do this, we add a color to our point like this: 
-
-- Enable `trace the color`.
-- Let's choose the color as `blue` to the line `edit border color`.
-- Thickness at 1
-
-
-- Click on the `load` button
-
-
-
-![step 03](../../screenshots/demo/tutorial3/point2-text.jpg)
-
-We add visible colours for the text in point 2
-
-
-## Etape 5 : Add an image 
+## Etape 4 : Add an image 
 
 
 To add an illustraton to our point, go to `Coordinates space`, `region` and `Add coordinate space` menu. And choose our point.
 
-![step 02](../../screenshots/demo/tutorial1/CoordinateMode.png)
+![step 02](../../screenshots/demo/tutorial2/CoordinateMode.png)
 
 You have to fill out the form like this: 
 
@@ -129,15 +103,25 @@ To finish
 
 ## Step 5 : Define incurved oriented links
 
+For this step, we will define 2 incurved oriented links. The first one, from the point to the pictures and the second one, from the picture to the point.
+
+First let's create 2 oriented links.
+
 To create an oriented link you have to pass by [the panel menu](../panel/panel-incurved-link.md).
 
-## Etape 6 : main metric
+Then, we will edit our links as follow :
+
+![Position](../../screenshots/demo/tutorial3/PositionParameter.png)
+
+## Etape 6 : Main metric
 
 To add a main metric to our link, go to `Coordinates space`, `OrientedLink` and click on you link.
 
 Then in `Main metric`, choose you metric.
 
 ![resultat](../../screenshots/demo/tutorial3/MainMetricLink.png)
+
+And 
 
 
 

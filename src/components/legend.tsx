@@ -4,6 +4,7 @@ import { SimpleOptions } from 'types';
 import { RegionClass } from 'Models/RegionClass';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
 import { PointClass } from 'Models/PointClass';
+import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 
 interface Legend {
   hiddenLegend: boolean;
@@ -55,28 +56,32 @@ class LegendComponent extends React.Component<Props, State> {
         <li className="LegendMatt">
           <span
             style={{
-              padding: 4,
-              margin: 9,
-              width: '3.5rem',
-              borderRadius: '39%',
+              padding: '5px',
+              margin: '10px',
+              width: '130px',
+              //width: '3.5rem',
+              //borderRadius: '39%',
               backgroundColor: lower.backColor,
               border: lower.sizeBorder + 'px solid ' + lower.borderColor,
               listStyleType: 'none',
               display: 'inline-block',
+              textAlign: 'center',
             }}
-          ></span>
-          {lowerLimit.length > 1 && (
-            <span
-              style={{
-                display: 'inline-block',
-                verticalAlign: 'middle',
-                marginBottom: '1.25rem',
-                fontSize: '9px',
-              }}
-            >
-              {i === 0 ? '-∞' : lower.lowerLimitMin} - {i === max ? '+∞' : lower.lowerLimitMax}
-            </span>
-          )}
+          >
+            {lowerLimit.length > 1 && (
+              <span
+                style={{
+                  //display: 'inline-block',
+                  //verticalAlign: 'middle',
+                  //marginBottom: '1.25rem',
+                  fontSize: '10px',
+                  //fontWeight: 'bold',
+                }}
+              >
+                {i === 0 ? '-∞' : lower.lowerLimitMin} - {i === max ? '+∞' : lower.lowerLimitMax}
+              </span>
+            )}
+          </span>
         </li>
       );
       ++i;
@@ -109,9 +114,30 @@ class LegendComponent extends React.Component<Props, State> {
 
     for (const line of allPoint) {
       const allLimit: JSX.Element[] = this.fillLowerLimit(line.lowerLimit);
+      const name: string = line.label || line.name;
+      console.log(name);
       const ownElement: JSX.Element = (
         <div>
-          {line.label}
+          {name}
+          {allLimit}
+        </div>
+      );
+      rendu.push(ownElement);
+    }
+    return rendu;
+  };
+
+  /** get all limit for orientedLink */
+  fillLink = () => {
+    const allLinks: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+    const rendu: JSX.Element[] = [];
+
+    for (const line of allLinks) {
+      const allLimit: JSX.Element[] = this.fillLowerLimit(line.lowerLimit);
+      const name: string = line.label || line.name;
+      const ownElement: JSX.Element = (
+        <div>
+          {name}
           {allLimit}
         </div>
       );
@@ -150,19 +176,29 @@ class LegendComponent extends React.Component<Props, State> {
           }}
         >
           <div style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
-            <h5 style={{ width: '100%', fontSize: '20px', display: 'inline-flex' }}>Legend</h5>
-            <p style={{ color: '#d8d9da', fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p>
-            <p style={{ color: '#d8d9da', fontSize: '11px', marginLeft: '17px' }}>Label</p>
+            <h5 style={{ width: '100%', fontSize: '20px', display: 'inline-flex', padding: '10px' }}>Legend</h5>
+            {/* <p style={{ color: '#d8d9da', fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p>
+            <p style={{ color: '#d8d9da', fontSize: '11px', marginLeft: '17px' }}>Label</p> */}
           </div>
           {/* <p style={{ fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p> */}
           <div style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
-            <p style={{ fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p>
+            <p style={{ fontSize: '15px', padding: '10px 0 10px 14px', fontWeight: 'bold', color: 'white' }}>Region</p>
           </div>
-          <ul key="regionLegend">{this.fillRegion()}</ul>
+          <ul key="regionLegend" style={{ paddingLeft: '5px' }}>
+            {this.fillRegion()}
+          </ul>
           <div style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
-            <p style={{ fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Point</p>
+            <p style={{ fontSize: '15px', padding: '10px 0 10px 14px', fontWeight: 'bold', color: 'white' }}>Point</p>
           </div>
-          <ul key="pointLegend">{this.fillPoint()}</ul>
+          <ul key="pointLegend" style={{ paddingLeft: '5px' }}>
+            {this.fillPoint()}
+          </ul>
+          <div style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
+            <p style={{ fontSize: '15px', padding: '10px 0 10px 14px', fontWeight: 'bold', color: 'white' }}>Oriented Link</p>
+          </div>
+          <ul key="pointLegend" style={{ paddingLeft: '5px' }}>
+            {this.fillLink()}
+          </ul>
         </article>
       </div>
     );

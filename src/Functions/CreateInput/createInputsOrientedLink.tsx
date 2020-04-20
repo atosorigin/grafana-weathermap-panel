@@ -20,6 +20,21 @@ export const createInputsOrientedLink = (
     'Orientation',
     undefined
   );
+  const newFieldSize: InputSelectableClass = new InputSelectableClass(
+    id.toString() + 'size',
+    'Size',
+    'size' + id.toString(),
+    'select',
+    [
+      { value: 'Small', label: 'Small' },
+      { value: 'Medium', label: 'Medium' },
+      { value: 'Large', label: 'Large' },
+    ],
+    '',
+    true,
+    'Size',
+    undefined
+  );
   const newFieldPointAPositionX: InputSelectableClass = new InputSelectableClass(
     id.toString() + 'pointAX',
     'CoordinateClick A - X',
@@ -170,6 +185,7 @@ export const createInputsOrientedLink = (
   const finalArray: InputSelectableClass[] = [
     newFieldLabelLink,
     newFieldOrientationLink,
+    newFieldSize,
     newFieldPointIn,
     newFieldRegionIn,
     newFieldPointAPositionX,

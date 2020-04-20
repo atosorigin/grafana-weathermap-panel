@@ -14,7 +14,7 @@ import { PointClass } from 'Models/PointClass';
 import { TextObject } from 'Models/TextObjectClass';
 import { LinkURLClass } from 'Models/LinkURLClass';
 import { SimpleOptions, Metric } from 'types';
-import { Collapse, Button } from '@grafana/ui';
+import { Collapse } from '@grafana/ui';
 import ParametresGeneriques from './Parametrage/parametresGeneriques';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
 import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
@@ -68,12 +68,9 @@ interface State {
   /**
    * to do
    */
-  index: number;
-
-  /**
-   * to do
-   */
   debug: boolean;
+
+  test: boolean;
 
   /**
    * to do
@@ -90,8 +87,8 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
     this.state = {
       arrayInput: [],
       arrayOrientedLinkClass: [],
-      index: 1,
       debug: false,
+      test: false,
       listCollapseOrientedLink: [],
     };
   }
@@ -120,6 +117,7 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
           element.id,
           element.label,
           element.orientationLink,
+          element.size,
           element.pointAPositionX,
           element.pointAPositionY,
           element.colorCoordinateA,
@@ -177,15 +175,11 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
     arrayOptionsPoint.push(optionPointNull);
 
     arrayPoint.forEach(point => {
-      let valueLabel = point.label;
-
-      if (point.label === '') {
-        valueLabel = point.name;
-      }
+      let valueLabel = point.label || point.name;
 
       const optionPoint: SelectableValue<string> = {
         label: valueLabel,
-        value: point.name,
+        value: valueLabel,
       };
       arrayOptionsPoint.push(optionPoint);
     });
@@ -200,6 +194,7 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
     id?: number,
     label?: string,
     orientationLink?: SelectableValue<string>,
+    size?: SelectableValue<string>,
     pointAPositionX?: string,
     pointAPositionY?: string,
     colorCoordinateA?: string,
@@ -291,6 +286,7 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
           initPositionParameter,
           'orientedLink' + num.toString(),
           orientationLink || { label: 'double', value: 'double' },
+          size || { label: 'Medium', value: 'Medium' },
           pointAPositionX || '0',
           pointAPositionY || '0',
           colorCoordinateA || '#5794F2',
@@ -416,7 +412,8 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
       name.startsWith('pointIn') ||
       name.startsWith('pointOut') ||
       name.startsWith('regionIn') ||
-      name.startsWith('regionOut')
+      name.startsWith('regionOut') ||
+      name.startsWith('size')
     ) {
       if (name.startsWith('orientationLink')) {
         valueSelect = this.state.arrayOrientedLinkClass[idx].orientationLink;
@@ -442,6 +439,8 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
           label: this.state.arrayOrientedLinkClass[idx].regionOut,
           value: this.state.arrayOrientedLinkClass[idx].regionOut,
         };
+      } else if (name.startsWith('size')) {
+        valueSelect = this.state.arrayOrientedLinkClass[idx].size;
       }
       return valueSelect;
     } else if (name.startsWith('mainMetric')) {
@@ -473,15 +472,6 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
       } else if (name.startsWith('pointCY')) {
         value = this.state.arrayOrientedLinkClass[idx].pointCPositionY;
       }
-      // else if (name.startsWith('pointIn')) {
-      //   value = this.state.arrayOrientedLinkClass[idx].pointIn;
-      // } else if (name.startsWith('pointOut')) {
-      //   value = this.state.arrayOrientedLinkClass[idx].pointIn;
-      // } else if (name.startsWith('regionIn')) {
-      //   value = this.state.arrayOrientedLinkClass[idx].pointIn;
-      // } else if (name.startsWith('regionOut')) {
-      //   value = this.state.arrayOrientedLinkClass[idx].pointIn;
-      // }
       return value;
     }
   }
@@ -577,15 +567,14 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
   };
 
   private updateAssociatePointAndRegion = (orientedLink: OrientedLinkClass, name: string) => {
-    const value: SelectableValue<any> = {};
     if (name.startsWith('pointIn')) {
-      orientedLink = editGoodParameterOrientedLink('regionIn', orientedLink, '', value || {});
+      orientedLink = editGoodParameterOrientedLink('regionIn', orientedLink, '', {});
     } else if (name.startsWith('regionIn')) {
-      orientedLink = editGoodParameterOrientedLink('pointIn', orientedLink, '', value || {});
+      orientedLink = editGoodParameterOrientedLink('pointIn', orientedLink, '', {});
     } else if (name.startsWith('pointOut')) {
-      orientedLink = editGoodParameterOrientedLink('regionOut', orientedLink, '', value || {});
+      orientedLink = editGoodParameterOrientedLink('regionOut', orientedLink, '', {});
     } else if (name.startsWith('regionOut')) {
-      orientedLink = editGoodParameterOrientedLink('pointOut', orientedLink, '', value || {});
+      orientedLink = editGoodParameterOrientedLink('pointOut', orientedLink, '', {});
     }
   };
 
@@ -657,8 +646,6 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
                 this.setState({
                   arrayOrientedLinkClass: copyOfoldArrayOrientedLinkClass,
                 });
-
-                console.log(this.state.arrayOrientedLinkClass);
 
                 this.callBack();
               }}
@@ -734,9 +721,9 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
             label={this.defineLabelCollapse(line.id)}
             onToggle={isOpen => {
               this.props.options.listCollapseOrientedLink[line.id - 1] = isOpen;
-              this.setState({
-                listCollapseOrientedLink: this.props.options.listCollapseOrientedLink,
-              });
+              this.setState((prevState, props) => ({
+                listCollapseOrientedLink: props.options.listCollapseOrientedLink,
+              }));
             }}
           >
             <div>
@@ -807,40 +794,115 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
       index++;
     }
 
-    return <div>{finalItem}</div>;
+    if (finalItem.length === 0) {
+      return (
+        <div
+          style={{
+            textAlign: 'center',
+            fontSize: '20px',
+            marginTop: '50px',
+          }}
+        >
+          Data not set
+        </div>
+      );
+    } else {
+      return <div>{finalItem}</div>;
+    }
   }
 
   /**
    * to do
    */
   componentDidMount = () => {
+    this.props.onOptionsChange({
+      ...this.props.options,
+      newOrientedLink: false,
+    });
+    this.props.options.newOrientedLink = false;
     this.loadCoorParent();
   };
 
-  componentWillReceiveProps() {
-    this.loadCoorParent();
-    this.generateInputsOrientedLinks();
-  }
+  componentDidUpdate = async () => {
+    if (this.props.options.newOrientedLink) {
+      //const newValue = false;
+      this.props.onOptionsChange({
+        ...this.props.options,
+        newOrientedLink: false,
+      });
+      this.props.options.newOrientedLink = false;
+      await this.setStateAsyncArrayInput({
+        arrayInput: [],
+      });
+      await this.setStateAsyncArrayOrientedLink({
+        arrayOrientedLinkClass: [],
+      });
+      await this.setStateAsyncDebug({
+        debug: false,
+      });
+      this.loadCoorParent();
+      this.generateInputsOrientedLinks();
+    }
+  };
 
-  /** update state when props uneCoor change */
-  componentDidUpdate(prevProps: Props) {
-    this.loadCoorParent();
-    this.generateInputsOrientedLinks();
-  }
+  // // /** update state when props uneCoor change */
+  // componentDidUpdate = async (prevProps: Props) => {
+  //   console.log('ok');
+  //   console.log(prevProps.options.newOrientedLink);
+  //   if (this.props.options.newOrientedLink) {
+  //     console.log('outof');
+  //     await this.setStateAsyncArrayInput({
+  //       arrayInput: [],
+  //     });
+  //     await this.setStateAsyncArrayOrientedLink({
+  //       arrayOrientedLinkClass: [],
+  //     });
+  //     await this.setStateAsyncDebug({
+  //       debug: false,
+  //     });
+  //     this.loadCoorParent();
+  //     this.generateInputsOrientedLinks();
+  //     const newValue = false;
+  //     this.props.onOptionsChange({
+  //       ...this.props.options,
+  //       newOrientedLink: newValue,
+  //     });
+  //     this.props.options.newOrientedLink = newValue;
+  //     console.log(prevProps.options.newOrientedLink);
+  //   }
+  // };
+
+  setStateAsyncDebug = (state: { debug: boolean }) => {
+    return new Promise(resolve => {
+      this.setState(state, resolve);
+    });
+  };
+
+  setStateAsyncArrayInput = (state: { arrayInput: ArrayInputSelectableClass[] }) => {
+    return new Promise(resolve => {
+      this.setState(state, resolve);
+    });
+  };
+
+  setStateAsyncArrayOrientedLink = (state: { arrayOrientedLinkClass: OrientedLinkClass[] }) => {
+    return new Promise(resolve => {
+      this.setState(state, resolve);
+    });
+  };
 
   /**
    * render()
    */
   render() {
-    const stylePositionButton = {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'center',
-    } as React.CSSProperties;
+    // const stylePositionButton = {
+    //   display: 'flex',
+    //   flexDirection: 'row',
+    //   justifyContent: 'center',
+    // } as React.CSSProperties;
     return (
-      <div>
+      <div style={{ marginBottom: '200px' }}>
         {this.generateInputsOrientedLinks()}
-        <div style={stylePositionButton}>
+        {/* <div style={stylePositionButton}>
           <Button
             onClick={() => {
               this.setState({
@@ -854,7 +916,7 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
           >
             Load Oriented Links
           </Button>
-        </div>
+        </div> */}
       </div>
     );
   }

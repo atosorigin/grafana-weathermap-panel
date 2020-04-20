@@ -130,7 +130,7 @@ class EditCoordinateSpace extends React.Component<Props, State> {
         <div>
           <tr style={{ verticalAlign: 'middle' }}>
             <td>
-              <FormLabel width={15}>Select label region to edit</FormLabel>
+              <FormLabel width={15}>Select Region</FormLabel>
             </td>
             <td>
               <Select
@@ -155,7 +155,15 @@ class EditCoordinateSpace extends React.Component<Props, State> {
               isAddCoordinate={false}
             />
           ) : (
-            <p>Data not set</p>
+            <p
+              style={{
+                textAlign: 'center',
+                fontSize: '20px',
+                marginTop: '50px',
+              }}
+            >
+              Data not set
+            </p>
           )}
         </div>
       </div>

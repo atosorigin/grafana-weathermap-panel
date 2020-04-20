@@ -221,6 +221,7 @@ class ImportInput extends React.Component<Props, State> {
       link.positionParameter,
       link.name,
       link.orientationLink,
+      link.size,
       link.pointAPositionX,
       link.pointAPositionY,
       link.colorCoordinateA,
