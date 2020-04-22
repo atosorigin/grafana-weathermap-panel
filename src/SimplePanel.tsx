@@ -142,10 +142,10 @@ export class SimplePanel extends PureComponent<Props, State> {
         this.props.options.baseMap
       )
     ) {
-      console.error('is not initial space');
+      //console.error('is not initial space');
       return;
     }
-    console.log(positionX.toString() + ' ' + positionY.toString());
+    //console.log(positionX.toString() + ' ' + positionY.toString());
 
     if (
       event.nativeEvent.target.id === 'initialSpace' ||
@@ -938,6 +938,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     const mapItems: JSX.Element[] = [];
     let item: JSX.Element = <div></div>;
     arrayOrientedLink.forEach((orientedLink: OrientedLinkClass) => {
+      //console.log(orientedLink);
       this.getValuesMainMetricOrientedLink(orientedLink);
       this.getValuesMainMetricOrientedLinkB(orientedLink);
       const valuesAuxiliaryMetrics: string[] = this.getValuesAuxiliaryMetricsOrientedLink(orientedLink);
@@ -970,6 +971,7 @@ export class SimplePanel extends PureComponent<Props, State> {
           data={this.props.data}
           textObject={orientedLink.textObj}
           seuil={orientedLink.lowerLimit}
+          traceBorder={orientedLink.traceBorder}
           labelAPositionX={orientedLink.positionParameter.labelAPositionX}
           labelAPositionY={orientedLink.positionParameter.labelAPositionY}
           labelBPositionX={orientedLink.positionParameter.labelBPositionX}
@@ -1106,13 +1108,16 @@ export class SimplePanel extends PureComponent<Props, State> {
 
   getValuesAuxiliaryMetrics = (auxiliaryMetrics: Metric[], mainMetric: Metric): string[] => {
     let valueAuxiliaryMetric: string[] = [];
-    const countMetrics: number = auxiliaryMetrics.length;
+    //const countMetrics: number = auxiliaryMetrics.length;
+    console.log(auxiliaryMetrics);
     auxiliaryMetrics.forEach((metric: Metric) => {
+      console.log(metric);
       let countTotalValues = 0;
       let resultTotalValues = 0;
       let result = '';
       if (metric.returnQuery && metric.returnQuery.length > 0) {
-        let numberLoop: number = (metric.returnQuery?.length || 0) / countMetrics;
+        console.log(metric.returnQuery);
+        let numberLoop: number = metric.returnQuery?.length || 0;
         if (metric.key !== '' && metric.keyValue !== '') {
           for (let i = 0; i < numberLoop; i++) {
             let line = metric.returnQuery[i];
@@ -1244,6 +1249,13 @@ export class SimplePanel extends PureComponent<Props, State> {
           }}
         >
           Position Legend
+        </Button>
+
+        <Button style={{ marginLeft: '4%' }} id="more" onClick={this.ZoomIn} variant={'primary'}>
+          +
+        </Button>
+        <Button id="less" onClick={this.ZoomOut} variant={'primary'}>
+          -
         </Button>
       </div>
     );
@@ -1438,10 +1450,10 @@ export class SimplePanel extends PureComponent<Props, State> {
    * update button css when mount component
    */
   componentDidMount = async () => {
-    // this.props.onOptionsChange({
-    //   ...this.props.options,
-    //   displayButton: false,
-    // });
+    this.props.onOptionsChange({
+      ...this.props.options,
+      displayButton: false,
+    });
     if (this.props.options.baseMap.modeSVG && this.props.options.baseMap.image !== '') {
       fetch(this.props.options.baseMap.image)
         .then(res => res.text())
@@ -1512,7 +1524,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       if (elmnt) {
         elmnt.style.transform += 'scale(0.99,0.99)';
       }
-      console.log('-');
+      //console.log('-');
     });
   };
   // Zoom Initial
@@ -1664,16 +1676,25 @@ export class SimplePanel extends PureComponent<Props, State> {
     // All Id in SVG
     const allidSvg = document.getElementById('octsvg213');
     allidSvg?.addEventListener('click', () => {
-      const elms = allidSvg.querySelectorAll('[id]');
-      console.log(elms);
+      //const elms = allidSvg.querySelectorAll('[id]');
+      //console.log(elms);
     });
 
+    // Test Svg Christophe search ID
+
+    // const allidSvg3 = document.getElementById('octsvg12');
+    // allidSvg3?.addEventListener('click', () => {
+    //   this.props.options.regionCoordinateSpace.forEach(region => {
+    //     console.log(region.idSVG);
+    //     console.log(region.linkURL.followLink);
+    //   });
+    // });
     // All Region in SVG
     const allidSvg2 = document.getElementById('octsvg213');
     allidSvg2?.addEventListener('click', () => {
       this.props.options.regionCoordinateSpace.forEach(region => {
-        console.log(region.idSVG);
-        console.log(region.linkURL.followLink);
+        //console.log(region.idSVG);
+        //console.log(region.linkURL.followLink);
       });
     });
 
@@ -1700,15 +1721,6 @@ export class SimplePanel extends PureComponent<Props, State> {
 
   /** render */
   render() {
-
-console.log ('---region');
-console.log(this.props.options.regionCoordinateSpace);
-console.log ('---points');
-console.log (this.props.options.arrayPoints);
-console.log ('---links');
-console.log (this.props.options.arrayOrientedLinks);
-
-
     let styleBackground;
     if (this.props.options.baseMap.modeSVG) {
       styleBackground = {
@@ -1771,13 +1783,6 @@ console.log (this.props.options.arrayOrientedLinks);
             marginLeft: '86%',
           }}
         >
-          <Button id="more" onClick={this.ZoomIn} variant={'primary'}>
-            +
-          </Button>
-          <Button id="less" onClick={this.ZoomOut} variant={'primary'}>
-            -
-          </Button>
-
           {/* <Button id="init" onClick={this.ZoomInitial} variant={'secondary'}>
             =
           </Button> */}
@@ -1802,7 +1807,14 @@ console.log (this.props.options.arrayOrientedLinks);
                 }}
               >
                 <Modal title="Add Region" onDismiss={this.addNode} onClickBackdrop={this.addNode} isOpen={this.state.nbClickButton}>
-                  <AddCoordinate options={this.props.options} onOptionsChange={this.props.onOptionsChange} data={this.props.data} isRegion={true} />
+                  <AddCoordinate
+                    options={this.props.options}
+                    onOptionsChange={this.props.onOptionsChange}
+                    data={this.props.data}
+                    isRegion={true}
+                    isPoint={false}
+                    isLink={false}
+                  />
                 </Modal>
               </div>
             )}
@@ -1832,6 +1844,7 @@ console.log (this.props.options.arrayOrientedLinks);
                     onMouseOver={this.SVG_PathImage && this.CreateLinkArea}
                     dangerouslySetInnerHTML={{ __html: this.props.options.baseMap.layerImage }}
                   />
+                  <div onClick={this.CreateLinkArea}></div>
                   {this.displayOrientedLink()}
                   {this.fillCoordinate()}
                   {this.displayPoint()}

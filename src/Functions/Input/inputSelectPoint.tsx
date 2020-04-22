@@ -24,8 +24,8 @@ const InputSelectPoint: FunctionComponent<InputSelectProps> = ({ _onChange, data
             marginBottom: '2px',
           }}
         >
-          <FormLabel width={10}>{label}</FormLabel>
-          <Select onChange={value => _onChange(value, name, index)} allowCustomValue={false} options={data} value={defaultValue} width={20} />
+          <FormLabel width={15}>{label}</FormLabel>
+          <Select onChange={value => _onChange(value, name, index)} allowCustomValue={false} options={data} value={defaultValue} width={30} />
         </div>
       );
     }
@@ -37,8 +37,8 @@ const InputSelectPoint: FunctionComponent<InputSelectProps> = ({ _onChange, data
           marginBottom: '2px',
         }}
       >
-        <FormLabel width={10}>{label}</FormLabel>
-        <Select onChange={value => _onChange(value, name, index)} allowCustomValue={false} options={data} value={defaultValue} width={20} />
+        <FormLabel width={15}>{label}</FormLabel>
+        <Select onChange={value => _onChange(value, name, index)} allowCustomValue={false} options={data} value={defaultValue} width={30} />
       </div>
     );
   }

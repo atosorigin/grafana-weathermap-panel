@@ -18,7 +18,7 @@ type InputTextFieldProps = {
  */
 export const InputSeriesColorPicker: FunctionComponent<InputTextFieldProps> = ({ color, keyInt, text, _onChange, width }) => (
   <div className="form-field">
-    <FormLabel width={25}>{text}</FormLabel>
+    <FormLabel width={15}>{text}</FormLabel>
     <div
       id="colorPicker"
       style={{

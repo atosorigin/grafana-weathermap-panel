@@ -115,7 +115,6 @@ class LegendComponent extends React.Component<Props, State> {
     for (const line of allPoint) {
       const allLimit: JSX.Element[] = this.fillLowerLimit(line.lowerLimit);
       const name: string = line.label || line.name;
-      console.log(name);
       const ownElement: JSX.Element = (
         <div>
           {name}

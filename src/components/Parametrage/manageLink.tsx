@@ -9,9 +9,7 @@ interface Props {
   /** id for coordinate space */
   coordinateSpace: CoordinateSpaceClass;
   /** save data to parent */
-  callBackToParent: (followLink: string, hoveringTooltipLink: string, hoveringTooltipText: string, textObj?: TextObject, id?: number) => void;
-  /** id of object */
-  id?: number;
+  callBackToParent: (followLink: string, hoveringTooltipLink: string, hoveringTooltipText: string, textObj?: TextObject) => void;
 }
 
 interface State {
@@ -86,7 +84,7 @@ class ManageLink extends React.Component<Props, State> {
    * save data
    */
   callBack = () => {
-    this.props.callBackToParent(this.state.followLink, this.state.hoveringTooltipLink, this.state.hoveringTooltipText, undefined, this.props.id);
+    this.props.callBackToParent(this.state.followLink, this.state.hoveringTooltipLink, this.state.hoveringTooltipText, undefined);
   };
 
   /**

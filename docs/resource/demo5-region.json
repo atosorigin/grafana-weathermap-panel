@@ -112,7 +112,7 @@
         "italic": false,
         "underline": false
       },
-      "generateObjectText": false,
+      "generateObjectText": true,
       "valueGenerateObjectText": {
         "legendElement": "",
         "numericFormatElement": "",

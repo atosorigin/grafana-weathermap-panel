@@ -55,15 +55,23 @@ class PositionParameter extends React.Component<Props, State> {
         arrayPoints: newArrayPoints,
       });
     } else if (this.props.isLink) {
-      const newArrayLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
-      newArrayLink[idCurrentCoordinateSpace].positionParameter = newPositionParameter;
+      const newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+      for (const orientedLink of newArrayOrientedLink) {
+        if (orientedLink.id === idCurrentCoordinateSpace) {
+          orientedLink.positionParameter = newPositionParameter;
+        }
+      }
       this.props.onOptionsChange({
         ...this.props.options,
-        arrayOrientedLinks: newArrayLink,
+        arrayOrientedLinks: newArrayOrientedLink,
       });
     } else if (this.props.isRegion) {
       const newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
-      newArrayRegion[idCurrentCoordinateSpace].positionParameter = newPositionParameter;
+      for (const region of newArrayRegion) {
+        if (region.id === idCurrentCoordinateSpace) {
+          region.positionParameter = newPositionParameter;
+        }
+      }
       this.props.onOptionsChange({
         ...this.props.options,
         regionCoordinateSpace: newArrayRegion,
@@ -82,7 +90,12 @@ class PositionParameter extends React.Component<Props, State> {
     };
     const idCurrentCoordinateSpace: number = this.props.id || 0;
     if (this.props.isLink) {
-      positionParameter = this.props.options.arrayOrientedLinks[idCurrentCoordinateSpace].positionParameter;
+      const newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+      for (const orientedLink of newArrayOrientedLink) {
+        if (orientedLink.id === idCurrentCoordinateSpace) {
+          positionParameter = orientedLink.positionParameter;
+        }
+      }
     } else if (this.props.isPoint) {
       const arrayPoints: PointClass[] = this.props.options.arrayPoints;
       for (const point of arrayPoints) {
@@ -218,8 +231,15 @@ class PositionParameter extends React.Component<Props, State> {
   private defineLabelPositionInputs = (): JSX.Element => {
     let item: JSX.Element;
     const positionParameter: PositionParameterClass = this.getPositionParameter();
+    let currentOrientedLink: any;
+    const arrayOrientedLinks: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+    for (const orientedLink of arrayOrientedLinks) {
+      if (orientedLink.id === this.props.id) {
+        currentOrientedLink = orientedLink;
+      }
+    }
 
-    if (this.props.isLink && this.props.options.arrayOrientedLinks[this.props.id].orientationLink.value === 'double') {
+    if (this.props.isLink && currentOrientedLink && currentOrientedLink.orientationLink.value === 'double') {
       item = (
         <div>
           <div>
@@ -305,8 +325,15 @@ class PositionParameter extends React.Component<Props, State> {
       { label: 'Right', value: 'right' },
     ];
     const positionParameter: PositionParameterClass = this.getPositionParameter();
+    let currentOrientedLink: any;
+    const arrayOrientedLinks: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+    for (const orientedLink of arrayOrientedLinks) {
+      if (orientedLink.id === this.props.id) {
+        currentOrientedLink = orientedLink;
+      }
+    }
 
-    if (this.props.isLink && this.props.options.arrayOrientedLinks[this.props.id].orientationLink.value === 'double') {
+    if (this.props.isLink && currentOrientedLink && currentOrientedLink.orientationLink.value === 'double') {
       item = (
         <div>
           <div style={{ display: 'flex' }}>

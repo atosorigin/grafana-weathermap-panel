@@ -5,7 +5,6 @@ import { FormField } from '@grafana/ui';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
 
 import InputSeriesColorPicker from 'Functions/Input/inputSeriesColorPicker';
-import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 import { PanelEditorProps } from '@grafana/data';
 import { SimpleOptions } from 'types';
 
@@ -20,10 +19,6 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   lowerLimitCallBack: (lowerLimit: LowerLimitClass[], id?: number) => void;
 
   isLink: boolean;
-
-  id?: number;
-
-  orientedLink?: OrientedLinkClass;
 }
 
 interface State {
@@ -63,7 +58,7 @@ class FixColor extends React.Component<Props, State> {
    * save data
    */
   callBack = (): void => {
-    this.props.lowerLimitCallBack(this.state.lowerLimit, this.props.id);
+    this.props.lowerLimitCallBack(this.state.lowerLimit);
   };
 
   /**
@@ -138,7 +133,7 @@ class FixColor extends React.Component<Props, State> {
           />
 
           <FormField
-            labelWidth={10}
+            labelWidth={15}
             label={labelSize}
             name="epaisseurContour"
             placeholder={placeHolderSize}
@@ -172,7 +167,7 @@ class FixColor extends React.Component<Props, State> {
             />
 
             <FormField
-              labelWidth={10}
+              labelWidth={15}
               label={labelSize}
               name="epaisseurContour"
               placeholder={placeHolderSize}

@@ -1,83 +1,82 @@
-# How to use auxiliere metric
+# Comment utiliser la métrique auxiliaire
 
-## Add a dashboard SVG
+## Ajouter un tableau de bord SVG
 
-![step 01](../../screenshots/demo/tutorial1/step01.jpg)
+![étape 01](../../screenshots/demo/tutorial7/background.jpg)
 
 
-Adding a background image is done from the `display` menu.
+L'ajout d'une image de fond se fait à partir du menu `display`.
 
-The selected image will be [demo1-background.svg](../../resource/demo1-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+L'image sélectionnée sera [demo7-background.svg](../../resource/demo7-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction "Copier l'adresse de l'image".
 
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-background.svg
-
 ```
 
-It is possible to have more details with the [display](../editor/display.md) page.
+Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
 
-You have to save and reload the page.
+Vous devez sauvegarder et recharger la page.
 
-## Add auxiliere metric to a point
+## Ajouter une métrique auxiliaire à un point
 
-### Step 1: Add a point
+### Étape 1 : Ajouter un point
 
 
 ![step 09](../../screenshots/demo/tutorial1/add-coordinate.png)
 
-- To place a point, go to `Visualization`, then `Coordinates space`, `Point` and `Add coordinate space`.
+- Pour placer un point, il faut se rendre dans `Visualization`, puis `Coordinates space`, `Point` et `Add coordinate space`.
 
 ![step 09](../../screenshots/demo/tutorial1/point1.png)
 
-You have to fill out the form like this: 
+Vous devez remplir le formulaire comme ceci : 
 
-- Fill in the "label" of the point
-- Inform his " size".
-- Enter the X and Y position where you want the point to appear.
+- Renseigner le `label` du point
+- Renseigner sa `size`
+- Saisir la position X et Y ou vous voulez voir le point apparaitre
 
-### Step 2 : Add main metric
-
-
-![step 05](../../screenshots/demo/tutorial1/step05.jpg)
+### Etape 2 : Ajout de la métrique principale
 
 
-The first step is through the `Queries` tab.
+![étape 05](../../screenshots/demo/tutorial1/step05.jpg)
 
-You must:
 
-- Complete the line `metrics` with the following line
+La première étape est l'onglet  `Queries`
+
+Vous devez :
+
+- Compléter la ligne `metrics` avec la ligne suivante
 
 ```
 rate(go_memstats_gc_cpu_fraction[5m]) * 100000
 ```
 
-The "A" marker will be used to identify this query as you can see below.
+Le marqueur "A" sera utilisé pour identifier cette requête, comme vous pouvez le voir ci-dessous.
 
-Once you have done that, you will associated this query to your point
+Une fois que vous aurez fait cela, vous associerez cette requête à votre point
 
 
 ![step 06](../../screenshots/demo/tutorial1/step06.jpg)
 
-The second step is from the `Coordinates space`, `region` and `Edit coordinate space` menu of the `visualization` tab.
+La deuxième étape se fait à partir du menu `Coordinates space`, `region` et `Edit coordinate space` de l'onglet `visualization`.
 
-You select the `Main metric` line to complete the form like this: 
+Vous sélectionnez la ligne `Main metric` pour remplir le formulaire comme ceci : 
 
-- Enter a `Query` for example A
-- Click on the `load` button
-
-
-The value will be automatically displayed after the page is refreshed.
+- Entrez une `Query` par exemple A
+- Cliquez sur le bouton `load`
 
 
-It is possible to fill in the other fields with the additional settings available on the page [coordinates space region](../editor/coordinates-space-region.md)
+La valeur sera automatiquement affichée après le rafraîchissement de la page.
 
-### Step 3 : Add auxiliere metric 
 
-Go to Auxiliary metrics and fill the form like Main metric
+Il est possible de remplir les autres champs avec les paramètres supplémentaires disponibles sur la page [coordinates space region](../editor/coordinates-space-region.md)
+
+### Étape 3 : Ajouter une métrique auxiliaire 
+
+Allez à la rubrique `Auxiliary metrics` et remplissez le formulaire comme `Main metric`
 
 ![auxiliere](../../screenshots/demo/tutorial8/auxiliere.png)
 
-After that, you will be able to see your auxiliary metric on the toolbox of your point
+Après cela, vous pourrez voir votre métrique auxiliaire dans la toolbox de votre point
 
 ![auxiliere](../../screenshots/demo/tutorial8/toolbox.png)

@@ -1415,7 +1415,7 @@ var InputSelect = function InputSelect(_a) {
     },
     allowCustomValue: false,
     options: data,
-    width: 10,
+    width: 30,
     value: defaultValue
   }));
 };
@@ -1446,8 +1446,8 @@ var InputSelectOrientedLink = function InputSelectOrientedLink(_a) {
       index = _a.index,
       defaultValue = _a.defaultValue,
       name = _a.name,
-      label = _a.label;
-  console.log(defaultValue);
+      label = _a.label; //console.log(defaultValue);
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       display: 'flex',
@@ -1505,7 +1505,7 @@ var InputSelectPoint = function InputSelectPoint(_a) {
           marginBottom: '2px'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_1__["FormLabel"], {
-        width: 10
+        width: 15
       }, label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_1__["Select"], {
         onChange: function onChange(value) {
           return _onChange(value, name, index);
@@ -1513,7 +1513,7 @@ var InputSelectPoint = function InputSelectPoint(_a) {
         allowCustomValue: false,
         options: data,
         value: defaultValue,
-        width: 20
+        width: 30
       }));
     }
   } else {
@@ -1523,7 +1523,7 @@ var InputSelectPoint = function InputSelectPoint(_a) {
         marginBottom: '2px'
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_1__["FormLabel"], {
-      width: 10
+      width: 15
     }, label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_1__["Select"], {
       onChange: function onChange(value) {
         return _onChange(value, name, index);
@@ -1531,7 +1531,7 @@ var InputSelectPoint = function InputSelectPoint(_a) {
       allowCustomValue: false,
       options: data,
       value: defaultValue,
-      width: 20
+      width: 30
     }));
   }
 };
@@ -1570,7 +1570,7 @@ var InputSeriesColorPicker = function InputSeriesColorPicker(_a) {
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-field"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_0__["FormLabel"], {
-    width: 25
+    width: 15
   }, text), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     id: "colorPicker",
     style: {
@@ -1587,97 +1587,6 @@ var InputSeriesColorPicker = function InputSeriesColorPicker(_a) {
   })));
 };
 /* harmony default export */ __webpack_exports__["default"] = (InputSeriesColorPicker); // width || Math.round(text.length * 1.7)
-
-/***/ }),
-
-/***/ "./Functions/Input/inputSeriesColorPickerOrientedLink.tsx":
-/*!****************************************************************!*\
-  !*** ./Functions/Input/inputSeriesColorPickerOrientedLink.tsx ***!
-  \****************************************************************/
-/*! exports provided: InputSeriesColorPickerOrientedLink, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InputSeriesColorPickerOrientedLink", function() { return InputSeriesColorPickerOrientedLink; });
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-
-
-var InputSeriesColorPickerOrientedLink = function InputSeriesColorPickerOrientedLink(_a) {
-  var color = _a.color,
-      keyInt = _a.keyInt,
-      text = _a.text,
-      _onChange = _a._onChange,
-      width = _a.width;
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "form-field"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_0__["FormLabel"], {
-    width: 15
-  }, text), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    id: "colorPicker",
-    style: {
-      marginTop: '10px',
-      marginLeft: '131px'
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_0__["ColorPicker"], {
-    color: color,
-    onChange: function onChange(newColor) {
-      return _onChange(keyInt, newColor);
-    }
-  })));
-};
-/* harmony default export */ __webpack_exports__["default"] = (InputSeriesColorPickerOrientedLink); // width || Math.round(text.length * 1.7)
-
-/***/ }),
-
-/***/ "./Functions/Input/inputSeriesColorPickerPoint.tsx":
-/*!*********************************************************!*\
-  !*** ./Functions/Input/inputSeriesColorPickerPoint.tsx ***!
-  \*********************************************************/
-/*! exports provided: InputSeriesColorPickerPoint, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InputSeriesColorPickerPoint", function() { return InputSeriesColorPickerPoint; });
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-
-
-/**
- * 1.7 -> taille approximative d'un caractere
- * @param param0 voir InputTextFieldProps
- */
-
-var InputSeriesColorPickerPoint = function InputSeriesColorPickerPoint(_a) {
-  var color = _a.color,
-      keyInt = _a.keyInt,
-      text = _a.text,
-      _onChange = _a._onChange,
-      width = _a.width;
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "form-field"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_0__["FormLabel"], {
-    width: width || Math.round(text.length * 1.7)
-  }, text), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    id: "colorPicker",
-    style: {
-      marginTop: '10px',
-      marginLeft: '131px'
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_0__["ColorPicker"], {
-    color: color,
-    onChange: function onChange(newColor) {
-      return _onChange(keyInt, newColor);
-    }
-  })));
-};
-/* harmony default export */ __webpack_exports__["default"] = (InputSeriesColorPickerPoint);
 
 /***/ }),
 
@@ -1766,7 +1675,7 @@ var InputTextOrientedLink = function InputTextOrientedLink(_a) {
   } else {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_0__["FormField"], {
       label: label,
-      labelWidth: 10,
+      labelWidth: 15,
       inputWidth: 20,
       type: "text",
       required: required,
@@ -2635,6 +2544,109 @@ var getResultQuery = function getResultQuery(mainMetric) {
   }
 
   return cnt;
+};
+
+/***/ }),
+
+/***/ "./Functions/initOrientedLink.tsx":
+/*!****************************************!*\
+  !*** ./Functions/initOrientedLink.tsx ***!
+  \****************************************/
+/*! exports provided: initOrientedLink, cloneOrientedLink */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initOrientedLink", function() { return initOrientedLink; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cloneOrientedLink", function() { return cloneOrientedLink; });
+/* harmony import */ var _Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Models/TextObjectClass */ "./Models/TextObjectClass.tsx");
+/* harmony import */ var _Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Models/LinkURLClass */ "./Models/LinkURLClass.tsx");
+/* harmony import */ var _Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Models/PositionParameterClass */ "./Models/PositionParameterClass.tsx");
+/* harmony import */ var _Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Models/OrientedLinkClass */ "./Models/OrientedLinkClass.tsx");
+
+
+
+
+var initOrientedLink = function initOrientedLink(newId, newZIndex) {
+  var num = newId;
+  var zIndex = newZIndex;
+  var initTextObject = new _Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_0__["TextObject"]('', false, '', '', {
+    bold: false,
+    italic: false,
+    underline: false
+  }, false, {
+    legendElement: '',
+    numericFormatElement: '',
+    unit: '',
+    displayObjectInTooltip: false,
+    // 'displayObjectPermanently': false,
+    addColorTextElement: false,
+    colorTextElement: 'white',
+    addColorBackElement: false,
+    colorBackElement: 'black'
+  }, {
+    legendElement: '',
+    numericFormatElement: '',
+    unit: '',
+    displayObjectInTooltip: false,
+    // 'displayObjectPermanently': false,
+    addColorTextElement: false,
+    colorTextElement: 'white',
+    addColorBackElement: false,
+    colorBackElement: 'black'
+  });
+  var parametrageMetric = new _Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_1__["LinkURLClass"]('', '', '');
+  var initPositionParameter = new _Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_2__["PositionParameterClass"]('', '', '', '', {}, {});
+  var initMainMetrics = {
+    key: '',
+    unit: '',
+    format: '',
+    keyValue: '',
+    refId: '',
+    manageValue: 'avg'
+  };
+  var initMainMetricsB = {
+    key: '',
+    unit: '',
+    format: '',
+    keyValue: '',
+    refId: '',
+    manageValue: 'avg'
+  };
+  var newCoordinate = new _Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_3__["OrientedLinkClass"](num, parametrageMetric, '', [], '', initTextObject, // {
+  // 	'key': keyMainMetric || '',
+  // 	'unit': '',
+  // 	'format': '',
+  // 	'keyValue': keyValueMainMetric || '',
+  // 	'refId': refIdMainMetric || '',
+  // 	'manageValue': 'avg',
+  // }
+  initMainMetrics, [], false, false, false, initPositionParameter, 'orientedLink' + num.toString(), {
+    label: 'double',
+    value: 'double'
+  }, {
+    label: 'Medium',
+    value: 'Medium'
+  }, '0', '0', '#5794F2', '0', '0', '#E54658', '', '', '', '', '', '', zIndex, '0', '0', {}, initMainMetricsB, []);
+  return newCoordinate;
+};
+var cloneOrientedLink = function cloneOrientedLink(orientedLink) {
+  var initTextObject = new _Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_0__["TextObject"]( //orientedLink.textObj.legend,
+  orientedLink.textObj.value, orientedLink.textObj.isTextTooltip, orientedLink.textObj.colorBack, orientedLink.textObj.colorText, orientedLink.textObj.style, orientedLink.textObj.generateObjectText, orientedLink.textObj.valueGenerateObjectText, orientedLink.textObj.generateAuxiliaryElement);
+  var linkURL = new _Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_1__["LinkURLClass"](orientedLink.linkURL.followLink, orientedLink.linkURL.hoveringTooltipLink, orientedLink.linkURL.hoveringTooltipText);
+  var positionParameter = new _Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_2__["PositionParameterClass"](orientedLink.positionParameter.labelAPositionX, orientedLink.positionParameter.labelAPositionY, orientedLink.positionParameter.labelBPositionX, orientedLink.positionParameter.labelBPositionY, orientedLink.positionParameter.tooltipPositionA, orientedLink.positionParameter.tooltipPositionB);
+  var mainMetric = {
+    key: orientedLink.mainMetric.key,
+    unit: orientedLink.mainMetric.unit,
+    format: orientedLink.mainMetric.format,
+    keyValue: orientedLink.mainMetric.keyValue,
+    refId: orientedLink.mainMetric.refId,
+    expr: orientedLink.mainMetric.expr,
+    returnQuery: orientedLink.mainMetric.returnQuery,
+    manageValue: orientedLink.mainMetric.manageValue
+  };
+  var newCoordinate = new _Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_3__["OrientedLinkClass"](orientedLink.id, linkURL, orientedLink.meta, orientedLink.lowerLimit, orientedLink.label, initTextObject, mainMetric, orientedLink.metrics, orientedLink.colorMode, orientedLink.traceBack, orientedLink.traceBorder, positionParameter, orientedLink.name, orientedLink.orientationLink, orientedLink.size, orientedLink.pointAPositionX, orientedLink.pointAPositionY, orientedLink.colorCoordinateA, orientedLink.pointBPositionX, orientedLink.pointBPositionY, orientedLink.colorCoordinateB, orientedLink.valueMainMetricA, orientedLink.valueMainMetricB, orientedLink.pointIn, orientedLink.pointOut, orientedLink.regionIn, orientedLink.regionOut, orientedLink.zIndex, orientedLink.pointCPositionX, orientedLink.pointCPositionY, orientedLink.isIncurved, orientedLink.mainMetricB, orientedLink.metricsB);
+  return newCoordinate;
 };
 
 /***/ }),
@@ -4485,20 +4497,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var components_coordinateSpaceInitial__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! components/coordinateSpaceInitial */ "./components/coordinateSpaceInitial.tsx");
 /* harmony import */ var components_importInput__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! components/importInput */ "./components/importInput.tsx");
 /* harmony import */ var components_CoordinateSpace_manageCoordinateSpace__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! components/CoordinateSpace/manageCoordinateSpace */ "./components/CoordinateSpace/manageCoordinateSpace.tsx");
-/* harmony import */ var _components_orientedLinkForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/orientedLinkForm */ "./components/orientedLinkForm.tsx");
-/* harmony import */ var components_display__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! components/display */ "./components/display.tsx");
-/* harmony import */ var style_SimpleEditor_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! style/SimpleEditor.css */ "./style/SimpleEditor.css");
-/* harmony import */ var style_SimpleEditor_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(style_SimpleEditor_css__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var components_display__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! components/display */ "./components/display.tsx");
+/* harmony import */ var style_SimpleEditor_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! style/SimpleEditor.css */ "./style/SimpleEditor.css");
+/* harmony import */ var style_SimpleEditor_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(style_SimpleEditor_css__WEBPACK_IMPORTED_MODULE_7__);
 
 
 
 
 
 
- // import PanelData from 'components/panelData';
-//import PointForm from 'components/pointForm';
-
- // import TimeSelector from 'components/timeSelector';
 
 
 /**
@@ -4537,29 +4544,7 @@ function (_super) {
     // 		style: datafromChild.style,
     // 	});
     // }
-
-
-    _this.myCallBackArrayPoints = function (dataFromChild) {
-      _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-        arrayPoints: dataFromChild
-      }));
-    };
-
-    _this.myCallBackArrayLinks = function (dataFromChild) {
-      _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-        arrayLinks: dataFromChild
-      }));
-    };
-
-    _this.myCallBackArrayOrientedLinks = function (dataFromChild) {
-      _this.setState({
-        arrayOrientedLinks: dataFromChild
-      });
-
-      _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-        arrayOrientedLinks: dataFromChild
-      }));
-    }; /// Adrien
+    /// Adrien
     // onInfoChanged = ({ target }: any) => {
     // 	this.props.onOptionsChange({ ...this.props.options, info: target.value });
     // }
@@ -4605,12 +4590,7 @@ function (_super) {
       _this.setState({
         collapsePanelData: isOpen
       });
-    }; // private onToggleLink = (isOpen: boolean): void => {
-    // 	this.setState({
-    // 		collapseLink: isOpen,
-    // 	});
-    // }
-
+    };
 
     _this.onTogglePrincipalTargets = function (isOpen) {
       _this.setState({
@@ -4711,7 +4691,6 @@ function (_super) {
       collapseDashboardData: false,
       collapsePanelData: false,
       collapseTimeSelector: false,
-      arrayOrientedLinks: _this.props.options.arrayOrientedLinks,
       collapsePrincipalTarget: false,
       tabsVariable: [true, false, false, false, false],
       tabsCoordinateSpace: [true, false, false, false]
@@ -4761,7 +4740,7 @@ function (_super) {
       onChangeTab: function onChangeTab() {
         return _this.goToTab(4);
       }
-    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["TabContent"], null, this.state.tabsVariable[0] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_display__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["TabContent"], null, this.state.tabsVariable[0] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_display__WEBPACK_IMPORTED_MODULE_6__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data
@@ -4797,20 +4776,23 @@ function (_super) {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
-      isRegion: true
+      isRegion: true,
+      isPoint: false,
+      isLink: false
     }), this.state.tabsCoordinateSpace[1] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_CoordinateSpace_manageCoordinateSpace__WEBPACK_IMPORTED_MODULE_5__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
-      isRegion: false
-    }), this.state.tabsCoordinateSpace[3] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_orientedLinkForm__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      arrayPoint: this.props.options.arrayPoints,
-      regionCoordinateSpace: this.props.options.regionCoordinateSpace,
-      oldArrayOrientedLinkClass: this.props.options.arrayOrientedLinks,
-      callBackFromParent: this.myCallBackArrayOrientedLinks.bind(this),
+      isRegion: false,
+      isPoint: true,
+      isLink: false
+    }), this.state.tabsCoordinateSpace[3] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_CoordinateSpace_manageCoordinateSpace__WEBPACK_IMPORTED_MODULE_5__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
-      data: this.props.data
+      data: this.props.data,
+      isRegion: false,
+      isPoint: false,
+      isLink: true
     }))), this.state.tabsVariable[4] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_importInput__WEBPACK_IMPORTED_MODULE_4__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
@@ -4929,11 +4911,10 @@ function (_super) {
       positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1;
 
       if (!Object(Functions_coodinateIsInInitialSpace__WEBPACK_IMPORTED_MODULE_8__["coordinateIsInInitialSpace"])(parseInt(event.nativeEvent.offsetX, 10), parseInt(event.nativeEvent.offsetY, 10), _this.props.options.coordinateSpaceInitial, _this.props.options.baseMap)) {
-        console.error('is not initial space');
+        //console.error('is not initial space');
         return;
-      }
+      } //console.log(positionX.toString() + ' ' + positionY.toString());
 
-      console.log(positionX.toString() + ' ' + positionY.toString());
 
       if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG) {
         _this.createPointToClick(positionX, positionY);
@@ -5726,17 +5707,20 @@ function (_super) {
     };
 
     _this.getValuesAuxiliaryMetrics = function (auxiliaryMetrics, mainMetric) {
-      var valueAuxiliaryMetric = [];
-      var countMetrics = auxiliaryMetrics.length;
+      var valueAuxiliaryMetric = []; //const countMetrics: number = auxiliaryMetrics.length;
+
+      console.log(auxiliaryMetrics);
       auxiliaryMetrics.forEach(function (metric) {
         var _a;
 
+        console.log(metric);
         var countTotalValues = 0;
         var resultTotalValues = 0;
         var result = '';
 
         if (metric.returnQuery && metric.returnQuery.length > 0) {
-          var numberLoop = (((_a = metric.returnQuery) === null || _a === void 0 ? void 0 : _a.length) || 0) / countMetrics;
+          console.log(metric.returnQuery);
+          var numberLoop = ((_a = metric.returnQuery) === null || _a === void 0 ? void 0 : _a.length) || 0;
 
           if (metric.key !== '' && metric.keyValue !== '') {
             for (var i = 0; i < numberLoop; i++) {
@@ -5890,7 +5874,18 @@ function (_super) {
 
           _this.resetButtonManage(2);
         }
-      }, "Position Legend"));
+      }, "Position Legend"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+        style: {
+          marginLeft: '4%'
+        },
+        id: "more",
+        onClick: _this.ZoomIn,
+        variant: 'primary'
+      }, "+"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+        id: "less",
+        onClick: _this.ZoomOut,
+        variant: 'primary'
+      }, "-"));
 
       _this.setState({
         allActionButton: _final
@@ -6166,10 +6161,10 @@ function (_super) {
         var _this = this;
 
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
-          // this.props.onOptionsChange({
-          //   ...this.props.options,
-          //   displayButton: false,
-          // });
+          this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.props.options), {
+            displayButton: false
+          }));
+
           if (this.props.options.baseMap.modeSVG && this.props.options.baseMap.image !== '') {
             fetch(this.props.options.baseMap.image).then(function (res) {
               return res.text();
@@ -6249,9 +6244,8 @@ function (_super) {
 
         if (elmnt) {
           elmnt.style.transform += 'scale(0.99,0.99)';
-        }
+        } //console.log('-');
 
-        console.log('-');
       });
     }; // Zoom Initial
     // ZoomInitial = () => {
@@ -6420,16 +6414,22 @@ function (_super) {
 
 
       var allidSvg = document.getElementById('octsvg213');
-      (_a = allidSvg) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
-        var elms = allidSvg.querySelectorAll('[id]');
-        console.log(elms);
-      }); // All Region in SVG
+      (_a = allidSvg) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {//const elms = allidSvg.querySelectorAll('[id]');
+        //console.log(elms);
+      }); // Test Svg Christophe search ID
+      // const allidSvg3 = document.getElementById('octsvg12');
+      // allidSvg3?.addEventListener('click', () => {
+      //   this.props.options.regionCoordinateSpace.forEach(region => {
+      //     console.log(region.idSVG);
+      //     console.log(region.linkURL.followLink);
+      //   });
+      // });
+      // All Region in SVG
 
       var allidSvg2 = document.getElementById('octsvg213');
       (_b = allidSvg2) === null || _b === void 0 ? void 0 : _b.addEventListener('click', function () {
-        _this.props.options.regionCoordinateSpace.forEach(function (region) {
-          console.log(region.idSVG);
-          console.log(region.linkURL.followLink);
+        _this.props.options.regionCoordinateSpace.forEach(function (region) {//console.log(region.idSVG);
+          //console.log(region.linkURL.followLink);
         });
       }); // const elms = document.querySelectorAll('[id]');
       // for (var i = 0; i < elms.length; i++) {
@@ -6534,6 +6534,7 @@ function (_super) {
     var mapItems = [];
     var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
     arrayOrientedLink.forEach(function (orientedLink) {
+      //console.log(orientedLink);
       _this.getValuesMainMetricOrientedLink(orientedLink);
 
       _this.getValuesMainMetricOrientedLinkB(orientedLink);
@@ -6569,6 +6570,7 @@ function (_super) {
         data: _this.props.data,
         textObject: orientedLink.textObj,
         seuil: orientedLink.lowerLimit,
+        traceBorder: orientedLink.traceBorder,
         labelAPositionX: orientedLink.positionParameter.labelAPositionX,
         labelAPositionY: orientedLink.positionParameter.labelAPositionY,
         labelBPositionX: orientedLink.positionParameter.labelBPositionX,
@@ -6710,12 +6712,6 @@ function (_super) {
 
 
   SimplePanel.prototype.render = function () {
-    console.log('---region');
-    console.log(this.props.options.regionCoordinateSpace);
-    console.log('---points');
-    console.log(this.props.options.arrayPoints);
-    console.log('---links');
-    console.log(this.props.options.arrayOrientedLinks);
     var styleBackground;
 
     if (this.props.options.baseMap.modeSVG) {
@@ -6772,15 +6768,7 @@ function (_super) {
         marginTop: '-7px',
         marginLeft: '86%'
       }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-      id: "more",
-      onClick: this.ZoomIn,
-      variant: 'primary'
-    }, "+"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-      id: "less",
-      onClick: this.ZoomOut,
-      variant: 'primary'
-    }, "-")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       style: {
         textAlign: 'left',
         position: 'relative',
@@ -6810,7 +6798,9 @@ function (_super) {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
-      isRegion: true
+      isRegion: true,
+      isPoint: false,
+      isLink: false
     }))), this.state.buttonManage[2] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_legend__WEBPACK_IMPORTED_MODULE_15__["default"], Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
@@ -6844,6 +6834,8 @@ function (_super) {
       dangerouslySetInnerHTML: {
         __html: this.props.options.baseMap.layerImage
       }
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      onClick: this.CreateLinkArea
     }), this.displayOrientedLink(), this.fillCoordinate(), this.displayPoint()))))));
   };
 
@@ -6868,8 +6860,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var Functions_initRegionCoordinateSpace__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! Functions/initRegionCoordinateSpace */ "./Functions/initRegionCoordinateSpace.tsx");
 /* harmony import */ var Functions_initPoint__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! Functions/initPoint */ "./Functions/initPoint.tsx");
-/* harmony import */ var components_CoordinateSpace_coordinateSpace__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! components/CoordinateSpace/coordinateSpace */ "./components/CoordinateSpace/coordinateSpace.tsx");
-/* harmony import */ var _point_point__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./point/point */ "./components/CoordinateSpace/point/point.tsx");
+/* harmony import */ var Functions_initOrientedLink__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! Functions/initOrientedLink */ "./Functions/initOrientedLink.tsx");
+/* harmony import */ var components_CoordinateSpace_coordinateSpace__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! components/CoordinateSpace/coordinateSpace */ "./components/CoordinateSpace/coordinateSpace.tsx");
+/* harmony import */ var _point_point__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./point/point */ "./components/CoordinateSpace/point/point.tsx");
+/* harmony import */ var _orientedLink_orientedLink__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./orientedLink/orientedLink */ "./components/CoordinateSpace/orientedLink/orientedLink.tsx");
+
+
 
 
 
@@ -6928,6 +6924,17 @@ function (_super) {
       }
     };
 
+    _this.defineIdOrientedLink = function () {
+      var id = 1;
+
+      if (_this.props.options.arrayOrientedLinks.length === 0) {
+        return id;
+      } else {
+        id = _this.props.options.arrayOrientedLinks[_this.props.options.arrayOrientedLinks.length - 1].id + 1;
+        return id;
+      }
+    };
+
     _this.lastId = function () {
       var e_2, _a;
 
@@ -6964,12 +6971,24 @@ function (_super) {
         _this.setState({
           coordinate: Object(Functions_initRegionCoordinateSpace__WEBPACK_IMPORTED_MODULE_2__["initRegionCoordinateSpace"])(_this.lastId())
         });
-      } else {
+      } else if (_this.props.isPoint) {
         var id = _this.defineIdPoint();
 
         _this.setState({
           point: Object(Functions_initPoint__WEBPACK_IMPORTED_MODULE_3__["initPoint"])(id)
         });
+      } else if (_this.props.isLink) {
+        var id = _this.defineIdOrientedLink();
+
+        var newZIndex = _this.props.options.zIndexOrientedLink + 1;
+
+        _this.setState({
+          orientedLink: Object(Functions_initOrientedLink__WEBPACK_IMPORTED_MODULE_4__["initOrientedLink"])(id, newZIndex)
+        });
+
+        _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+          zIndexOrientedLink: newZIndex
+        }));
       }
     };
     /** update onOptionsChange */
@@ -6981,14 +7000,18 @@ function (_super) {
           _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
             indexRegion: newIdx
           }));
-        } else {
+        } else if (_this.props.isPoint) {
           _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
             indexPoint: newIdx
+          }));
+        } else if (_this.props.isLink) {
+          _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+            indexOrientedLink: newIdx
           }));
         }
       });
     };
-    /** send data for parent */
+    /** send data of region for parent */
 
 
     _this.callBack = function (id, newCoordinate) {
@@ -7026,7 +7049,7 @@ function (_super) {
         });
       });
     };
-    /** send data for parent */
+    /** send data of point for parent */
 
 
     _this.callBackPoint = function (id, newCoordinate) {
@@ -7064,10 +7087,49 @@ function (_super) {
         });
       });
     };
+    /** send data of orientedLink for parent */
+
+
+    _this.callBackOrientedLink = function (id, newCoordinate) {
+      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
+        var allCoordinateSpace;
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+          switch (_a.label) {
+            case 0:
+              if (!newCoordinate) return [3
+              /*break*/
+              , 2];
+              allCoordinateSpace = this.props.options.arrayOrientedLinks.slice();
+              return [4
+              /*yield*/
+              , this.setAsyncOption(newCoordinate.id)];
+
+            case 1:
+              _a.sent();
+
+              this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.props.options), {
+                arrayOrientedLinks: allCoordinateSpace.concat(newCoordinate)
+              }));
+
+              if (this.props.returnEditMode) {
+                this.props.returnEditMode();
+              }
+
+              _a.label = 2;
+
+            case 2:
+              return [2
+              /*return*/
+              ];
+          }
+        });
+      });
+    };
 
     _this.state = {
       coordinate: undefined,
-      point: undefined
+      point: undefined,
+      orientedLink: undefined
     };
     return _this;
   }
@@ -7076,7 +7138,7 @@ function (_super) {
 
   AddCoordinate.prototype.render = function () {
     if (this.props.isRegion) {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.coordinate && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_CoordinateSpace_coordinateSpace__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.coordinate && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_CoordinateSpace_coordinateSpace__WEBPACK_IMPORTED_MODULE_5__["default"], {
         options: this.props.options,
         onOptionsChange: this.props.onOptionsChange,
         data: this.props.data,
@@ -7084,8 +7146,8 @@ function (_super) {
         callBackToParent: this.callBack,
         isAddCoordinate: true
       }));
-    } else {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.point && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_point_point__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    } else if (this.props.isPoint) {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.point && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_point_point__WEBPACK_IMPORTED_MODULE_6__["default"], {
         options: this.props.options,
         onOptionsChange: this.props.onOptionsChange,
         data: this.props.data,
@@ -7093,6 +7155,17 @@ function (_super) {
         callBackToParent: this.callBackPoint,
         isAddPoint: true
       }));
+    } else if (this.props.isLink) {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.orientedLink && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_orientedLink_orientedLink__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        options: this.props.options,
+        onOptionsChange: this.props.onOptionsChange,
+        data: this.props.data,
+        orientedLink: this.state.orientedLink,
+        callBackToParent: this.callBackOrientedLink,
+        isAddLink: true
+      }));
+    } else {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
     }
   };
 
@@ -7732,7 +7805,9 @@ function (_super) {
       style: {
         verticalAlign: 'middle'
       }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], null, "Zone SVG")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, "Zone SVG")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
       onChange: function onChange(value) {
         return _this.onChangeSelectSVG(value);
       },
@@ -7744,7 +7819,7 @@ function (_super) {
       className: "classRegion"
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "Image",
-      labelWidth: 10,
+      labelWidth: 15,
       inputWidth: 20,
       type: "text",
       value: this.state.arrayCoor.img,
@@ -7754,7 +7829,7 @@ function (_super) {
       }
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "X min",
-      labelWidth: 10,
+      labelWidth: 15,
       inputWidth: 20,
       type: "text",
       value: this.state.arrayCoor.coords.xMin,
@@ -7764,7 +7839,7 @@ function (_super) {
       }
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "X max",
-      labelWidth: 10,
+      labelWidth: 15,
       inputWidth: 20,
       type: "text",
       value: this.state.arrayCoor.coords.xMax,
@@ -7774,7 +7849,7 @@ function (_super) {
       }
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "Y min",
-      labelWidth: 10,
+      labelWidth: 15,
       inputWidth: 20,
       type: "text",
       value: this.state.arrayCoor.coords.yMin,
@@ -7784,7 +7859,7 @@ function (_super) {
       }
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "Y max",
-      labelWidth: 10,
+      labelWidth: 15,
       inputWidth: 20,
       type: "text",
       value: this.state.arrayCoor.coords.yMax,
@@ -8093,7 +8168,7 @@ function (_super) {
     var _this = _super.call(this, props) || this;
 
     _this.saveAuxMetrics = function (newAuxMetrics, isLinkB) {
-      var e_1, _a, e_2, _b;
+      var e_1, _a, e_2, _b, e_3, _c;
 
       var idCurrentCoordinateSpace = _this.props.idCoordinate;
 
@@ -8126,10 +8201,28 @@ function (_super) {
       } else if (_this.props.isLink) {
         var newArrayLink = _this.props.options.arrayOrientedLinks;
 
-        if (isLinkB) {
-          newArrayLink[idCurrentCoordinateSpace].metricsB = newAuxMetrics;
-        } else {
-          newArrayLink[idCurrentCoordinateSpace].metrics = newAuxMetrics;
+        try {
+          for (var newArrayLink_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(newArrayLink), newArrayLink_1_1 = newArrayLink_1.next(); !newArrayLink_1_1.done; newArrayLink_1_1 = newArrayLink_1.next()) {
+            var orientedLink = newArrayLink_1_1.value;
+
+            if (orientedLink.id === idCurrentCoordinateSpace) {
+              if (isLinkB) {
+                orientedLink.metricsB = newAuxMetrics;
+              } else {
+                orientedLink.metrics = newAuxMetrics;
+              }
+            }
+          }
+        } catch (e_2_1) {
+          e_2 = {
+            error: e_2_1
+          };
+        } finally {
+          try {
+            if (newArrayLink_1_1 && !newArrayLink_1_1.done && (_b = newArrayLink_1["return"])) _b.call(newArrayLink_1);
+          } finally {
+            if (e_2) throw e_2.error;
+          }
         }
 
         _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
@@ -8146,15 +8239,15 @@ function (_super) {
               region.metrics = newAuxMetrics;
             }
           }
-        } catch (e_2_1) {
-          e_2 = {
-            error: e_2_1
+        } catch (e_3_1) {
+          e_3 = {
+            error: e_3_1
           };
         } finally {
           try {
-            if (newArrayRegion_1_1 && !newArrayRegion_1_1.done && (_b = newArrayRegion_1["return"])) _b.call(newArrayRegion_1);
+            if (newArrayRegion_1_1 && !newArrayRegion_1_1.done && (_c = newArrayRegion_1["return"])) _c.call(newArrayRegion_1);
           } finally {
-            if (e_2) throw e_2.error;
+            if (e_3) throw e_3.error;
           }
         }
 
@@ -8165,16 +8258,36 @@ function (_super) {
     };
 
     _this.getAuxiliaryMetrics = function (isLinkB) {
-      var e_3, _a, e_4, _b;
+      var e_4, _a, e_5, _b, e_6, _c;
 
       var auxiliaryMetrics = [];
       var idCurrentCoordinateSpace = _this.props.idCoordinate;
 
       if (_this.props.isLink) {
-        if (isLinkB) {
-          auxiliaryMetrics = _this.props.options.arrayOrientedLinks[idCurrentCoordinateSpace].metricsB;
-        } else {
-          auxiliaryMetrics = _this.props.options.arrayOrientedLinks[idCurrentCoordinateSpace].metrics;
+        var arrayOrientedLinks = _this.props.options.arrayOrientedLinks;
+
+        try {
+          for (var arrayOrientedLinks_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayOrientedLinks), arrayOrientedLinks_1_1 = arrayOrientedLinks_1.next(); !arrayOrientedLinks_1_1.done; arrayOrientedLinks_1_1 = arrayOrientedLinks_1.next()) {
+            var orientedLink = arrayOrientedLinks_1_1.value;
+
+            if (orientedLink.id === idCurrentCoordinateSpace) {
+              if (isLinkB) {
+                auxiliaryMetrics = orientedLink.metricsB;
+              } else {
+                auxiliaryMetrics = orientedLink.metrics;
+              }
+            }
+          }
+        } catch (e_4_1) {
+          e_4 = {
+            error: e_4_1
+          };
+        } finally {
+          try {
+            if (arrayOrientedLinks_1_1 && !arrayOrientedLinks_1_1.done && (_a = arrayOrientedLinks_1["return"])) _a.call(arrayOrientedLinks_1);
+          } finally {
+            if (e_4) throw e_4.error;
+          }
         }
       } else if (_this.props.isPoint) {
         var arrayPoints = _this.props.options.arrayPoints;
@@ -8187,15 +8300,15 @@ function (_super) {
               auxiliaryMetrics = point.metrics;
             }
           }
-        } catch (e_3_1) {
-          e_3 = {
-            error: e_3_1
+        } catch (e_5_1) {
+          e_5 = {
+            error: e_5_1
           };
         } finally {
           try {
-            if (arrayPoints_1_1 && !arrayPoints_1_1.done && (_a = arrayPoints_1["return"])) _a.call(arrayPoints_1);
+            if (arrayPoints_1_1 && !arrayPoints_1_1.done && (_b = arrayPoints_1["return"])) _b.call(arrayPoints_1);
           } finally {
-            if (e_3) throw e_3.error;
+            if (e_5) throw e_5.error;
           }
         }
       } else if (_this.props.isRegion) {
@@ -8209,15 +8322,15 @@ function (_super) {
               auxiliaryMetrics = region.metrics;
             }
           }
-        } catch (e_4_1) {
-          e_4 = {
-            error: e_4_1
+        } catch (e_6_1) {
+          e_6 = {
+            error: e_6_1
           };
         } finally {
           try {
-            if (arrayRegions_1_1 && !arrayRegions_1_1.done && (_b = arrayRegions_1["return"])) _b.call(arrayRegions_1);
+            if (arrayRegions_1_1 && !arrayRegions_1_1.done && (_c = arrayRegions_1["return"])) _c.call(arrayRegions_1);
           } finally {
-            if (e_4) throw e_4.error;
+            if (e_6) throw e_6.error;
           }
         }
       }
@@ -8226,19 +8339,40 @@ function (_super) {
     };
 
     _this.getReferenceMainMetric = function (isLinkB) {
-      var e_5, _a, e_6, _b, e_7, _c;
+      var e_7, _a, e_8, _b, e_9, _c, e_10, _d;
 
       var newRefId = '';
-      var newArrayPoints = _this.props.options.arrayPoints;
       var idCurrentCoordinateSpace = _this.props.idCoordinate;
 
       if (_this.props.isLink) {
-        if (isLinkB) {
-          newRefId = _this.props.options.arrayOrientedLinks[_this.props.idCoordinate].mainMetricB.refId || '';
-        } else {
-          newRefId = _this.props.options.arrayOrientedLinks[_this.props.idCoordinate].mainMetric.refId || '';
+        var arrayOrientedLinks = _this.props.options.arrayOrientedLinks;
+
+        try {
+          for (var arrayOrientedLinks_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayOrientedLinks), arrayOrientedLinks_2_1 = arrayOrientedLinks_2.next(); !arrayOrientedLinks_2_1.done; arrayOrientedLinks_2_1 = arrayOrientedLinks_2.next()) {
+            var orientedLink = arrayOrientedLinks_2_1.value;
+
+            if (orientedLink.id === idCurrentCoordinateSpace) {
+              if (isLinkB) {
+                newRefId = orientedLink.mainMetricB.refId || '';
+              } else {
+                newRefId = orientedLink.mainMetric.refId || '';
+              }
+            }
+          }
+        } catch (e_7_1) {
+          e_7 = {
+            error: e_7_1
+          };
+        } finally {
+          try {
+            if (arrayOrientedLinks_2_1 && !arrayOrientedLinks_2_1.done && (_a = arrayOrientedLinks_2["return"])) _a.call(arrayOrientedLinks_2);
+          } finally {
+            if (e_7) throw e_7.error;
+          }
         }
       } else if (_this.props.isPoint) {
+        var newArrayPoints = _this.props.options.arrayPoints;
+
         try {
           for (var newArrayPoints_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(newArrayPoints), newArrayPoints_2_1 = newArrayPoints_2.next(); !newArrayPoints_2_1.done; newArrayPoints_2_1 = newArrayPoints_2.next()) {
             var point = newArrayPoints_2_1.value;
@@ -8247,15 +8381,15 @@ function (_super) {
               newRefId = point.mainMetric.refId || '';
             }
           }
-        } catch (e_5_1) {
-          e_5 = {
-            error: e_5_1
+        } catch (e_8_1) {
+          e_8 = {
+            error: e_8_1
           };
         } finally {
           try {
-            if (newArrayPoints_2_1 && !newArrayPoints_2_1.done && (_a = newArrayPoints_2["return"])) _a.call(newArrayPoints_2);
+            if (newArrayPoints_2_1 && !newArrayPoints_2_1.done && (_b = newArrayPoints_2["return"])) _b.call(newArrayPoints_2);
           } finally {
-            if (e_5) throw e_5.error;
+            if (e_8) throw e_8.error;
           }
         }
       } else if (_this.props.isRegion) {
@@ -8269,15 +8403,15 @@ function (_super) {
               newRefId = region.mainMetric.refId || '';
             }
           }
-        } catch (e_6_1) {
-          e_6 = {
-            error: e_6_1
+        } catch (e_9_1) {
+          e_9 = {
+            error: e_9_1
           };
         } finally {
           try {
-            if (arrayRegions_2_1 && !arrayRegions_2_1.done && (_b = arrayRegions_2["return"])) _b.call(arrayRegions_2);
+            if (arrayRegions_2_1 && !arrayRegions_2_1.done && (_c = arrayRegions_2["return"])) _c.call(arrayRegions_2);
           } finally {
-            if (e_6) throw e_6.error;
+            if (e_9) throw e_9.error;
           }
         }
       }
@@ -8294,25 +8428,20 @@ function (_super) {
             _this.saveAuxMetrics(newAuxiliaryMetrics, isLinkB);
           }
         }
-      } catch (e_7_1) {
-        e_7 = {
-          error: e_7_1
+      } catch (e_10_1) {
+        e_10 = {
+          error: e_10_1
         };
       } finally {
         try {
-          if (newAuxiliaryMetrics_1_1 && !newAuxiliaryMetrics_1_1.done && (_c = newAuxiliaryMetrics_1["return"])) _c.call(newAuxiliaryMetrics_1);
+          if (newAuxiliaryMetrics_1_1 && !newAuxiliaryMetrics_1_1.done && (_d = newAuxiliaryMetrics_1["return"])) _d.call(newAuxiliaryMetrics_1);
         } finally {
-          if (e_7) throw e_7.error;
+          if (e_10) throw e_10.error;
         }
       }
 
       return newRefId;
-    }; // /** call back to parent */
-    // private callBack = () => {
-    //   console.log(this.props.idCoordinate);
-    //   this.props.callBackToParent(this.state.metrics, this.props.idCoordinate);
-    // };
-
+    };
     /** switch value collapse when click collapse */
 
 
@@ -8343,12 +8472,9 @@ function (_super) {
 
       var idCurrentAuxMetrics = event.currentTarget.id;
       var value = event.currentTarget.value;
-      newAuxiliaryMetrics[idCurrentAuxMetrics].key = value; // this.setState({
-      //   metrics: newAuxiliaryMetrics,
-      // });
+      newAuxiliaryMetrics[idCurrentAuxMetrics].key = value;
 
-      _this.saveAuxMetrics(newAuxiliaryMetrics, false); //this.callBack();
-
+      _this.saveAuxMetrics(newAuxiliaryMetrics, false);
     };
 
     _this.onChangeKeyB = function (event) {
@@ -8356,12 +8482,9 @@ function (_super) {
 
       var idCurrentAuxMetrics = event.currentTarget.id;
       var value = event.currentTarget.value;
-      newAuxiliaryMetrics[idCurrentAuxMetrics].key = value; // this.setState({
-      //   metrics: newAuxiliaryMetrics,
-      // });
+      newAuxiliaryMetrics[idCurrentAuxMetrics].key = value;
 
-      _this.saveAuxMetrics(newAuxiliaryMetrics, true); //this.callBack();
-
+      _this.saveAuxMetrics(newAuxiliaryMetrics, true);
     };
 
     _this.onChangeValueKey = function (event) {
@@ -8371,11 +8494,7 @@ function (_super) {
       var value = event.currentTarget.value;
       newAuxiliaryMetrics[id].keyValue = value;
 
-      _this.saveAuxMetrics(newAuxiliaryMetrics, false); // this.setState({
-      //   metrics: newAuxiliaryMetrics,
-      // });
-      // this.callBack();
-
+      _this.saveAuxMetrics(newAuxiliaryMetrics, false);
     };
 
     _this.onChangeValueKeyB = function (event) {
@@ -8385,11 +8504,7 @@ function (_super) {
       var value = event.currentTarget.value;
       newAuxiliaryMetrics[id].keyValue = value;
 
-      _this.saveAuxMetrics(newAuxiliaryMetrics, true); // this.setState({
-      //   metrics: newAuxiliaryMetrics,
-      // });
-      // this.callBack();
-
+      _this.saveAuxMetrics(newAuxiliaryMetrics, true);
     };
 
     _this.onChangeManageValue = function (event) {
@@ -8397,19 +8512,8 @@ function (_super) {
 
       var id = event.id;
       newAuxiliaryMetrics[id].manageValue = event.value;
-      var newValue = {
-        id: event.id,
-        value: event.value,
-        label: event.label
-      };
 
       _this.saveAuxMetrics(newAuxiliaryMetrics, false);
-
-      _this.setState({
-        //metrics: newAuxiliaryMetrics,
-        selectDefaultManageValue: newValue
-      }); //this.callBack();
-
     };
 
     _this.onChangeManageValueB = function (event) {
@@ -8417,19 +8521,8 @@ function (_super) {
 
       var id = event.id;
       newAuxiliaryMetrics[id].manageValue = event.value;
-      var newValue = {
-        id: event.id,
-        value: event.value,
-        label: event.label
-      };
 
       _this.saveAuxMetrics(newAuxiliaryMetrics, true);
-
-      _this.setState({
-        //metrics: newAuxiliaryMetrics,
-        selectDefaultManageValue: newValue
-      }); //this.callBack();
-
     };
 
     _this.addAuxiliaryMetric = function () {
@@ -8444,14 +8537,11 @@ function (_super) {
         keyValue: '',
         refId: refIdMetric,
         manageValue: 'avg'
-      }); // this.setState({
-      //   metrics: auxiliaryMetrics,
-      // });
+      });
 
       _this.saveAuxMetrics(newAuxiliaryMetrics, false);
 
-      _this.displayInputs(false); //this.callBack();
-
+      _this.displayInputs(false);
     };
 
     _this.addAuxiliaryMetricB = function () {
@@ -8466,14 +8556,11 @@ function (_super) {
         keyValue: '',
         refId: refIdMetric,
         manageValue: 'avg'
-      }); // this.setState({
-      //   metrics: auxiliaryMetrics,
-      // });
+      });
 
       _this.saveAuxMetrics(newAuxiliaryMetrics, true);
 
-      _this.displayInputs(true); //this.callBack();
-
+      _this.displayInputs(true);
     };
 
     _this.deleteAuxiliaryMetric = function (event) {
@@ -8481,14 +8568,11 @@ function (_super) {
 
       var newAuxiliaryMetrics = _this.getAuxiliaryMetrics(false);
 
-      newAuxiliaryMetrics.splice(id, 1); // this.setState({
-      //   metrics: newAuxiliaryMetrics,
-      // });
+      newAuxiliaryMetrics.splice(id, 1);
 
       _this.saveAuxMetrics(newAuxiliaryMetrics, false);
 
-      _this.displayInputs(false); //this.callBack();
-
+      _this.displayInputs(false);
     };
 
     _this.deleteAuxiliaryMetricB = function (event) {
@@ -8496,14 +8580,11 @@ function (_super) {
 
       var newAuxiliaryMetrics = _this.getAuxiliaryMetrics(true);
 
-      newAuxiliaryMetrics.splice(id, 1); // this.setState({
-      //   metrics: newAuxiliaryMetrics,
-      // });
+      newAuxiliaryMetrics.splice(id, 1);
 
       _this.saveAuxMetrics(newAuxiliaryMetrics, true);
 
-      _this.displayInputs(true); //this.callBack();
-
+      _this.displayInputs(true);
     };
 
     _this.getAllManageValue = function (id) {
@@ -8666,7 +8747,7 @@ function (_super) {
           style: styleSelect
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
           key: idCoordinateSpace + 'labelref' + id.toString(),
-          width: 10
+          width: 15
         }, "Query"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
           key: ((_c = _this.props.idCoordinate) === null || _c === void 0 ? void 0 : _c.toString()) || '' + 'refValue' + id.toString(),
           style: styleReferenceMetric
@@ -8674,8 +8755,8 @@ function (_super) {
           key: idCoordinateSpace + 'inputKey' + id.toString(),
           id: id.toString(),
           label: "Key",
-          labelWidth: 10,
-          inputWidth: 20,
+          labelWidth: 15,
+          inputWidth: 30,
           type: "text",
           value: auxMetrics[id].key,
           name: "key",
@@ -8684,8 +8765,8 @@ function (_super) {
           key: idCoordinateSpace + 'valueKey' + id.toString(),
           id: id.toString(),
           label: "Value key",
-          labelWidth: 10,
-          inputWidth: 20,
+          labelWidth: 15,
+          inputWidth: 30,
           type: "text",
           value: auxMetrics[id].keyValue,
           name: "valueKey",
@@ -8696,13 +8777,13 @@ function (_super) {
           style: styleSelect
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
           key: idCoordinateSpace + 'labelTypeOfValue' + id.toString(),
-          width: 10
+          width: 15
         }, "Value"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
           key: idCoordinateSpace + 'selectTypeOfValue' + id.toString(),
           onChange: _this.onChangeManageValue,
           allowCustomValue: false,
           options: _this.getAllManageValue(id.toString()),
-          width: 20,
+          width: 30,
           value: _this.getCurrentManageValue(id, isLinkB)
         }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           key: idCoordinateSpace + 'buttonDelete' + id.toString()
@@ -8741,11 +8822,7 @@ function (_super) {
     _this.state = {
       collapse: false,
       collapseLinkA: false,
-      collapseLinkB: false,
-      selectDefaultManageValue: {
-        value: 'avg',
-        label: 'avg'
-      }
+      collapseLinkB: false
     };
     return _this;
   }
@@ -8755,17 +8832,41 @@ function (_super) {
 
 
   ManageAuxiliaryQuery.prototype.render = function () {
-    var _a;
+    var e_11, _a;
 
-    var idCoordinateSpace = ((_a = this.props.idCoordinate) === null || _a === void 0 ? void 0 : _a.toString()) || '';
+    var _b;
+
+    var idCoordinateSpace = ((_b = this.props.idCoordinate) === null || _b === void 0 ? void 0 : _b.toString()) || '';
     var styleButtonAdd = {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'center',
       marginTop: '10px'
     };
+    var currentOrientedLink;
+    var arrayOrientedLinks = this.props.options.arrayOrientedLinks;
 
-    if (this.props.isLink && this.props.options.arrayOrientedLinks[this.props.idCoordinate].orientationLink.value === 'double') {
+    try {
+      for (var arrayOrientedLinks_3 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayOrientedLinks), arrayOrientedLinks_3_1 = arrayOrientedLinks_3.next(); !arrayOrientedLinks_3_1.done; arrayOrientedLinks_3_1 = arrayOrientedLinks_3.next()) {
+        var orientedLink = arrayOrientedLinks_3_1.value;
+
+        if (orientedLink.id === this.props.idCoordinate) {
+          currentOrientedLink = orientedLink;
+        }
+      }
+    } catch (e_11_1) {
+      e_11 = {
+        error: e_11_1
+      };
+    } finally {
+      try {
+        if (arrayOrientedLinks_3_1 && !arrayOrientedLinks_3_1.done && (_a = arrayOrientedLinks_3["return"])) _a.call(arrayOrientedLinks_3);
+      } finally {
+        if (e_11) throw e_11.error;
+      }
+    }
+
+    if (this.props.isLink && currentOrientedLink && currentOrientedLink.orientationLink.value === 'double') {
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
         isOpen: this.state.collapse,
         label: "Auxiliary metrics",
@@ -8826,7 +8927,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _editCoordinateSpace__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editCoordinateSpace */ "./components/CoordinateSpace/editCoordinateSpace.tsx");
 /* harmony import */ var _point_editPoint__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./point/editPoint */ "./components/CoordinateSpace/point/editPoint.tsx");
-/* harmony import */ var _addCoordinate__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./addCoordinate */ "./components/CoordinateSpace/addCoordinate.tsx");
+/* harmony import */ var _orientedLink_editOrientedLink__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./orientedLink/editOrientedLink */ "./components/CoordinateSpace/orientedLink/editOrientedLink.tsx");
+/* harmony import */ var _addCoordinate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./addCoordinate */ "./components/CoordinateSpace/addCoordinate.tsx");
+
 
 
 
@@ -8873,7 +8976,7 @@ function (_super) {
     };
 
     _this.contentTabEdit = function () {
-      var result;
+      var result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
 
       if (_this.props.isRegion) {
         result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_editCoordinateSpace__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -8881,8 +8984,14 @@ function (_super) {
           options: _this.props.options,
           data: _this.props.data
         }));
-      } else {
+      } else if (_this.props.isPoint) {
         result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_point_editPoint__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          onOptionsChange: _this.props.onOptionsChange,
+          options: _this.props.options,
+          data: _this.props.data
+        }));
+      } else if (_this.props.isLink) {
+        result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_orientedLink_editOrientedLink__WEBPACK_IMPORTED_MODULE_5__["default"], {
           onOptionsChange: _this.props.onOptionsChange,
           options: _this.props.options,
           data: _this.props.data
@@ -8903,30 +9012,46 @@ function (_super) {
   ManageCoordinateSpace.prototype.render = function () {
     var _this = this;
 
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["TabsBar"], {
-      className: "page-header tabs",
-      hideBorder: false
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tab"], {
-      key: "tabDisplayCoordinateSpaceAdd",
-      label: "Add coordinate space",
-      active: this.state.tabsVariable[0],
-      onChangeTab: function onChangeTab() {
-        return _this.goToTab(0);
-      }
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tab"], {
-      key: "tabDisplayCoordinateSpaceEdit",
-      label: "Edit coordinate space",
-      active: this.state.tabsVariable[1],
-      onChangeTab: function onChangeTab() {
-        return _this.goToTab(1);
-      }
-    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["TabContent"], null, this.state.tabsVariable[0] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_addCoordinate__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      onOptionsChange: this.props.onOptionsChange,
-      options: this.props.options,
-      data: this.props.data,
-      returnEditMode: this.returnEditMode,
-      isRegion: this.props.isRegion
-    }), this.state.tabsVariable[1] && this.contentTabEdit()));
+    if (!this.props.isLink) {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["TabsBar"], {
+        className: "page-header tabs",
+        hideBorder: false
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tab"], {
+        key: "tabDisplayCoordinateSpaceAdd",
+        label: "Add coordinate space",
+        active: this.state.tabsVariable[0],
+        onChangeTab: function onChangeTab() {
+          return _this.goToTab(0);
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tab"], {
+        key: "tabDisplayCoordinateSpaceEdit",
+        label: "Edit coordinate space",
+        active: this.state.tabsVariable[1],
+        onChangeTab: function onChangeTab() {
+          return _this.goToTab(1);
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["TabContent"], null, this.state.tabsVariable[0] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_addCoordinate__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        onOptionsChange: this.props.onOptionsChange,
+        options: this.props.options,
+        data: this.props.data,
+        returnEditMode: this.returnEditMode,
+        isRegion: this.props.isRegion,
+        isPoint: this.props.isPoint,
+        isLink: this.props.isLink
+      }), this.state.tabsVariable[1] && this.contentTabEdit()));
+    } else {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["TabsBar"], {
+        className: "page-header tabs",
+        hideBorder: false
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tab"], {
+        key: "tabDisplayCoordinateSpaceEdit",
+        label: "Edit coordinate space",
+        active: this.state.tabsVariable[1],
+        onChangeTab: function onChangeTab() {
+          return _this.goToTab(1);
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["TabContent"], null, this.state.tabsVariable[1] && this.contentTabEdit()));
+    }
   };
 
   return ManageCoordinateSpace;
@@ -9370,9 +9495,33 @@ function (_super) {
     };
 
     _this.displayHtml = function () {
-      var result;
+      var e_7, _a;
 
-      if (_this.props.isLink && _this.props.options.arrayOrientedLinks[_this.props.id || 0].orientationLink.value === 'double') {
+      var result;
+      var currentOrientedLink;
+      var arrayOrientedLinks = _this.props.options.arrayOrientedLinks;
+
+      try {
+        for (var arrayOrientedLinks_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayOrientedLinks), arrayOrientedLinks_1_1 = arrayOrientedLinks_1.next(); !arrayOrientedLinks_1_1.done; arrayOrientedLinks_1_1 = arrayOrientedLinks_1.next()) {
+          var orientedLink = arrayOrientedLinks_1_1.value;
+
+          if (orientedLink.id === _this.props.idCoordinate) {
+            currentOrientedLink = orientedLink;
+          }
+        }
+      } catch (e_7_1) {
+        e_7 = {
+          error: e_7_1
+        };
+      } finally {
+        try {
+          if (arrayOrientedLinks_1_1 && !arrayOrientedLinks_1_1.done && (_a = arrayOrientedLinks_1["return"])) _a.call(arrayOrientedLinks_1);
+        } finally {
+          if (e_7) throw e_7.error;
+        }
+      }
+
+      if (_this.props.isLink && currentOrientedLink && currentOrientedLink.orientationLink.value === 'double') {
         result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
           isOpen: _this.state.collapseMainMetric,
           label: "Main metric",
@@ -9385,17 +9534,19 @@ function (_super) {
           style: {
             verticalAlign: 'middle'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], null, "Query")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+          width: 15
+        }, "Query")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
           onChange: function onChange(value) {
             return _this.onChangeSelectQuery(value);
           },
           allowCustomValue: false,
           options: _this.state.selectQuery,
-          width: 10,
+          width: 15,
           value: _this.state.selectQueryDefault
         }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           label: "Key",
-          labelWidth: 10,
+          labelWidth: 15,
           inputWidth: 20,
           type: "text",
           value: _this.state.mainMetric.key,
@@ -9405,7 +9556,7 @@ function (_super) {
           }
         }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           label: "Value key",
-          labelWidth: 10,
+          labelWidth: 15,
           inputWidth: 20,
           type: "text",
           value: _this.state.mainMetric.keyValue,
@@ -9417,13 +9568,15 @@ function (_super) {
           style: {
             verticalAlign: 'middle'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], null, "Manipulate")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+          width: 15
+        }, "Manipulate")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
           onChange: function onChange(value) {
             return _this.onChangeSelectManageValue(value);
           },
           allowCustomValue: false,
           options: _this.state.selectManageValue,
-          width: 10,
+          width: 15,
           value: _this.state.selectDefaultManageValue
         })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
           isOpen: _this.state.collapseLinkB,
@@ -9434,7 +9587,9 @@ function (_super) {
             verticalAlign: 'middle',
             marginTop: '10px'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], null, "Query")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+          width: 15
+        }, "Query")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
           onChange: function onChange(value) {
             return _this.onChangeSelectQueryB(value);
           },
@@ -9444,7 +9599,7 @@ function (_super) {
           value: _this.getDefaultQueryB()
         }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           label: "Key",
-          labelWidth: 10,
+          labelWidth: 15,
           inputWidth: 20,
           type: "text",
           value: _this.state.mainMetricB.key,
@@ -9454,7 +9609,7 @@ function (_super) {
           }
         }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           label: "Value key",
-          labelWidth: 10,
+          labelWidth: 15,
           inputWidth: 20,
           type: "text",
           value: _this.state.mainMetricB.keyValue,
@@ -9466,7 +9621,9 @@ function (_super) {
           style: {
             verticalAlign: 'middle'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], null, "Manipulate")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+          width: 15
+        }, "Manipulate")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
           onChange: function onChange(value) {
             return _this.onChangeSelectManageValueB(value);
           },
@@ -9484,7 +9641,9 @@ function (_super) {
           style: {
             verticalAlign: 'middle'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], null, "Query")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+          width: 15
+        }, "Query")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
           onChange: function onChange(value) {
             return _this.onChangeSelectQuery(value);
           },
@@ -9494,8 +9653,8 @@ function (_super) {
           value: _this.state.selectQueryDefault
         }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           label: "Key",
-          labelWidth: 10,
-          inputWidth: 20,
+          labelWidth: 15,
+          inputWidth: 10,
           type: "text",
           value: _this.state.mainMetric.key,
           name: "key",
@@ -9504,8 +9663,8 @@ function (_super) {
           }
         }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           label: "Value key",
-          labelWidth: 10,
-          inputWidth: 20,
+          labelWidth: 15,
+          inputWidth: 10,
           type: "text",
           value: _this.state.mainMetric.keyValue,
           name: "valueKey",
@@ -9516,7 +9675,9 @@ function (_super) {
           style: {
             verticalAlign: 'middle'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], null, "Manipulate")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+          width: 15
+        }, "Manipulate")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
           onChange: function onChange(value) {
             return _this.onChangeSelectManageValue(value);
           },
@@ -9566,6 +9727,908 @@ function (_super) {
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (ManageQuery);
+
+/***/ }),
+
+/***/ "./components/CoordinateSpace/orientedLink/editOrientedLink.tsx":
+/*!**********************************************************************!*\
+  !*** ./components/CoordinateSpace/orientedLink/editOrientedLink.tsx ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
+/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _orientedLink__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./orientedLink */ "./components/CoordinateSpace/orientedLink/orientedLink.tsx");
+
+
+
+
+/**
+ * manage coordinate space for simpleEditor
+ */
+
+var EditOrientedLink =
+/** @class */
+function (_super) {
+  Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(EditOrientedLink, _super);
+
+  function EditOrientedLink(props) {
+    var _this = _super.call(this, props) || this;
+    /**
+     * save data in parent
+     */
+
+
+    _this.callBack = function (id, newCoordinate) {
+      var e_1, _a, e_2, _b;
+
+      if (newCoordinate) {
+        var oldData = _this.props.options.arrayOrientedLinks.slice();
+
+        var i = 0;
+
+        try {
+          for (var oldData_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(oldData), oldData_1_1 = oldData_1.next(); !oldData_1_1.done; oldData_1_1 = oldData_1.next()) {
+            var line = oldData_1_1.value;
+
+            if (line.id === id) {
+              oldData[i] = newCoordinate;
+              break;
+            }
+
+            ++i;
+          }
+        } catch (e_1_1) {
+          e_1 = {
+            error: e_1_1
+          };
+        } finally {
+          try {
+            if (oldData_1_1 && !oldData_1_1.done && (_a = oldData_1["return"])) _a.call(oldData_1);
+          } finally {
+            if (e_1) throw e_1.error;
+          }
+        }
+
+        _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+          arrayOrientedLinks: oldData
+        })); //this.fillSelectPoint();
+
+      } else {
+        var find = false;
+
+        var oldData = _this.props.options.arrayOrientedLinks.slice();
+
+        var i = 0;
+
+        try {
+          for (var oldData_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(oldData), oldData_2_1 = oldData_2.next(); !oldData_2_1.done; oldData_2_1 = oldData_2.next()) {
+            var line = oldData_2_1.value;
+
+            if (line.id === id) {
+              find = true;
+              break;
+            }
+
+            ++i;
+          }
+        } catch (e_2_1) {
+          e_2 = {
+            error: e_2_1
+          };
+        } finally {
+          try {
+            if (oldData_2_1 && !oldData_2_1.done && (_b = oldData_2["return"])) _b.call(oldData_2);
+          } finally {
+            if (e_2) throw e_2.error;
+          }
+        }
+
+        if (find) {
+          oldData.splice(i, 1);
+
+          _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+            arrayOrientedLinks: oldData
+          }));
+
+          _this.fillSelectPoint();
+        }
+      }
+    };
+    /** change select value to edit */
+
+
+    _this.onChangeSelectCoordinate = function (value) {
+      _this.setState({
+        selectCoordinateSpaceDefault: value
+      });
+    };
+    /** fill select whith array region object */
+
+
+    _this.fillSelectPoint = function () {
+      var e_3, _a, e_4, _b;
+
+      var _c;
+
+      var valueExist = false;
+      var valueSelect = [];
+
+      var stockTmpCoordinatesSpace = _this.props.options.arrayOrientedLinks.slice();
+
+      try {
+        for (var stockTmpCoordinatesSpace_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(stockTmpCoordinatesSpace), stockTmpCoordinatesSpace_1_1 = stockTmpCoordinatesSpace_1.next(); !stockTmpCoordinatesSpace_1_1.done; stockTmpCoordinatesSpace_1_1 = stockTmpCoordinatesSpace_1.next()) {
+          var line = stockTmpCoordinatesSpace_1_1.value;
+          var label = line.label || line.name;
+          valueSelect.push({
+            value: line,
+            label: label
+          });
+        }
+      } catch (e_3_1) {
+        e_3 = {
+          error: e_3_1
+        };
+      } finally {
+        try {
+          if (stockTmpCoordinatesSpace_1_1 && !stockTmpCoordinatesSpace_1_1.done && (_a = stockTmpCoordinatesSpace_1["return"])) _a.call(stockTmpCoordinatesSpace_1);
+        } finally {
+          if (e_3) throw e_3.error;
+        }
+      }
+
+      if (_this.state.selectCoordinateSpaceDefault) {
+        try {
+          for (var stockTmpCoordinatesSpace_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(stockTmpCoordinatesSpace), stockTmpCoordinatesSpace_2_1 = stockTmpCoordinatesSpace_2.next(); !stockTmpCoordinatesSpace_2_1.done; stockTmpCoordinatesSpace_2_1 = stockTmpCoordinatesSpace_2.next()) {
+            var line = stockTmpCoordinatesSpace_2_1.value;
+
+            if (line.id === ((_c = _this.state.selectCoordinateSpaceDefault.value) === null || _c === void 0 ? void 0 : _c.id)) {
+              valueExist = true;
+              break;
+            }
+          }
+        } catch (e_4_1) {
+          e_4 = {
+            error: e_4_1
+          };
+        } finally {
+          try {
+            if (stockTmpCoordinatesSpace_2_1 && !stockTmpCoordinatesSpace_2_1.done && (_b = stockTmpCoordinatesSpace_2["return"])) _b.call(stockTmpCoordinatesSpace_2);
+          } finally {
+            if (e_4) throw e_4.error;
+          }
+        }
+      } // dev
+
+
+      _this.setState(function (prevState) {
+        return {
+          selectCoordinateSpace: valueSelect,
+          selectCoordinateSpaceDefault: valueExist ? prevState.selectCoordinateSpaceDefault : valueSelect.length > 0 ? valueSelect[0] : prevState.selectCoordinateSpaceDefault
+        };
+      }); // final
+      // this.setState({
+      // 	selectCoordinateSpace: valueSelect,
+      // 	selectCoordinateSpaceDefault: (valueSelect.length > 0) ?
+      // 		valueSelect[0] : this.state.selectCoordinateSpaceDefault,
+      // });
+
+    };
+    /** fill data for select */
+
+
+    _this.componentDidMount = function () {
+      _this.fillSelectPoint();
+    };
+    /** update state if value props change */
+
+
+    _this.componentDidUpdate = function (prevProps) {
+      if (prevProps.options.arrayOrientedLinks !== _this.props.options.arrayOrientedLinks) {
+        _this.fillSelectPoint();
+      } // console.log(prevProps.options.newPoint);
+
+
+      if (prevProps.options.newOrientedLink) {
+        _this.fillSelectPoint();
+
+        _this.props.options.newOrientedLink = false;
+      }
+    };
+
+    _this.state = {
+      selectCoordinateSpace: [],
+      selectCoordinateSpaceDefault: []
+    };
+    return _this;
+  }
+  /** return html */
+
+
+  EditOrientedLink.prototype.render = function () {
+    var _this = this;
+
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, "Select Oriented Link")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+      onChange: function onChange(value) {
+        return _this.onChangeSelectCoordinate(value);
+      },
+      allowCustomValue: false,
+      options: this.state.selectCoordinateSpace,
+      width: 10,
+      value: this.state.selectCoordinateSpaceDefault
+    })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.selectCoordinateSpaceDefault.value ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_orientedLink__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      options: this.props.options,
+      onOptionsChange: this.props.onOptionsChange,
+      data: this.props.data,
+      orientedLink: this.state.selectCoordinateSpaceDefault.value,
+      callBackToParent: this.callBack,
+      isAddLink: false
+    }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+      style: {
+        textAlign: 'center',
+        fontSize: '20px',
+        marginTop: '50px'
+      }
+    }, "Data not set")));
+  };
+
+  return EditOrientedLink;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (EditOrientedLink);
+
+/***/ }),
+
+/***/ "./components/CoordinateSpace/orientedLink/orientedLink.tsx":
+/*!******************************************************************!*\
+  !*** ./components/CoordinateSpace/orientedLink/orientedLink.tsx ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Models_ArrayInputSelectableClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Models/ArrayInputSelectableClass */ "./Models/ArrayInputSelectableClass.tsx");
+/* harmony import */ var _Functions_Input_inputTextOrientedLink__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../Functions/Input/inputTextOrientedLink */ "./Functions/Input/inputTextOrientedLink.tsx");
+/* harmony import */ var _Functions_Input_inputSelectOrientedLink__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../Functions/Input/inputSelectOrientedLink */ "./Functions/Input/inputSelectOrientedLink.tsx");
+/* harmony import */ var _Functions_CreateInput_createInputsOrientedLink__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../Functions/CreateInput/createInputsOrientedLink */ "./Functions/CreateInput/createInputsOrientedLink.tsx");
+/* harmony import */ var _Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../Functions/EditParameter/editGoodParameterOrientedLink */ "./Functions/EditParameter/editGoodParameterOrientedLink.tsx");
+/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
+/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _Parametrage_parametresGeneriques__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../Parametrage/parametresGeneriques */ "./components/Parametrage/parametresGeneriques.tsx");
+/* harmony import */ var _Parametrage_manageLowerLimit__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../Parametrage/manageLowerLimit */ "./components/Parametrage/manageLowerLimit.tsx");
+/* harmony import */ var _Parametrage_positionParameters__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../Parametrage/positionParameters */ "./components/Parametrage/positionParameters.tsx");
+/* harmony import */ var _CoordinateSpace_manageQuery__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../CoordinateSpace/manageQuery */ "./components/CoordinateSpace/manageQuery.tsx");
+/* harmony import */ var _CoordinateSpace_manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../CoordinateSpace/manageAuxiliaryQuery */ "./components/CoordinateSpace/manageAuxiliaryQuery.tsx");
+/* harmony import */ var _Functions_initOrientedLink__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../Functions/initOrientedLink */ "./Functions/initOrientedLink.tsx");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * IndexParametrage
+ */
+
+var OrientedLink =
+/** @class */
+function (_super) {
+  Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(OrientedLink, _super);
+
+  function OrientedLink(props) {
+    var _this = _super.call(this, props) || this;
+    /** update state with promise */
+
+
+    _this.setStateAsyncOrientedLink = function (state) {
+      return new Promise(function (resolve) {
+        _this.setState(state, resolve);
+      });
+    };
+    /** update state with promise */
+
+
+    _this.setStateAsyncArrayInput = function (state) {
+      return new Promise(function (resolve) {
+        _this.setState(state, resolve);
+      });
+    };
+    /** add inputs for a new coordiante */
+
+
+    _this.addInput = function (id) {
+      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+          switch (_a.label) {
+            case 0:
+              return [4
+              /*yield*/
+              , this.setStateAsyncArrayInput({
+                arrayInput: this.state.arrayInput.concat([new _Models_ArrayInputSelectableClass__WEBPACK_IMPORTED_MODULE_2__["ArrayInputSelectableClass"](id, Object(_Functions_CreateInput_createInputsOrientedLink__WEBPACK_IMPORTED_MODULE_5__["createInputsOrientedLink"])(id, this.defineDataRegion(), this.defineDataPoint()))])
+              })];
+
+            case 1:
+              _a.sent();
+
+              return [2
+              /*return*/
+              ];
+          }
+        });
+      });
+    };
+    /**
+     * Delete array input and value
+     * @param {event} event event click delete button
+     */
+
+
+    _this.deleteOwnInput = function () {
+      var label = _this.state.orientedLink.label || _this.state.orientedLink.name;
+      var del = confirm('Delete "' + label + '" ?'); // alert(del);
+
+      if (del) {
+        _this.props.callBackToParent(_this.state.orientedLink.id, undefined);
+      }
+    };
+    /** set point in/out to empty in if orientedLink is associate to region in/out
+     *  set region in/out to empty in if orientedLink is associate to point in/out
+     */
+
+
+    _this.updateAssociatePointAndRegion = function (orientedLink, name) {
+      if (name.startsWith('pointIn')) {
+        orientedLink = Object(_Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_6__["editGoodParameterOrientedLink"])('regionIn', orientedLink, '', {});
+      } else if (name.startsWith('regionIn')) {
+        orientedLink = Object(_Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_6__["editGoodParameterOrientedLink"])('pointIn', orientedLink, '', {});
+      } else if (name.startsWith('pointOut')) {
+        orientedLink = Object(_Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_6__["editGoodParameterOrientedLink"])('regionOut', orientedLink, '', {});
+      } else if (name.startsWith('regionOut')) {
+        orientedLink = Object(_Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_6__["editGoodParameterOrientedLink"])('pointOut', orientedLink, '', {});
+      }
+    };
+    /** call function to return arrayCoor a SimpleEditor */
+
+
+    _this.callBack = function () {
+      var waitAlert = 3000;
+
+      if (_this.state.orientedLink.label === '') {
+        _this.setState({
+          severityAlert: 'error',
+          titleAlert: 'Error: label is empty',
+          hiddenAlert: false
+        });
+
+        setTimeout(function () {
+          _this.setState({
+            hiddenAlert: true
+          });
+        }, waitAlert); //console.log('ok');
+      } else {
+        _this.props.callBackToParent(_this.state.orientedLink.id, _this.state.orientedLink);
+
+        _this.setState({
+          severityAlert: 'success',
+          titleAlert: 'Save',
+          hiddenAlert: false
+        });
+
+        if (!_this.props.isAddLink) {
+          setTimeout(function () {
+            _this.setState({
+              hiddenAlert: true
+            });
+          }, waitAlert);
+        }
+      }
+    };
+    /** update data for manageLink and textObject */
+
+
+    _this.callBackToOther = function (followLink, hoveringTooltipLink, hoveringTooltipText, textObj) {
+      var oldCoor = _this.state.orientedLink;
+
+      if (followLink) {
+        oldCoor.linkURL.followLink = followLink;
+      }
+
+      if (hoveringTooltipLink) {
+        oldCoor.linkURL.hoveringTooltipLink = hoveringTooltipLink;
+      }
+
+      if (hoveringTooltipText) {
+        oldCoor.linkURL.hoveringTooltipText = hoveringTooltipText;
+      }
+
+      if (textObj) {
+        oldCoor.textObj = textObj;
+      }
+
+      _this.setState({
+        orientedLink: oldCoor
+      });
+
+      if (_this.props.isAddLink === false) {
+        _this.callBack();
+      }
+    };
+    /** update lower limit */
+
+
+    _this.callBackManageLowerLimit = function (coordinate, id) {
+      var newValue = _this.state.orientedLink;
+      newValue.colorMode = coordinate.colorMode;
+      newValue.traceBorder = coordinate.traceBorder;
+      newValue.traceBack = coordinate.traceBack;
+
+      _this.setState({
+        orientedLink: newValue
+      });
+
+      if (_this.props.isAddLink === false) {
+        _this.callBack();
+      }
+    };
+    /** save lower limit data */
+
+
+    _this.callBackLowerLimit = function (lowerLimit, id) {
+      var newValue = _this.state.orientedLink;
+      newValue.lowerLimit = lowerLimit;
+
+      _this.setState({
+        orientedLink: newValue
+      });
+
+      if (_this.props.isAddLink === false) {
+        _this.callBack();
+      }
+    };
+    /** save data of mainMetric */
+
+
+    _this.callBackMainMetric = function (mainMetric, id) {
+      var newValue = _this.state.orientedLink;
+      newValue.mainMetric = mainMetric;
+
+      _this.setState({
+        orientedLink: newValue
+      });
+
+      if (_this.props.isAddLink === false) {
+        _this.callBack();
+      }
+    };
+    /**
+     * fill input whith data
+     * this function is called by mount and update event
+     */
+
+
+    _this.getDataInInput = function () {
+      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+          switch (_a.label) {
+            case 0:
+              return [4
+              /*yield*/
+              , this.addInput(this.props.orientedLink.id)];
+
+            case 1:
+              _a.sent();
+
+              this.generateInputsOrientedLink();
+              return [2
+              /*return*/
+              ];
+          }
+        });
+      });
+    };
+    /** call function in load component */
+
+
+    _this.componentDidMount = function () {
+      _this.getDataInInput();
+    };
+    /** function is call when props is update. Update state */
+
+
+    _this.componentDidUpdate = function (prevProps, prevState) {
+      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+          switch (_a.label) {
+            case 0:
+              if (!(prevProps.orientedLink.id !== this.props.orientedLink.id)) return [3
+              /*break*/
+              , 3];
+              return [4
+              /*yield*/
+              , this.setStateAsyncOrientedLink({
+                orientedLink: Object(_Functions_initOrientedLink__WEBPACK_IMPORTED_MODULE_13__["cloneOrientedLink"])(this.props.orientedLink)
+              })];
+
+            case 1:
+              _a.sent();
+
+              return [4
+              /*yield*/
+              , this.setStateAsyncArrayInput({
+                arrayInput: []
+              })];
+
+            case 2:
+              _a.sent();
+
+              this.getDataInInput();
+              _a.label = 3;
+
+            case 3:
+              return [2
+              /*return*/
+              ];
+          }
+        });
+      });
+    };
+
+    _this.state = {
+      arrayInput: [],
+      orientedLink: Object(_Functions_initOrientedLink__WEBPACK_IMPORTED_MODULE_13__["cloneOrientedLink"])(_this.props.orientedLink),
+      arrayOrientedLink: [],
+      //debug: false,
+      htmlInput: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null),
+      hiddenAlert: true,
+      titleAlert: 'Error: label is empty',
+      severityAlert: 'error'
+    };
+    return _this;
+  }
+
+  OrientedLink.prototype.defineDataRegion = function () {
+    var regionCoordinateSpace = this.props.options.regionCoordinateSpace;
+    var optionRegionNull = {
+      label: 'None',
+      value: ''
+    };
+    var arrayOptionsRegion = [];
+    arrayOptionsRegion.push(optionRegionNull);
+    regionCoordinateSpace.forEach(function (region) {
+      var optionRegion = {
+        label: region.label,
+        value: region.label
+      };
+      arrayOptionsRegion.push(optionRegion);
+    });
+    return arrayOptionsRegion;
+  };
+
+  OrientedLink.prototype.defineDataPoint = function () {
+    var arrayPoints = this.props.options.arrayPoints;
+    var optionPointNull = {
+      label: 'None',
+      value: ''
+    };
+    var arrayOptionsPoint = [];
+    arrayOptionsPoint.push(optionPointNull);
+    arrayPoints.forEach(function (point) {
+      var valueLabel = point.label || point.name;
+      var optionPoint = {
+        label: valueLabel,
+        value: valueLabel
+      };
+      arrayOptionsPoint.push(optionPoint);
+    });
+    return arrayOptionsPoint;
+  };
+  /**
+   * Use function if value input change
+   * @param {string} currentTarget new value of input
+   * @param {string} name name of input
+   * @param {number} index id of input
+   */
+
+
+  OrientedLink.prototype._handleChange = function (currentTarget, name, index) {
+    var tmp = this.state.orientedLink;
+    tmp = Object(_Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_6__["editGoodParameterOrientedLink"])(name, tmp, currentTarget, {});
+    this.setState({
+      orientedLink: tmp
+    });
+    this.generateInputsOrientedLink();
+
+    if (this.props.isAddLink === false) {
+      this.callBack();
+    }
+  };
+  /**
+   * Get value of input with state.arrayPointClass
+   * @param {number} id id of element
+   * @param {string} param name of input
+   * @returns {string} value of the array element
+   */
+
+
+  OrientedLink.prototype.getGoodValue = function (name) {
+    var value;
+    var valueSelect;
+    var valueMetric;
+    value = '';
+    valueSelect = {};
+
+    if (name.startsWith('orientationLink') || name.startsWith('isIncurved') || name.startsWith('pointIn') || name.startsWith('pointOut') || name.startsWith('regionIn') || name.startsWith('regionOut') || name.startsWith('size')) {
+      if (name.startsWith('orientationLink')) {
+        valueSelect = this.state.orientedLink.orientationLink;
+      } else if (name.startsWith('isIncurved')) {
+        valueSelect = this.state.orientedLink.isIncurved;
+      } else if (name.startsWith('pointIn')) {
+        valueSelect = {
+          label: this.state.orientedLink.pointIn,
+          value: this.state.orientedLink.pointIn
+        };
+      } else if (name.startsWith('pointOut')) {
+        valueSelect = {
+          label: this.state.orientedLink.pointOut,
+          value: this.state.orientedLink.pointOut
+        };
+      } else if (name.startsWith('regionIn')) {
+        valueSelect = {
+          label: this.state.orientedLink.regionIn,
+          value: this.state.orientedLink.regionIn
+        };
+      } else if (name.startsWith('regionOut')) {
+        valueSelect = {
+          label: this.state.orientedLink.regionOut,
+          value: this.state.orientedLink.regionOut
+        };
+      } else if (name.startsWith('size')) {
+        valueSelect = this.state.orientedLink.size;
+      }
+
+      return valueSelect;
+    } else if (name.startsWith('mainMetric')) {
+      valueMetric = this.state.orientedLink.mainMetric;
+      return valueMetric;
+    } else {
+      if (name.startsWith('label')) {
+        value = this.state.orientedLink.label;
+      } else if (name.startsWith('pointAX')) {
+        value = this.state.orientedLink.pointAPositionX;
+      } else if (name.startsWith('pointAY')) {
+        value = this.state.orientedLink.pointAPositionY;
+      } else if (name.startsWith('pointBX')) {
+        value = this.state.orientedLink.pointBPositionX;
+      } else if (name.startsWith('pointBY')) {
+        value = this.state.orientedLink.pointBPositionY;
+      } else if (name.startsWith('colorCoordinateA')) {
+        value = this.state.orientedLink.colorCoordinateA;
+      } else if (name.startsWith('colorCoordinateB')) {
+        value = this.state.orientedLink.colorCoordinateB;
+      } else if (name.startsWith('refIdMainMetric')) {
+        value = this.state.orientedLink.mainMetric.refId || '';
+      } else if (name.startsWith('keyMainMetric')) {
+        value = this.state.orientedLink.mainMetric.key || '';
+      } else if (name.startsWith('keyValueMainMetric')) {
+        value = this.state.orientedLink.mainMetric.keyValue || '';
+      } else if (name.startsWith('pointCX')) {
+        value = this.state.orientedLink.pointCPositionX;
+      } else if (name.startsWith('pointCY')) {
+        value = this.state.orientedLink.pointCPositionY;
+      }
+
+      return value;
+    }
+  };
+  /** create dynamic input */
+
+
+  OrientedLink.prototype.generateInputsOrientedLink = function () {
+    var e_1, _a;
+
+    var _this = this;
+
+    var arrayInput = this.state.arrayInput;
+    var finalItem = [];
+    var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+
+    var _loop_1 = function _loop_1(line) {
+      var mapItems = [];
+      line.uneClassInput.forEach(function (obj) {
+        if (obj.input_type === 'text') {
+          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Functions_Input_inputTextOrientedLink__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            key: obj.id,
+            label: obj.label,
+            name: obj.name,
+            placeholder: obj.placeholder || '',
+            required: obj.required,
+            value: _this.getGoodValue(obj.name),
+            _handleChange: function _handleChange(event) {
+              _this._handleChange(event.currentTarget.value, obj.name, line.id);
+            },
+            isIncurved: _this.getGoodValue('isIncurved')
+          });
+        } else if (obj.input_type === 'select') {
+          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Functions_Input_inputSelectOrientedLink__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            key: obj.id,
+            _onChange: function _onChange(value, name, index) {
+              var newOrientedLink = _this.state.orientedLink;
+              Object(_Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_6__["editGoodParameterOrientedLink"])(name, newOrientedLink, value.value || '', value);
+
+              _this.updateAssociatePointAndRegion(newOrientedLink, name);
+
+              _this.setState({
+                orientedLink: newOrientedLink
+              });
+
+              _this.generateInputsOrientedLink();
+
+              if (_this.props.isAddLink === false) {
+                _this.callBack();
+              }
+            },
+            name: obj.name,
+            index: line.id,
+            data: obj.optionValues,
+            defaultValue: _this.getGoodValue(obj.name),
+            label: obj.label
+          });
+        } else {
+          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+        }
+
+        mapItems.push(item);
+      });
+      var newInputList = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        key: 'inputOrientedLink' + line.id.toString(),
+        className: "inputCoor",
+        id: 'point' + line.id.toString()
+      }, mapItems);
+      finalItem = finalItem.concat(newInputList);
+    };
+
+    try {
+      for (var arrayInput_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayInput), arrayInput_1_1 = arrayInput_1.next(); !arrayInput_1_1.done; arrayInput_1_1 = arrayInput_1.next()) {
+        var line = arrayInput_1_1.value;
+
+        _loop_1(line);
+      }
+    } catch (e_1_1) {
+      e_1 = {
+        error: e_1_1
+      };
+    } finally {
+      try {
+        if (arrayInput_1_1 && !arrayInput_1_1.done && (_a = arrayInput_1["return"])) _a.call(arrayInput_1);
+      } finally {
+        if (e_1) throw e_1.error;
+      }
+    }
+
+    this.setState(function (prevState) {
+      return {
+        htmlInput: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", null, finalItem)
+      };
+    });
+  };
+  /** save data of zIndex */
+
+
+  OrientedLink.prototype.callBackZIndex = function (zIndexUpdated, id) {
+    var newValue = this.state.orientedLink;
+    newValue.zIndex = zIndexUpdated;
+    this.setState({
+      orientedLink: newValue
+    });
+
+    if (this.props.isAddLink === false) {
+      this.callBack();
+    }
+  };
+  /**
+   * render()
+   */
+
+
+  OrientedLink.prototype.render = function () {
+    var _this = this;
+
+    var styleAlert = {
+      position: 'fixed',
+      bottom: '5%',
+      right: '5%',
+      zIndex: 9999
+    };
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: styleAlert,
+      hidden: this.state.hiddenAlert
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_7__["Alert"], {
+      title: this.state.titleAlert,
+      severity: this.state.severityAlert
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_CoordinateSpace_manageQuery__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      options: this.props.options,
+      onOptionsChange: this.props.onOptionsChange,
+      data: this.props.data,
+      idCoordinate: this.state.orientedLink.id,
+      mainMetric: this.state.orientedLink.mainMetric,
+      callBackToParent: this.callBackMainMetric,
+      isLink: true
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_CoordinateSpace_manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      options: this.props.options,
+      onOptionsChange: this.props.onOptionsChange,
+      data: this.props.data,
+      idCoordinate: this.state.orientedLink.id,
+      metrics: this.state.orientedLink.metrics,
+      isLink: true
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_parametresGeneriques__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      options: this.props.options,
+      onOptionsChange: this.props.onOptionsChange,
+      data: this.props.data,
+      coordinateSpace: this.state.orientedLink,
+      callBackToParent: this.callBackToOther
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_manageLowerLimit__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      options: this.props.options,
+      onOptionsChange: this.props.onOptionsChange,
+      data: this.props.data,
+      coordinate: this.state.orientedLink,
+      callBack: this.callBackManageLowerLimit,
+      lowerLimitCallBack: this.callBackLowerLimit,
+      isLink: true
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_positionParameters__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      options: this.props.options,
+      onOptionsChange: this.props.onOptionsChange,
+      data: this.props.data,
+      callBackToParentZIndex: this.callBackZIndex.bind(this),
+      isPoint: false,
+      isLink: true,
+      isRegion: false,
+      id: this.state.orientedLink.id
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.htmlInput), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        textAlign: 'center'
+      },
+      className: "buttonSave"
+    }, this.props.isAddLink && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_7__["Button"], {
+      style: {
+        marginRight: '1%'
+      },
+      onClick: function onClick() {
+        return _this.callBack();
+      }
+    }, "Save"), !this.props.isAddLink && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_7__["Button"], {
+      onClick: this.deleteOwnInput,
+      variant: "danger"
+    }, "Delete")));
+  };
+
+  return OrientedLink;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (OrientedLink);
 
 /***/ }),
 
@@ -9848,16 +10911,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Models_ArrayInputSelectableClass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../Models/ArrayInputSelectableClass */ "./Models/ArrayInputSelectableClass.tsx");
 /* harmony import */ var _Functions_EditParameter_editGoodParameterPoint__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../Functions/EditParameter/editGoodParameterPoint */ "./Functions/EditParameter/editGoodParameterPoint.tsx");
 /* harmony import */ var _Functions_Input_inputSelectPoint__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../Functions/Input/inputSelectPoint */ "./Functions/Input/inputSelectPoint.tsx");
-/* harmony import */ var _Functions_Input_inputSeriesColorPickerPoint__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../Functions/Input/inputSeriesColorPickerPoint */ "./Functions/Input/inputSeriesColorPickerPoint.tsx");
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _manageQuery__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../manageQuery */ "./components/CoordinateSpace/manageQuery.tsx");
-/* harmony import */ var _manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../manageAuxiliaryQuery */ "./components/CoordinateSpace/manageAuxiliaryQuery.tsx");
-/* harmony import */ var _Parametrage_positionParameters__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../Parametrage/positionParameters */ "./components/Parametrage/positionParameters.tsx");
-/* harmony import */ var _Parametrage_parametresGeneriques__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../Parametrage/parametresGeneriques */ "./components/Parametrage/parametresGeneriques.tsx");
-/* harmony import */ var _Parametrage_manageLowerLimit__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../Parametrage/manageLowerLimit */ "./components/Parametrage/manageLowerLimit.tsx");
-/* harmony import */ var Functions_initPoint__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! Functions/initPoint */ "./Functions/initPoint.tsx");
-
+/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
+/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _manageQuery__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../manageQuery */ "./components/CoordinateSpace/manageQuery.tsx");
+/* harmony import */ var _manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../manageAuxiliaryQuery */ "./components/CoordinateSpace/manageAuxiliaryQuery.tsx");
+/* harmony import */ var _Parametrage_positionParameters__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../Parametrage/positionParameters */ "./components/Parametrage/positionParameters.tsx");
+/* harmony import */ var _Parametrage_parametresGeneriques__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../Parametrage/parametresGeneriques */ "./components/Parametrage/parametresGeneriques.tsx");
+/* harmony import */ var _Parametrage_manageLowerLimit__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../Parametrage/manageLowerLimit */ "./components/Parametrage/manageLowerLimit.tsx");
+/* harmony import */ var Functions_initPoint__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! Functions/initPoint */ "./Functions/initPoint.tsx");
 
 
 
@@ -9930,11 +10991,11 @@ function (_super) {
 
 
     _this.deleteOwnInput = function () {
-      var label = _this.state.arrayCoor.label || _this.state.arrayCoor.name;
+      var label = _this.state.point.label || _this.state.point.name;
       var del = confirm('Delete "' + label + '" ?'); // alert(del);
 
       if (del) {
-        _this.props.callBackToParent(_this.state.arrayCoor.id, undefined);
+        _this.props.callBackToParent(_this.state.point.id, undefined);
       }
     };
     /** call function to return arrayCoor a SimpleEditor */
@@ -9943,7 +11004,7 @@ function (_super) {
     _this.callBack = function () {
       var waitAlert = 3000;
 
-      if (_this.state.arrayCoor.label === '') {
+      if (_this.state.point.label === '') {
         _this.setState({
           severityAlert: 'error',
           titleAlert: 'Error: label is empty',
@@ -9957,7 +11018,7 @@ function (_super) {
         }, waitAlert);
         console.log('ok');
       } else {
-        _this.props.callBackToParent(_this.state.arrayCoor.id, _this.state.arrayCoor);
+        _this.props.callBackToParent(_this.state.point.id, _this.state.point);
 
         _this.setState({
           severityAlert: 'success',
@@ -9976,7 +11037,7 @@ function (_super) {
     };
 
     _this.callBackToOther = function (followLink, hoveringTooltipLink, hoveringTooltipText, textObj) {
-      var oldCoor = _this.state.arrayCoor;
+      var oldCoor = _this.state.point;
 
       if (followLink) {
         oldCoor.linkURL.followLink = followLink;
@@ -9995,7 +11056,7 @@ function (_super) {
       }
 
       _this.setState({
-        arrayCoor: oldCoor
+        point: oldCoor
       });
 
       if (_this.props.isAddPoint === false) {
@@ -10006,35 +11067,28 @@ function (_super) {
 
 
     _this.callBackManageLowerLimit = function (coordinate, id) {
-      var newValue = _this.state.arrayCoor;
+      var newValue = _this.state.point;
       newValue.colorMode = coordinate.colorMode;
       newValue.traceBorder = coordinate.traceBorder;
       newValue.traceBack = coordinate.traceBack;
 
       _this.setState({
-        arrayCoor: newValue
+        point: newValue
       });
 
       if (_this.props.isAddPoint === false) {
         _this.callBack();
       }
-    }; // private callBackPositionParameter = (positionParameter: PositionParameterClass, id?: number) => {
-    //   const newValue: PointClass = this.state.arrayCoor;
-    //   newValue.positionParameter = positionParameter;
-    //   this.setState({
-    //     arrayCoor: newValue,
-    //   });
-    // };
-
+    };
     /** save lower limit data */
 
 
     _this.callBackLowerLimit = function (lowerLimit, id) {
-      var newValue = _this.state.arrayCoor;
+      var newValue = _this.state.point;
       newValue.lowerLimit = lowerLimit;
 
       _this.setState({
-        arrayCoor: newValue
+        point: newValue
       });
 
       if (_this.props.isAddPoint === false) {
@@ -10043,11 +11097,11 @@ function (_super) {
     };
 
     _this.callBackMainMetric = function (mainMetric, id) {
-      var newValue = _this.state.arrayCoor;
+      var newValue = _this.state.point;
       newValue.mainMetric = mainMetric;
 
       _this.setState({
-        arrayCoor: newValue
+        point: newValue
       });
 
       if (_this.props.isAddPoint === false) {
@@ -10100,7 +11154,7 @@ function (_super) {
               return [4
               /*yield*/
               , this.setStateAsyncArrayCoor({
-                arrayCoor: Object(Functions_initPoint__WEBPACK_IMPORTED_MODULE_14__["clonePoint"])(this.props.point)
+                point: Object(Functions_initPoint__WEBPACK_IMPORTED_MODULE_13__["clonePoint"])(this.props.point)
               })];
 
             case 1:
@@ -10129,9 +11183,8 @@ function (_super) {
 
     _this.state = {
       arrayInput: [],
-      arrayCoor: Object(Functions_initPoint__WEBPACK_IMPORTED_MODULE_14__["clonePoint"])(_this.props.point),
+      point: Object(Functions_initPoint__WEBPACK_IMPORTED_MODULE_13__["clonePoint"])(_this.props.point),
       arrayPointClass: [],
-      debug: false,
       htmlInput: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null),
       hiddenAlert: true,
       titleAlert: 'Error: label is empty',
@@ -10148,10 +11201,10 @@ function (_super) {
 
 
   Point.prototype._handleChange = function (currentTarget, name, index) {
-    var tmp = this.state.arrayCoor;
+    var tmp = this.state.point;
     tmp = Object(_Functions_EditParameter_editGoodParameterPoint__WEBPACK_IMPORTED_MODULE_5__["editGoodParameterPoint"])(name, tmp, currentTarget, {});
     this.setState({
-      arrayCoor: tmp
+      point: tmp
     });
     this.generateInputsPoint();
 
@@ -10167,7 +11220,7 @@ function (_super) {
    */
 
 
-  Point.prototype.getGoodValue = function (id, param) {
+  Point.prototype.getGoodValue = function (param) {
     var value;
     var valueSelect;
     value = '';
@@ -10175,27 +11228,27 @@ function (_super) {
 
     if (param.startsWith('drawGraphicMarker') || param.startsWith('shape') || param.startsWith('sizeWidth') || param.startsWith('sizeHeight') || param.startsWith('linkWithCoordinateSpace')) {
       if (param.startsWith('drawGraphicMarker')) {
-        valueSelect = this.state.arrayCoor.drawGraphicMarker;
+        valueSelect = this.state.point.drawGraphicMarker;
       } else if (param.startsWith('shape')) {
-        valueSelect = this.state.arrayCoor.shape;
+        valueSelect = this.state.point.shape;
       } else if (param.startsWith('sizeWidth')) {
-        valueSelect = this.state.arrayCoor.sizeWidth;
+        valueSelect = this.state.point.sizeWidth;
       } else if (param.startsWith('sizeHeight')) {
-        valueSelect = this.state.arrayCoor.sizeHeight;
+        valueSelect = this.state.point.sizeHeight;
       }
 
       return valueSelect;
     } else {
       if (param.startsWith('rotateArrow')) {
-        value = this.state.arrayCoor.rotateArrow;
+        value = this.state.point.rotateArrow;
       } else if (param.startsWith('positionShapeX')) {
-        value = this.state.arrayCoor.positionShapeX;
+        value = this.state.point.positionShapeX;
       } else if (param.startsWith('positionShapeY')) {
-        value = this.state.arrayCoor.positionShapeY;
+        value = this.state.point.positionShapeY;
       } else if (param.startsWith('label')) {
-        value = this.state.arrayCoor.label;
+        value = this.state.point.label;
       } else if (param.startsWith('color')) {
-        value = this.state.arrayCoor.color;
+        value = this.state.point.color;
       }
 
       return value;
@@ -10225,21 +11278,21 @@ function (_super) {
             name: obj.name,
             placeholder: obj.placeholder || '',
             required: obj.required,
-            value: _this.getGoodValue(line.id, obj.name),
+            value: _this.getGoodValue(obj.name),
             _handleChange: function _handleChange(event) {
               _this._handleChange(event.currentTarget.value, obj.name, line.id);
             },
-            shape: _this.getGoodValue(line.id, 'shape').value
+            shape: _this.getGoodValue('shape').value
           });
         } else if (obj.input_type === 'select') {
           item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Functions_Input_inputSelectPoint__WEBPACK_IMPORTED_MODULE_6__["default"], {
             key: obj.id,
             _onChange: function _onChange(value, name, index) {
-              var newPoint = _this.state.arrayCoor;
+              var newPoint = _this.state.point;
               Object(_Functions_EditParameter_editGoodParameterPoint__WEBPACK_IMPORTED_MODULE_5__["editGoodParameterPoint"])(name, newPoint, '', value);
 
               _this.setState({
-                arrayCoor: newPoint
+                point: newPoint
               });
 
               _this.generateInputsPoint();
@@ -10251,70 +11304,11 @@ function (_super) {
             name: obj.name,
             index: line.id,
             data: obj.optionValues,
-            defaultValue: _this.getGoodValue(line.id, obj.name),
-            shape: _this.getGoodValue(line.id, 'shape').value,
+            defaultValue: _this.getGoodValue(obj.name),
+            shape: _this.getGoodValue('shape').value,
             label: obj.label
           });
-        } else if (obj.input_type === 'color') {
-          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Functions_Input_inputSeriesColorPickerPoint__WEBPACK_IMPORTED_MODULE_7__["default"], {
-            key: obj.id,
-            keyInt: parseInt(obj.id, 10),
-            color: _this.getGoodValue(line.id, 'color'),
-            text: obj.label,
-            width: 10,
-            _onChange: function _onChange(keyInt, newColor) {
-              var e_2, _a;
-
-              var i;
-              i = 0;
-
-              var copyOfarrayPointClass = _this.state.arrayPointClass.slice();
-
-              try {
-                for (var copyOfarrayPointClass_1 = (e_2 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(copyOfarrayPointClass)), copyOfarrayPointClass_1_1 = copyOfarrayPointClass_1.next(); !copyOfarrayPointClass_1_1.done; copyOfarrayPointClass_1_1 = copyOfarrayPointClass_1.next()) {
-                  var line_1 = copyOfarrayPointClass_1_1.value;
-
-                  if (line_1.id === keyInt) {
-                    copyOfarrayPointClass[i] = Object(_Functions_EditParameter_editGoodParameterPoint__WEBPACK_IMPORTED_MODULE_5__["editGoodParameterPoint"])(obj.name, copyOfarrayPointClass[i], newColor, {});
-                    break;
-                  }
-
-                  i++;
-                }
-              } catch (e_2_1) {
-                e_2 = {
-                  error: e_2_1
-                };
-              } finally {
-                try {
-                  if (copyOfarrayPointClass_1_1 && !copyOfarrayPointClass_1_1.done && (_a = copyOfarrayPointClass_1["return"])) _a.call(copyOfarrayPointClass_1);
-                } finally {
-                  if (e_2) throw e_2.error;
-                }
-              }
-
-              _this.setState({
-                arrayPointClass: copyOfarrayPointClass
-              });
-
-              _this.callBack();
-
-              obj.setDefaultValueColor(newColor);
-            }
-          });
         } else {
-          //   itemButton = (
-          //     <InputButtonField
-          //       key={obj.id}
-          //       label={obj.label}
-          //       value={obj.value || ''}
-          //       name={obj.name}
-          //       required={obj.required}
-          //       _handleChange={this.deleteOwnInput}
-          //       id={obj.id}
-          //       withLabel={false}
-          //     />
-          //   );
           item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
         }
 
@@ -10369,40 +11363,40 @@ function (_super) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       style: styleAlert,
       hidden: this.state.hiddenAlert
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_8__["Alert"], {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_7__["Alert"], {
       title: this.state.titleAlert,
       severity: this.state.severityAlert
-    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_manageQuery__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_manageQuery__WEBPACK_IMPORTED_MODULE_8__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
-      idCoordinate: this.state.arrayCoor.id,
-      mainMetric: this.state.arrayCoor.mainMetric,
+      idCoordinate: this.state.point.id,
+      mainMetric: this.state.point.mainMetric,
       callBackToParent: this.callBackMainMetric,
       isLink: false
-    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_9__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
-      idCoordinate: this.state.arrayCoor.id,
-      metrics: this.state.arrayCoor.metrics,
+      idCoordinate: this.state.point.id,
+      metrics: this.state.point.metrics,
       //callBackToParent={this.callBackAuxiliaryMetric}
       isPoint: true
-    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_parametresGeneriques__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_parametresGeneriques__WEBPACK_IMPORTED_MODULE_11__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
-      coordinateSpace: this.state.arrayCoor,
+      coordinateSpace: this.state.point,
       callBackToParent: this.callBackToOther
-    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_manageLowerLimit__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_manageLowerLimit__WEBPACK_IMPORTED_MODULE_12__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
-      coordinate: this.state.arrayCoor,
+      coordinate: this.state.point,
       callBack: this.callBackManageLowerLimit,
       lowerLimitCallBack: this.callBackLowerLimit,
       isLink: false
-    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_positionParameters__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_positionParameters__WEBPACK_IMPORTED_MODULE_10__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
@@ -10410,20 +11404,20 @@ function (_super) {
       isPoint: true,
       isLink: false,
       isRegion: false,
-      id: this.state.arrayCoor.id
+      id: this.state.point.id
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.htmlInput), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       style: {
         textAlign: 'center'
       },
       className: "buttonSave"
-    }, this.props.isAddPoint && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_8__["Button"], {
+    }, this.props.isAddPoint && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_7__["Button"], {
       style: {
         marginRight: '1%'
       },
       onClick: function onClick() {
         return _this.callBack();
       }
-    }, "Save"), !this.props.isAddPoint && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_8__["Button"], {
+    }, "Save"), !this.props.isAddPoint && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_7__["Button"], {
       onClick: this.deleteOwnInput,
       variant: "danger"
     }, "Delete")));
@@ -10523,26 +11517,38 @@ function (_super) {
       arrayOrientedLink.forEach(function (orientedLink) {
         if (_this.props.name !== orientedLink.name) {
           if (_this.props.associateRegionIn !== '' && _this.props.associateRegionOut !== '') {
+            //console.log('//1');
             if (_this.props.associateRegionIn === orientedLink.regionIn || _this.props.associateRegionIn === orientedLink.regionOut) {
+              //console.log('//1.1');
               if (_this.props.associateRegionOut === orientedLink.regionIn || _this.props.associateRegionOut === orientedLink.regionOut) {
+                //console.log('//1.2');
                 listParallelOrientedLinks.push(orientedLink.id);
               }
             }
           } else if (_this.props.associatePointIn !== '' && _this.props.associatePointOut !== '') {
+            //console.log('//2');
             if (_this.props.associatePointIn === orientedLink.pointIn || _this.props.associatePointIn === orientedLink.pointOut) {
+              //console.log('//2.1');
               if (_this.props.associatePointOut === orientedLink.pointIn || _this.props.associatePointOut === orientedLink.pointOut) {
+                //console.log('//2.2');
                 listParallelOrientedLinks.push(orientedLink.id);
               }
             }
           } else if (_this.props.associateRegionIn !== '' && _this.props.associatePointOut !== '') {
-            if (_this.props.associateRegionIn === orientedLink.regionIn || _this.props.associateRegionIn === orientedLink.pointOut || _this.props.associateRegionIn === orientedLink.regionOut) {
-              if (_this.props.associatePointOut === orientedLink.regionIn || _this.props.associatePointOut === orientedLink.pointOut || _this.props.associatePointOut === orientedLink.pointIn) {
+            //console.log('//3');
+            if (_this.props.associateRegionIn === orientedLink.regionIn || _this.props.associateRegionIn === orientedLink.regionOut) {
+              //console.log('//3.1');
+              if (_this.props.associatePointOut === orientedLink.pointOut || _this.props.associatePointOut === orientedLink.pointIn) {
+                //console.log('//3.2');
                 listParallelOrientedLinks.push(orientedLink.id);
               }
             }
           } else if (_this.props.associatePointIn !== '' && _this.props.associateRegionOut !== '') {
-            if (_this.props.associatePointIn === orientedLink.pointIn || _this.props.associatePointIn === orientedLink.regionOut || _this.props.associatePointIn === orientedLink.pointOut) {
-              if (_this.props.associateRegionOut === orientedLink.pointIn || _this.props.associateRegionOut === orientedLink.regionOut || _this.props.associateRegionOut === orientedLink.regionIn) {
+            //console.log('//4');
+            if (_this.props.associatePointIn === orientedLink.pointIn || _this.props.associatePointIn === orientedLink.pointOut) {
+              //console.log('//4.1');
+              if (_this.props.associateRegionOut === orientedLink.regionOut || _this.props.associateRegionOut === orientedLink.regionIn) {
+                //console.log('//4.2');
                 listParallelOrientedLinks.push(orientedLink.id);
               }
             }
@@ -10551,7 +11557,8 @@ function (_super) {
       });
       var listParallelOrientedLinkSorted = listParallelOrientedLinks.sort(function (a, b) {
         return a - b;
-      });
+      }); //console.log(listParallelOrientedLinkSorted);
+
       return listParallelOrientedLinkSorted;
     };
 
@@ -10678,156 +11685,204 @@ function (_super) {
         if (idMultiLink === 0) {
           if (yMidIn > yMidOut) {
             if (xMidIn > xMidOut) {
+              console.log('x1');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x2');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMinIn;
               } else {
                 xResult = xMaxIn;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x3');
               xResult = xMinIn;
             }
           } else if (yMidIn < yMidOut) {
             if (xMidIn > xMidOut) {
+              console.log('x4');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMinIn;
               } else {
                 xResult = xMaxIn;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x5');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x6');
               xResult = xMinIn;
             }
           } else if (yMidIn === yMidOut) {
             if (xMidIn > xMidOut) {
+              console.log('x7');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x8');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMinIn;
               } else {
                 xResult = xMaxIn;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x9');
               xResult = xMinIn;
             }
           }
         } else if (idMultiLink === 1) {
           if (yMidIn > yMidOut) {
             if (xMidIn > xMidOut) {
+              console.log('x10');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMinIn;
               } else {
                 xResult = xMaxIn;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x11');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x12');
               xResult = xMaxIn;
             }
           } else if (yMidIn < yMidOut) {
             if (xMidIn > xMidOut) {
+              console.log('x13');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x14');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMinIn;
               } else {
                 xResult = xMaxIn;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x15');
               xResult = xMaxIn;
             }
           } else if (yMidIn === yMidOut) {
             if (xMidIn > xMidOut) {
+              console.log('x16');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x17');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMinIn;
               } else {
                 xResult = xMaxIn;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x18');
               xResult = xMinIn;
             }
           }
         } else if (idMultiLink === 2) {
           if (yMidIn > yMidOut) {
             if (xMidOut > xMinIn && xMidOut < xMaxIn || xMidOut < xMinIn && xMidOut > xMaxIn) {
+              console.log('x19');
               xResult = (xMinIn + xMaxIn) / 2;
             } else if (xMidIn > xMidOut) {
+              console.log('x20');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x21');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMinIn;
               } else {
                 xResult = xMaxIn;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x22');
               xResult = (xMinIn + xMaxIn) / 2;
             }
           } else if (yMidIn < yMidOut) {
             if (xMidOut > xMinIn && xMidOut < xMaxIn || xMidOut < xMinIn && xMidOut > xMaxIn) {
+              console.log('x23');
               xResult = (xMinIn + xMaxIn) / 2;
             } else if (xMidIn > xMidOut) {
+              console.log('x24');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x25');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMinIn;
               } else {
                 xResult = xMaxIn;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x26');
               xResult = (xMinIn + xMaxIn) / 2;
             }
           } else if (yMidIn === yMidOut) {
             if (xMidOut > xMinIn && xMidOut < xMaxIn || xMidOut < xMinIn && xMidOut > xMaxIn) {
+              console.log('x27');
               xResult = (xMinIn + xMaxIn) / 2;
             } else if (xMidIn > xMidOut) {
+              console.log('x28');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x29');
+
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMinIn;
               } else {
                 xResult = xMaxIn;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x30');
               xResult = xMinIn;
             }
           }
@@ -10835,6 +11890,8 @@ function (_super) {
       } else {
         if (idMultiLink === 0) {
           if (yMidIn > yMidOut) {
+            console.log('x31');
+
             if (xMidIn > xMidOut) {
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
@@ -10842,49 +11899,64 @@ function (_super) {
                 xResult = xMinOut;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x32');
+
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
                 xResult = xMaxOut;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x33');
               xResult = xMinOut;
             }
           } else if (yMidIn < yMidOut) {
             if (xMidIn > xMidOut) {
+              console.log('x34');
+
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
                 xResult = xMaxOut;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x35');
+
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
               } else {
                 xResult = xMinOut;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x36');
               xResult = xMinOut;
             }
           } else if (yMidIn === yMidOut) {
             if (xMidIn > xMidOut) {
+              console.log('x37');
+
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
                 xResult = xMaxOut;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x38');
+
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
               } else {
                 xResult = xMinOut;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x39');
               xResult = xMinOut;
             }
           }
         } else if (idMultiLink === 1) {
           if (yMidIn > yMidOut) {
+            console.log('x40');
+
             if (xMidIn > xMidOut) {
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
@@ -10892,98 +11964,128 @@ function (_super) {
                 xResult = xMaxOut;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x41');
+
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
               } else {
                 xResult = xMinOut;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x42');
               xResult = xMaxOut;
             }
           } else if (yMidIn < yMidOut) {
             if (xMidIn > xMidOut) {
+              console.log('x43');
+
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
               } else {
                 xResult = xMinOut;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x44');
+
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
                 xResult = xMaxOut;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x45');
               xResult = xMaxOut;
             }
           } else if (yMidIn === yMidOut) {
             if (xMidIn > xMidOut) {
+              console.log('x46');
+
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
                 xResult = xMaxOut;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x47');
+
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
               } else {
                 xResult = xMinOut;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x48');
               xResult = xMinOut;
             }
           }
         } else if (idMultiLink === 2) {
           if (yMidIn > yMidOut) {
             if (xMidIn > xMinOut && xMidIn < xMaxOut || xMidIn < xMinOut && xMidIn > xMaxOut) {
+              console.log('x49');
               xResult = (xMinOut + xMaxOut) / 2;
             } else if (xMidIn > xMidOut) {
+              console.log('x50');
+
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
                 xResult = xMaxOut;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x51');
+
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
               } else {
                 xResult = xMinOut;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x52');
               xResult = (xMinOut + xMaxOut) / 2;
             }
           } else if (yMidIn < yMidOut) {
             if (xMidIn > xMinOut && xMidIn < xMaxOut || xMidIn < xMinOut && xMidIn > xMaxOut) {
+              console.log('x53');
               xResult = (xMinOut + xMaxOut) / 2;
             } else if (xMidIn > xMidOut) {
+              console.log('x54');
+
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
                 xResult = xMaxOut;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x55');
+
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
               } else {
                 xResult = xMinOut;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x56');
               xResult = (xMinOut + xMaxOut) / 2;
             }
           } else if (yMidIn === yMidOut) {
             if (xMidIn > xMidOut) {
+              console.log('x57');
+
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
                 xResult = xMaxOut;
               }
             } else if (xMidIn < xMidOut) {
+              console.log('x58');
+
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
               } else {
                 xResult = xMinOut;
               }
             } else if (xMidIn === xMidOut) {
+              console.log('x59');
               xResult = xMinOut;
             }
           }
@@ -11886,6 +12988,64 @@ function (_super) {
       return yResult;
     };
 
+    _this.getX = function (labelPoint) {
+      var e_1, _a;
+
+      var result = 0;
+      var arrayPoint = _this.props.options.arrayPoints;
+
+      try {
+        for (var arrayPoint_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayPoint), arrayPoint_1_1 = arrayPoint_1.next(); !arrayPoint_1_1.done; arrayPoint_1_1 = arrayPoint_1.next()) {
+          var point = arrayPoint_1_1.value;
+
+          if (point.label === labelPoint || point.name === labelPoint) {
+            result = _this.synchroLinkX(parseInt(point.positionShapeX, 10));
+          }
+        }
+      } catch (e_1_1) {
+        e_1 = {
+          error: e_1_1
+        };
+      } finally {
+        try {
+          if (arrayPoint_1_1 && !arrayPoint_1_1.done && (_a = arrayPoint_1["return"])) _a.call(arrayPoint_1);
+        } finally {
+          if (e_1) throw e_1.error;
+        }
+      }
+
+      return result;
+    };
+
+    _this.getY = function (labelPoint) {
+      var e_2, _a;
+
+      var result = 0;
+      var arrayPoint = _this.props.options.arrayPoints;
+
+      try {
+        for (var arrayPoint_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayPoint), arrayPoint_2_1 = arrayPoint_2.next(); !arrayPoint_2_1.done; arrayPoint_2_1 = arrayPoint_2.next()) {
+          var point = arrayPoint_2_1.value;
+
+          if (point.label === labelPoint || point.name === labelPoint) {
+            result = _this.synchroLinkY(parseInt(point.positionShapeY, 10));
+          }
+        }
+      } catch (e_2_1) {
+        e_2 = {
+          error: e_2_1
+        };
+      } finally {
+        try {
+          if (arrayPoint_2_1 && !arrayPoint_2_1.done && (_a = arrayPoint_2["return"])) _a.call(arrayPoint_2);
+        } finally {
+          if (e_2) throw e_2.error;
+        }
+      }
+
+      return result;
+    };
+
     _this.defineValueTooptip = function (typeLink, link) {
       var contentTooltip = [];
       var valueMainMetricA = _this.props.valueMainMetricA;
@@ -12193,11 +13353,13 @@ function (_super) {
     var yCByClick = 0;
 
     if (listParallelOrientedLinks.length > 1) {
+      //console.log('multi');
       var indexOrientedLink_1 = 0;
       listParallelOrientedLinks.forEach(function (index) {
         if (index === parseInt(_this.props.id, 10)) {
           if (indexOrientedLink_1 === 0) {
             if (_this.props.associatePointIn !== '' && _this.props.associatePointOut !== '') {
+              //console.log('m0-1');
               xA = _this.synchroLinkX(_this.ifMultiLinkWithPointDefineX(true, 0));
               yA = _this.synchroLinkY(_this.ifMultiLinkWithPointDefineY(true, 0));
               xB = _this.synchroLinkX(_this.ifMultiLinkWithPointDefineX(false, 0));
@@ -12205,6 +13367,7 @@ function (_super) {
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (_this.props.associateRegionIn !== '' && _this.props.associateRegionOut !== '') {
+              //console.log('m0-2');
               xA = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(true, 0));
               yA = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(true, 0));
               xB = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(false, 0));
@@ -12212,22 +13375,25 @@ function (_super) {
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (_this.props.associatePointIn !== '' && _this.props.associateRegionOut !== '') {
-              xA = xA0;
-              yA = yA0;
+              //console.log('m0-3');
+              xA = _this.getX(_this.props.associatePointIn);
+              yA = _this.getY(_this.props.associatePointIn);
               xB = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(false, 0));
               yB = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(false, 0));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (_this.props.associateRegionIn !== '' && _this.props.associatePointOut !== '') {
+              //console.log('m0-4');
               xA = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(true, 0));
               yA = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(true, 0));
-              xB = xB0;
-              yB = yB0;
+              xB = _this.getX(_this.props.associatePointOut);
+              yB = _this.getY(_this.props.associatePointOut);
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             }
           } else if (indexOrientedLink_1 === 1) {
             if (_this.props.associatePointIn !== '' && _this.props.associatePointOut !== '') {
+              //console.log('m1-1');
               xA = _this.synchroLinkX(_this.ifMultiLinkWithPointDefineX(true, 1));
               yA = _this.synchroLinkY(_this.ifMultiLinkWithPointDefineY(true, 1));
               xB = _this.synchroLinkX(_this.ifMultiLinkWithPointDefineX(false, 1));
@@ -12235,6 +13401,7 @@ function (_super) {
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (_this.props.associateRegionIn !== '' && _this.props.associateRegionOut !== '') {
+              //console.log('m1-2');
               xA = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(true, 1));
               yA = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(true, 1));
               xB = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(false, 1));
@@ -12242,22 +13409,25 @@ function (_super) {
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (_this.props.associatePointIn !== '' && _this.props.associateRegionOut !== '') {
-              xA = xA0;
-              yA = yA0;
+              //console.log('m1-3');
+              xA = _this.getX(_this.props.associatePointIn);
+              yA = _this.getY(_this.props.associatePointIn);
               xB = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(false, 1));
               yB = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(false, 1));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (_this.props.associateRegionIn !== '' && _this.props.associatePointOut !== '') {
+              //console.log('m1-4');
               xA = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(true, 1));
               yA = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(true, 1));
-              xB = xB0;
-              yB = yB0;
+              xB = _this.getX(_this.props.associatePointOut);
+              yB = _this.getY(_this.props.associatePointOut);
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             }
           } else if (indexOrientedLink_1 === 2) {
             if (_this.props.associatePointIn !== '' && _this.props.associatePointOut !== '') {
+              //console.log('m2-1');
               xA = _this.synchroLinkX(_this.ifMultiLinkWithPointDefineX(true, 2));
               yA = _this.synchroLinkY(_this.ifMultiLinkWithPointDefineY(true, 2));
               xB = _this.synchroLinkX(_this.ifMultiLinkWithPointDefineX(false, 2));
@@ -12265,6 +13435,7 @@ function (_super) {
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (_this.props.associateRegionIn !== '' && _this.props.associateRegionOut !== '') {
+              //console.log('m2-2');
               xA = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(true, 2));
               yA = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(true, 2));
               xB = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -12272,17 +13443,19 @@ function (_super) {
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (_this.props.associatePointIn !== '' && _this.props.associateRegionOut !== '') {
-              xA = xA0;
-              yA = yA0;
+              //console.log('m2-3');
+              xB = _this.getX(_this.props.associatePointIn);
+              yB = _this.getY(_this.props.associatePointIn);
               xB = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(false, 2));
               yB = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(false, 2));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (_this.props.associateRegionIn !== '' && _this.props.associatePointOut !== '') {
+              //console.log('m2-4');
               xA = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(true, 2));
               yA = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(true, 2));
-              xB = xB0;
-              yB = yB0;
+              xB = _this.getX(_this.props.associatePointOut);
+              yB = _this.getY(_this.props.associatePointOut);
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             }
@@ -12292,6 +13465,7 @@ function (_super) {
         indexOrientedLink_1++;
       });
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
+      //console.log('1');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = xB0;
@@ -12299,6 +13473,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionOut !== '' && this.props.associateRegionIn === '' && this.props.associatePointIn === '') {
+      //console.log('2');
       xA = xA0;
       yA = yA0;
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -12306,6 +13481,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
+      //console.log('3');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -12313,6 +13489,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
+      //console.log('4');
       xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
       xB = xB0;
@@ -12320,6 +13497,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointOut !== '' && this.props.associatePointIn === '' && this.props.associateRegionIn === '') {
+      //console.log('5');
       xA = xA0;
       yA = yA0;
       xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
@@ -12327,6 +13505,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
+      //console.log('6');
       xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
@@ -12334,6 +13513,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
+      //console.log('7');
       xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -12341,6 +13521,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
+      //console.log('8');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
@@ -12348,6 +13529,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else {
+      //console.log('9');
       xA = xA0;
       yA = yA0;
       xB = xB0;
@@ -12737,9 +13919,13 @@ function (_super) {
       valueMainMetric = parseInt(this.props.valueMainMetricB, 10);
     }
 
-    if (seuil.length > 0) {
-      if (seuil[0].borderColor !== '') {
-        colorBorder = seuil[0].borderColor;
+    if (this.props.traceBorder) {
+      if (seuil.length > 0) {
+        if (seuil[0].borderColor !== '') {
+          colorBorder = seuil[0].borderColor;
+        } else {
+          colorBorder = 'black';
+        }
       } else {
         colorBorder = 'black';
       }
@@ -12787,9 +13973,14 @@ function (_super) {
       valueMainMetric = parseInt(this.props.valueMainMetricB, 10);
     }
 
-    if (seuil.length > 0) {
-      if (seuil[0].sizeBorder !== '') {
-        sizeBorder = seuil[0].sizeBorder;
+    if (this.props.traceBorder) {
+      //sizeBorder = seuil[0].sizeBorder;
+      if (seuil.length > 0) {
+        if (seuil[0].sizeBorder !== '') {
+          sizeBorder = seuil[0].sizeBorder;
+        } else {
+          sizeBorder = this.defineSizeLink();
+        }
       } else {
         sizeBorder = this.defineSizeLink();
       }
@@ -13818,7 +15009,7 @@ function (_super) {
         href: region.linkURL.hoveringTooltipLink
       }, region.linkURL.hoveringTooltipText), region.textObj.isTextTooltip && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, region.label)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         style: styleMetrics
-      }, region.textObj.generateObjectText && region.textObj.valueGenerateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, valueQueryResult)));
+      }, region.textObj.generateObjectText && region.textObj.valueGenerateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, valueQueryResult)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, _this.displayValuesAuxMetrics()));
       return {
         tooltipValue: tooltipValue,
         backgroundColor: lowerLimit.colorBack,
@@ -13907,10 +15098,12 @@ function (_super) {
     _this.getValuesAuxiliaryMetrics = function () {
       var region = _this.props.uneCoor;
       Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_7__["reqMetricAuxRegion"])(region, _this.props);
-      var mainMetric = region.mainMetric;
-      var auxiliaryMetrics = region.metrics;
-      var valueAuxiliaryMetric = [];
-      var countMetrics = auxiliaryMetrics.length;
+      var mainMetric = region.mainMetric; //console.log(mainMetric.refId);
+
+      var auxiliaryMetrics = region.metrics; //console.log(auxiliaryMetrics);
+
+      var valueAuxiliaryMetric = []; //const countMetrics: number = auxiliaryMetrics.length;
+
       auxiliaryMetrics.forEach(function (metric) {
         var _a;
 
@@ -13919,7 +15112,7 @@ function (_super) {
         var result = '';
 
         if (metric.returnQuery && metric.returnQuery.length > 0) {
-          var numberLoop = (((_a = metric.returnQuery) === null || _a === void 0 ? void 0 : _a.length) || 0) / countMetrics;
+          var numberLoop = ((_a = metric.returnQuery) === null || _a === void 0 ? void 0 : _a.length) || 0;
 
           if (metric.key !== '' && metric.keyValue !== '') {
             for (var i = 0; i < numberLoop; i++) {
@@ -13978,6 +15171,132 @@ function (_super) {
       });
       return valueAuxiliaryMetric;
     };
+
+    _this.getConvertValueAuxMetrics = function (valueBrut) {
+      var result = '';
+      var region = _this.props.uneCoor;
+      var roundValue = region.textObj.generateAuxiliaryElement.numericFormatElement;
+      var unit = region.textObj.generateAuxiliaryElement.unit;
+
+      if (roundValue !== '') {
+        result = parseFloat(valueBrut).toPrecision(parseInt(roundValue, 10)).toString();
+      } else {
+        result = valueBrut;
+      }
+
+      return result + ' ' + unit;
+    };
+
+    _this.displayValuesAuxMetrics = function () {
+      var e_1, _a;
+
+      var html = [];
+
+      var valuesAuxMetrics = _this.getValuesAuxiliaryMetrics();
+
+      var auxMetrics = _this.props.uneCoor.metrics;
+      var region = _this.props.uneCoor;
+      var addColorText = region.textObj.generateAuxiliaryElement.addColorTextElement;
+      var addColorBack = region.textObj.generateAuxiliaryElement.addColorBackElement;
+      var legend = region.textObj.generateAuxiliaryElement.legendElement;
+      var colorText = '';
+      var colorBack = '';
+
+      if (addColorText) {
+        colorText = region.textObj.generateAuxiliaryElement.colorTextElement;
+      } else {
+        colorText = 'white';
+      }
+
+      if (addColorBack) {
+        colorBack = region.textObj.generateAuxiliaryElement.colorBackElement;
+      } else {
+        colorBack = 'black';
+      }
+
+      var styleTitle = {
+        fontFamily: _this.props.options.display.police,
+        fontSize: '10px',
+        marginTop: '5px',
+        marginBottom: '0px',
+        color: colorText
+      };
+      var styleTitle2 = {
+        fontFamily: _this.props.options.display.police,
+        fontSize: '10px',
+        marginTop: '5px',
+        marginLeft: '5px',
+        marginBottom: '0px',
+        color: colorText
+      };
+      var styleContent = {
+        fontFamily: _this.props.options.display.police,
+        fontSize: '9px',
+        marginLeft: '10px',
+        marginBottom: '0px',
+        color: colorText
+      };
+
+      if (auxMetrics.length > 0) {
+        html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          key: '',
+          style: styleTitle
+        }, "Auxiliary Metric"));
+        html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          style: styleTitle
+        }, legend));
+        var index = 1;
+
+        try {
+          for (var auxMetrics_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(auxMetrics), auxMetrics_1_1 = auxMetrics_1.next(); !auxMetrics_1_1.done; auxMetrics_1_1 = auxMetrics_1.next()) {
+            var metric = auxMetrics_1_1.value;
+
+            var valueAuxMetric = _this.getConvertValueAuxMetrics(valuesAuxMetrics[index - 1]);
+
+            html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              key: '',
+              style: styleTitle2
+            }, "+ Metric ", index));
+            html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              key: '',
+              style: styleContent
+            }, "- Value : ", valueAuxMetric));
+            html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              key: '',
+              style: styleContent
+            }, "- Key : ", metric.key));
+            html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              key: '',
+              style: styleContent
+            }, "- KeyValue : ", metric.keyValue));
+            html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              key: '',
+              style: styleContent
+            }, "- Type : ", metric.manageValue));
+            index++;
+          }
+        } catch (e_1_1) {
+          e_1 = {
+            error: e_1_1
+          };
+        } finally {
+          try {
+            if (auxMetrics_1_1 && !auxMetrics_1_1.done && (_a = auxMetrics_1["return"])) _a.call(auxMetrics_1);
+          } finally {
+            if (e_1) throw e_1.error;
+          }
+        }
+
+        ;
+      }
+
+      ;
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        style: {
+          backgroundColor: colorBack
+        }
+      }, html);
+    };
     /** final region zone . Call function after reqMetrics*/
 
 
@@ -14021,7 +15340,12 @@ function (_super) {
         color: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorTextElement : 'white',
         verticalAlign: 'middle'
       };
-      var value;
+      var value; // console.log('text object');
+      // console.log(region.textObj.isTextTooltip);
+      // console.log('main metric');
+      // console.log(region.textObj.generateObjectText);
+      // console.log('aux metric');
+      // console.log(region.textObj.generateAuxiliaryElement.displayObjectInTooltip);
 
       if (_this.props.isEnabled && region.linkURL.followLink !== '') {
         value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -14040,7 +15364,7 @@ function (_super) {
           style: styleMetricsDiv
         }, region.textObj.generateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInTooltip && _this.state.valueQuery)))));
 
-        if (region.textObj.isTextTooltip || region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip) {
+        if (region.textObj.isTextTooltip || region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip || region.textObj.generateAuxiliaryElement.displayObjectInTooltip) {
           value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
             content: _this.state.tooltipValue
           }, value);
@@ -14055,7 +15379,7 @@ function (_super) {
           style: styleMetricsDiv
         }, region.textObj.generateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInTooltip && _this.state.valueQuery)));
 
-        if (region.textObj.isTextTooltip || region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip) {
+        if (region.textObj.isTextTooltip || region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip || region.textObj.generateAuxiliaryElement.displayObjectInTooltip) {
           value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
             content: _this.state.tooltipValue
           }, value);
@@ -14181,8 +15505,8 @@ function (_super) {
 
 
   DrawRectangleExtend.prototype.render = function () {
-    //console.log(this.props.uneCoor.metrics);
-    //console.log(this.getValuesAuxiliaryMetrics());
+    // console.log(this.props.uneCoor.metrics);
+    // console.log(this.getValuesAuxiliaryMetrics());
     return this.state.htmlResult;
   };
 
@@ -14281,7 +15605,7 @@ function (_super) {
     _this.callBack = function () {
       _this.fillVarInput();
 
-      _this.props.lowerLimitCallBack(_this.state.lowerLimit, _this.props.id);
+      _this.props.lowerLimitCallBack(_this.state.lowerLimit);
     };
     /** old function */
 
@@ -14947,7 +16271,7 @@ function (_super) {
 
 
     _this.callBack = function () {
-      _this.props.lowerLimitCallBack(_this.state.lowerLimit, _this.props.id);
+      _this.props.lowerLimitCallBack(_this.state.lowerLimit);
     };
     /**
      * change background color
@@ -15077,7 +16401,7 @@ function (_super) {
           text: textInputColor,
           _onChange: _this.onChangeColorContour
         }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
-          labelWidth: 10,
+          labelWidth: 15,
           label: labelSize,
           name: "epaisseurContour",
           placeholder: placeHolderSize,
@@ -15108,7 +16432,7 @@ function (_super) {
             text: textInputColor,
             _onChange: _this.onChangeColorContour
           }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
-            labelWidth: 10,
+            labelWidth: 15,
             label: labelSize,
             name: "epaisseurContour",
             placeholder: placeHolderSize,
@@ -15262,7 +16586,7 @@ function (_super) {
 
 
     _this.callBack = function () {
-      _this.props.callBackToParent(_this.state.followLink, _this.state.hoveringTooltipLink, _this.state.hoveringTooltipText, undefined, _this.props.id);
+      _this.props.callBackToParent(_this.state.followLink, _this.state.hoveringTooltipLink, _this.state.hoveringTooltipText, undefined);
     };
     /**
      * call function when follow link change
@@ -15468,9 +16792,9 @@ function (_super) {
     _this.onSave = function () {
       // console.log('lower');
       // console.log(this.props.id);
-      _this.props.callBack(_this.props.coordinate, _this.props.id);
+      _this.props.callBack(_this.props.coordinate);
 
-      _this.props.lowerLimitCallBack(_this.state.coordinate.lowerLimit, _this.props.id);
+      _this.props.lowerLimitCallBack(_this.state.coordinate.lowerLimit);
     };
     /**
      * Edit fondIsChecked with switch
@@ -15539,7 +16863,7 @@ function (_super) {
 
     _this.onSwitchColorMode = function () {
       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
-        var newValue;
+        var newValue, defaultSizeBorder;
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
           switch (_a.label) {
             case 0:
@@ -15548,7 +16872,13 @@ function (_super) {
               if (!!this.state.coordinate.colorMode) return [3
               /*break*/
               , 2];
-              newValue.lowerLimit = [new Models_LowerLimitClass__WEBPACK_IMPORTED_MODULE_3__["LowerLimitClass"](0, '', '', '', '', '')];
+              defaultSizeBorder = '';
+
+              if (this.props.isLink) {
+                defaultSizeBorder = '10';
+              }
+
+              newValue.lowerLimit = [new Models_LowerLimitClass__WEBPACK_IMPORTED_MODULE_3__["LowerLimitClass"](0, '', '', '', '', defaultSizeBorder)];
               return [4
               /*yield*/
               , this.setStateAsyncCoordinate({
@@ -15652,19 +16982,37 @@ function (_super) {
       label: 'Lower limit',
       isOpen: this.state.openLowerLimit,
       onToggle: this.onToggleLowerLimit
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: l10n.genericParameter.variableColor,
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, l10n.genericParameter.variableColor), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: '',
       checked: this.state.coordinate.colorMode,
       onChange: this.onSwitchColorMode
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), !this.props.isLink ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: l10n.genericParameter.traceBackground,
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), !this.props.isLink ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, l10n.genericParameter.traceBackground), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: '',
       checked: this.state.coordinate.traceBack,
       onChange: this.onSwitchFond
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: l10n.genericParameter.traceContour,
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, l10n.genericParameter.traceContour), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: '',
       checked: this.state.coordinate.traceBorder,
       onChange: this.onSwitchContour
-    })) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+    }))) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
       label: 'Color/Size',
       checked: this.state.coordinate.traceBorder,
       onChange: this.onSwitchContour
@@ -15673,8 +17021,7 @@ function (_super) {
       traceBack: this.state.coordinate.traceBack,
       lowerLimit: this.state.coordinate.lowerLimit,
       lowerLimitCallBack: this.props.lowerLimitCallBack,
-      isLink: this.props.isLink,
-      id: this.props.id
+      isLink: this.props.isLink
     }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Parametrage_fixColor__WEBPACK_IMPORTED_MODULE_4__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
@@ -15683,7 +17030,6 @@ function (_super) {
       traceBack: this.state.coordinate.traceBack,
       lowerLimit: this.state.coordinate.lowerLimit,
       lowerLimitCallBack: this.props.lowerLimitCallBack,
-      id: this.props.id,
       isLink: this.props.isLink
     })));
   };
@@ -15772,16 +17118,14 @@ function (_super) {
       onToggle: this.onToggleLinkCollapse
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_manageLink__WEBPACK_IMPORTED_MODULE_3__["default"], {
       coordinateSpace: this.props.coordinateSpace,
-      callBackToParent: this.props.callBackToParent,
-      id: this.props.id
+      callBackToParent: this.props.callBackToParent
     }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
       isOpen: this.state.collapseTextObject,
       label: "Text object",
       onToggle: this.onToggleTextObject
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_textObjects__WEBPACK_IMPORTED_MODULE_4__["default"], {
       coordinateSpace: this.props.coordinateSpace,
-      callBackToParent: this.props.callBackToParent,
-      id: this.props.id
+      callBackToParent: this.props.callBackToParent
     }))));
   };
 
@@ -15822,7 +17166,7 @@ function (_super) {
     var _this = _super.call(this, props) || this;
 
     _this.savePositionParameter = function (newPositionParameter) {
-      var e_1, _a;
+      var e_1, _a, e_2, _b, e_3, _c;
 
       var idCurrentCoordinateSpace = _this.props.id || 0;
 
@@ -15853,15 +17197,53 @@ function (_super) {
           arrayPoints: newArrayPoints
         }));
       } else if (_this.props.isLink) {
-        var newArrayLink = _this.props.options.arrayOrientedLinks;
-        newArrayLink[idCurrentCoordinateSpace].positionParameter = newPositionParameter;
+        var newArrayOrientedLink = _this.props.options.arrayOrientedLinks;
+
+        try {
+          for (var newArrayOrientedLink_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(newArrayOrientedLink), newArrayOrientedLink_1_1 = newArrayOrientedLink_1.next(); !newArrayOrientedLink_1_1.done; newArrayOrientedLink_1_1 = newArrayOrientedLink_1.next()) {
+            var orientedLink = newArrayOrientedLink_1_1.value;
+
+            if (orientedLink.id === idCurrentCoordinateSpace) {
+              orientedLink.positionParameter = newPositionParameter;
+            }
+          }
+        } catch (e_2_1) {
+          e_2 = {
+            error: e_2_1
+          };
+        } finally {
+          try {
+            if (newArrayOrientedLink_1_1 && !newArrayOrientedLink_1_1.done && (_b = newArrayOrientedLink_1["return"])) _b.call(newArrayOrientedLink_1);
+          } finally {
+            if (e_2) throw e_2.error;
+          }
+        }
 
         _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-          arrayOrientedLinks: newArrayLink
+          arrayOrientedLinks: newArrayOrientedLink
         }));
       } else if (_this.props.isRegion) {
         var newArrayRegion = _this.props.options.regionCoordinateSpace;
-        newArrayRegion[idCurrentCoordinateSpace].positionParameter = newPositionParameter;
+
+        try {
+          for (var newArrayRegion_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(newArrayRegion), newArrayRegion_1_1 = newArrayRegion_1.next(); !newArrayRegion_1_1.done; newArrayRegion_1_1 = newArrayRegion_1.next()) {
+            var region = newArrayRegion_1_1.value;
+
+            if (region.id === idCurrentCoordinateSpace) {
+              region.positionParameter = newPositionParameter;
+            }
+          }
+        } catch (e_3_1) {
+          e_3 = {
+            error: e_3_1
+          };
+        } finally {
+          try {
+            if (newArrayRegion_1_1 && !newArrayRegion_1_1.done && (_c = newArrayRegion_1["return"])) _c.call(newArrayRegion_1);
+          } finally {
+            if (e_3) throw e_3.error;
+          }
+        }
 
         _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
           regionCoordinateSpace: newArrayRegion
@@ -15870,7 +17252,7 @@ function (_super) {
     };
 
     _this.getPositionParameter = function () {
-      var e_2, _a, e_3, _b;
+      var e_4, _a, e_5, _b, e_6, _c;
 
       var positionParameter = {
         labelAPositionX: '0',
@@ -15883,7 +17265,27 @@ function (_super) {
       var idCurrentCoordinateSpace = _this.props.id || 0;
 
       if (_this.props.isLink) {
-        positionParameter = _this.props.options.arrayOrientedLinks[idCurrentCoordinateSpace].positionParameter;
+        var newArrayOrientedLink = _this.props.options.arrayOrientedLinks;
+
+        try {
+          for (var newArrayOrientedLink_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(newArrayOrientedLink), newArrayOrientedLink_2_1 = newArrayOrientedLink_2.next(); !newArrayOrientedLink_2_1.done; newArrayOrientedLink_2_1 = newArrayOrientedLink_2.next()) {
+            var orientedLink = newArrayOrientedLink_2_1.value;
+
+            if (orientedLink.id === idCurrentCoordinateSpace) {
+              positionParameter = orientedLink.positionParameter;
+            }
+          }
+        } catch (e_4_1) {
+          e_4 = {
+            error: e_4_1
+          };
+        } finally {
+          try {
+            if (newArrayOrientedLink_2_1 && !newArrayOrientedLink_2_1.done && (_a = newArrayOrientedLink_2["return"])) _a.call(newArrayOrientedLink_2);
+          } finally {
+            if (e_4) throw e_4.error;
+          }
+        }
       } else if (_this.props.isPoint) {
         var arrayPoints = _this.props.options.arrayPoints;
 
@@ -15895,15 +17297,15 @@ function (_super) {
               positionParameter = point.positionParameter;
             }
           }
-        } catch (e_2_1) {
-          e_2 = {
-            error: e_2_1
+        } catch (e_5_1) {
+          e_5 = {
+            error: e_5_1
           };
         } finally {
           try {
-            if (arrayPoints_1_1 && !arrayPoints_1_1.done && (_a = arrayPoints_1["return"])) _a.call(arrayPoints_1);
+            if (arrayPoints_1_1 && !arrayPoints_1_1.done && (_b = arrayPoints_1["return"])) _b.call(arrayPoints_1);
           } finally {
-            if (e_2) throw e_2.error;
+            if (e_5) throw e_5.error;
           }
         }
       } else if (_this.props.isRegion) {
@@ -15917,15 +17319,15 @@ function (_super) {
               positionParameter = region.positionParameter;
             }
           }
-        } catch (e_3_1) {
-          e_3 = {
-            error: e_3_1
+        } catch (e_6_1) {
+          e_6 = {
+            error: e_6_1
           };
         } finally {
           try {
-            if (arrayRegions_1_1 && !arrayRegions_1_1.done && (_b = arrayRegions_1["return"])) _b.call(arrayRegions_1);
+            if (arrayRegions_1_1 && !arrayRegions_1_1.done && (_c = arrayRegions_1["return"])) _c.call(arrayRegions_1);
           } finally {
-            if (e_3) throw e_3.error;
+            if (e_6) throw e_6.error;
           }
         }
       }
@@ -16061,11 +17463,36 @@ function (_super) {
     };
 
     _this.defineLabelPositionInputs = function () {
+      var e_7, _a;
+
       var item;
 
       var positionParameter = _this.getPositionParameter();
 
-      if (_this.props.isLink && _this.props.options.arrayOrientedLinks[_this.props.id].orientationLink.value === 'double') {
+      var currentOrientedLink;
+      var arrayOrientedLinks = _this.props.options.arrayOrientedLinks;
+
+      try {
+        for (var arrayOrientedLinks_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayOrientedLinks), arrayOrientedLinks_1_1 = arrayOrientedLinks_1.next(); !arrayOrientedLinks_1_1.done; arrayOrientedLinks_1_1 = arrayOrientedLinks_1.next()) {
+          var orientedLink = arrayOrientedLinks_1_1.value;
+
+          if (orientedLink.id === _this.props.id) {
+            currentOrientedLink = orientedLink;
+          }
+        }
+      } catch (e_7_1) {
+        e_7 = {
+          error: e_7_1
+        };
+      } finally {
+        try {
+          if (arrayOrientedLinks_1_1 && !arrayOrientedLinks_1_1.done && (_a = arrayOrientedLinks_1["return"])) _a.call(arrayOrientedLinks_1);
+        } finally {
+          if (e_7) throw e_7.error;
+        }
+      }
+
+      if (_this.props.isLink && currentOrientedLink && currentOrientedLink.orientationLink.value === 'double') {
         item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           label: "Label A Position X",
           labelWidth: 10,
@@ -16123,6 +17550,8 @@ function (_super) {
     };
 
     _this.defineTooltipPositionInputs = function () {
+      var e_8, _a;
+
       var item;
       var optionsSelectTooltipPosition = [{
         label: 'Top',
@@ -16140,7 +17569,30 @@ function (_super) {
 
       var positionParameter = _this.getPositionParameter();
 
-      if (_this.props.isLink && _this.props.options.arrayOrientedLinks[_this.props.id].orientationLink.value === 'double') {
+      var currentOrientedLink;
+      var arrayOrientedLinks = _this.props.options.arrayOrientedLinks;
+
+      try {
+        for (var arrayOrientedLinks_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayOrientedLinks), arrayOrientedLinks_2_1 = arrayOrientedLinks_2.next(); !arrayOrientedLinks_2_1.done; arrayOrientedLinks_2_1 = arrayOrientedLinks_2.next()) {
+          var orientedLink = arrayOrientedLinks_2_1.value;
+
+          if (orientedLink.id === _this.props.id) {
+            currentOrientedLink = orientedLink;
+          }
+        }
+      } catch (e_8_1) {
+        e_8 = {
+          error: e_8_1
+        };
+      } finally {
+        try {
+          if (arrayOrientedLinks_2_1 && !arrayOrientedLinks_2_1.done && (_a = arrayOrientedLinks_2["return"])) _a.call(arrayOrientedLinks_2);
+        } finally {
+          if (e_8) throw e_8.error;
+        }
+      }
+
+      if (_this.props.isLink && currentOrientedLink && currentOrientedLink.orientationLink.value === 'double') {
         item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: {
             display: 'flex'
@@ -16375,19 +17827,37 @@ function (_super) {
 
 
   StyleComponent.prototype.render = function () {
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: "Bold",
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, "Bold"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: "",
       checked: this.state.style.bold,
       onChange: this.onChangeBold
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: "Italic",
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, "Italic"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: "",
       checked: this.state.style.italic,
       onChange: this.onChangeItalic
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: "Underline",
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, "Underline"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: "",
       checked: this.state.style.underline,
       onChange: this.onChangeUnderline
-    }));
+    })));
   };
 
   return StyleComponent;
@@ -16444,7 +17914,7 @@ function (_super) {
 
 
     _this.callBack = function () {
-      _this.props.callBackToParent(undefined, undefined, undefined, _this.state.textObject, _this.props.id);
+      _this.props.callBackToParent(undefined, undefined, undefined, _this.state.textObject);
     }; // /** change value for legend input */
     // onSwitchLegend = async () => {
     // 	const newTextObject: TextObject = this.state.textObject;
@@ -17093,11 +18563,17 @@ function (_super) {
   TextObjects.prototype.render = function () {
     var l10n = __webpack_require__(/*! Localization/en.json */ "./Localization/en.json");
 
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, l10n.textObject.principalMetric), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: "Display text in region or tooltip",
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, l10n.textObject.principalMetric), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, "Display text in region or tooltip"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: "",
       checked: this.state.textObject.isTextTooltip,
       onChange: this.onSwitchisTextTooltip
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
       hidden: this.state.textObject.isTextTooltip
     }, l10n.textObject.textRegion), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
       hidden: !this.state.textObject.isTextTooltip
@@ -17114,11 +18590,17 @@ function (_super) {
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Parametrage_styleComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
       oldStyle: this.state.textObject.style,
       saveParent: this.saveData
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, "Generate text object"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: l10n.textObject.generateTextObject,
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, "Generate text object"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, l10n.textObject.generateTextObject), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: '',
       checked: this.state.textObject.generateObjectText,
       onChange: this.onSwitchGenerateObjectText
-    }), this.state.textObject.generateObjectText && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputText__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    })), this.state.textObject.generateObjectText && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputText__WEBPACK_IMPORTED_MODULE_4__["default"], {
       label: l10n.textObject.legend,
       name: "legendTextObject",
       placeholder: l10n.textObject.legend,
@@ -17139,24 +18621,42 @@ function (_super) {
       required: false,
       value: this.state.textObject.valueGenerateObjectText.unit,
       _handleChange: this.onChangeValueGenerateObjectTextunit
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: l10n.textObject.objectDisplayTextTooltip,
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, l10n.textObject.objectDisplayTextTooltip), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: '',
       checked: this.state.textObject.valueGenerateObjectText.displayObjectInTooltip,
       onChange: this.onSwitchValueGenerateObjectTextdisplayObjectInTooltip
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: l10n.textObject.colorText,
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, l10n.textObject.colorText), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: '',
       checked: this.state.textObject.valueGenerateObjectText.addColorTextElement,
       onChange: this.onSwitchValueGenerateObjectTextAddColorTextElement
-    }), this.state.textObject.valueGenerateObjectText.addColorTextElement && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    })), this.state.textObject.valueGenerateObjectText.addColorTextElement && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"], {
       color: this.state.textObject.valueGenerateObjectText.colorTextElement,
       keyInt: 0,
       text: l10n.textObject.colorTextOptional,
       _onChange: this.onChangeValueGenerateObjectTextColorTextElement
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, l10n.textObject.colorText), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
       label: l10n.textObject.backgroundColor,
       checked: this.state.textObject.valueGenerateObjectText.addColorBackElement,
       onChange: this.onSwitchValueGenerateObjectTextAddColorBackElement
-    }), this.state.textObject.valueGenerateObjectText.addColorBackElement && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    })), this.state.textObject.valueGenerateObjectText.addColorBackElement && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"], {
       color: this.state.textObject.valueGenerateObjectText.colorBackElement,
       keyInt: 0,
       text: l10n.textObject.optionalBackgroundColor,
@@ -17182,24 +18682,42 @@ function (_super) {
       required: false,
       value: this.state.textObject.generateAuxiliaryElement.unit,
       _handleChange: this.onChangeunit
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: l10n.textObject.objectDisplayTextTooltip,
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, l10n.textObject.objectDisplayTextTooltip), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: '',
       checked: this.state.textObject.generateAuxiliaryElement.displayObjectInTooltip,
       onChange: this.onSwitchdisplayObjectInTooltip
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: l10n.textObject.colorText,
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, l10n.textObject.colorText), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: '',
       checked: this.state.textObject.generateAuxiliaryElement.addColorTextElement,
       onChange: this.onSwitchAddColorTextElement
-    }), this.state.textObject.generateAuxiliaryElement.addColorTextElement && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    })), this.state.textObject.generateAuxiliaryElement.addColorTextElement && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"], {
       color: this.state.textObject.generateAuxiliaryElement.colorTextElement,
       keyInt: 0,
       text: l10n.textObject.colorTextOptional,
       _onChange: this.onChangeColorTextElement
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: l10n.textObject.backgroundColor,
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, l10n.textObject.backgroundColor), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: '',
       checked: this.state.textObject.generateAuxiliaryElement.addColorBackElement,
       onChange: this.onSwitchAddColorBackElement
-    }), this.state.textObject.generateAuxiliaryElement.addColorBackElement && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    })), this.state.textObject.generateAuxiliaryElement.addColorBackElement && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"], {
       color: this.state.textObject.generateAuxiliaryElement.colorBackElement,
       keyInt: 0,
       text: l10n.textObject.optionalBackgroundColor,
@@ -17322,13 +18840,19 @@ function (_super) {
 
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "coordinateSpaceInitial"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: "Display space initial",
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, "Display space initial"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: "",
       checked: this.state.arrayCoor.displayArea,
       onChange: this.onChangeSwitchDisplayInitialSpace
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "xMin",
-      labelWidth: 10,
+      labelWidth: 15,
       inputWidth: 20,
       type: "text",
       required: true,
@@ -17340,7 +18864,7 @@ function (_super) {
       placeholder: 'X minimum'
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "X max",
-      labelWidth: 10,
+      labelWidth: 15,
       inputWidth: 20,
       type: "text",
       required: true,
@@ -17352,7 +18876,7 @@ function (_super) {
       placeholder: 'X max'
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "Y min",
-      labelWidth: 10,
+      labelWidth: 15,
       inputWidth: 20,
       type: "text",
       required: true,
@@ -17364,7 +18888,7 @@ function (_super) {
       placeholder: 'Y minimum'
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "Y max",
-      labelWidth: 10,
+      labelWidth: 15,
       inputWidth: 20,
       type: "text",
       required: true,
@@ -17638,42 +19162,49 @@ function (_super) {
         verticalAlign: 'middle'
       }
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
-      width: 10
+      width: 15
     }, "Police")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSelect__WEBPACK_IMPORTED_MODULE_3__["default"], {
       _onChange: this.onChangePolice,
       data: police,
       defaultValue: this.state.newPolice
     }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: l10n.textDefault.size,
-      labelWidth: 10,
-      inputWidth: 10,
+      labelWidth: 15,
+      inputWidth: 30,
       required: true,
       value: this.state.size,
       onChange: this.handleChangesize
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_styleComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
       oldStyle: this.state.style,
       saveParent: this.saveStyleData
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: "Use SVG",
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, "Use SVG"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      labelClass: "",
+      label: "",
       checked: options.baseMap.modeSVG,
       onChange: this.onChangeSwitchModeSVG
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: 'Image',
-      labelWidth: 10,
+      labelWidth: 15,
       inputWidth: 30,
       type: "text",
       onChange: this.onImageChanged,
       value: options.baseMap.image || ''
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "Width",
-      labelWidth: 10,
+      labelWidth: 15,
       inputWidth: 30,
       type: "text",
       onChange: this.onChangeWidthBaseMap,
       value: options.baseMap.width || ''
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "Height",
-      labelWidth: 10,
+      labelWidth: 15,
       inputWidth: 30,
       type: "text",
       onChange: this.onChangeHeightBaseMap,
@@ -17822,8 +19353,7 @@ function (_super) {
 
 
     _this.loadMonoPoint = function (point) {
-      var toLoad = new _Models_PointClass__WEBPACK_IMPORTED_MODULE_3__["PointClass"](point.id, point.linkURL, point.meta, point.lowerLimit, point.label, point.textObj, point.mainMetric, point.metrics, point.colorMode, point.traceBack, point.traceBorder, point.positionParameter, point.name, point.valueMetric, point.drawGraphicMarker, point.shape, point.sizeWidth, point.sizeHeight, point.rotateArrow, point.positionShapeX, point.positionShapeY, point.color, point.associateOrientedLinksIn, point.associateOrientedLinksOut);
-      console.log(toLoad);
+      var toLoad = new _Models_PointClass__WEBPACK_IMPORTED_MODULE_3__["PointClass"](point.id, point.linkURL, point.meta, point.lowerLimit, point.label, point.textObj, point.mainMetric, point.metrics, point.colorMode, point.traceBack, point.traceBorder, point.positionParameter, point.name, point.valueMetric, point.drawGraphicMarker, point.shape, point.sizeWidth, point.sizeHeight, point.rotateArrow, point.positionShapeX, point.positionShapeY, point.color, point.associateOrientedLinksIn, point.associateOrientedLinksOut); // console.log(toLoad);
 
       var selector = _this.PointValidator(toLoad); // Do some test here to see if your already load a coordinatespace with this id
 
@@ -18519,7 +20049,6 @@ function (_super) {
           var allLimit = _this.fillLowerLimit(line.lowerLimit);
 
           var name_1 = line.label || line.name;
-          console.log(name_1);
           var ownElement = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, name_1, allLimit);
           rendu.push(ownElement);
         }
@@ -18742,993 +20271,6 @@ function (_super) {
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (LegendComponent);
-
-/***/ }),
-
-/***/ "./components/orientedLinkForm.tsx":
-/*!*****************************************!*\
-  !*** ./components/orientedLinkForm.tsx ***!
-  \*****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var Models_ArrayInputSelectableClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! Models/ArrayInputSelectableClass */ "./Models/ArrayInputSelectableClass.tsx");
-/* harmony import */ var Functions_Input_inputTextOrientedLink__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! Functions/Input/inputTextOrientedLink */ "./Functions/Input/inputTextOrientedLink.tsx");
-/* harmony import */ var Functions_Input_inputSelectOrientedLink__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! Functions/Input/inputSelectOrientedLink */ "./Functions/Input/inputSelectOrientedLink.tsx");
-/* harmony import */ var Functions_Input_inputSeriesColorPickerOrientedLink__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! Functions/Input/inputSeriesColorPickerOrientedLink */ "./Functions/Input/inputSeriesColorPickerOrientedLink.tsx");
-/* harmony import */ var Functions_Input_inputButton__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! Functions/Input/inputButton */ "./Functions/Input/inputButton.tsx");
-/* harmony import */ var Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! Models/OrientedLinkClass */ "./Models/OrientedLinkClass.tsx");
-/* harmony import */ var Functions_CreateInput_createInputsOrientedLink__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! Functions/CreateInput/createInputsOrientedLink */ "./Functions/CreateInput/createInputsOrientedLink.tsx");
-/* harmony import */ var Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! Functions/EditParameter/editGoodParameterOrientedLink */ "./Functions/EditParameter/editGoodParameterOrientedLink.tsx");
-/* harmony import */ var Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! Models/TextObjectClass */ "./Models/TextObjectClass.tsx");
-/* harmony import */ var Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! Models/LinkURLClass */ "./Models/LinkURLClass.tsx");
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _Parametrage_parametresGeneriques__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Parametrage/parametresGeneriques */ "./components/Parametrage/parametresGeneriques.tsx");
-/* harmony import */ var _Parametrage_manageLowerLimit__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./Parametrage/manageLowerLimit */ "./components/Parametrage/manageLowerLimit.tsx");
-/* harmony import */ var Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! Models/PositionParameterClass */ "./Models/PositionParameterClass.tsx");
-/* harmony import */ var _Parametrage_positionParameters__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./Parametrage/positionParameters */ "./components/Parametrage/positionParameters.tsx");
-/* harmony import */ var _CoordinateSpace_manageQuery__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./CoordinateSpace/manageQuery */ "./components/CoordinateSpace/manageQuery.tsx");
-/* harmony import */ var _CoordinateSpace_manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./CoordinateSpace/manageAuxiliaryQuery */ "./components/CoordinateSpace/manageAuxiliaryQuery.tsx");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * IndexParametrage
- */
-
-var OrientedLinkForm =
-/** @class */
-function (_super) {
-  Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(OrientedLinkForm, _super);
-
-  function OrientedLinkForm(props) {
-    var _this = _super.call(this, props) || this;
-    /**
-     * to do
-     */
-
-
-    _this.callBack = function () {
-      _this.props.callBackFromParent(_this.state.arrayOrientedLinkClass);
-    };
-
-    _this.loadCoorParent = function () {
-      var e_1, _a;
-
-      var oldArrayOrientedLinkClass = _this.props.oldArrayOrientedLinkClass;
-
-      if (oldArrayOrientedLinkClass.length === 0 || _this.state.debug === true) {
-        if (!_this.state.debug) {
-          _this.setState(function (prevState) {
-            return {
-              debug: !prevState.debug
-            };
-          });
-        }
-
-        return;
-      }
-
-      var _loop_1 = function _loop_1(element) {
-        setTimeout(function () {
-          _this.addInput(element.id, element.label, element.orientationLink, element.size, element.pointAPositionX, element.pointAPositionY, element.colorCoordinateA, element.pointBPositionX, element.pointBPositionY, element.colorCoordinateB, element.pointIn, element.pointOut, element.regionIn, element.regionOut, element.textObj, element.lowerLimit, element.positionParameter, element.pointCPositionX, element.pointCPositionY, element.isIncurved, element.mainMetric, element.metrics, element.mainMetricB, element.metricsB, element.colorMode, element.traceBorder //element.traceBack
-          );
-        }, 100);
-      };
-
-      try {
-        for (var oldArrayOrientedLinkClass_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(oldArrayOrientedLinkClass), oldArrayOrientedLinkClass_1_1 = oldArrayOrientedLinkClass_1.next(); !oldArrayOrientedLinkClass_1_1.done; oldArrayOrientedLinkClass_1_1 = oldArrayOrientedLinkClass_1.next()) {
-          var element = oldArrayOrientedLinkClass_1_1.value;
-
-          _loop_1(element);
-        }
-      } catch (e_1_1) {
-        e_1 = {
-          error: e_1_1
-        };
-      } finally {
-        try {
-          if (oldArrayOrientedLinkClass_1_1 && !oldArrayOrientedLinkClass_1_1.done && (_a = oldArrayOrientedLinkClass_1["return"])) _a.call(oldArrayOrientedLinkClass_1);
-        } finally {
-          if (e_1) throw e_1.error;
-        }
-      }
-
-      _this.setState(function (prevState) {
-        return {
-          debug: !prevState.debug
-        };
-      });
-    };
-    /**
-     * add inputs for a new coordiante
-     */
-
-
-    _this.addInput = function (id, label, orientationLink, size, pointAPositionX, pointAPositionY, colorCoordinateA, pointBPositionX, pointBPositionY, colorCoordinateB, pointIn, pointOut, regionIn, regionOut, //refIdMainMetric?: string, keyMainMetric?: string, keyValueMainMetric?: string,
-    textObj, seuil, positionParameter, pointCPositionX, pointCPositionY, isIncurved, mainMetrics, auxiliaryMetrics, mainMetricsB, auxiliaryMetricsB, colorMode, traceBorder //traceBack?: boolean
-    ) {
-      var num = id || _this.props.options.indexOrientedLink + 1;
-      var zIndex = _this.props.options.zIndexOrientedLink;
-      var finalArray = Object(Functions_CreateInput_createInputsOrientedLink__WEBPACK_IMPORTED_MODULE_8__["createInputsOrientedLink"])(num, _this.defineDataRegion(), _this.defineDataPoint());
-      var initTextObject = textObj || new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_10__["TextObject"]('', false, '', '', {
-        bold: false,
-        italic: false,
-        underline: false
-      }, false, {
-        legendElement: '',
-        numericFormatElement: '',
-        unit: '',
-        displayObjectInTooltip: false,
-        // 'displayObjectPermanently': false,
-        addColorTextElement: false,
-        colorTextElement: 'white',
-        addColorBackElement: false,
-        colorBackElement: 'black'
-      }, {
-        legendElement: '',
-        numericFormatElement: '',
-        unit: '',
-        displayObjectInTooltip: false,
-        // 'displayObjectPermanently': false,
-        addColorTextElement: false,
-        colorTextElement: 'white',
-        addColorBackElement: false,
-        colorBackElement: 'black'
-      });
-      var parametrageMetric = new Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_11__["LinkURLClass"]('', '', '');
-      var initPositionParameter = positionParameter || new Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_15__["PositionParameterClass"]('', '', '', '', {}, {});
-      var initMainMetrics = mainMetrics || {
-        key: '',
-        unit: '',
-        format: '',
-        keyValue: '',
-        refId: '',
-        manageValue: 'avg'
-      };
-      var initMainMetricsB = mainMetricsB || {
-        key: '',
-        unit: '',
-        format: '',
-        keyValue: '',
-        refId: '',
-        manageValue: 'avg'
-      };
-
-      _this.setState(function (prevState) {
-        return {
-          arrayOrientedLinkClass: prevState.arrayOrientedLinkClass.concat(new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_7__["OrientedLinkClass"](num, parametrageMetric, '', seuil || [], label || '', initTextObject, // {
-          // 	'key': keyMainMetric || '',
-          // 	'unit': '',
-          // 	'format': '',
-          // 	'keyValue': keyValueMainMetric || '',
-          // 	'refId': refIdMainMetric || '',
-          // 	'manageValue': 'avg',
-          // }
-          initMainMetrics, auxiliaryMetrics || [], colorMode || false, false, traceBorder || false, initPositionParameter, 'orientedLink' + num.toString(), orientationLink || {
-            label: 'double',
-            value: 'double'
-          }, size || {
-            label: 'Medium',
-            value: 'Medium'
-          }, pointAPositionX || '0', pointAPositionY || '0', colorCoordinateA || '#5794F2', pointBPositionX || '0', pointBPositionY || '0', colorCoordinateB || '#E54658', '', '', pointIn || '', pointOut || '', regionIn || '', regionOut || '', zIndex, pointCPositionX || '0', pointCPositionY || '0', isIncurved || {}, initMainMetricsB, auxiliaryMetricsB || [])),
-          arrayInput: prevState.arrayInput.concat([new Models_ArrayInputSelectableClass__WEBPACK_IMPORTED_MODULE_2__["ArrayInputSelectableClass"](num, finalArray)])
-        };
-      });
-
-      _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-        indexOrientedLink: num
-      }));
-    };
-    /**
-     * Delete array input and value
-     * @param {event} event event click delete button
-     */
-
-
-    _this.deleteOwnInput = function (event) {
-      var e_2, _a;
-
-      var arrayInput = _this.state.arrayInput;
-      var id = event.currentTarget.id;
-
-      var _loop_2 = function _loop_2(obj) {
-        var e_3, _a;
-
-        try {
-          for (var _b = (e_3 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(obj.uneClassInput)), _c = _b.next(); !_c.done; _c = _b.next()) {
-            var line = _c.value;
-
-            if (line.input_type === 'button') {
-              if (line.id === id) {
-                var updateArrayInput = arrayInput.filter(function (value) {
-                  return value.id !== obj.id;
-                });
-
-                _this.setState({
-                  arrayInput: updateArrayInput
-                });
-
-                _this.deleteArrayOrientedLinkClass(parseInt(id, 10));
-
-                return {
-                  value: void 0
-                };
-              }
-            }
-          }
-        } catch (e_3_1) {
-          e_3 = {
-            error: e_3_1
-          };
-        } finally {
-          try {
-            if (_c && !_c.done && (_a = _b["return"])) _a.call(_b);
-          } finally {
-            if (e_3) throw e_3.error;
-          }
-        }
-      };
-
-      try {
-        for (var arrayInput_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayInput), arrayInput_1_1 = arrayInput_1.next(); !arrayInput_1_1.done; arrayInput_1_1 = arrayInput_1.next()) {
-          var obj = arrayInput_1_1.value;
-
-          var state_1 = _loop_2(obj);
-
-          if (_typeof(state_1) === "object") return state_1.value;
-        }
-      } catch (e_2_1) {
-        e_2 = {
-          error: e_2_1
-        };
-      } finally {
-        try {
-          if (arrayInput_1_1 && !arrayInput_1_1.done && (_a = arrayInput_1["return"])) _a.call(arrayInput_1);
-        } finally {
-          if (e_2) throw e_2.error;
-        }
-      }
-    };
-    /** update lower limit */
-
-
-    _this.callBackManageLowerLimit = function (coordiante, id) {
-      var newValue = _this.state.arrayOrientedLinkClass[id || 0];
-      newValue.colorMode = coordiante.colorMode;
-      newValue.traceBorder = coordiante.traceBorder; //newValue.traceBack = coordiante.traceBack;
-      // newValue.lowerLimit = coordiante.lowerLimit;
-
-      _this.props.options.arrayOrientedLinks[id || 0] = newValue;
-
-      _this.callBack();
-    };
-    /** save lower limit data */
-
-
-    _this.callBackLowerLimit = function (lowerLimit, id) {
-      var newValue = _this.state.arrayOrientedLinkClass[id || 0];
-      newValue.lowerLimit = lowerLimit;
-      _this.props.options.arrayOrientedLinks[id || 0] = newValue;
-
-      _this.callBack();
-    };
-    /**
-     * to do
-     */
-
-
-    _this.defineListCollapse = function () {
-      _this.props.options.listCollapsePoint = [];
-      var arrayOrientedLink = _this.state.arrayOrientedLinkClass;
-      arrayOrientedLink.forEach(function (orientedLink) {
-        _this.props.options.listCollapseOrientedLink.push(false);
-      });
-    };
-
-    _this.callBackToOther = function (followLink, hoveringTooltipLink, hoveringTooltipText, textObj, id) {
-      var newValue = _this.state.arrayOrientedLinkClass[id || 0];
-
-      if (followLink) {
-        newValue.linkURL.followLink = followLink;
-      }
-
-      if (hoveringTooltipLink) {
-        newValue.linkURL.hoveringTooltipLink = hoveringTooltipLink;
-      }
-
-      if (hoveringTooltipText) {
-        newValue.linkURL.hoveringTooltipText = hoveringTooltipText;
-      }
-
-      if (textObj) {
-        newValue.textObj = textObj;
-      }
-
-      _this.props.options.arrayOrientedLinks[id || 0] = newValue;
-
-      _this.callBack(); // const arrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
-      // arrayOrientedLink[id || 0] = oldCoor;
-      // this.props.onOptionsChange({
-      //   ...this.props.options,
-      //   arrayOrientedLinks: arrayOrientedLink,
-      // });
-
-    };
-
-    _this.callBackMainMetric = function (mainMetric, id) {
-      var newValue = _this.state.arrayOrientedLinkClass[id || 0];
-      newValue.mainMetric = mainMetric;
-      _this.props.options.arrayOrientedLinks[id || 0] = newValue;
-
-      _this.callBack();
-    };
-
-    _this.updateAssociatePointAndRegion = function (orientedLink, name) {
-      if (name.startsWith('pointIn')) {
-        orientedLink = Object(Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_9__["editGoodParameterOrientedLink"])('regionIn', orientedLink, '', {});
-      } else if (name.startsWith('regionIn')) {
-        orientedLink = Object(Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_9__["editGoodParameterOrientedLink"])('pointIn', orientedLink, '', {});
-      } else if (name.startsWith('pointOut')) {
-        orientedLink = Object(Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_9__["editGoodParameterOrientedLink"])('regionOut', orientedLink, '', {});
-      } else if (name.startsWith('regionOut')) {
-        orientedLink = Object(Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_9__["editGoodParameterOrientedLink"])('pointOut', orientedLink, '', {});
-      }
-    };
-    /**
-     * to do
-     */
-
-
-    _this.componentDidMount = function () {
-      _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-        newOrientedLink: false
-      }));
-
-      _this.props.options.newOrientedLink = false;
-
-      _this.loadCoorParent();
-    };
-
-    _this.componentDidUpdate = function () {
-      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
-          switch (_a.label) {
-            case 0:
-              if (!this.props.options.newOrientedLink) return [3
-              /*break*/
-              , 4]; //const newValue = false;
-
-              this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.props.options), {
-                newOrientedLink: false
-              }));
-              this.props.options.newOrientedLink = false;
-              return [4
-              /*yield*/
-              , this.setStateAsyncArrayInput({
-                arrayInput: []
-              })];
-
-            case 1:
-              _a.sent();
-
-              return [4
-              /*yield*/
-              , this.setStateAsyncArrayOrientedLink({
-                arrayOrientedLinkClass: []
-              })];
-
-            case 2:
-              _a.sent();
-
-              return [4
-              /*yield*/
-              , this.setStateAsyncDebug({
-                debug: false
-              })];
-
-            case 3:
-              _a.sent();
-
-              this.loadCoorParent();
-              this.generateInputsOrientedLinks();
-              _a.label = 4;
-
-            case 4:
-              return [2
-              /*return*/
-              ];
-          }
-        });
-      });
-    }; // // /** update state when props uneCoor change */
-    // componentDidUpdate = async (prevProps: Props) => {
-    //   console.log('ok');
-    //   console.log(prevProps.options.newOrientedLink);
-    //   if (this.props.options.newOrientedLink) {
-    //     console.log('outof');
-    //     await this.setStateAsyncArrayInput({
-    //       arrayInput: [],
-    //     });
-    //     await this.setStateAsyncArrayOrientedLink({
-    //       arrayOrientedLinkClass: [],
-    //     });
-    //     await this.setStateAsyncDebug({
-    //       debug: false,
-    //     });
-    //     this.loadCoorParent();
-    //     this.generateInputsOrientedLinks();
-    //     const newValue = false;
-    //     this.props.onOptionsChange({
-    //       ...this.props.options,
-    //       newOrientedLink: newValue,
-    //     });
-    //     this.props.options.newOrientedLink = newValue;
-    //     console.log(prevProps.options.newOrientedLink);
-    //   }
-    // };
-
-
-    _this.setStateAsyncDebug = function (state) {
-      return new Promise(function (resolve) {
-        _this.setState(state, resolve);
-      });
-    };
-
-    _this.setStateAsyncArrayInput = function (state) {
-      return new Promise(function (resolve) {
-        _this.setState(state, resolve);
-      });
-    };
-
-    _this.setStateAsyncArrayOrientedLink = function (state) {
-      return new Promise(function (resolve) {
-        _this.setState(state, resolve);
-      });
-    };
-
-    _this.state = {
-      arrayInput: [],
-      arrayOrientedLinkClass: [],
-      debug: false,
-      test: false,
-      listCollapseOrientedLink: []
-    };
-    return _this;
-  }
-
-  OrientedLinkForm.prototype.defineDataRegion = function () {
-    var regionCoordinateSpace = this.props.regionCoordinateSpace;
-    var optionRegionNull = {
-      label: 'None',
-      value: ''
-    };
-    var arrayOptionsRegion = [];
-    arrayOptionsRegion.push(optionRegionNull);
-    regionCoordinateSpace.forEach(function (region) {
-      var optionRegion = {
-        label: region.label,
-        value: region.label
-      };
-      arrayOptionsRegion.push(optionRegion);
-    });
-    return arrayOptionsRegion;
-  };
-
-  OrientedLinkForm.prototype.defineDataPoint = function () {
-    var arrayPoint = this.props.arrayPoint;
-    var optionPointNull = {
-      label: 'None',
-      value: ''
-    };
-    var arrayOptionsPoint = [];
-    arrayOptionsPoint.push(optionPointNull);
-    arrayPoint.forEach(function (point) {
-      var valueLabel = point.label || point.name;
-      var optionPoint = {
-        label: valueLabel,
-        value: valueLabel
-      };
-      arrayOptionsPoint.push(optionPoint);
-    });
-    return arrayOptionsPoint;
-  };
-  /**
-   * Delete array coordinate in state.oldArrayOrientedLinkClass
-   * @param {number} id id of object element to delete
-   */
-
-
-  OrientedLinkForm.prototype.deleteArrayOrientedLinkClass = function (id) {
-    var _this = this;
-
-    var newLinkClass = this.state.arrayOrientedLinkClass.filter(function (value) {
-      return value.id !== id;
-    });
-    this.setState({
-      arrayOrientedLinkClass: newLinkClass
-    });
-    setTimeout(function () {
-      _this.callBack();
-    }, 100);
-  };
-  /**
-   * Use function if value input change
-   * @param {string} currentTarget new value of input
-   * @param {string} name name of input
-   * @param {number} index id of input
-   */
-
-
-  OrientedLinkForm.prototype._handleChange = function (currentTarget, name, index) {
-    var e_4, _a;
-
-    var i;
-    i = 0;
-    var copyOfoldArrayOrientedLinkClass = this.state.arrayOrientedLinkClass.slice();
-
-    try {
-      for (var copyOfoldArrayOrientedLinkClass_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(copyOfoldArrayOrientedLinkClass), copyOfoldArrayOrientedLinkClass_1_1 = copyOfoldArrayOrientedLinkClass_1.next(); !copyOfoldArrayOrientedLinkClass_1_1.done; copyOfoldArrayOrientedLinkClass_1_1 = copyOfoldArrayOrientedLinkClass_1.next()) {
-        var line = copyOfoldArrayOrientedLinkClass_1_1.value;
-
-        if (line.id === index) {
-          copyOfoldArrayOrientedLinkClass[i] = Object(Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_9__["editGoodParameterOrientedLink"])(name, copyOfoldArrayOrientedLinkClass[i], currentTarget, {});
-          break;
-        }
-
-        i++;
-      }
-    } catch (e_4_1) {
-      e_4 = {
-        error: e_4_1
-      };
-    } finally {
-      try {
-        if (copyOfoldArrayOrientedLinkClass_1_1 && !copyOfoldArrayOrientedLinkClass_1_1.done && (_a = copyOfoldArrayOrientedLinkClass_1["return"])) _a.call(copyOfoldArrayOrientedLinkClass_1);
-      } finally {
-        if (e_4) throw e_4.error;
-      }
-    }
-
-    this.setState({
-      arrayOrientedLinkClass: copyOfoldArrayOrientedLinkClass
-    });
-    this.callBack();
-  };
-  /**
-   * Get value of input with state.oldArrayOrientedLinkClass
-   * @param {number} id id of element
-   * @param {string} param name of input
-   * @returns {string} value of the array element
-   */
-
-
-  OrientedLinkForm.prototype.getGoodValue = function (id, name) {
-    var e_5, _a;
-
-    var value;
-    var valueSelect;
-    var valueMetric;
-    var idx = -1;
-    var index = 0;
-    value = '';
-    valueSelect = {};
-
-    try {
-      for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(this.state.arrayOrientedLinkClass), _c = _b.next(); !_c.done; _c = _b.next()) {
-        var line = _c.value;
-
-        if (line.id === id) {
-          idx = index;
-          break;
-        }
-
-        ++index;
-      }
-    } catch (e_5_1) {
-      e_5 = {
-        error: e_5_1
-      };
-    } finally {
-      try {
-        if (_c && !_c.done && (_a = _b["return"])) _a.call(_b);
-      } finally {
-        if (e_5) throw e_5.error;
-      }
-    }
-
-    if (idx === -1) {
-      return value;
-    }
-
-    if (name.startsWith('orientationLink') || name.startsWith('isIncurved') || name.startsWith('pointIn') || name.startsWith('pointOut') || name.startsWith('regionIn') || name.startsWith('regionOut') || name.startsWith('size')) {
-      if (name.startsWith('orientationLink')) {
-        valueSelect = this.state.arrayOrientedLinkClass[idx].orientationLink;
-      } else if (name.startsWith('isIncurved')) {
-        valueSelect = this.state.arrayOrientedLinkClass[idx].isIncurved;
-      } else if (name.startsWith('pointIn')) {
-        valueSelect = {
-          label: this.state.arrayOrientedLinkClass[idx].pointIn,
-          value: this.state.arrayOrientedLinkClass[idx].pointIn
-        };
-      } else if (name.startsWith('pointOut')) {
-        valueSelect = {
-          label: this.state.arrayOrientedLinkClass[idx].pointOut,
-          value: this.state.arrayOrientedLinkClass[idx].pointOut
-        };
-      } else if (name.startsWith('regionIn')) {
-        valueSelect = {
-          label: this.state.arrayOrientedLinkClass[idx].regionIn,
-          value: this.state.arrayOrientedLinkClass[idx].regionIn
-        };
-      } else if (name.startsWith('regionOut')) {
-        valueSelect = {
-          label: this.state.arrayOrientedLinkClass[idx].regionOut,
-          value: this.state.arrayOrientedLinkClass[idx].regionOut
-        };
-      } else if (name.startsWith('size')) {
-        valueSelect = this.state.arrayOrientedLinkClass[idx].size;
-      }
-
-      return valueSelect;
-    } else if (name.startsWith('mainMetric')) {
-      valueMetric = this.state.arrayOrientedLinkClass[idx].mainMetric;
-      return valueMetric;
-    } else {
-      if (name.startsWith('label')) {
-        value = this.state.arrayOrientedLinkClass[idx].label;
-      } else if (name.startsWith('pointAX')) {
-        value = this.state.arrayOrientedLinkClass[idx].pointAPositionX;
-      } else if (name.startsWith('pointAY')) {
-        value = this.state.arrayOrientedLinkClass[idx].pointAPositionY;
-      } else if (name.startsWith('pointBX')) {
-        value = this.state.arrayOrientedLinkClass[idx].pointBPositionX;
-      } else if (name.startsWith('pointBY')) {
-        value = this.state.arrayOrientedLinkClass[idx].pointBPositionY;
-      } else if (name.startsWith('colorCoordinateA')) {
-        value = this.state.arrayOrientedLinkClass[idx].colorCoordinateA;
-      } else if (name.startsWith('colorCoordinateB')) {
-        value = this.state.arrayOrientedLinkClass[idx].colorCoordinateB;
-      } else if (name.startsWith('refIdMainMetric')) {
-        value = this.state.arrayOrientedLinkClass[idx].mainMetric.refId || '';
-      } else if (name.startsWith('keyMainMetric')) {
-        value = this.state.arrayOrientedLinkClass[idx].mainMetric.key || '';
-      } else if (name.startsWith('keyValueMainMetric')) {
-        value = this.state.arrayOrientedLinkClass[idx].mainMetric.keyValue || '';
-      } else if (name.startsWith('pointCX')) {
-        value = this.state.arrayOrientedLinkClass[idx].pointCPositionX;
-      } else if (name.startsWith('pointCY')) {
-        value = this.state.arrayOrientedLinkClass[idx].pointCPositionY;
-      }
-
-      return value;
-    }
-  };
-
-  OrientedLinkForm.prototype.defineLabelCollapse = function (id) {
-    var label = this.getGoodValue(id, 'label');
-
-    if (this.getGoodValue(id, 'label') === '') {
-      label = 'OrientedLink ' + id.toString();
-    }
-
-    return label;
-  }; // private callBackPositionParameter = (positionParameter: PositionParameterClass, id?: number) => {
-  //   const orientedLinkToUpdate: OrientedLinkClass = this.state.arrayOrientedLinkClass[id || 0];
-  //   orientedLinkToUpdate.positionParameter = positionParameter;
-  //   this.props.options.arrayOrientedLinks[id || 0] = orientedLinkToUpdate;
-  //   this.callBack();
-  // };
-
-
-  OrientedLinkForm.prototype.callBackZIndex = function (zIndexUpdated, id) {
-    this.props.options.arrayOrientedLinks[id].zIndex = zIndexUpdated;
-    this.callBack();
-  }; // private callBackAuxiliaryMetric = (auxiliaryMetrics: Metric[], id?: number): void => {
-  //   const newValue: OrientedLinkClass = this.state.arrayOrientedLinkClass[id || 0];
-  //   newValue.metrics = auxiliaryMetrics;
-  //   this.props.options.arrayOrientedLinks[id || 0] = newValue;
-  //   this.callBack();
-  // };
-
-  /**
-   * create dynamic input
-   */
-
-
-  OrientedLinkForm.prototype.generateInputsOrientedLinks = function () {
-    var e_6, _a;
-
-    var _this = this;
-
-    var index = 0;
-    this.defineListCollapse();
-    var arrayInput = this.state.arrayInput;
-    var finalItem = [];
-    var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
-    var itemButton = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
-
-    var _loop_3 = function _loop_3(line) {
-      var mapItems = [];
-      line.uneClassInput.forEach(function (obj) {
-        if (obj.input_type === 'text') {
-          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputTextOrientedLink__WEBPACK_IMPORTED_MODULE_3__["default"], {
-            key: obj.id,
-            label: obj.label,
-            name: obj.name,
-            placeholder: obj.placeholder || '',
-            required: obj.required,
-            value: _this.getGoodValue(line.id, obj.name),
-            _handleChange: function _handleChange(event) {
-              _this._handleChange(event.currentTarget.value, obj.name, line.id);
-            },
-            isIncurved: _this.getGoodValue(line.id, 'isIncurved')
-          });
-        } else if (obj.input_type === 'select') {
-          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSelectOrientedLink__WEBPACK_IMPORTED_MODULE_4__["default"], {
-            key: obj.id,
-            _onChange: function _onChange(value, name, index) {
-              var e_7, _a;
-
-              var i;
-              i = 0;
-
-              var copyOfoldArrayOrientedLinkClass = _this.state.arrayOrientedLinkClass.slice();
-
-              try {
-                for (var copyOfoldArrayOrientedLinkClass_2 = (e_7 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(copyOfoldArrayOrientedLinkClass)), copyOfoldArrayOrientedLinkClass_2_1 = copyOfoldArrayOrientedLinkClass_2.next(); !copyOfoldArrayOrientedLinkClass_2_1.done; copyOfoldArrayOrientedLinkClass_2_1 = copyOfoldArrayOrientedLinkClass_2.next()) {
-                  var line_1 = copyOfoldArrayOrientedLinkClass_2_1.value;
-
-                  if (line_1.id === index) {
-                    copyOfoldArrayOrientedLinkClass[i] = Object(Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_9__["editGoodParameterOrientedLink"])(name, copyOfoldArrayOrientedLinkClass[i], value.value || '', value || {});
-
-                    _this.updateAssociatePointAndRegion(copyOfoldArrayOrientedLinkClass[i], name);
-
-                    break;
-                  }
-
-                  i++;
-                }
-              } catch (e_7_1) {
-                e_7 = {
-                  error: e_7_1
-                };
-              } finally {
-                try {
-                  if (copyOfoldArrayOrientedLinkClass_2_1 && !copyOfoldArrayOrientedLinkClass_2_1.done && (_a = copyOfoldArrayOrientedLinkClass_2["return"])) _a.call(copyOfoldArrayOrientedLinkClass_2);
-                } finally {
-                  if (e_7) throw e_7.error;
-                }
-              }
-
-              _this.setState({
-                arrayOrientedLinkClass: copyOfoldArrayOrientedLinkClass
-              });
-
-              _this.callBack();
-            },
-            name: obj.name,
-            index: line.id,
-            data: obj.optionValues,
-            defaultValue: _this.getGoodValue(line.id, obj.name),
-            label: obj.label
-          });
-        } else if (obj.input_type === 'color') {
-          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPickerOrientedLink__WEBPACK_IMPORTED_MODULE_5__["default"], {
-            key: obj.id,
-            keyInt: parseInt(obj.id, 10),
-            color: _this.getGoodValue(line.id, obj.name),
-            text: obj.label,
-            width: 10,
-            _onChange: function _onChange(keyInt, newColor) {
-              var e_8, _a;
-
-              var i;
-              i = 0;
-
-              var copyOfArrayOrientedLinkClass = _this.state.arrayOrientedLinkClass.slice();
-
-              try {
-                for (var copyOfArrayOrientedLinkClass_1 = (e_8 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(copyOfArrayOrientedLinkClass)), copyOfArrayOrientedLinkClass_1_1 = copyOfArrayOrientedLinkClass_1.next(); !copyOfArrayOrientedLinkClass_1_1.done; copyOfArrayOrientedLinkClass_1_1 = copyOfArrayOrientedLinkClass_1.next()) {
-                  var line_2 = copyOfArrayOrientedLinkClass_1_1.value;
-
-                  if (line_2.id === keyInt) {
-                    copyOfArrayOrientedLinkClass[i] = Object(Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_9__["editGoodParameterOrientedLink"])(obj.name, copyOfArrayOrientedLinkClass[i], newColor, {});
-                    break;
-                  }
-
-                  i++;
-                }
-              } catch (e_8_1) {
-                e_8 = {
-                  error: e_8_1
-                };
-              } finally {
-                try {
-                  if (copyOfArrayOrientedLinkClass_1_1 && !copyOfArrayOrientedLinkClass_1_1.done && (_a = copyOfArrayOrientedLinkClass_1["return"])) _a.call(copyOfArrayOrientedLinkClass_1);
-                } finally {
-                  if (e_8) throw e_8.error;
-                }
-              }
-
-              _this.setState({
-                arrayOrientedLinkClass: copyOfArrayOrientedLinkClass
-              });
-
-              _this.callBack();
-
-              obj.setDefaultValueColor(newColor);
-            }
-          });
-        } else {
-          itemButton = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputButton__WEBPACK_IMPORTED_MODULE_6__["default"], {
-            key: obj.id,
-            label: obj.label,
-            value: obj.value || '',
-            name: obj.name,
-            required: obj.required,
-            _handleChange: _this.deleteOwnInput,
-            id: obj.id,
-            withLabel: false
-          });
-          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
-        }
-
-        mapItems.push(item);
-      });
-      var divKey = 'inputOrientedLink' + line.id.toString();
-      var newInput = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        key: divKey,
-        className: "inputCoor",
-        id: 'orientedLink' + line.id.toString(),
-        style: {
-          display: 'flex',
-          flexDirection: 'row',
-          marginBottom: '5px'
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_12__["Collapse"], {
-        isOpen: this_1.state.listCollapseOrientedLink[line.id - 1],
-        label: this_1.defineLabelCollapse(line.id),
-        onToggle: function onToggle(isOpen) {
-          _this.props.options.listCollapseOrientedLink[line.id - 1] = isOpen;
-
-          _this.setState(function (prevState, props) {
-            return {
-              listCollapseOrientedLink: props.options.listCollapseOrientedLink
-            };
-          });
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_CoordinateSpace_manageQuery__WEBPACK_IMPORTED_MODULE_17__["default"], {
-        options: this_1.props.options,
-        idCoordinate: this_1.state.arrayOrientedLinkClass[index].id,
-        onOptionsChange: this_1.props.onOptionsChange,
-        data: this_1.props.data,
-        mainMetric: this_1.state.arrayOrientedLinkClass[index].mainMetric,
-        mainMetricB: this_1.state.arrayOrientedLinkClass[index].mainMetricB,
-        callBackToParent: this_1.callBackMainMetric,
-        id: index,
-        isLink: true
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_CoordinateSpace_manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_18__["default"], {
-        options: this_1.props.options,
-        idCoordinate: index,
-        onOptionsChange: this_1.props.onOptionsChange,
-        data: this_1.props.data,
-        metrics: this_1.state.arrayOrientedLinkClass[index].metrics,
-        //callBackToParent={this.callBackAuxiliaryMetric}
-        isLink: true
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_parametresGeneriques__WEBPACK_IMPORTED_MODULE_13__["default"], {
-        options: this_1.props.options,
-        onOptionsChange: this_1.props.onOptionsChange,
-        data: this_1.props.data,
-        coordinateSpace: this_1.state.arrayOrientedLinkClass[index],
-        callBackToParent: this_1.callBackToOther,
-        id: index
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_manageLowerLimit__WEBPACK_IMPORTED_MODULE_14__["default"], {
-        options: this_1.props.options,
-        onOptionsChange: this_1.props.onOptionsChange,
-        data: this_1.props.data,
-        coordinate: this_1.state.arrayOrientedLinkClass[index],
-        orientedLink: this_1.state.arrayOrientedLinkClass[index],
-        callBack: this_1.callBackManageLowerLimit,
-        lowerLimitCallBack: this_1.callBackLowerLimit,
-        id: index,
-        isLink: true
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Parametrage_positionParameters__WEBPACK_IMPORTED_MODULE_16__["default"], {
-        options: this_1.props.options,
-        onOptionsChange: this_1.props.onOptionsChange,
-        data: this_1.props.data,
-        callBackToParentZIndex: this_1.callBackZIndex.bind(this_1),
-        isPoint: false,
-        isLink: true,
-        isRegion: false,
-        id: index
-      })), mapItems), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          marginTop: '4px'
-        }
-      }, itemButton));
-      finalItem = finalItem.concat(newInput);
-      index++;
-    };
-
-    var this_1 = this;
-
-    try {
-      for (var arrayInput_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayInput), arrayInput_2_1 = arrayInput_2.next(); !arrayInput_2_1.done; arrayInput_2_1 = arrayInput_2.next()) {
-        var line = arrayInput_2_1.value;
-
-        _loop_3(line);
-      }
-    } catch (e_6_1) {
-      e_6 = {
-        error: e_6_1
-      };
-    } finally {
-      try {
-        if (arrayInput_2_1 && !arrayInput_2_1.done && (_a = arrayInput_2["return"])) _a.call(arrayInput_2);
-      } finally {
-        if (e_6) throw e_6.error;
-      }
-    }
-
-    if (finalItem.length === 0) {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          textAlign: 'center',
-          fontSize: '20px',
-          marginTop: '50px'
-        }
-      }, "Data not set");
-    } else {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, finalItem);
-    }
-  };
-  /**
-   * render()
-   */
-
-
-  OrientedLinkForm.prototype.render = function () {
-    // const stylePositionButton = {
-    //   display: 'flex',
-    //   flexDirection: 'row',
-    //   justifyContent: 'center',
-    // } as React.CSSProperties;
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      style: {
-        marginBottom: '200px'
-      }
-    }, this.generateInputsOrientedLinks());
-  };
-
-  return OrientedLinkForm;
-}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (OrientedLinkForm);
 
 /***/ }),
 
@@ -19973,7 +20515,7 @@ var defaults = {
   orientedLinkToDowngrade: {},
   checkIndexMultiLink: 0,
   newPoint: true,
-  newOrientedLink: false
+  newOrientedLink: true
 };
 
 /***/ }),

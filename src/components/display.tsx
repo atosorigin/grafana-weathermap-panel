@@ -202,7 +202,7 @@ class Display extends React.Component<Props, State> {
       <div>
         <tr style={{ verticalAlign: 'middle' }}>
           <td>
-            <FormLabel width={10}>Police</FormLabel>
+            <FormLabel width={15}>Police</FormLabel>
           </td>
           <td>
             <InputSelect _onChange={this.onChangePolice} data={police} defaultValue={this.state.newPolice} />
@@ -211,8 +211,8 @@ class Display extends React.Component<Props, State> {
 
         <FormField
           label={l10n.textDefault.size}
-          labelWidth={10}
-          inputWidth={10}
+          labelWidth={15}
+          inputWidth={30}
           required={true}
           value={this.state.size}
           onChange={this.handleChangesize}
@@ -229,8 +229,9 @@ class Display extends React.Component<Props, State> {
           onChange={this.handleChangeStyle}
         /> */}
 
-        <div>
-          <Switch label="Use SVG" checked={options.baseMap.modeSVG} onChange={this.onChangeSwitchModeSVG} />
+        <div style={{ display: 'flex' }}>
+          <FormLabel width={15}>Use SVG</FormLabel>
+          <Switch labelClass="" label="" checked={options.baseMap.modeSVG} onChange={this.onChangeSwitchModeSVG} />
         </div>
         {/* {options.baseMap.modeSVG ? (
           <FormField
@@ -243,10 +244,10 @@ class Display extends React.Component<Props, State> {
           />
         ) : ( */}
         <div>
-          <FormField label={'Image'} labelWidth={10} inputWidth={30} type="text" onChange={this.onImageChanged} value={options.baseMap.image || ''} />
+          <FormField label={'Image'} labelWidth={15} inputWidth={30} type="text" onChange={this.onImageChanged} value={options.baseMap.image || ''} />
           <FormField
             label="Width"
-            labelWidth={10}
+            labelWidth={15}
             inputWidth={30}
             type="text"
             onChange={this.onChangeWidthBaseMap}
@@ -254,7 +255,7 @@ class Display extends React.Component<Props, State> {
           />
           <FormField
             label="Height"
-            labelWidth={10}
+            labelWidth={15}
             inputWidth={30}
             type="text"
             onChange={this.onChangeHeightBaseMap}

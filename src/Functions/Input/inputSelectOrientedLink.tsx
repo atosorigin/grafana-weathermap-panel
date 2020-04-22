@@ -12,7 +12,7 @@ type InputSelectProps = {
 };
 
 const InputSelectOrientedLink: FunctionComponent<InputSelectProps> = ({ _onChange, data, index, defaultValue, name, label }) => {
-  console.log(defaultValue);
+  //console.log(defaultValue);
   return (
     <div
       style={{

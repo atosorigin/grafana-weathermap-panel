@@ -465,5 +465,5 @@ export const defaults: SimpleOptions = {
   orientedLinkToDowngrade: {},
   checkIndexMultiLink: 0,
   newPoint: true,
-  newOrientedLink: false,
+  newOrientedLink: true,
 };

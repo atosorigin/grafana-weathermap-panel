@@ -12,8 +12,6 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   idCoordinate: number;
   /** parent data */
   metrics: Metric[];
-  /** call function when save data */
-  //callBackToParent: (metrics: Metric[], id?: number) => void;
   /** check if coordinateSpace is OrientedLink */
   isLink?: boolean;
   /** check if coordinateSpace is Point */
@@ -29,8 +27,6 @@ interface State {
   collapseLinkA: boolean;
   /** collapse linkB if orientedLink is bidirectionnal open or close */
   collapseLinkB: boolean;
-  /** default value for manage value */
-  selectDefaultManageValue: SelectableValue<TManageValue>;
 }
 
 /**
@@ -43,7 +39,6 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
       collapse: false,
       collapseLinkA: false,
       collapseLinkB: false,
-      selectDefaultManageValue: { value: 'avg', label: 'avg' },
     };
   }
 
@@ -62,10 +57,14 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
       });
     } else if (this.props.isLink) {
       const newArrayLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
-      if (isLinkB) {
-        newArrayLink[idCurrentCoordinateSpace].metricsB = newAuxMetrics;
-      } else {
-        newArrayLink[idCurrentCoordinateSpace].metrics = newAuxMetrics;
+      for (const orientedLink of newArrayLink) {
+        if (orientedLink.id === idCurrentCoordinateSpace) {
+          if (isLinkB) {
+            orientedLink.metricsB = newAuxMetrics;
+          } else {
+            orientedLink.metrics = newAuxMetrics;
+          }
+        }
       }
       this.props.onOptionsChange({
         ...this.props.options,
@@ -89,10 +88,15 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
     let auxiliaryMetrics: Metric[] = [];
     const idCurrentCoordinateSpace: number = this.props.idCoordinate;
     if (this.props.isLink) {
-      if (isLinkB) {
-        auxiliaryMetrics = this.props.options.arrayOrientedLinks[idCurrentCoordinateSpace].metricsB;
-      } else {
-        auxiliaryMetrics = this.props.options.arrayOrientedLinks[idCurrentCoordinateSpace].metrics;
+      const arrayOrientedLinks: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+      for (const orientedLink of arrayOrientedLinks) {
+        if (orientedLink.id === idCurrentCoordinateSpace) {
+          if (isLinkB) {
+            auxiliaryMetrics = orientedLink.metricsB;
+          } else {
+            auxiliaryMetrics = orientedLink.metrics;
+          }
+        }
       }
     } else if (this.props.isPoint) {
       const arrayPoints: PointClass[] = this.props.options.arrayPoints;
@@ -114,15 +118,20 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
 
   private getReferenceMainMetric = (isLinkB: boolean): string => {
     let newRefId = '';
-    const newArrayPoints: PointClass[] = this.props.options.arrayPoints;
     const idCurrentCoordinateSpace: number = this.props.idCoordinate;
     if (this.props.isLink) {
-      if (isLinkB) {
-        newRefId = this.props.options.arrayOrientedLinks[this.props.idCoordinate].mainMetricB.refId || '';
-      } else {
-        newRefId = this.props.options.arrayOrientedLinks[this.props.idCoordinate].mainMetric.refId || '';
+      const arrayOrientedLinks: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+      for (const orientedLink of arrayOrientedLinks) {
+        if (orientedLink.id === idCurrentCoordinateSpace) {
+          if (isLinkB) {
+            newRefId = orientedLink.mainMetricB.refId || '';
+          } else {
+            newRefId = orientedLink.mainMetric.refId || '';
+          }
+        }
       }
     } else if (this.props.isPoint) {
+      const newArrayPoints: PointClass[] = this.props.options.arrayPoints;
       for (const point of newArrayPoints) {
         if (point.id === idCurrentCoordinateSpace) {
           newRefId = point.mainMetric.refId || '';
@@ -145,12 +154,6 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
     }
     return newRefId;
   };
-
-  // /** call back to parent */
-  // private callBack = () => {
-  //   console.log(this.props.idCoordinate);
-  //   this.props.callBackToParent(this.state.metrics, this.props.idCoordinate);
-  // };
 
   /** switch value collapse when click collapse */
   private onToggleCollapse = (isOpen: boolean) => {
@@ -178,11 +181,7 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
     const idCurrentAuxMetrics: number = event.currentTarget.id;
     const value: string = event.currentTarget.value;
     newAuxiliaryMetrics[idCurrentAuxMetrics].key = value;
-    // this.setState({
-    //   metrics: newAuxiliaryMetrics,
-    // });
     this.saveAuxMetrics(newAuxiliaryMetrics, false);
-    //this.callBack();
   };
 
   private onChangeKeyB = (event: any) => {
@@ -190,11 +189,7 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
     const idCurrentAuxMetrics: number = event.currentTarget.id;
     const value: string = event.currentTarget.value;
     newAuxiliaryMetrics[idCurrentAuxMetrics].key = value;
-    // this.setState({
-    //   metrics: newAuxiliaryMetrics,
-    // });
     this.saveAuxMetrics(newAuxiliaryMetrics, true);
-    //this.callBack();
   };
 
   private onChangeValueKey = (event: any) => {
@@ -203,10 +198,6 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
     const value: string = event.currentTarget.value;
     newAuxiliaryMetrics[id].keyValue = value;
     this.saveAuxMetrics(newAuxiliaryMetrics, false);
-    // this.setState({
-    //   metrics: newAuxiliaryMetrics,
-    // });
-    // this.callBack();
   };
 
   private onChangeValueKeyB = (event: any) => {
@@ -215,36 +206,20 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
     const value: string = event.currentTarget.value;
     newAuxiliaryMetrics[id].keyValue = value;
     this.saveAuxMetrics(newAuxiliaryMetrics, true);
-    // this.setState({
-    //   metrics: newAuxiliaryMetrics,
-    // });
-    // this.callBack();
   };
 
   private onChangeManageValue = (event: any) => {
     const newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(false);
     const id: number = event.id;
     newAuxiliaryMetrics[id].manageValue = event.value;
-    const newValue: SelectableValue<TManageValue> = { id: event.id, value: event.value, label: event.label };
     this.saveAuxMetrics(newAuxiliaryMetrics, false);
-    this.setState({
-      //metrics: newAuxiliaryMetrics,
-      selectDefaultManageValue: newValue,
-    });
-    //this.callBack();
   };
 
   private onChangeManageValueB = (event: any) => {
     const newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(true);
     const id: number = event.id;
     newAuxiliaryMetrics[id].manageValue = event.value;
-    const newValue: SelectableValue<TManageValue> = { id: event.id, value: event.value, label: event.label };
     this.saveAuxMetrics(newAuxiliaryMetrics, true);
-    this.setState({
-      //metrics: newAuxiliaryMetrics,
-      selectDefaultManageValue: newValue,
-    });
-    //this.callBack();
   };
 
   private addAuxiliaryMetric = () => {
@@ -258,12 +233,8 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
       refId: refIdMetric,
       manageValue: 'avg',
     });
-    // this.setState({
-    //   metrics: auxiliaryMetrics,
-    // });
     this.saveAuxMetrics(newAuxiliaryMetrics, false);
     this.displayInputs(false);
-    //this.callBack();
   };
 
   private addAuxiliaryMetricB = () => {
@@ -277,36 +248,24 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
       refId: refIdMetric,
       manageValue: 'avg',
     });
-    // this.setState({
-    //   metrics: auxiliaryMetrics,
-    // });
     this.saveAuxMetrics(newAuxiliaryMetrics, true);
     this.displayInputs(true);
-    //this.callBack();
   };
 
   private deleteAuxiliaryMetric = (event: any) => {
     const id: number = event.currentTarget.id;
     const newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(false);
     newAuxiliaryMetrics.splice(id, 1);
-    // this.setState({
-    //   metrics: newAuxiliaryMetrics,
-    // });
     this.saveAuxMetrics(newAuxiliaryMetrics, false);
     this.displayInputs(false);
-    //this.callBack();
   };
 
   private deleteAuxiliaryMetricB = (event: any) => {
     const id: number = event.currentTarget.id;
     const newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(true);
     newAuxiliaryMetrics.splice(id, 1);
-    // this.setState({
-    //   metrics: newAuxiliaryMetrics,
-    // });
     this.saveAuxMetrics(newAuxiliaryMetrics, true);
     this.displayInputs(true);
-    //this.callBack();
   };
 
   private getAllManageValue = (id: string): Array<SelectableValue<TManageValue>> => {
@@ -449,7 +408,7 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
           <div key={idCoordinateSpace + 'content' + id.toString()} style={styleContent}>
             <div key={idCoordinateSpace + 'inputs' + id.toString()}>
               <div key={idCoordinateSpace + 'refBloc' + id.toString()} style={styleSelect}>
-                <FormLabel key={idCoordinateSpace + 'labelref' + id.toString()} width={10}>
+                <FormLabel key={idCoordinateSpace + 'labelref' + id.toString()} width={15}>
                   Query
                 </FormLabel>
                 <p key={this.props.idCoordinate?.toString() || '' + 'refValue' + id.toString()} style={styleReferenceMetric}>
@@ -460,8 +419,8 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
                 key={idCoordinateSpace + 'inputKey' + id.toString()}
                 id={id.toString()}
                 label="Key"
-                labelWidth={10}
-                inputWidth={20}
+                labelWidth={15}
+                inputWidth={30}
                 type="text"
                 value={auxMetrics[id].key}
                 name="key"
@@ -471,15 +430,15 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
                 key={idCoordinateSpace + 'valueKey' + id.toString()}
                 id={id.toString()}
                 label="Value key"
-                labelWidth={10}
-                inputWidth={20}
+                labelWidth={15}
+                inputWidth={30}
                 type="text"
                 value={auxMetrics[id].keyValue}
                 name="valueKey"
                 onChange={this.onChangeValueKey}
               />
               <div key={idCoordinateSpace + 'divTypeOfValue' + id.toString()} id={id.toString()} style={styleSelect}>
-                <FormLabel key={idCoordinateSpace + 'labelTypeOfValue' + id.toString()} width={10}>
+                <FormLabel key={idCoordinateSpace + 'labelTypeOfValue' + id.toString()} width={15}>
                   Value
                 </FormLabel>
                 <Select
@@ -487,7 +446,7 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
                   onChange={this.onChangeManageValue}
                   allowCustomValue={false}
                   options={this.getAllManageValue(id.toString())}
-                  width={20}
+                  width={30}
                   value={this.getCurrentManageValue(id, isLinkB)}
                 />
               </div>
@@ -532,7 +491,15 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
       marginTop: '10px',
     } as React.CSSProperties;
 
-    if (this.props.isLink && this.props.options.arrayOrientedLinks[this.props.idCoordinate].orientationLink.value === 'double') {
+    let currentOrientedLink: any;
+    const arrayOrientedLinks: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+    for (const orientedLink of arrayOrientedLinks) {
+      if (orientedLink.id === this.props.idCoordinate) {
+        currentOrientedLink = orientedLink;
+      }
+    }
+
+    if (this.props.isLink && currentOrientedLink && currentOrientedLink.orientationLink.value === 'double') {
       return (
         <Collapse isOpen={this.state.collapse} label="Auxiliary metrics" onToggle={this.onToggleCollapse}>
           <Collapse isOpen={this.state.collapseLinkA} label="Link A" onToggle={this.onToggleCollapseLinkA}>

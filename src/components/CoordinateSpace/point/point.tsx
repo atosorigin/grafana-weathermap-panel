@@ -1,16 +1,13 @@
 import React, { CSSProperties } from 'react';
 import { createInputsPoint } from '../../../Functions/CreateInput/createInputsPoint';
 import InputTextPoint from '../../../Functions/Input/inputTextPoint';
-//import InputButtonField from '../Functions/Input/inputButton';
 import { InputSelectableClass } from '../../../Models/InputSelectableClass';
 import { ArrayInputSelectableClass } from '../../../Models/ArrayInputSelectableClass';
 import { editGoodParameterPoint } from '../../../Functions/EditParameter/editGoodParameterPoint';
 import { PointClass } from '../../../Models/PointClass';
 import InputSelectPoint from '../../../Functions/Input/inputSelectPoint';
 import { SelectableValue, PanelEditorProps } from '@grafana/data';
-import InputSeriesColorPickerPoint from '../../../Functions/Input/inputSeriesColorPickerPoint';
 import { Button, AlertVariant, Alert } from '@grafana/ui';
-//import { RegionClass } from '../Models/RegionClass';
 import { SimpleOptions, Metric } from '../../../types';
 
 import ManageQuery from '../manageQuery';
@@ -49,9 +46,7 @@ interface State {
   /** */
   arrayPointClass: PointClass[];
   /** */
-  arrayCoor: PointClass;
-  /** */
-  debug: boolean;
+  point: PointClass;
   /** */
   htmlInput: JSX.Element;
   /** display alert when form error */
@@ -70,9 +65,8 @@ export default class Point extends React.Component<Props, State> {
     super(props);
     this.state = {
       arrayInput: [],
-      arrayCoor: clonePoint(this.props.point),
+      point: clonePoint(this.props.point),
       arrayPointClass: [],
-      debug: false,
       htmlInput: <div></div>,
       hiddenAlert: true,
       titleAlert: 'Error: label is empty',
@@ -83,7 +77,7 @@ export default class Point extends React.Component<Props, State> {
   /** update state with promise */
   setStateAsyncArrayCoor = (state: {
     /** new espace coordinate */
-    arrayCoor: PointClass;
+    point: PointClass;
   }) => {
     return new Promise(resolve => {
       this.setState(state, resolve);
@@ -112,11 +106,11 @@ export default class Point extends React.Component<Props, State> {
    * @param {event} event event click delete button
    */
   deleteOwnInput = (): void => {
-    const label = this.state.arrayCoor.label || this.state.arrayCoor.name;
+    const label = this.state.point.label || this.state.point.name;
     const del: boolean = confirm('Delete "' + label + '" ?');
     // alert(del);
     if (del) {
-      this.props.callBackToParent(this.state.arrayCoor.id, undefined);
+      this.props.callBackToParent(this.state.point.id, undefined);
     }
   };
 
@@ -127,10 +121,10 @@ export default class Point extends React.Component<Props, State> {
    * @param {number} index id of input
    */
   _handleChange(currentTarget: string, name: string, index: number): void {
-    let tmp: PointClass = this.state.arrayCoor;
+    let tmp: PointClass = this.state.point;
     tmp = editGoodParameterPoint(name, tmp, currentTarget, {});
     this.setState({
-      arrayCoor: tmp,
+      point: tmp,
     });
     this.generateInputsPoint();
     if (this.props.isAddPoint === false) {
@@ -144,7 +138,7 @@ export default class Point extends React.Component<Props, State> {
    * @param {string} param name of input
    * @returns {string} value of the array element
    */
-  private getGoodValue(id: number, param: string): any {
+  private getGoodValue(param: string): any {
     let value: string;
     let valueSelect: SelectableValue<any>;
 
@@ -159,26 +153,26 @@ export default class Point extends React.Component<Props, State> {
       param.startsWith('linkWithCoordinateSpace')
     ) {
       if (param.startsWith('drawGraphicMarker')) {
-        valueSelect = this.state.arrayCoor.drawGraphicMarker;
+        valueSelect = this.state.point.drawGraphicMarker;
       } else if (param.startsWith('shape')) {
-        valueSelect = this.state.arrayCoor.shape;
+        valueSelect = this.state.point.shape;
       } else if (param.startsWith('sizeWidth')) {
-        valueSelect = this.state.arrayCoor.sizeWidth;
+        valueSelect = this.state.point.sizeWidth;
       } else if (param.startsWith('sizeHeight')) {
-        valueSelect = this.state.arrayCoor.sizeHeight;
+        valueSelect = this.state.point.sizeHeight;
       }
       return valueSelect;
     } else {
       if (param.startsWith('rotateArrow')) {
-        value = this.state.arrayCoor.rotateArrow;
+        value = this.state.point.rotateArrow;
       } else if (param.startsWith('positionShapeX')) {
-        value = this.state.arrayCoor.positionShapeX;
+        value = this.state.point.positionShapeX;
       } else if (param.startsWith('positionShapeY')) {
-        value = this.state.arrayCoor.positionShapeY;
+        value = this.state.point.positionShapeY;
       } else if (param.startsWith('label')) {
-        value = this.state.arrayCoor.label;
+        value = this.state.point.label;
       } else if (param.startsWith('color')) {
-        value = this.state.arrayCoor.color;
+        value = this.state.point.color;
       }
       return value;
     }
@@ -203,7 +197,7 @@ export default class Point extends React.Component<Props, State> {
               name={obj.name}
               placeholder={obj.placeholder || ''}
               required={obj.required}
-              value={this.getGoodValue(line.id, obj.name)}
+              value={this.getGoodValue(obj.name)}
               _handleChange={(event: {
                 /**
                  * get currentTarget in event element
@@ -212,7 +206,7 @@ export default class Point extends React.Component<Props, State> {
               }) => {
                 this._handleChange(event.currentTarget.value, obj.name, line.id);
               }}
-              shape={this.getGoodValue(line.id, 'shape').value}
+              shape={this.getGoodValue('shape').value}
             />
           );
         } else if (obj.input_type === 'select') {
@@ -220,10 +214,10 @@ export default class Point extends React.Component<Props, State> {
             <InputSelectPoint
               key={obj.id}
               _onChange={(value: SelectableValue<string>, name: string, index: number) => {
-                const newPoint: PointClass = this.state.arrayCoor;
+                const newPoint: PointClass = this.state.point;
                 editGoodParameterPoint(name, newPoint, '', value);
                 this.setState({
-                  arrayCoor: newPoint,
+                  point: newPoint,
                 });
                 this.generateInputsPoint();
                 if (this.props.isAddPoint === false) {
@@ -233,54 +227,12 @@ export default class Point extends React.Component<Props, State> {
               name={obj.name}
               index={line.id}
               data={obj.optionValues}
-              defaultValue={this.getGoodValue(line.id, obj.name)}
-              shape={this.getGoodValue(line.id, 'shape').value}
+              defaultValue={this.getGoodValue(obj.name)}
+              shape={this.getGoodValue('shape').value}
               label={obj.label}
             />
           );
-        } else if (obj.input_type === 'color') {
-          item = (
-            <InputSeriesColorPickerPoint
-              key={obj.id}
-              keyInt={parseInt(obj.id, 10)}
-              color={this.getGoodValue(line.id, 'color')}
-              text={obj.label}
-              width={10}
-              _onChange={(keyInt: number, newColor: string) => {
-                let i: number;
-                i = 0;
-                const copyOfarrayPointClass: PointClass[] = this.state.arrayPointClass.slice();
-                for (const line of copyOfarrayPointClass) {
-                  if (line.id === keyInt) {
-                    copyOfarrayPointClass[i] = editGoodParameterPoint(obj.name, copyOfarrayPointClass[i], newColor, {});
-                    break;
-                  }
-                  i++;
-                }
-
-                this.setState({
-                  arrayPointClass: copyOfarrayPointClass,
-                });
-
-                this.callBack();
-
-                obj.setDefaultValueColor(newColor);
-              }}
-            />
-          );
         } else {
-          //   itemButton = (
-          //     <InputButtonField
-          //       key={obj.id}
-          //       label={obj.label}
-          //       value={obj.value || ''}
-          //       name={obj.name}
-          //       required={obj.required}
-          //       _handleChange={this.deleteOwnInput}
-          //       id={obj.id}
-          //       withLabel={false}
-          //     />
-          //   );
           item = <div></div>;
         }
         mapItems.push(item);
@@ -303,7 +255,7 @@ export default class Point extends React.Component<Props, State> {
   callBack = (): void => {
     const waitAlert = 3000;
 
-    if (this.state.arrayCoor.label === '') {
+    if (this.state.point.label === '') {
       this.setState({
         severityAlert: 'error',
         titleAlert: 'Error: label is empty',
@@ -316,7 +268,7 @@ export default class Point extends React.Component<Props, State> {
       }, waitAlert);
       console.log('ok');
     } else {
-      this.props.callBackToParent(this.state.arrayCoor.id, this.state.arrayCoor);
+      this.props.callBackToParent(this.state.point.id, this.state.point);
       this.setState({
         severityAlert: 'success',
         titleAlert: 'Save',
@@ -333,7 +285,7 @@ export default class Point extends React.Component<Props, State> {
   };
 
   private callBackToOther = (followLink?: string, hoveringTooltipLink?: string, hoveringTooltipText?: string, textObj?: TextObject): void => {
-    const oldCoor: PointClass = this.state.arrayCoor;
+    const oldCoor: PointClass = this.state.point;
     if (followLink) {
       oldCoor.linkURL.followLink = followLink;
     }
@@ -346,9 +298,8 @@ export default class Point extends React.Component<Props, State> {
     if (textObj) {
       oldCoor.textObj = textObj;
     }
-
     this.setState({
-      arrayCoor: oldCoor,
+      point: oldCoor,
     });
     if (this.props.isAddPoint === false) {
       this.callBack();
@@ -357,32 +308,24 @@ export default class Point extends React.Component<Props, State> {
 
   /** update lower limit */
   private callBackManageLowerLimit = (coordinate: CoordinateSpaceClass, id?: number) => {
-    const newValue: PointClass = this.state.arrayCoor;
+    const newValue: PointClass = this.state.point;
     newValue.colorMode = coordinate.colorMode;
     newValue.traceBorder = coordinate.traceBorder;
     newValue.traceBack = coordinate.traceBack;
     this.setState({
-      arrayCoor: newValue,
+      point: newValue,
     });
     if (this.props.isAddPoint === false) {
       this.callBack();
     }
   };
 
-  // private callBackPositionParameter = (positionParameter: PositionParameterClass, id?: number) => {
-  //   const newValue: PointClass = this.state.arrayCoor;
-  //   newValue.positionParameter = positionParameter;
-  //   this.setState({
-  //     arrayCoor: newValue,
-  //   });
-  // };
-
   /** save lower limit data */
   private callBackLowerLimit = (lowerLimit: LowerLimitClass[], id?: number) => {
-    const newValue: PointClass = this.state.arrayCoor;
+    const newValue: PointClass = this.state.point;
     newValue.lowerLimit = lowerLimit;
     this.setState({
-      arrayCoor: newValue,
+      point: newValue,
     });
     if (this.props.isAddPoint === false) {
       this.callBack();
@@ -390,10 +333,10 @@ export default class Point extends React.Component<Props, State> {
   };
 
   private callBackMainMetric = (mainMetric: Metric, id?: number): void => {
-    const newValue: PointClass = this.state.arrayCoor;
+    const newValue: PointClass = this.state.point;
     newValue.mainMetric = mainMetric;
     this.setState({
-      arrayCoor: newValue,
+      point: newValue,
     });
     if (this.props.isAddPoint === false) {
       this.callBack();
@@ -418,7 +361,7 @@ export default class Point extends React.Component<Props, State> {
   componentDidUpdate = async (prevProps: Props, prevState: State) => {
     if (prevProps.point.id !== this.props.point.id) {
       await this.setStateAsyncArrayCoor({
-        arrayCoor: clonePoint(this.props.point),
+        point: clonePoint(this.props.point),
       });
       await this.setStateAsyncArrayInput({
         arrayInput: [],
@@ -451,8 +394,8 @@ export default class Point extends React.Component<Props, State> {
             options={this.props.options}
             onOptionsChange={this.props.onOptionsChange}
             data={this.props.data}
-            idCoordinate={this.state.arrayCoor.id}
-            mainMetric={this.state.arrayCoor.mainMetric}
+            idCoordinate={this.state.point.id}
+            mainMetric={this.state.point.mainMetric}
             callBackToParent={this.callBackMainMetric}
             isLink={false}
           />
@@ -462,8 +405,8 @@ export default class Point extends React.Component<Props, State> {
             options={this.props.options}
             onOptionsChange={this.props.onOptionsChange}
             data={this.props.data}
-            idCoordinate={this.state.arrayCoor.id}
-            metrics={this.state.arrayCoor.metrics}
+            idCoordinate={this.state.point.id}
+            metrics={this.state.point.metrics}
             //callBackToParent={this.callBackAuxiliaryMetric}
             isPoint={true}
           />
@@ -473,7 +416,7 @@ export default class Point extends React.Component<Props, State> {
             options={this.props.options}
             onOptionsChange={this.props.onOptionsChange}
             data={this.props.data}
-            coordinateSpace={this.state.arrayCoor}
+            coordinateSpace={this.state.point}
             callBackToParent={this.callBackToOther}
           />
         </div>
@@ -482,7 +425,7 @@ export default class Point extends React.Component<Props, State> {
             options={this.props.options}
             onOptionsChange={this.props.onOptionsChange}
             data={this.props.data}
-            coordinate={this.state.arrayCoor}
+            coordinate={this.state.point}
             callBack={this.callBackManageLowerLimit}
             lowerLimitCallBack={this.callBackLowerLimit}
             isLink={false}
@@ -497,7 +440,7 @@ export default class Point extends React.Component<Props, State> {
             isPoint={true}
             isLink={false}
             isRegion={false}
-            id={this.state.arrayCoor.id}
+            id={this.state.point.id}
           />
         </div>
         <div>{this.state.htmlInput}</div>

@@ -124,11 +124,11 @@ Ensuite, dans `Main metric`, choisissez votre métrique.
 
 
 
-### Import JSON file
+### Importer un fichier JSON
 
-- It is possible to add all of those configuration through json files by doing an import. To know how to do it, [follow this link](../editor/import.md)
+- Il est possible d'ajouter toutes ces configurations par le biais de fichiers json en faisant une importation. Pour savoir comment faire, [suivez ce lien](../editor/import.md)
 
-And here is the different JSON file :
+Et voici le différent dossier JSON :
 
 - [demo3-region](../../resource/demo3-region.json) 
 - [demo3-point](../../resource/demo3-point.json)

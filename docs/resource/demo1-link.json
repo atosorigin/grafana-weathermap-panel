@@ -9,7 +9,7 @@
             "key": "",
             "keyValue": "",
             "manageValue": "avg",
-            "refId": "",
+            "refId": "A",
             "returnQuery": [],
             "unit": ""
         },
@@ -32,14 +32,14 @@
             "label": "Monodirectional",
             "value": "AB"
         },
-        "pointAPositionX": "-14",
-        "pointAPositionY": "88",
-        "pointBPositionX": "72",
-        "pointBPositionY": "70",
-        "pointCPositionX": "29",
-        "pointCPositionY": "79",
-        "pointIn": "point2",
-        "pointOut": "point1",
+        "pointAPositionX": "-70",
+        "pointAPositionY": "66",
+        "pointBPositionX": "",
+        "pointBPositionY": "",
+        "pointCPositionX": "",
+        "pointCPositionY": "",
+        "pointIn": "",
+        "pointOut": "point2",
         "positionParameter": {
             "labelAPositionX": "0",
             "labelAPositionY": "0",
@@ -66,9 +66,9 @@
             "generateObjectText": false,
             "isTextRegion": false,
             "style": {
-                "bold": true,
+                "bold": false,
                 "italic": false,
-                "underline": true
+                "underline": false
             },
             "value": "",
             "valueGenerateObjectText": {

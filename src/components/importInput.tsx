@@ -140,7 +140,7 @@ class ImportInput extends React.Component<Props, State> {
       point.associateOrientedLinksIn,
       point.associateOrientedLinksOut
     );
-    console.log(toLoad);
+    // console.log(toLoad);
     let selector: number = this.PointValidator(toLoad);
     // Do some test here to see if your already load a coordinatespace with this id
     if (selector === 0) {

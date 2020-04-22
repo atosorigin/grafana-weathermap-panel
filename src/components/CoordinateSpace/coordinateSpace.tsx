@@ -490,7 +490,7 @@ class CoordinateSpace extends React.Component<Props, State> {
             <div className="svgMode">
               <tr style={{ verticalAlign: 'middle' }}>
                 <td>
-                  <FormLabel>Zone SVG</FormLabel>
+                  <FormLabel width={15}>Zone SVG</FormLabel>
                 </td>
                 <td>
                   <Select
@@ -507,7 +507,7 @@ class CoordinateSpace extends React.Component<Props, State> {
             <div className="classRegion">
               <FormField
                 label="Image"
-                labelWidth={10}
+                labelWidth={15}
                 inputWidth={20}
                 type="text"
                 value={this.state.arrayCoor.img}
@@ -516,7 +516,7 @@ class CoordinateSpace extends React.Component<Props, State> {
               />
               <FormField
                 label="X min"
-                labelWidth={10}
+                labelWidth={15}
                 inputWidth={20}
                 type="text"
                 value={this.state.arrayCoor.coords.xMin}
@@ -525,7 +525,7 @@ class CoordinateSpace extends React.Component<Props, State> {
               />
               <FormField
                 label="X max"
-                labelWidth={10}
+                labelWidth={15}
                 inputWidth={20}
                 type="text"
                 value={this.state.arrayCoor.coords.xMax}
@@ -534,7 +534,7 @@ class CoordinateSpace extends React.Component<Props, State> {
               />
               <FormField
                 label="Y min"
-                labelWidth={10}
+                labelWidth={15}
                 inputWidth={20}
                 type="text"
                 value={this.state.arrayCoor.coords.yMin}
@@ -543,7 +543,7 @@ class CoordinateSpace extends React.Component<Props, State> {
               />
               <FormField
                 label="Y max"
-                labelWidth={10}
+                labelWidth={15}
                 inputWidth={20}
                 type="text"
                 value={this.state.arrayCoor.coords.yMax}

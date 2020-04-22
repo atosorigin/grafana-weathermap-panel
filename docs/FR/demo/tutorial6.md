@@ -1,15 +1,15 @@
  
-# Create modelisation advanced
+# Créer une modélisation avancée
 
-## Select query
+## Sélectionner une requête
 
-Let's choose those two queries :
+Choisissons ces deux requêtes :
 
 - node_cpu_frequency_hertz
 - node_network_carrier
 
 
-See what they return :
+Voir ce qu'ils rapportent :
 
 ![values](../../screenshots/demo/tutorial5/values.png)
 
@@ -41,39 +41,39 @@ node_network_carrier{instance="localhost:9100",interface="vethdee87cd",job="node
 
 ```
 
-There are a lot of values, so we have to manipulate them in order to come up with a coherent value.
+Il y a beaucoup de valeurs, donc nous devons les manipuler pour arriver à une valeur cohérente.
 
-## Create regions and manipulate the Metric
+## Créer des régions et manipuler la métrique
 
-### Step 1 : Import our SVG
+### Étape 1 : Importer notre SVG
 
-Adding a background image is done from the `display` menu.
+L'ajout d'une image de fond se fait à partir du menu `display`.
 
-The selected image will be [demo1-background.svg](../../resource/demo1-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+L'image sélectionnée sera [demo1-background.svg](../../resource/demo1-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
 
-It is possible to have more details with the [display](../editor/display.md) page.
+Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
 
-You have to save and reload the page.
+Vous devez sauvegarder et recharger la page.
 
-### Step 2 : Create the region
+### Étape 2 : Créer la région
 
-We will create two regions
+Nous allons créer deux régions
 
-For this step, you can follow the [tutorial2](tutorial2.md) to create your region and add some colors
+Pour cette étape, vous pouvez suivre le [tutorial2](tutorial2.md) pour créer votre région et ajouter des couleurs
 
-### Step 3 : Add Main metric to the region and manipulate the data
+### Etape 3 : Ajouter une métrique principale à la région et manipuler les données
 
-Once the regions are created, go to Main metric and add the one you want.
+Une fois les régions créées, allez dans la rubrique `Main metric` et ajoutez une de celle que vous avez definis.
 
-Then you can choose between "manipulate the average", if you want an average of the metric values. Or "manipulate the total", if you want a sum of the metric values.
+Vous pouvez ensuite choisir entre `manipulate the average`, si vous voulez une moyenne des valeurs métriques. Ou  `manipulate the total`, si vous voulez une somme des valeurs de la métrique.
 
 ![average](../../screenshots/demo/tutorial6/average.png)
 
 
 ![total](../../screenshots/demo/tutorial6/total.png)
 
-If your measurement is to return only one value, you must select "handling error". 
-This will display its value, if it is unique, and will display an error if there are other values.
+Si votre mesure ne doit renvoyer qu'une seule valeur, vous devez sélectionner "erreur de manipulation". 
+Cela affichera sa valeur, si elle est unique, et affichera une erreur s'il y a d'autres valeurs.
 
 
 ![demo6](../../screenshots/demo/tutorial6/result.png)

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Switch } from '@grafana/ui';
+import { Switch, FormLabel } from '@grafana/ui';
 
 export interface Style {
   bold: boolean;
@@ -68,14 +68,23 @@ class StyleComponent extends React.Component<Props, State> {
    */
   render() {
     return (
-      <div>
-        <Switch label="Bold" checked={this.state.style.bold} onChange={this.onChangeBold} />
-        <Switch label="Italic" checked={this.state.style.italic} onChange={this.onChangeItalic} />
-        <Switch label="Underline" checked={this.state.style.underline} onChange={this.onChangeUnderline} />
+      <section>
+        <div style={{ display: 'flex' }}>
+          <FormLabel width={15}>Bold</FormLabel>
+          <Switch label="" checked={this.state.style.bold} onChange={this.onChangeBold} />
+        </div>
+        <div style={{ display: 'flex' }}>
+          <FormLabel width={15}>Italic</FormLabel>
+          <Switch label="" checked={this.state.style.italic} onChange={this.onChangeItalic} />
+        </div>
+        <div style={{ display: 'flex' }}>
+          <FormLabel width={15}>Underline</FormLabel>
+          <Switch label="" checked={this.state.style.underline} onChange={this.onChangeUnderline} />
+        </div>
         {/* <Button onChange={this.onChangeBold}>Bold</Button>
         <Button onChange={this.onChangeItalic}>Italic</Button>
         <Button onChange={this.onChangeUnderline}>Underline</Button> */}
-      </div>
+      </section>
     );
   }
 }

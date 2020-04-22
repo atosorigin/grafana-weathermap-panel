@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch } from '@grafana/ui';
+import { Switch, FormLabel } from '@grafana/ui';
 
 import { Style } from 'components/Parametrage/styleComponent';
 import StyleComponent from 'components/Parametrage/styleComponent';
@@ -14,9 +14,7 @@ interface Props {
   /** id coordinate */
   coordinateSpace: CoordinateSpaceClass;
   /** call function to save data in parent */
-  callBackToParent: (followLink?: string, hoveringTooltipLink?: string, hoveringTooltipText?: string, textObj?: TextObject, id?: number) => void;
-  /** id element to save data*/
-  id?: number;
+  callBackToParent: (followLink?: string, hoveringTooltipLink?: string, hoveringTooltipText?: string, textObj?: TextObject) => void;
 }
 
 interface State {
@@ -48,7 +46,7 @@ class TextObjects extends React.Component<Props, State> {
 
   /** call back to parent */
   callBack = () => {
-    this.props.callBackToParent(undefined, undefined, undefined, this.state.textObject, this.props.id);
+    this.props.callBackToParent(undefined, undefined, undefined, this.state.textObject);
   };
 
   // /** change value for legend input */
@@ -331,7 +329,10 @@ class TextObjects extends React.Component<Props, State> {
         <div>
           <h4>{l10n.textObject.principalMetric}</h4>
 
-          <Switch label="Display text in region or tooltip" checked={this.state.textObject.isTextTooltip} onChange={this.onSwitchisTextTooltip} />
+          <div style={{ display: 'flex' }}>
+            <FormLabel width={15}>Display text in region or tooltip</FormLabel>
+            <Switch label="" checked={this.state.textObject.isTextTooltip} onChange={this.onSwitchisTextTooltip} />
+          </div>
 
           <h5 hidden={this.state.textObject.isTextTooltip}>{l10n.textObject.textRegion}</h5>
           <h5 hidden={!this.state.textObject.isTextTooltip}>{l10n.textObject.textBubble}</h5>
@@ -365,11 +366,11 @@ class TextObjects extends React.Component<Props, State> {
         </div>
         <div>
           <h4>Generate text object</h4>
-          <Switch
-            label={l10n.textObject.generateTextObject}
-            checked={this.state.textObject.generateObjectText}
-            onChange={this.onSwitchGenerateObjectText}
-          />
+          <div style={{ display: 'flex' }}>
+            <FormLabel width={15}>{l10n.textObject.generateTextObject}</FormLabel>
+            <Switch label={''} checked={this.state.textObject.generateObjectText} onChange={this.onSwitchGenerateObjectText} />
+          </div>
+
           {this.state.textObject.generateObjectText && (
             <div>
               {/* <h4>Object text</h4> */}
@@ -397,21 +398,29 @@ class TextObjects extends React.Component<Props, State> {
                 value={this.state.textObject.valueGenerateObjectText.unit}
                 _handleChange={this.onChangeValueGenerateObjectTextunit}
               />
-              <Switch
-                label={l10n.textObject.objectDisplayTextTooltip}
-                checked={this.state.textObject.valueGenerateObjectText.displayObjectInTooltip}
-                onChange={this.onSwitchValueGenerateObjectTextdisplayObjectInTooltip}
-              />
+              <div style={{ display: 'flex' }}>
+                <FormLabel width={15}>{l10n.textObject.objectDisplayTextTooltip}</FormLabel>
+                <Switch
+                  label={''}
+                  checked={this.state.textObject.valueGenerateObjectText.displayObjectInTooltip}
+                  onChange={this.onSwitchValueGenerateObjectTextdisplayObjectInTooltip}
+                />
+              </div>
+
               {/* <Switch
 								label={l10n.textObject.objectDisplayInPermanentlyHover}
 								checked={this.state.textObject.valueGenerateObjectText.displayObjectPermanently}
 								onChange={this.onSwitchValueGenerateObjectTextDisplayObjectPermanently}
 							/> */}
-              <Switch
-                label={l10n.textObject.colorText}
-                checked={this.state.textObject.valueGenerateObjectText.addColorTextElement}
-                onChange={this.onSwitchValueGenerateObjectTextAddColorTextElement}
-              />
+              <div style={{ display: 'flex' }}>
+                <FormLabel width={15}>{l10n.textObject.colorText}</FormLabel>
+                <Switch
+                  label={''}
+                  checked={this.state.textObject.valueGenerateObjectText.addColorTextElement}
+                  onChange={this.onSwitchValueGenerateObjectTextAddColorTextElement}
+                />
+              </div>
+
               {this.state.textObject.valueGenerateObjectText.addColorTextElement && (
                 <InputSeriesColorPicker
                   color={this.state.textObject.valueGenerateObjectText.colorTextElement}
@@ -420,11 +429,15 @@ class TextObjects extends React.Component<Props, State> {
                   _onChange={this.onChangeValueGenerateObjectTextColorTextElement}
                 />
               )}
-              <Switch
-                label={l10n.textObject.backgroundColor}
-                checked={this.state.textObject.valueGenerateObjectText.addColorBackElement}
-                onChange={this.onSwitchValueGenerateObjectTextAddColorBackElement}
-              />
+              <div style={{ display: 'flex' }}>
+                <FormLabel width={15}>{l10n.textObject.colorText}</FormLabel>
+                <Switch
+                  label={l10n.textObject.backgroundColor}
+                  checked={this.state.textObject.valueGenerateObjectText.addColorBackElement}
+                  onChange={this.onSwitchValueGenerateObjectTextAddColorBackElement}
+                />
+              </div>
+
               {this.state.textObject.valueGenerateObjectText.addColorBackElement && (
                 <InputSeriesColorPicker
                   color={this.state.textObject.valueGenerateObjectText.colorBackElement}
@@ -465,21 +478,29 @@ class TextObjects extends React.Component<Props, State> {
             value={this.state.textObject.generateAuxiliaryElement.unit}
             _handleChange={this.onChangeunit}
           />
-          <Switch
-            label={l10n.textObject.objectDisplayTextTooltip}
-            checked={this.state.textObject.generateAuxiliaryElement.displayObjectInTooltip}
-            onChange={this.onSwitchdisplayObjectInTooltip}
-          />
+          <div style={{ display: 'flex' }}>
+            <FormLabel width={15}>{l10n.textObject.objectDisplayTextTooltip}</FormLabel>
+            <Switch
+              label={''}
+              checked={this.state.textObject.generateAuxiliaryElement.displayObjectInTooltip}
+              onChange={this.onSwitchdisplayObjectInTooltip}
+            />
+          </div>
+
           {/* <Switch
 						label={l10n.textObject.objectDisplayInPermanentlyHover}
 						checked={this.state.textObject.generateAuxiliaryElement.displayObjectPermanently}
 						onChange={this.onSwitchDisplayObjectPermanently}
 					/> */}
-          <Switch
-            label={l10n.textObject.colorText}
-            checked={this.state.textObject.generateAuxiliaryElement.addColorTextElement}
-            onChange={this.onSwitchAddColorTextElement}
-          />
+          <div style={{ display: 'flex' }}>
+            <FormLabel width={15}>{l10n.textObject.colorText}</FormLabel>
+            <Switch
+              label={''}
+              checked={this.state.textObject.generateAuxiliaryElement.addColorTextElement}
+              onChange={this.onSwitchAddColorTextElement}
+            />
+          </div>
+
           {this.state.textObject.generateAuxiliaryElement.addColorTextElement && (
             <InputSeriesColorPicker
               color={this.state.textObject.generateAuxiliaryElement.colorTextElement}
@@ -488,11 +509,15 @@ class TextObjects extends React.Component<Props, State> {
               _onChange={this.onChangeColorTextElement}
             />
           )}
-          <Switch
-            label={l10n.textObject.backgroundColor}
-            checked={this.state.textObject.generateAuxiliaryElement.addColorBackElement}
-            onChange={this.onSwitchAddColorBackElement}
-          />
+          <div style={{ display: 'flex' }}>
+            <FormLabel width={15}>{l10n.textObject.backgroundColor}</FormLabel>
+            <Switch
+              label={''}
+              checked={this.state.textObject.generateAuxiliaryElement.addColorBackElement}
+              onChange={this.onSwitchAddColorBackElement}
+            />
+          </div>
+
           {this.state.textObject.generateAuxiliaryElement.addColorBackElement && (
             <InputSeriesColorPicker
               color={this.state.textObject.generateAuxiliaryElement.colorBackElement}

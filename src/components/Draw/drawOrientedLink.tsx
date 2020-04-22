@@ -32,6 +32,7 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   valueMainMetricA: string;
   valueMainMetricB: string;
   textObject: TextObject;
+  traceBorder: boolean;
   seuil: LowerLimitClass[];
   labelAPositionX: string;
   labelAPositionY: string;
@@ -132,42 +133,38 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     arrayOrientedLink.forEach(orientedLink => {
       if (this.props.name !== orientedLink.name) {
         if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
+          //console.log('//1');
           if (this.props.associateRegionIn === orientedLink.regionIn || this.props.associateRegionIn === orientedLink.regionOut) {
+            //console.log('//1.1');
             if (this.props.associateRegionOut === orientedLink.regionIn || this.props.associateRegionOut === orientedLink.regionOut) {
+              //console.log('//1.2');
               listParallelOrientedLinks.push(orientedLink.id);
             }
           }
         } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
+          //console.log('//2');
           if (this.props.associatePointIn === orientedLink.pointIn || this.props.associatePointIn === orientedLink.pointOut) {
+            //console.log('//2.1');
             if (this.props.associatePointOut === orientedLink.pointIn || this.props.associatePointOut === orientedLink.pointOut) {
+              //console.log('//2.2');
               listParallelOrientedLinks.push(orientedLink.id);
             }
           }
         } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
-          if (
-            this.props.associateRegionIn === orientedLink.regionIn ||
-            this.props.associateRegionIn === orientedLink.pointOut ||
-            this.props.associateRegionIn === orientedLink.regionOut
-          ) {
-            if (
-              this.props.associatePointOut === orientedLink.regionIn ||
-              this.props.associatePointOut === orientedLink.pointOut ||
-              this.props.associatePointOut === orientedLink.pointIn
-            ) {
+          //console.log('//3');
+          if (this.props.associateRegionIn === orientedLink.regionIn || this.props.associateRegionIn === orientedLink.regionOut) {
+            //console.log('//3.1');
+            if (this.props.associatePointOut === orientedLink.pointOut || this.props.associatePointOut === orientedLink.pointIn) {
+              //console.log('//3.2');
               listParallelOrientedLinks.push(orientedLink.id);
             }
           }
         } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-          if (
-            this.props.associatePointIn === orientedLink.pointIn ||
-            this.props.associatePointIn === orientedLink.regionOut ||
-            this.props.associatePointIn === orientedLink.pointOut
-          ) {
-            if (
-              this.props.associateRegionOut === orientedLink.pointIn ||
-              this.props.associateRegionOut === orientedLink.regionOut ||
-              this.props.associateRegionOut === orientedLink.regionIn
-            ) {
+          //console.log('//4');
+          if (this.props.associatePointIn === orientedLink.pointIn || this.props.associatePointIn === orientedLink.pointOut) {
+            //console.log('//4.1');
+            if (this.props.associateRegionOut === orientedLink.regionOut || this.props.associateRegionOut === orientedLink.regionIn) {
+              //console.log('//4.2');
               listParallelOrientedLinks.push(orientedLink.id);
             }
           }
@@ -175,6 +172,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       }
     });
     const listParallelOrientedLinkSorted: number[] = listParallelOrientedLinks.sort((a, b) => a - b);
+    //console.log(listParallelOrientedLinkSorted);
     return listParallelOrientedLinkSorted;
   };
 
@@ -305,156 +303,186 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       if (idMultiLink === 0) {
         if (yMidIn > yMidOut) {
           if (xMidIn > xMidOut) {
+            console.log('x1');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMaxIn;
             } else {
               xResult = xMinIn;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x2');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMinIn;
             } else {
               xResult = xMaxIn;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x3');
             xResult = xMinIn;
           }
         } else if (yMidIn < yMidOut) {
           if (xMidIn > xMidOut) {
+            console.log('x4');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMinIn;
             } else {
               xResult = xMaxIn;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x5');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMaxIn;
             } else {
               xResult = xMinIn;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x6');
             xResult = xMinIn;
           }
         } else if (yMidIn === yMidOut) {
           if (xMidIn > xMidOut) {
+            console.log('x7');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMaxIn;
             } else {
               xResult = xMinIn;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x8');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMinIn;
             } else {
               xResult = xMaxIn;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x9');
             xResult = xMinIn;
           }
         }
       } else if (idMultiLink === 1) {
         if (yMidIn > yMidOut) {
           if (xMidIn > xMidOut) {
+            console.log('x10');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMinIn;
             } else {
               xResult = xMaxIn;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x11');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMaxIn;
             } else {
               xResult = xMinIn;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x12');
             xResult = xMaxIn;
           }
         } else if (yMidIn < yMidOut) {
           if (xMidIn > xMidOut) {
+            console.log('x13');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMaxIn;
             } else {
               xResult = xMinIn;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x14');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMinIn;
             } else {
               xResult = xMaxIn;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x15');
             xResult = xMaxIn;
           }
         } else if (yMidIn === yMidOut) {
           if (xMidIn > xMidOut) {
+            console.log('x16');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMaxIn;
             } else {
               xResult = xMinIn;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x17');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMinIn;
             } else {
               xResult = xMaxIn;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x18');
             xResult = xMinIn;
           }
         }
       } else if (idMultiLink === 2) {
         if (yMidIn > yMidOut) {
           if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
+            console.log('x19');
             xResult = (xMinIn + xMaxIn) / 2;
           } else if (xMidIn > xMidOut) {
+            console.log('x20');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMaxIn;
             } else {
               xResult = xMinIn;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x21');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMinIn;
             } else {
               xResult = xMaxIn;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x22');
             xResult = (xMinIn + xMaxIn) / 2;
           }
         } else if (yMidIn < yMidOut) {
           if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
+            console.log('x23');
             xResult = (xMinIn + xMaxIn) / 2;
           } else if (xMidIn > xMidOut) {
+            console.log('x24');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMaxIn;
             } else {
               xResult = xMinIn;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x25');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMinIn;
             } else {
               xResult = xMaxIn;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x26');
             xResult = (xMinIn + xMaxIn) / 2;
           }
         } else if (yMidIn === yMidOut) {
           if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
+            console.log('x27');
             xResult = (xMinIn + xMaxIn) / 2;
           } else if (xMidIn > xMidOut) {
+            console.log('x28');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMaxIn;
             } else {
               xResult = xMinIn;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x29');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMinIn;
             } else {
               xResult = xMaxIn;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x30');
             xResult = xMinIn;
           }
         }
@@ -462,6 +490,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     } else {
       if (idMultiLink === 0) {
         if (yMidIn > yMidOut) {
+          console.log('x31');
           if (xMidIn > xMidOut) {
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMaxOut;
@@ -469,49 +498,58 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               xResult = xMinOut;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x32');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMinOut;
             } else {
               xResult = xMaxOut;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x33');
             xResult = xMinOut;
           }
         } else if (yMidIn < yMidOut) {
           if (xMidIn > xMidOut) {
+            console.log('x34');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMinOut;
             } else {
               xResult = xMaxOut;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x35');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMaxOut;
             } else {
               xResult = xMinOut;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x36');
             xResult = xMinOut;
           }
         } else if (yMidIn === yMidOut) {
           if (xMidIn > xMidOut) {
+            console.log('x37');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMinOut;
             } else {
               xResult = xMaxOut;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x38');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMaxOut;
             } else {
               xResult = xMinOut;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x39');
             xResult = xMinOut;
           }
         }
       } else if (idMultiLink === 1) {
         if (yMidIn > yMidOut) {
+          console.log('x40');
           if (xMidIn > xMidOut) {
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMinOut;
@@ -519,98 +557,117 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               xResult = xMaxOut;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x41');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMaxOut;
             } else {
               xResult = xMinOut;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x42');
             xResult = xMaxOut;
           }
         } else if (yMidIn < yMidOut) {
           if (xMidIn > xMidOut) {
+            console.log('x43');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMaxOut;
             } else {
               xResult = xMinOut;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x44');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMinOut;
             } else {
               xResult = xMaxOut;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x45');
             xResult = xMaxOut;
           }
         } else if (yMidIn === yMidOut) {
           if (xMidIn > xMidOut) {
+            console.log('x46');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMinOut;
             } else {
               xResult = xMaxOut;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x47');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMaxOut;
             } else {
               xResult = xMinOut;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x48');
             xResult = xMinOut;
           }
         }
       } else if (idMultiLink === 2) {
         if (yMidIn > yMidOut) {
           if ((xMidIn > xMinOut && xMidIn < xMaxOut) || (xMidIn < xMinOut && xMidIn > xMaxOut)) {
+            console.log('x49');
             xResult = (xMinOut + xMaxOut) / 2;
           } else if (xMidIn > xMidOut) {
+            console.log('x50');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMinOut;
             } else {
               xResult = xMaxOut;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x51');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMaxOut;
             } else {
               xResult = xMinOut;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x52');
             xResult = (xMinOut + xMaxOut) / 2;
           }
         } else if (yMidIn < yMidOut) {
           if ((xMidIn > xMinOut && xMidIn < xMaxOut) || (xMidIn < xMinOut && xMidIn > xMaxOut)) {
+            console.log('x53');
             xResult = (xMinOut + xMaxOut) / 2;
           } else if (xMidIn > xMidOut) {
+            console.log('x54');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMinOut;
             } else {
               xResult = xMaxOut;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x55');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMaxOut;
             } else {
               xResult = xMinOut;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x56');
             xResult = (xMinOut + xMaxOut) / 2;
           }
         } else if (yMidIn === yMidOut) {
           if (xMidIn > xMidOut) {
+            console.log('x57');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMinOut;
             } else {
               xResult = xMaxOut;
             }
           } else if (xMidIn < xMidOut) {
+            console.log('x58');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMaxOut;
             } else {
               xResult = xMinOut;
             }
           } else if (xMidIn === xMidOut) {
+            console.log('x59');
             xResult = xMinOut;
           }
         }
@@ -1451,6 +1508,28 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     return yResult;
   };
 
+  private getX = (labelPoint: string): number => {
+    let result = 0;
+    const arrayPoint: PointClass[] = this.props.options.arrayPoints;
+    for (const point of arrayPoint) {
+      if (point.label === labelPoint || point.name === labelPoint) {
+        result = this.synchroLinkX(parseInt(point.positionShapeX, 10));
+      }
+    }
+    return result;
+  };
+
+  private getY = (labelPoint: string): number => {
+    let result = 0;
+    const arrayPoint: PointClass[] = this.props.options.arrayPoints;
+    for (const point of arrayPoint) {
+      if (point.label === labelPoint || point.name === labelPoint) {
+        result = this.synchroLinkY(parseInt(point.positionShapeY, 10));
+      }
+    }
+    return result;
+  };
+
   /**
    * to do
    */
@@ -1464,11 +1543,13 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     let yCByClick = 0;
 
     if (listParallelOrientedLinks.length > 1) {
+      //console.log('multi');
       let indexOrientedLink = 0;
       listParallelOrientedLinks.forEach(index => {
         if (index === parseInt(this.props.id, 10)) {
           if (indexOrientedLink === 0) {
             if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
+              //console.log('m0-1');
               xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 0));
               yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 0));
               xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 0));
@@ -1476,6 +1557,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
+              //console.log('m0-2');
               xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 0));
               yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 0));
               xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 0));
@@ -1483,22 +1565,25 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-              xA = xA0;
-              yA = yA0;
+              //console.log('m0-3');
+              xA = this.getX(this.props.associatePointIn);
+              yA = this.getY(this.props.associatePointIn);
               xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 0));
               yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 0));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
+              //console.log('m0-4');
               xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 0));
               yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 0));
-              xB = xB0;
-              yB = yB0;
+              xB = this.getX(this.props.associatePointOut);
+              yB = this.getY(this.props.associatePointOut);
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             }
           } else if (indexOrientedLink === 1) {
             if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
+              //console.log('m1-1');
               xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 1));
               yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 1));
               xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 1));
@@ -1506,6 +1591,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
+              //console.log('m1-2');
               xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 1));
               yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 1));
               xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 1));
@@ -1513,22 +1599,25 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-              xA = xA0;
-              yA = yA0;
+              //console.log('m1-3');
+              xA = this.getX(this.props.associatePointIn);
+              yA = this.getY(this.props.associatePointIn);
               xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 1));
               yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 1));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
+              //console.log('m1-4');
               xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 1));
               yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 1));
-              xB = xB0;
-              yB = yB0;
+              xB = this.getX(this.props.associatePointOut);
+              yB = this.getY(this.props.associatePointOut);
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             }
           } else if (indexOrientedLink === 2) {
             if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
+              //console.log('m2-1');
               xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
               yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
               xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
@@ -1536,6 +1625,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
+              //console.log('m2-2');
               xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
               yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
               xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -1543,17 +1633,19 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-              xA = xA0;
-              yA = yA0;
+              //console.log('m2-3');
+              xB = this.getX(this.props.associatePointIn);
+              yB = this.getY(this.props.associatePointIn);
               xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
               yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
+              //console.log('m2-4');
               xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
               yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
-              xB = xB0;
-              yB = yB0;
+              xB = this.getX(this.props.associatePointOut);
+              yB = this.getY(this.props.associatePointOut);
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             }
@@ -1562,6 +1654,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         indexOrientedLink++;
       });
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
+      //console.log('1');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = xB0;
@@ -1569,6 +1662,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionOut !== '' && this.props.associateRegionIn === '' && this.props.associatePointIn === '') {
+      //console.log('2');
       xA = xA0;
       yA = yA0;
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -1576,6 +1670,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
+      //console.log('3');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -1583,6 +1678,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
+      //console.log('4');
       xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
       xB = xB0;
@@ -1590,6 +1686,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointOut !== '' && this.props.associatePointIn === '' && this.props.associateRegionIn === '') {
+      //console.log('5');
       xA = xA0;
       yA = yA0;
       xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
@@ -1597,6 +1694,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
+      //console.log('6');
       xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
@@ -1604,6 +1702,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
+      //console.log('7');
       xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -1611,6 +1710,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
+      //console.log('8');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
@@ -1618,6 +1718,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else {
+      //console.log('9');
       xA = xA0;
       yA = yA0;
       xB = xB0;
@@ -2057,9 +2158,13 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       valueMainMetric = parseInt(this.props.valueMainMetricB, 10);
     }
 
-    if (seuil.length > 0) {
-      if (seuil[0].borderColor !== '') {
-        colorBorder = seuil[0].borderColor;
+    if (this.props.traceBorder) {
+      if (seuil.length > 0) {
+        if (seuil[0].borderColor !== '') {
+          colorBorder = seuil[0].borderColor;
+        } else {
+          colorBorder = 'black';
+        }
       } else {
         colorBorder = 'black';
       }
@@ -2106,9 +2211,14 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       valueMainMetric = parseInt(this.props.valueMainMetricB, 10);
     }
 
-    if (seuil.length > 0) {
-      if (seuil[0].sizeBorder !== '') {
-        sizeBorder = seuil[0].sizeBorder;
+    if (this.props.traceBorder) {
+      //sizeBorder = seuil[0].sizeBorder;
+      if (seuil.length > 0) {
+        if (seuil[0].sizeBorder !== '') {
+          sizeBorder = seuil[0].sizeBorder;
+        } else {
+          sizeBorder = this.defineSizeLink();
+        }
       } else {
         sizeBorder = this.defineSizeLink();
       }

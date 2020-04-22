@@ -49,7 +49,7 @@ You must:
 - Complete the line `metrics` with the following line
 
 ```
-rate(go_memstats_gc_cpu_fraction[5m]) * 100000
+rate(node_network_transmit_bytes_total[5m])
 ```
 
 The "A" marker will be used to identify this query as you can see below.
@@ -74,7 +74,7 @@ It is possible to fill in the other fields with the additional settings availabl
 
 ### Step 3 : Add auxiliere metric 
 
-Go to Auxiliary metrics and fill the form like Main metric
+Go to `Auxiliary metrics` and fill the form like `Main metric`
 
 ![auxiliere](../../screenshots/demo/tutorial8/auxiliere.png)
 

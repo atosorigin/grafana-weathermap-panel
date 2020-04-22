@@ -157,6 +157,9 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
         <div style={styleMetrics}>
           {region.textObj.generateObjectText && region.textObj.valueGenerateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip && <p>{valueQueryResult}</p>}
         </div>
+        <div>
+          {this.displayValuesAuxMetrics()}
+        </div>
       </div>
     );
     return {
@@ -240,15 +243,17 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     const region: RegionClass = this.props.uneCoor;
     reqMetricAuxRegion(region, this.props);
     const mainMetric: Metric = region.mainMetric;
+    //console.log(mainMetric.refId);
     const auxiliaryMetrics: Metric[] = region.metrics;
+    //console.log(auxiliaryMetrics);
     let valueAuxiliaryMetric: string[] = [];
-    const countMetrics: number = auxiliaryMetrics.length;
+    //const countMetrics: number = auxiliaryMetrics.length;
     auxiliaryMetrics.forEach((metric: Metric) => {
       let countTotalValues = 0;
       let resultTotalValues = 0;
       let result = '';
       if (metric.returnQuery && metric.returnQuery.length > 0) {
-        let numberLoop: number = (metric.returnQuery?.length || 0) / countMetrics;
+        let numberLoop: number = (metric.returnQuery?.length || 0);
         if (metric.key !== '' && metric.keyValue !== '') {
           for (let i = 0; i < numberLoop; i++) {
             let line = metric.returnQuery[i];
@@ -301,6 +306,115 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     return valueAuxiliaryMetric;
   };
 
+  private getConvertValueAuxMetrics = (valueBrut: string): string => {
+    let result = '';
+    const region: RegionClass = this.props.uneCoor;
+    const roundValue: string = region.textObj.generateAuxiliaryElement.numericFormatElement;
+    const unit: string = region.textObj.generateAuxiliaryElement.unit;
+    if (roundValue !== '') {
+      result = (parseFloat(valueBrut).toPrecision(parseInt(roundValue, 10)).toString());
+    } else {
+      result = valueBrut;
+    }
+    return result + ' ' + unit;
+  }; 
+
+  private displayValuesAuxMetrics = (): JSX.Element => {
+    let html: JSX.Element[] = [];
+    const valuesAuxMetrics: string[] = this.getValuesAuxiliaryMetrics();
+    const auxMetrics: Metric[] = this.props.uneCoor.metrics;
+    const region: RegionClass = this.props.uneCoor;
+    const addColorText: boolean = region.textObj.generateAuxiliaryElement.addColorTextElement;
+    const addColorBack: boolean = region.textObj.generateAuxiliaryElement.addColorBackElement;
+    const legend: string = region.textObj.generateAuxiliaryElement.legendElement;
+    let colorText = '';
+    let colorBack = '';
+
+    if (addColorText) {
+      colorText = region.textObj.generateAuxiliaryElement.colorTextElement;
+    } else {
+      colorText = 'white';
+    }
+
+    if (addColorBack) {
+      colorBack = region.textObj.generateAuxiliaryElement.colorBackElement;
+    } else {
+      colorBack = 'black';
+    }
+
+    const styleTitle = {
+      fontFamily: this.props.options.display.police,
+      fontSize: '10px',
+      marginTop: '5px',
+      marginBottom: '0px',
+      color: colorText,
+      //backgroundColor: colorBack,
+    } as React.CSSProperties;
+
+    const styleTitle2 = {
+      fontFamily: this.props.options.display.police,
+      fontSize: '10px',
+      marginTop: '5px',
+      marginLeft: '5px',
+      marginBottom: '0px',
+      color: colorText,
+      //backgroundColor: colorBack,
+    } as React.CSSProperties;
+
+    const styleContent = {
+      fontFamily: this.props.options.display.police,
+      fontSize: '9px',
+      marginLeft: '10px',
+      marginBottom: '0px',
+      color: colorText,
+      //backgroundColor: colorBack,
+    } as React.CSSProperties;
+
+      if (auxMetrics.length > 0) {
+        html.push(
+          <p key={''} style={styleTitle}>
+            Auxiliary Metric
+          </p>
+        );
+        html.push(
+          <p style={styleTitle}>
+            {legend}
+          </p>
+        );
+        let index = 1;
+        for (const metric of auxMetrics) {
+          const valueAuxMetric: string = this.getConvertValueAuxMetrics(valuesAuxMetrics[index - 1]);
+          html.push(
+            <p key={''} style={styleTitle2}>
+              + Metric {index}
+            </p>
+          );
+          html.push(
+            <p key={''} style={styleContent}>
+              - Value : {valueAuxMetric}
+            </p>
+          );
+          html.push(
+            <p key={''} style={styleContent}>
+              - Key : {metric.key}
+            </p>
+          );
+          html.push(
+            <p key={''} style={styleContent}>
+              - KeyValue : {metric.keyValue}
+            </p>
+          );
+          html.push(
+            <p key={''} style={styleContent}>
+              - Type : {metric.manageValue}
+            </p>
+          );
+          index++;
+        };
+      };
+    return <div style={{backgroundColor: colorBack}}>{html}</div>;
+  };
+
   /** final region zone . Call function after reqMetrics*/
   renduFinal = () => {
     if (this.props.uneCoor.mode) {
@@ -348,6 +462,13 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
 
     let value: JSX.Element;
 
+    // console.log('text object');
+    // console.log(region.textObj.isTextTooltip);
+    // console.log('main metric');
+    // console.log(region.textObj.generateObjectText);
+    // console.log('aux metric');
+    // console.log(region.textObj.generateAuxiliaryElement.displayObjectInTooltip);
+
     if (this.props.isEnabled && region.linkURL.followLink !== '') {
 
       value = (
@@ -366,7 +487,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
           </a>
         </div>
       );
-      if (region.textObj.isTextTooltip || (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip)) {
+      if (region.textObj.isTextTooltip || (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip) || region.textObj.generateAuxiliaryElement.displayObjectInTooltip) {
         value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
       }
     } else {
@@ -382,7 +503,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
           )}
         </div>
       );
-      if (region.textObj.isTextTooltip || (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip)) {
+      if (region.textObj.isTextTooltip || (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip) || region.textObj.generateAuxiliaryElement.displayObjectInTooltip) {
         value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
       }
     }
@@ -460,8 +581,8 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
 
   /** render */
   render() {
-    //console.log(this.props.uneCoor.metrics);
-    //console.log(this.getValuesAuxiliaryMetrics());
+    // console.log(this.props.uneCoor.metrics);
+    // console.log(this.getValuesAuxiliaryMetrics());
     return this.state.htmlResult;
   }
 }

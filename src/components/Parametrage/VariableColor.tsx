@@ -22,8 +22,6 @@ interface Props {
   lowerLimitCallBack: (lowerLimit: LowerLimitClass[], id?: number) => void;
 
   isLink: boolean;
-
-  id?: number;
 }
 
 interface State {
@@ -129,7 +127,7 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
    */
   callBack = () => {
     this.fillVarInput();
-    this.props.lowerLimitCallBack(this.state.lowerLimit, this.props.id);
+    this.props.lowerLimitCallBack(this.state.lowerLimit);
   };
 
   /** old function */

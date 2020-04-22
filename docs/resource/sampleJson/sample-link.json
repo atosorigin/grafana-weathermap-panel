@@ -2,17 +2,8 @@
     "links": [{
         "colorCoordinateA": "#5794F2",
         "colorCoordinateB": "#E54658",
-        "colorMode": false,
+        "colorMode": true,
         "id": 1,
-        "mainMetric": {
-            "format": "",
-            "key": "",
-            "keyValue": "",
-            "manageValue": "avg",
-            "refId": "",
-            "returnQuery": [],
-            "unit": ""
-        },
         "isIncurved": {
             "label": "No",
             "value": false
@@ -23,23 +14,82 @@
             "hoveringTooltipLink": "",
             "hoveringTooltipText": ""
         },
-        "lowerLimit": [],
-
+        "lowerLimit": [{
+                "backColor": "#1F60C4",
+                "borderColor": "#1F60C4",
+                "id": 0,
+                "lowerLimitMax": "20",
+                "lowerLimitMin": "",
+                "sizeBorder": "10"
+            },
+            {
+                "backColor": "#37872D",
+                "borderColor": "#37872D",
+                "id": 1,
+                "lowerLimitMax": "40",
+                "lowerLimitMin": ">20",
+                "sizeBorder": "10"
+            },
+            {
+                "backColor": "#E0B400",
+                "borderColor": "#E0B400",
+                "id": 2,
+                "lowerLimitMax": "60",
+                "lowerLimitMin": ">40",
+                "sizeBorder": "10"
+            },
+            {
+                "backColor": "#FA6400",
+                "borderColor": "#FA6400",
+                "id": 3,
+                "lowerLimitMax": "80",
+                "lowerLimitMin": ">60",
+                "sizeBorder": "10"
+            },
+            {
+                "backColor": "#C4162A",
+                "borderColor": "#C4162A",
+                "id": 4,
+                "lowerLimitMax": "",
+                "lowerLimitMin": ">80",
+                "sizeBorder": "10"
+            }
+        ],
+        "mainMetric": {
+            "expr": "",
+            "format": "",
+            "key": "",
+            "keyValue": "",
+            "manageValue": "avg",
+            "refId": "A",
+            "returnQuery": [],
+            "unit": ""
+        },
+        "mainMetricB": {
+            "format": "",
+            "key": "",
+            "keyValue": "",
+            "manageValue": "avg",
+            "refId": "B",
+            "returnQuery": [],
+            "unit": ""
+        },
         "meta": "",
         "metrics": [],
+        "metricsB": [],
         "name": "orientedLink1",
         "orientationLink": {
-            "label": "Monodirectional",
-            "value": "AB"
+            "label": "Bidirectional",
+            "value": "double"
         },
-        "pointAPositionX": "-14",
-        "pointAPositionY": "88",
-        "pointBPositionX": "72",
-        "pointBPositionY": "70",
-        "pointCPositionX": "29",
-        "pointCPositionY": "79",
-        "pointIn": "point2",
-        "pointOut": "point1",
+        "pointAPositionX": "",
+        "pointAPositionY": "",
+        "pointBPositionX": "",
+        "pointBPositionY": "",
+        "pointCPositionX": "",
+        "pointCPositionY": "",
+        "pointIn": "pointRouteur",
+        "pointOut": "ProxyServer",
         "positionParameter": {
             "labelAPositionX": "0",
             "labelAPositionY": "0",
@@ -50,6 +100,7 @@
         },
         "regionIn": "",
         "regionOut": "",
+        "size": { "value": "Medium", "label": "Medium" },
         "textObj": {
             "colorBack": "",
             "colorText": "",
@@ -60,8 +111,8 @@
                 "colorTextElement": "white",
                 "displayObjectInText": false,
                 "legendElement": "",
-                "numericFormatElement": "",
-                "unit": ""
+                "numericFormatElement": "2",
+                "unit": "%"
             },
             "generateObjectText": false,
             "isTextRegion": false,
@@ -82,20 +133,10 @@
                 "unit": ""
             }
         },
-        "traceBack": false,
-        "traceBorder": false,
-        "valueMainMetricA": "-",
-        "valueMainMetricB": "-",
-        "zIndex": "5",
-        "mainMetricB": {
-            "format": "",
-            "key": "",
-            "keyValue": "",
-            "manageValue": "avg",
-            "refId": "",
-            "returnQuery": [],
-            "unit": ""
-        },
-        "metricsB": []
+        "traceBack": true,
+        "traceBorder": true,
+        "valueMainMetricA": "",
+        "valueMainMetricB": "",
+        "zIndex": 2
     }]
 }

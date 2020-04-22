@@ -1,14 +1,13 @@
 # Changelog
 
-## v0.4.9 (2020-04-xx)
+## v0.4.9 (2020-04-22)
 
 - Add size links
 - Update label empty
 - Update Documentations
 - Update button zoom
+- Update documentations (tutorial)
 - fixed bi-directional links
-- 
-
 
 ## v0.4.8 (2020-04-18)
 

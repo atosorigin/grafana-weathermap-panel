@@ -15,11 +15,7 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   /** id coordinate */
   coordinateSpace: CoordinateSpaceClass;
   /** call function to save data in parent */
-  callBackToParent: (followLink?: string, hoveringTooltipLink?: string, hoveringTooltipText?: string, textObj?: TextObject, id?: number) => void;
-  /**
-   *
-   */
-  id?: number;
+  callBackToParent: (followLink?: string, hoveringTooltipLink?: string, hoveringTooltipText?: string, textObj?: TextObject) => void;
 }
 
 interface State {
@@ -73,13 +69,13 @@ class ParametresGeneriques extends React.Component<Props, State> {
       <div>
         <Collapse isOpen={this.state.collapseLink} label="Manage link" onToggle={this.onToggleLinkCollapse}>
           <div>
-            <ManageLink coordinateSpace={this.props.coordinateSpace} callBackToParent={this.props.callBackToParent} id={this.props.id} />
+            <ManageLink coordinateSpace={this.props.coordinateSpace} callBackToParent={this.props.callBackToParent} />
           </div>
         </Collapse>
 
         <Collapse isOpen={this.state.collapseTextObject} label="Text object" onToggle={this.onToggleTextObject}>
           <div>
-            <TextObjects coordinateSpace={this.props.coordinateSpace} callBackToParent={this.props.callBackToParent} id={this.props.id} />
+            <TextObjects coordinateSpace={this.props.coordinateSpace} callBackToParent={this.props.callBackToParent} />
           </div>
         </Collapse>
       </div>

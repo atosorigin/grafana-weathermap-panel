@@ -1,4 +1,4 @@
-# Create bi directionnel
+# Create link bi directionnel
 
 
 ## Add a dashboard SVG
@@ -79,16 +79,20 @@ A link will appaer and we will edit it to change it to Bidirectional point.
 
 The option of direction is done from the `Coordinates space`, `OrientedLink` menu. Then, click on your link and go down.
 
+Then, select `Bidirectional` for the orientation
+
 ![Bidirectional](../../screenshots/demo/tutorial7/LinkBidirectionnel.png)
 
 ### Step 2 : Choose the color of your link
+
+To change the color, go to the `lower limit` menu.
 
 ![LowerLimit](../../screenshots/demo/tutorial7/LowerLimitLink.png)
 
 ### Step 3 : Add a query to your link
 
 First you will have to create the query.
-Tp do that, go to `Queries` and fill the input like follow :
+To do that, go to `Queries` and fill the input like follow :
 ![query](../../screenshots/demo/tutorial7/query.png)
 
 

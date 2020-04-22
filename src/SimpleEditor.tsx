@@ -5,18 +5,11 @@ import { SimpleOptions } from './types';
 import { PanelEditorProps } from '@grafana/data';
 import { Tab, TabsBar, TabContent } from '@grafana/ui';
 
-import { LinkClass } from 'Models/LinkClass';
-import { OrientedLinkClass } from 'Models/OrientedLinkClass';
-import { PointClass } from 'Models/PointClass';
-
 import CoordinateSpaceInitialClass from 'components/coordinateSpaceInitial';
 import ImportInput from 'components/importInput';
 import ManageCoordinateSpace from 'components/CoordinateSpace/manageCoordinateSpace';
-import OrientedLinkForm from './components/orientedLinkForm';
-// import PanelData from 'components/panelData';
-//import PointForm from 'components/pointForm';
+
 import Display from 'components/display';
-// import TimeSelector from 'components/timeSelector';
 
 import 'style/SimpleEditor.css';
 
@@ -26,9 +19,6 @@ interface State {
   collapseDashboardData: boolean;
   collapseTimeSelector: boolean;
   collapsePanelData: boolean;
-
-  /** Tableau d'objets OrientedLinkClass */
-  arrayOrientedLinks: OrientedLinkClass[];
 
   /**
    * index
@@ -50,7 +40,6 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
       collapseDashboardData: false,
       collapsePanelData: false,
       collapseTimeSelector: false,
-      arrayOrientedLinks: this.props.options.arrayOrientedLinks,
       collapsePrincipalTarget: false,
       tabsVariable: [true, false, false, false, false],
       tabsCoordinateSpace: [true, false, false, false],
@@ -82,31 +71,6 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
   // 		style: datafromChild.style,
   // 	});
   // }
-
-  myCallBackArrayPoints = (dataFromChild: PointClass[]) => {
-    this.props.onOptionsChange({
-      ...this.props.options,
-      arrayPoints: dataFromChild,
-    });
-  };
-
-  myCallBackArrayLinks = (dataFromChild: LinkClass[]) => {
-    this.props.onOptionsChange({
-      ...this.props.options,
-      arrayLinks: dataFromChild,
-    });
-  };
-
-  private myCallBackArrayOrientedLinks = (dataFromChild: OrientedLinkClass[]) => {
-    this.setState({
-      arrayOrientedLinks: dataFromChild,
-    });
-
-    this.props.onOptionsChange({
-      ...this.props.options,
-      arrayOrientedLinks: dataFromChild,
-    });
-  };
 
   /// Adrien
   // onInfoChanged = ({ target }: any) => {
@@ -142,12 +106,6 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
       collapsePanelData: isOpen,
     });
   };
-
-  // private onToggleLink = (isOpen: boolean): void => {
-  // 	this.setState({
-  // 		collapseLink: isOpen,
-  // 	});
-  // }
 
   onTogglePrincipalTargets = (isOpen: boolean): void => {
     this.setState({
@@ -270,6 +228,8 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
                     onOptionsChange={this.props.onOptionsChange}
                     data={this.props.data}
                     isRegion={true}
+                    isPoint={false}
+                    isLink={false}
                   />
                 )}
                 {this.state.tabsCoordinateSpace[1] && (
@@ -278,17 +238,18 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
                     onOptionsChange={this.props.onOptionsChange}
                     data={this.props.data}
                     isRegion={false}
+                    isPoint={true}
+                    isLink={false}
                   />
                 )}
                 {this.state.tabsCoordinateSpace[3] && (
-                  <OrientedLinkForm
-                    arrayPoint={this.props.options.arrayPoints}
-                    regionCoordinateSpace={this.props.options.regionCoordinateSpace}
-                    oldArrayOrientedLinkClass={this.props.options.arrayOrientedLinks}
-                    callBackFromParent={this.myCallBackArrayOrientedLinks.bind(this)}
+                  <ManageCoordinateSpace
                     options={this.props.options}
                     onOptionsChange={this.props.onOptionsChange}
                     data={this.props.data}
+                    isRegion={false}
+                    isPoint={false}
+                    isLink={true}
                   />
                 )}
               </TabContent>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputSelectableClass } from 'Models/InputSelectableClass';
+import { InputSelectableClass } from '../Models/InputSelectableClass';
 import { ArrayInputSelectableClass } from 'Models/ArrayInputSelectableClass';
 import { SelectableValue, PanelEditorProps } from '@grafana/data';
 import InputTextOrientedLink from 'Functions/Input/inputTextOrientedLink';
@@ -65,12 +65,15 @@ interface State {
    */
   arrayOrientedLinkClass: OrientedLinkClass[];
 
+  // /**
+  //  * to do
+  //  */
+  // index: number;
+
   /**
    * to do
    */
   debug: boolean;
-
-  test: boolean;
 
   /**
    * to do
@@ -87,8 +90,8 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
     this.state = {
       arrayInput: [],
       arrayOrientedLinkClass: [],
+      //index: 1,
       debug: false,
-      test: false,
       listCollapseOrientedLink: [],
     };
   }
@@ -663,7 +666,7 @@ export default class OrientedLinkForm extends React.Component<Props, State> {
               keyInt={parseInt(obj.id, 10)}
               color={this.getGoodValue(line.id, obj.name)}
               text={obj.label}
-              width={10}
+              width={15}
               _onChange={(keyInt: number, newColor: string) => {
                 let i: number;
                 i = 0;

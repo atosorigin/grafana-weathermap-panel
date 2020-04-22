@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Switch, Collapse } from '@grafana/ui';
+import { Switch, Collapse, FormLabel } from '@grafana/ui';
 
 import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
@@ -9,7 +9,6 @@ import FixColor from 'components/Parametrage/fixColor';
 import VariableColor from 'components/Parametrage/VariableColor';
 import { PanelEditorProps } from '@grafana/data';
 import { SimpleOptions } from 'types';
-import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 
 interface Props extends PanelEditorProps<SimpleOptions> {
   /** last data */
@@ -20,10 +19,6 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   lowerLimitCallBack: (lowerLimit: LowerLimitClass[], id?: number) => void;
 
   isLink: boolean;
-
-  orientedLink?: OrientedLinkClass;
-
-  id?: number;
 }
 
 interface State {
@@ -71,8 +66,8 @@ class ManageLowerLimit extends React.Component<Props, State> {
   onSave = () => {
     // console.log('lower');
     // console.log(this.props.id);
-    this.props.callBack(this.props.coordinate, this.props.id);
-    this.props.lowerLimitCallBack(this.state.coordinate.lowerLimit, this.props.id);
+    this.props.callBack(this.props.coordinate);
+    this.props.lowerLimitCallBack(this.state.coordinate.lowerLimit);
   };
 
   /**
@@ -105,7 +100,11 @@ class ManageLowerLimit extends React.Component<Props, State> {
 
     newValue.colorMode = !newValue.colorMode;
     if (!this.state.coordinate.colorMode) {
-      newValue.lowerLimit = [new LowerLimitClass(0, '', '', '', '', '')];
+      let defaultSizeBorder = '';
+      if (this.props.isLink) {
+        defaultSizeBorder = '10';
+      }
+      newValue.lowerLimit = [new LowerLimitClass(0, '', '', '', '', defaultSizeBorder)];
       await this.setStateAsyncCoordinate({ coordinate: newValue });
     } else {
       newValue.lowerLimit = [];
@@ -143,12 +142,22 @@ class ManageLowerLimit extends React.Component<Props, State> {
     return (
       <div>
         <Collapse label={'Lower limit'} isOpen={this.state.openLowerLimit} onToggle={this.onToggleLowerLimit}>
-          <Switch label={l10n.genericParameter.variableColor} checked={this.state.coordinate.colorMode} onChange={this.onSwitchColorMode} />
+          <div style={{ display: 'flex' }}>
+            <FormLabel width={15}>{l10n.genericParameter.variableColor}</FormLabel>
+            <Switch label={''} checked={this.state.coordinate.colorMode} onChange={this.onSwitchColorMode} />
+          </div>
+
           <br />
           {!this.props.isLink ? (
             <div>
-              <Switch label={l10n.genericParameter.traceBackground} checked={this.state.coordinate.traceBack} onChange={this.onSwitchFond} />
-              <Switch label={l10n.genericParameter.traceContour} checked={this.state.coordinate.traceBorder} onChange={this.onSwitchContour} />
+              <div style={{ display: 'flex' }}>
+                <FormLabel width={15}>{l10n.genericParameter.traceBackground}</FormLabel>
+                <Switch label={''} checked={this.state.coordinate.traceBack} onChange={this.onSwitchFond} />
+              </div>
+              <div style={{ display: 'flex' }}>
+                <FormLabel width={15}>{l10n.genericParameter.traceContour}</FormLabel>
+                <Switch label={''} checked={this.state.coordinate.traceBorder} onChange={this.onSwitchContour} />
+              </div>
             </div>
           ) : (
             <Switch label={'Color/Size'} checked={this.state.coordinate.traceBorder} onChange={this.onSwitchContour} />
@@ -161,7 +170,6 @@ class ManageLowerLimit extends React.Component<Props, State> {
               lowerLimit={this.state.coordinate.lowerLimit}
               lowerLimitCallBack={this.props.lowerLimitCallBack}
               isLink={this.props.isLink}
-              id={this.props.id}
             />
           ) : (
             <FixColor
@@ -172,7 +180,6 @@ class ManageLowerLimit extends React.Component<Props, State> {
               traceBack={this.state.coordinate.traceBack}
               lowerLimit={this.state.coordinate.lowerLimit}
               lowerLimitCallBack={this.props.lowerLimitCallBack}
-              id={this.props.id}
               isLink={this.props.isLink}
             />
           )}

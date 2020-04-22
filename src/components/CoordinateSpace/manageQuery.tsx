@@ -3,6 +3,7 @@ import { SimpleOptions, TManageValue, Metric } from 'types';
 
 import { PanelEditorProps, SelectableValue, DataFrame } from '@grafana/data';
 import { Select, FormField, Collapse, FormLabel } from '@grafana/ui';
+import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 //import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 
 interface Prop extends PanelEditorProps<SimpleOptions> {
@@ -283,20 +284,27 @@ class ManageQuery extends React.Component<Prop, State> {
 
   private displayHtml = (): JSX.Element => {
     let result: JSX.Element;
-    if (this.props.isLink && this.props.options.arrayOrientedLinks[this.props.id || 0].orientationLink.value === 'double') {
+    let currentOrientedLink: any;
+    const arrayOrientedLinks: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+    for (const orientedLink of arrayOrientedLinks) {
+      if (orientedLink.id === this.props.idCoordinate) {
+        currentOrientedLink = orientedLink;
+      }
+    }
+    if (this.props.isLink && currentOrientedLink && currentOrientedLink.orientationLink.value === 'double') {
       result = (
         <Collapse isOpen={this.state.collapseMainMetric} label="Main metric" onToggle={this.onToggleMainMetric}>
           <Collapse isOpen={this.state.collapseLinkA} label="Link A" onToggle={this.onToggleLinkA}>
             <tr style={{ verticalAlign: 'middle' }}>
               <td>
-                <FormLabel>Query</FormLabel>
+                <FormLabel width={15}>Query</FormLabel>
               </td>
               <td>
                 <Select
                   onChange={value => this.onChangeSelectQuery(value)}
                   allowCustomValue={false}
                   options={this.state.selectQuery}
-                  width={10}
+                  width={15}
                   value={this.state.selectQueryDefault}
                 />
               </td>
@@ -304,7 +312,7 @@ class ManageQuery extends React.Component<Prop, State> {
             {/* <br /> */}
             <FormField
               label="Key"
-              labelWidth={10}
+              labelWidth={15}
               inputWidth={20}
               type="text"
               value={this.state.mainMetric.key}
@@ -313,7 +321,7 @@ class ManageQuery extends React.Component<Prop, State> {
             />
             <FormField
               label="Value key"
-              labelWidth={10}
+              labelWidth={15}
               inputWidth={20}
               type="text"
               value={this.state.mainMetric.keyValue}
@@ -323,14 +331,14 @@ class ManageQuery extends React.Component<Prop, State> {
             {/* <br /> */}
             <tr style={{ verticalAlign: 'middle' }}>
               <td>
-                <FormLabel>Manipulate</FormLabel>
+                <FormLabel width={15}>Manipulate</FormLabel>
               </td>
               <td>
                 <Select
                   onChange={value => this.onChangeSelectManageValue(value)}
                   allowCustomValue={false}
                   options={this.state.selectManageValue}
-                  width={10}
+                  width={15}
                   value={this.state.selectDefaultManageValue}
                 />
               </td>
@@ -339,7 +347,7 @@ class ManageQuery extends React.Component<Prop, State> {
           <Collapse isOpen={this.state.collapseLinkB} label="Link B" onToggle={this.onToggleLinkB}>
             <tr style={{ verticalAlign: 'middle', marginTop: '10px' }}>
               <td>
-                <FormLabel>Query</FormLabel>
+                <FormLabel width={15}>Query</FormLabel>
               </td>
               <td>
                 <Select
@@ -354,7 +362,7 @@ class ManageQuery extends React.Component<Prop, State> {
             {/* <br /> */}
             <FormField
               label="Key"
-              labelWidth={10}
+              labelWidth={15}
               inputWidth={20}
               type="text"
               value={this.state.mainMetricB.key}
@@ -363,7 +371,7 @@ class ManageQuery extends React.Component<Prop, State> {
             />
             <FormField
               label="Value key"
-              labelWidth={10}
+              labelWidth={15}
               inputWidth={20}
               type="text"
               value={this.state.mainMetricB.keyValue}
@@ -373,7 +381,7 @@ class ManageQuery extends React.Component<Prop, State> {
             {/* <br /> */}
             <tr style={{ verticalAlign: 'middle' }}>
               <td>
-                <FormLabel>Manipulate</FormLabel>
+                <FormLabel width={15}>Manipulate</FormLabel>
               </td>
               <td>
                 <Select
@@ -393,7 +401,7 @@ class ManageQuery extends React.Component<Prop, State> {
         <Collapse isOpen={this.state.collapseMainMetric} label="Main metric" onToggle={this.onToggleMainMetric}>
           <tr style={{ verticalAlign: 'middle' }}>
             <td>
-              <FormLabel>Query</FormLabel>
+              <FormLabel width={15}>Query</FormLabel>
             </td>
             <td>
               <Select
@@ -408,8 +416,8 @@ class ManageQuery extends React.Component<Prop, State> {
           {/* <br /> */}
           <FormField
             label="Key"
-            labelWidth={10}
-            inputWidth={20}
+            labelWidth={15}
+            inputWidth={10}
             type="text"
             value={this.state.mainMetric.key}
             name="key"
@@ -417,8 +425,8 @@ class ManageQuery extends React.Component<Prop, State> {
           />
           <FormField
             label="Value key"
-            labelWidth={10}
-            inputWidth={20}
+            labelWidth={15}
+            inputWidth={10}
             type="text"
             value={this.state.mainMetric.keyValue}
             name="valueKey"
@@ -427,7 +435,7 @@ class ManageQuery extends React.Component<Prop, State> {
           {/* <br /> */}
           <tr style={{ verticalAlign: 'middle' }}>
             <td>
-              <FormLabel>Manipulate</FormLabel>
+              <FormLabel width={15}>Manipulate</FormLabel>
             </td>
             <td>
               <Select

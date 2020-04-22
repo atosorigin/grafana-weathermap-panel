@@ -1,25 +1,25 @@
  
-# Create a customizable query
+# Créer une requête personnalisable
 
-## Add a query
+## Ajouter une requête
 
-The example shows how to use query filters to obtain precise metrics
+L'exemple montre comment utiliser des filtres de requête pour obtenir des mesures précises
 
 
 ![step 01](../../screenshots/demo/tutorial5/step01.png)
 
 
-In a query, we want to analyze what the network card receives
+Dans une requête, nous voulons analyser ce que la carte réseau reçoit
 
 
 ```
-node_network_receive_bytes
+rate(node_network_receive_bytes_total[5m])
 
 ```
 
 
 
-The result shows several possible outcomes
+Le résultat montre plusieurs issues possibles
 
 
 ```
@@ -43,24 +43,24 @@ node_network_receive_bytes_total{device="vethdee87cd",instance="localhost:9100",
 
 ```
 
-The difference shows 9 types of devices. Let's choose 2 for this exemple
+La différence montre 9 types d'appareils. Choisissons en 2 pour cet exemple
 
 - vetha317d1e
 - eno0
 
 
-Here we want to filter the result to display only the device we are interested in.
+Ici, nous voulons filtrer le résultat pour n'afficher que l'appareil qui nous intéresse.
 
 
-## Create regions and filter the Metric
+## Créer des régions et filtrer la métrique
 
-### Step 1 : Import our file PNG
+### Etape 1 : Importer notre image PNG
 
-Adding a background image is done from the `display` menu.
+L'ajout d'une image de fond se fait à partir du menu `display`.
 
-The selected image will be [demo1-background.svg](../../resource/demo1-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+L'image sélectionnée sera [demo1-background.svg](../../resource/demo1-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `copier l'adresse de l'image`.
 
-It is possible to have more details with the [display](../editor/display.md) page.
+Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
 
 
 ```
@@ -68,21 +68,21 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 
 ```
 
-You have to save and reload the page.
+Vous devez sauvegarder et recharger la page.
 
-### Step 2 : Create the region
+### Etape 2 : Créer la région
 
-We will create two regions
+Nous allons créer deux régions
 
-For this step, you can follow the [tutorial2](tutorial2.md) to create your region and add some colors
+Pour cette étape, vous pouvez suivre le [tutorial2](tutorial2.md) pour créer votre région et ajouter des couleurs
 
-### Step 3 : Add Main metric to the region and filter
+### Etape 3 : Ajouter la métrique principale à la région et filtrer
 
-Once you have created your regions, you can edit them in `Region`, `Edit coordinate space`. Then click on `Main metric` and fill it like this :
-- `Query` : Choose the query you are interested in
-- `Key` : Represent the key present in the result of you query. Here it's `device`
-- `Value key` : Represent the value of the previous key. Here we want to filter for value `enp0s3` and `lo`
-- `Manipulate` : You can choose if you want an `average`,`sum` or `total` of the value.
+Une fois que vous avez créé vos régions, vous pouvez les éditer dans `Region`, `Edit coordinate space`. Cliquez ensuite sur `Main metric` et remplissez le formulaire comme ceci :
+- `Query` : Choisissez la requête qui vous intéresse
+- `Key` : représente la clé présente dans le résultat de votre requête. Ici, c'est `device`.
+- `Value key` : Représente la valeur de la clé précédente. Nous voulons ici filtrer les valeurs `enp0s3` et `lo`.
+- `Manipulate` : Vous pouvez choisir si vous voulez un`average`,`sum` ou `total` de la valeur.
 
 Region 1
 
@@ -95,7 +95,14 @@ Region 2
 
 ## Result
 
-The result display those 2 values
+Le résultat affiche ces 2 valeurs
 
 ![step 04](../../screenshots/demo/tutorial5/demo5.png)
 
+### Importer un fichier JSON
+
+- Il est possible d'ajouter toutes ces configurations par le biais de fichiers json en faisant une importation. Pour savoir comment faire, [suivez ce lien](../editor/import.md)
+
+Et voici le différent dossier JSON :
+
+- [demo3-region](../../resource/demo5-region.json) 

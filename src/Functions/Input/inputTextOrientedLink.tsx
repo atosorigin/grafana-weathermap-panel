@@ -49,7 +49,7 @@ export const InputTextOrientedLink: FunctionComponent<InputTextFieldProps> = ({
       <div>
         <FormField
           label={label}
-          labelWidth={10}
+          labelWidth={15}
           inputWidth={20}
           type="text"
           required={required}

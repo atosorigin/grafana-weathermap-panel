@@ -13,7 +13,7 @@ In a query, we want to analyze what the network card receives
 
 
 ```
-node_network_receive_bytes
+rate(node_network_receive_bytes_total[5m])
 
 ```
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { SimpleOptions, CoordinateSpaceInitial } from 'types';
 
-import { FormField, Switch } from '@grafana/ui';
+import { FormField, Switch, FormLabel } from '@grafana/ui';
 import { PanelEditorProps } from '@grafana/data';
 
 import { editGoodParameter } from 'Functions/EditParameter/editGoodParameter';
@@ -84,10 +84,14 @@ class CoordinateSpaceInitialClass extends React.Component<Props, State> {
   render() {
     return (
       <div className="coordinateSpaceInitial">
-        <Switch label="Display space initial" checked={this.state.arrayCoor.displayArea} onChange={this.onChangeSwitchDisplayInitialSpace} />
+        <div style={{ display: 'flex' }}>
+          <FormLabel width={15}>Display space initial</FormLabel>
+          <Switch label="" checked={this.state.arrayCoor.displayArea} onChange={this.onChangeSwitchDisplayInitialSpace} />
+        </div>
+
         <FormField
           label="xMin"
-          labelWidth={10}
+          labelWidth={15}
           inputWidth={20}
           type="text"
           required={true}
@@ -104,7 +108,7 @@ class CoordinateSpaceInitialClass extends React.Component<Props, State> {
 
         <FormField
           label="X max"
-          labelWidth={10}
+          labelWidth={15}
           inputWidth={20}
           type="text"
           required={true}
@@ -121,7 +125,7 @@ class CoordinateSpaceInitialClass extends React.Component<Props, State> {
 
         <FormField
           label="Y min"
-          labelWidth={10}
+          labelWidth={15}
           inputWidth={20}
           type="text"
           required={true}
@@ -138,7 +142,7 @@ class CoordinateSpaceInitialClass extends React.Component<Props, State> {
 
         <FormField
           label="Y max"
-          labelWidth={10}
+          labelWidth={15}
           inputWidth={20}
           type="text"
           required={true}
