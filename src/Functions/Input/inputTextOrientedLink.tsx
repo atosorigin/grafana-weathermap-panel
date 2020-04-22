@@ -31,7 +31,7 @@ export const InputTextOrientedLink: FunctionComponent<InputTextFieldProps> = ({
           <FormField
             label={label}
             labelWidth={15}
-            inputWidth={15}
+            inputWidth={20}
             type="text"
             required={required}
             name={name}

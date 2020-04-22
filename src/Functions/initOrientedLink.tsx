@@ -10,8 +10,8 @@ export const initOrientedLink = (newId: number, newZIndex: number): OrientedLink
   const initTextObject: TextObject = new TextObject(
     '',
     false,
-    '',
-    '',
+    'white',
+    'black',
     { bold: false, italic: false, underline: false },
     false,
     {
@@ -29,11 +29,11 @@ export const initOrientedLink = (newId: number, newZIndex: number): OrientedLink
       legendElement: '',
       numericFormatElement: '',
       unit: '',
-      displayObjectInTooltip: false,
+      displayObjectInTooltip: true,
       // 'displayObjectPermanently': false,
-      addColorTextElement: false,
+      addColorTextElement: true,
       colorTextElement: 'white',
-      addColorBackElement: false,
+      addColorBackElement: true,
       colorBackElement: 'black',
     }
   );

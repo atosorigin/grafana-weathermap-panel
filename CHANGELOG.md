@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.10 (2020-04-22)
+
+- Fixed Text object with oriented link
+
 ## v0.4.9 (2020-04-22)
 
 - Add size links

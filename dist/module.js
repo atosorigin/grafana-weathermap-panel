@@ -1661,7 +1661,7 @@ var InputTextOrientedLink = function InputTextOrientedLink(_a) {
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_0__["FormField"], {
         label: label,
         labelWidth: 15,
-        inputWidth: 15,
+        inputWidth: 20,
         type: "text",
         required: required,
         name: name,
@@ -2570,7 +2570,7 @@ __webpack_require__.r(__webpack_exports__);
 var initOrientedLink = function initOrientedLink(newId, newZIndex) {
   var num = newId;
   var zIndex = newZIndex;
-  var initTextObject = new _Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_0__["TextObject"]('', false, '', '', {
+  var initTextObject = new _Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_0__["TextObject"]('', false, 'white', 'black', {
     bold: false,
     italic: false,
     underline: false
@@ -2588,11 +2588,11 @@ var initOrientedLink = function initOrientedLink(newId, newZIndex) {
     legendElement: '',
     numericFormatElement: '',
     unit: '',
-    displayObjectInTooltip: false,
+    displayObjectInTooltip: true,
     // 'displayObjectPermanently': false,
-    addColorTextElement: false,
+    addColorTextElement: true,
     colorTextElement: 'white',
-    addColorBackElement: false,
+    addColorBackElement: true,
     colorBackElement: 'black'
   });
   var parametrageMetric = new _Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_1__["LinkURLClass"]('', '', '');
@@ -5165,84 +5165,119 @@ function (_super) {
 
         index++;
       });
-    };
-    /**
-     * to do
-     */
+    }; // /**
+    //  * to do
+    //  */
+    // updateAssociateOrientedLinkInToPoint = () => {
+    //   console.log('update point in');
+    //   let indexPoint = 0;
+    //   this.props.options.arrayPoints.forEach((point: PointClass) => {
+    //     let indexAssociateOrientedLinkIn = 0;
+    //     point.associateOrientedLinksIn.forEach(oneAssociateOrientedLinksIn => {
+    //       let orientedLinkExist = false;
+    //       this.props.options.arrayOrientedLinks.forEach((orientedLink: OrientedLinkClass) => {
+    //         if (oneAssociateOrientedLinksIn.name === orientedLink.name) {
+    //           orientedLinkExist = true;
+    //           if (orientedLink.label) {
+    //             this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn[indexAssociateOrientedLinkIn] = {
+    //               label: orientedLink.label,
+    //               name: orientedLink.name,
+    //             };
+    //           } else {
+    //             this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn[indexAssociateOrientedLinkIn] = {
+    //               label: '',
+    //               name: orientedLink.name,
+    //             };
+    //           }
+    //         }
+    //       });
+    //       if (orientedLinkExist === false) {
+    //         this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn.splice(indexAssociateOrientedLinkIn, 1);
+    //       }
+    //       indexAssociateOrientedLinkIn++;
+    //     });
+    //     indexPoint++;
+    //   });
+    // };
+    // /**
+    //  * to do
+    //  */
+    // updateAssociateOrientedLinkOutToPoint = () => {
+    //   console.log('update point out');
+    //   let indexPoint = 0;
+    //   this.props.options.arrayPoints.forEach((point: PointClass) => {
+    //     let indexAssociateOrientedLinkOut = 0;
+    //     point.associateOrientedLinksOut.forEach(oneAssociateOrientedLinksOut => {
+    //       let orientedLinkExist = false;
+    //       this.props.options.arrayOrientedLinks.forEach((orientedLink: OrientedLinkClass) => {
+    //         if (oneAssociateOrientedLinksOut.name === orientedLink.name) {
+    //           orientedLinkExist = true;
+    //           if (orientedLink.label) {
+    //             this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut[indexAssociateOrientedLinkOut] = {
+    //               label: orientedLink.label,
+    //               name: orientedLink.name,
+    //             };
+    //           } else {
+    //             this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut[indexAssociateOrientedLinkOut] = {
+    //               label: '',
+    //               name: orientedLink.name,
+    //             };
+    //           }
+    //         }
+    //       });
+    //       if (orientedLinkExist === false) {
+    //         this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut.splice(indexAssociateOrientedLinkOut, 1);
+    //       }
+    //       indexAssociateOrientedLinkOut++;
+    //     });
+    //     indexPoint++;
+    //   });
+    //   this.displayPoint();
+    // };
+
+    /** update AssociateOrientedLinkIn of point for tootip  */
 
 
     _this.updateAssociateOrientedLinkInToPoint = function () {
       var indexPoint = 0;
 
       _this.props.options.arrayPoints.forEach(function (point) {
-        var indexAssociateOrientedLinkIn = 0;
-        point.associateOrientedLinksIn.forEach(function (oneAssociateOrientedLinksIn) {
-          var orientedLinkExist = false;
+        var newAssociateLinkIn = [];
+        var namePoint = point.label || point.name;
 
-          _this.props.options.arrayOrientedLinks.forEach(function (orientedLink) {
-            if (oneAssociateOrientedLinksIn.name === orientedLink.name) {
-              orientedLinkExist = true;
-
-              if (orientedLink.label) {
-                _this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn[indexAssociateOrientedLinkIn] = {
-                  label: orientedLink.label,
-                  name: orientedLink.name
-                };
-              } else {
-                _this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn[indexAssociateOrientedLinkIn] = {
-                  label: '',
-                  name: orientedLink.name
-                };
-              }
-            }
-          });
-
-          if (orientedLinkExist === false) {
-            _this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn.splice(indexAssociateOrientedLinkIn, 1);
+        _this.props.options.arrayOrientedLinks.forEach(function (link) {
+          if (link.pointIn === namePoint) {
+            newAssociateLinkIn.push({
+              label: link.label,
+              name: link.name
+            });
           }
-
-          indexAssociateOrientedLinkIn++;
         });
+
+        _this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn = newAssociateLinkIn;
         indexPoint++;
       });
     };
-    /**
-     * to do
-     */
+    /** update AssociateOrientedLinkOut of point for tootip  */
 
 
     _this.updateAssociateOrientedLinkOutToPoint = function () {
       var indexPoint = 0;
 
       _this.props.options.arrayPoints.forEach(function (point) {
-        var indexAssociateOrientedLinkOut = 0;
-        point.associateOrientedLinksOut.forEach(function (oneAssociateOrientedLinksOut) {
-          var orientedLinkExist = false;
+        var newAssociateLinkIn = [];
+        var namePoint = point.label || point.name;
 
-          _this.props.options.arrayOrientedLinks.forEach(function (orientedLink) {
-            if (oneAssociateOrientedLinksOut.name === orientedLink.name) {
-              orientedLinkExist = true;
-
-              if (orientedLink.label) {
-                _this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut[indexAssociateOrientedLinkOut] = {
-                  label: orientedLink.label,
-                  name: orientedLink.name
-                };
-              } else {
-                _this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut[indexAssociateOrientedLinkOut] = {
-                  label: '',
-                  name: orientedLink.name
-                };
-              }
-            }
-          });
-
-          if (orientedLinkExist === false) {
-            _this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut.splice(indexAssociateOrientedLinkOut, 1);
+        _this.props.options.arrayOrientedLinks.forEach(function (link) {
+          if (link.pointOut === namePoint) {
+            newAssociateLinkIn.push({
+              label: link.label,
+              name: link.name
+            });
           }
-
-          indexAssociateOrientedLinkOut++;
         });
+
+        _this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut = newAssociateLinkIn;
         indexPoint++;
       });
     };
@@ -5615,6 +5650,7 @@ function (_super) {
 
 
     _this.createOrientedLinkToClick = function (isIncurved) {
+      console.log('create');
       var coordinates = _this.props.options.coordinatesToDrawLinkWithClick;
 
       var id = _this.defineIdOrientedLink();
@@ -5624,7 +5660,7 @@ function (_super) {
       var objectIn = coordinates[1];
       var objectOut = coordinates[2];
       var pointC = coordinates[3];
-      var initTextObject = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_6__["TextObject"]('', false, '', '', {
+      var initTextObject = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_6__["TextObject"]('', false, 'white', 'black', {
         bold: false,
         italic: false,
         underline: false
@@ -5642,11 +5678,11 @@ function (_super) {
         legendElement: '',
         numericFormatElement: '',
         unit: '',
-        displayObjectInTooltip: false,
+        displayObjectInTooltip: true,
         // 'displayObjectPermanently': false,
-        addColorTextElement: false,
+        addColorTextElement: true,
         colorTextElement: 'white',
-        addColorBackElement: false,
+        addColorBackElement: true,
         colorBackElement: 'black'
       });
       var parametrageMetric = new Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_7__["LinkURLClass"]('', '', '');
@@ -6530,6 +6566,7 @@ function (_super) {
   SimplePanel.prototype.displayOrientedLink = function () {
     var _this = this;
 
+    console.log('display');
     var arrayOrientedLink = this.props.options.arrayOrientedLinks;
     var mapItems = [];
     var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
@@ -13046,186 +13083,356 @@ function (_super) {
       return result;
     };
 
+    _this.defineMainMetric = function (mainMetric) {
+      var result = '';
+      var unit = _this.props.textObject.valueGenerateObjectText.unit;
+      var decimal = _this.props.textObject.valueGenerateObjectText.numericFormatElement;
+
+      if (decimal !== '') {
+        result = parseFloat(mainMetric).toPrecision(parseInt(decimal, 10)) + ' ' + unit;
+      } else {
+        result = mainMetric + ' ' + unit;
+      }
+
+      return result;
+    };
+
+    _this.defineAuxMetric = function (auxMetric) {
+      var result = '';
+      var unit = _this.props.textObject.generateAuxiliaryElement.unit;
+      var decimal = _this.props.textObject.generateAuxiliaryElement.numericFormatElement;
+
+      if (decimal !== '') {
+        result = parseFloat(auxMetric).toPrecision(parseInt(decimal, 10)) + ' ' + unit;
+      } else {
+        result = auxMetric + ' ' + unit;
+      }
+
+      return result;
+    };
+
+    _this.defineTextObject = function (mainMetric) {
+      var htmlTextObject = [];
+      var htmlMainMetric = [];
+      var dislayTextObjectInTooltip = _this.props.textObject.isTextTooltip;
+      var textColorTextObject = _this.props.textObject.colorText;
+      var backColoTextObject = _this.props.textObject.colorBack;
+      var displayMainMetric = _this.props.textObject.generateObjectText;
+      var displayMainMetricInTooltip = _this.props.textObject.valueGenerateObjectText.displayObjectInTooltip;
+      var addTextColorMainMetric = _this.props.textObject.valueGenerateObjectText.addColorTextElement;
+      var addBackColorMainMetric = _this.props.textObject.valueGenerateObjectText.addColorBackElement;
+      var textColorMainMetric = _this.props.textObject.valueGenerateObjectText.colorTextElement;
+      var backColorMainMetric = _this.props.textObject.valueGenerateObjectText.colorBackElement;
+      var legendMainMetric = _this.props.textObject.valueGenerateObjectText.legendElement;
+      var styleLabel = {
+        color: textColorTextObject,
+        backgroundColor: backColoTextObject,
+        textAlign: 'center',
+        margin: 0,
+        padding: '0 5px'
+      };
+      var styleMainMetric = {
+        color: addTextColorMainMetric ? textColorMainMetric : textColorTextObject,
+        margin: 0,
+        padding: 0,
+        whiteSpace: 'nowrap'
+      };
+
+      if (!dislayTextObjectInTooltip) {
+        htmlTextObject.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          style: styleLabel
+        }, _this.props.label || _this.props.name.toUpperCase()));
+      }
+
+      if (displayMainMetric) {
+        if (!displayMainMetricInTooltip) {
+          if (legendMainMetric) {
+            htmlMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              style: styleMainMetric
+            }, legendMainMetric));
+          }
+
+          htmlMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+            style: styleMainMetric
+          }, _this.defineMainMetric(mainMetric)));
+        }
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        style: {
+          backgroundColor: backColoTextObject,
+          border: '1px solid black'
+        }
+      }, htmlTextObject, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        style: {
+          backgroundColor: addBackColorMainMetric ? backColorMainMetric : backColoTextObject,
+          padding: '0 5px'
+        }
+      }, htmlMainMetric));
+    };
+
     _this.defineValueTooptip = function (typeLink, link) {
       var contentTooltip = [];
+      var contentTooltipMainMetric = [];
+      var contentTooltipAuxMetric = [];
       var valueMainMetricA = _this.props.valueMainMetricA;
       var valueMainMetricB = _this.props.valueMainMetricB;
       var refMainMetricA = _this.props.refMainMetricA;
       var refMainMetricB = _this.props.refMainMetricB;
+      var dislayTextObjectInTooltip = _this.props.textObject.isTextTooltip;
+      var textColorTextObject = _this.props.textObject.colorText;
+      var backColoTextObject = _this.props.textObject.colorBack;
+      var displayMainMetric = _this.props.textObject.generateObjectText;
+      var displayMainMetricInTooltip = _this.props.textObject.valueGenerateObjectText.displayObjectInTooltip;
+      var addTextColorMainMetric = _this.props.textObject.valueGenerateObjectText.addColorTextElement;
+      var addBackColorMainMetric = _this.props.textObject.valueGenerateObjectText.addColorBackElement;
+      var textColorMainMetric = _this.props.textObject.valueGenerateObjectText.colorTextElement;
+      var backColorMainMetric = _this.props.textObject.valueGenerateObjectText.colorBackElement;
+      var legendMainMetric = _this.props.textObject.valueGenerateObjectText.legendElement;
+      var displayAuxMetricInTooltip = _this.props.textObject.generateAuxiliaryElement.displayObjectInTooltip;
+      var addTextColorAuxMetric = _this.props.textObject.generateAuxiliaryElement.addColorTextElement;
+      var addBackColorAuxMetric = _this.props.textObject.generateAuxiliaryElement.addColorBackElement;
+      var textColorAuxMetric = _this.props.textObject.generateAuxiliaryElement.colorTextElement;
+      var backColorAuxMetric = _this.props.textObject.generateAuxiliaryElement.colorBackElement;
+      var legendAuxMetric = _this.props.textObject.generateAuxiliaryElement.legendElement;
       var styleMainTitle = {
         fontFamily: _this.props.police,
         fontSize: '11px',
         marginBottom: '0px',
-        textAlign: 'center'
+        textAlign: 'center',
+        color: textColorTextObject,
+        backgroundColor: backColoTextObject
       };
-      var styleTitle = {
+      var styleTitleMainMetric = {
         fontFamily: _this.props.police,
         fontSize: '10px',
         marginTop: '5px',
-        marginBottom: '0px'
+        marginBottom: '0px',
+        color: addTextColorMainMetric ? textColorMainMetric : textColorTextObject
       };
-      var styleTitle2 = {
+      var styleTitleAuxMetric = {
+        fontFamily: _this.props.police,
+        fontSize: '10px',
+        marginTop: '5px',
+        marginBottom: '0px',
+        color: addTextColorAuxMetric ? textColorAuxMetric : textColorTextObject
+      };
+      var styleTitle2MainMetric = {
         fontFamily: _this.props.police,
         fontSize: '10px',
         marginTop: '5px',
         marginLeft: '5px',
-        marginBottom: '0px'
+        marginBottom: '0px',
+        color: addTextColorMainMetric ? textColorMainMetric : textColorTextObject
       };
-      var styleContentMetrics = {
+      var styleTitle2AuxMetric = {
+        fontFamily: _this.props.police,
+        fontSize: '10px',
+        marginTop: '5px',
+        marginLeft: '5px',
+        marginBottom: '0px',
+        color: addTextColorAuxMetric ? textColorAuxMetric : textColorTextObject
+      };
+      var styleContentMainMetrics = {
         fontFamily: _this.props.police,
         fontSize: '9px',
         marginLeft: '10px',
-        marginBottom: '0px'
+        marginBottom: '0px',
+        color: addTextColorMainMetric ? textColorMainMetric : textColorTextObject
       };
-      contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-        key: 'contentTooltip1' + _this.props.name,
-        style: styleMainTitle
-      }, _this.props.label || _this.props.name.toUpperCase()));
-      contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-        key: 'contentTooltip2' + _this.props.name,
-        style: styleTitle
-      }, "Main Metric"));
+      var styleContentAuxMetrics = {
+        fontFamily: _this.props.police,
+        fontSize: '9px',
+        marginLeft: '10px',
+        marginBottom: '0px',
+        color: addTextColorAuxMetric ? textColorAuxMetric : textColorTextObject
+      };
 
-      if (typeLink === 'bidirectional') {
-        if (link === 'A') {
-          contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-            key: 'contentTooltip3a' + _this.props.name,
-            style: styleTitle2
-          }, "+ Link A"));
-          contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-            key: 'contentTooltip4a' + _this.props.name,
-            style: styleContentMetrics
-          }, ' ', "- Reference : ", refMainMetricA));
-          contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-            key: 'contentTooltip5a' + _this.props.name,
-            style: styleContentMetrics
-          }, ' ', "- Value : ", valueMainMetricA));
-        } else {
-          contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-            key: 'contentTooltip3b' + _this.props.name,
-            style: styleTitle2
-          }, "+ Link B"));
-          contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-            key: 'contentTooltip4b' + _this.props.name,
-            style: styleContentMetrics
-          }, ' ', "- Reference : ", refMainMetricB));
-          contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-            key: 'contentTooltip5b' + _this.props.name,
-            style: styleContentMetrics
-          }, ' ', "- Value : ", valueMainMetricB));
-        }
-      } else if (typeLink === 'monodirectional') {
+      if (dislayTextObjectInTooltip) {
         contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-          key: 'contentTooltip6' + _this.props.name,
-          style: styleContentMetrics
-        }, ' ', "- Reference : ", refMainMetricA));
-        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-          key: 'contentTooltip7' + _this.props.name,
-          style: styleContentMetrics
-        }, ' ', "- Value : ", valueMainMetricA));
+          key: 'contentTooltip1' + _this.props.name,
+          style: styleMainTitle
+        }, _this.props.label || _this.props.name.toUpperCase()));
       }
 
-      if (typeLink === 'bidirectional') {
-        if (link === 'A') {
+      if (displayMainMetric) {
+        if (displayMainMetricInTooltip) {
+          if (legendMainMetric) {
+            contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              style: styleTitleMainMetric
+            }, legendMainMetric));
+          }
+
+          contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+            key: 'contentTooltip2' + _this.props.name,
+            style: styleTitleMainMetric
+          }, "Main Metric"));
+
+          if (typeLink === 'bidirectional') {
+            if (link === 'A') {
+              contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                key: 'contentTooltip3a' + _this.props.name,
+                style: styleTitle2MainMetric
+              }, "+ Link A"));
+              contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                key: 'contentTooltip4a' + _this.props.name,
+                style: styleContentMainMetrics
+              }, ' ', "- Reference : ", refMainMetricA));
+              contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                key: 'contentTooltip5a' + _this.props.name,
+                style: styleContentMainMetrics
+              }, ' ', "- Value : ", _this.defineMainMetric(valueMainMetricA)));
+            } else {
+              contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                key: 'contentTooltip3b' + _this.props.name,
+                style: styleTitle2MainMetric
+              }, "+ Link B"));
+              contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                key: 'contentTooltip4b' + _this.props.name,
+                style: styleContentMainMetrics
+              }, ' ', "- Reference : ", refMainMetricB));
+              contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                key: 'contentTooltip5b' + _this.props.name,
+                style: styleContentMainMetrics
+              }, ' ', "- Value : ", _this.defineMainMetric(valueMainMetricB)));
+            }
+          } else if (typeLink === 'monodirectional') {
+            contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              key: 'contentTooltip6' + _this.props.name,
+              style: styleContentMainMetrics
+            }, ' ', "- Reference : ", refMainMetricA));
+            contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              key: 'contentTooltip7' + _this.props.name,
+              style: styleContentMainMetrics
+            }, ' ', "- Value : ", _this.defineMainMetric(valueMainMetricA)));
+          }
+        }
+      }
+
+      if (displayAuxMetricInTooltip) {
+        if (legendAuxMetric) {
+          contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+            style: styleTitleAuxMetric
+          }, legendAuxMetric));
+        }
+
+        if (typeLink === 'bidirectional') {
+          if (link === 'A') {
+            if (_this.props.auxiliaryMetrics.length > 0) {
+              contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                key: 'contentTooltip8a' + _this.props.name,
+                style: styleTitleAuxMetric
+              }, "Auxiliary Metric"));
+              var index_1 = 1;
+
+              _this.props.auxiliaryMetrics.forEach(function (metric) {
+                contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                  key: index_1.toString() + 'contentTooltip9a' + _this.props.name,
+                  style: styleTitle2AuxMetric
+                }, "+ Metric ", index_1));
+                contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                  key: index_1.toString() + 'contentTooltip10a' + _this.props.name,
+                  style: styleContentAuxMetrics
+                }, "- Value : ", _this.defineAuxMetric(_this.props.valuesAuxiliaryMetrics[index_1 - 1])));
+                contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                  key: index_1.toString() + 'contentTooltip11a' + _this.props.name,
+                  style: styleContentAuxMetrics
+                }, "- Key : ", metric.key));
+                contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                  key: index_1.toString() + 'contentTooltip12a' + _this.props.name,
+                  style: styleContentAuxMetrics
+                }, "- KeyValue : ", metric.keyValue));
+                contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                  key: index_1.toString() + 'contentTooltip13a' + _this.props.name,
+                  style: styleContentAuxMetrics
+                }, "- Type : ", metric.manageValue));
+                index_1++;
+              });
+            }
+          } else {
+            if (_this.props.auxiliaryMetricsB.length > 0) {
+              contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                key: 'contentTooltip8b' + _this.props.name,
+                style: styleTitleAuxMetric
+              }, "Auxiliary Metric"));
+              var index_2 = 1;
+
+              _this.props.auxiliaryMetricsB.forEach(function (metric) {
+                contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                  key: index_2.toString() + 'contentTooltip9b' + _this.props.name,
+                  style: styleTitle2AuxMetric
+                }, "+ Metric ", index_2));
+                contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                  key: index_2.toString() + 'contentTooltip10b' + _this.props.name,
+                  style: styleContentAuxMetrics
+                }, "- Value : ", _this.defineAuxMetric(_this.props.valuesAuxiliaryMetrics[index_2 - 1])));
+                contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                  key: index_2.toString() + 'contentTooltip11b' + _this.props.name,
+                  style: styleContentAuxMetrics
+                }, "- Key : ", metric.key));
+                contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                  key: index_2.toString() + 'contentTooltip12b' + _this.props.name,
+                  style: styleContentAuxMetrics
+                }, "- KeyValue : ", metric.keyValue));
+                contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                  key: index_2.toString() + 'contentTooltip13b' + _this.props.name,
+                  style: styleContentAuxMetrics
+                }, "- Type : ", metric.manageValue));
+                index_2++;
+              });
+            }
+          }
+        } else if (typeLink === 'monodirectional') {
           if (_this.props.auxiliaryMetrics.length > 0) {
-            contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-              key: 'contentTooltip8a' + _this.props.name,
-              style: styleTitle
+            contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              key: 'contentTooltip14' + _this.props.name,
+              style: styleTitleAuxMetric
             }, "Auxiliary Metric"));
-            var index_1 = 1;
+            var index_3 = 1;
 
             _this.props.auxiliaryMetrics.forEach(function (metric) {
-              contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_1.toString() + 'contentTooltip9a' + _this.props.name,
-                style: styleTitle2
-              }, "+ Metric ", index_1));
-              contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_1.toString() + 'contentTooltip10a' + _this.props.name,
-                style: styleContentMetrics
-              }, "- Value : ", _this.props.valuesAuxiliaryMetrics[index_1 - 1]));
-              contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_1.toString() + 'contentTooltip11a' + _this.props.name,
-                style: styleContentMetrics
+              contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                key: index_3.toString() + 'contentTooltip15' + _this.props.name,
+                style: styleTitle2AuxMetric
+              }, "+ Metric ", index_3));
+              contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                key: index_3.toString() + 'contentTooltip16' + _this.props.name,
+                style: styleContentAuxMetrics
+              }, "- Value : ", _this.defineAuxMetric(_this.props.valuesAuxiliaryMetrics[index_3 - 1])));
+              contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                key: index_3.toString() + 'contentTooltip17' + _this.props.name,
+                style: styleContentAuxMetrics
               }, "- Key : ", metric.key));
-              contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_1.toString() + 'contentTooltip12a' + _this.props.name,
-                style: styleContentMetrics
+              contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                key: index_3.toString() + 'contentTooltip18' + _this.props.name,
+                style: styleContentAuxMetrics
               }, "- KeyValue : ", metric.keyValue));
-              contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_1.toString() + 'contentTooltip13a' + _this.props.name,
-                style: styleContentMetrics
+              contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                key: index_3.toString() + 'contentTooltip19' + _this.props.name,
+                style: styleContentAuxMetrics
               }, "- Type : ", metric.manageValue));
-              index_1++;
+              index_3++;
             });
           }
-        } else {
-          if (_this.props.auxiliaryMetricsB.length > 0) {
-            contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-              key: 'contentTooltip8b' + _this.props.name,
-              style: styleTitle
-            }, "Auxiliary Metric"));
-            var index_2 = 1;
-
-            _this.props.auxiliaryMetricsB.forEach(function (metric) {
-              contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_2.toString() + 'contentTooltip9b' + _this.props.name,
-                style: styleTitle2
-              }, "+ Metric ", index_2));
-              contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_2.toString() + 'contentTooltip10b' + _this.props.name,
-                style: styleContentMetrics
-              }, "- Value : ", _this.props.valuesAuxiliaryMetricsB[index_2 - 1]));
-              contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_2.toString() + 'contentTooltip11b' + _this.props.name,
-                style: styleContentMetrics
-              }, "- Key : ", metric.key));
-              contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_2.toString() + 'contentTooltip12b' + _this.props.name,
-                style: styleContentMetrics
-              }, "- KeyValue : ", metric.keyValue));
-              contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_2.toString() + 'contentTooltip13b' + _this.props.name,
-                style: styleContentMetrics
-              }, "- Type : ", metric.manageValue));
-              index_2++;
-            });
-          }
-        }
-      } else if (typeLink === 'monodirectional') {
-        if (_this.props.auxiliaryMetrics.length > 0) {
-          contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-            key: 'contentTooltip14' + _this.props.name,
-            style: styleTitle
-          }, "Auxiliary Metric"));
-          var index_3 = 1;
-
-          _this.props.auxiliaryMetrics.forEach(function (metric) {
-            contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-              key: index_3.toString() + 'contentTooltip15' + _this.props.name,
-              style: styleTitle2
-            }, "+ Metric ", index_3));
-            contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-              key: index_3.toString() + 'contentTooltip16' + _this.props.name,
-              style: styleContentMetrics
-            }, "- Value : ", _this.props.valuesAuxiliaryMetrics[index_3 - 1]));
-            contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-              key: index_3.toString() + 'contentTooltip17' + _this.props.name,
-              style: styleContentMetrics
-            }, "- Key : ", metric.key));
-            contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-              key: index_3.toString() + 'contentTooltip18' + _this.props.name,
-              style: styleContentMetrics
-            }, "- KeyValue : ", metric.keyValue));
-            contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-              key: index_3.toString() + 'contentTooltip19' + _this.props.name,
-              style: styleContentMetrics
-            }, "- Type : ", metric.manageValue));
-            index_3++;
-          });
         }
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, contentTooltip);
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        style: {
+          border: '1px solid black',
+          padding: 0
+        }
+      }, contentTooltip, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        style: {
+          backgroundColor: addBackColorMainMetric ? backColorMainMetric : backColoTextObject,
+          padding: '0 5px'
+        }
+      }, contentTooltipMainMetric), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        style: {
+          backgroundColor: addBackColorAuxMetric ? backColorAuxMetric : backColoTextObject,
+          padding: '0 5px'
+        }
+      }, contentTooltipAuxMetric));
     };
 
     _this.defineTextDecoration = function () {
@@ -13634,9 +13841,9 @@ function (_super) {
           //border: '1px solid black',
           backgroundColor: 'white',
           color: this.defineColorTextLabel(),
-          padding: '0 5px'
+          padding: '0'
         }
-      }, this.props.valueMainMetricA)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
+      }, this.defineTextObject(this.props.valueMainMetricA))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
         content: valueTooltipBidirectionalB,
         placement: this.props.tooltipPositionB.value
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
@@ -13686,9 +13893,9 @@ function (_super) {
           //border: '1px solid black',
           backgroundColor: 'white',
           color: this.defineColorTextLabel(),
-          padding: '0 5px'
+          padding: '0'
         }
-      }, this.props.valueMainMetricB)));
+      }, this.defineTextObject(this.props.valueMainMetricB))));
     } else if (orientationLink === 'AB') {
       if (this.props.isIncurved.value) {
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
@@ -13762,10 +13969,10 @@ function (_super) {
             backgroundColor: 'white',
             fontSize: this.props.sizePolice,
             color: this.defineColorTextLabel(),
-            padding: '0 5px',
+            padding: '0',
             cursor: 'pointer'
           }
-        }, this.props.valueMainMetricA));
+        }, this.defineTextObject(this.props.valueMainMetricA)));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
           href: linkUrlOrientedLink,
@@ -13820,10 +14027,10 @@ function (_super) {
             backgroundColor: 'white',
             fontSize: this.props.sizePolice,
             color: this.defineColorTextLabel(),
-            padding: '0 5px',
+            padding: '0',
             cursor: 'pointer'
           }
-        }, this.props.valueMainMetricA));
+        }, this.defineTextObject(this.props.valueMainMetricA)));
       } // else if (orientationLink === 'BA') {
       // 	return (
       // 		<div id='link'>
@@ -14013,18 +14220,6 @@ function (_super) {
       index++;
     });
     return sizeBorder;
-  };
-
-  DrawOrientedLink.prototype.defineCoordinates = function (associateRegion, coordinate, region) {
-    var result = 0;
-
-    if (associateRegion.value === undefined || associateRegion.value.id === undefined) {
-      result = coordinate;
-    } else {
-      result = region;
-    }
-
-    return result;
   };
 
   DrawOrientedLink.prototype.render = function () {
@@ -19353,7 +19548,8 @@ function (_super) {
 
 
     _this.loadMonoPoint = function (point) {
-      var toLoad = new _Models_PointClass__WEBPACK_IMPORTED_MODULE_3__["PointClass"](point.id, point.linkURL, point.meta, point.lowerLimit, point.label, point.textObj, point.mainMetric, point.metrics, point.colorMode, point.traceBack, point.traceBorder, point.positionParameter, point.name, point.valueMetric, point.drawGraphicMarker, point.shape, point.sizeWidth, point.sizeHeight, point.rotateArrow, point.positionShapeX, point.positionShapeY, point.color, point.associateOrientedLinksIn, point.associateOrientedLinksOut); // console.log(toLoad);
+      var toLoad = new _Models_PointClass__WEBPACK_IMPORTED_MODULE_3__["PointClass"](point.id, point.linkURL, point.meta, point.lowerLimit, point.label, point.textObj, point.mainMetric, point.metrics, point.colorMode, point.traceBack, point.traceBorder, point.positionParameter, point.name, point.valueMetric, point.drawGraphicMarker, point.shape, point.sizeWidth, point.sizeHeight, point.rotateArrow, point.positionShapeX, point.positionShapeY, point.color, point.associateOrientedLinksIn, point.associateOrientedLinksOut);
+      console.log(toLoad);
 
       var selector = _this.PointValidator(toLoad); // Do some test here to see if your already load a coordinatespace with this id
 

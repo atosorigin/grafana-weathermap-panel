@@ -419,70 +419,105 @@ export class SimplePanel extends PureComponent<Props, State> {
     });
   };
 
-  /**
-   * to do
-   */
-  updateAssociateOrientedLinkInToPoint = () => {
+  // /**
+  //  * to do
+  //  */
+  // updateAssociateOrientedLinkInToPoint = () => {
+  //   console.log('update point in');
+  //   let indexPoint = 0;
+  //   this.props.options.arrayPoints.forEach((point: PointClass) => {
+  //     let indexAssociateOrientedLinkIn = 0;
+  //     point.associateOrientedLinksIn.forEach(oneAssociateOrientedLinksIn => {
+  //       let orientedLinkExist = false;
+  //       this.props.options.arrayOrientedLinks.forEach((orientedLink: OrientedLinkClass) => {
+  //         if (oneAssociateOrientedLinksIn.name === orientedLink.name) {
+  //           orientedLinkExist = true;
+  //           if (orientedLink.label) {
+  //             this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn[indexAssociateOrientedLinkIn] = {
+  //               label: orientedLink.label,
+  //               name: orientedLink.name,
+  //             };
+  //           } else {
+  //             this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn[indexAssociateOrientedLinkIn] = {
+  //               label: '',
+  //               name: orientedLink.name,
+  //             };
+  //           }
+  //         }
+  //       });
+  //       if (orientedLinkExist === false) {
+  //         this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn.splice(indexAssociateOrientedLinkIn, 1);
+  //       }
+  //       indexAssociateOrientedLinkIn++;
+  //     });
+  //     indexPoint++;
+  //   });
+  // };
+
+  // /**
+  //  * to do
+  //  */
+  // updateAssociateOrientedLinkOutToPoint = () => {
+  //   console.log('update point out');
+  //   let indexPoint = 0;
+  //   this.props.options.arrayPoints.forEach((point: PointClass) => {
+  //     let indexAssociateOrientedLinkOut = 0;
+  //     point.associateOrientedLinksOut.forEach(oneAssociateOrientedLinksOut => {
+  //       let orientedLinkExist = false;
+  //       this.props.options.arrayOrientedLinks.forEach((orientedLink: OrientedLinkClass) => {
+  //         if (oneAssociateOrientedLinksOut.name === orientedLink.name) {
+  //           orientedLinkExist = true;
+  //           if (orientedLink.label) {
+  //             this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut[indexAssociateOrientedLinkOut] = {
+  //               label: orientedLink.label,
+  //               name: orientedLink.name,
+  //             };
+  //           } else {
+  //             this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut[indexAssociateOrientedLinkOut] = {
+  //               label: '',
+  //               name: orientedLink.name,
+  //             };
+  //           }
+  //         }
+  //       });
+  //       if (orientedLinkExist === false) {
+  //         this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut.splice(indexAssociateOrientedLinkOut, 1);
+  //       }
+  //       indexAssociateOrientedLinkOut++;
+  //     });
+  //     indexPoint++;
+  //   });
+  //   this.displayPoint();
+  // };
+
+  /** update AssociateOrientedLinkIn of point for tootip  */
+  private updateAssociateOrientedLinkInToPoint = () => {
     let indexPoint = 0;
-    this.props.options.arrayPoints.forEach((point: PointClass) => {
-      let indexAssociateOrientedLinkIn = 0;
-      point.associateOrientedLinksIn.forEach(oneAssociateOrientedLinksIn => {
-        let orientedLinkExist = false;
-        this.props.options.arrayOrientedLinks.forEach((orientedLink: OrientedLinkClass) => {
-          if (oneAssociateOrientedLinksIn.name === orientedLink.name) {
-            orientedLinkExist = true;
-            if (orientedLink.label) {
-              this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn[indexAssociateOrientedLinkIn] = {
-                label: orientedLink.label,
-                name: orientedLink.name,
-              };
-            } else {
-              this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn[indexAssociateOrientedLinkIn] = {
-                label: '',
-                name: orientedLink.name,
-              };
-            }
-          }
-        });
-        if (orientedLinkExist === false) {
-          this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn.splice(indexAssociateOrientedLinkIn, 1);
+    this.props.options.arrayPoints.forEach(point => {
+      let newAssociateLinkIn: any[] = [];
+      const namePoint: string = point.label || point.name;
+      this.props.options.arrayOrientedLinks.forEach(link => {
+        if (link.pointIn === namePoint) {
+          newAssociateLinkIn.push({ label: link.label, name: link.name });
         }
-        indexAssociateOrientedLinkIn++;
       });
+      this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn = newAssociateLinkIn;
       indexPoint++;
     });
   };
 
-  /**
-   * to do
-   */
-  updateAssociateOrientedLinkOutToPoint = () => {
+  /** update AssociateOrientedLinkOut of point for tootip  */
+  private updateAssociateOrientedLinkOutToPoint = () => {
     let indexPoint = 0;
-    this.props.options.arrayPoints.forEach((point: PointClass) => {
-      let indexAssociateOrientedLinkOut = 0;
-      point.associateOrientedLinksOut.forEach(oneAssociateOrientedLinksOut => {
-        let orientedLinkExist = false;
-        this.props.options.arrayOrientedLinks.forEach((orientedLink: OrientedLinkClass) => {
-          if (oneAssociateOrientedLinksOut.name === orientedLink.name) {
-            orientedLinkExist = true;
-            if (orientedLink.label) {
-              this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut[indexAssociateOrientedLinkOut] = {
-                label: orientedLink.label,
-                name: orientedLink.name,
-              };
-            } else {
-              this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut[indexAssociateOrientedLinkOut] = {
-                label: '',
-                name: orientedLink.name,
-              };
-            }
-          }
-        });
-        if (orientedLinkExist === false) {
-          this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut.splice(indexAssociateOrientedLinkOut, 1);
+    this.props.options.arrayPoints.forEach(point => {
+      let newAssociateLinkIn: any[] = [];
+      const namePoint: string = point.label || point.name;
+      this.props.options.arrayOrientedLinks.forEach(link => {
+        if (link.pointOut === namePoint) {
+          newAssociateLinkIn.push({ label: link.label, name: link.name });
         }
-        indexAssociateOrientedLinkOut++;
       });
+      this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut = newAssociateLinkIn;
       indexPoint++;
     });
   };
@@ -821,6 +856,7 @@ export class SimplePanel extends PureComponent<Props, State> {
    * to do
    */
   createOrientedLinkToClick = (isIncurved: SelectableValue<boolean>) => {
+    console.log('create');
     const coordinates = this.props.options.coordinatesToDrawLinkWithClick;
     const id: number = this.defineIdOrientedLink();
     const name: string = 'orientedLink' + id.toString();
@@ -831,8 +867,8 @@ export class SimplePanel extends PureComponent<Props, State> {
     const initTextObject: TextObject = new TextObject(
       '',
       false,
-      '',
-      '',
+      'white',
+      'black',
       { bold: false, italic: false, underline: false },
       false,
       {
@@ -850,11 +886,11 @@ export class SimplePanel extends PureComponent<Props, State> {
         legendElement: '',
         numericFormatElement: '',
         unit: '',
-        displayObjectInTooltip: false,
+        displayObjectInTooltip: true,
         // 'displayObjectPermanently': false,
-        addColorTextElement: false,
+        addColorTextElement: true,
         colorTextElement: 'white',
-        addColorBackElement: false,
+        addColorBackElement: true,
         colorBackElement: 'black',
       }
     );
@@ -934,6 +970,7 @@ export class SimplePanel extends PureComponent<Props, State> {
    * to do
    */
   displayOrientedLink() {
+    console.log('display');
     const arrayOrientedLink = this.props.options.arrayOrientedLinks;
     const mapItems: JSX.Element[] = [];
     let item: JSX.Element = <div></div>;

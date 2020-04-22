@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { SelectableValue, PanelEditorProps } from '@grafana/data';
-import { RegionClass, Coord4D } from 'Models/RegionClass';
+import { Coord4D } from 'Models/RegionClass';
 import { Tooltip } from '@grafana/ui';
 import { SimpleOptions, Metric } from 'types';
 import { TextObject } from 'Models/TextObjectClass';
@@ -1834,10 +1834,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 //border: '1px solid black',
                 backgroundColor: 'white',
                 color: this.defineColorTextLabel(),
-                padding: '0 5px',
+                padding: '0',
               }}
             >
-              {this.props.valueMainMetricA}
+              {this.defineTextObject(this.props.valueMainMetricA)}
             </div>
           </div>
           <div>
@@ -1896,10 +1896,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 //border: '1px solid black',
                 backgroundColor: 'white',
                 color: this.defineColorTextLabel(),
-                padding: '0 5px',
+                padding: '0',
               }}
             >
-              {this.props.valueMainMetricB}
+              {this.defineTextObject(this.props.valueMainMetricB)}
             </div>
           </div>
         </a>
@@ -1984,11 +1984,11 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 backgroundColor: 'white',
                 fontSize: this.props.sizePolice,
                 color: this.defineColorTextLabel(),
-                padding: '0 5px',
+                padding: '0',
                 cursor: 'pointer',
               }}
             >
-              {this.props.valueMainMetricA}
+              {this.defineTextObject(this.props.valueMainMetricA)}
             </div>
           </a>
         );
@@ -2049,11 +2049,11 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 backgroundColor: 'white',
                 fontSize: this.props.sizePolice,
                 color: this.defineColorTextLabel(),
-                padding: '0 5px',
+                padding: '0',
                 cursor: 'pointer',
               }}
             >
-              {this.props.valueMainMetricA}
+              {this.defineTextObject(this.props.valueMainMetricA)}
             </div>
           </a>
         );
@@ -2254,233 +2254,369 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     return sizeBorder;
   }
 
-  defineCoordinates(associateRegion: SelectableValue<RegionClass>, coordinate: number, region: number): number {
-    let result = 0;
-    if (associateRegion.value === undefined || associateRegion.value.id === undefined) {
-      result = coordinate;
+  private defineMainMetric = (mainMetric: string): string => {
+    let result = '';
+    const unit: string = this.props.textObject.valueGenerateObjectText.unit;
+    const decimal: string = this.props.textObject.valueGenerateObjectText.numericFormatElement;
+
+    if (decimal !== '') {
+      result = parseFloat(mainMetric).toPrecision(parseInt(decimal, 10)) + ' ' + unit;
     } else {
-      result = region;
+      result = mainMetric + ' ' + unit;
     }
     return result;
-  }
+  };
+
+  private defineAuxMetric = (auxMetric: string): string => {
+    let result = '';
+    const unit: string = this.props.textObject.generateAuxiliaryElement.unit;
+    const decimal: string = this.props.textObject.generateAuxiliaryElement.numericFormatElement;
+
+    if (decimal !== '') {
+      result = parseFloat(auxMetric).toPrecision(parseInt(decimal, 10)) + ' ' + unit;
+    } else {
+      result = auxMetric + ' ' + unit;
+    }
+    return result;
+  };
+
+  private defineTextObject = (mainMetric: string): JSX.Element => {
+    let htmlTextObject: JSX.Element[] = [];
+    let htmlMainMetric: JSX.Element[] = [];
+    const dislayTextObjectInTooltip: boolean = this.props.textObject.isTextTooltip;
+    const textColorTextObject: string = this.props.textObject.colorText;
+    const backColoTextObject: string = this.props.textObject.colorBack;
+    const displayMainMetric: boolean = this.props.textObject.generateObjectText;
+    const displayMainMetricInTooltip: boolean = this.props.textObject.valueGenerateObjectText.displayObjectInTooltip;
+    const addTextColorMainMetric: boolean = this.props.textObject.valueGenerateObjectText.addColorTextElement;
+    const addBackColorMainMetric: boolean = this.props.textObject.valueGenerateObjectText.addColorBackElement;
+    const textColorMainMetric: string = this.props.textObject.valueGenerateObjectText.colorTextElement;
+    const backColorMainMetric: string = this.props.textObject.valueGenerateObjectText.colorBackElement;
+    const legendMainMetric: string = this.props.textObject.valueGenerateObjectText.legendElement;
+
+    const styleLabel = {
+      color: textColorTextObject,
+      backgroundColor: backColoTextObject,
+      textAlign: 'center',
+      margin: 0,
+      padding: '0 5px',
+    } as CSSProperties;
+
+    const styleMainMetric = {
+      color: addTextColorMainMetric ? textColorMainMetric : textColorTextObject,
+      margin: 0,
+      padding: 0,
+      whiteSpace: 'nowrap',
+    } as CSSProperties;
+
+    if (!dislayTextObjectInTooltip) {
+      htmlTextObject.push(<p style={styleLabel}>{this.props.label || this.props.name.toUpperCase()}</p>);
+    }
+    if (displayMainMetric) {
+      if (!displayMainMetricInTooltip) {
+        if (legendMainMetric) {
+          htmlMainMetric.push(<p style={styleMainMetric}>{legendMainMetric}</p>);
+        }
+        htmlMainMetric.push(<p style={styleMainMetric}>{this.defineMainMetric(mainMetric)}</p>);
+      }
+    }
+    return (
+      <div style={{ backgroundColor: backColoTextObject, border: '1px solid black' }}>
+        {htmlTextObject}
+        <div style={{ backgroundColor: addBackColorMainMetric ? backColorMainMetric : backColoTextObject, padding: '0 5px' }}>{htmlMainMetric}</div>
+      </div>
+    );
+  };
 
   private defineValueTooptip = (typeLink: string, link?: string) => {
     const contentTooltip: JSX.Element[] = [];
+    const contentTooltipMainMetric: JSX.Element[] = [];
+    const contentTooltipAuxMetric: JSX.Element[] = [];
     const valueMainMetricA = this.props.valueMainMetricA;
     const valueMainMetricB = this.props.valueMainMetricB;
     const refMainMetricA = this.props.refMainMetricA;
     const refMainMetricB = this.props.refMainMetricB;
+    const dislayTextObjectInTooltip: boolean = this.props.textObject.isTextTooltip;
+    const textColorTextObject: string = this.props.textObject.colorText;
+    const backColoTextObject: string = this.props.textObject.colorBack;
+    const displayMainMetric: boolean = this.props.textObject.generateObjectText;
+    const displayMainMetricInTooltip: boolean = this.props.textObject.valueGenerateObjectText.displayObjectInTooltip;
+    const addTextColorMainMetric: boolean = this.props.textObject.valueGenerateObjectText.addColorTextElement;
+    const addBackColorMainMetric: boolean = this.props.textObject.valueGenerateObjectText.addColorBackElement;
+    const textColorMainMetric: string = this.props.textObject.valueGenerateObjectText.colorTextElement;
+    const backColorMainMetric: string = this.props.textObject.valueGenerateObjectText.colorBackElement;
+    const legendMainMetric: string = this.props.textObject.valueGenerateObjectText.legendElement;
+    const displayAuxMetricInTooltip: boolean = this.props.textObject.generateAuxiliaryElement.displayObjectInTooltip;
+    const addTextColorAuxMetric: boolean = this.props.textObject.generateAuxiliaryElement.addColorTextElement;
+    const addBackColorAuxMetric: boolean = this.props.textObject.generateAuxiliaryElement.addColorBackElement;
+    const textColorAuxMetric: string = this.props.textObject.generateAuxiliaryElement.colorTextElement;
+    const backColorAuxMetric: string = this.props.textObject.generateAuxiliaryElement.colorBackElement;
+    const legendAuxMetric: string = this.props.textObject.generateAuxiliaryElement.legendElement;
 
     const styleMainTitle = {
       fontFamily: this.props.police,
       fontSize: '11px',
       marginBottom: '0px',
       textAlign: 'center',
+      color: textColorTextObject,
+      backgroundColor: backColoTextObject,
     } as React.CSSProperties;
 
-    const styleTitle = {
+    const styleTitleMainMetric = {
       fontFamily: this.props.police,
       fontSize: '10px',
       marginTop: '5px',
       marginBottom: '0px',
+      color: addTextColorMainMetric ? textColorMainMetric : textColorTextObject,
     } as React.CSSProperties;
 
-    const styleTitle2 = {
+    const styleTitleAuxMetric = {
+      fontFamily: this.props.police,
+      fontSize: '10px',
+      marginTop: '5px',
+      marginBottom: '0px',
+      color: addTextColorAuxMetric ? textColorAuxMetric : textColorTextObject,
+    } as React.CSSProperties;
+
+    const styleTitle2MainMetric = {
       fontFamily: this.props.police,
       fontSize: '10px',
       marginTop: '5px',
       marginLeft: '5px',
       marginBottom: '0px',
+      color: addTextColorMainMetric ? textColorMainMetric : textColorTextObject,
     } as React.CSSProperties;
 
-    const styleContentMetrics = {
+    const styleTitle2AuxMetric = {
+      fontFamily: this.props.police,
+      fontSize: '10px',
+      marginTop: '5px',
+      marginLeft: '5px',
+      marginBottom: '0px',
+      color: addTextColorAuxMetric ? textColorAuxMetric : textColorTextObject,
+    } as React.CSSProperties;
+
+    const styleContentMainMetrics = {
       fontFamily: this.props.police,
       fontSize: '9px',
       marginLeft: '10px',
       marginBottom: '0px',
+      color: addTextColorMainMetric ? textColorMainMetric : textColorTextObject,
     } as React.CSSProperties;
 
-    contentTooltip.push(
-      <p key={'contentTooltip1' + this.props.name} style={styleMainTitle}>
-        {this.props.label || this.props.name.toUpperCase()}
-      </p>
-    );
+    const styleContentAuxMetrics = {
+      fontFamily: this.props.police,
+      fontSize: '9px',
+      marginLeft: '10px',
+      marginBottom: '0px',
+      color: addTextColorAuxMetric ? textColorAuxMetric : textColorTextObject,
+    } as React.CSSProperties;
 
-    contentTooltip.push(
-      <p key={'contentTooltip2' + this.props.name} style={styleTitle}>
-        Main Metric
-      </p>
-    );
-
-    if (typeLink === 'bidirectional') {
-      if (link === 'A') {
-        contentTooltip.push(
-          <p key={'contentTooltip3a' + this.props.name} style={styleTitle2}>
-            + Link A
-          </p>
-        );
-        contentTooltip.push(
-          <p key={'contentTooltip4a' + this.props.name} style={styleContentMetrics}>
-            {' '}
-            - Reference : {refMainMetricA}
-          </p>
-        );
-        contentTooltip.push(
-          <p key={'contentTooltip5a' + this.props.name} style={styleContentMetrics}>
-            {' '}
-            - Value : {valueMainMetricA}
-          </p>
-        );
-      } else {
-        contentTooltip.push(
-          <p key={'contentTooltip3b' + this.props.name} style={styleTitle2}>
-            + Link B
-          </p>
-        );
-        contentTooltip.push(
-          <p key={'contentTooltip4b' + this.props.name} style={styleContentMetrics}>
-            {' '}
-            - Reference : {refMainMetricB}
-          </p>
-        );
-        contentTooltip.push(
-          <p key={'contentTooltip5b' + this.props.name} style={styleContentMetrics}>
-            {' '}
-            - Value : {valueMainMetricB}
-          </p>
-        );
-      }
-    } else if (typeLink === 'monodirectional') {
+    if (dislayTextObjectInTooltip) {
       contentTooltip.push(
-        <p key={'contentTooltip6' + this.props.name} style={styleContentMetrics}>
-          {' '}
-          - Reference : {refMainMetricA}
-        </p>
-      );
-      contentTooltip.push(
-        <p key={'contentTooltip7' + this.props.name} style={styleContentMetrics}>
-          {' '}
-          - Value : {valueMainMetricA}
+        <p key={'contentTooltip1' + this.props.name} style={styleMainTitle}>
+          {this.props.label || this.props.name.toUpperCase()}
         </p>
       );
     }
 
-    if (typeLink === 'bidirectional') {
-      if (link === 'A') {
+    if (displayMainMetric) {
+      if (displayMainMetricInTooltip) {
+        if (legendMainMetric) {
+          contentTooltipMainMetric.push(<p style={styleTitleMainMetric}>{legendMainMetric}</p>);
+        }
+        contentTooltipMainMetric.push(
+          <p key={'contentTooltip2' + this.props.name} style={styleTitleMainMetric}>
+            Main Metric
+          </p>
+        );
+
+        if (typeLink === 'bidirectional') {
+          if (link === 'A') {
+            contentTooltipMainMetric.push(
+              <p key={'contentTooltip3a' + this.props.name} style={styleTitle2MainMetric}>
+                + Link A
+              </p>
+            );
+            contentTooltipMainMetric.push(
+              <p key={'contentTooltip4a' + this.props.name} style={styleContentMainMetrics}>
+                {' '}
+                - Reference : {refMainMetricA}
+              </p>
+            );
+            contentTooltipMainMetric.push(
+              <p key={'contentTooltip5a' + this.props.name} style={styleContentMainMetrics}>
+                {' '}
+                - Value : {this.defineMainMetric(valueMainMetricA)}
+              </p>
+            );
+          } else {
+            contentTooltipMainMetric.push(
+              <p key={'contentTooltip3b' + this.props.name} style={styleTitle2MainMetric}>
+                + Link B
+              </p>
+            );
+            contentTooltipMainMetric.push(
+              <p key={'contentTooltip4b' + this.props.name} style={styleContentMainMetrics}>
+                {' '}
+                - Reference : {refMainMetricB}
+              </p>
+            );
+            contentTooltipMainMetric.push(
+              <p key={'contentTooltip5b' + this.props.name} style={styleContentMainMetrics}>
+                {' '}
+                - Value : {this.defineMainMetric(valueMainMetricB)}
+              </p>
+            );
+          }
+        } else if (typeLink === 'monodirectional') {
+          contentTooltipMainMetric.push(
+            <p key={'contentTooltip6' + this.props.name} style={styleContentMainMetrics}>
+              {' '}
+              - Reference : {refMainMetricA}
+            </p>
+          );
+          contentTooltipMainMetric.push(
+            <p key={'contentTooltip7' + this.props.name} style={styleContentMainMetrics}>
+              {' '}
+              - Value : {this.defineMainMetric(valueMainMetricA)}
+            </p>
+          );
+        }
+      }
+    }
+
+    if (displayAuxMetricInTooltip) {
+      if (legendAuxMetric) {
+        contentTooltipAuxMetric.push(<p style={styleTitleAuxMetric}>{legendAuxMetric}</p>);
+      }
+      if (typeLink === 'bidirectional') {
+        if (link === 'A') {
+          if (this.props.auxiliaryMetrics.length > 0) {
+            contentTooltipAuxMetric.push(
+              <p key={'contentTooltip8a' + this.props.name} style={styleTitleAuxMetric}>
+                Auxiliary Metric
+              </p>
+            );
+            let index = 1;
+            this.props.auxiliaryMetrics.forEach(metric => {
+              contentTooltipAuxMetric.push(
+                <p key={index.toString() + 'contentTooltip9a' + this.props.name} style={styleTitle2AuxMetric}>
+                  + Metric {index}
+                </p>
+              );
+              contentTooltipAuxMetric.push(
+                <p key={index.toString() + 'contentTooltip10a' + this.props.name} style={styleContentAuxMetrics}>
+                  - Value : {this.defineAuxMetric(this.props.valuesAuxiliaryMetrics[index - 1])}
+                </p>
+              );
+              contentTooltipAuxMetric.push(
+                <p key={index.toString() + 'contentTooltip11a' + this.props.name} style={styleContentAuxMetrics}>
+                  - Key : {metric.key}
+                </p>
+              );
+              contentTooltipAuxMetric.push(
+                <p key={index.toString() + 'contentTooltip12a' + this.props.name} style={styleContentAuxMetrics}>
+                  - KeyValue : {metric.keyValue}
+                </p>
+              );
+              contentTooltipAuxMetric.push(
+                <p key={index.toString() + 'contentTooltip13a' + this.props.name} style={styleContentAuxMetrics}>
+                  - Type : {metric.manageValue}
+                </p>
+              );
+              index++;
+            });
+          }
+        } else {
+          if (this.props.auxiliaryMetricsB.length > 0) {
+            contentTooltipAuxMetric.push(
+              <p key={'contentTooltip8b' + this.props.name} style={styleTitleAuxMetric}>
+                Auxiliary Metric
+              </p>
+            );
+            let index = 1;
+            this.props.auxiliaryMetricsB.forEach(metric => {
+              contentTooltipAuxMetric.push(
+                <p key={index.toString() + 'contentTooltip9b' + this.props.name} style={styleTitle2AuxMetric}>
+                  + Metric {index}
+                </p>
+              );
+              contentTooltipAuxMetric.push(
+                <p key={index.toString() + 'contentTooltip10b' + this.props.name} style={styleContentAuxMetrics}>
+                  - Value : {this.defineAuxMetric(this.props.valuesAuxiliaryMetrics[index - 1])}
+                </p>
+              );
+              contentTooltipAuxMetric.push(
+                <p key={index.toString() + 'contentTooltip11b' + this.props.name} style={styleContentAuxMetrics}>
+                  - Key : {metric.key}
+                </p>
+              );
+              contentTooltipAuxMetric.push(
+                <p key={index.toString() + 'contentTooltip12b' + this.props.name} style={styleContentAuxMetrics}>
+                  - KeyValue : {metric.keyValue}
+                </p>
+              );
+              contentTooltipAuxMetric.push(
+                <p key={index.toString() + 'contentTooltip13b' + this.props.name} style={styleContentAuxMetrics}>
+                  - Type : {metric.manageValue}
+                </p>
+              );
+              index++;
+            });
+          }
+        }
+      } else if (typeLink === 'monodirectional') {
         if (this.props.auxiliaryMetrics.length > 0) {
-          contentTooltip.push(
-            <p key={'contentTooltip8a' + this.props.name} style={styleTitle}>
+          contentTooltipAuxMetric.push(
+            <p key={'contentTooltip14' + this.props.name} style={styleTitleAuxMetric}>
               Auxiliary Metric
             </p>
           );
           let index = 1;
           this.props.auxiliaryMetrics.forEach(metric => {
-            contentTooltip.push(
-              <p key={index.toString() + 'contentTooltip9a' + this.props.name} style={styleTitle2}>
+            contentTooltipAuxMetric.push(
+              <p key={index.toString() + 'contentTooltip15' + this.props.name} style={styleTitle2AuxMetric}>
                 + Metric {index}
               </p>
             );
-            contentTooltip.push(
-              <p key={index.toString() + 'contentTooltip10a' + this.props.name} style={styleContentMetrics}>
-                - Value : {this.props.valuesAuxiliaryMetrics[index - 1]}
+            contentTooltipAuxMetric.push(
+              <p key={index.toString() + 'contentTooltip16' + this.props.name} style={styleContentAuxMetrics}>
+                - Value : {this.defineAuxMetric(this.props.valuesAuxiliaryMetrics[index - 1])}
               </p>
             );
-            contentTooltip.push(
-              <p key={index.toString() + 'contentTooltip11a' + this.props.name} style={styleContentMetrics}>
+            contentTooltipAuxMetric.push(
+              <p key={index.toString() + 'contentTooltip17' + this.props.name} style={styleContentAuxMetrics}>
                 - Key : {metric.key}
               </p>
             );
-            contentTooltip.push(
-              <p key={index.toString() + 'contentTooltip12a' + this.props.name} style={styleContentMetrics}>
+            contentTooltipAuxMetric.push(
+              <p key={index.toString() + 'contentTooltip18' + this.props.name} style={styleContentAuxMetrics}>
                 - KeyValue : {metric.keyValue}
               </p>
             );
-            contentTooltip.push(
-              <p key={index.toString() + 'contentTooltip13a' + this.props.name} style={styleContentMetrics}>
+            contentTooltipAuxMetric.push(
+              <p key={index.toString() + 'contentTooltip19' + this.props.name} style={styleContentAuxMetrics}>
                 - Type : {metric.manageValue}
               </p>
             );
             index++;
           });
         }
-      } else {
-        if (this.props.auxiliaryMetricsB.length > 0) {
-          contentTooltip.push(
-            <p key={'contentTooltip8b' + this.props.name} style={styleTitle}>
-              Auxiliary Metric
-            </p>
-          );
-          let index = 1;
-          this.props.auxiliaryMetricsB.forEach(metric => {
-            contentTooltip.push(
-              <p key={index.toString() + 'contentTooltip9b' + this.props.name} style={styleTitle2}>
-                + Metric {index}
-              </p>
-            );
-            contentTooltip.push(
-              <p key={index.toString() + 'contentTooltip10b' + this.props.name} style={styleContentMetrics}>
-                - Value : {this.props.valuesAuxiliaryMetricsB[index - 1]}
-              </p>
-            );
-            contentTooltip.push(
-              <p key={index.toString() + 'contentTooltip11b' + this.props.name} style={styleContentMetrics}>
-                - Key : {metric.key}
-              </p>
-            );
-            contentTooltip.push(
-              <p key={index.toString() + 'contentTooltip12b' + this.props.name} style={styleContentMetrics}>
-                - KeyValue : {metric.keyValue}
-              </p>
-            );
-            contentTooltip.push(
-              <p key={index.toString() + 'contentTooltip13b' + this.props.name} style={styleContentMetrics}>
-                - Type : {metric.manageValue}
-              </p>
-            );
-            index++;
-          });
-        }
-      }
-    } else if (typeLink === 'monodirectional') {
-      if (this.props.auxiliaryMetrics.length > 0) {
-        contentTooltip.push(
-          <p key={'contentTooltip14' + this.props.name} style={styleTitle}>
-            Auxiliary Metric
-          </p>
-        );
-        let index = 1;
-        this.props.auxiliaryMetrics.forEach(metric => {
-          contentTooltip.push(
-            <p key={index.toString() + 'contentTooltip15' + this.props.name} style={styleTitle2}>
-              + Metric {index}
-            </p>
-          );
-          contentTooltip.push(
-            <p key={index.toString() + 'contentTooltip16' + this.props.name} style={styleContentMetrics}>
-              - Value : {this.props.valuesAuxiliaryMetrics[index - 1]}
-            </p>
-          );
-          contentTooltip.push(
-            <p key={index.toString() + 'contentTooltip17' + this.props.name} style={styleContentMetrics}>
-              - Key : {metric.key}
-            </p>
-          );
-          contentTooltip.push(
-            <p key={index.toString() + 'contentTooltip18' + this.props.name} style={styleContentMetrics}>
-              - KeyValue : {metric.keyValue}
-            </p>
-          );
-          contentTooltip.push(
-            <p key={index.toString() + 'contentTooltip19' + this.props.name} style={styleContentMetrics}>
-              - Type : {metric.manageValue}
-            </p>
-          );
-          index++;
-        });
       }
     }
 
-    return <div>{contentTooltip}</div>;
+    return (
+      <div style={{ border: '1px solid black', padding: 0 }}>
+        {contentTooltip}
+        <div style={{ backgroundColor: addBackColorMainMetric ? backColorMainMetric : backColoTextObject, padding: '0 5px' }}>
+          {contentTooltipMainMetric}
+        </div>
+        <div style={{ backgroundColor: addBackColorAuxMetric ? backColorAuxMetric : backColoTextObject, padding: '0 5px' }}>
+          {contentTooltipAuxMetric}
+        </div>
+      </div>
+    );
   };
 
   private defineTextDecoration = (): string => {
