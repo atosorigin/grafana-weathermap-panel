@@ -52,3 +52,6 @@ Then, if you want to add a region, you can see the differents id of your shape i
 ![Enregistrer](./../../screenshots/demo/tutorial4/Region.png)
 
 
+
+
+fichier [demo5-region](../../resource/demo5-region.json) 

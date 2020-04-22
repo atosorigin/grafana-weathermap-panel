@@ -20,36 +20,37 @@ The **link** file must be declared as a JSON file like this:
     "links": [{
         "colorCoordinateA": "#5794F2",
         "colorCoordinateB": "#E54658",
-        "colorMode": false,
+        "colorMode": true,
         "id": 1,
-        "mainMetric": {},
-        "isIncurved": {},
+        "isIncurved": {...},
         "label": "",
-        "linkURL": {},
-        "lowerLimit": [],
+        "linkURL": {...},
+        "lowerLimit": [{...},{...}],
+        "mainMetric": {...},
+        "mainMetricB": {...},
         "meta": "",
         "metrics": [],
+        "metricsB": [],
         "name": "orientedLink1",
-        "orientationLink": {},
-        "pointAPositionX": "-14",
-        "pointAPositionY": "88",
-        "pointBPositionX": "72",
-        "pointBPositionY": "70",
-        "pointCPositionX": "29",
-        "pointCPositionY": "79",
-        "pointIn": "point2",
-        "pointOut": "point1",
-        "positionParameter": {},
+        "orientationLink": {... },
+        "pointAPositionX": "",
+        "pointAPositionY": "",
+        "pointBPositionX": "",
+        "pointBPositionY": "",
+        "pointCPositionX": "",
+        "pointCPositionY": "",
+        "pointIn": "pointRouteur",
+        "pointOut": "ProxyServer",
+        "positionParameter": {...},
         "regionIn": "",
         "regionOut": "",
-        "textObj": {},
-        "traceBack": false,
-        "traceBorder": false,
-        "valueMainMetricA": "-",
-        "valueMainMetricB": "-",
-        "zIndex": "5",
-        "mainMetricB": {},
-        "metricsB": []
+        "size": { "value": "Medium", "label": "Medium" },
+        "textObj": {...},
+        "traceBack": true,
+        "traceBorder": true,
+        "valueMainMetricA": "",
+        "valueMainMetricB": "",
+        "zIndex": 2
     }]
 }
 
@@ -62,8 +63,8 @@ The **link** file must be declared as a JSON file like this:
 
 ```
 
-    "colorCoordinateA": "black",
-    "colorCoordinateB": "black",
+    "colorCoordinateA": "#5794F2",
+    "colorCoordinateB": "#E54658",
 
 ```
 
@@ -72,9 +73,10 @@ The **link** file must be declared as a JSON file like this:
 - **colorMode** : "true" if you want to use differents colors for this point. "false" if you want a unique color.
 
 ```
-    "colorMode": false,
+    "colorMode": true,
 
 ```
+
 
 ## id
 
@@ -84,34 +86,6 @@ The **link** file must be declared as a JSON file like this:
     "id": "1",
 
 ```
-
-## mainMetric et mainMetricB
-
-- **mainMetric**	
-    - **expr** : Expression in PrompQL
-    - **format** "" (Leaves blank)
-    - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
-    - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
-    - **manageValue** : You can choose between "sum", "avg" or "err".
-    - **refId**: Metric reference associated with this region
-    - **returnQuery**: (Leave blank) 
-    - **unit** : (Leave blank)
-
-```
-"mainMetric": {
-            "expr": "",
-            "format": "",
-            "key": "",
-            "keyValue": "",
-            "manageValue": "avg",
-            "refId": "",
-            "returnQuery": [],
-            "unit": ""
-        },
-  
-  
-```
-
 
 ## isIncurved
 
@@ -127,6 +101,8 @@ The **link** file must be declared as a JSON file like this:
         },
 
 ```
+
+
 ## label/name
 
 - **label** : Give a label to the link
@@ -139,6 +115,7 @@ The **link** file must be declared as a JSON file like this:
         
         
 ```
+
 
 ## linkURL
 
@@ -153,8 +130,14 @@ The **link** file must be declared as a JSON file like this:
             "hoveringTooltipLink": "",
             "hoveringTooltipText": ""
         },
-    
+
+
 ```
+    
+
+
+
+
       
 ## lowerLimit
 
@@ -246,6 +229,33 @@ With similarly:
   - **lowerLimitMin**: Minimum metric value for this colour
   - **sizeBorder** : thickness of the border
 
+
+## mainMetric et mainMetricB
+
+- **mainMetric**	
+    - **expr** : Expression in PrompQL
+    - **format** "" (Leaves blank)
+    - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
+    - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
+    - **manageValue** : You can choose between "sum", "avg" or "err".
+    - **refId**: Metric reference associated with this region
+    - **returnQuery**: (Leave blank) 
+    - **unit** : (Leave blank)
+
+```
+"mainMetric": {
+            "expr": "",
+            "format": "",
+            "key": "",
+            "keyValue": "",
+            "manageValue": "avg",
+            "refId": "A",
+            "returnQuery": [],
+            "unit": ""
+        },
+  
+  
+```
 
 
 ## meta
@@ -377,6 +387,12 @@ TO DO , Laisser vide pour le moment
     "regionOut": "region1",
         
 ```
+
+## size
+
+- **size** : Allow you to choose the size of your link
+    - **value** : What os the size. Could be Small, Medium, Large
+    - **label** : Choose a label for the size
 
 ## textObj
 

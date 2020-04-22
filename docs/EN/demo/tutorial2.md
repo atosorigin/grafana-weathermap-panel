@@ -16,7 +16,7 @@ It is possible to have more details with the [display](../editor/display.md) pag
 You have to save and reload the page.
 
 
-## Define an coorinate mode region with image
+## Define an coordinate mode region with image
 
 ### Add an image in a region
 
@@ -32,7 +32,7 @@ You have to fill out the form like this:
 
 The selected image will be [cumputer-png.png](../../resource/computer-png.png). To do this, we download it in base64 with the `Copy image address` function.
 
-Then chosse the size of the region for your image. Here we choose :
+Then choose the size of the region for your image. Here we choose :
 - X Min : -55
 - X Max : -85 
 - Y Min : -20

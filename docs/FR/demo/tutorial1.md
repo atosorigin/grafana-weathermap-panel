@@ -1,25 +1,29 @@
 
-
-## Création d'un région dynamique
-
-
-### Etape 1 : Ajouter une image en arrière plan
-
+## Ajouter un dashboard SVG
 
 ![step 01](../../screenshots/demo/tutorial1/step01.jpg)
 
+## Création d'un région dynamique
 
-L'ajout d'une image en arrière plan s'effectue à partir du menu `display`.
-
-L'image sélectionnée sera [demo2-background.svg](https://github.com/atosorigin/grafana-weathermap-panel/blob/master/demo/demo2-background.svg). Pour cela, nous la téléchargeons en base64 avec la  fonction `Copier l'adresse de l'image`
-
-Il est possible d'avoir plus de détails avec la page [display](../EN/editor/display.md)
-
-Il faut sauvergarder et recharger la page.
+L'ajout d'une image de fond se fait à partir du menu `display`.
 
 
+L'image sélectionnée sera [demo1-background.svg](../../resource/demo1-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
 
-### Etape 2 : Définir une région SVG
+
+```
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-background.svg
+
+```
+
+Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
+
+Vous devez sauvegarder et recharger la page.
+
+## Créer une région dynamique
+
+
+### Etape 1 : Définir une région SVG
 
 
 ![step 02](../../screenshots/demo/tutorial1/step02.jpg)
@@ -35,7 +39,7 @@ Vous devez remplir le formulaire comme ceci :
 - Cliquer sur le bouton `load`
 
 
-### Etape 3 : Ajouter une couleur à l'élément SVG
+### Etape 2 : Ajouter une couleur à l'élément SVG
 
 
 
@@ -64,7 +68,7 @@ Il est possible de définir d'autres paramètres, en vous référant à la page 
 
 
 
-### Etape 4 : Ajouter une Query à un élément SVG
+### Etape 3 : Ajouter une Query à un élément SVG
 
 
 ![step 05](../../screenshots/demo/tutorial1/step05.jpg)
@@ -104,7 +108,7 @@ Il est possible de compléter les autres champs avec les paramétrages compléme
 
 
 
-### Etape 5 : Mise en forme des informations de l'élément SVG
+### Etape 4 : Mise en forme des informations de l'élément SVG
 
 
 ![step 07](../../screenshots/demo/tutorial1/step07.jpg)

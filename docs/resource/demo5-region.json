@@ -12,12 +12,12 @@
         "id": 0,
         "lowerLimitMin": "",
         "lowerLimitMax": "",
-        "backColor": "#FFF899",
-        "borderColor": "#E0B400",
+        "backColor": "#37872D",
+        "borderColor": "#37872D",
         "sizeBorder": "1"
       }
     ],
-    "label": "enp0s3",
+    "label": "vetha317d1e",
     "textObj": {
       "value": "",
       "isTextTooltip": false,
@@ -28,7 +28,7 @@
         "italic": false,
         "underline": false
       },
-      "generateObjectText": false,
+      "generateObjectText": true,
       "valueGenerateObjectText": {
         "legendElement": "",
         "numericFormatElement": "",
@@ -54,78 +54,10 @@
       "key": "device",
       "unit": "",
       "format": "",
-      "keyValue": "enp0s3",
+      "keyValue": "vetha317d1e",
       "refId": "A",
       "expr": "",
-      "returnQuery": [
-        {
-          "name": "node_network_receive_bytes{device=\"enp0s3\",instance=\"localhost:9100\",job=\"node_exporter\"}",
-          "refId": "A",
-          "fields": [
-            {
-              "name": "node_network_receive_bytes{device=\"enp0s3\",instance=\"localhost:9100\",job=\"node_exporter\"}",
-              "type": "number",
-              "config": {},
-              "values": {
-                "buffer": [
-                  16794792
-                ]
-              },
-              "labels": {
-                "device": "enp0s3",
-                "instance": "localhost:9100",
-                "job": "node_exporter"
-              },
-              "calcs": null
-            },
-            {
-              "name": "Time",
-              "type": "time",
-              "config": {},
-              "values": {
-                "buffer": [
-
-                ]
-              },
-              "calcs": null
-            }
-          ],
-          "length": 721
-        },
-        {
-          "name": "node_network_receive_bytes{device=\"lo\",instance=\"localhost:9100\",job=\"node_exporter\"}",
-          "refId": "A",
-          "fields": [
-            {
-              "name": "node_network_receive_bytes{device=\"lo\",instance=\"localhost:9100\",job=\"node_exporter\"}",
-              "type": "number",
-              "config": {},
-              "values": {
-                "buffer": []
-              },
-              "labels": {
-                "device": "lo",
-                "instance": "localhost:9100",
-                "job": "node_exporter"
-              },
-              "calcs": null
-            },
-            {
-              "name": "Time",
-              "type": "time",
-              "config": {},
-              "values": {
-                "buffer": [
-
-                  1587420600000
-                ]
-              },
-              "calcs": null
-            }
-          ],
-          "length": 721
-        }
-      ],
+      "returnQuery": [],
       "manageValue": "avg"
     },
     "metrics": [],
@@ -140,14 +72,14 @@
       "tooltipPositionA": {},
       "tooltipPositionB": {}
     },
-    "idSVG": "",
-    "mode": false,
+    "idSVG": "path163",
+    "mode": true,
     "orientedLink": [],
     "coords": {
-      "xMin": "-55",
-      "xMax": "-85",
-      "yMin": "-20",
-      "yMax": "10"
+      "xMin": "0",
+      "xMax": "0",
+      "yMin": "0",
+      "yMax": "0"
     },
     "img": ""
   },
@@ -164,12 +96,12 @@
         "id": 0,
         "lowerLimitMin": "",
         "lowerLimitMax": "",
-        "backColor": "#DEB6F2",
-        "borderColor": "#8F3BB8",
+        "backColor": "#C4162A",
+        "borderColor": "#C4162A",
         "sizeBorder": "1"
       }
     ],
-    "label": "lo",
+    "label": "eno0",
     "textObj": {
       "value": "",
       "isTextTooltip": false,
@@ -206,74 +138,10 @@
       "key": "device",
       "unit": "",
       "format": "",
-      "keyValue": "lo",
+      "keyValue": "eno0",
       "refId": "A",
       "expr": "",
-      "returnQuery": [
-        {
-          "name": "node_network_receive_bytes{device=\"enp0s3\",instance=\"localhost:9100\",job=\"node_exporter\"}",
-          "refId": "A",
-          "fields": [
-            {
-              "name": "node_network_receive_bytes{device=\"enp0s3\",instance=\"localhost:9100\",job=\"node_exporter\"}",
-              "type": "number",
-              "config": {},
-              "values": {
-                "buffer": []
-              },
-              "labels": {
-                "device": "enp0s3",
-                "instance": "localhost:9100",
-                "job": "node_exporter"
-              },
-              "calcs": null
-            },
-            {
-              "name": "Time",
-              "type": "time",
-              "config": {},
-              "values": {
-                "buffer": []
-              },
-              "calcs": null
-            }
-          ],
-          "length": 721
-        },
-        {
-          "name": "node_network_receive_bytes{device=\"lo\",instance=\"localhost:9100\",job=\"node_exporter\"}",
-          "refId": "A",
-          "fields": [
-            {
-              "name": "node_network_receive_bytes{device=\"lo\",instance=\"localhost:9100\",job=\"node_exporter\"}",
-              "type": "number",
-              "config": {},
-              "values": {
-                "buffer": [
-
-                ]
-              },
-              "labels": {
-                "device": "lo",
-                "instance": "localhost:9100",
-                "job": "node_exporter"
-              },
-              "calcs": null
-            },
-            {
-              "name": "Time",
-              "type": "time",
-              "config": {},
-              "values": {
-                "buffer": [
-                ]
-              },
-              "calcs": null
-            }
-          ],
-          "length": 721
-        }
-      ],
+      "returnQuery": [],
       "manageValue": "avg"
     },
     "metrics": [],
@@ -288,14 +156,14 @@
       "tooltipPositionA": {},
       "tooltipPositionB": {}
     },
-    "idSVG": "",
-    "mode": false,
+    "idSVG": "path147",
+    "mode": true,
     "orientedLink": [],
     "coords": {
-      "xMin": "-18",
+      "xMin": "0",
       "xMax": "0",
-      "yMin": "-6",
-      "yMax": "10"
+      "yMin": "0",
+      "yMax": "0"
     },
     "img": ""
   }

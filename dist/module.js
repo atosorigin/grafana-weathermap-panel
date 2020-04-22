@@ -1046,6 +1046,16 @@ var createInputsOrientedLink = function createInputsOrientedLink(id, dataCoordin
     label: 'Bidirectional',
     value: 'double'
   }], '', true, 'Orientation', undefined);
+  var newFieldSize = new Models_InputSelectableClass__WEBPACK_IMPORTED_MODULE_0__["InputSelectableClass"](id.toString() + 'size', 'Size', 'size' + id.toString(), 'select', [{
+    value: 'Small',
+    label: 'Small'
+  }, {
+    value: 'Medium',
+    label: 'Medium'
+  }, {
+    value: 'Large',
+    label: 'Large'
+  }], '', true, 'Size', undefined);
   var newFieldPointAPositionX = new Models_InputSelectableClass__WEBPACK_IMPORTED_MODULE_0__["InputSelectableClass"](id.toString() + 'pointAX', 'CoordinateClick A - X', 'pointAX' + id.toString(), 'text', [], '', true, 'PointA-X', undefined);
   var newFieldPointAPositionY = new Models_InputSelectableClass__WEBPACK_IMPORTED_MODULE_0__["InputSelectableClass"](id.toString() + 'pointAY', 'CoordinateClick A - Y', 'pointAY' + id.toString(), 'text', [], '', true, 'PointA-Y', undefined);
   var newFieldPointBPositionX = new Models_InputSelectableClass__WEBPACK_IMPORTED_MODULE_0__["InputSelectableClass"](id.toString() + 'pointBX', 'CoordinateClick B - X', 'pointBX' + id.toString(), 'text', [], '', true, 'PointB-X', undefined);
@@ -1065,7 +1075,7 @@ var createInputsOrientedLink = function createInputsOrientedLink(id, dataCoordin
   var newFieldPointCPositionX = new Models_InputSelectableClass__WEBPACK_IMPORTED_MODULE_0__["InputSelectableClass"](id.toString() + 'pointCX', 'CoordinateClick C - X', 'pointCX' + id.toString(), 'text', [], '', true, 'PointC-X', undefined);
   var newFieldPointCPositionY = new Models_InputSelectableClass__WEBPACK_IMPORTED_MODULE_0__["InputSelectableClass"](id.toString() + 'pointCY', 'CoordinateClick C - Y', 'pointCY' + id.toString(), 'text', [], '', true, 'PointC-Y', undefined);
   var newFieldButton = new Models_InputSelectableClass__WEBPACK_IMPORTED_MODULE_0__["InputSelectableClass"](id.toString() + 'deleteLink', 'Delete', 'delete' + id.toString(), 'button', [], '', false, undefined, 'delete');
-  var finalArray = [newFieldLabelLink, newFieldOrientationLink, newFieldPointIn, newFieldRegionIn, newFieldPointAPositionX, newFieldPointAPositionY, newFieldPointOut, newFieldRegionOut, newFieldPointBPositionX, newFieldPointBPositionY, newFieldIsIncurved, newFieldPointCPositionX, newFieldPointCPositionY, newFieldButton];
+  var finalArray = [newFieldLabelLink, newFieldOrientationLink, newFieldSize, newFieldPointIn, newFieldRegionIn, newFieldPointAPositionX, newFieldPointAPositionY, newFieldPointOut, newFieldRegionOut, newFieldPointBPositionX, newFieldPointBPositionY, newFieldIsIncurved, newFieldPointCPositionX, newFieldPointCPositionY, newFieldButton];
   return finalArray;
 };
 
@@ -1270,6 +1280,8 @@ var editGoodParameterOrientedLink = function editGoodParameterOrientedLink(name,
     editCoor.regionIn = newValue;
   } else if (name.startsWith('regionOut')) {
     editCoor.regionOut = newValue;
+  } else if (name.startsWith('size')) {
+    editCoor.size = newValueSelect;
   }
 
   return editCoor;
@@ -1435,6 +1447,7 @@ var InputSelectOrientedLink = function InputSelectOrientedLink(_a) {
       defaultValue = _a.defaultValue,
       name = _a.name,
       label = _a.label;
+  console.log(defaultValue);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       display: 'flex',
@@ -4082,11 +4095,12 @@ var OrientedLinkClass =
 function (_super) {
   Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(OrientedLinkClass, _super);
 
-  function OrientedLinkClass(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter, name, orientationLink, pointAPositionX, pointAPositionY, colorCoordinateA, pointBPositionX, pointBPositionY, colorCoordinateB, valueMainMetricA, valueMainMetricB, pointIn, pointOut, regionIn, regionOut, zIndex, pointCPositionX, pointCPositionY, isIncurved, mainMetricB, metricsB) {
+  function OrientedLinkClass(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter, name, orientationLink, size, pointAPositionX, pointAPositionY, colorCoordinateA, pointBPositionX, pointBPositionY, colorCoordinateB, valueMainMetricA, valueMainMetricB, pointIn, pointOut, regionIn, regionOut, zIndex, pointCPositionX, pointCPositionY, isIncurved, mainMetricB, metricsB) {
     var _this = _super.call(this, id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter) || this;
 
     _this.name = name;
     _this.orientationLink = orientationLink;
+    _this.size = size;
     _this.pointAPositionX = pointAPositionX;
     _this.pointAPositionY = pointAPositionY;
     _this.colorCoordinateA = colorCoordinateA;
@@ -4526,20 +4540,12 @@ function (_super) {
 
 
     _this.myCallBackArrayPoints = function (dataFromChild) {
-      _this.setState({
-        arrayPoints: dataFromChild
-      });
-
       _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
         arrayPoints: dataFromChild
       }));
     };
 
     _this.myCallBackArrayLinks = function (dataFromChild) {
-      _this.setState({
-        arrayLinks: dataFromChild
-      });
-
       _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
         arrayLinks: dataFromChild
       }));
@@ -4599,24 +4605,12 @@ function (_super) {
       _this.setState({
         collapsePanelData: isOpen
       });
-    };
-
-    _this.onTogglePoint = function (isOpen) {
-      _this.setState({
-        collapsePoint: isOpen
-      });
     }; // private onToggleLink = (isOpen: boolean): void => {
     // 	this.setState({
     // 		collapseLink: isOpen,
     // 	});
     // }
 
-
-    _this.onToggleOrientedLink = function (isOpen) {
-      _this.setState({
-        collapseOrientedLink: isOpen
-      });
-    };
 
     _this.onTogglePrincipalTargets = function (isOpen) {
       _this.setState({
@@ -4717,10 +4711,6 @@ function (_super) {
       collapseDashboardData: false,
       collapsePanelData: false,
       collapseTimeSelector: false,
-      collapsePoint: false,
-      collapseOrientedLink: false,
-      arrayPoints: _this.props.options.arrayPoints,
-      arrayLinks: _this.props.options.arrayLinks,
       arrayOrientedLinks: _this.props.options.arrayOrientedLinks,
       collapsePrincipalTarget: false,
       tabsVariable: [true, false, false, false, false],
@@ -5023,6 +5013,7 @@ function (_super) {
         arrayPoints: newArrayPoint
       }));
 
+      _this.props.options.newPoint = true;
       setTimeout(function () {
         _this.displayPoint();
       }, 100);
@@ -5689,6 +5680,9 @@ function (_super) {
       }, [], false, false, false, positionParameter, name, {
         label: 'Monodirectional',
         value: 'AB'
+      }, {
+        label: 'Medium',
+        value: 'Medium'
       }, objectIn.x.toString(), objectIn.y.toString(), '#5794F2', objectOut.x.toString(), objectOut.y.toString(), '#E54658', '', '', objectIn.labelPoint, objectOut.labelPoint, objectIn.labelRegion, objectOut.labelRegion, zIndex, pointC.x, pointC.y, isIncurved, {
         key: '',
         unit: '',
@@ -5698,13 +5692,16 @@ function (_super) {
         manageValue: 'avg'
       }, []);
       var newArrayOrientedLink = _this.props.options.arrayOrientedLinks;
-      newArrayOrientedLink.push(newOrientedLink);
+      newArrayOrientedLink.push(newOrientedLink); //const newValue = true;
 
       _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
         arrayOrientedLinks: newArrayOrientedLink,
         indexOrientedLink: id,
-        zIndexOrientedLink: zIndex
+        zIndexOrientedLink: zIndex,
+        newOrientedLink: true
       }));
+
+      _this.props.options.newOrientedLink = true;
 
       _this.addAssociateOrientedLinkToPoint(objectIn.labelPoint || '', objectOut.labelPoint || '', newOrientedLink.id);
 
@@ -5875,7 +5872,23 @@ function (_super) {
         variant: _this.state.buttonManage[2] ? 'danger' : 'primary',
         className: "button",
         onClick: function onClick() {
-          return _this.resetButtonManage(2);
+          if (_this.state.buttonAddIncurvedLinkIsActive) {
+            _this.setState(function (prevState) {
+              return {
+                buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive
+              };
+            });
+          }
+
+          if (_this.state.buttonAddLinkIsActive) {
+            _this.setState(function (prevState) {
+              return {
+                buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive
+              };
+            });
+          }
+
+          _this.resetButtonManage(2);
         }
       }, "Position Legend"));
 
@@ -5971,6 +5984,22 @@ function (_super) {
     };
 
     _this.addNode = function () {
+      if (_this.state.buttonAddIncurvedLinkIsActive) {
+        _this.setState(function (prevState) {
+          return {
+            buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive
+          };
+        });
+      }
+
+      if (_this.state.buttonAddLinkIsActive) {
+        _this.setState(function (prevState) {
+          return {
+            buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive
+          };
+        });
+      }
+
       _this.setState(function (prevState) {
         return {
           nbClickButton: prevState.buttonManage[0] ? false : true
@@ -5983,6 +6012,22 @@ function (_super) {
     };
 
     _this.addPoint = function () {
+      if (_this.state.buttonAddIncurvedLinkIsActive) {
+        _this.setState(function (prevState) {
+          return {
+            buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive
+          };
+        });
+      }
+
+      if (_this.state.buttonAddLinkIsActive) {
+        _this.setState(function (prevState) {
+          return {
+            buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive
+          };
+        });
+      }
+
       _this.setState(function (prevState) {
         return {
           nbClickButton: prevState.buttonManage[3] ? false : true,
@@ -5996,6 +6041,14 @@ function (_super) {
     };
 
     _this.addLink = function () {
+      if (_this.state.buttonAddIncurvedLinkIsActive) {
+        _this.setState(function (prevState) {
+          return {
+            buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive
+          };
+        });
+      }
+
       _this.setState(function (prevState) {
         return {
           nbClickButton: prevState.buttonManage[1] ? false : true,
@@ -6009,9 +6062,18 @@ function (_super) {
     };
 
     _this.addIncurvedLink = function () {
+      if (_this.state.buttonAddLinkIsActive) {
+        _this.setState(function (prevState) {
+          return {
+            buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive
+          };
+        });
+      }
+
       _this.setState(function (prevState) {
         return {
-          nbClickButton: prevState.buttonManage[4] ? false : true
+          nbClickButton: prevState.buttonManage[4] ? false : true,
+          buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive
         };
       });
 
@@ -6387,7 +6449,6 @@ function (_super) {
     };
 
     _this.state = {
-      idOrientedLink: _this.props.options.indexOrientedLink,
       valueButton: '',
       buttonManage: [false, false, false, false, false],
       numberClickDiv: 0,
@@ -6402,7 +6463,8 @@ function (_super) {
       displayRegion: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null),
       tooltip: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "salut"),
       idSVG: '',
-      buttonAddLinkIsActive: false
+      buttonAddLinkIsActive: false,
+      buttonAddIncurvedLinkIsActive: false
     };
     return _this;
   }
@@ -6453,7 +6515,8 @@ function (_super) {
         auxiliaryMetrics: line.metrics,
         valuesAuxiliaryMetrics: valuesAuxiliaryMetrics,
         linkUrl: line.linkURL,
-        buttonAddLinkIsActive: _this.state.buttonAddLinkIsActive
+        buttonAddLinkIsActive: _this.state.buttonAddLinkIsActive,
+        buttonAddIncurvedLinkIsActive: _this.state.buttonAddIncurvedLinkIsActive
       });
       mapItems.push(item);
     });
@@ -6522,7 +6585,8 @@ function (_super) {
         valuesAuxiliaryMetricsB: valuesAuxiliaryMetricsB,
         police: _this.props.options.display.police,
         sizePolice: _this.props.options.display.size,
-        linkUrl: orientedLink.linkURL
+        linkUrl: orientedLink.linkURL,
+        size: orientedLink.size
       });
       mapItems.push(item);
     });
@@ -6646,6 +6710,12 @@ function (_super) {
 
 
   SimplePanel.prototype.render = function () {
+    console.log('---region');
+    console.log(this.props.options.regionCoordinateSpace);
+    console.log('---points');
+    console.log(this.props.options.arrayPoints);
+    console.log('---links');
+    console.log(this.props.options.arrayOrientedLinks);
     var styleBackground;
 
     if (this.props.options.baseMap.modeSVG) {
@@ -7059,6 +7129,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var components_Parametrage_parametresGeneriques__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! components/Parametrage/parametresGeneriques */ "./components/Parametrage/parametresGeneriques.tsx");
 /* harmony import */ var style_CoordinateSpace_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! style/CoordinateSpace.css */ "./style/CoordinateSpace.css");
 /* harmony import */ var style_CoordinateSpace_css__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(style_CoordinateSpace_css__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./manageAuxiliaryQuery */ "./components/CoordinateSpace/manageAuxiliaryQuery.tsx");
+
 
 
 
@@ -7149,6 +7221,10 @@ function (_super) {
         selectedDefaultSVG: value,
         arrayCoor: coordinate
       });
+
+      if (_this.props.isAddCoordinate === false) {
+        _this.callBack();
+      }
     };
     /** call function to return arrayCoor a SimpleEditor */
 
@@ -7168,22 +7244,23 @@ function (_super) {
             hiddenAlert: true
           });
         }, waitAlert);
+        console.log('ok');
       } else {
         _this.props.callBackToParent(_this.state.arrayCoor.id, _this.state.arrayCoor);
-      }
 
-      _this.setState({
-        severityAlert: 'success',
-        titleAlert: 'Save',
-        hiddenAlert: false
-      });
+        _this.setState({
+          severityAlert: 'success',
+          titleAlert: 'Save',
+          hiddenAlert: false
+        });
 
-      if (!_this.props.isAddCoordinate) {
-        setTimeout(function () {
-          _this.setState({
-            hiddenAlert: true
-          });
-        }, waitAlert);
+        if (!_this.props.isAddCoordinate) {
+          setTimeout(function () {
+            _this.setState({
+              hiddenAlert: true
+            });
+          }, waitAlert);
+        }
       }
     };
     /** save data in parent */
@@ -7211,6 +7288,10 @@ function (_super) {
       _this.setState({
         arrayCoor: oldCoor
       });
+
+      if (_this.props.isAddCoordinate === false) {
+        _this.callBack();
+      }
     };
     /** update lower limit */
 
@@ -7224,6 +7305,10 @@ function (_super) {
       _this.setState({
         arrayCoor: newValue
       });
+
+      if (_this.props.isAddCoordinate === false) {
+        _this.callBack();
+      }
     };
     /** save lower limit data */
 
@@ -7235,6 +7320,10 @@ function (_super) {
       _this.setState({
         arrayCoor: newValue
       });
+
+      if (_this.props.isAddCoordinate === false) {
+        _this.callBack();
+      }
     };
     /** save mainMetric data */
 
@@ -7246,6 +7335,10 @@ function (_super) {
       _this.setState({
         arrayCoor: newValue
       });
+
+      if (_this.props.isAddCoordinate === false) {
+        _this.callBack();
+      }
     };
     /** change value radio button checker to pass svg or coordinate mode */
 
@@ -7258,6 +7351,10 @@ function (_super) {
         selectedRadio: event.currentTarget.value,
         arrayCoor: coordinate
       });
+
+      if (_this.props.isAddCoordinate === false) {
+        _this.callBack();
+      }
     };
     /** add all id SVG in select */
 
@@ -7464,6 +7561,10 @@ function (_super) {
       arrayCoor: tmp
     });
     this.fillInputEspaceCoor();
+
+    if (this.props.isAddCoordinate === false) {
+      this.callBack();
+    }
   };
   /**
    * Get value of input with state.arrayCoor
@@ -7583,12 +7684,20 @@ function (_super) {
       severity: this.state.severityAlert
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.htmlInput), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_manageQuery__WEBPACK_IMPORTED_MODULE_11__["default"], {
       options: this.props.options,
-      idCoordinate: this.state.arrayCoor.id,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
+      idCoordinate: this.state.arrayCoor.id,
       mainMetric: this.state.arrayCoor.mainMetric,
       callBackToParent: this.callBackMainMetric,
       isLink: false
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      options: this.props.options,
+      onOptionsChange: this.props.onOptionsChange,
+      data: this.props.data,
+      idCoordinate: this.state.arrayCoor.id,
+      metrics: this.state.arrayCoor.metrics,
+      //callBackToParent={this.callBackAuxiliaryMetric}
+      isRegion: true
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Parametrage_parametresGeneriques__WEBPACK_IMPORTED_MODULE_12__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
@@ -7688,14 +7797,14 @@ function (_super) {
         textAlign: 'center'
       },
       className: "buttonSave"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    }, this.props.isAddCoordinate && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
       style: {
         marginRight: '1%'
       },
       onClick: function onClick() {
         return _this.callBack();
       }
-    }, "Load"), !this.props.isAddCoordinate && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    }, "Save"), !this.props.isAddCoordinate && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
       onClick: this.deleteOwnInput,
       variant: "danger"
     }, "Delete")));
@@ -7923,7 +8032,7 @@ function (_super) {
       }
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
       width: 15
-    }, "Select label region to edit")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+    }, "Select Region")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
       onChange: function onChange(value) {
         return _this.onChangeSelectCoordinate(value);
       },
@@ -7938,7 +8047,13 @@ function (_super) {
       coordinate: this.state.selectCoordinateSpaceDefault.value,
       callBackToParent: this.callBack,
       isAddCoordinate: false
-    }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Data not set")));
+    }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+      style: {
+        textAlign: 'center',
+        fontSize: '20px',
+        marginTop: '50px'
+      }
+    }, "Data not set")));
   };
 
   return EditCoordinateSpace;
@@ -7978,7 +8093,7 @@ function (_super) {
     var _this = _super.call(this, props) || this;
 
     _this.saveAuxMetrics = function (newAuxMetrics, isLinkB) {
-      var e_1, _a;
+      var e_1, _a, e_2, _b;
 
       var idCurrentCoordinateSpace = _this.props.idCoordinate;
 
@@ -8020,11 +8135,37 @@ function (_super) {
         _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
           arrayOrientedLinks: newArrayLink
         }));
+      } else if (_this.props.isRegion) {
+        var newArrayRegion = _this.props.options.regionCoordinateSpace;
+
+        try {
+          for (var newArrayRegion_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(newArrayRegion), newArrayRegion_1_1 = newArrayRegion_1.next(); !newArrayRegion_1_1.done; newArrayRegion_1_1 = newArrayRegion_1.next()) {
+            var region = newArrayRegion_1_1.value;
+
+            if (region.id === idCurrentCoordinateSpace) {
+              region.metrics = newAuxMetrics;
+            }
+          }
+        } catch (e_2_1) {
+          e_2 = {
+            error: e_2_1
+          };
+        } finally {
+          try {
+            if (newArrayRegion_1_1 && !newArrayRegion_1_1.done && (_b = newArrayRegion_1["return"])) _b.call(newArrayRegion_1);
+          } finally {
+            if (e_2) throw e_2.error;
+          }
+        }
+
+        _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+          regionCoordinateSpace: newArrayRegion
+        }));
       }
     };
 
     _this.getAuxiliaryMetrics = function (isLinkB) {
-      var e_2, _a, e_3, _b;
+      var e_3, _a, e_4, _b;
 
       var auxiliaryMetrics = [];
       var idCurrentCoordinateSpace = _this.props.idCoordinate;
@@ -8046,15 +8187,15 @@ function (_super) {
               auxiliaryMetrics = point.metrics;
             }
           }
-        } catch (e_2_1) {
-          e_2 = {
-            error: e_2_1
+        } catch (e_3_1) {
+          e_3 = {
+            error: e_3_1
           };
         } finally {
           try {
             if (arrayPoints_1_1 && !arrayPoints_1_1.done && (_a = arrayPoints_1["return"])) _a.call(arrayPoints_1);
           } finally {
-            if (e_2) throw e_2.error;
+            if (e_3) throw e_3.error;
           }
         }
       } else if (_this.props.isRegion) {
@@ -8068,15 +8209,15 @@ function (_super) {
               auxiliaryMetrics = region.metrics;
             }
           }
-        } catch (e_3_1) {
-          e_3 = {
-            error: e_3_1
+        } catch (e_4_1) {
+          e_4 = {
+            error: e_4_1
           };
         } finally {
           try {
             if (arrayRegions_1_1 && !arrayRegions_1_1.done && (_b = arrayRegions_1["return"])) _b.call(arrayRegions_1);
           } finally {
-            if (e_3) throw e_3.error;
+            if (e_4) throw e_4.error;
           }
         }
       }
@@ -8085,7 +8226,7 @@ function (_super) {
     };
 
     _this.getReferenceMainMetric = function (isLinkB) {
-      var e_4, _a, e_5, _b, e_6, _c;
+      var e_5, _a, e_6, _b, e_7, _c;
 
       var newRefId = '';
       var newArrayPoints = _this.props.options.arrayPoints;
@@ -8106,15 +8247,15 @@ function (_super) {
               newRefId = point.mainMetric.refId || '';
             }
           }
-        } catch (e_4_1) {
-          e_4 = {
-            error: e_4_1
+        } catch (e_5_1) {
+          e_5 = {
+            error: e_5_1
           };
         } finally {
           try {
             if (newArrayPoints_2_1 && !newArrayPoints_2_1.done && (_a = newArrayPoints_2["return"])) _a.call(newArrayPoints_2);
           } finally {
-            if (e_4) throw e_4.error;
+            if (e_5) throw e_5.error;
           }
         }
       } else if (_this.props.isRegion) {
@@ -8128,15 +8269,15 @@ function (_super) {
               newRefId = region.mainMetric.refId || '';
             }
           }
-        } catch (e_5_1) {
-          e_5 = {
-            error: e_5_1
+        } catch (e_6_1) {
+          e_6 = {
+            error: e_6_1
           };
         } finally {
           try {
             if (arrayRegions_2_1 && !arrayRegions_2_1.done && (_b = arrayRegions_2["return"])) _b.call(arrayRegions_2);
           } finally {
-            if (e_5) throw e_5.error;
+            if (e_6) throw e_6.error;
           }
         }
       }
@@ -8153,15 +8294,15 @@ function (_super) {
             _this.saveAuxMetrics(newAuxiliaryMetrics, isLinkB);
           }
         }
-      } catch (e_6_1) {
-        e_6 = {
-          error: e_6_1
+      } catch (e_7_1) {
+        e_7 = {
+          error: e_7_1
         };
       } finally {
         try {
           if (newAuxiliaryMetrics_1_1 && !newAuxiliaryMetrics_1_1.done && (_c = newAuxiliaryMetrics_1["return"])) _c.call(newAuxiliaryMetrics_1);
         } finally {
-          if (e_6) throw e_6.error;
+          if (e_7) throw e_7.error;
         }
       }
 
@@ -8598,15 +8739,13 @@ function (_super) {
     };
 
     _this.state = {
-      metrics: _this.props.metrics,
       collapse: false,
       collapseLinkA: false,
       collapseLinkB: false,
       selectDefaultManageValue: {
         value: 'avg',
         label: 'avg'
-      },
-      mapItems: []
+      }
     };
     return _this;
   }
@@ -9499,7 +9638,8 @@ function (_super) {
 
         _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
           arrayPoints: oldData
-        }));
+        })); //this.fillSelectPoint();
+
       } else {
         var find = false;
 
@@ -9631,8 +9771,14 @@ function (_super) {
 
     _this.componentDidUpdate = function (prevProps) {
       if (prevProps.options.arrayPoints !== _this.props.options.arrayPoints) {
-        // this.componentDidMount();
         _this.fillSelectPoint();
+      } // console.log(prevProps.options.newPoint);
+
+
+      if (prevProps.options.newPoint) {
+        _this.fillSelectPoint();
+
+        _this.props.options.newPoint = false;
       }
     };
 
@@ -9654,7 +9800,7 @@ function (_super) {
       }
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
       width: 15
-    }, "Select point to edit")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+    }, "Select Point")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
       onChange: function onChange(value) {
         return _this.onChangeSelectCoordinate(value);
       },
@@ -9662,21 +9808,20 @@ function (_super) {
       options: this.state.selectCoordinateSpace,
       width: 10,
       value: this.state.selectCoordinateSpaceDefault
-    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
-      style: {
-        marginTop: '2px',
-        marginLeft: '20px'
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-      onClick: this.fillSelectPoint
-    }, "Update list Point")))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.selectCoordinateSpaceDefault.value ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_point__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.selectCoordinateSpaceDefault.value ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_point__WEBPACK_IMPORTED_MODULE_3__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
       point: this.state.selectCoordinateSpaceDefault.value,
       callBackToParent: this.callBack,
       isAddPoint: false
-    }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Data not set")));
+    }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+      style: {
+        textAlign: 'center',
+        fontSize: '20px',
+        marginTop: '50px'
+      }
+    }, "Data not set")));
   };
 
   return EditPoint;
@@ -9798,20 +9943,35 @@ function (_super) {
     _this.callBack = function () {
       var waitAlert = 3000;
 
-      _this.props.callBackToParent(_this.state.arrayCoor.id, _this.state.arrayCoor);
+      if (_this.state.arrayCoor.label === '') {
+        _this.setState({
+          severityAlert: 'error',
+          titleAlert: 'Error: label is empty',
+          hiddenAlert: false
+        });
 
-      _this.setState({
-        severityAlert: 'success',
-        titleAlert: 'Save',
-        hiddenAlert: false
-      });
-
-      if (!_this.props.isAddPoint) {
         setTimeout(function () {
           _this.setState({
             hiddenAlert: true
           });
         }, waitAlert);
+        console.log('ok');
+      } else {
+        _this.props.callBackToParent(_this.state.arrayCoor.id, _this.state.arrayCoor);
+
+        _this.setState({
+          severityAlert: 'success',
+          titleAlert: 'Save',
+          hiddenAlert: false
+        });
+
+        if (!_this.props.isAddPoint) {
+          setTimeout(function () {
+            _this.setState({
+              hiddenAlert: true
+            });
+          }, waitAlert);
+        }
       }
     };
 
@@ -9837,6 +9997,10 @@ function (_super) {
       _this.setState({
         arrayCoor: oldCoor
       });
+
+      if (_this.props.isAddPoint === false) {
+        _this.callBack();
+      }
     };
     /** update lower limit */
 
@@ -9850,6 +10014,10 @@ function (_super) {
       _this.setState({
         arrayCoor: newValue
       });
+
+      if (_this.props.isAddPoint === false) {
+        _this.callBack();
+      }
     }; // private callBackPositionParameter = (positionParameter: PositionParameterClass, id?: number) => {
     //   const newValue: PointClass = this.state.arrayCoor;
     //   newValue.positionParameter = positionParameter;
@@ -9868,6 +10036,10 @@ function (_super) {
       _this.setState({
         arrayCoor: newValue
       });
+
+      if (_this.props.isAddPoint === false) {
+        _this.callBack();
+      }
     };
 
     _this.callBackMainMetric = function (mainMetric, id) {
@@ -9877,6 +10049,10 @@ function (_super) {
       _this.setState({
         arrayCoor: newValue
       });
+
+      if (_this.props.isAddPoint === false) {
+        _this.callBack();
+      }
     };
     /**
      * fill input whith data
@@ -9978,7 +10154,10 @@ function (_super) {
       arrayCoor: tmp
     });
     this.generateInputsPoint();
-    this.callBack();
+
+    if (this.props.isAddPoint === false) {
+      this.callBack();
+    }
   };
   /**
    * Get value of input with state.arrayPointClass
@@ -10065,7 +10244,9 @@ function (_super) {
 
               _this.generateInputsPoint();
 
-              _this.callBack();
+              if (_this.props.isAddPoint === false) {
+                _this.callBack();
+              }
             },
             name: obj.name,
             index: line.id,
@@ -10179,7 +10360,19 @@ function (_super) {
   Point.prototype.render = function () {
     var _this = this;
 
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_manageQuery__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    var styleAlert = {
+      position: 'fixed',
+      bottom: '5%',
+      right: '5%',
+      zIndex: 9999
+    };
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: styleAlert,
+      hidden: this.state.hiddenAlert
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_8__["Alert"], {
+      title: this.state.titleAlert,
+      severity: this.state.severityAlert
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_manageQuery__WEBPACK_IMPORTED_MODULE_9__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
@@ -10223,7 +10416,7 @@ function (_super) {
         textAlign: 'center'
       },
       className: "buttonSave"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_8__["Button"], {
+    }, this.props.isAddPoint && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_8__["Button"], {
       style: {
         marginRight: '1%'
       },
@@ -10381,7 +10574,9 @@ function (_super) {
 
       if (_this.props.associatePointIn !== '') {
         arrayPoints.forEach(function (point) {
-          if (point.name === _this.props.associatePointIn) {
+          var name = point.label || point.name;
+
+          if (name === _this.props.associatePointIn) {
             xMinIn = parseInt(point.positionShapeX, 10);
             xMaxIn = parseInt(point.positionShapeX, 10);
             yMinIn = parseInt(point.positionShapeY, 10);
@@ -10410,7 +10605,9 @@ function (_super) {
           }
         });
         arrayPoints.forEach(function (point) {
-          if (point.name === _this.props.associatePointOut) {
+          var name = point.label || point.name;
+
+          if (name === _this.props.associatePointOut) {
             xMinOut = parseInt(point.positionShapeX, 10);
             xMaxOut = parseInt(point.positionShapeX, 10);
             yMinOut = parseInt(point.positionShapeY, 10);
@@ -10580,7 +10777,9 @@ function (_super) {
           }
         } else if (idMultiLink === 2) {
           if (yMidIn > yMidOut) {
-            if (xMidIn > xMidOut) {
+            if (xMidOut > xMinIn && xMidOut < xMaxIn || xMidOut < xMinIn && xMidOut > xMaxIn) {
+              xResult = (xMinIn + xMaxIn) / 2;
+            } else if (xMidIn > xMidOut) {
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
@@ -10596,7 +10795,9 @@ function (_super) {
               xResult = (xMinIn + xMaxIn) / 2;
             }
           } else if (yMidIn < yMidOut) {
-            if (xMidIn > xMidOut) {
+            if (xMidOut > xMinIn && xMidOut < xMaxIn || xMidOut < xMinIn && xMidOut > xMaxIn) {
+              xResult = (xMinIn + xMaxIn) / 2;
+            } else if (xMidIn > xMidOut) {
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
@@ -10612,7 +10813,9 @@ function (_super) {
               xResult = (xMinIn + xMaxIn) / 2;
             }
           } else if (yMidIn === yMidOut) {
-            if (xMidIn > xMidOut) {
+            if (xMidOut > xMinIn && xMidOut < xMaxIn || xMidOut < xMinIn && xMidOut > xMaxIn) {
+              xResult = (xMinIn + xMaxIn) / 2;
+            } else if (xMidIn > xMidOut) {
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
@@ -10732,7 +10935,9 @@ function (_super) {
           }
         } else if (idMultiLink === 2) {
           if (yMidIn > yMidOut) {
-            if (xMidIn > xMidOut) {
+            if (xMidIn > xMinOut && xMidIn < xMaxOut || xMidIn < xMinOut && xMidIn > xMaxOut) {
+              xResult = (xMinOut + xMaxOut) / 2;
+            } else if (xMidIn > xMidOut) {
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
@@ -10748,7 +10953,9 @@ function (_super) {
               xResult = (xMinOut + xMaxOut) / 2;
             }
           } else if (yMidIn < yMidOut) {
-            if (xMidIn > xMidOut) {
+            if (xMidIn > xMinOut && xMidIn < xMaxOut || xMidIn < xMinOut && xMidIn > xMaxOut) {
+              xResult = (xMinOut + xMaxOut) / 2;
+            } else if (xMidIn > xMidOut) {
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
@@ -10805,7 +11012,9 @@ function (_super) {
 
       if (_this.props.associatePointIn !== '') {
         arrayPoints.forEach(function (point) {
-          if (point.name === _this.props.associatePointIn) {
+          var name = point.label || point.name;
+
+          if (name === _this.props.associatePointIn) {
             xMinIn = parseInt(point.positionShapeX, 10);
             xMaxIn = parseInt(point.positionShapeX, 10);
             yMinIn = parseInt(point.positionShapeY, 10);
@@ -10834,7 +11043,9 @@ function (_super) {
           }
         });
         arrayPoints.forEach(function (point) {
-          if (point.name === _this.props.associatePointOut) {
+          var name = point.label || point.name;
+
+          if (name === _this.props.associatePointOut) {
             xMinOut = parseInt(point.positionShapeX, 10);
             xMaxOut = parseInt(point.positionShapeX, 10);
             yMinOut = parseInt(point.positionShapeY, 10);
@@ -10903,20 +11114,52 @@ function (_super) {
 
       if (isIn) {
         if (idMultiLink === 0) {
-          if (xMidIn > xMidOut) {
+          if (xMidOut > xMinIn && xMidOut < xMaxIn || xMidOut < xMinIn && xMidOut > xMaxIn) {
             if (yMidIn > yMidOut) {
+              console.log('y1');
+
               if (yMinIn < 0 && yMaxIn < 0) {
-                yResult = yMinIn;
-              } else {
                 yResult = yMaxIn;
+              } else {
+                yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
+              console.log('y2');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
                 yResult = yMaxIn;
               }
             } else if (yMidIn === yMidOut) {
+              console.log('y3');
+
+              if (yMinIn < 0 && yMaxIn < 0) {
+                yResult = yMinIn;
+              } else {
+                yResult = yMaxIn;
+              }
+            }
+          } else if (xMidIn > xMidOut) {
+            if (yMidIn > yMidOut) {
+              console.log('y4');
+
+              if (yMinIn < 0 && yMaxIn < 0) {
+                yResult = yMinIn;
+              } else {
+                yResult = yMaxIn;
+              }
+            } else if (yMidIn < yMidOut) {
+              console.log('y5');
+
+              if (yMinIn < 0 && yMaxIn < 0) {
+                yResult = yMinIn;
+              } else {
+                yResult = yMaxIn;
+              }
+            } else if (yMidIn === yMidOut) {
+              console.log('y6');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
@@ -10925,18 +11168,24 @@ function (_super) {
             }
           } else if (xMidIn < xMidOut) {
             if (yMidIn > yMidOut) {
+              console.log('y7');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
                 yResult = yMaxIn;
               }
             } else if (yMidIn < yMidOut) {
+              console.log('y8');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
                 yResult = yMaxIn;
               }
             } else if (yMidIn === yMidOut) {
+              console.log('y9');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
@@ -10945,18 +11194,16 @@ function (_super) {
             }
           } else if (xMidIn === xMidOut) {
             if (yMidIn > yMidOut) {
+              console.log('y10');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
-              if (yMinIn < 0 && yMaxIn < 0) {
-                yResult = yMinIn;
-              } else {
-                yResult = yMaxIn;
-              }
-            } else if (yMidIn === yMidOut) {
+              console.log('y11');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
@@ -10965,7 +11212,35 @@ function (_super) {
             }
           }
         } else if (idMultiLink === 1) {
-          if (xMidIn > xMidOut) {
+          if (xMidOut > xMinIn && xMidOut < xMaxIn || xMidOut < xMinIn && xMidOut > xMaxIn) {
+            if (yMidIn > yMidOut) {
+              console.log('y12');
+
+              if (yMinIn < 0 && yMaxIn < 0) {
+                yResult = yMaxIn;
+              } else {
+                yResult = yMinIn;
+              }
+            } else if (yMidIn < yMidOut) {
+              console.log('y13');
+
+              if (yMinIn < 0 && yMaxIn < 0) {
+                yResult = yMinIn;
+              } else {
+                yResult = yMaxIn;
+              }
+            } else if (yMidIn === yMidOut) {
+              console.log('y14');
+
+              if (yMinIn < 0 && yMaxIn < 0) {
+                yResult = yMinOut;
+              } else {
+                yResult = yMaxOut;
+              }
+            }
+          } else if (xMidIn > xMidOut) {
+            console.log('y16');
+
             if (yMidIn > yMidOut) {
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
@@ -10973,12 +11248,16 @@ function (_super) {
                 yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
+              console.log('y17');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn === yMidOut) {
+              console.log('y18');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
@@ -10987,18 +11266,24 @@ function (_super) {
             }
           } else if (xMidIn < xMidOut) {
             if (yMidIn > yMidOut) {
+              console.log('y19');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
+              console.log('y20');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn === yMidOut) {
+              console.log('y21');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
@@ -11007,18 +11292,16 @@ function (_super) {
             }
           } else if (xMidIn === xMidOut) {
             if (yMidIn > yMidOut) {
+              console.log('y22');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
-              if (yMinIn < 0 && yMaxIn < 0) {
-                yResult = yMinIn;
-              } else {
-                yResult = yMaxIn;
-              }
-            } else if (yMidIn === yMidOut) {
+              console.log('y23');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
@@ -11027,52 +11310,86 @@ function (_super) {
             }
           }
         } else if (idMultiLink === 2) {
-          if (xMidIn > xMidOut) {
+          if (xMidOut > xMinIn && xMidOut < xMaxIn || xMidOut < xMinIn && xMidOut > xMaxIn) {
             if (yMidIn > yMidOut) {
+              console.log('y24');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
+              console.log('y25');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
                 yResult = yMaxIn;
               }
             } else if (yMidIn === yMidOut) {
+              console.log('y26');
+
+              if (yMinIn < 0 && yMaxIn < 0) {
+                yResult = yMinOut;
+              } else {
+                yResult = yMaxOut;
+              }
+            }
+          } else if (xMidIn > xMidOut) {
+            if (yMidIn > yMidOut) {
+              console.log('y28');
+
+              if (yMinIn < 0 && yMaxIn < 0) {
+                yResult = yMaxIn;
+              } else {
+                yResult = yMinIn;
+              }
+            } else if (yMidIn < yMidOut) {
+              console.log('y29');
+
+              if (yMinIn < 0 && yMaxIn < 0) {
+                yResult = yMinIn;
+              } else {
+                yResult = yMaxIn;
+              }
+            } else if (yMidIn === yMidOut) {
+              console.log('y30');
               yResult = (yMinIn + yMaxIn) / 2;
             }
           } else if (xMidIn < xMidOut) {
             if (yMidIn > yMidOut) {
+              console.log('y31');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
+              console.log('y32');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
                 yResult = yMaxIn;
               }
             } else if (yMidIn === yMidOut) {
+              console.log('y33');
               yResult = (yMinIn + yMaxIn) / 2;
             }
           } else if (xMidIn === xMidOut) {
             if (yMidIn > yMidOut) {
+              console.log('y34');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
-              if (yMinIn < 0 && yMaxIn < 0) {
-                yResult = yMinIn;
-              } else {
-                yResult = yMaxIn;
-              }
-            } else if (yMidIn === yMidOut) {
+              console.log('y35');
+
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
@@ -11083,20 +11400,52 @@ function (_super) {
         }
       } else {
         if (idMultiLink === 0) {
-          if (xMidIn > xMidOut) {
+          if (xMidIn > xMinOut && xMidIn < xMaxOut || xMidIn < xMinOut && xMidIn > xMaxOut) {
             if (yMidIn > yMidOut) {
+              console.log('y37');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
+              console.log('y38');
+
+              if (yMinOut < 0 && yMaxOut < 0) {
+                yResult = yMaxOut;
+              } else {
+                yResult = yMinOut;
+              }
+            } else if (yMidIn === yMidOut) {
+              console.log('y39');
+
+              if (yMinOut < 0 && yMaxOut < 0) {
+                yResult = yMinOut;
+              } else {
+                yResult = yMaxOut;
+              }
+            }
+          } else if (xMidIn > xMidOut) {
+            if (yMidIn > yMidOut) {
+              console.log('y40');
+
+              if (yMinOut < 0 && yMaxOut < 0) {
+                yResult = yMinOut;
+              } else {
+                yResult = yMaxOut;
+              }
+            } else if (yMidIn < yMidOut) {
+              console.log('y41');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn === yMidOut) {
+              console.log('y42');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
@@ -11105,18 +11454,24 @@ function (_super) {
             }
           } else if (xMidIn < xMidOut) {
             if (yMidIn > yMidOut) {
+              console.log('y43');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
+              console.log('y44');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn === yMidOut) {
+              console.log('y45');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
@@ -11125,18 +11480,16 @@ function (_super) {
             }
           } else if (xMidIn === xMidOut) {
             if (yMidIn > yMidOut) {
+              console.log('y46');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
-              if (yMinOut < 0 && yMaxOut < 0) {
-                yResult = yMaxOut;
-              } else {
-                yResult = yMinOut;
-              }
-            } else if (yMidIn === yMidOut) {
+              console.log('y47');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
@@ -11145,20 +11498,52 @@ function (_super) {
             }
           }
         } else if (idMultiLink === 1) {
-          if (xMidIn > xMidOut) {
+          if (xMidIn > xMinOut && xMidIn < xMaxOut || xMidIn < xMinOut && xMidIn > xMaxOut) {
             if (yMidIn > yMidOut) {
+              console.log('y49');
+
               if (yMinOut < 0 && yMaxOut < 0) {
-                yResult = yMaxOut;
-              } else {
                 yResult = yMinOut;
+              } else {
+                yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
+              console.log('y50');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
                 yResult = yMinOut;
               }
             } else if (yMidIn === yMidOut) {
+              console.log('y51');
+
+              if (yMinOut < 0 && yMaxOut < 0) {
+                yResult = yMinOut;
+              } else {
+                yResult = yMaxOut;
+              }
+            }
+          } else if (xMidIn > xMidOut) {
+            if (yMidIn > yMidOut) {
+              console.log('y52');
+
+              if (yMinOut < 0 && yMaxOut < 0) {
+                yResult = yMaxOut;
+              } else {
+                yResult = yMinOut;
+              }
+            } else if (yMidIn < yMidOut) {
+              console.log('y53');
+
+              if (yMinOut < 0 && yMaxOut < 0) {
+                yResult = yMaxOut;
+              } else {
+                yResult = yMinOut;
+              }
+            } else if (yMidIn === yMidOut) {
+              console.log('y54');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
@@ -11167,18 +11552,24 @@ function (_super) {
             }
           } else if (xMidIn < xMidOut) {
             if (yMidIn > yMidOut) {
+              console.log('y55');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
                 yResult = yMinOut;
               }
             } else if (yMidIn < yMidOut) {
+              console.log('y56');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
                 yResult = yMinOut;
               }
             } else if (yMidIn === yMidOut) {
+              console.log('y57');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
@@ -11187,18 +11578,16 @@ function (_super) {
             }
           } else if (xMidIn === xMidOut) {
             if (yMidIn > yMidOut) {
+              console.log('y58');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
-              if (yMinOut < 0 && yMaxOut < 0) {
-                yResult = yMaxOut;
-              } else {
-                yResult = yMinOut;
-              }
-            } else if (yMidIn === yMidOut) {
+              console.log('y59');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
@@ -11207,52 +11596,81 @@ function (_super) {
             }
           }
         } else if (idMultiLink === 2) {
-          if (xMidIn > xMidOut) {
+          if (xMidIn > xMinOut && xMidIn < xMaxOut || xMidIn < xMinOut && xMidIn > xMaxOut) {
             if (yMidIn > yMidOut) {
+              console.log('y61');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
+              console.log('y62');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
                 yResult = yMinOut;
               }
             } else if (yMidIn === yMidOut) {
+              console.log('y64');
+              yResult = (yMinOut + yMaxOut) / 2;
+            }
+          } else if (xMidIn > xMidOut) {
+            if (yMidIn > yMidOut) {
+              console.log('y65');
+
+              if (yMinOut < 0 && yMaxOut < 0) {
+                yResult = yMinOut;
+              } else {
+                yResult = yMaxOut;
+              }
+            } else if (yMidIn < yMidOut) {
+              console.log('y66');
+
+              if (yMinOut < 0 && yMaxOut < 0) {
+                yResult = yMaxOut;
+              } else {
+                yResult = yMinOut;
+              }
+            } else if (yMidIn === yMidOut) {
+              console.log('y67');
               yResult = (yMinOut + yMaxOut) / 2;
             }
           } else if (xMidIn < xMidOut) {
             if (yMidIn > yMidOut) {
+              console.log('y68');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
+              console.log('y69');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
                 yResult = yMinOut;
               }
             } else if (yMidIn === yMidOut) {
+              console.log('y70');
               yResult = (yMinOut + yMaxOut) / 2;
             }
           } else if (xMidIn === xMidOut) {
             if (yMidIn > yMidOut) {
+              console.log('y71');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
-              if (yMinOut < 0 && yMaxOut < 0) {
-                yResult = yMaxOut;
-              } else {
-                yResult = yMinOut;
-              }
-            } else if (yMidIn === yMidOut) {
+              console.log('y72');
+
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
@@ -11275,12 +11693,14 @@ function (_super) {
       var yOut = 0;
       var ajustPosition = 5;
       arrayPoints.forEach(function (point) {
-        if (point.name === _this.props.associatePointIn) {
+        var name = point.label || point.name;
+
+        if (name === _this.props.associatePointIn) {
           xIn = parseInt(point.positionShapeX, 10);
           yIn = parseInt(point.positionShapeY, 10);
         }
 
-        if (point.name === _this.props.associatePointOut) {
+        if (name === _this.props.associatePointOut) {
           xOut = parseInt(point.positionShapeX, 10);
           yOut = parseInt(point.positionShapeY, 10);
         }
@@ -11374,12 +11794,14 @@ function (_super) {
       var yOut = 0;
       var ajustPosition = 5;
       arrayPoints.forEach(function (point) {
-        if (point.name === _this.props.associatePointIn) {
+        var name = point.label || point.name;
+
+        if (name === _this.props.associatePointIn) {
           xIn = parseInt(point.positionShapeX, 10);
           yIn = parseInt(point.positionShapeY, 10);
         }
 
-        if (point.name === _this.props.associatePointOut) {
+        if (name === _this.props.associatePointOut) {
           xOut = parseInt(point.positionShapeX, 10);
           yOut = parseInt(point.positionShapeY, 10);
         }
@@ -11709,6 +12131,26 @@ function (_super) {
       return result;
     };
 
+    _this.defineSizeLink = function () {
+      var result = '';
+
+      if (_this.props.size) {
+        var size = _this.props.size.value || '';
+
+        if (size === 'Small') {
+          result = '8';
+        } else if (size === 'Medium') {
+          result = '9';
+        } else if (size === 'Large') {
+          result = '10';
+        }
+      } else {
+        result = '9';
+      }
+
+      return result;
+    };
+
     _this.state = {};
     return _this;
   }
@@ -11740,8 +12182,7 @@ function (_super) {
 
 
   DrawOrientedLink.prototype.drawLink = function (xA0, yA0, xB0, yB0, xCByClick0, yCByClick0, orientationLink) {
-    var _this = this; //this.defineParallelOrientedLinks();
-
+    var _this = this;
 
     var listParallelOrientedLinks = this.defineParallelOrientedLinks();
     var xA = 0;
@@ -12007,7 +12448,7 @@ function (_super) {
           zIndex: 9999,
           top: yMidAC + parseInt(this.props.labelAPositionY, 10) * inverseAxeY - this.labelSynchroY('A'),
           left: xMidAC + parseInt(this.props.labelAPositionX, 10) - this.labelSynchroX('A'),
-          fontSize: '8px',
+          fontSize: this.props.sizePolice,
           //border: '1px solid black',
           backgroundColor: 'white',
           color: this.defineColorTextLabel(),
@@ -12059,7 +12500,7 @@ function (_super) {
           zIndex: 9999,
           top: yMidBC + parseInt(this.props.labelBPositionY, 10) * inverseAxeY - this.labelSynchroY('B'),
           left: xMidBC + parseInt(this.props.labelBPositionX, 10) - this.labelSynchroX('B'),
-          fontSize: '8px',
+          fontSize: this.props.sizePolice,
           //border: '1px solid black',
           backgroundColor: 'white',
           color: this.defineColorTextLabel(),
@@ -12137,7 +12578,7 @@ function (_super) {
             top: yC + parseInt(this.props.labelAPositionY, 10) * inverseAxeY - this.labelSynchroY('A'),
             left: xC + parseInt(this.props.labelAPositionX, 10) - this.labelSynchroX('A'),
             backgroundColor: 'white',
-            fontSize: '8px',
+            fontSize: this.props.sizePolice,
             color: this.defineColorTextLabel(),
             padding: '0 5px',
             cursor: 'pointer'
@@ -12165,7 +12606,8 @@ function (_super) {
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           id: "arrow1",
           style: {
-            display: 'flex'
+            display: 'flex',
+            justifyContent: 'center'
           }
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "arrowTriangle",
@@ -12194,7 +12636,7 @@ function (_super) {
             top: yMidAB + parseInt(this.props.labelAPositionY, 10) * inverseAxeY - this.labelSynchroY('A'),
             left: xMidAB + parseInt(this.props.labelAPositionX, 10) - this.labelSynchroX('A'),
             backgroundColor: 'white',
-            fontSize: '8px',
+            fontSize: this.props.sizePolice,
             color: this.defineColorTextLabel(),
             padding: '0 5px',
             cursor: 'pointer'
@@ -12349,10 +12791,10 @@ function (_super) {
       if (seuil[0].sizeBorder !== '') {
         sizeBorder = seuil[0].sizeBorder;
       } else {
-        sizeBorder = '10';
+        sizeBorder = this.defineSizeLink();
       }
     } else {
-      sizeBorder = '10';
+      sizeBorder = this.defineSizeLink();
     }
 
     var index = 0;
@@ -12734,7 +13176,7 @@ function (_super) {
 
     if (drawGraphicMarker === 'true') {
       if (shape === 'circle') {
-        if (this.props.buttonAddLinkIsActive) {
+        if (this.props.buttonAddLinkIsActive || this.props.buttonAddIncurvedLinkIsActive) {
           return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
             key: 'tooltip' + this.props.name,
             content: valueToolTip,
@@ -12812,7 +13254,7 @@ function (_super) {
         textDecoration: this.defineTextDecoration(),
         fontStyle: this.defineFontStyle(),
         fontWeight: this.defineFontWeight(),
-        fontSize: '12px',
+        fontSize: this.props.sizePolice,
         fontFamily: police,
         color: this.props.textObject.colorText || 'black',
         position: 'absolute',
@@ -13461,6 +13903,81 @@ function (_super) {
         _this.generateTooltipAndEditColor(region, null);
       }
     };
+
+    _this.getValuesAuxiliaryMetrics = function () {
+      var region = _this.props.uneCoor;
+      Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_7__["reqMetricAuxRegion"])(region, _this.props);
+      var mainMetric = region.mainMetric;
+      var auxiliaryMetrics = region.metrics;
+      var valueAuxiliaryMetric = [];
+      var countMetrics = auxiliaryMetrics.length;
+      auxiliaryMetrics.forEach(function (metric) {
+        var _a;
+
+        var countTotalValues = 0;
+        var resultTotalValues = 0;
+        var result = '';
+
+        if (metric.returnQuery && metric.returnQuery.length > 0) {
+          var numberLoop = (((_a = metric.returnQuery) === null || _a === void 0 ? void 0 : _a.length) || 0) / countMetrics;
+
+          if (metric.key !== '' && metric.keyValue !== '') {
+            for (var i = 0; i < numberLoop; i++) {
+              var line = metric.returnQuery[i];
+
+              if (line.fields[0].labels) {
+                if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || mainMetric.key === '' && mainMetric.keyValue === '') {
+                  if (line.fields[0].labels[metric.key] === metric.keyValue) {
+                    var countValues = line.fields[0].values.length;
+
+                    for (var i_1 = 0; i_1 < countValues; i_1++) {
+                      if (line.fields[0].values.get(i_1)) {
+                        resultTotalValues += line.fields[0].values.get(i_1);
+                        countTotalValues++;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          } else {
+            for (var i = 0; i < numberLoop; i++) {
+              var line = metric.returnQuery[i];
+
+              if (line.fields[0].labels) {
+                if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || mainMetric.key === '' && mainMetric.keyValue === '') {
+                  var countValues = line.fields[0].values.length;
+
+                  for (var i_2 = 0; i_2 < countValues; i_2++) {
+                    if (line.fields[0].values.get(i_2)) {
+                      resultTotalValues += line.fields[0].values.get(i_2);
+                      countTotalValues++;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          if (metric.manageValue === 'avg') {
+            result = (resultTotalValues / countTotalValues).toString();
+          } else if (metric.manageValue === 'sum') {
+            result = resultTotalValues.toString();
+          } else if (metric.manageValue === 'err') {
+            if (countTotalValues > 1) {
+              result = 'error';
+            } else {
+              result = resultTotalValues.toString();
+            }
+          }
+        }
+
+        if (result !== '') {
+          valueAuxiliaryMetric.push(result);
+        }
+      });
+      return valueAuxiliaryMetric;
+    };
     /** final region zone . Call function after reqMetrics*/
 
 
@@ -13664,6 +14181,8 @@ function (_super) {
 
 
   DrawRectangleExtend.prototype.render = function () {
+    //console.log(this.props.uneCoor.metrics);
+    //console.log(this.getValuesAuxiliaryMetrics());
     return this.state.htmlResult;
   };
 
@@ -17365,7 +17884,7 @@ function (_super) {
     };
 
     _this.loadMonoLink = function (link) {
-      var toLoad = new _Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_5__["OrientedLinkClass"](link.id, link.linkURL, link.meta, link.lowerLimit, link.label, link.textObj, link.mainMetric, link.metrics, link.colorMode, link.traceBack, link.traceBorder, link.positionParameter, link.name, link.orientationLink, link.pointAPositionX, link.pointAPositionY, link.colorCoordinateA, link.pointBPositionX, link.pointBPositionY, link.colorCoordinateB, link.valueMainMetricA, link.valueMainMetricB, link.pointIn, link.pointOut, link.regionIn, link.regionOut, link.zIndex, link.pointCPositionX, link.pointCPositionY, link.isIncurved, link.mainMetricB, link.metricsB);
+      var toLoad = new _Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_5__["OrientedLinkClass"](link.id, link.linkURL, link.meta, link.lowerLimit, link.label, link.textObj, link.mainMetric, link.metrics, link.colorMode, link.traceBack, link.traceBorder, link.positionParameter, link.name, link.orientationLink, link.size, link.pointAPositionX, link.pointAPositionY, link.colorCoordinateA, link.pointBPositionX, link.pointBPositionY, link.colorCoordinateB, link.valueMainMetricA, link.valueMainMetricB, link.pointIn, link.pointOut, link.regionIn, link.regionOut, link.zIndex, link.pointCPositionX, link.pointCPositionY, link.isIncurved, link.mainMetricB, link.metricsB);
       console.log(toLoad); // Do some test here to see if your already load a coordinatespace with this id
 
       var selector = _this.LinkValidator(toLoad);
@@ -17917,23 +18436,25 @@ function (_super) {
             className: "LegendMatt"
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
             style: {
-              padding: 4,
-              margin: 9,
-              width: '3.5rem',
-              borderRadius: '39%',
+              padding: '5px',
+              margin: '10px',
+              width: '130px',
+              //width: '3.5rem',
+              //borderRadius: '39%',
               backgroundColor: lower.backColor,
               border: lower.sizeBorder + 'px solid ' + lower.borderColor,
               listStyleType: 'none',
-              display: 'inline-block'
-            }
-          }), lowerLimit.length > 1 && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-            style: {
               display: 'inline-block',
-              verticalAlign: 'middle',
-              marginBottom: '1.25rem',
-              fontSize: '9px'
+              textAlign: 'center'
             }
-          }, i === 0 ? '-∞' : lower.lowerLimitMin, " - ", i === max ? '+∞' : lower.lowerLimitMax)));
+          }, lowerLimit.length > 1 && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+            style: {
+              //display: 'inline-block',
+              //verticalAlign: 'middle',
+              //marginBottom: '1.25rem',
+              fontSize: '10px'
+            }
+          }, i === 0 ? '-∞' : lower.lowerLimitMin, " - ", i === max ? '+∞' : lower.lowerLimitMax))));
           ++i;
         }
       } catch (e_1_1) {
@@ -17997,7 +18518,9 @@ function (_super) {
 
           var allLimit = _this.fillLowerLimit(line.lowerLimit);
 
-          var ownElement = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, line.label, allLimit);
+          var name_1 = line.label || line.name;
+          console.log(name_1);
+          var ownElement = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, name_1, allLimit);
           rendu.push(ownElement);
         }
       } catch (e_3_1) {
@@ -18009,6 +18532,39 @@ function (_super) {
           if (allPoint_1_1 && !allPoint_1_1.done && (_a = allPoint_1["return"])) _a.call(allPoint_1);
         } finally {
           if (e_3) throw e_3.error;
+        }
+      }
+
+      return rendu;
+    };
+    /** get all limit for orientedLink */
+
+
+    _this.fillLink = function () {
+      var e_4, _a;
+
+      var allLinks = _this.props.options.arrayOrientedLinks;
+      var rendu = [];
+
+      try {
+        for (var allLinks_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(allLinks), allLinks_1_1 = allLinks_1.next(); !allLinks_1_1.done; allLinks_1_1 = allLinks_1.next()) {
+          var line = allLinks_1_1.value;
+
+          var allLimit = _this.fillLowerLimit(line.lowerLimit);
+
+          var name_2 = line.label || line.name;
+          var ownElement = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, name_2, allLimit);
+          rendu.push(ownElement);
+        }
+      } catch (e_4_1) {
+        e_4 = {
+          error: e_4_1
+        };
+      } finally {
+        try {
+          if (allLinks_1_1 && !allLinks_1_1.done && (_a = allLinks_1["return"])) _a.call(allLinks_1);
+        } finally {
+          if (e_4) throw e_4.error;
         }
       }
 
@@ -18055,33 +18611,25 @@ function (_super) {
                 style: {
                   width: '100%',
                   fontSize: '20px',
-                  display: 'inline-flex'
+                  display: 'inline-flex',
+                  padding: '10px'
                 }
-              }, "Legend"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                style: {
-                  color: '#d8d9da',
-                  fontSize: '15px',
-                  marginLeft: '14px',
-                  fontWeight: 'bold'
-                }
-              }, "Region"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                style: {
-                  color: '#d8d9da',
-                  fontSize: '11px',
-                  marginLeft: '17px'
-                }
-              }, "Label")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+              }, "Legend")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
                 style: {
                   backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))'
                 }
               }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
                 style: {
                   fontSize: '15px',
-                  marginLeft: '14px',
-                  fontWeight: 'bold'
+                  padding: '10px 0 10px 14px',
+                  fontWeight: 'bold',
+                  color: 'white'
                 }
               }, "Region")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-                key: "regionLegend"
+                key: "regionLegend",
+                style: {
+                  paddingLeft: '5px'
+                }
               }, this.fillRegion()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
                 style: {
                   backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))'
@@ -18089,12 +18637,32 @@ function (_super) {
               }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
                 style: {
                   fontSize: '15px',
-                  marginLeft: '14px',
-                  fontWeight: 'bold'
+                  padding: '10px 0 10px 14px',
+                  fontWeight: 'bold',
+                  color: 'white'
                 }
               }, "Point")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-                key: "pointLegend"
-              }, this.fillPoint())));
+                key: "pointLegend",
+                style: {
+                  paddingLeft: '5px'
+                }
+              }, this.fillPoint()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+                style: {
+                  backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))'
+                }
+              }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                style: {
+                  fontSize: '15px',
+                  padding: '10px 0 10px 14px',
+                  fontWeight: 'bold',
+                  color: 'white'
+                }
+              }, "Oriented Link")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+                key: "pointLegend",
+                style: {
+                  paddingLeft: '5px'
+                }
+              }, this.fillLink())));
               return [4
               /*yield*/
               , this.setStateAsyncFinalHTML({
@@ -18267,7 +18835,7 @@ function (_super) {
 
       var _loop_1 = function _loop_1(element) {
         setTimeout(function () {
-          _this.addInput(element.id, element.label, element.orientationLink, element.pointAPositionX, element.pointAPositionY, element.colorCoordinateA, element.pointBPositionX, element.pointBPositionY, element.colorCoordinateB, element.pointIn, element.pointOut, element.regionIn, element.regionOut, element.textObj, element.lowerLimit, element.positionParameter, element.pointCPositionX, element.pointCPositionY, element.isIncurved, element.mainMetric, element.metrics, element.mainMetricB, element.metricsB, element.colorMode, element.traceBorder //element.traceBack
+          _this.addInput(element.id, element.label, element.orientationLink, element.size, element.pointAPositionX, element.pointAPositionY, element.colorCoordinateA, element.pointBPositionX, element.pointBPositionY, element.colorCoordinateB, element.pointIn, element.pointOut, element.regionIn, element.regionOut, element.textObj, element.lowerLimit, element.positionParameter, element.pointCPositionX, element.pointCPositionY, element.isIncurved, element.mainMetric, element.metrics, element.mainMetricB, element.metricsB, element.colorMode, element.traceBorder //element.traceBack
           );
         }, 100);
       };
@@ -18301,7 +18869,7 @@ function (_super) {
      */
 
 
-    _this.addInput = function (id, label, orientationLink, pointAPositionX, pointAPositionY, colorCoordinateA, pointBPositionX, pointBPositionY, colorCoordinateB, pointIn, pointOut, regionIn, regionOut, //refIdMainMetric?: string, keyMainMetric?: string, keyValueMainMetric?: string,
+    _this.addInput = function (id, label, orientationLink, size, pointAPositionX, pointAPositionY, colorCoordinateA, pointBPositionX, pointBPositionY, colorCoordinateB, pointIn, pointOut, regionIn, regionOut, //refIdMainMetric?: string, keyMainMetric?: string, keyValueMainMetric?: string,
     textObj, seuil, positionParameter, pointCPositionX, pointCPositionY, isIncurved, mainMetrics, auxiliaryMetrics, mainMetricsB, auxiliaryMetricsB, colorMode, traceBorder //traceBack?: boolean
     ) {
       var num = id || _this.props.options.indexOrientedLink + 1;
@@ -18364,6 +18932,9 @@ function (_super) {
           initMainMetrics, auxiliaryMetrics || [], colorMode || false, false, traceBorder || false, initPositionParameter, 'orientedLink' + num.toString(), orientationLink || {
             label: 'double',
             value: 'double'
+          }, size || {
+            label: 'Medium',
+            value: 'Medium'
           }, pointAPositionX || '0', pointAPositionY || '0', colorCoordinateA || '#5794F2', pointBPositionX || '0', pointBPositionY || '0', colorCoordinateB || '#E54658', '', '', pointIn || '', pointOut || '', regionIn || '', regionOut || '', zIndex, pointCPositionX || '0', pointCPositionY || '0', isIncurved || {}, initMainMetricsB, auxiliaryMetricsB || [])),
           arrayInput: prevState.arrayInput.concat([new Models_ArrayInputSelectableClass__WEBPACK_IMPORTED_MODULE_2__["ArrayInputSelectableClass"](num, finalArray)])
         };
@@ -18518,16 +19089,14 @@ function (_super) {
     };
 
     _this.updateAssociatePointAndRegion = function (orientedLink, name) {
-      var value = {};
-
       if (name.startsWith('pointIn')) {
-        orientedLink = Object(Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_9__["editGoodParameterOrientedLink"])('regionIn', orientedLink, '', value || {});
+        orientedLink = Object(Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_9__["editGoodParameterOrientedLink"])('regionIn', orientedLink, '', {});
       } else if (name.startsWith('regionIn')) {
-        orientedLink = Object(Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_9__["editGoodParameterOrientedLink"])('pointIn', orientedLink, '', value || {});
+        orientedLink = Object(Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_9__["editGoodParameterOrientedLink"])('pointIn', orientedLink, '', {});
       } else if (name.startsWith('pointOut')) {
-        orientedLink = Object(Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_9__["editGoodParameterOrientedLink"])('regionOut', orientedLink, '', value || {});
+        orientedLink = Object(Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_9__["editGoodParameterOrientedLink"])('regionOut', orientedLink, '', {});
       } else if (name.startsWith('regionOut')) {
-        orientedLink = Object(Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_9__["editGoodParameterOrientedLink"])('pointOut', orientedLink, '', value || {});
+        orientedLink = Object(Functions_EditParameter_editGoodParameterOrientedLink__WEBPACK_IMPORTED_MODULE_9__["editGoodParameterOrientedLink"])('pointOut', orientedLink, '', {});
       }
     };
     /**
@@ -18536,14 +19105,117 @@ function (_super) {
 
 
     _this.componentDidMount = function () {
+      _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+        newOrientedLink: false
+      }));
+
+      _this.props.options.newOrientedLink = false;
+
       _this.loadCoorParent();
+    };
+
+    _this.componentDidUpdate = function () {
+      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+          switch (_a.label) {
+            case 0:
+              if (!this.props.options.newOrientedLink) return [3
+              /*break*/
+              , 4]; //const newValue = false;
+
+              this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.props.options), {
+                newOrientedLink: false
+              }));
+              this.props.options.newOrientedLink = false;
+              return [4
+              /*yield*/
+              , this.setStateAsyncArrayInput({
+                arrayInput: []
+              })];
+
+            case 1:
+              _a.sent();
+
+              return [4
+              /*yield*/
+              , this.setStateAsyncArrayOrientedLink({
+                arrayOrientedLinkClass: []
+              })];
+
+            case 2:
+              _a.sent();
+
+              return [4
+              /*yield*/
+              , this.setStateAsyncDebug({
+                debug: false
+              })];
+
+            case 3:
+              _a.sent();
+
+              this.loadCoorParent();
+              this.generateInputsOrientedLinks();
+              _a.label = 4;
+
+            case 4:
+              return [2
+              /*return*/
+              ];
+          }
+        });
+      });
+    }; // // /** update state when props uneCoor change */
+    // componentDidUpdate = async (prevProps: Props) => {
+    //   console.log('ok');
+    //   console.log(prevProps.options.newOrientedLink);
+    //   if (this.props.options.newOrientedLink) {
+    //     console.log('outof');
+    //     await this.setStateAsyncArrayInput({
+    //       arrayInput: [],
+    //     });
+    //     await this.setStateAsyncArrayOrientedLink({
+    //       arrayOrientedLinkClass: [],
+    //     });
+    //     await this.setStateAsyncDebug({
+    //       debug: false,
+    //     });
+    //     this.loadCoorParent();
+    //     this.generateInputsOrientedLinks();
+    //     const newValue = false;
+    //     this.props.onOptionsChange({
+    //       ...this.props.options,
+    //       newOrientedLink: newValue,
+    //     });
+    //     this.props.options.newOrientedLink = newValue;
+    //     console.log(prevProps.options.newOrientedLink);
+    //   }
+    // };
+
+
+    _this.setStateAsyncDebug = function (state) {
+      return new Promise(function (resolve) {
+        _this.setState(state, resolve);
+      });
+    };
+
+    _this.setStateAsyncArrayInput = function (state) {
+      return new Promise(function (resolve) {
+        _this.setState(state, resolve);
+      });
+    };
+
+    _this.setStateAsyncArrayOrientedLink = function (state) {
+      return new Promise(function (resolve) {
+        _this.setState(state, resolve);
+      });
     };
 
     _this.state = {
       arrayInput: [],
       arrayOrientedLinkClass: [],
-      index: 1,
       debug: false,
+      test: false,
       listCollapseOrientedLink: []
     };
     return _this;
@@ -18576,15 +19248,10 @@ function (_super) {
     var arrayOptionsPoint = [];
     arrayOptionsPoint.push(optionPointNull);
     arrayPoint.forEach(function (point) {
-      var valueLabel = point.label;
-
-      if (point.label === '') {
-        valueLabel = point.name;
-      }
-
+      var valueLabel = point.label || point.name;
       var optionPoint = {
         label: valueLabel,
-        value: point.name
+        value: valueLabel
       };
       arrayOptionsPoint.push(optionPoint);
     });
@@ -18698,7 +19365,7 @@ function (_super) {
       return value;
     }
 
-    if (name.startsWith('orientationLink') || name.startsWith('isIncurved') || name.startsWith('pointIn') || name.startsWith('pointOut') || name.startsWith('regionIn') || name.startsWith('regionOut')) {
+    if (name.startsWith('orientationLink') || name.startsWith('isIncurved') || name.startsWith('pointIn') || name.startsWith('pointOut') || name.startsWith('regionIn') || name.startsWith('regionOut') || name.startsWith('size')) {
       if (name.startsWith('orientationLink')) {
         valueSelect = this.state.arrayOrientedLinkClass[idx].orientationLink;
       } else if (name.startsWith('isIncurved')) {
@@ -18723,6 +19390,8 @@ function (_super) {
           label: this.state.arrayOrientedLinkClass[idx].regionOut,
           value: this.state.arrayOrientedLinkClass[idx].regionOut
         };
+      } else if (name.startsWith('size')) {
+        valueSelect = this.state.arrayOrientedLinkClass[idx].size;
       }
 
       return valueSelect;
@@ -18754,16 +19423,7 @@ function (_super) {
         value = this.state.arrayOrientedLinkClass[idx].pointCPositionX;
       } else if (name.startsWith('pointCY')) {
         value = this.state.arrayOrientedLinkClass[idx].pointCPositionY;
-      } // else if (name.startsWith('pointIn')) {
-      //   value = this.state.arrayOrientedLinkClass[idx].pointIn;
-      // } else if (name.startsWith('pointOut')) {
-      //   value = this.state.arrayOrientedLinkClass[idx].pointIn;
-      // } else if (name.startsWith('regionIn')) {
-      //   value = this.state.arrayOrientedLinkClass[idx].pointIn;
-      // } else if (name.startsWith('regionOut')) {
-      //   value = this.state.arrayOrientedLinkClass[idx].pointIn;
-      // }
-
+      }
 
       return value;
     }
@@ -18869,8 +19529,6 @@ function (_super) {
                 arrayOrientedLinkClass: copyOfoldArrayOrientedLinkClass
               });
 
-              console.log(_this.state.arrayOrientedLinkClass);
-
               _this.callBack();
             },
             name: obj.name,
@@ -18958,8 +19616,10 @@ function (_super) {
         onToggle: function onToggle(isOpen) {
           _this.props.options.listCollapseOrientedLink[line.id - 1] = isOpen;
 
-          _this.setState({
-            listCollapseOrientedLink: _this.props.options.listCollapseOrientedLink
+          _this.setState(function (prevState, props) {
+            return {
+              listCollapseOrientedLink: props.options.listCollapseOrientedLink
+            };
           });
         }
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_CoordinateSpace_manageQuery__WEBPACK_IMPORTED_MODULE_17__["default"], {
@@ -19035,19 +19695,17 @@ function (_super) {
       }
     }
 
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, finalItem);
-  };
-
-  OrientedLinkForm.prototype.componentWillReceiveProps = function () {
-    this.loadCoorParent();
-    this.generateInputsOrientedLinks();
-  };
-  /** update state when props uneCoor change */
-
-
-  OrientedLinkForm.prototype.componentDidUpdate = function (prevProps) {
-    this.loadCoorParent();
-    this.generateInputsOrientedLinks();
+    if (finalItem.length === 0) {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        style: {
+          textAlign: 'center',
+          fontSize: '20px',
+          marginTop: '50px'
+        }
+      }, "Data not set");
+    } else {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, finalItem);
+    }
   };
   /**
    * render()
@@ -19055,28 +19713,16 @@ function (_super) {
 
 
   OrientedLinkForm.prototype.render = function () {
-    var _this = this;
-
-    var stylePositionButton = {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'center'
-    };
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.generateInputsOrientedLinks(), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      style: stylePositionButton
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_12__["Button"], {
-      onClick: function onClick() {
-        _this.setState({
-          arrayInput: [],
-          arrayOrientedLinkClass: [],
-          debug: false
-        });
-
-        _this.loadCoorParent();
-
-        _this.generateInputsOrientedLinks();
+    // const stylePositionButton = {
+    //   display: 'flex',
+    //   flexDirection: 'row',
+    //   justifyContent: 'center',
+    // } as React.CSSProperties;
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        marginBottom: '200px'
       }
-    }, "Load Oriented Links")));
+    }, this.generateInputsOrientedLinks());
   };
 
   return OrientedLinkForm;
@@ -19325,7 +19971,9 @@ var defaults = {
   zIndexOrientedLink: 1,
   orientedLinkToUpgrade: {},
   orientedLinkToDowngrade: {},
-  checkIndexMultiLink: 0
+  checkIndexMultiLink: 0,
+  newPoint: true,
+  newOrientedLink: false
 };
 
 /***/ }),

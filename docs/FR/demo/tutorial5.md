@@ -99,6 +99,3 @@ The result display those 2 values
 
 ![step 04](../../screenshots/demo/tutorial5/demo5.png)
 
-
-
-file [demo4-play](../../resource/demo4-play.svg) 

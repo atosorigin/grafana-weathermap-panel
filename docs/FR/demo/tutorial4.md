@@ -1,152 +1,53 @@
- 
-# create file modelisation
 
+# Comment créer et ajouter votre propre image SVG dans Grafana
 
+## Créer votre SVG sur inkscape
 
+### Étape 1 : Télécharger Inkscape
 
+Le logiciel recommandé pour créer une image de fond sera [Inkscape] (https://inkscape.org). Il est disponible pour :
 
-prometheus_http_request_duration_seconds_bucket{handler="/"}
+  - Linux
+  - Windows
+  - Mac
 
+### Étape 2 : Créer votre forme
 
+Inkscape vous permet de choisir entre plusieurs formes pour créer votre SVG :
+- Cercle :
+- Carré
+- Autre..
 
+! [Inkscape](./../../screenshots/demo/tutorial4/Inkscape.png)
 
-![tutorial 4 step 01](../../screenshots/demo/tutorial4/step01.jpg)
+Vous pouvez également créer votre image SVG avec draw.io. Plus d'informations [ici](./appendix/svg.md)
 
+### Etape 3 : Ajouter un identifiant à tous vos objets
 
-Dans une query, nous voulons analyser ce que reçoit la carte réseau
+Il est nécessaire d'ajouter un identifiant à tous vos objets. Il sera plus facile à utiliser avec grafana.
 
+Pour ajouter un identifiant, `right click` sur votre objet, puis allez sur `Properties of your object`. Une fenêtre apparaîtra et vous permettra de modifier l'identifiant
 
-```
-node_network_receive_bytes
+![Propriete](./../../screenshots/demo/tutorial4/Propriete.png)
 
-```
+### Étape 4 : Sauvez votre forme
 
+Pour sauvegarder votre forme, vous devez enregistrer au format `SVG Inkscape` ou `SVG simple`.
 
+![Enregistrer](./../../screenshots/demo/tutorial4/enregistrer.png)
 
-le résultat montre plusieurs résultats possibles
+## Ajoutez votre SVG à Grafana
 
+L'ajout d'une image de fond se fait à partir du menu `display`.
 
-```
-node_network_receive_bytes{device="enp0s3",instance="localhost:9100",job="node_exporter"}
+L'image sélectionnée sera celle que vous venez de créer. Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copy image address`.
 
-node_network_receive_bytes{device="lo",instance="localhost:9100",job="node_exporter"}
+Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
 
-```
+![Enregistrer](./../../screenshots/demo/tutorial4/DisplaySVG.png)
 
-La différence montre 2 types de devices 
+Ensuite, si vous voulez ajouter une région, vous pouvez voir les différents id de votre forme dans "Zone SVG". 
 
-- enp0s3
-- lo
-
-
-
-Il faut associer 1 metrics par region ou points...
-
-comme ceci
-
-
-Region 1
-
-![tutorial 4 step 02](../../screenshots/demo/tutorial4/step02.jpg)
-
-
-Region 2
-
-![tutorial 4 step 03](../../screenshots/demo/tutorial4/step03.jpg)
-
-
-Le resultat affiche 2 valeurs
-
-![tutorial 4 step 04](../../screenshots/demo/tutorial4/step04.jpg)
-
-
-
-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-
-
-
-# essai 2
-
-
-![tutorial 4 step 05](../../screenshots/demo/tutorial4/step05.jpg)
-
-
-http_request_duration_microseconds
-
-Nous obtenons de nombreux résultats 
-
-
-
-```
-http_request_duration_microseconds{handler="alertmanagers",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="alertmanagers",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="alertmanagers",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="alerts",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="alerts",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="alerts",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="config",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="config",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="config",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="flags",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="flags",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="flags",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="graph",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="graph",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="graph",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="heap",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="heap",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="heap",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="label_values",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="label_values",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="label_values",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="options",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="options",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="options",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="prometheus",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="prometheus",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="prometheus",instance="localhost:9090",job="prometheus",quantile="0.99"}
-http_request_duration_microseconds{handler="query",instance="localhost:9090",job="prometheus",quantile="0.5"}
-http_request_duration_microseconds{handler="query",instance="localhost:9090",job="prometheus",quantile="0.9"}
-http_request_duration_microseconds{handler="query",instance="localhost:9090",job="prometheus",quantile="0.99"}
-
-```
-
-
-![tutorial 4 step 06](../../screenshots/demo/tutorial4/step06.jpg)
-
-
-nous sélections une query 
-
-
-
-
-l'élément handler sera utilisé comme argument variable 
-
-
-
-![tutorial 4 step 07](../../screenshots/demo/tutorial4/step07.jpg)
-
-
-
-= probleme
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![Enregistrer](./../../screenshots/demo/tutorial4/Region.png)
 
 

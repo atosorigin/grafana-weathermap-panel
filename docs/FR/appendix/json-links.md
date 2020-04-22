@@ -370,6 +370,12 @@ Avec de même :
         
 ```
 
+## size
+
+- **size** : Vous permet de choisir la taille de votre lien
+    - **value** : Quelle est la taille. Peut être small, medium, large
+    - **label** : Choisissez un label pour la taille
+
 ## textObj
 
 - **colorBack** : Choisir la couleur du background du texte en rgba. Exemple : rgba(255, 255, 255, 0)

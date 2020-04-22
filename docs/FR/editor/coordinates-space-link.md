@@ -1,11 +1,8 @@
-
-
-
-## oriented Link
+# oriented Link
 Définir les coordonnées d'un oriented link
 
 
-## Informations obligatoires
+## **Informations obligatoires**
 
 
 ![saisie oriented link](../../screenshots/editor/coordinates/screen-oriented-link/obligatoire.jpg)
@@ -15,11 +12,11 @@ les informations obligatoires pour afficher les points sont :
 
 
 
-### Label 
+## Label 
 
 il s'agit d'une clé permettant d'ajouter le résultat d'une valeur à des paramètres 
 
-### orientation
+## orientation
 
 2 orientations sont possibles : 
 
@@ -28,21 +25,26 @@ il s'agit d'une clé permettant d'ajouter le résultat d'une valeur à des param
 
 
 
-### Position
+## Size
 
-Un lien se fait par 2 points A et B
+Vous permet de choisir la taille du lien entre Small, Medium et Large
 
-c'est pourquoi chaque point à ces coordoonées, en position X et Y
+## AssociatePoint/RégionIn et AssociatePoint/RégionOut
+
+Vous permet de définir l'objet de départ et d'arrivée de votre lien, il peut s'agir d'un lien entre des points et/ou des régions.
+
+## CoordinatClickA/B-X/Y
+
+Si le lien n'est pas associé à un objet, ces entrées sont utilisées pour définir les points de départ et d'arrivée du lien.
+
+## Incurved
+
+Il est possible d'ajouter un point pour faire une courbe.
+
+Pour ce faire, vous ajoutez un nouveau point C en position X et Y.
 
 
-### Incurved
-
-Il est possible d'ajouter un point pour faire une courbe incurved
-
-pour cela, vous ajoutez un nouveau point en position X et Y
-
-
-
+## **Autre paramètre**
 
 
 

@@ -1,45 +1,49 @@
-## Oriented Link
+# Oriented Link
 
 Defining the coordinates of an oriented link
 
 
-## Informations obligatoires
+## **Required information**
 
 
-![saisie oriented link](../../screenshots/editor/coordinates/screen-oriented-link/obligatoire.jpg)
+![saisie oriented link](../../screenshots/editor/coordinates/screen-oriented-link/obligatoire.png)
 
 
 The required information to display the points is : 
 
 
 
-### Label 
+## Label 
 
 This is a key to add the result of a value to the parameters 
 
-### orientation
+## Orientation
 
 2 orientations are possible: 
 
 - monodirectional
-- bi-directional
 
+bi-directional
 
+## Size
 
-### Position
+Allow you to chosse the size of the link between Small, Medium and Large
 
-A link is made by 2 points A and B
+## AssociatePoint/RegionIn and AssociatePoint/RegionOut
 
-therefore each point at these coordoonées, in position X and Y
+Allows you to define the starting and ending object of your link, it could be between points and/or regions.
 
+## CoordinatClickA/B-X/Y
 
-### Incurved
+If hte link is not associate to an object, these inputs are used to define the starting and ending points of the link.
+
+## Incurved
 
 It is possible to add a point to make a curved curve.
 
 To do this, you add a new point C in the X and Y position.
 
-
+## **Other parameter**
 
 ## Main metric
 

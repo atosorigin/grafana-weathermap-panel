@@ -1,103 +1,132 @@
-# Create Dashboard Avanced with link Bi rectionnel
+# Ajoutez PNG/JPG dans votre tableau de bord
+
+## Ajouter une image comme affichage
+Pour ce tutoriel, vous devez d'abord télécharger l'image de fond : 
+
+
+! [étape 01](../../screenshots/demo/tutorial2/ImagePNG.png)
 
 
 
-## Etape 1 : Création des queries
+L'ajout d'une image de fond se fait à partir du menu `display`.
 
-![demo2 step 01](../../screenshots/demo/tutorial2/step01.jpg)
+L'image sélectionnée sera [demo2-background.jpg](../../resource/demo2-background.jpg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
 
+Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
 
-rate(node_network_receive_bytes{device="enp0s3"}[10s])*8/1024/1024
-
-
-rate(node_network_transmit_bytes{device="enp0s3"}[10s])*8/1024/1024
+Vous devez sauvegarder et recharger la page.
 
 
+## Définir une région en mode coordonnées avec une image
 
+### Ajouter une image dans une région
 
-## Etape 2 : Déterminer un espace
+La création d'une région dans une image SVG se fait à partir du menu `Coordinates space`, `region` puis `Add coordinate space`.
 
-
-
-![demo2 step 02](../../screenshots/demo/tutorial2/step02.jpg)
-
-
-La création d'un espace en arrière plan s'effectue à partir du menu `display`.
-
-Nous saisissons 
-
-- Décochons `use svg`
-- largeur
-- hauteur
-
-
-## Etape 3 : Ajout d'un point 1
-
-![demo2 step 03](../../screenshots/demo/tutorial2/step03.jpg)
-
-
-La création d'un point s'effectue à partir du menu `Coordinates space`, `point` et `Àdd point`
+![step 02](../../screenshots/demo/tutorial2/CoordinateMode.png)
 
 Vous devez remplir le formulaire comme ceci : 
 
-- Saisir un `label` par exemple Computer
-- La taille `size`
-- position `X`
-- position `Y`
-- Cliquer sur le bouton `load`
+- Entrer un `label` par exemple : ordinateur
+- Selectionner `Coordinate mode`.
+- Puis choisissez une image
+
+L'image sélectionnée sera [cumputer-png.png](../../resource/computer-png.png). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
+
+Deinissez ensuite la taille de la région pour votre image. Ici, nous choisirons :
+- X Min : -55
+- X Max : -85 
+- Y Min : -20
+- Y Max : 10
+
+Pour finir
+- Cliquez sur le bouton `load`
 
 
+![step 03](../../screenshots/demo/tutorial2/ImageRegion.png)
 
-![demo2 step 04](../../screenshots/demo/tutorial2/step04.jpg)
+### Résultat
 
-Nous en profitons der changer la couleur de notre point. Pour cela, nous ajoutons une couleur à notre point comme ceci : 
+Le résultat final sera le suivant : 
 
-- Activer `trace the color`
-- Choisissons la couleur comme `verte` à la ligne `edit border color`
-- L'épaisseur à 1
+![step 08](../../screenshots/demo/tutorial2/Result1.png)
 
+## Définir une région en mode de coorination sans image
 
+### Étape 1 : Créer la région
 
-## Etape 4 : Ajout d'un point 2
+La création d'une région dans une image SVG se fait à partir du menu `Coordinates space`, `region` puis `Add coordinate space`.
 
-![demo2 step 05](../../screenshots/demo/tutorial2/step05.jpg)
-
-
-La création d'un point s'effectue à partir du menu `Coordinates space`, `point` et `Àdd point`
+![step 02](../../screenshots/demo/tutorial2/CoordinateMode.png)
 
 Vous devez remplir le formulaire comme ceci : 
 
-- Saisir un `label` par exemple Computer
-- La taille `size`
-- position `X`
-- position `Y`
-- Cliquer sur le bouton `load`
+- Entrez un `label` par exemple  ordinateur
+- Sélectionnez `Coordinate mode`.
+
+![step 03](../../screenshots/demo/tutorial2/CoordinateModeNoImage.png)
+
+
+Deinissez ensuite la taille de la région pour votre image. Ici, nous choisirons :
+- X Min : -18
+- X Max : 0
+- Y Min : -6
+- Y Max : 9
+
+Pour finir
+- Cliquez sur le bouton `load`
+
+### Étape 2 : Ajouter une couleur à une région
+
+![step 03](../../screenshots/demo/tutorial2/LowerLimit.png)
+
+
+L'ajout d'une couleur à un élément SVG se fait à partir du menu `Coordinates space`, `region` puis `Edit coordinate space`.
+
+Sélectionnez la ligne `lower limit` et remplissez ensuite le formulaire comme ceci : 
+ 
+
+- Cocher `Trace the background` pour activer la couleur de fond. 
+- Sélectionnez la couleur `verte` dans la ligne `Editer la couleur de fond`.
+- Cocher `Trace the border` pour activer la couleur de la bordure.
+- Sélectionnez la couleur `rouge` dans la ligne `Editer la couleur de la bordure`.
+- Entrez une valeur pour définir la taille de la bordure `size border`, par exemple 3
+- Cliquez sur le bouton `load`
 
 
 
-![demo2 step 06](../../screenshots/demo/tutorial2/step06.jpg)
+Vous obtenez le résultat suivant
 
-Nous en profitons der changer la couleur de notre point. Pour cela, nous ajoutons une couleur à notre point comme ceci : 
-
-- Activer `trace the color`
-- Choisissons la couleur comme `verte` à la ligne `edit border color`
-- L'épaisseur à 1
+![step 04](../../screenshots/demo/tutorial2/Cumputer2.png)
 
 
-## Etape 5 ; ajouter lien oriented
+Il est possible de définir d'autres paramètres, en se référant à la page [coordinates lower limit](../editor/coordinates-lower-limit.md).
 
+### Résultat
 
-TODO
+Le résultat final sera le suivant : 
 
+![step 08](../../screenshots/demo/tutorial2/Result2.png)
 
+## Définir un lien orienté entre deux régions
 
-## Etape 9 : Ajouter une illustration au point 1
+Pour créer un lien orienté, vous devez passer par [le menu du panneau](../panel/panel-oriented-link.md).
 
+Vous pouvez aussi vous rendre au [tutoriel3](tutorial3.md) qui explique comment faire
 
-![demo2 step 09](../../screenshots/demo/tutorial2/step09.jpg)
+## Résultat final 
 
-Nous ajoutons une illustration à notre point
+! [demo2](../../screenshots/demo/tutorial2/demo2.png)
 
+## Ajoutez tout avec JSON
 
+### Importer un fichier JSON
 
+- Il est possible d'ajouter toutes ces configurations par le biais de fichiers json en faisant une importation. Pour savoir comment faire, [suivez ce lien](../editor/import.md)
 
+Et voici le différent dossier JSON :
+
+- [demo2-svgRegion](../../resource/demo2-svgRegion.json) 
+- [demo2-point](../../resource/demo2-point.json)
+- [demo2-link](../../resource/demo2-link.json)
+- [demo2-global](../../resource/demo2-global.json)

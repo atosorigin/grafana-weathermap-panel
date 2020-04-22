@@ -2,9 +2,8 @@
 
 
 
-## Step 1 : Creation of queries
+## Step 1: Creating queries
 
-![step 01](../../screenshots/demo/tutorial3/query.jpg)
 
 The first step is through the `Queries` tab.
 
@@ -18,9 +17,9 @@ rate(node_network_receive_bytes{device="enp0s3"}[10s])*8/1024/1024
 rate(node_network_transmit_bytes{device="enp0s3"}[10s])*8/1024/1024
 ```
 
-The "A" marker will be used to identify this query as you can see below.
+The "A" and "B" markers will be used to identify this query as you can see below.
 
-
+![step 01](../../screenshots/demo/tutorial3/query.jpg)
 
 
 ## Step 2: Determining a space
@@ -68,10 +67,10 @@ We take advantage of this by changing the colour of our point. To do this, we ad
 
 
 
-## Etape 4 : Add an image 
+## Step 4 : Add an image 
 
 
-To add an illustraton to our point, go to `Coordinates space`, `region` and `Add coordinate space` menu. And choose our point.
+To add an illustraton to our region, go to `Coordinates space`, `region` and `Add coordinate space` menu. And choose our point.
 
 ![step 02](../../screenshots/demo/tutorial2/CoordinateMode.png)
 
@@ -81,7 +80,6 @@ You have to fill out the form like this:
 - Select `Coordinate mode`.
 - Then choose an image
 
-- Then choose an image
 
 The selected image will be [cumputer-svg.svg](../../resource/computer-svg.svg). To do this, fill the input with the adresse of the svg file
 
@@ -113,7 +111,7 @@ Then, we will edit our links as follow :
 
 ![Position](../../screenshots/demo/tutorial3/PositionParameter.png)
 
-## Etape 6 : Main metric
+## Step 6 : Main metric
 
 To add a main metric to our link, go to `Coordinates space`, `OrientedLink` and click on you link.
 
