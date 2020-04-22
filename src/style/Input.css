@@ -1,0 +1,42 @@
+.container-css {
+  display: flex;
+  margin-bottom: 2px;
+}
+
+.label-css {
+  width: 136px;
+  padding: 8px;
+  flex-shrink: 0;
+  font-weight: 500;
+  font-size: 12px;
+  background-color: #212327;
+  display: block;
+  height: 35px;
+  border: 1px solid #262628;
+  border-right: none;
+  border-radius: 3px 0 0 3px;
+  box-sizing: inherit;
+  text-align: left;
+}
+
+.value-css {
+  width: 276px;
+  display: block;
+  height: 35px;
+  padding: 8px;
+  font-size: 14px;
+  line-height: 18px;
+  color: #d8d9da;
+  background-color: #09090b;
+  background-image: none;
+  background-clip: padding-box;
+  border: 1px solid #262628;
+  border-radius: 0 3px 3px 0;
+  box-shadow: inset 1px 0px 4px 0px rgba(150, 150, 150, 0.1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  box-sizing: inherit;
+  text-align: left;
+}

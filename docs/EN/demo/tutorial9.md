@@ -94,7 +94,7 @@ Region
 
 resultat
 
-![step 01](../../screenshots/demo/tutorial9/resultat.jpg)
+![step 01](../../screenshots/demo/tutorial9/resultat.png)
 
 
 
