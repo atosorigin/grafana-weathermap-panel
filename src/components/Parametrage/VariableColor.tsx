@@ -424,8 +424,8 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
    */
   infoSeuil = () => {
     // console.group('info');
-    console.log(this.state.lowerLimit);
-    console.log(this.state.arrayInputClass);
+    // console.log(this.state.lowerLimit);
+    // console.log(this.state.arrayInputClass);
     // console.groupEnd();
   };
 

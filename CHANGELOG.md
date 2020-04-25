@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.4.11 (2020-04-24)
+
+- Fixed main metrics for the region, point, links
+- Fixed changed select region
+
+
 ## v0.4.10 (2020-04-22)
 
 - Fixed Text object with oriented link

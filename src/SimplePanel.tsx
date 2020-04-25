@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { SimpleOptions, Background, Metric } from 'types';
 
-import { PanelProps, SelectableValue, DataFrame } from '@grafana/data';
+import { PanelProps, SelectableValue } from '@grafana/data';
 import { CustomScrollbar, Modal, Button } from '@grafana/ui';
 
 import { PointClass } from 'Models/PointClass';
@@ -23,6 +23,7 @@ import DrawOrientedLink from './components/Draw/drawOrientedLink';
 import LegendComponant from './components/legend';
 
 import DrawRectangleExtend from 'components/Draw/drawRectangleExtend';
+import { getResultQuery } from 'Functions/getResultQuery';
 // import { identity } from 'rxjs';
 
 interface Props extends PanelProps<SimpleOptions> {}
@@ -93,20 +94,22 @@ export class SimplePanel extends PureComponent<Props, State> {
    */
   defineLimit = (): JSX.Element => {
     const { coordinateSpaceInitial } = this.props.options;
-    let jsxItems: JSX.Element;
+    let jsxItems: JSX.Element = <div></div>;
 
-    jsxItems = (
-      <DrawRectangle
-        key="limitCoor"
-        color="orange"
-        coordinateInitial={coordinateSpaceInitial}
-        id="initialSpace"
-        onOptionsChange={this.props.onOptionsChange}
-        options={this.props.options}
-        data={this.props.data}
-        isEnabled={!this.state.buttonManage[1]}
-      />
-    );
+    if (this.props.options.baseMap.image === '' && !this.props.options.baseMap.modeSVG) {
+      jsxItems = (
+        <DrawRectangle
+          key="limitCoor"
+          color="orange"
+          coordinateInitial={coordinateSpaceInitial}
+          id="initialSpace"
+          onOptionsChange={this.props.onOptionsChange}
+          options={this.props.options}
+          data={this.props.data}
+          isEnabled={!this.state.buttonManage[1]}
+        />
+      );
+    }
     return jsxItems;
   };
 
@@ -150,6 +153,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     if (
       event.nativeEvent.target.id === 'initialSpace' ||
       event.nativeEvent.target.id === 'mainPanel' ||
+      event.nativeEvent.target.id === 'Intent' ||
       event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG
     ) {
       this.createPointToClick(positionX, positionY);
@@ -174,13 +178,13 @@ export class SimplePanel extends PureComponent<Props, State> {
     const initTextObject: TextObject = new TextObject(
       '',
       false,
-      '',
-      '',
+      'white',
+      'black',
       { bold: false, italic: false, underline: false },
-      false,
+      true,
       {
         legendElement: '',
-        numericFormatElement: '',
+        numericFormatElement: '5',
         unit: '',
         displayObjectInTooltip: false,
         // 'displayObjectPermanently': false,
@@ -193,11 +197,11 @@ export class SimplePanel extends PureComponent<Props, State> {
         legendElement: '',
         numericFormatElement: '',
         unit: '',
-        displayObjectInTooltip: false,
+        displayObjectInTooltip: true,
         // 'displayObjectPermanently': false,
-        addColorTextElement: false,
+        addColorTextElement: true,
         colorTextElement: 'white',
-        addColorBackElement: false,
+        addColorBackElement: true,
         colorBackElement: 'black',
       }
     );
@@ -240,12 +244,10 @@ export class SimplePanel extends PureComponent<Props, State> {
     const newArrayPoint: PointClass[] = this.props.options.arrayPoints;
     newArrayPoint.push(newPoint);
 
-    //this.props.options.indexPoint = id;
     this.props.onOptionsChange({
       ...this.props.options,
       indexPoint: id,
       arrayPoints: newArrayPoint,
-      //newPoint: true,
     });
 
     this.props.options.newPoint = true;
@@ -261,7 +263,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   displayPoint() {
     const mapItems: JSX.Element[] = [];
     this.props.options.arrayPoints.forEach((line: PointClass) => {
-      this.getValuesMainMetricPoint(line);
+      const valueMainMetric = this.getValuesMainMetricPoint(line).toString();
       this.updatePositionOrientedLink(line);
       const valuesAuxiliaryMetrics: string[] = this.getValuesAuxiliaryMetricsPoint(line);
       const item: JSX.Element = (
@@ -286,7 +288,7 @@ export class SimplePanel extends PureComponent<Props, State> {
           data={this.props.data}
           textObject={line.textObj}
           seuil={line.lowerLimit}
-          valueMainMetric={line.valueMetric}
+          valueMainMetric={valueMainMetric}
           refMainMetric={line.mainMetric.refId || ''}
           associateOrientedLinkIn={line.associateOrientedLinksIn}
           associateOrientedLinkOut={line.associateOrientedLinksOut}
@@ -560,6 +562,7 @@ export class SimplePanel extends PureComponent<Props, State> {
 
     if (
       event.nativeEvent.target.id === 'initialSpace' ||
+      event.nativeEvent.target.id === 'Intent' ||
       event.nativeEvent.target.id === 'mainPanel' ||
       event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG
     ) {
@@ -642,6 +645,39 @@ export class SimplePanel extends PureComponent<Props, State> {
               this.resetCoordinatesToDrawLinkWithClick();
             }
           }
+        } else if (event.nativeEvent.target.id !== 'oct' + this.props.options.baseMap.idSVG && event.nativeEvent.target.id.startsWith('oct')) {
+          const id: string = event.nativeEvent.target.id.substr(3);
+          if (id === region.idSVG) {
+            const coordinates = this.props.options.coordinatesToDrawLinkWithClick;
+
+            const allValues: string = event.nativeEvent.target.attributes[0].nodeValue;
+            const arrayAllValues: string[] = allValues.split(' ');
+            const xMinSVG: number = parseInt(arrayAllValues[1], 10);
+            const xMaxSVG: number = parseInt(arrayAllValues[7], 10);
+            const yMinSVG: number = parseInt(arrayAllValues[8], 10);
+            const yMaxSVG: number = parseInt(arrayAllValues[2], 10);
+            positionX = (xMinSVG + xMaxSVG) / 2;
+            positionY = (yMaxSVG + yMinSVG) / 2;
+            // console.log(positionX);
+            // console.log(positionY);
+            if (coordinates[0].id === 0) {
+              objectIn.x = positionX;
+              objectIn.y = positionY;
+              objectIn.labelRegion = region.label;
+              objectIn.region = region;
+              coordinates[0].id++;
+            } else if (coordinates[0].id === 1) {
+              objectOut.x = positionX;
+              objectOut.y = positionY;
+              objectOut.labelRegion = region.label;
+              objectOut.region = region;
+              pointC.x = ((parseInt(objectIn.x, 10) + parseInt(objectOut.x, 10)) / 2).toString();
+              pointC.y = ((parseInt(objectIn.y, 10) + parseInt(objectOut.y, 10)) / 2).toString();
+              coordinates[0].id = 0;
+              this.createOrientedLinkToClick({ label: 'No', value: false });
+              this.resetCoordinatesToDrawLinkWithClick();
+            }
+          }
         } else {
           const id: number = parseInt(event.nativeEvent.target.offsetParent.id.charAt(6) + event.nativeEvent.target.offsetParent.id.charAt(7), 10);
 
@@ -697,6 +733,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     if (
       event.nativeEvent.target.id === 'mainPanel' ||
       event.nativeEvent.target.id === 'initialSpace' ||
+      event.nativeEvent.target.id === 'Intent' ||
       event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG
     ) {
       positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
@@ -856,7 +893,6 @@ export class SimplePanel extends PureComponent<Props, State> {
    * to do
    */
   createOrientedLinkToClick = (isIncurved: SelectableValue<boolean>) => {
-    console.log('create');
     const coordinates = this.props.options.coordinatesToDrawLinkWithClick;
     const id: number = this.defineIdOrientedLink();
     const name: string = 'orientedLink' + id.toString();
@@ -870,10 +906,10 @@ export class SimplePanel extends PureComponent<Props, State> {
       'white',
       'black',
       { bold: false, italic: false, underline: false },
-      false,
+      true,
       {
         legendElement: '',
-        numericFormatElement: '',
+        numericFormatElement: '5',
         unit: '',
         displayObjectInTooltip: false,
         // 'displayObjectPermanently': false,
@@ -918,7 +954,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       false,
       positionParameter,
       name,
-      { label: 'Monodirectional', value: 'AB' },
+      { label: 'Bidirectionnal', value: 'double' },
       { label: 'Medium', value: 'Medium' },
       objectIn.x.toString(),
       objectIn.y.toString(),
@@ -970,13 +1006,12 @@ export class SimplePanel extends PureComponent<Props, State> {
    * to do
    */
   displayOrientedLink() {
-    console.log('display');
     const arrayOrientedLink = this.props.options.arrayOrientedLinks;
     const mapItems: JSX.Element[] = [];
     let item: JSX.Element = <div></div>;
     arrayOrientedLink.forEach((orientedLink: OrientedLinkClass) => {
-      //console.log(orientedLink);
-      this.getValuesMainMetricOrientedLink(orientedLink);
+      const valueMainMetricA: string = this.getValuesMainMetricOrientedLink(orientedLink).toString();
+      const valueMainMetricB: string = this.getValuesMainMetricOrientedLinkB(orientedLink).toString();
       this.getValuesMainMetricOrientedLinkB(orientedLink);
       const valuesAuxiliaryMetrics: string[] = this.getValuesAuxiliaryMetricsOrientedLink(orientedLink);
       const valuesAuxiliaryMetricsB: string[] = this.getValuesAuxiliaryMetricsOrientedLinkB(orientedLink);
@@ -999,8 +1034,8 @@ export class SimplePanel extends PureComponent<Props, State> {
           heightImage={parseInt(this.props.options.baseMap.height, 10)}
           label={orientedLink.label}
           name={orientedLink.name}
-          valueMainMetricA={orientedLink.valueMainMetricA}
-          valueMainMetricB={orientedLink.valueMainMetricB}
+          valueMainMetricA={valueMainMetricA}
+          valueMainMetricB={valueMainMetricB}
           refMainMetricA={orientedLink.mainMetric.refId || ''}
           refMainMetricB={orientedLink.mainMetricB.refId || ''}
           options={this.props.options}
@@ -1041,92 +1076,103 @@ export class SimplePanel extends PureComponent<Props, State> {
    */
   getValuesMainMetricPoint(point: PointClass) {
     reqMetricPoint(point, this.props);
-    this.getValuesMainMetric(point.mainMetric, undefined, point);
+    //this.getValuesMainMetric(point.mainMetric, undefined, point);
+    let result = 0;
+    result = getResultQuery(point.mainMetric) || NaN;
+    return result;
   }
 
-  getValuesMainMetricOrientedLink(orientedLink: OrientedLinkClass) {
+  getValuesMainMetricOrientedLink(orientedLink: OrientedLinkClass): number {
     reqMetricOrientedLink(orientedLink, this.props);
-    this.getValuesMainMetric(orientedLink.mainMetric, orientedLink, undefined, false);
+    //this.getValuesMainMetric(orientedLink.mainMetric, orientedLink, undefined, false);
+    let result = 0;
+    result = getResultQuery(orientedLink.mainMetric) || NaN;
+    return result;
   }
 
   getValuesMainMetricOrientedLinkB(orientedLink: OrientedLinkClass) {
     reqMetricOrientedLink(orientedLink, this.props);
-    this.getValuesMainMetric(orientedLink.mainMetricB, orientedLink, undefined, true);
+    //this.getValuesMainMetric(orientedLink.mainMetricB, orientedLink, undefined, true);
+    let result = 0;
+    result = getResultQuery(orientedLink.mainMetricB) || NaN;
+    return result;
   }
 
-  /**
-   * to do
-   */
-  getValuesMainMetric(mainMetric: Metric, orientedLink?: OrientedLinkClass, point?: PointClass, isBidirectionnal?: boolean) {
-    let valueMainMetric = 0;
-    let totalValuesCount = 0;
-    const key: string = mainMetric.key;
-    const keyValue: string = mainMetric.keyValue;
-    if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
-      mainMetric.returnQuery.forEach((line: DataFrame) => {
-        if (line.fields[0].labels) {
-          if (key !== '' && keyValue !== '') {
-            if (line.fields[0].labels[key] === keyValue) {
-              const countValues: number = line.fields[0].values.length;
-              for (let i = 0; i < countValues; i++) {
-                if (line.fields[0].values.get(i)) {
-                  totalValuesCount++;
-                  valueMainMetric += line.fields[0].values.get(i);
-                }
-              }
-            }
-          } else {
-            const countValues: number = line.fields[0].values.length;
-            for (let i = 0; i < countValues; i++) {
-              if (line.fields[0].values.get(i)) {
-                totalValuesCount++;
-                valueMainMetric += line.fields[0].values.get(i);
-              }
-            }
-          }
-        }
-      });
-      if (orientedLink) {
-        if (!isBidirectionnal) {
-          if (mainMetric.manageValue === 'avg') {
-            orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
-          } else if (mainMetric.manageValue === 'sum') {
-            orientedLink.valueMainMetricA = valueMainMetric.toString();
-          } else if (mainMetric.manageValue === 'err') {
-            if (totalValuesCount > 1) {
-              orientedLink.valueMainMetricA = 'error';
-            } else {
-              orientedLink.valueMainMetricA = valueMainMetric.toString();
-            }
-          }
-        } else {
-          if (mainMetric.manageValue === 'avg') {
-            orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
-          } else if (mainMetric.manageValue === 'sum') {
-            orientedLink.valueMainMetricB = valueMainMetric.toString();
-          } else if (mainMetric.manageValue === 'err') {
-            if (totalValuesCount > 1) {
-              orientedLink.valueMainMetricB = 'error';
-            } else {
-              orientedLink.valueMainMetricB = valueMainMetric.toString();
-            }
-          }
-        }
-      } else if (point) {
-        if (mainMetric.manageValue === 'avg') {
-          point.valueMetric = (valueMainMetric / totalValuesCount).toString();
-        } else if (mainMetric.manageValue === 'sum') {
-          point.valueMetric = valueMainMetric.toString();
-        } else if (mainMetric.manageValue === 'err') {
-          if (totalValuesCount > 1) {
-            point.valueMetric = 'error';
-          } else {
-            point.valueMetric = valueMainMetric.toString();
-          }
-        }
-      }
-    }
-  }
+  // /**
+  //  * to do
+  //  */
+  // getValuesMainMetric(mainMetric: Metric, orientedLink?: OrientedLinkClass, point?: PointClass, isBidirectionnal?: boolean) {
+  //   let valueMainMetric = 0;
+  //   let totalValuesCount = 0;
+  //   const key: string = mainMetric.key;
+  //   const keyValue: string = mainMetric.keyValue;
+  //   if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
+  //     mainMetric.returnQuery.forEach((line: DataFrame) => {
+  //       if (line.fields[0].labels) {
+  //         if (key !== '' && keyValue !== '') {
+  //           if (line.fields[0].labels[key] === keyValue) {
+  //             const countValues: number = line.fields[0].values.length;
+  //             for (let i = 0; i < countValues; i++) {
+  //               if (line.fields[0].values.get(i)) {
+  //                 totalValuesCount++;
+  //                 valueMainMetric += line.fields[0].values.get(i);
+  //               }
+  //             }
+  //           } else {
+
+  //           }
+  //         } else {
+  //           const countValues: number = line.fields[0].values.length;
+  //           for (let i = 0; i < countValues; i++) {
+  //             if (line.fields[0].values.get(i)) {
+  //               totalValuesCount++;
+  //               valueMainMetric += line.fields[0].values.get(i);
+  //             }
+  //           }
+  //         }
+  //       }
+  //     });
+  //     if (orientedLink) {
+  //       if (!isBidirectionnal) {
+  //         if (mainMetric.manageValue === 'avg') {
+  //           orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
+  //         } else if (mainMetric.manageValue === 'sum') {
+  //           orientedLink.valueMainMetricA = valueMainMetric.toString();
+  //         } else if (mainMetric.manageValue === 'err') {
+  //           if (totalValuesCount > 1) {
+  //             orientedLink.valueMainMetricA = 'error';
+  //           } else {
+  //             orientedLink.valueMainMetricA = valueMainMetric.toString();
+  //           }
+  //         }
+  //       } else {
+  //         if (mainMetric.manageValue === 'avg') {
+  //           orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
+  //         } else if (mainMetric.manageValue === 'sum') {
+  //           orientedLink.valueMainMetricB = valueMainMetric.toString();
+  //         } else if (mainMetric.manageValue === 'err') {
+  //           if (totalValuesCount > 1) {
+  //             orientedLink.valueMainMetricB = 'error';
+  //           } else {
+  //             orientedLink.valueMainMetricB = valueMainMetric.toString();
+  //           }
+  //         }
+  //       }
+  //     } else if (point) {
+  //       if (mainMetric.manageValue === 'avg') {
+  //         point.valueMetric = (valueMainMetric / totalValuesCount).toString();
+  //       } else if (mainMetric.manageValue === 'sum') {
+  //         point.valueMetric = valueMainMetric.toString();
+  //       } else if (mainMetric.manageValue === 'err') {
+  //         if (totalValuesCount > 1) {
+  //           point.valueMetric = 'error';
+  //         } else {
+  //           point.valueMetric = valueMainMetric.toString();
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   getValuesAuxiliaryMetricsPoint = (point: PointClass): string[] => {
     reqMetricAuxPoint(point, this.props);
@@ -1146,14 +1192,11 @@ export class SimplePanel extends PureComponent<Props, State> {
   getValuesAuxiliaryMetrics = (auxiliaryMetrics: Metric[], mainMetric: Metric): string[] => {
     let valueAuxiliaryMetric: string[] = [];
     //const countMetrics: number = auxiliaryMetrics.length;
-    console.log(auxiliaryMetrics);
     auxiliaryMetrics.forEach((metric: Metric) => {
-      console.log(metric);
       let countTotalValues = 0;
       let resultTotalValues = 0;
       let result = '';
       if (metric.returnQuery && metric.returnQuery.length > 0) {
-        console.log(metric.returnQuery);
         let numberLoop: number = metric.returnQuery?.length || 0;
         if (metric.key !== '' && metric.keyValue !== '') {
           for (let i = 0; i < numberLoop; i++) {
@@ -1245,7 +1288,7 @@ export class SimplePanel extends PureComponent<Props, State> {
    */
   updateButtonCss = () => {
     const final: JSX.Element = (
-      <div id="allButton">
+      <div id="allButton" style={{ marginTop: '1%' }}>
         <Button style={{ marginLeft: '5%' }} variant={this.state.buttonManage[0] ? 'danger' : 'primary'} className="button" onClick={this.addNode}>
           Add Region
         </Button>
@@ -1505,8 +1548,10 @@ export class SimplePanel extends PureComponent<Props, State> {
                 const newBaseMap: Background = this.props.options.baseMap;
 
                 newBaseMap.idSVG = id[1];
-                newBaseMap.width = documentId.getAttribute('width') || '';
-                newBaseMap.height = documentId.getAttribute('height') || '';
+                // newBaseMap.width = documentId.getAttribute('width') || '';
+                // newBaseMap.height = documentId.getAttribute('height') || '';
+                // newBaseMap.width = parseInt(documentId.getAttribute('width'), 10).toString() || '';
+                // newBaseMap.height = parseInt(documentId.getAttribute('height'), 10).toString() || '';
                 this.props.onOptionsChange({
                   ...this.props.options,
                   baseMap: newBaseMap,
@@ -1710,30 +1755,32 @@ export class SimplePanel extends PureComponent<Props, State> {
   /*************************************** create link regionbyid**************************************** */
 
   CreateLinkArea = () => {
-    // All Id in SVG
-    const allidSvg = document.getElementById('octsvg213');
+    // All Id in SVG Test
+    const allidSvg = document.getElementById('octsvg12');
     allidSvg?.addEventListener('click', () => {
-      //const elms = allidSvg.querySelectorAll('[id]');
-      //console.log(elms);
+      const elms = allidSvg.querySelectorAll('[id]');
+      console.log(elms);
     });
 
-    // Test Svg Christophe search ID
+    // Test Svg Christophe search ID corrrigé
 
     // const allidSvg3 = document.getElementById('octsvg12');
     // allidSvg3?.addEventListener('click', () => {
-    //   this.props.options.regionCoordinateSpace.forEach(region => {
-    //     console.log(region.idSVG);
-    //     console.log(region.linkURL.followLink);
-    //   });
+    //   const elms = allidSvg3.querySelectorAll('[id]');
+    //   console.log(elms);
+    // });
     // });
     // All Region in SVG
-    const allidSvg2 = document.getElementById('octsvg213');
-    allidSvg2?.addEventListener('click', () => {
-      this.props.options.regionCoordinateSpace.forEach(region => {
-        //console.log(region.idSVG);
-        //console.log(region.linkURL.followLink);
-      });
-    });
+    // const allidSvg2 = document.getElementById('octsvg12');
+    // allidSvg2?.addEventListener('click', () => {
+    // this.props.options.regionCoordinateSpace.forEach(region => {
+    //   console.log(region.idSVG);
+    //   console.log(region.linkURL.followLink);
+    // const dam = allidSvg2.querySelectorAll('[id]');
+    // console.log(dam);
+    // console.log('loua');
+    // });
+    // });
 
     // const elms = document.querySelectorAll('[id]');
     // for (var i = 0; i < elms.length; i++) {
@@ -1871,6 +1918,7 @@ export class SimplePanel extends PureComponent<Props, State> {
                 <div className="tooltip" />
                 {/* {this.fillCoordinate()} */}
                 <div onClick={this.getCoordinates} id="mainPanel" style={{ position: 'absolute', top: '15%', zIndex: 1 }}>
+                  {this.defineLimit()}
                   <div
                     style={styleSVG} // onMouseOver={this.SVG_PathImage}
                     dangerouslySetInnerHTML={{ __html: this.state.svg }}

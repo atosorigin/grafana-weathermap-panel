@@ -1,7 +1,7 @@
 {
     "points": [{
-            "associateOrientedLinksIn": [{ "label": "point-ordi", "name": "point-ordi" }],
-            "associateOrientedLinksOut": [{ "label": "ordi-point", "name": "ordi-point" }],
+            "associateOrientedLinksIn": [{ "label": "", "name": "" }],
+            "associateOrientedLinksOut": [{ "label": "", "name": "" }],
             "color": "black",
             "colorMode": false,
             "drawGraphicMarker": {
@@ -9,15 +9,15 @@
                 "value": "true"
             },
             "id": 1,
-            "label": "",
+            "label": "point1",
             "linkURL": {
                 "followLink": "",
                 "hoveringTooltipLink": "",
                 "hoveringTooltipText": ""
             },
             "lowerLimit": [{
-                "backColor": "#37872D",
-                "borderColor": "#37872D",
+                "backColor": "#000000",
+                "borderColor": "#000000",
                 "id": 0,
                 "lowerLimitMax": "",
                 "lowerLimitMin": "",
@@ -28,12 +28,20 @@
                 "key": "",
                 "keyValue": "",
                 "manageValue": "avg",
-                "refId": "",
+                "refId": "A",
                 "returnQuery": [],
                 "unit": ""
             },
             "meta": "",
-            "metrics": [],
+            "metrics": [{
+                "format": "",
+                "key": "device",
+                "keyValue": "vetha317d1e",
+                "manageValue": "avg",
+                "refId": "A",
+                "returnQuery": [],
+                "unit": ""
+            }],
             "name": "point1",
             "positionParameter": {
                 "labelAPositionX": "0",
@@ -43,8 +51,8 @@
                 "tooltipPositionA": {},
                 "tooltipPositionB": {}
             },
-            "positionShapeX": "70",
-            "positionShapeY": "70",
+            "positionShapeX": "-20",
+            "positionShapeY": "4",
             "rotateArrow": "0",
             "shape": {
                 "label": "Circle",

@@ -13,8 +13,10 @@ interface Prop extends PanelEditorProps<SimpleOptions> {
   mainMetric: Metric;
   /** call function when save data */
   mainMetricB?: Metric;
-  /** call function when save data */
+  /** call function when save data mainMetric*/
   callBackToParent: (mainMetric: Metric, id?: number) => void;
+  /** call function when save data mainMetricB*/
+  callBackToParentMainMetricB?: (mainMetricB: Metric, id?: number) => void;
   /** id coordinateSpace for link and point*/
   id?: number;
   /** check if is OrientedLink */
@@ -66,25 +68,45 @@ class ManageQuery extends React.Component<Prop, State> {
     this.props.callBackToParent(this.state.mainMetric, this.props.id);
   };
 
+  /** call back to parent for mainMetricB */
+  callBackB = () => {
+    if (this.props.callBackToParentMainMetricB) {
+      this.props.callBackToParentMainMetricB(this.state.mainMetricB, this.props.id);
+    }
+  };
+
+  /** get mainMetricB of OrientedLink bidirectionnal */
+  getMainMetricB = (): any => {
+    let mainMetricB: any = {};
+    const arrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+    for (const orientedLink of arrayOrientedLink) {
+      if (orientedLink.id === this.props.idCoordinate) {
+        mainMetricB = orientedLink.mainMetricB;
+      }
+    }
+    return mainMetricB;
+  };
+
   /** edit value for default select manage value */
   onChangeSelectManageValue = (value: SelectableValue<TManageValue>) => {
     const newMainMetric: Metric = this.state.mainMetric;
     newMainMetric.manageValue = value.value || 'err';
-    this.setState(prevState => ({
+    this.setState({
       mainMetric: newMainMetric,
-      selectDefaultManageValue: value || prevState.selectDefaultManageValue,
-    }));
+      //selectDefaultManageValue: value,
+    });
     this.callBack();
   };
 
   /** edit value for default select manage value */
   onChangeSelectManageValueB = (value: SelectableValue<TManageValue>) => {
-    const newMainMetric: Metric = this.props.options.arrayOrientedLinks[this.props.id || 0].mainMetricB;
+    const newMainMetric: Metric = this.state.mainMetricB;
+    //const arrayOrientedLinks: OrientedLink = this.props.options.arrayOrientedLinks
     newMainMetric.manageValue = value.value || 'err';
     this.setState({
       mainMetricB: newMainMetric,
     });
-    this.callBack();
+    this.callBackB();
   };
 
   /** edit value key for mainMetric */
@@ -99,12 +121,12 @@ class ManageQuery extends React.Component<Prop, State> {
 
   /** edit value key for mainMetric */
   _handleChangeKeyB = (value: string) => {
-    const newMainMetric: Metric = this.props.options.arrayOrientedLinks[this.props.id || 0].mainMetricB;
+    const newMainMetric: Metric = this.state.mainMetricB;
     newMainMetric.key = value;
     this.setState({
       mainMetricB: newMainMetric,
     });
-    this.callBack();
+    this.callBackB();
   };
 
   /** edit value keyValue for mainMetric */
@@ -119,12 +141,12 @@ class ManageQuery extends React.Component<Prop, State> {
 
   /** edit value keyValue for mainMetric */
   _handleChangeKeyValueB = (value: string) => {
-    const newMainMetric: Metric = this.props.options.arrayOrientedLinks[this.props.id || 0].mainMetricB;
+    const newMainMetric: Metric = this.state.mainMetricB;
     newMainMetric.keyValue = value;
     this.setState({
       mainMetricB: newMainMetric,
     });
-    this.callBack();
+    this.callBackB();
   };
 
   /** edit value for select */
@@ -141,13 +163,13 @@ class ManageQuery extends React.Component<Prop, State> {
 
   /** edit value for select */
   onChangeSelectQueryB = (value: SelectableValue<DataFrame>) => {
-    const newMainMetric: Metric = this.props.options.arrayOrientedLinks[this.props.id || 0].mainMetricB;
+    const newMainMetric: Metric = this.state.mainMetricB;
     newMainMetric.refId = value.value?.refId || '';
     newMainMetric.expr = '';
     this.setState({
       mainMetricB: newMainMetric,
     });
-    this.callBack();
+    this.callBackB();
   };
 
   /** switch value collapseMainMetric when click collapse */
@@ -173,7 +195,7 @@ class ManageQuery extends React.Component<Prop, State> {
 
   private getDefaultQueryB = (): SelectableValue<DataFrame> => {
     let defaultValue: SelectableValue<DataFrame> = { label: 'No value', value: undefined };
-    const mainMetricB: Metric = this.props.options.arrayOrientedLinks[this.props.id || 0].mainMetricB;
+    const mainMetricB: Metric = this.state.mainMetricB;
     for (const value of this.state.selectQuery) {
       if (mainMetricB.refId) {
         if (mainMetricB.refId === value.label) {
@@ -184,9 +206,22 @@ class ManageQuery extends React.Component<Prop, State> {
     return defaultValue;
   };
 
+  private getDefaultManageValue = (): SelectableValue<TManageValue> => {
+    let defaultValue: SelectableValue<TManageValue> = { label: 'avg', value: 'avg' };
+    const mainMetric: Metric = this.state.mainMetric;
+    for (const value of this.state.selectManageValue) {
+      if (mainMetric.manageValue) {
+        if (mainMetric.manageValue === value.value) {
+          defaultValue = value;
+        }
+      }
+    }
+    return defaultValue;
+  };
+
   private getDefaultManageValueB = (): SelectableValue<TManageValue> => {
     let defaultValue: SelectableValue<TManageValue> = { label: 'avg', value: 'avg' };
-    const mainMetricB: Metric = this.props.options.arrayOrientedLinks[this.props.id || 0].mainMetricB;
+    const mainMetricB: Metric = this.state.mainMetricB;
     for (const value of this.state.selectManageValue) {
       if (mainMetricB.manageValue) {
         if (mainMetricB.manageValue === value.value) {
@@ -268,6 +303,14 @@ class ManageQuery extends React.Component<Prop, State> {
     return new Promise(resolve => this.setState(state, resolve));
   };
 
+  /** update with promise mainMetric state */
+  setStateAsyncMainMetricB = (state: {
+    /** new value main metric */
+    mainMetricB: Metric;
+  }) => {
+    return new Promise(resolve => this.setState(state, resolve));
+  };
+
   /** update data when props is update */
   componentDidUpdate = async (prevProps: Prop) => {
     if (prevProps.idCoordinate !== this.props.idCoordinate) {
@@ -275,6 +318,9 @@ class ManageQuery extends React.Component<Prop, State> {
         collapseMainMetric: false,
       });
       await this.setStateAsyncMainMetric({ mainMetric: this.props.mainMetric });
+      if (this.props.mainMetricB) {
+        await this.setStateAsyncMainMetricB({ mainMetricB: this.props.mainMetricB });
+      }
       this.fillSelectQuery();
     }
     if (prevProps.data.series !== this.props.data.series) {
@@ -295,20 +341,16 @@ class ManageQuery extends React.Component<Prop, State> {
       result = (
         <Collapse isOpen={this.state.collapseMainMetric} label="Main metric" onToggle={this.onToggleMainMetric}>
           <Collapse isOpen={this.state.collapseLinkA} label="Link A" onToggle={this.onToggleLinkA}>
-            <tr style={{ verticalAlign: 'middle' }}>
-              <td>
-                <FormLabel width={15}>Query</FormLabel>
-              </td>
-              <td>
-                <Select
-                  onChange={value => this.onChangeSelectQuery(value)}
-                  allowCustomValue={false}
-                  options={this.state.selectQuery}
-                  width={15}
-                  value={this.state.selectQueryDefault}
-                />
-              </td>
-            </tr>
+            <div style={{ display: 'flex' }}>
+              <FormLabel width={15}>Query</FormLabel>
+              <Select
+                onChange={value => this.onChangeSelectQuery(value)}
+                allowCustomValue={false}
+                options={this.state.selectQuery}
+                width={15}
+                value={this.state.selectQueryDefault}
+              />
+            </div>
             {/* <br /> */}
             <FormField
               label="Key"
@@ -329,36 +371,28 @@ class ManageQuery extends React.Component<Prop, State> {
               onChange={event => this._handleChangeKeyValue(event.currentTarget.value)}
             />
             {/* <br /> */}
-            <tr style={{ verticalAlign: 'middle' }}>
-              <td>
-                <FormLabel width={15}>Manipulate</FormLabel>
-              </td>
-              <td>
-                <Select
-                  onChange={value => this.onChangeSelectManageValue(value)}
-                  allowCustomValue={false}
-                  options={this.state.selectManageValue}
-                  width={15}
-                  value={this.state.selectDefaultManageValue}
-                />
-              </td>
-            </tr>
+            <div style={{ display: 'flex' }}>
+              <FormLabel width={15}>Manipulate</FormLabel>
+              <Select
+                onChange={value => this.onChangeSelectManageValue(value)}
+                allowCustomValue={false}
+                options={this.state.selectManageValue}
+                width={15}
+                value={this.getDefaultManageValue()}
+              />
+            </div>
           </Collapse>
           <Collapse isOpen={this.state.collapseLinkB} label="Link B" onToggle={this.onToggleLinkB}>
-            <tr style={{ verticalAlign: 'middle', marginTop: '10px' }}>
-              <td>
-                <FormLabel width={15}>Query</FormLabel>
-              </td>
-              <td>
-                <Select
-                  onChange={value => this.onChangeSelectQueryB(value)}
-                  allowCustomValue={false}
-                  options={this.state.selectQuery}
-                  width={10}
-                  value={this.getDefaultQueryB()}
-                />
-              </td>
-            </tr>
+            <div style={{ display: 'flex', marginTop: '10px' }}>
+              <FormLabel width={15}>Query</FormLabel>
+              <Select
+                onChange={value => this.onChangeSelectQueryB(value)}
+                allowCustomValue={false}
+                options={this.state.selectQuery}
+                width={10}
+                value={this.getDefaultQueryB()}
+              />
+            </div>
             {/* <br /> */}
             <FormField
               label="Key"
@@ -379,40 +413,32 @@ class ManageQuery extends React.Component<Prop, State> {
               onChange={event => this._handleChangeKeyValueB(event.currentTarget.value)}
             />
             {/* <br /> */}
-            <tr style={{ verticalAlign: 'middle' }}>
-              <td>
-                <FormLabel width={15}>Manipulate</FormLabel>
-              </td>
-              <td>
-                <Select
-                  onChange={value => this.onChangeSelectManageValueB(value)}
-                  allowCustomValue={false}
-                  options={this.state.selectManageValue}
-                  width={10}
-                  value={this.getDefaultManageValueB()}
-                />
-              </td>
-            </tr>
+            <div style={{ display: 'flex' }}>
+              <FormLabel width={15}>Manipulate</FormLabel>
+              <Select
+                onChange={value => this.onChangeSelectManageValueB(value)}
+                allowCustomValue={false}
+                options={this.state.selectManageValue}
+                width={10}
+                value={this.getDefaultManageValueB()}
+              />
+            </div>
           </Collapse>
         </Collapse>
       );
     } else {
       result = (
         <Collapse isOpen={this.state.collapseMainMetric} label="Main metric" onToggle={this.onToggleMainMetric}>
-          <tr style={{ verticalAlign: 'middle' }}>
-            <td>
-              <FormLabel width={15}>Query</FormLabel>
-            </td>
-            <td>
-              <Select
-                onChange={value => this.onChangeSelectQuery(value)}
-                allowCustomValue={false}
-                options={this.state.selectQuery}
-                width={10}
-                value={this.state.selectQueryDefault}
-              />
-            </td>
-          </tr>
+          <div style={{ display: 'flex' }}>
+            <FormLabel width={15}>Query</FormLabel>
+            <Select
+              onChange={value => this.onChangeSelectQuery(value)}
+              allowCustomValue={false}
+              options={this.state.selectQuery}
+              width={10}
+              value={this.state.selectQueryDefault}
+            />
+          </div>
           {/* <br /> */}
           <FormField
             label="Key"
@@ -433,20 +459,16 @@ class ManageQuery extends React.Component<Prop, State> {
             onChange={event => this._handleChangeKeyValue(event.currentTarget.value)}
           />
           {/* <br /> */}
-          <tr style={{ verticalAlign: 'middle' }}>
-            <td>
-              <FormLabel width={15}>Manipulate</FormLabel>
-            </td>
-            <td>
-              <Select
-                onChange={value => this.onChangeSelectManageValue(value)}
-                allowCustomValue={false}
-                options={this.state.selectManageValue}
-                width={10}
-                value={this.state.selectDefaultManageValue}
-              />
-            </td>
-          </tr>
+          <div style={{ display: 'flex' }}>
+            <FormLabel width={15}>Manipulate</FormLabel>
+            <Select
+              onChange={value => this.onChangeSelectManageValue(value)}
+              allowCustomValue={false}
+              options={this.state.selectManageValue}
+              width={10}
+              value={this.getDefaultManageValue()}
+            />
+          </div>
         </Collapse>
       );
     }

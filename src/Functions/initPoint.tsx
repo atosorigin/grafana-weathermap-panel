@@ -3,19 +3,19 @@ import { LinkURLClass } from '../Models/LinkURLClass';
 import { PositionParameterClass } from '../Models/PositionParameterClass';
 import { Metric } from '../types';
 import { PointClass } from '../Models/PointClass';
-
+//rgba(255, 255, 255, 0)
 export const initPoint = (index: number): PointClass => {
   const newId: number = index;
   const initTextObject: TextObject = new TextObject(
     '',
     false,
-    'rgba(255, 255, 255, 0)',
-    'rgba(0, 0, 0, 1)',
+    'white',
+    'black',
     { italic: false, bold: false, underline: false },
-    false,
+    true,
     {
       legendElement: '',
-      numericFormatElement: '',
+      numericFormatElement: '5',
       unit: '',
       displayObjectInTooltip: false,
       // 'displayObjectPermanently': false,
@@ -28,11 +28,11 @@ export const initPoint = (index: number): PointClass => {
       legendElement: '',
       numericFormatElement: '',
       unit: '',
-      displayObjectInTooltip: false,
+      displayObjectInTooltip: true,
       // 'displayObjectPermanently': false,
-      addColorTextElement: false,
-      colorTextElement: 'white',
-      addColorBackElement: false,
+      addColorTextElement: true,
+      colorTextElement: '',
+      addColorBackElement: true,
       colorBackElement: 'black',
     }
   );
@@ -99,6 +99,7 @@ export const clonePoint = (point: PointClass): PointClass => {
     returnQuery: point.mainMetric.returnQuery,
     manageValue: point.mainMetric.manageValue,
   };
+
   const newCoordinate: PointClass = new PointClass(
     point.id,
     linkURL,

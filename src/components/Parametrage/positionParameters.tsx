@@ -319,10 +319,10 @@ class PositionParameter extends React.Component<Props, State> {
   private defineTooltipPositionInputs = (): JSX.Element => {
     let item: JSX.Element;
     const optionsSelectTooltipPosition: Array<SelectableValue<string>> = [
-      { label: 'Top', value: 'top' },
-      { label: 'Bottom', value: 'bottom' },
-      { label: 'Left', value: 'left' },
-      { label: 'Right', value: 'right' },
+      { label: 'Top', value: 'Top' },
+      { label: 'Bottom', value: 'Bottom' },
+      { label: 'Left', value: 'Left' },
+      { label: 'Right', value: 'Right' },
     ];
     const positionParameter: PositionParameterClass = this.getPositionParameter();
     let currentOrientedLink: any;

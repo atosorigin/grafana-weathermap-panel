@@ -1,15 +1,15 @@
 {
     "links": [
-        {
-       "colorCoordinateA": "#5794F2",
+    {
+    "colorCoordinateA": "#5794F2",
     "colorCoordinateB": "#E54658",
-    "colorMode": false,
+    "colorMode": true,
     "id": 1,
     "isIncurved": {
       "label": "No",
       "value": false
     },
-    "label": "",
+    "label": "link",
     "linkURL": {
       "followLink": "",
       "hoveringTooltipLink": "",
@@ -25,45 +25,21 @@
         "sizeBorder": ""
       },
       {
-        "backColor": "#37872D",
-        "borderColor": "",
-        "id": 1,
-        "lowerLimitMax": "40",
-        "lowerLimitMin": ">20",
-        "sizeBorder": ""
-      },
-      {
-        "backColor": "#E0B400",
-        "borderColor": "",
-        "id": 2,
-        "lowerLimitMax": "60",
-        "lowerLimitMin": ">40",
-        "sizeBorder": ""
-      },
-      {
-        "backColor": "#FA6400",
-        "borderColor": "",
-        "id": 3,
-        "lowerLimitMax": "80",
-        "lowerLimitMin": ">60",
-        "sizeBorder": ""
-      },
-      {
         "backColor": "#C4162A",
         "borderColor": "",
         "id": 4,
         "lowerLimitMax": "",
-        "lowerLimitMin": ">80",
+        "lowerLimitMin": ">20",
         "sizeBorder": ""
       }
     ],
     "mainMetric": {
-      "expr": "",
+      "expr": "A",
       "format": "",
       "key": "",
       "keyValue": "",
       "manageValue": "avg",
-      "refId": "",
+      "refId": "A",
       "returnQuery": [],
       "unit": ""
     },
@@ -72,7 +48,7 @@
       "key": "",
       "keyValue": "",
       "manageValue": "avg",
-      "refId": "",
+      "refId": "A",
       "returnQuery": [],
       "unit": ""
     },
@@ -84,14 +60,14 @@
       "label": "Bidirectional",
       "value": "double"
     },
-    "pointAPositionX": "-25",
-    "pointAPositionY": "-55",
-    "pointBPositionX": "15",
-    "pointBPositionY": "5",
-    "pointCPositionX": "29",
-    "pointCPositionY": "79",
-    "pointIn": "pointRouteur",
-    "pointOut": "ProxyServer",
+    "pointAPositionX": "",
+    "pointAPositionY": "",
+    "pointBPositionX": "",
+    "pointBPositionY": "",
+    "pointCPositionX": "",
+    "pointCPositionY": "",
+    "pointIn": "",
+    "pointOut": "",
     "positionParameter": {
       "labelAPositionX": "0",
       "labelAPositionY": "0",
@@ -100,8 +76,8 @@
       "tooltipPositionA": {},
       "tooltipPositionB": {}
     },
-    "regionIn": "",
-    "regionOut": "",
+    "regionIn": "Proxy server",
+    "regionOut": "Routeur",
     "textObj": {
       "colorBack": "",
       "colorText": "",
@@ -138,7 +114,7 @@
     "traceBorder": false,
     "valueMainMetricA": "",
     "valueMainMetricB": "",
-    "zIndex": 1
+    "zIndex": 3
          }
     ]
 }

@@ -24,7 +24,7 @@ export const InputTextPoint: FunctionComponent<InputTextFieldProps> = ({ label, 
         <div>
           <FormField
             label={label}
-            labelWidth={10}
+            labelWidth={15}
             inputWidth={20}
             type="text"
             required={required}
@@ -41,7 +41,7 @@ export const InputTextPoint: FunctionComponent<InputTextFieldProps> = ({ label, 
       <div>
         <FormField
           label={label}
-          labelWidth={10}
+          labelWidth={15}
           inputWidth={20}
           type="text"
           required={required}

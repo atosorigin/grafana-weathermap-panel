@@ -325,7 +325,7 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
     } as React.CSSProperties;
 
     const styleReferenceMetric = {
-      width: '276px',
+      width: '416px',
       height: '35px',
       border: '1px solid #262628',
       borderRadius: '0 3px 3px 0',

@@ -46,14 +46,14 @@ class LegendComponent extends React.Component<Props, State> {
   };
 
   /** fill lowerlimit in JSX.Element */
-  fillLowerLimit = (lowerLimit: LowerLimitClass[]): JSX.Element[] => {
+  fillLowerLimit = (lowerLimit: LowerLimitClass[], name: string): JSX.Element[] => {
     const allLimit: JSX.Element[] = [];
     let i = 0;
     const max: number = lowerLimit.length - 1;
 
     for (const lower of lowerLimit) {
       allLimit.push(
-        <li className="LegendMatt">
+        <div key={name + 'LowerLimit' + i} className="LegendMatt">
           <span
             style={{
               padding: '5px',
@@ -82,7 +82,7 @@ class LegendComponent extends React.Component<Props, State> {
               </span>
             )}
           </span>
-        </li>
+        </div>
       );
       ++i;
     }
@@ -93,11 +93,10 @@ class LegendComponent extends React.Component<Props, State> {
   fillRegion = () => {
     const allRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
     const rendu: JSX.Element[] = [];
-
     for (const line of allRegion) {
-      const allLimit: JSX.Element[] = this.fillLowerLimit(line.lowerLimit);
+      const allLimit: JSX.Element[] = this.fillLowerLimit(line.lowerLimit, 'region');
       const ownElement: JSX.Element = (
-        <div>
+        <div key={line.id + 'DisplayLegendRegion'}>
           {line.label}
           {allLimit}
         </div>
@@ -113,10 +112,10 @@ class LegendComponent extends React.Component<Props, State> {
     const rendu: JSX.Element[] = [];
 
     for (const line of allPoint) {
-      const allLimit: JSX.Element[] = this.fillLowerLimit(line.lowerLimit);
+      const allLimit: JSX.Element[] = this.fillLowerLimit(line.lowerLimit, 'point');
       const name: string = line.label || line.name;
       const ownElement: JSX.Element = (
-        <div>
+        <div key={name + 'DisplayLegendPoint'}>
           {name}
           {allLimit}
         </div>
@@ -132,10 +131,10 @@ class LegendComponent extends React.Component<Props, State> {
     const rendu: JSX.Element[] = [];
 
     for (const line of allLinks) {
-      const allLimit: JSX.Element[] = this.fillLowerLimit(line.lowerLimit);
+      const allLimit: JSX.Element[] = this.fillLowerLimit(line.lowerLimit, 'link');
       const name: string = line.label || line.name;
       const ownElement: JSX.Element = (
-        <div>
+        <div key={name + 'DisplayLegendLink'}>
           {name}
           {allLimit}
         </div>
@@ -149,6 +148,7 @@ class LegendComponent extends React.Component<Props, State> {
   renduState = async () => {
     const value: JSX.Element = (
       <div
+        key={'contentLegend'}
         style={{
           position: 'relative',
           left: this.state.legend.x,
@@ -174,30 +174,30 @@ class LegendComponent extends React.Component<Props, State> {
             zIndex: 9999,
           }}
         >
-          <div style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
+          <div key={'legendTitle'} style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
             <h5 style={{ width: '100%', fontSize: '20px', display: 'inline-flex', padding: '10px' }}>Legend</h5>
             {/* <p style={{ color: '#d8d9da', fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p>
             <p style={{ color: '#d8d9da', fontSize: '11px', marginLeft: '17px' }}>Label</p> */}
           </div>
           {/* <p style={{ fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p> */}
-          <div style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
+          <div key={'legendTitleRegion'} style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
             <p style={{ fontSize: '15px', padding: '10px 0 10px 14px', fontWeight: 'bold', color: 'white' }}>Region</p>
           </div>
-          <ul key="regionLegend" style={{ paddingLeft: '5px' }}>
+          <div key="regionLegend" style={{ paddingLeft: '5px' }}>
             {this.fillRegion()}
-          </ul>
-          <div style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
+          </div>
+          <div key={'legendTitlePoint'} style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
             <p style={{ fontSize: '15px', padding: '10px 0 10px 14px', fontWeight: 'bold', color: 'white' }}>Point</p>
           </div>
-          <ul key="pointLegend" style={{ paddingLeft: '5px' }}>
+          <div key="pointLegend" style={{ paddingLeft: '5px' }}>
             {this.fillPoint()}
-          </ul>
-          <div style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
+          </div>
+          <div key={'legendTitleLink'} style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
             <p style={{ fontSize: '15px', padding: '10px 0 10px 14px', fontWeight: 'bold', color: 'white' }}>Oriented Link</p>
           </div>
-          <ul key="pointLegend" style={{ paddingLeft: '5px' }}>
+          <div key="linkLegend" style={{ paddingLeft: '5px' }}>
             {this.fillLink()}
-          </ul>
+          </div>
         </article>
       </div>
     );
@@ -229,7 +229,7 @@ class LegendComponent extends React.Component<Props, State> {
    * result
    */
   render() {
-    return <div>{this.state.finalHTML}</div>;
+    return <div key={'contentHtmlLegend'}>{this.state.finalHTML}</div>;
   }
 }
 export default LegendComponent;

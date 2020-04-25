@@ -17,7 +17,7 @@
             "label": "No",
             "value": false
         },
-        "label": "",
+        "label": "link",
         "linkURL": {
             "followLink": "",
             "hoveringTooltipLink": "",
@@ -32,14 +32,14 @@
             "label": "Monodirectional",
             "value": "AB"
         },
-        "pointAPositionX": "-70",
-        "pointAPositionY": "66",
-        "pointBPositionX": "",
-        "pointBPositionY": "",
+        "pointAPositionX": "-20",
+        "pointAPositionY": "25",
+        "pointBPositionX": "-50",
+        "pointBPositionY": "25",
         "pointCPositionX": "",
         "pointCPositionY": "",
         "pointIn": "",
-        "pointOut": "point2",
+        "pointOut": "",
         "positionParameter": {
             "labelAPositionX": "0",
             "labelAPositionY": "0",
@@ -52,7 +52,7 @@
         "regionOut": "",
         "textObj": {
             "value": "",
-            "isTextTooltip": true,
+            "isTextTooltip": false,
             "colorBack": "rgba(255, 255, 255, 0)",
             "colorText": "rgba(0, 0, 0, 1)",
             "style": {
@@ -60,7 +60,7 @@
                 "italic": false,
                 "underline": false
             },
-            "generateObjectText": true,
+            "generateObjectText": false,
             "valueGenerateObjectText": {
                 "legendElement": "",
                 "numericFormatElement": "",

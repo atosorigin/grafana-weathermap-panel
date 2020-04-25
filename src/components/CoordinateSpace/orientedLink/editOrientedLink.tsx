@@ -141,24 +141,15 @@ class EditOrientedLink extends React.Component<Props, State> {
   render() {
     return (
       <div>
-        <div>
-          <tr style={{ display: 'flex' }}>
-            <td>
-              <FormLabel width={15}>Select Oriented Link</FormLabel>
-            </td>
-            <td>
-              <Select
-                onChange={value => this.onChangeSelectCoordinate(value)}
-                allowCustomValue={false}
-                options={this.state.selectCoordinateSpace}
-                width={10}
-                value={this.state.selectCoordinateSpaceDefault}
-              />
-            </td>
-            {/* <td style={{ marginTop: '2px', marginLeft: '20px' }}>
-              <Button onClick={this.fillSelectPoint}>Update list Point</Button>
-            </td> */}
-          </tr>
+        <div style={{ display: 'flex' }}>
+          <FormLabel width={15}>Select Oriented Link</FormLabel>
+          <Select
+            onChange={value => this.onChangeSelectCoordinate(value)}
+            allowCustomValue={false}
+            options={this.state.selectCoordinateSpace}
+            width={10}
+            value={this.state.selectCoordinateSpaceDefault}
+          />
         </div>
         <br />
         <div>

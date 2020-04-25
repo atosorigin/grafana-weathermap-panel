@@ -1513,7 +1513,7 @@ var InputSelectPoint = function InputSelectPoint(_a) {
         allowCustomValue: false,
         options: data,
         value: defaultValue,
-        width: 30
+        width: 20
       }));
     }
   } else {
@@ -1531,7 +1531,7 @@ var InputSelectPoint = function InputSelectPoint(_a) {
       allowCustomValue: false,
       options: data,
       value: defaultValue,
-      width: 30
+      width: 20
     }));
   }
 };
@@ -1721,7 +1721,7 @@ var InputTextPoint = function InputTextPoint(_a) {
     } else {
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_0__["FormField"], {
         label: label,
-        labelWidth: 10,
+        labelWidth: 15,
         inputWidth: 20,
         type: "text",
         required: required,
@@ -1734,7 +1734,7 @@ var InputTextPoint = function InputTextPoint(_a) {
   } else {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_0__["FormField"], {
       label: label,
-      labelWidth: 10,
+      labelWidth: 15,
       inputWidth: 20,
       type: "text",
       required: required,
@@ -1762,31 +1762,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _searchIDLimit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./searchIDLimit */ "./Functions/searchIDLimit.tsx");
 
 var coordinateIsInInitialSpace = function coordinateIsInInitialSpace(x, y, initial, baseMap) {
-  console.log(x + ' ' + y);
-  var initialPx = Object(_searchIDLimit__WEBPACK_IMPORTED_MODULE_0__["pixelToPercent"])(initial.coordinate, baseMap);
-  console.log(initialPx);
+  //console.log(x + ' ' + y);
+  var initialPx = Object(_searchIDLimit__WEBPACK_IMPORTED_MODULE_0__["pixelToPercent"])(initial.coordinate, baseMap); //console.log(initialPx);
 
   if (x < initialPx.xMin) {
-    console.log('error');
+    //console.log('error');
     return 0;
   }
 
   if (x > initialPx.xMax) {
-    console.log('error');
+    //console.log('error');
     return 0;
   }
 
   if (y < initialPx.yMin) {
-    console.log('error');
+    //console.log('error');
     return 0;
   }
 
   if (y > initialPx.yMax) {
-    console.log('error');
+    //console.log('error');
     return 0;
-  }
+  } //console.log('is ok');
 
-  console.log('is ok');
+
   return 1;
 };
 
@@ -2574,9 +2573,9 @@ var initOrientedLink = function initOrientedLink(newId, newZIndex) {
     bold: false,
     italic: false,
     underline: false
-  }, false, {
+  }, true, {
     legendElement: '',
-    numericFormatElement: '',
+    numericFormatElement: '5',
     unit: '',
     displayObjectInTooltip: false,
     // 'displayObjectPermanently': false,
@@ -2622,7 +2621,7 @@ var initOrientedLink = function initOrientedLink(newId, newZIndex) {
   // 	'manageValue': 'avg',
   // }
   initMainMetrics, [], false, false, false, initPositionParameter, 'orientedLink' + num.toString(), {
-    label: 'double',
+    label: 'Bidirectionnal',
     value: 'double'
   }, {
     label: 'Medium',
@@ -2669,16 +2668,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+ //rgba(255, 255, 255, 0)
 
 var initPoint = function initPoint(index) {
   var newId = index;
-  var initTextObject = new _Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_0__["TextObject"]('', false, 'rgba(255, 255, 255, 0)', 'rgba(0, 0, 0, 1)', {
+  var initTextObject = new _Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_0__["TextObject"]('', false, 'white', 'black', {
     italic: false,
     bold: false,
     underline: false
-  }, false, {
+  }, true, {
     legendElement: '',
-    numericFormatElement: '',
+    numericFormatElement: '5',
     unit: '',
     displayObjectInTooltip: false,
     // 'displayObjectPermanently': false,
@@ -2690,11 +2690,11 @@ var initPoint = function initPoint(index) {
     legendElement: '',
     numericFormatElement: '',
     unit: '',
-    displayObjectInTooltip: false,
+    displayObjectInTooltip: true,
     // 'displayObjectPermanently': false,
-    addColorTextElement: false,
-    colorTextElement: 'white',
-    addColorBackElement: false,
+    addColorTextElement: true,
+    colorTextElement: '',
+    addColorBackElement: true,
     colorBackElement: 'black'
   });
   var linkURL = new _Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_1__["LinkURLClass"]('', '', '');
@@ -2769,9 +2769,9 @@ var initRegionCoordinateSpace = function initRegionCoordinateSpace(index) {
     bold: false,
     italic: false,
     underline: false
-  }, false, {
+  }, true, {
     legendElement: '',
-    numericFormatElement: '',
+    numericFormatElement: '5',
     unit: '',
     displayObjectInTooltip: false,
     // 'displayObjectPermanently': false,
@@ -2783,7 +2783,7 @@ var initRegionCoordinateSpace = function initRegionCoordinateSpace(index) {
     legendElement: '',
     numericFormatElement: '',
     unit: '',
-    displayObjectInTooltip: false,
+    displayObjectInTooltip: true,
     // 'displayObjectPermanently': false,
     addColorTextElement: false,
     colorTextElement: 'white',
@@ -4836,6 +4836,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Draw_drawOrientedLink__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Draw/drawOrientedLink */ "./components/Draw/drawOrientedLink.tsx");
 /* harmony import */ var _components_legend__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/legend */ "./components/legend.tsx");
 /* harmony import */ var components_Draw_drawRectangleExtend__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! components/Draw/drawRectangleExtend */ "./components/Draw/drawRectangleExtend.tsx");
+/* harmony import */ var Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! Functions/getResultQuery */ "./Functions/getResultQuery.tsx");
 
 
 
@@ -4846,6 +4847,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // import { getResultQuery } from 'Functions/getResultQuery';
+
 
 
 
@@ -4873,17 +4875,21 @@ function (_super) {
 
     _this.defineLimit = function () {
       var coordinateSpaceInitial = _this.props.options.coordinateSpaceInitial;
-      var jsxItems;
-      jsxItems = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawRectangle__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        key: "limitCoor",
-        color: "orange",
-        coordinateInitial: coordinateSpaceInitial,
-        id: "initialSpace",
-        onOptionsChange: _this.props.onOptionsChange,
-        options: _this.props.options,
-        data: _this.props.data,
-        isEnabled: !_this.state.buttonManage[1]
-      });
+      var jsxItems = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+
+      if (_this.props.options.baseMap.image === '' && !_this.props.options.baseMap.modeSVG) {
+        jsxItems = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawRectangle__WEBPACK_IMPORTED_MODULE_12__["default"], {
+          key: "limitCoor",
+          color: "orange",
+          coordinateInitial: coordinateSpaceInitial,
+          id: "initialSpace",
+          onOptionsChange: _this.props.onOptionsChange,
+          options: _this.props.options,
+          data: _this.props.data,
+          isEnabled: !_this.state.buttonManage[1]
+        });
+      }
+
       return jsxItems;
     };
     /**
@@ -4916,7 +4922,7 @@ function (_super) {
       } //console.log(positionX.toString() + ' ' + positionY.toString());
 
 
-      if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG) {
+      if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'Intent' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG) {
         _this.createPointToClick(positionX, positionY);
       }
     };
@@ -4939,13 +4945,13 @@ function (_super) {
     _this.createPointToClick = function (x, y) {
       var id = _this.defineIdPoint();
 
-      var initTextObject = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_6__["TextObject"]('', false, '', '', {
+      var initTextObject = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_6__["TextObject"]('', false, 'white', 'black', {
         bold: false,
         italic: false,
         underline: false
-      }, false, {
+      }, true, {
         legendElement: '',
-        numericFormatElement: '',
+        numericFormatElement: '5',
         unit: '',
         displayObjectInTooltip: false,
         // 'displayObjectPermanently': false,
@@ -4957,11 +4963,11 @@ function (_super) {
         legendElement: '',
         numericFormatElement: '',
         unit: '',
-        displayObjectInTooltip: false,
+        displayObjectInTooltip: true,
         // 'displayObjectPermanently': false,
-        addColorTextElement: false,
+        addColorTextElement: true,
         colorTextElement: 'white',
-        addColorBackElement: false,
+        addColorBackElement: true,
         colorBackElement: 'black'
       });
       var parametrageMetric = new Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_7__["LinkURLClass"]('', '', '');
@@ -4987,7 +4993,7 @@ function (_super) {
         value: 'medium'
       }, '0', x.toString(), y.toString(), 'black', [], []);
       var newArrayPoint = _this.props.options.arrayPoints;
-      newArrayPoint.push(newPoint); //this.props.options.indexPoint = id;
+      newArrayPoint.push(newPoint);
 
       _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
         indexPoint: id,
@@ -5320,7 +5326,7 @@ function (_super) {
       var yMaxPx = (yMax + 100) * (heightPanel / 200);
       var heightInitialSpace = yMaxPx - yMinPx;
 
-      if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG) {
+      if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'Intent' || event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG) {
         positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
         positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
 
@@ -5413,13 +5419,20 @@ function (_super) {
                 _this.resetCoordinatesToDrawLinkWithClick();
               }
             }
-          } else {
-            var id = parseInt(event.nativeEvent.target.offsetParent.id.charAt(6) + event.nativeEvent.target.offsetParent.id.charAt(7), 10);
+          } else if (event.nativeEvent.target.id !== 'oct' + _this.props.options.baseMap.idSVG && event.nativeEvent.target.id.startsWith('oct')) {
+            var id = event.nativeEvent.target.id.substr(3);
 
-            if (id === region.id) {
+            if (id === region.idSVG) {
               var coordinates_3 = _this.props.options.coordinatesToDrawLinkWithClick;
-              positionX = (xMin + xMax) / 2;
-              positionY = (yMax + yMin) / 2;
+              var allValues = event.nativeEvent.target.attributes[0].nodeValue;
+              var arrayAllValues = allValues.split(' ');
+              var xMinSVG = parseInt(arrayAllValues[1], 10);
+              var xMaxSVG = parseInt(arrayAllValues[7], 10);
+              var yMinSVG = parseInt(arrayAllValues[8], 10);
+              var yMaxSVG = parseInt(arrayAllValues[2], 10);
+              positionX = (xMinSVG + xMaxSVG) / 2;
+              positionY = (yMaxSVG + yMinSVG) / 2; // console.log(positionX);
+              // console.log(positionY);
 
               if (coordinates_3[0].id === 0) {
                 objectIn.x = positionX;
@@ -5435,6 +5448,37 @@ function (_super) {
                 pointC.x = ((parseInt(objectIn.x, 10) + parseInt(objectOut.x, 10)) / 2).toString();
                 pointC.y = ((parseInt(objectIn.y, 10) + parseInt(objectOut.y, 10)) / 2).toString();
                 coordinates_3[0].id = 0;
+
+                _this.createOrientedLinkToClick({
+                  label: 'No',
+                  value: false
+                });
+
+                _this.resetCoordinatesToDrawLinkWithClick();
+              }
+            }
+          } else {
+            var id = parseInt(event.nativeEvent.target.offsetParent.id.charAt(6) + event.nativeEvent.target.offsetParent.id.charAt(7), 10);
+
+            if (id === region.id) {
+              var coordinates_4 = _this.props.options.coordinatesToDrawLinkWithClick;
+              positionX = (xMin + xMax) / 2;
+              positionY = (yMax + yMin) / 2;
+
+              if (coordinates_4[0].id === 0) {
+                objectIn.x = positionX;
+                objectIn.y = positionY;
+                objectIn.labelRegion = region.label;
+                objectIn.region = region;
+                coordinates_4[0].id++;
+              } else if (coordinates_4[0].id === 1) {
+                objectOut.x = positionX;
+                objectOut.y = positionY;
+                objectOut.labelRegion = region.label;
+                objectOut.region = region;
+                pointC.x = ((parseInt(objectIn.x, 10) + parseInt(objectOut.x, 10)) / 2).toString();
+                pointC.y = ((parseInt(objectIn.y, 10) + parseInt(objectOut.y, 10)) / 2).toString();
+                coordinates_4[0].id = 0;
 
                 _this.createOrientedLinkToClick({
                   label: 'No',
@@ -5470,7 +5514,7 @@ function (_super) {
       var yMaxPx = (yMax + 100) * (heightPanel / 200);
       var heightInitialSpace = yMaxPx - yMinPx;
 
-      if (event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG) {
+      if (event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'Intent' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG) {
         positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
         positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
 
@@ -5499,25 +5543,25 @@ function (_super) {
         var arrayPoint = _this.props.options.arrayPoints;
         arrayPoint.forEach(function (point) {
           if (point.id === id_2) {
-            var coordinates_4 = _this.props.options.coordinatesToDrawLinkWithClick;
+            var coordinates_5 = _this.props.options.coordinatesToDrawLinkWithClick;
             var name_2 = point.label || point.name;
 
-            if (coordinates_4[0].id === 0) {
+            if (coordinates_5[0].id === 0) {
               objectIn.x = point.positionShapeX;
               objectIn.y = point.positionShapeY;
               objectIn.labelPoint = name_2;
               objectIn.point = point;
-              coordinates_4[0].id++;
-            } else if (coordinates_4[0].id === 1) {
+              coordinates_5[0].id++;
+            } else if (coordinates_5[0].id === 1) {
               objectOut.x = point.positionShapeX;
               objectOut.y = point.positionShapeY;
               objectOut.labelPoint = name_2;
               objectOut.point = point;
-              coordinates_4[0].id++;
-            } else if (coordinates_4[0].id === 2) {
+              coordinates_5[0].id++;
+            } else if (coordinates_5[0].id === 2) {
               pointC.x = point.positionShapeX;
               pointC.y = point.positionShapeY;
-              coordinates_4[0].id = 0;
+              coordinates_5[0].id = 0;
 
               _this.createOrientedLinkToClick({
                 label: 'Yes',
@@ -5540,39 +5584,6 @@ function (_super) {
             var id = parseInt(event.nativeEvent.target.id.charAt(6) + event.nativeEvent.target.id.charAt(7), 10);
 
             if (id === region.id) {
-              var coordinates_5 = _this.props.options.coordinatesToDrawLinkWithClick;
-              positionX = (xMin + xMax) / 2;
-              positionY = (yMax + yMin) / 2;
-
-              if (coordinates_5[0].id === 0) {
-                objectIn.x = positionX;
-                objectIn.y = positionY;
-                objectIn.labelRegion = region.label;
-                objectIn.region = region;
-                coordinates_5[0].id++;
-              } else if (coordinates_5[0].id === 1) {
-                objectOut.x = positionX;
-                objectOut.y = positionY;
-                objectOut.labelRegion = region.label;
-                objectOut.region = region;
-                coordinates_5[0].id++;
-              } else if (coordinates_5[0].id === 2) {
-                pointC.x = positionX;
-                pointC.y = positionY;
-                coordinates_5[0].id = 0;
-
-                _this.createOrientedLinkToClick({
-                  label: 'Yes',
-                  value: true
-                });
-
-                _this.resetCoordinatesToDrawLinkWithClick();
-              }
-            }
-          } else {
-            var id = parseInt(event.nativeEvent.target.offsetParent.id.charAt(6) + event.nativeEvent.target.offsetParent.id.charAt(7), 10);
-
-            if (id === region.id) {
               var coordinates_6 = _this.props.options.coordinatesToDrawLinkWithClick;
               positionX = (xMin + xMax) / 2;
               positionY = (yMax + yMin) / 2;
@@ -5593,6 +5604,39 @@ function (_super) {
                 pointC.x = positionX;
                 pointC.y = positionY;
                 coordinates_6[0].id = 0;
+
+                _this.createOrientedLinkToClick({
+                  label: 'Yes',
+                  value: true
+                });
+
+                _this.resetCoordinatesToDrawLinkWithClick();
+              }
+            }
+          } else {
+            var id = parseInt(event.nativeEvent.target.offsetParent.id.charAt(6) + event.nativeEvent.target.offsetParent.id.charAt(7), 10);
+
+            if (id === region.id) {
+              var coordinates_7 = _this.props.options.coordinatesToDrawLinkWithClick;
+              positionX = (xMin + xMax) / 2;
+              positionY = (yMax + yMin) / 2;
+
+              if (coordinates_7[0].id === 0) {
+                objectIn.x = positionX;
+                objectIn.y = positionY;
+                objectIn.labelRegion = region.label;
+                objectIn.region = region;
+                coordinates_7[0].id++;
+              } else if (coordinates_7[0].id === 1) {
+                objectOut.x = positionX;
+                objectOut.y = positionY;
+                objectOut.labelRegion = region.label;
+                objectOut.region = region;
+                coordinates_7[0].id++;
+              } else if (coordinates_7[0].id === 2) {
+                pointC.x = positionX;
+                pointC.y = positionY;
+                coordinates_7[0].id = 0;
 
                 _this.createOrientedLinkToClick({
                   label: 'Yes',
@@ -5650,7 +5694,6 @@ function (_super) {
 
 
     _this.createOrientedLinkToClick = function (isIncurved) {
-      console.log('create');
       var coordinates = _this.props.options.coordinatesToDrawLinkWithClick;
 
       var id = _this.defineIdOrientedLink();
@@ -5664,9 +5707,9 @@ function (_super) {
         bold: false,
         italic: false,
         underline: false
-      }, false, {
+      }, true, {
         legendElement: '',
-        numericFormatElement: '',
+        numericFormatElement: '5',
         unit: '',
         displayObjectInTooltip: false,
         // 'displayObjectPermanently': false,
@@ -5695,8 +5738,8 @@ function (_super) {
         refId: '',
         manageValue: 'avg'
       }, [], false, false, false, positionParameter, name, {
-        label: 'Monodirectional',
-        value: 'AB'
+        label: 'Bidirectionnal',
+        value: 'double'
       }, {
         label: 'Medium',
         value: 'Medium'
@@ -5725,7 +5768,81 @@ function (_super) {
       setTimeout(function () {
         _this.displayOrientedLink();
       }, 100);
-    };
+    }; // /**
+    //  * to do
+    //  */
+    // getValuesMainMetric(mainMetric: Metric, orientedLink?: OrientedLinkClass, point?: PointClass, isBidirectionnal?: boolean) {
+    //   let valueMainMetric = 0;
+    //   let totalValuesCount = 0;
+    //   const key: string = mainMetric.key;
+    //   const keyValue: string = mainMetric.keyValue;
+    //   if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
+    //     mainMetric.returnQuery.forEach((line: DataFrame) => {
+    //       if (line.fields[0].labels) {
+    //         if (key !== '' && keyValue !== '') {
+    //           if (line.fields[0].labels[key] === keyValue) {
+    //             const countValues: number = line.fields[0].values.length;
+    //             for (let i = 0; i < countValues; i++) {
+    //               if (line.fields[0].values.get(i)) {
+    //                 totalValuesCount++;
+    //                 valueMainMetric += line.fields[0].values.get(i);
+    //               }
+    //             }
+    //           } else {
+    //           }
+    //         } else {
+    //           const countValues: number = line.fields[0].values.length;
+    //           for (let i = 0; i < countValues; i++) {
+    //             if (line.fields[0].values.get(i)) {
+    //               totalValuesCount++;
+    //               valueMainMetric += line.fields[0].values.get(i);
+    //             }
+    //           }
+    //         }
+    //       }
+    //     });
+    //     if (orientedLink) {
+    //       if (!isBidirectionnal) {
+    //         if (mainMetric.manageValue === 'avg') {
+    //           orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
+    //         } else if (mainMetric.manageValue === 'sum') {
+    //           orientedLink.valueMainMetricA = valueMainMetric.toString();
+    //         } else if (mainMetric.manageValue === 'err') {
+    //           if (totalValuesCount > 1) {
+    //             orientedLink.valueMainMetricA = 'error';
+    //           } else {
+    //             orientedLink.valueMainMetricA = valueMainMetric.toString();
+    //           }
+    //         }
+    //       } else {
+    //         if (mainMetric.manageValue === 'avg') {
+    //           orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
+    //         } else if (mainMetric.manageValue === 'sum') {
+    //           orientedLink.valueMainMetricB = valueMainMetric.toString();
+    //         } else if (mainMetric.manageValue === 'err') {
+    //           if (totalValuesCount > 1) {
+    //             orientedLink.valueMainMetricB = 'error';
+    //           } else {
+    //             orientedLink.valueMainMetricB = valueMainMetric.toString();
+    //           }
+    //         }
+    //       }
+    //     } else if (point) {
+    //       if (mainMetric.manageValue === 'avg') {
+    //         point.valueMetric = (valueMainMetric / totalValuesCount).toString();
+    //       } else if (mainMetric.manageValue === 'sum') {
+    //         point.valueMetric = valueMainMetric.toString();
+    //       } else if (mainMetric.manageValue === 'err') {
+    //         if (totalValuesCount > 1) {
+    //           point.valueMetric = 'error';
+    //         } else {
+    //           point.valueMetric = valueMainMetric.toString();
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+
 
     _this.getValuesAuxiliaryMetricsPoint = function (point) {
       Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricAuxPoint"])(point, _this.props);
@@ -5745,17 +5862,14 @@ function (_super) {
     _this.getValuesAuxiliaryMetrics = function (auxiliaryMetrics, mainMetric) {
       var valueAuxiliaryMetric = []; //const countMetrics: number = auxiliaryMetrics.length;
 
-      console.log(auxiliaryMetrics);
       auxiliaryMetrics.forEach(function (metric) {
         var _a;
 
-        console.log(metric);
         var countTotalValues = 0;
         var resultTotalValues = 0;
         var result = '';
 
         if (metric.returnQuery && metric.returnQuery.length > 0) {
-          console.log(metric.returnQuery);
           var numberLoop = ((_a = metric.returnQuery) === null || _a === void 0 ? void 0 : _a.length) || 0;
 
           if (metric.key !== '' && metric.keyValue !== '') {
@@ -5856,7 +5970,10 @@ function (_super) {
 
     _this.updateButtonCss = function () {
       var _final = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "allButton"
+        id: "allButton",
+        style: {
+          marginTop: '1%'
+        }
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
         style: {
           marginLeft: '5%'
@@ -6219,9 +6336,10 @@ function (_super) {
 
                   if (documentId) {
                     var newBaseMap = _this.props.options.baseMap;
-                    newBaseMap.idSVG = id[1];
-                    newBaseMap.width = documentId.getAttribute('width') || '';
-                    newBaseMap.height = documentId.getAttribute('height') || '';
+                    newBaseMap.idSVG = id[1]; // newBaseMap.width = documentId.getAttribute('width') || '';
+                    // newBaseMap.height = documentId.getAttribute('height') || '';
+                    // newBaseMap.width = parseInt(documentId.getAttribute('width'), 10).toString() || '';
+                    // newBaseMap.height = parseInt(documentId.getAttribute('height'), 10).toString() || '';
 
                     _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
                       baseMap: newBaseMap
@@ -6446,28 +6564,32 @@ function (_super) {
 
 
     _this.CreateLinkArea = function () {
-      var _a, _b; // All Id in SVG
+      var _a; // All Id in SVG Test
 
 
-      var allidSvg = document.getElementById('octsvg213');
-      (_a = allidSvg) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {//const elms = allidSvg.querySelectorAll('[id]');
-        //console.log(elms);
-      }); // Test Svg Christophe search ID
+      var allidSvg = document.getElementById('octsvg12');
+      (_a = allidSvg) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
+        var elms = allidSvg.querySelectorAll('[id]');
+        console.log(elms);
+      }); // Test Svg Christophe search ID corrrigé
       // const allidSvg3 = document.getElementById('octsvg12');
       // allidSvg3?.addEventListener('click', () => {
-      //   this.props.options.regionCoordinateSpace.forEach(region => {
-      //     console.log(region.idSVG);
-      //     console.log(region.linkURL.followLink);
-      //   });
+      //   const elms = allidSvg3.querySelectorAll('[id]');
+      //   console.log(elms);
+      // });
       // });
       // All Region in SVG
-
-      var allidSvg2 = document.getElementById('octsvg213');
-      (_b = allidSvg2) === null || _b === void 0 ? void 0 : _b.addEventListener('click', function () {
-        _this.props.options.regionCoordinateSpace.forEach(function (region) {//console.log(region.idSVG);
-          //console.log(region.linkURL.followLink);
-        });
-      }); // const elms = document.querySelectorAll('[id]');
+      // const allidSvg2 = document.getElementById('octsvg12');
+      // allidSvg2?.addEventListener('click', () => {
+      // this.props.options.regionCoordinateSpace.forEach(region => {
+      //   console.log(region.idSVG);
+      //   console.log(region.linkURL.followLink);
+      // const dam = allidSvg2.querySelectorAll('[id]');
+      // console.log(dam);
+      // console.log('loua');
+      // });
+      // });
+      // const elms = document.querySelectorAll('[id]');
       // for (var i = 0; i < elms.length; i++) {
       //   let lpo = document.getElementById('octsvg213');
       //   lpo?.addEventListener('click', () => {
@@ -6514,7 +6636,7 @@ function (_super) {
 
     var mapItems = [];
     this.props.options.arrayPoints.forEach(function (line) {
-      _this.getValuesMainMetricPoint(line);
+      var valueMainMetric = _this.getValuesMainMetricPoint(line).toString();
 
       _this.updatePositionOrientedLink(line);
 
@@ -6541,7 +6663,7 @@ function (_super) {
         data: _this.props.data,
         textObject: line.textObj,
         seuil: line.lowerLimit,
-        valueMainMetric: line.valueMetric,
+        valueMainMetric: valueMainMetric,
         refMainMetric: line.mainMetric.refId || '',
         associateOrientedLinkIn: line.associateOrientedLinksIn,
         associateOrientedLinkOut: line.associateOrientedLinksOut,
@@ -6566,13 +6688,13 @@ function (_super) {
   SimplePanel.prototype.displayOrientedLink = function () {
     var _this = this;
 
-    console.log('display');
     var arrayOrientedLink = this.props.options.arrayOrientedLinks;
     var mapItems = [];
     var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
     arrayOrientedLink.forEach(function (orientedLink) {
-      //console.log(orientedLink);
-      _this.getValuesMainMetricOrientedLink(orientedLink);
+      var valueMainMetricA = _this.getValuesMainMetricOrientedLink(orientedLink).toString();
+
+      var valueMainMetricB = _this.getValuesMainMetricOrientedLinkB(orientedLink).toString();
 
       _this.getValuesMainMetricOrientedLinkB(orientedLink);
 
@@ -6598,8 +6720,8 @@ function (_super) {
         heightImage: parseInt(_this.props.options.baseMap.height, 10),
         label: orientedLink.label,
         name: orientedLink.name,
-        valueMainMetricA: orientedLink.valueMainMetricA,
-        valueMainMetricB: orientedLink.valueMainMetricB,
+        valueMainMetricA: valueMainMetricA,
+        valueMainMetricB: valueMainMetricB,
         refMainMetricA: orientedLink.mainMetric.refId || '',
         refMainMetricB: orientedLink.mainMetricB.refId || '',
         options: _this.props.options,
@@ -6639,97 +6761,27 @@ function (_super) {
 
 
   SimplePanel.prototype.getValuesMainMetricPoint = function (point) {
-    Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricPoint"])(point, this.props);
-    this.getValuesMainMetric(point.mainMetric, undefined, point);
+    Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricPoint"])(point, this.props); //this.getValuesMainMetric(point.mainMetric, undefined, point);
+
+    var result = 0;
+    result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_17__["getResultQuery"])(point.mainMetric) || NaN;
+    return result;
   };
 
   SimplePanel.prototype.getValuesMainMetricOrientedLink = function (orientedLink) {
-    Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricOrientedLink"])(orientedLink, this.props);
-    this.getValuesMainMetric(orientedLink.mainMetric, orientedLink, undefined, false);
+    Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricOrientedLink"])(orientedLink, this.props); //this.getValuesMainMetric(orientedLink.mainMetric, orientedLink, undefined, false);
+
+    var result = 0;
+    result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_17__["getResultQuery"])(orientedLink.mainMetric) || NaN;
+    return result;
   };
 
   SimplePanel.prototype.getValuesMainMetricOrientedLinkB = function (orientedLink) {
-    Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricOrientedLink"])(orientedLink, this.props);
-    this.getValuesMainMetric(orientedLink.mainMetricB, orientedLink, undefined, true);
-  };
-  /**
-   * to do
-   */
+    Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricOrientedLink"])(orientedLink, this.props); //this.getValuesMainMetric(orientedLink.mainMetricB, orientedLink, undefined, true);
 
-
-  SimplePanel.prototype.getValuesMainMetric = function (mainMetric, orientedLink, point, isBidirectionnal) {
-    var valueMainMetric = 0;
-    var totalValuesCount = 0;
-    var key = mainMetric.key;
-    var keyValue = mainMetric.keyValue;
-
-    if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
-      mainMetric.returnQuery.forEach(function (line) {
-        if (line.fields[0].labels) {
-          if (key !== '' && keyValue !== '') {
-            if (line.fields[0].labels[key] === keyValue) {
-              var countValues = line.fields[0].values.length;
-
-              for (var i = 0; i < countValues; i++) {
-                if (line.fields[0].values.get(i)) {
-                  totalValuesCount++;
-                  valueMainMetric += line.fields[0].values.get(i);
-                }
-              }
-            }
-          } else {
-            var countValues = line.fields[0].values.length;
-
-            for (var i = 0; i < countValues; i++) {
-              if (line.fields[0].values.get(i)) {
-                totalValuesCount++;
-                valueMainMetric += line.fields[0].values.get(i);
-              }
-            }
-          }
-        }
-      });
-
-      if (orientedLink) {
-        if (!isBidirectionnal) {
-          if (mainMetric.manageValue === 'avg') {
-            orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
-          } else if (mainMetric.manageValue === 'sum') {
-            orientedLink.valueMainMetricA = valueMainMetric.toString();
-          } else if (mainMetric.manageValue === 'err') {
-            if (totalValuesCount > 1) {
-              orientedLink.valueMainMetricA = 'error';
-            } else {
-              orientedLink.valueMainMetricA = valueMainMetric.toString();
-            }
-          }
-        } else {
-          if (mainMetric.manageValue === 'avg') {
-            orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
-          } else if (mainMetric.manageValue === 'sum') {
-            orientedLink.valueMainMetricB = valueMainMetric.toString();
-          } else if (mainMetric.manageValue === 'err') {
-            if (totalValuesCount > 1) {
-              orientedLink.valueMainMetricB = 'error';
-            } else {
-              orientedLink.valueMainMetricB = valueMainMetric.toString();
-            }
-          }
-        }
-      } else if (point) {
-        if (mainMetric.manageValue === 'avg') {
-          point.valueMetric = (valueMainMetric / totalValuesCount).toString();
-        } else if (mainMetric.manageValue === 'sum') {
-          point.valueMetric = valueMainMetric.toString();
-        } else if (mainMetric.manageValue === 'err') {
-          if (totalValuesCount > 1) {
-            point.valueMetric = 'error';
-          } else {
-            point.valueMetric = valueMainMetric.toString();
-          }
-        }
-      }
-    }
+    var result = 0;
+    result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_17__["getResultQuery"])(orientedLink.mainMetricB) || NaN;
+    return result;
   };
 
   SimplePanel.prototype.componentDidUpdate = function (prevProps) {
@@ -6859,7 +6911,7 @@ function (_super) {
         top: '15%',
         zIndex: 1
       }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }, this.defineLimit(), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       style: styleSVG,
       dangerouslySetInnerHTML: {
         __html: this.state.svg
@@ -7353,8 +7405,7 @@ function (_super) {
           _this.setState({
             hiddenAlert: true
           });
-        }, waitAlert);
-        console.log('ok');
+        }, waitAlert); //console.log('ok');
       } else {
         _this.props.callBackToParent(_this.state.arrayCoor.id, _this.state.arrayCoor);
 
@@ -7800,7 +7851,7 @@ function (_super) {
       mainMetric: this.state.arrayCoor.mainMetric,
       callBackToParent: this.callBackMainMetric,
       isLink: false
-    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    })), !this.props.isAddCoordinate && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_14__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
@@ -7838,13 +7889,13 @@ function (_super) {
       onChange: this.onChangeRadioMode
     }), "Coordinate mode")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), this.state.selectedRadio === 'svgMode' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "svgMode"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       style: {
-        verticalAlign: 'middle'
+        display: 'flex'
       }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
       width: 15
-    }, "Zone SVG")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+    }, "Zone SVG"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
       onChange: function onChange(value) {
         return _this.onChangeSelectSVG(value);
       },
@@ -7852,7 +7903,7 @@ function (_super) {
       options: this.state.allIDSelected,
       width: 10,
       value: this.state.selectedDefaultSVG
-    })))) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }))) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "classRegion"
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "Image",
@@ -8138,13 +8189,13 @@ function (_super) {
   EditCoordinateSpace.prototype.render = function () {
     var _this = this;
 
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       style: {
-        verticalAlign: 'middle'
+        display: 'flex'
       }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
       width: 15
-    }, "Select Region")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+    }, "Select Region"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
       onChange: function onChange(value) {
         return _this.onChangeSelectCoordinate(value);
       },
@@ -8152,7 +8203,7 @@ function (_super) {
       options: this.state.selectCoordinateSpace,
       width: 10,
       value: this.state.selectCoordinateSpaceDefault
-    })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.selectCoordinateSpaceDefault.value ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_coordinateSpace__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.selectCoordinateSpaceDefault.value ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_coordinateSpace__WEBPACK_IMPORTED_MODULE_3__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
@@ -8692,7 +8743,7 @@ function (_super) {
         marginBottom: '2px'
       };
       var styleReferenceMetric = {
-        width: '276px',
+        width: '416px',
         height: '35px',
         border: '1px solid #262628',
         borderRadius: '0 3px 3px 0',
@@ -9132,6 +9183,45 @@ function (_super) {
     _this.callBack = function () {
       _this.props.callBackToParent(_this.state.mainMetric, _this.props.id);
     };
+    /** call back to parent for mainMetricB */
+
+
+    _this.callBackB = function () {
+      if (_this.props.callBackToParentMainMetricB) {
+        _this.props.callBackToParentMainMetricB(_this.state.mainMetricB, _this.props.id);
+      }
+    };
+    /** get mainMetricB of OrientedLink bidirectionnal */
+
+
+    _this.getMainMetricB = function () {
+      var e_1, _a;
+
+      var mainMetricB = {};
+      var arrayOrientedLink = _this.props.options.arrayOrientedLinks;
+
+      try {
+        for (var arrayOrientedLink_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayOrientedLink), arrayOrientedLink_1_1 = arrayOrientedLink_1.next(); !arrayOrientedLink_1_1.done; arrayOrientedLink_1_1 = arrayOrientedLink_1.next()) {
+          var orientedLink = arrayOrientedLink_1_1.value;
+
+          if (orientedLink.id === _this.props.idCoordinate) {
+            mainMetricB = orientedLink.mainMetricB;
+          }
+        }
+      } catch (e_1_1) {
+        e_1 = {
+          error: e_1_1
+        };
+      } finally {
+        try {
+          if (arrayOrientedLink_1_1 && !arrayOrientedLink_1_1.done && (_a = arrayOrientedLink_1["return"])) _a.call(arrayOrientedLink_1);
+        } finally {
+          if (e_1) throw e_1.error;
+        }
+      }
+
+      return mainMetricB;
+    };
     /** edit value for default select manage value */
 
 
@@ -9139,11 +9229,8 @@ function (_super) {
       var newMainMetric = _this.state.mainMetric;
       newMainMetric.manageValue = value.value || 'err';
 
-      _this.setState(function (prevState) {
-        return {
-          mainMetric: newMainMetric,
-          selectDefaultManageValue: value || prevState.selectDefaultManageValue
-        };
+      _this.setState({
+        mainMetric: newMainMetric
       });
 
       _this.callBack();
@@ -9152,14 +9239,15 @@ function (_super) {
 
 
     _this.onChangeSelectManageValueB = function (value) {
-      var newMainMetric = _this.props.options.arrayOrientedLinks[_this.props.id || 0].mainMetricB;
+      var newMainMetric = _this.state.mainMetricB; //const arrayOrientedLinks: OrientedLink = this.props.options.arrayOrientedLinks
+
       newMainMetric.manageValue = value.value || 'err';
 
       _this.setState({
         mainMetricB: newMainMetric
       });
 
-      _this.callBack();
+      _this.callBackB();
     };
     /** edit value key for mainMetric */
 
@@ -9178,14 +9266,14 @@ function (_super) {
 
 
     _this._handleChangeKeyB = function (value) {
-      var newMainMetric = _this.props.options.arrayOrientedLinks[_this.props.id || 0].mainMetricB;
+      var newMainMetric = _this.state.mainMetricB;
       newMainMetric.key = value;
 
       _this.setState({
         mainMetricB: newMainMetric
       });
 
-      _this.callBack();
+      _this.callBackB();
     };
     /** edit value keyValue for mainMetric */
 
@@ -9204,14 +9292,14 @@ function (_super) {
 
 
     _this._handleChangeKeyValueB = function (value) {
-      var newMainMetric = _this.props.options.arrayOrientedLinks[_this.props.id || 0].mainMetricB;
+      var newMainMetric = _this.state.mainMetricB;
       newMainMetric.keyValue = value;
 
       _this.setState({
         mainMetricB: newMainMetric
       });
 
-      _this.callBack();
+      _this.callBackB();
     };
     /** edit value for select */
 
@@ -9236,7 +9324,7 @@ function (_super) {
     _this.onChangeSelectQueryB = function (value) {
       var _a;
 
-      var newMainMetric = _this.props.options.arrayOrientedLinks[_this.props.id || 0].mainMetricB;
+      var newMainMetric = _this.state.mainMetricB;
       newMainMetric.refId = ((_a = value.value) === null || _a === void 0 ? void 0 : _a.refId) || '';
       newMainMetric.expr = '';
 
@@ -9244,7 +9332,7 @@ function (_super) {
         mainMetricB: newMainMetric
       });
 
-      _this.callBack();
+      _this.callBackB();
     };
     /** switch value collapseMainMetric when click collapse */
 
@@ -9272,13 +9360,13 @@ function (_super) {
     };
 
     _this.getDefaultQueryB = function () {
-      var e_1, _a;
+      var e_2, _a;
 
       var defaultValue = {
         label: 'No value',
         value: undefined
       };
-      var mainMetricB = _this.props.options.arrayOrientedLinks[_this.props.id || 0].mainMetricB;
+      var mainMetricB = _this.state.mainMetricB;
 
       try {
         for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(_this.state.selectQuery), _c = _b.next(); !_c.done; _c = _b.next()) {
@@ -9286,40 +9374,6 @@ function (_super) {
 
           if (mainMetricB.refId) {
             if (mainMetricB.refId === value.label) {
-              defaultValue = value;
-            }
-          }
-        }
-      } catch (e_1_1) {
-        e_1 = {
-          error: e_1_1
-        };
-      } finally {
-        try {
-          if (_c && !_c.done && (_a = _b["return"])) _a.call(_b);
-        } finally {
-          if (e_1) throw e_1.error;
-        }
-      }
-
-      return defaultValue;
-    };
-
-    _this.getDefaultManageValueB = function () {
-      var e_2, _a;
-
-      var defaultValue = {
-        label: 'avg',
-        value: 'avg'
-      };
-      var mainMetricB = _this.props.options.arrayOrientedLinks[_this.props.id || 0].mainMetricB;
-
-      try {
-        for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(_this.state.selectManageValue), _c = _b.next(); !_c.done; _c = _b.next()) {
-          var value = _c.value;
-
-          if (mainMetricB.manageValue) {
-            if (mainMetricB.manageValue === value.value) {
               defaultValue = value;
             }
           }
@@ -9338,11 +9392,79 @@ function (_super) {
 
       return defaultValue;
     };
+
+    _this.getDefaultManageValue = function () {
+      var e_3, _a;
+
+      var defaultValue = {
+        label: 'avg',
+        value: 'avg'
+      };
+      var mainMetric = _this.state.mainMetric;
+
+      try {
+        for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(_this.state.selectManageValue), _c = _b.next(); !_c.done; _c = _b.next()) {
+          var value = _c.value;
+
+          if (mainMetric.manageValue) {
+            if (mainMetric.manageValue === value.value) {
+              defaultValue = value;
+            }
+          }
+        }
+      } catch (e_3_1) {
+        e_3 = {
+          error: e_3_1
+        };
+      } finally {
+        try {
+          if (_c && !_c.done && (_a = _b["return"])) _a.call(_b);
+        } finally {
+          if (e_3) throw e_3.error;
+        }
+      }
+
+      return defaultValue;
+    };
+
+    _this.getDefaultManageValueB = function () {
+      var e_4, _a;
+
+      var defaultValue = {
+        label: 'avg',
+        value: 'avg'
+      };
+      var mainMetricB = _this.state.mainMetricB;
+
+      try {
+        for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(_this.state.selectManageValue), _c = _b.next(); !_c.done; _c = _b.next()) {
+          var value = _c.value;
+
+          if (mainMetricB.manageValue) {
+            if (mainMetricB.manageValue === value.value) {
+              defaultValue = value;
+            }
+          }
+        }
+      } catch (e_4_1) {
+        e_4 = {
+          error: e_4_1
+        };
+      } finally {
+        try {
+          if (_c && !_c.done && (_a = _b["return"])) _a.call(_b);
+        } finally {
+          if (e_4) throw e_4.error;
+        }
+      }
+
+      return defaultValue;
+    };
     /** add all query in select */
 
 
     _this.fillSelectQuery = function () {
-      var e_3, _a, e_4, _b, e_5, _c;
+      var e_5, _a, e_6, _b, e_7, _c;
 
       var _d, _e, _f;
 
@@ -9359,7 +9481,7 @@ function (_super) {
           var duplicate = false;
 
           try {
-            for (var valueSelect_1 = (e_4 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(valueSelect)), valueSelect_1_1 = valueSelect_1.next(); !valueSelect_1_1.done; valueSelect_1_1 = valueSelect_1.next()) {
+            for (var valueSelect_1 = (e_6 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(valueSelect)), valueSelect_1_1 = valueSelect_1.next(); !valueSelect_1_1.done; valueSelect_1_1 = valueSelect_1.next()) {
               var valueSave = valueSelect_1_1.value;
 
               if (((_d = valueSave.value) === null || _d === void 0 ? void 0 : _d.refId) === line.refId) {
@@ -9367,15 +9489,15 @@ function (_super) {
                 break;
               }
             }
-          } catch (e_4_1) {
-            e_4 = {
-              error: e_4_1
+          } catch (e_6_1) {
+            e_6 = {
+              error: e_6_1
             };
           } finally {
             try {
               if (valueSelect_1_1 && !valueSelect_1_1.done && (_b = valueSelect_1["return"])) _b.call(valueSelect_1);
             } finally {
-              if (e_4) throw e_4.error;
+              if (e_6) throw e_6.error;
             }
           }
 
@@ -9386,15 +9508,15 @@ function (_super) {
             });
           }
         }
-      } catch (e_3_1) {
-        e_3 = {
-          error: e_3_1
+      } catch (e_5_1) {
+        e_5 = {
+          error: e_5_1
         };
       } finally {
         try {
           if (_h && !_h.done && (_a = _g["return"])) _a.call(_g);
         } finally {
-          if (e_3) throw e_3.error;
+          if (e_5) throw e_5.error;
         }
       }
 
@@ -9420,15 +9542,15 @@ function (_super) {
               break;
             }
           }
-        } catch (e_5_1) {
-          e_5 = {
-            error: e_5_1
+        } catch (e_7_1) {
+          e_7 = {
+            error: e_7_1
           };
         } finally {
           try {
             if (valueSelect_2_1 && !valueSelect_2_1.done && (_c = valueSelect_2["return"])) _c.call(valueSelect_2);
           } finally {
-            if (e_5) throw e_5.error;
+            if (e_7) throw e_7.error;
           }
         }
       }
@@ -9443,7 +9565,7 @@ function (_super) {
 
 
     _this.componentDidMount = function () {
-      var e_6, _a;
+      var e_8, _a;
 
       _this.fillSelectQuery();
 
@@ -9467,15 +9589,15 @@ function (_super) {
             defaultValue = line;
           }
         }
-      } catch (e_6_1) {
-        e_6 = {
-          error: e_6_1
+      } catch (e_8_1) {
+        e_8 = {
+          error: e_8_1
         };
       } finally {
         try {
           if (newSelectManageValue_1_1 && !newSelectManageValue_1_1.done && (_a = newSelectManageValue_1["return"])) _a.call(newSelectManageValue_1);
         } finally {
-          if (e_6) throw e_6.error;
+          if (e_8) throw e_8.error;
         }
       }
 
@@ -9492,6 +9614,14 @@ function (_super) {
         return _this.setState(state, resolve);
       });
     };
+    /** update with promise mainMetric state */
+
+
+    _this.setStateAsyncMainMetricB = function (state) {
+      return new Promise(function (resolve) {
+        return _this.setState(state, resolve);
+      });
+    };
     /** update data when props is update */
 
 
@@ -9502,7 +9632,7 @@ function (_super) {
             case 0:
               if (!(prevProps.idCoordinate !== this.props.idCoordinate)) return [3
               /*break*/
-              , 2];
+              , 4];
               this.setState({
                 collapseMainMetric: false
               });
@@ -9515,10 +9645,25 @@ function (_super) {
             case 1:
               _a.sent();
 
-              this.fillSelectQuery();
-              _a.label = 2;
+              if (!this.props.mainMetricB) return [3
+              /*break*/
+              , 3];
+              return [4
+              /*yield*/
+              , this.setStateAsyncMainMetricB({
+                mainMetricB: this.props.mainMetricB
+              })];
 
             case 2:
+              _a.sent();
+
+              _a.label = 3;
+
+            case 3:
+              this.fillSelectQuery();
+              _a.label = 4;
+
+            case 4:
               if (prevProps.data.series !== this.props.data.series) {
                 this.fillSelectQuery();
               }
@@ -9532,7 +9677,7 @@ function (_super) {
     };
 
     _this.displayHtml = function () {
-      var e_7, _a;
+      var e_9, _a;
 
       var result;
       var currentOrientedLink;
@@ -9546,15 +9691,15 @@ function (_super) {
             currentOrientedLink = orientedLink;
           }
         }
-      } catch (e_7_1) {
-        e_7 = {
-          error: e_7_1
+      } catch (e_9_1) {
+        e_9 = {
+          error: e_9_1
         };
       } finally {
         try {
           if (arrayOrientedLinks_1_1 && !arrayOrientedLinks_1_1.done && (_a = arrayOrientedLinks_1["return"])) _a.call(arrayOrientedLinks_1);
         } finally {
-          if (e_7) throw e_7.error;
+          if (e_9) throw e_9.error;
         }
       }
 
@@ -9567,13 +9712,13 @@ function (_super) {
           isOpen: _this.state.collapseLinkA,
           label: "Link A",
           onToggle: _this.onToggleLinkA
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: {
-            verticalAlign: 'middle'
+            display: 'flex'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
           width: 15
-        }, "Query")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+        }, "Query"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
           onChange: function onChange(value) {
             return _this.onChangeSelectQuery(value);
           },
@@ -9581,7 +9726,7 @@ function (_super) {
           options: _this.state.selectQuery,
           width: 15,
           value: _this.state.selectQueryDefault
-        }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           label: "Key",
           labelWidth: 15,
           inputWidth: 20,
@@ -9601,32 +9746,32 @@ function (_super) {
           onChange: function onChange(event) {
             return _this._handleChangeKeyValue(event.currentTarget.value);
           }
-        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: {
-            verticalAlign: 'middle'
+            display: 'flex'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
           width: 15
-        }, "Manipulate")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+        }, "Manipulate"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
           onChange: function onChange(value) {
             return _this.onChangeSelectManageValue(value);
           },
           allowCustomValue: false,
           options: _this.state.selectManageValue,
           width: 15,
-          value: _this.state.selectDefaultManageValue
-        })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
+          value: _this.getDefaultManageValue()
+        }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
           isOpen: _this.state.collapseLinkB,
           label: "Link B",
           onToggle: _this.onToggleLinkB
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: {
-            verticalAlign: 'middle',
+            display: 'flex',
             marginTop: '10px'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
           width: 15
-        }, "Query")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+        }, "Query"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
           onChange: function onChange(value) {
             return _this.onChangeSelectQueryB(value);
           },
@@ -9634,7 +9779,7 @@ function (_super) {
           options: _this.state.selectQuery,
           width: 10,
           value: _this.getDefaultQueryB()
-        }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           label: "Key",
           labelWidth: 15,
           inputWidth: 20,
@@ -9654,13 +9799,13 @@ function (_super) {
           onChange: function onChange(event) {
             return _this._handleChangeKeyValueB(event.currentTarget.value);
           }
-        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: {
-            verticalAlign: 'middle'
+            display: 'flex'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
           width: 15
-        }, "Manipulate")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+        }, "Manipulate"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
           onChange: function onChange(value) {
             return _this.onChangeSelectManageValueB(value);
           },
@@ -9668,19 +9813,19 @@ function (_super) {
           options: _this.state.selectManageValue,
           width: 10,
           value: _this.getDefaultManageValueB()
-        })))));
+        }))));
       } else {
         result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
           isOpen: _this.state.collapseMainMetric,
           label: "Main metric",
           onToggle: _this.onToggleMainMetric
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: {
-            verticalAlign: 'middle'
+            display: 'flex'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
           width: 15
-        }, "Query")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+        }, "Query"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
           onChange: function onChange(value) {
             return _this.onChangeSelectQuery(value);
           },
@@ -9688,7 +9833,7 @@ function (_super) {
           options: _this.state.selectQuery,
           width: 10,
           value: _this.state.selectQueryDefault
-        }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           label: "Key",
           labelWidth: 15,
           inputWidth: 10,
@@ -9708,21 +9853,21 @@ function (_super) {
           onChange: function onChange(event) {
             return _this._handleChangeKeyValue(event.currentTarget.value);
           }
-        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: {
-            verticalAlign: 'middle'
+            display: 'flex'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
           width: 15
-        }, "Manipulate")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+        }, "Manipulate"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
           onChange: function onChange(value) {
             return _this.onChangeSelectManageValue(value);
           },
           allowCustomValue: false,
           options: _this.state.selectManageValue,
           width: 10,
-          value: _this.state.selectDefaultManageValue
-        }))));
+          value: _this.getDefaultManageValue()
+        })));
       }
 
       return result;
@@ -9991,13 +10136,13 @@ function (_super) {
   EditOrientedLink.prototype.render = function () {
     var _this = this;
 
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       style: {
         display: 'flex'
       }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
       width: 15
-    }, "Select Oriented Link")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+    }, "Select Oriented Link"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
       onChange: function onChange(value) {
         return _this.onChangeSelectCoordinate(value);
       },
@@ -10005,7 +10150,7 @@ function (_super) {
       options: this.state.selectCoordinateSpace,
       width: 10,
       value: this.state.selectCoordinateSpaceDefault
-    })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.selectCoordinateSpaceDefault.value ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_orientedLink__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.selectCoordinateSpaceDefault.value ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_orientedLink__WEBPACK_IMPORTED_MODULE_3__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
@@ -10252,6 +10397,21 @@ function (_super) {
     _this.callBackMainMetric = function (mainMetric, id) {
       var newValue = _this.state.orientedLink;
       newValue.mainMetric = mainMetric;
+
+      _this.setState({
+        orientedLink: newValue
+      });
+
+      if (_this.props.isAddLink === false) {
+        _this.callBack();
+      }
+    };
+    /** save data of mainMetric */
+
+
+    _this.callBackMainMetricB = function (mainMetricB, id) {
+      var newValue = _this.state.orientedLink;
+      newValue.mainMetricB = mainMetricB;
 
       _this.setState({
         orientedLink: newValue
@@ -10612,7 +10772,9 @@ function (_super) {
       data: this.props.data,
       idCoordinate: this.state.orientedLink.id,
       mainMetric: this.state.orientedLink.mainMetric,
+      mainMetricB: this.state.orientedLink.mainMetricB,
       callBackToParent: this.callBackMainMetric,
+      callBackToParentMainMetricB: this.callBackMainMetricB,
       isLink: true
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_CoordinateSpace_manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_12__["default"], {
       options: this.props.options,
@@ -10894,13 +11056,13 @@ function (_super) {
   EditPoint.prototype.render = function () {
     var _this = this;
 
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       style: {
         display: 'flex'
       }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
       width: 15
-    }, "Select Point")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+    }, "Select Point"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
       onChange: function onChange(value) {
         return _this.onChangeSelectCoordinate(value);
       },
@@ -10908,7 +11070,7 @@ function (_super) {
       options: this.state.selectCoordinateSpace,
       width: 10,
       value: this.state.selectCoordinateSpaceDefault
-    })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.selectCoordinateSpaceDefault.value ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_point__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.selectCoordinateSpaceDefault.value ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_point__WEBPACK_IMPORTED_MODULE_3__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
@@ -11052,8 +11214,7 @@ function (_super) {
           _this.setState({
             hiddenAlert: true
           });
-        }, waitAlert);
-        console.log('ok');
+        }, waitAlert); //console.log('ok');
       } else {
         _this.props.callBackToParent(_this.state.point.id, _this.state.point);
 
@@ -11411,7 +11572,7 @@ function (_super) {
       mainMetric: this.state.point.mainMetric,
       callBackToParent: this.callBackMainMetric,
       isLink: false
-    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    })), !this.props.isAddPoint && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_manageAuxiliaryQuery__WEBPACK_IMPORTED_MODULE_9__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
@@ -13140,6 +13301,7 @@ function (_super) {
 
       if (!dislayTextObjectInTooltip) {
         htmlTextObject.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          key: 'contentTextObject1' + _this.props.name,
           style: styleLabel
         }, _this.props.label || _this.props.name.toUpperCase()));
       }
@@ -13148,11 +13310,13 @@ function (_super) {
         if (!displayMainMetricInTooltip) {
           if (legendMainMetric) {
             htmlMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              key: 'contentTextObject2' + _this.props.name,
               style: styleMainMetric
             }, legendMainMetric));
           }
 
           htmlMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+            key: 'contentTextObject3' + _this.props.name,
             style: styleMainMetric
           }, _this.defineMainMetric(mainMetric)));
         }
@@ -13169,6 +13333,18 @@ function (_super) {
           padding: '0 5px'
         }
       }, htmlMainMetric));
+    };
+
+    _this.defineHtmlLinkTooltip = function () {
+      var result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+
+      if (_this.props.linkUrl.hoveringTooltipText !== '') {
+        result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+          href: _this.props.linkUrl.hoveringTooltipLink
+        }, _this.props.linkUrl.hoveringTooltipText);
+      }
+
+      return result;
     };
 
     _this.defineValueTooptip = function (typeLink, link) {
@@ -13264,45 +13440,45 @@ function (_super) {
           }
 
           contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-            key: 'contentTooltip2' + _this.props.name,
+            key: 'contentTooltip1' + _this.props.name,
             style: styleTitleMainMetric
           }, "Main Metric"));
 
           if (typeLink === 'bidirectional') {
             if (link === 'A') {
               contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: 'contentTooltip3a' + _this.props.name,
+                key: 'contentTooltip2' + _this.props.name,
                 style: styleTitle2MainMetric
               }, "+ Link A"));
               contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: 'contentTooltip4a' + _this.props.name,
+                key: 'contentTooltip3' + _this.props.name,
                 style: styleContentMainMetrics
               }, ' ', "- Reference : ", refMainMetricA));
               contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: 'contentTooltip5a' + _this.props.name,
+                key: 'contentTooltip4' + _this.props.name,
                 style: styleContentMainMetrics
               }, ' ', "- Value : ", _this.defineMainMetric(valueMainMetricA)));
             } else {
               contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: 'contentTooltip3b' + _this.props.name,
+                key: 'contentTooltip5' + _this.props.name,
                 style: styleTitle2MainMetric
               }, "+ Link B"));
               contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: 'contentTooltip4b' + _this.props.name,
+                key: 'contentTooltip6' + _this.props.name,
                 style: styleContentMainMetrics
               }, ' ', "- Reference : ", refMainMetricB));
               contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: 'contentTooltip5b' + _this.props.name,
+                key: 'contentTooltip7' + _this.props.name,
                 style: styleContentMainMetrics
               }, ' ', "- Value : ", _this.defineMainMetric(valueMainMetricB)));
             }
           } else if (typeLink === 'monodirectional') {
             contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-              key: 'contentTooltip6' + _this.props.name,
+              key: 'contentTooltip8' + _this.props.name,
               style: styleContentMainMetrics
             }, ' ', "- Reference : ", refMainMetricA));
             contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-              key: 'contentTooltip7' + _this.props.name,
+              key: 'contentTooltip9' + _this.props.name,
               style: styleContentMainMetrics
             }, ' ', "- Value : ", _this.defineMainMetric(valueMainMetricA)));
           }
@@ -13320,30 +13496,30 @@ function (_super) {
           if (link === 'A') {
             if (_this.props.auxiliaryMetrics.length > 0) {
               contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: 'contentTooltip8a' + _this.props.name,
+                key: 'contentTooltip10' + _this.props.name,
                 style: styleTitleAuxMetric
               }, "Auxiliary Metric"));
               var index_1 = 1;
 
               _this.props.auxiliaryMetrics.forEach(function (metric) {
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                  key: index_1.toString() + 'contentTooltip9a' + _this.props.name,
+                  key: index_1.toString() + 'contentTooltip11' + _this.props.name,
                   style: styleTitle2AuxMetric
                 }, "+ Metric ", index_1));
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                  key: index_1.toString() + 'contentTooltip10a' + _this.props.name,
+                  key: index_1.toString() + 'contentTooltip12' + _this.props.name,
                   style: styleContentAuxMetrics
                 }, "- Value : ", _this.defineAuxMetric(_this.props.valuesAuxiliaryMetrics[index_1 - 1])));
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                  key: index_1.toString() + 'contentTooltip11a' + _this.props.name,
+                  key: index_1.toString() + 'contentTooltip13' + _this.props.name,
                   style: styleContentAuxMetrics
                 }, "- Key : ", metric.key));
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                  key: index_1.toString() + 'contentTooltip12a' + _this.props.name,
+                  key: index_1.toString() + 'contentTooltip14' + _this.props.name,
                   style: styleContentAuxMetrics
                 }, "- KeyValue : ", metric.keyValue));
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                  key: index_1.toString() + 'contentTooltip13a' + _this.props.name,
+                  key: index_1.toString() + 'contentTooltip15' + _this.props.name,
                   style: styleContentAuxMetrics
                 }, "- Type : ", metric.manageValue));
                 index_1++;
@@ -13352,30 +13528,30 @@ function (_super) {
           } else {
             if (_this.props.auxiliaryMetricsB.length > 0) {
               contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: 'contentTooltip8b' + _this.props.name,
+                key: 'contentTooltip16' + _this.props.name,
                 style: styleTitleAuxMetric
               }, "Auxiliary Metric"));
               var index_2 = 1;
 
               _this.props.auxiliaryMetricsB.forEach(function (metric) {
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                  key: index_2.toString() + 'contentTooltip9b' + _this.props.name,
+                  key: index_2.toString() + 'contentTooltip17' + _this.props.name,
                   style: styleTitle2AuxMetric
                 }, "+ Metric ", index_2));
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                  key: index_2.toString() + 'contentTooltip10b' + _this.props.name,
+                  key: index_2.toString() + 'contentTooltip18' + _this.props.name,
                   style: styleContentAuxMetrics
                 }, "- Value : ", _this.defineAuxMetric(_this.props.valuesAuxiliaryMetrics[index_2 - 1])));
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                  key: index_2.toString() + 'contentTooltip11b' + _this.props.name,
+                  key: index_2.toString() + 'contentTooltip19' + _this.props.name,
                   style: styleContentAuxMetrics
                 }, "- Key : ", metric.key));
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                  key: index_2.toString() + 'contentTooltip12b' + _this.props.name,
+                  key: index_2.toString() + 'contentTooltip20' + _this.props.name,
                   style: styleContentAuxMetrics
                 }, "- KeyValue : ", metric.keyValue));
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                  key: index_2.toString() + 'contentTooltip13b' + _this.props.name,
+                  key: index_2.toString() + 'contentTooltip21' + _this.props.name,
                   style: styleContentAuxMetrics
                 }, "- Type : ", metric.manageValue));
                 index_2++;
@@ -13385,30 +13561,30 @@ function (_super) {
         } else if (typeLink === 'monodirectional') {
           if (_this.props.auxiliaryMetrics.length > 0) {
             contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-              key: 'contentTooltip14' + _this.props.name,
+              key: 'contentTooltip22' + _this.props.name,
               style: styleTitleAuxMetric
             }, "Auxiliary Metric"));
             var index_3 = 1;
 
             _this.props.auxiliaryMetrics.forEach(function (metric) {
               contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_3.toString() + 'contentTooltip15' + _this.props.name,
+                key: index_3.toString() + 'contentTooltip23' + _this.props.name,
                 style: styleTitle2AuxMetric
               }, "+ Metric ", index_3));
               contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_3.toString() + 'contentTooltip16' + _this.props.name,
+                key: index_3.toString() + 'contentTooltip14' + _this.props.name,
                 style: styleContentAuxMetrics
               }, "- Value : ", _this.defineAuxMetric(_this.props.valuesAuxiliaryMetrics[index_3 - 1])));
               contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_3.toString() + 'contentTooltip17' + _this.props.name,
+                key: index_3.toString() + 'contentTooltip25' + _this.props.name,
                 style: styleContentAuxMetrics
               }, "- Key : ", metric.key));
               contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_3.toString() + 'contentTooltip18' + _this.props.name,
+                key: index_3.toString() + 'contentTooltip26' + _this.props.name,
                 style: styleContentAuxMetrics
               }, "- KeyValue : ", metric.keyValue));
               contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_3.toString() + 'contentTooltip19' + _this.props.name,
+                key: index_3.toString() + 'contentTooltip27' + _this.props.name,
                 style: styleContentAuxMetrics
               }, "- Type : ", metric.manageValue));
               index_3++;
@@ -13432,7 +13608,7 @@ function (_super) {
           backgroundColor: addBackColorAuxMetric ? backColorAuxMetric : backColoTextObject,
           padding: '0 5px'
         }
-      }, contentTooltipAuxMetric));
+      }, contentTooltipAuxMetric), _this.defineHtmlLinkTooltip());
     };
 
     _this.defineTextDecoration = function () {
@@ -13743,7 +13919,11 @@ function (_super) {
       yB = yB0;
       xCByClick = xCByClick0;
       yCByClick = yCByClick0;
-    }
+    } // console.log('xA');
+    // console.log(xA);
+    // console.log('yA');
+    // console.log(yA);
+
 
     var xC = 0;
     var yC = 0;
@@ -13784,7 +13964,6 @@ function (_super) {
     var valueTooltipBidirectionalA = this.defineValueTooptip('bidirectional', 'A');
     var valueTooltipBidirectionalB = this.defineValueTooptip('bidirectional', 'B');
     var linkUrlOrientedLink = this.props.linkUrl.followLink;
-    var linkUrlTooltip = this.props.linkUrl.hoveringTooltipLink;
     var inverseAxeY = -1;
 
     if (orientationLink === 'double') {
@@ -13794,8 +13973,7 @@ function (_super) {
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
         content: valueTooltipBidirectionalA,
         placement: this.props.tooltipPositionA.value
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        href: linkUrlTooltip,
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         id: "linkA",
         style: {
           position: 'absolute',
@@ -13846,8 +14024,7 @@ function (_super) {
       }, this.defineTextObject(this.props.valueMainMetricA))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
         content: valueTooltipBidirectionalB,
         placement: this.props.tooltipPositionB.value
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        href: linkUrlTooltip,
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         id: "linkB",
         style: {
           position: 'absolute',
@@ -13903,8 +14080,7 @@ function (_super) {
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
           content: valueTooltipMonodirectional,
           placement: this.props.tooltipPositionA.value
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-          href: linkUrlTooltip,
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           id: "partA",
           style: {
             position: 'absolute',
@@ -13924,8 +14100,7 @@ function (_super) {
         }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
           content: valueTooltipMonodirectional,
           placement: this.props.tooltipPositionA.value
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-          href: linkUrlTooltip,
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           id: "partB",
           style: {
             position: 'absolute',
@@ -13976,13 +14151,11 @@ function (_super) {
       } else {
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
           href: linkUrlOrientedLink,
-          target: "_blank",
-          rel: "noopener noreferrer"
+          target: "_blank"
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
           content: valueTooltipMonodirectional,
           placement: this.props.tooltipPositionA.value
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-          href: linkUrlTooltip,
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           id: "link",
           style: {
             position: 'absolute',
@@ -14346,6 +14519,123 @@ function (_super) {
       return result;
     };
 
+    _this.defineMainMetric = function (mainMetric) {
+      var result = '';
+      var unit = _this.props.textObject.valueGenerateObjectText.unit;
+      var decimal = _this.props.textObject.valueGenerateObjectText.numericFormatElement;
+
+      if (decimal !== '') {
+        result = parseFloat(mainMetric).toPrecision(parseInt(decimal, 10)) + ' ' + unit;
+      } else {
+        result = mainMetric + ' ' + unit;
+      }
+
+      return result;
+    };
+
+    _this.defineAuxMetric = function (auxMetric) {
+      var result = '';
+      var unit = _this.props.textObject.generateAuxiliaryElement.unit;
+      var decimal = _this.props.textObject.generateAuxiliaryElement.numericFormatElement;
+
+      if (decimal !== '') {
+        result = parseFloat(auxMetric).toPrecision(parseInt(decimal, 10)) + ' ' + unit;
+      } else {
+        result = auxMetric + ' ' + unit;
+      }
+
+      return result;
+    };
+
+    _this.defineTextObject = function (mainMetric) {
+      var htmlTextObject = [];
+      var htmlMainMetric = [];
+      var dislayTextObjectInTooltip = _this.props.textObject.isTextTooltip;
+      var textColorTextObject = _this.props.textObject.colorText;
+      var backColoTextObject = _this.props.textObject.colorBack;
+      var displayMainMetric = _this.props.textObject.generateObjectText;
+      var displayMainMetricInTooltip = _this.props.textObject.valueGenerateObjectText.displayObjectInTooltip;
+      var addTextColorMainMetric = _this.props.textObject.valueGenerateObjectText.addColorTextElement;
+      var addBackColorMainMetric = _this.props.textObject.valueGenerateObjectText.addColorBackElement;
+      var textColorMainMetric = _this.props.textObject.valueGenerateObjectText.colorTextElement;
+      var backColorMainMetric = _this.props.textObject.valueGenerateObjectText.colorBackElement;
+      var legendMainMetric = _this.props.textObject.valueGenerateObjectText.legendElement;
+      var styleLabel = {
+        color: textColorTextObject,
+        backgroundColor: backColoTextObject,
+        textAlign: 'center',
+        margin: 0,
+        padding: '0 5px'
+      };
+      var styleMainMetric = {
+        color: addTextColorMainMetric ? textColorMainMetric : textColorTextObject,
+        margin: 0,
+        padding: 0,
+        whiteSpace: 'nowrap'
+      };
+
+      if (!dislayTextObjectInTooltip) {
+        htmlTextObject.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          key: 'contentTextObject1' + _this.props.name,
+          style: styleLabel
+        }, _this.props.label || _this.props.name.toUpperCase()));
+      }
+
+      if (displayMainMetric) {
+        if (!displayMainMetricInTooltip) {
+          if (legendMainMetric) {
+            htmlMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              key: 'contentTextObject2' + _this.props.name,
+              style: styleMainMetric
+            }, legendMainMetric));
+          }
+
+          htmlMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+            key: 'contentTextObject3' + _this.props.name,
+            style: styleMainMetric
+          }, _this.defineMainMetric(mainMetric)));
+        }
+      }
+
+      var styleMainDiv = {
+        backgroundColor: backColoTextObject,
+        border: '1px solid black'
+      };
+
+      if (!displayMainMetric || displayMainMetric && displayMainMetricInTooltip) {
+        styleMainDiv = {
+          backgroundColor: backColoTextObject
+        };
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        style: styleMainDiv
+      }, htmlTextObject, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        style: {
+          backgroundColor: addBackColorMainMetric ? backColorMainMetric : backColoTextObject,
+          padding: '0 5px'
+        }
+      }, htmlMainMetric));
+    };
+
+    _this.defineHtmlLinkTooltip = function () {
+      var result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+
+      if (_this.props.linkUrl.hoveringTooltipText !== '') {
+        result = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+          style: {
+            fontFamily: _this.props.police,
+            fontSize: '11px',
+            marginBottom: '0px',
+            textAlign: 'center'
+          },
+          href: _this.props.linkUrl.hoveringTooltipLink
+        }, _this.props.linkUrl.hoveringTooltipText);
+      }
+
+      return result;
+    };
+
     _this.defineTextDecoration = function () {
       var mainStyle = _this.props.textObject.style;
       var result = '';
@@ -14624,12 +14914,6 @@ function (_super) {
   };
 
   DrawPoint.prototype.displayLabel = function (label, name, positionX, positionY, police) {
-    var valueToDisplay = label;
-
-    if (label === '') {
-      valueToDisplay = name;
-    }
-
     var valueToolTip = this.defineContentTooltip('label');
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
       key: 'tooltipLabel' + this.props.name,
@@ -14648,122 +14932,213 @@ function (_super) {
         top: this.definePositionLabelY(positionY),
         left: this.definePositionLabelX(positionX)
       }
-    }, valueToDisplay));
+    }, this.defineTextObject(this.props.valueMainMetric)));
   };
 
   DrawPoint.prototype.defineContentTooltip = function (localisation) {
     var _this = this;
 
+    var contentTooltip = [];
+    var contentTooltipMainMetric = [];
+    var contentTooltipAuxMetric = [];
+    var contentTooltipAssociateLink = [];
     var arrayOrientedLinksIn = this.props.associateOrientedLinkIn;
     var arrayOrientedLinksOut = this.props.associateOrientedLinkOut;
-    var valueMainMetric = this.props.valueMainMetric;
     var refMainMetric = this.props.refMainMetric;
-    var contentTooltip = [];
-    var linkUrlTooltip = this.props.linkUrl.hoveringTooltipLink;
+    var dislayTextObjectInTooltip = this.props.textObject.isTextTooltip;
+    var textColorTextObject = this.props.textObject.colorText;
+    var backColoTextObject = this.props.textObject.colorBack;
+    var displayMainMetric = this.props.textObject.generateObjectText;
+    var displayMainMetricInTooltip = this.props.textObject.valueGenerateObjectText.displayObjectInTooltip;
+    var addTextColorMainMetric = this.props.textObject.valueGenerateObjectText.addColorTextElement;
+    var addBackColorMainMetric = this.props.textObject.valueGenerateObjectText.addColorBackElement;
+    var textColorMainMetric = this.props.textObject.valueGenerateObjectText.colorTextElement;
+    var backColorMainMetric = this.props.textObject.valueGenerateObjectText.colorBackElement;
+    var legendMainMetric = this.props.textObject.valueGenerateObjectText.legendElement;
+    var displayAuxMetricInTooltip = this.props.textObject.generateAuxiliaryElement.displayObjectInTooltip;
+    var addTextColorAuxMetric = this.props.textObject.generateAuxiliaryElement.addColorTextElement;
+    var addBackColorAuxMetric = this.props.textObject.generateAuxiliaryElement.addColorBackElement;
+    var textColorAuxMetric = this.props.textObject.generateAuxiliaryElement.colorTextElement;
+    var backColorAuxMetric = this.props.textObject.generateAuxiliaryElement.colorBackElement;
+    var legendAuxMetric = this.props.textObject.generateAuxiliaryElement.legendElement;
     var styleMainTitle = {
       fontFamily: this.props.police,
       fontSize: '11px',
       marginBottom: '0px',
-      textAlign: 'center'
+      textAlign: 'center',
+      color: textColorTextObject,
+      backgroundColor: backColoTextObject
     };
-    var styleTitle = {
+    var styleTitleMainMetric = {
       fontFamily: this.props.police,
       fontSize: '10px',
       marginTop: '5px',
-      marginBottom: '0px'
+      marginBottom: '0px',
+      color: addTextColorMainMetric ? textColorMainMetric : textColorTextObject
     };
-    var styleTitle2 = {
+    var styleTitleAuxMetric = {
+      fontFamily: this.props.police,
+      fontSize: '10px',
+      marginTop: '5px',
+      marginBottom: '0px',
+      color: addTextColorAuxMetric ? textColorAuxMetric : textColorTextObject
+    }; // const styleTitle2MainMetric = {
+    //   fontFamily: this.props.police,
+    //   fontSize: '10px',
+    //   marginTop: '5px',
+    //   marginLeft: '5px',
+    //   marginBottom: '0px',
+    //   color: addTextColorMainMetric ? textColorMainMetric : textColorTextObject,
+    // } as React.CSSProperties;
+
+    var styleTitle2AuxMetric = {
       fontFamily: this.props.police,
       fontSize: '10px',
       marginTop: '5px',
       marginLeft: '5px',
+      marginBottom: '0px',
+      color: addTextColorAuxMetric ? textColorAuxMetric : textColorTextObject
+    };
+    var styleContentMainMetrics = {
+      fontFamily: this.props.police,
+      fontSize: '9px',
+      marginLeft: '10px',
+      marginBottom: '0px',
+      color: addTextColorMainMetric ? textColorMainMetric : textColorTextObject
+    };
+    var styleContentAuxMetrics = {
+      fontFamily: this.props.police,
+      fontSize: '9px',
+      marginLeft: '10px',
+      marginBottom: '0px',
+      color: addTextColorAuxMetric ? textColorAuxMetric : textColorTextObject
+    };
+    var styleTitleAssociateLink = {
+      fontFamily: this.props.police,
+      fontSize: '10px',
+      marginTop: '5px',
       marginBottom: '0px'
     };
-    var styleContent = {
+    var styleContentAssociateLink = {
       fontFamily: this.props.police,
       fontSize: '9px',
       marginLeft: '10px',
       marginBottom: '0px'
     };
-    contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-      key: localisation + 'ContentTooltip1' + this.props.name,
-      style: styleMainTitle
-    }, this.props.label || this.props.name.toUpperCase()));
-    contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-      key: localisation + 'ContentTooltip2' + this.props.name,
-      style: styleTitle
-    }, "Main Metric"));
-    contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-      key: localisation + 'ContentTooltip3' + this.props.name,
-      style: styleContent
-    }, "- Reference : ", refMainMetric));
-    contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-      key: localisation + 'ContentTooltip4' + this.props.name,
-      style: styleContent
-    }, "- Value : ", valueMainMetric + this.props.textObject.valueGenerateObjectText.unit));
 
-    if (this.props.auxiliaryMetrics.length > 0) {
+    if (dislayTextObjectInTooltip) {
       contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        key: localisation + 'ContentTooltip1' + this.props.name,
+        style: styleMainTitle
+      }, this.props.label || this.props.name.toUpperCase()));
+    }
+
+    if (displayMainMetric && displayMainMetricInTooltip) {
+      if (legendMainMetric) {
+        contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          key: localisation + 'ContentTooltip2' + this.props.name,
+          style: styleTitleMainMetric
+        }, legendMainMetric));
+      }
+
+      contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        key: localisation + 'ContentTooltip3' + this.props.name,
+        style: styleTitleMainMetric
+      }, "Main Metric"));
+      contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        key: localisation + 'ContentTooltip4' + this.props.name,
+        style: styleContentMainMetrics
+      }, "- Reference : ", refMainMetric));
+      contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
         key: localisation + 'ContentTooltip5' + this.props.name,
-        style: styleTitle
-      }, "Auxiliary Metric"));
-      var index_1 = 1;
-      this.props.auxiliaryMetrics.forEach(function (metric) {
-        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-          key: index_1.toString() + localisation + 'ContentTooltip6' + _this.props.name,
-          style: styleTitle2
-        }, "+ Metric ", index_1));
-        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-          key: index_1.toString() + localisation + 'ContentTooltip7' + _this.props.name,
-          style: styleContent
-        }, "- Value : ", _this.props.valuesAuxiliaryMetrics[index_1 - 1]));
-        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-          key: index_1.toString() + localisation + 'ContentTooltip8' + _this.props.name,
-          style: styleContent
-        }, "- Key : ", metric.key));
-        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-          key: index_1.toString() + localisation + 'ContentTooltip9' + _this.props.name,
-          style: styleContent
-        }, "- KeyValue : ", metric.keyValue));
-        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-          key: index_1.toString() + localisation + 'ContentTooltip10' + _this.props.name,
-          style: styleContent
-        }, "- Type : ", metric.manageValue));
-        index_1++;
-      });
+        style: styleContentMainMetrics
+      }, "- Value : ", this.defineMainMetric(this.props.valueMainMetric)));
+    }
+
+    if (displayAuxMetricInTooltip) {
+      if (legendAuxMetric) {
+        contentTooltipMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          key: localisation + 'ContentTooltip6' + this.props.name,
+          style: styleTitleAuxMetric
+        }, legendAuxMetric));
+      }
+
+      if (this.props.auxiliaryMetrics.length > 0) {
+        contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          key: localisation + 'ContentTooltip7' + this.props.name,
+          style: styleTitleAuxMetric
+        }, "Auxiliary Metric"));
+        var index_1 = 1;
+        this.props.auxiliaryMetrics.forEach(function (metric) {
+          contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+            key: index_1.toString() + localisation + 'ContentTooltip8' + _this.props.name,
+            style: styleTitle2AuxMetric
+          }, "+ Metric ", index_1));
+          contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+            key: index_1.toString() + localisation + 'ContentTooltip9' + _this.props.name,
+            style: styleContentAuxMetrics
+          }, "- Value : ", _this.defineAuxMetric(_this.props.valuesAuxiliaryMetrics[index_1 - 1])));
+          contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+            key: index_1.toString() + localisation + 'ContentTooltip10' + _this.props.name,
+            style: styleContentAuxMetrics
+          }, "- Key : ", metric.key));
+          contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+            key: index_1.toString() + localisation + 'ContentTooltip11' + _this.props.name,
+            style: styleContentAuxMetrics
+          }, "- KeyValue : ", metric.keyValue));
+          contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+            key: index_1.toString() + localisation + 'ContentTooltip12' + _this.props.name,
+            style: styleContentAuxMetrics
+          }, "- Type : ", metric.manageValue));
+          index_1++;
+        });
+      }
     }
 
     if (arrayOrientedLinksIn.length !== 0) {
-      contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-        key: localisation + 'ContentTooltip11' + this.props.name,
-        style: styleTitle
+      contentTooltipAssociateLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        key: localisation + 'ContentTooltip13' + this.props.name,
+        style: styleTitleAssociateLink
       }, "Associate Link In :"));
       arrayOrientedLinksIn.forEach(function (orientedLinkIn) {
         var nameOrientedLink = orientedLinkIn.label || orientedLinkIn.name;
-        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-          key: localisation + 'ContentTooltip12' + _this.props.name,
-          style: styleContent
+        contentTooltipAssociateLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          key: localisation + 'ContentTooltip14' + _this.props.name,
+          style: styleContentAssociateLink
         }, "- ", nameOrientedLink));
       });
     }
 
     if (arrayOrientedLinksOut.length !== 0) {
-      contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-        key: localisation + 'ContentTooltip13' + this.props.name,
-        style: styleTitle
+      contentTooltipAssociateLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        key: localisation + 'ContentTooltip15' + this.props.name,
+        style: styleTitleAssociateLink
       }, "Associate Link Out :"));
       arrayOrientedLinksOut.forEach(function (orientedLinkOut) {
         var nameOrientedLink = orientedLinkOut.label || orientedLinkOut.name;
-        contentTooltip.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-          key: localisation + 'ContentTooltip14' + _this.props.name,
-          style: styleContent
+        contentTooltipAssociateLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          key: localisation + 'ContentTooltip16' + _this.props.name,
+          style: styleContentAssociateLink
         }, "- ", nameOrientedLink));
       });
     }
 
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-      href: linkUrlTooltip
-    }, contentTooltip);
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        border: '1px solid black',
+        padding: 0
+      }
+    }, contentTooltip, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        backgroundColor: addBackColorMainMetric ? backColorMainMetric : backColoTextObject,
+        padding: '0 5px'
+      }
+    }, contentTooltipMainMetric), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        backgroundColor: addBackColorAuxMetric ? backColorAuxMetric : backColoTextObject,
+        padding: '0 5px'
+      }
+    }, contentTooltipAuxMetric), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, contentTooltipAssociateLink), this.defineHtmlLinkTooltip()));
   };
 
   DrawPoint.prototype.defineBackgroundColor = function () {
@@ -16357,10 +16732,10 @@ function (_super) {
      */
 
 
-    _this.infoSeuil = function () {
-      // console.group('info');
-      console.log(_this.state.lowerLimit);
-      console.log(_this.state.arrayInputClass); // console.groupEnd();
+    _this.infoSeuil = function () {// console.group('info');
+      // console.log(this.state.lowerLimit);
+      // console.log(this.state.arrayInputClass);
+      // console.groupEnd();
     };
     /**
      * component mount
@@ -17750,16 +18125,16 @@ function (_super) {
       var item;
       var optionsSelectTooltipPosition = [{
         label: 'Top',
-        value: 'top'
+        value: 'Top'
       }, {
         label: 'Bottom',
-        value: 'bottom'
+        value: 'Bottom'
       }, {
         label: 'Left',
-        value: 'left'
+        value: 'Left'
       }, {
         label: 'Right',
-        value: 'right'
+        value: 'Right'
       }];
 
       var positionParameter = _this.getPositionParameter();
@@ -18847,8 +19222,8 @@ function (_super) {
       }
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
       width: 15
-    }, l10n.textObject.colorText), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: l10n.textObject.backgroundColor,
+    }, l10n.textObject.backgroundColor), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: '',
       checked: this.state.textObject.valueGenerateObjectText.addColorBackElement,
       onChange: this.onSwitchValueGenerateObjectTextAddColorBackElement
     })), this.state.textObject.valueGenerateObjectText.addColorBackElement && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -19352,17 +19727,18 @@ function (_super) {
 
     var l10n = __webpack_require__(/*! Localization/en.json */ "./Localization/en.json");
 
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       style: {
-        verticalAlign: 'middle'
+        display: 'flex',
+        marginBottom: 1
       }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
       width: 15
-    }, "Police")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSelect__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }, "Police"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSelect__WEBPACK_IMPORTED_MODULE_3__["default"], {
       _onChange: this.onChangePolice,
       data: police,
       defaultValue: this.state.newPolice
-    }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: l10n.textDefault.size,
       labelWidth: 15,
       inputWidth: 30,
@@ -20148,7 +20524,7 @@ function (_super) {
     /** fill lowerlimit in JSX.Element */
 
 
-    _this.fillLowerLimit = function (lowerLimit) {
+    _this.fillLowerLimit = function (lowerLimit, name) {
       var e_1, _a;
 
       var allLimit = [];
@@ -20158,7 +20534,8 @@ function (_super) {
       try {
         for (var lowerLimit_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(lowerLimit), lowerLimit_1_1 = lowerLimit_1.next(); !lowerLimit_1_1.done; lowerLimit_1_1 = lowerLimit_1.next()) {
           var lower = lowerLimit_1_1.value;
-          allLimit.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+          allLimit.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            key: name + 'LowerLimit' + i,
             className: "LegendMatt"
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
             style: {
@@ -20210,9 +20587,11 @@ function (_super) {
         for (var allRegion_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(allRegion), allRegion_1_1 = allRegion_1.next(); !allRegion_1_1.done; allRegion_1_1 = allRegion_1.next()) {
           var line = allRegion_1_1.value;
 
-          var allLimit = _this.fillLowerLimit(line.lowerLimit);
+          var allLimit = _this.fillLowerLimit(line.lowerLimit, 'region');
 
-          var ownElement = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, line.label, allLimit);
+          var ownElement = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            key: line.id + 'DisplayLegendRegion'
+          }, line.label, allLimit);
           rendu.push(ownElement);
         }
       } catch (e_2_1) {
@@ -20242,10 +20621,12 @@ function (_super) {
         for (var allPoint_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(allPoint), allPoint_1_1 = allPoint_1.next(); !allPoint_1_1.done; allPoint_1_1 = allPoint_1.next()) {
           var line = allPoint_1_1.value;
 
-          var allLimit = _this.fillLowerLimit(line.lowerLimit);
+          var allLimit = _this.fillLowerLimit(line.lowerLimit, 'point');
 
           var name_1 = line.label || line.name;
-          var ownElement = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, name_1, allLimit);
+          var ownElement = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            key: name_1 + 'DisplayLegendPoint'
+          }, name_1, allLimit);
           rendu.push(ownElement);
         }
       } catch (e_3_1) {
@@ -20275,10 +20656,12 @@ function (_super) {
         for (var allLinks_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(allLinks), allLinks_1_1 = allLinks_1.next(); !allLinks_1_1.done; allLinks_1_1 = allLinks_1.next()) {
           var line = allLinks_1_1.value;
 
-          var allLimit = _this.fillLowerLimit(line.lowerLimit);
+          var allLimit = _this.fillLowerLimit(line.lowerLimit, 'link');
 
           var name_2 = line.label || line.name;
-          var ownElement = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, name_2, allLimit);
+          var ownElement = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            key: name_2 + 'DisplayLegendLink'
+          }, name_2, allLimit);
           rendu.push(ownElement);
         }
       } catch (e_4_1) {
@@ -20305,6 +20688,7 @@ function (_super) {
           switch (_a.label) {
             case 0:
               value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+                key: 'contentLegend',
                 style: {
                   position: 'relative',
                   left: this.state.legend.x,
@@ -20329,6 +20713,7 @@ function (_super) {
                   zIndex: 9999
                 }
               }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+                key: 'legendTitle',
                 style: {
                   backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))'
                 }
@@ -20340,6 +20725,7 @@ function (_super) {
                   padding: '10px'
                 }
               }, "Legend")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+                key: 'legendTitleRegion',
                 style: {
                   backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))'
                 }
@@ -20350,12 +20736,13 @@ function (_super) {
                   fontWeight: 'bold',
                   color: 'white'
                 }
-              }, "Region")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+              }, "Region")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
                 key: "regionLegend",
                 style: {
                   paddingLeft: '5px'
                 }
               }, this.fillRegion()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+                key: 'legendTitlePoint',
                 style: {
                   backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))'
                 }
@@ -20366,12 +20753,13 @@ function (_super) {
                   fontWeight: 'bold',
                   color: 'white'
                 }
-              }, "Point")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+              }, "Point")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
                 key: "pointLegend",
                 style: {
                   paddingLeft: '5px'
                 }
               }, this.fillPoint()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+                key: 'legendTitleLink',
                 style: {
                   backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))'
                 }
@@ -20382,8 +20770,8 @@ function (_super) {
                   fontWeight: 'bold',
                   color: 'white'
                 }
-              }, "Oriented Link")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-                key: "pointLegend",
+              }, "Oriented Link")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+                key: "linkLegend",
                 style: {
                   paddingLeft: '5px'
                 }
@@ -20460,7 +20848,9 @@ function (_super) {
 
 
   LegendComponent.prototype.render = function () {
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.finalHTML);
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      key: 'contentHtmlLegend'
+    }, this.state.finalHTML);
   };
 
   return LegendComponent;

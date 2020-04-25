@@ -8,7 +8,7 @@
                 "label": "Yes",
                 "value": true
             },
-            "label": "",
+            "label": "point-ordi",
             "linkURL": {
                 "followLink": "",
                 "hoveringTooltipLink": "",
@@ -16,7 +16,7 @@
             },
             "lowerLimit": [{
                 "backColor": "",
-                "borderColor": "#E0B400",
+                "borderColor": "#C4162A",
                 "id": 0,
                 "lowerLimitMax": "",
                 "lowerLimitMin": "",
@@ -50,13 +50,13 @@
                 "label": "Monodirectional",
                 "value": "AB"
             },
-            "pointAPositionX": "50",
-            "pointAPositionY": "20",
-            "pointBPositionX": "-20",
-            "pointBPositionY": "-20",
-            "pointCPositionX": "59",
-            "pointCPositionY": "-10",
-            "pointIn": "",
+            "pointAPositionX": "",
+            "pointAPositionY": "",
+            "pointBPositionX": "",
+            "pointBPositionY": "",
+            "pointCPositionX": "0",
+            "pointCPositionY": "90",
+            "pointIn": "point1",
             "pointOut": "",
             "positionParameter": {
                 "labelAPositionX": "0",
@@ -67,7 +67,8 @@
                 "tooltipPositionB": {}
             },
             "regionIn": "",
-            "regionOut": "",
+            "regionOut": "computer",
+            "size": { "value": "Medium", "label": "Medium" },
             "textObj": {
                 "colorBack": "",
                 "colorText": "",
@@ -101,22 +102,21 @@
                 }
             },
             "traceBack": false,
-            "traceBorder": false,
+            "traceBorder": true,
             "valueMainMetricA": "",
             "valueMainMetricB": "",
-            "zIndex": 1
+            "zIndex": 2
         },
         {
             "colorCoordinateA": "#5794F2",
             "colorCoordinateB": "#E54658",
             "colorMode": false,
-            "colorModeB": false,
             "id": 2,
             "isIncurved": {
                 "label": "Yes",
                 "value": true
             },
-            "label": "",
+            "label": "ordi-point",
             "linkURL": {
                 "followLink": "",
                 "hoveringTooltipLink": "",
@@ -124,7 +124,7 @@
             },
             "lowerLimit": [{
                 "backColor": "",
-                "borderColor": "#8F3BB8",
+                "borderColor": "#5794F2",
                 "id": 0,
                 "lowerLimitMax": "",
                 "lowerLimitMin": "",
@@ -158,14 +158,14 @@
                 "label": "Monodirectional",
                 "value": "AB"
             },
-            "pointAPositionX": "-20",
-            "pointAPositionY": "-20",
-            "pointBPositionX": "50",
-            "pointBPositionY": "20",
-            "pointCPositionX": "-19",
-            "pointCPositionY": "79",
+            "pointAPositionX": "",
+            "pointAPositionY": "",
+            "pointBPositionX": "",
+            "pointBPositionY": "",
+            "pointCPositionX": "60",
+            "pointCPositionY": "-20",
             "pointIn": "",
-            "pointOut": "",
+            "pointOut": "point1",
             "positionParameter": {
                 "labelAPositionX": "0",
                 "labelAPositionY": "0",
@@ -174,8 +174,9 @@
                 "tooltipPositionA": {},
                 "tooltipPositionB": {}
             },
-            "regionIn": "",
+            "regionIn": "computer",
             "regionOut": "",
+            "size": { "value": "Medium", "label": "Medium" },
             "textObj": {
                 "colorBack": "",
                 "colorText": "",
@@ -208,10 +209,8 @@
                     "unit": ""
                 }
             },
-            "traceBack": false,
-            "traceBackB": false,
-            "traceBorder": false,
-            "traceBorderB": false,
+            "traceBack": false,  
+            "traceBorder": true,
             "valueMainMetricA": "",
             "valueMainMetricB": "",
             "zIndex": 2

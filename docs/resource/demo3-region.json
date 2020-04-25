@@ -3,14 +3,14 @@
     {
     "colorMode": false,
     "coords": {
-      "xMax": "-100",
+      "xMax": "-50",
       "xMin": "-10",
-      "yMax": "-100",
+      "yMax": "-50",
       "yMin": "-10"
     },
     "id": 1,
     "idSVG": "",
-    "img": "http://localhost/demo/computer-svg.svg",
+    "img": "https://framagit.org/hellosct1/atos_grafana/-/raw/master/docs/resource/computer-png.png",
     "label": "computer",
     "linkURL": {
       "followLink": "",
@@ -40,35 +40,35 @@
       "tooltipPositionB": {}
     },
     "textObj": {
+      "value": "",
+      "isTextTooltip": true,
       "colorBack": "rgba(255, 255, 255, 0)",
       "colorText": "rgba(0, 0, 0, 1)",
-      "generateAuxiliaryElement": {
-        "addColorBackElement": false,
-        "addColorTextElement": false,
-        "colorBackElement": "black",
-        "colorTextElement": "white",
-        "displayObjectInText": false,
-        "legendElement": "",
-        "numericFormatElement": "",
-        "unit": ""
-      },
-      "generateObjectText": false,
-      "isTextRegion": false,
       "style": {
         "bold": false,
         "italic": false,
         "underline": false
       },
-      "value": "",
+      "generateObjectText": false,
       "valueGenerateObjectText": {
-        "addColorBackElement": false,
-        "addColorTextElement": false,
-        "colorBackElement": "black",
-        "colorTextElement": "white",
-        "displayObjectInText": false,
         "legendElement": "",
         "numericFormatElement": "",
-        "unit": ""
+        "unit": "",
+        "displayObjectInTooltip": false,
+        "addColorTextElement": false,
+        "colorTextElement": "white",
+        "addColorBackElement": false,
+        "colorBackElement": "black"
+      },
+      "generateAuxiliaryElement": {
+        "legendElement": "",
+        "numericFormatElement": "",
+        "unit": "",
+        "displayObjectInTooltip": false,
+        "addColorTextElement": false,
+        "colorTextElement": "white",
+        "addColorBackElement": false,
+        "colorBackElement": "black"
       }
     },
     "traceBack": false,

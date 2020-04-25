@@ -430,9 +430,9 @@ class TextObjects extends React.Component<Props, State> {
                 />
               )}
               <div style={{ display: 'flex' }}>
-                <FormLabel width={15}>{l10n.textObject.colorText}</FormLabel>
+                <FormLabel width={15}>{l10n.textObject.backgroundColor}</FormLabel>
                 <Switch
-                  label={l10n.textObject.backgroundColor}
+                  label={''}
                   checked={this.state.textObject.valueGenerateObjectText.addColorBackElement}
                   onChange={this.onSwitchValueGenerateObjectTextAddColorBackElement}
                 />

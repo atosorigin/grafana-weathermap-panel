@@ -242,7 +242,7 @@ class CoordinateSpace extends React.Component<Props, State> {
           hiddenAlert: true,
         });
       }, waitAlert);
-      console.log('ok');
+      //console.log('ok');
     } else {
       this.props.callBackToParent(this.state.arrayCoor.id, this.state.arrayCoor);
       this.setState({
@@ -440,17 +440,19 @@ class CoordinateSpace extends React.Component<Props, State> {
             isLink={false}
           />
         </div>
-        <div>
-          <ManageAuxiliaryQuery
-            options={this.props.options}
-            onOptionsChange={this.props.onOptionsChange}
-            data={this.props.data}
-            idCoordinate={this.state.arrayCoor.id}
-            metrics={this.state.arrayCoor.metrics}
-            //callBackToParent={this.callBackAuxiliaryMetric}
-            isRegion={true}
-          />
-        </div>
+        {!this.props.isAddCoordinate && (
+          <div>
+            <ManageAuxiliaryQuery
+              options={this.props.options}
+              onOptionsChange={this.props.onOptionsChange}
+              data={this.props.data}
+              idCoordinate={this.state.arrayCoor.id}
+              metrics={this.state.arrayCoor.metrics}
+              //callBackToParent={this.callBackAuxiliaryMetric}
+              isRegion={true}
+            />
+          </div>
+        )}
         <div>
           <ParametresGeneriques
             options={this.props.options}
@@ -488,20 +490,16 @@ class CoordinateSpace extends React.Component<Props, State> {
           <br></br>
           {this.state.selectedRadio === 'svgMode' ? (
             <div className="svgMode">
-              <tr style={{ verticalAlign: 'middle' }}>
-                <td>
-                  <FormLabel width={15}>Zone SVG</FormLabel>
-                </td>
-                <td>
-                  <Select
-                    onChange={value => this.onChangeSelectSVG(value)}
-                    allowCustomValue={false}
-                    options={this.state.allIDSelected}
-                    width={10}
-                    value={this.state.selectedDefaultSVG}
-                  />
-                </td>
-              </tr>
+              <div style={{ display: 'flex' }}>
+                <FormLabel width={15}>Zone SVG</FormLabel>
+                <Select
+                  onChange={value => this.onChangeSelectSVG(value)}
+                  allowCustomValue={false}
+                  options={this.state.allIDSelected}
+                  width={10}
+                  value={this.state.selectedDefaultSVG}
+                />
+              </div>
             </div>
           ) : (
             <div className="classRegion">

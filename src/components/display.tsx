@@ -200,14 +200,10 @@ class Display extends React.Component<Props, State> {
 
     return (
       <div>
-        <tr style={{ verticalAlign: 'middle' }}>
-          <td>
-            <FormLabel width={15}>Police</FormLabel>
-          </td>
-          <td>
-            <InputSelect _onChange={this.onChangePolice} data={police} defaultValue={this.state.newPolice} />
-          </td>
-        </tr>
+        <div style={{ display: 'flex', marginBottom: 1 }}>
+          <FormLabel width={15}>Police</FormLabel>
+          <InputSelect _onChange={this.onChangePolice} data={police} defaultValue={this.state.newPolice} />
+        </div>
 
         <FormField
           label={l10n.textDefault.size}

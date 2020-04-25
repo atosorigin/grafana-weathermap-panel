@@ -20,6 +20,10 @@ This plugin is created to map a computer network. This makes it possible to be i
 
 It take data from your network devices and use it to provide a single-page overview of the current state of network
 
+We can compare this to the presentation of the weather. 
+Indeed, the background with the computer network can represent a country. And we add on this background regions, points and links which can refer to the weather in a given city. 
+In addition, it is possible to add values from the network device to each region, point or link, just as you can add the temperature for a city.
+
 Many settings are available to customize the rendering.
 
 ### Background
@@ -41,6 +45,8 @@ You can add :
     - Allows you to create a link between two objects by adding a metric to it. This can be useful to represent a data transfer or something else.
 
 
-Compatibility with  Prometheus
+### Query
 
-to be continued...
+It is also possible to assimilate requests to the Coordination Space, just as we can assimilate the temperature to a city. 
+To do so, we use a database that gathers all the necessary data. These data are sorted and collected using queries with filters. 
+Once the data has been processed and collected, it can be affected.

@@ -5,8 +5,8 @@ export class PositionParameterClass {
   labelAPositionY: string;
   labelBPositionX: string;
   labelBPositionY: string;
-  tooltipPositionA: SelectableValue<any>;
-  tooltipPositionB: SelectableValue<any>;
+  tooltipPositionA: SelectableValue<string>;
+  tooltipPositionB: SelectableValue<string>;
 
   constructor(
     labelAPositionX: string,

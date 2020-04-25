@@ -18,7 +18,11 @@ WeatherMap Panel Plugin pour Grafana est inspiré du plugin WeatherMap pour Cact
 
 Ce plugin est créé pour cartographier un réseau informatique. Cela permet d'être informé en temps réel en cas de dysfonctionnement d'un système informatique ou autre.
 
-Il prend les données de vos périphériques réseau et les utilise pour fournir un aperçu d'une seule page de l'état actuel du réseau
+Il prend les données de vos périphériques réseau et les utilise pour fournir un aperçu d'une seule page de l'état actuel du réseau.
+
+Nous pouvons comparer cela à la présentation de la météo. 
+En effet, l'arriere plan avec le réseau informatique peut représenter un pays. Et on ajoute sur cette arrière plan des regions, des points et des liens ce qui peut faire référence au temmps qu'il fait dans une ville donnée. 
+De plus, il est possible d'ajouter des valeurs du péréiphérique réseau à chaque regions, point ou lien, au même titre qu'on peut ajouter la temperature pour une ville.
 
 De nombreux paramètres sont disponibles pour personnaliser le rendu.
 
@@ -46,6 +50,10 @@ Vous pouvez ajouter :
     - Permet de créer un lien entre deux objets en y ajoutant une métrique. Cela peut être utile pour représenter un transfert de données ou autre chose.
 
 
+### Query
 
+Il est également possible d'assimiler les demandes à l'Espace de coordination, tout comme on peut assimiler la température à une ville. 
+Pour ce faire, nous utilisons une base de données qui rassemble toutes les données nécessaires. Ces données sont triées et collectées à l'aide de requêtes avec filtres. 
+Une fois que les données ont été traitées et collectées, elles peuvent être affectées.
 
 ![resultat](../../screenshots/init/resultat.png)

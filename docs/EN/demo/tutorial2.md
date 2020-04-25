@@ -122,7 +122,6 @@ To create an oriented link you have to pass by [the panel menu](../panel/panel-o
 And here is the different JSON file :
 
 - [demo2-svgRegion](../../resource/demo2-svgRegion.json) 
-- [demo2-point](../../resource/demo2-point.json)
 - [demo2-link](../../resource/demo2-link.json)
 - [demo2-global](../../resource/demo2-global.json)
 

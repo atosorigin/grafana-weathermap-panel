@@ -266,7 +266,7 @@ export default class Point extends React.Component<Props, State> {
           hiddenAlert: true,
         });
       }, waitAlert);
-      console.log('ok');
+      //console.log('ok');
     } else {
       this.props.callBackToParent(this.state.point.id, this.state.point);
       this.setState({
@@ -400,17 +400,19 @@ export default class Point extends React.Component<Props, State> {
             isLink={false}
           />
         </div>
-        <div>
-          <ManageAuxiliaryQuery
-            options={this.props.options}
-            onOptionsChange={this.props.onOptionsChange}
-            data={this.props.data}
-            idCoordinate={this.state.point.id}
-            metrics={this.state.point.metrics}
-            //callBackToParent={this.callBackAuxiliaryMetric}
-            isPoint={true}
-          />
-        </div>
+        {!this.props.isAddPoint && (
+          <div>
+            <ManageAuxiliaryQuery
+              options={this.props.options}
+              onOptionsChange={this.props.onOptionsChange}
+              data={this.props.data}
+              idCoordinate={this.state.point.id}
+              metrics={this.state.point.metrics}
+              //callBackToParent={this.callBackAuxiliaryMetric}
+              isPoint={true}
+            />
+          </div>
+        )}
         <div>
           <ParametresGeneriques
             options={this.props.options}

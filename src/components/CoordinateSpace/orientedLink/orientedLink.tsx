@@ -436,6 +436,18 @@ export default class OrientedLink extends React.Component<Props, State> {
     }
   };
 
+  /** save data of mainMetric */
+  private callBackMainMetricB = (mainMetricB: Metric, id?: number): void => {
+    const newValue: OrientedLinkClass = this.state.orientedLink;
+    newValue.mainMetricB = mainMetricB;
+    this.setState({
+      orientedLink: newValue,
+    });
+    if (this.props.isAddLink === false) {
+      this.callBack();
+    }
+  };
+
   /** save data of zIndex */
   private callBackZIndex(zIndexUpdated: number, id: number) {
     const newValue: OrientedLinkClass = this.state.orientedLink;
@@ -501,7 +513,9 @@ export default class OrientedLink extends React.Component<Props, State> {
             data={this.props.data}
             idCoordinate={this.state.orientedLink.id}
             mainMetric={this.state.orientedLink.mainMetric}
+            mainMetricB={this.state.orientedLink.mainMetricB}
             callBackToParent={this.callBackMainMetric}
+            callBackToParentMainMetricB={this.callBackMainMetricB}
             isLink={true}
           />
         </div>
