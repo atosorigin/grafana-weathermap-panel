@@ -1,0 +1,5 @@
+rate(node_network_receive_bytes{device="enp0s3"}[10s])*100*8/1024/1024
+
+rate(node_network_transmit_bytes{device="enp0s3"}[10s])*100*8/1024/1024
+
+

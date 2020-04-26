@@ -1,0 +1,220 @@
+{
+    "links": [{
+            "colorCoordinateA": "#5794F2",
+            "colorCoordinateB": "#E54658",
+            "colorMode": false,
+            "id": 1,
+            "isIncurved": {
+                "label": "Yes",
+                "value": true
+            },
+            "label": "point-ordi",
+            "linkURL": {
+                "followLink": "",
+                "hoveringTooltipLink": "",
+                "hoveringTooltipText": ""
+            },
+            "lowerLimit": [{
+                "backColor": "",
+                "borderColor": "#C4162A",
+                "id": 0,
+                "lowerLimitMax": "",
+                "lowerLimitMin": "",
+                "sizeBorder": "10"
+            }],
+            "lowerLimitB": [],
+            "mainMetric": {
+                "expr": "",
+                "format": "",
+                "key": "",
+                "keyValue": "",
+                "manageValue": "avg",
+                "refId": "A",
+                "returnQuery": [],
+                "unit": ""
+            },
+            "mainMetricB": {
+                "format": "",
+                "key": "",
+                "keyValue": "",
+                "manageValue": "avg",
+                "refId": "",
+                "returnQuery": [],
+                "unit": ""
+            },
+            "meta": "",
+            "metrics": [],
+            "metricsB": [],
+            "name": "orientedLink1",
+            "orientationLink": {
+                "label": "Monodirectional",
+                "value": "AB"
+            },
+            "pointAPositionX": "",
+            "pointAPositionY": "",
+            "pointBPositionX": "",
+            "pointBPositionY": "",
+            "pointCPositionX": "0",
+            "pointCPositionY": "90",
+            "pointIn": "point1",
+            "pointOut": "",
+            "positionParameter": {
+                "labelAPositionX": "0",
+                "labelAPositionY": "0",
+                "labelBPositionX": "0",
+                "labelBPositionY": "0",
+                "tooltipPositionA": {},
+                "tooltipPositionB": {}
+            },
+            "regionIn": "",
+            "regionOut": "computer",
+            "size": { "value": "Medium", "label": "Medium" },
+            "textObj": {
+                "colorBack": "",
+                "colorText": "",
+                "generateAuxiliaryElement": {
+                    "addColorBackElement": false,
+                    "addColorTextElement": false,
+                    "colorBackElement": "black",
+                    "colorTextElement": "white",
+                    "displayObjectInTooltip": false,
+                    "legendElement": "",
+                    "numericFormatElement": "",
+                    "unit": ""
+                },
+                "generateObjectText": false,
+                "isTextTooltip": false,
+                "style": {
+                    "bold": true,
+                    "italic": false,
+                    "underline": true
+                },
+                "value": "",
+                "valueGenerateObjectText": {
+                    "addColorBackElement": false,
+                    "addColorTextElement": false,
+                    "colorBackElement": "black",
+                    "colorTextElement": "white",
+                    "displayObjectInTooltip": false,
+                    "legendElement": "",
+                    "numericFormatElement": "",
+                    "unit": ""
+                }
+            },
+            "traceBack": false,
+            "traceBorder": true,
+            "valueMainMetricA": "",
+            "valueMainMetricB": "",
+            "zIndex": 2
+        },
+        {
+            "colorCoordinateA": "#5794F2",
+            "colorCoordinateB": "#E54658",
+            "colorMode": false,
+            "id": 2,
+            "isIncurved": {
+                "label": "Yes",
+                "value": true
+            },
+            "label": "ordi-point",
+            "linkURL": {
+                "followLink": "",
+                "hoveringTooltipLink": "",
+                "hoveringTooltipText": ""
+            },
+            "lowerLimit": [{
+                "backColor": "",
+                "borderColor": "#5794F2",
+                "id": 0,
+                "lowerLimitMax": "",
+                "lowerLimitMin": "",
+                "sizeBorder": "10"
+            }],
+            "lowerLimitB": [],
+            "mainMetric": {
+                "expr": "",
+                "format": "",
+                "key": "",
+                "keyValue": "",
+                "manageValue": "avg",
+                "refId": "A",
+                "returnQuery": [],
+                "unit": ""
+            },
+            "mainMetricB": {
+                "format": "",
+                "key": "",
+                "keyValue": "",
+                "manageValue": "avg",
+                "refId": "",
+                "returnQuery": [],
+                "unit": ""
+            },
+            "meta": "",
+            "metrics": [],
+            "metricsB": [],
+            "name": "orientedLink2",
+            "orientationLink": {
+                "label": "Monodirectional",
+                "value": "AB"
+            },
+            "pointAPositionX": "",
+            "pointAPositionY": "",
+            "pointBPositionX": "",
+            "pointBPositionY": "",
+            "pointCPositionX": "60",
+            "pointCPositionY": "-20",
+            "pointIn": "",
+            "pointOut": "point1",
+            "positionParameter": {
+                "labelAPositionX": "0",
+                "labelAPositionY": "0",
+                "labelBPositionX": "0",
+                "labelBPositionY": "0",
+                "tooltipPositionA": {},
+                "tooltipPositionB": {}
+            },
+            "regionIn": "computer",
+            "regionOut": "",
+            "size": { "value": "Medium", "label": "Medium" },
+            "textObj": {
+                "colorBack": "",
+                "colorText": "",
+                "generateAuxiliaryElement": {
+                    "addColorBackElement": false,
+                    "addColorTextElement": false,
+                    "colorBackElement": "black",
+                    "colorTextElement": "white",
+                    "displayObjectInTooltip": false,
+                    "legendElement": "",
+                    "numericFormatElement": "",
+                    "unit": ""
+                },
+                "generateObjectText": false,
+                "isTextTooltip": false,
+                "style": {
+                    "bold": true,
+                    "italic": false,
+                    "underline": true
+                },
+                "value": "",
+                "valueGenerateObjectText": {
+                    "addColorBackElement": false,
+                    "addColorTextElement": false,
+                    "colorBackElement": "black",
+                    "colorTextElement": "white",
+                    "displayObjectInTooltip": false,
+                    "legendElement": "",
+                    "numericFormatElement": "",
+                    "unit": ""
+                }
+            },
+            "traceBack": false,  
+            "traceBorder": true,
+            "valueMainMetricA": "",
+            "valueMainMetricB": "",
+            "zIndex": 2
+        }
+
+    ]
+}

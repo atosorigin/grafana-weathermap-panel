@@ -1,0 +1,78 @@
+{
+  "regions": [
+    {
+    "colorMode": false,
+    "coords": {
+      "xMax": "-50",
+      "xMin": "-10",
+      "yMax": "-50",
+      "yMin": "-10"
+    },
+    "id": 1,
+    "idSVG": "",
+    "img": "https://framagit.org/hellosct1/atos_grafana/-/raw/master/docs/resource/computer-png.png",
+    "label": "computer",
+    "linkURL": {
+      "followLink": "",
+      "hoveringTooltipLink": "",
+      "hoveringTooltipText": ""
+    },
+    "lowerLimit": [],
+    "mainMetric": {
+      "format": "",
+      "key": "",
+      "keyValue": "",
+      "manageValue": "avg",
+      "refId": "",
+      "returnQuery": [],
+      "unit": ""
+    },
+    "meta": "",
+    "metrics": [],
+    "mode": false,
+    "orientedLink": [],
+    "positionParameter": {
+      "labelAPositionX": "0",
+      "labelAPositionY": "0",
+      "labelBPositionX": "0",
+      "labelBPositionY": "0",
+      "tooltipPositionA": {},
+      "tooltipPositionB": {}
+    },
+    "textObj": {
+      "value": "",
+      "isTextTooltip": true,
+      "colorBack": "rgba(255, 255, 255, 0)",
+      "colorText": "rgba(0, 0, 0, 1)",
+      "style": {
+        "bold": false,
+        "italic": false,
+        "underline": false
+      },
+      "generateObjectText": false,
+      "valueGenerateObjectText": {
+        "legendElement": "",
+        "numericFormatElement": "",
+        "unit": "",
+        "displayObjectInTooltip": false,
+        "addColorTextElement": false,
+        "colorTextElement": "white",
+        "addColorBackElement": false,
+        "colorBackElement": "black"
+      },
+      "generateAuxiliaryElement": {
+        "legendElement": "",
+        "numericFormatElement": "",
+        "unit": "",
+        "displayObjectInTooltip": false,
+        "addColorTextElement": false,
+        "colorTextElement": "white",
+        "addColorBackElement": false,
+        "colorBackElement": "black"
+      }
+    },
+    "traceBack": false,
+    "traceBorder": false
+  }
+]
+}

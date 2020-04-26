@@ -1,0 +1,120 @@
+{
+    "links": [
+    {
+    "colorCoordinateA": "#5794F2",
+    "colorCoordinateB": "#E54658",
+    "colorMode": true,
+    "id": 1,
+    "isIncurved": {
+      "label": "No",
+      "value": false
+    },
+    "label": "link",
+    "linkURL": {
+      "followLink": "",
+      "hoveringTooltipLink": "",
+      "hoveringTooltipText": ""
+    },
+    "lowerLimit": [
+      {
+        "backColor": "#1F60C4",
+        "borderColor": "",
+        "id": 0,
+        "lowerLimitMax": "20",
+        "lowerLimitMin": "",
+        "sizeBorder": ""
+      },
+      {
+        "backColor": "#C4162A",
+        "borderColor": "",
+        "id": 4,
+        "lowerLimitMax": "",
+        "lowerLimitMin": ">20",
+        "sizeBorder": ""
+      }
+    ],
+    "mainMetric": {
+      "expr": "A",
+      "format": "",
+      "key": "",
+      "keyValue": "",
+      "manageValue": "avg",
+      "refId": "A",
+      "returnQuery": [],
+      "unit": ""
+    },
+    "mainMetricB": {
+      "format": "",
+      "key": "",
+      "keyValue": "",
+      "manageValue": "avg",
+      "refId": "A",
+      "returnQuery": [],
+      "unit": ""
+    },
+    "meta": "",
+    "metrics": [],
+    "metricsB": [],
+    "name": "orientedLink1",
+    "orientationLink": {
+      "label": "Bidirectional",
+      "value": "double"
+    },
+    "pointAPositionX": "",
+    "pointAPositionY": "",
+    "pointBPositionX": "",
+    "pointBPositionY": "",
+    "pointCPositionX": "",
+    "pointCPositionY": "",
+    "pointIn": "",
+    "pointOut": "",
+    "positionParameter": {
+      "labelAPositionX": "0",
+      "labelAPositionY": "0",
+      "labelBPositionX": "0",
+      "labelBPositionY": "0",
+      "tooltipPositionA": {},
+      "tooltipPositionB": {}
+    },
+    "regionIn": "Proxy server",
+    "regionOut": "Routeur",
+    "textObj": {
+      "colorBack": "",
+      "colorText": "",
+      "generateAuxiliaryElement": {
+        "addColorBackElement": false,
+        "addColorTextElement": false,
+        "colorBackElement": "black",
+        "colorTextElement": "white",
+        "displayObjectInText": false,
+        "legendElement": "",
+        "numericFormatElement": "2",
+        "unit": "%"
+      },
+      "generateObjectText": false,
+      "isTextRegion": false,
+      "style": {
+        "bold": true,
+        "italic": false,
+        "underline": true
+      },
+      "value": "",
+      "valueGenerateObjectText": {
+        "addColorBackElement": false,
+        "addColorTextElement": false,
+        "colorBackElement": "black",
+        "colorTextElement": "white",
+        "displayObjectInText": false,
+        "legendElement": "",
+        "numericFormatElement": "",
+        "unit": ""
+      }
+    },
+    "traceBack": false,
+    "traceBorder": false,
+    "valueMainMetricA": "",
+    "valueMainMetricB": "",
+    "zIndex": 3
+         }
+    ]
+}
