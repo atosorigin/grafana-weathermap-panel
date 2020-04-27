@@ -10,7 +10,7 @@
     },
     "id": 1,
     "idSVG": "",
-    "img": "https://framagit.org/hellosct1/atos_grafana/-/raw/master/docs/resource/computer-png.png",
+    "img": "http://localhost/demo/computer-png.png",
     "label": "computer",
     "linkURL": {
       "followLink": "",

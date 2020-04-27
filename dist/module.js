@@ -5382,6 +5382,7 @@ function (_super) {
         });
       } else {
         var arrayRegion = _this.props.options.regionCoordinateSpace;
+        var indexRegion_1 = 0;
         arrayRegion.forEach(function (region) {
           var xMin = parseInt(region.coords.xMin, 10);
           var xMax = parseInt(region.coords.xMax, 10);
@@ -5423,16 +5424,60 @@ function (_super) {
             var id = event.nativeEvent.target.id.substr(3);
 
             if (id === region.idSVG) {
+              console.log(region.idSVG);
               var coordinates_3 = _this.props.options.coordinatesToDrawLinkWithClick;
-              var allValues = event.nativeEvent.target.attributes[0].nodeValue;
-              var arrayAllValues = allValues.split(' ');
-              var xMinSVG = parseInt(arrayAllValues[1], 10);
-              var xMaxSVG = parseInt(arrayAllValues[7], 10);
-              var yMinSVG = parseInt(arrayAllValues[8], 10);
-              var yMaxSVG = parseInt(arrayAllValues[2], 10);
-              positionX = (xMinSVG + xMaxSVG) / 2;
-              positionY = (yMaxSVG + yMinSVG) / 2; // console.log(positionX);
-              // console.log(positionY);
+              var newRegionCoordinateSpace = _this.props.options.regionCoordinateSpace; //SVG 7
+
+              var width = parseInt(event.nativeEvent.target.attributes[5].nodeValue, 10);
+              var height = parseInt(event.nativeEvent.target.attributes[4].nodeValue, 10);
+              var xMinSVG = parseInt(event.nativeEvent.target.attributes[7].nodeValue, 10);
+              var xMaxSVG = xMinSVG + width;
+              var yMaxSVG = parseInt(event.nativeEvent.target.attributes[6].nodeValue, 10);
+              var yMinSVG = yMaxSVG + height;
+              var xMinSVGCoor = (Math.round((xMinSVG - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2).toString();
+              var xMaxSVGCoor = (Math.round((xMaxSVG - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2).toString();
+              var yMinSVGCoor = (Math.round((yMinSVG - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1).toString();
+              var yMaxSVGCoor = (Math.round((yMaxSVG - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1).toString();
+              var newCoords = {
+                xMin: xMinSVGCoor,
+                xMax: xMaxSVGCoor,
+                yMin: yMinSVGCoor,
+                yMax: yMaxSVGCoor
+              };
+              console.log(indexRegion_1);
+              console.log(newRegionCoordinateSpace[indexRegion_1]);
+              console.log(newRegionCoordinateSpace[indexRegion_1].coords);
+              console.log(newCoords);
+              newRegionCoordinateSpace[indexRegion_1].coords = newCoords;
+
+              _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+                regionCoordinateSpace: newRegionCoordinateSpace
+              })); // console.log(xMaxSVG);
+              // console.log(yMinSVG);
+              //console.log(event.nativeEvent.target);
+              //const allValues: string = event.nativeEvent.target.attributes[0].nodeValue;
+              //console.log('allValues');
+              //console.log(allValues);
+              //const arrayAllValues: string[] = allValues.split(' ');
+              //console.log(arrayAllValues);
+              // const xMinSVG: number = parseInt(arrayAllValues[1], 10);
+              // const xMaxSVG: number = parseInt(arrayAllValues[7], 10);
+              // const yMinSVG: number = parseInt(arrayAllValues[8], 10);
+              // const yMaxSVG: number = parseInt(arrayAllValues[2], 10);
+              // console.log('xMinSVG');
+              // console.log(xMinSVG);
+              // console.log('xMaxSVG');
+              // console.log(xMaxSVG);
+              // console.log('yMinSVG');
+              // console.log(yMinSVG);
+              // console.log('yMaxSVG');
+              // console.log(yMaxSVG);
+
+
+              positionX = (parseInt(xMinSVGCoor, 10) + parseInt(xMaxSVGCoor, 10)) / 2;
+              positionY = (parseInt(yMaxSVGCoor, 10) + parseInt(yMinSVGCoor, 10)) / 2;
+              console.log(positionX);
+              console.log(positionY);
 
               if (coordinates_3[0].id === 0) {
                 objectIn.x = positionX;
@@ -5489,6 +5534,8 @@ function (_super) {
               }
             }
           }
+
+          indexRegion_1++;
         });
       }
     };
@@ -6338,8 +6385,9 @@ function (_super) {
                     var newBaseMap = _this.props.options.baseMap;
                     newBaseMap.idSVG = id[1]; // newBaseMap.width = documentId.getAttribute('width') || '';
                     // newBaseMap.height = documentId.getAttribute('height') || '';
-                    // newBaseMap.width = parseInt(documentId.getAttribute('width'), 10).toString() || '';
-                    // newBaseMap.height = parseInt(documentId.getAttribute('height'), 10).toString() || '';
+
+                    newBaseMap.width = parseInt(documentId.getAttribute('width') || '0', 10).toString() || '';
+                    newBaseMap.height = parseInt(documentId.getAttribute('height') || '0', 10).toString() || '';
 
                     _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
                       baseMap: newBaseMap
@@ -11801,6 +11849,7 @@ function (_super) {
         yMidIn = yMinIn;
         yMidOut = (yMinOut + yMaxOut) / 2;
       } else if (_this.props.associatePointOut !== '') {
+        console.log(arrayRegions);
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionIn) {
             xMinIn = parseInt(region.coords.xMin, 10);
@@ -11858,6 +11907,7 @@ function (_super) {
         yMidIn = (yMinIn + yMaxIn) / 2;
         yMidOut = yMinOut;
       } else {
+        console.log(arrayRegions);
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionIn) {
             xMinIn = parseInt(region.coords.xMin, 10);
@@ -13322,11 +13372,19 @@ function (_super) {
         }
       }
 
+      var styleMainDiv = {
+        backgroundColor: backColoTextObject,
+        border: '1px solid black'
+      };
+
+      if (!displayMainMetric || displayMainMetric && displayMainMetricInTooltip) {
+        styleMainDiv = {
+          backgroundColor: backColoTextObject
+        };
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          backgroundColor: backColoTextObject,
-          border: '1px solid black'
-        }
+        style: styleMainDiv
       }, htmlTextObject, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         style: {
           backgroundColor: addBackColorMainMetric ? backColorMainMetric : backColoTextObject,
@@ -13848,7 +13906,7 @@ function (_super) {
         indexOrientedLink_1++;
       });
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      //console.log('1');
+      console.log('1');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = xB0;
@@ -13856,7 +13914,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionOut !== '' && this.props.associateRegionIn === '' && this.props.associatePointIn === '') {
-      //console.log('2');
+      console.log('2');
       xA = xA0;
       yA = yA0;
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -13864,7 +13922,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
-      //console.log('3');
+      console.log('3');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -13872,7 +13930,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      //console.log('4');
+      console.log('4');
       xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
       xB = xB0;
@@ -13880,7 +13938,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointOut !== '' && this.props.associatePointIn === '' && this.props.associateRegionIn === '') {
-      //console.log('5');
+      console.log('5');
       xA = xA0;
       yA = yA0;
       xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
@@ -13888,7 +13946,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
-      //console.log('6');
+      console.log('6');
       xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
@@ -13896,7 +13954,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-      //console.log('7');
+      console.log('7');
       xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -13904,7 +13962,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
-      //console.log('8');
+      console.log('8');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
@@ -13912,7 +13970,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else {
-      //console.log('9');
+      console.log('9');
       xA = xA0;
       yA = yA0;
       xB = xB0;
@@ -14174,6 +14232,7 @@ function (_super) {
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "arrowTriangle",
           style: {
+            //position: 'absolute',
             width: '0',
             height: '0',
             borderLeft: this.defineBorderSize('A') + 'px solid transparent',

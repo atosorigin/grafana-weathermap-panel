@@ -1,18 +1,9 @@
 {
     "links": [{
-        "colorCoordinateA": "#5794F2",
-        "colorCoordinateB": "#E54658",
+        "colorCoordinateA": "",
+        "colorCoordinateB": "",
         "colorMode": false,
         "id": 1,
-        "mainMetric": {
-            "format": "",
-            "key": "",
-            "keyValue": "",
-            "manageValue": "avg",
-            "refId": "A",
-            "returnQuery": [],
-            "unit": ""
-        },
         "isIncurved": {
             "label": "No",
             "value": false
@@ -24,7 +15,15 @@
             "hoveringTooltipText": ""
         },
         "lowerLimit": [],
-
+        "mainMetric": {
+            "format": "",
+            "key": "",
+            "keyValue": "",
+            "manageValue": "avg",
+            "refId": "A",
+            "returnQuery": [],
+            "unit": ""
+        },
         "meta": "",
         "metrics": [],
         "name": "orientedLink1",
@@ -32,14 +31,14 @@
             "label": "Monodirectional",
             "value": "AB"
         },
-        "pointAPositionX": "-70",
-        "pointAPositionY": "66",
+        "pointAPositionX": "",
+        "pointAPositionY": "",
         "pointBPositionX": "",
         "pointBPositionY": "",
         "pointCPositionX": "",
         "pointCPositionY": "",
-        "pointIn": "",
-        "pointOut": "point2",
+        "pointIn": "Computer",
+        "pointOut": "Data center",
         "positionParameter": {
             "labelAPositionX": "0",
             "labelAPositionY": "0",
@@ -50,11 +49,21 @@
         },
         "regionIn": "",
         "regionOut": "",
+        "size": { "value": "Medium", "label": "Medium" },
         "textObj": {
-            "value": "",
+            "colorBack": "",
+            "colorText": "",
+            "generateAuxiliaryElement": {
+                "addColorBackElement": false,
+                "addColorTextElement": false,
+                "colorBackElement": "black",
+                "colorTextElement": "white",
+                "displayObjectInTooltip": false,
+                "legendElement": "",
+                "numericFormatElement": "",
+                "unit": ""
+            },
             "isTextTooltip": true,
-            "colorBack": "rgba(255, 255, 255, 0)",
-            "colorText": "rgba(0, 0, 0, 1)",
             "style": {
                 "bold": false,
                 "italic": false,
@@ -62,24 +71,14 @@
             },
             "generateObjectText": true,
             "valueGenerateObjectText": {
-                "legendElement": "",
-                "numericFormatElement": "",
-                "unit": "",
-                "displayObjectInTooltip": false,
-                "addColorTextElement": false,
-                "colorTextElement": "white",
                 "addColorBackElement": false,
-                "colorBackElement": "black"
-            },
-            "generateAuxiliaryElement": {
-                "legendElement": "",
-                "numericFormatElement": "",
-                "unit": "",
-                "displayObjectInTooltip": false,
                 "addColorTextElement": false,
+                "colorBackElement": "black",
                 "colorTextElement": "white",
-                "addColorBackElement": false,
-                "colorBackElement": "black"
+                "displayObjectInTooltip": false,
+                "legendElement": "",
+                "numericFormatElement": "5",
+                "unit": "el"
             }
         },
         "traceBack": false,

@@ -58,7 +58,7 @@ Here we want to filter the result to display only the device we are interested i
 
 Adding a background image is done from the `display` menu.
 
-The selected image will be [demo1-background.svg](../../resource/demo1-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+The selected image will be [demo5-background.svg](../../resource/demo5-background.svg). To do this, we download it in base64 with the `Copy image address` function.
 
 It is possible to have more details with the [display](../editor/display.md) page.
 
@@ -101,4 +101,6 @@ The result display those 2 values
 
 
 
-file [demo4-play](../../resource/demo4-play.svg) 
+
+
+xxxxxxxxxxxxxx load file [demo5-region](../../resource/demo5-region.json) 

@@ -613,6 +613,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       });
     } else {
       const arrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
+      let indexRegion = 0;
 
       arrayRegion.forEach((region: RegionClass) => {
         const xMin: number = parseInt(region.coords.xMin, 10);
@@ -648,18 +649,55 @@ export class SimplePanel extends PureComponent<Props, State> {
         } else if (event.nativeEvent.target.id !== 'oct' + this.props.options.baseMap.idSVG && event.nativeEvent.target.id.startsWith('oct')) {
           const id: string = event.nativeEvent.target.id.substr(3);
           if (id === region.idSVG) {
+            console.log(region.idSVG);
             const coordinates = this.props.options.coordinatesToDrawLinkWithClick;
+            const newRegionCoordinateSpace: RegionClass[] = this.props.options.regionCoordinateSpace;
 
-            const allValues: string = event.nativeEvent.target.attributes[0].nodeValue;
-            const arrayAllValues: string[] = allValues.split(' ');
-            const xMinSVG: number = parseInt(arrayAllValues[1], 10);
-            const xMaxSVG: number = parseInt(arrayAllValues[7], 10);
-            const yMinSVG: number = parseInt(arrayAllValues[8], 10);
-            const yMaxSVG: number = parseInt(arrayAllValues[2], 10);
-            positionX = (xMinSVG + xMaxSVG) / 2;
-            positionY = (yMaxSVG + yMinSVG) / 2;
-            // console.log(positionX);
-            // console.log(positionY);
+            //SVG 7
+            const width: number = parseInt(event.nativeEvent.target.attributes[5].nodeValue, 10);
+            const height: number = parseInt(event.nativeEvent.target.attributes[4].nodeValue, 10);
+            const xMinSVG: number = parseInt(event.nativeEvent.target.attributes[7].nodeValue, 10);
+            const xMaxSVG: number = xMinSVG + width;
+            const yMaxSVG: number = parseInt(event.nativeEvent.target.attributes[6].nodeValue, 10);
+            const yMinSVG: number = yMaxSVG + height;
+            const xMinSVGCoor: string = (Math.round((xMinSVG - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2).toString();
+            const xMaxSVGCoor: string = (Math.round((xMaxSVG - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2).toString();
+            const yMinSVGCoor: string = (Math.round((yMinSVG - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1).toString();
+            const yMaxSVGCoor: string = (Math.round((yMaxSVG - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1).toString();
+            const newCoords: Coord4D = { xMin: xMinSVGCoor, xMax: xMaxSVGCoor, yMin: yMinSVGCoor, yMax: yMaxSVGCoor };
+            console.log(indexRegion);
+            console.log(newRegionCoordinateSpace[indexRegion]);
+            console.log(newRegionCoordinateSpace[indexRegion].coords);
+            console.log(newCoords);
+            newRegionCoordinateSpace[indexRegion].coords = newCoords;
+            this.props.onOptionsChange({
+              ...this.props.options,
+              regionCoordinateSpace: newRegionCoordinateSpace,
+            });
+            // console.log(xMaxSVG);
+            // console.log(yMinSVG);
+            //console.log(event.nativeEvent.target);
+            //const allValues: string = event.nativeEvent.target.attributes[0].nodeValue;
+            //console.log('allValues');
+            //console.log(allValues);
+            //const arrayAllValues: string[] = allValues.split(' ');
+            //console.log(arrayAllValues);
+            // const xMinSVG: number = parseInt(arrayAllValues[1], 10);
+            // const xMaxSVG: number = parseInt(arrayAllValues[7], 10);
+            // const yMinSVG: number = parseInt(arrayAllValues[8], 10);
+            // const yMaxSVG: number = parseInt(arrayAllValues[2], 10);
+            // console.log('xMinSVG');
+            // console.log(xMinSVG);
+            // console.log('xMaxSVG');
+            // console.log(xMaxSVG);
+            // console.log('yMinSVG');
+            // console.log(yMinSVG);
+            // console.log('yMaxSVG');
+            // console.log(yMaxSVG);
+            positionX = (parseInt(xMinSVGCoor, 10) + parseInt(xMaxSVGCoor, 10)) / 2;
+            positionY = (parseInt(yMaxSVGCoor, 10) + parseInt(yMinSVGCoor, 10)) / 2;
+            console.log(positionX);
+            console.log(positionY);
             if (coordinates[0].id === 0) {
               objectIn.x = positionX;
               objectIn.y = positionY;
@@ -705,6 +743,7 @@ export class SimplePanel extends PureComponent<Props, State> {
             }
           }
         }
+        indexRegion++;
       });
     }
   };
@@ -1550,8 +1589,8 @@ export class SimplePanel extends PureComponent<Props, State> {
                 newBaseMap.idSVG = id[1];
                 // newBaseMap.width = documentId.getAttribute('width') || '';
                 // newBaseMap.height = documentId.getAttribute('height') || '';
-                // newBaseMap.width = parseInt(documentId.getAttribute('width'), 10).toString() || '';
-                // newBaseMap.height = parseInt(documentId.getAttribute('height'), 10).toString() || '';
+                newBaseMap.width = parseInt(documentId.getAttribute('width') || '0', 10).toString() || '';
+                newBaseMap.height = parseInt(documentId.getAttribute('height') || '0', 10).toString() || '';
                 this.props.onOptionsChange({
                   ...this.props.options,
                   baseMap: newBaseMap,

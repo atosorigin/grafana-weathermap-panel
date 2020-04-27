@@ -49,7 +49,7 @@ There are a lot of values, so we have to manipulate them in order to come up wit
 
 Adding a background image is done from the `display` menu.
 
-The selected image will be [demo1-background.svg](../../resource/demo1-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+The selected image will be [demo6-background.svg](../../resource/demo6-background.svg). To do this, we download it in base64 with the `Copy image address` function.
 
 It is possible to have more details with the [display](../editor/display.md) page.
 

@@ -111,41 +111,7 @@ resultat
       "keyValue": "prepare_time",
       "refId": "A",
       "expr": "",
-      "returnQuery": [
-        {
-          "name": "prometheus_engine_query_duration_seconds{instance=\"localhost:9090\",job=\"prometheus\",quantile=\"0.5\",slice=\"prepare_time\"}",
-          "refId": "A",
-          "fields": [
-            {
-              "name": "prometheus_engine_query_duration_seconds{instance=\"localhost:9090\",job=\"prometheus\",quantile=\"0.5\",slice=\"prepare_time\"}",
-              "type": "number",
-              "config": {},
-              "values": {
-                "buffer": [
-                ]
-              },
-              "labels": {
-                "instance": "localhost:9090",
-                "job": "prometheus",
-                "quantile": "0.5",
-                "slice": "prepare_time"
-              },
-              "calcs": null
-            },
-            {
-              "name": "Time",
-              "type": "time",
-              "config": {},
-              "values": {
-                "buffer": [
-                ]
-              },
-              "calcs": null
-            }
-          ],
-          "length": 1
-        }
-      ],
+      "returnQuery": [],
       "manageValue": "avg"
     },
     

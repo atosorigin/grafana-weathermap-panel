@@ -218,6 +218,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMidIn = yMinIn;
       yMidOut = (yMinOut + yMaxOut) / 2;
     } else if (this.props.associatePointOut !== '') {
+      console.log(arrayRegions);
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(region.coords.xMin, 10);
@@ -277,6 +278,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMidIn = (yMinIn + yMaxIn) / 2;
       yMidOut = yMinOut;
     } else {
+      console.log(arrayRegions);
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(region.coords.xMin, 10);
@@ -1654,7 +1656,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         indexOrientedLink++;
       });
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      //console.log('1');
+      console.log('1');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = xB0;
@@ -1662,7 +1664,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionOut !== '' && this.props.associateRegionIn === '' && this.props.associatePointIn === '') {
-      //console.log('2');
+      console.log('2');
       xA = xA0;
       yA = yA0;
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -1670,7 +1672,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
-      //console.log('3');
+      console.log('3');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -1678,7 +1680,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      //console.log('4');
+      console.log('4');
       xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
       xB = xB0;
@@ -1686,7 +1688,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointOut !== '' && this.props.associatePointIn === '' && this.props.associateRegionIn === '') {
-      //console.log('5');
+      console.log('5');
       xA = xA0;
       yA = yA0;
       xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
@@ -1694,7 +1696,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
-      //console.log('6');
+      console.log('6');
       xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
@@ -1702,7 +1704,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-      //console.log('7');
+      console.log('7');
       xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -1710,7 +1712,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
-      //console.log('8');
+      console.log('8');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
@@ -1718,7 +1720,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else {
-      //console.log('9');
+      console.log('9');
       xA = xA0;
       yA = yA0;
       xB = xB0;
@@ -2013,9 +2015,11 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                     justifyContent: 'center',
                   }}
                 >
+                  {/* <div className="arrowTriangle"> */}
                   <div
                     className="arrowTriangle"
                     style={{
+                      //position: 'absolute',
                       width: '0',
                       height: '0',
                       borderLeft: this.defineBorderSize('A') + 'px solid transparent',
@@ -2024,6 +2028,20 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                       transform: 'rotate(270deg)',
                     }}
                   ></div>
+                  {/* <div
+                      className="triangleUp"
+                      style={{
+                        position: 'absolute',
+                        top: '5px',
+                        width: '0',
+                        height: '0',
+                        borderLeft: 9 + 'px solid transparent',
+                        borderRight: 9 + 'px solid transparent',
+                        borderBottom: 9 + 'px solid ' + 'red',
+                        transform: 'rotate(270deg)',
+                      }}
+                    />
+                  </div> */}
                   <div
                     style={{
                       border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
@@ -2330,8 +2348,20 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         );
       }
     }
+
+    let styleMainDiv = {
+      backgroundColor: backColoTextObject,
+      border: '1px solid black',
+    } as CSSProperties;
+
+    if (!displayMainMetric || (displayMainMetric && displayMainMetricInTooltip)) {
+      styleMainDiv = {
+        backgroundColor: backColoTextObject,
+      };
+    }
+
     return (
-      <div style={{ backgroundColor: backColoTextObject, border: '1px solid black' }}>
+      <div style={styleMainDiv}>
         {htmlTextObject}
         <div style={{ backgroundColor: addBackColorMainMetric ? backColorMainMetric : backColoTextObject, padding: '0 5px' }}>{htmlMainMetric}</div>
       </div>

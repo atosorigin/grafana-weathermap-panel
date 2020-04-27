@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.5.0 (2020-04-27)
+
+- Update Documentations
+- Update CSS
+- Fixed select svg by import file
+
+
 ## v0.4.11 (2020-04-24)
 
 - Fixed main metrics for the region, point, links

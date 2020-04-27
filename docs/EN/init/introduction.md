@@ -50,3 +50,18 @@ You can add :
 It is also possible to assimilate requests to the Coordination Space, just as we can assimilate the temperature to a city. 
 To do so, we use a database that gathers all the necessary data. These data are sorted and collected using queries with filters. 
 Once the data has been processed and collected, it can be affected.
+
+
+### workflow
+
+![workflow0](../../screenshots/init/workflow0.png)
+
+xxxx
+
+![workflow1](../../screenshots/init/workflow1.png)
+
+xxxx
+
+
+![workflow2](../../screenshots/init/workflow2.png)
+
