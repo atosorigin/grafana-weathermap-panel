@@ -55,15 +55,17 @@ A dedicated page to fill in the fields is available [here](coordinates-lower-lim
 
 ![position parameter](../../screenshots/editor/coordinates/screen-point/position-parameter.jpg)
 
-you can define the position of the 
+You can define the position of the 
 
 
-the position of the label in X and Y
+  - The position of the label in X and Y
 
 
-the tooltip position : 
-up / down...
-
+  - The tooltip position : 
+    - up
+    - down
+    - right
+    - left 
 
 
 

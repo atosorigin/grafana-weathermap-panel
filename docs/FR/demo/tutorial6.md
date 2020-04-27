@@ -6,7 +6,7 @@
 Choisissons ces deux requêtes :
 
 - node_cpu_frequency_hertz
-- node_network_carrier
+- node_network_carrier_changes_total
 
 
 Voir ce qu'ils rapportent :
@@ -28,16 +28,16 @@ node_network_carrier
 
 ```
 
-node_network_carrier{instance="localhost:9100",interface="br-565444d7f7ec",job="node"}
-node_network_carrier{instance="localhost:9100",interface="br-d1bef2b848cd",job="node"}
-node_network_carrier{instance="localhost:9100",interface="br-f19a1cf1980f",job="node"}
-node_network_carrier{instance="localhost:9100",interface="docker0",job="node"}
-node_network_carrier{instance="localhost:9100",interface="eno0",job="node"}
-node_network_carrier{instance="localhost:9100",interface="lo",job="node"}
-node_network_carrier{instance="localhost:9100",interface="veth17769f7",job="node"}
-node_network_carrier{instance="localhost:9100",interface="vetha317d1e",job="node"}
-node_network_carrier{instance="localhost:9100",interface="vethc04149a",job="node"}
-node_network_carrier{instance="localhost:9100",interface="vethdee87cd",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="br-565444d7f7ec",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="br-d1bef2b848cd",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="br-f19a1cf1980f",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="docker0",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="eno0",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="lo",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="veth17769f7",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="vetha317d1e",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="vethc04149a",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="vethdee87cd",job="node"}
 
 ```
 

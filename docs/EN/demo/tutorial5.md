@@ -99,8 +99,10 @@ The result display those 2 values
 
 ![step 04](../../screenshots/demo/tutorial5/demo5.png)
 
+### Import JSON file
 
+- It is possible to add all of those configuration through json files by doing an import. To know how to do it, [follow this link](../editor/import.md)
 
+And here is the JSON file :
 
-
-xxxxxxxxxxxxxx load file [demo5-region](../../resource/demo5-region.json) 
+[demo5-region](../../resource/demo5-region.json) 

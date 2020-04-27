@@ -55,22 +55,24 @@ Le fichier **point** doit être déclaré sous la forme d'un fichier JSON comme 
 
 ```
 
-## associateLink In/Out
-
-- **associateLinkIn** et **associateLinkOut** : TO DO
-
-```
-    "associateLinkIn": 
-    "associateLinkOut": 
-```
 
 ## associateOrientedLinks In/Out
 
-- **associateOrientedLinksIn** et **associateOrientedLinksOut** : TO DO
+- **associateOrientedLinksIn/Out** : Renseigner le lien qui commence/termine à  ce point
+
+  - label : Vous pouvez choisir un label pour cette association
+  - nom : choisissez le nom unique de cette association
+
 
 ```
-    "associateOrientedLinksIn": 
-    "associateOrientedLinksOut" :
+"associateOrientedLinksIn":{ 
+    "label": "A", 
+    "name":"orientedLink1"
+}
+"associateOrientedLinksOut":{ 
+    "label": "B", 
+    "name":"orientedLink2"
+}
 ```
 ## color
 

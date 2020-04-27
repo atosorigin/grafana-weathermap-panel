@@ -2,7 +2,7 @@
 
 WeatherMap Panel Plugin for Grafana is free software. You can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation
 
-WeatherMap Panel Pluginis distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+WeatherMap Panel Plugin is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 Parts of this software distribution are by other authors. Please see the README file for attribution and license details.
 
@@ -52,16 +52,36 @@ To do so, we use a database that gathers all the necessary data. These data are 
 Once the data has been processed and collected, it can be affected.
 
 
-### workflow
+### Workflow
 
 ![workflow0](../../screenshots/init/workflow0.png)
 
-xxxx
+Here, we will explain the different step of "How to use WeatherMap Panel Plugin"
+
+Step 1 : Connect you to Grafana and add our plugin by following [This tutoriel](config-data-source.md)
+
+Step 2 : Create a new dashboard
+
+Step 3 : On the `queries` menu, select `Prometheus` and add as many query as you want
+
+Step 4 : On the `visualisation` menu, you will be able to choose your backgound (SVG image, Bitmap image, or no image)
+
+Step 5 : Once you have done that, by going to the editor tabs, you can add some regions, points and link to your dashboard
+
+Step 6 : Then, you can assimilate metrics to the regions/points/links you just created. To do that, there is 3 differents way that we are going to explain to you
+
+#### Method 1
 
 ![workflow1](../../screenshots/init/workflow1.png)
 
-xxxx
+First method :
+- You choose a query that return only one value and you want to assimilate the result without adding any filter
 
+#### Method 2
 
 ![workflow2](../../screenshots/init/workflow2.png)
 
+Second method :
+- You choose a query that return multiple value with differents key/valueKey, and you want to add a filter to refine your query.
+
+Step 7 : Once you have done all of those step, you will see the result of your query on the dashboard, assimilate with a region/a point or a link.

@@ -56,11 +56,19 @@ The **point** file must be declared as a JSON file like this:
 
 ## associateOrientedLinks In/Out
 
-- **associateOrientedLinksIn** and **associateOrientedLinksOut** : TO DO
+- **associateOrientedLinksIn/Out** : The name of the link that start/end from/to this point
+  - label : You can choose a label for this association
+  - name : choose the unique name of this association
 
 ```
-    "associateOrientedLinksIn": 
-    "associateOrientedLinksOut" :
+"associateOrientedLinksIn":{ 
+    "label": "A", 
+    "name":"orientedLink1"
+}
+"associateOrientedLinksOut":{ 
+    "label": "B", 
+    "name":"orientedLink2"
+}
 ```
 ## color
 

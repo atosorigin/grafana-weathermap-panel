@@ -6,12 +6,12 @@
 Let's choose those two queries :
 
 - node_cpu_frequency_hertz
-- node_network_carrier
+- node_network_carrier_changes_total
 
 
 See what they return :
 
-![values](../../screenshots/demo/tutorial5/values.png)
+![values](../../screenshots/demo/tutorial6/values.png)
 
 node_cpu_frequency_hertz
 
@@ -27,17 +27,16 @@ node_cpu_frequency_hertz{cpu="3",instance="localhost:9100",job="node"}
 node_network_carrier
 
 ```
-
-node_network_carrier{instance="localhost:9100",interface="br-565444d7f7ec",job="node"}
-node_network_carrier{instance="localhost:9100",interface="br-d1bef2b848cd",job="node"}
-node_network_carrier{instance="localhost:9100",interface="br-f19a1cf1980f",job="node"}
-node_network_carrier{instance="localhost:9100",interface="docker0",job="node"}
-node_network_carrier{instance="localhost:9100",interface="eno0",job="node"}
-node_network_carrier{instance="localhost:9100",interface="lo",job="node"}
-node_network_carrier{instance="localhost:9100",interface="veth17769f7",job="node"}
-node_network_carrier{instance="localhost:9100",interface="vetha317d1e",job="node"}
-node_network_carrier{instance="localhost:9100",interface="vethc04149a",job="node"}
-node_network_carrier{instance="localhost:9100",interface="vethdee87cd",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="br-565444d7f7ec",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="br-d1bef2b848cd",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="br-f19a1cf1980f",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="docker0",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="eno0",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="lo",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="veth17769f7",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="vetha317d1e",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="vethc04149a",job="node"}
+node_network_carrier_changes_total{instance="localhost:9100",interface="vethdee87cd",job="node"}
 
 ```
 
