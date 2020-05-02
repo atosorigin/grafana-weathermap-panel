@@ -1,5 +1,5 @@
 # Oriented link
-
+[![](../../resource/Go-back.png)](README.md)
 ![menu](../../screenshots/panel/oriented-link.jpg)
 
 Après avoir cliquer sur le bouton **oriented link**

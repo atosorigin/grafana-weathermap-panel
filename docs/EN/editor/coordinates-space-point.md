@@ -1,6 +1,7 @@
 
 # Point
-
+[![](../../screenshots/other/Go-back.png)](coordinates.md)
+ 
 Define the coordinates of the points
 
 
@@ -11,7 +12,7 @@ Define the coordinates of the points
 ![saisie point](../../screenshots/editor/coordinates/screen-point/obligatoire.jpg)
 
 
-The required information to display the points is : 
+The required informations to display the points are : 
 
 
 

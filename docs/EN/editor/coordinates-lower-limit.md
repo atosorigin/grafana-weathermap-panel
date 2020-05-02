@@ -1,12 +1,11 @@
 # Lower limit
-
+[![](../../screenshots/other/Go-back.png)](coordinates.md)
 
 
 This part is common for 
 
 - [Region](coordinates-space-region.md)
 - [Point](coordinates-space-point.md)
-- [Oriented Link](coordinates-space-link.md)
 
 
 
@@ -26,10 +25,9 @@ If the `color variable` is unchecked, a form of this type appears
 
 ### Variable color
 
-if the `color variable' is checked,
-a new form appears to define the number of tiers required like this :
+if the `color variable` is checked, a new form appears to define the number of tiers required like this :
 
-![lower limit](../../screenshots/editor/coordinates/lower-limit/variable-color.jpg)
+![lower limit](../../screenshots/editor/coordinates/lower-limit/lower-limit-variable.png)
 
 Fill in the number of steps (default 3)
 Click on `add color`

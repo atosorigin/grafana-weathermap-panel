@@ -1,6 +1,6 @@
  
 # Import Files
- 
+[![](../../screenshots/other/Go-back.png)](README.md)
  
 ## Global URL Import
 
@@ -75,12 +75,8 @@ You select the file on your hard drive from the `Browse..` button.
 After that, you click the `add` button, followed by the `finish` button.
 
 
-The result is instantaneous
-
-It is possible to upload an additional configuration file
-
-but you have to save the page
-and reload the page
+The result is instantaneous 
+It is possible to upload an additional configuration file but you have to save the page and reload the page
 
 
 

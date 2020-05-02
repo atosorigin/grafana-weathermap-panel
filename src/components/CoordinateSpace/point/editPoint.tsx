@@ -92,6 +92,8 @@ class EditPoint extends React.Component<Props, State> {
     const valueSelect: SelectPoint[] = [];
     const stockTmpCoordinatesSpace: PointClass[] = this.props.options.arrayPoints.slice();
 
+    //valueSelect.push({ value: {}, label: 'No Data' });
+
     for (const line of stockTmpCoordinatesSpace) {
       let label = line.label || line.name;
       valueSelect.push({ value: line, label: label });
@@ -105,13 +107,17 @@ class EditPoint extends React.Component<Props, State> {
       }
     }
     // dev
+    // this.setState(prevState => ({
+    //   selectCoordinateSpace: valueSelect,
+    //   selectCoordinateSpaceDefault: valueExist
+    //     ? prevState.selectCoordinateSpaceDefault
+    //     : valueSelect.length > 0
+    //     ? valueSelect[0]
+    //     : prevState.selectCoordinateSpaceDefault,
+    // }));
     this.setState(prevState => ({
       selectCoordinateSpace: valueSelect,
-      selectCoordinateSpaceDefault: valueExist
-        ? prevState.selectCoordinateSpaceDefault
-        : valueSelect.length > 0
-        ? valueSelect[0]
-        : prevState.selectCoordinateSpaceDefault,
+      selectCoordinateSpaceDefault: valueExist ? prevState.selectCoordinateSpaceDefault : valueSelect.length > 0 ? valueSelect[0] : [],
     }));
     // final
     // this.setState({

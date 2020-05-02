@@ -2,42 +2,28 @@
 
 Inspired by the [WeatherMap plugin for Cacti](https://www.network-weathermap.com/), WeatherMap Panel Plugin for Grafana.
 
-Compatibility with  Prometheus
+This plugin is created to map a computer network. This makes it possible to be informed in real time in case a computer system is malfunctioning or other.
 
-This project is still in development.
+It take data from your network devices and use it to provide a single-page overview of the current state of network
+
+We can compare this to the presentation of the weather. 
+Indeed, the background with the computer network can represent a country. And we add on this background regions, points and links which can refer to the weather in a given city. 
+In addition, it is possible to add values from the network device to each region, point or link, just as you can add the temperature for a city.
+
+Many settings are available to customize the rendering.
+
 
 # Installation
 
-* Weathermap requires [Grafana](https://www.grafana.com/) v6.6+ to run (not tested lower version). Download and install it first.
-
-## Dependencies
-
-- Grafana 6.6.x or 6.7.x
-
-
-## Official version
-
-Go to [weathermap-panel](https://grafana.com/plugins/grafana-weathermap-panel) official page and click on "install Plugin".
-
-
-## Automatic
+Install by using `grafana-cli`
 
 ```sh
 grafana-cli plugins install grafana-weathermap-panel
 ```
 
-## Manual
+Or see more installation options in [docs](https://github.com/atosorigin/grafana-weathermap-panel/blob/master/docs/EN/init/installation.md).
 
-```sh
-$ git clone https://github.com/atosorigin/grafana-weathermap-panel.git
-```
 
-move the folder to grafana's plugins folder
-
-```sh
-$ mv grafana-weathermap-panel /var/lib/grafana/plugins
-$ systemctl restart grafana-server
-```
 
 # Getting Help
 

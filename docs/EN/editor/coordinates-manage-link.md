@@ -1,6 +1,7 @@
 
 # Manage link
-
+[![](../../screenshots/other/Go-back.png)](coordinates.md)
+ 
 
 
 This part is common for 
@@ -10,7 +11,7 @@ This part is common for
 - [Oriented Link](coordinates-space-link.md)
 
 
-![main metric](../../screenshots/editor/coordinates/manage-link/manage-link.jpg)
+![main metric](../../screenshots/editor/coordinates/manage-link/manage-link.png)
 
 
 

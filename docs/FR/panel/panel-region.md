@@ -1,4 +1,5 @@
-# region
+# Region
+[![](../../resource/Go-back.png)](README.md)
 
 ![region](../../screenshots/panel/region.jpg)
 
@@ -14,10 +15,6 @@ Un formulaire d'édition est proposé. L'ensemble de l'écran de saisie sont rep
 
 
 
-
-
 L'édition de la région s'effectue à partir du formulaire de l'[éditeur Region](../editor/coordinates-space-region.md)
 
-
-todo
 

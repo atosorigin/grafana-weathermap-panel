@@ -1,8 +1,6 @@
-
-
-
 # Editor
-
+[![](../../screenshots/other/Go-back.png)](../../README.md)
+ 
 The editor is the manual configuration screen to build your space.
 
 

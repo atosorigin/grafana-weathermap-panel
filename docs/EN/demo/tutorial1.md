@@ -1,6 +1,7 @@
 
 ## Add a dashboard SVG
-
+[![](../../screenshots/other/Go-back.png)](README.md)
+ 
 ![step 01](../../screenshots/demo/tutorial1/step01.jpg)
 
 
@@ -47,7 +48,7 @@ You have to fill out the form like this:
 
 Adding a color to a SVG element is done from the `Coordinates space`, `region` and `Edit coordinate space` menu.
 
-You select the `Lower limit' line and then complete the form like this: 
+You select the `Lower limit` line and then complete the form like this: 
  
 
 - Enable `Trace the background` to activate the background color. 
@@ -55,7 +56,7 @@ You select the `Lower limit' line and then complete the form like this:
 - Enable `Trace the border` to activate the border color.
 - Select the `red` color in the `Edit border color` line.
 - Enter a value to set the size of the border `size border` for example 3
-- Click on the "load" button
+- Click on the `load` button
 
 
 You get the following result
@@ -83,7 +84,7 @@ You must:
 rate(go_memstats_gc_cpu_fraction[5m]) * 100000
 ```
 
-The "A" marker will be used to identify this query as you can see below.
+The `A` marker will be used to identify this query as you can see below.
 
 
 

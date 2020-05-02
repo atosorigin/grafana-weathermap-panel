@@ -1,4 +1,6 @@
-# oriented Link
+# Oriented Link
+[![](../../resource/Go-back.png)](coordinates.md)
+
 Définir les coordonnées d'un oriented link
 
 
@@ -73,7 +75,7 @@ Une page dédiée pour remplir les champs sont disponible [ici](coordinates-mana
 ## Text object
 
 
-Une page dédié pour remplir les champs sont disponible [ici](coordinates-text-object.md)
+Une page dédié pour remplir les champs sont disponible [ici](coordinates-object-text.md)
 
 
 
@@ -97,11 +99,15 @@ Vous pouvez définir la position du e différent paramètre.
 
 
   - La position tooltip : 
-haut / bas....
+    - haut
+    - bas
+    - droite
+    - gauche
 
 
   - Layer level
-
+    - Upgrade on : choisissez l'autre lien que vous voulez voir en dessous de celui ci
+    - Downgrade on : choisissez l'autre lien que vous voulez voir au-dessus de celui ci
 
 
 

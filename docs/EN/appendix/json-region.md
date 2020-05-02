@@ -1,5 +1,6 @@
 # File `region`
-
+[![](../../screenshots/other/Go-back.png)](README.md)
+ 
 The full [sample-region.json](../../resource/sampleJson/sample-region.json) script is available, with construction details below.
 
 
@@ -283,18 +284,16 @@ Compatible format is JPG / PNG / GIF / SVG
 
 ## metrics
 
- This is a metric table to add auxilary metrics.
- 
-    - **0**
-    
-        - **expr** : Expression in PrompQL
-        - **format** : (Leaves blank)
-        - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
-        - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
-        - **manageValue** : You can choose between "sum", "avg" or "err".
-        - **refId**: Metric reference associated with this region
-        - **returnQuery**: (Leave blank)    
-        - **unit** : (Leave blank)
+ - **metrics** This is a metric table to add auxilary metrics.
+    - **0**  
+      - **expr** : Expression in PrompQL
+      - **format** : (Leaves blank)
+      - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
+      - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
+      - **manageValue** : You can choose between "sum", "avg" or "err".
+      - **refId**: Metric reference associated with this region
+      - **returnQuery**: (Leave blank)    
+      - **unit** : (Leave blank)
 
     - **1**
         - ...

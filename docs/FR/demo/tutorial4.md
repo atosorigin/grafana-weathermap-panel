@@ -1,6 +1,7 @@
 
 # Comment créer et ajouter votre propre image SVG dans Grafana
-
+ [![](../../resource/Go-back.png)](README.md)
+ 
 ## Créer votre SVG sur inkscape
 
 ### Étape 1 : Télécharger Inkscape

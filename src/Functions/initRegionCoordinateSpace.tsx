@@ -10,8 +10,8 @@ export const initRegionCoordinateSpace = (index: number): RegionClass => {
   const initTextObject: TextObject = new TextObject(
     '',
     false,
-    'rgba(255, 255, 255, 0)',
-    'rgba(0, 0, 0, 1)',
+    'rgb(255, 255, 255, 0)',
+    'black',
     { bold: false, italic: false, underline: false },
     true,
     {
@@ -27,7 +27,7 @@ export const initRegionCoordinateSpace = (index: number): RegionClass => {
     },
     {
       legendElement: '',
-      numericFormatElement: '',
+      numericFormatElement: '5',
       unit: '',
       displayObjectInTooltip: true,
       // 'displayObjectPermanently': false,

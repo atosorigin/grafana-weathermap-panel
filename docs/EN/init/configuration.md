@@ -1,12 +1,6 @@
-
-file TMP
-
-
-
-
-
 # Configuration
-
+[![](../../screenshots/other/Go-back.png)](README.md)
+ 
 https://www.howtoforge.com/tutorial/how-to-install-prometheus-and-node-exporter-on-centos-8/
 
 ### Prerequisites
@@ -24,7 +18,7 @@ Example : node_cpu{cpu="cpu0",mode="idle"}
 
 To see the available metrics, open the browser and type this:
 
-```sh
+```
 http://localhost:9100/metrics
 ```
 
@@ -33,7 +27,7 @@ http://localhost:9100/metrics
 
 ## Testing Prometheus
 
-```sh
+```
 http://localhost:9090/
 ```
 
@@ -46,7 +40,7 @@ From the `data sources` menu in Grafana, choose Prometheus
 
 Complete the form and the line
 
-url : http://localhost:9090
+url : http://\<ip\>:9090
 
 You have to go to the `New dashboard` menu...
 

@@ -1,6 +1,6 @@
-
-
 # Auxiliary metric
+[![](../../screenshots/other/Go-back.png)](coordinates.md)
+ 
 
 This function is common for 
 
@@ -10,7 +10,7 @@ This function is common for
 
 
 
-![main metric](../../screenshots/editor/coordinates/main-metric/main-metric.jpg)
+![main metric](../../screenshots/editor/coordinates/auxiliary-metric/metric.png)
 
 
 
@@ -20,13 +20,13 @@ This function is common for
 
 for example 
 
-![main metric](../../screenshots/editor/coordinates/main-metric/main-metric-query-c.jpg)
+![main metric](../../screenshots/editor/coordinates/auxiliary-metric/metric-key.png)
 
 
 In the hypothesis where you retrieve several values, the following field proposes to return to you : 
 
 - Average: Returns an average of the received values.
 - Total: Returns the total sum of the received values.
-- Error: TO DO
+- Error: Returns the value if this one is single, return error if there is several values
 
 Choose the one you want.

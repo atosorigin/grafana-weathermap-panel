@@ -1,7 +1,5 @@
-
-
 # Display
-
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 
 ## Character font
@@ -19,9 +17,9 @@ You can choose the following font :
 ## Size
 
 
-Choice of text size in "em". 
+Choice of text size in `em`. 
 
-Example: "1em" or "4em".
+Example: `1em` oo `4em`.
  
  
  
@@ -121,7 +119,5 @@ The dashboard should be saved, like this
 
 ![display](../../screenshots/editor/display/save-dashboard.jpg)
 
-
-### If you don't use picture background
 
 

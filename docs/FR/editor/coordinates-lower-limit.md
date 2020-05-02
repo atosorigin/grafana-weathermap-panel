@@ -1,11 +1,11 @@
 # Lower limit
-
+[![](../../resource/Go-back.png)](coordinates.md)
 
 
 Cette partie est commune pour 
 
-- Region
-- Point
+- [Region](coordinates-space-region.md)
+- [Point](coordinates-space-point.md)
 
 
 ### Fixe color
@@ -24,10 +24,9 @@ Si la `variable color`  est décoché, un formulaire de se type apparait
 
 ### Variable color
 
-si la `variable color`  est coché,
-un nouveau formulaire apparaît pour définir le nombre de palier nécessaire comme ceci :
+si la `variable color`  est coché, un nouveau formulaire apparaît pour définir le nombre de palier nécessaire comme ceci :
 
-![lower limit](../../screenshots/editor/coordinates/lower-limit/variable-color.jpg)
+![lower limit](../../screenshots/editor/coordinates/lower-limit/lower-limit-variable.png)
 
 Renseigner le nombre de palier (par défaut 3)
 Cliquez sur `add color`

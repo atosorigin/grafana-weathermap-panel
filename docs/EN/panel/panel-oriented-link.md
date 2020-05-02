@@ -1,5 +1,6 @@
 # Oriented link
-
+[![](../../screenshots/other/Go-back.png)](README.md)
+ 
 ![menu](../../screenshots/panel/oriented-link.jpg)
 
 To create an oriented link you have to click twice on the **Add Oriented link** button. 

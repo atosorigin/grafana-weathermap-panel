@@ -1,6 +1,7 @@
  
 # Créer une requête personnalisable
-
+[![](../../resource/Go-back.png)](README.md)
+ 
 ## Ajouter une requête
 
 L'exemple montre comment utiliser des filtres de requête pour obtenir des mesures précises
@@ -103,6 +104,6 @@ Le résultat affiche ces 2 valeurs
 
 - Il est possible d'ajouter toutes ces configurations par le biais de fichiers json en faisant une importation. Pour savoir comment faire, [suivez ce lien](../editor/import.md)
 
-Et voici le différent dossier JSON :
+Et voici le fichier JSON :
 
 - [demo5-region](../../resource/demo5-region.json) 

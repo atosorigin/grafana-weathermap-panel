@@ -1,22 +1,29 @@
 
 # Display
+[![](../../resource/Go-back.png)](README.md)
 
 
-
-- Police de caractères
+## Police de caractères
 
 La liste de police de caractères utilise celle standard qui sont disponible dans le navigateur
 
 
-- Taille
+## Taille
 
-Permet de pouvoir choisir la taille de la police 
+Permet de pouvoir choisir la taille de la police  en `em`
 
-- Style
+Example: `1em` oo `4em`.
+
+## Style
 
 Différents styles sont possibles : gras, italique, souligné, etc.
 
-- Utiliser SVG
+- blod : "true" ou "false" pour mettre le texte en gras
+- italic : "true" ou "false" pour mettre le texte en italique
+- underline : "true" ou "false" pour mettre le texte en évidence
+- 
+
+## Utiliser SVG
 
 Permet de télécharger un svg pour pouvoir gérer les régions. En décochant, vous pouvez telecharger n'importe quelle image mais elle ne sera pas interactive
 

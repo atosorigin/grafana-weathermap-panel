@@ -27,7 +27,7 @@ export const initOrientedLink = (newId: number, newZIndex: number): OrientedLink
     },
     {
       legendElement: '',
-      numericFormatElement: '',
+      numericFormatElement: '5',
       unit: '',
       displayObjectInTooltip: true,
       // 'displayObjectPermanently': false,

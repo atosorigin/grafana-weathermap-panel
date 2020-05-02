@@ -1,5 +1,6 @@
 # Ajoutez PNG/JPG dans votre tableau de bord
-
+[![](../../resource/Go-back.png)](README.md)
+ 
 ## Ajouter une image comme affichage
 Pour ce tutoriel, vous devez d'abord télécharger l'image de fond : 
 
@@ -67,7 +68,7 @@ Vous devez remplir le formulaire comme ceci :
 ![step 03](../../screenshots/demo/tutorial2/CoordinateModeNoImage.png)
 
 
-Deinissez ensuite la taille de la région pour votre image. Ici, nous choisirons :
+Definissez ensuite la taille de la région pour votre image. Ici, nous choisirons :
 - X Min : -18
 - X Max : 0
 - Y Min : -6
@@ -124,7 +125,7 @@ Vous pouvez aussi vous rendre au [tutoriel3](tutorial3.md) qui explique comment 
 
 - Il est possible d'ajouter toutes ces configurations par le biais de fichiers json en faisant une importation. Pour savoir comment faire, [suivez ce lien](../editor/import.md)
 
-Et voici le différent dossier JSON :
+Et voici les différents fichiers JSON :
 
 - [demo2-svgRegion](../../resource/demo2-svgRegion.json) 
 - [demo2-point](../../resource/demo2-point.json)

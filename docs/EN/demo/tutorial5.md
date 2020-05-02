@@ -1,6 +1,7 @@
  
 # Create a customizable query
-
+[![](../../screenshots/other/Go-back.png)](README.md)
+ 
 ## Add a query
 
 The example shows how to use query filters to obtain precise metrics
@@ -54,7 +55,7 @@ Here we want to filter the result to display only the device we are interested i
 
 ## Create regions and filter the Metric
 
-### Step 1 : Import our file PNG
+### Step 1 : Import our file SVG
 
 Adding a background image is done from the `display` menu.
 

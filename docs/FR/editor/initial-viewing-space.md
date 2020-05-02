@@ -1,7 +1,5 @@
-
-
-# initial viewing space
-
+# Initial viewing space
+[![](../../resource/Go-back.png)](README.md)
 
 ![display](../../screenshots/editor/initial/initial-view-space.jpg)
 

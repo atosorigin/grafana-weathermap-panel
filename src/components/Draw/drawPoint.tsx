@@ -202,6 +202,8 @@ export default class DrawPoint extends React.Component<Props, State> {
     const valueToolTip: JSX.Element = this.defineContentTooltip('point');
     const linkUrlPoint = this.props.linkUrl.followLink;
 
+    // console.log('point');
+    // console.log(linkUrlPoint);
     if (drawGraphicMarker === 'true') {
       if (shape === 'circle') {
         if (this.props.buttonAddLinkIsActive || this.props.buttonAddIncurvedLinkIsActive) {
@@ -327,26 +329,28 @@ export default class DrawPoint extends React.Component<Props, State> {
   private defineMainMetric = (mainMetric: string): string => {
     let result = '';
     const unit: string = this.props.textObject.valueGenerateObjectText.unit;
-    const decimal: string = this.props.textObject.valueGenerateObjectText.numericFormatElement;
+    //const decimal: string = this.props.textObject.valueGenerateObjectText.numericFormatElement;
+    const roundValue: number = parseInt(this.props.textObject.generateAuxiliaryElement.numericFormatElement, 10) || 1;
 
-    if (decimal !== '') {
-      result = parseFloat(mainMetric).toPrecision(parseInt(decimal, 10)) + ' ' + unit;
-    } else {
-      result = mainMetric + ' ' + unit;
-    }
+    //if (decimal !== '') {
+    result = parseFloat(mainMetric).toPrecision(roundValue) + ' ' + unit;
+    // } else {
+    //   result = mainMetric + ' ' + unit;
+    // }
     return result;
   };
 
   private defineAuxMetric = (auxMetric: string): string => {
     let result = '';
     const unit: string = this.props.textObject.generateAuxiliaryElement.unit;
-    const decimal: string = this.props.textObject.generateAuxiliaryElement.numericFormatElement;
+    //const decimal: string = this.props.textObject.generateAuxiliaryElement.numericFormatElement;
+    const roundValue: number = parseInt(this.props.textObject.generateAuxiliaryElement.numericFormatElement, 10) || 1;
 
-    if (decimal !== '') {
-      result = parseFloat(auxMetric).toPrecision(parseInt(decimal, 10)) + ' ' + unit;
-    } else {
-      result = auxMetric + ' ' + unit;
-    }
+    //if (decimal !== '') {
+    result = parseFloat(auxMetric).toPrecision(roundValue) + ' ' + unit;
+    // } else {
+    //   result = auxMetric + ' ' + unit;
+    // }
     return result;
   };
 

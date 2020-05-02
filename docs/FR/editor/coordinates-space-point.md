@@ -1,5 +1,7 @@
 
-# point
+# Point
+[![](../../resource/Go-back.png)](coordinates.md)
+
 Définir les coordonnées des points
 
 
@@ -10,7 +12,7 @@ Définir les coordonnées des points
 ![saisie point](../../screenshots/editor/coordinates/screen-point/obligatoire.jpg)
 
 
-les informations obligatoires pour afficher les points sont : 
+Les informations obligatoires pour afficher les points sont : 
 
 
 
@@ -35,12 +37,12 @@ position X et Y
 
 ## Main metric
 
-une page dédiée pour remplir les champs sont disponible [ici](coordinates-space-main-metric.md)
+une page dédiée pour remplir les champs sont disponible [ici](coordinates-main-metric.md)
 
 
 ## Auxiliary metric
 
-une page dédiée pour remplir les champs sont disponible [ici](coordinates-space-auxiliary-metric.md)
+une page dédiée pour remplir les champs sont disponible [ici](coordinates-auxiliary-metric.md)
 
 
 ## Manage link
@@ -53,7 +55,7 @@ une page dédiée pour remplir les champs sont disponible [ici](coordinates-mana
 ## Text object
 
 
-une page dédié pour remplir les champs sont disponible [ici](coordinates-text-object.md)
+une page dédié pour remplir les champs sont disponible [ici](coordinates-object-text.md)
 
 
 
@@ -74,11 +76,14 @@ une page dédié pour remplir les champs sont disponible [ici](coordinates-lower
 vous pouvez définir la position du paramètre 
 
 
-la position du label en X et Y
+- La position du label en X et Y
 
 
-la position tooltip : 
-haut / bas....
+- la position tooltip : 
+    - haut
+    - bas
+    - droite
+    - gauche
 
 
 

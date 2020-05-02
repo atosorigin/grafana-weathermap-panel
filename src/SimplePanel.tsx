@@ -12,9 +12,9 @@ import { TextObject } from 'Models/TextObjectClass';
 import { LinkURLClass } from 'Models/LinkURLClass';
 
 import { coordinateIsInInitialSpace } from 'Functions/coodinateIsInInitialSpace';
-import { reqMetricPoint, reqMetricOrientedLink, reqMetricAuxOrientedLink, reqMetricAuxPoint } from 'Functions/fetchMetrics';
-// import { getResultQuery } from 'Functions/getResultQuery';
-import { getInfoDisplayRegion } from 'Functions/getInfoDisplayRegion';
+import { reqMetricPoint, reqMetricOrientedLink, reqMetricAuxOrientedLink, reqMetricAuxPoint, reqMetricAuxRegion } from 'Functions/fetchMetrics';
+import { getResultQuery } from 'Functions/getResultQuery';
+//import { getInfoDisplayRegion } from 'Functions/getInfoDisplayRegion';
 
 import AddCoordinate from 'components/CoordinateSpace/addCoordinate';
 import DrawRectangle from './components/Draw/drawRectangle';
@@ -23,10 +23,17 @@ import DrawOrientedLink from './components/Draw/drawOrientedLink';
 import LegendComponant from './components/legend';
 
 import DrawRectangleExtend from 'components/Draw/drawRectangleExtend';
-import { getResultQuery } from 'Functions/getResultQuery';
+import { initRegionCoordinateSpace } from 'Functions/initRegionCoordinateSpace';
+import { Style } from 'components/Parametrage/styleComponent';
 // import { identity } from 'rxjs';
 
 interface Props extends PanelProps<SimpleOptions> {}
+
+interface DataTooltipRegionSVG {
+  idSVG: string;
+  x: string;
+  y: string;
+}
 
 interface Legend {
   hiddenLegend: boolean;
@@ -64,6 +71,8 @@ interface State {
   buttonAddLinkIsActive: boolean;
   // check if button Add Incurved Oriented Link is active
   buttonAddIncurvedLinkIsActive: boolean;
+
+  dataTooltipSVG: DataTooltipRegionSVG;
 }
 
 /**
@@ -85,6 +94,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       idSVG: '',
       buttonAddLinkIsActive: false,
       buttonAddIncurvedLinkIsActive: false,
+      dataTooltipSVG: { idSVG: '', x: '0', y: '0' },
     };
   }
 
@@ -106,7 +116,9 @@ export class SimplePanel extends PureComponent<Props, State> {
           onOptionsChange={this.props.onOptionsChange}
           options={this.props.options}
           data={this.props.data}
-          isEnabled={!this.state.buttonManage[1]}
+          //isEnabled={!this.state.buttonManage[1]}
+          buttonAddLinkIsActive={this.state.buttonAddLinkIsActive}
+          buttonAddIncurvedLinkIsActive={this.state.buttonAddIncurvedLinkIsActive}
         />
       );
     }
@@ -195,7 +207,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       },
       {
         legendElement: '',
-        numericFormatElement: '',
+        numericFormatElement: '5',
         unit: '',
         displayObjectInTooltip: true,
         // 'displayObjectPermanently': false,
@@ -263,6 +275,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   displayPoint() {
     const mapItems: JSX.Element[] = [];
     this.props.options.arrayPoints.forEach((line: PointClass) => {
+      //console.log(line);
       const valueMainMetric = this.getValuesMainMetricPoint(line).toString();
       this.updatePositionOrientedLink(line);
       const valuesAuxiliaryMetrics: string[] = this.getValuesAuxiliaryMetricsPoint(line);
@@ -326,77 +339,6 @@ export class SimplePanel extends PureComponent<Props, State> {
     }
   };
 
-  // /** display link with coordinate */
-  // displayLink() {
-  //   const { options } = this.props;
-  //   const mapItems: JSX.Element[] = [];
-  //   const arrayLinks: LinkClass[] = options.arrayLinks;
-
-  //   arrayLinks.forEach((link: LinkClass) => {
-  //     let item: JSX.Element = <div></div>;
-  //     if (link.defineHowToGetCoordonate.value === 'coordinate') {
-  //       item = (
-  //         <DrawLinkWithCoordinates
-  //           key={'link' + link.id.toString()}
-  //           pointAPositionX={link.pointAPositionX}
-  //           pointAPositionY={link.pointAPositionY}
-  //           pointBPositionX={link.pointBPositionX}
-  //           pointBPositionY={link.pointBPositionY}
-  //           colorA={link.colorCoordinateA}
-  //           colorB={link.colorCoordinateB}
-  //           orientationLink={link.orientationLink.value || ''}
-  //           labelA={link.labelLinkA}
-  //           labelB={link.labelLinkB}
-  //           labelAPositionX={link.positionXLabelA}
-  //           labelAPositionY={link.positionYLabelA}
-  //           labelBPositionX={link.positionXLabelB}
-  //           labelBPositionY={link.positionYLabelB}
-  //           height={parseInt(this.props.options.baseMap.height, 10)}
-  //           name={link.name}
-  //         />
-  //       );
-  //     } else if (link.defineHowToGetCoordonate.value === 'point') {
-  //       item = (
-  //         <DrawLinkWithPoints
-  //           key={'link' + link.id.toString()}
-  //           pointIn={link.pointIn}
-  //           pointOut={link.pointOut}
-  //           labelA={link.labelLinkA}
-  //           labelB={link.labelLinkB}
-  //           labelAPositionX={link.positionXLabelA}
-  //           labelAPositionY={link.positionYLabelA}
-  //           labelBPositionX={link.positionXLabelB}
-  //           labelBPositionY={link.positionYLabelB}
-  //           orientationLink={link.orientationLink.value || ''}
-  //           height={parseInt(this.props.options.baseMap.height, 10)}
-  //           name={link.name}
-  //         />
-  //       );
-  //     } else if (link.defineHowToGetCoordonate.value === 'region') {
-  //       item = (
-  //         <DrawLinkWithRegions
-  //           key={'link' + link.id.toString()}
-  //           regionIn={link.regionIn}
-  //           regionOut={link.regionOut}
-  //           colorA={link.colorRegionIn}
-  //           colorB={link.colorRegionOut}
-  //           labelA={link.labelLinkA}
-  //           labelB={link.labelLinkB}
-  //           labelAPositionX={link.positionXLabelA}
-  //           labelAPositionY={link.positionYLabelA}
-  //           labelBPositionX={link.positionXLabelB}
-  //           labelBPositionY={link.positionYLabelB}
-  //           orientationLink={link.orientationLink.value || ''}
-  //           height={parseInt(this.props.options.baseMap.height, 10)}
-  //           name={link.name}
-  //         />
-  //       );
-  //     }
-  //     mapItems.push(item);
-  //   });
-  //   return <ul>{mapItems}</ul>;
-  // }
-
   /**
    * to do
    */
@@ -420,77 +362,6 @@ export class SimplePanel extends PureComponent<Props, State> {
       index++;
     });
   };
-
-  // /**
-  //  * to do
-  //  */
-  // updateAssociateOrientedLinkInToPoint = () => {
-  //   console.log('update point in');
-  //   let indexPoint = 0;
-  //   this.props.options.arrayPoints.forEach((point: PointClass) => {
-  //     let indexAssociateOrientedLinkIn = 0;
-  //     point.associateOrientedLinksIn.forEach(oneAssociateOrientedLinksIn => {
-  //       let orientedLinkExist = false;
-  //       this.props.options.arrayOrientedLinks.forEach((orientedLink: OrientedLinkClass) => {
-  //         if (oneAssociateOrientedLinksIn.name === orientedLink.name) {
-  //           orientedLinkExist = true;
-  //           if (orientedLink.label) {
-  //             this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn[indexAssociateOrientedLinkIn] = {
-  //               label: orientedLink.label,
-  //               name: orientedLink.name,
-  //             };
-  //           } else {
-  //             this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn[indexAssociateOrientedLinkIn] = {
-  //               label: '',
-  //               name: orientedLink.name,
-  //             };
-  //           }
-  //         }
-  //       });
-  //       if (orientedLinkExist === false) {
-  //         this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn.splice(indexAssociateOrientedLinkIn, 1);
-  //       }
-  //       indexAssociateOrientedLinkIn++;
-  //     });
-  //     indexPoint++;
-  //   });
-  // };
-
-  // /**
-  //  * to do
-  //  */
-  // updateAssociateOrientedLinkOutToPoint = () => {
-  //   console.log('update point out');
-  //   let indexPoint = 0;
-  //   this.props.options.arrayPoints.forEach((point: PointClass) => {
-  //     let indexAssociateOrientedLinkOut = 0;
-  //     point.associateOrientedLinksOut.forEach(oneAssociateOrientedLinksOut => {
-  //       let orientedLinkExist = false;
-  //       this.props.options.arrayOrientedLinks.forEach((orientedLink: OrientedLinkClass) => {
-  //         if (oneAssociateOrientedLinksOut.name === orientedLink.name) {
-  //           orientedLinkExist = true;
-  //           if (orientedLink.label) {
-  //             this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut[indexAssociateOrientedLinkOut] = {
-  //               label: orientedLink.label,
-  //               name: orientedLink.name,
-  //             };
-  //           } else {
-  //             this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut[indexAssociateOrientedLinkOut] = {
-  //               label: '',
-  //               name: orientedLink.name,
-  //             };
-  //           }
-  //         }
-  //       });
-  //       if (orientedLinkExist === false) {
-  //         this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut.splice(indexAssociateOrientedLinkOut, 1);
-  //       }
-  //       indexAssociateOrientedLinkOut++;
-  //     });
-  //     indexPoint++;
-  //   });
-  //   this.displayPoint();
-  // };
 
   /** update AssociateOrientedLinkIn of point for tootip  */
   private updateAssociateOrientedLinkInToPoint = () => {
@@ -613,7 +484,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       });
     } else {
       const arrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
-      let indexRegion = 0;
+      //let indexRegion = 0;
 
       arrayRegion.forEach((region: RegionClass) => {
         const xMin: number = parseInt(region.coords.xMin, 10);
@@ -649,55 +520,12 @@ export class SimplePanel extends PureComponent<Props, State> {
         } else if (event.nativeEvent.target.id !== 'oct' + this.props.options.baseMap.idSVG && event.nativeEvent.target.id.startsWith('oct')) {
           const id: string = event.nativeEvent.target.id.substr(3);
           if (id === region.idSVG) {
-            console.log(region.idSVG);
+            //console.log(region.idSVG);
             const coordinates = this.props.options.coordinatesToDrawLinkWithClick;
-            const newRegionCoordinateSpace: RegionClass[] = this.props.options.regionCoordinateSpace;
-
-            //SVG 7
-            const width: number = parseInt(event.nativeEvent.target.attributes[5].nodeValue, 10);
-            const height: number = parseInt(event.nativeEvent.target.attributes[4].nodeValue, 10);
-            const xMinSVG: number = parseInt(event.nativeEvent.target.attributes[7].nodeValue, 10);
-            const xMaxSVG: number = xMinSVG + width;
-            const yMaxSVG: number = parseInt(event.nativeEvent.target.attributes[6].nodeValue, 10);
-            const yMinSVG: number = yMaxSVG + height;
-            const xMinSVGCoor: string = (Math.round((xMinSVG - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2).toString();
-            const xMaxSVGCoor: string = (Math.round((xMaxSVG - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2).toString();
-            const yMinSVGCoor: string = (Math.round((yMinSVG - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1).toString();
-            const yMaxSVGCoor: string = (Math.round((yMaxSVG - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1).toString();
-            const newCoords: Coord4D = { xMin: xMinSVGCoor, xMax: xMaxSVGCoor, yMin: yMinSVGCoor, yMax: yMaxSVGCoor };
-            console.log(indexRegion);
-            console.log(newRegionCoordinateSpace[indexRegion]);
-            console.log(newRegionCoordinateSpace[indexRegion].coords);
-            console.log(newCoords);
-            newRegionCoordinateSpace[indexRegion].coords = newCoords;
-            this.props.onOptionsChange({
-              ...this.props.options,
-              regionCoordinateSpace: newRegionCoordinateSpace,
-            });
-            // console.log(xMaxSVG);
-            // console.log(yMinSVG);
-            //console.log(event.nativeEvent.target);
-            //const allValues: string = event.nativeEvent.target.attributes[0].nodeValue;
-            //console.log('allValues');
-            //console.log(allValues);
-            //const arrayAllValues: string[] = allValues.split(' ');
-            //console.log(arrayAllValues);
-            // const xMinSVG: number = parseInt(arrayAllValues[1], 10);
-            // const xMaxSVG: number = parseInt(arrayAllValues[7], 10);
-            // const yMinSVG: number = parseInt(arrayAllValues[8], 10);
-            // const yMaxSVG: number = parseInt(arrayAllValues[2], 10);
-            // console.log('xMinSVG');
-            // console.log(xMinSVG);
-            // console.log('xMaxSVG');
-            // console.log(xMaxSVG);
-            // console.log('yMinSVG');
-            // console.log(yMinSVG);
-            // console.log('yMaxSVG');
-            // console.log(yMaxSVG);
-            positionX = (parseInt(xMinSVGCoor, 10) + parseInt(xMaxSVGCoor, 10)) / 2;
-            positionY = (parseInt(yMaxSVGCoor, 10) + parseInt(yMinSVGCoor, 10)) / 2;
-            console.log(positionX);
-            console.log(positionY);
+            positionX = 0;
+            positionY = 0;
+            // console.log(positionX);
+            // console.log(positionY);
             if (coordinates[0].id === 0) {
               objectIn.x = positionX;
               objectIn.y = positionY;
@@ -743,7 +571,7 @@ export class SimplePanel extends PureComponent<Props, State> {
             }
           }
         }
-        indexRegion++;
+        //indexRegion++;
       });
     }
   };
@@ -858,6 +686,32 @@ export class SimplePanel extends PureComponent<Props, State> {
               this.resetCoordinatesToDrawLinkWithClick();
             }
           }
+        } else if (event.nativeEvent.target.id !== 'oct' + this.props.options.baseMap.idSVG && event.nativeEvent.target.id.startsWith('oct')) {
+          const id: string = event.nativeEvent.target.id.substr(3);
+          if (id === region.idSVG) {
+            const coordinates = this.props.options.coordinatesToDrawLinkWithClick;
+            positionX = 0;
+            positionY = 0;
+            if (coordinates[0].id === 0) {
+              objectIn.x = positionX;
+              objectIn.y = positionY;
+              objectIn.labelRegion = region.label;
+              objectIn.region = region;
+              coordinates[0].id++;
+            } else if (coordinates[0].id === 1) {
+              objectOut.x = positionX;
+              objectOut.y = positionY;
+              objectOut.labelRegion = region.label;
+              objectOut.region = region;
+              coordinates[0].id++;
+            } else if (coordinates[0].id === 2) {
+              pointC.x = positionX;
+              pointC.y = positionY;
+              coordinates[0].id = 0;
+              this.createOrientedLinkToClick({ label: 'Yes', value: true });
+              this.resetCoordinatesToDrawLinkWithClick();
+            }
+          }
         } else {
           const id: number = parseInt(event.nativeEvent.target.offsetParent.id.charAt(6) + event.nativeEvent.target.offsetParent.id.charAt(7), 10);
 
@@ -890,30 +744,6 @@ export class SimplePanel extends PureComponent<Props, State> {
       });
     }
   };
-
-  // defineAssociateOrientedLinkToRegion(): OrientedLinkClass[] {
-  // 	const arrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
-  // 	const arrayAllOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
-  // 	const arrayOrientedLinkAssociateRegionIn: OrientedLinkClass[] = [];
-  // 	const arrayOrientedLinkAssociateRegionOut: OrientedLinkClass[] = [];
-  // 	let arrayToReturn: OrientedLinkClass[] = [];
-  // 	arrayRegion.forEach((region) => {
-  // 		arrayAllOrientedLink.forEach((orientedLink) => {
-  // 			arrayToReturn = [];
-  // 			if (region.id === orientedLink.regionIn.id) {
-  // 				arrayOrientedLinkAssociateRegionIn.push(orientedLink);
-  // 				arrayToReturn = arrayOrientedLinkAssociateRegionIn;
-  // 				region.orientedLink = arrayToReturn;
-  // 			}
-  // 			if (region.id === orientedLink.regionOut.id) {
-  // 				arrayOrientedLinkAssociateRegionOut.push(orientedLink);
-  // 				arrayToReturn = arrayOrientedLinkAssociateRegionOut;
-  // 				region.orientedLink = arrayToReturn;
-  // 			}
-  // 		});
-  // 	});
-  // 	return arrayToReturn;
-  // }
 
   /**
    * to do
@@ -959,7 +789,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       },
       {
         legendElement: '',
-        numericFormatElement: '',
+        numericFormatElement: '5',
         unit: '',
         displayObjectInTooltip: true,
         // 'displayObjectPermanently': false,
@@ -1049,6 +879,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     const mapItems: JSX.Element[] = [];
     let item: JSX.Element = <div></div>;
     arrayOrientedLink.forEach((orientedLink: OrientedLinkClass) => {
+      //console.log(orientedLink);
       const valueMainMetricA: string = this.getValuesMainMetricOrientedLink(orientedLink).toString();
       const valueMainMetricB: string = this.getValuesMainMetricOrientedLinkB(orientedLink).toString();
       this.getValuesMainMetricOrientedLinkB(orientedLink);
@@ -1542,7 +1373,9 @@ export class SimplePanel extends PureComponent<Props, State> {
           onOptionsChange={this.props.onOptionsChange}
           options={this.props.options}
           data={this.props.data}
-          isEnabled={!this.state.buttonManage[1]}
+          // isEnabled={!this.state.buttonManage[1]}
+          buttonAddLinkIsActive={this.state.buttonAddLinkIsActive}
+          buttonAddIncurvedLinkIsActive={this.state.buttonAddIncurvedLinkIsActive}
         />
       ),
     });
@@ -1569,6 +1402,7 @@ export class SimplePanel extends PureComponent<Props, State> {
    * update button css when mount component
    */
   componentDidMount = async () => {
+    console.log('mount Panel');
     this.props.onOptionsChange({
       ...this.props.options,
       displayButton: false,
@@ -1662,10 +1496,94 @@ export class SimplePanel extends PureComponent<Props, State> {
   //   });
   // };
 
-  /********************************  Zoom Panel*********************************** */
+  private displayTooltipSVG = (event: any) => {
+    const idSVG: string = event.target.id.substring(3);
+    const arrayRegions: RegionClass[] = this.props.options.regionCoordinateSpace;
+    let newDataSVG: DataTooltipRegionSVG = { idSVG: idSVG, x: '', y: '' };
+    for (const region of arrayRegions) {
+      if (region.idSVG === idSVG) {
+        let xSVG = 0;
+        let ySVG = 0;
+        let widthSVG = 0;
+        let heightSVG = 0;
+        let positionX = '';
+        let positionY = '';
+        if (event.target.localName === 'rect') {
+          xSVG = parseInt(event.target.attributes['x'].nodeValue, 10);
+          ySVG = parseInt(event.target.attributes['y'].nodeValue, 10);
+          widthSVG = parseInt(event.target.attributes['width'].nodeValue, 10);
+          heightSVG = parseInt(event.target.attributes['height'].nodeValue, 10);
+          positionX = (xSVG + widthSVG).toString();
+          positionY = (ySVG - heightSVG / 2).toString();
+        } else if (event.target.localName === 'ellipse') {
+          xSVG = parseInt(event.target.attributes['cx'].nodeValue, 10);
+          ySVG = parseInt(event.target.attributes['cy'].nodeValue, 10);
+          widthSVG = parseInt(event.target.attributes['rx'].nodeValue, 10) * 2;
+          heightSVG = parseInt(event.target.attributes['ry'].nodeValue, 10) * 2;
+          positionX = xSVG.toString();
+          positionY = ySVG.toString();
+        } else if (event.target.localName === 'path') {
+          const allValues: string = event.target.attributes['d'].nodeValue;
+          const arrayAllValues: string[] = allValues.split(' ');
+          let iX = -2;
+          let xMin = 1000000;
+          let xMax = 0;
+          let iY = -1;
+          let yMin = 1000000;
+          let yMax = 0;
+          for (let i = 0; i < arrayAllValues.length; i++) {
+            let valueToCheck = parseInt(arrayAllValues[i], 10);
+            if (i === iX + 3) {
+              if (valueToCheck < xMin) {
+                xMin = valueToCheck;
+              }
+              if (valueToCheck > xMax) {
+                xMax = valueToCheck;
+              }
+              iX = i;
+            }
+            if (i === iY + 3) {
+              if (valueToCheck < yMin) {
+                yMin = valueToCheck;
+              }
+              if (valueToCheck > yMax) {
+                yMax = valueToCheck;
+              }
+              iY = i;
+            }
+          }
+          xSVG = xMin;
+          ySVG = yMin;
+          widthSVG = xMax - xMin;
+          // heightSVG = xMax - xMin;
+          positionX = (xSVG + widthSVG).toString();
+          positionY = ySVG.toString();
+        }
+        newDataSVG.x = positionX;
+        newDataSVG.y = positionY;
+        this.setState({
+          dataTooltipSVG: newDataSVG,
+        });
+        const tooltipSVG: any = document.getElementById('tooltipSVG');
+        if (tooltipSVG) {
+          tooltipSVG.style.display = 'initial';
+        }
+      }
+    }
+  };
+
+  private hideTooltipSVG = (event: any) => {
+    const idSVG: string = event.target.id.substring(3);
+    const arrayRegions: RegionClass[] = this.props.options.regionCoordinateSpace;
+    for (const region of arrayRegions) {
+      if (region.idSVG === idSVG) {
+        const tooltipSVG: any = document.getElementById('tooltipSVG');
+        tooltipSVG.style.display = 'none';
+      }
+    }
+  };
 
   // Tooltip in Svg
-
   tooltip_SVG = () => {
     const red = document.getElementById('part1');
 
@@ -1729,39 +1647,64 @@ export class SimplePanel extends PureComponent<Props, State> {
 
   /*************************************test create tooltip **********************************************************/
 
-  SVG_PathImage = () => {
-    for (const line of this.props.options.regionCoordinateSpace) {
-      if (line.mode) {
-        const id: HTMLElement | null = document.getElementById('oct' + line.idSVG);
-        if (id) {
-          // const valueQuery = getResultQuery(line.mainMetric);
-          const test = document.getElementById('jeSuisLa' + line.id);
-          if (test) {
-            test.style.fill = 'red';
-          } else {
-            const textObj: TextObject = line.textObj;
-            if (
-              textObj.isTextTooltip ||
-              (textObj.generateObjectText && textObj.valueGenerateObjectText && textObj.valueGenerateObjectText.displayObjectInTooltip)
-            ) {
-              const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
-              title.setAttribute('fill', 'yellow');
-              title.setAttributeNS('http://www.w3.org/1999/xlink', 'fill', 'yellow');
-
-              title.setAttribute('fill', 'red');
-              title.setAttributeNS('title', 'fill', 'red');
-              const text = getInfoDisplayRegion(line, this.props);
-
-              title.innerHTML = text.tooltip.modeText || '';
-              // title.textContent = valueQuery ? valueQuery.toString() : '';
-              title.id = 'jeSuisLa' + line.id;
-              title.style.fill = 'red';
-              id.appendChild(title);
-            }
-          }
+  SVG_PathImage = (event: any) => {
+    // console.log('SVG_PathImage');
+    // console.log(event.target);
+    this.displayTooltipSVG(event);
+    const elementSVG: any = event.target;
+    const parentElementSVG: any = elementSVG.parentNode;
+    const idSVG: string = elementSVG.id.substring(3);
+    const arrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
+    for (const region of arrayRegion) {
+      if (region.idSVG === idSVG) {
+        //console.log(elementSVG);
+        const linkUrl: string = region.linkURL.followLink;
+        //console.log(linkUrl);
+        if (linkUrl && !document.getElementById('a' + idSVG) && !this.state.buttonAddIncurvedLinkIsActive && !this.state.buttonAddLinkIsActive) {
+          // const cir1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          // cir1.setAttribute('fill', '#ff0000');
+          // cir1.setAttribute('cx', '310');
+          // cir1.setAttribute('cy', '210');
+          // cir1.setAttribute('r', '30');
+          const aElement = document.createElementNS('http://www.w3.org/2000/svg', 'a');
+          aElement.setAttribute('id', 'a' + idSVG);
+          aElement.setAttribute('href', linkUrl);
+          aElement.appendChild(elementSVG);
+          parentElementSVG.appendChild(aElement);
         }
       }
     }
+    // for (const line of this.props.options.regionCoordinateSpace) {
+    //   if (line.mode) {
+    //     const id: HTMLElement | null = document.getElementById('oct' + line.idSVG);
+    //     if (id) {
+    //       // const valueQuery = getResultQuery(line.mainMetric);
+    //       const test = document.getElementById('jeSuisLa' + line.id);
+    //       if (test) {
+    //         test.style.fill = 'red';
+    //       } else {
+    //         const textObj: TextObject = line.textObj;
+    //         if (
+    //           !textObj.isTextTooltip ||
+    //           (textObj.generateObjectText && textObj.valueGenerateObjectText && !textObj.valueGenerateObjectText.displayObjectInTooltip)
+    //         ) {
+    //           const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+    //           title.setAttribute('fill', 'yellow');
+    //           title.setAttributeNS('http://www.w3.org/1999/xlink', 'fill', 'yellow');
+    //           title.setAttribute('fill', 'red');
+    //           title.setAttributeNS('title', 'fill', 'red');
+    //           const text = getInfoDisplayRegion(line, this.props);
+
+    //           title.innerHTML = text.tooltip.modeText || '';
+    //           // title.textContent = valueQuery ? valueQuery.toString() : '';
+    //           title.id = 'jeSuisLa' + line.id;
+    //           title.style.fill = 'red';
+    //           id.appendChild(title);
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
   };
 
   fillCoordinate = (): JSX.Element => {
@@ -1785,7 +1728,9 @@ export class SimplePanel extends PureComponent<Props, State> {
         options={this.props.options}
         data={this.props.data}
         id={'region' + line.id.toString()}
-        isEnabled={true}
+        //isEnabled={true}
+        buttonAddLinkIsActive={this.state.buttonAddLinkIsActive}
+        buttonAddIncurvedLinkIsActive={this.state.buttonAddIncurvedLinkIsActive}
       />
     ));
     return <ul style={styleRegion}>{mapItems}</ul>;
@@ -1836,6 +1781,263 @@ export class SimplePanel extends PureComponent<Props, State> {
     //     console.log('rer2');
     //   });
     // }
+  };
+
+  getValuesAuxiliaryMetricsRegionSVG = (region: RegionClass): string[] => {
+    reqMetricAuxRegion(region, this.props);
+    return this.getValuesAuxiliaryMetrics(region.metrics, region.mainMetric);
+  };
+
+  private getConvertValueAuxMetrics = (valueBrut: string, region: RegionClass): string => {
+    let result = '';
+    const roundValue: number = parseInt(region.textObj.generateAuxiliaryElement.numericFormatElement, 10) || 1;
+    const unit: string = region.textObj.generateAuxiliaryElement.unit;
+    //if (roundValue !== '') {
+    result = parseFloat(valueBrut).toPrecision(roundValue);
+    // } else {
+    //   result = valueBrut;
+    // }
+    return result + ' ' + unit;
+  };
+
+  private displayAuxiliaryMetricsRegionSVG = (region: RegionClass): JSX.Element => {
+    let html: JSX.Element[] = [];
+    const valuesAuxMetrics: string[] = this.getValuesAuxiliaryMetrics(region.metrics, region.mainMetric);
+    const auxMetrics: Metric[] = region.metrics;
+    const addColorText: boolean = region.textObj.generateAuxiliaryElement.addColorTextElement;
+    const addColorBack: boolean = region.textObj.generateAuxiliaryElement.addColorBackElement;
+    const legend: string = region.textObj.generateAuxiliaryElement.legendElement;
+    let colorText = '';
+    let colorBack = '';
+
+    if (addColorText) {
+      colorText = region.textObj.generateAuxiliaryElement.colorTextElement;
+    } else {
+      colorText = 'white';
+    }
+
+    if (addColorBack) {
+      colorBack = region.textObj.generateAuxiliaryElement.colorBackElement;
+    } else {
+      colorBack = 'black';
+    }
+
+    const styleTitle = {
+      fontFamily: this.props.options.display.police,
+      fontSize: '10px',
+      marginTop: '5px',
+      marginBottom: '0px',
+      color: colorText,
+      //backgroundColor: colorBack,
+    } as React.CSSProperties;
+
+    const styleTitle2 = {
+      fontFamily: this.props.options.display.police,
+      fontSize: '10px',
+      marginTop: '5px',
+      marginLeft: '5px',
+      marginBottom: '0px',
+      color: colorText,
+      //backgroundColor: colorBack,
+    } as React.CSSProperties;
+
+    const styleContent = {
+      fontFamily: this.props.options.display.police,
+      fontSize: '9px',
+      marginLeft: '10px',
+      marginBottom: '0px',
+      color: colorText,
+      whiteSpace: 'nowrap',
+      //backgroundColor: colorBack,
+    } as React.CSSProperties;
+
+    if (auxMetrics.length > 0) {
+      html.push(
+        <p key={region.id + 'contentToolTip1'} style={styleTitle}>
+          Auxiliary Metric
+        </p>
+      );
+      html.push(
+        <p key={region.idSVG + 'contentToolTip2'} style={styleTitle}>
+          {legend}
+        </p>
+      );
+      let index = 1;
+      for (const metric of auxMetrics) {
+        const valueAuxMetric: string = this.getConvertValueAuxMetrics(valuesAuxMetrics[index - 1], region);
+        html.push(
+          <p key={index + 'region' + region.idSVG + 'contentToolTip3'} style={styleTitle2}>
+            + Metric {index}
+          </p>
+        );
+        html.push(
+          <p key={index + 'region' + region.idSVG + 'contentToolTip4'} style={styleContent}>
+            - Value : {valueAuxMetric}
+          </p>
+        );
+        html.push(
+          <p key={index + 'region' + region.idSVG + 'contentToolTip5'} style={styleContent}>
+            - Key : {metric.key}
+          </p>
+        );
+        html.push(
+          <p key={index + 'region' + region.idSVG + 'contentToolTip6'} style={styleContent}>
+            - KeyValue : {metric.keyValue}
+          </p>
+        );
+        html.push(
+          <p key={index + 'region' + region.idSVG + 'contentToolTip7'} style={styleContent}>
+            - Type : {metric.manageValue}
+          </p>
+        );
+        index++;
+      }
+    }
+    return <div style={{ backgroundColor: colorBack }}>{html}</div>;
+  };
+
+  private defineMainMetric = (region: RegionClass): string => {
+    let result = '';
+    const legend: string = region.textObj.valueGenerateObjectText.legendElement;
+    const unit: string = region.textObj.valueGenerateObjectText.unit;
+    //const decimal: string = region.textObj.valueGenerateObjectText.numericFormatElement;
+    //const roundMetrics: number = parseInt(decimal, 10) || 1;
+    const roundValue: number = parseInt(region.textObj.generateAuxiliaryElement.numericFormatElement, 10) || 1;
+    const mainMetric: number = getResultQuery(region.mainMetric) || 0;
+
+    // if (decimal !== '') {
+    result = mainMetric.toPrecision(roundValue) + ' ' + unit;
+    // } else {
+    //   result = mainMetric + ' ' + unit;
+    // }
+    if (legend) {
+      result = legend + ': ' + result;
+    }
+    return result;
+  };
+
+  private defineTextDecoration = (region: RegionClass): string => {
+    const mainStyle: Style = region.textObj.style;
+    let result = '';
+    if (mainStyle.underline) {
+      result = 'underline';
+    } else {
+      if (this.props.options.display.style.underline) {
+        result = 'underline';
+      } else {
+        result = 'none';
+      }
+    }
+    return result;
+  };
+
+  private defineFontStyle = (region: RegionClass): string => {
+    const mainStyle: Style = region.textObj.style;
+    let result = '';
+    if (mainStyle.italic) {
+      result = 'italic';
+    } else {
+      if (this.props.options.display.style.italic) {
+        result = 'italic';
+      } else {
+        result = 'normal';
+      }
+    }
+    return result;
+  };
+
+  private defineFontWeight = (region: RegionClass): any => {
+    const mainStyle: Style = region.textObj.style;
+    let result = '';
+    if (mainStyle.bold) {
+      result = 'bold';
+    } else {
+      if (this.props.options.display.style.bold) {
+        result = 'bold';
+      } else {
+        result = 'normal';
+      }
+    }
+    return result;
+  };
+
+  private htmlTooltipRegionSVG = (): JSX.Element => {
+    let regionSVG: RegionClass = initRegionCoordinateSpace(1000);
+    for (const region of this.props.options.regionCoordinateSpace) {
+      if (region.idSVG === this.state.dataTooltipSVG.idSVG) {
+        regionSVG = region;
+      }
+    }
+
+    const styleMainTooltipSVG = {
+      display: 'none',
+      position: 'absolute',
+      top: parseInt(this.state.dataTooltipSVG.y, 10),
+      left: parseInt(this.state.dataTooltipSVG.x, 10),
+      zIndex: 9999,
+      width: 'auto',
+      border: '1px solid black',
+      borderRadius: '5px',
+      backgroundColor: 'black',
+      padding: 5,
+    } as React.CSSProperties;
+
+    const styleLabelTooltipSVG = {
+      textDecoration: this.defineTextDecoration(regionSVG),
+      fontStyle: this.defineFontStyle(regionSVG),
+      fontWeight: this.defineFontWeight(regionSVG),
+      fontSize: this.props.options.display.size,
+      fontFamily: this.props.options.display.police,
+      color: regionSVG.textObj.colorText,
+      backgroundColor: regionSVG.textObj.colorBack,
+    } as React.CSSProperties;
+
+    const styleMainMetricTooltipSVG = {
+      textDecoration: this.defineTextDecoration(regionSVG),
+      fontStyle: this.defineFontStyle(regionSVG),
+      fontWeight: this.defineFontWeight(regionSVG),
+      color: regionSVG.textObj.valueGenerateObjectText.addColorTextElement ? regionSVG.textObj.valueGenerateObjectText.colorTextElement : 'white',
+      backgroundColor: regionSVG.textObj.valueGenerateObjectText.addColorBackElement
+        ? regionSVG.textObj.valueGenerateObjectText.colorBackElement
+        : 'black',
+      fontSize: this.props.options.display.size,
+      fontFamily: this.props.options.display.police,
+    } as React.CSSProperties;
+
+    const styleElementTooltipSVG = {
+      color: 'white',
+      fontSize: this.props.options.display.size,
+      fontFamily: this.props.options.display.police,
+    } as React.CSSProperties;
+
+    const html: JSX.Element = (
+      <div
+        id="tooltipSVG"
+        style={styleMainTooltipSVG}
+        onMouseOver={(event: any) => {
+          const tooltipSVG: any = document.getElementById('tooltipSVG');
+          if (event.target.id === 'tooltipSVG' || event.target.parentElement.id === 'tooltipSVG') {
+            tooltipSVG.style.display = 'initial';
+          }
+        }}
+        onMouseOut={(event: any) => {
+          const tooltipSVG: any = document.getElementById('tooltipSVG');
+          if (event.target.id !== 'tooltipSVG' || event.target.parentElement.id !== 'tooltipSVG') {
+            tooltipSVG.style.display = 'none';
+          }
+        }}
+      >
+        {regionSVG.textObj.isTextTooltip && <p style={styleLabelTooltipSVG}>{regionSVG.label}</p>}
+        {regionSVG.textObj.generateObjectText && regionSVG.textObj.valueGenerateObjectText.displayObjectInTooltip && (
+          <p style={styleMainMetricTooltipSVG}>{this.defineMainMetric(regionSVG)}</p>
+        )}
+        {regionSVG.textObj.generateAuxiliaryElement.displayObjectInTooltip && this.displayAuxiliaryMetricsRegionSVG(regionSVG)}
+        <a style={styleElementTooltipSVG} href={regionSVG.linkURL.hoveringTooltipLink}>
+          {regionSVG.linkURL.hoveringTooltipText}
+        </a>
+      </div>
+    );
+    return html;
   };
 
   /*************************************** create link regionbyid**************************************** */
@@ -1959,16 +2161,26 @@ export class SimplePanel extends PureComponent<Props, State> {
                 <div onClick={this.getCoordinates} id="mainPanel" style={{ position: 'absolute', top: '15%', zIndex: 1 }}>
                   {this.defineLimit()}
                   <div
-                    style={styleSVG} // onMouseOver={this.SVG_PathImage}
+                    style={styleSVG}
+                    // onMouseOver={this.SVG_PathImage}
                     dangerouslySetInnerHTML={{ __html: this.state.svg }}
                   />
                   <div
                     id="Intent"
                     style={styleSVG_2}
-                    onMouseOver={this.SVG_PathImage && this.CreateLinkArea}
+                    onMouseOver={this.SVG_PathImage}
+                    // && this.CreateLinkArea
+                    // && this.displayTooltipSVG
+                    // onMouseOver={event => {
+                    //   this.displayTooltipSVG(event);
+                    // }}
+                    onMouseOut={event => {
+                      this.hideTooltipSVG(event);
+                    }}
                     dangerouslySetInnerHTML={{ __html: this.props.options.baseMap.layerImage }}
                   />
-                  <div onClick={this.CreateLinkArea}></div>
+                  {/* <div onClick={this.CreateLinkArea}></div> */}
+                  {this.htmlTooltipRegionSVG()}
                   {this.displayOrientedLink()}
                   {this.fillCoordinate()}
                   {this.displayPoint()}

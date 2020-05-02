@@ -1,7 +1,6 @@
 
 # Configuration data source
-
-
+[![](../../resource/Go-back.png)](README.md)
 
 ## Les données des séries chronologiques comme source de données
 
@@ -50,6 +49,10 @@ Pour insérer une requête dans un dashboard, vous devez d'abord créer ce dashb
 
 - Dans les paramètres du panel, vous devez choisir la requête. Ici, choisissez `Prometheus`.
 - Vous pouvez ensuite choisir les Metrics à visualiser
+
+### Externe
+
+Il est possible d'utilisé la connexion sans passé par l'interface de Grafana
 
 
 

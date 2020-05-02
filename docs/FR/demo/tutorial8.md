@@ -1,5 +1,6 @@
 # Comment utiliser la métrique auxiliaire
-
+[![](../../resource/Go-back.png)](README.md)
+ 
 ## Ajouter un tableau de bord SVG
 
 ![étape 01](../../screenshots/demo/tutorial7/background.jpg)
@@ -80,3 +81,12 @@ Allez à la rubrique `Auxiliary metrics` et remplissez le formulaire comme `Main
 Après cela, vous pourrez voir votre métrique auxiliaire dans la toolbox de votre point
 
 ![auxiliere](../../screenshots/demo/tutorial8/toolbox.png)
+
+
+### Importer un fichier JSON
+
+- Il est possible d'ajouter toutes ces configurations par le biais de fichiers json en faisant une importation. Pour savoir comment faire, [suivez ce lien](../editor/import.md)
+
+Et voici le fichier JSON :
+
+- [demo5-region](../../resource/demo8-point.json) 

@@ -1,6 +1,6 @@
 
 # Configuration data source
-
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 
 ## Time Series Data as the Data Source
@@ -53,9 +53,9 @@ To insert a query into a dashboard, first, you have to create this dashboard and
 - Then you can choose the Metrics to visualize
 
 
-### Externe
+### External
 
-Il est possible d'utilisé la connexion dans passé par l'interface de Grafana
+It is possible to use the connection without going through the Grafana interface.
 
 
 

@@ -1,5 +1,6 @@
 # Créer un dashboard avancé avec des liens directionnels
-
+[![](../../resource/Go-back.png)](README.md)
+ 
 
 
 ## Etape 1 : Création des requêtes
@@ -128,7 +129,7 @@ Ensuite, dans `Main metric`, choisissez votre métrique.
 
 - Il est possible d'ajouter toutes ces configurations par le biais de fichiers json en faisant une importation. Pour savoir comment faire, [suivez ce lien](../editor/import.md)
 
-Et voici le différent dossier JSON :
+Et voici les différents fichiers JSON :
 
 - [demo3-region](../../resource/demo3-region.json) 
 - [demo3-point](../../resource/demo3-point.json)

@@ -1,13 +1,26 @@
-# settings server
+# Settings server
+[![](../../resource/Go-back.png)](README.md)
+
+L'importation de fichiers par des liens est effectuée par un serveur associé.
+
+Si vous n'effectuez pas l'opération, vous ne pourrez pas profiter de la fonctionnalité car vous obtiendrez le message d'erreur [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) 
+
+La résolution se fait avec un serveur associé soit en installant [Apache](https://www.apache.org/)
 
 
 
-
-# Enable CORS header on apache2
-
+# Apache 2
 
 
-- edit file:
+Vous devez d'abord installer Apache 2.4.x.
+
+
+
+## Activer l'en-tête CORS sur apache2
+
+Le fichier de configuration doit être modifié comme ceci
+
+Depuis le terminal : 
 
 ```
 sudo /etc/apache2/apache2.conf
@@ -23,7 +36,7 @@ change:
     </Directory>
 ```
 
-to:
+en:
 
 ```
     <Directory /var/www/>
@@ -41,3 +54,16 @@ to:
 - reaload service:
 
 ```sudo systemctl restart apache2```
+
+Vous placez les fichiers de démonstration dans le dossier
+
+```
+/var/www/html
+
+```
+
+pour obtenir le résultat suivant
+
+
+
+![path file](../../screenshots/appendix/file-import.jpg)

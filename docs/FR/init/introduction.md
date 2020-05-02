@@ -1,5 +1,8 @@
 # Introduction
 
+[![](../../resource/Go-back.png)](../../README-fr.md)
+
+
 WeatherMap Panel Plugin pour Grafana est un logiciel gratuit. Vous pouvez le redistribuer et/ou le modifier selon les termes de la licence publique générale GNU telle que publiée par la Free Software Foundation
 
 WeatherMap Panel Plugin est distribué dans l'espoir qu'il sera utile, mais SANS AUCUNE GARANTIE ; sans même la garantie implicite de QUALITÉ MARCHANDE ou d'ADAPTATION À UN USAGE PARTICULIER. Voir la licence publique générale GNU pour plus de détails.
@@ -57,3 +60,44 @@ Pour ce faire, nous utilisons une base de données qui rassemble toutes les donn
 Une fois que les données ont été traitées et collectées, elles peuvent être affectées.
 
 ![resultat](../../screenshots/init/resultat.png)
+
+
+### Workflow
+
+![workflow0](../../screenshots/init/workflow0.png)
+
+Ici, nous allons expliquer les différentes étapes de "Comment utiliser WeatherMap Panel Plugin".
+
+Etape 1 : Connectez-vous à Grafana et ajoutez notre plugin en suivant [This tutoriel](config-data-source.md)
+
+Étape 2 : Créer un nouveau dashboard
+
+Etape 3 : Dans le menu `queries`, sélectionnez `Prometheus` et ajoutez autant de requêtes que vous le souhaitez
+
+Etape 4 : Dans le menu `visualisation`, vous pourrez choisir votre fond d'écran (image SVG, image Bitmap, ou pas d'image)
+
+Étape 5 : Une fois que vous avez fait cela, en allant dans les onglets de l'éditeur, vous pouvez ajouter des régions, des points et un lien vers votre tableau de bord
+
+Etape 6 : Ensuite, vous pouvez assimiler les mesures aux régions/points/liens que vous venez de créer. Pour ce faire, il y a 3 façons différentes que nous allons vous expliquer
+
+
+#### Méthode 1
+
+![workflow1](../../screenshots/init/workflow1.png)
+
+Première méthode :
+- Vous choisissez une requête qui ne renvoie qu'une seule valeur et vous voulez assimiler le résultat à une region un point ou un lien, sans ajouter de filtre
+
+#### Méthode 2
+
+![workflow2](../../screenshots/init/workflow2.png)
+
+Deuxième méthode :
+- Vous choisissez une requête qui renvoie plusieurs valeurs avec différentes clés/valeurs, et vous voulez ajouter un filtre pour affiner votre requête.
+
+Étape 7 : Une fois que vous avez effectué toutes ces étapes, vous verrez le résultat de votre requête sur le tableau de bord, assimilé à une région/un point ou un lien.
+
+
+#### Méthode 3
+
+Prochainement

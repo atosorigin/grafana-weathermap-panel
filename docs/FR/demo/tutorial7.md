@@ -1,5 +1,6 @@
 # Create link bi directionnel
-
+[![](../../resource/Go-back.png)](README.md)
+ 
 # Créer un lien bi directionnel
 
 
@@ -154,7 +155,7 @@ Vous pouvez alors constater sur cette image que le lien est cliquable
 
 - Il est possible d'ajouter toutes ces configurations par le biais de fichiers json en faisant une importation. Pour savoir comment faire, [suivez ce lien](../editor/import.md)
 
-Et voici le différent dossier JSON :
+Et voici les différents fichiers JSON :
 
 - [demo7-Region](../../resource/demo7-region-svg.json) 
 - [demo7-point](../../resource/demo7-point.json)

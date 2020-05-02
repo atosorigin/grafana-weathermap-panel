@@ -2214,163 +2214,6 @@ var reqUpdateMetrics = function reqUpdateMetrics(props) {
 
 /***/ }),
 
-/***/ "./Functions/getInfoDisplayRegion.tsx":
-/*!********************************************!*\
-  !*** ./Functions/getInfoDisplayRegion.tsx ***!
-  \********************************************/
-/*! exports provided: getInfoDisplayRegion */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getInfoDisplayRegion", function() { return getInfoDisplayRegion; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _fetchMetrics__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fetchMetrics */ "./Functions/fetchMetrics.tsx");
-/* harmony import */ var _getResultQuery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getResultQuery */ "./Functions/getResultQuery.tsx");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-
-
- // import { getLowerLimit, LowerLimit } from './getLowerLimit';
-
-
-
-var getTextGenerate = function getTextGenerate(region, valueMetric) {
-  if (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText) {
-    var roundMetrics = region.textObj.valueGenerateObjectText ? parseInt(region.textObj.valueGenerateObjectText.numericFormatElement, 10) : 1;
-    var style = {
-      color: region.textObj.valueGenerateObjectText.addColorTextElement ? region.textObj.valueGenerateObjectText.colorTextElement : 'black',
-      backgroundColor: region.textObj.valueGenerateObjectText.addColorBackElement ? region.textObj.valueGenerateObjectText.colorBackElement : 'rgba(0, 0, 0, 0)'
-    };
-    var convertValue = '';
-
-    if (valueMetric && region.textObj.valueGenerateObjectText && region.textObj.valueGenerateObjectText.numericFormatElement !== '' && roundMetrics) {
-      convertValue = (valueMetric || 0).toPrecision(roundMetrics).toString();
-    } else if (valueMetric) {
-      convertValue = valueMetric.toString();
-    }
-
-    var modeText = region.textObj.valueGenerateObjectText.legendElement + ' ' + convertValue + ' ' + region.textObj.valueGenerateObjectText.unit;
-    var modeHTML = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-      style: style
-    }, region.textObj.valueGenerateObjectText.legendElement, convertValue, region.textObj.valueGenerateObjectText.unit);
-    return {
-      modeHTML: modeHTML,
-      modeText: modeText
-    };
-  }
-
-  return {
-    modeHTML: null,
-    modeText: null
-  };
-};
-
-var getTextRegion = function getTextRegion(region) {
-  var style = {
-    color: region.textObj.colorText,
-    backgroundColor: region.textObj.colorBack,
-    fontWeight: region.textObj.style.bold ? 'bold' : 'normal',
-    fontStyle: region.textObj.style.italic ? 'italic' : 'normal',
-    textDecoration: region.textObj.style.underline ? 'underline' : 'none'
-  };
-  var modeText = region.label;
-  var modeHTML = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-    style: style
-  }, region.label);
-  return {
-    modeHTML: modeHTML,
-    modeText: modeText
-  };
-};
-
-var getText = function getText(region, valueMetric) {
-  var generateText = {
-    modeHTML: null,
-    modeText: null
-  };
-  var generateTextRegion = {
-    modeHTML: null,
-    modeText: null
-  };
-
-  if (!region.textObj.valueGenerateObjectText.displayObjectInTooltip) {
-    generateText = getTextGenerate(region, valueMetric);
-  }
-
-  if (!region.textObj.isTextTooltip) {
-    generateTextRegion = getTextRegion(region);
-  }
-
-  var modeHTML = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", null, generateTextRegion.modeHTML && generateTextRegion.modeHTML, generateText.modeHTML && generateText.modeHTML);
-  var modeText = (generateTextRegion.modeText ? generateTextRegion.modeText + ' ' : '') + (generateText.modeText ? generateText.modeText : '');
-  return {
-    modeHTML: modeHTML,
-    modeText: modeText
-  };
-};
-
-var getTooltip = function getTooltip(region, valueMetric) {
-  var generateText = {
-    modeHTML: null,
-    modeText: null
-  };
-  var generateTextRegion = {
-    modeHTML: null,
-    modeText: null
-  };
-
-  if (region.textObj.valueGenerateObjectText.displayObjectInTooltip) {
-    generateText = getTextGenerate(region, valueMetric);
-  }
-
-  if (region.textObj.isTextTooltip) {
-    generateTextRegion = getTextRegion(region);
-  }
-
-  var modeHTML = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", null, generateTextRegion.modeHTML && generateTextRegion.modeHTML, generateText.modeHTML && generateText.modeHTML);
-  var modeText = (generateTextRegion.modeText ? generateTextRegion.modeText + ' ' : '') + (generateText.modeText ? generateText.modeText : '');
-  return {
-    modeHTML: modeHTML,
-    modeText: modeText
-  };
-};
-
-var updateMetrics = function updateMetrics(region, props) {
-  return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(void 0, void 0, void 0, function () {
-    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
-      switch (_a.label) {
-        case 0:
-          return [4
-          /*yield*/
-          , Promise.resolve('Success').then(function () {
-            Object(_fetchMetrics__WEBPACK_IMPORTED_MODULE_1__["reqMetricRegion"])(region, props);
-          })];
-
-        case 1:
-          _a.sent();
-
-          return [2
-          /*return*/
-          ];
-      }
-    });
-  });
-};
-
-var getInfoDisplayRegion = function getInfoDisplayRegion(region, props) {
-  updateMetrics(region, props);
-  var valueMetric = Object(_getResultQuery__WEBPACK_IMPORTED_MODULE_2__["getResultQuery"])(region.mainMetric);
-  var text = getText(region, valueMetric);
-  var tooltip = getTooltip(region, valueMetric);
-  return {
-    tooltip: tooltip,
-    text: text
-  };
-};
-
-/***/ }),
-
 /***/ "./Functions/getLowerLimit.tsx":
 /*!*************************************!*\
   !*** ./Functions/getLowerLimit.tsx ***!
@@ -2585,7 +2428,7 @@ var initOrientedLink = function initOrientedLink(newId, newZIndex) {
     colorBackElement: 'black'
   }, {
     legendElement: '',
-    numericFormatElement: '',
+    numericFormatElement: '5',
     unit: '',
     displayObjectInTooltip: true,
     // 'displayObjectPermanently': false,
@@ -2688,7 +2531,7 @@ var initPoint = function initPoint(index) {
     colorBackElement: 'black'
   }, {
     legendElement: '',
-    numericFormatElement: '',
+    numericFormatElement: '5',
     unit: '',
     displayObjectInTooltip: true,
     // 'displayObjectPermanently': false,
@@ -2765,7 +2608,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var initRegionCoordinateSpace = function initRegionCoordinateSpace(index) {
   var newId = index + 1;
-  var initTextObject = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_1__["TextObject"]('', false, 'rgba(255, 255, 255, 0)', 'rgba(0, 0, 0, 1)', {
+  var initTextObject = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_1__["TextObject"]('', false, 'rgb(255, 255, 255, 0)', 'black', {
     bold: false,
     italic: false,
     underline: false
@@ -2781,7 +2624,7 @@ var initRegionCoordinateSpace = function initRegionCoordinateSpace(index) {
     colorBackElement: 'black'
   }, {
     legendElement: '',
-    numericFormatElement: '',
+    numericFormatElement: '5',
     unit: '',
     displayObjectInTooltip: true,
     // 'displayObjectPermanently': false,
@@ -3026,162 +2869,120 @@ var parseColor = function parseColor(color) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pixelToPercent", function() { return pixelToPercent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "returnAllId", function() { return returnAllId; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
-
 /** verif limit for one coordinate */
+// const verifAllLimit = (n: number, limit: number[], isWith: boolean) => {
+//   //console.log(n);
+//   if (isWith) {
+//     if (limit[0] <= n && limit[1] >= n) {
+//       return true;
+//     }
+//   } else {
+//     if (limit[2] <= n && limit[3] >= n) {
+//       return true;
+//     }
+//   }
+//   return false;
+// };
+// /** search all coordinate if atribute is d */
+// const searchOtherLimitDAttribute = (data: string, limit: number[]): boolean => {
+//   const parseWithLetter = [];
+//   const regex = /[a-zA-Z]{1}[0-9.\W]*/g;
+//   let tmp;
+//   do {
+//     tmp = regex.exec(data);
+//     if (tmp) {
+//       parseWithLetter.push(tmp.toString());
+//     }
+//   } while (tmp);
+//   //console.log(parseWithLetter);
+//   for (const line of parseWithLetter) {
+//     const tmpBis: string[] = line.split(' ');
+//     //const tmpTest: string[] = line.split(/,| /);
+//     let index = 0;
+//     // console.log(tmpBis);
+//     //console.log(tmpTest);
+//     // console.log(limit);
+//     for (const lineTmp of tmpBis) {
+//       if (lineTmp === '') {
+//         break;
+//       }
+//       if (index !== 0 && index % 2 !== 0) {
+//         if (!verifAllLimit(parseInt(lineTmp, 10), limit, true)) {
+//           //console.log('no');
+//           return true;
+//         }
+//       } else if (index !== 0) {
+//         if (!verifAllLimit(parseInt(lineTmp, 10), limit, false)) {
+//           //console.log('no');
+//           return true;
+//         }
+//       }
+//       ++index;
+//     }
+//   }
+//   //console.log('ok');
+//   return false;
+// };
 
-var verifAllLimit = function verifAllLimit(n, limit, isWith) {
-  if (isWith) {
-    if (limit[0] <= n && limit[1] >= n) {
-      return true;
-    }
-  } else {
-    if (limit[2] <= n && limit[3] >= n) {
-      return true;
-    }
-  }
-
-  return false;
-};
-/** search all coordinate if atribute is d */
-
-
-var searchOtherLimitDAttribute = function searchOtherLimitDAttribute(data, limit) {
-  var e_1, _a, e_2, _b;
-
-  var parseWithLetter = [];
-  var regex = /[a-zA-Z]{1}[0-9.\W]*/g;
-  var tmp;
-
-  do {
-    tmp = regex.exec(data);
-
-    if (tmp) {
-      parseWithLetter.push(tmp.toString());
-    }
-  } while (tmp);
-
-  try {
-    for (var parseWithLetter_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(parseWithLetter), parseWithLetter_1_1 = parseWithLetter_1.next(); !parseWithLetter_1_1.done; parseWithLetter_1_1 = parseWithLetter_1.next()) {
-      var line = parseWithLetter_1_1.value;
-      var tmpBis = line.split(' ');
-      var index = 0;
-
-      try {
-        for (var tmpBis_1 = (e_2 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(tmpBis)), tmpBis_1_1 = tmpBis_1.next(); !tmpBis_1_1.done; tmpBis_1_1 = tmpBis_1.next()) {
-          var lineTmp = tmpBis_1_1.value;
-
-          if (lineTmp === '') {
-            break;
-          }
-
-          if (index !== 0 && index % 2 !== 0) {
-            if (!verifAllLimit(parseInt(lineTmp, 10), limit, true)) {
-              return true;
-            }
-          } else if (index !== 0) {
-            if (!verifAllLimit(parseInt(lineTmp, 10), limit, false)) {
-              return true;
-            }
-          }
-
-          ++index;
-        }
-      } catch (e_2_1) {
-        e_2 = {
-          error: e_2_1
-        };
-      } finally {
-        try {
-          if (tmpBis_1_1 && !tmpBis_1_1.done && (_b = tmpBis_1["return"])) _b.call(tmpBis_1);
-        } finally {
-          if (e_2) throw e_2.error;
-        }
-      }
-    }
-  } catch (e_1_1) {
-    e_1 = {
-      error: e_1_1
-    };
-  } finally {
-    try {
-      if (parseWithLetter_1_1 && !parseWithLetter_1_1.done && (_a = parseWithLetter_1["return"])) _a.call(parseWithLetter_1);
-    } finally {
-      if (e_1) throw e_1.error;
-    }
-  }
-
-  return false;
-};
 /** search if x and y are in limit */
+// const searchOtherLimitXYAttribute = (element: HTMLElement, limit: number[], labelX: string, labelY: string): boolean => {
+//   //console.log(element);
+//   const x: number = parseInt(element.getAttribute(labelX) || '0', 10);
+//   const y: number = parseInt(element.getAttribute(labelY) || '0', 10);
+//   if (x !== null && y !== null) {
+//     if (verifAllLimit(x, limit, true) && verifAllLimit(y, limit, false)) {
+//       return false;
+//     }
+//   }
+//   return true;
+// };
 
-
-var searchOtherLimitXYAttribute = function searchOtherLimitXYAttribute(element, limit, labelX, labelY) {
-  var x = parseInt(element.getAttribute(labelX) || '0', 10);
-  var y = parseInt(element.getAttribute(labelY) || '0', 10);
-
-  if (x !== null && y !== null) {
-    if (verifAllLimit(x, limit, true) && verifAllLimit(y, limit, false)) {
-      return false;
-    }
-  }
-
-  return true;
-};
 /** search if x1|2 and y1|2 are in limit */
+// const searchOtherLimitXnYnAttribute = (element: HTMLElement, limit: number[]): boolean => {
+//   const x1: number = parseInt(element.getAttribute('x1') || '0', 10);
+//   const x2: number = parseInt(element.getAttribute('x2') || '0', 10);
+//   const y1: number = parseInt(element.getAttribute('y1') || '0', 10);
+//   const y2: number = parseInt(element.getAttribute('y2') || '0', 10);
+//   if (x1 && x2 && y1 && y2) {
+//     if (verifAllLimit(x1, limit, true) && verifAllLimit(x2, limit, true) && verifAllLimit(y1, limit, false) && verifAllLimit(y2, limit, false)) {
+//       return false;
+//     }
+//   }
+//   return true;
+// };
+// /** search if region id svg is in limit */
+// const regionIsOverLimit = (element: HTMLElement | null, limit: number[]): boolean => {
+//   //console.log(element);
+//   if (!element) {
+//     //console.log('1');
+//     return true;
+//   }
+//   let attribute: string | null = element.getAttribute('d');
+//   //console.log(attribute);
+//   if (attribute) {
+//     //console.log('2');
+//     return searchOtherLimitDAttribute(attribute, limit);
+//   }
+//   attribute = element.getAttribute('x');
+//   //console.log(attribute);
+//   if (attribute) {
+//     //console.log('3');
+//     return searchOtherLimitXYAttribute(element, limit, 'x', 'y');
+//   }
+//   attribute = element.getAttribute('x1');
+//   if (attribute) {
+//     //console.log('4');
+//     return searchOtherLimitXnYnAttribute(element, limit);
+//   }
+//   attribute = element.getAttribute('cx');
+//   if (attribute) {
+//     //console.log('5');
+//     return searchOtherLimitXYAttribute(element, limit, 'cx', 'cy');
+//   }
+//   return true;
+// };
 
-
-var searchOtherLimitXnYnAttribute = function searchOtherLimitXnYnAttribute(element, limit) {
-  var x1 = parseInt(element.getAttribute('x1') || '0', 10);
-  var x2 = parseInt(element.getAttribute('x2') || '0', 10);
-  var y1 = parseInt(element.getAttribute('y1') || '0', 10);
-  var y2 = parseInt(element.getAttribute('y2') || '0', 10);
-
-  if (x1 && x2 && y1 && y2) {
-    if (verifAllLimit(x1, limit, true) && verifAllLimit(x2, limit, true) && verifAllLimit(y1, limit, false) && verifAllLimit(y2, limit, false)) {
-      return false;
-    }
-  }
-
-  return true;
-};
-/** search if region id svg is in limit */
-
-
-var regionIsOverLimit = function regionIsOverLimit(element, limit) {
-  if (!element) {
-    return true;
-  }
-
-  var attribute = element.getAttribute('d');
-
-  if (attribute) {
-    return searchOtherLimitDAttribute(attribute, limit);
-  }
-
-  attribute = element.getAttribute('x');
-
-  if (attribute) {
-    return searchOtherLimitXYAttribute(element, limit, 'x', 'y');
-  }
-
-  attribute = element.getAttribute('x1');
-
-  if (attribute) {
-    return searchOtherLimitXnYnAttribute(element, limit);
-  }
-
-  attribute = element.getAttribute('cx');
-
-  if (attribute) {
-    return searchOtherLimitXYAttribute(element, limit, 'cx', 'cy');
-  }
-
-  return true;
-};
 /** convert initial percent coordinate from -100 -> 100 to 0 -> 100 */
-
-
 var convertInitialCoordinate = function convertInitialCoordinate(n) {
   var midPercent = 50;
   n = n >= 0 ? (n / 2 || 0) + midPercent : -n / 2 - midPercent;
@@ -3220,6 +3021,13 @@ var returnAllId = function returnAllId(coordinate, baseMap) {
   var arrId = [];
   var arrIdVerif = [];
   var listElement = (_a = document.getElementById(baseMap.idSVG)) === null || _a === void 0 ? void 0 : _a.querySelectorAll('*[id]');
+  console.log(listElement); // const filtered = [listElement].filter();
+  //     function(e) {
+  //       return
+  //     },
+  //     [octpath,octrect,octellipse]
+  // );
+  //console.log(listElement);
 
   if (listElement) {
     // const limit: number[] = [
@@ -3243,15 +3051,21 @@ var returnAllId = function returnAllId(coordinate, baseMap) {
     // limit[2] = sizeHeight * limit[2];
     // limit[3] = limit[3] / percent || 0;
     // limit[3] = sizeHeight * limit[3];
-    var coordInt = pixelToPercent(coordinate, baseMap);
-    var limit_1 = [coordInt.xMin, coordInt.xMax, coordInt.yMin, coordInt.yMax];
+    // const coordInt = pixelToPercent(coordinate, baseMap);
+    // const limit: number[] = [coordInt.xMin, coordInt.xMax, coordInt.yMin, coordInt.yMax];
     Array.from(listElement).forEach(function (e) {
-      if (!regionIsOverLimit(document.getElementById(e.id), limit_1)) {
+      console.log(e); // if (!regionIsOverLimit(document.getElementById(e.id), limit)) {
+      //   //console.log('is pushed');
+      //   arrId.push(e.id);
+      // }
+
+      if (e.localName === 'path' || e.localName === 'rect' || e.localName === 'ellipse') {
         arrId.push(e.id);
       }
 
       arrIdVerif.push(e.id);
     });
+    console.log(arrId.length);
     arrId.sort(function (a, b) {
       if (a < b) {
         return -1;
@@ -3268,176 +3082,6 @@ var returnAllId = function returnAllId(coordinate, baseMap) {
   }
 
   return arrId;
-};
-
-/***/ }),
-
-/***/ "./Functions/searchMinMaxIdSVG.tsx":
-/*!*****************************************!*\
-  !*** ./Functions/searchMinMaxIdSVG.tsx ***!
-  \*****************************************/
-/*! exports provided: searchMinMaxIdSVG */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchMinMaxIdSVG", function() { return searchMinMaxIdSVG; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
-
-
-var initICoord4DInt = function initICoord4DInt() {
-  return {
-    xMin: 0,
-    xMax: 0,
-    yMin: 0,
-    yMax: 0
-  };
-};
-
-var searchForD = function searchForD(str) {
-  var e_1, _a, e_2, _b;
-
-  var coordinate = initICoord4DInt();
-  var verif = [false, false, false, false];
-  var parseWithLetter = [];
-  var regex = /[a-zA-Z]{1}[0-9.\W]*/g;
-  var tmp;
-
-  do {
-    tmp = regex.exec(str);
-
-    if (tmp) {
-      parseWithLetter.push(tmp.toString());
-    }
-  } while (tmp);
-
-  try {
-    for (var parseWithLetter_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(parseWithLetter), parseWithLetter_1_1 = parseWithLetter_1.next(); !parseWithLetter_1_1.done; parseWithLetter_1_1 = parseWithLetter_1.next()) {
-      var line = parseWithLetter_1_1.value;
-      var tmpBis = line.split(' ');
-      var index = 0;
-
-      try {
-        for (var tmpBis_1 = (e_2 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(tmpBis)), tmpBis_1_1 = tmpBis_1.next(); !tmpBis_1_1.done; tmpBis_1_1 = tmpBis_1.next()) {
-          var lineTmp = tmpBis_1_1.value;
-
-          if (lineTmp === '') {
-            break;
-          }
-
-          var nb = parseInt(lineTmp, 10);
-
-          if (index !== 0 && index % 2 !== 0) {
-            if (nb < coordinate.xMin || verif[0] === false) {
-              coordinate.xMin = nb;
-              verif[0] = true;
-            }
-
-            if (nb > coordinate.xMax || verif[1] === false) {
-              coordinate.xMax = nb;
-              verif[1] = true;
-            }
-          } else if (index !== 0) {
-            if (nb < coordinate.yMin || verif[2] === false) {
-              coordinate.yMin = nb;
-              verif[2] = true;
-            }
-
-            if (nb > coordinate.yMax || verif[3] === false) {
-              coordinate.yMax = nb;
-              verif[3] = true;
-            }
-          }
-
-          index++;
-        }
-      } catch (e_2_1) {
-        e_2 = {
-          error: e_2_1
-        };
-      } finally {
-        try {
-          if (tmpBis_1_1 && !tmpBis_1_1.done && (_b = tmpBis_1["return"])) _b.call(tmpBis_1);
-        } finally {
-          if (e_2) throw e_2.error;
-        }
-      }
-    }
-  } catch (e_1_1) {
-    e_1 = {
-      error: e_1_1
-    };
-  } finally {
-    try {
-      if (parseWithLetter_1_1 && !parseWithLetter_1_1.done && (_a = parseWithLetter_1["return"])) _a.call(parseWithLetter_1);
-    } finally {
-      if (e_1) throw e_1.error;
-    }
-  }
-
-  return coordinate;
-};
-
-var searchForXY = function searchForXY(element, labelX, labelY) {
-  var x = parseInt(element.getAttribute(labelX) || '0', 10);
-  var y = parseInt(element.getAttribute(labelY) || '0', 10);
-  var coordinate = initICoord4DInt();
-  coordinate.xMin = x;
-  coordinate.xMax = x;
-  coordinate.yMin = y;
-  coordinate.yMax = y;
-  return coordinate;
-};
-
-var searchForXnYn = function searchForXnYn(element) {
-  var x1 = parseInt(element.getAttribute('x1') || '0', 10);
-  var x2 = parseInt(element.getAttribute('x2') || '0', 10);
-  var y1 = parseInt(element.getAttribute('y1') || '0', 10);
-  var y2 = parseInt(element.getAttribute('y2') || '0', 10);
-  var coordinate = initICoord4DInt();
-  coordinate.xMin = x1;
-  coordinate.xMax = x2;
-  coordinate.yMin = y1;
-  coordinate.yMax = y2;
-  return coordinate;
-};
-
-var searchMinMaxIdSVG = function searchMinMaxIdSVG(idSVG) {
-  var element = document.getElementById(idSVG);
-
-  if (!element) {
-    return null;
-  }
-
-  var result = initICoord4DInt();
-
-  if (element) {
-    var attribute = element.getAttribute('d');
-
-    if (attribute) {
-      return searchForD(attribute);
-    }
-
-    attribute = element.getAttribute('x');
-
-    if (attribute) {
-      return searchForXY(element, 'x', 'y');
-    }
-
-    attribute = element.getAttribute('x1');
-
-    if (attribute) {
-      return searchForXnYn(element);
-    }
-
-    attribute = element.getAttribute('cx');
-
-    if (attribute) {
-      return searchForXY(element, 'cx', 'cy');
-    }
-  }
-
-  return result;
 };
 
 /***/ }),
@@ -4642,6 +4286,19 @@ function (_super) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
           switch (_a.label) {
             case 0:
+              console.log('mount'); // const url: string = window.location.href;
+              // const arrayUrl: string[] = url.split('&');
+              // for (const element of arrayUrl) {
+              //   console.log(element);
+              //   if (element === 'edit') {
+              //     console.log('edit');
+              //     await Promise.resolve('Success').then(() => {
+              //       this.props.onOptionsChange({
+              //         ...this.props.options,
+              //         displayButton: true,
+              //       });
+              //     });
+
               return [4
               /*yield*/
               , Promise.resolve('Success').then(function () {
@@ -4651,6 +4308,18 @@ function (_super) {
               })];
 
             case 1:
+              // const url: string = window.location.href;
+              // const arrayUrl: string[] = url.split('&');
+              // for (const element of arrayUrl) {
+              //   console.log(element);
+              //   if (element === 'edit') {
+              //     console.log('edit');
+              //     await Promise.resolve('Success').then(() => {
+              //       this.props.onOptionsChange({
+              //         ...this.props.options,
+              //         displayButton: true,
+              //       });
+              //     });
               _a.sent();
 
               return [2
@@ -4668,6 +4337,7 @@ function (_super) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
           switch (_a.label) {
             case 0:
+              console.log('unMount');
               return [4
               /*yield*/
               , Promise.resolve('Success').then(function () {
@@ -4829,14 +4499,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! Models/LinkURLClass */ "./Models/LinkURLClass.tsx");
 /* harmony import */ var Functions_coodinateIsInInitialSpace__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! Functions/coodinateIsInInitialSpace */ "./Functions/coodinateIsInInitialSpace.tsx");
 /* harmony import */ var Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! Functions/fetchMetrics */ "./Functions/fetchMetrics.tsx");
-/* harmony import */ var Functions_getInfoDisplayRegion__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! Functions/getInfoDisplayRegion */ "./Functions/getInfoDisplayRegion.tsx");
+/* harmony import */ var Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! Functions/getResultQuery */ "./Functions/getResultQuery.tsx");
 /* harmony import */ var components_CoordinateSpace_addCoordinate__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! components/CoordinateSpace/addCoordinate */ "./components/CoordinateSpace/addCoordinate.tsx");
 /* harmony import */ var _components_Draw_drawRectangle__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Draw/drawRectangle */ "./components/Draw/drawRectangle.tsx");
 /* harmony import */ var _components_Draw_drawPoint__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Draw/drawPoint */ "./components/Draw/drawPoint.tsx");
 /* harmony import */ var _components_Draw_drawOrientedLink__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Draw/drawOrientedLink */ "./components/Draw/drawOrientedLink.tsx");
 /* harmony import */ var _components_legend__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/legend */ "./components/legend.tsx");
 /* harmony import */ var components_Draw_drawRectangleExtend__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! components/Draw/drawRectangleExtend */ "./components/Draw/drawRectangleExtend.tsx");
-/* harmony import */ var Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! Functions/getResultQuery */ "./Functions/getResultQuery.tsx");
+/* harmony import */ var Functions_initRegionCoordinateSpace__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! Functions/initRegionCoordinateSpace */ "./Functions/initRegionCoordinateSpace.tsx");
 
 
 
@@ -4846,8 +4516,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // import { getResultQuery } from 'Functions/getResultQuery';
 
+ //import { getInfoDisplayRegion } from 'Functions/getInfoDisplayRegion';
 
 
 
@@ -4886,7 +4556,9 @@ function (_super) {
           onOptionsChange: _this.props.onOptionsChange,
           options: _this.props.options,
           data: _this.props.data,
-          isEnabled: !_this.state.buttonManage[1]
+          //isEnabled={!this.state.buttonManage[1]}
+          buttonAddLinkIsActive: _this.state.buttonAddLinkIsActive,
+          buttonAddIncurvedLinkIsActive: _this.state.buttonAddIncurvedLinkIsActive
         });
       }
 
@@ -4961,7 +4633,7 @@ function (_super) {
         colorBackElement: 'black'
       }, {
         legendElement: '',
-        numericFormatElement: '',
+        numericFormatElement: '5',
         unit: '',
         displayObjectInTooltip: true,
         // 'displayObjectPermanently': false,
@@ -5068,76 +4740,7 @@ function (_super) {
           if (e_1) throw e_1.error;
         }
       }
-    }; // /** display link with coordinate */
-    // displayLink() {
-    //   const { options } = this.props;
-    //   const mapItems: JSX.Element[] = [];
-    //   const arrayLinks: LinkClass[] = options.arrayLinks;
-    //   arrayLinks.forEach((link: LinkClass) => {
-    //     let item: JSX.Element = <div></div>;
-    //     if (link.defineHowToGetCoordonate.value === 'coordinate') {
-    //       item = (
-    //         <DrawLinkWithCoordinates
-    //           key={'link' + link.id.toString()}
-    //           pointAPositionX={link.pointAPositionX}
-    //           pointAPositionY={link.pointAPositionY}
-    //           pointBPositionX={link.pointBPositionX}
-    //           pointBPositionY={link.pointBPositionY}
-    //           colorA={link.colorCoordinateA}
-    //           colorB={link.colorCoordinateB}
-    //           orientationLink={link.orientationLink.value || ''}
-    //           labelA={link.labelLinkA}
-    //           labelB={link.labelLinkB}
-    //           labelAPositionX={link.positionXLabelA}
-    //           labelAPositionY={link.positionYLabelA}
-    //           labelBPositionX={link.positionXLabelB}
-    //           labelBPositionY={link.positionYLabelB}
-    //           height={parseInt(this.props.options.baseMap.height, 10)}
-    //           name={link.name}
-    //         />
-    //       );
-    //     } else if (link.defineHowToGetCoordonate.value === 'point') {
-    //       item = (
-    //         <DrawLinkWithPoints
-    //           key={'link' + link.id.toString()}
-    //           pointIn={link.pointIn}
-    //           pointOut={link.pointOut}
-    //           labelA={link.labelLinkA}
-    //           labelB={link.labelLinkB}
-    //           labelAPositionX={link.positionXLabelA}
-    //           labelAPositionY={link.positionYLabelA}
-    //           labelBPositionX={link.positionXLabelB}
-    //           labelBPositionY={link.positionYLabelB}
-    //           orientationLink={link.orientationLink.value || ''}
-    //           height={parseInt(this.props.options.baseMap.height, 10)}
-    //           name={link.name}
-    //         />
-    //       );
-    //     } else if (link.defineHowToGetCoordonate.value === 'region') {
-    //       item = (
-    //         <DrawLinkWithRegions
-    //           key={'link' + link.id.toString()}
-    //           regionIn={link.regionIn}
-    //           regionOut={link.regionOut}
-    //           colorA={link.colorRegionIn}
-    //           colorB={link.colorRegionOut}
-    //           labelA={link.labelLinkA}
-    //           labelB={link.labelLinkB}
-    //           labelAPositionX={link.positionXLabelA}
-    //           labelAPositionY={link.positionYLabelA}
-    //           labelBPositionX={link.positionXLabelB}
-    //           labelBPositionY={link.positionYLabelB}
-    //           orientationLink={link.orientationLink.value || ''}
-    //           height={parseInt(this.props.options.baseMap.height, 10)}
-    //           name={link.name}
-    //         />
-    //       );
-    //     }
-    //     mapItems.push(item);
-    //   });
-    //   return <ul>{mapItems}</ul>;
-    // }
-
+    };
     /**
      * to do
      */
@@ -5171,76 +4774,7 @@ function (_super) {
 
         index++;
       });
-    }; // /**
-    //  * to do
-    //  */
-    // updateAssociateOrientedLinkInToPoint = () => {
-    //   console.log('update point in');
-    //   let indexPoint = 0;
-    //   this.props.options.arrayPoints.forEach((point: PointClass) => {
-    //     let indexAssociateOrientedLinkIn = 0;
-    //     point.associateOrientedLinksIn.forEach(oneAssociateOrientedLinksIn => {
-    //       let orientedLinkExist = false;
-    //       this.props.options.arrayOrientedLinks.forEach((orientedLink: OrientedLinkClass) => {
-    //         if (oneAssociateOrientedLinksIn.name === orientedLink.name) {
-    //           orientedLinkExist = true;
-    //           if (orientedLink.label) {
-    //             this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn[indexAssociateOrientedLinkIn] = {
-    //               label: orientedLink.label,
-    //               name: orientedLink.name,
-    //             };
-    //           } else {
-    //             this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn[indexAssociateOrientedLinkIn] = {
-    //               label: '',
-    //               name: orientedLink.name,
-    //             };
-    //           }
-    //         }
-    //       });
-    //       if (orientedLinkExist === false) {
-    //         this.props.options.arrayPoints[indexPoint].associateOrientedLinksIn.splice(indexAssociateOrientedLinkIn, 1);
-    //       }
-    //       indexAssociateOrientedLinkIn++;
-    //     });
-    //     indexPoint++;
-    //   });
-    // };
-    // /**
-    //  * to do
-    //  */
-    // updateAssociateOrientedLinkOutToPoint = () => {
-    //   console.log('update point out');
-    //   let indexPoint = 0;
-    //   this.props.options.arrayPoints.forEach((point: PointClass) => {
-    //     let indexAssociateOrientedLinkOut = 0;
-    //     point.associateOrientedLinksOut.forEach(oneAssociateOrientedLinksOut => {
-    //       let orientedLinkExist = false;
-    //       this.props.options.arrayOrientedLinks.forEach((orientedLink: OrientedLinkClass) => {
-    //         if (oneAssociateOrientedLinksOut.name === orientedLink.name) {
-    //           orientedLinkExist = true;
-    //           if (orientedLink.label) {
-    //             this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut[indexAssociateOrientedLinkOut] = {
-    //               label: orientedLink.label,
-    //               name: orientedLink.name,
-    //             };
-    //           } else {
-    //             this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut[indexAssociateOrientedLinkOut] = {
-    //               label: '',
-    //               name: orientedLink.name,
-    //             };
-    //           }
-    //         }
-    //       });
-    //       if (orientedLinkExist === false) {
-    //         this.props.options.arrayPoints[indexPoint].associateOrientedLinksOut.splice(indexAssociateOrientedLinkOut, 1);
-    //       }
-    //       indexAssociateOrientedLinkOut++;
-    //     });
-    //     indexPoint++;
-    //   });
-    //   this.displayPoint();
-    // };
-
+    };
     /** update AssociateOrientedLinkIn of point for tootip  */
 
 
@@ -5381,8 +4915,8 @@ function (_super) {
           }
         });
       } else {
-        var arrayRegion = _this.props.options.regionCoordinateSpace;
-        var indexRegion_1 = 0;
+        var arrayRegion = _this.props.options.regionCoordinateSpace; //let indexRegion = 0;
+
         arrayRegion.forEach(function (region) {
           var xMin = parseInt(region.coords.xMin, 10);
           var xMax = parseInt(region.coords.xMax, 10);
@@ -5424,60 +4958,11 @@ function (_super) {
             var id = event.nativeEvent.target.id.substr(3);
 
             if (id === region.idSVG) {
-              console.log(region.idSVG);
+              //console.log(region.idSVG);
               var coordinates_3 = _this.props.options.coordinatesToDrawLinkWithClick;
-              var newRegionCoordinateSpace = _this.props.options.regionCoordinateSpace; //SVG 7
-
-              var width = parseInt(event.nativeEvent.target.attributes[5].nodeValue, 10);
-              var height = parseInt(event.nativeEvent.target.attributes[4].nodeValue, 10);
-              var xMinSVG = parseInt(event.nativeEvent.target.attributes[7].nodeValue, 10);
-              var xMaxSVG = xMinSVG + width;
-              var yMaxSVG = parseInt(event.nativeEvent.target.attributes[6].nodeValue, 10);
-              var yMinSVG = yMaxSVG + height;
-              var xMinSVGCoor = (Math.round((xMinSVG - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2).toString();
-              var xMaxSVGCoor = (Math.round((xMaxSVG - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2).toString();
-              var yMinSVGCoor = (Math.round((yMinSVG - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1).toString();
-              var yMaxSVGCoor = (Math.round((yMaxSVG - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1).toString();
-              var newCoords = {
-                xMin: xMinSVGCoor,
-                xMax: xMaxSVGCoor,
-                yMin: yMinSVGCoor,
-                yMax: yMaxSVGCoor
-              };
-              console.log(indexRegion_1);
-              console.log(newRegionCoordinateSpace[indexRegion_1]);
-              console.log(newRegionCoordinateSpace[indexRegion_1].coords);
-              console.log(newCoords);
-              newRegionCoordinateSpace[indexRegion_1].coords = newCoords;
-
-              _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-                regionCoordinateSpace: newRegionCoordinateSpace
-              })); // console.log(xMaxSVG);
-              // console.log(yMinSVG);
-              //console.log(event.nativeEvent.target);
-              //const allValues: string = event.nativeEvent.target.attributes[0].nodeValue;
-              //console.log('allValues');
-              //console.log(allValues);
-              //const arrayAllValues: string[] = allValues.split(' ');
-              //console.log(arrayAllValues);
-              // const xMinSVG: number = parseInt(arrayAllValues[1], 10);
-              // const xMaxSVG: number = parseInt(arrayAllValues[7], 10);
-              // const yMinSVG: number = parseInt(arrayAllValues[8], 10);
-              // const yMaxSVG: number = parseInt(arrayAllValues[2], 10);
-              // console.log('xMinSVG');
-              // console.log(xMinSVG);
-              // console.log('xMaxSVG');
-              // console.log(xMaxSVG);
-              // console.log('yMinSVG');
-              // console.log(yMinSVG);
-              // console.log('yMaxSVG');
-              // console.log(yMaxSVG);
-
-
-              positionX = (parseInt(xMinSVGCoor, 10) + parseInt(xMaxSVGCoor, 10)) / 2;
-              positionY = (parseInt(yMaxSVGCoor, 10) + parseInt(yMinSVGCoor, 10)) / 2;
-              console.log(positionX);
-              console.log(positionY);
+              positionX = 0;
+              positionY = 0; // console.log(positionX);
+              // console.log(positionY);
 
               if (coordinates_3[0].id === 0) {
                 objectIn.x = positionX;
@@ -5533,9 +5018,8 @@ function (_super) {
                 _this.resetCoordinatesToDrawLinkWithClick();
               }
             }
-          }
+          } //indexRegion++;
 
-          indexRegion_1++;
         });
       }
     };
@@ -5660,13 +5144,13 @@ function (_super) {
                 _this.resetCoordinatesToDrawLinkWithClick();
               }
             }
-          } else {
-            var id = parseInt(event.nativeEvent.target.offsetParent.id.charAt(6) + event.nativeEvent.target.offsetParent.id.charAt(7), 10);
+          } else if (event.nativeEvent.target.id !== 'oct' + _this.props.options.baseMap.idSVG && event.nativeEvent.target.id.startsWith('oct')) {
+            var id = event.nativeEvent.target.id.substr(3);
 
-            if (id === region.id) {
+            if (id === region.idSVG) {
               var coordinates_7 = _this.props.options.coordinatesToDrawLinkWithClick;
-              positionX = (xMin + xMax) / 2;
-              positionY = (yMax + yMin) / 2;
+              positionX = 0;
+              positionY = 0;
 
               if (coordinates_7[0].id === 0) {
                 objectIn.x = positionX;
@@ -5693,33 +5177,43 @@ function (_super) {
                 _this.resetCoordinatesToDrawLinkWithClick();
               }
             }
+          } else {
+            var id = parseInt(event.nativeEvent.target.offsetParent.id.charAt(6) + event.nativeEvent.target.offsetParent.id.charAt(7), 10);
+
+            if (id === region.id) {
+              var coordinates_8 = _this.props.options.coordinatesToDrawLinkWithClick;
+              positionX = (xMin + xMax) / 2;
+              positionY = (yMax + yMin) / 2;
+
+              if (coordinates_8[0].id === 0) {
+                objectIn.x = positionX;
+                objectIn.y = positionY;
+                objectIn.labelRegion = region.label;
+                objectIn.region = region;
+                coordinates_8[0].id++;
+              } else if (coordinates_8[0].id === 1) {
+                objectOut.x = positionX;
+                objectOut.y = positionY;
+                objectOut.labelRegion = region.label;
+                objectOut.region = region;
+                coordinates_8[0].id++;
+              } else if (coordinates_8[0].id === 2) {
+                pointC.x = positionX;
+                pointC.y = positionY;
+                coordinates_8[0].id = 0;
+
+                _this.createOrientedLinkToClick({
+                  label: 'Yes',
+                  value: true
+                });
+
+                _this.resetCoordinatesToDrawLinkWithClick();
+              }
+            }
           }
         });
       }
-    }; // defineAssociateOrientedLinkToRegion(): OrientedLinkClass[] {
-    // 	const arrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
-    // 	const arrayAllOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
-    // 	const arrayOrientedLinkAssociateRegionIn: OrientedLinkClass[] = [];
-    // 	const arrayOrientedLinkAssociateRegionOut: OrientedLinkClass[] = [];
-    // 	let arrayToReturn: OrientedLinkClass[] = [];
-    // 	arrayRegion.forEach((region) => {
-    // 		arrayAllOrientedLink.forEach((orientedLink) => {
-    // 			arrayToReturn = [];
-    // 			if (region.id === orientedLink.regionIn.id) {
-    // 				arrayOrientedLinkAssociateRegionIn.push(orientedLink);
-    // 				arrayToReturn = arrayOrientedLinkAssociateRegionIn;
-    // 				region.orientedLink = arrayToReturn;
-    // 			}
-    // 			if (region.id === orientedLink.regionOut.id) {
-    // 				arrayOrientedLinkAssociateRegionOut.push(orientedLink);
-    // 				arrayToReturn = arrayOrientedLinkAssociateRegionOut;
-    // 				region.orientedLink = arrayToReturn;
-    // 			}
-    // 		});
-    // 	});
-    // 	return arrayToReturn;
-    // }
-
+    };
     /**
      * to do
      */
@@ -5766,7 +5260,7 @@ function (_super) {
         colorBackElement: 'black'
       }, {
         legendElement: '',
-        numericFormatElement: '',
+        numericFormatElement: '5',
         unit: '',
         displayObjectInTooltip: true,
         // 'displayObjectPermanently': false,
@@ -6328,7 +5822,9 @@ function (_super) {
           onOptionsChange: _this.props.onOptionsChange,
           options: _this.props.options,
           data: _this.props.data,
-          isEnabled: !_this.state.buttonManage[1]
+          // isEnabled={!this.state.buttonManage[1]}
+          buttonAddLinkIsActive: _this.state.buttonAddLinkIsActive,
+          buttonAddIncurvedLinkIsActive: _this.state.buttonAddIncurvedLinkIsActive
         })
       });
     };
@@ -6361,6 +5857,7 @@ function (_super) {
         var _this = this;
 
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+          console.log('mount Panel');
           this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.props.options), {
             displayButton: false
           }));
@@ -6460,8 +5957,144 @@ function (_super) {
     //   });
     // };
 
-    /********************************  Zoom Panel*********************************** */
-    // Tooltip in Svg
+
+    _this.displayTooltipSVG = function (event) {
+      var e_4, _a;
+
+      var idSVG = event.target.id.substring(3);
+      var arrayRegions = _this.props.options.regionCoordinateSpace;
+      var newDataSVG = {
+        idSVG: idSVG,
+        x: '',
+        y: ''
+      };
+
+      try {
+        for (var arrayRegions_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayRegions), arrayRegions_1_1 = arrayRegions_1.next(); !arrayRegions_1_1.done; arrayRegions_1_1 = arrayRegions_1.next()) {
+          var region = arrayRegions_1_1.value;
+
+          if (region.idSVG === idSVG) {
+            var xSVG = 0;
+            var ySVG = 0;
+            var widthSVG = 0;
+            var heightSVG = 0;
+            var positionX = '';
+            var positionY = '';
+
+            if (event.target.localName === 'rect') {
+              xSVG = parseInt(event.target.attributes['x'].nodeValue, 10);
+              ySVG = parseInt(event.target.attributes['y'].nodeValue, 10);
+              widthSVG = parseInt(event.target.attributes['width'].nodeValue, 10);
+              heightSVG = parseInt(event.target.attributes['height'].nodeValue, 10);
+              positionX = (xSVG + widthSVG).toString();
+              positionY = (ySVG - heightSVG / 2).toString();
+            } else if (event.target.localName === 'ellipse') {
+              xSVG = parseInt(event.target.attributes['cx'].nodeValue, 10);
+              ySVG = parseInt(event.target.attributes['cy'].nodeValue, 10);
+              widthSVG = parseInt(event.target.attributes['rx'].nodeValue, 10) * 2;
+              heightSVG = parseInt(event.target.attributes['ry'].nodeValue, 10) * 2;
+              positionX = xSVG.toString();
+              positionY = ySVG.toString();
+            } else if (event.target.localName === 'path') {
+              var allValues = event.target.attributes['d'].nodeValue;
+              var arrayAllValues = allValues.split(' ');
+              var iX = -2;
+              var xMin = 1000000;
+              var xMax = 0;
+              var iY = -1;
+              var yMin = 1000000;
+              var yMax = 0;
+
+              for (var i = 0; i < arrayAllValues.length; i++) {
+                var valueToCheck = parseInt(arrayAllValues[i], 10);
+
+                if (i === iX + 3) {
+                  if (valueToCheck < xMin) {
+                    xMin = valueToCheck;
+                  }
+
+                  if (valueToCheck > xMax) {
+                    xMax = valueToCheck;
+                  }
+
+                  iX = i;
+                }
+
+                if (i === iY + 3) {
+                  if (valueToCheck < yMin) {
+                    yMin = valueToCheck;
+                  }
+
+                  if (valueToCheck > yMax) {
+                    yMax = valueToCheck;
+                  }
+
+                  iY = i;
+                }
+              }
+
+              xSVG = xMin;
+              ySVG = yMin;
+              widthSVG = xMax - xMin; // heightSVG = xMax - xMin;
+
+              positionX = (xSVG + widthSVG).toString();
+              positionY = ySVG.toString();
+            }
+
+            newDataSVG.x = positionX;
+            newDataSVG.y = positionY;
+
+            _this.setState({
+              dataTooltipSVG: newDataSVG
+            });
+
+            var tooltipSVG = document.getElementById('tooltipSVG');
+
+            if (tooltipSVG) {
+              tooltipSVG.style.display = 'initial';
+            }
+          }
+        }
+      } catch (e_4_1) {
+        e_4 = {
+          error: e_4_1
+        };
+      } finally {
+        try {
+          if (arrayRegions_1_1 && !arrayRegions_1_1.done && (_a = arrayRegions_1["return"])) _a.call(arrayRegions_1);
+        } finally {
+          if (e_4) throw e_4.error;
+        }
+      }
+    };
+
+    _this.hideTooltipSVG = function (event) {
+      var e_5, _a;
+
+      var idSVG = event.target.id.substring(3);
+      var arrayRegions = _this.props.options.regionCoordinateSpace;
+
+      try {
+        for (var arrayRegions_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayRegions), arrayRegions_2_1 = arrayRegions_2.next(); !arrayRegions_2_1.done; arrayRegions_2_1 = arrayRegions_2.next()) {
+          var region = arrayRegions_2_1.value;
+
+          if (region.idSVG === idSVG) {
+            var tooltipSVG = document.getElementById('tooltipSVG');
+            tooltipSVG.style.display = 'none';
+          }
+        }
+      } catch (e_5_1) {
+        e_5 = {
+          error: e_5_1
+        };
+      } finally {
+        try {
+          if (arrayRegions_2_1 && !arrayRegions_2_1.done && (_a = arrayRegions_2["return"])) _a.call(arrayRegions_2);
+        } finally {
+          if (e_5) throw e_5.error;
+        }
+      }
+    }; // Tooltip in Svg
 
 
     _this.tooltip_SVG = function () {
@@ -6532,53 +6165,81 @@ function (_super) {
     /*************************************test create tooltip **********************************************************/
 
 
-    _this.SVG_PathImage = function () {
-      var e_4, _a;
+    _this.SVG_PathImage = function (event) {
+      var e_6, _a; // console.log('SVG_PathImage');
+      // console.log(event.target);
+
+
+      _this.displayTooltipSVG(event);
+
+      var elementSVG = event.target;
+      var parentElementSVG = elementSVG.parentNode;
+      var idSVG = elementSVG.id.substring(3);
+      var arrayRegion = _this.props.options.regionCoordinateSpace;
 
       try {
-        for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(_this.props.options.regionCoordinateSpace), _c = _b.next(); !_c.done; _c = _b.next()) {
-          var line = _c.value;
+        for (var arrayRegion_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayRegion), arrayRegion_1_1 = arrayRegion_1.next(); !arrayRegion_1_1.done; arrayRegion_1_1 = arrayRegion_1.next()) {
+          var region = arrayRegion_1_1.value;
 
-          if (line.mode) {
-            var id = document.getElementById('oct' + line.idSVG);
+          if (region.idSVG === idSVG) {
+            //console.log(elementSVG);
+            var linkUrl = region.linkURL.followLink; //console.log(linkUrl);
 
-            if (id) {
-              // const valueQuery = getResultQuery(line.mainMetric);
-              var test_1 = document.getElementById('jeSuisLa' + line.id);
-
-              if (test_1) {
-                test_1.style.fill = 'red';
-              } else {
-                var textObj = line.textObj;
-
-                if (textObj.isTextTooltip || textObj.generateObjectText && textObj.valueGenerateObjectText && textObj.valueGenerateObjectText.displayObjectInTooltip) {
-                  var title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
-                  title.setAttribute('fill', 'yellow');
-                  title.setAttributeNS('http://www.w3.org/1999/xlink', 'fill', 'yellow');
-                  title.setAttribute('fill', 'red');
-                  title.setAttributeNS('title', 'fill', 'red');
-                  var text = Object(Functions_getInfoDisplayRegion__WEBPACK_IMPORTED_MODULE_10__["getInfoDisplayRegion"])(line, _this.props);
-                  title.innerHTML = text.tooltip.modeText || ''; // title.textContent = valueQuery ? valueQuery.toString() : '';
-
-                  title.id = 'jeSuisLa' + line.id;
-                  title.style.fill = 'red';
-                  id.appendChild(title);
-                }
-              }
+            if (linkUrl && !document.getElementById('a' + idSVG) && !_this.state.buttonAddIncurvedLinkIsActive && !_this.state.buttonAddLinkIsActive) {
+              // const cir1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+              // cir1.setAttribute('fill', '#ff0000');
+              // cir1.setAttribute('cx', '310');
+              // cir1.setAttribute('cy', '210');
+              // cir1.setAttribute('r', '30');
+              var aElement = document.createElementNS('http://www.w3.org/2000/svg', 'a');
+              aElement.setAttribute('id', 'a' + idSVG);
+              aElement.setAttribute('href', linkUrl);
+              aElement.appendChild(elementSVG);
+              parentElementSVG.appendChild(aElement);
             }
           }
         }
-      } catch (e_4_1) {
-        e_4 = {
-          error: e_4_1
+      } catch (e_6_1) {
+        e_6 = {
+          error: e_6_1
         };
       } finally {
         try {
-          if (_c && !_c.done && (_a = _b["return"])) _a.call(_b);
+          if (arrayRegion_1_1 && !arrayRegion_1_1.done && (_a = arrayRegion_1["return"])) _a.call(arrayRegion_1);
         } finally {
-          if (e_4) throw e_4.error;
+          if (e_6) throw e_6.error;
         }
-      }
+      } // for (const line of this.props.options.regionCoordinateSpace) {
+      //   if (line.mode) {
+      //     const id: HTMLElement | null = document.getElementById('oct' + line.idSVG);
+      //     if (id) {
+      //       // const valueQuery = getResultQuery(line.mainMetric);
+      //       const test = document.getElementById('jeSuisLa' + line.id);
+      //       if (test) {
+      //         test.style.fill = 'red';
+      //       } else {
+      //         const textObj: TextObject = line.textObj;
+      //         if (
+      //           !textObj.isTextTooltip ||
+      //           (textObj.generateObjectText && textObj.valueGenerateObjectText && !textObj.valueGenerateObjectText.displayObjectInTooltip)
+      //         ) {
+      //           const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+      //           title.setAttribute('fill', 'yellow');
+      //           title.setAttributeNS('http://www.w3.org/1999/xlink', 'fill', 'yellow');
+      //           title.setAttribute('fill', 'red');
+      //           title.setAttributeNS('title', 'fill', 'red');
+      //           const text = getInfoDisplayRegion(line, this.props);
+      //           title.innerHTML = text.tooltip.modeText || '';
+      //           // title.textContent = valueQuery ? valueQuery.toString() : '';
+      //           title.id = 'jeSuisLa' + line.id;
+      //           title.style.fill = 'red';
+      //           id.appendChild(title);
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
+
     };
 
     _this.fillCoordinate = function () {
@@ -6601,7 +6262,9 @@ function (_super) {
           options: _this.props.options,
           data: _this.props.data,
           id: 'region' + line.id.toString(),
-          isEnabled: true
+          //isEnabled={true}
+          buttonAddLinkIsActive: _this.state.buttonAddLinkIsActive,
+          buttonAddIncurvedLinkIsActive: _this.state.buttonAddIncurvedLinkIsActive
         });
       });
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
@@ -6654,6 +6317,291 @@ function (_super) {
       // }
     };
 
+    _this.getValuesAuxiliaryMetricsRegionSVG = function (region) {
+      Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricAuxRegion"])(region, _this.props);
+      return _this.getValuesAuxiliaryMetrics(region.metrics, region.mainMetric);
+    };
+
+    _this.getConvertValueAuxMetrics = function (valueBrut, region) {
+      var result = '';
+      var roundValue = parseInt(region.textObj.generateAuxiliaryElement.numericFormatElement, 10) || 1;
+      var unit = region.textObj.generateAuxiliaryElement.unit; //if (roundValue !== '') {
+
+      result = parseFloat(valueBrut).toPrecision(roundValue); // } else {
+      //   result = valueBrut;
+      // }
+
+      return result + ' ' + unit;
+    };
+
+    _this.displayAuxiliaryMetricsRegionSVG = function (region) {
+      var e_7, _a;
+
+      var html = [];
+
+      var valuesAuxMetrics = _this.getValuesAuxiliaryMetrics(region.metrics, region.mainMetric);
+
+      var auxMetrics = region.metrics;
+      var addColorText = region.textObj.generateAuxiliaryElement.addColorTextElement;
+      var addColorBack = region.textObj.generateAuxiliaryElement.addColorBackElement;
+      var legend = region.textObj.generateAuxiliaryElement.legendElement;
+      var colorText = '';
+      var colorBack = '';
+
+      if (addColorText) {
+        colorText = region.textObj.generateAuxiliaryElement.colorTextElement;
+      } else {
+        colorText = 'white';
+      }
+
+      if (addColorBack) {
+        colorBack = region.textObj.generateAuxiliaryElement.colorBackElement;
+      } else {
+        colorBack = 'black';
+      }
+
+      var styleTitle = {
+        fontFamily: _this.props.options.display.police,
+        fontSize: '10px',
+        marginTop: '5px',
+        marginBottom: '0px',
+        color: colorText
+      };
+      var styleTitle2 = {
+        fontFamily: _this.props.options.display.police,
+        fontSize: '10px',
+        marginTop: '5px',
+        marginLeft: '5px',
+        marginBottom: '0px',
+        color: colorText
+      };
+      var styleContent = {
+        fontFamily: _this.props.options.display.police,
+        fontSize: '9px',
+        marginLeft: '10px',
+        marginBottom: '0px',
+        color: colorText,
+        whiteSpace: 'nowrap'
+      };
+
+      if (auxMetrics.length > 0) {
+        html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          key: region.id + 'contentToolTip1',
+          style: styleTitle
+        }, "Auxiliary Metric"));
+        html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          key: region.idSVG + 'contentToolTip2',
+          style: styleTitle
+        }, legend));
+        var index = 1;
+
+        try {
+          for (var auxMetrics_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(auxMetrics), auxMetrics_1_1 = auxMetrics_1.next(); !auxMetrics_1_1.done; auxMetrics_1_1 = auxMetrics_1.next()) {
+            var metric = auxMetrics_1_1.value;
+
+            var valueAuxMetric = _this.getConvertValueAuxMetrics(valuesAuxMetrics[index - 1], region);
+
+            html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              key: index + 'region' + region.idSVG + 'contentToolTip3',
+              style: styleTitle2
+            }, "+ Metric ", index));
+            html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              key: index + 'region' + region.idSVG + 'contentToolTip4',
+              style: styleContent
+            }, "- Value : ", valueAuxMetric));
+            html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              key: index + 'region' + region.idSVG + 'contentToolTip5',
+              style: styleContent
+            }, "- Key : ", metric.key));
+            html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              key: index + 'region' + region.idSVG + 'contentToolTip6',
+              style: styleContent
+            }, "- KeyValue : ", metric.keyValue));
+            html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              key: index + 'region' + region.idSVG + 'contentToolTip7',
+              style: styleContent
+            }, "- Type : ", metric.manageValue));
+            index++;
+          }
+        } catch (e_7_1) {
+          e_7 = {
+            error: e_7_1
+          };
+        } finally {
+          try {
+            if (auxMetrics_1_1 && !auxMetrics_1_1.done && (_a = auxMetrics_1["return"])) _a.call(auxMetrics_1);
+          } finally {
+            if (e_7) throw e_7.error;
+          }
+        }
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        style: {
+          backgroundColor: colorBack
+        }
+      }, html);
+    };
+
+    _this.defineMainMetric = function (region) {
+      var result = '';
+      var legend = region.textObj.valueGenerateObjectText.legendElement;
+      var unit = region.textObj.valueGenerateObjectText.unit; //const decimal: string = region.textObj.valueGenerateObjectText.numericFormatElement;
+      //const roundMetrics: number = parseInt(decimal, 10) || 1;
+
+      var roundValue = parseInt(region.textObj.generateAuxiliaryElement.numericFormatElement, 10) || 1;
+      var mainMetric = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_10__["getResultQuery"])(region.mainMetric) || 0; // if (decimal !== '') {
+
+      result = mainMetric.toPrecision(roundValue) + ' ' + unit; // } else {
+      //   result = mainMetric + ' ' + unit;
+      // }
+
+      if (legend) {
+        result = legend + ': ' + result;
+      }
+
+      return result;
+    };
+
+    _this.defineTextDecoration = function (region) {
+      var mainStyle = region.textObj.style;
+      var result = '';
+
+      if (mainStyle.underline) {
+        result = 'underline';
+      } else {
+        if (_this.props.options.display.style.underline) {
+          result = 'underline';
+        } else {
+          result = 'none';
+        }
+      }
+
+      return result;
+    };
+
+    _this.defineFontStyle = function (region) {
+      var mainStyle = region.textObj.style;
+      var result = '';
+
+      if (mainStyle.italic) {
+        result = 'italic';
+      } else {
+        if (_this.props.options.display.style.italic) {
+          result = 'italic';
+        } else {
+          result = 'normal';
+        }
+      }
+
+      return result;
+    };
+
+    _this.defineFontWeight = function (region) {
+      var mainStyle = region.textObj.style;
+      var result = '';
+
+      if (mainStyle.bold) {
+        result = 'bold';
+      } else {
+        if (_this.props.options.display.style.bold) {
+          result = 'bold';
+        } else {
+          result = 'normal';
+        }
+      }
+
+      return result;
+    };
+
+    _this.htmlTooltipRegionSVG = function () {
+      var e_8, _a;
+
+      var regionSVG = Object(Functions_initRegionCoordinateSpace__WEBPACK_IMPORTED_MODULE_17__["initRegionCoordinateSpace"])(1000);
+
+      try {
+        for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(_this.props.options.regionCoordinateSpace), _c = _b.next(); !_c.done; _c = _b.next()) {
+          var region = _c.value;
+
+          if (region.idSVG === _this.state.dataTooltipSVG.idSVG) {
+            regionSVG = region;
+          }
+        }
+      } catch (e_8_1) {
+        e_8 = {
+          error: e_8_1
+        };
+      } finally {
+        try {
+          if (_c && !_c.done && (_a = _b["return"])) _a.call(_b);
+        } finally {
+          if (e_8) throw e_8.error;
+        }
+      }
+
+      var styleMainTooltipSVG = {
+        display: 'none',
+        position: 'absolute',
+        top: parseInt(_this.state.dataTooltipSVG.y, 10),
+        left: parseInt(_this.state.dataTooltipSVG.x, 10),
+        zIndex: 9999,
+        width: 'auto',
+        border: '1px solid black',
+        borderRadius: '5px',
+        backgroundColor: 'black',
+        padding: 5
+      };
+      var styleLabelTooltipSVG = {
+        textDecoration: _this.defineTextDecoration(regionSVG),
+        fontStyle: _this.defineFontStyle(regionSVG),
+        fontWeight: _this.defineFontWeight(regionSVG),
+        fontSize: _this.props.options.display.size,
+        fontFamily: _this.props.options.display.police,
+        color: regionSVG.textObj.colorText,
+        backgroundColor: regionSVG.textObj.colorBack
+      };
+      var styleMainMetricTooltipSVG = {
+        textDecoration: _this.defineTextDecoration(regionSVG),
+        fontStyle: _this.defineFontStyle(regionSVG),
+        fontWeight: _this.defineFontWeight(regionSVG),
+        color: regionSVG.textObj.valueGenerateObjectText.addColorTextElement ? regionSVG.textObj.valueGenerateObjectText.colorTextElement : 'white',
+        backgroundColor: regionSVG.textObj.valueGenerateObjectText.addColorBackElement ? regionSVG.textObj.valueGenerateObjectText.colorBackElement : 'black',
+        fontSize: _this.props.options.display.size,
+        fontFamily: _this.props.options.display.police
+      };
+      var styleElementTooltipSVG = {
+        color: 'white',
+        fontSize: _this.props.options.display.size,
+        fontFamily: _this.props.options.display.police
+      };
+      var html = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        id: "tooltipSVG",
+        style: styleMainTooltipSVG,
+        onMouseOver: function onMouseOver(event) {
+          var tooltipSVG = document.getElementById('tooltipSVG');
+
+          if (event.target.id === 'tooltipSVG' || event.target.parentElement.id === 'tooltipSVG') {
+            tooltipSVG.style.display = 'initial';
+          }
+        },
+        onMouseOut: function onMouseOut(event) {
+          var tooltipSVG = document.getElementById('tooltipSVG');
+
+          if (event.target.id !== 'tooltipSVG' || event.target.parentElement.id !== 'tooltipSVG') {
+            tooltipSVG.style.display = 'none';
+          }
+        }
+      }, regionSVG.textObj.isTextTooltip && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        style: styleLabelTooltipSVG
+      }, regionSVG.label), regionSVG.textObj.generateObjectText && regionSVG.textObj.valueGenerateObjectText.displayObjectInTooltip && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        style: styleMainMetricTooltipSVG
+      }, _this.defineMainMetric(regionSVG)), regionSVG.textObj.generateAuxiliaryElement.displayObjectInTooltip && _this.displayAuxiliaryMetricsRegionSVG(regionSVG), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        style: styleElementTooltipSVG,
+        href: regionSVG.linkURL.hoveringTooltipLink
+      }, regionSVG.linkURL.hoveringTooltipText));
+      return html;
+    };
+
     _this.state = {
       valueButton: '',
       buttonManage: [false, false, false, false, false],
@@ -6670,7 +6618,12 @@ function (_super) {
       tooltip: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "salut"),
       idSVG: '',
       buttonAddLinkIsActive: false,
-      buttonAddIncurvedLinkIsActive: false
+      buttonAddIncurvedLinkIsActive: false,
+      dataTooltipSVG: {
+        idSVG: '',
+        x: '0',
+        y: '0'
+      }
     };
     return _this;
   }
@@ -6684,6 +6637,7 @@ function (_super) {
 
     var mapItems = [];
     this.props.options.arrayPoints.forEach(function (line) {
+      //console.log(line);
       var valueMainMetric = _this.getValuesMainMetricPoint(line).toString();
 
       _this.updatePositionOrientedLink(line);
@@ -6740,6 +6694,7 @@ function (_super) {
     var mapItems = [];
     var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
     arrayOrientedLink.forEach(function (orientedLink) {
+      //console.log(orientedLink);
       var valueMainMetricA = _this.getValuesMainMetricOrientedLink(orientedLink).toString();
 
       var valueMainMetricB = _this.getValuesMainMetricOrientedLinkB(orientedLink).toString();
@@ -6812,7 +6767,7 @@ function (_super) {
     Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricPoint"])(point, this.props); //this.getValuesMainMetric(point.mainMetric, undefined, point);
 
     var result = 0;
-    result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_17__["getResultQuery"])(point.mainMetric) || NaN;
+    result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_10__["getResultQuery"])(point.mainMetric) || NaN;
     return result;
   };
 
@@ -6820,7 +6775,7 @@ function (_super) {
     Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricOrientedLink"])(orientedLink, this.props); //this.getValuesMainMetric(orientedLink.mainMetric, orientedLink, undefined, false);
 
     var result = 0;
-    result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_17__["getResultQuery"])(orientedLink.mainMetric) || NaN;
+    result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_10__["getResultQuery"])(orientedLink.mainMetric) || NaN;
     return result;
   };
 
@@ -6828,7 +6783,7 @@ function (_super) {
     Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricOrientedLink"])(orientedLink, this.props); //this.getValuesMainMetric(orientedLink.mainMetricB, orientedLink, undefined, true);
 
     var result = 0;
-    result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_17__["getResultQuery"])(orientedLink.mainMetricB) || NaN;
+    result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_10__["getResultQuery"])(orientedLink.mainMetricB) || NaN;
     return result;
   };
 
@@ -6849,6 +6804,8 @@ function (_super) {
 
 
   SimplePanel.prototype.render = function () {
+    var _this = this;
+
     var styleBackground;
 
     if (this.props.options.baseMap.modeSVG) {
@@ -6961,19 +6918,26 @@ function (_super) {
       }
     }, this.defineLimit(), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       style: styleSVG,
+      // onMouseOver={this.SVG_PathImage}
       dangerouslySetInnerHTML: {
         __html: this.state.svg
       }
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       id: "Intent",
       style: styleSVG_2,
-      onMouseOver: this.SVG_PathImage && this.CreateLinkArea,
+      onMouseOver: this.SVG_PathImage,
+      // && this.CreateLinkArea
+      // && this.displayTooltipSVG
+      // onMouseOver={event => {
+      //   this.displayTooltipSVG(event);
+      // }}
+      onMouseOut: function onMouseOut(event) {
+        _this.hideTooltipSVG(event);
+      },
       dangerouslySetInnerHTML: {
         __html: this.props.options.baseMap.layerImage
       }
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      onClick: this.CreateLinkArea
-    }), this.displayOrientedLink(), this.fillCoordinate(), this.displayPoint()))))));
+    }), this.htmlTooltipRegionSVG(), this.displayOrientedLink(), this.fillCoordinate(), this.displayPoint()))))));
   };
 
   return SimplePanel;
@@ -8201,12 +8165,20 @@ function (_super) {
           }
         }
       } // dev
+      // this.setState(prevState => ({
+      //   selectCoordinateSpace: valueSelect,
+      //   selectCoordinateSpaceDefault: valueExist
+      //     ? prevState.selectCoordinateSpaceDefault
+      //     : valueSelect.length > 0
+      //     ? valueSelect[0]
+      //     : prevState.selectCoordinateSpaceDefault,
+      // }));
 
 
       _this.setState(function (prevState) {
         return {
           selectCoordinateSpace: valueSelect,
-          selectCoordinateSpaceDefault: valueExist ? prevState.selectCoordinateSpaceDefault : valueSelect.length > 0 ? valueSelect[0] : prevState.selectCoordinateSpaceDefault
+          selectCoordinateSpaceDefault: valueExist ? prevState.selectCoordinateSpaceDefault : valueSelect.length > 0 ? valueSelect[0] : []
         };
       });
     };
@@ -10135,12 +10107,20 @@ function (_super) {
           }
         }
       } // dev
+      // this.setState(prevState => ({
+      //   selectCoordinateSpace: valueSelect,
+      //   selectCoordinateSpaceDefault: valueExist
+      //     ? prevState.selectCoordinateSpaceDefault
+      //     : valueSelect.length > 0
+      //     ? valueSelect[0]
+      //     : prevState.selectCoordinateSpaceDefault,
+      // }));
 
 
       _this.setState(function (prevState) {
         return {
           selectCoordinateSpace: valueSelect,
-          selectCoordinateSpaceDefault: valueExist ? prevState.selectCoordinateSpaceDefault : valueSelect.length > 0 ? valueSelect[0] : prevState.selectCoordinateSpaceDefault
+          selectCoordinateSpaceDefault: valueExist ? prevState.selectCoordinateSpaceDefault : valueSelect.length > 0 ? valueSelect[0] : []
         };
       }); // final
       // this.setState({
@@ -11013,6 +10993,7 @@ function (_super) {
       var stockTmpCoordinatesSpace = _this.props.options.arrayPoints.slice();
 
       try {
+        //valueSelect.push({ value: {}, label: 'No Data' });
         for (var stockTmpCoordinatesSpace_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(stockTmpCoordinatesSpace), stockTmpCoordinatesSpace_1_1 = stockTmpCoordinatesSpace_1.next(); !stockTmpCoordinatesSpace_1_1.done; stockTmpCoordinatesSpace_1_1 = stockTmpCoordinatesSpace_1.next()) {
           var line = stockTmpCoordinatesSpace_1_1.value;
           var label = line.label || line.name;
@@ -11055,12 +11036,20 @@ function (_super) {
           }
         }
       } // dev
+      // this.setState(prevState => ({
+      //   selectCoordinateSpace: valueSelect,
+      //   selectCoordinateSpaceDefault: valueExist
+      //     ? prevState.selectCoordinateSpaceDefault
+      //     : valueSelect.length > 0
+      //     ? valueSelect[0]
+      //     : prevState.selectCoordinateSpaceDefault,
+      // }));
 
 
       _this.setState(function (prevState) {
         return {
           selectCoordinateSpace: valueSelect,
-          selectCoordinateSpaceDefault: valueExist ? prevState.selectCoordinateSpaceDefault : valueSelect.length > 0 ? valueSelect[0] : prevState.selectCoordinateSpaceDefault
+          selectCoordinateSpaceDefault: valueExist ? prevState.selectCoordinateSpaceDefault : valueSelect.length > 0 ? valueSelect[0] : []
         };
       }); // final
       // this.setState({
@@ -11808,6 +11797,142 @@ function (_super) {
       return listParallelOrientedLinkSorted;
     };
 
+    _this.defineCoor4DRegion = function (region) {
+      var coor4D = {
+        xMin: '0',
+        xMax: '0',
+        yMin: '0',
+        yMax: '0'
+      };
+      var xMin = 0;
+      var xMax = 0;
+      var yMin = 0;
+      var yMax = 0;
+
+      if (region.idSVG !== '') {
+        console.log('regionSVG');
+        var heightPanel = parseInt(_this.props.options.baseMap.height, 10);
+        var widthPanel = parseInt(_this.props.options.baseMap.width, 10);
+        var initialSpace = _this.props.options.coordinateSpaceInitial.coordinate;
+        var xMinInitialSpace = parseInt(initialSpace.xMin, 10);
+        var xMinPx = (xMinInitialSpace + 100) * (widthPanel / 200);
+        var xMaxInitialSpace = parseInt(initialSpace.xMax, 10);
+        var xMaxPx = (xMaxInitialSpace + 100) * (widthPanel / 200);
+        var widthInitialSpace = xMaxPx - xMinPx;
+        var yMinInitialSpace = parseInt(initialSpace.yMin, 10);
+        var yMinPx = (yMinInitialSpace + 100) * (heightPanel / 200);
+        var yMaxInitialSpace = parseInt(initialSpace.yMax, 10);
+        var yMaxPx = (yMaxInitialSpace + 100) * (heightPanel / 200);
+        var heightInitialSpace = yMaxPx - yMinPx;
+        var regionSVGHtml = document.getElementById('oct' + region.idSVG);
+        var width = 0;
+        var height = 0;
+        var xMinSVG = 0;
+        var xMaxSVG = 0;
+        var yMaxSVG = 0;
+        var yMinSVG = 0; //console.log(regionSVGHtml);
+
+        if (regionSVGHtml) {
+          if (regionSVGHtml.localName === 'rect') {
+            //console.log('rect');
+            //console.log(regionSVGHtml);
+            width = parseInt(regionSVGHtml.attributes['width'].nodeValue, 10);
+            height = parseInt(regionSVGHtml.attributes['height'].nodeValue, 10);
+            xMinSVG = parseInt(regionSVGHtml.attributes['x'].nodeValue, 10);
+            xMaxSVG = xMinSVG + width;
+            yMaxSVG = parseInt(regionSVGHtml.attributes['y'].nodeValue, 10);
+            yMinSVG = yMaxSVG + height;
+          } else if (regionSVGHtml.localName === 'ellipse') {
+            //console.log('ellipse');
+            //console.log(regionSVGHtml);
+            var rX = parseInt(regionSVGHtml.attributes['rx'].nodeValue, 10);
+            var rY = parseInt(regionSVGHtml.attributes['ry'].nodeValue, 10);
+            xMinSVG = parseInt(regionSVGHtml.attributes['cx'].nodeValue, 10) - rX;
+            xMaxSVG = parseInt(regionSVGHtml.attributes['cx'].nodeValue, 10) + rX;
+            yMinSVG = parseInt(regionSVGHtml.attributes['cy'].nodeValue, 10) + rY;
+            yMaxSVG = parseInt(regionSVGHtml.attributes['cy'].nodeValue, 10) - rY;
+          } else if (regionSVGHtml.localName === 'path') {
+            //console.log('path');
+            //console.log(regionSVGHtml);
+            var allValues = regionSVGHtml.attributes['d'].nodeValue;
+            var arrayAllValues = allValues.split(' '); //console.log(arrayAllValues);
+
+            var iX = -2;
+            var xMin_1 = 1000000;
+            var xMax_1 = 0;
+            var iY = -1;
+            var yMin_1 = 1000000;
+            var yMax_1 = 0;
+
+            for (var i = 0; i < arrayAllValues.length; i++) {
+              var valueToCheck = parseInt(arrayAllValues[i], 10);
+
+              if (i === iX + 3) {
+                if (valueToCheck < xMin_1) {
+                  xMin_1 = valueToCheck;
+                }
+
+                if (valueToCheck > xMax_1) {
+                  xMax_1 = valueToCheck;
+                }
+
+                iX = i;
+              }
+
+              if (i === iY + 3) {
+                if (valueToCheck < yMin_1) {
+                  yMin_1 = valueToCheck;
+                }
+
+                if (valueToCheck > yMax_1) {
+                  yMax_1 = valueToCheck;
+                }
+
+                iY = i;
+              }
+            }
+
+            xMinSVG = xMin_1;
+            xMaxSVG = xMax_1;
+            yMinSVG = yMax_1;
+            yMaxSVG = yMin_1;
+          }
+        }
+
+        var xMinSVGCoor = Math.round((xMinSVG - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
+        var xMaxSVGCoor = Math.round((xMaxSVG - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
+        var yMinSVGCoor = Math.round((yMinSVG - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1;
+        var yMaxSVGCoor = Math.round((yMaxSVG - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1;
+        xMin = xMinSVGCoor;
+        xMax = xMaxSVGCoor;
+        yMin = yMinSVGCoor;
+        yMax = yMaxSVGCoor;
+
+        if (xMin < 0 && xMax < 0) {
+          xMin = xMaxSVGCoor;
+          xMax = xMinSVGCoor;
+        }
+
+        if (yMin < 0 && yMax < 0) {
+          yMin = yMaxSVGCoor;
+          yMax = yMinSVGCoor;
+        }
+      } else {
+        xMin = parseInt(region.coords.xMin, 10);
+        xMax = parseInt(region.coords.xMax, 10);
+        yMin = parseInt(region.coords.yMin, 10);
+        yMax = parseInt(region.coords.yMax, 10);
+      }
+
+      coor4D = {
+        xMin: xMin.toString(),
+        xMax: xMax.toString(),
+        yMin: yMin.toString(),
+        yMax: yMax.toString()
+      };
+      return coor4D;
+    };
+
     _this.ifMultiLinkWithRegionDefineX = function (isIn, idMultiLink) {
       var xResult = 0;
       var arrayRegions = _this.props.options.regionCoordinateSpace;
@@ -11838,10 +11963,10 @@ function (_super) {
         });
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionOut) {
-            xMinOut = parseInt(region.coords.xMin, 10);
-            xMaxOut = parseInt(region.coords.xMax, 10);
-            yMinOut = parseInt(region.coords.yMin, 10);
-            yMaxOut = parseInt(region.coords.yMax, 10);
+            xMinOut = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
+            xMaxOut = parseInt(_this.defineCoor4DRegion(region).xMax, 10);
+            yMinOut = parseInt(_this.defineCoor4DRegion(region).yMin, 10);
+            yMaxOut = parseInt(_this.defineCoor4DRegion(region).yMax, 10);
           }
         });
         xMidIn = xMinIn;
@@ -11849,13 +11974,12 @@ function (_super) {
         yMidIn = yMinIn;
         yMidOut = (yMinOut + yMaxOut) / 2;
       } else if (_this.props.associatePointOut !== '') {
-        console.log(arrayRegions);
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionIn) {
-            xMinIn = parseInt(region.coords.xMin, 10);
-            xMaxIn = parseInt(region.coords.xMax, 10);
-            yMinIn = parseInt(region.coords.yMin, 10);
-            yMaxIn = parseInt(region.coords.yMax, 10);
+            xMinIn = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
+            xMaxIn = parseInt(_this.defineCoor4DRegion(region).xMax, 10);
+            yMinIn = parseInt(_this.defineCoor4DRegion(region).yMin, 10);
+            yMaxIn = parseInt(_this.defineCoor4DRegion(region).yMax, 10);
           }
         });
         arrayPoints.forEach(function (point) {
@@ -11875,10 +11999,10 @@ function (_super) {
       } else if (_this.props.associatePointIn === '' && _this.props.associateRegionIn === '') {
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionOut) {
-            xMinOut = parseInt(region.coords.xMin, 10);
-            xMaxOut = parseInt(region.coords.xMax, 10);
-            yMinOut = parseInt(region.coords.yMin, 10);
-            yMaxOut = parseInt(region.coords.yMax, 10);
+            xMinOut = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
+            xMaxOut = parseInt(_this.defineCoor4DRegion(region).xMax, 10);
+            yMinOut = parseInt(_this.defineCoor4DRegion(region).yMin, 10);
+            yMaxOut = parseInt(_this.defineCoor4DRegion(region).yMax, 10);
           }
         });
         xMinIn = parseInt(_this.props.pointAPositionX, 10);
@@ -11892,10 +12016,10 @@ function (_super) {
       } else if (_this.props.associatePointOut === '' && _this.props.associateRegionOut === '') {
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionIn) {
-            xMinIn = parseInt(region.coords.xMin, 10);
-            xMaxIn = parseInt(region.coords.xMax, 10);
-            yMinIn = parseInt(region.coords.yMin, 10);
-            yMaxIn = parseInt(region.coords.yMax, 10);
+            xMinIn = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
+            xMaxIn = parseInt(_this.defineCoor4DRegion(region).xMax, 10);
+            yMinIn = parseInt(_this.defineCoor4DRegion(region).yMin, 10);
+            yMaxIn = parseInt(_this.defineCoor4DRegion(region).yMax, 10);
           }
         });
         xMinOut = parseInt(_this.props.pointBPositionX, 10);
@@ -11907,20 +12031,19 @@ function (_super) {
         yMidIn = (yMinIn + yMaxIn) / 2;
         yMidOut = yMinOut;
       } else {
-        console.log(arrayRegions);
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionIn) {
-            xMinIn = parseInt(region.coords.xMin, 10);
-            xMaxIn = parseInt(region.coords.xMax, 10);
-            yMinIn = parseInt(region.coords.yMin, 10);
-            yMaxIn = parseInt(region.coords.yMax, 10);
+            xMinIn = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
+            xMaxIn = parseInt(_this.defineCoor4DRegion(region).xMax, 10);
+            yMinIn = parseInt(_this.defineCoor4DRegion(region).yMin, 10);
+            yMaxIn = parseInt(_this.defineCoor4DRegion(region).yMax, 10);
           }
 
           if (region.label === _this.props.associateRegionOut) {
-            xMinOut = parseInt(region.coords.xMin, 10);
-            xMaxOut = parseInt(region.coords.xMax, 10);
-            yMinOut = parseInt(region.coords.yMin, 10);
-            yMaxOut = parseInt(region.coords.yMax, 10);
+            xMinOut = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
+            xMaxOut = parseInt(_this.defineCoor4DRegion(region).xMax, 10);
+            yMinOut = parseInt(_this.defineCoor4DRegion(region).yMin, 10);
+            yMaxOut = parseInt(_this.defineCoor4DRegion(region).yMax, 10);
           }
         });
         xMidIn = (xMinIn + xMaxIn) / 2;
@@ -12077,8 +12200,10 @@ function (_super) {
               console.log('x21');
 
               if (xMinIn < 0 && xMaxIn < 0) {
+                console.log('xmin');
                 xResult = xMinIn;
               } else {
+                console.log('xmax');
                 xResult = xMaxIn;
               }
             } else if (xMidIn === xMidOut) {
@@ -12373,10 +12498,10 @@ function (_super) {
         });
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionOut) {
-            xMinOut = parseInt(region.coords.xMin, 10);
-            xMaxOut = parseInt(region.coords.xMax, 10);
-            yMinOut = parseInt(region.coords.yMin, 10);
-            yMaxOut = parseInt(region.coords.yMax, 10);
+            xMinOut = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
+            xMaxOut = parseInt(_this.defineCoor4DRegion(region).xMax, 10);
+            yMinOut = parseInt(_this.defineCoor4DRegion(region).yMin, 10);
+            yMaxOut = parseInt(_this.defineCoor4DRegion(region).yMax, 10);
           }
         });
         xMidIn = xMinIn;
@@ -12386,10 +12511,10 @@ function (_super) {
       } else if (_this.props.associatePointOut !== '') {
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionIn) {
-            xMinIn = parseInt(region.coords.xMin, 10);
-            xMaxIn = parseInt(region.coords.xMax, 10);
-            yMinIn = parseInt(region.coords.yMin, 10);
-            yMaxIn = parseInt(region.coords.yMax, 10);
+            xMinIn = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
+            xMaxIn = parseInt(_this.defineCoor4DRegion(region).xMax, 10);
+            yMinIn = parseInt(_this.defineCoor4DRegion(region).yMin, 10);
+            yMaxIn = parseInt(_this.defineCoor4DRegion(region).yMax, 10);
           }
         });
         arrayPoints.forEach(function (point) {
@@ -12409,10 +12534,10 @@ function (_super) {
       } else if (_this.props.associatePointIn === '' && _this.props.associateRegionIn === '') {
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionOut) {
-            xMinOut = parseInt(region.coords.xMin, 10);
-            xMaxOut = parseInt(region.coords.xMax, 10);
-            yMinOut = parseInt(region.coords.yMin, 10);
-            yMaxOut = parseInt(region.coords.yMax, 10);
+            xMinOut = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
+            xMaxOut = parseInt(_this.defineCoor4DRegion(region).xMax, 10);
+            yMinOut = parseInt(_this.defineCoor4DRegion(region).yMin, 10);
+            yMaxOut = parseInt(_this.defineCoor4DRegion(region).yMax, 10);
           }
         });
         xMinIn = parseInt(_this.props.pointAPositionX, 10);
@@ -12426,10 +12551,10 @@ function (_super) {
       } else if (_this.props.associatePointOut === '' && _this.props.associateRegionOut === '') {
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionIn) {
-            xMinIn = parseInt(region.coords.xMin, 10);
-            xMaxIn = parseInt(region.coords.xMax, 10);
-            yMinIn = parseInt(region.coords.yMin, 10);
-            yMaxIn = parseInt(region.coords.yMax, 10);
+            xMinIn = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
+            xMaxIn = parseInt(_this.defineCoor4DRegion(region).xMax, 10);
+            yMinIn = parseInt(_this.defineCoor4DRegion(region).yMin, 10);
+            yMaxIn = parseInt(_this.defineCoor4DRegion(region).yMax, 10);
           }
         });
         xMinOut = parseInt(_this.props.pointBPositionX, 10);
@@ -12443,17 +12568,17 @@ function (_super) {
       } else {
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionIn) {
-            xMinIn = parseInt(region.coords.xMin, 10);
-            xMaxIn = parseInt(region.coords.xMax, 10);
-            yMinIn = parseInt(region.coords.yMin, 10);
-            yMaxIn = parseInt(region.coords.yMax, 10);
+            xMinIn = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
+            xMaxIn = parseInt(_this.defineCoor4DRegion(region).xMax, 10);
+            yMinIn = parseInt(_this.defineCoor4DRegion(region).yMin, 10);
+            yMaxIn = parseInt(_this.defineCoor4DRegion(region).yMax, 10);
           }
 
           if (region.label === _this.props.associateRegionOut) {
-            xMinOut = parseInt(region.coords.xMin, 10);
-            xMaxOut = parseInt(region.coords.xMax, 10);
-            yMinOut = parseInt(region.coords.yMin, 10);
-            yMaxOut = parseInt(region.coords.yMax, 10);
+            xMinOut = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
+            xMaxOut = parseInt(_this.defineCoor4DRegion(region).xMax, 10);
+            yMinOut = parseInt(_this.defineCoor4DRegion(region).yMin, 10);
+            yMaxOut = parseInt(_this.defineCoor4DRegion(region).yMax, 10);
           }
         });
         xMidIn = (xMinIn + xMaxIn) / 2;
@@ -13296,28 +13421,26 @@ function (_super) {
 
     _this.defineMainMetric = function (mainMetric) {
       var result = '';
-      var unit = _this.props.textObject.valueGenerateObjectText.unit;
-      var decimal = _this.props.textObject.valueGenerateObjectText.numericFormatElement;
+      var unit = _this.props.textObject.valueGenerateObjectText.unit; //const decimal: string = this.props.textObject.valueGenerateObjectText.numericFormatElement;
 
-      if (decimal !== '') {
-        result = parseFloat(mainMetric).toPrecision(parseInt(decimal, 10)) + ' ' + unit;
-      } else {
-        result = mainMetric + ' ' + unit;
-      }
+      var roundValue = parseInt(_this.props.textObject.generateAuxiliaryElement.numericFormatElement, 10) || 1; //if (decimal !== '') {
+
+      result = parseFloat(mainMetric).toPrecision(roundValue) + ' ' + unit; // } else {
+      //   result = mainMetric + ' ' + unit;
+      // }
 
       return result;
     };
 
     _this.defineAuxMetric = function (auxMetric) {
       var result = '';
-      var unit = _this.props.textObject.generateAuxiliaryElement.unit;
-      var decimal = _this.props.textObject.generateAuxiliaryElement.numericFormatElement;
+      var unit = _this.props.textObject.generateAuxiliaryElement.unit; //const decimal: string = this.props.textObject.generateAuxiliaryElement.numericFormatElement;
 
-      if (decimal !== '') {
-        result = parseFloat(auxMetric).toPrecision(parseInt(decimal, 10)) + ' ' + unit;
-      } else {
-        result = auxMetric + ' ' + unit;
-      }
+      var roundValue = parseInt(_this.props.textObject.generateAuxiliaryElement.numericFormatElement, 10) || 1; //if (decimal !== '') {
+
+      result = parseFloat(auxMetric).toPrecision(roundValue) + ' ' + unit; // } else {
+      //   result = auxMetric + ' ' + unit;
+      // }
 
       return result;
     };
@@ -13752,7 +13875,8 @@ function (_super) {
       return result;
     };
 
-    _this.state = {};
+    _this.state = {//pointTest: <div></div>,
+    };
     return _this;
   }
 
@@ -14580,28 +14704,26 @@ function (_super) {
 
     _this.defineMainMetric = function (mainMetric) {
       var result = '';
-      var unit = _this.props.textObject.valueGenerateObjectText.unit;
-      var decimal = _this.props.textObject.valueGenerateObjectText.numericFormatElement;
+      var unit = _this.props.textObject.valueGenerateObjectText.unit; //const decimal: string = this.props.textObject.valueGenerateObjectText.numericFormatElement;
 
-      if (decimal !== '') {
-        result = parseFloat(mainMetric).toPrecision(parseInt(decimal, 10)) + ' ' + unit;
-      } else {
-        result = mainMetric + ' ' + unit;
-      }
+      var roundValue = parseInt(_this.props.textObject.generateAuxiliaryElement.numericFormatElement, 10) || 1; //if (decimal !== '') {
+
+      result = parseFloat(mainMetric).toPrecision(roundValue) + ' ' + unit; // } else {
+      //   result = mainMetric + ' ' + unit;
+      // }
 
       return result;
     };
 
     _this.defineAuxMetric = function (auxMetric) {
       var result = '';
-      var unit = _this.props.textObject.generateAuxiliaryElement.unit;
-      var decimal = _this.props.textObject.generateAuxiliaryElement.numericFormatElement;
+      var unit = _this.props.textObject.generateAuxiliaryElement.unit; //const decimal: string = this.props.textObject.generateAuxiliaryElement.numericFormatElement;
 
-      if (decimal !== '') {
-        result = parseFloat(auxMetric).toPrecision(parseInt(decimal, 10)) + ' ' + unit;
-      } else {
-        result = auxMetric + ' ' + unit;
-      }
+      var roundValue = parseInt(_this.props.textObject.generateAuxiliaryElement.numericFormatElement, 10) || 1; //if (decimal !== '') {
+
+      result = parseFloat(auxMetric).toPrecision(roundValue) + ' ' + unit; // } else {
+      //   result = auxMetric + ' ' + unit;
+      // }
 
       return result;
     };
@@ -14907,7 +15029,8 @@ function (_super) {
 
   DrawPoint.prototype.drawPoint = function (drawGraphicMarker, size, positionShapeX, positionShapeY, shape, color) {
     var valueToolTip = this.defineContentTooltip('point');
-    var linkUrlPoint = this.props.linkUrl.followLink;
+    var linkUrlPoint = this.props.linkUrl.followLink; // console.log('point');
+    // console.log(linkUrlPoint);
 
     if (drawGraphicMarker === 'true') {
       if (shape === 'circle') {
@@ -15431,7 +15554,9 @@ function (_super) {
           options: _this.props.options,
           data: _this.props.data,
           id: 'region' + line.id.toString(),
-          isEnabled: _this.props.isEnabled
+          //isEnabled={this.props.isEnabled}
+          buttonAddLinkIsActive: _this.props.buttonAddLinkIsActive,
+          buttonAddIncurvedLinkIsActive: _this.props.buttonAddIncurvedLinkIsActive
         });
       });
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", null, mapItems);
@@ -15552,10 +15677,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! Functions/getResultQuery */ "./Functions/getResultQuery.tsx");
 /* harmony import */ var Functions_parseColor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! Functions/parseColor */ "./Functions/parseColor.tsx");
 /* harmony import */ var Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! Functions/fetchMetrics */ "./Functions/fetchMetrics.tsx");
-/* harmony import */ var Functions_searchMinMaxIdSVG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! Functions/searchMinMaxIdSVG */ "./Functions/searchMinMaxIdSVG.tsx");
 
 /* eslint-disable prettier/prettier */
-
 
 
 
@@ -15620,7 +15743,7 @@ function (_super) {
     /** fill state for tooltip, color zone and calc round query */
 
 
-    _this.setStateTooltip = function (lowerLimit, region, valueQuery, link) {
+    _this.setStateTooltip = function (lowerLimit, region, valueQuery) {
       var styleTooltip = {
         color: region.textObj.colorText,
         backgroundColor: region.textObj.colorBack
@@ -15634,7 +15757,7 @@ function (_super) {
 
       var tooltipValue = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         style: styleTooltip
-      }, link && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
         href: region.linkURL.hoveringTooltipLink
       }, region.linkURL.hoveringTooltipText), region.textObj.isTextTooltip && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, region.label)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         style: styleMetrics
@@ -15655,6 +15778,86 @@ function (_super) {
 
       return false;
     };
+
+    _this.getPlacementTextObjectRegionSVG = function (idSVG) {
+      var coor = {
+        top: '0',
+        bottom: '0',
+        left: '0',
+        right: '0'
+      };
+      var elementSVG = document.getElementById('oct' + idSVG);
+
+      if (elementSVG) {
+        var xSVG = 0;
+        var ySVG = 0;
+        var widthSVG = 0;
+        var heightSVG = 0;
+        var top_1 = '';
+        var left = '';
+
+        if (elementSVG.localName === 'path') {
+          var allValues = elementSVG.attributes['d'].nodeValue;
+          var arrayAllValues = allValues.split(' ');
+          var iX = -2;
+          var xMin = 1000000;
+          var xMax = 0;
+          var iY = -1;
+          var yMin = 1000000;
+          var yMax = 0;
+
+          for (var i = 0; i < arrayAllValues.length; i++) {
+            var valueToCheck = parseInt(arrayAllValues[i], 10);
+
+            if (i === iX + 3) {
+              if (valueToCheck < xMin) {
+                xMin = valueToCheck;
+              }
+
+              if (valueToCheck > xMax) {
+                xMax = valueToCheck;
+              }
+
+              iX = i;
+            }
+
+            if (i === iY + 3) {
+              if (valueToCheck < yMin) {
+                yMin = valueToCheck;
+              }
+
+              if (valueToCheck > yMax) {
+                yMax = valueToCheck;
+              }
+
+              iY = i;
+            }
+          }
+
+          left = xMax.toString();
+          top_1 = yMax.toString();
+        } else if (elementSVG.localName === 'ellipse') {
+          xSVG = parseInt(elementSVG.attributes['cx'].nodeValue, 10);
+          ySVG = parseInt(elementSVG.attributes['cy'].nodeValue, 10);
+          var rX = parseInt(elementSVG.attributes['rx'].nodeValue, 10) * 2;
+          var rY = parseInt(elementSVG.attributes['ry'].nodeValue, 10) * 2;
+          left = (xSVG + rX).toString();
+          top_1 = (ySVG + rY).toString();
+        } else if (elementSVG.localName === 'rect') {
+          xSVG = parseInt(elementSVG.attributes['x'].nodeValue, 10);
+          ySVG = parseInt(elementSVG.attributes['y'].nodeValue, 10);
+          widthSVG = parseInt(elementSVG.attributes['width'].nodeValue, 10);
+          heightSVG = parseInt(elementSVG.attributes['height'].nodeValue, 10);
+          left = (xSVG + widthSVG).toString();
+          top_1 = (ySVG + heightSVG).toString();
+        }
+
+        coor.top = top_1;
+        coor.left = left;
+      }
+
+      return coor;
+    };
     /** generate tooltip for metrics and apply color with lower limit */
 
 
@@ -15664,38 +15867,74 @@ function (_super) {
 
       if (region.mode) {
         _this.editColorSvgZone(region.idSVG, lowerLimit.colorBack, lowerLimit.colorBorder, lowerLimit.sizeBorder.toString());
-      }
+      } // const resultTooltip: Tooltip = this.setStateTooltip(lowerLimit, region, valueQuery, this.props.isEnabled);
 
-      var resultTooltip = _this.setStateTooltip(lowerLimit, region, valueQuery, _this.props.isEnabled);
 
-      if (valueQuery) {
-        if (region.mode && (!region.textObj.isTextTooltip || _this.displayValueQuery(region))) {
-          var coordinateWrite = Object(Functions_searchMinMaxIdSVG__WEBPACK_IMPORTED_MODULE_8__["searchMinMaxIdSVG"])(region.idSVG);
+      var resultTooltip = _this.setStateTooltip(lowerLimit, region, valueQuery); //if (valueQuery) {
+      //if (region.mode && ((!region.textObj.isTextTooltip) || this.displayValueQuery(region))) {
 
-          if (coordinateWrite) {
-            stateIsFill = true;
-            var styleWrite = {
-              position: 'absolute',
-              zIndex: 999,
-              left: coordinateWrite.xMax - (coordinateWrite.xMax - coordinateWrite.xMin),
-              top: coordinateWrite.yMax,
-              backgroundColor: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorBackElement : 'black',
-              color: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorTextElement : 'white'
-            };
-            var htmlResult = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-              style: styleWrite
-            }, !region.textObj.isTextTooltip && region.label, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), _this.displayValueQuery(region) && resultTooltip.valueQuery);
 
-            _this.setState({
-              htmlResult: htmlResult,
-              tooltipValue: resultTooltip.tooltipValue,
-              backgroundColor: resultTooltip.backgroundColor,
-              borderColor: resultTooltip.borderColor,
-              sizeBorder: resultTooltip.sizeBorder,
-              valueQuery: resultTooltip.valueQuery
-            });
-          }
+      if (region.mode) {
+        //const coordinateWrite: Coord4DInt | null = searchMinMaxIdSVG(region.idSVG);
+        var coordinateTextObject = _this.getPlacementTextObjectRegionSVG(region.idSVG); //if (coordinateWrite) {
+
+
+        stateIsFill = true;
+        var style = region.textObj.style;
+        var styleWrite = {
+          width: 'auto',
+          position: 'absolute',
+          zIndex: 999,
+          // left: coordinateWrite.xMax - (coordinateWrite.xMax - coordinateWrite.xMin),
+          // top: coordinateWrite.yMax,
+          left: coordinateTextObject.left + 'px',
+          top: coordinateTextObject.top + 'px',
+          border: '1px solid black'
+        };
+        var styleLabelTooltipSVG = {
+          textDecoration: _this.defineTextDecoration(style),
+          fontStyle: _this.defineFontStyle(style),
+          fontWeight: _this.defineFontWeight(style),
+          fontSize: _this.props.options.display.size,
+          fontFamily: _this.props.options.display.police,
+          color: region.textObj.colorText,
+          backgroundColor: region.textObj.colorBack,
+          margin: 0,
+          padding: '5px 5px 0 5px'
+        };
+        var styleMainMetricTooltipSVG = {
+          textDecoration: _this.defineTextDecoration(style),
+          fontStyle: _this.defineFontStyle(style),
+          fontWeight: _this.defineFontWeight(style),
+          color: region.textObj.valueGenerateObjectText.addColorTextElement ? region.textObj.valueGenerateObjectText.colorTextElement : 'white',
+          backgroundColor: region.textObj.valueGenerateObjectText.addColorBackElement ? region.textObj.valueGenerateObjectText.colorBackElement : 'black',
+          fontSize: _this.props.options.display.size,
+          fontFamily: _this.props.options.display.police,
+          margin: 0,
+          padding: '5px 5px 0 5px'
+        };
+        var htmlResult = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          style: styleWrite
+        }, !region.textObj.isTextTooltip && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          style: styleLabelTooltipSVG
+        }, region.label), region.textObj.generateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInTooltip && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          style: styleMainMetricTooltipSVG
+        }, _this.displayValueQuery(region) && resultTooltip.valueQuery));
+
+        if (region.textObj.isTextTooltip && region.textObj.valueGenerateObjectText.displayObjectInTooltip) {
+          htmlResult = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
         }
+
+        _this.setState({
+          htmlResult: htmlResult,
+          tooltipValue: resultTooltip.tooltipValue,
+          backgroundColor: resultTooltip.backgroundColor,
+          borderColor: resultTooltip.borderColor,
+          sizeBorder: resultTooltip.sizeBorder,
+          valueQuery: resultTooltip.valueQuery
+        }); //}
+        //}
+
       }
 
       if (!stateIsFill) {
@@ -15803,15 +16042,14 @@ function (_super) {
 
     _this.getConvertValueAuxMetrics = function (valueBrut) {
       var result = '';
-      var region = _this.props.uneCoor;
-      var roundValue = region.textObj.generateAuxiliaryElement.numericFormatElement;
-      var unit = region.textObj.generateAuxiliaryElement.unit;
+      var region = _this.props.uneCoor; //const roundValue: string = region.textObj.generateAuxiliaryElement.numericFormatElement;
 
-      if (roundValue !== '') {
-        result = parseFloat(valueBrut).toPrecision(parseInt(roundValue, 10)).toString();
-      } else {
-        result = valueBrut;
-      }
+      var roundValue = parseInt(region.textObj.generateAuxiliaryElement.numericFormatElement, 10) || 1;
+      var unit = region.textObj.generateAuxiliaryElement.unit; //if (roundValue !== '') {
+
+      result = parseFloat(valueBrut).toPrecision(roundValue).toString(); // } else {
+      //   result = valueBrut;
+      // }
 
       return result + ' ' + unit;
     };
@@ -15820,11 +16058,11 @@ function (_super) {
       var e_1, _a;
 
       var html = [];
+      var region = _this.props.uneCoor;
 
       var valuesAuxMetrics = _this.getValuesAuxiliaryMetrics();
 
-      var auxMetrics = _this.props.uneCoor.metrics;
-      var region = _this.props.uneCoor;
+      var auxMetrics = region.metrics;
       var addColorText = region.textObj.generateAuxiliaryElement.addColorTextElement;
       var addColorBack = region.textObj.generateAuxiliaryElement.addColorBackElement;
       var legend = region.textObj.generateAuxiliaryElement.legendElement;
@@ -15868,10 +16106,11 @@ function (_super) {
 
       if (auxMetrics.length > 0) {
         html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-          key: '',
+          key: 'region' + region.id + 'contentToolTip1',
           style: styleTitle
         }, "Auxiliary Metric"));
         html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          key: 'region' + region.id + 'contentToolTip2',
           style: styleTitle
         }, legend));
         var index = 1;
@@ -15883,23 +16122,23 @@ function (_super) {
             var valueAuxMetric = _this.getConvertValueAuxMetrics(valuesAuxMetrics[index - 1]);
 
             html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-              key: '',
+              key: index + 'region' + region.id + 'contentToolTip3',
               style: styleTitle2
             }, "+ Metric ", index));
             html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-              key: '',
+              key: index + 'region' + region.id + 'contentToolTip4',
               style: styleContent
             }, "- Value : ", valueAuxMetric));
             html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-              key: '',
+              key: index + 'region' + region.id + 'contentToolTip5',
               style: styleContent
             }, "- Key : ", metric.key));
             html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-              key: '',
+              key: index + 'region' + region.id + 'contentToolTip6',
               style: styleContent
             }, "- KeyValue : ", metric.keyValue));
             html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-              key: '',
+              key: index + 'region' + region.id + 'contentToolTip7',
               style: styleContent
             }, "- Type : ", metric.manageValue));
             index++;
@@ -15975,8 +16214,28 @@ function (_super) {
       // console.log(region.textObj.generateObjectText);
       // console.log('aux metric');
       // console.log(region.textObj.generateAuxiliaryElement.displayObjectInTooltip);
+      // console.log(this.props.buttonAddLinkIsActive);
+      // console.log(this.props.buttonAddIncurvedLinkIsActive);
+      // console.log(region.linkURL.followLink);
 
-      if (_this.props.isEnabled && region.linkURL.followLink !== '') {
+      if (_this.props.buttonAddLinkIsActive || _this.props.buttonAddIncurvedLinkIsActive) {
+        //console.log('active');
+        value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          style: styleDiv,
+          id: _this.props.id
+        }, (!region.textObj.isTextTooltip || region.textObj.generateObjectText) && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          style: styleTextDiv
+        }, !region.textObj.isTextTooltip && region.label), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          style: styleMetricsDiv
+        }, region.textObj.generateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInTooltip && _this.state.valueQuery)));
+
+        if (region.textObj.isTextTooltip || region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip || region.textObj.generateAuxiliaryElement.displayObjectInTooltip) {
+          value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
+            content: _this.state.tooltipValue
+          }, value);
+        }
+      } else {
+        //console.log('not active');
         value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: styleDiv,
           id: _this.props.id
@@ -15998,22 +16257,46 @@ function (_super) {
             content: _this.state.tooltipValue
           }, value);
         }
-      } else {
-        value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          style: styleDiv,
-          id: _this.props.id
-        }, (!region.textObj.isTextTooltip || region.textObj.generateObjectText) && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          style: styleTextDiv
-        }, !region.textObj.isTextTooltip && region.label), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          style: styleMetricsDiv
-        }, region.textObj.generateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInTooltip && _this.state.valueQuery)));
+      } // if (!this.props.isEnabled && region.linkURL.followLink !== '') {
+      //   console.log('not active');
+      //   value = (
+      //     <div style={styleDiv} id={this.props.id}>
+      //       <a href={region.linkURL.followLink}>
+      //         <div style={{height: '100%', width: '100%'}} >
+      //           {(!region.textObj.isTextTooltip || region.textObj.generateObjectText) && (
+      //             <div>
+      //               <div style={styleTextDiv}>{!region.textObj.isTextTooltip && region.label}</div>
+      //               <div style={styleMetricsDiv}>
+      //                 {region.textObj.generateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInTooltip && this.state.valueQuery}
+      //               </div>
+      //             </div>
+      //           )}
+      //         </div>
+      //       </a>
+      //     </div>
+      //   );
+      //   if (region.textObj.isTextTooltip || (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip) || region.textObj.generateAuxiliaryElement.displayObjectInTooltip) {
+      //     value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
+      //   }
+      // } else {
+      //   console.log('active');
+      //   value = (
+      //     <div style={styleDiv} id={this.props.id}>
+      //       {(!region.textObj.isTextTooltip || region.textObj.generateObjectText) && (
+      //         <div>
+      //           <div style={styleTextDiv}>{!region.textObj.isTextTooltip && region.label}</div>
+      //           <div style={styleMetricsDiv}>
+      //             {region.textObj.generateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInTooltip && this.state.valueQuery}
+      //           </div>
+      //         </div>
+      //       )}
+      //     </div>
+      //   );
+      //   if (region.textObj.isTextTooltip || (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip) || region.textObj.generateAuxiliaryElement.displayObjectInTooltip) {
+      //     value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
+      //   }
+      // }
 
-        if (region.textObj.isTextTooltip || region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip || region.textObj.generateAuxiliaryElement.displayObjectInTooltip) {
-          value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
-            content: _this.state.tooltipValue
-          }, value);
-        }
-      }
 
       _this.setState({
         htmlResult: value

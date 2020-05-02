@@ -1,15 +1,13 @@
-
 # Manage link
-
+[![](../../resource/Go-back.png)](coordinates.md)
 
 Cette partie est commune pour 
 
-- Region
-- Point
+- [Region](coordinates-space-region.md)
+- [Point](coordinates-space-point.md)
+- [Oriented Link](coordinates-space-link.md)
 
-
-![main metric](../../screenshots/editor/coordinates/manage-link/manage-link.jpg)
-
+![main metric](../../screenshots/editor/coordinates/manage-link/manage-link.png)
 
 
 3 liens sont disponibles

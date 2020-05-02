@@ -143,6 +143,19 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
   };
 
   componentDidMount = async () => {
+    console.log('mount');
+    // const url: string = window.location.href;
+    // const arrayUrl: string[] = url.split('&');
+    // for (const element of arrayUrl) {
+    //   console.log(element);
+    //   if (element === 'edit') {
+    //     console.log('edit');
+    //     await Promise.resolve('Success').then(() => {
+    //       this.props.onOptionsChange({
+    //         ...this.props.options,
+    //         displayButton: true,
+    //       });
+    //     });
     await Promise.resolve('Success').then(() => {
       this.props.onOptionsChange({
         ...this.props.options,
@@ -152,6 +165,7 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
   };
 
   componentWillUnmount = async () => {
+    console.log('unMount');
     await Promise.resolve('Success').then(() => {
       this.props.onOptionsChange({
         ...this.props.options,

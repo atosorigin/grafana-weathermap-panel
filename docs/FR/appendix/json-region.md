@@ -1,4 +1,5 @@
 # Fichier `region`
+[![](../../resource/Go-back.png)](README.md)
 
 le script complet [sample-region.json](../../../demo/sample-region.json) est disponible, dont le détail de construction se trouve ci-dessous.
 
@@ -232,10 +233,10 @@ Le format compatible est JPG / PNG / GIF / SVG
 
 ## linkURL
 
- - **linkURL** : Permet de rendre les regions cliquables 
-    - **followLink** : Permet une redirection vers le lien renseigné en cliquant sur la region
-    - **hoveringTooltipLink** : Permet une redirection vers le lien renseigné dans le tool type en cliquant sur le lien
-    - **hoveringTooltipText** : Affiche le lien dans le tool type qui apparait quand on passe le curseur sur la région
+ - **linkURL** : Vous permet de rendre les régions cliquables 
+    - **followLink** : Vous permet une redirection vers le lien renseigné en cliquant sur la région
+    - **hoveringTooltipLink** : Vous permet une redirection vers le lien renseigné dans le tool type en cliquant sur le lien
+    - **hoveringTooltipText** : Affiche le lien dans le tool type qui apparaît quand on passe le curseur sur la région
 
 
 ```
@@ -253,10 +254,10 @@ Le format compatible est JPG / PNG / GIF / SVG
  - **mainMetric**	
     - **expr** : Expresison en PrompQL
     - **format** "" (Laisser vide)
-    - **key** : permet de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
-    - **keyValue** : permet de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
+    - **key** : Correspond à une clef associée à la métrique
+    - **keyValue** : Vous permet de filtrer les données reçues par la Query en renseignant la valeur de la clef associée à la métrique
     - **manageValue** : Vous avez le choix entre "sum", "avg" ou "err"
-    - **refId** : Référence de la metric associé a cette région
+    - **refId** : Référence de la métrique associé à cette région
     - **returnQuery** : Ne pas renseigner.      
     - **unit** : (Laisser vide)
 
@@ -285,14 +286,14 @@ A FAIRE, Laisser vide pour le moment
 
 ## metrics
 
- - **metrics** : Il s'agit d'un tableau de metric pour ajouter des metrics auxilières
+ - **metrics** : Il s'agit d'un tableau de métrique pour ajouter des métriques auxilières
     - **0**
         - **expr** : Expresison en PrompQL
         - **format** "" (Laisser vide)
-        - **key** : permet de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
-        - **keyValue** : permet de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
+        - **key** : Correspond à une clef associée à la métrique
+        - **keyValue** : Vous permet de filtrer les données reçues par la Query en renseignant la valeur de la clef associée à la métrique
         - **manageValue** : Vous avez le choix entre "sum", "avg" ou "err"
-        - **refId** : Référence de la metric associé a cette région
+        - **refId** : Référence de la métrique associé à cette région
         - **returnQuery** : Ne pas renseigner.      
         - **unit** : (Laisser vide)
     - **1**
@@ -334,22 +335,22 @@ A FAIRE, Laisser vide pour le moment
         - **orientationLink** : Choisir "monodirectional" ou "bidirectional"
         - **pointAPositionX** : Choisir la position horizontal du point A entre "-100" et "100"
         - **pointAPositionY** : Choisir la position vertical du point A entre "-100" et "100"
-        - **colorCoordinateA** : Choisissez la couleur de la coordonnée A;
+        - **colorCoordinateA** : Choisissez la couleur de la coordonnée A
         - **pointBPositionX** : Choisir la position horizontal du point B entre "-100" et "100"
         - **pointBPositionY** : Choisir la position vertical du point B entre "-100" et "100"
-        - **colorCoordinateB** : Choisissez la couleur de la coordonnée B;
-        - **valueMainMetricA** : Valeur de la Main métrique du point B;
-        - **valueMainMetricB** : Valeur de la Main métrique du point A;
-        - **pointIn** : Nom du point d'entré;
-        - **pointOut** : Nom du point sortant;;
-        - **regionIn** : Nom de la région d'entrée;
-        - **regionOut** : Nom de la région sortante;
-        - **zIndex** : Plus le nombre est grand, plus le lien sera mis en évidence sur l'image en termes de couche.;
-        - **pointCPositionX** : Choisir la position horizontal du point A entre "-100" et "100";
-        - **pointCPositionY** : Choisir la position horizontal du point A entre "-100" et "100";
+        - **colorCoordinateB** : Choisissez la couleur de la coordonnée B;$
+        - **valueMainMetricA** : Valeur de la Main métrique du point B
+        - **valueMainMetricB** : Valeur de la Main métrique du point A
+        - **pointIn** : Nom du point d'entrée
+        - **pointOut** : Nom du point sortant
+        - **regionIn** : Nom de la région d'entrée
+        - **regionOut** : Nom de la région sortante
+        - **zIndex** : Plus le nombre est grand, plus le lien sera mis en évidence sur l'image en termes de couche
+        - **pointCPositionX** : Choisir la position horizontal du point A entre "-100" et "100"
+        - **pointCPositionY** : Choisir la position horizontal du point A entre "-100" et "100"
         - **isIncurved** : Saisir "true" si votre lien est incurvé. Sinon, saisir "false"
-        - **mainMetricB** : Renseigner le metric de B
-        - **metricsB** : Renseigner les metrics auxilière de B
+        - **mainMetricB** : Renseigner le métrique de B
+        - **metricsB** : Renseigner les métriques auxilière de B
 
 ```
 
@@ -386,8 +387,8 @@ A FAIRE, Laisser vide pour le moment
       - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
       - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
       - **colorBackElement** : Choisir la couleur du background
-      - **colorTextElement** :  Choisir la couelur du texte 
-      - **displayObjectInText** : Afficher l'object dans le texte. "true" ou "false"
+      - **colorTextElement** :  Choisir la couleur du texte 
+      - **displayObjectInText** : Afficher l'objet dans le texte. "true" ou "false"
       - **displayObjectPermanently** : Afficher l'objet de facon permanente. "true" ou false"
       - **legendElement** : Associer une légende à votre élément 
       - **numericFormatElement** : Permet d'arrondir le résultat de la query
@@ -405,9 +406,9 @@ A FAIRE, Laisser vide pour le moment
       - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
       - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
       - **colorBackElement** : Choisir la couleur du background
-      - **colorTextElement** :  Choisir la couelur du texte 
-      - **displayObjectInText** : Afficher l'object dans le texte. "true" ou "false"
-      - **displayObjectPermanently** : Afficher l'objet de facon permanente. "true" ou false"
+      - **colorTextElement** :  Choisir la couleur du texte 
+      - **displayObjectInText** : Afficher l'objet dans le texte. "true" ou "false"
+      - **displayObjectPermanently** : Afficher l'objet de façon permanente. "true" ou false"
       - **legendElement**	: Associer une légende à votre élément 
       - **numericFormatElement** : Permet d'arrondir le résultat de la query
       - **unityMesureElement**: Affiche une unité de mesure

@@ -1,6 +1,6 @@
  
 # Import Files
- 
+[![](../../resource/Go-back.png)](README.md)
  
 ## Global URL Import
 
@@ -78,10 +78,7 @@ Après, vous cliquez sur le bouton `add`, suivi du bouton `finish`
 
 Le résultat est instantanné
 
-Il est possible d'uploader un fichier de configuration supplémentaire
-
-mais il faut sauvegarder la page
-et recharger la page
+Il est possible d'uploader un fichier de configuration supplémentaire mais il faut sauvegarder la page et recharger la page
 
     
 

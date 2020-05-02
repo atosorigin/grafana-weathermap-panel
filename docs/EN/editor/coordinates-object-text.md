@@ -1,5 +1,5 @@
 # Text object
-
+[![](../../screenshots/other/Go-back.png)](coordinates.md)
 
 This part is common for 
 
@@ -14,7 +14,7 @@ This part is common for
 #### Region
 
 
-![text object](coordinates/text-object/textobject-principal-region.jpg)
+![text object](../../screenshots/editor/coordinates/text-object/textobject-principal-region.jpg)
 
 By unchecking this option, the label name will be displayed in the defined region.
 

@@ -1,8 +1,18 @@
 # Changelog
 
+## v0.5.1 (2020-05-02)
+
+- Update Text Object region SVG
+- Update Tooltip region SVG
+- Update oriented link with region SVG
+- Update Documentation
+- fixed click region with link url
+- fixed select coordinate
+- fixed ID of the file SVG in the select region
+
 ## v0.5.0 (2020-04-27)
 
-- Update Documentations
+- Update Documentation
 - Update CSS
 - Fixed select svg by import file
 
@@ -21,14 +31,14 @@
 
 - Add size links
 - Update label empty
-- Update Documentations
+- Update Documentation
 - Update button zoom
 - Update documentations (tutorial)
 - fixed bi-directional links
 
 ## v0.4.8 (2020-04-18)
 
-- Update Documentations
+- Update Documentation
 - fixed interface
 
 ## v0.4.7 (2020-04-16)

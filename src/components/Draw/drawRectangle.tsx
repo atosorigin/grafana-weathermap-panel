@@ -15,7 +15,11 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   /** id region */
   id: string;
   /** if button SimplePanel is active, block all onClick region space */
-  isEnabled: boolean;
+  //isEnabled: boolean;
+  /** if button Add Oriented Link of SimplePanel is active, block all onClick region space */
+  buttonAddLinkIsActive: boolean;
+  /** if button Add Incurved Oriented Link of SimplePanel is active, block all onClick region space */
+  buttonAddIncurvedLinkIsActive: boolean;
 }
 
 // tslint:disable-next-line: no-empty-interface
@@ -72,7 +76,9 @@ export default class DrawRectangle extends React.Component<Props, State> {
         options={this.props.options}
         data={this.props.data}
         id={'region' + line.id.toString()}
-        isEnabled={this.props.isEnabled}
+        //isEnabled={this.props.isEnabled}
+        buttonAddLinkIsActive={this.props.buttonAddLinkIsActive}
+        buttonAddIncurvedLinkIsActive={this.props.buttonAddIncurvedLinkIsActive}
       />
     ));
     return <ul>{mapItems}</ul>;

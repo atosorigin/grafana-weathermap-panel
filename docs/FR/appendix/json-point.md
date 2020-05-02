@@ -1,4 +1,5 @@
 # Fichier `point`
+[![](../../resource/Go-back.png)](README.md)
 
 le script complet [sample-point.json](../../../demo/sample-point.json) est disponible, dont le détail de construction se trouve ci-dessous.
 
@@ -58,10 +59,9 @@ Le fichier **point** doit être déclaré sous la forme d'un fichier JSON comme 
 
 ## associateOrientedLinks In/Out
 
-- **associateOrientedLinksIn/Out** : Renseigner le lien qui commence/termine à  ce point
-
+- **associateOrientedLinksIn/Out** : Renseignez le lien qui commence/termine à ce point
   - label : Vous pouvez choisir un label pour cette association
-  - nom : choisissez le nom unique de cette association
+  - nom : Choisissez le nom unique de cette association
 
 
 ```
@@ -88,13 +88,6 @@ Le fichier **point** doit être déclaré sous la forme d'un fichier JSON comme 
     "colorMode": false,
 ```
 
-## coordinateSpace
-
-- **coordinateSpace** : TO DO
-
-```
-    "coordinateSpace": {},
-```
 
 ## drawGraphicMarker
 
@@ -128,10 +121,10 @@ Le fichier **point** doit être déclaré sous la forme d'un fichier JSON comme 
 
 ## linkURL
 
- - **linkURL** : Permet de rendre les regions cliquables 
-    - **followLink** : Permet une redirection vers le lien renseigné en cliquant sur la region
+ - **linkURL** : Permet de rendre les régions cliquables 
+    - **followLink** : Permet une redirection vers le lien renseigné en cliquant sur la région
     - **hoveringTooltipLink** : Permet une redirection vers le lien renseigné dans le tool type en cliquant sur le lien
-    - **hoveringTooltipText** : Affiche le lien dans le tool type qui apparait quand on passe le curseur sur la zone ou sur le point
+    - **hoveringTooltipText** : Affiche le lien dans le tool type qui apparaît quand on passe le curseur sur la zone ou sur le point
 
 
 ```
@@ -148,8 +141,8 @@ Le fichier **point** doit être déclaré sous la forme d'un fichier JSON comme 
 
 Il est possible de choisir entre 2 méthodes de couleur : 
 
-- couleur fixe
-- couleur variable
+- Couleur fixe
+- Couleur variable
 
 ### Couleur fixe
 
@@ -238,10 +231,10 @@ Avec de même :
  - **mainMetric**	
     - **expr** : Expresison en PrompQL
     - **format** "" (Laisser vide)
-    - **key** : permet de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
-    - **keyValue** : permet de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
+    - **key** : Correspond à une clef associée à la métrique
+    - **keyValue** : Permet de filtrer les données reçues par la Query en renseignant la valeur de la clef associée à la métrique
     - **manageValue** : Vous avez le choix entre "sum", "avg" ou "err"
-    - **refId** : Référence de la metric associé a cette région
+    - **refId** : Référence de la métrique associé à cette région
     - **returnQuery** : Ne pas renseigner.      
     - **unit** : (Laisser vide)
 
@@ -270,14 +263,14 @@ Avec de même :
 
 ## metrics
 
- - **metrics** : Il s'agit d'un tableau de metric pour ajouter des metrics auxilières
+ - **metrics** : Il s'agit d'un tableau de métrique pour ajouter des métriques auxilières
     - **0**
         - **expr** : Expresison en PrompQL
         - **format** "" (Laisser vide)
-        - **key** : permet de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
-        - **keyValue** : permet de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
+        - **key** : Correspond à une clef associée à la métrique
+        - **keyValue** : Vous permet de filtrer les données reçues par la Query en renseignant la valeur de la clef associée à la métrique
         - **manageValue** : Vous avez le choix entre "sum", "avg" ou "err"
-        - **refId** : Référence de la metric associé a cette région
+        - **refId** : Référence de la métrique associé à cette région
         - **returnQuery** : Ne pas renseigner.      
         - **unit** : (Laisser vide)
     - **1**
@@ -341,7 +334,7 @@ Avec de même :
 
 ## positionShape X/Y
 
-- **positionShape X** et **positionShapeY** : Choisissez ou vous voulez placer le point sur le tableau
+- **positionShape X** et **positionShapeY** : Choisissez où vous voulez placer le point sur le tableau
 
 ```
     "positionShapeX": "-60",
@@ -410,28 +403,28 @@ Avec de même :
       - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
       - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
       - **colorBackElement** : Choisir la couleur du background
-      - **colorTextElement** :  Choisir la couelur du texte 
-      - **displayObjectInText** : Afficher l'object dans le texte. "true" ou "false"
+      - **colorTextElement** :  Choisir la couleur du texte 
+      - **displayObjectInText** : Afficher l'objet dans le texte. "true" ou "false"
       - **displayObjectPermanently** : Afficher l'objet de facon permanente. "true" ou false"
       - **legendElement** : Associer une légende à votre élément 
       - **numericFormatElement** : Permet d'arrondir le résultat de la query
       - **unityMesureElement** : Affiche une unité de mesure
   - **generateObjectText** : Généré un objet texte. "true" ou "false"
-  - **isTextRegion** : affichage du texte dans l'élément ou l'infobulle
+  - **isTextRegion** : Affichage du texte dans l'élément ou l'infobulle
   - **legend** : Permet d'ajouter une légende
   - **style**	
       - **bold** : "True" ou "False" pour mettre le texte en gras
       - **italic** : "True" ou "False" pour mettre le texte en italique
-      - **underline** : "True" ou "False" pour mettre le texte en sousligné
+      - **underline** : "True" ou "False" pour mettre le texte en souligné
   - **unit** : Permet d'afficher une unité de mesure
   - **value**	: Valeur de l'objet
   - **valueGenerateObjectText** : A utiliser et remplir si generateObjectText est true lors de l'utilisation de la variable pour stocker des données
       - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
       - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
       - **colorBackElement** : Choisir la couleur du background
-      - **colorTextElement** :  Choisir la couelur du texte 
-      - **displayObjectInText** : Afficher l'object dans le texte. "true" ou "false"
-      - **displayObjectPermanently** : Afficher l'objet de facon permanente. "true" ou false"
+      - **colorTextElement** :  Choisir la couleur du texte 
+      - **displayObjectInText** : Afficher l'objet dans le texte. "true" ou "false"
+      - **displayObjectPermanently** : Afficher l'objet de façon permanente. "true" ou false"
       - **legendElement**	: Associer une légende à votre élément 
       - **numericFormatElement** : Permet d'arrondir le résultat de la query
       - **unityMesureElement**: Affiche une unité de mesure
@@ -501,7 +494,7 @@ Avec de même :
 
 ## valueMetric
 
-- **valueMetric** : Définir la valeur de la metric
+- **valueMetric** : Définir la valeur de la métrique
 
 ```
 "valueMetric": ""

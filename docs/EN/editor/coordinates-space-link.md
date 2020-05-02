@@ -1,5 +1,6 @@
 # Oriented Link
-
+[![](../../screenshots/other/Go-back.png)](coordinates.md)
+ 
 Defining the coordinates of an oriented link
 
 
@@ -22,8 +23,7 @@ This is a key to add the result of a value to the parameters
 2 orientations are possible: 
 
 - monodirectional
-
-bi-directional
+- bi-directional
 
 ## Size
 

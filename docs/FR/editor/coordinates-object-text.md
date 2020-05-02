@@ -1,14 +1,11 @@
-
-
-
 # Text object
-
+[![](../../resource/Go-back.png)](coordinates.md)
 
 Cette partie est commune pour 
 
-- Region
-- Point
-
+- [Region](coordinates-space-region.md)
+- [Point](coordinates-space-point.md)
+- [Oriented Link](coordinates-space-link.md)
 
 ### Principal metrics
 
@@ -16,7 +13,8 @@ Cette partie est commune pour
 #### Region
 
 
-![text object](../../screenshots/editor/coordinates/screen-region/textobject-principal-region.jpg)
+
+![text object](../../screenshots/editor/coordinates/text-object/textobject-principal-region.jpg)
 
 
 En décochant cette option, le nom du label sera affiché dans la région définie.
@@ -29,7 +27,7 @@ Il apparait ensuite plusieurs options pour l'affichage du texte dans la région:
 
 #### Tooltip
 
-![text object](../../screenshots/editor/coordinates/screen-region/textobject-principal-tooltips.jpg)
+![text object](../../screenshots/editor/coordinates/text-object/textobject-principal-tooltips.jpg)
 
 En cochant cette option, le nom du label et le lien "Link tooltip" sera affiché dans l'info bulle qui apparait en passant le curseur sur la region
 
@@ -42,7 +40,7 @@ Il apparait ensuite plusieurs options pour l'affichage du texte dans l'info bull
 
 ### Generate texte object
 
-![text object](../../screenshots/editor/coordinates/screen-region/textobject-generate.jpg)
+![text object](../../screenshots/editor/coordinates/text-object/textobject-generate.jpg)
 
 
 En cochant cette option, vous allez vouloir afficher la valeur de la metric. Différentes options s'offrent ensuite à vous :
@@ -59,7 +57,7 @@ En cochant cette option, vous allez vouloir afficher la valeur de la metric. Dif
 ### Auxiliary element
 
 
-![text object](../../screenshots/editor/coordinates/screen-region/textobject-auxiliary.jpg)
+![text object](../../screenshots/editor/coordinates/text-object/textobject-auxiliary.jpg)
 
 
 En cochant cette option, vous allez vouloir afficher la valeur de l'auxilière définie au préalable. Différentes options s'offrent ensuite à vous :

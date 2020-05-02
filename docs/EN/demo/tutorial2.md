@@ -1,5 +1,6 @@
 # Add PNG/JPG in your dashboard
-
+[![](../../screenshots/other/Go-back.png)](README.md)
+ 
 ## Add an image as display
 For this tutorial, you will first download the picture background : 
 
@@ -10,6 +11,12 @@ For this tutorial, you will first download the picture background :
 Adding a background image is done from the `display` menu.
 
 The selected image will be [demo2-background.jpg](../../resource/demo2-background.jpg). To do this, we download it in base64 with the `Copy image address` function.
+
+
+```
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo2-background.jpg
+
+```
 
 It is possible to have more details with the [display](../editor/display.md) page.
 

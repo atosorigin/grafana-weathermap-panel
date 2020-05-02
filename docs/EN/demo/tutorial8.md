@@ -1,5 +1,6 @@
 # How to use auxiliere metric
-
+[![](../../screenshots/other/Go-back.png)](README.md)
+ 
 ## Add a dashboard SVG
 
 ![step 01](../../screenshots/demo/tutorial1/step01.jpg)
@@ -81,3 +82,11 @@ Go to `Auxiliary metrics` and fill the form like `Main metric`
 After that, you will be able to see your auxiliary metric on the toolbox of your point
 
 ![auxiliere](../../screenshots/demo/tutorial8/toolbox.png)
+
+### Import JSON file
+
+- It is possible to add all of those configuration through json files by doing an import. To know how to do it, [follow this link](../editor/import.md)
+
+And here is the JSON file :
+
+[demo8-point](../../resource/demo8-point.json) 

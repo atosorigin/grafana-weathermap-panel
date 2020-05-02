@@ -1,6 +1,7 @@
  
 # Create modelisation advanced
-
+[![](../../screenshots/other/Go-back.png)](README.md)
+ 
 ## Select query
 
 Let's choose those two queries :
@@ -78,6 +79,13 @@ This will display its value, if it is unique, and will display an error if there
 ![demo6](../../screenshots/demo/tutorial6/result.png)
 
 
+### Import JSON file
+
+- It is possible to add all of those configuration through json files by doing an import. To know how to do it, [follow this link](../editor/import.md)
+
+And here is the JSON file :
+
+[demo5-region](../../resource/demo6-region.json) 
 
 
 

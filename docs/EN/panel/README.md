@@ -1,7 +1,5 @@
 # Panel
-
-
-
+[![](../../screenshots/other/Go-back.png)](../../README.md)
 
 The panel is the result displayed in relation to the data and the edited panels.
 
@@ -20,4 +18,5 @@ To do this, various functions are available from the menu bar
   - [Add oriented link](panel-oriented-link.md)
   - [Add incurved oriented link](panel-incurved-link.md)
   - [Position Legend](panel-position-legend.md)
+  - [More and less](panel-more-less.md)
 

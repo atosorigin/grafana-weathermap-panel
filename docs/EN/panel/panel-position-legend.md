@@ -1,6 +1,6 @@
 
 # Legend
-
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 ![legend](../../screenshots/panel/legend.jpg)
 

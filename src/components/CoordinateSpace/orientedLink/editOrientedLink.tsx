@@ -104,13 +104,17 @@ class EditOrientedLink extends React.Component<Props, State> {
       }
     }
     // dev
+    // this.setState(prevState => ({
+    //   selectCoordinateSpace: valueSelect,
+    //   selectCoordinateSpaceDefault: valueExist
+    //     ? prevState.selectCoordinateSpaceDefault
+    //     : valueSelect.length > 0
+    //     ? valueSelect[0]
+    //     : prevState.selectCoordinateSpaceDefault,
+    // }));
     this.setState(prevState => ({
       selectCoordinateSpace: valueSelect,
-      selectCoordinateSpaceDefault: valueExist
-        ? prevState.selectCoordinateSpaceDefault
-        : valueSelect.length > 0
-        ? valueSelect[0]
-        : prevState.selectCoordinateSpaceDefault,
+      selectCoordinateSpaceDefault: valueExist ? prevState.selectCoordinateSpaceDefault : valueSelect.length > 0 ? valueSelect[0] : [],
     }));
     // final
     // this.setState({

@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 import { SelectableValue, PanelEditorProps } from '@grafana/data';
-import { Coord4D } from 'Models/RegionClass';
+import { Coord4D, RegionClass } from 'Models/RegionClass';
 import { Tooltip } from '@grafana/ui';
 import { SimpleOptions, Metric } from 'types';
 import { TextObject } from 'Models/TextObjectClass';
@@ -54,12 +54,16 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   size: SelectableValue<string>;
 }
 
-interface State {}
+interface State {
+  //pointTest: JSX.Element;
+}
 
 export default class DrawOrientedLink extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {};
+    this.state = {
+      //pointTest: <div></div>,
+    };
   }
 
   private synchroLinkX(positionX: number): number {
@@ -176,6 +180,120 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     return listParallelOrientedLinkSorted;
   };
 
+  private defineCoor4DRegion = (region: RegionClass): Coord4D => {
+    let coor4D: Coord4D = { xMin: '0', xMax: '0', yMin: '0', yMax: '0' };
+    let xMin = 0;
+    let xMax = 0;
+    let yMin = 0;
+    let yMax = 0;
+    if (region.idSVG !== '') {
+      console.log('regionSVG');
+      const heightPanel: number = parseInt(this.props.options.baseMap.height, 10);
+      const widthPanel: number = parseInt(this.props.options.baseMap.width, 10);
+      const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
+      const xMinInitialSpace: number = parseInt(initialSpace.xMin, 10);
+      const xMinPx: number = (xMinInitialSpace + 100) * (widthPanel / 200);
+      const xMaxInitialSpace: number = parseInt(initialSpace.xMax, 10);
+      const xMaxPx: number = (xMaxInitialSpace + 100) * (widthPanel / 200);
+      const widthInitialSpace: number = xMaxPx - xMinPx;
+      const yMinInitialSpace: number = parseInt(initialSpace.yMin, 10);
+      const yMinPx: number = (yMinInitialSpace + 100) * (heightPanel / 200);
+      const yMaxInitialSpace: number = parseInt(initialSpace.yMax, 10);
+      const yMaxPx: number = (yMaxInitialSpace + 100) * (heightPanel / 200);
+      const heightInitialSpace: number = yMaxPx - yMinPx;
+      const regionSVGHtml: any = document.getElementById('oct' + region.idSVG);
+      let width = 0;
+      let height = 0;
+      let xMinSVG = 0;
+      let xMaxSVG = 0;
+      let yMaxSVG = 0;
+      let yMinSVG = 0;
+      //console.log(regionSVGHtml);
+      if (regionSVGHtml) {
+        if (regionSVGHtml.localName === 'rect') {
+          //console.log('rect');
+          //console.log(regionSVGHtml);
+          width = parseInt(regionSVGHtml.attributes['width'].nodeValue, 10);
+          height = parseInt(regionSVGHtml.attributes['height'].nodeValue, 10);
+          xMinSVG = parseInt(regionSVGHtml.attributes['x'].nodeValue, 10);
+          xMaxSVG = xMinSVG + width;
+          yMaxSVG = parseInt(regionSVGHtml.attributes['y'].nodeValue, 10);
+          yMinSVG = yMaxSVG + height;
+        } else if (regionSVGHtml.localName === 'ellipse') {
+          //console.log('ellipse');
+          //console.log(regionSVGHtml);
+          const rX: number = parseInt(regionSVGHtml.attributes['rx'].nodeValue, 10);
+          const rY: number = parseInt(regionSVGHtml.attributes['ry'].nodeValue, 10);
+          xMinSVG = parseInt(regionSVGHtml.attributes['cx'].nodeValue, 10) - rX;
+          xMaxSVG = parseInt(regionSVGHtml.attributes['cx'].nodeValue, 10) + rX;
+          yMinSVG = parseInt(regionSVGHtml.attributes['cy'].nodeValue, 10) + rY;
+          yMaxSVG = parseInt(regionSVGHtml.attributes['cy'].nodeValue, 10) - rY;
+        } else if (regionSVGHtml.localName === 'path') {
+          //console.log('path');
+          //console.log(regionSVGHtml);
+          const allValues: string = regionSVGHtml.attributes['d'].nodeValue;
+          const arrayAllValues: string[] = allValues.split(' ');
+          //console.log(arrayAllValues);
+          let iX = -2;
+          let xMin = 1000000;
+          let xMax = 0;
+          let iY = -1;
+          let yMin = 1000000;
+          let yMax = 0;
+          for (let i = 0; i < arrayAllValues.length; i++) {
+            let valueToCheck = parseInt(arrayAllValues[i], 10);
+            if (i === iX + 3) {
+              if (valueToCheck < xMin) {
+                xMin = valueToCheck;
+              }
+              if (valueToCheck > xMax) {
+                xMax = valueToCheck;
+              }
+              iX = i;
+            }
+            if (i === iY + 3) {
+              if (valueToCheck < yMin) {
+                yMin = valueToCheck;
+              }
+              if (valueToCheck > yMax) {
+                yMax = valueToCheck;
+              }
+              iY = i;
+            }
+          }
+          xMinSVG = xMin;
+          xMaxSVG = xMax;
+          yMinSVG = yMax;
+          yMaxSVG = yMin;
+        }
+      }
+      const xMinSVGCoor: number = Math.round((xMinSVG - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
+      const xMaxSVGCoor: number = Math.round((xMaxSVG - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
+      const yMinSVGCoor: number = Math.round((yMinSVG - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1;
+      const yMaxSVGCoor: number = Math.round((yMaxSVG - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1;
+      xMin = xMinSVGCoor;
+      xMax = xMaxSVGCoor;
+      yMin = yMinSVGCoor;
+      yMax = yMaxSVGCoor;
+
+      if (xMin < 0 && xMax < 0) {
+        xMin = xMaxSVGCoor;
+        xMax = xMinSVGCoor;
+      }
+      if (yMin < 0 && yMax < 0) {
+        yMin = yMaxSVGCoor;
+        yMax = yMinSVGCoor;
+      }
+    } else {
+      xMin = parseInt(region.coords.xMin, 10);
+      xMax = parseInt(region.coords.xMax, 10);
+      yMin = parseInt(region.coords.yMin, 10);
+      yMax = parseInt(region.coords.yMax, 10);
+    }
+    coor4D = { xMin: xMin.toString(), xMax: xMax.toString(), yMin: yMin.toString(), yMax: yMax.toString() };
+    return coor4D;
+  };
+
   private ifMultiLinkWithRegionDefineX = (isIn: boolean, idMultiLink: number): number => {
     let xResult = 0;
     const arrayRegions = this.props.options.regionCoordinateSpace;
@@ -206,10 +324,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
 
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionOut) {
-          xMinOut = parseInt(region.coords.xMin, 10);
-          xMaxOut = parseInt(region.coords.xMax, 10);
-          yMinOut = parseInt(region.coords.yMin, 10);
-          yMaxOut = parseInt(region.coords.yMax, 10);
+          xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
+          xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
+          yMinOut = parseInt(this.defineCoor4DRegion(region).yMin, 10);
+          yMaxOut = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
 
@@ -218,13 +336,12 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMidIn = yMinIn;
       yMidOut = (yMinOut + yMaxOut) / 2;
     } else if (this.props.associatePointOut !== '') {
-      console.log(arrayRegions);
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
-          xMinIn = parseInt(region.coords.xMin, 10);
-          xMaxIn = parseInt(region.coords.xMax, 10);
-          yMinIn = parseInt(region.coords.yMin, 10);
-          yMaxIn = parseInt(region.coords.yMax, 10);
+          xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
+          xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
+          yMinIn = parseInt(this.defineCoor4DRegion(region).yMin, 10);
+          yMaxIn = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
 
@@ -245,10 +362,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '') {
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionOut) {
-          xMinOut = parseInt(region.coords.xMin, 10);
-          xMaxOut = parseInt(region.coords.xMax, 10);
-          yMinOut = parseInt(region.coords.yMin, 10);
-          yMaxOut = parseInt(region.coords.yMax, 10);
+          xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
+          xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
+          yMinOut = parseInt(this.defineCoor4DRegion(region).yMin, 10);
+          yMaxOut = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
       xMinIn = parseInt(this.props.pointAPositionX, 10);
@@ -262,10 +379,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     } else if (this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
-          xMinIn = parseInt(region.coords.xMin, 10);
-          xMaxIn = parseInt(region.coords.xMax, 10);
-          yMinIn = parseInt(region.coords.yMin, 10);
-          yMaxIn = parseInt(region.coords.yMax, 10);
+          xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
+          xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
+          yMinIn = parseInt(this.defineCoor4DRegion(region).yMin, 10);
+          yMaxIn = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
 
@@ -278,20 +395,19 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMidIn = (yMinIn + yMaxIn) / 2;
       yMidOut = yMinOut;
     } else {
-      console.log(arrayRegions);
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
-          xMinIn = parseInt(region.coords.xMin, 10);
-          xMaxIn = parseInt(region.coords.xMax, 10);
-          yMinIn = parseInt(region.coords.yMin, 10);
-          yMaxIn = parseInt(region.coords.yMax, 10);
+          xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
+          xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
+          yMinIn = parseInt(this.defineCoor4DRegion(region).yMin, 10);
+          yMaxIn = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
 
         if (region.label === this.props.associateRegionOut) {
-          xMinOut = parseInt(region.coords.xMin, 10);
-          xMaxOut = parseInt(region.coords.xMax, 10);
-          yMinOut = parseInt(region.coords.yMin, 10);
-          yMaxOut = parseInt(region.coords.yMax, 10);
+          xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
+          xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
+          yMinOut = parseInt(this.defineCoor4DRegion(region).yMin, 10);
+          yMaxOut = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
 
@@ -435,8 +551,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           } else if (xMidIn < xMidOut) {
             console.log('x21');
             if (xMinIn < 0 && xMaxIn < 0) {
+              console.log('xmin');
               xResult = xMinIn;
             } else {
+              console.log('xmax');
               xResult = xMaxIn;
             }
           } else if (xMidIn === xMidOut) {
@@ -709,10 +827,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
 
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionOut) {
-          xMinOut = parseInt(region.coords.xMin, 10);
-          xMaxOut = parseInt(region.coords.xMax, 10);
-          yMinOut = parseInt(region.coords.yMin, 10);
-          yMaxOut = parseInt(region.coords.yMax, 10);
+          xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
+          xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
+          yMinOut = parseInt(this.defineCoor4DRegion(region).yMin, 10);
+          yMaxOut = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
 
@@ -723,10 +841,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     } else if (this.props.associatePointOut !== '') {
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
-          xMinIn = parseInt(region.coords.xMin, 10);
-          xMaxIn = parseInt(region.coords.xMax, 10);
-          yMinIn = parseInt(region.coords.yMin, 10);
-          yMaxIn = parseInt(region.coords.yMax, 10);
+          xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
+          xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
+          yMinIn = parseInt(this.defineCoor4DRegion(region).yMin, 10);
+          yMaxIn = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
 
@@ -747,10 +865,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '') {
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionOut) {
-          xMinOut = parseInt(region.coords.xMin, 10);
-          xMaxOut = parseInt(region.coords.xMax, 10);
-          yMinOut = parseInt(region.coords.yMin, 10);
-          yMaxOut = parseInt(region.coords.yMax, 10);
+          xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
+          xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
+          yMinOut = parseInt(this.defineCoor4DRegion(region).yMin, 10);
+          yMaxOut = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
       xMinIn = parseInt(this.props.pointAPositionX, 10);
@@ -764,10 +882,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     } else if (this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
-          xMinIn = parseInt(region.coords.xMin, 10);
-          xMaxIn = parseInt(region.coords.xMax, 10);
-          yMinIn = parseInt(region.coords.yMin, 10);
-          yMaxIn = parseInt(region.coords.yMax, 10);
+          xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
+          xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
+          yMinIn = parseInt(this.defineCoor4DRegion(region).yMin, 10);
+          yMaxIn = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
 
@@ -782,17 +900,17 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     } else {
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
-          xMinIn = parseInt(region.coords.xMin, 10);
-          xMaxIn = parseInt(region.coords.xMax, 10);
-          yMinIn = parseInt(region.coords.yMin, 10);
-          yMaxIn = parseInt(region.coords.yMax, 10);
+          xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
+          xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
+          yMinIn = parseInt(this.defineCoor4DRegion(region).yMin, 10);
+          yMaxIn = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
 
         if (region.label === this.props.associateRegionOut) {
-          xMinOut = parseInt(region.coords.xMin, 10);
-          xMaxOut = parseInt(region.coords.xMax, 10);
-          yMinOut = parseInt(region.coords.yMin, 10);
-          yMaxOut = parseInt(region.coords.yMax, 10);
+          xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
+          xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
+          yMinOut = parseInt(this.defineCoor4DRegion(region).yMin, 10);
+          yMaxOut = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
 
@@ -2273,26 +2391,28 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
   private defineMainMetric = (mainMetric: string): string => {
     let result = '';
     const unit: string = this.props.textObject.valueGenerateObjectText.unit;
-    const decimal: string = this.props.textObject.valueGenerateObjectText.numericFormatElement;
+    //const decimal: string = this.props.textObject.valueGenerateObjectText.numericFormatElement;
+    const roundValue: number = parseInt(this.props.textObject.generateAuxiliaryElement.numericFormatElement, 10) || 1;
 
-    if (decimal !== '') {
-      result = parseFloat(mainMetric).toPrecision(parseInt(decimal, 10)) + ' ' + unit;
-    } else {
-      result = mainMetric + ' ' + unit;
-    }
+    //if (decimal !== '') {
+    result = parseFloat(mainMetric).toPrecision(roundValue) + ' ' + unit;
+    // } else {
+    //   result = mainMetric + ' ' + unit;
+    // }
     return result;
   };
 
   private defineAuxMetric = (auxMetric: string): string => {
     let result = '';
     const unit: string = this.props.textObject.generateAuxiliaryElement.unit;
-    const decimal: string = this.props.textObject.generateAuxiliaryElement.numericFormatElement;
+    //const decimal: string = this.props.textObject.generateAuxiliaryElement.numericFormatElement;
+    const roundValue: number = parseInt(this.props.textObject.generateAuxiliaryElement.numericFormatElement, 10) || 1;
 
-    if (decimal !== '') {
-      result = parseFloat(auxMetric).toPrecision(parseInt(decimal, 10)) + ' ' + unit;
-    } else {
-      result = auxMetric + ' ' + unit;
-    }
+    //if (decimal !== '') {
+    result = parseFloat(auxMetric).toPrecision(roundValue) + ' ' + unit;
+    // } else {
+    //   result = auxMetric + ' ' + unit;
+    // }
     return result;
   };
 
@@ -2776,6 +2896,11 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     // const xRegionOut: number = this.synchroLinkX((xMaxAssociateRegionOut + xMinAssociateRegionOut) / 2, defineCenter);
     // const yRegionOut: number = this.synchroLinkY((yMaxAssociateRegionOut + yMinAssociateRegionOut) / 2, defineCenter);
 
-    return <div>{this.drawLink(xCoordinateA, yCoordinateA, xCoordinateB, yCoordinateB, xCoordinateC, yCoordinateC, orientationLink)}</div>;
+    return (
+      <div>
+        {/* {this.state.pointTest} */}
+        {this.drawLink(xCoordinateA, yCoordinateA, xCoordinateB, yCoordinateB, xCoordinateC, yCoordinateC, orientationLink)}
+      </div>
+    );
   }
 }

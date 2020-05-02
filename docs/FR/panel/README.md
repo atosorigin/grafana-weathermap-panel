@@ -1,7 +1,5 @@
 # Panel
-
-
-
+[![](../../resource/Go-back.png)](../../README-fr.md)
 
 Le panel est le résultat affiché par rapport aux données et aux panneaux édités.
 
@@ -20,4 +18,5 @@ pour cela, différentes fonctions sont disponibles à partir de la barre du menu
   - [Add oriented link](panel-oriented-link.md)
   - [Add incurved oriented link](panel-incurved-link.md)
   - [Position Legend](panel-position-legend.md)
+  - [Plus et moins](panel-more-less.md)
 

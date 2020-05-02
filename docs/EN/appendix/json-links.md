@@ -1,5 +1,6 @@
 # File `links`
-
+[![](../../screenshots/other/Go-back.png)](README.md)
+ 
 The complete [sample-link.json](../../resource/sampleJson/sample-link.json) script is available, the construction details of which can be found below.
 
 

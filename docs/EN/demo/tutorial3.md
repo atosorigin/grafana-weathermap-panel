@@ -1,5 +1,6 @@
 # Create Dashboard Avanced with link  directionnel
-
+[![](../../screenshots/other/Go-back.png)](README.md) 
+ 
 
 
 ## Step 1: Creating queries
@@ -115,11 +116,13 @@ Then, we will edit our links as follow :
 
 To add a main metric to our link, go to `Coordinates space`, `OrientedLink` and click on you link.
 
-Then in `Main metric`, choose you metric.
+Then in `Main metric`, choose your metric for the first link.
 
 ![resultat](../../screenshots/demo/tutorial3/MainMetricLink.png)
 
-And 
+ANd choose the other metric for the second link
+
+![resultat](../../screenshots/demo/tutorial3/MainMetricLinkB.png)
 
 
 

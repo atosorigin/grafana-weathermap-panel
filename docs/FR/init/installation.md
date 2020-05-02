@@ -1,5 +1,5 @@
 # Installation
-
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 
 * Weathermap requires [Grafana](https://www.grafana.com/) v6.6+ to run (not tested lower version). Download and install it first.
@@ -7,7 +7,6 @@
 ## Dependencies
 
 - Grafana 6.6.x or 6.7.x
-- Yarn 1.21.1
 
 
 ## Official version
@@ -29,25 +28,9 @@ $ git clone https://github.com/atosorigin/grafana-weathermap-panel.git
 
 move the folder to grafana's plugins folder
 
+
 ```sh
 $ mv grafana-weathermap-panel /var/lib/grafana/plugins
-```
-
-Install the plugins
-
-```sh
-$ cd /var/lib/grafana/plugins
-$ cd grafana-weathermap-panel
-$ yarn install
-$ yarn watch
 $ systemctl restart grafana-server
-```
-
-This will run linting tools and applu prettier Fix
-
-To build the plugin run :
-
-```sh
-$ yarn build
 ```
 

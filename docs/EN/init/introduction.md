@@ -1,5 +1,6 @@
 # Introduction
-
+[![](../../screenshots/other/Go-back.png)](../../README.md)
+ 
 WeatherMap Panel Plugin for Grafana is free software. You can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation
 
 WeatherMap Panel Plugin is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -85,3 +86,8 @@ Second method :
 - You choose a query that return multiple value with differents key/valueKey, and you want to add a filter to refine your query.
 
 Step 7 : Once you have done all of those step, you will see the result of your query on the dashboard, assimilate with a region/a point or a link.
+
+
+#### Method 3
+
+Coming soon

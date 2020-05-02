@@ -1,3 +1,5 @@
+# SVG
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 ## Build an SVG file
 

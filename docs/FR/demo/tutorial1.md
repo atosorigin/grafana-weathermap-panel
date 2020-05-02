@@ -1,5 +1,6 @@
 
 ## Ajouter un dashboard SVG
+[![](../../resource/Go-back.png)](README.md)
 
 ![step 01](../../screenshots/demo/tutorial1/step01.jpg)
 
@@ -86,8 +87,6 @@ rate(go_memstats_gc_cpu_fraction[5m]) * 100000
 
 Le point de repère sera `A` qui sera le code utilisé ci-dessous
 
-Les paramétrages complémentaires sont disponible à la page ......
-
 
 
 ![step 06](../../screenshots/demo/tutorial1/step06.jpg)
@@ -103,7 +102,8 @@ Vous sélectionnez la ligne `Main metric` pour compléter le formulaire comme ce
 La valeur sera automatiquement affichée après le rafraichissement de la page
 
 
-Il est possible de compléter les autres champs avec les paramétrages complémentaires disponible à la page ....
+Il est possible de définir d'autres paramètres, en se référant à la page [coordinates space region](../editor/coordinates-space-region.md)
+
 
 
 
@@ -151,64 +151,63 @@ Vous devez remplir le formulaire comme ceci :
 - Saisir la position X et Y ou vous voulez voir le point apparaitre
 
 
-### Step 2: Add a color to the point
+### Étape 2 : Ajouter une couleur au point
 
 
 
 ![step 03](../../screenshots/demo/tutorial1/lower-limit-point.png)
 
 
-Adding a color to a SVG element is done from the `Coordinates space`, `point` and `Edit coordinate space` menu.
+L'ajout d'une couleur à un élément SVG se fait à partir du menu `Coordinates space`, `point` et `Edit coordinate space`.
 
-You select the `Lower limit' line and then complete the form like this: 
+Vous sélectionnez la ligne `Lower limit` pour compléter le formulaire comme ceci : 
  
 
-- Enable `Trace the background` to activate the background color. 
-- Select the `green` color in the `Edit background color` line.
-- Enable `Trace the border` to activate the border color.
-- Select the `red` color in the `Edit border color` line.
-- Enter a value to set the size of the border `size border` for example 3
-- Click on the "load" button
+- Activer `Trace the background` pour activer la couleur d'arrière plan 
+- Sélectionner la couleur `verte` à la ligne `Edit background color`
+- Activer `Trace the border` pour activer la couleur de bordure
+- Sélectionner la couleur `rouge` à la ligne `Edit border color`
+- Saisir une valeur pour définir la taille de la bordure `size border` par exemple 3
+- Cliquer sur le bouton `load`
 
-
-You get the following result
+Vous obtenez le résultat suivant
 
 ![step 04](../../screenshots/demo/tutorial1/result-color-point.png)
 
 
-It is possible to define other parameters, referring to the [coordinates lower limit](../editor/coordinates-lower-limit.md) page.
+Il est possible de définir d'autres paramètres, en se référant à la page [coordinates lower limit](../editor/coordinates-lower-limit.md).
 
 
-### Step 3: Adding a Query to a point
+### Étape 3 : Ajout d'une requête à un point
 
 
 ![step 05](../../screenshots/demo/tutorial1/step05.jpg)
 
 
-As seen in the previous section, we need a metric. So you can use the same metric as before, or you can give another metric B
+Comme nous l'avons vu dans la section précédente, nous avons besoin d'un système de mesure. Vous pouvez donc utiliser la même métrique qu'auparavant, ou vous pouvez donner une autre métrique `B`
 
-Once you have done that, you will associated this query to your point
+Une fois que vous aurez fait cela, vous associerez cette requête à votre point
 
 
 ![step 06](../../screenshots/demo/tutorial1/step06.jpg)
 
-The second step is from the `Coordinates space`, `region` and `Edit coordinate space` menu of the `visualization` tab.
+La deuxième étape se fait à partir du menu `Coordinates space`, `region` et `Edit coordinate space` de l'onglet `visualization`.
 
-You select the `Main metric` line to complete the form like this: 
+Vous sélectionnez la ligne `Main metric` pour remplir le formulaire comme ceci : 
 
-- Enter a `Query` for example A
-- Click on the `load` button
-
-
-The value will be automatically displayed after the page is refreshed.
+- Entrez une `Query` par exemple A
+- Cliquez sur le bouton `load`
 
 
-It is possible to fill in the other fields with the additional settings available on the page [coordinates space region](../editor/coordinates-space-region.md)
+La valeur sera automatiquement affichée après le rafraîchissement de la page.
+
+
+Il est possible de remplir les autres champs avec les paramètres supplémentaires disponibles sur la page [coordinates space region](../editor/coordinates-space-region.md)
 
 
 ### Résultat
 
-The end result will be like this: 
+Le résultat final sera le suivant : 
 
 ![step 08](../../screenshots/demo/tutorial1/final-result-point.png)
 
@@ -217,25 +216,41 @@ The end result will be like this:
 
 ### Etape 1 : Placer un lien orienté
 
-To create an oriented link you have to pass by [the panel menu](../panel/panel-oriented-link.md).
+Pour créer un lien orienté, vous devez passer par la page [the panel menu](../panel/panel-oriented-link.md).
 
-### Step 2: Adding a Query to a link
+### Étape 2 : Ajout d'une requête à un lien
 
-Once you have place you link on the image you can go to `Coordinates space` and `point` menu of the `visualization` tab.
+Une fois que vous avez placé votre lien sur l'image, vous pouvez aller dans le menu `Coordinates space` and `point` de l'onglet `visualization`.
 
 
 ![step 06](../../screenshots/demo/tutorial1/OrientedLink1.png)
 
-Here, you can see your link `OrientedLink 1`
+Ici, vous pouvez voir votre lien `OrientedLink 1`.
 
-You select the `Main metric` line to complete the form like this: 
+Vous sélectionnez la ligne `Main metric` pour remplir le formulaire comme ceci : 
 
-- Enter a `Query` for example A
-- Click on the `load` button
-
-
-The value will be automatically displayed after the page is refreshed.
+- Entrez une `Query`, par exemple A
+- Cliquez sur le bouton `load`
 
 
-It is possible to fill in the other fields with the additional settings available on the page [coordinates space link](../editor/coordinates-space-link.md)
+La valeur sera automatiquement affichée après le rafraîchissement de la page.
 
+
+Il est possible de remplir les autres champs avec les paramètres supplémentaires disponibles sur la page [coordinates space link](../editor/coordinates-space-link.md)
+
+
+### Résultat final
+
+![step 06](../../screenshots/demo/tutorial1/final-result-link.png)
+## Ajoutez tout avec JSON
+
+### Importer un fichier JSON
+
+- Il est possible d'ajouter toutes ces configurations par le biais de fichiers json en faisant une importation. Pour savoir comment faire, [suivez ce lien](../editor/import.md)
+
+Et voici les différents fichiers JSON :
+
+- [demo1-svgRegion](../../resource/demo1-svgRegion.json) 
+- [demo1-point](../../resource/demo1-point.json)
+- [demo1-link](../../resource/demo1-link.json)
+- [demo1-global](../../resource/demo1-global.json)

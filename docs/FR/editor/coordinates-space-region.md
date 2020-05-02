@@ -1,5 +1,5 @@
 # Région
-
+[![](../../resource/Go-back.png)](coordinates.md)
 
 Permet la création d'une région
 
@@ -47,7 +47,7 @@ Une page dédié pour remplir les champs sont disponible [ici](coordinates-manag
 ## Text object
 
 
-Une page dédié pour remplir les champs sont disponible [ici](coordinates-text-object.md)
+Une page dédié pour remplir les champs sont disponible [ici](coordinates-object-text.md)
 
 
 ## Lower Limit

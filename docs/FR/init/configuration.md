@@ -1,6 +1,5 @@
-
-
 # Configuration
+[![](../../resource/Go-back.png)](README.md)
 
 https://www.howtoforge.com/tutorial/how-to-install-prometheus-and-node-exporter-on-centos-8/
 

@@ -1,6 +1,5 @@
 # Main metric
-
-
+[![](../../screenshots/other/Go-back.png)](coordinates.md)
 
 This part is common for 
 
@@ -24,13 +23,13 @@ The following parameter is used to
 
 for example 
 
-![main metric](../../screenshots/editor/coordinates/main-metric/main-metric-query-c.jpg)
+![main metric](../../screenshots/editor/coordinates/main-metric/main-metric-key-value.png)
 
 
 In the hypothesis where you retrieve several values, the following field proposes to return to you : 
 
 - Average: Returns an average of the received values.
 - Total: Returns the total sum of the received values.
-- Error: TO DO
+- Error: Returns the value if this one is single, return error if there is several values
 
 Choose the one you want.

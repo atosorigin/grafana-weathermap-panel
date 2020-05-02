@@ -1,10 +1,11 @@
 # Settings server
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 The import of files by links is done by an associated server.
 
 If you do not perform the operation, you will not be able to take advantage of the functionality because you will get the error message [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) 
 
-The resolution is done with an associated server either by installing [Apache](https://www.apache.org/)
+The resolution is done with an associated server either by installing [Apache](https://www.apache.org/) or [Nginx](https://www.nginx.com)
 
 
 
@@ -62,6 +63,14 @@ You place the demo files in the folder
 /var/www/html
 
 ```
+
+# Nginx
+
+
+
+
+
+# Result
 
 to get the following result
 

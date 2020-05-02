@@ -1,6 +1,7 @@
 
 # How to create and add your own SVG image in Grafana
-
+[![](../../screenshots/other/Go-back.png)](README.md)
+ 
 ## Create you SVG on inkscape
 
 ### Step 1 : Download Inkscape

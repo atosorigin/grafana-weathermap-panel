@@ -1,6 +1,6 @@
 {
   "name": "weathermap",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "WeatherMap Panel Plugin for Grafana",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
@@ -14,13 +14,13 @@
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-typescript": "^7.9.0",
-    "@grafana/data": "^6.6.0",
-    "@grafana/toolkit": "^6.6.0",
+    "@grafana/data": "^6.7.0",
+    "@grafana/toolkit": "^6.7.0",
     "babel-jest": "^25.1.0",
     "css-loader": "^3.4.2"
   },
   "dependencies": {
-    "@grafana/ui": "^6.6.0",
+    "@grafana/ui": "^6.7.0",
     "@types/react-tabs": "^2.3.1",
     "global": "^4.4.0",
     "react-tabs": "^3.1.0",

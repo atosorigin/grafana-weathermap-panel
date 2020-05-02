@@ -26,7 +26,7 @@ export const initPoint = (index: number): PointClass => {
     },
     {
       legendElement: '',
-      numericFormatElement: '',
+      numericFormatElement: '5',
       unit: '',
       displayObjectInTooltip: true,
       // 'displayObjectPermanently': false,

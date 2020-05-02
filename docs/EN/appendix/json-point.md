@@ -1,5 +1,6 @@
 # File `point`
-
+[![](../../screenshots/other/Go-back.png)](README.md)
+ 
 The full [sample-point.json](../../resource/sampleJson/sample-point.json) script is available, the construction details of which can be found below.
 
 
@@ -56,7 +57,7 @@ The **point** file must be declared as a JSON file like this:
 
 ## associateOrientedLinks In/Out
 
-- **associateOrientedLinksIn/Out** : The name of the link that start/end from/to this point
+- **associateOrientedLinksIn/Out** : Fill in the link that starts/ends at this point
   - label : You can choose a label for this association
   - name : choose the unique name of this association
 
@@ -503,6 +504,4 @@ With similarly:
 "valueMetric": ""
 
 ```
-
-
 

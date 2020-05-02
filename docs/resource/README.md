@@ -1,4 +1,6 @@
+# Resource
 
+[![](../screenshots/other/Go-back.png)](../README.md)
 
 The `dashboard` directory offers different examples for the WeatcherMap plugin of grafana.
 

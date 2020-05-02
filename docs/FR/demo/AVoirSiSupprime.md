@@ -21,7 +21,6 @@ faire une relation entre query et OrientedLink
 
 
 
-
 ## Etape 1 : Création des queries
 
 

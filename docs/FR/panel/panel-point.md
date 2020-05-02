@@ -1,6 +1,5 @@
-
 # Point
-
+[![](../../resource/Go-back.png)](README.md)
 
 
 ![menu](../../screenshots/panel/point.jpg)

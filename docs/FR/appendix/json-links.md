@@ -1,4 +1,5 @@
 # Fichier `links`
+[![](../../resource/Go-back.png)](README.md)
 
 le script complet [sample-link.json](../../../demo/sample-link.json) est disponible, dont le détail de construction se trouve ci-dessous.
 
@@ -69,7 +70,7 @@ Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme c
 
 ## colorMode
 
-- **colorMode** : TO DO
+- **colorMode** : "vrai" si vous voulez utiliser différentes couleurs pour ce point. "faux" si vous voulez une couleur unique.
 
 ```
     "colorMode": false,
@@ -88,10 +89,10 @@ Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme c
 
 - **mainMetric**	
     - **format** "" (Laisser vide)
-    - **key** : permet de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
-    - **keyValue** : permet de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
+    - **key** : Correspond à une clef associée à la métrique
+    - **keyValue** : Vous permet de filtrer les données reçues par la Query en renseignant la valeur de la clef associée à la métrique
     - **manageValue** : Vous avez le choix entre "sum", "avg" ou "err"
-    - **refId** : Référence de la metric associé a cette région
+    - **refId** : Référence de la métrique associée à cette région
     - **returnQuery** : Ne pas renseigner.      
     - **unit** : (Laisser vide)
 
@@ -127,7 +128,7 @@ Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme c
 ## label/name
 
 - **label** : Donne un label au lien
-- **name** : DOnne un nom au lien
+- **name** : Donne un nom au lien
 
 ```
 
@@ -139,9 +140,9 @@ Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme c
 ## linkURL
 
  - **linkURL**
-    - **followLink** : Permet une redirection vers le lien renseigné en cliquant sur la region
+    - **followLink** : Permet une redirection vers le lien renseigné en cliquant sur la région
     - **hoveringTooltipLink** : Permet une redirection vers le lien renseigné dans le tool type en cliquant sur le lien
-    - **hoveringTooltipText** : Affiche le lien dans le tool type qui apparait quand on passe le curseur sur la zone ou sur le point
+    - **hoveringTooltipText** : Affiche le lien dans le tool type qui apparaît quand on passe le curseur sur la zone ou sur le point
 
 ```
  "linkURL": {
@@ -157,8 +158,8 @@ Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme c
 
 Il est possible de choisir entre 2 méthodes de couleur : 
 
-- couleur fixe
-- couleur variable
+- Couleur fixe
+- Couleur variable
 
 ### Couleur fixe
 
@@ -169,7 +170,7 @@ Si "colorMode" est "false"
 "colorMode": false,
 ```
 
-La couleur sera alors définie comme suit
+La couleur sera alors définie comme cela 
 
 ```
 "lowerLimit": [
@@ -253,14 +254,14 @@ Avec de même :
 
 ## metrics et metricsB
 
- - **metrics** : Il s'agit d'un tableau de metric pour ajouter des metrics auxilières
+ - **metrics** : Il s'agit d'un tableau de métrique pour ajouter des métriques auxilières
     - **0**
         - **expr** : Expresison en PrompQL
         - **format** "" (Laisser vide)
-        - **key** : permet de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
-        - **keyValue** : permet de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
+        - **key** : Correspond à une clef associée à la métrique
+        - **keyValue** : Vous permet de filtrer les données reçues par la Query en renseignant la valeur de la clef associée à la métrique
         - **manageValue** : Vous avez le choix entre "sum", "avg" ou "err"
-        - **refId** : Référence de la metric associé a cette région
+        - **refId** : Référence de la métrique associé à cette région
         - **returnQuery** : Ne pas renseigner.      
         - **unit** : (Laisser vide)
     - **1**
@@ -384,8 +385,8 @@ Avec de même :
         - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
         - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
         - **colorBackElement** : Choisir la couleur du background
-        - **colorTextElement** :  Choisir la couelur du texte 
-        - **displayObjectInText** : Afficher l'object dans le texte. "true" ou "false"
+        - **colorTextElement** :  Choisir la couleur du texte 
+        - **displayObjectInText** : Afficher l'objet dans le texte. "true" ou "false"
         - **legendElement** : Associer une légende à votre élément 
         - **numericFormatElement** : Permet d'arrondir le résultat de la query
         - **unit** : Affiche une unité de mesure
@@ -394,14 +395,14 @@ Avec de même :
     - **style**	
         - **bold** : "True" ou "False" pour mettre le texte en gras
         - **italic** : "True" ou "False" pour mettre le texte en italique
-        - **underline** : "True" ou "False" pour mettre le texte en sousligné
+        - **underline** : "True" ou "False" pour mettre le texte en souligné
     - **value**	: Valeur de l'objet
     - **valueGenerateObjectText**	
         - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
         - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
         - **colorBackElement** : Choisir la couleur du background
-        - **colorTextElement** :  Choisir la couelur du texte 
-        - **displayObjectInText** : Afficher l'object dans le texte. "true" ou "false"
+        - **colorTextElement** :  Choisir la couleur du texte 
+        - **displayObjectInText** : Afficher l'objet dans le texte. "true" ou "false"
         - **legendElement** : Associer une légende à votre élément 
         - **numericFormatElement** : Permet d'arrondir le résultat de la query
         - **unit** : Affiche une unité de mesure
@@ -468,11 +469,11 @@ Avec de même :
 
 ## valueMainMetric A/B
 
-- **valueMainMetricA** et **valueMainMetricB** : Valeur de la Metric principale des points A et B
+- **valueMainMetricA** et **valueMainMetricB** : Valeur de la métrique principale des points A et B
 
 ```
-    "valueMainMetricA": TO DO,
-    "valueMainMetricA": TO DO,
+    "valueMainMetricA": "50",
+    "valueMainMetricA": "30",
 
 ```
 

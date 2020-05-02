@@ -1,5 +1,5 @@
 # Create link bi directionnel
-
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 ## Add a dashboard SVG
 
@@ -153,6 +153,7 @@ Then you can this on this picture that the link is clickable
 
 And here is the different JSON file :
 
-- [demo7-Region](../../resource/demo7-region-svg.json) 
+- [demo7-Region SVG](../../resource/demo7-region-svg.json) 
+- [demo7-Region Coord](../../resource/demo7-region-coord.json) 
 - [demo7-point](../../resource/demo7-point.json)
 - [demo7-link](../../resource/demo7-link.json)

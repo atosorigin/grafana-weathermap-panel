@@ -1,4 +1,5 @@
 # Region
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 ![region](../../screenshots/panel/region.jpg)
 
@@ -10,9 +11,6 @@ An output form is proposed. The entire entry screen is represented as follows:
 
 
 ![region](../../screenshots/panel/region-form.jpg)
-
-
-
 
 
 

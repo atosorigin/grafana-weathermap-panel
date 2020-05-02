@@ -1,6 +1,7 @@
  
 # Créer une modélisation avancée
-
+[![](../../resource/Go-back.png)](README.md)
+ 
 ## Sélectionner une requête
 
 Choisissons ces deux requêtes :
@@ -79,6 +80,13 @@ Cela affichera sa valeur, si elle est unique, et affichera une erreur s'il y a d
 ![demo6](../../screenshots/demo/tutorial6/result.png)
 
 
+### Importer un fichier JSON
+
+- Il est possible d'ajouter toutes ces configurations par le biais de fichiers json en faisant une importation. Pour savoir comment faire, [suivez ce lien](../editor/import.md)
+
+Et voici le fichier JSON :
+
+- [demo5-region](../../resource/demo5-region.json) 
 
 
 
