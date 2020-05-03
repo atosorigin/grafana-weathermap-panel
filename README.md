@@ -4,7 +4,7 @@ Inspired by the [WeatherMap plugin for Cacti](https://www.network-weathermap.com
 
 This plugin is created to map a computer network. This makes it possible to be informed in real time in case a computer system is malfunctioning or other.
 
-It take data from your network devices and use it to provide a single-page overview of the current state of network.
+It take data from your network devices and use it to provide a single-page overview of the current state of network
 
 We can compare this to the presentation of the weather. 
 Indeed, the background with the computer network can represent a country. And we add on this background regions, points and links which can refer to the weather in a given city. 

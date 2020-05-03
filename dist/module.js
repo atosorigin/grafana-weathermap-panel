@@ -115,7 +115,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "../node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(true);
 // Module
-exports.push([module.i, "div.divSimpleEditor {\n  width: 100%;\n  /* margin: 2%;\n  padding: 2%; */ }\n\ndiv.CoordinateSpaceInitital {\n  /* margin: 1%; */\n  /* margin-bottom: 8%; */ }\n\nh3.titreSection {\n  margin-bottom: 2%;\n  /*   color: blue; */ }\n\n.parameter-interface-container {\n  width: 100%; }\n\n.parameter-interface-list-title {\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-flex-direction: row;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-justify-content: space-around;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n  border-bottom: 4px solid white;\n  margin: 10px 0; }\n\n.parameter-interface-title {\n  padding: 10px;\n  list-style: none;\n  cursor: pointer; }\n", "",{"version":3,"sources":["SimpleEditor.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX;gBACc,EAAE;;AAElB;EACE,gBAAgB;EAChB,uBAAuB,EAAE;;AAE3B;EACE,iBAAiB;EACjB,mBAAmB,EAAE;;AAEvB;EACE,WAAW,EAAE;;AAEf;EACE,qBAAa;EAAb,oBAAa;EAAb,aAAa;EACb,2BAAmB;MAAnB,uBAAmB;UAAnB,mBAAmB;EACnB,qCAA6B;MAA7B,yBAA6B;UAA7B,6BAA6B;EAC7B,8BAA8B;EAC9B,cAAc,EAAE;;AAElB;EACE,aAAa;EACb,gBAAgB;EAChB,eAAe,EAAE","file":"SimpleEditor.css","sourcesContent":["div.divSimpleEditor {\n  width: 100%;\n  /* margin: 2%;\n  padding: 2%; */ }\n\ndiv.CoordinateSpaceInitital {\n  /* margin: 1%; */\n  /* margin-bottom: 8%; */ }\n\nh3.titreSection {\n  margin-bottom: 2%;\n  /*   color: blue; */ }\n\n.parameter-interface-container {\n  width: 100%; }\n\n.parameter-interface-list-title {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  border-bottom: 4px solid white;\n  margin: 10px 0; }\n\n.parameter-interface-title {\n  padding: 10px;\n  list-style: none;\n  cursor: pointer; }\n"]}]);
+exports.push([module.i, "div.divSimpleEditor {\n  width: 100%;\n  /* margin: 2%;\n  padding: 2%; */ }\n\ndiv.CoordinateSpaceInitital {\n  /* margin: 1%; */\n  /* margin-bottom: 8%; */ }\n\nh3.titreSection {\n  margin-bottom: 2%;\n  /*   color: blue; */ }\n\n.parameter-interface-container {\n  width: 100%; }\n\n.parameter-interface-list-title {\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-flex-direction: row;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-justify-content: space-around;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n  border-bottom: 4px solid white;\n  margin: 10px 0; }\n\n.parameter-interface-title {\n  padding: 10px;\n  list-style: none;\n  cursor: pointer; }\n", "",{"version":3,"sources":["SimpleEditor.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX;gBACc,EAAE;;AAElB;EACE,gBAAgB;EAChB,uBAAuB,EAAE;;AAE3B;EACE,iBAAiB;EACjB,mBAAmB,EAAE;;AAEvB;EACE,WAAW,EAAE;;AAEf;EACE,qBAAqB;EACrB,oBAAoB;EACpB,aAAa;EACb,2BAA2B;MACvB,uBAAuB;UACnB,mBAAmB;EAC3B,qCAAqC;MACjC,yBAAyB;UACrB,6BAA6B;EACrC,8BAA8B;EAC9B,cAAc,EAAE;;AAElB;EACE,aAAa;EACb,gBAAgB;EAChB,eAAe,EAAE","file":"SimpleEditor.css","sourcesContent":["div.divSimpleEditor {\n  width: 100%;\n  /* margin: 2%;\n  padding: 2%; */ }\n\ndiv.CoordinateSpaceInitital {\n  /* margin: 1%; */\n  /* margin-bottom: 8%; */ }\n\nh3.titreSection {\n  margin-bottom: 2%;\n  /*   color: blue; */ }\n\n.parameter-interface-container {\n  width: 100%; }\n\n.parameter-interface-list-title {\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-flex-direction: row;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-justify-content: space-around;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n  border-bottom: 4px solid white;\n  margin: 10px 0; }\n\n.parameter-interface-title {\n  padding: 10px;\n  list-style: none;\n  cursor: pointer; }\n"]}]);
 // Exports
 module.exports = exports;
 
@@ -6324,12 +6324,15 @@ function (_super) {
 
     _this.getConvertValueAuxMetrics = function (valueBrut, region) {
       var result = '';
-      var roundValue = parseInt(region.textObj.generateAuxiliaryElement.numericFormatElement, 10) || 1;
-      var unit = region.textObj.generateAuxiliaryElement.unit; //if (roundValue !== '') {
+      var decimal = region.textObj.generateAuxiliaryElement.numericFormatElement;
+      var roundValue = parseInt(decimal, 10) || 1;
+      var unit = region.textObj.generateAuxiliaryElement.unit;
 
-      result = parseFloat(valueBrut).toPrecision(roundValue); // } else {
-      //   result = valueBrut;
-      // }
+      if (decimal !== '') {
+        result = parseFloat(valueBrut).toPrecision(roundValue);
+      } else {
+        result = valueBrut;
+      }
 
       return result + ' ' + unit;
     };
@@ -6446,15 +6449,17 @@ function (_super) {
     _this.defineMainMetric = function (region) {
       var result = '';
       var legend = region.textObj.valueGenerateObjectText.legendElement;
-      var unit = region.textObj.valueGenerateObjectText.unit; //const decimal: string = region.textObj.valueGenerateObjectText.numericFormatElement;
-      //const roundMetrics: number = parseInt(decimal, 10) || 1;
+      var unit = region.textObj.valueGenerateObjectText.unit;
+      var decimal = region.textObj.valueGenerateObjectText.numericFormatElement; //const roundMetrics: number = parseInt(decimal, 10) || 1;
 
-      var roundValue = parseInt(region.textObj.generateAuxiliaryElement.numericFormatElement, 10) || 1;
-      var mainMetric = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_10__["getResultQuery"])(region.mainMetric) || 0; // if (decimal !== '') {
+      var roundValue = parseInt(decimal, 10) || 1;
+      var mainMetric = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_10__["getResultQuery"])(region.mainMetric) || 0;
 
-      result = mainMetric.toPrecision(roundValue) + ' ' + unit; // } else {
-      //   result = mainMetric + ' ' + unit;
-      // }
+      if (decimal !== '') {
+        result = mainMetric.toPrecision(roundValue) + ' ' + unit;
+      } else {
+        result = mainMetric + ' ' + unit;
+      }
 
       if (legend) {
         result = legend + ': ' + result;
@@ -13421,26 +13426,30 @@ function (_super) {
 
     _this.defineMainMetric = function (mainMetric) {
       var result = '';
-      var unit = _this.props.textObject.valueGenerateObjectText.unit; //const decimal: string = this.props.textObject.valueGenerateObjectText.numericFormatElement;
+      var unit = _this.props.textObject.valueGenerateObjectText.unit;
+      var decimal = _this.props.textObject.valueGenerateObjectText.numericFormatElement;
+      var roundValue = parseInt(decimal, 10) || 1;
 
-      var roundValue = parseInt(_this.props.textObject.generateAuxiliaryElement.numericFormatElement, 10) || 1; //if (decimal !== '') {
-
-      result = parseFloat(mainMetric).toPrecision(roundValue) + ' ' + unit; // } else {
-      //   result = mainMetric + ' ' + unit;
-      // }
+      if (decimal !== '') {
+        result = parseFloat(mainMetric).toPrecision(roundValue) + ' ' + unit;
+      } else {
+        result = mainMetric + ' ' + unit;
+      }
 
       return result;
     };
 
     _this.defineAuxMetric = function (auxMetric) {
       var result = '';
-      var unit = _this.props.textObject.generateAuxiliaryElement.unit; //const decimal: string = this.props.textObject.generateAuxiliaryElement.numericFormatElement;
+      var unit = _this.props.textObject.generateAuxiliaryElement.unit;
+      var decimal = _this.props.textObject.generateAuxiliaryElement.numericFormatElement;
+      var roundValue = parseInt(decimal, 10) || 1;
 
-      var roundValue = parseInt(_this.props.textObject.generateAuxiliaryElement.numericFormatElement, 10) || 1; //if (decimal !== '') {
-
-      result = parseFloat(auxMetric).toPrecision(roundValue) + ' ' + unit; // } else {
-      //   result = auxMetric + ' ' + unit;
-      // }
+      if (decimal !== '') {
+        result = parseFloat(auxMetric).toPrecision(roundValue) + ' ' + unit;
+      } else {
+        result = auxMetric + ' ' + unit;
+      }
 
       return result;
     };
@@ -14704,26 +14713,30 @@ function (_super) {
 
     _this.defineMainMetric = function (mainMetric) {
       var result = '';
-      var unit = _this.props.textObject.valueGenerateObjectText.unit; //const decimal: string = this.props.textObject.valueGenerateObjectText.numericFormatElement;
+      var unit = _this.props.textObject.valueGenerateObjectText.unit;
+      var decimal = _this.props.textObject.valueGenerateObjectText.numericFormatElement;
+      var roundValue = parseInt(decimal, 10) || 1;
 
-      var roundValue = parseInt(_this.props.textObject.generateAuxiliaryElement.numericFormatElement, 10) || 1; //if (decimal !== '') {
-
-      result = parseFloat(mainMetric).toPrecision(roundValue) + ' ' + unit; // } else {
-      //   result = mainMetric + ' ' + unit;
-      // }
+      if (decimal !== '') {
+        result = parseFloat(mainMetric).toPrecision(roundValue) + ' ' + unit;
+      } else {
+        result = mainMetric + ' ' + unit;
+      }
 
       return result;
     };
 
     _this.defineAuxMetric = function (auxMetric) {
       var result = '';
-      var unit = _this.props.textObject.generateAuxiliaryElement.unit; //const decimal: string = this.props.textObject.generateAuxiliaryElement.numericFormatElement;
+      var unit = _this.props.textObject.generateAuxiliaryElement.unit;
+      var decimal = _this.props.textObject.generateAuxiliaryElement.numericFormatElement;
+      var roundValue = parseInt(decimal, 10) || 1;
 
-      var roundValue = parseInt(_this.props.textObject.generateAuxiliaryElement.numericFormatElement, 10) || 1; //if (decimal !== '') {
-
-      result = parseFloat(auxMetric).toPrecision(roundValue) + ' ' + unit; // } else {
-      //   result = auxMetric + ' ' + unit;
-      // }
+      if (decimal !== '') {
+        result = parseFloat(auxMetric).toPrecision(roundValue) + ' ' + unit;
+      } else {
+        result = auxMetric + ' ' + unit;
+      }
 
       return result;
     };

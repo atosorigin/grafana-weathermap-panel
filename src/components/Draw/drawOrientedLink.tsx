@@ -2391,28 +2391,28 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
   private defineMainMetric = (mainMetric: string): string => {
     let result = '';
     const unit: string = this.props.textObject.valueGenerateObjectText.unit;
-    //const decimal: string = this.props.textObject.valueGenerateObjectText.numericFormatElement;
-    const roundValue: number = parseInt(this.props.textObject.generateAuxiliaryElement.numericFormatElement, 10) || 1;
+    const decimal: string = this.props.textObject.valueGenerateObjectText.numericFormatElement;
+    const roundValue: number = parseInt(decimal, 10) || 1;
 
-    //if (decimal !== '') {
-    result = parseFloat(mainMetric).toPrecision(roundValue) + ' ' + unit;
-    // } else {
-    //   result = mainMetric + ' ' + unit;
-    // }
+    if (decimal !== '') {
+      result = parseFloat(mainMetric).toPrecision(roundValue) + ' ' + unit;
+    } else {
+      result = mainMetric + ' ' + unit;
+    }
     return result;
   };
 
   private defineAuxMetric = (auxMetric: string): string => {
     let result = '';
     const unit: string = this.props.textObject.generateAuxiliaryElement.unit;
-    //const decimal: string = this.props.textObject.generateAuxiliaryElement.numericFormatElement;
-    const roundValue: number = parseInt(this.props.textObject.generateAuxiliaryElement.numericFormatElement, 10) || 1;
+    const decimal: string = this.props.textObject.generateAuxiliaryElement.numericFormatElement;
+    const roundValue: number = parseInt(decimal, 10) || 1;
 
-    //if (decimal !== '') {
-    result = parseFloat(auxMetric).toPrecision(roundValue) + ' ' + unit;
-    // } else {
-    //   result = auxMetric + ' ' + unit;
-    // }
+    if (decimal !== '') {
+      result = parseFloat(auxMetric).toPrecision(roundValue) + ' ' + unit;
+    } else {
+      result = auxMetric + ' ' + unit;
+    }
     return result;
   };
 

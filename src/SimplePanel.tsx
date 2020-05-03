@@ -1790,13 +1790,14 @@ export class SimplePanel extends PureComponent<Props, State> {
 
   private getConvertValueAuxMetrics = (valueBrut: string, region: RegionClass): string => {
     let result = '';
-    const roundValue: number = parseInt(region.textObj.generateAuxiliaryElement.numericFormatElement, 10) || 1;
+    const decimal: string = region.textObj.generateAuxiliaryElement.numericFormatElement;
+    const roundValue: number = parseInt(decimal, 10) || 1;
     const unit: string = region.textObj.generateAuxiliaryElement.unit;
-    //if (roundValue !== '') {
-    result = parseFloat(valueBrut).toPrecision(roundValue);
-    // } else {
-    //   result = valueBrut;
-    // }
+    if (decimal !== '') {
+      result = parseFloat(valueBrut).toPrecision(roundValue);
+    } else {
+      result = valueBrut;
+    }
     return result + ' ' + unit;
   };
 
@@ -1900,16 +1901,16 @@ export class SimplePanel extends PureComponent<Props, State> {
     let result = '';
     const legend: string = region.textObj.valueGenerateObjectText.legendElement;
     const unit: string = region.textObj.valueGenerateObjectText.unit;
-    //const decimal: string = region.textObj.valueGenerateObjectText.numericFormatElement;
+    const decimal: string = region.textObj.valueGenerateObjectText.numericFormatElement;
     //const roundMetrics: number = parseInt(decimal, 10) || 1;
-    const roundValue: number = parseInt(region.textObj.generateAuxiliaryElement.numericFormatElement, 10) || 1;
+    const roundValue: number = parseInt(decimal, 10) || 1;
     const mainMetric: number = getResultQuery(region.mainMetric) || 0;
 
-    // if (decimal !== '') {
-    result = mainMetric.toPrecision(roundValue) + ' ' + unit;
-    // } else {
-    //   result = mainMetric + ' ' + unit;
-    // }
+    if (decimal !== '') {
+      result = mainMetric.toPrecision(roundValue) + ' ' + unit;
+    } else {
+      result = mainMetric + ' ' + unit;
+    }
     if (legend) {
       result = legend + ': ' + result;
     }
