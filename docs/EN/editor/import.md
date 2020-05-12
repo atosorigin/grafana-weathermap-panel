@@ -14,7 +14,7 @@ For the Global import, it is necessary to fill in the link of the .json file whi
 With:
 	
 - coordinateSpaceInitial	
-    - coordinate: Allows you to resize your work space. X and Y axes ranging from -100% to plus 100%. 
+    - coordinate: Allows you to resize your workspace. X and Y axes ranging from -100% to plus 100%. 
     - displayArea: "True" or "False" to show the working space
 - textSettings	
     - font: Choice of text font between "Helvetica", "Arial", "sans-serif", "mono".
@@ -45,13 +45,13 @@ With:
 
 For the Multi URL Import, you have to enter the required URLs in the field. 
 The different URLs are those of regions, points, and links. 
-You can find templates of the json type of these files at the following links:
+You can find templates of the JSON type of these files at the following links:
 
 - [region.json](./../appendix/json-region.md)
 - [point.json](./../appendix/json-points.md)
 - [lien.json](./../appendix/json-links.md)
 
-Afterwards, you click on the `add` button if you want to add more URLs
+Afterward, you click on the `add` button if you want to add more URLs
 To finish you have to click on `finish`.
 
 

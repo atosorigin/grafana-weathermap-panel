@@ -71,7 +71,7 @@ The **link** file must be declared as a JSON file like this:
 
 ## colorMode
 
-- **colorMode** : "true" if you want to use differents colors for this point. "false" if you want a unique color.
+- **colorMode** : "true" if you want to use different colors for this point. "false" if you want a unique color.
 
 ```
     "colorMode": true,
@@ -330,7 +330,7 @@ TO DO , Laisser vide pour le moment
 
 ## point A/B/C Position X/Y
 
-- **pointAPositionX** etc.. : Allow you to place yours point on the board
+- **pointAPositionX** etc.. : Allow you to place your point on the board
 
 ```
     "pointAPositionX": "-14",
@@ -392,7 +392,7 @@ TO DO , Laisser vide pour le moment
 ## size
 
 - **size** : Allow you to choose the size of your link
-    - **value** : What os the size. Could be Small, Medium, Large
+    - **value** : What is the size. Could be Small, Medium, Large
     - **label** : Choose a label for the size
 
 ## textObj
@@ -466,7 +466,7 @@ TO DO , Laisser vide pour le moment
 
 ## traceBack
 
- - **traceBack**: Allows to associate a color to the background. "true" or "false"
+ - **traceBack**: Allow you to associate a color to the background. "true" or "false"
 
 
 ```
@@ -476,7 +476,7 @@ TO DO , Laisser vide pour le moment
 
 ## traceBorder
 
-  - **traceBorder**: Allows to associate a color to the border. "true" or "false"
+  - **traceBorder**: Allow you to associate a color to the border. "true" or "false"
 
 ```
       "traceBorder": false
@@ -496,7 +496,7 @@ TO DO , Laisser vide pour le moment
 
 ## zIndex
 
- - **zIndex**: The larger the number, the more the link will be highlighted on the image in terms of layer.
+ - **zIndex**: The larger the number, the more the link will be highlighted on the image in terms of layers.
 
  ```
     "zIndex": "5",

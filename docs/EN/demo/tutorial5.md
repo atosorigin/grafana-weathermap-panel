@@ -44,7 +44,7 @@ node_network_receive_bytes_total{device="vethdee87cd",instance="localhost:9100",
 
 ```
 
-The difference shows 9 types of devices. Let's choose 2 for this exemple
+The difference shows 9 types of devices. Let's choose 2 for these examples
 
 - vetha317d1e
 - eno0
@@ -81,9 +81,9 @@ For this step, you can follow the [tutorial2](tutorial2.md) to create your regio
 
 Once you have created your regions, you can edit them in `Region`, `Edit coordinate space`. Then click on `Main metric` and fill it like this :
 - `Query` : Choose the query you are interested in
-- `Key` : Represent the key present in the result of you query. Here it's `device`
+- `Key` : Represent the key present in the result of your query. Here it's `device`
 - `Value key` : Represent the value of the previous key. Here we want to filter for value `enp0s3` and `lo`
-- `Manipulate` : You can choose if you want an `average`,`sum` or `total` of the value.
+- `Manipulate` : You can choose if you want an `average`,`sum`, or `total` of the value.
 
 Region 1
 
@@ -102,7 +102,7 @@ The result display those 2 values
 
 ### Import JSON file
 
-- It is possible to add all of those configuration through json files by doing an import. To know how to do it, [follow this link](../editor/import.md)
+- It is possible to add all of those configurations through JSON files by doing an import. To know how to do it, [follow this link](../editor/import.md)
 
 And here is the JSON file :
 

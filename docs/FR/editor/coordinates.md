@@ -1,6 +1,6 @@
 
 # Coordinates space
-[![](../../resource/Go-back.png)](README.md)
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 L'espace de coordonnées se découpe en 3 parties : 
 

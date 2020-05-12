@@ -1,5 +1,5 @@
 # Auxiliary metric
-[![](../../resource/Go-back.png)](coordinates.md)
+[![](../../screenshots/other/Go-back.png)](coordinates.md)
 
 Cette fonction est commune pour 
 
@@ -11,9 +11,9 @@ Cette fonction est commune pour
 ![main metric](../../screenshots/editor/coordinates/auxiliary-metric/metric.png)
 
 
-- L'intêret de la metric auxilière et d'ajouter d'autres valeurs à une region ou à un point.
-- La query de la main metric est recopier ici. 
-- "Key" et "Value key" permettent de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
+- L'intérêt de la métrique auxiliaire et d'ajouter d'autres valeurs à une région ou à un point.
+- La query de la main métrique est recopié ici. 
+- "Key" et "Value key" permettent de filtrer les données reçues par la Query pour ne garder que ce qui vous importe.
 
 
 par exemple 
@@ -21,13 +21,14 @@ par exemple
 ![main metric](../../screenshots/editor/coordinates/auxiliary-metric/metric-key.png)
 
 
-Dans l'hypothese ou vous récupéré pluseurs valeurs, le champ suivant propose de vous retourner suivantes : 
+Dans l'hypothèse où vous récupérez plusieurs valeurs, le champ suivant propose de vous retourner suivantes : 
 
 - Average : Renvoie une moyenne des valeurs reçues.
 - Total : Renvoie la somme total des valeurs reçues
 - Error : Retourne la valeur si celle-ci est unique, retourne "erreur" s'il y a plusieurs valeurs
 
 Choisissez celle qui vous désirez.
+
 
 
 

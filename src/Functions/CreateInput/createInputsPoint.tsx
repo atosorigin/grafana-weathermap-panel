@@ -3,9 +3,6 @@ import { InputSelectableClass } from 'Models/InputSelectableClass';
 //import { RegionClass } from 'Models/RegionClass';
 
 export const createInputsPoint = (id: number): InputSelectableClass[] => {
-  // const newFieldLinkWithCoordonateSpace: InputSelectableClass = new InputSelectableClass(id.toString() + 'LinkWithCoordinateSpace',
-  // 	'Associate region', 'linkWithCoordinateSpace' + id.toString(), 'select',
-  // 	dataEspaceCoor, '', true, 'Associate region', undefined);
   const newFieldDrawGraphicMarker: InputSelectableClass = new InputSelectableClass(
     id.toString() + 'drawGraphicMarker',
     'Display ',
@@ -20,14 +17,22 @@ export const createInputsPoint = (id: number): InputSelectableClass[] => {
     'drawGraphicMarker',
     undefined
   );
-  // const newFieldShape: InputSelectableClass = new InputSelectableClass(id.toString() + 'shape',
-  // 	'GraphicMarker', 'shape' + id.toString(), 'select',
-  // 	[
-  // 		{ value: 'arrow', label: 'Arrow' },
-  // 		{ value: 'circle', label: 'Circle' },
-  // 		{ value: 'cross', label: 'Cross' },
-  // 	],
-  // 	'', true, 'Shape', undefined);
+  const newFieldShape: InputSelectableClass = new InputSelectableClass(
+    id.toString() + 'shape',
+    'Shape',
+    'shape' + id.toString(),
+    'select',
+    [
+      { value: 'none', label: 'None' },
+      { value: 'circle', label: 'Circle' },
+      { value: 'square', label: 'Square' },
+      { value: 'diamond', label: 'Diamond' },
+    ],
+    '',
+    true,
+    'Shape',
+    undefined
+  );
   const newFieldSizeWidthShape: InputSelectableClass = new InputSelectableClass(
     id.toString() + 'sizeWidth',
     'Size',
@@ -58,9 +63,6 @@ export const createInputsPoint = (id: number): InputSelectableClass[] => {
     'SizeHeight',
     undefined
   );
-  // const newFieldColor: InputSelectableClass = new InputSelectableClass(id.toString() + 'color',
-  // 	'Color', 'color' + id.toString(), 'color', [],
-  // 	'#5794F2', true, 'Color', undefined);
   const newFieldRotateArrow: InputSelectableClass = new InputSelectableClass(
     id.toString() + 'rotateArrow',
     'Orientation',
@@ -105,21 +107,6 @@ export const createInputsPoint = (id: number): InputSelectableClass[] => {
     'Label',
     undefined
   );
-  // const newFieldPositionLabelX: InputSelectableClass = new InputSelectableClass(id.toString() + 'positionLabelX',
-  // 	'Position X Label', 'positionLabelX' + id.toString(),
-  // 	'text', [], '', true, 'Position X Label', undefined);
-  // const newFieldPositionLabelY: InputSelectableClass = new InputSelectableClass(id.toString() + 'positionLabelY',
-  // 	'Position Y Label', 'positionLabelY' + id.toString(),
-  // 	'text', [], '', true, 'Position Y Label', undefined);
-  // const newFieldMainMetric: InputSelectableClass = new InputSelectableClass(id.toString() + 'refIdMainMetricPoint',
-  // 	'Ref Id Main Metric', 'refIdMainMetric' + id.toString(), 'text',
-  // 	[], '', true, 'RefId Main Metric', undefined);
-  // const newFieldKeyMainMetric: InputSelectableClass = new InputSelectableClass(id.toString() + 'keyMainMetricPoint',
-  // 	'Key Main Metric', 'keyMainMetric' + id.toString(), 'text',
-  // 	[], '', true, 'Key Main Metric', undefined);
-  // const newFieldKeyValueMainMetric: InputSelectableClass = new InputSelectableClass(id.toString() + 'keyValueMainMetricPoint',
-  // 	'Key Value Main Metric', 'keyValueMainMetric' + id.toString(), 'text',
-  // 	[], '', true, 'Key Value Main Metric', undefined);
   const newFieldButton: InputSelectableClass = new InputSelectableClass(
     id.toString() + 'deletePoint',
     'Delete',
@@ -134,20 +121,13 @@ export const createInputsPoint = (id: number): InputSelectableClass[] => {
 
   const finalArray: InputSelectableClass[] = [
     newFieldLabel,
-    //newFieldLinkWithCoordonateSpace,
     newFieldDrawGraphicMarker,
-    //newFieldShape,
+    newFieldShape,
     newFieldSizeWidthShape,
     newFieldSizeHeightShape,
-    //newFieldColor,
     newFieldRotateArrow,
     newFieldPositionXShape,
     newFieldPositionYShape,
-    // newFieldPositionLabelX,
-    // newFieldPositionLabelY,
-    // newFieldMainMetric,
-    // newFieldKeyMainMetric,
-    // newFieldKeyValueMainMetric,
     newFieldButton,
   ];
   return finalArray;

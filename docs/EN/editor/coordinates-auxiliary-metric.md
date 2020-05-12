@@ -27,6 +27,6 @@ In the hypothesis where you retrieve several values, the following field propose
 
 - Average: Returns an average of the received values.
 - Total: Returns the total sum of the received values.
-- Error: Returns the value if this one is single, return error if there is several values
+- Error: Returns the value if this one is single, return `error` if there are several values
 
 Choose the one you want.

@@ -61,7 +61,7 @@ By checking this option, you will want to display the value of the metric. You t
 ![text object](../../screenshots/editor/coordinates/text-object/textobject-auxiliary.jpg)
 
 
-By checking this option, you will want to display the value of the auxilary defined beforehand. You then have different options:
+By checking this option, you will want to display the value of the auxiliary defined beforehand. You then have different options:
 
 - Legend: Allows you to add a legend before displaying the value of the metric.
 - Digital formatting: Allows you to round the value of the metric (To be defined)

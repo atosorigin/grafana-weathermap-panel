@@ -1,6 +1,6 @@
  
 # Créer une modélisation avancée
-[![](../../resource/Go-back.png)](README.md)
+[![](../../screenshots/other/Go-back.png)](README.md)
  
 ## Sélectionner une requête
 
@@ -64,7 +64,7 @@ Pour cette étape, vous pouvez suivre le [tutorial2](tutorial2.md) pour créer v
 
 ### Etape 3 : Ajouter une métrique principale à la région et manipuler les données
 
-Une fois les régions créées, allez dans la rubrique `Main metric` et ajoutez une de celle que vous avez definis.
+Une fois les régions créées, allez dans la rubrique `Main metric` et ajoutez une de celle que vous avez définis.
 
 Vous pouvez ensuite choisir entre `manipulate the average`, si vous voulez une moyenne des valeurs métriques. Ou  `manipulate the total`, si vous voulez une somme des valeurs de la métrique.
 

@@ -14,7 +14,6 @@ import { LinkURLClass } from 'Models/LinkURLClass';
 import { coordinateIsInInitialSpace } from 'Functions/coodinateIsInInitialSpace';
 import { reqMetricPoint, reqMetricOrientedLink, reqMetricAuxOrientedLink, reqMetricAuxPoint, reqMetricAuxRegion } from 'Functions/fetchMetrics';
 import { getResultQuery } from 'Functions/getResultQuery';
-//import { getInfoDisplayRegion } from 'Functions/getInfoDisplayRegion';
 
 import AddCoordinate from 'components/CoordinateSpace/addCoordinate';
 import DrawRectangle from './components/Draw/drawRectangle';
@@ -25,7 +24,6 @@ import LegendComponant from './components/legend';
 import DrawRectangleExtend from 'components/Draw/drawRectangleExtend';
 import { initRegionCoordinateSpace } from 'Functions/initRegionCoordinateSpace';
 import { Style } from 'components/Parametrage/styleComponent';
-// import { identity } from 'rxjs';
 
 interface Props extends PanelProps<SimpleOptions> {}
 
@@ -73,6 +71,11 @@ interface State {
   buttonAddIncurvedLinkIsActive: boolean;
 
   dataTooltipSVG: DataTooltipRegionSVG;
+
+  hiddenLegend: boolean;
+
+  // value of image in Display to the initialisation
+  currentImage: string;
 }
 
 /**
@@ -95,6 +98,8 @@ export class SimplePanel extends PureComponent<Props, State> {
       buttonAddLinkIsActive: false,
       buttonAddIncurvedLinkIsActive: false,
       dataTooltipSVG: { idSVG: '', x: '0', y: '0' },
+      hiddenLegend: false,
+      currentImage: '',
     };
   }
 
@@ -217,11 +222,11 @@ export class SimplePanel extends PureComponent<Props, State> {
         colorBackElement: 'black',
       }
     );
-    const parametrageMetric: LinkURLClass = new LinkURLClass('', '', '');
+    const linkUrl: LinkURLClass = new LinkURLClass('', '', '');
     const positionParameter: PositionParameterClass = new PositionParameterClass('0', '0', '0', '0', {}, {});
     const newPoint: PointClass = new PointClass(
       id,
-      parametrageMetric,
+      linkUrl,
       '',
       [],
       '',
@@ -317,7 +322,6 @@ export class SimplePanel extends PureComponent<Props, State> {
       );
       mapItems.push(item);
     });
-
     return <div>{mapItems}</div>;
   }
 
@@ -1152,6 +1156,20 @@ export class SimplePanel extends PureComponent<Props, State> {
       this.getCoordinatesToDrawPointWithClick(event);
     }
   };
+  // Close Legend
+  callInFunc = () => {
+    if (this.state.buttonAddIncurvedLinkIsActive) {
+      this.setState((prevState: State) => ({
+        buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive,
+      }));
+    }
+    if (this.state.buttonAddLinkIsActive) {
+      this.setState((prevState: State) => ({
+        buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive,
+      }));
+    }
+    this.resetButtonManage(2);
+  };
 
   /**
    * add button click to manage region, point, oriented link, position legend
@@ -1181,31 +1199,20 @@ export class SimplePanel extends PureComponent<Props, State> {
         </Button>
 
         <Button
+          id="legnd"
           style={{ marginLeft: '5%' }}
           variant={this.state.buttonManage[2] ? 'danger' : 'primary'}
           className="button"
-          onClick={() => {
-            if (this.state.buttonAddIncurvedLinkIsActive) {
-              this.setState((prevState: State) => ({
-                buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive,
-              }));
-            }
-            if (this.state.buttonAddLinkIsActive) {
-              this.setState((prevState: State) => ({
-                buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive,
-              }));
-            }
-            this.resetButtonManage(2);
-          }}
+          onClick={this.callInFunc} // Method Close legend
         >
           Position Legend
         </Button>
 
         <Button style={{ marginLeft: '4%' }} id="more" onClick={this.ZoomIn} variant={'primary'}>
-          +
+          <i className="fa fa-plus" aria-hidden="true"></i>
         </Button>
         <Button id="less" onClick={this.ZoomOut} variant={'primary'}>
-          -
+          <i className="fa fa-minus" aria-hidden="true"></i>
         </Button>
       </div>
     );
@@ -1245,6 +1252,12 @@ export class SimplePanel extends PureComponent<Props, State> {
         numberClickDiv: 0,
       });
     } else {
+      if (index === 2) {
+        this.setState({
+          hiddenLegend: false,
+          valueButton: '',
+        });
+      }
       tmp[index] = true;
       this.setState({
         numberClickDiv: 1,
@@ -1407,6 +1420,9 @@ export class SimplePanel extends PureComponent<Props, State> {
       ...this.props.options,
       displayButton: false,
     });
+    this.setState({
+      currentImage: this.props.options.baseMap.image,
+    });
     if (this.props.options.baseMap.modeSVG && this.props.options.baseMap.image !== '') {
       fetch(this.props.options.baseMap.image)
         .then(res => res.text())
@@ -1448,9 +1464,12 @@ export class SimplePanel extends PureComponent<Props, State> {
   };
 
   componentDidUpdate(prevProps: Props) {
-    if (this.props.options.baseMap.image !== prevProps.options.baseMap.image) {
+    if (this.state.currentImage !== this.props.options.baseMap.image) {
       this.componentDidMount();
     }
+    // if (this.props.options.baseMap.image !== prevProps.options.baseMap.image) {
+    //   this.componentDidMount();
+    // }
     if (this.props !== prevProps) {
       this.chargeRegion();
     }
@@ -1961,6 +1980,14 @@ export class SimplePanel extends PureComponent<Props, State> {
     }
     return result;
   };
+  // Close Legend
+
+  private stopDisplayLegend = () => {
+    this.callInFunc();
+    this.setState({
+      hiddenLegend: true,
+    });
+  };
 
   private htmlTooltipRegionSVG = (): JSX.Element => {
     let regionSVG: RegionClass = initRegionCoordinateSpace(1000);
@@ -2144,16 +2171,17 @@ export class SimplePanel extends PureComponent<Props, State> {
                 </Modal>
               </div>
             )}
-
-            {this.state.buttonManage[2] && <div></div>}
-            <LegendComponant
-              options={this.props.options}
-              onOptionsChange={this.props.onOptionsChange}
-              data={this.props.data}
-              // legend={this.props.options.legend}
-              {...this.props.options.legend}
-              callBack={this.handleClick}
-            />
+            {!this.state.hiddenLegend && (
+              <LegendComponant
+                options={this.props.options}
+                onOptionsChange={this.props.onOptionsChange}
+                data={this.props.data}
+                // legend={this.props.options.legend}
+                {...this.props.options.legend}
+                callBack={this.handleClick}
+                callBackClose={this.stopDisplayLegend}
+              />
+            )}
             <div onClick={this.callMethod}></div>
             <div id="coordinateSpaces" style={styleBackground}>
               <div>

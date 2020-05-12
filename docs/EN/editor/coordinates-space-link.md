@@ -16,7 +16,7 @@ The required information to display the points is :
 
 ## Label 
 
-This is a key to add the result of a value to the parameters 
+This is a key to add the result of value to the parameters 
 
 ## Orientation
 
@@ -27,7 +27,7 @@ This is a key to add the result of a value to the parameters
 
 ## Size
 
-Allow you to chosse the size of the link between Small, Medium and Large
+Allow you to choose the size of the link between Small, Medium and Large
 
 ## AssociatePoint/RegionIn and AssociatePoint/RegionOut
 
@@ -35,7 +35,7 @@ Allows you to define the starting and ending object of your link, it could be be
 
 ## CoordinatClickA/B-X/Y
 
-If hte link is not associate to an object, these inputs are used to define the starting and ending points of the link.
+If the link is not associated to an object, these inputs are used to define the starting and ending points of the link.
 
 ## Incurved
 

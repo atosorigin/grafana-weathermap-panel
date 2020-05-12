@@ -115,7 +115,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "../node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(true);
 // Module
-exports.push([module.i, "div.divSimpleEditor {\n  width: 100%;\n  /* margin: 2%;\n  padding: 2%; */ }\n\ndiv.CoordinateSpaceInitital {\n  /* margin: 1%; */\n  /* margin-bottom: 8%; */ }\n\nh3.titreSection {\n  margin-bottom: 2%;\n  /*   color: blue; */ }\n\n.parameter-interface-container {\n  width: 100%; }\n\n.parameter-interface-list-title {\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-flex-direction: row;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-justify-content: space-around;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n  border-bottom: 4px solid white;\n  margin: 10px 0; }\n\n.parameter-interface-title {\n  padding: 10px;\n  list-style: none;\n  cursor: pointer; }\n", "",{"version":3,"sources":["SimpleEditor.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX;gBACc,EAAE;;AAElB;EACE,gBAAgB;EAChB,uBAAuB,EAAE;;AAE3B;EACE,iBAAiB;EACjB,mBAAmB,EAAE;;AAEvB;EACE,WAAW,EAAE;;AAEf;EACE,qBAAqB;EACrB,oBAAoB;EACpB,aAAa;EACb,2BAA2B;MACvB,uBAAuB;UACnB,mBAAmB;EAC3B,qCAAqC;MACjC,yBAAyB;UACrB,6BAA6B;EACrC,8BAA8B;EAC9B,cAAc,EAAE;;AAElB;EACE,aAAa;EACb,gBAAgB;EAChB,eAAe,EAAE","file":"SimpleEditor.css","sourcesContent":["div.divSimpleEditor {\n  width: 100%;\n  /* margin: 2%;\n  padding: 2%; */ }\n\ndiv.CoordinateSpaceInitital {\n  /* margin: 1%; */\n  /* margin-bottom: 8%; */ }\n\nh3.titreSection {\n  margin-bottom: 2%;\n  /*   color: blue; */ }\n\n.parameter-interface-container {\n  width: 100%; }\n\n.parameter-interface-list-title {\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-flex-direction: row;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-justify-content: space-around;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n  border-bottom: 4px solid white;\n  margin: 10px 0; }\n\n.parameter-interface-title {\n  padding: 10px;\n  list-style: none;\n  cursor: pointer; }\n"]}]);
+exports.push([module.i, "div.divSimpleEditor {\n  width: 100%;\n  /* margin: 2%;\n  padding: 2%; */ }\n\ndiv.CoordinateSpaceInitital {\n  /* margin: 1%; */\n  /* margin-bottom: 8%; */ }\n\nh3.titreSection {\n  margin-bottom: 2%;\n  /*   color: blue; */ }\n\n.parameter-interface-container {\n  width: 100%; }\n\n.parameter-interface-list-title {\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-flex-direction: row;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-justify-content: space-around;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n  border-bottom: 4px solid white;\n  margin: 10px 0; }\n\n.parameter-interface-title {\n  padding: 10px;\n  list-style: none;\n  cursor: pointer; }\n", "",{"version":3,"sources":["SimpleEditor.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX;gBACc,EAAE;;AAElB;EACE,gBAAgB;EAChB,uBAAuB,EAAE;;AAE3B;EACE,iBAAiB;EACjB,mBAAmB,EAAE;;AAEvB;EACE,WAAW,EAAE;;AAEf;EACE,qBAAa;EAAb,oBAAa;EAAb,aAAa;EACb,2BAAmB;MAAnB,uBAAmB;UAAnB,mBAAmB;EACnB,qCAA6B;MAA7B,yBAA6B;UAA7B,6BAA6B;EAC7B,8BAA8B;EAC9B,cAAc,EAAE;;AAElB;EACE,aAAa;EACb,gBAAgB;EAChB,eAAe,EAAE","file":"SimpleEditor.css","sourcesContent":["div.divSimpleEditor {\n  width: 100%;\n  /* margin: 2%;\n  padding: 2%; */ }\n\ndiv.CoordinateSpaceInitital {\n  /* margin: 1%; */\n  /* margin-bottom: 8%; */ }\n\nh3.titreSection {\n  margin-bottom: 2%;\n  /*   color: blue; */ }\n\n.parameter-interface-container {\n  width: 100%; }\n\n.parameter-interface-list-title {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  border-bottom: 4px solid white;\n  margin: 10px 0; }\n\n.parameter-interface-title {\n  padding: 10px;\n  list-style: none;\n  cursor: pointer; }\n"]}]);
 // Exports
 module.exports = exports;
 
@@ -768,18 +768,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldGet", function() { return __classPrivateFieldGet; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldSet", function() { return __classPrivateFieldSet; });
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
+Copyright (c) Microsoft Corporation.
 
-THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
 
-See the Apache Version 2.0 License for specific language governing permissions
-and limitations under the License.
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 /* global Reflect, Promise */
 
@@ -1096,24 +1096,26 @@ __webpack_require__.r(__webpack_exports__);
 //import { RegionClass } from 'Models/RegionClass';
 
 var createInputsPoint = function createInputsPoint(id) {
-  // const newFieldLinkWithCoordonateSpace: InputSelectableClass = new InputSelectableClass(id.toString() + 'LinkWithCoordinateSpace',
-  // 	'Associate region', 'linkWithCoordinateSpace' + id.toString(), 'select',
-  // 	dataEspaceCoor, '', true, 'Associate region', undefined);
   var newFieldDrawGraphicMarker = new Models_InputSelectableClass__WEBPACK_IMPORTED_MODULE_0__["InputSelectableClass"](id.toString() + 'drawGraphicMarker', 'Display ', 'drawGraphicMarker' + id.toString(), 'select', [{
     value: 'true',
     label: 'Yes'
   }, {
     value: 'false',
     label: 'No'
-  }], '', true, 'drawGraphicMarker', undefined); // const newFieldShape: InputSelectableClass = new InputSelectableClass(id.toString() + 'shape',
-  // 	'GraphicMarker', 'shape' + id.toString(), 'select',
-  // 	[
-  // 		{ value: 'arrow', label: 'Arrow' },
-  // 		{ value: 'circle', label: 'Circle' },
-  // 		{ value: 'cross', label: 'Cross' },
-  // 	],
-  // 	'', true, 'Shape', undefined);
-
+  }], '', true, 'drawGraphicMarker', undefined);
+  var newFieldShape = new Models_InputSelectableClass__WEBPACK_IMPORTED_MODULE_0__["InputSelectableClass"](id.toString() + 'shape', 'Shape', 'shape' + id.toString(), 'select', [{
+    value: 'none',
+    label: 'None'
+  }, {
+    value: 'circle',
+    label: 'Circle'
+  }, {
+    value: 'square',
+    label: 'Square'
+  }, {
+    value: 'diamond',
+    label: 'Diamond'
+  }], '', true, 'Shape', undefined);
   var newFieldSizeWidthShape = new Models_InputSelectableClass__WEBPACK_IMPORTED_MODULE_0__["InputSelectableClass"](id.toString() + 'sizeWidth', 'Size', 'sizeWidth' + id.toString(), 'select', [{
     value: 'small',
     label: 'Small'
@@ -1133,39 +1135,13 @@ var createInputsPoint = function createInputsPoint(id) {
   }, {
     value: 'large',
     label: 'Large'
-  }], '', true, 'SizeHeight', undefined); // const newFieldColor: InputSelectableClass = new InputSelectableClass(id.toString() + 'color',
-  // 	'Color', 'color' + id.toString(), 'color', [],
-  // 	'#5794F2', true, 'Color', undefined);
-
+  }], '', true, 'SizeHeight', undefined);
   var newFieldRotateArrow = new Models_InputSelectableClass__WEBPACK_IMPORTED_MODULE_0__["InputSelectableClass"](id.toString() + 'rotateArrow', 'Orientation', 'rotateArrow' + id.toString(), 'text', [], '', true, 'RotateArrow', undefined);
   var newFieldPositionXShape = new Models_InputSelectableClass__WEBPACK_IMPORTED_MODULE_0__["InputSelectableClass"](id.toString() + 'positionShapeX', 'Position X', 'positionShapeX' + id.toString(), 'text', [], '', true, 'Position X Shape', undefined);
   var newFieldPositionYShape = new Models_InputSelectableClass__WEBPACK_IMPORTED_MODULE_0__["InputSelectableClass"](id.toString() + 'positionShapeY', 'Position Y', 'positionShapeY' + id.toString(), 'text', [], '', true, 'Position Y Shape', undefined);
-  var newFieldLabel = new Models_InputSelectableClass__WEBPACK_IMPORTED_MODULE_0__["InputSelectableClass"](id.toString() + 'labelPoint', 'Label', 'labelPoint' + id.toString(), 'text', [], '', true, 'Label', undefined); // const newFieldPositionLabelX: InputSelectableClass = new InputSelectableClass(id.toString() + 'positionLabelX',
-  // 	'Position X Label', 'positionLabelX' + id.toString(),
-  // 	'text', [], '', true, 'Position X Label', undefined);
-  // const newFieldPositionLabelY: InputSelectableClass = new InputSelectableClass(id.toString() + 'positionLabelY',
-  // 	'Position Y Label', 'positionLabelY' + id.toString(),
-  // 	'text', [], '', true, 'Position Y Label', undefined);
-  // const newFieldMainMetric: InputSelectableClass = new InputSelectableClass(id.toString() + 'refIdMainMetricPoint',
-  // 	'Ref Id Main Metric', 'refIdMainMetric' + id.toString(), 'text',
-  // 	[], '', true, 'RefId Main Metric', undefined);
-  // const newFieldKeyMainMetric: InputSelectableClass = new InputSelectableClass(id.toString() + 'keyMainMetricPoint',
-  // 	'Key Main Metric', 'keyMainMetric' + id.toString(), 'text',
-  // 	[], '', true, 'Key Main Metric', undefined);
-  // const newFieldKeyValueMainMetric: InputSelectableClass = new InputSelectableClass(id.toString() + 'keyValueMainMetricPoint',
-  // 	'Key Value Main Metric', 'keyValueMainMetric' + id.toString(), 'text',
-  // 	[], '', true, 'Key Value Main Metric', undefined);
-
+  var newFieldLabel = new Models_InputSelectableClass__WEBPACK_IMPORTED_MODULE_0__["InputSelectableClass"](id.toString() + 'labelPoint', 'Label', 'labelPoint' + id.toString(), 'text', [], '', true, 'Label', undefined);
   var newFieldButton = new Models_InputSelectableClass__WEBPACK_IMPORTED_MODULE_0__["InputSelectableClass"](id.toString() + 'deletePoint', 'Delete', 'delete' + id.toString(), 'button', [], '', true, undefined, 'Delete');
-  var finalArray = [newFieldLabel, //newFieldLinkWithCoordonateSpace,
-  newFieldDrawGraphicMarker, //newFieldShape,
-  newFieldSizeWidthShape, newFieldSizeHeightShape, //newFieldColor,
-  newFieldRotateArrow, newFieldPositionXShape, newFieldPositionYShape, // newFieldPositionLabelX,
-  // newFieldPositionLabelY,
-  // newFieldMainMetric,
-  // newFieldKeyMainMetric,
-  // newFieldKeyValueMainMetric,
-  newFieldButton];
+  var finalArray = [newFieldLabel, newFieldDrawGraphicMarker, newFieldShape, newFieldSizeWidthShape, newFieldSizeHeightShape, newFieldRotateArrow, newFieldPositionXShape, newFieldPositionYShape, newFieldButton];
   return finalArray;
 };
 
@@ -2353,7 +2329,7 @@ var getResultQuery = function getResultQuery(mainMetric) {
         var result = searchNameIsKey(line, mainMetric);
 
         if (result) {
-          var sizeQuery = line.fields[0].values.length;
+          var sizeQuery = line.fields[0].values.length; // in grafana 7 change line.field[0] to line.field[1]
 
           for (var i = 0; i < sizeQuery; i++) {
             if (line.fields.length > 0 && line.fields[0].values.get(i)) {
@@ -3020,8 +2996,8 @@ var returnAllId = function returnAllId(coordinate, baseMap) {
 
   var arrId = [];
   var arrIdVerif = [];
-  var listElement = (_a = document.getElementById(baseMap.idSVG)) === null || _a === void 0 ? void 0 : _a.querySelectorAll('*[id]');
-  console.log(listElement); // const filtered = [listElement].filter();
+  var listElement = (_a = document.getElementById(baseMap.idSVG)) === null || _a === void 0 ? void 0 : _a.querySelectorAll('*[id]'); //console.log(listElement);
+  // const filtered = [listElement].filter();
   //     function(e) {
   //       return
   //     },
@@ -3054,18 +3030,18 @@ var returnAllId = function returnAllId(coordinate, baseMap) {
     // const coordInt = pixelToPercent(coordinate, baseMap);
     // const limit: number[] = [coordInt.xMin, coordInt.xMax, coordInt.yMin, coordInt.yMax];
     Array.from(listElement).forEach(function (e) {
-      console.log(e); // if (!regionIsOverLimit(document.getElementById(e.id), limit)) {
+      //console.log(e);
+      // if (!regionIsOverLimit(document.getElementById(e.id), limit)) {
       //   //console.log('is pushed');
       //   arrId.push(e.id);
       // }
-
       if (e.localName === 'path' || e.localName === 'rect' || e.localName === 'ellipse') {
         arrId.push(e.id);
       }
 
       arrIdVerif.push(e.id);
-    });
-    console.log(arrId.length);
+    }); //console.log(arrId.length);
+
     arrId.sort(function (a, b) {
       if (a < b) {
         return -1;
@@ -4517,7 +4493,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- //import { getInfoDisplayRegion } from 'Functions/getInfoDisplayRegion';
 
 
 
@@ -4642,9 +4617,9 @@ function (_super) {
         addColorBackElement: true,
         colorBackElement: 'black'
       });
-      var parametrageMetric = new Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_7__["LinkURLClass"]('', '', '');
+      var linkUrl = new Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_7__["LinkURLClass"]('', '', '');
       var positionParameter = new Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_4__["PositionParameterClass"]('0', '0', '0', '0', {}, {});
-      var newPoint = new Models_PointClass__WEBPACK_IMPORTED_MODULE_3__["PointClass"](id, parametrageMetric, '', [], '', initTextObject, {
+      var newPoint = new Models_PointClass__WEBPACK_IMPORTED_MODULE_3__["PointClass"](id, linkUrl, '', [], '', initTextObject, {
         key: '',
         unit: '',
         format: '',
@@ -5503,6 +5478,27 @@ function (_super) {
       } else if (valueButton === 'point') {
         _this.getCoordinatesToDrawPointWithClick(event);
       }
+    }; // Close Legend
+
+
+    _this.callInFunc = function () {
+      if (_this.state.buttonAddIncurvedLinkIsActive) {
+        _this.setState(function (prevState) {
+          return {
+            buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive
+          };
+        });
+      }
+
+      if (_this.state.buttonAddLinkIsActive) {
+        _this.setState(function (prevState) {
+          return {
+            buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive
+          };
+        });
+      }
+
+      _this.resetButtonManage(2);
     };
     /**
      * add button click to manage region, point, oriented link, position legend
@@ -5544,30 +5540,13 @@ function (_super) {
         className: "button",
         onClick: _this.addIncurvedLink
       }, "Add Incurved Oriented Link"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+        id: "legnd",
         style: {
           marginLeft: '5%'
         },
         variant: _this.state.buttonManage[2] ? 'danger' : 'primary',
         className: "button",
-        onClick: function onClick() {
-          if (_this.state.buttonAddIncurvedLinkIsActive) {
-            _this.setState(function (prevState) {
-              return {
-                buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive
-              };
-            });
-          }
-
-          if (_this.state.buttonAddLinkIsActive) {
-            _this.setState(function (prevState) {
-              return {
-                buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive
-              };
-            });
-          }
-
-          _this.resetButtonManage(2);
-        }
+        onClick: _this.callInFunc
       }, "Position Legend"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
         style: {
           marginLeft: '4%'
@@ -5575,11 +5554,17 @@ function (_super) {
         id: "more",
         onClick: _this.ZoomIn,
         variant: 'primary'
-      }, "+"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+        className: "fa fa-plus",
+        "aria-hidden": "true"
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
         id: "less",
         onClick: _this.ZoomOut,
         variant: 'primary'
-      }, "-"));
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+        className: "fa fa-minus",
+        "aria-hidden": "true"
+      })));
 
       _this.setState({
         allActionButton: _final
@@ -5648,6 +5633,13 @@ function (_super) {
                   numberClickDiv: 0
                 });
               } else {
+                if (index === 2) {
+                  this.setState({
+                    hiddenLegend: false,
+                    valueButton: ''
+                  });
+                }
+
                 tmp[index] = true;
                 this.setState({
                   numberClickDiv: 1
@@ -5861,6 +5853,9 @@ function (_super) {
           this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.props.options), {
             displayButton: false
           }));
+          this.setState({
+            currentImage: this.props.options.baseMap.image
+          });
 
           if (this.props.options.baseMap.modeSVG && this.props.options.baseMap.image !== '') {
             fetch(this.props.options.baseMap.image).then(function (res) {
@@ -6517,6 +6512,15 @@ function (_super) {
       }
 
       return result;
+    }; // Close Legend
+
+
+    _this.stopDisplayLegend = function () {
+      _this.callInFunc();
+
+      _this.setState({
+        hiddenLegend: true
+      });
     };
 
     _this.htmlTooltipRegionSVG = function () {
@@ -6628,7 +6632,9 @@ function (_super) {
         idSVG: '',
         x: '0',
         y: '0'
-      }
+      },
+      hiddenLegend: false,
+      currentImage: ''
     };
     return _this;
   }
@@ -6793,9 +6799,12 @@ function (_super) {
   };
 
   SimplePanel.prototype.componentDidUpdate = function (prevProps) {
-    if (this.props.options.baseMap.image !== prevProps.options.baseMap.image) {
+    if (this.state.currentImage !== this.props.options.baseMap.image) {
       this.componentDidMount();
-    }
+    } // if (this.props.options.baseMap.image !== prevProps.options.baseMap.image) {
+    //   this.componentDidMount();
+    // }
+
 
     if (this.props !== prevProps) {
       this.chargeRegion();
@@ -6900,12 +6909,13 @@ function (_super) {
       isRegion: true,
       isPoint: false,
       isLink: false
-    }))), this.state.buttonManage[2] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_legend__WEBPACK_IMPORTED_MODULE_15__["default"], Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({
+    }))), !this.state.hiddenLegend && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_legend__WEBPACK_IMPORTED_MODULE_15__["default"], Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data
     }, this.props.options.legend, {
-      callBack: this.handleClick
+      callBack: this.handleClick,
+      callBackClose: this.stopDisplayLegend
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       onClick: this.callMethod
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -11938,6 +11948,21 @@ function (_super) {
       return coor4D;
     };
 
+    _this.getPaddingPoint = function (point, idMultiLink) {
+      var result = 0;
+      var pointHtml = document.getElementById(point.name);
+
+      if (pointHtml) {
+        result = parseInt(pointHtml.style.padding.substring(-2), 10);
+
+        if (idMultiLink === 2) {
+          result = result / 2;
+        }
+      }
+
+      return result;
+    };
+
     _this.ifMultiLinkWithRegionDefineX = function (isIn, idMultiLink) {
       var xResult = 0;
       var arrayRegions = _this.props.options.regionCoordinateSpace;
@@ -11955,15 +11980,27 @@ function (_super) {
       var yMidIn = 0;
       var yMidOut = 0;
 
-      if (_this.props.associatePointIn !== '') {
+      if (_this.props.associatePointIn !== '' && _this.props.associateRegionOut !== '') {
         arrayPoints.forEach(function (point) {
+          var paddingPoint = _this.getPaddingPoint(point, idMultiLink);
+
           var name = point.label || point.name;
 
           if (name === _this.props.associatePointIn) {
-            xMinIn = parseInt(point.positionShapeX, 10);
-            xMaxIn = parseInt(point.positionShapeX, 10);
-            yMinIn = parseInt(point.positionShapeY, 10);
-            yMaxIn = parseInt(point.positionShapeY, 10);
+            xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+            yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+            if (xMinIn < 0 && xMaxIn < 0) {
+              xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+              xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            }
+
+            if (yMinIn < 0 && yMaxIn < 0) {
+              yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+              yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            }
           }
         });
         arrayRegions.forEach(function (region) {
@@ -11974,11 +12011,7 @@ function (_super) {
             yMaxOut = parseInt(_this.defineCoor4DRegion(region).yMax, 10);
           }
         });
-        xMidIn = xMinIn;
-        xMidOut = (xMinOut + xMaxOut) / 2;
-        yMidIn = yMinIn;
-        yMidOut = (yMinOut + yMaxOut) / 2;
-      } else if (_this.props.associatePointOut !== '') {
+      } else if (_this.props.associateRegionIn !== '' && _this.props.associatePointOut !== '') {
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionIn) {
             xMinIn = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
@@ -11988,20 +12021,28 @@ function (_super) {
           }
         });
         arrayPoints.forEach(function (point) {
+          var paddingPoint = _this.getPaddingPoint(point, idMultiLink);
+
           var name = point.label || point.name;
 
           if (name === _this.props.associatePointOut) {
-            xMinOut = parseInt(point.positionShapeX, 10);
-            xMaxOut = parseInt(point.positionShapeX, 10);
-            yMinOut = parseInt(point.positionShapeY, 10);
-            yMaxOut = parseInt(point.positionShapeY, 10);
+            xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+            yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+            if (xMinOut < 0 && xMaxOut < 0) {
+              xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+              xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            }
+
+            if (yMinOut < 0 && yMaxOut < 0) {
+              yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+              yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            }
           }
         });
-        xMidIn = (xMinIn + xMaxIn) / 2;
-        xMidOut = xMinOut;
-        yMidIn = (yMinIn + yMaxIn) / 2;
-        yMidOut = yMinOut;
-      } else if (_this.props.associatePointIn === '' && _this.props.associateRegionIn === '') {
+      } else if (_this.props.associatePointIn === '' && _this.props.associateRegionIn === '' && _this.props.associateRegionOut !== '') {
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionOut) {
             xMinOut = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
@@ -12014,11 +12055,7 @@ function (_super) {
         xMaxIn = parseInt(_this.props.pointAPositionX, 10);
         yMinIn = parseInt(_this.props.pointAPositionY, 10);
         yMaxIn = parseInt(_this.props.pointAPositionY, 10);
-        xMidIn = xMinIn;
-        xMidOut = (xMinOut + xMaxOut) / 2;
-        yMidIn = yMinIn;
-        yMidOut = (yMinOut + yMaxOut) / 2;
-      } else if (_this.props.associatePointOut === '' && _this.props.associateRegionOut === '') {
+      } else if (_this.props.associateRegionIn !== '' && _this.props.associatePointOut === '' && _this.props.associateRegionOut === '') {
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionIn) {
             xMinIn = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
@@ -12031,10 +12068,100 @@ function (_super) {
         xMaxOut = parseInt(_this.props.pointBPositionX, 10);
         yMinOut = parseInt(_this.props.pointBPositionY, 10);
         yMaxOut = parseInt(_this.props.pointBPositionY, 10);
-        xMidIn = (xMinIn + xMaxIn) / 2;
-        xMidOut = xMinOut;
-        yMidIn = (yMinIn + yMaxIn) / 2;
-        yMidOut = yMinOut;
+      } else if (_this.props.associatePointIn !== '' && _this.props.associatePointOut === '' && _this.props.associateRegionOut === '') {
+        arrayPoints.forEach(function (point) {
+          var paddingPoint = _this.getPaddingPoint(point, idMultiLink);
+
+          var name = point.label || point.name;
+
+          if (name === _this.props.associatePointIn) {
+            xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+            yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+            if (xMinIn < 0 && xMaxIn < 0) {
+              xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+              xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            }
+
+            if (yMinIn < 0 && yMaxIn < 0) {
+              yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+              yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            }
+          }
+        });
+        xMinOut = parseInt(_this.props.pointBPositionX, 10);
+        xMaxOut = parseInt(_this.props.pointBPositionX, 10);
+        yMinOut = parseInt(_this.props.pointBPositionY, 10);
+        yMaxOut = parseInt(_this.props.pointBPositionY, 10);
+      } else if (_this.props.associatePointIn === '' && _this.props.associateRegionIn === '' && _this.props.associatePointOut !== '') {
+        arrayPoints.forEach(function (point) {
+          var paddingPoint = _this.getPaddingPoint(point, idMultiLink);
+
+          var name = point.label || point.name;
+
+          if (name === _this.props.associatePointOut) {
+            xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+            yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+            if (xMinOut < 0 && xMaxOut < 0) {
+              xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+              xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            }
+
+            if (yMinOut < 0 && yMaxOut < 0) {
+              yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+              yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            }
+          }
+        });
+        xMinIn = parseInt(_this.props.pointAPositionX, 10);
+        xMaxIn = parseInt(_this.props.pointAPositionX, 10);
+        yMinIn = parseInt(_this.props.pointAPositionY, 10);
+        yMaxIn = parseInt(_this.props.pointAPositionY, 10);
+      } else if (_this.props.associatePointIn !== '' && _this.props.associatePointOut !== '') {
+        arrayPoints.forEach(function (point) {
+          var paddingPoint = _this.getPaddingPoint(point, idMultiLink);
+
+          var name = point.label || point.name;
+
+          if (name === _this.props.associatePointIn) {
+            xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+            yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+            if (xMinIn < 0 && xMaxIn < 0) {
+              xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+              xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            }
+
+            if (yMinIn < 0 && yMaxIn < 0) {
+              yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+              yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            }
+          }
+
+          if (name === _this.props.associatePointOut) {
+            xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+            yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+            if (xMinOut < 0 && xMaxOut < 0) {
+              xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+              xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            }
+
+            if (yMinOut < 0 && yMaxOut < 0) {
+              yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+              yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            }
+          }
+        });
       } else {
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionIn) {
@@ -12051,11 +12178,12 @@ function (_super) {
             yMaxOut = parseInt(_this.defineCoor4DRegion(region).yMax, 10);
           }
         });
-        xMidIn = (xMinIn + xMaxIn) / 2;
-        xMidOut = (xMinOut + xMaxOut) / 2;
-        yMidIn = (yMinIn + yMaxIn) / 2;
-        yMidOut = (yMinOut + yMaxOut) / 2;
       }
+
+      xMidIn = (xMinIn + xMaxIn) / 2;
+      xMidOut = (xMinOut + xMaxOut) / 2;
+      yMidIn = (yMinIn + yMaxIn) / 2;
+      yMidOut = (yMinOut + yMaxOut) / 2;
 
       if (isIn) {
         if (idMultiLink === 0) {
@@ -12490,15 +12618,27 @@ function (_super) {
       var yMidIn = 0;
       var yMidOut = 0;
 
-      if (_this.props.associatePointIn !== '') {
+      if (_this.props.associatePointIn !== '' && _this.props.associateRegionOut !== '') {
         arrayPoints.forEach(function (point) {
+          var paddingPoint = _this.getPaddingPoint(point, idMultiLink);
+
           var name = point.label || point.name;
 
           if (name === _this.props.associatePointIn) {
-            xMinIn = parseInt(point.positionShapeX, 10);
-            xMaxIn = parseInt(point.positionShapeX, 10);
-            yMinIn = parseInt(point.positionShapeY, 10);
-            yMaxIn = parseInt(point.positionShapeY, 10);
+            xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+            yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+            if (xMinIn < 0 && xMaxIn < 0) {
+              xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+              xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            }
+
+            if (yMinIn < 0 && yMaxIn < 0) {
+              yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+              yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            }
           }
         });
         arrayRegions.forEach(function (region) {
@@ -12509,11 +12649,7 @@ function (_super) {
             yMaxOut = parseInt(_this.defineCoor4DRegion(region).yMax, 10);
           }
         });
-        xMidIn = xMinIn;
-        xMidOut = (xMinOut + xMaxOut) / 2;
-        yMidIn = yMinIn;
-        yMidOut = (yMinOut + yMaxOut) / 2;
-      } else if (_this.props.associatePointOut !== '') {
+      } else if (_this.props.associateRegionIn !== '' && _this.props.associatePointOut !== '') {
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionIn) {
             xMinIn = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
@@ -12523,20 +12659,28 @@ function (_super) {
           }
         });
         arrayPoints.forEach(function (point) {
+          var paddingPoint = _this.getPaddingPoint(point, idMultiLink);
+
           var name = point.label || point.name;
 
           if (name === _this.props.associatePointOut) {
-            xMinOut = parseInt(point.positionShapeX, 10);
-            xMaxOut = parseInt(point.positionShapeX, 10);
-            yMinOut = parseInt(point.positionShapeY, 10);
-            yMaxOut = parseInt(point.positionShapeY, 10);
+            xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+            yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+            if (xMinOut < 0 && xMaxOut < 0) {
+              xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+              xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            }
+
+            if (yMinOut < 0 && yMaxOut < 0) {
+              yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+              yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            }
           }
         });
-        xMidIn = (xMinIn + xMaxIn) / 2;
-        xMidOut = xMinOut;
-        yMidIn = (yMinIn + yMaxIn) / 2;
-        yMidOut = yMinOut;
-      } else if (_this.props.associatePointIn === '' && _this.props.associateRegionIn === '') {
+      } else if (_this.props.associatePointIn === '' && _this.props.associateRegionIn === '' && _this.props.associateRegionOut !== '') {
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionOut) {
             xMinOut = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
@@ -12549,11 +12693,7 @@ function (_super) {
         xMaxIn = parseInt(_this.props.pointAPositionX, 10);
         yMinIn = parseInt(_this.props.pointAPositionY, 10);
         yMaxIn = parseInt(_this.props.pointAPositionY, 10);
-        xMidIn = xMinIn;
-        xMidOut = (xMinOut + xMaxOut) / 2;
-        yMidIn = yMinIn;
-        yMidOut = (yMinOut + yMaxOut) / 2;
-      } else if (_this.props.associatePointOut === '' && _this.props.associateRegionOut === '') {
+      } else if (_this.props.associateRegionIn !== '' && _this.props.associatePointOut === '' && _this.props.associateRegionOut === '') {
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionIn) {
             xMinIn = parseInt(_this.defineCoor4DRegion(region).xMin, 10);
@@ -12566,10 +12706,100 @@ function (_super) {
         xMaxOut = parseInt(_this.props.pointBPositionX, 10);
         yMinOut = parseInt(_this.props.pointBPositionY, 10);
         yMaxOut = parseInt(_this.props.pointBPositionY, 10);
-        xMidIn = (xMinIn + xMaxIn) / 2;
-        xMidOut = xMinOut;
-        yMidIn = (yMinIn + yMaxIn) / 2;
-        yMidOut = yMinOut;
+      } else if (_this.props.associatePointIn !== '' && _this.props.associatePointOut === '' && _this.props.associateRegionOut === '') {
+        arrayPoints.forEach(function (point) {
+          var paddingPoint = _this.getPaddingPoint(point, idMultiLink);
+
+          var name = point.label || point.name;
+
+          if (name === _this.props.associatePointIn) {
+            xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+            yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+            if (xMinIn < 0 && xMaxIn < 0) {
+              xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+              xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            }
+
+            if (yMinIn < 0 && yMaxIn < 0) {
+              yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+              yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            }
+          }
+        });
+        xMinOut = parseInt(_this.props.pointBPositionX, 10);
+        xMaxOut = parseInt(_this.props.pointBPositionX, 10);
+        yMinOut = parseInt(_this.props.pointBPositionY, 10);
+        yMaxOut = parseInt(_this.props.pointBPositionY, 10);
+      } else if (_this.props.associatePointIn === '' && _this.props.associateRegionIn === '' && _this.props.associatePointOut !== '') {
+        arrayPoints.forEach(function (point) {
+          var paddingPoint = _this.getPaddingPoint(point, idMultiLink);
+
+          var name = point.label || point.name;
+
+          if (name === _this.props.associatePointOut) {
+            xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+            yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+            if (xMinOut < 0 && xMaxOut < 0) {
+              xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+              xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            }
+
+            if (yMinOut < 0 && yMaxOut < 0) {
+              yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+              yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            }
+          }
+        });
+        xMinIn = parseInt(_this.props.pointAPositionX, 10);
+        xMaxIn = parseInt(_this.props.pointAPositionX, 10);
+        yMinIn = parseInt(_this.props.pointAPositionY, 10);
+        yMaxIn = parseInt(_this.props.pointAPositionY, 10);
+      } else if (_this.props.associatePointIn !== '' && _this.props.associatePointOut !== '') {
+        arrayPoints.forEach(function (point) {
+          var paddingPoint = _this.getPaddingPoint(point, idMultiLink);
+
+          var name = point.label || point.name;
+
+          if (name === _this.props.associatePointIn) {
+            xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+            yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+            if (xMinIn < 0 && xMaxIn < 0) {
+              xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+              xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            }
+
+            if (yMinIn < 0 && yMaxIn < 0) {
+              yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+              yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            }
+          }
+
+          if (name === _this.props.associatePointOut) {
+            xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+            yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+            if (xMinOut < 0 && xMaxOut < 0) {
+              xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+              xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            }
+
+            if (yMinOut < 0 && yMaxOut < 0) {
+              yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+              yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            }
+          }
+        });
       } else {
         arrayRegions.forEach(function (region) {
           if (region.label === _this.props.associateRegionIn) {
@@ -12586,11 +12816,12 @@ function (_super) {
             yMaxOut = parseInt(_this.defineCoor4DRegion(region).yMax, 10);
           }
         });
-        xMidIn = (xMinIn + xMaxIn) / 2;
-        xMidOut = (xMinOut + xMaxOut) / 2;
-        yMidIn = (yMinIn + yMaxIn) / 2;
-        yMidOut = (yMinOut + yMaxOut) / 2;
       }
+
+      xMidIn = (xMinIn + xMaxIn) / 2;
+      xMidOut = (xMinOut + xMaxOut) / 2;
+      yMidIn = (yMinIn + yMaxIn) / 2;
+      yMidOut = (yMinOut + yMaxOut) / 2;
 
       if (isIn) {
         if (idMultiLink === 0) {
@@ -13164,266 +13395,6 @@ function (_super) {
       return yResult;
     };
 
-    _this.ifMultiLinkWithPointDefineX = function (isIn, idMultiLink) {
-      var xResult = 0;
-      var arrayPoints = _this.props.options.arrayPoints;
-      var xIn = 0;
-      var yIn = 0;
-      var xOut = 0;
-      var yOut = 0;
-      var ajustPosition = 5;
-      arrayPoints.forEach(function (point) {
-        var name = point.label || point.name;
-
-        if (name === _this.props.associatePointIn) {
-          xIn = parseInt(point.positionShapeX, 10);
-          yIn = parseInt(point.positionShapeY, 10);
-        }
-
-        if (name === _this.props.associatePointOut) {
-          xOut = parseInt(point.positionShapeX, 10);
-          yOut = parseInt(point.positionShapeY, 10);
-        }
-      });
-      var angleRadian = Math.atan2(yIn - yOut, xIn - xOut);
-      var angleDegre = angleRadian * 180 / Math.PI;
-
-      if (isIn) {
-        if (idMultiLink === 0) {
-          if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
-            xResult = xIn;
-          } else if (angleDegre > 0 && angleDegre < 90) {
-            xResult = xIn - ajustPosition * (angleDegre / 90);
-          } else if (angleDegre === 90) {
-            xResult = xIn + ajustPosition;
-          } else if (angleDegre > 90 && angleDegre < 180) {
-            xResult = xIn + ajustPosition * ((angleDegre - 180) / 90 * -1);
-          } else if (angleDegre < 0 && angleDegre > -90) {
-            xResult = xIn + ajustPosition * (angleDegre / 90 * -1);
-          } else if (angleDegre === -90) {
-            xResult = xIn + ajustPosition;
-          } else if (angleDegre < -90 && angleDegre > -180) {
-            xResult = xIn - ajustPosition * ((angleDegre + 180) / 90);
-          }
-        } else if (idMultiLink === 1) {
-          if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
-            xResult = xIn;
-          } else if (angleDegre > 0 && angleDegre < 90) {
-            xResult = xIn + ajustPosition * (angleDegre / 90);
-          } else if (angleDegre === 90) {
-            xResult = xIn - ajustPosition;
-          } else if (angleDegre > 90 && angleDegre < 180) {
-            xResult = xIn - ajustPosition * ((angleDegre - 180) / 90 * -1);
-          } else if (angleDegre < 0 && angleDegre > -90) {
-            xResult = xIn - ajustPosition * (angleDegre / 90 * -1);
-          } else if (angleDegre === -90) {
-            xResult = xIn - ajustPosition;
-          } else if (angleDegre < -90 && angleDegre > -180) {
-            xResult = xIn + ajustPosition * ((angleDegre + 180) / 90);
-          }
-        } else if (idMultiLink === 2) {
-          xResult = xIn;
-        }
-      } else {
-        if (idMultiLink === 0) {
-          if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
-            xResult = xOut;
-          } else if (angleDegre > 0 && angleDegre < 90) {
-            xResult = xOut - ajustPosition * (angleDegre / 90);
-          } else if (angleDegre === 90) {
-            xResult = xOut + ajustPosition;
-          } else if (angleDegre > 90 && angleDegre < 180) {
-            xResult = xOut + ajustPosition * ((angleDegre - 180) / 90 * -1);
-          } else if (angleDegre < 0 && angleDegre > -90) {
-            xResult = xOut + ajustPosition * (angleDegre / 90 * -1);
-          } else if (angleDegre === -90) {
-            xResult = xOut + ajustPosition;
-          } else if (angleDegre < -90 && angleDegre > -180) {
-            xResult = xOut - ajustPosition * ((angleDegre + 180) / 90);
-          }
-        } else if (idMultiLink === 1) {
-          if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
-            xResult = xOut;
-          } else if (angleDegre > 0 && angleDegre < 90) {
-            xResult = xOut + ajustPosition * (angleDegre / 90);
-          } else if (angleDegre === 90) {
-            xResult = xOut - ajustPosition;
-          } else if (angleDegre > 90 && angleDegre < 180) {
-            xResult = xOut - ajustPosition * ((angleDegre - 180) / 90 * -1);
-          } else if (angleDegre < 0 && angleDegre > -90) {
-            xResult = xOut - ajustPosition * (angleDegre / 90 * -1);
-          } else if (angleDegre === -90) {
-            xResult = xOut - ajustPosition;
-          } else if (angleDegre < -90 && angleDegre > -180) {
-            xResult = xOut + ajustPosition * ((angleDegre + 180) / 90);
-          }
-        } else if (idMultiLink === 2) {
-          xResult = xOut;
-        }
-      }
-
-      return xResult;
-    };
-
-    _this.ifMultiLinkWithPointDefineY = function (isIn, idMultiLink) {
-      var yResult = 0;
-      var arrayPoints = _this.props.options.arrayPoints;
-      var xIn = 0;
-      var yIn = 0;
-      var xOut = 0;
-      var yOut = 0;
-      var ajustPosition = 5;
-      arrayPoints.forEach(function (point) {
-        var name = point.label || point.name;
-
-        if (name === _this.props.associatePointIn) {
-          xIn = parseInt(point.positionShapeX, 10);
-          yIn = parseInt(point.positionShapeY, 10);
-        }
-
-        if (name === _this.props.associatePointOut) {
-          xOut = parseInt(point.positionShapeX, 10);
-          yOut = parseInt(point.positionShapeY, 10);
-        }
-      });
-      var angleRadian = Math.atan2(yIn - yOut, xIn - xOut);
-      var angleDegre = angleRadian * 180 / Math.PI;
-
-      if (isIn) {
-        if (idMultiLink === 0) {
-          if (angleDegre === 0) {
-            yResult = yIn + ajustPosition;
-          } else if (angleDegre > 0 && angleDegre < 90) {
-            yResult = yIn + ajustPosition * ((angleDegre - 90) / 90 * -1);
-          } else if (angleDegre === 90 || angleDegre === -90) {
-            yResult = yIn;
-          } else if (angleDegre > 90 && angleDegre < 180) {
-            yResult = yIn + ajustPosition * ((angleDegre - 90) / 90);
-          } else if (angleDegre < 0 && angleDegre > -90) {
-            yResult = yIn + ajustPosition * ((angleDegre + 90) / 90);
-          } else if (angleDegre < -90 && angleDegre > -180) {
-            yResult = yIn + ajustPosition * ((angleDegre + 90) / 90 * -1);
-          } else if (angleDegre === 180 || angleDegre === -180) {
-            yResult = yIn + ajustPosition;
-          }
-        } else if (idMultiLink === 1) {
-          if (angleDegre === 0) {
-            yResult = yIn - ajustPosition;
-          } else if (angleDegre > 0 && angleDegre < 90) {
-            yResult = yIn - ajustPosition * ((angleDegre - 90) / 90 * -1);
-          } else if (angleDegre === 90 || angleDegre === -90) {
-            yResult = yIn;
-          } else if (angleDegre > 90 && angleDegre < 180) {
-            yResult = yIn - ajustPosition * ((angleDegre - 90) / 90);
-          } else if (angleDegre < 0 && angleDegre > -90) {
-            yResult = yIn - ajustPosition * ((angleDegre + 90) / 90);
-          } else if (angleDegre < -90 && angleDegre > -180) {
-            yResult = yIn - ajustPosition * ((angleDegre + 90) / 90 * -1);
-          } else if (angleDegre === 180 || angleDegre === -180) {
-            yResult = yIn - ajustPosition;
-          }
-        } else if (idMultiLink === 2) {
-          yResult = yIn;
-        }
-      } else {
-        if (idMultiLink === 0) {
-          if (angleDegre === 0) {
-            yResult = yOut + ajustPosition;
-          } else if (angleDegre > 0 && angleDegre < 90) {
-            yResult = yOut + ajustPosition * ((angleDegre - 90) / 90 * -1);
-          } else if (angleDegre === 90 || angleDegre === -90) {
-            yResult = yOut;
-          } else if (angleDegre > 90 && angleDegre < 180) {
-            yResult = yOut + ajustPosition * ((angleDegre - 90) / 90);
-          } else if (angleDegre < 0 && angleDegre > -90) {
-            yResult = yOut + ajustPosition * ((angleDegre + 90) / 90);
-          } else if (angleDegre < -90 && angleDegre > -180) {
-            yResult = yOut + ajustPosition * ((angleDegre + 90) / 90 * -1);
-          } else if (angleDegre === 180 || angleDegre === -180) {
-            yResult = yOut + ajustPosition;
-          }
-        } else if (idMultiLink === 1) {
-          if (angleDegre === 0) {
-            yResult = yOut - ajustPosition;
-          } else if (angleDegre > 0 && angleDegre < 90) {
-            yResult = yOut - ajustPosition * ((angleDegre - 90) / 90 * -1);
-          } else if (angleDegre === 90 || angleDegre === -90) {
-            yResult = yOut;
-          } else if (angleDegre > 90 && angleDegre < 180) {
-            yResult = yOut - ajustPosition * ((angleDegre - 90) / 90);
-          } else if (angleDegre < 0 && angleDegre > -90) {
-            yResult = yOut - ajustPosition * ((angleDegre + 90) / 90);
-          } else if (angleDegre < -90 && angleDegre > -180) {
-            yResult = yOut - ajustPosition * ((angleDegre + 90) / 90 * -1);
-          } else if (angleDegre === 180 || angleDegre === -180) {
-            yResult = yOut - ajustPosition;
-          }
-        } else if (idMultiLink === 2) {
-          yResult = yOut;
-        }
-      }
-
-      return yResult;
-    };
-
-    _this.getX = function (labelPoint) {
-      var e_1, _a;
-
-      var result = 0;
-      var arrayPoint = _this.props.options.arrayPoints;
-
-      try {
-        for (var arrayPoint_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayPoint), arrayPoint_1_1 = arrayPoint_1.next(); !arrayPoint_1_1.done; arrayPoint_1_1 = arrayPoint_1.next()) {
-          var point = arrayPoint_1_1.value;
-
-          if (point.label === labelPoint || point.name === labelPoint) {
-            result = _this.synchroLinkX(parseInt(point.positionShapeX, 10));
-          }
-        }
-      } catch (e_1_1) {
-        e_1 = {
-          error: e_1_1
-        };
-      } finally {
-        try {
-          if (arrayPoint_1_1 && !arrayPoint_1_1.done && (_a = arrayPoint_1["return"])) _a.call(arrayPoint_1);
-        } finally {
-          if (e_1) throw e_1.error;
-        }
-      }
-
-      return result;
-    };
-
-    _this.getY = function (labelPoint) {
-      var e_2, _a;
-
-      var result = 0;
-      var arrayPoint = _this.props.options.arrayPoints;
-
-      try {
-        for (var arrayPoint_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayPoint), arrayPoint_2_1 = arrayPoint_2.next(); !arrayPoint_2_1.done; arrayPoint_2_1 = arrayPoint_2.next()) {
-          var point = arrayPoint_2_1.value;
-
-          if (point.label === labelPoint || point.name === labelPoint) {
-            result = _this.synchroLinkY(parseInt(point.positionShapeY, 10));
-          }
-        }
-      } catch (e_2_1) {
-        e_2 = {
-          error: e_2_1
-        };
-      } finally {
-        try {
-          if (arrayPoint_2_1 && !arrayPoint_2_1.done && (_a = arrayPoint_2["return"])) _a.call(arrayPoint_2);
-        } finally {
-          if (e_2) throw e_2.error;
-        }
-      }
-
-      return result;
-    };
-
     _this.defineMainMetric = function (mainMetric) {
       var result = '';
       var unit = _this.props.textObject.valueGenerateObjectText.unit;
@@ -13909,7 +13880,219 @@ function (_super) {
     var heightInitialSpace = yMaxPx - yMinPx;
     var y = this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) + (heightInitialSpace / 2 - positionY * (heightInitialSpace / 200));
     return y;
-  };
+  }; // private ifMultiLinkWithPointDefineX = (isIn: boolean, idMultiLink: number): number => {
+  //   let xResult = 0;
+  //   const arrayPoints: PointClass[] = this.props.options.arrayPoints;
+  //   let xIn = 0;
+  //   let yIn = 0;
+  //   let xOut = 0;
+  //   let yOut = 0;
+  //   const ajustPosition = 5;
+  //   arrayPoints.forEach(point => {
+  //     let name: string = point.label || point.name;
+  //     if (name === this.props.associatePointIn) {
+  //       xIn = parseInt(point.positionShapeX, 10);
+  //       yIn = parseInt(point.positionShapeY, 10);
+  //     }
+  //     if (name === this.props.associatePointOut) {
+  //       xOut = parseInt(point.positionShapeX, 10);
+  //       yOut = parseInt(point.positionShapeY, 10);
+  //     }
+  //   });
+  //   const angleRadian: number = Math.atan2(yIn - yOut, xIn - xOut);
+  //   const angleDegre: number = (angleRadian * 180) / Math.PI;
+  //   if (isIn) {
+  //     if (idMultiLink === 0) {
+  //       if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
+  //         xResult = xIn;
+  //       } else if (angleDegre > 0 && angleDegre < 90) {
+  //         xResult = xIn - ajustPosition * (angleDegre / 90);
+  //       } else if (angleDegre === 90) {
+  //         xResult = xIn + ajustPosition;
+  //       } else if (angleDegre > 90 && angleDegre < 180) {
+  //         xResult = xIn + ajustPosition * (((angleDegre - 180) / 90) * -1);
+  //       } else if (angleDegre < 0 && angleDegre > -90) {
+  //         xResult = xIn + ajustPosition * ((angleDegre / 90) * -1);
+  //       } else if (angleDegre === -90) {
+  //         xResult = xIn + ajustPosition;
+  //       } else if (angleDegre < -90 && angleDegre > -180) {
+  //         xResult = xIn - ajustPosition * ((angleDegre + 180) / 90);
+  //       }
+  //     } else if (idMultiLink === 1) {
+  //       if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
+  //         xResult = xIn;
+  //       } else if (angleDegre > 0 && angleDegre < 90) {
+  //         xResult = xIn + ajustPosition * (angleDegre / 90);
+  //       } else if (angleDegre === 90) {
+  //         xResult = xIn - ajustPosition;
+  //       } else if (angleDegre > 90 && angleDegre < 180) {
+  //         xResult = xIn - ajustPosition * (((angleDegre - 180) / 90) * -1);
+  //       } else if (angleDegre < 0 && angleDegre > -90) {
+  //         xResult = xIn - ajustPosition * ((angleDegre / 90) * -1);
+  //       } else if (angleDegre === -90) {
+  //         xResult = xIn - ajustPosition;
+  //       } else if (angleDegre < -90 && angleDegre > -180) {
+  //         xResult = xIn + ajustPosition * ((angleDegre + 180) / 90);
+  //       }
+  //     } else if (idMultiLink === 2) {
+  //       xResult = xIn;
+  //     }
+  //   } else {
+  //     if (idMultiLink === 0) {
+  //       if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
+  //         xResult = xOut;
+  //       } else if (angleDegre > 0 && angleDegre < 90) {
+  //         xResult = xOut - ajustPosition * (angleDegre / 90);
+  //       } else if (angleDegre === 90) {
+  //         xResult = xOut + ajustPosition;
+  //       } else if (angleDegre > 90 && angleDegre < 180) {
+  //         xResult = xOut + ajustPosition * (((angleDegre - 180) / 90) * -1);
+  //       } else if (angleDegre < 0 && angleDegre > -90) {
+  //         xResult = xOut + ajustPosition * ((angleDegre / 90) * -1);
+  //       } else if (angleDegre === -90) {
+  //         xResult = xOut + ajustPosition;
+  //       } else if (angleDegre < -90 && angleDegre > -180) {
+  //         xResult = xOut - ajustPosition * ((angleDegre + 180) / 90);
+  //       }
+  //     } else if (idMultiLink === 1) {
+  //       if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
+  //         xResult = xOut;
+  //       } else if (angleDegre > 0 && angleDegre < 90) {
+  //         xResult = xOut + ajustPosition * (angleDegre / 90);
+  //       } else if (angleDegre === 90) {
+  //         xResult = xOut - ajustPosition;
+  //       } else if (angleDegre > 90 && angleDegre < 180) {
+  //         xResult = xOut - ajustPosition * (((angleDegre - 180) / 90) * -1);
+  //       } else if (angleDegre < 0 && angleDegre > -90) {
+  //         xResult = xOut - ajustPosition * ((angleDegre / 90) * -1);
+  //       } else if (angleDegre === -90) {
+  //         xResult = xOut - ajustPosition;
+  //       } else if (angleDegre < -90 && angleDegre > -180) {
+  //         xResult = xOut + ajustPosition * ((angleDegre + 180) / 90);
+  //       }
+  //     } else if (idMultiLink === 2) {
+  //       xResult = xOut;
+  //     }
+  //   }
+  //   return xResult;
+  // };
+  // private ifMultiLinkWithPointDefineY = (isIn: boolean, idMultiLink: number): number => {
+  //   let yResult = 0;
+  //   const arrayPoints: PointClass[] = this.props.options.arrayPoints;
+  //   let xIn = 0;
+  //   let yIn = 0;
+  //   let xOut = 0;
+  //   let yOut = 0;
+  //   const ajustPosition = 5;
+  //   arrayPoints.forEach(point => {
+  //     let name: string = point.label || point.name;
+  //     if (name === this.props.associatePointIn) {
+  //       xIn = parseInt(point.positionShapeX, 10);
+  //       yIn = parseInt(point.positionShapeY, 10);
+  //     }
+  //     if (name === this.props.associatePointOut) {
+  //       xOut = parseInt(point.positionShapeX, 10);
+  //       yOut = parseInt(point.positionShapeY, 10);
+  //     }
+  //   });
+  //   const angleRadian: number = Math.atan2(yIn - yOut, xIn - xOut);
+  //   const angleDegre: number = (angleRadian * 180) / Math.PI;
+  //   if (isIn) {
+  //     if (idMultiLink === 0) {
+  //       if (angleDegre === 0) {
+  //         yResult = yIn + ajustPosition;
+  //       } else if (angleDegre > 0 && angleDegre < 90) {
+  //         yResult = yIn + ajustPosition * (((angleDegre - 90) / 90) * -1);
+  //       } else if (angleDegre === 90 || angleDegre === -90) {
+  //         yResult = yIn;
+  //       } else if (angleDegre > 90 && angleDegre < 180) {
+  //         yResult = yIn + ajustPosition * ((angleDegre - 90) / 90);
+  //       } else if (angleDegre < 0 && angleDegre > -90) {
+  //         yResult = yIn + ajustPosition * ((angleDegre + 90) / 90);
+  //       } else if (angleDegre < -90 && angleDegre > -180) {
+  //         yResult = yIn + ajustPosition * (((angleDegre + 90) / 90) * -1);
+  //       } else if (angleDegre === 180 || angleDegre === -180) {
+  //         yResult = yIn + ajustPosition;
+  //       }
+  //     } else if (idMultiLink === 1) {
+  //       if (angleDegre === 0) {
+  //         yResult = yIn - ajustPosition;
+  //       } else if (angleDegre > 0 && angleDegre < 90) {
+  //         yResult = yIn - ajustPosition * (((angleDegre - 90) / 90) * -1);
+  //       } else if (angleDegre === 90 || angleDegre === -90) {
+  //         yResult = yIn;
+  //       } else if (angleDegre > 90 && angleDegre < 180) {
+  //         yResult = yIn - ajustPosition * ((angleDegre - 90) / 90);
+  //       } else if (angleDegre < 0 && angleDegre > -90) {
+  //         yResult = yIn - ajustPosition * ((angleDegre + 90) / 90);
+  //       } else if (angleDegre < -90 && angleDegre > -180) {
+  //         yResult = yIn - ajustPosition * (((angleDegre + 90) / 90) * -1);
+  //       } else if (angleDegre === 180 || angleDegre === -180) {
+  //         yResult = yIn - ajustPosition;
+  //       }
+  //     } else if (idMultiLink === 2) {
+  //       yResult = yIn;
+  //     }
+  //   } else {
+  //     if (idMultiLink === 0) {
+  //       if (angleDegre === 0) {
+  //         yResult = yOut + ajustPosition;
+  //       } else if (angleDegre > 0 && angleDegre < 90) {
+  //         yResult = yOut + ajustPosition * (((angleDegre - 90) / 90) * -1);
+  //       } else if (angleDegre === 90 || angleDegre === -90) {
+  //         yResult = yOut;
+  //       } else if (angleDegre > 90 && angleDegre < 180) {
+  //         yResult = yOut + ajustPosition * ((angleDegre - 90) / 90);
+  //       } else if (angleDegre < 0 && angleDegre > -90) {
+  //         yResult = yOut + ajustPosition * ((angleDegre + 90) / 90);
+  //       } else if (angleDegre < -90 && angleDegre > -180) {
+  //         yResult = yOut + ajustPosition * (((angleDegre + 90) / 90) * -1);
+  //       } else if (angleDegre === 180 || angleDegre === -180) {
+  //         yResult = yOut + ajustPosition;
+  //       }
+  //     } else if (idMultiLink === 1) {
+  //       if (angleDegre === 0) {
+  //         yResult = yOut - ajustPosition;
+  //       } else if (angleDegre > 0 && angleDegre < 90) {
+  //         yResult = yOut - ajustPosition * (((angleDegre - 90) / 90) * -1);
+  //       } else if (angleDegre === 90 || angleDegre === -90) {
+  //         yResult = yOut;
+  //       } else if (angleDegre > 90 && angleDegre < 180) {
+  //         yResult = yOut - ajustPosition * ((angleDegre - 90) / 90);
+  //       } else if (angleDegre < 0 && angleDegre > -90) {
+  //         yResult = yOut - ajustPosition * ((angleDegre + 90) / 90);
+  //       } else if (angleDegre < -90 && angleDegre > -180) {
+  //         yResult = yOut - ajustPosition * (((angleDegre + 90) / 90) * -1);
+  //       } else if (angleDegre === 180 || angleDegre === -180) {
+  //         yResult = yOut - ajustPosition;
+  //       }
+  //     } else if (idMultiLink === 2) {
+  //       yResult = yOut;
+  //     }
+  //   }
+  //   return yResult;
+  // };
+  // private getX = (labelPoint: string): number => {
+  //   let result = 0;
+  //   const arrayPoint: PointClass[] = this.props.options.arrayPoints;
+  //   for (const point of arrayPoint) {
+  //     if (point.label === labelPoint || point.name === labelPoint) {
+  //       result = this.synchroLinkX(parseInt(point.positionShapeX, 10));
+  //     }
+  //   }
+  //   return result;
+  // };
+  // private getY = (labelPoint: string): number => {
+  //   let result = 0;
+  //   const arrayPoint: PointClass[] = this.props.options.arrayPoints;
+  //   for (const point of arrayPoint) {
+  //     if (point.label === labelPoint || point.name === labelPoint) {
+  //       result = this.synchroLinkY(parseInt(point.positionShapeY, 10));
+  //     }
+  //   }
+  //   return result;
+  // };
+
   /**
    * to do
    */
@@ -13934,10 +14117,10 @@ function (_super) {
           if (indexOrientedLink_1 === 0) {
             if (_this.props.associatePointIn !== '' && _this.props.associatePointOut !== '') {
               //console.log('m0-1');
-              xA = _this.synchroLinkX(_this.ifMultiLinkWithPointDefineX(true, 0));
-              yA = _this.synchroLinkY(_this.ifMultiLinkWithPointDefineY(true, 0));
-              xB = _this.synchroLinkX(_this.ifMultiLinkWithPointDefineX(false, 0));
-              yB = _this.synchroLinkY(_this.ifMultiLinkWithPointDefineY(false, 0));
+              xA = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(true, 0));
+              yA = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(true, 0));
+              xB = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(false, 0));
+              yB = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(false, 0));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (_this.props.associateRegionIn !== '' && _this.props.associateRegionOut !== '') {
@@ -13950,8 +14133,8 @@ function (_super) {
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (_this.props.associatePointIn !== '' && _this.props.associateRegionOut !== '') {
               //console.log('m0-3');
-              xA = _this.getX(_this.props.associatePointIn);
-              yA = _this.getY(_this.props.associatePointIn);
+              xA = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(true, 0));
+              yA = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(true, 0));
               xB = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(false, 0));
               yB = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(false, 0));
               xCByClick = xCByClick0 || (xA + xB) / 2;
@@ -13960,18 +14143,18 @@ function (_super) {
               //console.log('m0-4');
               xA = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(true, 0));
               yA = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(true, 0));
-              xB = _this.getX(_this.props.associatePointOut);
-              yB = _this.getY(_this.props.associatePointOut);
+              xB = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(false, 0));
+              yB = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(false, 0));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             }
           } else if (indexOrientedLink_1 === 1) {
             if (_this.props.associatePointIn !== '' && _this.props.associatePointOut !== '') {
               //console.log('m1-1');
-              xA = _this.synchroLinkX(_this.ifMultiLinkWithPointDefineX(true, 1));
-              yA = _this.synchroLinkY(_this.ifMultiLinkWithPointDefineY(true, 1));
-              xB = _this.synchroLinkX(_this.ifMultiLinkWithPointDefineX(false, 1));
-              yB = _this.synchroLinkY(_this.ifMultiLinkWithPointDefineY(false, 1));
+              xA = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(true, 1));
+              yA = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(true, 1));
+              xB = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(false, 1));
+              yB = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(false, 1));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (_this.props.associateRegionIn !== '' && _this.props.associateRegionOut !== '') {
@@ -13984,8 +14167,8 @@ function (_super) {
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (_this.props.associatePointIn !== '' && _this.props.associateRegionOut !== '') {
               //console.log('m1-3');
-              xA = _this.getX(_this.props.associatePointIn);
-              yA = _this.getY(_this.props.associatePointIn);
+              xA = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(true, 1));
+              yA = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(true, 1));
               xB = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(false, 1));
               yB = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(false, 1));
               xCByClick = xCByClick0 || (xA + xB) / 2;
@@ -13994,18 +14177,18 @@ function (_super) {
               //console.log('m1-4');
               xA = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(true, 1));
               yA = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(true, 1));
-              xB = _this.getX(_this.props.associatePointOut);
-              yB = _this.getY(_this.props.associatePointOut);
+              xB = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(false, 1));
+              yB = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(false, 1));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             }
           } else if (indexOrientedLink_1 === 2) {
             if (_this.props.associatePointIn !== '' && _this.props.associatePointOut !== '') {
               //console.log('m2-1');
-              xA = _this.synchroLinkX(_this.ifMultiLinkWithPointDefineX(true, 2));
-              yA = _this.synchroLinkY(_this.ifMultiLinkWithPointDefineY(true, 2));
-              xB = _this.synchroLinkX(_this.ifMultiLinkWithPointDefineX(false, 2));
-              yB = _this.synchroLinkY(_this.ifMultiLinkWithPointDefineY(false, 2));
+              xA = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(true, 2));
+              yA = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(true, 2));
+              xB = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(false, 2));
+              yB = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(false, 2));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (_this.props.associateRegionIn !== '' && _this.props.associateRegionOut !== '') {
@@ -14018,8 +14201,8 @@ function (_super) {
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (_this.props.associatePointIn !== '' && _this.props.associateRegionOut !== '') {
               //console.log('m2-3');
-              xB = _this.getX(_this.props.associatePointIn);
-              yB = _this.getY(_this.props.associatePointIn);
+              xA = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(true, 2));
+              yA = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(true, 2));
               xB = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(false, 2));
               yB = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(false, 2));
               xCByClick = xCByClick0 || (xA + xB) / 2;
@@ -14028,8 +14211,8 @@ function (_super) {
               //console.log('m2-4');
               xA = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(true, 2));
               yA = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(true, 2));
-              xB = _this.getX(_this.props.associatePointOut);
-              yB = _this.getY(_this.props.associatePointOut);
+              xB = _this.synchroLinkX(_this.ifMultiLinkWithRegionDefineX(false, 2));
+              yB = _this.synchroLinkY(_this.ifMultiLinkWithRegionDefineY(false, 2));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             }
@@ -14064,8 +14247,8 @@ function (_super) {
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
       console.log('4');
-      xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
-      yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
+      xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
+      yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = xB0;
       yB = yB0;
       xCByClick = xCByClick0 || (xA + xB) / 2;
@@ -14074,22 +14257,22 @@ function (_super) {
       console.log('5');
       xA = xA0;
       yA = yA0;
-      xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
-      yB = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(false, 2));
+      xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
+      yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
       console.log('6');
-      xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
-      yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
-      xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
-      yB = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(false, 2));
+      xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
+      yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
+      xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
+      yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
       console.log('7');
-      xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
-      yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
+      xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
+      yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
       yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
       xCByClick = xCByClick0 || (xA + xB) / 2;
@@ -14098,8 +14281,8 @@ function (_super) {
       console.log('8');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
-      xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
-      yB = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(false, 2));
+      xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
+      yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else {
@@ -14672,6 +14855,34 @@ function (_super) {
       return valueToAdaptPositionToInitialSpace;
     };
 
+    _this.defineBorderRadius = function () {
+      var result = 0;
+      var shape = _this.props.shape.value || '';
+
+      if (shape === 'circle') {
+        result = 50;
+      } // console.log('radius');
+      // console.log(shape);
+      // console.log(result);
+
+
+      return result;
+    };
+
+    _this.defineRotate = function () {
+      var result = 'rotate(0deg)';
+      var shape = _this.props.shape.value || '';
+
+      if (shape === 'diamond') {
+        result = 'rotate(45deg)';
+      } // console.log('rotate');
+      // console.log(shape);
+      // console.log(result);
+
+
+      return result;
+    };
+
     _this.definePositionLabelX = function (coordinateX) {
       var positionLabel = parseInt(_this.props.labelPositionX, 10);
       var result = 0;
@@ -14938,24 +15149,22 @@ function (_super) {
     var xMinPx = (xMin + 100) * (this.props.widthImage / 200);
     var xMax = parseInt(initialSpace.xMax, 10);
     var xMaxPx = (xMax + 100) * (this.props.widthImage / 200);
-    var widthInitialSpace = xMaxPx - xMinPx;
+    var widthInitialSpace = xMaxPx - xMinPx; // if (shape === 'circle') {
+    //   x =
+    //     xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - (size + parseInt(this.defineBorderSize(), 10));
+    // } else {
+    //   let widthToCenterCross = 0;
+    //   if (size === 10) {
+    //     widthToCenterCross = 3;
+    //   } else if (size === 14) {
+    //     widthToCenterCross = 5;
+    //   } else if (size === 16) {
+    //     widthToCenterCross = 5.5;
+    //   }
+    //   x = xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - widthToCenterCross;
+    // }
 
-    if (shape === 'circle') {
-      x = xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - (size + parseInt(this.defineBorderSize(), 10));
-    } else {
-      var widthToCenterCross = 0;
-
-      if (size === 10) {
-        widthToCenterCross = 3;
-      } else if (size === 14) {
-        widthToCenterCross = 5;
-      } else if (size === 16) {
-        widthToCenterCross = 5.5;
-      }
-
-      x = xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - widthToCenterCross;
-    }
-
+    x = xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - (size + parseInt(this.defineBorderSize(), 10));
     return x;
   };
   /**
@@ -14972,28 +15181,28 @@ function (_super) {
     var yMinPx = (yMin + 100) * (this.props.heightImage / 200);
     var yMax = parseInt(initialSpace.yMax, 10);
     var yMaxPx = (yMax + 100) * (this.props.heightImage / 200);
-    var heightInitialSpace = yMaxPx - yMinPx;
+    var heightInitialSpace = yMaxPx - yMinPx; // if (shapeGraphicMarker === 'circle') {
+    //   y =
+    //     this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) +
+    //     (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 2 / 100) - (size + parseInt(this.defineBorderSize(), 10)));
+    // } else {
+    //   let heightToCenterCross = 0;
+    //   if (size === 10) {
+    //     heightToCenterCross = 7.5;
+    //   }
+    //   if (size === 14) {
+    //     heightToCenterCross = 10.5;
+    //   }
+    //   if (size === 16) {
+    //     heightToCenterCross = 12;
+    //   }
+    //   y =
+    //     this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) +
+    //     (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 2 / 100)) -
+    //     heightToCenterCross;
+    // }
 
-    if (shapeGraphicMarker === 'circle') {
-      y = this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) + (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 2 / 100) - (size + parseInt(this.defineBorderSize(), 10)));
-    } else {
-      var heightToCenterCross = 0;
-
-      if (size === 10) {
-        heightToCenterCross = 7.5;
-      }
-
-      if (size === 14) {
-        heightToCenterCross = 10.5;
-      }
-
-      if (size === 16) {
-        heightToCenterCross = 12;
-      }
-
-      y = this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) + (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 2 / 100)) - heightToCenterCross;
-    }
-
+    y = this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) + (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 2 / 100) - (size + parseInt(this.defineBorderSize(), 10)));
     return y;
   };
   /**
@@ -15004,32 +15213,28 @@ function (_super) {
 
 
   DrawPoint.prototype.defineSizeGraphicMarkerPx = function (size, shape) {
-    if (size === 'small' && shape === 'circle') {
-      return 4;
-    }
-
-    if (size === 'small' && shape === 'cross') {
-      return 10;
-    }
-
-    if (size === 'medium' && shape === 'circle') {
-      return 6;
-    }
-
-    if (size === 'medium' && shape === 'cross') {
-      return 14;
-    }
-
-    if (size === 'large' && shape === 'circle') {
-      return 8;
-    }
-
-    if (size === 'large' && shape === 'cross') {
-      return 16;
-    } else {
+    if (this.props.shape.value === 'none') {
       return 0;
+    } else {
+      if (size === 'small') {
+        return 4;
+      } else if (size === 'medium') {
+        return 6;
+      } else if (size === 'large') {
+        return 8;
+      } else {
+        return 0;
+      }
     }
-  };
+  }; // definePadding = (size: number): string => {
+  //   let result = size + 'px';
+  //   if (this.props.shape.value === 'none') {
+  //     result = '0px';
+  //   }
+  //   console.log(result);
+  //   return result;
+  // };
+
   /**
    * to do
    * @param positionX
@@ -15040,68 +15245,55 @@ function (_super) {
    */
 
 
-  DrawPoint.prototype.drawPoint = function (drawGraphicMarker, size, positionShapeX, positionShapeY, shape, color) {
+  DrawPoint.prototype.drawPoint = function (drawGraphicMarker, size, positionShapeX, positionShapeY) {
     var valueToolTip = this.defineContentTooltip('point');
-    var linkUrlPoint = this.props.linkUrl.followLink; // console.log('point');
-    // console.log(linkUrlPoint);
+    var linkUrlPoint = this.props.linkUrl.followLink;
+    var borderRadius = this.defineBorderRadius() + 'px';
+    var rotate = this.defineRotate(); // const padding = this.definePadding(size);
+    // console.log(this.props.shape.value);
+    // console.log(borderRadius);
+    // console.log(rotate);
 
     if (drawGraphicMarker === 'true') {
-      if (shape === 'circle') {
-        if (this.props.buttonAddLinkIsActive || this.props.buttonAddIncurvedLinkIsActive) {
-          return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
-            key: 'tooltip' + this.props.name,
-            content: valueToolTip,
-            placement: this.props.tooltipPosition.value
-          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-            style: {
-              border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
-              backgroundColor: this.defineBackgroundColor(),
-              borderRadius: '50px',
-              padding: size + 'px',
-              position: 'absolute',
-              zIndex: 1000,
-              left: positionShapeX,
-              top: positionShapeY
-            },
-            id: this.props.idPoint
-          }));
-        } else {
-          return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
-            key: 'tooltip' + this.props.name,
-            content: valueToolTip,
-            placement: this.props.tooltipPosition.value
-          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-            href: linkUrlPoint,
-            style: {
-              border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
-              backgroundColor: this.defineBackgroundColor(),
-              borderRadius: '50px',
-              padding: size + 'px',
-              position: 'absolute',
-              zIndex: 1000,
-              left: positionShapeX,
-              top: positionShapeY
-            },
-            id: this.props.idPoint
-          }));
-        }
-      } else if (shape === 'cross') {
+      if (this.props.buttonAddLinkIsActive || this.props.buttonAddIncurvedLinkIsActive) {
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
           key: 'tooltip' + this.props.name,
           content: valueToolTip,
           placement: this.props.tooltipPosition.value
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          id: this.props.idPoint,
           style: {
-            fontSize: size,
-            fontWeight: 'bold',
+            border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
+            backgroundColor: this.defineBackgroundColor(),
+            borderRadius: borderRadius,
+            padding: size + 'px',
             position: 'absolute',
             zIndex: 1000,
-            color: color,
             left: positionShapeX,
-            top: positionShapeY
-          }
-        }, "X"));
+            top: positionShapeY,
+            transform: rotate
+          },
+          id: this.props.idPoint
+        }));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
+          key: 'tooltip' + this.props.name,
+          content: valueToolTip,
+          placement: this.props.tooltipPosition.value
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+          href: linkUrlPoint,
+          style: {
+            border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
+            backgroundColor: this.defineBackgroundColor(),
+            borderRadius: borderRadius,
+            padding: size + 'px',
+            position: 'absolute',
+            zIndex: 1000,
+            left: positionShapeX,
+            top: positionShapeY,
+            transform: rotate
+          },
+          id: this.props.idPoint
+        }));
       }
     } else {
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
@@ -15298,7 +15490,7 @@ function (_super) {
       arrayOrientedLinksIn.forEach(function (orientedLinkIn) {
         var nameOrientedLink = orientedLinkIn.label || orientedLinkIn.name;
         contentTooltipAssociateLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-          key: localisation + 'ContentTooltip14' + _this.props.name,
+          key: localisation + 'ContentTooltip14' + _this.props.name + nameOrientedLink,
           style: styleContentAssociateLink
         }, "- ", nameOrientedLink));
       });
@@ -15312,7 +15504,7 @@ function (_super) {
       arrayOrientedLinksOut.forEach(function (orientedLinkOut) {
         var nameOrientedLink = orientedLinkOut.label || orientedLinkOut.name;
         contentTooltipAssociateLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-          key: localisation + 'ContentTooltip16' + _this.props.name,
+          key: localisation + 'ContentTooltip16' + _this.props.name + nameOrientedLink,
           style: styleContentAssociateLink
         }, "- ", nameOrientedLink));
       });
@@ -15480,7 +15672,6 @@ function (_super) {
     var positionShapeY = this.definePositionY(valueInputPositionArrowY, initialSpace, size, shape);
     var label = this.props.label;
     var name = this.props.name;
-    var color = this.props.color;
     var drawGraphicMarker = this.props.drawGraphicMarker.value || '';
     var police = this.props.police;
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -15488,7 +15679,7 @@ function (_super) {
       style: {
         cursor: 'pointer'
       }
-    }, this.displayLabel(label, name, positionShapeX, positionShapeY, police), this.drawPoint(drawGraphicMarker, size, positionShapeX, positionShapeY, shape, color));
+    }, this.displayLabel(label, name, positionShapeX, positionShapeY, police), this.drawPoint(drawGraphicMarker, size, positionShapeX, positionShapeY));
   };
 
   return DrawPoint;
@@ -20855,6 +21046,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
+/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 /**
@@ -20895,7 +21089,7 @@ function (_super) {
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
             style: {
               padding: '5px',
-              margin: '10px',
+              // margin: '10px',
               width: '130px',
               //width: '3.5rem',
               //borderRadius: '39%',
@@ -20962,6 +21156,25 @@ function (_super) {
       }
 
       return rendu;
+    };
+
+    _this.closeLegend = function (event) {
+      _this.props.callBackClose(); // const close = document.getElementById('iconclose');
+      // close?.addEventListener('click', () => {
+      //   console.log('goodzone');
+      //   const disapear = document.getElementById('L');
+      //   const appear = document.getElementById('legnd');
+      //   if (disapear) {
+      //     disapear.style.visibility = 'hidden';
+      //   }
+      //   appear?.addEventListener('click', () => {
+      //     if (disapear) {
+      //       console.log('dam');
+      //       disapear.style.visibility = 'visible';
+      //     }
+      //   });
+      // });
+
     };
     /** get all limit for point */
 
@@ -21053,6 +21266,7 @@ function (_super) {
                 },
                 hidden: this.state.legend.hiddenLegend
               }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("article", {
+                id: "L",
                 style: {
                   width: '170px',
                   position: 'absolute',
@@ -21076,10 +21290,19 @@ function (_super) {
                 style: {
                   width: '100%',
                   fontSize: '20px',
-                  display: 'inline-flex',
+                  display: 'flex',
                   padding: '10px'
                 }
-              }, "Legend")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+              }, "Legend", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+                onClick: this.closeLegend,
+                style: {
+                  marginLeft: '20%'
+                },
+                id: "iconclose"
+              }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+                className: "fa fa-times",
+                "aria-hidden": "true"
+              }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
                 key: 'legendTitleRegion',
                 style: {
                   backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))'
@@ -21091,10 +21314,11 @@ function (_super) {
                   fontWeight: 'bold',
                   color: 'white'
                 }
-              }, "Region")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+              }, "Region"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
                 key: "regionLegend",
                 style: {
-                  paddingLeft: '5px'
+                  paddingLeft: '5px',
+                  lineHeight: '0.6'
                 }
               }, this.fillRegion()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
                 key: 'legendTitlePoint',
@@ -21111,7 +21335,8 @@ function (_super) {
               }, "Point")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
                 key: "pointLegend",
                 style: {
-                  paddingLeft: '5px'
+                  paddingLeft: '5px',
+                  lineHeight: '0.95'
                 }
               }, this.fillPoint()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
                 key: 'legendTitleLink',
@@ -21203,6 +21428,7 @@ function (_super) {
 
 
   LegendComponent.prototype.render = function () {
+    // rip testMoi
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       key: 'contentHtmlLegend'
     }, this.state.finalHTML);

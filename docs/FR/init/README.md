@@ -1,5 +1,5 @@
 # Environment
-[![](../../resource/Go-back.png)](../../README-fr.md)
+[![](../../screenshots/other/Go-back.png)](../../README-fr.md)
 
 - [Installation](installation.md) 
 - [Configuration](configuration.md)

@@ -96,20 +96,21 @@ export default class DrawPoint extends React.Component<Props, State> {
     const xMaxPx: number = (xMax + 100) * (this.props.widthImage / 200);
     const widthInitialSpace: number = xMaxPx - xMinPx;
 
-    if (shape === 'circle') {
-      x =
-        xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - (size + parseInt(this.defineBorderSize(), 10));
-    } else {
-      let widthToCenterCross = 0;
-      if (size === 10) {
-        widthToCenterCross = 3;
-      } else if (size === 14) {
-        widthToCenterCross = 5;
-      } else if (size === 16) {
-        widthToCenterCross = 5.5;
-      }
-      x = xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - widthToCenterCross;
-    }
+    // if (shape === 'circle') {
+    //   x =
+    //     xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - (size + parseInt(this.defineBorderSize(), 10));
+    // } else {
+    //   let widthToCenterCross = 0;
+    //   if (size === 10) {
+    //     widthToCenterCross = 3;
+    //   } else if (size === 14) {
+    //     widthToCenterCross = 5;
+    //   } else if (size === 16) {
+    //     widthToCenterCross = 5.5;
+    //   }
+    //   x = xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - widthToCenterCross;
+    // }
+    x = xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - (size + parseInt(this.defineBorderSize(), 10));
     return x;
   }
 
@@ -127,28 +128,32 @@ export default class DrawPoint extends React.Component<Props, State> {
     const yMaxPx: number = (yMax + 100) * (this.props.heightImage / 200);
     const heightInitialSpace: number = yMaxPx - yMinPx;
 
-    if (shapeGraphicMarker === 'circle') {
-      y =
-        this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) +
-        (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 2 / 100) - (size + parseInt(this.defineBorderSize(), 10)));
-    } else {
-      let heightToCenterCross = 0;
+    // if (shapeGraphicMarker === 'circle') {
+    //   y =
+    //     this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) +
+    //     (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 2 / 100) - (size + parseInt(this.defineBorderSize(), 10)));
+    // } else {
+    //   let heightToCenterCross = 0;
 
-      if (size === 10) {
-        heightToCenterCross = 7.5;
-      }
-      if (size === 14) {
-        heightToCenterCross = 10.5;
-      }
-      if (size === 16) {
-        heightToCenterCross = 12;
-      }
+    //   if (size === 10) {
+    //     heightToCenterCross = 7.5;
+    //   }
+    //   if (size === 14) {
+    //     heightToCenterCross = 10.5;
+    //   }
+    //   if (size === 16) {
+    //     heightToCenterCross = 12;
+    //   }
 
-      y =
-        this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) +
-        (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 2 / 100)) -
-        heightToCenterCross;
-    }
+    //   y =
+    //     this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) +
+    //     (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 2 / 100)) -
+    //     heightToCenterCross;
+    // }
+    y =
+      this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) +
+      (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 2 / 100) - (size + parseInt(this.defineBorderSize(), 10)));
+
     return y;
   }
 
@@ -168,27 +173,53 @@ export default class DrawPoint extends React.Component<Props, State> {
    * @param shapeGraphicMarker
    */
   private defineSizeGraphicMarkerPx(size: string, shape: string) {
-    if (size === 'small' && shape === 'circle') {
-      return 4;
-    }
-    if (size === 'small' && shape === 'cross') {
-      return 10;
-    }
-    if (size === 'medium' && shape === 'circle') {
-      return 6;
-    }
-    if (size === 'medium' && shape === 'cross') {
-      return 14;
-    }
-    if (size === 'large' && shape === 'circle') {
-      return 8;
-    }
-    if (size === 'large' && shape === 'cross') {
-      return 16;
-    } else {
+    if (this.props.shape.value === 'none') {
       return 0;
+    } else {
+      if (size === 'small') {
+        return 4;
+      } else if (size === 'medium') {
+        return 6;
+      } else if (size === 'large') {
+        return 8;
+      } else {
+        return 0;
+      }
     }
   }
+
+  defineBorderRadius = (): number => {
+    let result = 0;
+    const shape: string = this.props.shape.value || '';
+    if (shape === 'circle') {
+      result = 50;
+    }
+    // console.log('radius');
+    // console.log(shape);
+    // console.log(result);
+    return result;
+  };
+
+  defineRotate = (): string => {
+    let result = 'rotate(0deg)';
+    const shape: string = this.props.shape.value || '';
+    if (shape === 'diamond') {
+      result = 'rotate(45deg)';
+    }
+    // console.log('rotate');
+    // console.log(shape);
+    // console.log(result);
+    return result;
+  };
+
+  // definePadding = (size: number): string => {
+  //   let result = size + 'px';
+  //   if (this.props.shape.value === 'none') {
+  //     result = '0px';
+  //   }
+  //   console.log(result);
+  //   return result;
+  // };
 
   /**
    * to do
@@ -198,69 +229,53 @@ export default class DrawPoint extends React.Component<Props, State> {
    * @param sizeGraphicMarkerPx
    * @param shapeGraphicMarker
    */
-  private drawPoint(drawGraphicMarker: string, size: number, positionShapeX: number, positionShapeY: number, shape: string, color: string): any {
+  private drawPoint(drawGraphicMarker: string, size: number, positionShapeX: number, positionShapeY: number): any {
     const valueToolTip: JSX.Element = this.defineContentTooltip('point');
     const linkUrlPoint = this.props.linkUrl.followLink;
-
-    // console.log('point');
-    // console.log(linkUrlPoint);
+    const borderRadius = this.defineBorderRadius() + 'px';
+    const rotate = this.defineRotate();
+    // const padding = this.definePadding(size);
+    // console.log(this.props.shape.value);
+    // console.log(borderRadius);
+    // console.log(rotate);
     if (drawGraphicMarker === 'true') {
-      if (shape === 'circle') {
-        if (this.props.buttonAddLinkIsActive || this.props.buttonAddIncurvedLinkIsActive) {
-          return (
-            <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
-              <div
-                style={{
-                  border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
-                  backgroundColor: this.defineBackgroundColor(),
-                  borderRadius: '50px',
-                  padding: size + 'px',
-                  position: 'absolute',
-                  zIndex: 1000,
-                  left: positionShapeX,
-                  top: positionShapeY,
-                }}
-                id={this.props.idPoint}
-              ></div>
-            </Tooltip>
-          );
-        } else {
-          return (
-            <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
-              <a
-                href={linkUrlPoint}
-                style={{
-                  border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
-                  backgroundColor: this.defineBackgroundColor(),
-                  borderRadius: '50px',
-                  padding: size + 'px',
-                  position: 'absolute',
-                  zIndex: 1000,
-                  left: positionShapeX,
-                  top: positionShapeY,
-                }}
-                id={this.props.idPoint}
-              ></a>
-            </Tooltip>
-          );
-        }
-      } else if (shape === 'cross') {
+      if (this.props.buttonAddLinkIsActive || this.props.buttonAddIncurvedLinkIsActive) {
         return (
           <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
             <div
-              id={this.props.idPoint}
               style={{
-                fontSize: size,
-                fontWeight: 'bold',
+                border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
+                backgroundColor: this.defineBackgroundColor(),
+                borderRadius: borderRadius,
+                padding: size + 'px',
                 position: 'absolute',
                 zIndex: 1000,
-                color: color,
                 left: positionShapeX,
                 top: positionShapeY,
+                transform: rotate,
               }}
-            >
-              X
-            </div>
+              id={this.props.idPoint}
+            ></div>
+          </Tooltip>
+        );
+      } else {
+        return (
+          <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
+            <a
+              href={linkUrlPoint}
+              style={{
+                border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
+                backgroundColor: this.defineBackgroundColor(),
+                borderRadius: borderRadius,
+                padding: size + 'px',
+                position: 'absolute',
+                zIndex: 1000,
+                left: positionShapeX,
+                top: positionShapeY,
+                transform: rotate,
+              }}
+              id={this.props.idPoint}
+            ></a>
           </Tooltip>
         );
       }
@@ -631,7 +646,7 @@ export default class DrawPoint extends React.Component<Props, State> {
       arrayOrientedLinksIn.forEach(orientedLinkIn => {
         const nameOrientedLink: string = orientedLinkIn.label || orientedLinkIn.name;
         contentTooltipAssociateLink.push(
-          <p key={localisation + 'ContentTooltip14' + this.props.name} style={styleContentAssociateLink}>
+          <p key={localisation + 'ContentTooltip14' + this.props.name + nameOrientedLink} style={styleContentAssociateLink}>
             - {nameOrientedLink}
           </p>
         );
@@ -647,7 +662,7 @@ export default class DrawPoint extends React.Component<Props, State> {
       arrayOrientedLinksOut.forEach(orientedLinkOut => {
         const nameOrientedLink: string = orientedLinkOut.label || orientedLinkOut.name;
         contentTooltipAssociateLink.push(
-          <p key={localisation + 'ContentTooltip16' + this.props.name} style={styleContentAssociateLink}>
+          <p key={localisation + 'ContentTooltip16' + this.props.name + nameOrientedLink} style={styleContentAssociateLink}>
             - {nameOrientedLink}
           </p>
         );
@@ -857,14 +872,13 @@ export default class DrawPoint extends React.Component<Props, State> {
     const positionShapeY: number = this.definePositionY(valueInputPositionArrowY, initialSpace, size, shape);
     const label: string = this.props.label;
     const name: string = this.props.name;
-    const color: string = this.props.color;
     const drawGraphicMarker: string = this.props.drawGraphicMarker.value || '';
     const police = this.props.police;
 
     return (
       <div key={this.props.name} style={{ cursor: 'pointer' }}>
         {this.displayLabel(label, name, positionShapeX, positionShapeY, police)}
-        {this.drawPoint(drawGraphicMarker, size, positionShapeX, positionShapeY, shape, color)}
+        {this.drawPoint(drawGraphicMarker, size, positionShapeX, positionShapeY)}
       </div>
     );
   }

@@ -1,5 +1,5 @@
 # Panel
-[![](../../resource/Go-back.png)](../../README-fr.md)
+[![](../../screenshots/other/Go-back.png)](../../README-fr.md)
 
 Le panel est le résultat affiché par rapport aux données et aux panneaux édités.
 

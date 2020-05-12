@@ -6,9 +6,9 @@ import { SimpleOptions, Metric } from 'types';
 import { TextObject } from 'Models/TextObjectClass';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
-import { PointClass } from 'Models/PointClass';
 import { LinkURLClass } from 'Models/LinkURLClass';
 import { Style } from 'components/Parametrage/styleComponent';
+import { PointClass } from 'Models/PointClass';
 
 interface Props extends PanelEditorProps<SimpleOptions> {
   id: string;
@@ -294,6 +294,18 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     return coor4D;
   };
 
+  getPaddingPoint = (point: PointClass, idMultiLink: number): number => {
+    let result = 0;
+    const pointHtml = document.getElementById(point.name);
+    if (pointHtml) {
+      result = parseInt(pointHtml.style.padding.substring(-2), 10);
+      if (idMultiLink === 2) {
+        result = result / 2;
+      }
+    }
+    return result;
+  };
+
   private ifMultiLinkWithRegionDefineX = (isIn: boolean, idMultiLink: number): number => {
     let xResult = 0;
     const arrayRegions = this.props.options.regionCoordinateSpace;
@@ -311,14 +323,25 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     let yMidIn = 0;
     let yMidOut = 0;
 
-    if (this.props.associatePointIn !== '') {
+    if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
       arrayPoints.forEach(point => {
+        let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
-          xMinIn = parseInt(point.positionShapeX, 10);
-          xMaxIn = parseInt(point.positionShapeX, 10);
-          yMinIn = parseInt(point.positionShapeY, 10);
-          yMaxIn = parseInt(point.positionShapeY, 10);
+          xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+          xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+          yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+          yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+          if (xMinIn < 0 && xMaxIn < 0) {
+            xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+            xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+          }
+
+          if (yMinIn < 0 && yMaxIn < 0) {
+            yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+            yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+          }
         }
       });
 
@@ -330,12 +353,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           yMaxOut = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
-
-      xMidIn = xMinIn;
-      xMidOut = (xMinOut + xMaxOut) / 2;
-      yMidIn = yMinIn;
-      yMidOut = (yMinOut + yMaxOut) / 2;
-    } else if (this.props.associatePointOut !== '') {
+    } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
@@ -346,20 +364,26 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       });
 
       arrayPoints.forEach(point => {
+        let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointOut) {
-          xMinOut = parseInt(point.positionShapeX, 10);
-          xMaxOut = parseInt(point.positionShapeX, 10);
-          yMinOut = parseInt(point.positionShapeY, 10);
-          yMaxOut = parseInt(point.positionShapeY, 10);
+          xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+          xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+          yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+          yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+          if (xMinOut < 0 && xMaxOut < 0) {
+            xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+            xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+          }
+
+          if (yMinOut < 0 && yMaxOut < 0) {
+            yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+            yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+          }
         }
       });
-
-      xMidIn = (xMinIn + xMaxIn) / 2;
-      xMidOut = xMinOut;
-      yMidIn = (yMinIn + yMaxIn) / 2;
-      yMidOut = yMinOut;
-    } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '') {
+    } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associateRegionOut !== '') {
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionOut) {
           xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
@@ -372,11 +396,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xMaxIn = parseInt(this.props.pointAPositionX, 10);
       yMinIn = parseInt(this.props.pointAPositionY, 10);
       yMaxIn = parseInt(this.props.pointAPositionY, 10);
-      xMidIn = xMinIn;
-      xMidOut = (xMinOut + xMaxOut) / 2;
-      yMidIn = yMinIn;
-      yMidOut = (yMinOut + yMaxOut) / 2;
-    } else if (this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
+    } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
@@ -385,15 +405,98 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           yMaxIn = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
-
       xMinOut = parseInt(this.props.pointBPositionX, 10);
       xMaxOut = parseInt(this.props.pointBPositionX, 10);
       yMinOut = parseInt(this.props.pointBPositionY, 10);
       yMaxOut = parseInt(this.props.pointBPositionY, 10);
-      xMidIn = (xMinIn + xMaxIn) / 2;
-      xMidOut = xMinOut;
-      yMidIn = (yMinIn + yMaxIn) / 2;
-      yMidOut = yMinOut;
+    } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
+      arrayPoints.forEach(point => {
+        let paddingPoint = this.getPaddingPoint(point, idMultiLink);
+        let name: string = point.label || point.name;
+        if (name === this.props.associatePointIn) {
+          xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+          xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+          yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+          yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+          if (xMinIn < 0 && xMaxIn < 0) {
+            xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+            xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+          }
+
+          if (yMinIn < 0 && yMaxIn < 0) {
+            yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+            yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+          }
+        }
+      });
+      xMinOut = parseInt(this.props.pointBPositionX, 10);
+      xMaxOut = parseInt(this.props.pointBPositionX, 10);
+      yMinOut = parseInt(this.props.pointBPositionY, 10);
+      yMaxOut = parseInt(this.props.pointBPositionY, 10);
+    } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associatePointOut !== '') {
+      arrayPoints.forEach(point => {
+        let paddingPoint = this.getPaddingPoint(point, idMultiLink);
+        let name: string = point.label || point.name;
+        if (name === this.props.associatePointOut) {
+          xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+          xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+          yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+          yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+          if (xMinOut < 0 && xMaxOut < 0) {
+            xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+            xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+          }
+
+          if (yMinOut < 0 && yMaxOut < 0) {
+            yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+            yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+          }
+        }
+      });
+      xMinIn = parseInt(this.props.pointAPositionX, 10);
+      xMaxIn = parseInt(this.props.pointAPositionX, 10);
+      yMinIn = parseInt(this.props.pointAPositionY, 10);
+      yMaxIn = parseInt(this.props.pointAPositionY, 10);
+    } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
+      arrayPoints.forEach(point => {
+        let paddingPoint = this.getPaddingPoint(point, idMultiLink);
+        let name: string = point.label || point.name;
+        if (name === this.props.associatePointIn) {
+          xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+          xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+          yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+          yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+          if (xMinIn < 0 && xMaxIn < 0) {
+            xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+            xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+          }
+
+          if (yMinIn < 0 && yMaxIn < 0) {
+            yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+            yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+          }
+        }
+
+        if (name === this.props.associatePointOut) {
+          xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+          xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+          yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+          yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+          if (xMinOut < 0 && xMaxOut < 0) {
+            xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+            xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+          }
+
+          if (yMinOut < 0 && yMaxOut < 0) {
+            yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+            yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+          }
+        }
+      });
     } else {
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
@@ -410,12 +513,12 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           yMaxOut = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
-
-      xMidIn = (xMinIn + xMaxIn) / 2;
-      xMidOut = (xMinOut + xMaxOut) / 2;
-      yMidIn = (yMinIn + yMaxIn) / 2;
-      yMidOut = (yMinOut + yMaxOut) / 2;
     }
+
+    xMidIn = (xMinIn + xMaxIn) / 2;
+    xMidOut = (xMinOut + xMaxOut) / 2;
+    yMidIn = (yMinIn + yMaxIn) / 2;
+    yMidOut = (yMinOut + yMaxOut) / 2;
 
     if (isIn) {
       if (idMultiLink === 0) {
@@ -814,14 +917,25 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     let yMidIn = 0;
     let yMidOut = 0;
 
-    if (this.props.associatePointIn !== '') {
+    if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
       arrayPoints.forEach(point => {
+        let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
-          xMinIn = parseInt(point.positionShapeX, 10);
-          xMaxIn = parseInt(point.positionShapeX, 10);
-          yMinIn = parseInt(point.positionShapeY, 10);
-          yMaxIn = parseInt(point.positionShapeY, 10);
+          xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+          xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+          yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+          yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+          if (xMinIn < 0 && xMaxIn < 0) {
+            xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+            xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+          }
+
+          if (yMinIn < 0 && yMaxIn < 0) {
+            yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+            yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+          }
         }
       });
 
@@ -833,12 +947,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           yMaxOut = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
-
-      xMidIn = xMinIn;
-      xMidOut = (xMinOut + xMaxOut) / 2;
-      yMidIn = yMinIn;
-      yMidOut = (yMinOut + yMaxOut) / 2;
-    } else if (this.props.associatePointOut !== '') {
+    } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
@@ -849,20 +958,26 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       });
 
       arrayPoints.forEach(point => {
+        let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointOut) {
-          xMinOut = parseInt(point.positionShapeX, 10);
-          xMaxOut = parseInt(point.positionShapeX, 10);
-          yMinOut = parseInt(point.positionShapeY, 10);
-          yMaxOut = parseInt(point.positionShapeY, 10);
+          xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+          xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+          yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+          yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+          if (xMinOut < 0 && xMaxOut < 0) {
+            xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+            xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+          }
+
+          if (yMinOut < 0 && yMaxOut < 0) {
+            yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+            yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+          }
         }
       });
-
-      xMidIn = (xMinIn + xMaxIn) / 2;
-      xMidOut = xMinOut;
-      yMidIn = (yMinIn + yMaxIn) / 2;
-      yMidOut = yMinOut;
-    } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '') {
+    } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associateRegionOut !== '') {
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionOut) {
           xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
@@ -875,11 +990,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xMaxIn = parseInt(this.props.pointAPositionX, 10);
       yMinIn = parseInt(this.props.pointAPositionY, 10);
       yMaxIn = parseInt(this.props.pointAPositionY, 10);
-      xMidIn = xMinIn;
-      xMidOut = (xMinOut + xMaxOut) / 2;
-      yMidIn = yMinIn;
-      yMidOut = (yMinOut + yMaxOut) / 2;
-    } else if (this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
+    } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
@@ -888,15 +999,98 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           yMaxIn = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
-
       xMinOut = parseInt(this.props.pointBPositionX, 10);
       xMaxOut = parseInt(this.props.pointBPositionX, 10);
       yMinOut = parseInt(this.props.pointBPositionY, 10);
       yMaxOut = parseInt(this.props.pointBPositionY, 10);
-      xMidIn = (xMinIn + xMaxIn) / 2;
-      xMidOut = xMinOut;
-      yMidIn = (yMinIn + yMaxIn) / 2;
-      yMidOut = yMinOut;
+    } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
+      arrayPoints.forEach(point => {
+        let paddingPoint = this.getPaddingPoint(point, idMultiLink);
+        let name: string = point.label || point.name;
+        if (name === this.props.associatePointIn) {
+          xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+          xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+          yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+          yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+          if (xMinIn < 0 && xMaxIn < 0) {
+            xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+            xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+          }
+
+          if (yMinIn < 0 && yMaxIn < 0) {
+            yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+            yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+          }
+        }
+      });
+      xMinOut = parseInt(this.props.pointBPositionX, 10);
+      xMaxOut = parseInt(this.props.pointBPositionX, 10);
+      yMinOut = parseInt(this.props.pointBPositionY, 10);
+      yMaxOut = parseInt(this.props.pointBPositionY, 10);
+    } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associatePointOut !== '') {
+      arrayPoints.forEach(point => {
+        let paddingPoint = this.getPaddingPoint(point, idMultiLink);
+        let name: string = point.label || point.name;
+        if (name === this.props.associatePointOut) {
+          xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+          xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+          yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+          yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+          if (xMinOut < 0 && xMaxOut < 0) {
+            xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+            xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+          }
+
+          if (yMinOut < 0 && yMaxOut < 0) {
+            yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+            yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+          }
+        }
+      });
+      xMinIn = parseInt(this.props.pointAPositionX, 10);
+      xMaxIn = parseInt(this.props.pointAPositionX, 10);
+      yMinIn = parseInt(this.props.pointAPositionY, 10);
+      yMaxIn = parseInt(this.props.pointAPositionY, 10);
+    } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
+      arrayPoints.forEach(point => {
+        let paddingPoint = this.getPaddingPoint(point, idMultiLink);
+        let name: string = point.label || point.name;
+        if (name === this.props.associatePointIn) {
+          xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+          xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+          yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+          yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+          if (xMinIn < 0 && xMaxIn < 0) {
+            xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
+            xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+          }
+
+          if (yMinIn < 0 && yMaxIn < 0) {
+            yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+            yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+          }
+        }
+
+        if (name === this.props.associatePointOut) {
+          xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+          xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+          yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+          yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+
+          if (xMinOut < 0 && xMaxOut < 0) {
+            xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
+            xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+          }
+
+          if (yMinOut < 0 && yMaxOut < 0) {
+            yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+            yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+          }
+        }
+      });
     } else {
       arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
@@ -913,12 +1107,12 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           yMaxOut = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
-
-      xMidIn = (xMinIn + xMaxIn) / 2;
-      xMidOut = (xMinOut + xMaxOut) / 2;
-      yMidIn = (yMinIn + yMaxIn) / 2;
-      yMidOut = (yMinOut + yMaxOut) / 2;
     }
+
+    xMidIn = (xMinIn + xMaxIn) / 2;
+    xMidOut = (xMinOut + xMaxOut) / 2;
+    yMidIn = (yMinIn + yMaxIn) / 2;
+    yMidOut = (yMinOut + yMaxOut) / 2;
 
     if (isIn) {
       if (idMultiLink === 0) {
@@ -1430,225 +1624,225 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     return yResult;
   };
 
-  private ifMultiLinkWithPointDefineX = (isIn: boolean, idMultiLink: number): number => {
-    let xResult = 0;
-    const arrayPoints: PointClass[] = this.props.options.arrayPoints;
-    let xIn = 0;
-    let yIn = 0;
-    let xOut = 0;
-    let yOut = 0;
-    const ajustPosition = 5;
-    arrayPoints.forEach(point => {
-      let name: string = point.label || point.name;
-      if (name === this.props.associatePointIn) {
-        xIn = parseInt(point.positionShapeX, 10);
-        yIn = parseInt(point.positionShapeY, 10);
-      }
-      if (name === this.props.associatePointOut) {
-        xOut = parseInt(point.positionShapeX, 10);
-        yOut = parseInt(point.positionShapeY, 10);
-      }
-    });
+  // private ifMultiLinkWithPointDefineX = (isIn: boolean, idMultiLink: number): number => {
+  //   let xResult = 0;
+  //   const arrayPoints: PointClass[] = this.props.options.arrayPoints;
+  //   let xIn = 0;
+  //   let yIn = 0;
+  //   let xOut = 0;
+  //   let yOut = 0;
+  //   const ajustPosition = 5;
+  //   arrayPoints.forEach(point => {
+  //     let name: string = point.label || point.name;
+  //     if (name === this.props.associatePointIn) {
+  //       xIn = parseInt(point.positionShapeX, 10);
+  //       yIn = parseInt(point.positionShapeY, 10);
+  //     }
+  //     if (name === this.props.associatePointOut) {
+  //       xOut = parseInt(point.positionShapeX, 10);
+  //       yOut = parseInt(point.positionShapeY, 10);
+  //     }
+  //   });
 
-    const angleRadian: number = Math.atan2(yIn - yOut, xIn - xOut);
-    const angleDegre: number = (angleRadian * 180) / Math.PI;
+  //   const angleRadian: number = Math.atan2(yIn - yOut, xIn - xOut);
+  //   const angleDegre: number = (angleRadian * 180) / Math.PI;
 
-    if (isIn) {
-      if (idMultiLink === 0) {
-        if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
-          xResult = xIn;
-        } else if (angleDegre > 0 && angleDegre < 90) {
-          xResult = xIn - ajustPosition * (angleDegre / 90);
-        } else if (angleDegre === 90) {
-          xResult = xIn + ajustPosition;
-        } else if (angleDegre > 90 && angleDegre < 180) {
-          xResult = xIn + ajustPosition * (((angleDegre - 180) / 90) * -1);
-        } else if (angleDegre < 0 && angleDegre > -90) {
-          xResult = xIn + ajustPosition * ((angleDegre / 90) * -1);
-        } else if (angleDegre === -90) {
-          xResult = xIn + ajustPosition;
-        } else if (angleDegre < -90 && angleDegre > -180) {
-          xResult = xIn - ajustPosition * ((angleDegre + 180) / 90);
-        }
-      } else if (idMultiLink === 1) {
-        if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
-          xResult = xIn;
-        } else if (angleDegre > 0 && angleDegre < 90) {
-          xResult = xIn + ajustPosition * (angleDegre / 90);
-        } else if (angleDegre === 90) {
-          xResult = xIn - ajustPosition;
-        } else if (angleDegre > 90 && angleDegre < 180) {
-          xResult = xIn - ajustPosition * (((angleDegre - 180) / 90) * -1);
-        } else if (angleDegre < 0 && angleDegre > -90) {
-          xResult = xIn - ajustPosition * ((angleDegre / 90) * -1);
-        } else if (angleDegre === -90) {
-          xResult = xIn - ajustPosition;
-        } else if (angleDegre < -90 && angleDegre > -180) {
-          xResult = xIn + ajustPosition * ((angleDegre + 180) / 90);
-        }
-      } else if (idMultiLink === 2) {
-        xResult = xIn;
-      }
-    } else {
-      if (idMultiLink === 0) {
-        if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
-          xResult = xOut;
-        } else if (angleDegre > 0 && angleDegre < 90) {
-          xResult = xOut - ajustPosition * (angleDegre / 90);
-        } else if (angleDegre === 90) {
-          xResult = xOut + ajustPosition;
-        } else if (angleDegre > 90 && angleDegre < 180) {
-          xResult = xOut + ajustPosition * (((angleDegre - 180) / 90) * -1);
-        } else if (angleDegre < 0 && angleDegre > -90) {
-          xResult = xOut + ajustPosition * ((angleDegre / 90) * -1);
-        } else if (angleDegre === -90) {
-          xResult = xOut + ajustPosition;
-        } else if (angleDegre < -90 && angleDegre > -180) {
-          xResult = xOut - ajustPosition * ((angleDegre + 180) / 90);
-        }
-      } else if (idMultiLink === 1) {
-        if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
-          xResult = xOut;
-        } else if (angleDegre > 0 && angleDegre < 90) {
-          xResult = xOut + ajustPosition * (angleDegre / 90);
-        } else if (angleDegre === 90) {
-          xResult = xOut - ajustPosition;
-        } else if (angleDegre > 90 && angleDegre < 180) {
-          xResult = xOut - ajustPosition * (((angleDegre - 180) / 90) * -1);
-        } else if (angleDegre < 0 && angleDegre > -90) {
-          xResult = xOut - ajustPosition * ((angleDegre / 90) * -1);
-        } else if (angleDegre === -90) {
-          xResult = xOut - ajustPosition;
-        } else if (angleDegre < -90 && angleDegre > -180) {
-          xResult = xOut + ajustPosition * ((angleDegre + 180) / 90);
-        }
-      } else if (idMultiLink === 2) {
-        xResult = xOut;
-      }
-    }
-    return xResult;
-  };
+  //   if (isIn) {
+  //     if (idMultiLink === 0) {
+  //       if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
+  //         xResult = xIn;
+  //       } else if (angleDegre > 0 && angleDegre < 90) {
+  //         xResult = xIn - ajustPosition * (angleDegre / 90);
+  //       } else if (angleDegre === 90) {
+  //         xResult = xIn + ajustPosition;
+  //       } else if (angleDegre > 90 && angleDegre < 180) {
+  //         xResult = xIn + ajustPosition * (((angleDegre - 180) / 90) * -1);
+  //       } else if (angleDegre < 0 && angleDegre > -90) {
+  //         xResult = xIn + ajustPosition * ((angleDegre / 90) * -1);
+  //       } else if (angleDegre === -90) {
+  //         xResult = xIn + ajustPosition;
+  //       } else if (angleDegre < -90 && angleDegre > -180) {
+  //         xResult = xIn - ajustPosition * ((angleDegre + 180) / 90);
+  //       }
+  //     } else if (idMultiLink === 1) {
+  //       if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
+  //         xResult = xIn;
+  //       } else if (angleDegre > 0 && angleDegre < 90) {
+  //         xResult = xIn + ajustPosition * (angleDegre / 90);
+  //       } else if (angleDegre === 90) {
+  //         xResult = xIn - ajustPosition;
+  //       } else if (angleDegre > 90 && angleDegre < 180) {
+  //         xResult = xIn - ajustPosition * (((angleDegre - 180) / 90) * -1);
+  //       } else if (angleDegre < 0 && angleDegre > -90) {
+  //         xResult = xIn - ajustPosition * ((angleDegre / 90) * -1);
+  //       } else if (angleDegre === -90) {
+  //         xResult = xIn - ajustPosition;
+  //       } else if (angleDegre < -90 && angleDegre > -180) {
+  //         xResult = xIn + ajustPosition * ((angleDegre + 180) / 90);
+  //       }
+  //     } else if (idMultiLink === 2) {
+  //       xResult = xIn;
+  //     }
+  //   } else {
+  //     if (idMultiLink === 0) {
+  //       if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
+  //         xResult = xOut;
+  //       } else if (angleDegre > 0 && angleDegre < 90) {
+  //         xResult = xOut - ajustPosition * (angleDegre / 90);
+  //       } else if (angleDegre === 90) {
+  //         xResult = xOut + ajustPosition;
+  //       } else if (angleDegre > 90 && angleDegre < 180) {
+  //         xResult = xOut + ajustPosition * (((angleDegre - 180) / 90) * -1);
+  //       } else if (angleDegre < 0 && angleDegre > -90) {
+  //         xResult = xOut + ajustPosition * ((angleDegre / 90) * -1);
+  //       } else if (angleDegre === -90) {
+  //         xResult = xOut + ajustPosition;
+  //       } else if (angleDegre < -90 && angleDegre > -180) {
+  //         xResult = xOut - ajustPosition * ((angleDegre + 180) / 90);
+  //       }
+  //     } else if (idMultiLink === 1) {
+  //       if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
+  //         xResult = xOut;
+  //       } else if (angleDegre > 0 && angleDegre < 90) {
+  //         xResult = xOut + ajustPosition * (angleDegre / 90);
+  //       } else if (angleDegre === 90) {
+  //         xResult = xOut - ajustPosition;
+  //       } else if (angleDegre > 90 && angleDegre < 180) {
+  //         xResult = xOut - ajustPosition * (((angleDegre - 180) / 90) * -1);
+  //       } else if (angleDegre < 0 && angleDegre > -90) {
+  //         xResult = xOut - ajustPosition * ((angleDegre / 90) * -1);
+  //       } else if (angleDegre === -90) {
+  //         xResult = xOut - ajustPosition;
+  //       } else if (angleDegre < -90 && angleDegre > -180) {
+  //         xResult = xOut + ajustPosition * ((angleDegre + 180) / 90);
+  //       }
+  //     } else if (idMultiLink === 2) {
+  //       xResult = xOut;
+  //     }
+  //   }
+  //   return xResult;
+  // };
 
-  private ifMultiLinkWithPointDefineY = (isIn: boolean, idMultiLink: number): number => {
-    let yResult = 0;
-    const arrayPoints: PointClass[] = this.props.options.arrayPoints;
-    let xIn = 0;
-    let yIn = 0;
-    let xOut = 0;
-    let yOut = 0;
-    const ajustPosition = 5;
-    arrayPoints.forEach(point => {
-      let name: string = point.label || point.name;
-      if (name === this.props.associatePointIn) {
-        xIn = parseInt(point.positionShapeX, 10);
-        yIn = parseInt(point.positionShapeY, 10);
-      }
-      if (name === this.props.associatePointOut) {
-        xOut = parseInt(point.positionShapeX, 10);
-        yOut = parseInt(point.positionShapeY, 10);
-      }
-    });
+  // private ifMultiLinkWithPointDefineY = (isIn: boolean, idMultiLink: number): number => {
+  //   let yResult = 0;
+  //   const arrayPoints: PointClass[] = this.props.options.arrayPoints;
+  //   let xIn = 0;
+  //   let yIn = 0;
+  //   let xOut = 0;
+  //   let yOut = 0;
+  //   const ajustPosition = 5;
+  //   arrayPoints.forEach(point => {
+  //     let name: string = point.label || point.name;
+  //     if (name === this.props.associatePointIn) {
+  //       xIn = parseInt(point.positionShapeX, 10);
+  //       yIn = parseInt(point.positionShapeY, 10);
+  //     }
+  //     if (name === this.props.associatePointOut) {
+  //       xOut = parseInt(point.positionShapeX, 10);
+  //       yOut = parseInt(point.positionShapeY, 10);
+  //     }
+  //   });
 
-    const angleRadian: number = Math.atan2(yIn - yOut, xIn - xOut);
-    const angleDegre: number = (angleRadian * 180) / Math.PI;
+  //   const angleRadian: number = Math.atan2(yIn - yOut, xIn - xOut);
+  //   const angleDegre: number = (angleRadian * 180) / Math.PI;
 
-    if (isIn) {
-      if (idMultiLink === 0) {
-        if (angleDegre === 0) {
-          yResult = yIn + ajustPosition;
-        } else if (angleDegre > 0 && angleDegre < 90) {
-          yResult = yIn + ajustPosition * (((angleDegre - 90) / 90) * -1);
-        } else if (angleDegre === 90 || angleDegre === -90) {
-          yResult = yIn;
-        } else if (angleDegre > 90 && angleDegre < 180) {
-          yResult = yIn + ajustPosition * ((angleDegre - 90) / 90);
-        } else if (angleDegre < 0 && angleDegre > -90) {
-          yResult = yIn + ajustPosition * ((angleDegre + 90) / 90);
-        } else if (angleDegre < -90 && angleDegre > -180) {
-          yResult = yIn + ajustPosition * (((angleDegre + 90) / 90) * -1);
-        } else if (angleDegre === 180 || angleDegre === -180) {
-          yResult = yIn + ajustPosition;
-        }
-      } else if (idMultiLink === 1) {
-        if (angleDegre === 0) {
-          yResult = yIn - ajustPosition;
-        } else if (angleDegre > 0 && angleDegre < 90) {
-          yResult = yIn - ajustPosition * (((angleDegre - 90) / 90) * -1);
-        } else if (angleDegre === 90 || angleDegre === -90) {
-          yResult = yIn;
-        } else if (angleDegre > 90 && angleDegre < 180) {
-          yResult = yIn - ajustPosition * ((angleDegre - 90) / 90);
-        } else if (angleDegre < 0 && angleDegre > -90) {
-          yResult = yIn - ajustPosition * ((angleDegre + 90) / 90);
-        } else if (angleDegre < -90 && angleDegre > -180) {
-          yResult = yIn - ajustPosition * (((angleDegre + 90) / 90) * -1);
-        } else if (angleDegre === 180 || angleDegre === -180) {
-          yResult = yIn - ajustPosition;
-        }
-      } else if (idMultiLink === 2) {
-        yResult = yIn;
-      }
-    } else {
-      if (idMultiLink === 0) {
-        if (angleDegre === 0) {
-          yResult = yOut + ajustPosition;
-        } else if (angleDegre > 0 && angleDegre < 90) {
-          yResult = yOut + ajustPosition * (((angleDegre - 90) / 90) * -1);
-        } else if (angleDegre === 90 || angleDegre === -90) {
-          yResult = yOut;
-        } else if (angleDegre > 90 && angleDegre < 180) {
-          yResult = yOut + ajustPosition * ((angleDegre - 90) / 90);
-        } else if (angleDegre < 0 && angleDegre > -90) {
-          yResult = yOut + ajustPosition * ((angleDegre + 90) / 90);
-        } else if (angleDegre < -90 && angleDegre > -180) {
-          yResult = yOut + ajustPosition * (((angleDegre + 90) / 90) * -1);
-        } else if (angleDegre === 180 || angleDegre === -180) {
-          yResult = yOut + ajustPosition;
-        }
-      } else if (idMultiLink === 1) {
-        if (angleDegre === 0) {
-          yResult = yOut - ajustPosition;
-        } else if (angleDegre > 0 && angleDegre < 90) {
-          yResult = yOut - ajustPosition * (((angleDegre - 90) / 90) * -1);
-        } else if (angleDegre === 90 || angleDegre === -90) {
-          yResult = yOut;
-        } else if (angleDegre > 90 && angleDegre < 180) {
-          yResult = yOut - ajustPosition * ((angleDegre - 90) / 90);
-        } else if (angleDegre < 0 && angleDegre > -90) {
-          yResult = yOut - ajustPosition * ((angleDegre + 90) / 90);
-        } else if (angleDegre < -90 && angleDegre > -180) {
-          yResult = yOut - ajustPosition * (((angleDegre + 90) / 90) * -1);
-        } else if (angleDegre === 180 || angleDegre === -180) {
-          yResult = yOut - ajustPosition;
-        }
-      } else if (idMultiLink === 2) {
-        yResult = yOut;
-      }
-    }
-    return yResult;
-  };
+  //   if (isIn) {
+  //     if (idMultiLink === 0) {
+  //       if (angleDegre === 0) {
+  //         yResult = yIn + ajustPosition;
+  //       } else if (angleDegre > 0 && angleDegre < 90) {
+  //         yResult = yIn + ajustPosition * (((angleDegre - 90) / 90) * -1);
+  //       } else if (angleDegre === 90 || angleDegre === -90) {
+  //         yResult = yIn;
+  //       } else if (angleDegre > 90 && angleDegre < 180) {
+  //         yResult = yIn + ajustPosition * ((angleDegre - 90) / 90);
+  //       } else if (angleDegre < 0 && angleDegre > -90) {
+  //         yResult = yIn + ajustPosition * ((angleDegre + 90) / 90);
+  //       } else if (angleDegre < -90 && angleDegre > -180) {
+  //         yResult = yIn + ajustPosition * (((angleDegre + 90) / 90) * -1);
+  //       } else if (angleDegre === 180 || angleDegre === -180) {
+  //         yResult = yIn + ajustPosition;
+  //       }
+  //     } else if (idMultiLink === 1) {
+  //       if (angleDegre === 0) {
+  //         yResult = yIn - ajustPosition;
+  //       } else if (angleDegre > 0 && angleDegre < 90) {
+  //         yResult = yIn - ajustPosition * (((angleDegre - 90) / 90) * -1);
+  //       } else if (angleDegre === 90 || angleDegre === -90) {
+  //         yResult = yIn;
+  //       } else if (angleDegre > 90 && angleDegre < 180) {
+  //         yResult = yIn - ajustPosition * ((angleDegre - 90) / 90);
+  //       } else if (angleDegre < 0 && angleDegre > -90) {
+  //         yResult = yIn - ajustPosition * ((angleDegre + 90) / 90);
+  //       } else if (angleDegre < -90 && angleDegre > -180) {
+  //         yResult = yIn - ajustPosition * (((angleDegre + 90) / 90) * -1);
+  //       } else if (angleDegre === 180 || angleDegre === -180) {
+  //         yResult = yIn - ajustPosition;
+  //       }
+  //     } else if (idMultiLink === 2) {
+  //       yResult = yIn;
+  //     }
+  //   } else {
+  //     if (idMultiLink === 0) {
+  //       if (angleDegre === 0) {
+  //         yResult = yOut + ajustPosition;
+  //       } else if (angleDegre > 0 && angleDegre < 90) {
+  //         yResult = yOut + ajustPosition * (((angleDegre - 90) / 90) * -1);
+  //       } else if (angleDegre === 90 || angleDegre === -90) {
+  //         yResult = yOut;
+  //       } else if (angleDegre > 90 && angleDegre < 180) {
+  //         yResult = yOut + ajustPosition * ((angleDegre - 90) / 90);
+  //       } else if (angleDegre < 0 && angleDegre > -90) {
+  //         yResult = yOut + ajustPosition * ((angleDegre + 90) / 90);
+  //       } else if (angleDegre < -90 && angleDegre > -180) {
+  //         yResult = yOut + ajustPosition * (((angleDegre + 90) / 90) * -1);
+  //       } else if (angleDegre === 180 || angleDegre === -180) {
+  //         yResult = yOut + ajustPosition;
+  //       }
+  //     } else if (idMultiLink === 1) {
+  //       if (angleDegre === 0) {
+  //         yResult = yOut - ajustPosition;
+  //       } else if (angleDegre > 0 && angleDegre < 90) {
+  //         yResult = yOut - ajustPosition * (((angleDegre - 90) / 90) * -1);
+  //       } else if (angleDegre === 90 || angleDegre === -90) {
+  //         yResult = yOut;
+  //       } else if (angleDegre > 90 && angleDegre < 180) {
+  //         yResult = yOut - ajustPosition * ((angleDegre - 90) / 90);
+  //       } else if (angleDegre < 0 && angleDegre > -90) {
+  //         yResult = yOut - ajustPosition * ((angleDegre + 90) / 90);
+  //       } else if (angleDegre < -90 && angleDegre > -180) {
+  //         yResult = yOut - ajustPosition * (((angleDegre + 90) / 90) * -1);
+  //       } else if (angleDegre === 180 || angleDegre === -180) {
+  //         yResult = yOut - ajustPosition;
+  //       }
+  //     } else if (idMultiLink === 2) {
+  //       yResult = yOut;
+  //     }
+  //   }
+  //   return yResult;
+  // };
 
-  private getX = (labelPoint: string): number => {
-    let result = 0;
-    const arrayPoint: PointClass[] = this.props.options.arrayPoints;
-    for (const point of arrayPoint) {
-      if (point.label === labelPoint || point.name === labelPoint) {
-        result = this.synchroLinkX(parseInt(point.positionShapeX, 10));
-      }
-    }
-    return result;
-  };
+  // private getX = (labelPoint: string): number => {
+  //   let result = 0;
+  //   const arrayPoint: PointClass[] = this.props.options.arrayPoints;
+  //   for (const point of arrayPoint) {
+  //     if (point.label === labelPoint || point.name === labelPoint) {
+  //       result = this.synchroLinkX(parseInt(point.positionShapeX, 10));
+  //     }
+  //   }
+  //   return result;
+  // };
 
-  private getY = (labelPoint: string): number => {
-    let result = 0;
-    const arrayPoint: PointClass[] = this.props.options.arrayPoints;
-    for (const point of arrayPoint) {
-      if (point.label === labelPoint || point.name === labelPoint) {
-        result = this.synchroLinkY(parseInt(point.positionShapeY, 10));
-      }
-    }
-    return result;
-  };
+  // private getY = (labelPoint: string): number => {
+  //   let result = 0;
+  //   const arrayPoint: PointClass[] = this.props.options.arrayPoints;
+  //   for (const point of arrayPoint) {
+  //     if (point.label === labelPoint || point.name === labelPoint) {
+  //       result = this.synchroLinkY(parseInt(point.positionShapeY, 10));
+  //     }
+  //   }
+  //   return result;
+  // };
 
   /**
    * to do
@@ -1670,10 +1864,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           if (indexOrientedLink === 0) {
             if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
               //console.log('m0-1');
-              xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 0));
-              yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 0));
-              xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 0));
-              yB = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(false, 0));
+              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 0));
+              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 0));
+              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 0));
+              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 0));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
@@ -1686,8 +1880,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
               //console.log('m0-3');
-              xA = this.getX(this.props.associatePointIn);
-              yA = this.getY(this.props.associatePointIn);
+              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 0));
+              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 0));
               xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 0));
               yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 0));
               xCByClick = xCByClick0 || (xA + xB) / 2;
@@ -1696,18 +1890,18 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               //console.log('m0-4');
               xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 0));
               yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 0));
-              xB = this.getX(this.props.associatePointOut);
-              yB = this.getY(this.props.associatePointOut);
+              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 0));
+              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 0));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             }
           } else if (indexOrientedLink === 1) {
             if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
               //console.log('m1-1');
-              xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 1));
-              yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 1));
-              xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 1));
-              yB = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(false, 1));
+              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 1));
+              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 1));
+              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 1));
+              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 1));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
@@ -1720,8 +1914,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
               //console.log('m1-3');
-              xA = this.getX(this.props.associatePointIn);
-              yA = this.getY(this.props.associatePointIn);
+              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 1));
+              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 1));
               xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 1));
               yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 1));
               xCByClick = xCByClick0 || (xA + xB) / 2;
@@ -1730,18 +1924,18 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               //console.log('m1-4');
               xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 1));
               yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 1));
-              xB = this.getX(this.props.associatePointOut);
-              yB = this.getY(this.props.associatePointOut);
+              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 1));
+              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 1));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             }
           } else if (indexOrientedLink === 2) {
             if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
               //console.log('m2-1');
-              xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
-              yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
-              xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
-              yB = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(false, 2));
+              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
+              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
+              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
+              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
@@ -1754,8 +1948,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
               //console.log('m2-3');
-              xB = this.getX(this.props.associatePointIn);
-              yB = this.getY(this.props.associatePointIn);
+              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
+              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
               xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
               yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
               xCByClick = xCByClick0 || (xA + xB) / 2;
@@ -1764,8 +1958,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               //console.log('m2-4');
               xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
               yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
-              xB = this.getX(this.props.associatePointOut);
-              yB = this.getY(this.props.associatePointOut);
+              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
+              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             }
@@ -1799,8 +1993,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
       console.log('4');
-      xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
-      yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
+      xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
+      yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = xB0;
       yB = yB0;
       xCByClick = xCByClick0 || (xA + xB) / 2;
@@ -1809,22 +2003,22 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       console.log('5');
       xA = xA0;
       yA = yA0;
-      xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
-      yB = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(false, 2));
+      xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
+      yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
       console.log('6');
-      xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
-      yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
-      xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
-      yB = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(false, 2));
+      xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
+      yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
+      xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
+      yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
       console.log('7');
-      xA = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(true, 2));
-      yA = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(true, 2));
+      xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
+      yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
       yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
       xCByClick = xCByClick0 || (xA + xB) / 2;
@@ -1833,8 +2027,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       console.log('8');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
-      xB = this.synchroLinkX(this.ifMultiLinkWithPointDefineX(false, 2));
-      yB = this.synchroLinkY(this.ifMultiLinkWithPointDefineY(false, 2));
+      xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
+      yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else {

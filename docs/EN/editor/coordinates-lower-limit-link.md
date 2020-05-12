@@ -9,7 +9,7 @@
 If the `color variable` is unchecked, a form of this type appears
 
 
-- Color/size : By checking this box, gives the possibility to change the background color and to give a size.
+- Color/size : By checking this box, it gives the possibility to change the background color and to give a size.
 - Edit color: By clicking on the circle, you can choose the desired color. 
 - Edit size: Allows you to choose the size of the link
 

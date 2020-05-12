@@ -5,6 +5,7 @@ import { RegionClass } from 'Models/RegionClass';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
 import { PointClass } from 'Models/PointClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
+import { Button } from '@grafana/ui';
 
 interface Legend {
   hiddenLegend: boolean;
@@ -16,6 +17,7 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   // legend: Legend;
   /** save data */
   callBack: (event: any) => void;
+  callBackClose: () => void;
 }
 
 interface State {
@@ -57,7 +59,7 @@ class LegendComponent extends React.Component<Props, State> {
           <span
             style={{
               padding: '5px',
-              margin: '10px',
+              // margin: '10px',
               width: '130px',
               //width: '3.5rem',
               //borderRadius: '39%',
@@ -104,6 +106,26 @@ class LegendComponent extends React.Component<Props, State> {
       rendu.push(ownElement);
     }
     return rendu;
+  };
+
+  closeLegend = (event: any) => {
+    this.props.callBackClose();
+    // const close = document.getElementById('iconclose');
+    // close?.addEventListener('click', () => {
+    //   console.log('goodzone');
+
+    //   const disapear = document.getElementById('L');
+    //   const appear = document.getElementById('legnd');
+    //   if (disapear) {
+    //     disapear.style.visibility = 'hidden';
+    //   }
+    //   appear?.addEventListener('click', () => {
+    //     if (disapear) {
+    //       console.log('dam');
+    //       disapear.style.visibility = 'visible';
+    //     }
+    //   });
+    // });
   };
 
   /** get all limit for point */
@@ -159,6 +181,7 @@ class LegendComponent extends React.Component<Props, State> {
         hidden={this.state.legend.hiddenLegend}
       >
         <article
+          id="L"
           style={{
             width: '170px',
             position: 'absolute',
@@ -175,21 +198,27 @@ class LegendComponent extends React.Component<Props, State> {
           }}
         >
           <div key={'legendTitle'} style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
-            <h5 style={{ width: '100%', fontSize: '20px', display: 'inline-flex', padding: '10px' }}>Legend</h5>
+            <h5 style={{ width: '100%', fontSize: '20px', display: 'flex', padding: '10px' }}>
+              Legend
+              <Button onClick={this.closeLegend} style={{ marginLeft: '20%' }} id="iconclose">
+                <i className="fa fa-times" aria-hidden="true"></i>
+              </Button>
+            </h5>
             {/* <p style={{ color: '#d8d9da', fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p>
             <p style={{ color: '#d8d9da', fontSize: '11px', marginLeft: '17px' }}>Label</p> */}
+
+            {/* <p style={{ fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p> */}
+            <div key={'legendTitleRegion'} style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
+              <p style={{ fontSize: '15px', padding: '10px 0 10px 14px', fontWeight: 'bold', color: 'white' }}>Region</p>
+            </div>
           </div>
-          {/* <p style={{ fontSize: '15px', marginLeft: '14px', fontWeight: 'bold' }}>Region</p> */}
-          <div key={'legendTitleRegion'} style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
-            <p style={{ fontSize: '15px', padding: '10px 0 10px 14px', fontWeight: 'bold', color: 'white' }}>Region</p>
-          </div>
-          <div key="regionLegend" style={{ paddingLeft: '5px' }}>
+          <div key="regionLegend" style={{ paddingLeft: '5px', lineHeight: '0.6' }}>
             {this.fillRegion()}
           </div>
           <div key={'legendTitlePoint'} style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
             <p style={{ fontSize: '15px', padding: '10px 0 10px 14px', fontWeight: 'bold', color: 'white' }}>Point</p>
           </div>
-          <div key="pointLegend" style={{ paddingLeft: '5px' }}>
+          <div key="pointLegend" style={{ paddingLeft: '5px', lineHeight: '0.95' }}>
             {this.fillPoint()}
           </div>
           <div key={'legendTitleLink'} style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
@@ -229,6 +258,7 @@ class LegendComponent extends React.Component<Props, State> {
    * result
    */
   render() {
+    // rip testMoi
     return <div key={'contentHtmlLegend'}>{this.state.finalHTML}</div>;
   }
 }

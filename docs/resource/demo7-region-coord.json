@@ -2,10 +2,10 @@
     "regions": [{
         "colorMode": false,
         "coords": {
-            "xMin": "0",
-            "xMax": "-50",
-            "yMin": "0",
-            "yMax": "-50"
+            "xMin": "-23",
+            "xMax": "-77",
+            "yMin": "-26",
+            "yMax": "-99"
         },
         "id": 350,
         "idSVG": "",
@@ -22,7 +22,7 @@
             "id": 0,
             "lowerLimitMax": "",
             "lowerLimitMin": "",
-            "sizeBorder": "5"
+            "sizeBorder": "2"
         }],
         "mainMetric": {
             "format": "",
@@ -79,7 +79,7 @@
                 "unityMesureElement": ""
             }
         },
-        "traceBack": true,
+        "traceBack": false,
         "traceBorder": true
     }]
 }

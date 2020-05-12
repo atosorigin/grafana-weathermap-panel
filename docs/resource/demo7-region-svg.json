@@ -63,9 +63,9 @@
                 "isTextRegion": false,
                 "legend": "",
                 "style": {
-                    "bold": true,
+                    "bold": false,
                     "italic": false,
-                    "underline": true
+                    "underline": false
                 },
                 "unit": "",
                 "value": "",
@@ -132,8 +132,8 @@
                 "tooltipPositionB": {}
             },
             "textObj": {
-                "colorBack": "#5794F2",
-                "colorText": "#73BF69",
+                "colorBack": "#FFFFFF",
+                "colorText": "#000000",
                 "generateAuxiliaryElement": {
                     "addColorBackElement": true,
                     "addColorTextElement": true,
@@ -145,13 +145,13 @@
                     "numericFormatElement": "round",
                     "unityMesureElement": "a"
                 },
-                "generateObjectText": true,
-                "isTextRegion": true,
+                "generateObjectText": false,
+                "isTextRegion": false,
                 "legend": "",
                 "style": {
-                    "bold": true,
+                    "bold": false,
                     "italic": false,
-                    "underline": true
+                    "underline": false
                 },
                 "unit": "em",
                 "value": "",

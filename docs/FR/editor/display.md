@@ -1,11 +1,11 @@
 
 # Display
-[![](../../resource/Go-back.png)](README.md)
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 
 ## Police de caractères
 
-La liste de police de caractères utilise celle standard qui sont disponible dans le navigateur
+La liste de police de caractères utilise celle standard qui sont disponibles dans le navigateur
 
 
 ## Taille
@@ -25,24 +25,24 @@ Différents styles sont possibles : gras, italique, souligné, etc.
 
 ## Utiliser SVG
 
-Permet de télécharger un svg pour pouvoir gérer les régions. En décochant, vous pouvez telecharger n'importe quelle image mais elle ne sera pas interactive
+Permet de télécharger un SVG pour pouvoir gérer les régions. En décochant, vous pouvez télécharger n'importe quelle image, mais elle ne sera pas interactive
 
 
 # Image
 
 Il est important de définir un espace pour délimiter son environnement
 
-Pour cela, il est possible de charger une image en arrière plan suivant une des méthodes proposées : 
+Pour cela, il est possible de charger une image en arrière-plan suivant une des méthodes proposées : 
 
 ## Si vous utilisez une image SVG
 
 ### Image Vectoriel
 
-Il s'agit d'une image vectoriel au format SVG. La création du fichier SVG est décrite dans la page dédié : [Construire un fichier SVG](../appendix/svg.md)
+Il s'agit d'une image vectorielle au format SVG. La création du fichier SVG est décrite dans la page dédiée : [Construire un fichier SVG](../appendix/svg.md)
 
 ![display](../../screenshots/editor/display/svg-background.jpg)
 
-Après avoir saisie l'url du fichier
+Après avoir saisi l'URL du fichier
 
 
 Il faut sauvegarder le dashboard, comme ceci
@@ -55,12 +55,12 @@ Il faut sauvegarder le dashboard, comme ceci
 
 ### Image Bitmap
 
-Il s'agit d'une image créé point par point dont le contenu n'est dynamique, ni vectoriel
+Il s'agit d'une image créée point par point dont le contenu n'est dynamique, ni vectoriel
 
 ![display](../../screenshots/editor/display/jpg-background.jpg)
 
 
-Il est possible de charger une image en arrière plan au format : 
+Il est possible de charger une image en arrière-plan au format : 
 
 - JPG ou JPEG
 - PNG
@@ -76,7 +76,7 @@ pour obtenir le résultat suivant
 ![display](../../screenshots/editor/display/jpg-resultat.jpg)
 
 
-Après avoir saisie l'url du fichier, la largeur et la hauteur
+Après avoir saisi l'URL du fichier, la largeur et la hauteur
 
 
 Il faut sauvegarder le dashboard, comme ceci
@@ -103,7 +103,7 @@ pour cela, il faut *copier l'adresse de l'image*
 
 
 
-Après avoir saisie l'url du fichier
+Après avoir saisi l'URL du fichier
 
 
 

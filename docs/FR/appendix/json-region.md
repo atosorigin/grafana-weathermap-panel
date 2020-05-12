@@ -1,5 +1,5 @@
 # Fichier `region`
-[![](../../resource/Go-back.png)](README.md)
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 le script complet [sample-region.json](../../../demo/sample-region.json) est disponible, dont le détail de construction se trouve ci-dessous.
 

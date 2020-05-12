@@ -93,7 +93,7 @@ The **global** file must be declared as a JSON file like this:
 
 ```
    "baseMap": {
-        "image": "http://localhost/demo/sample-global.json",
+        "image": "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-background.svg",
         "layerImage": "",
         "modeSVG": true,
         "width": "",
@@ -115,7 +115,7 @@ The **global** file must be declared as a JSON file like this:
 ```
 
    "regions": [
-        "http://localhost/demo/sample-region.json"
+        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-svgRegion.json"
     ],
     
 
@@ -129,7 +129,7 @@ The **global** file must be declared as a JSON file like this:
 
 ```    
     "points": [
-        "http://localhost/demo/sample-point.json"
+        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-point.json"
     ],
     
 ```
@@ -142,7 +142,7 @@ The **global** file must be declared as a JSON file like this:
 
 ```
     "links": [
-        "http://localhost/demo/sample-link.json"
+        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-link.json"
     ]
     
 ```

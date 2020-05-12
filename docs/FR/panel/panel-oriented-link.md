@@ -1,8 +1,9 @@
 # Oriented link
-[![](../../resource/Go-back.png)](README.md)
+[![](../../screenshots/other/Go-back.png)](README.md)
+
 ![menu](../../screenshots/panel/oriented-link.jpg)
 
-Après avoir cliquer sur le bouton **oriented link**
+Après avoir cliqué sur le bouton **oriented link**
 
 
 
@@ -16,4 +17,4 @@ Le résultat obtenu sera automatiquement
 
 L'édition du point s'effectue à partir du formulaire de l'[éditeur oriented link](../editor/coordinates-space-link.md).
 
-Pour y acceder, il faut cliquer sur **Coordinate space**, puis **OrientedLink**, puis sur votre lien
+Pour y accéder, il faut cliquer sur **Coordinate space**, puis **OrientedLink**, puis sur votre lien

@@ -1,5 +1,5 @@
  
-# Create modelisation advanced
+# Create advanced modeling
 [![](../../screenshots/other/Go-back.png)](README.md)
  
 ## Select query
@@ -81,7 +81,7 @@ This will display its value, if it is unique, and will display an error if there
 
 ### Import JSON file
 
-- It is possible to add all of those configuration through json files by doing an import. To know how to do it, [follow this link](../editor/import.md)
+- It is possible to add all of those configurations through JSON files by doing an import. To know how to do it, [follow this link](../editor/import.md)
 
 And here is the JSON file :
 

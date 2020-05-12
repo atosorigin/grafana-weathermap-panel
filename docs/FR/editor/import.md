@@ -1,6 +1,6 @@
  
 # Import Files
-[![](../../resource/Go-back.png)](README.md)
+[![](../../screenshots/other/Go-back.png)](README.md)
  
 ## Global URL Import
 

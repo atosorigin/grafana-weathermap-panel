@@ -1,5 +1,5 @@
 # Realised
-[![](../../resource/Go-back.png)](../../README-fr.md)
+[![](../../screenshots/other/Go-back.png)](../../README-fr.md)
 
 
 Projet réalisé par Atos Open sources

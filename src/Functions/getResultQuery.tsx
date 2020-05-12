@@ -35,7 +35,7 @@ export const getResultQuery = (mainMetric: Metric) => {
       const result = searchNameIsKey(line, mainMetric);
       if (result) {
         const sizeQuery: number = line.fields[0].values.length;
-
+        // in grafana 7 change line.field[0] to line.field[1]
         for (let i = 0; i < sizeQuery; i++) {
           if (line.fields.length > 0 && line.fields[0].values.get(i)) {
             cnt += line.fields[0].values.get(i);

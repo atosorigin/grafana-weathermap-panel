@@ -1,5 +1,5 @@
 # Région
-[![](../../resource/Go-back.png)](coordinates.md)
+[![](../../screenshots/other/Go-back.png)](coordinates.md)
 
 Permet la création d'une région
 
@@ -31,29 +31,29 @@ Permet de définir les coordonnées d'une région sur la même base que l'onglet
 
 ## Main metric
 
-Une page dédié pour remplir les champs sont disponible [ici](coordinates-main-metric.md)
+Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-main-metric.md)
 
 
 ## Auxiliary metrics
 
-Une page dédié pour remplir les champs sont disponible [ici](coordinates-auxiliary-metric.md)
+Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-auxiliary-metric.md)
 
 
 ## Manage link
 
-Une page dédié pour remplir les champs sont disponible [ici](coordinates-manage-link.md)
+Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-manage-link.md)
 
 
 ## Text object
 
 
-Une page dédié pour remplir les champs sont disponible [ici](coordinates-object-text.md)
+Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-object-text.md)
 
 
 ## Lower Limit
 
 
-Une page dédié pour remplir les champs sont disponible [ici](coordinates-lower-limit.md)
+Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-lower-limit.md)
 
 
 

@@ -2,7 +2,7 @@
 # How to create and add your own SVG image in Grafana
 [![](../../screenshots/other/Go-back.png)](README.md)
  
-## Create you SVG on inkscape
+## Create you SVG on Inkscape
 
 ### Step 1 : Download Inkscape
 
@@ -14,10 +14,10 @@ The recommended software to make a background image will be [Inkscape](https://i
 
 ### Step 2 : Create your shape
 
-Inkscape allow you to choose between several shape to create you SVG :
+Inkscape allows you to choose between several shapes to create your SVG :
 - Circle
 - Square
-- Other..
+- Other...
 
 ![Inkscape](./../../screenshots/demo/tutorial4/Inkscape.png)
 
@@ -25,15 +25,15 @@ You can also create you SVG image with draw.io. More information [here](./append
 
 ### Step 3 : Add id to all of your objects
 
-It is necessary to add an id to all of your objects. It will be easier to use with grafana.
+It is necessary to add an id to all of your objects. It will be easier to use with Grafana.
 
-To add an id, `right click` on your object, then go on `Properties of your object`. A windows will appears and will allow you to change the ID
+To add an id, `right click` on your object, then go on `Properties of your object`. A window will appears and will allow you to change the ID
 
 ![Propriete](./../../screenshots/demo/tutorial4/Propriete.png)
 
 ### Step 4 : Save you shape
 
-To save you shape, you need to save in `SVG Inkscape` or `SVG simple` format.
+To save your shape, you need to save in `SVG Inkscape` or `SVG simple` format.
 
 ![Enregistrer](./../../screenshots/demo/tutorial4/enregistrer.png)
 
@@ -48,7 +48,7 @@ It is possible to have more details with the [display](../editor/display.md) pag
 
 ![Enregistrer](./../../screenshots/demo/tutorial4/DisplaySVG.png)
 
-Then, if you want to add a region, you can see the differents id of your shape in `Zone SVG`. 
+Then, if you want to add a region, you can see the different id of your shape in `Zone SVG`. 
 
 ![Enregistrer](./../../screenshots/demo/tutorial4/Region.png)
 

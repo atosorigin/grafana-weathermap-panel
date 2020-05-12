@@ -1,5 +1,5 @@
 # Oriented Link
-[![](../../resource/Go-back.png)](coordinates.md)
+[![](../../screenshots/other/Go-back.png)](coordinates.md)
 
 Définir les coordonnées d'un oriented link
 
@@ -31,7 +31,7 @@ il s'agit d'une clé permettant d'ajouter le résultat d'une valeur à des param
 
 Vous permet de choisir la taille du lien entre Small, Medium et Large
 
-## AssociatePoint/RégionIn et AssociatePoint/RégionOut
+## AssociatePoint/RegionIn et AssociatePoint/RegionOut
 
 Vous permet de définir l'objet de départ et d'arrivée de votre lien, il peut s'agir d'un lien entre des points et/ou des régions.
 
@@ -49,42 +49,31 @@ Pour ce faire, vous ajoutez un nouveau point C en position X et Y.
 ## **Autre paramètre**
 
 
-
 ## Main metric
 
-Une page dédiée pour remplir les champs sont disponible [ici](coordinates-space-main-metric.md)
-
-
+Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-main-metric.md)
 
 
 ## Auxiliary metrics
 
-
-Une page dédiée pour remplir les champs sont disponible [ici](coordinates-auxiliary-metric.md)
-
-
+Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-auxiliary-metric.md)
 
 
 ## Manage link
 
-Une page dédiée pour remplir les champs sont disponible [ici](coordinates-manage-link.md)
-
-
+Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-manage-link.md)
 
 
 ## Text object
 
 
-Une page dédié pour remplir les champs sont disponible [ici](coordinates-object-text.md)
+Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-object-text.md)
 
 
-
-## LowerLimit
-
+## Lower Limit
 
 
-Une page dédié pour remplir les champs sont disponible [ici](coordinates-lower-limit.md)
-
+Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-lower-limit.md)
 
 
 ## Position Parameter
@@ -107,7 +96,7 @@ Vous pouvez définir la position du e différent paramètre.
 
   - Layer level
     - Upgrade on : choisissez l'autre lien que vous voulez voir en dessous de celui ci
-    - Downgrade on : choisissez l'autre lien que vous voulez voir au-dessus de celui ci
+    - Downgrade on : choisissez l'autre lien que vous voulez voir au-dessus de celui-ci
 
 
 

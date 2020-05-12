@@ -1,5 +1,5 @@
 # Créer un dashboard avancé avec des liens directionnels
-[![](../../resource/Go-back.png)](README.md)
+[![](../../screenshots/other/Go-back.png)](README.md)
  
 
 
@@ -29,7 +29,7 @@ Les marqueurs "A" et "B" seront utilisés pour identifier cette requête, comme 
 ![step 02](../../screenshots/demo/tutorial3/display.jpg)
 
 
-La création d'un background se fait à partir du menu `dIsplay`.
+La création d'un background se fait à partir du menu `display`.
 
 Elle nécessite 
 
@@ -70,14 +70,14 @@ Nous en profitons pour changer la couleur de notre point. Pour ce faire, nous aj
 ## Etape 4 : Ajouter une image 
 
 
-Pour ajouter une illustration à notre region, allez dans le menu `Coordinates space`, `region`et `Add coordinate space`. 
-Ensuite, choisissez notre region.
+Pour ajouter une illustration à notre région, allez dans le menu `Coordinates space`, `region`et `Add coordinate space`. 
+Ensuite, choisissez notre région.
 
 ![step 02](../../screenshots/demo/tutorial2/CoordinateMode.png)
 
 Vous devez remplir le formulaire comme ceci : 
 
-- Entrez un `label`par exemple Ordinateur
+- Entrez un `label` par exemple Ordinateur
 - Sélectionnez `Coordinate mode`.
 - Choisissez ensuite une image
 
@@ -118,7 +118,7 @@ Ensuite, dans `Main metric`, choisissez votre métrique.
 
 ![resultat](../../screenshots/demo/tutorial3/MainMetricLink.png)
 
-## Resultat
+## Résultat
 
 
 ![resultat](../../screenshots/demo/tutorial3/resultat.png)

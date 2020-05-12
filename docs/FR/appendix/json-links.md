@@ -1,5 +1,5 @@
 # Fichier `links`
-[![](../../resource/Go-back.png)](README.md)
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 le script complet [sample-link.json](../../../demo/sample-link.json) est disponible, dont le détail de construction se trouve ci-dessous.
 

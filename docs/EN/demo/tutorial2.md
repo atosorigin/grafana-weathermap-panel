@@ -1,7 +1,7 @@
 # Add PNG/JPG in your dashboard
 [![](../../screenshots/other/Go-back.png)](README.md)
  
-## Add an image as display
+## Add an image as a display
 For this tutorial, you will first download the picture background : 
 
 
@@ -23,11 +23,11 @@ It is possible to have more details with the [display](../editor/display.md) pag
 You have to save and reload the page.
 
 
-## Define an coordinate mode region with image
+## Define a coordinate mode region with image
 
 ### Add an image in a region
 
-The creation of a region in an SVG image is done from the `Coordinates space`, `region` and `Add coordinate space` menu.
+The creation of a region in an SVG image is done from the `Coordinates space`, `region`, and `Add coordinate space` menu.
 
 ![step 02](../../screenshots/demo/tutorial2/CoordinateMode.png)
 
@@ -57,11 +57,11 @@ The end result will be like this:
 
 ![step 08](../../screenshots/demo/tutorial2/Result1.png)
 
-## Define an coorinate mode region without image
+## Define a coordinate mode region without image
 
-### Step 1 :Create the region
+### Step 1 : Create the region
 
-The creation of a region in an SVG image is done from the `Coordinates space`, `region` and `Add coordinate space` menu.
+The creation of a region in an SVG image is done from the `Coordinates space`, `region`, and `Add coordinate space` menu.
 
 ![step 02](../../screenshots/demo/tutorial2/CoordinateMode.png)
 
@@ -72,7 +72,7 @@ You have to fill out the form like this:
 
 ![step 03](../../screenshots/demo/tutorial2/CoordinateModeNoImage.png)
 
-Then chosse the size of the region for your image. Here we choose :
+Then choose the size of the region for your image. Here we choose :
 - X Min : -18
 - X Max : 0
 - Y Min : -6
@@ -81,12 +81,12 @@ Then chosse the size of the region for your image. Here we choose :
 To finish
 - Click on the `load` button
 
-### Step 2 : Add a color to a region
+### Step 2 : Add color to a region
 
 ![step 03](../../screenshots/demo/tutorial2/LowerLimit.png)
 
 
-Adding a color to a SVG element is done from the `Coordinates space`, `region` and `Edit coordinate space` menu.
+Adding a color to an SVG element is done from the `Coordinates space`, `region`, and `Edit coordinate space` menu.
 
 You select the `Lower limit' line and then complete the form like this: 
  
@@ -124,7 +124,7 @@ To create an oriented link you have to pass by [the panel menu](../panel/panel-o
 
 ### Import JSON file
 
-- It is possible to add all of those configuration through json files by doing an import. To know how to do it, [follow this link](../editor/import.md)
+- It is possible to add all of those configurations through JSON files by doing an import. To know how to do it, [follow this link](../editor/import.md)
 
 And here is the different JSON file :
 

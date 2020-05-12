@@ -12,11 +12,11 @@ Define the coordinates of the points
 ![saisie point](../../screenshots/editor/coordinates/screen-point/obligatoire.jpg)
 
 
-The required informations to display the points are : 
+The required information to display the points are : 
 
 
 
-- Label : This is a key to add the result of a value to the parameters 
+- Label : This is a key to add the result of value to the parameters 
 - Display : Show or not show the point
 - Size : Choose you size small / medium / large
 - Position : X and Y position

@@ -1,5 +1,5 @@
 # Settings server
-[![](../../resource/Go-back.png)](README.md)
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 L'importation de fichiers par des liens est effectuée par un serveur associé.
 

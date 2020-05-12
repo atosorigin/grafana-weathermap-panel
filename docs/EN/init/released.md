@@ -18,4 +18,5 @@ The team that made the plugin is:
  - [![](../../screenshots/other/linkedin.png)](https://www.linkedin.com/in/samuelbelondrade) Samuel BELONDRADE
  - [![](../../screenshots/other/linkedin.png)](https://www.linkedin.com/in/andre-simon-9701a7130/) André Simon
  - [![](../../screenshots/other/linkedin.png)](https://www.linkedin.com/in/bruno-bernard-2a7543110/) Bruno BERNARD
+ - [![](../../screenshots/other/linkedin.png)](https://www.linkedin.com/in/bruno-bernard-2a7543110/) Gabriel
 

@@ -18,7 +18,7 @@ This part is common for
 3 links are available
 
 
-- Following link : Allows a redirection towards the link by clicking on the region or on the point.
+- Following link : Allows a redirection towards the link by clicking on the region or the point.
 
 - Link tooltip : Allows a redirection to the link filled in the tool type by clicking on the link.
 

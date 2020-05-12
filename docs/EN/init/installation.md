@@ -11,7 +11,7 @@
 
 ## Official version
 
-Go to [weathermap-panel](https://grafana.com/plugins/grafana-weathermap-panel) official page and click on "install Plugin".
+Go to [weathermap-panel](https://grafana.com/plugins/grafana-weathermap-panel) official page and click on "Install Plugin".
 
 
 ## Automatic

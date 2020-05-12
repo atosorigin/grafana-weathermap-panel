@@ -1,5 +1,5 @@
 # Manage link
-[![](../../resource/Go-back.png)](coordinates.md)
+[![](../../screenshots/other/Go-back.png)](coordinates.md)
 
 Cette partie est commune pour 
 
@@ -13,7 +13,7 @@ Cette partie est commune pour
 3 liens sont disponibles
 
 
-- Following link : Permet une redirection vers le lien renseigné en cliquant sur la region ou sur le point
+- Following link : Permet une redirection vers le lien renseigné en cliquant sur la région ou sur le point
 
 - Link tooltip : Permet une redirection vers le lien renseigné dans le tool type en cliquant sur le lien
 

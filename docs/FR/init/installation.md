@@ -2,31 +2,31 @@
 [![](../../screenshots/other/Go-back.png)](README.md)
 
 
-* Weathermap requires [Grafana](https://www.grafana.com/) v6.6+ to run (not tested lower version). Download and install it first.
+* Weathermap nécessite [Grafana](https://www.grafana.com/) v6.6+ pour fonctionner (version inférieure non testée). Téléchargez-la et installez-la d'abord.
 
-## Dependencies
+## Dépendances
 
-- Grafana 6.6.x or 6.7.x
-
-
-## Official version
-
-Go to [weathermap-panel](https://grafana.com/plugins/grafana-weathermap-panel) official page and click on "install Plugin".
+- Grafana 6.6.x ou 6.7.x
 
 
-## Automatic
+## Version officielle
+
+Allez sur la page officielle de [weathermap-panel](https://grafana.com/plugins/grafana-weathermap-panel) et cliquez sur "install Plugin".
+
+
+## Automatique
 
 ```sh
 grafana-cli plugins install grafana-weathermap-panel
 ```
 
-## Manual
+## Manuel
 
 ```sh
 $ git clone https://github.com/atosorigin/grafana-weathermap-panel.git
 ```
 
-move the folder to grafana's plugins folder
+Déplacer le dossier dans le dossier plugins de grafana
 
 
 ```sh

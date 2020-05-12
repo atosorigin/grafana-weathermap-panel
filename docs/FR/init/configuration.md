@@ -1,11 +1,11 @@
 # Configuration
-[![](../../resource/Go-back.png)](README.md)
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 https://www.howtoforge.com/tutorial/how-to-install-prometheus-and-node-exporter-on-centos-8/
 
 ### Prerequisites
 
-Il est possible de pouvoir suivre une metric dans un environnement
+Il est possible de pouvoir suivre une métrique dans un environnement
 
 Example : node_cpu{cpu="cpu0",mode="idle"}
 
@@ -16,7 +16,7 @@ Example : node_cpu{cpu="cpu0",mode="idle"}
 
 ## Testing Node_exporter
 
-Pour voir les Metrics disponibles, ouvrez le navigateur et tapez ceci :
+Pour voir les métriques disponibles, ouvrez le navigateur et tapez ceci :
 
 ```
 http://localhost:9100/metrics
@@ -49,4 +49,4 @@ Il faut aller dans le menu "New dashboard"...
 
 Compléter les étapes pour voir le résultat
 
-![metrics graph](../../screenshots/init/graph.png)
+![métriques graph](../../screenshots/init/graph.png)

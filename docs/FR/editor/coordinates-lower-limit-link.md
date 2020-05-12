@@ -1,5 +1,5 @@
 # Lower limit du lien 
-[![](../../resource/Go-back.png)](coordinates.md)
+[![](../../screenshots/other/Go-back.png)](coordinates.md)
 
 ### Couleur fixe
 
@@ -27,7 +27,7 @@ Vous obtenez cet écran :
 
 ![lower limit](../../screenshots/editor/coordinates/lower-limit/variable-color-input.jpg)
 
-A chaque niveau, il faut remplir :
+À chaque niveau, il faut remplir :
 
 - Une valeur minimale
 - Une valeur maximale

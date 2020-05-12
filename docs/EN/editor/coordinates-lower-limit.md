@@ -17,7 +17,7 @@ This part is common for
 If the `color variable` is unchecked, a form of this type appears
 
 
-- Trace the background : By checking this box, gives the possibility to change the background color.
+- Trace the background : By checking this box, it gives the possibility to change the background color.
 - Trace the border: By checking this box, gives the possibility to change the border color
 - Edit background color: By clicking on the circle, you can choose the desired color. 
 - Edit border color: By clicking on the circle, you can choose the desired color. 

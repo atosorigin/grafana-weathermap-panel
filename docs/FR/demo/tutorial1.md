@@ -1,10 +1,8 @@
 
 ## Ajouter un dashboard SVG
-[![](../../resource/Go-back.png)](README.md)
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 ![step 01](../../screenshots/demo/tutorial1/step01.jpg)
-
-## Création d'un région dynamique
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
@@ -30,7 +28,7 @@ Vous devez sauvegarder et recharger la page.
 ![step 02](../../screenshots/demo/tutorial1/step02.jpg)
 
 
-La création d'une région dans dans une image SVG s'effectue à partir du menu `Coordinates space`, `region` et `Àdd coordinate space`
+La création d'une région dans une image SVG s'effectue à partir du menu `Coordinates space`, `region` et `Àdd coordinate space`
 
 Vous devez remplir le formulaire comme ceci : 
 
@@ -52,8 +50,8 @@ L'ajout d'une couleur à un élément SVG s'effectue à partir du menu `Coordina
 Vous sélectionnez la ligne `Lower limit` pour compléter le formulaire comme ceci : 
  
 
-- Activer `Trace the background` pour activer la couleur d'arrière plan 
-- Sélectionner la couleur `vert` à la ligne `Edit background color`
+- Activer `Trace the background` pour activer la couleur d'arrière-plan 
+- Sélectionner la couleur `verte` à la ligne `Edit background color`
 - Activer `Trace the border` pour activer la couleur de bordure
 - Sélectionner la couleur `rouge` à la ligne `Edit border color`
 - Saisir une valeur pour définir la taille de la bordure `size border` par exemple 3
@@ -79,7 +77,7 @@ La première étape passe par l'onglet `Queries`
 
 Vous devez :
 
-- compléter la ligne `métrics` avec la ligne suivante
+- compléter la ligne `metrics` avec la ligne suivante
 
 ```
 rate(go_memstats_gc_cpu_fraction[5m]) * 100000
@@ -163,7 +161,7 @@ L'ajout d'une couleur à un élément SVG se fait à partir du menu `Coordinates
 Vous sélectionnez la ligne `Lower limit` pour compléter le formulaire comme ceci : 
  
 
-- Activer `Trace the background` pour activer la couleur d'arrière plan 
+- Activer `Trace the background` pour activer la couleur d'arrière-plan 
 - Sélectionner la couleur `verte` à la ligne `Edit background color`
 - Activer `Trace the border` pour activer la couleur de bordure
 - Sélectionner la couleur `rouge` à la ligne `Edit border color`

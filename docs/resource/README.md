@@ -1,8 +1,8 @@
 # Resource
 
-[![](../screenshots/other/Go-back.png)](../README.md)
+[![](../../screenshots/other/Go-back.png)](../README.md)
 
-The `dashboard` directory offers different examples for the WeatcherMap plugin of grafana.
+The `dashboard` directory offers different examples for the WeatcherMap plugin of Grafana.
 
 ## Settings
 
@@ -43,7 +43,7 @@ To see the tutorial, [follow this link](../docs/EN/demo/tutorial2.md)
     
 ## Demo3
 
-### Create Dashboard Avanced with link  directionnel
+### Create an advanced dashboard with directional links
 
 The associated files you can import are =>
 
@@ -82,7 +82,7 @@ To see the tutorial, [follow this link](../docs/EN/demo/tutorial3.md)
   
 ## Demo6
 
-### Create modelisation advanced
+### Create advanced modeling
 
 The associated files you can import are =>
 

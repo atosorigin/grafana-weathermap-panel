@@ -1,7 +1,6 @@
 # Annex create file
 
-[![](../../resource/Go-back.png)](../../README-fr.md)
- 
+[![](../../screenshots/other/Go-back.png)](../../README-fr.md)
 
 - Modèles de Json
 

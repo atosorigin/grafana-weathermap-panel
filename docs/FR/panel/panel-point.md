@@ -1,5 +1,5 @@
 # Point
-[![](../../resource/Go-back.png)](README.md)
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 
 ![menu](../../screenshots/panel/point.jpg)
@@ -7,7 +7,7 @@
 
 
 
-Après avoir cliquer sur le bouton **point**
+Après avoir cliqué sur le bouton **point**
 
 
 
@@ -23,4 +23,4 @@ Le résultat obtenu sera automatiquement.
 
 L'édition du point s'effectue à partir du formulaire de l'[éditeur Point](../editor/coordinates-space-point.md). 
 
-Pour y acceder, il faut cliquer sur **Coordinate space**, puis **Point**, puis **Edit coordinate space**
+Pour y accéder, il faut cliquer sur **Coordinate space**, puis **Point**, puis **Edit coordinate space**

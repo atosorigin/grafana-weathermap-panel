@@ -29,7 +29,7 @@ You have to save and reload the page.
 ![step 02](../../screenshots/demo/tutorial1/step02.jpg)
 
 
-The creation of a region in an SVG image is done from the `Coordinates space`, `region` and `Add coordinate space` menu.
+The creation of a region in an SVG image is done from the `Coordinates space`, `region`, and `Add coordinate space` menu.
 
 You have to fill out the form like this: 
 
@@ -39,14 +39,14 @@ You have to fill out the form like this:
 - Click on the `load` button
 
 
-### Step 2: Add a color to the SVG element
+### Step 2: Add color to the SVG element
 
 
 
 ![step 03](../../screenshots/demo/tutorial1/step03.jpg)
 
 
-Adding a color to a SVG element is done from the `Coordinates space`, `region` and `Edit coordinate space` menu.
+Adding a color to an SVG element is done from the `Coordinates space`, `region`, and `Edit coordinate space` menu.
 
 You select the `Lower limit` line and then complete the form like this: 
  
@@ -118,27 +118,27 @@ You select the `Text object` line to complete the `Generate text object` form li
 
 
 - Enter a `legend`.
-- Enter the number of digits after the decimal point in `Digital formating` e.g. 2
+- Enter the number of digits after the decimal point in `Digital formatting` e.g. 2
 - Enter a unit of measurement in the line `unit of measurement` like qw
 - Choose a background color
 - Choose a text color
 - Click on the "load" button
 
-### Résultat
+### Result
 
 The end result will be like this: 
 
 ![step 08](../../screenshots/demo/tutorial1/step08.jpg)
 
 
-## Creat a point
+## Create a point
 
 ### Step 1: Placing a point
 
 
 ![step 09](../../screenshots/demo/tutorial1/add-coordinate.png)
 
-- To place a point, go to `Visualization`, then `Coordinates space`, `Point` and `Add coordinate space`.
+- To place a point, go to `Visualization`, then `Coordinates space`, `Point`, and `Add coordinate space`.
 
 ![step 09](../../screenshots/demo/tutorial1/point1.png)
 
@@ -156,7 +156,7 @@ You have to fill out the form like this:
 ![step 03](../../screenshots/demo/tutorial1/lower-limit-point.png)
 
 
-Adding a color to a SVG element is done from the `Coordinates space`, `point` and `Edit coordinate space` menu.
+Adding a color to an SVG element is done from the `Coordinates space`, `point`, and `Edit coordinate space` menu.
 
 You select the `Lower limit' line and then complete the form like this: 
  
@@ -185,12 +185,12 @@ It is possible to define other parameters, referring to the [coordinates lower l
 
 As seen in the previous section, we need a metric. So you can use the same metric as before, or you can give another metric B
 
-Once you have done that, you will associated this query to your point
+Once you have done that, you will associate this query to your point
 
 
 ![step 06](../../screenshots/demo/tutorial1/step06.jpg)
 
-The second step is from the `Coordinates space`, `region` and `Edit coordinate space` menu of the `visualization` tab.
+The second step is from the `Coordinates space`, `region`, and `Edit coordinate space` menu of the `visualization` tab.
 
 You select the `Main metric` line to complete the form like this: 
 
@@ -218,7 +218,7 @@ To create an oriented link you have to pass by [the panel menu](../panel/panel-o
 
 ### Step 2: Adding a Query to a link
 
-Once you have place you link on the image you can go to `Coordinates space` and `point` menu of the `visualization` tab.
+Once you have placed your link on the image you can go to `Coordinates space` and `point` menu of the `visualization` tab.
 
 
 ![step 06](../../screenshots/demo/tutorial1/OrientedLink1.png)
@@ -244,7 +244,7 @@ It is possible to fill in the other fields with the additional settings availabl
 
 ### Import JSON file
 
-- It is possible to add all of those configuration through json files by doing an import. To know how to do it, [follow this link](../editor/import.md)
+- It is possible to add all of those configurations through JSON files by doing an import. To know how to do it, [follow this link](../editor/import.md)
 
 And here is the different JSON file :
 

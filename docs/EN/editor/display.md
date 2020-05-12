@@ -35,7 +35,7 @@ Differents styles are possible: bold, italic, underlined, etc.
         
 ## Use SVG
 
-Allows you to download a svg to be able to manage the regions. By unchecking, you can download any image but it will not be interactive.
+It allows you to download an SVG to be able to manage the regions. By unchecking, you can download any image but it will not be interactive.
 
 ## Picture
 
@@ -51,10 +51,7 @@ This is a vector image in SVG format. The creation of the SVG file is described 
 
 ![display](../../screenshots/editor/display/svg-background.jpg)
 
-After entering the url of the file
-
-
-The dashboard should be saved, like this
+After entering the URL of the file, the dashboard should be saved, like this
 
 
 ![display](../../screenshots/editor/display/save-dashboard.jpg)
@@ -86,10 +83,7 @@ to get the following result
 ![display](../../screenshots/editor/display/jpg-resultat.jpg)
 
 
-After entering the file url, width and height
-
-
-The dashboard should be saved, like this
+After entering the file URL, width, and height, the dashboard should be saved, like this
 
 
 ![display](../../screenshots/editor/display/save-dashboard.jpg)
@@ -110,7 +104,7 @@ to do that, you have to *copy the address of the image*
 
 
 
-After entering the url of the file
+After entering the URL of the file
 
 
 

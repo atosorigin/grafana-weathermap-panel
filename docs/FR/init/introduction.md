@@ -1,6 +1,6 @@
 # Introduction
 
-[![](../../resource/Go-back.png)](../../README-fr.md)
+[![](../../screenshots/other/Go-back.png)](../../README-fr.md)
 
 
 WeatherMap Panel Plugin pour Grafana est un logiciel gratuit. Vous pouvez le redistribuer et/ou le modifier selon les termes de la licence publique générale GNU telle que publiée par la Free Software Foundation
@@ -24,8 +24,8 @@ Ce plugin est créé pour cartographier un réseau informatique. Cela permet d'�
 Il prend les données de vos périphériques réseau et les utilise pour fournir un aperçu d'une seule page de l'état actuel du réseau.
 
 Nous pouvons comparer cela à la présentation de la météo. 
-En effet, l'arriere plan avec le réseau informatique peut représenter un pays. Et on ajoute sur cette arrière plan des regions, des points et des liens ce qui peut faire référence au temmps qu'il fait dans une ville donnée. 
-De plus, il est possible d'ajouter des valeurs du péréiphérique réseau à chaque regions, point ou lien, au même titre qu'on peut ajouter la temperature pour une ville.
+En effet, l'arrière-plan avec le réseau informatique peut représenter un pays. Et on ajoute sur cet arrière-plan des régions, des points et des liens ce qui peut faire référence au temms qu'il fait dans une ville donnée. 
+De plus, il est possible d'ajouter des valeurs du périphérique réseau à chaque régions, point ou lien, au même titre qu'on peut ajouter la température pour une ville.
 
 De nombreux paramètres sont disponibles pour personnaliser le rendu.
 
@@ -68,7 +68,7 @@ Une fois que les données ont été traitées et collectées, elles peuvent êtr
 
 Ici, nous allons expliquer les différentes étapes de "Comment utiliser WeatherMap Panel Plugin".
 
-Etape 1 : Connectez-vous à Grafana et ajoutez notre plugin en suivant [This tutoriel](config-data-source.md)
+Etape 1 : Connectez-vous à Grafana et ajoutez notre plugin en suivant [Ce tutoriel](config-data-source.md)
 
 Étape 2 : Créer un nouveau dashboard
 
@@ -86,7 +86,7 @@ Etape 6 : Ensuite, vous pouvez assimiler les mesures aux régions/points/liens q
 ![workflow1](../../screenshots/init/workflow1.png)
 
 Première méthode :
-- Vous choisissez une requête qui ne renvoie qu'une seule valeur et vous voulez assimiler le résultat à une region un point ou un lien, sans ajouter de filtre
+- Vous choisissez une requête qui ne renvoie qu'une seule valeur et vous voulez assimiler le résultat à une région un point ou un lien, sans ajouter de filtre
 
 #### Méthode 2
 
@@ -95,9 +95,15 @@ Première méthode :
 Deuxième méthode :
 - Vous choisissez une requête qui renvoie plusieurs valeurs avec différentes clés/valeurs, et vous voulez ajouter un filtre pour affiner votre requête.
 
-Étape 7 : Une fois que vous avez effectué toutes ces étapes, vous verrez le résultat de votre requête sur le tableau de bord, assimilé à une région/un point ou un lien.
-
-
 #### Méthode 3
 
-Prochainement
+![workflow2](../../screenshots/init/workflow3.png)
+
+
+Troisième méthode :
+ - Vous choisissez une requête qui renvoie une valeur multiple avec différentes clés/valeurs.
+ - Ensuite, pour ajouter les différentes régions, points et liens, vous pouvez utiliser un fichier json global. Ce fichier contient toutes les informations nécessaires pour créer et associer chaque objet avec ses métriques
+
+
+Étape 7 : Une fois que vous avez effectué toutes ces étapes, vous verrez le résultat de votre requête sur le tableau de bord, assimilé à une région/un point ou un lien.
+

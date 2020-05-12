@@ -1,5 +1,5 @@
 # Main metric
-[![](../../resource/Go-back.png)](coordinates.md)
+[![](../../screenshots/other/Go-back.png)](coordinates.md)
 
 Cette fonction est commune pour 
 
@@ -13,12 +13,12 @@ Cette fonction est commune pour
 
 Le paramètre suivant permet de 
 
-- Associer une Query, défini au préalable, à une region ou à un point. Cela permettra de définir un valeur et/ou une couleur à une zone spécifique en fonction de la Query.
+- Associer une Query, défini au préalable, à une région ou à un point. Cela permettra de définir une valeur et/ou une couleur à une zone spécifique en fonction de la Query.
 
 ![main metric](../../screenshots/editor/coordinates/main-metric/main-metric-query-a.jpg)
 
 
-- "Key" et "Value key" permettent de filtrer les données réçues par la Query pour ne garder que ce qui vous importe.
+- "Key" et "Value key" permettent de filtrer les données reçues par la Query pour ne garder que ce qui vous importe.
 
 par exemple 
 
@@ -26,7 +26,7 @@ par exemple
 ![main metric](../../screenshots/editor/coordinates/main-metric/main-metric-key-value.png)
 
 
-Dans l'hypothese ou vous récupéré pluseurs valeurs, le champ suivant propose de vous retourner suivantes : 
+Dans l'hypothèse où vous récupérez plusieurs valeurs, le champ suivant propose de vous retourner suivantes : 
 
 - Average : Renvoie une moyenne des valeurs reçues.
 - Total : Renvoie la somme total des valeurs reçues

@@ -28,7 +28,7 @@ You have to save and reload the page.
 ![step 02](../../screenshots/demo/tutorial1/step02.jpg)
 
 
-The creation of a region in an SVG image is done from the `Coordinates space`, `region` and `Add coordinate space` menu.
+The creation of a region in an SVG image is done from the `Coordinates space`, `region`, and `Add coordinate space` menu.
 
 You have to fill out the form like this: 
 
@@ -39,14 +39,14 @@ You have to fill out the form like this:
 
 Repeat the same instruction for ProxyServer and Select `Proxy` for the zone SVG
 
-### Step 2: Add a color to the SVG element
+### Step 2: Add color to the SVG element
 
 
 
 ![step 03](../../screenshots/demo/tutorial7/LowerLimitProxy.png)
 
 
-Adding a color to a SVG element is done from the `Coordinates space`, `region` and `Edit coordinate space` menu.
+Adding a color to an SVG element is done from the `Coordinates space`, `region`, and `Edit coordinate space` menu.
 
 You select the `Lower limit' line and then complete the form like this: 
  
@@ -68,14 +68,14 @@ Repeat the same things for the Routeur et choose the color red
 It is possible to define other parameters, referring to the [coordinates lower limit](../editor/coordinates-lower-limit.md) page.
 
 
-## Add bi directionnel link between two points
+## Add bi directional link between two points
 
 
-### Step 1 : Add the link bidirectional
+### Step 1 : Add the be directional link  
 
 First, you have to click twice on `Add Oriented Link` and then, click on the Routeur point and on the ProxyServer Point.
 
-A link will appaer and we will edit it to change it to Bidirectional point.
+A link will appear and we will edit it to change it to Bidirectional point.
 
 The option of direction is done from the `Coordinates space`, `OrientedLink` menu. Then, click on your link and go down.
 
@@ -111,11 +111,11 @@ Then, you will be able to assign the metrics to your Link A and your Link B
 
 ![Metric](../../screenshots/demo/tutorial7/orientedLinkMetric.png)
 
-## Add clickable link
+## Add  a clickable link
 
 ### Step 1 : Add a region with Coordinate Mode
 
-The creation of a region in a coordinate mode is done from the `Coordinates space`, `region` and `Add coordinate space` menu.
+The creation of a region in a coordinate mode is done from the `Coordinates space`, `region`, and `Add coordinate space` menu.
 
 You have to fill out the form like this: 
 
@@ -130,7 +130,7 @@ You have to fill out the form like this:
 
 ### Step 2 : Add a link
 
-On this same region, it is possible to add a clickable link.
+In this same region, it is possible to add a clickable link.
 Do to that, go to Manage link and fill the form like follow :
 
 - `Following link` : Allows a redirection towards the link by clicking on the region or on the point.
@@ -149,7 +149,7 @@ Then you can this on this picture that the link is clickable
 
 ## Import JSON file
 
-- It is possible to add all of those configuration through json files by doing an import. To know how to do it, [follow this link](../editor/import.md)
+- It is possible to add all of those configurations through JSON files by doing an import. To know how to do it, [follow this link](../editor/import.md)
 
 And here is the different JSON file :
 

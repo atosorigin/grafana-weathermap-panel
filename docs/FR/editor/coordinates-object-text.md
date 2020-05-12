@@ -1,5 +1,5 @@
 # Text object
-[![](../../resource/Go-back.png)](coordinates.md)
+[![](../../screenshots/other/Go-back.png)](coordinates.md)
 
 Cette partie est commune pour 
 
@@ -7,10 +7,10 @@ Cette partie est commune pour
 - [Point](coordinates-space-point.md)
 - [Oriented Link](coordinates-space-link.md)
 
-### Principal metrics
+### Principal metric
 
 
-#### Region
+#### Région
 
 
 
@@ -29,7 +29,7 @@ Il apparait ensuite plusieurs options pour l'affichage du texte dans la région:
 
 ![text object](../../screenshots/editor/coordinates/text-object/textobject-principal-tooltips.jpg)
 
-En cochant cette option, le nom du label et le lien "Link tooltip" sera affiché dans l'info bulle qui apparait en passant le curseur sur la region
+En cochant cette option, le nom du label et le lien "Link tooltip" sera affiché dans l'info bulle qui apparait en passant le curseur sur la région
 
 Il apparait ensuite plusieurs options pour l'affichage du texte dans l'info bulle:
 
@@ -43,14 +43,14 @@ Il apparait ensuite plusieurs options pour l'affichage du texte dans l'info bull
 ![text object](../../screenshots/editor/coordinates/text-object/textobject-generate.jpg)
 
 
-En cochant cette option, vous allez vouloir afficher la valeur de la metric. Différentes options s'offrent ensuite à vous :
+En cochant cette option, vous allez vouloir afficher la valeur de la métrique. Différentes options s'offrent ensuite à vous :
 
-- Legend : Vous permet d'ajouter une legende avant d'afficher la valeur de la metric
-- Digital formating : Vous permet d'arrondir la valeur de la metric (A Définir)
-- Unit of mesure : Vous permet d'afficher l'unité de la valeur de la metric
-- Object display in text or tooltip : En cochant cette case, la valeur de la metric s'affichera dans l'info bulle
-- Color text : En cochant cette case, vous pourrez choisir une couleur pour le texte de la valeur de la metric
-- Background color : En cochant cette case, vous pourrez choisir une couleur pour le background de la valeur de la metric
+- Legend : Vous permet d'ajouter une légende avant d'afficher la valeur de la métrique.
+- Digital formating : Vous permet d'arrondir la valeur de la métrique (A Définir)
+- Unit of mesure : Vous permet d'afficher l'unité de la valeur de la métrique
+- Object display in text or tooltip : En cochant cette case, la valeur de la métrique s'affichera dans l'info bulle
+- Color text : En cochant cette case, vous pourrez choisir une couleur pour le texte de la valeur de la métrique
+- Background color : En cochant cette case, vous pourrez choisir une couleur pour le background de la valeur de la métrique
 
 
 
@@ -60,13 +60,13 @@ En cochant cette option, vous allez vouloir afficher la valeur de la metric. Dif
 ![text object](../../screenshots/editor/coordinates/text-object/textobject-auxiliary.jpg)
 
 
-En cochant cette option, vous allez vouloir afficher la valeur de l'auxilière définie au préalable. Différentes options s'offrent ensuite à vous :
+En cochant cette option, vous allez vouloir afficher la valeur de l'auxiliaire définie au préalable. Différentes options s'offrent ensuite à vous :
 
-- Legend : Vous permet d'ajouter une legende avant d'afficher la valeur de la metric
-- Digital formating : Vous permet d'arrondir la valeur de la metric (A Définir)
-- Unit of mesure : Vous permet d'afficher l'unité de la valeur de la metric
-- Object display in text or tooltip : En cochant cette case, la valeur de la metric s'affichera dans l'info bulle
-- Color text : En cochant cette case, vous pourrez choisir une couleur pour le texte de la valeur de la metric
-- Background color : En cochant cette case, vous pourrez choisir une couleur pour le background de la valeur de la metric
+- Legend : Vous permet d'ajouter une légende avant d'afficher la valeur de la métrique
+- Digital formating : Vous permet d'arrondir la valeur de la métrique (A Définir)
+- Unit of mesure : Vous permet d'afficher l'unité de la valeur de la métrique
+- Object display in text or tooltip : En cochant cette case, la valeur de la métrique s'affichera dans l'info bulle
+- Color text : En cochant cette case, vous pourrez choisir une couleur pour le texte de la valeur de la métrique
+- Background color : En cochant cette case, vous pourrez choisir une couleur pour le background de la valeur de la métrique
 
 

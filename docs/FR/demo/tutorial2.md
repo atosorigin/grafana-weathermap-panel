@@ -1,5 +1,5 @@
 # Ajoutez PNG/JPG dans votre tableau de bord
-[![](../../resource/Go-back.png)](README.md)
+[![](../../screenshots/other/Go-back.png)](README.md)
  
 ## Ajouter une image comme affichage
 Pour ce tutoriel, vous devez d'abord télécharger l'image de fond : 
@@ -18,7 +18,7 @@ Il est possible d'avoir plus de détails avec la page [display](../editor/displa
 Vous devez sauvegarder et recharger la page.
 
 
-## Définir une région en mode coordonnées avec une image
+## Définir une région en mode coordonnée avec une image
 
 ### Ajouter une image dans une région
 
@@ -34,7 +34,7 @@ Vous devez remplir le formulaire comme ceci :
 
 L'image sélectionnée sera [cumputer-png.png](../../resource/computer-png.png). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
 
-Deinissez ensuite la taille de la région pour votre image. Ici, nous choisirons :
+Definissez ensuite la taille de la région pour votre image. Ici, nous choisirons :
 - X Min : -55
 - X Max : -85 
 - Y Min : -20
@@ -52,7 +52,7 @@ Le résultat final sera le suivant :
 
 ![step 08](../../screenshots/demo/tutorial2/Result1.png)
 
-## Définir une région en mode de coorination sans image
+## Définir une région en mode de coordination sans image
 
 ### Étape 1 : Créer la région
 

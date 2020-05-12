@@ -1,13 +1,13 @@
 # Legend
-[![](../../resource/Go-back.png)](README.md)
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 ![legend](../../screenshots/panel/legend.jpg)
 
-La legend vous permettra de voir à quelles valeurs correspondent chaque couleurs pour les différentes régions et points
+La légende vous permettra de voir à quelles valeurs correspondent chaque couleur pour les différentes régions et points
 
-Après avoir sélectionner la légende, il est possible de cliquer dans l'espace pour positionner la légende
+Après avoir sélectionné la légende, il est possible de cliquer dans l'espace pour positionner la légende
 
-Après avoir choisi l'emplacement, il faut resélectionner le même bouton pour verouiller l'emplacement de la légende.
+Après avoir choisi l'emplacement, il faut re sélectionner le même bouton pour verrouiller l'emplacement de la légende.
 
 Sur cette légende, vous trouverez
 - L'étiquette de chaque région/point ou lien que vous avez créé

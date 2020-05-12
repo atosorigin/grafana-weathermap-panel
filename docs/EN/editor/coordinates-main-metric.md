@@ -14,7 +14,7 @@ This part is common for
 
 The following parameter is used to 
 
-- Associate a predefined Query to a region or a point. This will allow to define a value and/or a color to a specific area according to the query.
+- Associate a predefined Query to a region or a point. This will allow you to define value and/or a color to a specific area according to the query.
 
 ![main metric](../../screenshots/editor/coordinates/main-metric/main-metric-query-a.jpg)
 
@@ -30,6 +30,6 @@ In the hypothesis where you retrieve several values, the following field propose
 
 - Average: Returns an average of the received values.
 - Total: Returns the total sum of the received values.
-- Error: Returns the value if this one is single, return error if there is several values
+- Error: Returns the value if this one is single, return `error` if there are several values
 
 Choose the one you want.

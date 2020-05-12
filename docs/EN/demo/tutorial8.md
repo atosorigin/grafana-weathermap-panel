@@ -20,14 +20,14 @@ It is possible to have more details with the [display](../editor/display.md) pag
 
 You have to save and reload the page.
 
-## Add auxiliere metric to a point
+## Add  an auxiliary metric to a point
 
 ### Step 1: Add a point
 
 
 ![step 09](../../screenshots/demo/tutorial1/add-coordinate.png)
 
-- To place a point, go to `Visualization`, then `Coordinates space`, `Point` and `Add coordinate space`.
+- To place a point, go to `Visualization`, then `Coordinates space`, `Point`, and `Add coordinate space`.
 
 ![step 09](../../screenshots/demo/tutorial1/point1.png)
 
@@ -55,12 +55,12 @@ rate(node_network_transmit_bytes_total[5m])
 
 The "A" marker will be used to identify this query as you can see below.
 
-Once you have done that, you will associated this query to your point
+Once you have done that, you will associate this query to your point
 
 
 ![step 06](../../screenshots/demo/tutorial1/step06.jpg)
 
-The second step is from the `Coordinates space`, `region` and `Edit coordinate space` menu of the `visualization` tab.
+The second step is from the `Coordinates space`, `region`, and `Edit coordinate space` menu of the `visualization` tab.
 
 You select the `Main metric` line to complete the form like this: 
 
@@ -73,7 +73,7 @@ The value will be automatically displayed after the page is refreshed.
 
 It is possible to fill in the other fields with the additional settings available on the page [coordinates space region](../editor/coordinates-space-region.md)
 
-### Step 3 : Add auxiliere metric 
+### Step 3 : Add auxiliary metric 
 
 Go to `Auxiliary metrics` and fill the form like `Main metric`
 
@@ -85,7 +85,7 @@ After that, you will be able to see your auxiliary metric on the toolbox of your
 
 ### Import JSON file
 
-- It is possible to add all of those configuration through json files by doing an import. To know how to do it, [follow this link](../editor/import.md)
+- It is possible to add all of those configurations through JSON files by doing an import. To know how to do it, [follow this link](../editor/import.md)
 
 And here is the JSON file :
 

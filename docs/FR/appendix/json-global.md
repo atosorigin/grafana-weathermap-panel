@@ -1,5 +1,5 @@
 # Global file
- [![](../../resource/Go-back.png)](README.md)
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 Le script complet [sample-global.json](../../../../demo/sample-global.json) est disponible, avec les détails de construction ci-dessous.
 
@@ -86,8 +86,8 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
     - **image** : permet de remplir le lien de l'image, en base 64 ou avec une URL
     - **layerImage** : ""
     - **SVG mode** : "True" ou "false" si vous utilisez une image SVG
-    - **width** : Cchoix de la largeur si vous n'avez pas d'image SVG. Si vous en avez une, laissez vide
-    - **height** : choix de la hauteur si vous n'avez pas d'image SVG. Si vous en avez une, laissez vide
+    - **width** : Choix de la largeur si vous n'avez pas d'image SVG. Si vous en avez une, laissez vide
+    - **height** : Choix de la hauteur si vous n'avez pas d'image SVG. Si vous en avez une, laissez vide
     - **idSVG** ""
 
 ```

@@ -1,4 +1,4 @@
-# Create Dashboard Avanced with link  directionnel
+# Create an advanced dashboard with directional links
 [![](../../screenshots/other/Go-back.png)](README.md) 
  
 
@@ -60,7 +60,7 @@ You have to fill out the form like this:
 
 ![step 04](../../screenshots/demo/tutorial3/point1-color.jpg)
 
-We take advantage of this by changing the colour of our point. To do this, we add a color to our point like this: 
+We take advantage of this by changing the color of our point. To do this, we add color to our point like this: 
 
 - Enable `trace the color`
 - Let's choose the color as `green` to the line `edit border color`.
@@ -71,7 +71,7 @@ We take advantage of this by changing the colour of our point. To do this, we ad
 ## Step 4 : Add an image 
 
 
-To add an illustraton to our region, go to `Coordinates space`, `region` and `Add coordinate space` menu. And choose our point.
+To add an illustration to our region, go to `Coordinates space`, `region`, and `Add coordinate space` menu. And choose our point.
 
 ![step 02](../../screenshots/demo/tutorial2/CoordinateMode.png)
 
@@ -114,7 +114,7 @@ Then, we will edit our links as follow :
 
 ## Step 6 : Main metric
 
-To add a main metric to our link, go to `Coordinates space`, `OrientedLink` and click on you link.
+To add the main metric to our link, go to `Coordinates space`, `OrientedLink` and click on your link.
 
 Then in `Main metric`, choose your metric for the first link.
 
@@ -136,7 +136,7 @@ ANd choose the other metric for the second link
 
 ### Import JSON file
 
-- It is possible to add all of those configuration through json files by doing an import. To know how to do it, [follow this link](../editor/import.md)
+- It is possible to add all of those configurations through JSON files by doing an import. To know how to do it, [follow this link](../editor/import.md)
 
 And here is the different JSON file :
 

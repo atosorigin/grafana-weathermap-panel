@@ -1,5 +1,5 @@
 # Comment utiliser la métrique auxiliaire
-[![](../../resource/Go-back.png)](README.md)
+[![](../../screenshots/other/Go-back.png)](README.md)
  
 ## Ajouter un tableau de bord SVG
 

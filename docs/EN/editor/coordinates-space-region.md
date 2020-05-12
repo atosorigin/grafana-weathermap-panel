@@ -9,7 +9,7 @@ Allows the creation of a region
 
 ### Label 
 
-This is a key to add the result of a value to the parameters 
+This is a key to add the result of value to the parameters 
 
 
 ### SVG mode
@@ -22,7 +22,7 @@ Allows you to define an SVG element as a region (A screen, a button or others)
 
 ### Coordinate region
 
-Allows you to define the coordinates of a region on the same basis as the "Initial viewing space" tab.
+It allows you to define the coordinates of a region on the same basis as the "Initial viewing space" tab.
 
 ![coordinate mode](../../screenshots/editor/coordinates/screen-region/coord-coordinate-mode.jpg)
 ![coordinateZOne](../../screenshots/editor/coordinates/screen-region/zone1.png)

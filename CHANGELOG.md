@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.5.2 (2020-05-xx)
+
+- it's beta
+
 ## v0.5.1 (2020-05-02)
 
 - Update Text Object region SVG

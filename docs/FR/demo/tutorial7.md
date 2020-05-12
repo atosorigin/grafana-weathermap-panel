@@ -1,8 +1,5 @@
-# Create link bi directionnel
-[![](../../resource/Go-back.png)](README.md)
- 
 # Créer un lien bi directionnel
-
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 ## Ajouter un tableau de bord SVG
 
@@ -36,7 +33,7 @@ La création d'une région dans une image SVG se fait à partir du menu `Coordin
 
 Vous devez remplir le formulaire comme ceci : 
 
-- Entrez un `label`par exemple Ordinateur
+- Entrez un `label` par exemple Ordinateur
 - Sélectionnez `SVG label`.
 - Choisissez la ligne `path 147` dans la liste déroulante.
 - Cliquez sur le bouton `load`
@@ -56,8 +53,8 @@ L'ajout d'une couleur à un élément SVG s'effectue à partir du menu `Coordina
 Vous sélectionnez la ligne `Lower limit` pour compléter le formulaire comme ceci : 
  
 
-- Activer `Trace the background` pour activer la couleur d'arrière plan 
-- Sélectionner la couleur `vert` à la ligne `Edit background color`
+- Activer `Trace the background` pour activer la couleur d'arrière-plan 
+- Sélectionner la couleur `verte` à la ligne `Edit background color`
 - Activer `Trace the border` pour activer la couleur de bordure
 - Sélectionner la couleur `rouge` à la ligne `Edit border color`
 - Saisir une valeur pour définir la taille de la bordure `size border` par exemple 3
@@ -83,7 +80,7 @@ Un lien apparaîtra et nous l'éditerons pour le changer en point Bidirectionnel
 
 Les options d'orientation se font à partir du menu `Coordinates space`, `OrientedLink`. Ensuite, cliquez sur votre lien et descendez.
 
-Puis, séléctionnez `Bidirectional` pour l'orientation
+Puis, sélectionnez `Bidirectional` pour l'orientation
 
 ![Bidirectional](../../screenshots/demo/tutorial7/LinkBidirectionnel.png)
 
@@ -112,7 +109,7 @@ Metric B :
 rate(node_network_transmit_bytes{device="enp0s3"}[10s])*100*8/1024/1024
 ```
 
-Ensuite, vous pourrez attribuer les metriques à vos liens A et B
+Ensuite, vous pourrez attribuer les méstriques à vos liens A et B
 
 ![Metric](../../screenshots/demo/tutorial7/orientedLinkMetric.png)
 

@@ -173,7 +173,7 @@ export const returnAllId = (coordinate: Coord4D, baseMap: Background): string[] 
   const arrId: string[] = [];
   const arrIdVerif: string[] = [];
   const listElement: NodeListOf<Element> | undefined = document.getElementById(baseMap.idSVG)?.querySelectorAll('*[id]');
-  console.log(listElement);
+  //console.log(listElement);
   // const filtered = [listElement].filter();
   //     function(e) {
   //       return
@@ -211,7 +211,7 @@ export const returnAllId = (coordinate: Coord4D, baseMap: Background): string[] 
     // const coordInt = pixelToPercent(coordinate, baseMap);
     // const limit: number[] = [coordInt.xMin, coordInt.xMax, coordInt.yMin, coordInt.yMax];
     Array.from(listElement).forEach((e: Element) => {
-      console.log(e);
+      //console.log(e);
       // if (!regionIsOverLimit(document.getElementById(e.id), limit)) {
       //   //console.log('is pushed');
       //   arrId.push(e.id);
@@ -221,7 +221,7 @@ export const returnAllId = (coordinate: Coord4D, baseMap: Background): string[] 
       }
       arrIdVerif.push(e.id);
     });
-    console.log(arrId.length);
+    //console.log(arrId.length);
     arrId.sort((a: string, b: string) => {
       if (a < b) {
         return -1;

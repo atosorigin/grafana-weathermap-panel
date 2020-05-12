@@ -1,5 +1,5 @@
 # Editeur
-[![](../../resource/Go-back.png)](../../README-fr.md)
+[![](../../screenshots/other/Go-back.png)](../../README-fr.md)
 
 L'éditeur est l'écran de configuration manuel pour construire son espace
 

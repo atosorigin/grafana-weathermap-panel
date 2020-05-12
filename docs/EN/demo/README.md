@@ -36,5 +36,15 @@ In the form of a **demo**, you will learn how to use the plugin to get a dynamic
 
     [![demo8](../../screenshots/demo/demo8.png)](tutorial8.md)
 
- 
+- 9 [How to create a coordinate mode region](tutorial9.md)
+
+    [![demo9](../../screenshots/demo/demo9.png)](tutorial9.md)
+
+- 10 [How to add a global json file ](tutorial10.md)
+
+    [![demo10](../../screenshots/demo/demo1.png)](tutorial10.md)
+
+- 11 [How to use initial viewing space](tutorial11.md)
+
+    [![demo11](../../screenshots/demo/demo11.png)](tutorial11.md)
 

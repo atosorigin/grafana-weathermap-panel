@@ -6,7 +6,7 @@
             "yMin": "-100",
             "yMax": "100"
         },
-        "displayArea": false
+        "displayArea": true
     },
     "texteSettings": {
         "police": "Helvetica",
@@ -18,20 +18,20 @@
         }
     },
     "baseMap": {
-        "image": "http://localhost/demo/demo1-background.svg",
+        "image": "",
         "layerImage": "",
-        "modeSVG": true,
-        "width": "",
-        "height": "",
+        "modeSVG": false,
+        "width": "800",
+        "height": "600",
         "idSVG": ""
     },
     "regions": [
-        "http://localhost/demo/demo1-svgRegion.json"
+        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo3-region.json"
     ],
     "points": [
-        "http://localhost/demo/demo1-point.json"
+        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo3-point.json"
     ],
     "links": [
-        "http://localhost/demo/demo1-link.json"
+        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo3-link.json"
     ]
 }

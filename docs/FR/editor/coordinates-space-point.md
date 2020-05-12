@@ -1,6 +1,6 @@
 
 # Point
-[![](../../resource/Go-back.png)](coordinates.md)
+[![](../../screenshots/other/Go-back.png)](coordinates.md)
 
 Définir les coordonnées des points
 
@@ -33,39 +33,31 @@ taille : petit / moyen / gros
 position X et Y
 
 
-
-
 ## Main metric
 
-une page dédiée pour remplir les champs sont disponible [ici](coordinates-main-metric.md)
+Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-main-metric.md)
 
 
-## Auxiliary metric
+## Auxiliary metrics
 
-une page dédiée pour remplir les champs sont disponible [ici](coordinates-auxiliary-metric.md)
+Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-auxiliary-metric.md)
 
 
 ## Manage link
 
-une page dédiée pour remplir les champs sont disponible [ici](coordinates-manage-link.md)
-
-
+Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-manage-link.md)
 
 
 ## Text object
 
 
-une page dédié pour remplir les champs sont disponible [ici](coordinates-object-text.md)
+Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-object-text.md)
 
 
+## Lower Limit
 
 
-## lowerLimit
-
-
-
-une page dédié pour remplir les champs sont disponible [ici](coordinates-lower-limit.md)
-
+Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-lower-limit.md)
 
 
 ## Position Parameter

@@ -7,7 +7,7 @@
 
 The background image is an integral part of the plugin.
 
-It is made possible to make it dynamic. To do so, the background image must be in vectorized format [SVG](https://fr.wikipedia.org/wiki/Scalable_Vector_Graphics)
+It is made possible to make it dynamic. To do so, the background image must be in the vectorized format [SVG](https://fr.wikipedia.org/wiki/Scalable_Vector_Graphics)
 
 
 ## Editor

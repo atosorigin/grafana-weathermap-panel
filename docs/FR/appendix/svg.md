@@ -1,6 +1,6 @@
 
 ## Construire un fichier SVG
-[![](../../resource/Go-back.png)](README.md)
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 ### Background
 
