@@ -7,7 +7,7 @@
 The example shows how to use query filters to obtain precise metrics
 
 
-![step 01](../../screenshots/demo/tutorial5/step01.png)
+![step 01](../../screenshots/demo/tutorial05/step01.png)
 
 
 In a query, we want to analyze what the network card receives
@@ -59,13 +59,13 @@ Here we want to filter the result to display only the device we are interested i
 
 Adding a background image is done from the `display` menu.
 
-The selected image will be [demo5-background.svg](../../resource/demo5-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+The selected image will be [demo5-background.svg](../../resource/demo05-background.svg). To do this, we download it in base64 with the `Copy image address` function.
 
 It is possible to have more details with the [display](../editor/display.md) page.
 
 
 ```
-https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-background.svg
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
 
 ```
 
@@ -87,18 +87,18 @@ Once you have created your regions, you can edit them in `Region`, `Edit coordin
 
 Region 1
 
-![step 02](../../screenshots/demo/tutorial5/step2.jpg)
+![step 02](../../screenshots/demo/tutorial05/step2.jpg)
 
 
 Region 2
 
-![step 03](../../screenshots/demo/tutorial5/step03.png)
+![step 03](../../screenshots/demo/tutorial05/step03.png)
 
 ## Result
 
 The result display those 2 values
 
-![step 04](../../screenshots/demo/tutorial5/demo5.png)
+![step 04](../../screenshots/demo/tutorial05/demo5.png)
 
 ### Import JSON file
 
@@ -106,4 +106,4 @@ The result display those 2 values
 
 And here is the JSON file :
 
-[demo5-region](../../resource/demo5-region.json) 
+[demo5-region](../../resource/demo05-region.json) 

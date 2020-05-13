@@ -19,14 +19,14 @@ rate(node_network_transmit_bytes{device="enp0s3"}[10s])*8/1024/1024
 
 Les marqueurs "A" et "B" seront utilisés pour identifier cette requête, comme vous pouvez le voir ci-dessous.
 
-![step 01](../../screenshots/demo/tutorial3/query.jpg)
+![step 01](../../screenshots/demo/tutorial03/query.jpg)
 
 
 ## Étape 2 : Déterminer un espace
 
 
 
-![step 02](../../screenshots/demo/tutorial3/display.jpg)
+![step 02](../../screenshots/demo/tutorial03/display.jpg)
 
 
 La création d'un background se fait à partir du menu `display`.
@@ -41,7 +41,7 @@ Elle nécessite
 
 ## Étape 3 : Ajouter un point 
 
-![step 03](../../screenshots/demo/tutorial3/point1.png)
+![step 03](../../screenshots/demo/tutorial03/point1.png)
 
 
 La création d'un point se fait à partir du menu `Coordinates space`, `point` et `Add point`.
@@ -57,7 +57,7 @@ Vous devez remplir le formulaire comme ceci :
 
 
 
-![step 04](../../screenshots/demo/tutorial3/point1-color.jpg)
+![step 04](../../screenshots/demo/tutorial03/point1-color.jpg)
 
 Nous en profitons pour changer la couleur de notre point. Pour ce faire, nous ajoutons une couleur à notre point comme ceci : 
 
@@ -73,7 +73,7 @@ Nous en profitons pour changer la couleur de notre point. Pour ce faire, nous aj
 Pour ajouter une illustration à notre région, allez dans le menu `Coordinates space`, `region`et `Add coordinate space`. 
 Ensuite, choisissez notre région.
 
-![step 02](../../screenshots/demo/tutorial2/CoordinateMode.png)
+![step 02](../../screenshots/demo/tutorial02/CoordinateMode.png)
 
 Vous devez remplir le formulaire comme ceci : 
 
@@ -92,7 +92,7 @@ Choisissez ensuite la taille de la région pour votre image. Ici, nous choisisso
 Pour finir
 - Cliquez sur le bouton `load`
 
-![illustration1](../../screenshots/demo/tutorial3/illustration1.jpg)
+![illustration1](../../screenshots/demo/tutorial03/illustration1.jpg)
 
 
 
@@ -108,7 +108,7 @@ Pour créer un lien orienté, vous devez passer par [le menu du panneau](../pane
 
 Ensuite, nous allons éditer nos liens comme suit :
 
-![Position](../../screenshots/demo/tutorial3/PositionParameter.png)
+![Position](../../screenshots/demo/tutorial03/PositionParameter.png)
 
 ## Etape 6 : Main metric
 
@@ -116,12 +116,12 @@ Pour ajouter une mesure principale à notre lien, allez dans `Coordinates space`
 
 Ensuite, dans `Main metric`, choisissez votre métrique.
 
-![resultat](../../screenshots/demo/tutorial3/MainMetricLink.png)
+![resultat](../../screenshots/demo/tutorial03/MainMetricLink.png)
 
 ## Résultat
 
 
-![resultat](../../screenshots/demo/tutorial3/resultat.png)
+![resultat](../../screenshots/demo/tutorial03/resultat.png)
 
 
 
@@ -131,7 +131,7 @@ Ensuite, dans `Main metric`, choisissez votre métrique.
 
 Et voici les différents fichiers JSON :
 
-- [demo3-region](../../resource/demo3-region.json) 
-- [demo3-point](../../resource/demo3-point.json)
-- [demo3-link](../../resource/demo3-link.json)
+- [demo3-region](../../resource/demo03-region.json) 
+- [demo3-point](../../resource/demo03-point.json)
+- [demo3-link](../../resource/demo03-link.json)
 

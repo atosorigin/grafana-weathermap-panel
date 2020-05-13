@@ -7,7 +7,7 @@
 L'exemple montre comment utiliser des filtres de requête pour obtenir des mesures précises
 
 
-![step 01](../../screenshots/demo/tutorial5/step01.png)
+![step 01](../../screenshots/demo/tutorial05/step01.png)
 
 
 Dans une requête, nous voulons analyser ce que la carte réseau reçoit
@@ -59,13 +59,13 @@ Ici, nous voulons filtrer le résultat pour n'afficher que l'appareil qui nous i
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
-L'image sélectionnée sera [demo1-background.svg](../../resource/demo1-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `copier l'adresse de l'image`.
+L'image sélectionnée sera [demo1-background.svg](../../resource/demo01-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `copier l'adresse de l'image`.
 
 Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
 
 
 ```
-https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-background.svg
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
 
 ```
 
@@ -87,18 +87,18 @@ Une fois que vous avez créé vos régions, vous pouvez les éditer dans `Region
 
 Region 1
 
-![step 02](../../screenshots/demo/tutorial5/step2.jpg)
+![step 02](../../screenshots/demo/tutorial05/step2.jpg)
 
 
 Region 2
 
-![step 03](../../screenshots/demo/tutorial5/step03.png)
+![step 03](../../screenshots/demo/tutorial05/step03.png)
 
 ## Result
 
 Le résultat affiche ces 2 valeurs
 
-![step 04](../../screenshots/demo/tutorial5/demo5.png)
+![step 04](../../screenshots/demo/tutorial05/demo5.png)
 
 ### Importer un fichier JSON
 
@@ -106,4 +106,4 @@ Le résultat affiche ces 2 valeurs
 
 Et voici le fichier JSON :
 
-- [demo5-region](../../resource/demo5-region.json) 
+- [demo5-region](../../resource/demo05-region.json) 

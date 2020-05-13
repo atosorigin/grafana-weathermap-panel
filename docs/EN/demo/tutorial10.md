@@ -4,7 +4,7 @@
 ## Adding a Query
 
 
-![step 05](../../screenshots/demo/tutorial1/step05.jpg)
+![step 05](../../screenshots/demo/tutorial01/step05.jpg)
 
 
 The first step is through the `Queries` tab.

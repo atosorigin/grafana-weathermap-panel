@@ -182,12 +182,10 @@ export default class Point extends React.Component<Props, State> {
   generateInputsPoint(): void {
     const { arrayInput } = this.state;
     let item: JSX.Element = <div></div>;
-    //let itemButton: JSX.Element = <div></div>;
-    let mapItems: JSX.Element[] = [];
     let finalItem: JSX.Element[] = [];
 
     for (const line of arrayInput) {
-      mapItems = [];
+      const mapItems: JSX.Element[] = [];
       line.uneClassInput.forEach((obj: InputSelectableClass) => {
         if (obj.input_type === 'text') {
           item = (
@@ -233,7 +231,7 @@ export default class Point extends React.Component<Props, State> {
             />
           );
         } else {
-          item = <div></div>;
+          item = <div key={obj.id}></div>;
         }
         mapItems.push(item);
       });
@@ -241,7 +239,6 @@ export default class Point extends React.Component<Props, State> {
       const newInputList: JSX.Element = (
         <div key={'inputPoint' + line.id.toString()} className="inputCoor" id={'point' + line.id.toString()}>
           {mapItems}
-          {/* <div style={{ marginTop: '4px' }}>{itemButton}</div> */}
         </div>
       );
       finalItem = finalItem.concat(newInputList);

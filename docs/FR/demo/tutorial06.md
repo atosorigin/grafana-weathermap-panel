@@ -12,7 +12,7 @@ Choisissons ces deux requêtes :
 
 Voir ce qu'ils rapportent :
 
-![values](../../screenshots/demo/tutorial5/values.png)
+![values](../../screenshots/demo/tutorial05/values.png)
 
 node_cpu_frequency_hertz
 
@@ -50,7 +50,7 @@ Il y a beaucoup de valeurs, donc nous devons les manipuler pour arriver à une v
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
-L'image sélectionnée sera [demo1-background.svg](../../resource/demo1-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
+L'image sélectionnée sera [demo1-background.svg](../../resource/demo01-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
 
 Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
 
@@ -68,16 +68,16 @@ Une fois les régions créées, allez dans la rubrique `Main metric` et ajoutez 
 
 Vous pouvez ensuite choisir entre `manipulate the average`, si vous voulez une moyenne des valeurs métriques. Ou  `manipulate the total`, si vous voulez une somme des valeurs de la métrique.
 
-![average](../../screenshots/demo/tutorial6/average.png)
+![average](../../screenshots/demo/tutorial06/average.png)
 
 
-![total](../../screenshots/demo/tutorial6/total.png)
+![total](../../screenshots/demo/tutorial06/total.png)
 
 Si votre mesure ne doit renvoyer qu'une seule valeur, vous devez sélectionner "erreur de manipulation". 
 Cela affichera sa valeur, si elle est unique, et affichera une erreur s'il y a d'autres valeurs.
 
 
-![demo6](../../screenshots/demo/tutorial6/result.png)
+![demo6](../../screenshots/demo/tutorial06/result.png)
 
 
 ### Importer un fichier JSON
@@ -86,7 +86,7 @@ Cela affichera sa valeur, si elle est unique, et affichera une erreur s'il y a d
 
 Et voici le fichier JSON :
 
-- [demo5-region](../../resource/demo5-region.json) 
+- [demo5-region](../../resource/demo05-region.json) 
 
 
 

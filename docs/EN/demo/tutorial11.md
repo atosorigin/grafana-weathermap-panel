@@ -5,7 +5,7 @@ Initial viewing space allows you to choose the part of the dashboard you want to
 
 For this demonstration 11, we will take the result of the [tutorial9](tutorial9.md)
 
-![tutorial9](../../screenshots/demo/tutorial9/result.png)
+![tutorial9](../../screenshots/demo/tutorial09/result.png)
 
 And we will modify the `initial viewing space` to work only on the upper right part of the dashboard
 

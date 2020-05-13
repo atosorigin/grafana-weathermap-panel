@@ -9,8 +9,13 @@ This section allows you to resize your workspace. The cutout is as shown below.
 
 The X and Y axes range from -100% to 100%. 
 
+![decoupage](../../screenshots/editor/initial/initial-decoupage.svg)
+
+
 For example:
+
 If you want to work on the upper part of the image the characteristics will be as follows
+
 - X min: -100
 - X max: 100
 - Y min : 0
@@ -18,4 +23,4 @@ If you want to work on the upper part of the image the characteristics will be a
 
 The part in red will, therefore, be editable. 
 
-![decoupage](../../screenshots/editor/initial/initial-decoupage.svg)
+![decoupage](../../screenshots/editor/initial/initial-example.svg)

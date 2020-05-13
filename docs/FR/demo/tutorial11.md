@@ -5,7 +5,7 @@
 
 Pour cette démonstration 11, nous prendrons le résultat du [tutorial9](tutorial9.md)
 
-![tutorial9](../../screenshots/demo/tutorial9/result.png)
+![tutorial9](../../screenshots/demo/tutorial09/result.png)
 
 Ensuite, nous allons modifier `initial viewing space` pour travailler seulement sur la partie supérieure droite du dashboard
 

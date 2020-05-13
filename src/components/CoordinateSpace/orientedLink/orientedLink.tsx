@@ -326,12 +326,12 @@ export default class OrientedLink extends React.Component<Props, State> {
             />
           );
         } else {
-          item = <div></div>;
+          item = <div key={obj.id}></div>;
         }
         mapItems.push(item);
       });
       const newInputList: JSX.Element = (
-        <div key={'inputOrientedLink' + line.id.toString()} className="inputCoor" id={'point' + line.id.toString()}>
+        <div key={'inputOrientedLink' + line.id.toString()} className="inputCoor" id={'orientedLink' + line.id.toString()}>
           {mapItems}
         </div>
       );

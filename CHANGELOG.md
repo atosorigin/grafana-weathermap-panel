@@ -1,8 +1,12 @@
 # Changelog
 
-## v0.5.2 (2020-05-xx)
+## v0.1.0 RC (2020-05-xx)
 
-- it's beta
+- Update Documentation
+- Update form dots (none, circle, box...) 
+- Update import global file 
+- Update close legend
+- fixed data reset for a new dashboard
 
 ## v0.5.1 (2020-05-02)
 

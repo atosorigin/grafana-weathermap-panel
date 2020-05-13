@@ -1416,13 +1416,39 @@ export class SimplePanel extends PureComponent<Props, State> {
    */
   componentDidMount = async () => {
     console.log('mount Panel');
+
+    // // delete data if new dashboard
+    // const url: string = window.location.pathname;
+    // const arrayUrl: string[] = url.split('/');
+    // for (const element of arrayUrl) {
+    //   if (element === 'new') {
+    //     console.log('new dashboard');
+    //     this.props.onOptionsChange({
+    //       ...this.props.options,
+    //       arrayPoints: [],
+    //       arrayOrientedLinks: [],
+    //       regionCoordinateSpace: [],
+    //       saveImportUrl: { total: [], mono: [], multi: [] },
+    //       saveImportFile: [],
+    //       totalUrlInput: '',
+    //       multiUrlInput: '',
+    //       monoUrlInput: '',
+    //     });
+    //   }
+    // }
+
+    // not display Button of Panel if it is in the mode View
     this.props.onOptionsChange({
       ...this.props.options,
       displayButton: false,
     });
+
+    // save background in state
     this.setState({
       currentImage: this.props.options.baseMap.image,
     });
+
+    // load backgroundSVG
     if (this.props.options.baseMap.modeSVG && this.props.options.baseMap.image !== '') {
       fetch(this.props.options.baseMap.image)
         .then(res => res.text())

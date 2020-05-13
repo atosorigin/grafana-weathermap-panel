@@ -3,16 +3,16 @@
 
 ## Ajouter un tableau de bord SVG
 
-! [étape 01](../../screenshots/demo/tutorial7/background.jpg)
+! [étape 01](../../screenshots/demo/tutorial07/background.jpg)
 
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
-L'image sélectionnée sera [demo7-background.svg](../../resource/demo7-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction "Copier l'adresse de l'image".
+L'image sélectionnée sera [demo7-background.svg](../../resource/demo07-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction "Copier l'adresse de l'image".
 
 
 ```
-https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo7-background.svg
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo07-background.svg
 ```
 
 Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
@@ -26,7 +26,7 @@ Vous devez sauvegarder et recharger la page.
 ### Étape 1 : Définir une région SVG
 
 
-![step 02](../../screenshots/demo/tutorial1/step02.jpg)
+![step 02](../../screenshots/demo/tutorial01/step02.jpg)
 
 
 La création d'une région dans une image SVG se fait à partir du menu `Coordinates space`, `region` et `Add coordinate space`".
@@ -44,7 +44,7 @@ Répétez la même instruction pour ProxyServer et sélectionnez `Proxy` pour la
 
 
 
-![step 03](../../screenshots/demo/tutorial7/LowerLimitProxy.png)
+![step 03](../../screenshots/demo/tutorial07/LowerLimitProxy.png)
 
 
 
@@ -62,7 +62,7 @@ Vous sélectionnez la ligne `Lower limit` pour compléter le formulaire comme ce
 
 Vous obtenez le résultat suivant
 
-![step 04](../../screenshots/demo/tutorial7/ProxyBleu.png)
+![step 04](../../screenshots/demo/tutorial07/ProxyBleu.png)
 
 Répétez les mêmes choses pour le Routeur et choisissez la couleur rouge
 
@@ -82,19 +82,19 @@ Les options d'orientation se font à partir du menu `Coordinates space`, `Orient
 
 Puis, sélectionnez `Bidirectional` pour l'orientation
 
-![Bidirectional](../../screenshots/demo/tutorial7/LinkBidirectionnel.png)
+![Bidirectional](../../screenshots/demo/tutorial07/LinkBidirectionnel.png)
 
 ### Étape 2 : Choisissez la couleur de votre lien
 
 Pour changer la couleur, allez dans le menu `lower limit`.
 
-![LowerLimit](../../screenshots/demo/tutorial7/LowerLimitLink.png)
+![LowerLimit](../../screenshots/demo/tutorial07/LowerLimitLink.png)
 
 ### Étape 3 : Ajouter une query à votre lien
 
 Vous devez d'abord créer la requête.
 Pour ce faire, allez à "Requêtes" et remplissez les champs comme suit :
-![query](../../screenshots/demo/tutorial7/query.png)
+![query](../../screenshots/demo/tutorial07/query.png)
 
 
 
@@ -111,7 +111,7 @@ rate(node_network_transmit_bytes{device="enp0s3"}[10s])*100*8/1024/1024
 
 Ensuite, vous pourrez attribuer les méstriques à vos liens A et B
 
-![Metric](../../screenshots/demo/tutorial7/orientedLinkMetric.png)
+![Metric](../../screenshots/demo/tutorial07/orientedLinkMetric.png)
 
 ## Ajouter un lien cliquable
 
@@ -126,8 +126,8 @@ Vous devez remplir le formulaire comme ceci :
 - Remplissez les coordonnées de votre région
 - Cliquez sur le bouton `load`
 
-![Metric](../../screenshots/demo/tutorial7/Cumputers.png)
-![Metric](../../screenshots/demo/tutorial7/CoordonateMode.png)
+![Metric](../../screenshots/demo/tutorial07/Cumputers.png)
+![Metric](../../screenshots/demo/tutorial07/CoordonateMode.png)
 
 ### Étape 2 : Ajouter un lien
 
@@ -138,15 +138,15 @@ Pour ce faire, allez dans la rubrique Gérer le lien et remplissez le formulaire
 - `Link tooltip` : Permet une redirection vers le lien rempli dans le type d'outil en cliquant sur le lien.
 - `Text in tooltip` : Affiche le lien dans l'info-bulle qui apparaît lorsque le curseur est passé sur la région ou sur le point.
 
-![Metric](../../screenshots/demo/tutorial7/ManegeLink.png)
+![Metric](../../screenshots/demo/tutorial07/ManegeLink.png)
 
 Vous pouvez alors constater sur cette image que le lien est cliquable
 
-![Metric](../../screenshots/demo/tutorial7/Link-ConvertImage.jpg)
+![Metric](../../screenshots/demo/tutorial07/Link-ConvertImage.jpg)
 
 ## Résultat
 
-![result](../../screenshots/demo/tutorial7/demo7.png)
+![result](../../screenshots/demo/tutorial07/demo7.png)
 
 ## Importer un fichier JSON
 
@@ -154,6 +154,6 @@ Vous pouvez alors constater sur cette image que le lien est cliquable
 
 Et voici les différents fichiers JSON :
 
-- [demo7-Region](../../resource/demo7-region-svg.json) 
-- [demo7-point](../../resource/demo7-point.json)
-- [demo7-link](../../resource/demo7-link.json)
+- [demo7-Region](../../resource/demo07-region-svg.json) 
+- [demo7-point](../../resource/demo07-point.json)
+- [demo7-link](../../resource/demo07-link.json)

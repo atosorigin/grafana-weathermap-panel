@@ -143,33 +143,49 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
   };
 
   componentDidMount = async () => {
-    console.log('mount');
-    // const url: string = window.location.href;
-    // const arrayUrl: string[] = url.split('&');
-    // for (const element of arrayUrl) {
-    //   console.log(element);
-    //   if (element === 'edit') {
-    //     console.log('edit');
-    //     await Promise.resolve('Success').then(() => {
-    //       this.props.onOptionsChange({
-    //         ...this.props.options,
-    //         displayButton: true,
-    //       });
-    //     });
+    console.log('mount Editor');
+
+    // delete data if new dashboard
+    const url: string = window.location.pathname;
+    const arrayUrl: string[] = url.split('/');
+    console.log('currentDashboard : ' + this.props.options.currentDashboard);
+    for (const element of arrayUrl) {
+      if (element === 'new' && !this.props.options.currentDashboard) {
+        console.log('new dashboard');
+        this.props.onOptionsChange({
+          ...this.props.options,
+          arrayPoints: [],
+          arrayOrientedLinks: [],
+          regionCoordinateSpace: [],
+          saveImportUrl: { total: [], mono: [], multi: [] },
+          saveImportFile: [],
+          totalUrlInput: '',
+          multiUrlInput: '',
+          monoUrlInput: '',
+          baseMap: { image: '', layerImage: '', modeSVG: true, idSVG: '', width: '', height: '' },
+        });
+      }
+    }
+
+    // display Button of Panel if is mode Edit
     await Promise.resolve('Success').then(() => {
       this.props.onOptionsChange({
         ...this.props.options,
         displayButton: true,
+        currentDashboard: false,
       });
     });
   };
 
   componentWillUnmount = async () => {
-    console.log('unMount');
+    console.log('unMount Editor');
+
+    // not display Button of Panel if is mode View
     await Promise.resolve('Success').then(() => {
       this.props.onOptionsChange({
         ...this.props.options,
         displayButton: false,
+        currentDashboard: true,
       });
     });
   };

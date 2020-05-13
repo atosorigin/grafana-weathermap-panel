@@ -5,16 +5,16 @@
 For this tutorial, you will first download the picture background : 
 
 
-![step 01](../../screenshots/demo/tutorial2/ImagePNG.png)
+![step 01](../../screenshots/demo/tutorial02/ImagePNG.png)
 
 
 Adding a background image is done from the `display` menu.
 
-The selected image will be [demo2-background.jpg](../../resource/demo2-background.jpg). To do this, we download it in base64 with the `Copy image address` function.
+The selected image will be [demo2-background.jpg](../../resource/demo02-background.jpg). To do this, we download it in base64 with the `Copy image address` function.
 
 
 ```
-https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo2-background.jpg
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo02-background.jpg
 
 ```
 
@@ -29,7 +29,7 @@ You have to save and reload the page.
 
 The creation of a region in an SVG image is done from the `Coordinates space`, `region`, and `Add coordinate space` menu.
 
-![step 02](../../screenshots/demo/tutorial2/CoordinateMode.png)
+![step 02](../../screenshots/demo/tutorial02/CoordinateMode.png)
 
 You have to fill out the form like this: 
 
@@ -49,13 +49,13 @@ To finish
 - Click on the `load` button
 
 
-![step 03](../../screenshots/demo/tutorial2/ImageRegion.png)
+![step 03](../../screenshots/demo/tutorial02/ImageRegion.png)
 
 ### Result
 
 The end result will be like this: 
 
-![step 08](../../screenshots/demo/tutorial2/Result1.png)
+![step 08](../../screenshots/demo/tutorial02/Result1.png)
 
 ## Define a coordinate mode region without image
 
@@ -63,14 +63,14 @@ The end result will be like this:
 
 The creation of a region in an SVG image is done from the `Coordinates space`, `region`, and `Add coordinate space` menu.
 
-![step 02](../../screenshots/demo/tutorial2/CoordinateMode.png)
+![step 02](../../screenshots/demo/tutorial02/CoordinateMode.png)
 
 You have to fill out the form like this: 
 
 - Enter a `label` for example New Computer
 - Select `Coordinate mode`.
 
-![step 03](../../screenshots/demo/tutorial2/CoordinateModeNoImage.png)
+![step 03](../../screenshots/demo/tutorial02/CoordinateModeNoImage.png)
 
 Then choose the size of the region for your image. Here we choose :
 - X Min : -18
@@ -83,7 +83,7 @@ To finish
 
 ### Step 2 : Add color to a region
 
-![step 03](../../screenshots/demo/tutorial2/LowerLimit.png)
+![step 03](../../screenshots/demo/tutorial02/LowerLimit.png)
 
 
 Adding a color to an SVG element is done from the `Coordinates space`, `region`, and `Edit coordinate space` menu.
@@ -101,7 +101,7 @@ You select the `Lower limit' line and then complete the form like this:
 
 You get the following result
 
-![step 04](../../screenshots/demo/tutorial2/Cumputer2.png)
+![step 04](../../screenshots/demo/tutorial02/Cumputer2.png)
 
 
 It is possible to define other parameters, referring to the [coordinates lower limit](../editor/coordinates-lower-limit.md) page.
@@ -110,7 +110,7 @@ It is possible to define other parameters, referring to the [coordinates lower l
 
 The end result will be like this: 
 
-![step 08](../../screenshots/demo/tutorial2/Result2.png)
+![step 08](../../screenshots/demo/tutorial02/Result2.png)
 
 ## Define an oriented link between two regions
 
@@ -118,7 +118,7 @@ To create an oriented link you have to pass by [the panel menu](../panel/panel-o
 
 ## Final Result 
 
-![demo2](../../screenshots/demo/tutorial2/demo2.png)
+![demo2](../../screenshots/demo/tutorial02/demo2.png)
 
 ## Add everything with JSON
 
@@ -128,7 +128,7 @@ To create an oriented link you have to pass by [the panel menu](../panel/panel-o
 
 And here is the different JSON file :
 
-- [demo2-svgRegion](../../resource/demo2-svgRegion.json) 
-- [demo2-link](../../resource/demo2-link.json)
+- [demo2-svgRegion](../../resource/demo02-svgRegion.json) 
+- [demo2-link](../../resource/demo02-link.json)
 
 

@@ -4,16 +4,16 @@
 ## Ajouter un dashboard SVG
 
 
-![step 01](../../screenshots/demo/tutorial1/step01.jpg)
+![step 01](../../screenshots/demo/tutorial01/step01.jpg)
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
 
-L'image sélectionnée sera [demo1-background.svg](../../resource/demo1-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
+L'image sélectionnée sera [demo1-background.svg](../../resource/demo01-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
 
 
 ```
-https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-background.svg
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
 
 ```
 
@@ -25,7 +25,7 @@ Vous devez sauvegarder et recharger la page.
 
 Dans cette section, nous allons expliquer comment créer différentes régions sur le dashboard avec le mode de coordonnées.
 
-! [AddCoordiante](../../screenshots/demo/tutorial9/RegionCoordinateMode.png)
+! [AddCoordiante](../../screenshots/demo/tutorial09/RegionCoordinateMode.png)
 
 Ici, nous pouvons voir une section avec `X min`,`X max`,`Y min`,`Y max`.
 Le point de référence est le point (0,0). On peut donc avoir 3 cas différents 
@@ -59,27 +59,27 @@ Nous aurons donc les données suivantes :
 
 Region 1
 
-![zone1](../../screenshots/demo/tutorial9/zone1.png)
+![zone1](../../screenshots/demo/tutorial09/zone1.png)
 
 Region 2
 
-![zone2](../../screenshots/demo/tutorial9/zone2.png)
+![zone2](../../screenshots/demo/tutorial09/zone2.png)
 
 Region3
 
-![zone3](../../screenshots/demo/tutorial9/zone3.png)
+![zone3](../../screenshots/demo/tutorial09/zone3.png)
 
 ## Ajoutez de la couleur à nos régions
 
 Nous ajouterons différentes couleurs à nos régions pour les différencier. Allez à la `LowerLimit` et activez `Trace the border`. Ensuite, choisissez une couleur et une taille pour la frontière
 
-![lowerLimit](../../screenshots/demo/tutorial9/lowerLimit.png)
+![lowerLimit](../../screenshots/demo/tutorial09/lowerLimit.png)
 
 ## Résultat
 
 Une fois que vous avez fait cela pour vos trois régions, vous devriez avoir quelque chose comme cela :
 
-![result](../../screenshots/demo/tutorial9/result.png)
+![result](../../screenshots/demo/tutorial09/result.png)
 
 ### Importer un fichier JSON
 
@@ -87,4 +87,4 @@ Une fois que vous avez fait cela pour vos trois régions, vous devriez avoir que
 
 Et voici le fichier JSON :
 
-- [demo9-region](../../resource/demo9-region.json) 
+- [demo9-region](../../resource/demo09-region.json) 

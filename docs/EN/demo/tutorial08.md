@@ -3,16 +3,16 @@
  
 ## Add a dashboard SVG
 
-![step 01](../../screenshots/demo/tutorial1/step01.jpg)
+![step 01](../../screenshots/demo/tutorial01/step01.jpg)
 
 
 Adding a background image is done from the `display` menu.
 
-The selected image will be [demo1-background.svg](../../resource/demo1-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+The selected image will be [demo1-background.svg](../../resource/demo01-background.svg). To do this, we download it in base64 with the `Copy image address` function.
 
 
 ```
-https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-background.svg
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
 
 ```
 
@@ -25,11 +25,11 @@ You have to save and reload the page.
 ### Step 1: Add a point
 
 
-![step 09](../../screenshots/demo/tutorial1/add-coordinate.png)
+![step 09](../../screenshots/demo/tutorial01/add-coordinate.png)
 
 - To place a point, go to `Visualization`, then `Coordinates space`, `Point`, and `Add coordinate space`.
 
-![step 09](../../screenshots/demo/tutorial1/point1.png)
+![step 09](../../screenshots/demo/tutorial01/point1.png)
 
 You have to fill out the form like this: 
 
@@ -40,7 +40,7 @@ You have to fill out the form like this:
 ### Step 2 : Add main metric
 
 
-![step 05](../../screenshots/demo/tutorial1/step05.jpg)
+![step 05](../../screenshots/demo/tutorial01/step05.jpg)
 
 
 The first step is through the `Queries` tab.
@@ -58,7 +58,7 @@ The "A" marker will be used to identify this query as you can see below.
 Once you have done that, you will associate this query to your point
 
 
-![step 06](../../screenshots/demo/tutorial1/step06.jpg)
+![step 06](../../screenshots/demo/tutorial01/step06.jpg)
 
 The second step is from the `Coordinates space`, `region`, and `Edit coordinate space` menu of the `visualization` tab.
 
@@ -77,11 +77,11 @@ It is possible to fill in the other fields with the additional settings availabl
 
 Go to `Auxiliary metrics` and fill the form like `Main metric`
 
-![auxiliere](../../screenshots/demo/tutorial8/auxiliere.png)
+![auxiliere](../../screenshots/demo/tutorial08/auxiliere.png)
 
 After that, you will be able to see your auxiliary metric on the toolbox of your point
 
-![auxiliere](../../screenshots/demo/tutorial8/toolbox.png)
+![auxiliere](../../screenshots/demo/tutorial08/toolbox.png)
 
 ### Import JSON file
 
@@ -89,4 +89,4 @@ After that, you will be able to see your auxiliary metric on the toolbox of your
 
 And here is the JSON file :
 
-[demo8-point](../../resource/demo8-point.json) 
+[demo8-point](../../resource/demo08-point.json) 

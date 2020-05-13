@@ -3,16 +3,16 @@
  
 ## Ajouter un tableau de bord SVG
 
-![étape 01](../../screenshots/demo/tutorial7/background.jpg)
+![étape 01](../../screenshots/demo/tutorial07/background.jpg)
 
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
-L'image sélectionnée sera [demo7-background.svg](../../resource/demo7-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction "Copier l'adresse de l'image".
+L'image sélectionnée sera [demo7-background.svg](../../resource/demo07-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction "Copier l'adresse de l'image".
 
 
 ```
-https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-background.svg
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
 ```
 
 Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
@@ -24,11 +24,11 @@ Vous devez sauvegarder et recharger la page.
 ### Étape 1 : Ajouter un point
 
 
-![step 09](../../screenshots/demo/tutorial1/add-coordinate.png)
+![step 09](../../screenshots/demo/tutorial01/add-coordinate.png)
 
 - Pour placer un point, il faut se rendre dans `Visualization`, puis `Coordinates space`, `Point` et `Add coordinate space`.
 
-![step 09](../../screenshots/demo/tutorial1/point1.png)
+![step 09](../../screenshots/demo/tutorial01/point1.png)
 
 Vous devez remplir le formulaire comme ceci : 
 
@@ -39,7 +39,7 @@ Vous devez remplir le formulaire comme ceci :
 ### Etape 2 : Ajout de la métrique principale
 
 
-![étape 05](../../screenshots/demo/tutorial1/step05.jpg)
+![étape 05](../../screenshots/demo/tutorial01/step05.jpg)
 
 
 La première étape est l'onglet  `Queries`
@@ -57,7 +57,7 @@ Le marqueur "A" sera utilisé pour identifier cette requête, comme vous pouvez 
 Une fois que vous aurez fait cela, vous associerez cette requête à votre point
 
 
-![step 06](../../screenshots/demo/tutorial1/step06.jpg)
+![step 06](../../screenshots/demo/tutorial01/step06.jpg)
 
 La deuxième étape se fait à partir du menu `Coordinates space`, `region` et `Edit coordinate space` de l'onglet `visualization`.
 
@@ -76,11 +76,11 @@ Il est possible de remplir les autres champs avec les paramètres supplémentair
 
 Allez à la rubrique `Auxiliary metrics` et remplissez le formulaire comme `Main metric`
 
-![auxiliere](../../screenshots/demo/tutorial8/auxiliere.png)
+![auxiliere](../../screenshots/demo/tutorial08/auxiliere.png)
 
 Après cela, vous pourrez voir votre métrique auxiliaire dans la toolbox de votre point
 
-![auxiliere](../../screenshots/demo/tutorial8/toolbox.png)
+![auxiliere](../../screenshots/demo/tutorial08/toolbox.png)
 
 
 ### Importer un fichier JSON
@@ -89,4 +89,4 @@ Après cela, vous pourrez voir votre métrique auxiliaire dans la toolbox de vot
 
 Et voici le fichier JSON :
 
-- [demo5-region](../../resource/demo8-point.json) 
+- [demo5-region](../../resource/demo08-point.json) 

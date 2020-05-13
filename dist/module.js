@@ -740,7 +740,7 @@ module.exports = function (css) {
 /*!******************************************!*\
   !*** ../node_modules/tslib/tslib.es6.js ***!
   \******************************************/
-/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
+/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __createBinding, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -753,6 +753,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__metadata", function() { return __metadata; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__awaiter", function() { return __awaiter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__generator", function() { return __generator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__createBinding", function() { return __createBinding; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__exportStar", function() { return __exportStar; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__values", function() { return __values; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__read", function() { return __read; });
@@ -872,8 +873,16 @@ function __generator(thisArg, body) {
     }
 }
 
+const __createBinding = Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+});
+
 function __exportStar(m, exports) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
 }
 
 function __values(o) {
@@ -954,11 +963,17 @@ function __makeTemplateObject(cooked, raw) {
     return cooked;
 };
 
+const __setModuleDefault = Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+};
+
 function __importStar(mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result.default = mod;
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
     return result;
 }
 
@@ -4257,46 +4272,75 @@ function (_super) {
 
     _this.componentDidMount = function () {
       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
+        var url, arrayUrl, arrayUrl_1, arrayUrl_1_1, element;
+
+        var e_1, _a;
+
         var _this = this;
 
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
-          switch (_a.label) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_b) {
+          switch (_b.label) {
             case 0:
-              console.log('mount'); // const url: string = window.location.href;
-              // const arrayUrl: string[] = url.split('&');
-              // for (const element of arrayUrl) {
-              //   console.log(element);
-              //   if (element === 'edit') {
-              //     console.log('edit');
-              //     await Promise.resolve('Success').then(() => {
-              //       this.props.onOptionsChange({
-              //         ...this.props.options,
-              //         displayButton: true,
-              //       });
-              //     });
+              console.log('mount Editor');
+              url = window.location.pathname;
+              arrayUrl = url.split('/');
+              console.log('currentDashboard : ' + this.props.options.currentDashboard);
+
+              try {
+                for (arrayUrl_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayUrl), arrayUrl_1_1 = arrayUrl_1.next(); !arrayUrl_1_1.done; arrayUrl_1_1 = arrayUrl_1.next()) {
+                  element = arrayUrl_1_1.value;
+
+                  if (element === 'new' && !this.props.options.currentDashboard) {
+                    console.log('new dashboard');
+                    this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.props.options), {
+                      arrayPoints: [],
+                      arrayOrientedLinks: [],
+                      regionCoordinateSpace: [],
+                      saveImportUrl: {
+                        total: [],
+                        mono: [],
+                        multi: []
+                      },
+                      saveImportFile: [],
+                      totalUrlInput: '',
+                      multiUrlInput: '',
+                      monoUrlInput: '',
+                      baseMap: {
+                        image: '',
+                        layerImage: '',
+                        modeSVG: true,
+                        idSVG: '',
+                        width: '',
+                        height: ''
+                      }
+                    }));
+                  }
+                }
+              } catch (e_1_1) {
+                e_1 = {
+                  error: e_1_1
+                };
+              } finally {
+                try {
+                  if (arrayUrl_1_1 && !arrayUrl_1_1.done && (_a = arrayUrl_1["return"])) _a.call(arrayUrl_1);
+                } finally {
+                  if (e_1) throw e_1.error;
+                }
+              } // display Button of Panel if is mode Edit
+
 
               return [4
               /*yield*/
               , Promise.resolve('Success').then(function () {
                 _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-                  displayButton: true
+                  displayButton: true,
+                  currentDashboard: false
                 }));
               })];
 
             case 1:
-              // const url: string = window.location.href;
-              // const arrayUrl: string[] = url.split('&');
-              // for (const element of arrayUrl) {
-              //   console.log(element);
-              //   if (element === 'edit') {
-              //     console.log('edit');
-              //     await Promise.resolve('Success').then(() => {
-              //       this.props.onOptionsChange({
-              //         ...this.props.options,
-              //         displayButton: true,
-              //       });
-              //     });
-              _a.sent();
+              // display Button of Panel if is mode Edit
+              _b.sent();
 
               return [2
               /*return*/
@@ -4313,16 +4357,19 @@ function (_super) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
           switch (_a.label) {
             case 0:
-              console.log('unMount');
+              console.log('unMount Editor'); // not display Button of Panel if is mode View
+
               return [4
               /*yield*/
               , Promise.resolve('Success').then(function () {
                 _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-                  displayButton: false
+                  displayButton: false,
+                  currentDashboard: true
                 }));
               })];
 
             case 1:
+              // not display Button of Panel if is mode View
               _a.sent();
 
               return [2
@@ -5849,13 +5896,34 @@ function (_super) {
         var _this = this;
 
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
-          console.log('mount Panel');
+          console.log('mount Panel'); // // delete data if new dashboard
+          // const url: string = window.location.pathname;
+          // const arrayUrl: string[] = url.split('/');
+          // for (const element of arrayUrl) {
+          //   if (element === 'new') {
+          //     console.log('new dashboard');
+          //     this.props.onOptionsChange({
+          //       ...this.props.options,
+          //       arrayPoints: [],
+          //       arrayOrientedLinks: [],
+          //       regionCoordinateSpace: [],
+          //       saveImportUrl: { total: [], mono: [], multi: [] },
+          //       saveImportFile: [],
+          //       totalUrlInput: '',
+          //       multiUrlInput: '',
+          //       monoUrlInput: '',
+          //     });
+          //   }
+          // }
+          // not display Button of Panel if it is in the mode View
+
           this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.props.options), {
             displayButton: false
-          }));
+          })); // save background in state
+
           this.setState({
             currentImage: this.props.options.baseMap.image
-          });
+          }); // load backgroundSVG
 
           if (this.props.options.baseMap.modeSVG && this.props.options.baseMap.image !== '') {
             fetch(this.props.options.baseMap.image).then(function (res) {
@@ -10738,7 +10806,9 @@ function (_super) {
             label: obj.label
           });
         } else {
-          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            key: obj.id
+          });
         }
 
         mapItems.push(item);
@@ -10746,7 +10816,7 @@ function (_super) {
       var newInputList = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         key: 'inputOrientedLink' + line.id.toString(),
         className: "inputCoor",
-        id: 'point' + line.id.toString()
+        id: 'orientedLink' + line.id.toString()
       }, mapItems);
       finalItem = finalItem.concat(newInputList);
     };
@@ -11513,13 +11583,11 @@ function (_super) {
     var _this = this;
 
     var arrayInput = this.state.arrayInput;
-    var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null); //let itemButton: JSX.Element = <div></div>;
-
-    var mapItems = [];
+    var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
     var finalItem = [];
 
     var _loop_1 = function _loop_1(line) {
-      mapItems = [];
+      var mapItems = [];
       line.uneClassInput.forEach(function (obj) {
         if (obj.input_type === 'text') {
           item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Functions_Input_inputTextPoint__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -11559,7 +11627,9 @@ function (_super) {
             label: obj.label
           });
         } else {
-          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+          item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            key: obj.id
+          });
         }
 
         mapItems.push(item);
@@ -11807,8 +11877,7 @@ function (_super) {
       });
       var listParallelOrientedLinkSorted = listParallelOrientedLinks.sort(function (a, b) {
         return a - b;
-      }); //console.log(listParallelOrientedLinkSorted);
-
+      });
       return listParallelOrientedLinkSorted;
     };
 
@@ -11825,7 +11894,6 @@ function (_super) {
       var yMax = 0;
 
       if (region.idSVG !== '') {
-        console.log('regionSVG');
         var heightPanel = parseInt(_this.props.options.baseMap.height, 10);
         var widthPanel = parseInt(_this.props.options.baseMap.width, 10);
         var initialSpace = _this.props.options.coordinateSpaceInitial.coordinate;
@@ -11845,12 +11913,10 @@ function (_super) {
         var xMinSVG = 0;
         var xMaxSVG = 0;
         var yMaxSVG = 0;
-        var yMinSVG = 0; //console.log(regionSVGHtml);
+        var yMinSVG = 0;
 
         if (regionSVGHtml) {
           if (regionSVGHtml.localName === 'rect') {
-            //console.log('rect');
-            //console.log(regionSVGHtml);
             width = parseInt(regionSVGHtml.attributes['width'].nodeValue, 10);
             height = parseInt(regionSVGHtml.attributes['height'].nodeValue, 10);
             xMinSVG = parseInt(regionSVGHtml.attributes['x'].nodeValue, 10);
@@ -11858,8 +11924,6 @@ function (_super) {
             yMaxSVG = parseInt(regionSVGHtml.attributes['y'].nodeValue, 10);
             yMinSVG = yMaxSVG + height;
           } else if (regionSVGHtml.localName === 'ellipse') {
-            //console.log('ellipse');
-            //console.log(regionSVGHtml);
             var rX = parseInt(regionSVGHtml.attributes['rx'].nodeValue, 10);
             var rY = parseInt(regionSVGHtml.attributes['ry'].nodeValue, 10);
             xMinSVG = parseInt(regionSVGHtml.attributes['cx'].nodeValue, 10) - rX;
@@ -11867,11 +11931,8 @@ function (_super) {
             yMinSVG = parseInt(regionSVGHtml.attributes['cy'].nodeValue, 10) + rY;
             yMaxSVG = parseInt(regionSVGHtml.attributes['cy'].nodeValue, 10) - rY;
           } else if (regionSVGHtml.localName === 'path') {
-            //console.log('path');
-            //console.log(regionSVGHtml);
             var allValues = regionSVGHtml.attributes['d'].nodeValue;
-            var arrayAllValues = allValues.split(' '); //console.log(arrayAllValues);
-
+            var arrayAllValues = allValues.split(' ');
             var iX = -2;
             var xMin_1 = 1000000;
             var xMax_1 = 0;
@@ -12189,206 +12250,188 @@ function (_super) {
         if (idMultiLink === 0) {
           if (yMidIn > yMidOut) {
             if (xMidIn > xMidOut) {
-              console.log('x1');
-
+              //console.log('x1');
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x2');
-
+              //console.log('x2');
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMinIn;
               } else {
                 xResult = xMaxIn;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x3');
+              //console.log('x3');
               xResult = xMinIn;
             }
           } else if (yMidIn < yMidOut) {
             if (xMidIn > xMidOut) {
-              console.log('x4');
-
+              //console.log('x4');
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMinIn;
               } else {
                 xResult = xMaxIn;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x5');
-
+              //console.log('x5');
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x6');
+              //console.log('x6');
               xResult = xMinIn;
             }
           } else if (yMidIn === yMidOut) {
             if (xMidIn > xMidOut) {
-              console.log('x7');
-
+              //console.log('x7');
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x8');
-
+              //console.log('x8');
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMinIn;
               } else {
                 xResult = xMaxIn;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x9');
+              //console.log('x9');
               xResult = xMinIn;
             }
           }
         } else if (idMultiLink === 1) {
           if (yMidIn > yMidOut) {
             if (xMidIn > xMidOut) {
-              console.log('x10');
-
+              //console.log('x10');
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMinIn;
               } else {
                 xResult = xMaxIn;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x11');
-
+              //console.log('x11');
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x12');
+              //console.log('x12');
               xResult = xMaxIn;
             }
           } else if (yMidIn < yMidOut) {
             if (xMidIn > xMidOut) {
-              console.log('x13');
-
+              //console.log('x13');
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x14');
-
+              //console.log('x14');
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMinIn;
               } else {
                 xResult = xMaxIn;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x15');
+              //console.log('x15');
               xResult = xMaxIn;
             }
           } else if (yMidIn === yMidOut) {
             if (xMidIn > xMidOut) {
-              console.log('x16');
-
+              //console.log('x16');
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x17');
-
+              //console.log('x17');
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMinIn;
               } else {
                 xResult = xMaxIn;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x18');
+              //console.log('x18');
               xResult = xMinIn;
             }
           }
         } else if (idMultiLink === 2) {
           if (yMidIn > yMidOut) {
             if (xMidOut > xMinIn && xMidOut < xMaxIn || xMidOut < xMinIn && xMidOut > xMaxIn) {
-              console.log('x19');
+              //console.log('x19');
               xResult = (xMinIn + xMaxIn) / 2;
             } else if (xMidIn > xMidOut) {
-              console.log('x20');
-
+              //console.log('x20');
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x21');
-
+              //console.log('x21');
               if (xMinIn < 0 && xMaxIn < 0) {
-                console.log('xmin');
+                //console.log('xmin');
                 xResult = xMinIn;
               } else {
-                console.log('xmax');
+                //console.log('xmax');
                 xResult = xMaxIn;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x22');
+              //console.log('x22');
               xResult = (xMinIn + xMaxIn) / 2;
             }
           } else if (yMidIn < yMidOut) {
             if (xMidOut > xMinIn && xMidOut < xMaxIn || xMidOut < xMinIn && xMidOut > xMaxIn) {
-              console.log('x23');
+              //console.log('x23');
               xResult = (xMinIn + xMaxIn) / 2;
             } else if (xMidIn > xMidOut) {
-              console.log('x24');
-
+              //console.log('x24');
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x25');
-
+              //console.log('x25');
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMinIn;
               } else {
                 xResult = xMaxIn;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x26');
+              //console.log('x26');
               xResult = (xMinIn + xMaxIn) / 2;
             }
           } else if (yMidIn === yMidOut) {
             if (xMidOut > xMinIn && xMidOut < xMaxIn || xMidOut < xMinIn && xMidOut > xMaxIn) {
-              console.log('x27');
+              //console.log('x27');
               xResult = (xMinIn + xMaxIn) / 2;
             } else if (xMidIn > xMidOut) {
-              console.log('x28');
-
+              //console.log('x28');
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMaxIn;
               } else {
                 xResult = xMinIn;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x29');
-
+              //console.log('x29');
               if (xMinIn < 0 && xMaxIn < 0) {
                 xResult = xMinIn;
               } else {
                 xResult = xMaxIn;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x30');
+              //console.log('x30');
               xResult = xMinIn;
             }
           }
@@ -12396,8 +12439,7 @@ function (_super) {
       } else {
         if (idMultiLink === 0) {
           if (yMidIn > yMidOut) {
-            console.log('x31');
-
+            //console.log('x31');
             if (xMidIn > xMidOut) {
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
@@ -12405,64 +12447,58 @@ function (_super) {
                 xResult = xMinOut;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x32');
-
+              //console.log('x32');
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
                 xResult = xMaxOut;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x33');
+              //console.log('x33');
               xResult = xMinOut;
             }
           } else if (yMidIn < yMidOut) {
             if (xMidIn > xMidOut) {
-              console.log('x34');
-
+              //console.log('x34');
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
                 xResult = xMaxOut;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x35');
-
+              //console.log('x35');
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
               } else {
                 xResult = xMinOut;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x36');
+              //console.log('x36');
               xResult = xMinOut;
             }
           } else if (yMidIn === yMidOut) {
             if (xMidIn > xMidOut) {
-              console.log('x37');
-
+              //console.log('x37');
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
                 xResult = xMaxOut;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x38');
-
+              //console.log('x38');
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
               } else {
                 xResult = xMinOut;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x39');
+              //console.log('x39');
               xResult = xMinOut;
             }
           }
         } else if (idMultiLink === 1) {
           if (yMidIn > yMidOut) {
-            console.log('x40');
-
+            //console.log('x40');
             if (xMidIn > xMidOut) {
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
@@ -12470,128 +12506,117 @@ function (_super) {
                 xResult = xMaxOut;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x41');
-
+              //console.log('x41');
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
               } else {
                 xResult = xMinOut;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x42');
+              //console.log('x42');
               xResult = xMaxOut;
             }
           } else if (yMidIn < yMidOut) {
             if (xMidIn > xMidOut) {
-              console.log('x43');
-
+              //console.log('x43');
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
               } else {
                 xResult = xMinOut;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x44');
-
+              //console.log('x44');
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
                 xResult = xMaxOut;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x45');
+              //console.log('x45');
               xResult = xMaxOut;
             }
           } else if (yMidIn === yMidOut) {
             if (xMidIn > xMidOut) {
-              console.log('x46');
-
+              //console.log('x46');
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
                 xResult = xMaxOut;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x47');
-
+              //console.log('x47');
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
               } else {
                 xResult = xMinOut;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x48');
+              //console.log('x48');
               xResult = xMinOut;
             }
           }
         } else if (idMultiLink === 2) {
           if (yMidIn > yMidOut) {
             if (xMidIn > xMinOut && xMidIn < xMaxOut || xMidIn < xMinOut && xMidIn > xMaxOut) {
-              console.log('x49');
+              //console.log('x49');
               xResult = (xMinOut + xMaxOut) / 2;
             } else if (xMidIn > xMidOut) {
-              console.log('x50');
-
+              //console.log('x50');
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
                 xResult = xMaxOut;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x51');
-
+              //console.log('x51');
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
               } else {
                 xResult = xMinOut;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x52');
+              //console.log('x52');
               xResult = (xMinOut + xMaxOut) / 2;
             }
           } else if (yMidIn < yMidOut) {
             if (xMidIn > xMinOut && xMidIn < xMaxOut || xMidIn < xMinOut && xMidIn > xMaxOut) {
-              console.log('x53');
+              //console.log('x53');
               xResult = (xMinOut + xMaxOut) / 2;
             } else if (xMidIn > xMidOut) {
-              console.log('x54');
-
+              //console.log('x54');
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
                 xResult = xMaxOut;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x55');
-
+              //console.log('x55');
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
               } else {
                 xResult = xMinOut;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x56');
+              //console.log('x56');
               xResult = (xMinOut + xMaxOut) / 2;
             }
           } else if (yMidIn === yMidOut) {
             if (xMidIn > xMidOut) {
-              console.log('x57');
-
+              //console.log('x57');
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMinOut;
               } else {
                 xResult = xMaxOut;
               }
             } else if (xMidIn < xMidOut) {
-              console.log('x58');
-
+              //console.log('x58');
               if (xMinOut < 0 && xMaxOut < 0) {
                 xResult = xMaxOut;
               } else {
                 xResult = xMinOut;
               }
             } else if (xMidIn === xMidOut) {
-              console.log('x59');
+              //console.log('x59');
               xResult = xMinOut;
             }
           }
@@ -12827,24 +12852,21 @@ function (_super) {
         if (idMultiLink === 0) {
           if (xMidOut > xMinIn && xMidOut < xMaxIn || xMidOut < xMinIn && xMidOut > xMaxIn) {
             if (yMidIn > yMidOut) {
-              console.log('y1');
-
+              //console.log('y1');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y2');
-
+              //console.log('y2');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
                 yResult = yMaxIn;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y3');
-
+              //console.log('y3');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
@@ -12853,24 +12875,21 @@ function (_super) {
             }
           } else if (xMidIn > xMidOut) {
             if (yMidIn > yMidOut) {
-              console.log('y4');
-
+              //console.log('y4');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
                 yResult = yMaxIn;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y5');
-
+              //console.log('y5');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
                 yResult = yMaxIn;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y6');
-
+              //console.log('y6');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
@@ -12879,24 +12898,21 @@ function (_super) {
             }
           } else if (xMidIn < xMidOut) {
             if (yMidIn > yMidOut) {
-              console.log('y7');
-
+              //console.log('y7');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
                 yResult = yMaxIn;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y8');
-
+              //console.log('y8');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
                 yResult = yMaxIn;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y9');
-
+              //console.log('y9');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
@@ -12905,16 +12921,14 @@ function (_super) {
             }
           } else if (xMidIn === xMidOut) {
             if (yMidIn > yMidOut) {
-              console.log('y10');
-
+              //console.log('y10');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y11');
-
+              //console.log('y11');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
@@ -12925,24 +12939,21 @@ function (_super) {
         } else if (idMultiLink === 1) {
           if (xMidOut > xMinIn && xMidOut < xMaxIn || xMidOut < xMinIn && xMidOut > xMaxIn) {
             if (yMidIn > yMidOut) {
-              console.log('y12');
-
+              //console.log('y12');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y13');
-
+              //console.log('y13');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
                 yResult = yMaxIn;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y14');
-
+              //console.log('y14');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinOut;
               } else {
@@ -12950,8 +12961,7 @@ function (_super) {
               }
             }
           } else if (xMidIn > xMidOut) {
-            console.log('y16');
-
+            //console.log('y16');
             if (yMidIn > yMidOut) {
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
@@ -12959,16 +12969,14 @@ function (_super) {
                 yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y17');
-
+              //console.log('y17');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y18');
-
+              //console.log('y18');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
@@ -12977,24 +12985,21 @@ function (_super) {
             }
           } else if (xMidIn < xMidOut) {
             if (yMidIn > yMidOut) {
-              console.log('y19');
-
+              //console.log('y19');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y20');
-
+              //console.log('y20');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y21');
-
+              //console.log('y21');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
@@ -13003,16 +13008,14 @@ function (_super) {
             }
           } else if (xMidIn === xMidOut) {
             if (yMidIn > yMidOut) {
-              console.log('y22');
-
+              //console.log('y22');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y23');
-
+              //console.log('y23');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
@@ -13023,24 +13026,21 @@ function (_super) {
         } else if (idMultiLink === 2) {
           if (xMidOut > xMinIn && xMidOut < xMaxIn || xMidOut < xMinIn && xMidOut > xMaxIn) {
             if (yMidIn > yMidOut) {
-              console.log('y24');
-
+              //console.log('y24');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y25');
-
+              //console.log('y25');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
                 yResult = yMaxIn;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y26');
-
+              //console.log('y26');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinOut;
               } else {
@@ -13049,58 +13049,52 @@ function (_super) {
             }
           } else if (xMidIn > xMidOut) {
             if (yMidIn > yMidOut) {
-              console.log('y28');
-
+              //console.log('y28');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y29');
-
+              //console.log('y29');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
                 yResult = yMaxIn;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y30');
+              //console.log('y30');
               yResult = (yMinIn + yMaxIn) / 2;
             }
           } else if (xMidIn < xMidOut) {
             if (yMidIn > yMidOut) {
-              console.log('y31');
-
+              //console.log('y31');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y32');
-
+              //console.log('y32');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
                 yResult = yMaxIn;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y33');
+              //console.log('y33');
               yResult = (yMinIn + yMaxIn) / 2;
             }
           } else if (xMidIn === xMidOut) {
             if (yMidIn > yMidOut) {
-              console.log('y34');
-
+              //console.log('y34');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMaxIn;
               } else {
                 yResult = yMinIn;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y35');
-
+              //console.log('y35');
               if (yMinIn < 0 && yMaxIn < 0) {
                 yResult = yMinIn;
               } else {
@@ -13113,24 +13107,21 @@ function (_super) {
         if (idMultiLink === 0) {
           if (xMidIn > xMinOut && xMidIn < xMaxOut || xMidIn < xMinOut && xMidIn > xMaxOut) {
             if (yMidIn > yMidOut) {
-              console.log('y37');
-
+              //console.log('y37');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y38');
-
+              //console.log('y38');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
                 yResult = yMinOut;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y39');
-
+              //console.log('y39');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
@@ -13139,24 +13130,21 @@ function (_super) {
             }
           } else if (xMidIn > xMidOut) {
             if (yMidIn > yMidOut) {
-              console.log('y40');
-
+              //console.log('y40');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y41');
-
+              //console.log('y41');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y42');
-
+              //console.log('y42');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
@@ -13165,24 +13153,21 @@ function (_super) {
             }
           } else if (xMidIn < xMidOut) {
             if (yMidIn > yMidOut) {
-              console.log('y43');
-
+              //console.log('y43');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y44');
-
+              //console.log('y44');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y45');
-
+              //console.log('y45');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
@@ -13191,16 +13176,14 @@ function (_super) {
             }
           } else if (xMidIn === xMidOut) {
             if (yMidIn > yMidOut) {
-              console.log('y46');
-
+              //console.log('y46');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y47');
-
+              //console.log('y47');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
@@ -13211,24 +13194,21 @@ function (_super) {
         } else if (idMultiLink === 1) {
           if (xMidIn > xMinOut && xMidIn < xMaxOut || xMidIn < xMinOut && xMidIn > xMaxOut) {
             if (yMidIn > yMidOut) {
-              console.log('y49');
-
+              //console.log('y49');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y50');
-
+              //console.log('y50');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
                 yResult = yMinOut;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y51');
-
+              //console.log('y51');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
@@ -13237,24 +13217,21 @@ function (_super) {
             }
           } else if (xMidIn > xMidOut) {
             if (yMidIn > yMidOut) {
-              console.log('y52');
-
+              //console.log('y52');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
                 yResult = yMinOut;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y53');
-
+              //console.log('y53');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
                 yResult = yMinOut;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y54');
-
+              //console.log('y54');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
@@ -13263,24 +13240,21 @@ function (_super) {
             }
           } else if (xMidIn < xMidOut) {
             if (yMidIn > yMidOut) {
-              console.log('y55');
-
+              //console.log('y55');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
                 yResult = yMinOut;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y56');
-
+              //console.log('y56');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
                 yResult = yMinOut;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y57');
-
+              //console.log('y57');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
@@ -13289,16 +13263,14 @@ function (_super) {
             }
           } else if (xMidIn === xMidOut) {
             if (yMidIn > yMidOut) {
-              console.log('y58');
-
+              //console.log('y58');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y59');
-
+              //console.log('y59');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
@@ -13309,79 +13281,71 @@ function (_super) {
         } else if (idMultiLink === 2) {
           if (xMidIn > xMinOut && xMidIn < xMaxOut || xMidIn < xMinOut && xMidIn > xMaxOut) {
             if (yMidIn > yMidOut) {
-              console.log('y61');
-
+              //console.log('y61');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y62');
-
+              //console.log('y62');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
                 yResult = yMinOut;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y64');
+              //console.log('y64');
               yResult = (yMinOut + yMaxOut) / 2;
             }
           } else if (xMidIn > xMidOut) {
             if (yMidIn > yMidOut) {
-              console.log('y65');
-
+              //console.log('y65');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y66');
-
+              //console.log('y66');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
                 yResult = yMinOut;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y67');
+              //console.log('y67');
               yResult = (yMinOut + yMaxOut) / 2;
             }
           } else if (xMidIn < xMidOut) {
             if (yMidIn > yMidOut) {
-              console.log('y68');
-
+              //console.log('y68');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y69');
-
+              //console.log('y69');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
                 yResult = yMinOut;
               }
             } else if (yMidIn === yMidOut) {
-              console.log('y70');
+              //console.log('y70');
               yResult = (yMinOut + yMaxOut) / 2;
             }
           } else if (xMidIn === xMidOut) {
             if (yMidIn > yMidOut) {
-              console.log('y71');
-
+              //console.log('y71');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMinOut;
               } else {
                 yResult = yMaxOut;
               }
             } else if (yMidIn < yMidOut) {
-              console.log('y72');
-
+              //console.log('y72');
               if (yMinOut < 0 && yMaxOut < 0) {
                 yResult = yMaxOut;
               } else {
@@ -14222,7 +14186,7 @@ function (_super) {
         indexOrientedLink_1++;
       });
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      console.log('1');
+      //console.log('1');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = xB0;
@@ -14230,7 +14194,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionOut !== '' && this.props.associateRegionIn === '' && this.props.associatePointIn === '') {
-      console.log('2');
+      //console.log('2');
       xA = xA0;
       yA = yA0;
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -14238,7 +14202,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
-      console.log('3');
+      //console.log('3');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -14246,7 +14210,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      console.log('4');
+      //console.log('4');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = xB0;
@@ -14254,7 +14218,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointOut !== '' && this.props.associatePointIn === '' && this.props.associateRegionIn === '') {
-      console.log('5');
+      //console.log('5');
       xA = xA0;
       yA = yA0;
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -14262,7 +14226,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
-      console.log('6');
+      //console.log('6');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -14270,7 +14234,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-      console.log('7');
+      //console.log('7');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -14278,7 +14242,7 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
-      console.log('8');
+      //console.log('8');
       xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
       yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
       xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
@@ -14286,18 +14250,14 @@ function (_super) {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else {
-      console.log('9');
+      //console.log('9');
       xA = xA0;
       yA = yA0;
       xB = xB0;
       yB = yB0;
       xCByClick = xCByClick0;
       yCByClick = yCByClick0;
-    } // console.log('xA');
-    // console.log(xA);
-    // console.log('yA');
-    // console.log(yA);
-
+    }
 
     var xC = 0;
     var yC = 0;
@@ -21682,7 +21642,8 @@ var defaults = {
   orientedLinkToDowngrade: {},
   checkIndexMultiLink: 0,
   newPoint: true,
-  newOrientedLink: true
+  newOrientedLink: true,
+  currentDashboard: false
 };
 
 /***/ }),

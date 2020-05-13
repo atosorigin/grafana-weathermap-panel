@@ -12,7 +12,7 @@ Let's choose those two queries :
 
 See what they return :
 
-![values](../../screenshots/demo/tutorial6/values.png)
+![values](../../screenshots/demo/tutorial06/values.png)
 
 node_cpu_frequency_hertz
 
@@ -49,7 +49,7 @@ There are a lot of values, so we have to manipulate them in order to come up wit
 
 Adding a background image is done from the `display` menu.
 
-The selected image will be [demo6-background.svg](../../resource/demo6-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+The selected image will be [demo6-background.svg](../../resource/demo06-background.svg). To do this, we download it in base64 with the `Copy image address` function.
 
 It is possible to have more details with the [display](../editor/display.md) page.
 
@@ -67,16 +67,16 @@ Once the regions are created, go to Main metric and add the one you want.
 
 Then you can choose between "manipulate the average", if you want an average of the metric values. Or "manipulate the total", if you want a sum of the metric values.
 
-![average](../../screenshots/demo/tutorial6/average.png)
+![average](../../screenshots/demo/tutorial06/average.png)
 
 
-![total](../../screenshots/demo/tutorial6/total.png)
+![total](../../screenshots/demo/tutorial06/total.png)
 
 If your measurement is to return only one value, you must select "handling error". 
 This will display its value, if it is unique, and will display an error if there are other values.
 
 
-![demo6](../../screenshots/demo/tutorial6/result.png)
+![demo6](../../screenshots/demo/tutorial06/result.png)
 
 
 ### Import JSON file
@@ -85,7 +85,7 @@ This will display its value, if it is unique, and will display an error if there
 
 And here is the JSON file :
 
-[demo5-region](../../resource/demo6-region.json) 
+[demo5-region](../../resource/demo06-region.json) 
 
 
 

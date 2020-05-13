@@ -20,14 +20,14 @@ rate(node_network_transmit_bytes{device="enp0s3"}[10s])*8/1024/1024
 
 The "A" and "B" markers will be used to identify this query as you can see below.
 
-![step 01](../../screenshots/demo/tutorial3/query.jpg)
+![step 01](../../screenshots/demo/tutorial03/query.jpg)
 
 
 ## Step 2: Determining a space
 
 
 
-![step 02](../../screenshots/demo/tutorial3/display.jpg)
+![step 02](../../screenshots/demo/tutorial03/display.jpg)
 
 
 The creation of a background space is done from the `display' menu.
@@ -42,7 +42,7 @@ It requires
 
 ## Step 3: Add a point 1
 
-![step 03](../../screenshots/demo/tutorial3/point1.png)
+![step 03](../../screenshots/demo/tutorial03/point1.png)
 
 
 The creation of a point is done from the `Coordinates space`, `point` and `Add point` menu.
@@ -57,8 +57,7 @@ You have to fill out the form like this:
 
 
 
-
-![step 04](../../screenshots/demo/tutorial3/point1-color.jpg)
+![step 04](../../screenshots/demo/tutorial03/point1-color.jpg)
 
 We take advantage of this by changing the color of our point. To do this, we add color to our point like this: 
 
@@ -73,7 +72,7 @@ We take advantage of this by changing the color of our point. To do this, we add
 
 To add an illustration to our region, go to `Coordinates space`, `region`, and `Add coordinate space` menu. And choose our point.
 
-![step 02](../../screenshots/demo/tutorial2/CoordinateMode.png)
+![step 02](../../screenshots/demo/tutorial02/CoordinateMode.png)
 
 You have to fill out the form like this: 
 
@@ -94,7 +93,7 @@ To finish
 - Click on the `load` button
 
 
-![illustration1](../../screenshots/demo/tutorial3/illustration1.jpg)
+![illustration1](../../screenshots/demo/tutorial03/illustration1.jpg)
 
 
 
@@ -110,7 +109,7 @@ To create an oriented link you have to pass by [the panel menu](../panel/panel-i
 
 Then, we will edit our links as follow :
 
-![Position](../../screenshots/demo/tutorial3/PositionParameter.png)
+![Position](../../screenshots/demo/tutorial03/PositionParameter.png)
 
 ## Step 6 : Main metric
 
@@ -118,11 +117,11 @@ To add the main metric to our link, go to `Coordinates space`, `OrientedLink` an
 
 Then in `Main metric`, choose your metric for the first link.
 
-![resultat](../../screenshots/demo/tutorial3/MainMetricLink.png)
+![resultat](../../screenshots/demo/tutorial03/MainMetricLink.png)
 
 ANd choose the other metric for the second link
 
-![resultat](../../screenshots/demo/tutorial3/MainMetricLinkB.png)
+![resultat](../../screenshots/demo/tutorial03/MainMetricLinkB.png)
 
 
 
@@ -130,7 +129,7 @@ ANd choose the other metric for the second link
 ## Resultat
 
 
-![resultat](../../screenshots/demo/tutorial3/resultat.png)
+![resultat](../../screenshots/demo/tutorial03/resultat.png)
 
 
 
@@ -140,7 +139,7 @@ ANd choose the other metric for the second link
 
 And here is the different JSON file :
 
-- [demo3-region](../../resource/demo3-region.json) 
-- [demo3-point](../../resource/demo3-point.json)
-- [demo3-link](../../resource/demo3-link.json)
+- [demo3-region](../../resource/demo03-region.json) 
+- [demo3-point](../../resource/demo03-point.json)
+- [demo3-link](../../resource/demo03-link.json)
 

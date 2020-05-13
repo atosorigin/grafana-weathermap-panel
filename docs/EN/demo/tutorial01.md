@@ -2,16 +2,16 @@
 ## Add a dashboard SVG
 [![](../../screenshots/other/Go-back.png)](README.md)
  
-![step 01](../../screenshots/demo/tutorial1/step01.jpg)
+![step 01](../../screenshots/demo/tutorial01/step01.jpg)
 
 
 Adding a background image is done from the `display` menu.
 
-The selected image will be [demo1-background.svg](../../resource/demo1-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+The selected image will be [demo1-background.svg](../../resource/demo01-background.svg). To do this, we download it in base64 with the `Copy image address` function.
 
 
 ```
-https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-background.svg
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
 
 ```
 
@@ -26,7 +26,7 @@ You have to save and reload the page.
 ### Step 1: Define an SVG region
 
 
-![step 02](../../screenshots/demo/tutorial1/step02.jpg)
+![step 02](../../screenshots/demo/tutorial01/step02.jpg)
 
 
 The creation of a region in an SVG image is done from the `Coordinates space`, `region`, and `Add coordinate space` menu.
@@ -43,7 +43,7 @@ You have to fill out the form like this:
 
 
 
-![step 03](../../screenshots/demo/tutorial1/step03.jpg)
+![step 03](../../screenshots/demo/tutorial01/step03.jpg)
 
 
 Adding a color to an SVG element is done from the `Coordinates space`, `region`, and `Edit coordinate space` menu.
@@ -61,7 +61,7 @@ You select the `Lower limit` line and then complete the form like this:
 
 You get the following result
 
-![step 04](../../screenshots/demo/tutorial1/step04.jpg)
+![step 04](../../screenshots/demo/tutorial01/step04.jpg)
 
 
 It is possible to define other parameters, referring to the [coordinates lower limit](../editor/coordinates-lower-limit.md) page.
@@ -71,7 +71,7 @@ It is possible to define other parameters, referring to the [coordinates lower l
 ### Step 3: Adding a Query to an SVG element
 
 
-![step 05](../../screenshots/demo/tutorial1/step05.jpg)
+![step 05](../../screenshots/demo/tutorial01/step05.jpg)
 
 
 The first step is through the `Queries` tab.
@@ -88,7 +88,7 @@ The `A` marker will be used to identify this query as you can see below.
 
 
 
-![step 06](../../screenshots/demo/tutorial1/step06.jpg)
+![step 06](../../screenshots/demo/tutorial01/step06.jpg)
 
 The second step is from the `Coordinates space`, `region` and `Edit coordinate space` menu of the `visualization` tab.
 
@@ -109,7 +109,7 @@ It is possible to fill in the other fields with the additional settings availabl
 ### Step 4: Formatting SVG element information
 
 
-![step 07](../../screenshots/demo/tutorial1/step07.jpg)
+![step 07](../../screenshots/demo/tutorial01/step07.jpg)
 
 
 The formatting of the SVG element information is done from the `Coordinates space`, `Region` and `Edit coordinate space` menu.
@@ -128,7 +128,7 @@ You select the `Text object` line to complete the `Generate text object` form li
 
 The end result will be like this: 
 
-![step 08](../../screenshots/demo/tutorial1/step08.jpg)
+![step 08](../../screenshots/demo/tutorial01/step08.jpg)
 
 
 ## Create a point
@@ -136,11 +136,11 @@ The end result will be like this:
 ### Step 1: Placing a point
 
 
-![step 09](../../screenshots/demo/tutorial1/add-coordinate.png)
+![step 09](../../screenshots/demo/tutorial01/add-coordinate.png)
 
 - To place a point, go to `Visualization`, then `Coordinates space`, `Point`, and `Add coordinate space`.
 
-![step 09](../../screenshots/demo/tutorial1/point1.png)
+![step 09](../../screenshots/demo/tutorial01/point1.png)
 
 You have to fill out the form like this: 
 
@@ -153,7 +153,7 @@ You have to fill out the form like this:
 
 
 
-![step 03](../../screenshots/demo/tutorial1/lower-limit-point.png)
+![step 03](../../screenshots/demo/tutorial01/lower-limit-point.png)
 
 
 Adding a color to an SVG element is done from the `Coordinates space`, `point`, and `Edit coordinate space` menu.
@@ -171,7 +171,7 @@ You select the `Lower limit' line and then complete the form like this:
 
 You get the following result
 
-![step 04](../../screenshots/demo/tutorial1/result-color-point.png)
+![step 04](../../screenshots/demo/tutorial01/result-color-point.png)
 
 
 It is possible to define other parameters, referring to the [coordinates lower limit](../editor/coordinates-lower-limit.md) page.
@@ -180,7 +180,7 @@ It is possible to define other parameters, referring to the [coordinates lower l
 ### Step 3: Adding a Query to a point
 
 
-![step 05](../../screenshots/demo/tutorial1/step05.jpg)
+![step 05](../../screenshots/demo/tutorial01/step05.jpg)
 
 
 As seen in the previous section, we need a metric. So you can use the same metric as before, or you can give another metric B
@@ -188,7 +188,7 @@ As seen in the previous section, we need a metric. So you can use the same metri
 Once you have done that, you will associate this query to your point
 
 
-![step 06](../../screenshots/demo/tutorial1/step06.jpg)
+![step 06](../../screenshots/demo/tutorial01/step06.jpg)
 
 The second step is from the `Coordinates space`, `region`, and `Edit coordinate space` menu of the `visualization` tab.
 
@@ -208,7 +208,7 @@ It is possible to fill in the other fields with the additional settings availabl
 
 The end result will be like this: 
 
-![step 08](../../screenshots/demo/tutorial1/final-result-point.png)
+![step 08](../../screenshots/demo/tutorial01/final-result-point.png)
 
 ## Creating an oriented link 
 
@@ -221,7 +221,7 @@ To create an oriented link you have to pass by [the panel menu](../panel/panel-o
 Once you have placed your link on the image you can go to `Coordinates space` and `point` menu of the `visualization` tab.
 
 
-![step 06](../../screenshots/demo/tutorial1/OrientedLink1.png)
+![step 06](../../screenshots/demo/tutorial01/OrientedLink1.png)
 
 Here, you can see your link `OrientedLink 1`
 
@@ -238,7 +238,7 @@ It is possible to fill in the other fields with the additional settings availabl
 
 ### Result
 
-![step 06](../../screenshots/demo/tutorial1/final-result-link.png)
+![step 06](../../screenshots/demo/tutorial01/final-result-link.png)
 
 ## Add everything with JSON
 
@@ -248,9 +248,9 @@ It is possible to fill in the other fields with the additional settings availabl
 
 And here is the different JSON file :
 
-- [demo1-svgRegion](../../resource/demo1-svgRegion.json) 
-- [demo1-point](../../resource/demo1-point.json)
-- [demo1-link](../../resource/demo1-link.json)
-- [demo1-global](../../resource/demo1-global.json)
+- [demo1-svgRegion](../../resource/demo01-svgRegion.json) 
+- [demo1-point](../../resource/demo01-point.json)
+- [demo1-link](../../resource/demo01-link.json)
+
 
 

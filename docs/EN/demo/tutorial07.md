@@ -3,15 +3,15 @@
 
 ## Add a dashboard SVG
 
-![step 01](../../screenshots/demo/tutorial7/background.jpg)
+![step 01](../../screenshots/demo/tutorial07/background.jpg)
 
 
 Adding a background image is done from the `display` menu.
 
-The selected image will be [demo7-background.svg](../../resource/demo7-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+The selected image will be [demo7-background.svg](../../resource/demo07-background.svg). To do this, we download it in base64 with the `Copy image address` function.
 
 ```
-https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo7-background.svg
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo07-background.svg
 ```
 
 It is possible to have more details with the [display](../editor/display.md) page.
@@ -25,7 +25,7 @@ You have to save and reload the page.
 ### Step 1: Define an SVG region
 
 
-![step 02](../../screenshots/demo/tutorial1/step02.jpg)
+![step 02](../../screenshots/demo/tutorial01/step02.jpg)
 
 
 The creation of a region in an SVG image is done from the `Coordinates space`, `region`, and `Add coordinate space` menu.
@@ -43,7 +43,7 @@ Repeat the same instruction for ProxyServer and Select `Proxy` for the zone SVG
 
 
 
-![step 03](../../screenshots/demo/tutorial7/LowerLimitProxy.png)
+![step 03](../../screenshots/demo/tutorial07/LowerLimitProxy.png)
 
 
 Adding a color to an SVG element is done from the `Coordinates space`, `region`, and `Edit coordinate space` menu.
@@ -61,7 +61,7 @@ You select the `Lower limit' line and then complete the form like this:
 
 You get the following result
 
-![step 04](../../screenshots/demo/tutorial7/ProxyBleu.png)
+![step 04](../../screenshots/demo/tutorial07/ProxyBleu.png)
 
 Repeat the same things for the Routeur et choose the color red
 
@@ -81,19 +81,19 @@ The option of direction is done from the `Coordinates space`, `OrientedLink` men
 
 Then, select `Bidirectional` for the orientation
 
-![Bidirectional](../../screenshots/demo/tutorial7/LinkBidirectionnel.png)
+![Bidirectional](../../screenshots/demo/tutorial07/LinkBidirectionnel.png)
 
 ### Step 2 : Choose the color of your link
 
 To change the color, go to the `lower limit` menu.
 
-![LowerLimit](../../screenshots/demo/tutorial7/LowerLimitLink.png)
+![LowerLimit](../../screenshots/demo/tutorial07/LowerLimitLink.png)
 
 ### Step 3 : Add a query to your link
 
 First you will have to create the query.
 To do that, go to `Queries` and fill the input like follow :
-![query](../../screenshots/demo/tutorial7/query.png)
+![query](../../screenshots/demo/tutorial07/query.png)
 
 
 
@@ -109,7 +109,7 @@ rate(node_network_transmit_bytes{device="enp0s3"}[10s])*100*8/1024/1024
 ```
 Then, you will be able to assign the metrics to your Link A and your Link B
 
-![Metric](../../screenshots/demo/tutorial7/orientedLinkMetric.png)
+![Metric](../../screenshots/demo/tutorial07/orientedLinkMetric.png)
 
 ## Add  a clickable link
 
@@ -125,8 +125,8 @@ You have to fill out the form like this:
 - Click on the `load` button
 
 
-![Metric](../../screenshots/demo/tutorial7/Cumputers.png)
-![Metric](../../screenshots/demo/tutorial7/CoordonateMode.png)
+![Metric](../../screenshots/demo/tutorial07/Cumputers.png)
+![Metric](../../screenshots/demo/tutorial07/CoordonateMode.png)
 
 ### Step 2 : Add a link
 
@@ -137,15 +137,15 @@ Do to that, go to Manage link and fill the form like follow :
 - `Link tooltip` : Allows a redirection to the link filled in the tool type by clicking on the link.
 - `Text in tooltip` : Displays the link in the tooltip that appears when the cursor is passed over the area or point.
 
-![Metric](../../screenshots/demo/tutorial7/ManegeLink.png)
+![Metric](../../screenshots/demo/tutorial07/ManegeLink.png)
 
 Then you can this on this picture that the link is clickable
 
-![Metric](../../screenshots/demo/tutorial7/Link-ConvertImage.jpg)
+![Metric](../../screenshots/demo/tutorial07/Link-ConvertImage.jpg)
 
 ## Result
 
-![result](../../screenshots/demo/tutorial7/demo7.png)
+![result](../../screenshots/demo/tutorial07/demo7.png)
 
 ## Import JSON file
 
@@ -153,7 +153,7 @@ Then you can this on this picture that the link is clickable
 
 And here is the different JSON file :
 
-- [demo7-Region SVG](../../resource/demo7-region-svg.json) 
-- [demo7-Region Coord](../../resource/demo7-region-coord.json) 
-- [demo7-point](../../resource/demo7-point.json)
-- [demo7-link](../../resource/demo7-link.json)
+- [demo7-Region SVG](../../resource/demo07-region-svg.json) 
+- [demo7-Region Coord](../../resource/demo07-region-coord.json) 
+- [demo7-point](../../resource/demo07-point.json)
+- [demo7-link](../../resource/demo07-link.json)

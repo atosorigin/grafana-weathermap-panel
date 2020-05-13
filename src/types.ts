@@ -340,6 +340,8 @@ export interface SimpleOptions extends MetricSettings {
 
   newPoint: boolean;
   newOrientedLink: boolean;
+
+  currentDashboard: boolean;
 }
 
 export const defaults: SimpleOptions = {
@@ -466,4 +468,5 @@ export const defaults: SimpleOptions = {
   checkIndexMultiLink: 0,
   newPoint: true,
   newOrientedLink: true,
+  currentDashboard: false,
 };

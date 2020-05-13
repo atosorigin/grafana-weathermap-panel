@@ -1,5 +1,5 @@
-
 # Comment créer et ajouter votre propre image SVG dans Grafana
+
 [![](../../screenshots/other/Go-back.png)](README.md)
  
 ## Créer votre SVG sur inkscape
@@ -19,7 +19,7 @@ Inkscape vous permet de choisir entre plusieurs formes pour créer votre SVG :
 - Carré
 - Autre..
 
-! [Inkscape](./../../screenshots/demo/tutorial4/Inkscape.png)
+! [Inkscape](./../../screenshots/demo/tutorial04/Inkscape.png)
 
 Vous pouvez également créer votre image SVG avec draw.io. Plus d'informations [ici](./appendix/svg.md)
 
@@ -29,13 +29,13 @@ Il est nécessaire d'ajouter un identifiant à tous vos objets. Il sera plus fac
 
 Pour ajouter un identifiant, `right click` sur votre objet, puis allez sur `Properties of your object`. Une fenêtre apparaîtra et vous permettra de modifier l'identifiant
 
-![Propriete](./../../screenshots/demo/tutorial4/Propriete.png)
+![Propriete](./../../screenshots/demo/tutorial04/Propriete.png)
 
 ### Étape 4 : Sauvez votre forme
 
 Pour sauvegarder votre forme, vous devez enregistrer au format `SVG Inkscape` ou `SVG simple`.
 
-![Enregistrer](./../../screenshots/demo/tutorial4/enregistrer.png)
+![Enregistrer](./../../screenshots/demo/tutorial04/enregistrer.png)
 
 ## Ajoutez votre SVG à Grafana
 
@@ -45,10 +45,10 @@ L'image sélectionnée sera celle que vous venez de créer. Pour ce faire, nous 
 
 Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
 
-![Enregistrer](./../../screenshots/demo/tutorial4/DisplaySVG.png)
+![Enregistrer](./../../screenshots/demo/tutorial04/DisplaySVG.png)
 
 Ensuite, si vous voulez ajouter une région, vous pouvez voir les différents id de votre forme dans "Zone SVG". 
 
-![Enregistrer](./../../screenshots/demo/tutorial4/Region.png)
+![Enregistrer](./../../screenshots/demo/tutorial04/Region.png)
 
 
