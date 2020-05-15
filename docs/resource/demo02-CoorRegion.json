@@ -1,0 +1,166 @@
+{
+    "regions": [{
+            "colorMode": false,
+            "coords": {
+                "xMax": "0",
+                "xMin": "-18",
+                "yMax": "8",
+                "yMin": "-5"
+            },
+            "id": 1,
+            "idSVG": "",
+            "img": "",
+            "label": "hello",
+            "linkURL": {
+                "followLink": "",
+                "hoveringTooltipLink": "",
+                "hoveringTooltipText": ""
+            },
+            "lowerLimit": [{
+                "backColor": "#37872D",
+                "borderColor": "",
+                "id": 0,
+                "lowerLimitMax": "",
+                "lowerLimitMin": "",
+                "sizeBorder": "1"
+            }],
+            "mainMetric": {
+                "format": "",
+                "key": "",
+                "keyValue": "",
+                "refId": "",
+                "returnQuery": {},
+                "unit": ""
+            },
+            "meta": "",
+            "metrics": [],
+            "mode": false,
+            "orientedLink": [],
+            "positionParameter": {
+                "labelAPositionX": "0",
+                "labelAPositionY": "0",
+                "labelBPositionX": "0",
+                "labelBPositionY": "0",
+                "tooltipPositionA": {},
+                "tooltipPositionB": {}
+            },
+            "textObj": {
+                "value": "",
+                "isTextTooltip": false,
+                "colorBack": "rgba(255, 255, 255, 0)",
+                "colorText": "rgba(0, 0, 0, 1)",
+                "style": {
+                    "bold": false,
+                    "italic": false,
+                    "underline": false
+                },
+                "generateObjectText": false,
+                "valueGenerateObjectText": {
+                    "legendElement": "",
+                    "numericFormatElement": "",
+                    "unit": "",
+                    "displayObjectInTooltip": false,
+                    "addColorTextElement": false,
+                    "colorTextElement": "white",
+                    "addColorBackElement": false,
+                    "colorBackElement": "black"
+                },
+                "generateAuxiliaryElement": {
+                    "legendElement": "",
+                    "numericFormatElement": "",
+                    "unit": "",
+                    "displayObjectInTooltip": false,
+                    "addColorTextElement": false,
+                    "colorTextElement": "white",
+                    "addColorBackElement": false,
+                    "colorBackElement": "black"
+                }
+            },
+            "traceBack": true,
+            "traceBorder": false
+        },
+        {
+            "colorMode": false,
+            "coords": {
+                "xMax": "-80",
+                "xMin": "-55",
+                "yMax": "15",
+                "yMin": "-30"
+            },
+            "id": 2,
+            "idSVG": "",
+            "img": "https://framagit.org/hellosct1/atos_grafana/-/raw/master/docs/resource/computer-png.png",
+            "label": "computer2",
+            "linkURL": {
+                "followLink": "",
+                "hoveringTooltipLink": "",
+                "hoveringTooltipText": ""
+            },
+            "lowerLimit": [{
+                "backColor": "",
+                "borderColor": "",
+                "id": 0,
+                "lowerLimitMax": "",
+                "lowerLimitMin": "",
+                "sizeBorder": "1"
+            }],
+            "mainMetric": {
+                "format": "",
+                "key": "",
+                "keyValue": "",
+                "refId": "",
+                "returnQuery": {
+                    "fields": [],
+                    "length": 0
+                },
+                "unit": ""
+            },
+            "meta": "",
+            "metrics": [],
+            "mode": false,
+            "orientedLink": [],
+            "positionParameter": {
+                "labelAPositionX": "0",
+                "labelAPositionY": "0",
+                "labelBPositionX": "0",
+                "labelBPositionY": "0",
+                "tooltipPositionA": {},
+                "tooltipPositionB": {}
+            },
+            "textObj": {
+                "value": "",
+                "isTextTooltip": false,
+                "colorBack": "rgba(255, 255, 255, 0)",
+                "colorText": "rgba(0, 0, 0, 1)",
+                "style": {
+                    "bold": false,
+                    "italic": false,
+                    "underline": false
+                },
+                "generateObjectText": false,
+                "valueGenerateObjectText": {
+                    "legendElement": "",
+                    "numericFormatElement": "",
+                    "unit": "",
+                    "displayObjectInTooltip": false,
+                    "addColorTextElement": false,
+                    "colorTextElement": "white",
+                    "addColorBackElement": false,
+                    "colorBackElement": "black"
+                },
+                "generateAuxiliaryElement": {
+                    "legendElement": "",
+                    "numericFormatElement": "",
+                    "unit": "",
+                    "displayObjectInTooltip": false,
+                    "addColorTextElement": false,
+                    "colorTextElement": "white",
+                    "addColorBackElement": false,
+                    "colorBackElement": "black"
+                }
+            },
+            "traceBack": false,
+            "traceBorder": false
+        }
+    ]
+}
