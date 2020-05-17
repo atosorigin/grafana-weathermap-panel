@@ -873,16 +873,13 @@ function __generator(thisArg, body) {
     }
 }
 
-const __createBinding = Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
+function __createBinding(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
-});
+}
 
 function __exportStar(m, exports) {
-    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
+    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 
 function __values(o) {
@@ -963,17 +960,11 @@ function __makeTemplateObject(cooked, raw) {
     return cooked;
 };
 
-const __setModuleDefault = Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-};
-
 function __importStar(mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result.default = mod;
     return result;
 }
 
@@ -1737,48 +1728,6 @@ var InputTextPoint = function InputTextPoint(_a) {
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (InputTextPoint);
-
-/***/ }),
-
-/***/ "./Functions/coodinateIsInInitialSpace.tsx":
-/*!*************************************************!*\
-  !*** ./Functions/coodinateIsInInitialSpace.tsx ***!
-  \*************************************************/
-/*! exports provided: coordinateIsInInitialSpace */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "coordinateIsInInitialSpace", function() { return coordinateIsInInitialSpace; });
-/* harmony import */ var _searchIDLimit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./searchIDLimit */ "./Functions/searchIDLimit.tsx");
-
-var coordinateIsInInitialSpace = function coordinateIsInInitialSpace(x, y, initial, baseMap) {
-  //console.log(x + ' ' + y);
-  var initialPx = Object(_searchIDLimit__WEBPACK_IMPORTED_MODULE_0__["pixelToPercent"])(initial.coordinate, baseMap); //console.log(initialPx);
-
-  if (x < initialPx.xMin) {
-    //console.log('error');
-    return 0;
-  }
-
-  if (x > initialPx.xMax) {
-    //console.log('error');
-    return 0;
-  }
-
-  if (y < initialPx.yMin) {
-    //console.log('error');
-    return 0;
-  }
-
-  if (y > initialPx.yMax) {
-    //console.log('error');
-    return 0;
-  } //console.log('is ok');
-
-
-  return 1;
-};
 
 /***/ }),
 
@@ -2685,131 +2634,6 @@ var isNumFloat = function isNumFloat(value) {
   }
 
   return 0;
-};
-
-/***/ }),
-
-/***/ "./Functions/otherFunction.tsx":
-/*!*************************************!*\
-  !*** ./Functions/otherFunction.tsx ***!
-  \*************************************/
-/*! exports provided: calculRealCoordinate */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calculRealCoordinate", function() { return calculRealCoordinate; });
-/* harmony import */ var Functions_isNumFloat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Functions/isNumFloat */ "./Functions/isNumFloat.tsx");
-
-/**
- * Check limit of coordinate
- * @param {number} value number to test
- * @param {number} position 1 if xMin, 2 if xMax, 3 if yMin, 4 if yMax
- * @returns 0 if it's good or 1 otherwise
- */
-
-var verifLimit = function verifLimit(useLimit, limit, intValue, position) {
-  // const { useLimit, limit } = this.props;
-  if (!useLimit) {
-    return 0;
-  }
-
-  if (limit) {
-    if (position === 1 || position === 2) {
-      if (parseInt(limit.xMin, 10) <= intValue && parseInt(limit.xMax, 10) >= intValue) {
-        return intValue;
-      } else {
-        return position === 1 ? parseInt(limit.xMin, 10) : parseInt(limit.xMax, 10);
-      }
-    } else if (position === 3 || position === 4) {
-      if (parseInt(limit.yMin, 10) <= intValue && parseInt(limit.yMax, 10) >= intValue) {
-        return intValue;
-      } else {
-        return position === 3 ? parseInt(limit.yMin, 10) : parseInt(limit.yMax, 10);
-      }
-    }
-  }
-
-  return 0;
-};
-/**
- * Transform coordinate percent for css
- * @param {number} size value of coordinate
- * @param {boolean} isMax true if x or y is max value
- * @returns coordinate to percent
- */
-
-
-var transformCoordinateToPx = function transformCoordinateToPx(size, isMax) {
-  var maxSize = 100;
-  var minSize = -100;
-  var midSize = 50;
-
-  if (size > maxSize) {
-    size = maxSize;
-  } else if (size < 0 && size < minSize) {
-    size = minSize;
-  }
-
-  if (size >= 0) {
-    size /= 2;
-    size = isMax ? midSize - size : midSize + size;
-  } else {
-    size *= -1;
-    size /= 2;
-    size = midSize - size;
-  }
-
-  return size;
-};
-/** calcul value for top, bottom, left and right div coordinate */
-
-
-var calculRealCoordinate = function calculRealCoordinate(coordinate, useLimit, limit) {
-  var pLeft;
-  var pRight;
-  var pTop;
-  var pBottom;
-  var xMin = 0;
-  var xMax = 0;
-  var yMin = 0;
-  var yMax = 0;
-  xMin = Object(Functions_isNumFloat__WEBPACK_IMPORTED_MODULE_0__["isNumFloat"])(coordinate.coords.xMin) ? parseInt(coordinate.coords.xMin, 10) : 0;
-  xMax = Object(Functions_isNumFloat__WEBPACK_IMPORTED_MODULE_0__["isNumFloat"])(coordinate.coords.xMax) ? parseInt(coordinate.coords.xMax, 10) : 0;
-  yMin = Object(Functions_isNumFloat__WEBPACK_IMPORTED_MODULE_0__["isNumFloat"])(coordinate.coords.yMin) ? parseInt(coordinate.coords.yMin, 10) : 0;
-  yMax = Object(Functions_isNumFloat__WEBPACK_IMPORTED_MODULE_0__["isNumFloat"])(coordinate.coords.yMax) ? parseInt(coordinate.coords.yMax, 10) : 0;
-
-  if (useLimit) {
-    xMin = verifLimit(useLimit, limit, xMin, 1);
-    xMax = verifLimit(useLimit, limit, xMax, 2);
-    yMin = verifLimit(useLimit, limit, yMin, 3);
-    yMax = verifLimit(useLimit, limit, yMax, 4);
-  }
-
-  if (xMax >= 0) {
-    pLeft = transformCoordinateToPx(xMin, false).toString() + '%';
-    pRight = transformCoordinateToPx(xMax, true).toString() + '%';
-  } else {
-    xMin = xMin * -1;
-    pRight = transformCoordinateToPx(xMin, false).toString() + '%';
-    pLeft = transformCoordinateToPx(xMax, true).toString() + '%';
-  }
-
-  if (yMax >= 0) {
-    pBottom = transformCoordinateToPx(yMin, false).toString() + '%';
-    pTop = transformCoordinateToPx(yMax, true).toString() + '%';
-  } else {
-    yMin = yMin * -1;
-    pTop = transformCoordinateToPx(yMin, false).toString() + '%';
-    pBottom = transformCoordinateToPx(yMax, true).toString() + '%';
-  }
-
-  return {
-    left: pLeft,
-    right: pRight,
-    top: pTop,
-    bottom: pBottom
-  };
 };
 
 /***/ }),
@@ -4281,17 +4105,16 @@ function (_super) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_b) {
           switch (_b.label) {
             case 0:
-              console.log('mount Editor');
               url = window.location.pathname;
               arrayUrl = url.split('/');
-              console.log('currentDashboard : ' + this.props.options.currentDashboard);
 
               try {
+                // console.log('currentDashboard : ' + this.props.options.currentDashboard);
                 for (arrayUrl_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayUrl), arrayUrl_1_1 = arrayUrl_1.next(); !arrayUrl_1_1.done; arrayUrl_1_1 = arrayUrl_1.next()) {
                   element = arrayUrl_1_1.value;
 
                   if (element === 'new' && !this.props.options.currentDashboard) {
-                    console.log('new dashboard');
+                    //   console.log('new dashboard');
                     this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.props.options), {
                       arrayPoints: [],
                       arrayOrientedLinks: [],
@@ -4357,8 +4180,8 @@ function (_super) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
           switch (_a.label) {
             case 0:
-              console.log('unMount Editor'); // not display Button of Panel if is mode View
-
+              // console.log('unMount Editor');
+              // not display Button of Panel if is mode View
               return [4
               /*yield*/
               , Promise.resolve('Success').then(function () {
@@ -4369,6 +4192,7 @@ function (_super) {
               })];
 
             case 1:
+              // console.log('unMount Editor');
               // not display Button of Panel if is mode View
               _a.sent();
 
@@ -4520,16 +4344,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! Models/OrientedLinkClass */ "./Models/OrientedLinkClass.tsx");
 /* harmony import */ var Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! Models/TextObjectClass */ "./Models/TextObjectClass.tsx");
 /* harmony import */ var Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! Models/LinkURLClass */ "./Models/LinkURLClass.tsx");
-/* harmony import */ var Functions_coodinateIsInInitialSpace__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! Functions/coodinateIsInInitialSpace */ "./Functions/coodinateIsInInitialSpace.tsx");
-/* harmony import */ var Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! Functions/fetchMetrics */ "./Functions/fetchMetrics.tsx");
-/* harmony import */ var Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! Functions/getResultQuery */ "./Functions/getResultQuery.tsx");
-/* harmony import */ var components_CoordinateSpace_addCoordinate__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! components/CoordinateSpace/addCoordinate */ "./components/CoordinateSpace/addCoordinate.tsx");
-/* harmony import */ var _components_Draw_drawRectangle__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Draw/drawRectangle */ "./components/Draw/drawRectangle.tsx");
-/* harmony import */ var _components_Draw_drawPoint__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Draw/drawPoint */ "./components/Draw/drawPoint.tsx");
-/* harmony import */ var _components_Draw_drawOrientedLink__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Draw/drawOrientedLink */ "./components/Draw/drawOrientedLink.tsx");
-/* harmony import */ var _components_legend__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/legend */ "./components/legend.tsx");
-/* harmony import */ var components_Draw_drawRectangleExtend__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! components/Draw/drawRectangleExtend */ "./components/Draw/drawRectangleExtend.tsx");
-/* harmony import */ var Functions_initRegionCoordinateSpace__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! Functions/initRegionCoordinateSpace */ "./Functions/initRegionCoordinateSpace.tsx");
+/* harmony import */ var Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! Functions/fetchMetrics */ "./Functions/fetchMetrics.tsx");
+/* harmony import */ var Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! Functions/getResultQuery */ "./Functions/getResultQuery.tsx");
+/* harmony import */ var components_CoordinateSpace_addCoordinate__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! components/CoordinateSpace/addCoordinate */ "./components/CoordinateSpace/addCoordinate.tsx");
+/* harmony import */ var _components_Draw_drawRectangle__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Draw/drawRectangle */ "./components/Draw/drawRectangle.tsx");
+/* harmony import */ var _components_Draw_drawPoint__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Draw/drawPoint */ "./components/Draw/drawPoint.tsx");
+/* harmony import */ var _components_Draw_drawOrientedLink__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Draw/drawOrientedLink */ "./components/Draw/drawOrientedLink.tsx");
+/* harmony import */ var _components_legend__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/legend */ "./components/legend.tsx");
+/* harmony import */ var components_Draw_drawRectangleExtend__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! components/Draw/drawRectangleExtend */ "./components/Draw/drawRectangleExtend.tsx");
+/* harmony import */ var Functions_initRegionCoordinateSpace__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! Functions/initRegionCoordinateSpace */ "./Functions/initRegionCoordinateSpace.tsx");
 
 
 
@@ -4537,7 +4360,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+ //import { coordinateIsInInitialSpace } from 'Functions/coodinateIsInInitialSpace';
 
 
 
@@ -4570,7 +4393,7 @@ function (_super) {
       var jsxItems = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
 
       if (_this.props.options.baseMap.image === '' && !_this.props.options.baseMap.modeSVG) {
-        jsxItems = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawRectangle__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        jsxItems = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawRectangle__WEBPACK_IMPORTED_MODULE_11__["default"], {
           key: "limitCoor",
           color: "orange",
           coordinateInitial: coordinateSpaceInitial,
@@ -4600,20 +4423,43 @@ function (_super) {
       var xMin = parseInt(initialSpace.xMin, 10);
       var xMinPx = (xMin + 100) * (widthPanel / 200);
       var xMax = parseInt(initialSpace.xMax, 10);
-      var xMaxPx = (xMax + 100) * (widthPanel / 200);
-      var widthInitialSpace = xMaxPx - xMinPx;
+      var xMaxPx = (xMax + 100) * (widthPanel / 200); // if (xMin < 0 && xMax < 0) {
+      //   xMinPx = (xMax + 100) * (widthPanel / 200) * -1;
+      //   xMaxPx = (xMin + 100) * (widthPanel / 200) * -1;
+      // }
+
       var yMin = parseInt(initialSpace.yMin, 10);
       var yMinPx = (yMin + 100) * (heightPanel / 200);
       var yMax = parseInt(initialSpace.yMax, 10);
       var yMaxPx = (yMax + 100) * (heightPanel / 200);
-      var heightInitialSpace = yMaxPx - yMinPx;
-      positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
-      positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1;
 
-      if (!Object(Functions_coodinateIsInInitialSpace__WEBPACK_IMPORTED_MODULE_8__["coordinateIsInInitialSpace"])(parseInt(event.nativeEvent.offsetX, 10), parseInt(event.nativeEvent.offsetY, 10), _this.props.options.coordinateSpaceInitial, _this.props.options.baseMap)) {
-        //console.error('is not initial space');
-        return;
-      } //console.log(positionX.toString() + ' ' + positionY.toString());
+      if (yMin < 0 && yMax < 0) {
+        yMinPx = (yMax + 100) * (heightPanel / 200);
+        yMaxPx = (yMin + 100) * (heightPanel / 200);
+      }
+
+      var widthInitialSpace = xMaxPx - xMinPx;
+      var heightInitialSpace = yMaxPx - yMinPx;
+      positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2; //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1;
+
+      positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+
+      if (xMin < 0 && xMax < 0) {
+        positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2 * -1;
+      } // if (yMin < 0 && yMax < 0) {
+      //   positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+      // }
+      // if (
+      //   !coordinateIsInInitialSpace(
+      //     parseInt(event.nativeEvent.offsetX, 10),
+      //     parseInt(event.nativeEvent.offsetY, 10),
+      //     this.props.options.coordinateSpaceInitial,
+      //     this.props.options.baseMap
+      //   )
+      // ) {
+      //   //console.error('is not initial space');
+      //   return;
+      // }
 
 
       if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'Intent' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG) {
@@ -4874,17 +4720,32 @@ function (_super) {
       var xMin = parseInt(initialSpace.xMin, 10);
       var xMinPx = (xMin + 100) * (widthPanel / 200);
       var xMax = parseInt(initialSpace.xMax, 10);
-      var xMaxPx = (xMax + 100) * (widthPanel / 200);
-      var widthInitialSpace = xMaxPx - xMinPx;
+      var xMaxPx = (xMax + 100) * (widthPanel / 200); // if (xMin < 0 && xMax < 0) {
+      //   xMinPx = (xMax + 100) * (widthPanel / 200);
+      //   xMaxPx = (xMin + 100) * (widthPanel / 200);
+      // }
+
       var yMin = parseInt(initialSpace.yMin, 10);
       var yMinPx = (yMin + 100) * (heightPanel / 200);
       var yMax = parseInt(initialSpace.yMax, 10);
-      var yMaxPx = (yMax + 100) * (heightPanel / 200);
+      var yMaxPx = (yMax + 100) * (heightPanel / 200); // if (yMin < 0 && yMax < 0) {
+      //   yMinPx = (yMax + 100) * (heightPanel / 200);
+      //   yMaxPx = (yMin + 100) * (heightPanel / 200);
+      // }
+
+      var widthInitialSpace = xMaxPx - xMinPx;
       var heightInitialSpace = yMaxPx - yMinPx;
 
       if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'Intent' || event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG) {
-        positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
-        positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+        positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2; //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+
+        positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2; // if (yMax > 0 && yMax < 100) {
+        //   positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+        // }
+
+        if (yMin < 0 && yMax < 0) {
+          positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+        }
 
         if (coordinates[0].id === 0) {
           objectIn.x = positionX;
@@ -5059,17 +4920,34 @@ function (_super) {
       var xMin = parseInt(initialSpace.xMin, 10);
       var xMinPx = (xMin + 100) * (widthPanel / 200);
       var xMax = parseInt(initialSpace.xMax, 10);
-      var xMaxPx = (xMax + 100) * (widthPanel / 200);
-      var widthInitialSpace = xMaxPx - xMinPx;
+      var xMaxPx = (xMax + 100) * (widthPanel / 200); // if (xMin < 0 && xMax < 0) {
+      //   xMinPx = (xMax + 100) * (widthPanel / 200);
+      //   xMaxPx = (xMin + 100) * (widthPanel / 200);
+      // }
+
       var yMin = parseInt(initialSpace.yMin, 10);
       var yMinPx = (yMin + 100) * (heightPanel / 200);
       var yMax = parseInt(initialSpace.yMax, 10);
       var yMaxPx = (yMax + 100) * (heightPanel / 200);
+
+      if (yMin < 0 && yMax < 0) {
+        yMinPx = (yMax + 100) * (heightPanel / 200);
+        yMaxPx = (yMin + 100) * (heightPanel / 200);
+      }
+
+      var widthInitialSpace = xMaxPx - xMinPx;
       var heightInitialSpace = yMaxPx - yMinPx;
 
       if (event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'Intent' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG) {
-        positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
-        positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+        positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2; //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+
+        positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2; // if (yMax > 0 && yMax < 100) {
+        //   positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+        // }
+
+        if (yMin < 0 && yMax < 0) {
+          positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+        }
 
         if (coordinates[0].id === 0) {
           objectIn.x = positionX;
@@ -5408,17 +5286,17 @@ function (_super) {
 
 
     _this.getValuesAuxiliaryMetricsPoint = function (point) {
-      Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricAuxPoint"])(point, _this.props);
+      Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_8__["reqMetricAuxPoint"])(point, _this.props);
       return _this.getValuesAuxiliaryMetrics(point.metrics, point.mainMetric);
     };
 
     _this.getValuesAuxiliaryMetricsOrientedLink = function (orientedLink) {
-      Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricAuxOrientedLink"])(orientedLink, _this.props);
+      Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_8__["reqMetricAuxOrientedLink"])(orientedLink, _this.props);
       return _this.getValuesAuxiliaryMetrics(orientedLink.metrics, orientedLink.mainMetric);
     };
 
     _this.getValuesAuxiliaryMetricsOrientedLinkB = function (orientedLink) {
-      Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricAuxOrientedLink"])(orientedLink, _this.props);
+      Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_8__["reqMetricAuxOrientedLink"])(orientedLink, _this.props);
       return _this.getValuesAuxiliaryMetrics(orientedLink.metricsB, orientedLink.mainMetricB);
     };
 
@@ -5556,7 +5434,8 @@ function (_super) {
       var _final = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         id: "allButton",
         style: {
-          marginTop: '1%'
+          marginTop: '1%',
+          marginBottom: '50px'
         }
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
         style: {
@@ -5853,7 +5732,7 @@ function (_super) {
 
     _this.chargeRegion = function () {
       _this.setState({
-        displayRegion: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawRectangle__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        displayRegion: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawRectangle__WEBPACK_IMPORTED_MODULE_11__["default"], {
           key: "limitCoor",
           color: "orange",
           coordinateInitial: _this.props.options.coordinateSpaceInitial,
@@ -5889,6 +5768,45 @@ function (_super) {
     /**
      * update button css when mount component
      */
+    // not display Button of Panel if it is in the mode View
+
+
+    _this.checkIfDisplayButton = function () {
+      var e_4, _a;
+
+      var url = window.location.href;
+      var arrayUrl = url.split('&');
+      var canDisplayButton = false;
+
+      try {
+        for (var arrayUrl_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayUrl), arrayUrl_1_1 = arrayUrl_1.next(); !arrayUrl_1_1.done; arrayUrl_1_1 = arrayUrl_1.next()) {
+          var element = arrayUrl_1_1.value;
+
+          if (element === 'edit') {
+            canDisplayButton = true;
+          }
+        }
+      } catch (e_4_1) {
+        e_4 = {
+          error: e_4_1
+        };
+      } finally {
+        try {
+          if (arrayUrl_1_1 && !arrayUrl_1_1.done && (_a = arrayUrl_1["return"])) _a.call(arrayUrl_1);
+        } finally {
+          if (e_4) throw e_4.error;
+        }
+      }
+
+      if (!canDisplayButton) {
+        _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+          displayButton: false
+        }));
+      }
+    };
+    /**
+     * update button css when mount component
+     */
 
 
     _this.componentDidMount = function () {
@@ -5896,30 +5814,9 @@ function (_super) {
         var _this = this;
 
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
-          console.log('mount Panel'); // // delete data if new dashboard
-          // const url: string = window.location.pathname;
-          // const arrayUrl: string[] = url.split('/');
-          // for (const element of arrayUrl) {
-          //   if (element === 'new') {
-          //     console.log('new dashboard');
-          //     this.props.onOptionsChange({
-          //       ...this.props.options,
-          //       arrayPoints: [],
-          //       arrayOrientedLinks: [],
-          //       regionCoordinateSpace: [],
-          //       saveImportUrl: { total: [], mono: [], multi: [] },
-          //       saveImportFile: [],
-          //       totalUrlInput: '',
-          //       multiUrlInput: '',
-          //       monoUrlInput: '',
-          //     });
-          //   }
-          // }
+          // console.log('mount Panel');
           // not display Button of Panel if it is in the mode View
-
-          this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.props.options), {
-            displayButton: false
-          })); // save background in state
+          this.checkIfDisplayButton(); // save background in state
 
           this.setState({
             currentImage: this.props.options.baseMap.image
@@ -6022,7 +5919,7 @@ function (_super) {
 
 
     _this.displayTooltipSVG = function (event) {
-      var e_4, _a;
+      var e_5, _a;
 
       var idSVG = event.target.id.substring(3);
       var arrayRegions = _this.props.options.regionCoordinateSpace;
@@ -6118,21 +6015,21 @@ function (_super) {
             }
           }
         }
-      } catch (e_4_1) {
-        e_4 = {
-          error: e_4_1
+      } catch (e_5_1) {
+        e_5 = {
+          error: e_5_1
         };
       } finally {
         try {
           if (arrayRegions_1_1 && !arrayRegions_1_1.done && (_a = arrayRegions_1["return"])) _a.call(arrayRegions_1);
         } finally {
-          if (e_4) throw e_4.error;
+          if (e_5) throw e_5.error;
         }
       }
     };
 
     _this.hideTooltipSVG = function (event) {
-      var e_5, _a;
+      var e_6, _a;
 
       var idSVG = event.target.id.substring(3);
       var arrayRegions = _this.props.options.regionCoordinateSpace;
@@ -6146,15 +6043,15 @@ function (_super) {
             tooltipSVG.style.display = 'none';
           }
         }
-      } catch (e_5_1) {
-        e_5 = {
-          error: e_5_1
+      } catch (e_6_1) {
+        e_6 = {
+          error: e_6_1
         };
       } finally {
         try {
           if (arrayRegions_2_1 && !arrayRegions_2_1.done && (_a = arrayRegions_2["return"])) _a.call(arrayRegions_2);
         } finally {
-          if (e_5) throw e_5.error;
+          if (e_6) throw e_6.error;
         }
       }
     }; // Tooltip in Svg
@@ -6229,7 +6126,7 @@ function (_super) {
 
 
     _this.SVG_PathImage = function (event) {
-      var e_6, _a; // console.log('SVG_PathImage');
+      var e_7, _a; // console.log('SVG_PathImage');
       // console.log(event.target);
 
 
@@ -6249,11 +6146,6 @@ function (_super) {
             var linkUrl = region.linkURL.followLink; //console.log(linkUrl);
 
             if (linkUrl && !document.getElementById('a' + idSVG) && !_this.state.buttonAddIncurvedLinkIsActive && !_this.state.buttonAddLinkIsActive) {
-              // const cir1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-              // cir1.setAttribute('fill', '#ff0000');
-              // cir1.setAttribute('cx', '310');
-              // cir1.setAttribute('cy', '210');
-              // cir1.setAttribute('r', '30');
               var aElement = document.createElementNS('http://www.w3.org/2000/svg', 'a');
               aElement.setAttribute('id', 'a' + idSVG);
               aElement.setAttribute('href', linkUrl);
@@ -6262,15 +6154,15 @@ function (_super) {
             }
           }
         }
-      } catch (e_6_1) {
-        e_6 = {
-          error: e_6_1
+      } catch (e_7_1) {
+        e_7 = {
+          error: e_7_1
         };
       } finally {
         try {
           if (arrayRegion_1_1 && !arrayRegion_1_1.done && (_a = arrayRegion_1["return"])) _a.call(arrayRegion_1);
         } finally {
-          if (e_6) throw e_6.error;
+          if (e_7) throw e_7.error;
         }
       } // for (const line of this.props.options.regionCoordinateSpace) {
       //   if (line.mode) {
@@ -6316,7 +6208,7 @@ function (_super) {
       };
       var mapItems;
       mapItems = options.regionCoordinateSpace.map(function (line, index) {
-        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Draw_drawRectangleExtend__WEBPACK_IMPORTED_MODULE_16__["default"], {
+        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Draw_drawRectangleExtend__WEBPACK_IMPORTED_MODULE_15__["default"], {
           key: 'drawRectangleExtend' + index.toString(),
           uneCoor: line,
           useLimit: false,
@@ -6381,7 +6273,7 @@ function (_super) {
     };
 
     _this.getValuesAuxiliaryMetricsRegionSVG = function (region) {
-      Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricAuxRegion"])(region, _this.props);
+      Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_8__["reqMetricAuxRegion"])(region, _this.props);
       return _this.getValuesAuxiliaryMetrics(region.metrics, region.mainMetric);
     };
 
@@ -6401,7 +6293,7 @@ function (_super) {
     };
 
     _this.displayAuxiliaryMetricsRegionSVG = function (region) {
-      var e_7, _a;
+      var e_8, _a;
 
       var html = [];
 
@@ -6489,15 +6381,15 @@ function (_super) {
             }, "- Type : ", metric.manageValue));
             index++;
           }
-        } catch (e_7_1) {
-          e_7 = {
-            error: e_7_1
+        } catch (e_8_1) {
+          e_8 = {
+            error: e_8_1
           };
         } finally {
           try {
             if (auxMetrics_1_1 && !auxMetrics_1_1.done && (_a = auxMetrics_1["return"])) _a.call(auxMetrics_1);
           } finally {
-            if (e_7) throw e_7.error;
+            if (e_8) throw e_8.error;
           }
         }
       }
@@ -6516,7 +6408,7 @@ function (_super) {
       var decimal = region.textObj.valueGenerateObjectText.numericFormatElement; //const roundMetrics: number = parseInt(decimal, 10) || 1;
 
       var roundValue = parseInt(decimal, 10) || 1;
-      var mainMetric = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_10__["getResultQuery"])(region.mainMetric) || 0;
+      var mainMetric = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_9__["getResultQuery"])(region.mainMetric) || 0;
 
       if (decimal !== '') {
         result = mainMetric.toPrecision(roundValue) + ' ' + unit;
@@ -6592,9 +6484,9 @@ function (_super) {
     };
 
     _this.htmlTooltipRegionSVG = function () {
-      var e_8, _a;
+      var e_9, _a;
 
-      var regionSVG = Object(Functions_initRegionCoordinateSpace__WEBPACK_IMPORTED_MODULE_17__["initRegionCoordinateSpace"])(1000);
+      var regionSVG = Object(Functions_initRegionCoordinateSpace__WEBPACK_IMPORTED_MODULE_16__["initRegionCoordinateSpace"])(1000);
 
       try {
         for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(_this.props.options.regionCoordinateSpace), _c = _b.next(); !_c.done; _c = _b.next()) {
@@ -6604,15 +6496,15 @@ function (_super) {
             regionSVG = region;
           }
         }
-      } catch (e_8_1) {
-        e_8 = {
-          error: e_8_1
+      } catch (e_9_1) {
+        e_9 = {
+          error: e_9_1
         };
       } finally {
         try {
           if (_c && !_c.done && (_a = _b["return"])) _a.call(_b);
         } finally {
-          if (e_8) throw e_8.error;
+          if (e_9) throw e_9.error;
         }
       }
 
@@ -6723,7 +6615,7 @@ function (_super) {
 
       var valuesAuxiliaryMetrics = _this.getValuesAuxiliaryMetricsPoint(line);
 
-      var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawPoint__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawPoint__WEBPACK_IMPORTED_MODULE_12__["default"], {
         key: 'point' + line.id.toString(),
         drawGraphicMarker: line.drawGraphicMarker,
         shape: line.shape,
@@ -6784,7 +6676,7 @@ function (_super) {
 
       var valuesAuxiliaryMetricsB = _this.getValuesAuxiliaryMetricsOrientedLinkB(orientedLink);
 
-      item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawOrientedLink__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawOrientedLink__WEBPACK_IMPORTED_MODULE_13__["default"], {
         key: 'orientedLink' + orientedLink.id.toString(),
         id: orientedLink.id.toString(),
         orientationLink: orientedLink.orientationLink.value || '',
@@ -6843,26 +6735,26 @@ function (_super) {
 
 
   SimplePanel.prototype.getValuesMainMetricPoint = function (point) {
-    Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricPoint"])(point, this.props); //this.getValuesMainMetric(point.mainMetric, undefined, point);
+    Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_8__["reqMetricPoint"])(point, this.props); //this.getValuesMainMetric(point.mainMetric, undefined, point);
 
     var result = 0;
-    result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_10__["getResultQuery"])(point.mainMetric) || NaN;
+    result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_9__["getResultQuery"])(point.mainMetric) || NaN;
     return result;
   };
 
   SimplePanel.prototype.getValuesMainMetricOrientedLink = function (orientedLink) {
-    Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricOrientedLink"])(orientedLink, this.props); //this.getValuesMainMetric(orientedLink.mainMetric, orientedLink, undefined, false);
+    Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_8__["reqMetricOrientedLink"])(orientedLink, this.props); //this.getValuesMainMetric(orientedLink.mainMetric, orientedLink, undefined, false);
 
     var result = 0;
-    result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_10__["getResultQuery"])(orientedLink.mainMetric) || NaN;
+    result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_9__["getResultQuery"])(orientedLink.mainMetric) || NaN;
     return result;
   };
 
   SimplePanel.prototype.getValuesMainMetricOrientedLinkB = function (orientedLink) {
-    Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_9__["reqMetricOrientedLink"])(orientedLink, this.props); //this.getValuesMainMetric(orientedLink.mainMetricB, orientedLink, undefined, true);
+    Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_8__["reqMetricOrientedLink"])(orientedLink, this.props); //this.getValuesMainMetric(orientedLink.mainMetricB, orientedLink, undefined, true);
 
     var result = 0;
-    result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_10__["getResultQuery"])(orientedLink.mainMetricB) || NaN;
+    result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_9__["getResultQuery"])(orientedLink.mainMetricB) || NaN;
     return result;
   };
 
@@ -6970,14 +6862,14 @@ function (_super) {
       onDismiss: this.addNode,
       onClickBackdrop: this.addNode,
       isOpen: this.state.nbClickButton
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_CoordinateSpace_addCoordinate__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_CoordinateSpace_addCoordinate__WEBPACK_IMPORTED_MODULE_10__["default"], {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data,
       isRegion: true,
       isPoint: false,
       isLink: false
-    }))), !this.state.hiddenLegend && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_legend__WEBPACK_IMPORTED_MODULE_15__["default"], Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({
+    }))), !this.state.hiddenLegend && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_legend__WEBPACK_IMPORTED_MODULE_14__["default"], Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data
@@ -6989,17 +6881,16 @@ function (_super) {
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       id: "coordinateSpaces",
       style: styleBackground
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }, this.defineLimit(), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "tooltip"
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       onClick: this.getCoordinates,
       id: "mainPanel",
       style: {
         position: 'absolute',
-        top: '15%',
         zIndex: 1
       }
-    }, this.defineLimit(), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       style: styleSVG,
       // onMouseOver={this.SVG_PathImage}
       dangerouslySetInnerHTML: {
@@ -13830,6 +13721,12 @@ function (_super) {
     var xMinPx = (xMin + 100) * (this.props.widthImage / 200);
     var xMax = parseInt(initialSpace.xMax, 10);
     var xMaxPx = (xMax + 100) * (this.props.widthImage / 200);
+
+    if (xMin < 0 && xMax < 0) {
+      xMinPx = (xMax + 100) * (this.props.widthImage / 200);
+      xMaxPx = (xMin + 100) * (this.props.widthImage / 200);
+    }
+
     var widthInitialSpace = xMaxPx - xMinPx;
     var x = xMinPx + (positionX * (widthInitialSpace / 200) + widthInitialSpace / 2);
     return x;
@@ -13841,6 +13738,12 @@ function (_super) {
     var yMinPx = (yMin + 100) * (this.props.heightImage / 200);
     var yMax = parseInt(initialSpace.yMax, 10);
     var yMaxPx = (yMax + 100) * (this.props.heightImage / 200);
+
+    if (yMin < 0 && yMax < 0) {
+      yMinPx = (yMax + 100) * (this.props.heightImage / 200);
+      yMaxPx = (yMin + 100) * (this.props.heightImage / 200);
+    }
+
     var heightInitialSpace = yMaxPx - yMinPx;
     var y = this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) + (heightInitialSpace / 2 - positionY * (heightInitialSpace / 200));
     return y;
@@ -15109,6 +15012,12 @@ function (_super) {
     var xMinPx = (xMin + 100) * (this.props.widthImage / 200);
     var xMax = parseInt(initialSpace.xMax, 10);
     var xMaxPx = (xMax + 100) * (this.props.widthImage / 200);
+
+    if (xMin < 0 && xMax < 0) {
+      xMinPx = (xMax + 100) * (this.props.widthImage / 200);
+      xMaxPx = (xMin + 100) * (this.props.widthImage / 200);
+    }
+
     var widthInitialSpace = xMaxPx - xMinPx; // if (shape === 'circle') {
     //   x =
     //     xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - (size + parseInt(this.defineBorderSize(), 10));
@@ -15141,6 +15050,12 @@ function (_super) {
     var yMinPx = (yMin + 100) * (this.props.heightImage / 200);
     var yMax = parseInt(initialSpace.yMax, 10);
     var yMaxPx = (yMax + 100) * (this.props.heightImage / 200);
+
+    if (yMin < 0 && yMax < 0) {
+      yMinPx = (yMax + 100) * (this.props.heightImage / 200);
+      yMaxPx = (yMin + 100) * (this.props.heightImage / 200);
+    }
+
     var heightInitialSpace = yMaxPx - yMinPx; // if (shapeGraphicMarker === 'circle') {
     //   y =
     //     this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) +
@@ -15836,16 +15751,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
 /* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var Functions_otherFunction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! Functions/otherFunction */ "./Functions/otherFunction.tsx");
-/* harmony import */ var Functions_getLowerLimit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! Functions/getLowerLimit */ "./Functions/getLowerLimit.tsx");
-/* harmony import */ var Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! Functions/getResultQuery */ "./Functions/getResultQuery.tsx");
-/* harmony import */ var Functions_parseColor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! Functions/parseColor */ "./Functions/parseColor.tsx");
-/* harmony import */ var Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! Functions/fetchMetrics */ "./Functions/fetchMetrics.tsx");
+/* harmony import */ var Functions_getLowerLimit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! Functions/getLowerLimit */ "./Functions/getLowerLimit.tsx");
+/* harmony import */ var Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! Functions/getResultQuery */ "./Functions/getResultQuery.tsx");
+/* harmony import */ var Functions_parseColor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! Functions/parseColor */ "./Functions/parseColor.tsx");
+/* harmony import */ var Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! Functions/fetchMetrics */ "./Functions/fetchMetrics.tsx");
 
 /* eslint-disable prettier/prettier */
 
 
-
+ //import { calculRealCoordinate } from 'Functions/otherFunction';
 
 
 
@@ -15870,8 +15784,8 @@ function (_super) {
 
 
     _this.editColorSvgZone = function (id, color, border, sizeBorder) {
-      var colorSVG = Object(Functions_parseColor__WEBPACK_IMPORTED_MODULE_6__["parseColor"])(color);
-      var colorBorderSVG = Object(Functions_parseColor__WEBPACK_IMPORTED_MODULE_6__["parseColor"])(border);
+      var colorSVG = Object(Functions_parseColor__WEBPACK_IMPORTED_MODULE_5__["parseColor"])(color);
+      var colorBorderSVG = Object(Functions_parseColor__WEBPACK_IMPORTED_MODULE_5__["parseColor"])(border);
       var changeColorElement = document.getElementById(id); // if (id === 'rect45') {
       //   console.log('am here');
       // }
@@ -16027,7 +15941,7 @@ function (_super) {
 
     _this.generateTooltipAndEditColor = function (region, valueQuery) {
       var stateIsFill = false;
-      var lowerLimit = Object(Functions_getLowerLimit__WEBPACK_IMPORTED_MODULE_4__["getLowerLimit"])(region, valueQuery);
+      var lowerLimit = Object(Functions_getLowerLimit__WEBPACK_IMPORTED_MODULE_3__["getLowerLimit"])(region, valueQuery);
 
       if (region.mode) {
         _this.editColorSvgZone(region.idSVG, lowerLimit.colorBack, lowerLimit.colorBorder, lowerLimit.sizeBorder.toString());
@@ -16116,10 +16030,10 @@ function (_super) {
 
     _this.reqMetrics = function () {
       var region = _this.props.uneCoor;
-      Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_7__["reqMetricRegion"])(region, _this.props);
+      Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_6__["reqMetricRegion"])(region, _this.props);
 
       if (region.mainMetric.returnQuery && region.mainMetric.returnQuery.length > 0) {
-        var cnt = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_5__["getResultQuery"])(region.mainMetric);
+        var cnt = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_4__["getResultQuery"])(region.mainMetric);
 
         _this.generateTooltipAndEditColor(region, cnt);
       } else {
@@ -16129,7 +16043,7 @@ function (_super) {
 
     _this.getValuesAuxiliaryMetrics = function () {
       var region = _this.props.uneCoor;
-      Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_7__["reqMetricAuxRegion"])(region, _this.props);
+      Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_6__["reqMetricAuxRegion"])(region, _this.props);
       var mainMetric = region.mainMetric; //console.log(mainMetric.refId);
 
       var auxiliaryMetrics = region.metrics; //console.log(auxiliaryMetrics);
@@ -16329,6 +16243,60 @@ function (_super) {
         }
       }, html);
     };
+
+    _this.getCoordinatePxAdaptToInitialSpace = function (coorRegion) {
+      var widthImage = parseInt(_this.props.options.baseMap.width, 10);
+      var heightImage = parseInt(_this.props.options.baseMap.height, 10);
+      var initialSpace = _this.props.options.coordinateSpaceInitial.coordinate;
+      var xMin = parseInt(initialSpace.xMin, 10);
+      var xMax = parseInt(initialSpace.xMax, 10);
+      var yMin = parseInt(initialSpace.yMin, 10);
+      var yMax = parseInt(initialSpace.yMax, 10);
+      var xMinPx = (xMin + 100) * (widthImage / 200);
+      var xMaxPx = (xMax + 100) * (widthImage / 200);
+      var yMinPx = (yMin + 100) * (heightImage / 200);
+      var yMaxPx = (yMax + 100) * (heightImage / 200);
+
+      if (xMin < 0 && xMax < 0) {
+        xMinPx = (xMax + 100) * (widthImage / 200);
+        xMaxPx = (xMin + 100) * (widthImage / 200);
+      }
+
+      if (yMin < 0 && yMax < 0) {
+        yMinPx = (yMax + 100) * (heightImage / 200);
+        yMaxPx = (yMin + 100) * (heightImage / 200);
+      }
+
+      var widthInitialSpace = xMaxPx - xMinPx;
+      var heightInitialSpace = yMaxPx - yMinPx;
+      var topPx = heightImage - yMaxPx + (parseInt(coorRegion.yMax, 10) - 100) / 2 * -1 * (heightInitialSpace / 100) - yMinPx / 200;
+      var bottomPx = yMinPx + (parseInt(coorRegion.yMin, 10) + 100) / 2 * (heightInitialSpace / 100) - (heightImage - yMaxPx) / 200; // let topPx: number = (heightImage - yMaxPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMax, 10)) * (heightInitialSpace / 2 / 100));
+      // let bottomPx: number = (heightImage - yMinPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
+
+      var leftPx = xMinPx + (parseInt(coorRegion.xMin, 10) + 100) / 2 * (widthInitialSpace / 100) - (widthImage - xMaxPx) / 100;
+      var rightPx = (widthImage - xMaxPx) / 100 + widthImage - (parseInt(coorRegion.xMax, 10) + 100) / 2 * (widthInitialSpace / 100) - xMinPx; // let leftPx: number = xMinPx + (parseInt(coorRegion.xMin, 10) * (widthInitialSpace / 200) + widthInitialSpace / 2);
+      // let rightPx: number = widthInitialSpace - (parseInt(coorRegion.xMax, 10) * (widthInitialSpace / 200) + widthInitialSpace / 2) - xMinPx;
+
+      if (parseInt(coorRegion.xMin, 10) < 0 && parseInt(coorRegion.xMax, 10) < 0) {
+        leftPx = xMinPx + (parseInt(coorRegion.xMax, 10) + 100) / 2 * (widthInitialSpace / 100) - (widthImage - xMaxPx) / 100;
+        rightPx = (widthImage - xMaxPx) / 100 + widthImage - (parseInt(coorRegion.xMin, 10) + 100) / 2 * (widthInitialSpace / 100) - xMinPx; // leftPx = xMinPx + (parseInt(coorRegion.xMax, 10) * (widthInitialSpace / 200) + widthInitialSpace / 2);
+        // rightPx = widthInitialSpace - (parseInt(coorRegion.xMin, 10) * (widthInitialSpace / 200) + widthInitialSpace / 2) - xMinPx;
+      }
+
+      if (parseInt(coorRegion.yMin, 10) < 0 && parseInt(coorRegion.yMax, 10) < 0) {
+        topPx = heightImage - yMaxPx + (parseInt(coorRegion.yMin, 10) - 100) / 2 * -1 * (heightInitialSpace / 100) - yMinPx / 200;
+        bottomPx = yMinPx + (parseInt(coorRegion.yMax, 10) + 100) / 2 * (heightInitialSpace / 100) - (heightImage - yMaxPx) / 200; // topPx = (heightImage - yMaxPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
+        // bottomPx = (heightImage - yMinPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
+      }
+
+      var result = {
+        top: topPx.toString() + 'px',
+        bottom: bottomPx.toString() + 'px',
+        left: leftPx.toString() + 'px',
+        right: rightPx.toString() + 'px'
+      };
+      return result;
+    };
     /** final region zone . Call function after reqMetrics*/
 
 
@@ -16342,8 +16310,10 @@ function (_super) {
       var pBorder = _this.state.sizeBorder.toString() + 'px solid ' + _this.state.borderColor;
 
       var backColor = region.textObj.colorBack;
-      var textColor = region.textObj.colorText;
-      var coorHTML = Object(Functions_otherFunction__WEBPACK_IMPORTED_MODULE_3__["calculRealCoordinate"])(region, _this.props.useLimit, _this.props.limit);
+      var textColor = region.textObj.colorText; //const coorHTML: CoorHTML = calculRealCoordinate(region, this.props.useLimit, this.props.limit);
+
+      var coorHTML = _this.getCoordinatePxAdaptToInitialSpace(region.coords);
+
       var style = region.textObj.style;
       var styleDiv = {
         position: 'absolute',
@@ -16372,15 +16342,7 @@ function (_super) {
         color: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorTextElement : 'white',
         verticalAlign: 'middle'
       };
-      var value; // console.log('text object');
-      // console.log(region.textObj.isTextTooltip);
-      // console.log('main metric');
-      // console.log(region.textObj.generateObjectText);
-      // console.log('aux metric');
-      // console.log(region.textObj.generateAuxiliaryElement.displayObjectInTooltip);
-      // console.log(this.props.buttonAddLinkIsActive);
-      // console.log(this.props.buttonAddIncurvedLinkIsActive);
-      // console.log(region.linkURL.followLink);
+      var value;
 
       if (_this.props.buttonAddLinkIsActive || _this.props.buttonAddIncurvedLinkIsActive) {
         //console.log('active');

@@ -8,7 +8,7 @@
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
-L'image sélectionnée sera [demo7-background.svg](../../resource/demo07-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction "Copier l'adresse de l'image".
+L'image sélectionnée sera [demo01-background.svg](../../resource/demo01-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction "Copier l'adresse de l'image".
 
 
 ```
@@ -89,4 +89,4 @@ Après cela, vous pourrez voir votre métrique auxiliaire dans la toolbox de vot
 
 Et voici le fichier JSON :
 
-- [demo5-region](../../resource/demo08-point.json) 
+- [demo08-point](../../resource/demo08-point.json) 

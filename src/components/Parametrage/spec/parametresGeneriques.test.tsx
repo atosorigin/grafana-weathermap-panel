@@ -1,12 +1,12 @@
 // import React from 'react';
 // import ReactDOM from 'react-dom';
 // import ParametresGeneriques from '../parametresGeneriques';
-// import { ParametrageMetrique } from 'Models/SettingMetricClass';
+// // import { ParametrageMetrique } from 'Models/SettingMetricClass';
 // import { LoadingState } from '@grafana/data';
-// import { defaults, SimpleOptions, Target } from '../../../types';
+// import { defaults, SimpleOptions } from '../../../types';
 // import { act } from 'react-dom/test-utils';
 // import { TextObject } from 'Models/TextObjectClass';
-// import { CoordinateSpaceExtendClass } from 'Models/CoordinateSpaceExtendClass';
+// import { generate } from 'rxjs';
 
 describe('waiting test', () => {
   test('to be pass', done => {
@@ -21,16 +21,27 @@ describe('waiting test', () => {
 //  * - edit parameters
 //  */
 // describe('ParametresGeneriques tests', () => {
-//   let container, component, testTextObject, parametrageMetric, coordinateSpaceTest;
+//   let container: any, component: any, testTextObject, parametrageMetric, coordinateSpaceTest: any;
 //   const additionalStep = { value: '1', label: '1' };
-//   /*
-//    * Mock "onOptionChange" by re-rendering the component with the new options
-//    */
+//   //   /*
+//   //    * Mock "onOptionChange" by re-rendering the component with the new options
+//   //    */
 //   let mockFunctions = {
 //     onOptionsChange: (options: SimpleOptions, callback?: () => void) => {
-//       testProps.options = options;
+//       let testProps = {};
 //       act(() => {
-//         ReactDOM.render(<ParametresGeneriques ref={c => (component = c)} {...testProps} />, container);
+//         ReactDOM.render(
+//           <ParametresGeneriques
+//             coordinateSpace={component}
+//             callBackToParent={component}
+//             options={component}
+//             data={component}
+//             onOptionsChange={component}
+//             ref={c => (component = c)}
+//             {...testProps}
+//           />,
+//           container
+//         );
 //       });
 //     },
 //     callBackToParent: (followLink: string, hoveringTooltipLink: string, hoveringTooltipText: string, textObj: TextObject) => {
@@ -39,7 +50,18 @@ describe('waiting test', () => {
 //       coordinateSpaceTest.hoveringTooltipText = hoveringTooltipText ? hoveringTooltipText : coordinateSpaceTest.hoveringTooltipText;
 //       coordinateSpaceTest.hoveringTooltipText = hoveringTooltipText ? hoveringTooltipText : coordinateSpaceTest.hoveringTooltipText;
 //       act(() => {
-//         ReactDOM.render(<ParametresGeneriques ref={c => (component = c)} {...testProps} />, container);
+//         ReactDOM.render(
+//           <ParametresGeneriques
+//             coordinateSpace={component}
+//             callBackToParent={component}
+//             options={component}
+//             data={component}
+//             onOptionsChange={component}
+//             ref={c => (component = c)}
+//             {...testProps}
+//           />,
+//           container
+//         );
 //       });
 //     },
 //   };
@@ -48,28 +70,16 @@ describe('waiting test', () => {
 //     let clonedDefaults = JSON.parse(JSON.stringify(defaults));
 //     testTextObject = new TextObject(
 //       'legend',
-//       'value',
+//       true,
 //       'unit',
 //       'colbr',
-//       'coltxtr',
-//       'ctyletxtr',
-//       'colbackbu',
-//       'coltxtbu',
-//       'styletxtby',
+//       { italic: false, bold: false, underline: false },
 //       true,
-//       'legelement',
-//       'numformatel',
-//       'unitumseu',
-//       true,
-//       true,
-//       true,
-//       'coltxtele',
-//       true,
-//       'colbackel'
+//       valueGenerateObjectText,
+//       generateAuxiliaryElement
 //     );
-//     parametrageMetric = new ParametrageMetrique('', '', '');
-//     coordinateSpaceTest = new CoordinateSpaceExtendClass(
-//       0,
+//     let parametrageMetric;
+//     (coordinateSpaceTest = 0),
 //       '-10',
 //       '10',
 //       '-20',
@@ -80,8 +90,7 @@ describe('waiting test', () => {
 //       testTextObject,
 //       parametrageMetric,
 //       'key',
-//       'valkey'
-//     );
+//       'valkey';
 //     clonedDefaults.parametrageMetrique = parametrageMetric;
 //     clonedDefaults.seuil = [];
 //     clonedDefaults.listStep[1] = JSON.parse(JSON.stringify(additionalStep));
@@ -107,7 +116,18 @@ describe('waiting test', () => {
 //     };
 
 //     act(() => {
-//       ReactDOM.render(<ParametresGeneriques ref={c => (component = c)} {...testProps} />, container);
+//       ReactDOM.render(
+//         <ParametresGeneriques
+//           coordinateSpace={component}
+//           callBackToParent={component}
+//           options={component}
+//           data={component}
+//           onOptionsChange={component}
+//           ref={c => (component = c)}
+//           {...testProps}
+//         />,
+//         container
+//       );
 //     });
 //   });
 

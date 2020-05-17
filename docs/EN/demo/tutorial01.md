@@ -7,7 +7,7 @@
 
 Adding a background image is done from the `display` menu.
 
-The selected image will be [demo1-background.svg](../../resource/demo01-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+The selected image will be [demo01-background.svg](../../resource/demo01-background.svg). To do this, we download it in base64 with the `Copy image address` function.
 
 
 ```
@@ -16,8 +16,6 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 ```
 
 It is possible to have more details with the [display](../editor/display.md) page.
-
-You have to save and reload the page.
 
 
 ## Creating a dynamic region
@@ -36,7 +34,7 @@ You have to fill out the form like this:
 - Enter a `label` for example Computer
 - Select `SVG label`.
 - Choose the `path 147` line from the drop-down list.
-- Click on the `load` button
+- Click on the `save` button
 
 
 ### Step 2: Add color to the SVG element
@@ -56,7 +54,6 @@ You select the `Lower limit` line and then complete the form like this:
 - Enable `Trace the border` to activate the border color.
 - Select the `red` color in the `Edit border color` line.
 - Enter a value to set the size of the border `size border` for example 3
-- Click on the `load` button
 
 
 You get the following result
@@ -95,7 +92,7 @@ The second step is from the `Coordinates space`, `region` and `Edit coordinate s
 You select the `Main metric` line to complete the form like this: 
 
 - Enter a `Query` for example A
-- Click on the `load` button
+
 
 
 The value will be automatically displayed after the page is refreshed.
@@ -122,7 +119,7 @@ You select the `Text object` line to complete the `Generate text object` form li
 - Enter a unit of measurement in the line `unit of measurement` like qw
 - Choose a background color
 - Choose a text color
-- Click on the "load" button
+
 
 ### Result
 
@@ -144,10 +141,11 @@ The end result will be like this:
 
 You have to fill out the form like this: 
 
-- Fill in the "label" of the point
-- Inform his " size".
+- Fill in the `label` of the point
+- Inform his `size`.
+- Inform his `shape`
 - Enter the X and Y position where you want the point to appear.
-
+- Click on the `save` button
 
 ### Step 2: Add a color to the point
 
@@ -166,7 +164,7 @@ You select the `Lower limit' line and then complete the form like this:
 - Enable `Trace the border` to activate the border color.
 - Select the `red` color in the `Edit border color` line.
 - Enter a value to set the size of the border `size border` for example 3
-- Click on the "load" button
+
 
 
 You get the following result
@@ -195,7 +193,6 @@ The second step is from the `Coordinates space`, `region`, and `Edit coordinate 
 You select the `Main metric` line to complete the form like this: 
 
 - Enter a `Query` for example A
-- Click on the `load` button
 
 
 The value will be automatically displayed after the page is refreshed.
@@ -218,7 +215,7 @@ To create an oriented link you have to pass by [the panel menu](../panel/panel-o
 
 ### Step 2: Adding a Query to a link
 
-Once you have placed your link on the image you can go to `Coordinates space` and `point` menu of the `visualization` tab.
+Once you have placed your link on the image you can go to `Coordinates space` and ``OrientedLink` menu of the `visualization` tab.
 
 
 ![step 06](../../screenshots/demo/tutorial01/OrientedLink1.png)
@@ -228,7 +225,7 @@ Here, you can see your link `OrientedLink 1`
 You select the `Main metric` line to complete the form like this: 
 
 - Enter a `Query` for example A
-- Click on the `load` button
+
 
 
 The value will be automatically displayed after the page is refreshed.
@@ -248,9 +245,9 @@ It is possible to fill in the other fields with the additional settings availabl
 
 And here is the different JSON file :
 
-- [demo1-svgRegion](../../resource/demo01-svgRegion.json) 
-- [demo1-point](../../resource/demo01-point.json)
-- [demo1-link](../../resource/demo01-link.json)
+- [demo01-svgRegion](../../resource/demo01-svgRegion.json) 
+- [demo01-point](../../resource/demo01-point.json)
+- [demo01-link](../../resource/demo01-link.json)
 
 
 

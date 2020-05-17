@@ -2,7 +2,7 @@
 [![](../../screenshots/other/Go-back.png)](README.md)
 
 
-* Weathermap requires [Grafana](https://www.grafana.com/) v6.6+ to run (not tested lower version). Download and install it first.
+* Weathermap requires [Grafana](https://www.grafana.com/) v6.7+ to run (not tested lower version). Download and install it first.
 
 ## Dependencies
 

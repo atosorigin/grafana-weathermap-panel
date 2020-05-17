@@ -12,9 +12,9 @@
         "img": "",
         "label": "zone",
         "linkURL": {
-            "followLink": "",
-            "hoveringTooltipLink": "",
-            "hoveringTooltipText": ""
+            "followLink": "www.atos.net",
+            "hoveringTooltipLink": "www.atos.net",
+            "hoveringTooltipText": "ATOS"
         },
         "lowerLimit": [{
             "backColor": "#C4162A",

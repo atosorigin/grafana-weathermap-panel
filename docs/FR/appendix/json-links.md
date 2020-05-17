@@ -236,6 +236,7 @@ La couleur sera alors définie comme suit
 
 ```
 Avec de même :
+
 - **backColor**: Choisissez une couleur pour le background sous la forme #7FFF00 par exemple
 - **borderColor** : Choisissez une couleur pour la bordure sous la forme #7FFF00 par exemple
 - **id** : id de la couleur
@@ -246,11 +247,7 @@ Avec de même :
 
 ## meta
 
-- **meta** : TO DO, Laisser vide pour le moment
-
-```
-    "meta": TO DO
-```
+pas de valeurs
 
 ## metrics et metricsB
 

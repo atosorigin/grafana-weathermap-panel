@@ -14,15 +14,15 @@
         "style": {
             "bold": true,
             "italic": false,
-            "underline": true
+            "underline": false
         }
     },
     "baseMap": {
         "image": "",
         "layerImage": "",
         "modeSVG": false,
-        "width": "800",
-        "height": "600",
+        "width": "500",
+        "height": "300",
         "idSVG": ""
     },
     "regions": [

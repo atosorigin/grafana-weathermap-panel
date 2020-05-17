@@ -132,12 +132,7 @@ The **link** file must be declared as a JSON file like this:
             "hoveringTooltipText": ""
         },
 
-
 ```
-    
-
-
-
 
       
 ## lowerLimit
@@ -174,6 +169,7 @@ Then the color will be defined like this
 ```
 
 With:
+
   - **backColor**: Fill in a color for the background under the form #7FFF00 for example
   - **borderColor** : Fill in a color for the border under the form #7FFF00 for example. 
   - **id** : color id
@@ -223,6 +219,7 @@ Then the color will be defined like this
 
 ```
 With similarly:
+
   - **backColor**: Fill in a color for the background under the form #7FFF00 for example
   - **borderColor** : Fill in a color for the border under the form #7FFF00 for example. 
   - **id** : color id
@@ -261,11 +258,7 @@ With similarly:
 
 ## meta
 
-TO DO , Laisser vide pour le moment
-
-```
-
-```
+pas de valeurs
 
 ## metrics et metricsB
 

@@ -77,6 +77,7 @@ Le fichier **point** doit être déclaré sous la forme d'un fichier JSON comme 
 ## color
 
 - **color** : Vous permet de choisir une couleur pour le point
+
 ```
     "color": "red",
 ```
@@ -84,6 +85,7 @@ Le fichier **point** doit être déclaré sous la forme d'un fichier JSON comme 
 ## colorMode
 
 - **colorMode** : "true" si vous voulez utiliser différentes couleurs pour ce point. "false" si vous voulez une couleur unique.
+
 ```
     "colorMode": false,
 ```
@@ -170,6 +172,7 @@ La couleur sera alors définie comme suit
 ```
 
 Avec :
+
   - **backColor**: Choisissez une couleur pour le background sous la forme #7FFF00 par exemple
   - **borderColor** : Choisissez une couleur pour la bordure sous la forme #7FFF00 par exemple
   - **id** : id de la couleur
@@ -219,6 +222,7 @@ La couleur sera alors définie comme suit
 
 ```
 Avec de même :
+
   - **backColor**: Choisissez une couleur pour le background sous la forme #7FFF00 par exemple
   - **borderColor** : Choisissez une couleur pour la bordure sous la forme #7FFF00 par exemple
   - **id** : id de la couleur
@@ -255,11 +259,7 @@ Avec de même :
 
 ## meta
 
-- **meta** : TO DO
-
-```
-    "meta": TODO
-```
+pas de valeurs
 
 ## metrics
 

@@ -36,7 +36,6 @@ The **global** file must be declared as a JSON file like this:
     - **displayArea** : "True" or "False" to show the working space
 
 ```
-{
     "coordinateSpaceInitial": {
         "coordinate": {
             "xMin": "-100",
@@ -46,15 +45,8 @@ The **global** file must be declared as a JSON file like this:
         },
         "displayArea": false
     },
-}
-
 
 ```
-
-
-
-
-
 
 ## texteSettings
 
@@ -77,7 +69,6 @@ The **global** file must be declared as a JSON file like this:
         }
     },
 
-
 ```
 
 
@@ -93,15 +84,13 @@ The **global** file must be declared as a JSON file like this:
 
 ```
    "baseMap": {
-        "image": "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-background.svg",
+        "image": "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg",
         "layerImage": "",
         "modeSVG": true,
         "width": "",
         "height": "",
         "idSVG": ""
     },
- 
-
 
 ```
 
@@ -115,7 +104,7 @@ The **global** file must be declared as a JSON file like this:
 ```
 
    "regions": [
-        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-svgRegion.json"
+        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-svgRegion.json"
     ],
     
 
@@ -129,7 +118,7 @@ The **global** file must be declared as a JSON file like this:
 
 ```    
     "points": [
-        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-point.json"
+        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-point.json"
     ],
     
 ```
@@ -142,7 +131,7 @@ The **global** file must be declared as a JSON file like this:
 
 ```
     "links": [
-        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-link.json"
+        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-link.json"
     ]
     
 ```

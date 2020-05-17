@@ -1,12 +1,14 @@
 # Changelog
 
-## v0.1.0 RC (2020-05-xx)
+## v1.0.0 (2020-05-17)
 
 - Update Documentation
+- Update Tutorial and demo
 - Update form dots (none, circle, box...) 
 - Update import global file 
 - Update close legend
 - fixed data reset for a new dashboard
+- fixed panel menu
 
 ## v0.5.1 (2020-05-02)
 

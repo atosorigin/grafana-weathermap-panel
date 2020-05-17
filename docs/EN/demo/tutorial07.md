@@ -16,7 +16,6 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 
 It is possible to have more details with the [display](../editor/display.md) page.
 
-You have to save and reload the page.
 
 
 ## Create Routeur et ProxyServer regions
@@ -25,17 +24,16 @@ You have to save and reload the page.
 ### Step 1: Define an SVG region
 
 
-![step 02](../../screenshots/demo/tutorial01/step02.jpg)
-
+![step 02](../../screenshots/demo/tutorial07/regionsvg.png)
 
 The creation of a region in an SVG image is done from the `Coordinates space`, `region`, and `Add coordinate space` menu.
 
 You have to fill out the form like this: 
 
-- Enter a `label` for example Computer
+- Enter a `label` for example routeur
 - Select `SVG label`.
-- Choose the `path 147` line from the drop-down list.
-- Click on the `load` button
+- Choose the `routeur` line from the drop-down list.
+- Click on the `save` button
 
 Repeat the same instruction for ProxyServer and Select `Proxy` for the zone SVG
 
@@ -48,15 +46,15 @@ Repeat the same instruction for ProxyServer and Select `Proxy` for the zone SVG
 
 Adding a color to an SVG element is done from the `Coordinates space`, `region`, and `Edit coordinate space` menu.
 
-You select the `Lower limit' line and then complete the form like this: 
+You select the `Lower limit` line and then complete the form like this: 
  
 
 - Enable `Trace the background` to activate the background color. 
-- Select the `green` color in the `Edit background color` line.
+- Select the `blue` color in the `Edit background color` line.
 - Enable `Trace the border` to activate the border color.
-- Select the `red` color in the `Edit border color` line.
+- Select the `blue` color different in the `Edit border color` line.
 - Enter a value to set the size of the border `size border` for example 3
-- Click on the "load" button
+
 
 
 You get the following result
@@ -81,13 +79,38 @@ The option of direction is done from the `Coordinates space`, `OrientedLink` men
 
 Then, select `Bidirectional` for the orientation
 
+
+You associate the line with the region  `AssociateRegionIn` and `AssociateRegionOut`
+
 ![Bidirectional](../../screenshots/demo/tutorial07/LinkBidirectionnel.png)
 
 ### Step 2 : Choose the color of your link
 
 To change the color, go to the `lower limit` menu.
 
+
+### Étape 2 : Choisissez la couleur de votre lien
+
+To change the color, go to the `lower limit` menu.
+
 ![LowerLimit](../../screenshots/demo/tutorial07/LowerLimitLink.png)
+
+
+- Variable color check mark
+- Number of colour slices for example 3
+
+
+![LowerLimit](../../screenshots/demo/tutorial07/LowerLimitLink.png-next.png)
+
+You choose slices and color
+
+- <20 - BLue 
+- 20 à 40 - Green
+- 40 à 60 - Yellow
+- 60 à 80 - Orange
+- 80< Red
+
+
 
 ### Step 3 : Add a query to your link
 
@@ -122,10 +145,10 @@ You have to fill out the form like this:
 - Enter a `label` for example Computer
 - Select `coordinate mode`.
 - Fill the coordinate of your region
-- Click on the `load` button
 
 
-![Metric](../../screenshots/demo/tutorial07/Cumputers.png)
+
+![Metric](../../screenshots/demo/tutorial07/zone.png)
 ![Metric](../../screenshots/demo/tutorial07/CoordonateMode.png)
 
 ### Step 2 : Add a link
@@ -155,5 +178,4 @@ And here is the different JSON file :
 
 - [demo7-Region SVG](../../resource/demo07-region-svg.json) 
 - [demo7-Region Coord](../../resource/demo07-region-coord.json) 
-- [demo7-point](../../resource/demo07-point.json)
 - [demo7-link](../../resource/demo07-link.json)

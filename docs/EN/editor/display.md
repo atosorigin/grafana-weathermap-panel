@@ -4,6 +4,8 @@
 
 ## Character font
 
+![font](../../screenshots/editor/display/font.jpg)
+
 The font list uses the standard fonts that are available in the browser.
 
 You can choose the following font :
@@ -16,6 +18,7 @@ You can choose the following font :
 
 ## Size
 
+![size](../../screenshots/editor/display/size.jpg)
 
 Choice of text size in `em`. 
 
@@ -24,6 +27,8 @@ Example: `1em` oo `4em`.
  
  
 ## Style
+
+![style](../../screenshots/editor/display/style.jpg)
 
 Differents styles are possible: bold, italic, underlined, etc.
 
@@ -51,10 +56,7 @@ This is a vector image in SVG format. The creation of the SVG file is described 
 
 ![display](../../screenshots/editor/display/svg-background.jpg)
 
-After entering the URL of the file, the dashboard should be saved, like this
 
-
-![display](../../screenshots/editor/display/save-dashboard.jpg)
 
 
 ### If you don't use SVG
@@ -83,13 +85,25 @@ to get the following result
 ![display](../../screenshots/editor/display/jpg-resultat.jpg)
 
 
-After entering the file URL, width, and height, the dashboard should be saved, like this
 
 
-![display](../../screenshots/editor/display/save-dashboard.jpg)
+#### No background image
+
+You must fill in the space required to create your environment without background image :
+
+- Width
+- Height
+
+![no-background](../../screenshots/editor/display/no-background.jpg)
 
 
-#### base 64
+to get the following result
+
+![resultat](../../screenshots/editor/display/no-resultat.jpg)
+
+
+
+## base 64
 
 It is possible to load an image in *base 64* like this : 
 
@@ -101,17 +115,6 @@ to do that, you have to *copy the address of the image*
 
 ![display](../../screenshots/editor/display/base64-capture.jpg)
 
-
-
-
-After entering the URL of the file
-
-
-
-The dashboard should be saved, like this
-
-
-![display](../../screenshots/editor/display/save-dashboard.jpg)
 
 
 

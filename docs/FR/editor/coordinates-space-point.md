@@ -14,6 +14,14 @@ Définir les coordonnées des points
 
 Les informations obligatoires pour afficher les points sont : 
 
+- Label : This is a key to add the result of value to the parameters 
+- Display : Show or not show the point
+- Shape : Choose you form : none / Circle / Square / Diamond
+- Size : Choose you size : small / medium / large
+- Position : X and Y position
+
+
+If you chose to add, you have to click on **save** If you are in edit mode, the update will be automatic
 
 
 ### Label 
@@ -35,29 +43,29 @@ position X et Y
 
 ## Main metric
 
-Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-main-metric.md)
+Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-main-metric.md)
 
 
 ## Auxiliary metrics
 
-Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-auxiliary-metric.md)
+Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-auxiliary-metric.md)
 
 
 ## Manage link
 
-Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-manage-link.md)
+Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-manage-link.md)
 
 
 ## Text object
 
 
-Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-object-text.md)
+Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-object-text.md)
 
 
 ## Lower Limit
 
 
-Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-lower-limit.md)
+Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-lower-limit.md)
 
 
 ## Position Parameter

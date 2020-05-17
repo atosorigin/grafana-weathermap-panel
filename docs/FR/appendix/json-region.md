@@ -18,7 +18,7 @@ Le fichier **region** doit être déclaré sous la forme d'un fichier JSON comme
 
 ```
 {
-  "points": 
+  "regions": 
   [
     {
       "colorMode"	:false,
@@ -278,11 +278,7 @@ Le format compatible est JPG / PNG / GIF / SVG
 
 ## meta
 
-A FAIRE, Laisser vide pour le moment
-
-```
-
-```
+Pas de valeurs
 
 ## metrics
 
@@ -329,32 +325,8 @@ A FAIRE, Laisser vide pour le moment
 
 ## orientedLink
 
- - **orientedLink** :
-      - **0**
-        - **name** : Correspond au label ou au nom du lien;
-        - **orientationLink** : Choisir "monodirectional" ou "bidirectional"
-        - **pointAPositionX** : Choisir la position horizontal du point A entre "-100" et "100"
-        - **pointAPositionY** : Choisir la position vertical du point A entre "-100" et "100"
-        - **colorCoordinateA** : Choisissez la couleur de la coordonnée A
-        - **pointBPositionX** : Choisir la position horizontal du point B entre "-100" et "100"
-        - **pointBPositionY** : Choisir la position vertical du point B entre "-100" et "100"
-        - **colorCoordinateB** : Choisissez la couleur de la coordonnée B;$
-        - **valueMainMetricA** : Valeur de la Main métrique du point B
-        - **valueMainMetricB** : Valeur de la Main métrique du point A
-        - **pointIn** : Nom du point d'entrée
-        - **pointOut** : Nom du point sortant
-        - **regionIn** : Nom de la région d'entrée
-        - **regionOut** : Nom de la région sortante
-        - **zIndex** : Plus le nombre est grand, plus le lien sera mis en évidence sur l'image en termes de couche
-        - **pointCPositionX** : Choisir la position horizontal du point A entre "-100" et "100"
-        - **pointCPositionY** : Choisir la position horizontal du point A entre "-100" et "100"
-        - **isIncurved** : Saisir "true" si votre lien est incurvé. Sinon, saisir "false"
-        - **mainMetricB** : Renseigner le métrique de B
-        - **metricsB** : Renseigner les métriques auxilière de B
+Pas de valeurs
 
-```
-
-```
 
 ## positionParameter
 

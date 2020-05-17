@@ -8,7 +8,7 @@
                 "label": "Yes",
                 "value": true
             },
-            "label": "point-ordi",
+            "label": " ",
             "linkURL": {
                 "followLink": "",
                 "hoveringTooltipLink": "",
@@ -26,8 +26,8 @@
             "mainMetric": {
                 "expr": "",
                 "format": "",
-                "key": "",
-                "keyValue": "",
+                "key": "device",
+                "keyValue": "enp0s3",
                 "manageValue": "avg",
                 "refId": "A",
                 "returnQuery": [],
@@ -82,19 +82,19 @@
                     "numericFormatElement": "",
                     "unit": ""
                 },
-                "generateObjectText": false,
+                "generateObjectText": true,
                 "isTextTooltip": false,
                 "style": {
-                    "bold": true,
+                    "bold": false,
                     "italic": false,
-                    "underline": true
+                    "underline": false
                 },
                 "value": "",
                 "valueGenerateObjectText": {
                     "addColorBackElement": false,
-                    "addColorTextElement": false,
+                    "addColorTextElement": true,
                     "colorBackElement": "black",
-                    "colorTextElement": "white",
+                    "colorTextElement": "red",
                     "displayObjectInTooltip": false,
                     "legendElement": "",
                     "numericFormatElement": "",
@@ -134,10 +134,10 @@
             "mainMetric": {
                 "expr": "",
                 "format": "",
-                "key": "",
-                "keyValue": "",
+                "key": "device",
+                "keyValue": "enp0s3",
                 "manageValue": "avg",
-                "refId": "A",
+                "refId": "B",
                 "returnQuery": [],
                 "unit": ""
             },
@@ -190,26 +190,26 @@
                     "numericFormatElement": "",
                     "unit": ""
                 },
-                "generateObjectText": false,
+                "generateObjectText": true,
                 "isTextTooltip": false,
                 "style": {
-                    "bold": true,
+                    "bold": false,
                     "italic": false,
-                    "underline": true
+                    "underline": false
                 },
                 "value": "",
                 "valueGenerateObjectText": {
                     "addColorBackElement": false,
-                    "addColorTextElement": false,
+                    "addColorTextElement": true,
                     "colorBackElement": "black",
-                    "colorTextElement": "white",
+                    "colorTextElement": "blue",
                     "displayObjectInTooltip": false,
                     "legendElement": "",
                     "numericFormatElement": "",
                     "unit": ""
                 }
             },
-            "traceBack": false,  
+            "traceBack": false,
             "traceBorder": true,
             "valueMainMetricA": "",
             "valueMainMetricB": "",

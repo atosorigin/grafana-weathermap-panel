@@ -663,12 +663,16 @@ export class SimplePanel extends PureComponent<Props, State> {
       event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG
     ) {
       positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
-      positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
       //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+      positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
 
-      // if (yMin < 0 && yMax < 0) {
-      //   positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+      // if (yMax > 0 && yMax < 100) {
+      //   positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
       // }
+
+      if (yMin < 0 && yMax < 0) {
+        positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+      }
 
       if (coordinates[0].id === 0) {
         objectIn.x = positionX;
@@ -1474,34 +1478,32 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * update button css when mount component
    */
-  componentDidMount = async () => {
-    console.log('mount Panel');
+  // not display Button of Panel if it is in the mode View
+  checkIfDisplayButton = () => {
+    const url: string = window.location.href;
+    const arrayUrl: string[] = url.split('&');
+    let canDisplayButton = false;
+    for (const element of arrayUrl) {
+      if (element === 'edit') {
+        canDisplayButton = true;
+      }
+    }
+    if (!canDisplayButton) {
+      this.props.onOptionsChange({
+        ...this.props.options,
+        displayButton: false,
+      });
+    }
+  };
 
-    // // delete data if new dashboard
-    // const url: string = window.location.pathname;
-    // const arrayUrl: string[] = url.split('/');
-    // for (const element of arrayUrl) {
-    //   if (element === 'new') {
-    //     console.log('new dashboard');
-    //     this.props.onOptionsChange({
-    //       ...this.props.options,
-    //       arrayPoints: [],
-    //       arrayOrientedLinks: [],
-    //       regionCoordinateSpace: [],
-    //       saveImportUrl: { total: [], mono: [], multi: [] },
-    //       saveImportFile: [],
-    //       totalUrlInput: '',
-    //       multiUrlInput: '',
-    //       monoUrlInput: '',
-    //     });
-    //   }
-    // }
+  /**
+   * update button css when mount component
+   */
+  componentDidMount = async () => {
+   // console.log('mount Panel');
 
     // not display Button of Panel if it is in the mode View
-    this.props.onOptionsChange({
-      ...this.props.options,
-      displayButton: false,
-    });
+    this.checkIfDisplayButton();
 
     // save background in state
     this.setState({

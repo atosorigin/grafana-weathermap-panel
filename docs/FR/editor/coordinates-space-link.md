@@ -1,24 +1,25 @@
 # Oriented Link
 [![](../../screenshots/other/Go-back.png)](coordinates.md)
 
-Définir les coordonnées d'un oriented link
+
+L'ajout d'un nouveau [lien orienté](../panel/panel-oriented-link.md) ou un [lien incurvé](../panel/panel-incurved-link.md) se fait à partir du menu du panel.
+
+Vous pouvez modifier les coordonnées d'un oriented link ci-dessous : 
 
 
-## **Informations obligatoires**
+## Informations obligatoires
+
+les informations obligatoires pour afficher les points sont : 
 
 
 ![saisie oriented link](../../screenshots/editor/coordinates/screen-oriented-link/obligatoire.jpg)
 
 
-les informations obligatoires pour afficher les points sont : 
-
-
-
-## Label 
+### Label 
 
 il s'agit d'une clé permettant d'ajouter le résultat d'une valeur à des paramètres 
 
-## orientation
+### orientation
 
 2 orientations sont possibles : 
 
@@ -26,65 +27,85 @@ il s'agit d'une clé permettant d'ajouter le résultat d'une valeur à des param
 - birectionnel
 
 
-
-## Size
+### Taille
 
 Vous permet de choisir la taille du lien entre Small, Medium et Large
 
-## AssociatePoint/RegionIn et AssociatePoint/RegionOut
 
-Vous permet de définir l'objet de départ et d'arrivée de votre lien, il peut s'agir d'un lien entre des points et/ou des régions.
+## Associate Point/Region In
 
-## CoordinatClickA/B-X/Y
+![associate in](../../screenshots/editor/coordinates/screen-oriented-link/in.jpg)
 
-Si le lien n'est pas associé à un objet, ces entrées sont utilisées pour définir les points de départ et d'arrivée du lien.
+
+Vous permet de définir l'objet de départ de votre lien. 
+
+Pour cela vous pouvez l'associer à un point et/ou une région.
+
+Si vous ne l'associez, vous saisissez les coordonnées (X et Y) de départ.
+
+
+## Associate Point/Region Out
+
+![associate out](../../screenshots/editor/coordinates/screen-oriented-link/out.jpg)
+
+
+Vous permet de définir l'objet d'arrivée de votre lien. 
+
+Pour cela vous pouvez l'associer à un point et/ou une région.
+
+Si vous ne l'associez, vous saisissez les coordonnées (X et Y) de d'arrivée.
+
+
+
 
 ## Incurved
 
-Il est possible d'ajouter un point pour faire une courbe.
+![incurved](../../screenshots/editor/coordinates/screen-oriented-link/incurved.jpg)
 
-Pour ce faire, vous ajoutez un nouveau point C en position X et Y.
+Il est possible d'ajouter un point supplémentaire pour faire une courbe.
 
-
-## **Autre paramètre**
-
-
-## Main metric
-
-Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-main-metric.md)
+Pour cela, vous devez dire **oui** au champ **incurved** pour ajouter un nouveau point C en position X et Y.
 
 
-## Auxiliary metrics
-
-Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-auxiliary-metric.md)
+## Autre paramètre
 
 
-## Manage link
+### Main metric
 
-Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-manage-link.md)
-
-
-## Text object
+Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-main-metric.md)
 
 
-Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-object-text.md)
+### Auxiliary metrics
+
+Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-auxiliary-metric.md)
 
 
-## Lower Limit
+### Manage link
+
+Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-manage-link.md)
 
 
-Une page dédiée, pour remplir les champs, est disponibles [ici](coordinates-lower-limit.md)
+### Text object
 
 
-## Position Parameter
+Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-object-text.md)
 
 
-![position parameter](../../screenshots/editor/coordinates/screen-point/position-parameter.jpg)
+### Lower Limit
+
+
+Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-lower-limit.md)
+
+
+### Position Parameter
+
+
+![position parameter](../../screenshots/editor/coordinates/screen-oriented-link/position-parameter.jpg)
 
 Vous pouvez définir la position du e différent paramètre.
 
 
-  - La position du label en X et Y
+  - La position du label en X et Y suivant la position in (A) et out (B)
 
 
   - La position tooltip : 

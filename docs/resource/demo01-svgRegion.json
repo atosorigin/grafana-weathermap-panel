@@ -175,9 +175,9 @@
             "img": "",
             "label": "network",
             "linkURL": {
-                "followLink": "https://duckduckgo.com",
-                "hoveringTooltipLink": "https://localhost:3000",
-                "hoveringTooltipText": "Grafana"
+                "followLink": "https://atos.fr",
+                "hoveringTooltipLink": "https://grafana.com",
+                "hoveringTooltipText": "Grafana website"
             },
             "lowerLimit": [{
                     "backColor": "#73BF69",
@@ -236,7 +236,7 @@
                 },
                 "generateObjectText": true,
                 "valueGenerateObjectText": {
-                    "legendElement": "ceci est une legende",
+                    "legendElement": "it's a legend",
                     "numericFormatElement": "2",
                     "unit": "um",
                     "displayObjectInTooltip": false,

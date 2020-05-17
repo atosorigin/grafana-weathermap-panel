@@ -7,7 +7,7 @@
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
 
-L'image sélectionnée sera [demo1-background.svg](../../resource/demo01-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
+L'image sélectionnée sera [demo01-background.svg](../../resource/demo01-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
 
 
 ```
@@ -17,7 +17,7 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 
 Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
 
-Vous devez sauvegarder et recharger la page.
+
 
 ## Créer une région dynamique
 
@@ -35,7 +35,7 @@ Vous devez remplir le formulaire comme ceci :
 - Saisir un `label` par exemple Computer
 - Sélectionner `SVG label`
 - Choisir dans la liste déroulante, la ligne `path 147`
-- Cliquer sur le bouton `load`
+- Cliquer sur le bouton `save`
 
 
 ### Etape 2 : Ajouter une couleur à l'élément SVG
@@ -54,8 +54,8 @@ Vous sélectionnez la ligne `Lower limit` pour compléter le formulaire comme ce
 - Sélectionner la couleur `verte` à la ligne `Edit background color`
 - Activer `Trace the border` pour activer la couleur de bordure
 - Sélectionner la couleur `rouge` à la ligne `Edit border color`
-- Saisir une valeur pour définir la taille de la bordure `size border` par exemple 3
-- Cliquer sur le bouton `load`
+- Saisir une valeur pour définir la taille de la bordure `size border` par exemple 1
+
 
 
 Vous obtenez le résultat suivant
@@ -94,7 +94,7 @@ La deuxième étape s'effectue à partir du menu `Coordinates space`, `region` e
 Vous sélectionnez la ligne `Main metric` pour compléter le formulaire comme ceci : 
 
 - Saisir un `Query` par exemple A
-- Cliquer sur le bouton `load`
+
 
 
 La valeur sera automatiquement affichée après le rafraichissement de la page
@@ -121,7 +121,7 @@ Vous sélectionnez la ligne `Text object` pour compléter le formulaire `Generat
 - Saisir une unité de mesure à la ligne `unit of mesure` comme qw
 - Choisir une couleur d'arrière plan
 - Choisir une couleur de texte
-- Cliquer sur le bouton `load`
+
 
 ### Résultat
 
@@ -146,8 +146,9 @@ Vous devez remplir le formulaire comme ceci :
 
 - Renseigner le `label` du point
 - Renseigner sa `size`
+- Renseigner sa `forme`
 - Saisir la position X et Y ou vous voulez voir le point apparaitre
-
+- Cliquer sur le bouton `save`
 
 ### Étape 2 : Ajouter une couleur au point
 
@@ -166,7 +167,7 @@ Vous sélectionnez la ligne `Lower limit` pour compléter le formulaire comme ce
 - Activer `Trace the border` pour activer la couleur de bordure
 - Sélectionner la couleur `rouge` à la ligne `Edit border color`
 - Saisir une valeur pour définir la taille de la bordure `size border` par exemple 3
-- Cliquer sur le bouton `load`
+
 
 Vous obtenez le résultat suivant
 
@@ -194,7 +195,7 @@ La deuxième étape se fait à partir du menu `Coordinates space`, `region` et `
 Vous sélectionnez la ligne `Main metric` pour remplir le formulaire comme ceci : 
 
 - Entrez une `Query` par exemple A
-- Cliquez sur le bouton `load`
+
 
 
 La valeur sera automatiquement affichée après le rafraîchissement de la page.
@@ -218,7 +219,7 @@ Pour créer un lien orienté, vous devez passer par la page [the panel menu](../
 
 ### Étape 2 : Ajout d'une requête à un lien
 
-Une fois que vous avez placé votre lien sur l'image, vous pouvez aller dans le menu `Coordinates space` and `point` de l'onglet `visualization`.
+Une fois que vous avez placé votre lien sur l'image, vous pouvez aller dans le menu `Coordinates space` and `OrientedLink` de l'onglet `visualization`.
 
 
 ![step 06](../../screenshots/demo/tutorial01/OrientedLink1.png)
@@ -228,7 +229,7 @@ Ici, vous pouvez voir votre lien `OrientedLink 1`.
 Vous sélectionnez la ligne `Main metric` pour remplir le formulaire comme ceci : 
 
 - Entrez une `Query`, par exemple A
-- Cliquez sur le bouton `load`
+
 
 
 La valeur sera automatiquement affichée après le rafraîchissement de la page.
@@ -248,7 +249,7 @@ Il est possible de remplir les autres champs avec les paramètres supplémentair
 
 Et voici les différents fichiers JSON :
 
-- [demo1-svgRegion](../../resource/demo01-svgRegion.json) 
-- [demo1-point](../../resource/demo01-point.json)
-- [demo1-link](../../resource/demo01-link.json)
-- [demo1-global](../../resource/demo01-global.json)
+- [demo01-svgRegion](../../resource/demo01-svgRegion.json) 
+- [demo01-point](../../resource/demo01-point.json)
+- [demo01-link](../../resource/demo01-link.json)
+

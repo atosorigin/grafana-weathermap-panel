@@ -1,4 +1,5 @@
 # Créer un dashboard avancé avec des liens directionnels
+
 [![](../../screenshots/other/Go-back.png)](README.md)
  
 
@@ -12,9 +13,9 @@ Vous devez :
 - Compléter la ligne "metrics" avec les lignes suivantes
 
 ```
-rate(node_network_receive_bytes{device="enp0s3"}[10s])*8/1024/1024
+rate(node_network_receive_bytes{device="enp0s3"}[10s])
 
-rate(node_network_transmit_bytes{device="enp0s3"}[10s])*8/1024/1024
+rate(node_network_transmit_bytes{device="enp0s3"}[10s])
 ```
 
 Les marqueurs "A" et "B" seront utilisés pour identifier cette requête, comme vous pouvez le voir ci-dessous.
@@ -49,20 +50,18 @@ La création d'un point se fait à partir du menu `Coordinates space`, `point` e
 Vous devez remplir le formulaire comme ceci : 
 
 - Entrez un `label` par exemple Ordinateur
+- La `shape`
 - La `size`
 - position `X`
 - position `Y`
-- Cliquez sur le bouton `load`
-
-
 
 
 ![step 04](../../screenshots/demo/tutorial03/point1-color.jpg)
 
 Nous en profitons pour changer la couleur de notre point. Pour ce faire, nous ajoutons une couleur à notre point comme ceci : 
 
-- Activez l'option `trace the color`
-- Choisissons la couleur comme `vert` pour la ligne `edit border color`
+- Activez l'option `trace the border`
+- Choisissons la couleur comme `vert` pour la ligne `edit border color` et customisons une nuance de notre couleur choisi
 - Épaisseur à 1 avec `size border`
 
 
@@ -73,7 +72,7 @@ Nous en profitons pour changer la couleur de notre point. Pour ce faire, nous aj
 Pour ajouter une illustration à notre région, allez dans le menu `Coordinates space`, `region`et `Add coordinate space`. 
 Ensuite, choisissez notre région.
 
-![step 02](../../screenshots/demo/tutorial02/CoordinateMode.png)
+![step 02](../../screenshots/demo/tutorial03/CoordinateMode.png)
 
 Vous devez remplir le formulaire comme ceci : 
 
@@ -81,16 +80,20 @@ Vous devez remplir le formulaire comme ceci :
 - Sélectionnez `Coordinate mode`.
 - Choisissez ensuite une image
 
-L'image sélectionnée sera [cumputer-svg.svg](../../resource/computer-svg.svg). Pour ce faire, remplissez l'entrée avec l'adresse du fichier svg
+L'image sélectionnée sera [computer-png.png](../../resource/computer-png.png). Pour ce faire, remplissez l'entrée avec l'adresse du fichier svg
+
+```
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/computer-png.png
+```
 
 Choisissez ensuite la taille de la région pour votre image. Ici, nous choisissons :
+
 - X Min : -10
 - X Max : -50
 - Y Min : -10
 - Y Max : -50
 
-Pour finir
-- Cliquez sur le bouton `load`
+
 
 ![illustration1](../../screenshots/demo/tutorial03/illustration1.jpg)
 
@@ -114,9 +117,36 @@ Ensuite, nous allons éditer nos liens comme suit :
 
 Pour ajouter une mesure principale à notre lien, allez dans `Coordinates space`, `OrientedLink` et cliquez sur votre lien.
 
-Ensuite, dans `Main metric`, choisissez votre métrique.
+Ensuite, dans `Main metric`, choisissez votre métrique pour le premier lien.
 
 ![resultat](../../screenshots/demo/tutorial03/MainMetricLink.png)
+
+Et choisissez l'autre métrique pour le deuxième lien
+
+![resultat](../../screenshots/demo/tutorial03/MainMetricLinkB.png)
+
+## Etape 7 : Texte objet
+
+La personnalisation des valeurs métriques s'effectue à partir du formulaire **Generate text object**, allez dans `Coordinates space`, `OrientedLink` et cliquez sur votre lien.
+
+Ensuite, dans `Text object`, vous devez cocher la case `Generate text object` et remplir ceci :
+
+- cocher `color text`
+- choisir une couleur : par exemple Rouge
+
+![text objet](../../screenshots/demo/tutorial03/text.png)
+
+Et choisissez l'autre métrique pour le deuxième lien avec
+
+- cocher `color text`
+- choisir une couleur : par exemple bleu
+
+![texte objet B](../../screenshots/demo/tutorial03/textB.png)
+
+
+
+En option, vous pouvez effacer le label du lien comme le montre le résultat
+
 
 ## Résultat
 

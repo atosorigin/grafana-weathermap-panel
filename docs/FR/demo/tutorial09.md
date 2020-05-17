@@ -9,7 +9,7 @@
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
 
-L'image sélectionnée sera [demo1-background.svg](../../resource/demo01-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
+L'image sélectionnée sera [demo01-background.svg](../../resource/demo01-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
 
 
 ```
@@ -87,4 +87,4 @@ Une fois que vous avez fait cela pour vos trois régions, vous devriez avoir que
 
 Et voici le fichier JSON :
 
-- [demo9-region](../../resource/demo09-region.json) 
+- [demo09-region](../../resource/demo09-region.json) 

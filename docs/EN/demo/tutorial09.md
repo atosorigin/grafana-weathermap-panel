@@ -9,7 +9,7 @@
 
 Adding a background image is done from the `display` menu.
 
-The selected image will be [demo1-background.svg](../../resource/demo01-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+The selected image will be [demo01-background.svg](../../resource/demo01-background.svg). To do this, we download it in base64 with the `Copy image address` function.
 
 
 ```
@@ -87,4 +87,4 @@ Once you've done this for your three regions, you should have something like thi
 
 And here is the JSON file :
 
-[demo9-region](../../resource/demo09-region.json) 
+[demo09-region](../../resource/demo09-region.json) 

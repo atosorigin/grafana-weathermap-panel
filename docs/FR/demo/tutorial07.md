@@ -3,12 +3,12 @@
 
 ## Ajouter un tableau de bord SVG
 
-! [étape 01](../../screenshots/demo/tutorial07/background.jpg)
+![étape 01](../../screenshots/demo/tutorial07/background.jpg)
 
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
-L'image sélectionnée sera [demo7-background.svg](../../resource/demo07-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction "Copier l'adresse de l'image".
+L'image sélectionnée sera [demo07-background.svg](../../resource/demo07-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction "Copier l'adresse de l'image".
 
 
 ```
@@ -17,7 +17,7 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 
 Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
 
-Vous devez sauvegarder et recharger la page.
+
 
 
 ## Créer des régions Routeur et ProxyServer
@@ -26,17 +26,17 @@ Vous devez sauvegarder et recharger la page.
 ### Étape 1 : Définir une région SVG
 
 
-![step 02](../../screenshots/demo/tutorial01/step02.jpg)
+![step 02](../../screenshots/demo/tutorial07/regionsvg.png)
 
 
 La création d'une région dans une image SVG se fait à partir du menu `Coordinates space`, `region` et `Add coordinate space`".
 
 Vous devez remplir le formulaire comme ceci : 
 
-- Entrez un `label` par exemple Ordinateur
+- Entrez un `label` par exemple Routeur
 - Sélectionnez `SVG label`.
-- Choisissez la ligne `path 147` dans la liste déroulante.
-- Cliquez sur le bouton `load`
+- Choisissez la ligne `routeur` dans la liste déroulante.
+- Cliquer sur le bouton `save`
 
 Répétez la même instruction pour ProxyServer et sélectionnez `Proxy` pour la zone SVG
 
@@ -54,11 +54,11 @@ Vous sélectionnez la ligne `Lower limit` pour compléter le formulaire comme ce
  
 
 - Activer `Trace the background` pour activer la couleur d'arrière-plan 
-- Sélectionner la couleur `verte` à la ligne `Edit background color`
+- Sélectionner la couleur `bleu` à la ligne `Edit background color`
 - Activer `Trace the border` pour activer la couleur de bordure
-- Sélectionner la couleur `rouge` à la ligne `Edit border color`
+- Sélectionner la couleur `bleu` différente à la ligne `Edit border color`
 - Saisir une valeur pour définir la taille de la bordure `size border` par exemple 3
-- Cliquer sur le bouton `load`
+
 
 Vous obtenez le résultat suivant
 
@@ -82,6 +82,8 @@ Les options d'orientation se font à partir du menu `Coordinates space`, `Orient
 
 Puis, sélectionnez `Bidirectional` pour l'orientation
 
+Vous associez la ligne avec la région `AssociateRegionIn` et `AssociateRegionOut`
+
 ![Bidirectional](../../screenshots/demo/tutorial07/LinkBidirectionnel.png)
 
 ### Étape 2 : Choisissez la couleur de votre lien
@@ -89,6 +91,24 @@ Puis, sélectionnez `Bidirectional` pour l'orientation
 Pour changer la couleur, allez dans le menu `lower limit`.
 
 ![LowerLimit](../../screenshots/demo/tutorial07/LowerLimitLink.png)
+
+
+- Coché couleur variable
+- Nombre de tranche de couleurs par exemple 3
+
+![LowerLimit](../../screenshots/demo/tutorial07/LowerLimitLink.png-next.png)
+
+Vous choississez des tranches et une couleur
+
+- <20 - BLeu 
+- 20 à 40 - Vert
+- 40 à 60 - jaune
+- 60 à 80 - orange
+- 80< -rouge
+
+
+
+
 
 ### Étape 3 : Ajouter une query à votre lien
 
@@ -101,12 +121,12 @@ Pour ce faire, allez à "Requêtes" et remplissez les champs comme suit :
 ```
 Metric A :
 
-rate(node_network_receive_bytes{device="enp0s3"}[10s])*100*8/1024/1024
+rate(node_network_receive_bytes{device="enp0s3"}[1m])*100*8/1024/1024
 
 
 Metric B : 
 
-rate(node_network_transmit_bytes{device="enp0s3"}[10s])*100*8/1024/1024
+rate(node_network_transmit_bytes{device="enp0s3"}[1m])*100*8/1024/1024
 ```
 
 Ensuite, vous pourrez attribuer les méstriques à vos liens A et B
@@ -124,9 +144,9 @@ Vous devez remplir le formulaire comme ceci :
 - Entrez une `label` par exemple Ordinateur
 - Sélectionnez `coordinate mode`.
 - Remplissez les coordonnées de votre région
-- Cliquez sur le bouton `load`
 
-![Metric](../../screenshots/demo/tutorial07/Cumputers.png)
+
+![Metric](../../screenshots/demo/tutorial07/zone.png)
 ![Metric](../../screenshots/demo/tutorial07/CoordonateMode.png)
 
 ### Étape 2 : Ajouter un lien
@@ -146,7 +166,7 @@ Vous pouvez alors constater sur cette image que le lien est cliquable
 
 ## Résultat
 
-![result](../../screenshots/demo/tutorial07/demo7.png)
+![result](../../screenshots/demo/tutorial07/resultat.png)
 
 ## Importer un fichier JSON
 
@@ -154,6 +174,6 @@ Vous pouvez alors constater sur cette image que le lien est cliquable
 
 Et voici les différents fichiers JSON :
 
-- [demo7-Region](../../resource/demo07-region-svg.json) 
-- [demo7-point](../../resource/demo07-point.json)
+- [demo7-Region SVG](../../resource/demo07-region-svg.json) 
+- [demo7-Region coordonnées](../../resource/demo07-region-coord.json) 
 - [demo7-link](../../resource/demo07-link.json)

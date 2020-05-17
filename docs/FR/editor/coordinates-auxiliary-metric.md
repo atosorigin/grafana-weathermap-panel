@@ -16,7 +16,7 @@ Cette fonction est commune pour
 - "Key" et "Value key" permettent de filtrer les données reçues par la Query pour ne garder que ce qui vous importe.
 
 
-par exemple 
+## Exemple 
 
 ![main metric](../../screenshots/editor/coordinates/auxiliary-metric/metric-key.png)
 

@@ -34,8 +34,8 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
     - **coordinate** : Vous permet de redimensionner votre espace de travail.  Les axes X et Y allant de -100% à plus 100%. 
     - **displayArea** : Saisir "true" ou "false" pour afficher l'espace de travail
 
+    
 ```
-{
     "coordinateSpaceInitial": {
         "coordinate": {
             "xMin": "-100",
@@ -45,15 +45,8 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
         },
         "displayArea": false
     },
-}
-
 
 ```
-
-
-
-
-
 
 ## texteSettings
 
@@ -64,7 +57,6 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
         - **bold** : "true" ou "false" pour mettre le texte en gras
         - **italic** : "true" ou "false" pour mettre le texte en italique
         - **underline** : "true" ou "false" pour mettre le texte en évidence
-
 ```
     "texteSettings": {
         "police": "Helvetica",
@@ -75,7 +67,6 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
             "underline": true
         }
     },
-
 
 ```
 
@@ -89,18 +80,16 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
     - **width** : Choix de la largeur si vous n'avez pas d'image SVG. Si vous en avez une, laissez vide
     - **height** : Choix de la hauteur si vous n'avez pas d'image SVG. Si vous en avez une, laissez vide
     - **idSVG** ""
-
+    
 ```
    "baseMap": {
-        "image": "http://localhost/demo/sample-global.json",
+        "image": "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-background.svg",
         "layerImage": "",
         "modeSVG": true,
         "width": "",
         "height": "",
         "idSVG": ""
     },
- 
-
 
 ```
 
@@ -114,7 +103,7 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
 ```
 
    "regions": [
-        "http://localhost/demo/sample-region.json"
+        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-svgRegion.json"
     ],
     
 
@@ -128,7 +117,7 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
 
 ```    
     "points": [
-        "http://localhost/demo/sample-point.json"
+        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-point.json"
     ],
     
     
@@ -142,8 +131,8 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
 
 ```
     "links": [
-        "http://localhost/demo/sample-link.json"
+        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-link.json"
     ]
 
-
+```
 

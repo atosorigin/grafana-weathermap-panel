@@ -32,57 +32,7 @@
         "keyValue": "",
         "manageValue": "avg",
         "refId": "A",
-        "returnQuery": [
-          {
-            "name": "{instance=\"localhost:9090\",job=\"prometheus\"}",
-            "refId": "A",
-            "fields": [
-              {
-                "name": "{instance=\"localhost:9090\",job=\"prometheus\"}",
-                "type": "number",
-                "config": {},
-                "values": {
-                  "buffer": [
-                    0.00010687460908403869,
-                    0.0001602765718073289,
-                    0.0001602765718073289,
-                    0.0001602765718073289,
-                    0.00010682639989177438,
-                    0.00010682639989177438,
-                    0.00010682639989177438,
-                    0.00010682639989177438,
-                    0.00010682639989177438
-                  ]
-                },
-                "labels": {
-                  "instance": "localhost:9090",
-                  "job": "prometheus"
-                },
-                "calcs": null
-              },
-              {
-                "name": "Time",
-                "type": "time",
-                "config": {},
-                "values": {
-                  "buffer": [
-                    1584615120000,
-                    1584615135000,
-                    1584615150000,
-                    1584615165000,
-                    1584615180000,
-                    1584615195000,
-                    1584615210000,
-                    1584615225000,
-                    1584615240000
-                  ]
-                },
-                "calcs": null
-              }
-            ],
-            "length": 9
-          }
-        ],
+        "returnQuery": [],
         "unit": ""
       },
       "meta": "",

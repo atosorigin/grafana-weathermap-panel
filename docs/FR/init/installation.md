@@ -2,11 +2,11 @@
 [![](../../screenshots/other/Go-back.png)](README.md)
 
 
-* Weathermap nécessite [Grafana](https://www.grafana.com/) v6.6+ pour fonctionner (version inférieure non testée). Téléchargez-la et installez-la d'abord.
+* Weathermap nécessite [Grafana](https://www.grafana.com/) v6.7+ pour fonctionner (version inférieure non testée). Téléchargez-la et installez-la d'abord.
 
 ## Dépendances
 
-- Grafana 6.6.x ou 6.7.x
+- Grafana 6.7.x
 
 
 ## Version officielle

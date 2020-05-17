@@ -10,17 +10,16 @@ For this tutorial, you will first download the picture background :
 
 Adding a background image is done from the `display` menu.
 
-The selected image will be [demo2-background.jpg](../../resource/demo02-background.jpg). To do this, we download it in base64 with the `Copy image address` function.
+The selected image will be [demo02-background.jpg](../../resource/demo02-background.jpg). To do this, we download it in base64 with the `Copy image address` function.
 
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo02-background.jpg
-
 ```
 
 It is possible to have more details with the [display](../editor/display.md) page.
 
-You have to save and reload the page.
+
 
 
 ## Define a coordinate mode region with image
@@ -37,16 +36,24 @@ You have to fill out the form like this:
 - Select `Coordinate mode`.
 - Then choose an image
 
+To finish
+
+- Click on the `save` button
+
+
 The selected image will be [cumputer-png.png](../../resource/computer-png.png). To do this, we download it in base64 with the `Copy image address` function.
 
-Then choose the size of the region for your image. Here we choose :
-- X Min : -55
-- X Max : -85 
-- Y Min : -20
-- Y Max : 10
+```
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/computer-png.png
+```
 
-To finish
-- Click on the `load` button
+
+Then choose the size of the region for your image. Here we choose :
+
+- X Min : -55
+- X Max : -80 
+- Y Min : -30
+- Y Max : 15
 
 
 ![step 03](../../screenshots/demo/tutorial02/ImageRegion.png)
@@ -56,6 +63,8 @@ To finish
 The end result will be like this: 
 
 ![step 08](../../screenshots/demo/tutorial02/Result1.png)
+
+
 
 ## Define a coordinate mode region without image
 
@@ -73,13 +82,15 @@ You have to fill out the form like this:
 ![step 03](../../screenshots/demo/tutorial02/CoordinateModeNoImage.png)
 
 Then choose the size of the region for your image. Here we choose :
+
 - X Min : -18
 - X Max : 0
-- Y Min : -6
-- Y Max : 9
+- Y Min : -5
+- Y Max : 8
 
 To finish
-- Click on the `load` button
+
+- Click on the `save` button
 
 ### Step 2 : Add color to a region
 
@@ -93,10 +104,6 @@ You select the `Lower limit' line and then complete the form like this:
 
 - Enable `Trace the background` to activate the background color. 
 - Select the `green` color in the `Edit background color` line.
-- Enable `Trace the border` to activate the border color.
-- Select the `red` color in the `Edit border color` line.
-- Enter a value to set the size of the border `size border` for example 3
-- Click on the "load" button
 
 
 You get the following result
@@ -118,9 +125,9 @@ To create an oriented link you have to pass by [the panel menu](../panel/panel-o
 
 ## Final Result 
 
-![demo2](../../screenshots/demo/tutorial02/demo2.png)
+![demo2](../../screenshots/demo/tutorial02/Result-final.png)
 
-## Add everything with JSON
+
 
 ### Import JSON file
 
@@ -128,7 +135,7 @@ To create an oriented link you have to pass by [the panel menu](../panel/panel-o
 
 And here is the different JSON file :
 
-- [demo2-svgRegion](../../resource/demo02-svgRegion.json) 
-- [demo2-link](../../resource/demo02-link.json)
+- [demo02-CoorRegion](../../resource/demo02-CoorRegion.json) 
+- [demo02-link](../../resource/demo02-link.json)
 
 

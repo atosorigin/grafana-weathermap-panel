@@ -47,7 +47,7 @@ Il est possible d'avoir plus de détails avec la page [display](../editor/displa
 
 ![Enregistrer](./../../screenshots/demo/tutorial04/DisplaySVG.png)
 
-Ensuite, si vous voulez ajouter une région, vous pouvez voir les différents id de votre forme dans "Zone SVG". 
+Ensuite, si vous voulez ajouter une région, à partir du menu `Coordinates space`, `region` et `Add region`. Vous pouvez voir les différents id de votre forme dans "Zone SVG". 
 
 ![Enregistrer](./../../screenshots/demo/tutorial04/Region.png)
 

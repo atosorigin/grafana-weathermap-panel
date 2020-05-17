@@ -49,11 +49,14 @@ There are a lot of values, so we have to manipulate them in order to come up wit
 
 Adding a background image is done from the `display` menu.
 
-The selected image will be [demo6-background.svg](../../resource/demo06-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+The selected image will be [demo01-background.svg](../../resource/demo01-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+
 
 It is possible to have more details with the [display](../editor/display.md) page.
 
-You have to save and reload the page.
+```
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
+```
 
 ### Step 2 : Create the region
 
@@ -85,7 +88,7 @@ This will display its value, if it is unique, and will display an error if there
 
 And here is the JSON file :
 
-[demo5-region](../../resource/demo06-region.json) 
+[demo06-region](../../resource/demo06-region.json) 
 
 
 

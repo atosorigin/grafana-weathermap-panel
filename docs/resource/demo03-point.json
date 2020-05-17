@@ -16,12 +16,12 @@
                 "hoveringTooltipText": ""
             },
             "lowerLimit": [{
-                "backColor": "#37872D",
-                "borderColor": "#37872D",
+                "backColor": "",
+                "borderColor": "rgba(68,237,44)",
                 "id": 0,
                 "lowerLimitMax": "",
                 "lowerLimitMin": "",
-                "sizeBorder": "2"
+                "sizeBorder": "1"
             }],
             "mainMetric": {
                 "format": "",
@@ -47,8 +47,8 @@
             "positionShapeY": "70",
             "rotateArrow": "0",
             "shape": {
-                "label": "Circle",
-                "value": "circle"
+                "label": "Diamond",
+                "value": "diamond"
             },
             "sizeHeight": {
                 "label": "Medium",

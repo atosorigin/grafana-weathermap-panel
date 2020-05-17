@@ -5,17 +5,19 @@
 Pour ce tutoriel, vous devez d'abord télécharger l'image de fond : 
 
 
-! [étape 01](../../screenshots/demo/tutorial02/ImagePNG.png)
+![étape 01](../../screenshots/demo/tutorial02/ImagePNG.png)
 
 
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
-L'image sélectionnée sera [demo2-background.jpg](../../resource/demo02-background.jpg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
+L'image sélectionnée sera [demo02-background.jpg](../../resource/demo02-background.jpg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
+
+```
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo02-background.jpg
+```
 
 Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
-
-Vous devez sauvegarder et recharger la page.
 
 
 ## Définir une région en mode coordonnée avec une image
@@ -32,16 +34,19 @@ Vous devez remplir le formulaire comme ceci :
 - Selectionner `Coordinate mode`.
 - Puis choisissez une image
 
+Pour finir
+- Cliquez sur le bouton `save`
+
+
 L'image sélectionnée sera [cumputer-png.png](../../resource/computer-png.png). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
 
 Definissez ensuite la taille de la région pour votre image. Ici, nous choisirons :
-- X Min : -55
-- X Max : -85 
-- Y Min : -20
-- Y Max : 10
 
-Pour finir
-- Cliquez sur le bouton `load`
+- X Min : -55
+- X Max : -80 
+- Y Min : -30
+- Y Max : 15
+
 
 
 ![step 03](../../screenshots/demo/tutorial02/ImageRegion.png)
@@ -69,13 +74,14 @@ Vous devez remplir le formulaire comme ceci :
 
 
 Definissez ensuite la taille de la région pour votre image. Ici, nous choisirons :
+
 - X Min : -18
 - X Max : 0
-- Y Min : -6
-- Y Max : 9
+- Y Min : -5
+- Y Max : 8
 
 Pour finir
-- Cliquez sur le bouton `load`
+- Cliquez sur le bouton `save`
 
 ### Étape 2 : Ajouter une couleur à une région
 
@@ -89,11 +95,6 @@ Sélectionnez la ligne `lower limit` et remplissez ensuite le formulaire comme c
 
 - Cocher `Trace the background` pour activer la couleur de fond. 
 - Sélectionnez la couleur `verte` dans la ligne `Editer la couleur de fond`.
-- Cocher `Trace the border` pour activer la couleur de la bordure.
-- Sélectionnez la couleur `rouge` dans la ligne `Editer la couleur de la bordure`.
-- Entrez une valeur pour définir la taille de la bordure `size border`, par exemple 3
-- Cliquez sur le bouton `load`
-
 
 
 Vous obtenez le résultat suivant
@@ -115,11 +116,12 @@ Pour créer un lien orienté, vous devez passer par [le menu du panneau](../pane
 
 Vous pouvez aussi vous rendre au [tutoriel3](tutorial3.md) qui explique comment faire
 
+
 ## Résultat final 
 
-! [demo2](../../screenshots/demo/tutorial02/demo2.png)
+![demo2](../../screenshots/demo/tutorial02/Result-final.png)
 
-## Ajoutez tout avec JSON
+
 
 ### Importer un fichier JSON
 
@@ -127,7 +129,7 @@ Vous pouvez aussi vous rendre au [tutoriel3](tutorial3.md) qui explique comment 
 
 Et voici les différents fichiers JSON :
 
-- [demo2-svgRegion](../../resource/demo02-svgRegion.json) 
-- [demo2-point](../../resource/demo02-point.json)
-- [demo2-link](../../resource/demo02-link.json)
-- [demo2-global](../../resource/demo02-global.json)
+
+- [demo02-CoorRegion](../../resource/demo02-CoorRegion.json) 
+- [demo02-link](../../resource/demo02-link.json)
+

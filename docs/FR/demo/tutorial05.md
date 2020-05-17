@@ -19,7 +19,6 @@ rate(node_network_receive_bytes_total[5m])
 ```
 
 
-
 Le résultat montre plusieurs issues possibles
 
 
@@ -59,17 +58,14 @@ Ici, nous voulons filtrer le résultat pour n'afficher que l'appareil qui nous i
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
-L'image sélectionnée sera [demo1-background.svg](../../resource/demo01-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `copier l'adresse de l'image`.
+L'image sélectionnée sera [demo01-background.svg](../../resource/demo01-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `copier l'adresse de l'image`.
 
 Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
 
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
-
 ```
-
-Vous devez sauvegarder et recharger la page.
 
 ### Etape 2 : Créer la région
 

@@ -47,23 +47,27 @@ en:
     </Directory>
 ```
     
-- set header:
+   
+After saving, you load the header and restart the service: 
 
-```sudo a2enmod headers```
+```
+$ sudo a2enmod headers
 
-- reaload service:
+$ sudo systemctl restart apache2
 
-```sudo systemctl restart apache2```
+```
 
-Vous placez les fichiers de démonstration dans le dossier
+
+Vous placez les fichiers de *resource* dans le dossier suivant
 
 ```
 /var/www/html
 
 ```
 
+
+# Result
+
 pour obtenir le résultat suivant
-
-
 
 ![path file](../../screenshots/appendix/file-import.jpg)

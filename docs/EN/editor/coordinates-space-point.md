@@ -14,14 +14,13 @@ Define the coordinates of the points
 
 The required information to display the points are : 
 
+- Label : C'est une clé pour ajouter le résultat de la valeur aux paramètres 
+- Display : Voir ou pas voir le point
+- Shape : Choisir une forme : none / Circle / Square / Diamond
+- Size : Choisir une taille : small / medium / large
+- Position : position X et Y 
 
-
-- Label : This is a key to add the result of value to the parameters 
-- Display : Show or not show the point
-- Size : Choose you size small / medium / large
-- Position : X and Y position
-
-
+Si vous avez choisi d'ajouter, il faut cliquer sur **save** Si vous êtes en mode édition, la mise à jour sera automatique
 
 ## Main metric
 

@@ -1,14 +1,26 @@
 
 # Display
+
 [![](../../screenshots/other/Go-back.png)](README.md)
 
 
-## Police de caractères
+## Police de caractères
 
-La liste de police de caractères utilise celle standard qui sont disponibles dans le navigateur
+![font](../../screenshots/editor/display/font.jpg)
+
+La liste des polices utilise les polices standard qui sont disponibles dans le navigateur.
+
+Vous pouvez choisir la police suivante :
+
+- "Helvetica"
+- "Arial"
+- "sans-serif"
+- "mono"
 
 
 ## Taille
+
+![size](../../screenshots/editor/display/size.jpg)
 
 Permet de pouvoir choisir la taille de la police  en `em`
 
@@ -16,12 +28,14 @@ Example: `1em` oo `4em`.
 
 ## Style
 
+![style](../../screenshots/editor/display/style.jpg)
+
 Différents styles sont possibles : gras, italique, souligné, etc.
 
 - blod : "true" ou "false" pour mettre le texte en gras
 - italic : "true" ou "false" pour mettre le texte en italique
 - underline : "true" ou "false" pour mettre le texte en évidence
-- 
+ 
 
 ## Utiliser SVG
 
@@ -41,14 +55,6 @@ Pour cela, il est possible de charger une image en arrière-plan suivant une des
 Il s'agit d'une image vectorielle au format SVG. La création du fichier SVG est décrite dans la page dédiée : [Construire un fichier SVG](../appendix/svg.md)
 
 ![display](../../screenshots/editor/display/svg-background.jpg)
-
-Après avoir saisi l'URL du fichier
-
-
-Il faut sauvegarder le dashboard, comme ceci
-
-
-![display](../../screenshots/editor/display/save-dashboard.jpg)
 
 
 ## Si vous n'utilisez pas une image SVG
@@ -76,15 +82,20 @@ pour obtenir le résultat suivant
 ![display](../../screenshots/editor/display/jpg-resultat.jpg)
 
 
-Après avoir saisi l'URL du fichier, la largeur et la hauteur
+
+#### No background image
+
+You must fill in the space required to create your environment without background image :
+
+- Width
+- Height
+
+![no-background](../../screenshots/editor/display/no-background.jpg)
 
 
-Il faut sauvegarder le dashboard, comme ceci
+to get the following result
 
-
-![display](../../screenshots/editor/display/save-dashboard.jpg)
-
-
+![resultat](../../screenshots/editor/display/no-resultat.jpg)
 
 
 
@@ -101,14 +112,4 @@ pour cela, il faut *copier l'adresse de l'image*
 ![display](../../screenshots/editor/display/base64-capture.jpg)
 
 
-
-
-Après avoir saisi l'URL du fichier
-
-
-
-Il faut sauvegarder le dashboard, comme ceci
-
-
-![display](../../screenshots/editor/display/save-dashboard.jpg)
 

@@ -17,7 +17,7 @@ The **region** file must be declared as a JSON file like this:
 
 ```
 {
-  "points": 
+  "regions": 
   [
     {
       "colorMode"	:false,
@@ -277,10 +277,7 @@ Compatible format is JPG / PNG / GIF / SVG
 
 ## meta
 
-
-```
-
-```
+no value
 
 ## metrics
 
@@ -328,34 +325,13 @@ Compatible format is JPG / PNG / GIF / SVG
 
 ## orientedLink
 
- - **orientedLink** :
-      - **0**
-        - **name** : Corresponds to the label or the name of the link
-        - **Link orientation**: Choose "monodirectional" or "bidirectional".
-        - **pointAPositionX** : Choose the horizontal position of point A between "-100" and "100".
-        - **pointAPositionY** : Choose the vertical position of point A between "-100" and "100".
-        - **colorCoordinateA**: Choose the color of the coordinate A
-        - **pointBPositionX** : Choose the horizontal position of point B between "-100" and "100".
-        - **pointBPositionY** : Choose the vertical position of point B between "-100" and "100".
-        - **colorCoordinateB**: Choose the color of the coordinate B
-        - **valueMainMetricA**: Value of the main Metric of point A
-        - **valueMainMetricB**: Value of the main Metric of point B
-        - **pointIn** : Name of the incoming point
-        - **pointOut** : Name of the outgoing point
-        - **regionIn** : Name of the incoming region 
-        - **regionOut** : Name of the outgoing region
-        - **zIndex**: The larger the number, the more the link will be highlighted on the image in terms of layer.
-        - **pointCPositionX**: Choose the horizontal position of point A between "-100" and "100";
-        - **pointCPpositionY** : Choose the horizontal position of point A between "-100" and "100";
-        - **isIncurved** : Enter "true" if your link is curved. Otherwise, enter "false".
-        - **mainMetricB** : Inform the metric of B
-        - **metricsB**: Inform the metrics auxilière of B
+no value
 
-```
 
-```
+## positionParameter
 
-- **Parameter position**
+- **positionParameter**
+
     - **labelAPositionX** : Choose the horizontal position of label A between "-100" and "100".
     - **labelAPositionY** : Choose the vertical position of label A between "-100" and "100".
     - **labelBPositionX** : Choose the horizontal position of label B between "-100" and "100".

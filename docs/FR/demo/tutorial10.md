@@ -1,6 +1,10 @@
 # Comment ajouter un fichier json global 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
+
+Le tutorial suivant va vous montrer comment importer les différents fichiers JSON présenté dans le [tutorial1](tutorial1.md) dans un seul fichier global.json
+
+
 ##  Ajouter une Query
 
 
@@ -29,18 +33,40 @@ Pour créer le fichier global json, vous pouvez aller dans le [fichier d'importa
 Pour ce tutoriel, nous utiliserons le fichier json suivant :
 
 ```
-https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo10-global.json
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo10-01-global.json
 ```
+
 Une fois que vous êtes dans le menu `Vizualisation`, allez dans la section `Import Files`.
 
 Ensuite, copiez et collez le dernier lien dans la section `Global Url Import`.
 
 Cliquez sur `Finish` lorsque c'est terminé. 
 
-`Save` et rechargez la page.
 
 ![global_import](../../screenshots/demo/tutorial10/GlobalImport.png)
 
 ## Result
 
 ![result](../../screenshots/demo/tutorial10/result.png)
+
+
+
+# Bonus
+
+Nous vous mettons à disposition 2 fichiers supplémentaires associés :
+
+- [Tutorial2](tutorial2.md)
+  - Créer les `queries`
+  - Importer le fichier global suivant
+  
+```
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo10-02-global.json
+``` 
+
+- [Tutorial3](tutorial3.md)
+  - Créer les `queries`
+  - Importer le fichier global suivant
+  
+```
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo10-03-global.json
+``` 

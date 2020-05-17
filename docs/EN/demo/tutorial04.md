@@ -48,7 +48,7 @@ It is possible to have more details with the [display](../editor/display.md) pag
 
 ![Enregistrer](./../../screenshots/demo/tutorial04/DisplaySVG.png)
 
-Then, if you want to add a region, you can see the different id of your shape in `Zone SVG`. 
+Then, if you want to add a region, from the menu `Coordinates space`, `region` and `Add region`. You can see the different id of your shape in `Zone SVG`. 
 
 ![Enregistrer](./../../screenshots/demo/tutorial04/Region.png)
 
