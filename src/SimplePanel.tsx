@@ -1500,7 +1500,7 @@ export class SimplePanel extends PureComponent<Props, State> {
    * update button css when mount component
    */
   componentDidMount = async () => {
-   // console.log('mount Panel');
+    console.log('mount Panel');
 
     // not display Button of Panel if it is in the mode View
     this.checkIfDisplayButton();

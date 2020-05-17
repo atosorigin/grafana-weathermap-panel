@@ -4105,16 +4105,17 @@ function (_super) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_b) {
           switch (_b.label) {
             case 0:
+              console.log('mount Editor');
               url = window.location.pathname;
               arrayUrl = url.split('/');
+              console.log('currentDashboard : ' + this.props.options.currentDashboard);
 
               try {
-                // console.log('currentDashboard : ' + this.props.options.currentDashboard);
                 for (arrayUrl_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayUrl), arrayUrl_1_1 = arrayUrl_1.next(); !arrayUrl_1_1.done; arrayUrl_1_1 = arrayUrl_1.next()) {
                   element = arrayUrl_1_1.value;
 
                   if (element === 'new' && !this.props.options.currentDashboard) {
-                    //   console.log('new dashboard');
+                    console.log('new dashboard');
                     this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.props.options), {
                       arrayPoints: [],
                       arrayOrientedLinks: [],
@@ -4180,8 +4181,8 @@ function (_super) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
           switch (_a.label) {
             case 0:
-              // console.log('unMount Editor');
-              // not display Button of Panel if is mode View
+              console.log('unMount Editor'); // not display Button of Panel if is mode View
+
               return [4
               /*yield*/
               , Promise.resolve('Success').then(function () {
@@ -4192,7 +4193,6 @@ function (_super) {
               })];
 
             case 1:
-              // console.log('unMount Editor');
               // not display Button of Panel if is mode View
               _a.sent();
 
@@ -5814,8 +5814,8 @@ function (_super) {
         var _this = this;
 
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
-          // console.log('mount Panel');
-          // not display Button of Panel if it is in the mode View
+          console.log('mount Panel'); // not display Button of Panel if it is in the mode View
+
           this.checkIfDisplayButton(); // save background in state
 
           this.setState({

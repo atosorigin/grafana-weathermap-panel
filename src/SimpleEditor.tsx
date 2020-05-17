@@ -143,15 +143,15 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
   };
 
   componentDidMount = async () => {
-   // console.log('mount Editor');
+    console.log('mount Editor');
 
     // delete data if new dashboard
     const url: string = window.location.pathname;
     const arrayUrl: string[] = url.split('/');
-   // console.log('currentDashboard : ' + this.props.options.currentDashboard);
+    console.log('currentDashboard : ' + this.props.options.currentDashboard);
     for (const element of arrayUrl) {
       if (element === 'new' && !this.props.options.currentDashboard) {
-     //   console.log('new dashboard');
+        console.log('new dashboard');
         this.props.onOptionsChange({
           ...this.props.options,
           arrayPoints: [],
@@ -178,7 +178,7 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
   };
 
   componentWillUnmount = async () => {
-   // console.log('unMount Editor');
+    console.log('unMount Editor');
 
     // not display Button of Panel if is mode View
     await Promise.resolve('Success').then(() => {
