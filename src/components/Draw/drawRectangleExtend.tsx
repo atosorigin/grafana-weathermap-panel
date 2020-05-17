@@ -7,7 +7,7 @@ import { Tooltip } from '@grafana/ui';
 
 import { RegionClass, Coord4D } from 'Models/RegionClass';
 
-import { calculRealCoordinate } from 'Functions/otherFunction';
+//import { calculRealCoordinate } from 'Functions/otherFunction';
 import { getLowerLimit, LowerLimit } from 'Functions/getLowerLimit';
 import { getResultQuery } from 'Functions/getResultQuery';
 import { parseColor, Color } from 'Functions/parseColor';
@@ -525,6 +525,61 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     return <div style={{backgroundColor: colorBack}}>{html}</div>;
   };
 
+  getCoordinatePxAdaptToInitialSpace = (coorRegion: Coord4D): CoorHTML => {
+    const widthImage: number = parseInt(this.props.options.baseMap.width, 10);
+    const heightImage: number = parseInt(this.props.options.baseMap.height, 10);
+    const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
+    const xMin: number = parseInt(initialSpace.xMin, 10);
+    const xMax: number = parseInt(initialSpace.xMax, 10);
+    const yMin: number = parseInt(initialSpace.yMin, 10);
+    const yMax: number = parseInt(initialSpace.yMax, 10);
+    let xMinPx: number = (xMin + 100) * (widthImage / 200);
+    let xMaxPx: number = (xMax + 100) * (widthImage / 200);
+    let yMinPx: number = (yMin + 100) * (heightImage / 200);
+    let yMaxPx: number = (yMax + 100) * (heightImage / 200);
+
+    if (xMin < 0 && xMax < 0) {
+      xMinPx = (xMax + 100) * (widthImage / 200);
+      xMaxPx = (xMin + 100) * (widthImage / 200);
+    }
+
+    if (yMin < 0 && yMax < 0) {
+      yMinPx = (yMax + 100) * (heightImage / 200);
+      yMaxPx = (yMin + 100) * (heightImage / 200);
+    }
+
+    const widthInitialSpace: number = xMaxPx - xMinPx;
+    const heightInitialSpace: number = yMaxPx - yMinPx;
+
+    let topPx: number = (heightImage - yMaxPx) + ((parseInt(coorRegion.yMax, 10) - 100) / 2 * (-1)) * (heightInitialSpace / 100) - yMinPx / 200;
+    let bottomPx: number = yMinPx + ((parseInt(coorRegion.yMin, 10) + 100) / 2 ) * (heightInitialSpace / 100) - (heightImage - yMaxPx) / 200;
+    // let topPx: number = (heightImage - yMaxPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMax, 10)) * (heightInitialSpace / 2 / 100));
+    // let bottomPx: number = (heightImage - yMinPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
+
+    let leftPx: number = xMinPx + ((parseInt(coorRegion.xMin, 10) + 100) / 2) * (widthInitialSpace / 100) - ((widthImage - xMaxPx) / 100);
+    let rightPx: number = ((widthImage - xMaxPx) / 100) + widthImage - ((parseInt(coorRegion.xMax, 10) + 100) / 2) * (widthInitialSpace / 100) - xMinPx;
+    // let leftPx: number = xMinPx + (parseInt(coorRegion.xMin, 10) * (widthInitialSpace / 200) + widthInitialSpace / 2);
+    // let rightPx: number = widthInitialSpace - (parseInt(coorRegion.xMax, 10) * (widthInitialSpace / 200) + widthInitialSpace / 2) - xMinPx;
+
+    if (parseInt(coorRegion.xMin, 10) < 0 && parseInt(coorRegion.xMax, 10) < 0) {
+      leftPx = xMinPx + ((parseInt(coorRegion.xMax, 10) + 100) / 2) * (widthInitialSpace / 100) - ((widthImage - xMaxPx) / 100);
+      rightPx = ((widthImage - xMaxPx) / 100) + widthImage - ((parseInt(coorRegion.xMin, 10) + 100) / 2) * (widthInitialSpace / 100) - xMinPx;
+      // leftPx = xMinPx + (parseInt(coorRegion.xMax, 10) * (widthInitialSpace / 200) + widthInitialSpace / 2);
+      // rightPx = widthInitialSpace - (parseInt(coorRegion.xMin, 10) * (widthInitialSpace / 200) + widthInitialSpace / 2) - xMinPx;
+    }
+
+    if (parseInt(coorRegion.yMin, 10) < 0 && parseInt(coorRegion.yMax, 10) < 0) {
+      topPx = (heightImage - yMaxPx) + ((parseInt(coorRegion.yMin, 10) - 100) / 2 * (-1)) * (heightInitialSpace / 100) - (yMinPx / 200);
+      bottomPx = yMinPx + ((parseInt(coorRegion.yMax, 10) + 100) / 2 ) * (heightInitialSpace / 100) - ((heightImage - yMaxPx) / 200);
+      // topPx = (heightImage - yMaxPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
+      // bottomPx = (heightImage - yMinPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
+    }
+      
+    let result: CoorHTML = { top: topPx.toString() + 'px', bottom: bottomPx.toString() + 'px',  left: leftPx.toString() + 'px', right: rightPx.toString() + 'px' };
+    return result;
+  };
+
+
   /** final region zone . Call function after reqMetrics*/
   renduFinal = () => {
     if (this.props.uneCoor.mode) {
@@ -536,8 +591,8 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     const backColor: string = region.textObj.colorBack;
     const textColor: string = region.textObj.colorText;
 
-    const coorHTML: CoorHTML = calculRealCoordinate(region, this.props.useLimit, this.props.limit);
-
+    //const coorHTML: CoorHTML = calculRealCoordinate(region, this.props.useLimit, this.props.limit);
+    const coorHTML: CoorHTML = this.getCoordinatePxAdaptToInitialSpace(region.coords);
     const style: Style = region.textObj.style;
 
     const styleDiv = {
@@ -572,16 +627,6 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
 
     let value: JSX.Element;
 
-    // console.log('text object');
-    // console.log(region.textObj.isTextTooltip);
-    // console.log('main metric');
-    // console.log(region.textObj.generateObjectText);
-    // console.log('aux metric');
-    // console.log(region.textObj.generateAuxiliaryElement.displayObjectInTooltip);
-
-    // console.log(this.props.buttonAddLinkIsActive);
-    // console.log(this.props.buttonAddIncurvedLinkIsActive);
-    // console.log(region.linkURL.followLink);
     if (this.props.buttonAddLinkIsActive || this.props.buttonAddIncurvedLinkIsActive) {
       //console.log('active');
       value = (

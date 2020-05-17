@@ -91,9 +91,15 @@ export default class DrawPoint extends React.Component<Props, State> {
   private definePositionX(positionX: number, initialSpace: Coord4D, size: number, shape: string): number {
     let x: number;
     const xMin: number = parseInt(initialSpace.xMin, 10);
-    const xMinPx: number = (xMin + 100) * (this.props.widthImage / 200);
+    let xMinPx: number = (xMin + 100) * (this.props.widthImage / 200);
     const xMax: number = parseInt(initialSpace.xMax, 10);
-    const xMaxPx: number = (xMax + 100) * (this.props.widthImage / 200);
+    let xMaxPx: number = (xMax + 100) * (this.props.widthImage / 200);
+
+    if (xMin < 0 && xMax < 0) {
+      xMinPx = (xMax + 100) * (this.props.widthImage / 200);
+      xMaxPx = (xMin + 100) * (this.props.widthImage / 200);
+    }
+
     const widthInitialSpace: number = xMaxPx - xMinPx;
 
     // if (shape === 'circle') {
@@ -123,11 +129,16 @@ export default class DrawPoint extends React.Component<Props, State> {
   private definePositionY(positionY: number, initialSpace: SelectableValue<RegionClass>, size: number, shapeGraphicMarker: string): number {
     let y: number;
     const yMin: number = parseInt(initialSpace.yMin, 10);
-    const yMinPx: number = (yMin + 100) * (this.props.heightImage / 200);
+    let yMinPx: number = (yMin + 100) * (this.props.heightImage / 200);
     const yMax: number = parseInt(initialSpace.yMax, 10);
-    const yMaxPx: number = (yMax + 100) * (this.props.heightImage / 200);
-    const heightInitialSpace: number = yMaxPx - yMinPx;
+    let yMaxPx: number = (yMax + 100) * (this.props.heightImage / 200);
 
+    if (yMin < 0 && yMax < 0) {
+      yMinPx = (yMax + 100) * (this.props.heightImage / 200);
+      yMaxPx = (yMin + 100) * (this.props.heightImage / 200);
+    }
+
+    const heightInitialSpace: number = yMaxPx - yMinPx;
     // if (shapeGraphicMarker === 'circle') {
     //   y =
     //     this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) +

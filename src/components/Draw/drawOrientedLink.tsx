@@ -69,9 +69,15 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
   private synchroLinkX(positionX: number): number {
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
     const xMin: number = parseInt(initialSpace.xMin, 10);
-    const xMinPx: number = (xMin + 100) * (this.props.widthImage / 200);
+    let xMinPx: number = (xMin + 100) * (this.props.widthImage / 200);
     const xMax: number = parseInt(initialSpace.xMax, 10);
-    const xMaxPx: number = (xMax + 100) * (this.props.widthImage / 200);
+    let xMaxPx: number = (xMax + 100) * (this.props.widthImage / 200);
+
+    if (xMin < 0 && xMax < 0) {
+      xMinPx = (xMax + 100) * (this.props.widthImage / 200);
+      xMaxPx = (xMin + 100) * (this.props.widthImage / 200);
+    }
+
     const widthInitialSpace: number = xMaxPx - xMinPx;
     const x: number = xMinPx + (positionX * (widthInitialSpace / 200) + widthInitialSpace / 2);
     return x;
@@ -80,9 +86,15 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
   private synchroLinkY(positionY: number): number {
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
     const yMin: number = parseInt(initialSpace.yMin, 10);
-    const yMinPx: number = (yMin + 100) * (this.props.heightImage / 200);
+    let yMinPx: number = (yMin + 100) * (this.props.heightImage / 200);
     const yMax: number = parseInt(initialSpace.yMax, 10);
-    const yMaxPx: number = (yMax + 100) * (this.props.heightImage / 200);
+    let yMaxPx: number = (yMax + 100) * (this.props.heightImage / 200);
+
+    if (yMin < 0 && yMax < 0) {
+      yMinPx = (yMax + 100) * (this.props.heightImage / 200);
+      yMaxPx = (yMin + 100) * (this.props.heightImage / 200);
+    }
+
     const heightInitialSpace: number = yMaxPx - yMinPx;
     const y: number =
       this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) + (heightInitialSpace / 2 - positionY * (heightInitialSpace / 200));

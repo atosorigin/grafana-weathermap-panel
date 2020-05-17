@@ -18,7 +18,7 @@ describe('test editGoodParameterOrientedLink', () => {
 
   beforeEach(() => {
     afterEach(() => {
-      orientedLinkClass = null;
+      orientedLinkClass = [];
       coordinates = [];
       points = [];
     });

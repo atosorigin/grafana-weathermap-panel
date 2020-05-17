@@ -1798,6 +1798,7 @@ describe('Display tests', () => {
     link.pointCPositionY,
     link.isIncurved,
     link.mainMetricB,
+    link.metricsB,
     link.metricsB
   );
 
@@ -2481,6 +2482,7 @@ describe('Display tests', () => {
       link.pointCPositionY,
       link.isIncurved,
       link.mainMetricB,
+      link.metricsB,
       link.metricsB
     );
     propsAB = {

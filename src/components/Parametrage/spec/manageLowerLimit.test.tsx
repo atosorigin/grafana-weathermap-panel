@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TextObjects from '../textObjects';
 import { LoadingState } from '@grafana/data';
 import { defaults, SimpleOptions } from '../../../types';
 import { act } from 'react-dom/test-utils';
@@ -15,9 +14,22 @@ describe('CoordinatSpaceInitial tests', () => {
    */
   let mockFunctions = {
     onOptionsChange: (options: SimpleOptions, callback?: () => void) => {
-      testProps.options = options;
+      let testProps = {};
       act(() => {
-        ReactDOM.render(<ManageLowerLimit ref={c => (component = c)} {...testProps} />, container);
+        ReactDOM.render(
+          <ManageLowerLimit
+            onOptionsChange={component}
+            coordinate={component}
+            data={component}
+            options={component}
+            isLink={component}
+            callBack={component}
+            lowerLimitCallBack={component}
+            ref={c => (component = c)}
+            {...testProps}
+          />,
+          container
+        );
       });
     },
   };
@@ -323,105 +335,6 @@ describe('CoordinatSpaceInitial tests', () => {
     valueMetric: '',
   };
 
-  const link: any = {
-    colorCoordinateA: '#5794F2',
-    colorCoordinateB: '#E54658',
-    colorMode: false,
-    id: 1,
-    mainMetric: {
-      format: '',
-      key: '',
-      keyValue: '',
-      manageValue: 'avg',
-      refId: '',
-      returnQuery: [],
-      unit: '',
-    },
-    isIncurved: {
-      label: 'No',
-      value: false,
-    },
-    label: '',
-    linkURL: {
-      followLink: '',
-      hoveringTooltipLink: '',
-      hoveringTooltipText: '',
-    },
-    lowerLimit: [],
-
-    meta: '',
-    metrics: [],
-    name: 'orientedLink1',
-    orientationLink: {
-      label: 'Monodirectional',
-      value: 'AB',
-    },
-    pointAPositionX: '-14',
-    pointAPositionY: '88',
-    pointBPositionX: '72',
-    pointBPositionY: '70',
-    pointCPositionX: '29',
-    pointCPositionY: '79',
-    pointIn: 'point2',
-    pointOut: 'point1',
-    positionParameter: {
-      labelAPositionX: '0',
-      labelAPositionY: '0',
-      labelBPositionX: '0',
-      labelBPositionY: '0',
-      tooltipPositionA: {},
-      tooltipPositionB: {},
-    },
-    regionIn: '',
-    regionOut: '',
-    textObj: {
-      colorBack: '',
-      colorText: '',
-      generateAuxiliaryElement: {
-        addColorBackElement: false,
-        addColorTextElement: false,
-        colorBackElement: 'black',
-        colorTextElement: 'white',
-        displayObjectInText: false,
-        legendElement: '',
-        numericFormatElement: '',
-        unit: '',
-      },
-      generateObjectText: false,
-      isTextRegion: false,
-      style: {
-        bold: true,
-        italic: false,
-        underline: true,
-      },
-      value: '',
-      valueGenerateObjectText: {
-        addColorBackElement: false,
-        addColorTextElement: false,
-        colorBackElement: 'black',
-        colorTextElement: 'white',
-        displayObjectInText: false,
-        legendElement: '',
-        numericFormatElement: '',
-        unit: '',
-      },
-    },
-    traceBack: false,
-    traceBorder: false,
-    valueMainMetricA: '-',
-    valueMainMetricB: '-',
-    zIndex: '5',
-    mainMetricB: {
-      format: '',
-      key: '',
-      keyValue: '',
-      manageValue: 'avg',
-      refId: '',
-      returnQuery: [],
-      unit: '',
-    },
-    metricsB: [],
-  };
   let coordinate: PointClass = new PointClass(
     point.id,
     point.linkURL,
@@ -471,7 +384,10 @@ describe('CoordinatSpaceInitial tests', () => {
       },
     };
     act(() => {
-      ReactDOM.render(<ManageLowerLimit ref={c => (component = c)} {...testProps} />, container);
+      ReactDOM.render(
+        <ManageLowerLimit isLink={component} callBack={component} lowerLimitCallBack={component} ref={c => (component = c)} {...testProps} />,
+        container
+      );
     });
   });
 

@@ -6,9 +6,9 @@ import { defaults, SimpleOptions } from '../../types';
 import { LoadingState } from '@grafana/data';
 import { act } from 'react-dom/test-utils';
 
-import { PointClass } from 'Models/PointClass';
-import { RegionClass } from 'Models/RegionClass';
-import { OrientedLinkClass } from 'Models/OrientedLinkClass';
+// import { PointClass } from 'Models/PointClass';
+// import { RegionClass } from 'Models/RegionClass';
+// import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 
 describe('waiting test', () => {
   let container: any, component: any;

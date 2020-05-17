@@ -11,7 +11,7 @@ import { RegionClass, Coord4D } from 'Models/RegionClass';
 import { TextObject } from 'Models/TextObjectClass';
 import { LinkURLClass } from 'Models/LinkURLClass';
 
-import { coordinateIsInInitialSpace } from 'Functions/coodinateIsInInitialSpace';
+//import { coordinateIsInInitialSpace } from 'Functions/coodinateIsInInitialSpace';
 import { reqMetricPoint, reqMetricOrientedLink, reqMetricAuxOrientedLink, reqMetricAuxPoint, reqMetricAuxRegion } from 'Functions/fetchMetrics';
 import { getResultQuery } from 'Functions/getResultQuery';
 
@@ -140,32 +140,52 @@ export class SimplePanel extends PureComponent<Props, State> {
     const heightPanel: number = parseInt(this.props.options.baseMap.height, 10);
 
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
+
     const xMin: number = parseInt(initialSpace.xMin, 10);
-    const xMinPx: number = (xMin + 100) * (widthPanel / 200);
+    let xMinPx: number = (xMin + 100) * (widthPanel / 200);
     const xMax: number = parseInt(initialSpace.xMax, 10);
-    const xMaxPx: number = (xMax + 100) * (widthPanel / 200);
-    const widthInitialSpace: number = xMaxPx - xMinPx;
+    let xMaxPx: number = (xMax + 100) * (widthPanel / 200);
+
+    // if (xMin < 0 && xMax < 0) {
+    //   xMinPx = (xMax + 100) * (widthPanel / 200) * -1;
+    //   xMaxPx = (xMin + 100) * (widthPanel / 200) * -1;
+    // }
+
     const yMin: number = parseInt(initialSpace.yMin, 10);
-    const yMinPx: number = (yMin + 100) * (heightPanel / 200);
+    let yMinPx: number = (yMin + 100) * (heightPanel / 200);
     const yMax: number = parseInt(initialSpace.yMax, 10);
-    const yMaxPx: number = (yMax + 100) * (heightPanel / 200);
+    let yMaxPx: number = (yMax + 100) * (heightPanel / 200);
+
+    if (yMin < 0 && yMax < 0) {
+      yMinPx = (yMax + 100) * (heightPanel / 200);
+      yMaxPx = (yMin + 100) * (heightPanel / 200);
+    }
+
+    const widthInitialSpace: number = xMaxPx - xMinPx;
     const heightInitialSpace: number = yMaxPx - yMinPx;
 
-    positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
-    positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1;
+    positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
+    //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1;
+    positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
 
-    if (
-      !coordinateIsInInitialSpace(
-        parseInt(event.nativeEvent.offsetX, 10),
-        parseInt(event.nativeEvent.offsetY, 10),
-        this.props.options.coordinateSpaceInitial,
-        this.props.options.baseMap
-      )
-    ) {
-      //console.error('is not initial space');
-      return;
+    if (xMin < 0 && xMax < 0) {
+      positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2 * -1;
     }
-    //console.log(positionX.toString() + ' ' + positionY.toString());
+    // if (yMin < 0 && yMax < 0) {
+    //   positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+    // }
+
+    // if (
+    //   !coordinateIsInInitialSpace(
+    //     parseInt(event.nativeEvent.offsetX, 10),
+    //     parseInt(event.nativeEvent.offsetY, 10),
+    //     this.props.options.coordinateSpaceInitial,
+    //     this.props.options.baseMap
+    //   )
+    // ) {
+    //   //console.error('is not initial space');
+    //   return;
+    // }
 
     if (
       event.nativeEvent.target.id === 'initialSpace' ||
@@ -424,15 +444,28 @@ export class SimplePanel extends PureComponent<Props, State> {
     const heightPanel: number = parseInt(this.props.options.baseMap.height, 10);
     const widthPanel: number = parseInt(this.props.options.baseMap.width, 10);
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
+
     const xMin: number = parseInt(initialSpace.xMin, 10);
-    const xMinPx: number = (xMin + 100) * (widthPanel / 200);
+    let xMinPx: number = (xMin + 100) * (widthPanel / 200);
     const xMax: number = parseInt(initialSpace.xMax, 10);
-    const xMaxPx: number = (xMax + 100) * (widthPanel / 200);
-    const widthInitialSpace: number = xMaxPx - xMinPx;
+    let xMaxPx: number = (xMax + 100) * (widthPanel / 200);
+
+    // if (xMin < 0 && xMax < 0) {
+    //   xMinPx = (xMax + 100) * (widthPanel / 200);
+    //   xMaxPx = (xMin + 100) * (widthPanel / 200);
+    // }
+
     const yMin: number = parseInt(initialSpace.yMin, 10);
-    const yMinPx: number = (yMin + 100) * (heightPanel / 200);
+    let yMinPx: number = (yMin + 100) * (heightPanel / 200);
     const yMax: number = parseInt(initialSpace.yMax, 10);
-    const yMaxPx: number = (yMax + 100) * (heightPanel / 200);
+    let yMaxPx: number = (yMax + 100) * (heightPanel / 200);
+
+    // if (yMin < 0 && yMax < 0) {
+    //   yMinPx = (yMax + 100) * (heightPanel / 200);
+    //   yMaxPx = (yMin + 100) * (heightPanel / 200);
+    // }
+
+    const widthInitialSpace: number = xMaxPx - xMinPx;
     const heightInitialSpace: number = yMaxPx - yMinPx;
 
     if (
@@ -441,8 +474,17 @@ export class SimplePanel extends PureComponent<Props, State> {
       event.nativeEvent.target.id === 'mainPanel' ||
       event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG
     ) {
-      positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
-      positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+      positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
+      //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+      positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+
+      // if (yMax > 0 && yMax < 100) {
+      //   positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+      // }
+
+      if (yMin < 0 && yMax < 0) {
+        positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+      }
 
       if (coordinates[0].id === 0) {
         objectIn.x = positionX;
@@ -590,15 +632,28 @@ export class SimplePanel extends PureComponent<Props, State> {
     const heightPanel: number = parseInt(this.props.options.baseMap.height, 10);
     const widthPanel: number = parseInt(this.props.options.baseMap.width, 10);
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
+
     const xMin: number = parseInt(initialSpace.xMin, 10);
-    const xMinPx: number = (xMin + 100) * (widthPanel / 200);
+    let xMinPx: number = (xMin + 100) * (widthPanel / 200);
     const xMax: number = parseInt(initialSpace.xMax, 10);
-    const xMaxPx: number = (xMax + 100) * (widthPanel / 200);
-    const widthInitialSpace: number = xMaxPx - xMinPx;
+    let xMaxPx: number = (xMax + 100) * (widthPanel / 200);
+
+    // if (xMin < 0 && xMax < 0) {
+    //   xMinPx = (xMax + 100) * (widthPanel / 200);
+    //   xMaxPx = (xMin + 100) * (widthPanel / 200);
+    // }
+
     const yMin: number = parseInt(initialSpace.yMin, 10);
-    const yMinPx: number = (yMin + 100) * (heightPanel / 200);
+    let yMinPx: number = (yMin + 100) * (heightPanel / 200);
     const yMax: number = parseInt(initialSpace.yMax, 10);
-    const yMaxPx: number = (yMax + 100) * (heightPanel / 200);
+    let yMaxPx: number = (yMax + 100) * (heightPanel / 200);
+
+    if (yMin < 0 && yMax < 0) {
+      yMinPx = (yMax + 100) * (heightPanel / 200);
+      yMaxPx = (yMin + 100) * (heightPanel / 200);
+    }
+
+    const widthInitialSpace: number = xMaxPx - xMinPx;
     const heightInitialSpace: number = yMaxPx - yMinPx;
 
     if (
@@ -607,8 +662,13 @@ export class SimplePanel extends PureComponent<Props, State> {
       event.nativeEvent.target.id === 'Intent' ||
       event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG
     ) {
-      positionX = Math.round((event.nativeEvent.offsetX - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
-      positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+      positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
+      positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+      //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+
+      // if (yMin < 0 && yMax < 0) {
+      //   positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+      // }
 
       if (coordinates[0].id === 0) {
         objectIn.x = positionX;
@@ -1176,7 +1236,7 @@ export class SimplePanel extends PureComponent<Props, State> {
    */
   updateButtonCss = () => {
     const final: JSX.Element = (
-      <div id="allButton" style={{ marginTop: '1%' }}>
+      <div id="allButton" style={{ marginTop: '1%', marginBottom: '50px' }}>
         <Button style={{ marginLeft: '5%' }} variant={this.state.buttonManage[0] ? 'danger' : 'primary'} className="button" onClick={this.addNode}>
           Add Region
         </Button>
@@ -1706,11 +1766,6 @@ export class SimplePanel extends PureComponent<Props, State> {
         const linkUrl: string = region.linkURL.followLink;
         //console.log(linkUrl);
         if (linkUrl && !document.getElementById('a' + idSVG) && !this.state.buttonAddIncurvedLinkIsActive && !this.state.buttonAddLinkIsActive) {
-          // const cir1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-          // cir1.setAttribute('fill', '#ff0000');
-          // cir1.setAttribute('cx', '310');
-          // cir1.setAttribute('cy', '210');
-          // cir1.setAttribute('r', '30');
           const aElement = document.createElementNS('http://www.w3.org/2000/svg', 'a');
           aElement.setAttribute('id', 'a' + idSVG);
           aElement.setAttribute('href', linkUrl);
@@ -2127,7 +2182,6 @@ export class SimplePanel extends PureComponent<Props, State> {
 
     const styleSVG = {
       position: 'absolute',
-
       zIndex: 2,
     } as React.CSSProperties;
 
@@ -2144,7 +2198,6 @@ export class SimplePanel extends PureComponent<Props, State> {
     const defaultStyle = {
       height: '100vh',
       width: '100vw',
-
       fontFamily: this.props.options.display.police,
       fontSize: this.props.options.display.size,
       fontStyle: this.props.options.display.style.italic ? 'italic' : 'normal',
@@ -2210,11 +2263,11 @@ export class SimplePanel extends PureComponent<Props, State> {
             )}
             <div onClick={this.callMethod}></div>
             <div id="coordinateSpaces" style={styleBackground}>
+              {this.defineLimit()}
               <div>
                 <div className="tooltip" />
                 {/* {this.fillCoordinate()} */}
-                <div onClick={this.getCoordinates} id="mainPanel" style={{ position: 'absolute', top: '15%', zIndex: 1 }}>
-                  {this.defineLimit()}
+                <div onClick={this.getCoordinates} id="mainPanel" style={{ position: 'absolute', zIndex: 1 }}>
                   <div
                     style={styleSVG}
                     // onMouseOver={this.SVG_PathImage}
