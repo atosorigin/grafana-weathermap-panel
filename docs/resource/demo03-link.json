@@ -8,7 +8,7 @@
                 "label": "Yes",
                 "value": true
             },
-            "label": " ",
+            "label": "point-ordi",
             "linkURL": {
                 "followLink": "",
                 "hoveringTooltipLink": "",
@@ -83,7 +83,7 @@
                     "unit": ""
                 },
                 "generateObjectText": true,
-                "isTextTooltip": false,
+                "isTextTooltip": true,
                 "style": {
                     "bold": false,
                     "italic": false,
