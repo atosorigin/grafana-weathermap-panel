@@ -160,7 +160,11 @@ class ManageLowerLimit extends React.Component<Props, State> {
               </div>
             </div>
           ) : (
-            <Switch label={'Color/Size'} checked={this.state.coordinate.traceBorder} onChange={this.onSwitchContour} />
+            <div style={{ display: 'flex' }}>
+              <FormLabel width={15}>{'Color/Size'}</FormLabel>
+              <Switch label={''} checked={this.state.coordinate.traceBorder} onChange={this.onSwitchContour} />
+              {/* <Switch label={'Color/Size'} checked={this.state.coordinate.traceBorder} onChange={this.onSwitchContour} /> */}
+            </div>
           )}
 
           {this.state.coordinate.colorMode ? (

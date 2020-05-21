@@ -182,9 +182,14 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     return false;
   };
 
-  getPlacementTextObjectRegionSVG = (idSVG: string): CoorHTML => {
+  getPositionTextObjectRegionSVG = (idSVG: string): CoorHTML => {
     const coor: CoorHTML = {top: '0', bottom: '0', left: '0', right: '0'};
-    const elementSVG: any = document.getElementById('oct' + idSVG);
+    let elementSVG: any;
+    if (this.props.options.baseMap.isUploaded) {
+      elementSVG = document.getElementById(idSVG);
+    } else {
+      elementSVG = document.getElementById('oct' + idSVG);
+    }
     if (elementSVG) {
       let xSVG = 0;
       let ySVG = 0;
@@ -260,7 +265,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       //if (region.mode && ((!region.textObj.isTextTooltip) || this.displayValueQuery(region))) {
       if (region.mode) {
         //const coordinateWrite: Coord4DInt | null = searchMinMaxIdSVG(region.idSVG);
-        const coordinateTextObject: CoorHTML = this.getPlacementTextObjectRegionSVG(region.idSVG);
+        const coordinateTextObject: CoorHTML = this.getPositionTextObjectRegionSVG(region.idSVG);
         //if (coordinateWrite) {
           stateIsFill = true;
           const style: Style = region.textObj.style;

@@ -30,7 +30,7 @@ Pour créer le fichier global json, vous pouvez aller dans le [fichier d'importa
 
 ## Ajouter le fichier global
 
-Pour ce tutoriel, nous utiliserons le fichier json suivant :
+Pour ce tutoriel, nous utiliserons le fichier json disponible directement sur le dépôt :
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo10-01-global.json

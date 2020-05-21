@@ -7,7 +7,9 @@
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
 
-L'image sélectionnée sera [demo01-background.svg](../../resource/demo01-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
+L'image sélectionnée sera [demo01-background.svg](../../resource/demo01-background.svg). 
+
+Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`, ou avec le lien direct du dépôt : 
 
 
 ```

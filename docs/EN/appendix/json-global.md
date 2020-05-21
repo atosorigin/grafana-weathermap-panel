@@ -81,6 +81,7 @@ The **global** file must be declared as a JSON file like this:
     - **width**: Choice of width if you don't have an SVG image. If you have one, leave blank
     - **height** : Choice of height if you don't have an SVG image. If you have one, leave blank
     - **idSVG** ""
+    - **isUploaded** : False
 
 ```
    "baseMap": {
@@ -89,7 +90,8 @@ The **global** file must be declared as a JSON file like this:
         "modeSVG": true,
         "width": "",
         "height": "",
-        "idSVG": ""
+        "idSVG": "",
+        "isUploaded": false
     },
 
 ```

@@ -11,7 +11,9 @@ Pour ce tutoriel, vous devez d'abord télécharger l'image de fond :
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
-L'image sélectionnée sera [demo02-background.jpg](../../resource/demo02-background.jpg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
+L'image sélectionnée sera [demo02-background.jpg](../../resource/demo02-background.jpg). 
+
+Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`, ou avec le lien direct du dépôt : 
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo02-background.jpg

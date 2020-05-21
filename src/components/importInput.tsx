@@ -140,7 +140,7 @@ class ImportInput extends React.Component<Props, State> {
       point.associateOrientedLinksIn,
       point.associateOrientedLinksOut
     );
-    console.log(toLoad);
+    // console.log(toLoad);
     let selector: number = this.PointValidator(toLoad);
     // Do some test here to see if your already load a coordinatespace with this id
     if (selector === 0) {
@@ -183,7 +183,7 @@ class ImportInput extends React.Component<Props, State> {
       region.mode,
       region.img
     );
-    console.log(toLoad);
+    // console.log(toLoad);
     // Do some test here to see if your already load a coordinatespace with this id
     let selector: number = this.RegionValidator(toLoad);
     if (selector === 0) {
@@ -241,7 +241,7 @@ class ImportInput extends React.Component<Props, State> {
       link.mainMetricB,
       link.metricsB
     );
-    console.log(toLoad);
+    // console.log(toLoad);
     // Do some test here to see if your already load a coordinatespace with this id
     let selector: number = this.LinkValidator(toLoad);
     if (selector === 0) {
@@ -295,7 +295,7 @@ class ImportInput extends React.Component<Props, State> {
       }
     });
     this.fetchMulti();
-    console.log('load total');
+    // console.log('load total');
   };
 
   loaderTotal = async () => {
@@ -336,26 +336,26 @@ class ImportInput extends React.Component<Props, State> {
     //this.result = fetchConfFile(this.props.options.saveImportUrl.multi);
     this.props.options.saveImportUrl.multi.forEach(async url => {
       try {
-        console.log(url);
+        // console.log(url);
         let file = {};
-        console.log(file);
+        // console.log(file);
         let response = await fetch(url);
         file = await response.json();
         if (file.hasOwnProperty('regions')) {
           this.loadMultiRegions(file);
-          console.log('Load Region');
+          // console.log('Load Region');
         }
         if (file.hasOwnProperty('points')) {
           this.loadMultiPoints(file);
-          console.log('Load Point');
+          // console.log('Load Point');
         }
         if (file.hasOwnProperty('links')) {
           //console.log(file);
           this.loadMultiLinks(file);
-          console.log('Load Links');
+          // console.log('Load Links');
         }
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     });
   };
@@ -474,7 +474,7 @@ class ImportInput extends React.Component<Props, State> {
   // }
 
   tempo = () => {
-    console.log(this.props.options.saveImportUrl);
+    // console.log(this.props.options.saveImportUrl);
   };
 
   totalUrlDisplay = (props: any): JSX.Element => {
@@ -564,8 +564,8 @@ class ImportInput extends React.Component<Props, State> {
   };
 
   toDel = () => {
-    console.log(this.props.options.saveImportUrl.multi);
-    console.log(this.props.options.arrayPoints);
+    // console.log(this.props.options.saveImportUrl.multi);
+    // console.log(this.props.options.arrayPoints);
   };
 
   render() {

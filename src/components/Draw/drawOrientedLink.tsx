@@ -211,7 +211,12 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       const yMaxInitialSpace: number = parseInt(initialSpace.yMax, 10);
       const yMaxPx: number = (yMaxInitialSpace + 100) * (heightPanel / 200);
       const heightInitialSpace: number = yMaxPx - yMinPx;
-      const regionSVGHtml: any = document.getElementById('oct' + region.idSVG);
+      let regionSVGHtml: any;
+      if (this.props.options.baseMap.isUploaded) {
+        regionSVGHtml = document.getElementById(region.idSVG);
+      } else {
+        regionSVGHtml = document.getElementById('oct' + region.idSVG);
+      }
       let width = 0;
       let height = 0;
       let xMinSVG = 0;

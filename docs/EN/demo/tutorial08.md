@@ -8,7 +8,9 @@
 
 Adding a background image is done from the `display` menu.
 
-The selected image will be [demo01-background.svg](../../resource/demo01-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+The selected image will be [demo01-background.svg](../../resource/demo01-background.svg). 
+
+To do this, we download it in base64 with the `Copy image address` function, or with the direct link to the repository: 
 
 
 ```

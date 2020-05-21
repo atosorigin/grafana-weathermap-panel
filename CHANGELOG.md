@@ -1,12 +1,19 @@
 # Changelog
 
+## v1.0.1 (2020-05-21)
+
+- Update to upload by fileselect background image
+- Fixed css
+- Fixed select link monodirection by defaut
+
 ## v1.0.0 (2020-05-17)
 
 - Update Documentation
 - Update Tutorial and demo
-- Update form dots (none, circle, box...) 
+- Update shape dots (none, circle, box...) 
 - Update import global file 
 - Update close legend
+- Update test unit
 - fixed data reset for a new dashboard
 - fixed panel menu
 
@@ -127,6 +134,7 @@
 - Add legende
 - Add Type of graphic representation
 - Add compatibility SVG file
+- Add test unit
 - Update Graphic representation
 - Update metrics
 - Fixed panel

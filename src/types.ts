@@ -91,6 +91,10 @@ export interface Background {
   height: string;
   /** id svg for tag */
   idSVG: string;
+  /** check if is Url or Uploaded from computer */
+  isUploaded: boolean;
+  /** name of uploaded file if image is uploaded from computer */
+  nameUploadedImage?: string;
 }
 
 export interface TimeRange {
@@ -346,7 +350,7 @@ export interface SimpleOptions extends MetricSettings {
 
 export const defaults: SimpleOptions = {
   legend: { hiddenLegend: true, x: 0, y: 0 },
-  baseMap: { image: '', layerImage: '', modeSVG: true, width: '', height: '', idSVG: '' },
+  baseMap: { image: '', layerImage: '', modeSVG: true, width: '', height: '', idSVG: '', isUploaded: false },
   // imageUrl: 'https://upload.wikimedia.org/wikipedia/en/b/be/Locator_Grid.png',
   coordinateSpaceInitial: {
     coordinate: {

@@ -2404,8 +2404,8 @@ var initOrientedLink = function initOrientedLink(newId, newZIndex) {
   // 	'manageValue': 'avg',
   // }
   initMainMetrics, [], false, false, false, initPositionParameter, 'orientedLink' + num.toString(), {
-    label: 'Bidirectionnal',
-    value: 'double'
+    label: 'Monodirectional',
+    value: 'AB'
   }, {
     label: 'Medium',
     value: 'Medium'
@@ -3800,7 +3800,13 @@ function (_super) {
         }
       };
 
-      _this.state.readerFile.readAsText(_this.state.selectedFile);
+      var extensionFile = _this.state.selectedFile.name.split('.')[1];
+
+      if (extensionFile === 'jpg' || extensionFile === 'png' || extensionFile === 'gif') {
+        _this.state.readerFile.readAsDataURL(_this.state.selectedFile);
+      } else {
+        _this.state.readerFile.readAsText(_this.state.selectedFile);
+      }
     };
 
     _this.save = function () {
@@ -3813,6 +3819,25 @@ function (_super) {
         var loader_1 = new components_importInput__WEBPACK_IMPORTED_MODULE_3__["default"](_this.props);
 
         _this.props.options.saveImportFile.forEach(function (file) {
+          if (file.name) {
+            var arrayFileName = file.name.split('.');
+            var newBaseMap = _this.props.options.baseMap;
+
+            if (arrayFileName[1] === 'svg') {
+              newBaseMap.image = file.content;
+              newBaseMap.modeSVG = true;
+              newBaseMap.isUploaded = true;
+            } else if (arrayFileName[1] === 'jpg' || arrayFileName[1] === 'png' || arrayFileName[1] === 'gif') {
+              newBaseMap.image = file.content;
+              newBaseMap.modeSVG = false;
+              newBaseMap.isUploaded = true;
+            }
+
+            _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+              baseMap: newBaseMap
+            }));
+          }
+
           if (JSON.parse(file.content).hasOwnProperty('regions')) {
             loader_1.loadMultiRegions(JSON.parse(file.content));
             console.log('Load Region');
@@ -4105,17 +4130,16 @@ function (_super) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_b) {
           switch (_b.label) {
             case 0:
-              console.log('mount Editor');
               url = window.location.pathname;
               arrayUrl = url.split('/');
-              console.log('currentDashboard : ' + this.props.options.currentDashboard);
 
               try {
+                // console.log('currentDashboard : ' + this.props.options.currentDashboard);
                 for (arrayUrl_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayUrl), arrayUrl_1_1 = arrayUrl_1.next(); !arrayUrl_1_1.done; arrayUrl_1_1 = arrayUrl_1.next()) {
                   element = arrayUrl_1_1.value;
 
                   if (element === 'new' && !this.props.options.currentDashboard) {
-                    console.log('new dashboard');
+                    // console.log('new dashboard');
                     this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.props.options), {
                       arrayPoints: [],
                       arrayOrientedLinks: [],
@@ -4135,7 +4159,8 @@ function (_super) {
                         modeSVG: true,
                         idSVG: '',
                         width: '',
-                        height: ''
+                        height: '',
+                        isUploaded: false
                       }
                     }));
                   }
@@ -4181,8 +4206,8 @@ function (_super) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
           switch (_a.label) {
             case 0:
-              console.log('unMount Editor'); // not display Button of Panel if is mode View
-
+              // console.log('unMount Editor');
+              // not display Button of Panel if is mode View
               return [4
               /*yield*/
               , Promise.resolve('Success').then(function () {
@@ -4193,6 +4218,7 @@ function (_super) {
               })];
 
             case 1:
+              // console.log('unMount Editor');
               // not display Button of Panel if is mode View
               _a.sent();
 
@@ -4462,7 +4488,7 @@ function (_super) {
       // }
 
 
-      if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'Intent' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG) {
+      if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'Intent' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG || event.nativeEvent.target.id === _this.props.options.baseMap.idSVG) {
         _this.createPointToClick(positionX, positionY);
       }
     };
@@ -4736,7 +4762,7 @@ function (_super) {
       var widthInitialSpace = xMaxPx - xMinPx;
       var heightInitialSpace = yMaxPx - yMinPx;
 
-      if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'Intent' || event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG) {
+      if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'Intent' || event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG || event.nativeEvent.target.id === _this.props.options.baseMap.idSVG) {
         positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2; //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
 
         positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2; // if (yMax > 0 && yMax < 100) {
@@ -4837,8 +4863,14 @@ function (_super) {
                 _this.resetCoordinatesToDrawLinkWithClick();
               }
             }
-          } else if (event.nativeEvent.target.id !== 'oct' + _this.props.options.baseMap.idSVG && event.nativeEvent.target.id.startsWith('oct')) {
-            var id = event.nativeEvent.target.id.substr(3);
+          } else if (event.nativeEvent.target.id !== 'oct' + _this.props.options.baseMap.idSVG && event.nativeEvent.target.id.startsWith('oct') || event.nativeEvent.target.id !== _this.props.options.baseMap.idSVG && (event.nativeEvent.target.id.startsWith('path') || event.nativeEvent.target.id.startsWith('rect') || event.nativeEvent.target.id.startsWith('ellipse'))) {
+            var id = '';
+
+            if (_this.props.options.baseMap.isUploaded) {
+              id = event.nativeEvent.target.id;
+            } else {
+              id = event.nativeEvent.target.id.substr(3);
+            }
 
             if (id === region.idSVG) {
               //console.log(region.idSVG);
@@ -4938,7 +4970,7 @@ function (_super) {
       var widthInitialSpace = xMaxPx - xMinPx;
       var heightInitialSpace = yMaxPx - yMinPx;
 
-      if (event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'Intent' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG) {
+      if (event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'Intent' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG || event.nativeEvent.target.id === _this.props.options.baseMap.idSVG) {
         positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2; //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
 
         positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2; // if (yMax > 0 && yMax < 100) {
@@ -5044,8 +5076,14 @@ function (_super) {
                 _this.resetCoordinatesToDrawLinkWithClick();
               }
             }
-          } else if (event.nativeEvent.target.id !== 'oct' + _this.props.options.baseMap.idSVG && event.nativeEvent.target.id.startsWith('oct')) {
-            var id = event.nativeEvent.target.id.substr(3);
+          } else if (event.nativeEvent.target.id !== 'oct' + _this.props.options.baseMap.idSVG && event.nativeEvent.target.id.startsWith('oct') || event.nativeEvent.target.id !== _this.props.options.baseMap.idSVG && (event.nativeEvent.target.id.startsWith('path') || event.nativeEvent.target.id.startsWith('rect') || event.nativeEvent.target.id.startsWith('ellipse'))) {
+            var id = '';
+
+            if (_this.props.options.baseMap.isUploaded) {
+              id = event.nativeEvent.target.id;
+            } else {
+              id = event.nativeEvent.target.id.substr(3);
+            }
 
             if (id === region.idSVG) {
               var coordinates_7 = _this.props.options.coordinatesToDrawLinkWithClick;
@@ -5179,8 +5217,8 @@ function (_super) {
         refId: '',
         manageValue: 'avg'
       }, [], false, false, false, positionParameter, name, {
-        label: 'Bidirectionnal',
-        value: 'double'
+        label: 'Monodirectional',
+        value: 'AB'
       }, {
         label: 'Medium',
         value: 'Medium'
@@ -5811,11 +5849,13 @@ function (_super) {
 
     _this.componentDidMount = function () {
       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
+        var width, height, text, result, resultWidth, resultHeight, id, newBaseMap;
+
         var _this = this;
 
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
-          console.log('mount Panel'); // not display Button of Panel if it is in the mode View
-
+          // console.log('mount Panel');
+          // not display Button of Panel if it is in the mode View
           this.checkIfDisplayButton(); // save background in state
 
           this.setState({
@@ -5823,47 +5863,88 @@ function (_super) {
           }); // load backgroundSVG
 
           if (this.props.options.baseMap.modeSVG && this.props.options.baseMap.image !== '') {
-            fetch(this.props.options.baseMap.image).then(function (res) {
-              return res.text();
-            }).then(function (text) {
-              _this.setState({
+            if (this.props.options.baseMap.isUploaded) {
+              width = '';
+              height = '';
+              text = this.props.options.baseMap.image;
+              this.setState({
                 svg: text
               });
+              result = /id=["']\w*["']/i.exec(text);
+              resultWidth = /width=["']\w*["']/i.exec(text);
 
-              var result = /id=["']\w*["']/i.exec(text);
+              if (resultWidth && resultWidth.length > 0) {
+                width = resultWidth[0].split('"')[1];
+              }
+
+              resultHeight = /height=["']\w*["']/i.exec(text);
+
+              if (resultHeight && resultHeight.length > 0) {
+                height = resultHeight[0].split('"')[1];
+              }
 
               if (result && result.length > 0) {
-                var id = result[0].split('"');
+                id = result[0].split('"');
 
                 if (id.length > 1) {
-                  var documentId = document.getElementById(id[1]);
-
-                  if (documentId) {
-                    var newBaseMap = _this.props.options.baseMap;
-                    newBaseMap.idSVG = id[1]; // newBaseMap.width = documentId.getAttribute('width') || '';
-                    // newBaseMap.height = documentId.getAttribute('height') || '';
-
-                    newBaseMap.width = parseInt(documentId.getAttribute('width') || '0', 10).toString() || '';
-                    newBaseMap.height = parseInt(documentId.getAttribute('height') || '0', 10).toString() || '';
-
-                    _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-                      baseMap: newBaseMap
-                    }));
-                  }
+                  newBaseMap = this.props.options.baseMap;
+                  newBaseMap.idSVG = id[1];
+                  newBaseMap.layerImage = this.props.options.baseMap.image;
+                  newBaseMap.width = parseInt(width || '0', 10).toString() || '';
+                  newBaseMap.height = parseInt(height || '0', 10).toString() || '';
+                  this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.props.options), {
+                    baseMap: newBaseMap
+                  }));
                 }
               }
-            }).then(function () {
-              return _this.chargeRegion();
-            }).then(function () {
-              var newStr = _this.editIdString(_this.state.svg);
 
-              var background = _this.props.options.baseMap;
-              background.layerImage = newStr;
+              this.chargeRegion(); // const newStr: string = this.editIdString(this.state.svg);
+              // const background: Background = this.props.options.baseMap;
+              // background.layerImage = newStr;
+              // this.props.onOptionsChange({ ...this.props.options, baseMap: background });
+            } else {
+              fetch(this.props.options.baseMap.image).then(function (res) {
+                return res.text();
+              }).then(function (text) {
+                _this.setState({
+                  svg: text
+                });
 
-              _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-                baseMap: background
-              }));
-            });
+                var result = /id=["']\w*["']/i.exec(text);
+
+                if (result && result.length > 0) {
+                  var id = result[0].split('"');
+
+                  if (id.length > 1) {
+                    var documentId = document.getElementById(id[1]);
+
+                    if (documentId) {
+                      var newBaseMap = _this.props.options.baseMap;
+                      newBaseMap.idSVG = id[1]; // newBaseMap.width = documentId.getAttribute('width') || '';
+                      // newBaseMap.height = documentId.getAttribute('height') || '';
+
+                      newBaseMap.width = parseInt(documentId.getAttribute('width') || '0', 10).toString() || '';
+                      newBaseMap.height = parseInt(documentId.getAttribute('height') || '0', 10).toString() || '';
+
+                      _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+                        baseMap: newBaseMap
+                      }));
+                    }
+                  }
+                }
+              }).then(function () {
+                return _this.chargeRegion();
+              }).then(function () {
+                var newStr = _this.editIdString(_this.state.svg);
+
+                var background = _this.props.options.baseMap;
+                background.layerImage = newStr;
+
+                _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+                  baseMap: background
+                }));
+              });
+            }
           } else {
             this.chargeRegion();
           }
@@ -5921,7 +6002,14 @@ function (_super) {
     _this.displayTooltipSVG = function (event) {
       var e_5, _a;
 
-      var idSVG = event.target.id.substring(3);
+      var idSVG = '';
+
+      if (_this.props.options.baseMap.isUploaded) {
+        idSVG = event.target.id;
+      } else {
+        idSVG = event.target.id.substring(3);
+      }
+
       var arrayRegions = _this.props.options.regionCoordinateSpace;
       var newDataSVG = {
         idSVG: idSVG,
@@ -6031,7 +6119,14 @@ function (_super) {
     _this.hideTooltipSVG = function (event) {
       var e_6, _a;
 
-      var idSVG = event.target.id.substring(3);
+      var idSVG = '';
+
+      if (_this.props.options.baseMap.isUploaded) {
+        idSVG = event.target.id;
+      } else {
+        idSVG = event.target.id.substring(3);
+      }
+
       var arrayRegions = _this.props.options.regionCoordinateSpace;
 
       try {
@@ -6126,15 +6221,20 @@ function (_super) {
 
 
     _this.SVG_PathImage = function (event) {
-      var e_7, _a; // console.log('SVG_PathImage');
-      // console.log(event.target);
-
+      var e_7, _a;
 
       _this.displayTooltipSVG(event);
 
       var elementSVG = event.target;
       var parentElementSVG = elementSVG.parentNode;
-      var idSVG = elementSVG.id.substring(3);
+      var idSVG = '';
+
+      if (_this.props.options.baseMap.isUploaded) {
+        idSVG = event.target.id;
+      } else {
+        idSVG = event.target.id.substring(3);
+      }
+
       var arrayRegion = _this.props.options.regionCoordinateSpace;
 
       try {
@@ -6142,8 +6242,7 @@ function (_super) {
           var region = arrayRegion_1_1.value;
 
           if (region.idSVG === idSVG) {
-            //console.log(elementSVG);
-            var linkUrl = region.linkURL.followLink; //console.log(linkUrl);
+            var linkUrl = region.linkURL.followLink;
 
             if (linkUrl && !document.getElementById('a' + idSVG) && !_this.state.buttonAddIncurvedLinkIsActive && !_this.state.buttonAddLinkIsActive) {
               var aElement = document.createElementNS('http://www.w3.org/2000/svg', 'a');
@@ -6227,50 +6326,48 @@ function (_super) {
       }, mapItems);
     };
     /*************************************** create link regionbyid**************************************** */
+    // CreateLinkArea = () => {
+    //   // All Id in SVG Test
+    //   const allidSvg = document.getElementById('octsvg12');
+    //   allidSvg?.addEventListener('click', () => {
+    //     const elms = allidSvg.querySelectorAll('[id]');
+    //     console.log(elms);
+    //   });
+    // Test Svg Christophe search ID corrrigé
+    // const allidSvg3 = document.getElementById('octsvg12');
+    // allidSvg3?.addEventListener('click', () => {
+    //   const elms = allidSvg3.querySelectorAll('[id]');
+    //   console.log(elms);
+    // });
+    // });
+    // All Region in SVG
+    // const allidSvg2 = document.getElementById('octsvg12');
+    // allidSvg2?.addEventListener('click', () => {
+    // this.props.options.regionCoordinateSpace.forEach(region => {
+    //   console.log(region.idSVG);
+    //   console.log(region.linkURL.followLink);
+    // const dam = allidSvg2.querySelectorAll('[id]');
+    // console.log(dam);
+    // console.log('loua');
+    // });
+    // });
+    // const elms = document.querySelectorAll('[id]');
+    // for (var i = 0; i < elms.length; i++) {
+    //   let lpo = document.getElementById('octsvg213');
+    //   lpo?.addEventListener('click', () => {
+    //     console.log('rer');
+    //   });
+    //   let lpo1 = document.getElementById('octsvg213');
+    //   lpo1?.addEventListener('click', () => {
+    //     console.log('rer1');
+    //   });
+    //   let lpo2 = document.getElementById('octsvg213');
+    //   lpo2?.addEventListener('click', () => {
+    //     console.log('rer2');
+    //   });
+    // }
+    // };
 
-
-    _this.CreateLinkArea = function () {
-      var _a; // All Id in SVG Test
-
-
-      var allidSvg = document.getElementById('octsvg12');
-      (_a = allidSvg) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
-        var elms = allidSvg.querySelectorAll('[id]');
-        console.log(elms);
-      }); // Test Svg Christophe search ID corrrigé
-      // const allidSvg3 = document.getElementById('octsvg12');
-      // allidSvg3?.addEventListener('click', () => {
-      //   const elms = allidSvg3.querySelectorAll('[id]');
-      //   console.log(elms);
-      // });
-      // });
-      // All Region in SVG
-      // const allidSvg2 = document.getElementById('octsvg12');
-      // allidSvg2?.addEventListener('click', () => {
-      // this.props.options.regionCoordinateSpace.forEach(region => {
-      //   console.log(region.idSVG);
-      //   console.log(region.linkURL.followLink);
-      // const dam = allidSvg2.querySelectorAll('[id]');
-      // console.log(dam);
-      // console.log('loua');
-      // });
-      // });
-      // const elms = document.querySelectorAll('[id]');
-      // for (var i = 0; i < elms.length; i++) {
-      //   let lpo = document.getElementById('octsvg213');
-      //   lpo?.addEventListener('click', () => {
-      //     console.log('rer');
-      //   });
-      //   let lpo1 = document.getElementById('octsvg213');
-      //   lpo1?.addEventListener('click', () => {
-      //     console.log('rer1');
-      //   });
-      //   let lpo2 = document.getElementById('octsvg213');
-      //   lpo2?.addEventListener('click', () => {
-      //     console.log('rer2');
-      //   });
-      // }
-    };
 
     _this.getValuesAuxiliaryMetricsRegionSVG = function (region) {
       Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_8__["reqMetricAuxRegion"])(region, _this.props);
@@ -6773,6 +6870,7 @@ function (_super) {
   /*************************************** create link regionbyid**************************************** */
 
   /*************************************test create tooltip **********************************************************/
+  //https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
 
   /** render */
 
@@ -11798,7 +11896,14 @@ function (_super) {
         var yMaxInitialSpace = parseInt(initialSpace.yMax, 10);
         var yMaxPx = (yMaxInitialSpace + 100) * (heightPanel / 200);
         var heightInitialSpace = yMaxPx - yMinPx;
-        var regionSVGHtml = document.getElementById('oct' + region.idSVG);
+        var regionSVGHtml = void 0;
+
+        if (_this.props.options.baseMap.isUploaded) {
+          regionSVGHtml = document.getElementById(region.idSVG);
+        } else {
+          regionSVGHtml = document.getElementById('oct' + region.idSVG);
+        }
+
         var width = 0;
         var height = 0;
         var xMinSVG = 0;
@@ -15857,14 +15962,20 @@ function (_super) {
       return false;
     };
 
-    _this.getPlacementTextObjectRegionSVG = function (idSVG) {
+    _this.getPositionTextObjectRegionSVG = function (idSVG) {
       var coor = {
         top: '0',
         bottom: '0',
         left: '0',
         right: '0'
       };
-      var elementSVG = document.getElementById('oct' + idSVG);
+      var elementSVG;
+
+      if (_this.props.options.baseMap.isUploaded) {
+        elementSVG = document.getElementById(idSVG);
+      } else {
+        elementSVG = document.getElementById('oct' + idSVG);
+      }
 
       if (elementSVG) {
         var xSVG = 0;
@@ -15954,7 +16065,7 @@ function (_super) {
 
       if (region.mode) {
         //const coordinateWrite: Coord4DInt | null = searchMinMaxIdSVG(region.idSVG);
-        var coordinateTextObject = _this.getPlacementTextObjectRegionSVG(region.idSVG); //if (coordinateWrite) {
+        var coordinateTextObject = _this.getPositionTextObjectRegionSVG(region.idSVG); //if (coordinateWrite) {
 
 
         stateIsFill = true;
@@ -18050,11 +18161,17 @@ function (_super) {
       label: '',
       checked: this.state.coordinate.traceBorder,
       onChange: this.onSwitchContour
-    }))) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: 'Color/Size',
+    }))) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, 'Color/Size'), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+      label: '',
       checked: this.state.coordinate.traceBorder,
       onChange: this.onSwitchContour
-    }), this.state.coordinate.colorMode ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Parametrage_VariableColor__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    })), this.state.coordinate.colorMode ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Parametrage_VariableColor__WEBPACK_IMPORTED_MODULE_5__["default"], {
       traceBorder: this.state.coordinate.traceBorder,
       traceBack: this.state.coordinate.traceBack,
       lowerLimit: this.state.coordinate.lowerLimit,
@@ -20109,7 +20226,15 @@ function (_super) {
 
     _this.onImageChanged = function (e) {
       var newBaseMap = _this.props.options.baseMap;
-      newBaseMap.image = e.target.value;
+      var image = e.target.value;
+      var arrayImage = image.split('.');
+      newBaseMap.image = image;
+
+      if (image.split('.')[arrayImage.length - 1] === 'svg') {
+        newBaseMap.modeSVG = true;
+      } else {
+        newBaseMap.modeSVG = false;
+      }
 
       _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
         baseMap: newBaseMap
@@ -20162,13 +20287,61 @@ function (_super) {
       });
     };
 
+    _this.uploadImage = function (event) {
+      var readerFile = new FileReader();
+      var selectedFile = event.target.files[0];
+      var extensionFile = selectedFile.name.split('.')[1];
+      var file;
+
+      if (extensionFile === 'jpg' || extensionFile === 'png' || extensionFile === 'gif') {
+        readerFile.readAsDataURL(selectedFile);
+      } else {
+        readerFile.readAsText(selectedFile);
+      }
+
+      readerFile.onload = function () {
+        file = readerFile.result;
+      };
+
+      setTimeout(function () {
+        var newBaseMap = _this.props.options.baseMap;
+
+        if (extensionFile === 'svg') {
+          newBaseMap.image = file;
+          newBaseMap.modeSVG = true;
+          newBaseMap.isUploaded = true;
+          newBaseMap.nameUploadedImage = selectedFile.name;
+        } else if (extensionFile === 'jpg' || extensionFile === 'png' || extensionFile === 'gif') {
+          newBaseMap.image = file;
+          newBaseMap.modeSVG = false;
+          newBaseMap.isUploaded = true;
+          newBaseMap.nameUploadedImage = selectedFile.name;
+        }
+
+        _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+          baseMap: newBaseMap
+        }));
+      }, 1000);
+    };
+
+    _this.defineValueImage = function () {
+      var result = '';
+
+      if (!_this.props.options.baseMap.isUploaded) {
+        result = _this.props.options.baseMap.image || '';
+      }
+
+      return result;
+    };
+
     _this.state = {
       newPolice: {
         value: _this.props.options.display.police,
         label: _this.props.options.display.police
       },
       size: _this.props.options.display.size,
-      style: _this.props.options.display.style
+      style: _this.props.options.display.style,
+      imageUploaded: ''
     };
     return _this;
   }
@@ -20231,10 +20404,32 @@ function (_super) {
       label: 'Image',
       labelWidth: 15,
       inputWidth: 30,
+      placeholder: 'URL',
       type: "text",
       onChange: this.onImageChanged,
-      value: options.baseMap.image || ''
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+      value: this.defineValueImage()
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex',
+        margin: '2px 0'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
+      width: 15
+    }, "Upload Image"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+      style: {
+        border: '1px solid #262628',
+        borderRadius: '0 3px 3px 0',
+        width: '416px'
+      },
+      type: "file",
+      name: "file",
+      onChange: this.uploadImage
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+      style: {
+        margin: '10px 0 0 10px',
+        fontSize: '10px'
+      }
+    }, this.props.options.baseMap.nameUploadedImage || '')), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "Width",
       labelWidth: 15,
       inputWidth: 30,
@@ -20392,8 +20587,7 @@ function (_super) {
 
 
     _this.loadMonoPoint = function (point) {
-      var toLoad = new _Models_PointClass__WEBPACK_IMPORTED_MODULE_3__["PointClass"](point.id, point.linkURL, point.meta, point.lowerLimit, point.label, point.textObj, point.mainMetric, point.metrics, point.colorMode, point.traceBack, point.traceBorder, point.positionParameter, point.name, point.valueMetric, point.drawGraphicMarker, point.shape, point.sizeWidth, point.sizeHeight, point.rotateArrow, point.positionShapeX, point.positionShapeY, point.color, point.associateOrientedLinksIn, point.associateOrientedLinksOut);
-      console.log(toLoad);
+      var toLoad = new _Models_PointClass__WEBPACK_IMPORTED_MODULE_3__["PointClass"](point.id, point.linkURL, point.meta, point.lowerLimit, point.label, point.textObj, point.mainMetric, point.metrics, point.colorMode, point.traceBack, point.traceBorder, point.positionParameter, point.name, point.valueMetric, point.drawGraphicMarker, point.shape, point.sizeWidth, point.sizeHeight, point.rotateArrow, point.positionShapeX, point.positionShapeY, point.color, point.associateOrientedLinksIn, point.associateOrientedLinksOut); // console.log(toLoad);
 
       var selector = _this.PointValidator(toLoad); // Do some test here to see if your already load a coordinatespace with this id
 
@@ -20424,8 +20618,8 @@ function (_super) {
 
 
     _this.loadMonoRegion = function (region) {
-      var toLoad = new Models_RegionClass__WEBPACK_IMPORTED_MODULE_4__["RegionClass"](region.id, region.linkURL, region.meta, region.lowerLimit, region.label, region.textObj, region.mainMetric, region.metrics, region.colorMode, region.traceBack, region.traceBorder, region.positionParameter, region.idSVG, region.orientedLink, region.coords, region.mode, region.img);
-      console.log(toLoad); // Do some test here to see if your already load a coordinatespace with this id
+      var toLoad = new Models_RegionClass__WEBPACK_IMPORTED_MODULE_4__["RegionClass"](region.id, region.linkURL, region.meta, region.lowerLimit, region.label, region.textObj, region.mainMetric, region.metrics, region.colorMode, region.traceBack, region.traceBorder, region.positionParameter, region.idSVG, region.orientedLink, region.coords, region.mode, region.img); // console.log(toLoad);
+      // Do some test here to see if your already load a coordinatespace with this id
 
       var selector = _this.RegionValidator(toLoad);
 
@@ -20454,8 +20648,8 @@ function (_super) {
     };
 
     _this.loadMonoLink = function (link) {
-      var toLoad = new _Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_5__["OrientedLinkClass"](link.id, link.linkURL, link.meta, link.lowerLimit, link.label, link.textObj, link.mainMetric, link.metrics, link.colorMode, link.traceBack, link.traceBorder, link.positionParameter, link.name, link.orientationLink, link.size, link.pointAPositionX, link.pointAPositionY, link.colorCoordinateA, link.pointBPositionX, link.pointBPositionY, link.colorCoordinateB, link.valueMainMetricA, link.valueMainMetricB, link.pointIn, link.pointOut, link.regionIn, link.regionOut, link.zIndex, link.pointCPositionX, link.pointCPositionY, link.isIncurved, link.mainMetricB, link.metricsB);
-      console.log(toLoad); // Do some test here to see if your already load a coordinatespace with this id
+      var toLoad = new _Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_5__["OrientedLinkClass"](link.id, link.linkURL, link.meta, link.lowerLimit, link.label, link.textObj, link.mainMetric, link.metrics, link.colorMode, link.traceBack, link.traceBorder, link.positionParameter, link.name, link.orientationLink, link.size, link.pointAPositionX, link.pointAPositionY, link.colorCoordinateA, link.pointBPositionX, link.pointBPositionY, link.colorCoordinateB, link.valueMainMetricA, link.valueMainMetricB, link.pointIn, link.pointOut, link.regionIn, link.regionOut, link.zIndex, link.pointCPositionX, link.pointCPositionY, link.isIncurved, link.mainMetricB, link.metricsB); // console.log(toLoad);
+      // Do some test here to see if your already load a coordinatespace with this id
 
       var selector = _this.LinkValidator(toLoad);
 
@@ -20511,9 +20705,8 @@ function (_super) {
         }
       });
 
-      _this.fetchMulti();
+      _this.fetchMulti(); // console.log('load total');
 
-      console.log('load total');
     };
 
     _this.loaderTotal = function () {
@@ -20589,9 +20782,7 @@ function (_super) {
               case 0:
                 _a.trys.push([0, 3,, 4]);
 
-                console.log(url);
                 file = {};
-                console.log(file);
                 return [4
                 /*yield*/
                 , fetch(url)];
@@ -20606,19 +20797,16 @@ function (_super) {
                 file = _a.sent();
 
                 if (file.hasOwnProperty('regions')) {
-                  this.loadMultiRegions(file);
-                  console.log('Load Region');
+                  this.loadMultiRegions(file); // console.log('Load Region');
                 }
 
                 if (file.hasOwnProperty('points')) {
-                  this.loadMultiPoints(file);
-                  console.log('Load Point');
+                  this.loadMultiPoints(file); // console.log('Load Point');
                 }
 
                 if (file.hasOwnProperty('links')) {
                   //console.log(file);
-                  this.loadMultiLinks(file);
-                  console.log('Load Links');
+                  this.loadMultiLinks(file); // console.log('Load Links');
                 }
 
                 return [3
@@ -20627,7 +20815,6 @@ function (_super) {
 
               case 3:
                 error_2 = _a.sent();
-                console.error(error_2);
                 return [3
                 /*break*/
                 , 4];
@@ -20783,8 +20970,7 @@ function (_super) {
     // }
 
 
-    _this.tempo = function () {
-      console.log(_this.props.options.saveImportUrl);
+    _this.tempo = function () {// console.log(this.props.options.saveImportUrl);
     };
 
     _this.totalUrlDisplay = function (props) {
@@ -20876,9 +21062,8 @@ function (_super) {
       }));
     };
 
-    _this.toDel = function () {
-      console.log(_this.props.options.saveImportUrl.multi);
-      console.log(_this.props.options.arrayPoints);
+    _this.toDel = function () {// console.log(this.props.options.saveImportUrl.multi);
+      // console.log(this.props.options.arrayPoints);
     };
 
     _this.state = {
@@ -21468,7 +21653,8 @@ var defaults = {
     modeSVG: true,
     width: '',
     height: '',
-    idSVG: ''
+    idSVG: '',
+    isUploaded: false
   },
   // imageUrl: 'https://upload.wikimedia.org/wikipedia/en/b/be/Locator_Grid.png',
   coordinateSpaceInitial: {

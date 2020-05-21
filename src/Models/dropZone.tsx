@@ -1,6 +1,6 @@
 import React from 'react';
 import { PanelEditorProps } from '@grafana/data';
-import { SimpleOptions, ImportFile } from '../types';
+import { SimpleOptions, ImportFile, Background } from '../types';
 import { Button, FormField } from '@grafana/ui';
 import ImportInput from 'components/importInput';
 
@@ -36,7 +36,12 @@ class DropZone extends React.Component<Props, State> {
         this.props.onOptionsChange({ ...this.props.options, saveImportFile: this.props.options.saveImportFile });
       }
     };
-    this.state.readerFile.readAsText(this.state.selectedFile);
+    const extensionFile = this.state.selectedFile.name.split('.')[1];
+    if (extensionFile === 'jpg' || extensionFile === 'png' || extensionFile === 'gif') {
+      this.state.readerFile.readAsDataURL(this.state.selectedFile);
+    } else {
+      this.state.readerFile.readAsText(this.state.selectedFile);
+    }
   };
 
   save = () => {
@@ -44,6 +49,24 @@ class DropZone extends React.Component<Props, State> {
       this.props.options.saveImportFile.push({ name: this.state.selectedFile.name, content: this.state.readerFile.result as string });
       let loader: ImportInput = new ImportInput(this.props);
       this.props.options.saveImportFile.forEach(file => {
+        if (file.name) {
+          const arrayFileName = file.name.split('.');
+          let newBaseMap: Background = this.props.options.baseMap;
+          if (arrayFileName[1] === 'svg') {
+            newBaseMap.image = file.content;
+            newBaseMap.modeSVG = true;
+            newBaseMap.isUploaded = true;
+          } else if (arrayFileName[1] === 'jpg' || arrayFileName[1] === 'png' || arrayFileName[1] === 'gif') {
+            newBaseMap.image = file.content;
+            newBaseMap.modeSVG = false;
+            newBaseMap.isUploaded = true;
+          }
+          this.props.onOptionsChange({
+            ...this.props.options,
+            baseMap: newBaseMap,
+          });
+        }
+
         if (JSON.parse(file.content).hasOwnProperty('regions')) {
           loader.loadMultiRegions(JSON.parse(file.content));
           console.log('Load Region');

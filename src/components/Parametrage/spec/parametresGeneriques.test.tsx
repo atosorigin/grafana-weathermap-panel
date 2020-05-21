@@ -1,12 +1,10 @@
 // import React from 'react';
 // import ReactDOM from 'react-dom';
 // import ParametresGeneriques from '../parametresGeneriques';
-// // import { ParametrageMetrique } from 'Models/SettingMetricClass';
 // import { LoadingState } from '@grafana/data';
 // import { defaults, SimpleOptions } from '../../../types';
 // import { act } from 'react-dom/test-utils';
 // import { TextObject } from 'Models/TextObjectClass';
-// import { generate } from 'rxjs';
 
 describe('waiting test', () => {
   test('to be pass', done => {
@@ -21,7 +19,7 @@ describe('waiting test', () => {
 //  * - edit parameters
 //  */
 // describe('ParametresGeneriques tests', () => {
-//   let container: any, component: any, testTextObject, parametrageMetric, coordinateSpaceTest: any;
+//   let container: any, component: any, testTextObject, parametrageMetric: any, coordinateSpaceTest: any;
 //   const additionalStep = { value: '1', label: '1' };
 //   //   /*
 //   //    * Mock "onOptionChange" by re-rendering the component with the new options
@@ -68,16 +66,7 @@ describe('waiting test', () => {
 //   let testProps = {};
 //   beforeEach(() => {
 //     let clonedDefaults = JSON.parse(JSON.stringify(defaults));
-//     testTextObject = new TextObject(
-//       'legend',
-//       true,
-//       'unit',
-//       'colbr',
-//       { italic: false, bold: false, underline: false },
-//       true,
-//       valueGenerateObjectText,
-//       generateAuxiliaryElement
-//     );
+//     testTextObject = new TextObject('legend', true, 'unit', 'colbr', { italic: false, bold: false, underline: false }, true, {}, true);
 //     let parametrageMetric;
 //     (coordinateSpaceTest = 0),
 //       '-10',
@@ -159,7 +148,7 @@ describe('waiting test', () => {
 //   });
 
 //   test('test setStateAsyncParametrageMetrique', () => {
-//     return component.setStateAsyncParametrageMetrique({ parametrageMetrique: new ParametrageMetrique('A', 'B', 'C') }).then(() => {
+//     return component.setStateAsyncParametrageMetrique({ parametrageMetrique: ('A', 'B', 'C') }).then(() => {
 //       expect(component.state.parametrageMetrique.followLink).toBe('A');
 //       expect(component.state.parametrageMetrique.hoveringTooltipLink).toBe('B');
 //       expect(component.state.parametrageMetrique.hoveringTooltipText).toBe('C');

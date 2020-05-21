@@ -64,7 +64,7 @@ export const initOrientedLink = (newId: number, newZIndex: number): OrientedLink
     false,
     initPositionParameter,
     'orientedLink' + num.toString(),
-    { label: 'Bidirectionnal', value: 'double' },
+    { label: 'Monodirectional', value: 'AB' },
     { label: 'Medium', value: 'Medium' },
     '0',
     '0',

@@ -24,7 +24,7 @@ Vous pouvez choisir la police suivante :
 
 Permet de pouvoir choisir la taille de la police  en `em`
 
-Example: `1em` oo `4em`.
+Exemple: `1em` à `4em`.
 
 ## Style
 
@@ -44,7 +44,12 @@ Permet de télécharger un SVG pour pouvoir gérer les régions. En décochant, 
 
 # Image
 
-Il est important de définir un espace pour délimiter son environnement
+Il est important de définir un espace pour délimiter son environnement, pour cela vous pouvez télécharger
+
+- Image Vectoriel
+- Si vous n'utilisez pas une image SVG (JPG / PNG / GIF ou aucune)
+- Choisir une image depuis son ordinateur
+- base 64
 
 Pour cela, il est possible de charger une image en arrière-plan suivant une des méthodes proposées : 
 
@@ -83,20 +88,32 @@ pour obtenir le résultat suivant
 
 
 
-#### No background image
+#### Pas d'image d'arrière plan
 
-You must fill in the space required to create your environment without background image :
+Vous devez remplir l'espace requis pour créer votre environnement sans image de fond : 
 
-- Width
-- Height
+- Largeur
+- Hauteur
 
 ![no-background](../../screenshots/editor/display/no-background.jpg)
 
 
-to get the following result
+pour obtenir le résultat suivant :
 
 ![resultat](../../screenshots/editor/display/no-resultat.jpg)
 
+
+## Choisir une image depuis son ordinateur
+
+Il est possible de charger une image en arrière plan depuis son ordinateur. Elle sera chargée une fois et se positionnera en fond d'écran. 
+
+Elle peut être dans un format possible (SVG / JPG / PNG / GIF)
+
+![fileselect](../../screenshots/editor/display/fileselect.png)
+
+A partir du sélecteur, vous choississez le fichier de votre choix. Après la confirmation, l'image sera affiché et les champs de l'éditeur complété pour obtenir le résultat suivant : 
+
+![fileselect resultat](../../screenshots/editor/display/fileselect-resultat.png)
 
 
 ## base 64
@@ -110,6 +127,7 @@ Il est possible de charger une image en *base 64* comme ceci :
 pour cela, il faut *copier l'adresse de l'image*
 
 ![display](../../screenshots/editor/display/base64-capture.jpg)
+
 
 
 

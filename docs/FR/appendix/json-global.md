@@ -80,6 +80,7 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
     - **width** : Choix de la largeur si vous n'avez pas d'image SVG. Si vous en avez une, laissez vide
     - **height** : Choix de la hauteur si vous n'avez pas d'image SVG. Si vous en avez une, laissez vide
     - **idSVG** ""
+    - **isUploaded** : False
     
 ```
    "baseMap": {
@@ -88,7 +89,8 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
         "modeSVG": true,
         "width": "",
         "height": "",
-        "idSVG": ""
+        "idSVG": "",
+        "isUploaded": false
     },
 
 ```

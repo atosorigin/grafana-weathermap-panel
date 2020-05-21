@@ -28,7 +28,7 @@ To create the JSON global file, you can go to the [import file](./../editor/impo
 
 ## Add the global file
 
-For this tutorial, we will use the following JSON file :
+For this tutorial, we will use the following JSON file, available directly from the depot :
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo10-01-global.json

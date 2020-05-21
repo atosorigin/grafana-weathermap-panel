@@ -50,13 +50,17 @@ Il y a beaucoup de valeurs, donc nous devons les manipuler pour arriver à une v
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
-L'image sélectionnée sera [demo01-background.svg](../../resource/demo01-background.svg). Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`.
+L'image sélectionnée sera [demo01-background.svg](../../resource/demo01-background.svg). 
 
-Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
+Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`, ou avec le lien direct du dépôt : 
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
 ```
+
+Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
+
+
 
 ### Étape 2 : Créer la région
 

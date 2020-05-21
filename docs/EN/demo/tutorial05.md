@@ -59,15 +59,17 @@ Here we want to filter the result to display only the device we are interested i
 
 Adding a background image is done from the `display` menu.
 
-The selected image will be [demo1-background.svg](../../resource/demo01-background.svg). To do this, we download it in base64 with the `Copy image address` function.
+The selected image will be [demo1-background.svg](../../resource/demo01-background.svg). 
 
-It is possible to have more details with the [display](../editor/display.md) page.
+To do this, we download it in base64 with the `Copy image address` function, or with the direct link to the repository: 
 
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
 ```
 
+
+It is possible to have more details with the [display](../editor/display.md) page.
 
 
 ### Step 2 : Create the region

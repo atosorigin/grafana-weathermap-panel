@@ -48,3 +48,7 @@ Sous la forme d'une **démo**, vous apprendrez à utiliser le plugin pour obteni
 - 11 [Comment utiliser initial viewing space](tutorial11.md)
 
     [![demo11](../../screenshots/demo/demo11.png)](tutorial11.md)
+    
+- 12 [Construire son dashboard depuis son ordinateur](tutorial12.md)
+
+    [![demo12](../../screenshots/demo/demo12.png)](tutorial12.md)

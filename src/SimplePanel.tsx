@@ -191,7 +191,8 @@ export class SimplePanel extends PureComponent<Props, State> {
       event.nativeEvent.target.id === 'initialSpace' ||
       event.nativeEvent.target.id === 'mainPanel' ||
       event.nativeEvent.target.id === 'Intent' ||
-      event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG
+      event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG ||
+      event.nativeEvent.target.id === this.props.options.baseMap.idSVG
     ) {
       this.createPointToClick(positionX, positionY);
     }
@@ -472,7 +473,8 @@ export class SimplePanel extends PureComponent<Props, State> {
       event.nativeEvent.target.id === 'initialSpace' ||
       event.nativeEvent.target.id === 'Intent' ||
       event.nativeEvent.target.id === 'mainPanel' ||
-      event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG
+      event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG ||
+      event.nativeEvent.target.id === this.props.options.baseMap.idSVG
     ) {
       positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
       //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
@@ -563,8 +565,19 @@ export class SimplePanel extends PureComponent<Props, State> {
               this.resetCoordinatesToDrawLinkWithClick();
             }
           }
-        } else if (event.nativeEvent.target.id !== 'oct' + this.props.options.baseMap.idSVG && event.nativeEvent.target.id.startsWith('oct')) {
-          const id: string = event.nativeEvent.target.id.substr(3);
+        } else if (
+          (event.nativeEvent.target.id !== 'oct' + this.props.options.baseMap.idSVG && event.nativeEvent.target.id.startsWith('oct')) ||
+          (event.nativeEvent.target.id !== this.props.options.baseMap.idSVG &&
+            (event.nativeEvent.target.id.startsWith('path') ||
+              event.nativeEvent.target.id.startsWith('rect') ||
+              event.nativeEvent.target.id.startsWith('ellipse')))
+        ) {
+          let id = '';
+          if (this.props.options.baseMap.isUploaded) {
+            id = event.nativeEvent.target.id;
+          } else {
+            id = event.nativeEvent.target.id.substr(3);
+          }
           if (id === region.idSVG) {
             //console.log(region.idSVG);
             const coordinates = this.props.options.coordinatesToDrawLinkWithClick;
@@ -660,7 +673,8 @@ export class SimplePanel extends PureComponent<Props, State> {
       event.nativeEvent.target.id === 'mainPanel' ||
       event.nativeEvent.target.id === 'initialSpace' ||
       event.nativeEvent.target.id === 'Intent' ||
-      event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG
+      event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG ||
+      event.nativeEvent.target.id === this.props.options.baseMap.idSVG
     ) {
       positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
       //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
@@ -754,8 +768,19 @@ export class SimplePanel extends PureComponent<Props, State> {
               this.resetCoordinatesToDrawLinkWithClick();
             }
           }
-        } else if (event.nativeEvent.target.id !== 'oct' + this.props.options.baseMap.idSVG && event.nativeEvent.target.id.startsWith('oct')) {
-          const id: string = event.nativeEvent.target.id.substr(3);
+        } else if (
+          (event.nativeEvent.target.id !== 'oct' + this.props.options.baseMap.idSVG && event.nativeEvent.target.id.startsWith('oct')) ||
+          (event.nativeEvent.target.id !== this.props.options.baseMap.idSVG &&
+            (event.nativeEvent.target.id.startsWith('path') ||
+              event.nativeEvent.target.id.startsWith('rect') ||
+              event.nativeEvent.target.id.startsWith('ellipse')))
+        ) {
+          let id = '';
+          if (this.props.options.baseMap.isUploaded) {
+            id = event.nativeEvent.target.id;
+          } else {
+            id = event.nativeEvent.target.id.substr(3);
+          }
           if (id === region.idSVG) {
             const coordinates = this.props.options.coordinatesToDrawLinkWithClick;
             positionX = 0;
@@ -891,7 +916,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       false,
       positionParameter,
       name,
-      { label: 'Bidirectionnal', value: 'double' },
+      { label: 'Monodirectional', value: 'AB' },
       { label: 'Medium', value: 'Medium' },
       objectIn.x.toString(),
       objectIn.y.toString(),
@@ -1500,7 +1525,7 @@ export class SimplePanel extends PureComponent<Props, State> {
    * update button css when mount component
    */
   componentDidMount = async () => {
-    console.log('mount Panel');
+    // console.log('mount Panel');
 
     // not display Button of Panel if it is in the mode View
     this.checkIfDisplayButton();
@@ -1512,39 +1537,72 @@ export class SimplePanel extends PureComponent<Props, State> {
 
     // load backgroundSVG
     if (this.props.options.baseMap.modeSVG && this.props.options.baseMap.image !== '') {
-      fetch(this.props.options.baseMap.image)
-        .then(res => res.text())
-        .then(text => {
-          this.setState({ svg: text });
-          const result = /id=["']\w*["']/i.exec(text);
-          if (result && result.length > 0) {
-            const id: string[] = result[0].split('"');
-            if (id.length > 1) {
-              const documentId = document.getElementById(id[1]);
-              if (documentId) {
-                const newBaseMap: Background = this.props.options.baseMap;
-
-                newBaseMap.idSVG = id[1];
-                // newBaseMap.width = documentId.getAttribute('width') || '';
-                // newBaseMap.height = documentId.getAttribute('height') || '';
-                newBaseMap.width = parseInt(documentId.getAttribute('width') || '0', 10).toString() || '';
-                newBaseMap.height = parseInt(documentId.getAttribute('height') || '0', 10).toString() || '';
-                this.props.onOptionsChange({
-                  ...this.props.options,
-                  baseMap: newBaseMap,
-                });
+      if (this.props.options.baseMap.isUploaded) {
+        let width = '';
+        let height = '';
+        const text = this.props.options.baseMap.image;
+        this.setState({ svg: text });
+        const result = /id=["']\w*["']/i.exec(text);
+        const resultWidth = /width=["']\w*["']/i.exec(text);
+        if (resultWidth && resultWidth.length > 0) {
+          width = resultWidth[0].split('"')[1];
+        }
+        const resultHeight = /height=["']\w*["']/i.exec(text);
+        if (resultHeight && resultHeight.length > 0) {
+          height = resultHeight[0].split('"')[1];
+        }
+        if (result && result.length > 0) {
+          const id: string[] = result[0].split('"');
+          if (id.length > 1) {
+            const newBaseMap: Background = this.props.options.baseMap;
+            newBaseMap.idSVG = id[1];
+            newBaseMap.layerImage = this.props.options.baseMap.image;
+            newBaseMap.width = parseInt(width || '0', 10).toString() || '';
+            newBaseMap.height = parseInt(height || '0', 10).toString() || '';
+            this.props.onOptionsChange({
+              ...this.props.options,
+              baseMap: newBaseMap,
+            });
+          }
+        }
+        this.chargeRegion();
+        // const newStr: string = this.editIdString(this.state.svg);
+        // const background: Background = this.props.options.baseMap;
+        // background.layerImage = newStr;
+        // this.props.onOptionsChange({ ...this.props.options, baseMap: background });
+      } else {
+        fetch(this.props.options.baseMap.image)
+          .then(res => res.text())
+          .then(text => {
+            this.setState({ svg: text });
+            const result = /id=["']\w*["']/i.exec(text);
+            if (result && result.length > 0) {
+              const id: string[] = result[0].split('"');
+              if (id.length > 1) {
+                const documentId = document.getElementById(id[1]);
+                if (documentId) {
+                  const newBaseMap: Background = this.props.options.baseMap;
+                  newBaseMap.idSVG = id[1];
+                  // newBaseMap.width = documentId.getAttribute('width') || '';
+                  // newBaseMap.height = documentId.getAttribute('height') || '';
+                  newBaseMap.width = parseInt(documentId.getAttribute('width') || '0', 10).toString() || '';
+                  newBaseMap.height = parseInt(documentId.getAttribute('height') || '0', 10).toString() || '';
+                  this.props.onOptionsChange({
+                    ...this.props.options,
+                    baseMap: newBaseMap,
+                  });
+                }
               }
             }
-          }
-        })
-        .then(() => this.chargeRegion())
-        .then(() => {
-          const newStr: string = this.editIdString(this.state.svg);
-          const background: Background = this.props.options.baseMap;
-
-          background.layerImage = newStr;
-          this.props.onOptionsChange({ ...this.props.options, baseMap: background });
-        });
+          })
+          .then(() => this.chargeRegion())
+          .then(() => {
+            const newStr: string = this.editIdString(this.state.svg);
+            const background: Background = this.props.options.baseMap;
+            background.layerImage = newStr;
+            this.props.onOptionsChange({ ...this.props.options, baseMap: background });
+          });
+      }
     } else {
       this.chargeRegion();
     }
@@ -1604,7 +1662,12 @@ export class SimplePanel extends PureComponent<Props, State> {
   // };
 
   private displayTooltipSVG = (event: any) => {
-    const idSVG: string = event.target.id.substring(3);
+    let idSVG = '';
+    if (this.props.options.baseMap.isUploaded) {
+      idSVG = event.target.id;
+    } else {
+      idSVG = event.target.id.substring(3);
+    }
     const arrayRegions: RegionClass[] = this.props.options.regionCoordinateSpace;
     let newDataSVG: DataTooltipRegionSVG = { idSVG: idSVG, x: '', y: '' };
     for (const region of arrayRegions) {
@@ -1680,7 +1743,12 @@ export class SimplePanel extends PureComponent<Props, State> {
   };
 
   private hideTooltipSVG = (event: any) => {
-    const idSVG: string = event.target.id.substring(3);
+    let idSVG = '';
+    if (this.props.options.baseMap.isUploaded) {
+      idSVG = event.target.id;
+    } else {
+      idSVG = event.target.id.substring(3);
+    }
     const arrayRegions: RegionClass[] = this.props.options.regionCoordinateSpace;
     for (const region of arrayRegions) {
       if (region.idSVG === idSVG) {
@@ -1755,18 +1823,19 @@ export class SimplePanel extends PureComponent<Props, State> {
   /*************************************test create tooltip **********************************************************/
 
   SVG_PathImage = (event: any) => {
-    // console.log('SVG_PathImage');
-    // console.log(event.target);
     this.displayTooltipSVG(event);
     const elementSVG: any = event.target;
     const parentElementSVG: any = elementSVG.parentNode;
-    const idSVG: string = elementSVG.id.substring(3);
+    let idSVG = '';
+    if (this.props.options.baseMap.isUploaded) {
+      idSVG = event.target.id;
+    } else {
+      idSVG = event.target.id.substring(3);
+    }
     const arrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
     for (const region of arrayRegion) {
       if (region.idSVG === idSVG) {
-        //console.log(elementSVG);
         const linkUrl: string = region.linkURL.followLink;
-        //console.log(linkUrl);
         if (linkUrl && !document.getElementById('a' + idSVG) && !this.state.buttonAddIncurvedLinkIsActive && !this.state.buttonAddLinkIsActive) {
           const aElement = document.createElementNS('http://www.w3.org/2000/svg', 'a');
           aElement.setAttribute('id', 'a' + idSVG);
@@ -1840,50 +1909,50 @@ export class SimplePanel extends PureComponent<Props, State> {
 
   /*************************************** create link regionbyid**************************************** */
 
-  CreateLinkArea = () => {
-    // All Id in SVG Test
-    const allidSvg = document.getElementById('octsvg12');
-    allidSvg?.addEventListener('click', () => {
-      const elms = allidSvg.querySelectorAll('[id]');
-      console.log(elms);
-    });
+  // CreateLinkArea = () => {
+  //   // All Id in SVG Test
+  //   const allidSvg = document.getElementById('octsvg12');
+  //   allidSvg?.addEventListener('click', () => {
+  //     const elms = allidSvg.querySelectorAll('[id]');
+  //     console.log(elms);
+  //   });
 
-    // Test Svg Christophe search ID corrrigé
+  // Test Svg Christophe search ID corrrigé
 
-    // const allidSvg3 = document.getElementById('octsvg12');
-    // allidSvg3?.addEventListener('click', () => {
-    //   const elms = allidSvg3.querySelectorAll('[id]');
-    //   console.log(elms);
-    // });
-    // });
-    // All Region in SVG
-    // const allidSvg2 = document.getElementById('octsvg12');
-    // allidSvg2?.addEventListener('click', () => {
-    // this.props.options.regionCoordinateSpace.forEach(region => {
-    //   console.log(region.idSVG);
-    //   console.log(region.linkURL.followLink);
-    // const dam = allidSvg2.querySelectorAll('[id]');
-    // console.log(dam);
-    // console.log('loua');
-    // });
-    // });
+  // const allidSvg3 = document.getElementById('octsvg12');
+  // allidSvg3?.addEventListener('click', () => {
+  //   const elms = allidSvg3.querySelectorAll('[id]');
+  //   console.log(elms);
+  // });
+  // });
+  // All Region in SVG
+  // const allidSvg2 = document.getElementById('octsvg12');
+  // allidSvg2?.addEventListener('click', () => {
+  // this.props.options.regionCoordinateSpace.forEach(region => {
+  //   console.log(region.idSVG);
+  //   console.log(region.linkURL.followLink);
+  // const dam = allidSvg2.querySelectorAll('[id]');
+  // console.log(dam);
+  // console.log('loua');
+  // });
+  // });
 
-    // const elms = document.querySelectorAll('[id]');
-    // for (var i = 0; i < elms.length; i++) {
-    //   let lpo = document.getElementById('octsvg213');
-    //   lpo?.addEventListener('click', () => {
-    //     console.log('rer');
-    //   });
-    //   let lpo1 = document.getElementById('octsvg213');
-    //   lpo1?.addEventListener('click', () => {
-    //     console.log('rer1');
-    //   });
-    //   let lpo2 = document.getElementById('octsvg213');
-    //   lpo2?.addEventListener('click', () => {
-    //     console.log('rer2');
-    //   });
-    // }
-  };
+  // const elms = document.querySelectorAll('[id]');
+  // for (var i = 0; i < elms.length; i++) {
+  //   let lpo = document.getElementById('octsvg213');
+  //   lpo?.addEventListener('click', () => {
+  //     console.log('rer');
+  //   });
+  //   let lpo1 = document.getElementById('octsvg213');
+  //   lpo1?.addEventListener('click', () => {
+  //     console.log('rer1');
+  //   });
+  //   let lpo2 = document.getElementById('octsvg213');
+  //   lpo2?.addEventListener('click', () => {
+  //     console.log('rer2');
+  //   });
+  // }
+  // };
 
   getValuesAuxiliaryMetricsRegionSVG = (region: RegionClass): string[] => {
     reqMetricAuxRegion(region, this.props);
@@ -2154,7 +2223,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   /*************************************** create link regionbyid**************************************** */
 
   /*************************************test create tooltip **********************************************************/
-
+  //https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
   /** render */
   render() {
     let styleBackground;

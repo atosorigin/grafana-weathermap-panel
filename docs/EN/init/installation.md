@@ -4,6 +4,12 @@
 
 * Weathermap requires [Grafana](https://www.grafana.com/) v6.7+ to run (not tested lower version). Download and install it first.
 
+
+```
+The Weathermap plugin is not compatible with Grafana 7.x
+```
+
+
 ## Dependencies
 
 - Grafana 6.7.x

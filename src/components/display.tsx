@@ -16,6 +16,8 @@ interface State {
   size: string;
   /** style variable for input */
   style: Style;
+  /** background uploaded from computer */
+  imageUploaded: string;
 }
 
 /**
@@ -31,6 +33,7 @@ class Display extends React.Component<Props, State> {
       },
       size: this.props.options.display.size,
       style: this.props.options.display.style,
+      imageUploaded: '',
     };
   }
 
@@ -138,7 +141,14 @@ class Display extends React.Component<Props, State> {
     target: HTMLInputElement;
   }) => {
     const newBaseMap: Background = this.props.options.baseMap;
-    newBaseMap.image = e.target.value;
+    const image = e.target.value;
+    const arrayImage = image.split('.');
+    newBaseMap.image = image;
+    if (image.split('.')[arrayImage.length - 1] === 'svg') {
+      newBaseMap.modeSVG = true;
+    } else {
+      newBaseMap.modeSVG = false;
+    }
     this.props.onOptionsChange({
       ...this.props.options,
       baseMap: newBaseMap,
@@ -181,6 +191,48 @@ class Display extends React.Component<Props, State> {
 
   saveStyleData = (style: Style): void => {
     this.setStateAsyncStyle({ style: style });
+  };
+
+  uploadImage = (event: any) => {
+    const readerFile: FileReader = new FileReader();
+    const selectedFile: any = event.target.files[0];
+    const extensionFile = selectedFile.name.split('.')[1];
+    let file: any;
+    if (extensionFile === 'jpg' || extensionFile === 'png' || extensionFile === 'gif') {
+      readerFile.readAsDataURL(selectedFile);
+    } else {
+      readerFile.readAsText(selectedFile);
+    }
+    readerFile.onload = function() {
+      file = readerFile.result;
+    };
+
+    setTimeout(() => {
+      let newBaseMap: Background = this.props.options.baseMap;
+      if (extensionFile === 'svg') {
+        newBaseMap.image = file;
+        newBaseMap.modeSVG = true;
+        newBaseMap.isUploaded = true;
+        newBaseMap.nameUploadedImage = selectedFile.name;
+      } else if (extensionFile === 'jpg' || extensionFile === 'png' || extensionFile === 'gif') {
+        newBaseMap.image = file;
+        newBaseMap.modeSVG = false;
+        newBaseMap.isUploaded = true;
+        newBaseMap.nameUploadedImage = selectedFile.name;
+      }
+      this.props.onOptionsChange({
+        ...this.props.options,
+        baseMap: newBaseMap,
+      });
+    }, 1000);
+  };
+
+  defineValueImage = (): string => {
+    let result = '';
+    if (!this.props.options.baseMap.isUploaded) {
+      result = this.props.options.baseMap.image || '';
+    }
+    return result;
   };
 
   /**
@@ -240,7 +292,25 @@ class Display extends React.Component<Props, State> {
           />
         ) : ( */}
         <div>
-          <FormField label={'Image'} labelWidth={15} inputWidth={30} type="text" onChange={this.onImageChanged} value={options.baseMap.image || ''} />
+          <FormField
+            label={'Image'}
+            labelWidth={15}
+            inputWidth={30}
+            placeholder={'URL'}
+            type="text"
+            onChange={this.onImageChanged}
+            value={this.defineValueImage()}
+          />
+          <div style={{ display: 'flex', margin: '2px 0' }}>
+            <FormLabel width={15}>Upload Image</FormLabel>
+            <input
+              style={{ border: '1px solid #262628', borderRadius: '0 3px 3px 0', width: '416px' }}
+              type="file"
+              name="file"
+              onChange={this.uploadImage}
+            />
+            <p style={{ margin: '10px 0 0 10px', fontSize: '10px' }}>{this.props.options.baseMap.nameUploadedImage || ''}</p>
+          </div>
           <FormField
             label="Width"
             labelWidth={15}

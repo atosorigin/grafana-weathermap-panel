@@ -13,7 +13,7 @@ You enter the url of the file and click on the **Finish** button.
 
 The result is instantaneous.
 
-The decomposition of the file [global.json](../../appendix/json-global.md) is available with all the details.
+The decomposition of the file [global.json](../appendix/json-global.md) is available with all the details.
 
 
 ## Multi URL Import
@@ -25,9 +25,9 @@ For the Multi URL Import, you have to enter the required URLs in the field.
 The different URLs are those of regions, points, and links. 
 You can find templates of the JSON type of these files at the following links:
 
-- [region.json](../../appendix/json-region.md)
-- [point.json](../../appendix/json-points.md)
-- [lien.json](../../appendix/json-links.md)
+- [region.json](../appendix/json-region.md)
+- [point.json](../appendix/json-points.md)
+- [lien.json](../appendix/json-links.md)
 
 Afterward, you click on the `add` button if you want to add more URLs
 To finish you have to click on `finish`.

@@ -22,7 +22,7 @@ You can choose the following font :
 
 Choice of text size in `em`. 
 
-Example: `1em` oo `4em`.
+Example: `1em` to `4em`.
  
  
  
@@ -42,9 +42,16 @@ Differents styles are possible: bold, italic, underlined, etc.
 
 It allows you to download an SVG to be able to manage the regions. By unchecking, you can download any image but it will not be interactive.
 
+
 ## Picture
 
-It is important to define a space to delimit its environment.
+It is important to define a space to delimit its environment, for this you can download
+
+- If you use SVG
+- If you don't use SVG
+- Choose an image from your computer
+- Base 64
+
 
 To do this, it is possible to load a background image using one of the methods suggested: 
 
@@ -101,6 +108,19 @@ to get the following result
 
 ![resultat](../../screenshots/editor/display/no-resultat.jpg)
 
+
+
+## Choose an image from your computer
+
+It is possible to load a background image from your computer. It will be loaded once and will be positioned in the background. 
+
+It can be in a possible format (SVG / JPG / PNG / GIF)
+
+![fileselect](../../screenshots/editor/display/fileselect.png)
+
+From the selector, you choose the file of your choice. After confirmation, the image will be displayed and the fields of the editor will be completed to obtain the following result : 
+
+![fileselect resultat](../../screenshots/editor/display/fileselect-resultat.png)
 
 
 ## base 64

@@ -49,3 +49,7 @@ In the form of a **demo**, you will learn how to use the plugin to get a dynamic
 
     [![demo11](../../screenshots/demo/demo11.png)](tutorial11.md)
 
+- 12 [Building your dashboard from your computer](tutorial12.md)
+
+    [![demo12](../../screenshots/demo/demo12.png)](tutorial12.md)
+
