@@ -10,6 +10,7 @@ import ImportInput from 'components/importInput';
 import ManageCoordinateSpace from 'components/CoordinateSpace/manageCoordinateSpace';
 
 import Display from 'components/display';
+import Gabarit from 'components/gabarit';
 
 import 'style/SimpleEditor.css';
 
@@ -217,6 +218,7 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 						active={this.state.tabsVariable[3]}
 						onChangeTab={() => this.goToTab(3)}
 					/> */}
+          <Tab key="tabGabarit" label="Gabarit" active={this.state.tabsVariable[3]} onChangeTab={() => this.goToTab(3)} />
           <Tab key="tabImportInput" label="Import Files" active={this.state.tabsVariable[4]} onChangeTab={() => this.goToTab(4)} />
         </TabsBar>
         <TabContent>
@@ -308,6 +310,11 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
 							</Collapse>
 						</div>
 					} */}
+          {this.state.tabsVariable[3] && (
+            <div>
+              <Gabarit options={this.props.options} onOptionsChange={this.props.onOptionsChange} data={this.props.data} />
+            </div>
+          )}
           {this.state.tabsVariable[4] && (
             <div>
               <ImportInput options={this.props.options} onOptionsChange={this.props.onOptionsChange} data={this.props.data} />

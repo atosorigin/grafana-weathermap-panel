@@ -46,26 +46,79 @@ export default class DrawRectangle extends React.Component<Props, State> {
    * @returns coordinate to percent
    */
   transformCoordonneesToPx = (size: number, isMax: boolean, position: number): number => {
-    if (size > 100) {
-      size = 100;
-    } else if (size < 0 && size < -100) {
-      size = -100;
-    }
-    if (size >= 0) {
-      size /= 2;
-      size = isMax ? 50 - size : 50 + size;
+    /**
+     *
+     * V1 -100-100
+     *
+     */
+    // if (size > 100) {
+    //   size = 100;
+    // } else if (size < 0 && size < -100) {
+    //   size = -100;
+    // }
+    // if (size >= 0) {
+    //   size /= 2;
+    //   size = isMax ? 50 - size : 50 + size;
+    // } else {
+    //   size *= -1;
+    //   size /= 2;
+    //   size = 50 - size;
+    // }
+    // return size;
+
+    /**
+     *
+     * Correctif client 0-100
+     *
+     */
+
+    let result = 0;
+    if (!this.props.options.coordinateSpaceInitial.defaultReferentiel) {
+      // console.log(position);
+      // console.log('-');
+      if (size > 100) {
+        // console.log('>100');
+        // console.log(position);
+        size = 100;
+      } else if (size < 0 && size < -100) {
+        // console.log('<-100');
+        // console.log(position);
+        size = -100;
+      }
+      if (size >= 0) {
+        // console.log('>0');
+        // console.log(position);
+        size /= 2;
+        size = isMax ? 50 - size : 50 + size;
+      } else {
+        // console.log('<0');
+        // console.log(position);
+        size *= -1;
+        size /= 2;
+        size = 50 - size;
+      }
+      result = size;
+      // console.log(result);
     } else {
-      size *= -1;
-      size /= 2;
-      size = 50 - size;
+      // console.log(position);
+      // console.log('+');
+      if (position === 1) {
+        result = size;
+      } else if (position === 2) {
+        result = 100 - size;
+      } else if (position === 3) {
+        result = size;
+      } else if (position === 4) {
+        result = 100 - size;
+      }
     }
-    return size;
+    // console.log(result);
+    return result;
   };
 
   fillCoordinate = (): JSX.Element => {
     const { options } = this.props;
     let mapItems: JSX.Element[];
-
     mapItems = options.regionCoordinateSpace.map((line: RegionClass, index: number) => (
       <DrawRectangleExtend
         key={'drawRectangleExtend' + index.toString()}
@@ -102,21 +155,42 @@ export default class DrawRectangle extends React.Component<Props, State> {
     yMin = isNumFloat(line.yMin) ? parseInt(line.yMin, 10) : 0;
     yMax = isNumFloat(line.yMax) ? parseInt(line.yMax, 10) : 0;
 
+    // pLeft = this.transformCoordonneesToPx(xMin, false, 1).toString() + '%';
+    // pRight = this.transformCoordonneesToPx(xMax, true, 2).toString() + '%';
+    // pBottom = this.transformCoordonneesToPx(yMin, false, 3).toString() + '%';
+    // pTop = this.transformCoordonneesToPx(yMax, true, 4).toString() + '%';
+
     if (xMax >= 0) {
+      // console.log('pLeft xMax +');
       pLeft = this.transformCoordonneesToPx(xMin, false, 1).toString() + '%';
+      // console.log(pLeft);
+      // console.log('pRight xMax +');
       pRight = this.transformCoordonneesToPx(xMax, true, 2).toString() + '%';
+      // console.log(pRight);
     } else {
       xMin = xMin * -1;
+      // console.log('pRight xMax -');
       pRight = this.transformCoordonneesToPx(xMin, false, 1).toString() + '%';
+      // console.log(pRight);
+      // console.log('pLeft xMax -');
       pLeft = this.transformCoordonneesToPx(xMax, true, 2).toString() + '%';
+      // console.log(pLeft);
     }
     if (yMax >= 0) {
+      // console.log('pBottom yMax +');
       pBottom = this.transformCoordonneesToPx(yMin, false, 3).toString() + '%';
+      // console.log(pBottom);
+      // console.log('pTop yMax +');
       pTop = this.transformCoordonneesToPx(yMax, true, 4).toString() + '%';
+      // console.log(pTop);
     } else {
       yMin = yMin * -1;
+      // console.log('pTop yMax -');
       pTop = this.transformCoordonneesToPx(yMin, false, 3).toString() + '%';
+      // console.log(pTop);
+      // console.log('pBottom yMax -');
       pBottom = this.transformCoordonneesToPx(yMax, true, 4).toString() + '%';
+      // console.log(pBottom);
     }
 
     const data: JSX.Element = (

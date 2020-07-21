@@ -1,7 +1,6 @@
 import { InputSelectableClass } from 'Models/InputSelectableClass';
 import { SelectableValue } from '@grafana/data';
 import { PointClass } from 'Models/PointClass';
-//import { CoordinateSpaceInitialClass } from 'Models/CoordinateSpaceInittialClass';
 import { RegionClass } from 'Models/RegionClass';
 
 export const createInputsLink = (

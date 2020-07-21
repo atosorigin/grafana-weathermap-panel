@@ -57,11 +57,20 @@ export default class DrawPoint extends React.Component<Props, State> {
    */
   private defineLimitX(coordinateX: number) {
     let result: number = coordinateX;
-    if (coordinateX > 100) {
-      result = 100;
-    }
-    if (coordinateX < -100) {
-      result = -100;
+    if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
+      if (coordinateX > 100) {
+        result = 100;
+      }
+      if (coordinateX < 0) {
+        result = 0;
+      }
+    } else {
+      if (coordinateX > 100) {
+        result = 100;
+      }
+      if (coordinateX < -100) {
+        result = -100;
+      }
     }
     return result;
   }
@@ -73,12 +82,23 @@ export default class DrawPoint extends React.Component<Props, State> {
    */
   private defineLimitY(coordinateY: number) {
     let result: number = coordinateY;
-    if (coordinateY > 100) {
-      coordinateY = 100;
+    if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
+      //console.log(coordinateY);
+      if (coordinateY > 100) {
+        result = 100;
+      }
+      if (coordinateY < 0) {
+        result = 0;
+      }
+    } else {
+      if (coordinateY > 100) {
+        result = 100;
+      }
+      if (coordinateY < -100) {
+        result = -100;
+      }
     }
-    if (coordinateY < -100) {
-      coordinateY = -100;
-    }
+    //console.log(result);
     return result;
   }
 
@@ -89,34 +109,30 @@ export default class DrawPoint extends React.Component<Props, State> {
    * @param shapeGraphicMarker
    */
   private definePositionX(positionX: number, initialSpace: Coord4D, size: number, shape: string): number {
-    let x: number;
     const xMin: number = parseInt(initialSpace.xMin, 10);
-    let xMinPx: number = (xMin + 100) * (this.props.widthImage / 200);
     const xMax: number = parseInt(initialSpace.xMax, 10);
-    let xMaxPx: number = (xMax + 100) * (this.props.widthImage / 200);
+    const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
+    let x: number;
 
-    if (xMin < 0 && xMax < 0) {
-      xMinPx = (xMax + 100) * (this.props.widthImage / 200);
-      xMaxPx = (xMin + 100) * (this.props.widthImage / 200);
+    let xMinPx = 0;
+    let xMaxPx = 0;
+    if (!defaultReferentiel) {
+      if (xMin < 0 && xMax < 0) {
+        xMinPx = (xMax + 100) * (this.props.widthImage / 200);
+        xMaxPx = (xMin + 100) * (this.props.widthImage / 200);
+      } else {
+        xMinPx = (xMin + 100) * (this.props.widthImage / 200);
+        xMaxPx = (xMax + 100) * (this.props.widthImage / 200);
+      }
+      const widthInitialSpace: number = xMaxPx - xMinPx;
+      x =
+        xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - (size + parseInt(this.defineBorderSize(), 10));
+    } else {
+      xMinPx = xMin * (this.props.widthImage / 100);
+      xMaxPx = xMax * (this.props.widthImage / 100);
+      const widthInitialSpace: number = xMaxPx - xMinPx;
+      x = xMinPx + this.defineLimitX(positionX) * (widthInitialSpace / 100) - (size + parseInt(this.defineBorderSize(), 10));
     }
-
-    const widthInitialSpace: number = xMaxPx - xMinPx;
-
-    // if (shape === 'circle') {
-    //   x =
-    //     xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - (size + parseInt(this.defineBorderSize(), 10));
-    // } else {
-    //   let widthToCenterCross = 0;
-    //   if (size === 10) {
-    //     widthToCenterCross = 3;
-    //   } else if (size === 14) {
-    //     widthToCenterCross = 5;
-    //   } else if (size === 16) {
-    //     widthToCenterCross = 5.5;
-    //   }
-    //   x = xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - widthToCenterCross;
-    // }
-    x = xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - (size + parseInt(this.defineBorderSize(), 10));
     return x;
   }
 
@@ -129,46 +145,36 @@ export default class DrawPoint extends React.Component<Props, State> {
   private definePositionY(positionY: number, initialSpace: SelectableValue<RegionClass>, size: number, shapeGraphicMarker: string): number {
     let y: number;
     const yMin: number = parseInt(initialSpace.yMin, 10);
-    let yMinPx: number = (yMin + 100) * (this.props.heightImage / 200);
     const yMax: number = parseInt(initialSpace.yMax, 10);
-    let yMaxPx: number = (yMax + 100) * (this.props.heightImage / 200);
+    const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
 
-    if (yMin < 0 && yMax < 0) {
-      yMinPx = (yMax + 100) * (this.props.heightImage / 200);
-      yMaxPx = (yMin + 100) * (this.props.heightImage / 200);
+    let yMinPx = 0;
+    let yMaxPx = 0;
+    if (!defaultReferentiel) {
+      if (yMin < 0 && yMax < 0) {
+        yMinPx = (yMax + 100) * (this.props.heightImage / 200);
+        yMaxPx = (yMin + 100) * (this.props.heightImage / 200);
+      } else {
+        yMinPx = (yMin + 100) * (this.props.heightImage / 200);
+        yMaxPx = (yMax + 100) * (this.props.heightImage / 200);
+      }
+      const heightInitialSpace: number = yMaxPx - yMinPx;
+      y =
+        this.defineValueToAdaptPositionYToInitialSpace(yMinPx, yMaxPx) +
+        (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 2 / 100) - (size + parseInt(this.defineBorderSize(), 10)));
+    } else {
+      yMinPx = yMin * (this.props.heightImage / 100);
+      yMaxPx = yMax * (this.props.heightImage / 100);
+      const heightInitialSpace: number = yMaxPx - yMinPx;
+      y =
+        this.defineValueToAdaptPositionYToInitialSpace(yMinPx, yMaxPx) +
+        this.defineLimitY(100 - positionY) * (heightInitialSpace / 100) -
+        (size + parseInt(this.defineBorderSize(), 10));
     }
-
-    const heightInitialSpace: number = yMaxPx - yMinPx;
-    // if (shapeGraphicMarker === 'circle') {
-    //   y =
-    //     this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) +
-    //     (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 2 / 100) - (size + parseInt(this.defineBorderSize(), 10)));
-    // } else {
-    //   let heightToCenterCross = 0;
-
-    //   if (size === 10) {
-    //     heightToCenterCross = 7.5;
-    //   }
-    //   if (size === 14) {
-    //     heightToCenterCross = 10.5;
-    //   }
-    //   if (size === 16) {
-    //     heightToCenterCross = 12;
-    //   }
-
-    //   y =
-    //     this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) +
-    //     (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 2 / 100)) -
-    //     heightToCenterCross;
-    // }
-    y =
-      this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) +
-      (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 2 / 100) - (size + parseInt(this.defineBorderSize(), 10)));
-
     return y;
   }
 
-  private defineValueToAdaptPositionToInitialSpace = (yMinPx: number, yMaxPx: number): number => {
+  private defineValueToAdaptPositionYToInitialSpace = (yMinPx: number, yMaxPx: number): number => {
     let valueToAdaptPositionToInitialSpace = 0;
     if (yMaxPx > yMinPx) {
       valueToAdaptPositionToInitialSpace = this.props.heightImage - yMaxPx;

@@ -41,7 +41,7 @@ class CoordinateSpaceInitialClass extends React.Component<Props, State> {
    */
   _handleChange(currentTarget: string, name: string) {
     this.setState(prevState => ({
-      arrayCoor: editGoodParameter(name, prevState.arrayCoor, currentTarget),
+      arrayCoor: editGoodParameter(name, prevState.arrayCoor, currentTarget, this.state.arrayCoor.defaultReferentiel),
     }));
     this.callBack();
   }
@@ -70,12 +70,46 @@ class CoordinateSpaceInitialClass extends React.Component<Props, State> {
 
   /** change value for switch */
   onChangeSwitchDisplayInitialSpace = () => {
-    const newDisplayInitial: CoordinateSpaceInitial = this.state.arrayCoor;
-    newDisplayInitial.displayArea = !newDisplayInitial.displayArea;
+    const newInitialSpace: CoordinateSpaceInitial = this.state.arrayCoor;
+    newInitialSpace.displayArea = !newInitialSpace.displayArea;
     this.setState({
-      arrayCoor: newDisplayInitial,
+      arrayCoor: newInitialSpace,
     });
     this.callBack();
+  };
+
+  onChangeSwitchDefaultInitialSpace = () => {
+    const newInitialSpace: CoordinateSpaceInitial = this.state.arrayCoor;
+    newInitialSpace.defaultReferentiel = !newInitialSpace.defaultReferentiel;
+    this.setState({
+      arrayCoor: newInitialSpace,
+    });
+    if (newInitialSpace.defaultReferentiel) {
+      this.props.options.coordinateSpaceInitial.coordinate = {
+        xMin: '0',
+        xMax: '100',
+        yMin: '0',
+        yMax: '100',
+      };
+    } else {
+      this.props.options.coordinateSpaceInitial.coordinate = {
+        xMin: '-100',
+        xMax: '100',
+        yMin: '-100',
+        yMax: '100',
+      };
+    }
+    this.callBack();
+  };
+
+  displayValueReferentiel = (): string => {
+    let result = '';
+    if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
+      result = '(0 : 100)';
+    } else {
+      result = '(-100 : 100)';
+    }
+    return result;
   };
 
   /**
@@ -88,9 +122,12 @@ class CoordinateSpaceInitialClass extends React.Component<Props, State> {
           <FormLabel width={15}>Display space initial</FormLabel>
           <Switch label="" checked={this.state.arrayCoor.displayArea} onChange={this.onChangeSwitchDisplayInitialSpace} />
         </div>
-
+        <div style={{ display: 'flex' }}>
+          <FormLabel width={15}>Default referentiel {this.displayValueReferentiel()}</FormLabel>
+          <Switch label="" checked={this.state.arrayCoor.defaultReferentiel} onChange={this.onChangeSwitchDefaultInitialSpace} />
+        </div>
         <FormField
-          label="xMin"
+          label="X min"
           labelWidth={15}
           inputWidth={20}
           type="text"

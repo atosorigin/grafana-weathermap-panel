@@ -12,6 +12,7 @@ export const createInputsOrientedLink = (
     'orientationLink' + id.toString(),
     'select',
     [
+      { label: 'Nodirectional', value: 'no' },
       { label: 'Monodirectional', value: 'AB' },
       { label: 'Bidirectional', value: 'double' },
     ],

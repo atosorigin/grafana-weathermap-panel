@@ -183,24 +183,26 @@ class LegendComponent extends React.Component<Props, State> {
         <article
           id="L"
           style={{
-            width: '170px',
+            width: '200px',
             position: 'absolute',
             overflowY: 'scroll',
             margin: '0',
-            height: '220px',
+            height: '240px',
             backgroundColor: '#FFF',
             color: '#000',
             border: '4px solid #299c46',
             borderRadius: '4px',
-            scrollbarColor: '#09090b #212124',
-            scrollbarWidth: 'none',
+            // scrollbarColor: '#09090b #212124',
+            scrollbarColor: '#299c46',
+            scrollbarWidth: 'thin',
             zIndex: 9999,
+            resize: 'both',
           }}
         >
           <div key={'legendTitle'} style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
             <h5 style={{ width: '100%', fontSize: '20px', display: 'flex', padding: '10px' }}>
               Legend
-              <Button onClick={this.closeLegend} style={{ marginLeft: '20%' }} id="iconclose">
+              <Button onClick={this.closeLegend} style={{ marginLeft: 'auto' }} id="iconclose">
                 <i className="fa fa-times" aria-hidden="true"></i>
               </Button>
             </h5>
@@ -212,13 +214,13 @@ class LegendComponent extends React.Component<Props, State> {
               <p style={{ fontSize: '15px', padding: '10px 0 10px 14px', fontWeight: 'bold', color: 'white' }}>Region</p>
             </div>
           </div>
-          <div key="regionLegend" style={{ paddingLeft: '5px', lineHeight: '0.6' }}>
+          <div key="regionLegend" style={{ paddingLeft: '5px', lineHeight: '1.5' }}>
             {this.fillRegion()}
           </div>
           <div key={'legendTitlePoint'} style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>
             <p style={{ fontSize: '15px', padding: '10px 0 10px 14px', fontWeight: 'bold', color: 'white' }}>Point</p>
           </div>
-          <div key="pointLegend" style={{ paddingLeft: '5px', lineHeight: '0.95' }}>
+          <div key="pointLegend" style={{ paddingLeft: '5px', lineHeight: '1.5' }}>
             {this.fillPoint()}
           </div>
           <div key={'legendTitleLink'} style={{ backgroundImage: 'linear-gradient(90deg, rgb(41, 42, 45), rgb(0, 0, 0))' }}>

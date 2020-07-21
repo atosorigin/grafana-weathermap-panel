@@ -19,6 +19,7 @@ WeatherMap is a plugin for grafana allowing to visualize monitoring...
     - [Region](EN/editor/coordinates-space-region.md)
     - [Point](EN/editor/coordinates-space-point.md)
     - [Oriented link](EN/editor/coordinates-space-link.md)
+  - [Gabarit](EN/editor/gabarit.md)
   - [Import files](EN/editor/import.md)
 - [Panel](EN/panel/README.md)
   - [Add region](EN/panel/panel-region.md)
@@ -35,6 +36,7 @@ WeatherMap is a plugin for grafana allowing to visualize monitoring...
   - [JSON point](EN/appendix/json-point.md)
   - [JSON link](EN/appendix/json-links.md)
   - [JSON global](EN/appendix/json-global.md)
+  - [JSON gabarit](EN/appendix/json-gabarit.md)
   - [Server](EN/appendix/server.md)
 - [Released](EN/init/released.md)
 

@@ -8,6 +8,7 @@
   - [point](json-point.md)
   - [link](json-links.md)
   - [global](json-global.md)
+  - [gabarit](json-gabarit.md)
 
 
 - SVG 

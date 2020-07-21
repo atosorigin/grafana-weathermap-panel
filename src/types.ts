@@ -5,6 +5,7 @@ import { LinkClass } from 'Models/LinkClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 import { RegionClass, Coord4D } from 'Models/RegionClass';
 import { Style } from 'components/Parametrage/styleComponent';
+import { TextObject } from 'Models/TextObjectClass';
 
 /**
  * interface to save texte settings (police, size, style)
@@ -16,6 +17,110 @@ export interface TexteSettings {
   size: string;
   /** style simple panel */
   style: Style;
+}
+
+export interface LowerLimit {
+  id: number;
+  lowerLimitMin: string;
+  lowerLimitMax: string;
+  backColor: string;
+  borderColor: string;
+  sizeBorder: string;
+}
+
+export interface GabaritFile {
+  fileName: string;
+  queryID: string;
+  globalGabarit: GlobalGabarit;
+  templateGabaritPoint: TemplateGabaritPoint[];
+  templateGabaritRegion: TemplateGabaritRegion[];
+  templateGabaritLink: TemplateGabaritLink[];
+}
+
+export interface GlobalGabarit {
+  lowerLimit: LowerLimit;
+  textObject: TextObject;
+  colorMode: boolean;
+  traceBack: boolean;
+  traceBorder: boolean;
+}
+
+export interface TemplateGabaritPoint {
+  filtered: string;
+  labelfix: boolean;
+  xylabel: string;
+  xylabelfix: string;
+  type: string;
+  name: string;
+  meta: string;
+  label: string;
+  positionParameter: string;
+  mainMetric: Metric;
+  metrics: Metric[];
+  linkURL: UrlList;
+  valueMetric: string;
+  drawGraphicMarker: SelectableValue<string>;
+  shape: SelectableValue<string>;
+  sizeWidth: SelectableValue<string>;
+  sizeHeight: SelectableValue<string>;
+  roteArrow: SelectableValue<string>;
+  positionShapeX: string;
+  positionShapeY: string;
+  color: string;
+  associateOrientedLinksIn: OrientedLinkClass[];
+  associateOrientedLinksOut: OrientedLinkClass[];
+}
+
+export interface TemplateGabaritRegion {
+  filtered: string;
+  labelfix: boolean;
+  xylabel: string;
+  xylabel0: string;
+  xylabelfix: string;
+  xylabelfix0: string;
+  type: string;
+  meta: string;
+  label: string;
+  positionParameter: string;
+  mainMetric: Metric;
+  metrics: Metric[];
+  linkURL: UrlList;
+  idSVG: string;
+  mode: boolean;
+  img: string;
+}
+
+export interface TemplateGabaritLink {
+  filtered: string;
+  labelfix: boolean;
+  xylabelA: string;
+  xylabelB: string;
+  xylabelC: string;
+  xylabelfixA: string;
+  xylabelfixB: string;
+  xylabelfixC: string;
+  type: string;
+  name: string;
+  meta: string;
+  label: string;
+  positionParameter: string;
+  mainMetric: Metric;
+  metrics: Metric[];
+  mainMetricB: Metric;
+  metricsB: Metric[];
+  linkURL: UrlList;
+  orientationLink: SelectableValue<string>;
+  size: SelectableValue<string>;
+  colorCoordinateA: string;
+  colorCoordinateB: string;
+  valueMainMetricA: string;
+  valueMainMetricB: string;
+  pointIn: string;
+  pointOut: string;
+  regionIn: string;
+  regionOut: string;
+  zIndex: string;
+  isIncurved: SelectableValue<string>;
 }
 
 export declare type TManageValue = 'avg' | 'sum' | 'err';
@@ -118,6 +223,8 @@ export interface CoordinateSpaceInitial {
   coordinate: Coord4D;
   /** display zone in SimplePanel (orange rectangle) */
   displayArea: boolean;
+  /** if true use default coor 0-100 else use -100-100 */
+  defaultReferentiel: boolean;
 }
 
 interface Legend {
@@ -346,6 +453,11 @@ export interface SimpleOptions extends MetricSettings {
   newOrientedLink: boolean;
 
   currentDashboard: boolean;
+
+  gabaritUrlInput: string;
+  saveGabaritURL: string[];
+  saveGabaritFile: GabaritFile[];
+  gabaritDefault: GabaritFile;
 }
 
 export const defaults: SimpleOptions = {
@@ -354,12 +466,13 @@ export const defaults: SimpleOptions = {
   // imageUrl: 'https://upload.wikimedia.org/wikipedia/en/b/be/Locator_Grid.png',
   coordinateSpaceInitial: {
     coordinate: {
-      xMin: '-100',
+      xMin: '0',
       xMax: '100',
-      yMin: '-100',
+      yMin: '0',
       yMax: '100',
     },
     displayArea: true,
+    defaultReferentiel: true,
   },
   displayButton: false,
   regionCoordinateSpace: [],
@@ -473,4 +586,59 @@ export const defaults: SimpleOptions = {
   newPoint: true,
   newOrientedLink: true,
   currentDashboard: false,
+  gabaritUrlInput: '',
+  saveGabaritURL: [],
+  saveGabaritFile: [],
+  gabaritDefault: {
+    queryID: 'A',
+    fileName: 'default',
+    globalGabarit: {
+      lowerLimit: {
+        id: 0,
+        lowerLimitMin: '0',
+        lowerLimitMax: '0',
+        backColor: 'blue',
+        borderColor: 'red',
+        sizeBorder: '1px',
+      },
+      textObject: {
+        value: 'default',
+        isTextTooltip: false,
+        colorBack: 'blue',
+        colorText: 'black',
+        style: {
+          bold: false,
+          italic: false,
+          underline: false,
+        },
+        generateObjectText: false,
+        valueGenerateObjectText: {
+          legendElement: 'default',
+          numericFormatElement: 'default',
+          unit: 'default',
+          displayObjectInTooltip: false,
+          addColorTextElement: false,
+          colorTextElement: 'black',
+          addColorBackElement: false,
+          colorBackElement: 'white',
+        },
+        generateAuxiliaryElement: {
+          legendElement: 'default',
+          numericFormatElement: 'default',
+          unit: 'default',
+          displayObjectInTooltip: false,
+          addColorTextElement: false,
+          colorTextElement: 'black',
+          addColorBackElement: false,
+          colorBackElement: 'white',
+        },
+      },
+      colorMode: true,
+      traceBack: true,
+      traceBorder: true,
+    },
+    templateGabaritPoint: [],
+    templateGabaritRegion: [],
+    templateGabaritLink: [],
+  },
 };

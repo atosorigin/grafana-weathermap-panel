@@ -66,42 +66,115 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     };
   }
 
+  /**
+   * to do
+   * @param coordinateX
+   *
+   */
+  private defineLimitX(coordinateX: number) {
+    let result: number = coordinateX;
+    if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
+      if (coordinateX > 100) {
+        result = 100;
+      }
+      if (coordinateX < 0) {
+        result = 0;
+      }
+    } else {
+      if (coordinateX > 100) {
+        result = 100;
+      }
+      if (coordinateX < -100) {
+        result = -100;
+      }
+    }
+    return result;
+  }
+
+  /**
+   * to do
+   * @param coordinateY
+   *
+   */
+  private defineLimitY(coordinateY: number) {
+    let result: number = coordinateY;
+    if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
+      if (coordinateY > 100) {
+        result = 100;
+      }
+      if (coordinateY < 0) {
+        result = 0;
+      }
+    } else {
+      if (coordinateY > 100) {
+        result = 100;
+      }
+      if (coordinateY < -100) {
+        result = -100;
+      }
+    }
+    return result;
+  }
+
   private synchroLinkX(positionX: number): number {
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
     const xMin: number = parseInt(initialSpace.xMin, 10);
-    let xMinPx: number = (xMin + 100) * (this.props.widthImage / 200);
     const xMax: number = parseInt(initialSpace.xMax, 10);
-    let xMaxPx: number = (xMax + 100) * (this.props.widthImage / 200);
+    const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
+    let xMinPx = 0;
+    let xMaxPx = 0;
+    let x = 0;
 
-    if (xMin < 0 && xMax < 0) {
-      xMinPx = (xMax + 100) * (this.props.widthImage / 200);
-      xMaxPx = (xMin + 100) * (this.props.widthImage / 200);
+    if (!defaultReferentiel) {
+      if (xMin < 0 && xMax < 0) {
+        xMinPx = (xMax + 100) * (this.props.widthImage / 200);
+        xMaxPx = (xMin + 100) * (this.props.widthImage / 200);
+      } else {
+        xMinPx = (xMin + 100) * (this.props.widthImage / 200);
+        xMaxPx = (xMax + 100) * (this.props.widthImage / 200);
+      }
+      const widthInitialSpace: number = xMaxPx - xMinPx;
+      x = xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2);
+    } else {
+      xMinPx = xMin * (this.props.widthImage / 100);
+      xMaxPx = xMax * (this.props.widthImage / 100);
+      const widthInitialSpace: number = xMaxPx - xMinPx;
+      x = xMinPx + this.defineLimitX(positionX) * (widthInitialSpace / 100);
     }
-
-    const widthInitialSpace: number = xMaxPx - xMinPx;
-    const x: number = xMinPx + (positionX * (widthInitialSpace / 200) + widthInitialSpace / 2);
     return x;
   }
 
   private synchroLinkY(positionY: number): number {
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
     const yMin: number = parseInt(initialSpace.yMin, 10);
-    let yMinPx: number = (yMin + 100) * (this.props.heightImage / 200);
     const yMax: number = parseInt(initialSpace.yMax, 10);
-    let yMaxPx: number = (yMax + 100) * (this.props.heightImage / 200);
+    const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
+    let yMinPx = 0;
+    let yMaxPx = 0;
+    let y = 0;
 
-    if (yMin < 0 && yMax < 0) {
-      yMinPx = (yMax + 100) * (this.props.heightImage / 200);
-      yMaxPx = (yMin + 100) * (this.props.heightImage / 200);
+    if (!defaultReferentiel) {
+      if (yMin < 0 && yMax < 0) {
+        yMinPx = (yMax + 100) * (this.props.heightImage / 200);
+        yMaxPx = (yMin + 100) * (this.props.heightImage / 200);
+      } else {
+        yMinPx = (yMin + 100) * (this.props.heightImage / 200);
+        yMaxPx = (yMax + 100) * (this.props.heightImage / 200);
+      }
+      const heightInitialSpace: number = yMaxPx - yMinPx;
+      y =
+        this.defineValueToAdaptPositionYToInitialSpace(yMinPx, yMaxPx) +
+        (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 200));
+    } else {
+      yMinPx = yMin * (this.props.heightImage / 100);
+      yMaxPx = yMax * (this.props.heightImage / 100);
+      const heightInitialSpace: number = yMaxPx - yMinPx;
+      y = this.defineValueToAdaptPositionYToInitialSpace(yMinPx, yMaxPx) + this.defineLimitY(100 - positionY) * (heightInitialSpace / 100);
     }
-
-    const heightInitialSpace: number = yMaxPx - yMinPx;
-    const y: number =
-      this.defineValueToAdaptPositionToInitialSpace(yMinPx, yMaxPx) + (heightInitialSpace / 2 - positionY * (heightInitialSpace / 200));
     return y;
   }
 
-  private defineValueToAdaptPositionToInitialSpace = (yMinPx: number, yMaxPx: number): number => {
+  private defineValueToAdaptPositionYToInitialSpace = (yMinPx: number, yMaxPx: number): number => {
     let valueToAdaptPositionToInitialSpace = 0;
     if (yMaxPx > yMinPx) {
       valueToAdaptPositionToInitialSpace = this.props.heightImage - yMaxPx;
@@ -2329,7 +2402,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                     justifyContent: 'center',
                   }}
                 >
-                  {/* <div className="arrowTriangle"> */}
                   <div
                     className="arrowTriangle"
                     style={{
@@ -2342,20 +2414,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                       transform: 'rotate(270deg)',
                     }}
                   ></div>
-                  {/* <div
-                      className="triangleUp"
-                      style={{
-                        position: 'absolute',
-                        top: '5px',
-                        width: '0',
-                        height: '0',
-                        borderLeft: 9 + 'px solid transparent',
-                        borderRight: 9 + 'px solid transparent',
-                        borderBottom: 9 + 'px solid ' + 'red',
-                        transform: 'rotate(270deg)',
-                      }}
-                    />
-                  </div> */}
                   <div
                     style={{
                       border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
@@ -2388,48 +2446,104 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           </a>
         );
       }
-      // else if (orientationLink === 'BA') {
-      // 	return (
-      // 		<div id='link'>
-      // 			<div id='arrow1' style={{
-      // 				display: 'flex',
-      // 				alignContent: 'stretch',
-      // 				position: 'absolute',
-      // 				top: yArrowAB - (sizeArrowTriangle / 2),
-      // 				left: xArrowAB,
-      // 				transform: 'rotate(' + angleDegreeBA + 'deg)',
-      // 				width: distanceAB,
-
-      // 			}}>
-      // 				<div className='arrowTriangle' style={{
-      // 					width: '0',
-      // 					height: '0',
-      // 					borderLeft: sizeArrowTriangle + 'px solid transparent',
-      // 					borderRight: sizeArrowTriangle + 'px solid transparent',
-      // 					borderBottom: sizeArrowTriangle + 'px solid ' + colorB,
-      // 					transform: 'rotate(270deg)',
-      // 				}}></div>
-      // 				<div style={{
-      // 					border: '1px solid ' + colorB,
-      // 					backgroundColor: colorB,
-      // 					width: distanceAB,
-      // 				}}></div>
-      // 			</div>
-      // 			<div style={{
-      // 				position: 'absolute',
-      // 				top: yMidAB + labelBPositionY,
-      // 				left: xMidAB + labelBPositionX,
-      // 				//border: '1px solid black',
-      // 				backgroundColor: 'white',
-      // 				color: 'black',
-      // 				fontSize: distanceAB * (4 / 100),
-      // 				padding: '0 5px',
-      // 			}}>
-      // 				{labelB}
-      // 			</div>
-      // 		</div>
-      // 	)
-      // }
+    } else if (orientationLink === 'no') {
+      if (this.props.isIncurved.value) {
+        return (
+          <a href={linkUrlOrientedLink}>
+            <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
+              <div
+                id="partA"
+                style={{
+                  position: 'absolute',
+                  zIndex: this.props.zIndex,
+                  top: yArrowAC,
+                  left: xArrowAC,
+                  transform: 'rotate(' + angleDegreeAC.toString() + 'deg)',
+                  height: this.defineBorderSize('A') + 'px',
+                  width: distanceAC,
+                  border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
+                  backgroundColor: this.defineBorderColor('A'),
+                }}
+              ></div>
+            </Tooltip>
+            <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
+              <div
+                id="partB"
+                style={{
+                  position: 'absolute',
+                  zIndex: this.props.zIndex,
+                  top: yArrowBC,
+                  left: xArrowBC,
+                  transform: 'rotate(' + angleDegreeBC.toString() + 'deg)',
+                  height: this.defineBorderSize('A') + 'px',
+                  width: distanceBC,
+                  border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
+                  backgroundColor: this.defineBorderColor('A'),
+                }}
+              ></div>
+            </Tooltip>
+            <div
+              id={'labelMainMetric' + this.props.id}
+              style={{
+                textDecoration: this.defineTextDecoration(),
+                fontStyle: this.defineFontStyle(),
+                fontWeight: this.defineFontWeight(),
+                position: 'absolute',
+                zIndex: 9999,
+                top: yC + parseInt(this.props.labelAPositionY, 10) * inverseAxeY - this.labelSynchroY('A'),
+                left: xC + parseInt(this.props.labelAPositionX, 10) - this.labelSynchroX('A'),
+                backgroundColor: 'white',
+                fontSize: this.props.sizePolice,
+                color: this.defineColorTextLabel(),
+                padding: '0',
+                cursor: 'pointer',
+              }}
+            >
+              {this.defineTextObject(this.props.valueMainMetricA)}
+            </div>
+          </a>
+        );
+      } else {
+        return (
+          <a href={linkUrlOrientedLink} target="_blank">
+            <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
+              <div
+                id="link"
+                style={{
+                  position: 'absolute',
+                  zIndex: this.props.zIndex,
+                  top: yArrowAB,
+                  left: xArrowAB,
+                  transform: 'rotate(' + angleDegreeAB.toString() + 'deg)',
+                  width: distanceAB,
+                  height: this.defineBorderSize('A') + 'px',
+                  border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
+                  backgroundColor: this.defineBorderColor('A'),
+                }}
+              ></div>
+            </Tooltip>
+            <div
+              id={'labelMainMetric' + this.props.id}
+              style={{
+                textDecoration: this.defineTextDecoration(),
+                fontStyle: this.defineFontStyle(),
+                fontWeight: this.defineFontWeight(),
+                position: 'absolute',
+                zIndex: 9999,
+                top: yMidAB + parseInt(this.props.labelAPositionY, 10) * inverseAxeY - this.labelSynchroY('A'),
+                left: xMidAB + parseInt(this.props.labelAPositionX, 10) - this.labelSynchroX('A'),
+                backgroundColor: 'white',
+                fontSize: this.props.sizePolice,
+                color: this.defineColorTextLabel(),
+                padding: '0',
+                cursor: 'pointer',
+              }}
+            >
+              {this.defineTextObject(this.props.valueMainMetricA)}
+            </div>
+          </a>
+        );
+      }
     } else {
       return <div></div>;
     }

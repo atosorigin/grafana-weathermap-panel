@@ -134,58 +134,53 @@ export class SimplePanel extends PureComponent<Props, State> {
    * to do
    */
   getCoordinatesToDrawPointWithClick = (event: any) => {
-    let positionX = 0;
-    let positionY = 0;
     const widthPanel: number = parseInt(this.props.options.baseMap.width, 10);
     const heightPanel: number = parseInt(this.props.options.baseMap.height, 10);
-
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
-
     const xMin: number = parseInt(initialSpace.xMin, 10);
-    let xMinPx: number = (xMin + 100) * (widthPanel / 200);
     const xMax: number = parseInt(initialSpace.xMax, 10);
-    let xMaxPx: number = (xMax + 100) * (widthPanel / 200);
-
-    // if (xMin < 0 && xMax < 0) {
-    //   xMinPx = (xMax + 100) * (widthPanel / 200) * -1;
-    //   xMaxPx = (xMin + 100) * (widthPanel / 200) * -1;
-    // }
-
     const yMin: number = parseInt(initialSpace.yMin, 10);
-    let yMinPx: number = (yMin + 100) * (heightPanel / 200);
     const yMax: number = parseInt(initialSpace.yMax, 10);
-    let yMaxPx: number = (yMax + 100) * (heightPanel / 200);
+    const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
+    let positionX = 0;
+    let positionY = 0;
 
-    if (yMin < 0 && yMax < 0) {
-      yMinPx = (yMax + 100) * (heightPanel / 200);
-      yMaxPx = (yMin + 100) * (heightPanel / 200);
+    let xMinPx = 0;
+    let xMaxPx = 0;
+    if (!defaultReferentiel) {
+      xMinPx = (xMin + 100) * (widthPanel / 200);
+      xMaxPx = (xMax + 100) * (widthPanel / 200);
+      const widthInitialSpace: number = xMaxPx - xMinPx;
+      if (xMin < 0 && xMax < 0) {
+        positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2 * -1;
+      } else {
+        positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
+      }
+    } else {
+      xMinPx = xMin * (widthPanel / 100);
+      xMaxPx = xMax * (widthPanel / 100);
+      const widthInitialSpace: number = xMaxPx - xMinPx;
+      positionX = Math.round(((event.nativeEvent.offsetX - xMinPx) / widthInitialSpace) * 100);
     }
 
-    const widthInitialSpace: number = xMaxPx - xMinPx;
-    const heightInitialSpace: number = yMaxPx - yMinPx;
-
-    positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
-    //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1;
-    positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
-
-    if (xMin < 0 && xMax < 0) {
-      positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2 * -1;
+    let yMinPx = 0;
+    let yMaxPx = 0;
+    if (!defaultReferentiel) {
+      if (yMin < 0 && yMax < 0) {
+        yMinPx = (yMax + 100) * (heightPanel / 200);
+        yMaxPx = (yMin + 100) * (heightPanel / 200);
+      } else {
+        yMinPx = (yMin + 100) * (heightPanel / 200);
+        yMaxPx = (yMax + 100) * (heightPanel / 200);
+      }
+      const heightInitialSpace: number = yMaxPx - yMinPx;
+      positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+    } else {
+      yMinPx = yMin * (heightPanel / 100);
+      yMaxPx = yMax * (heightPanel / 100);
+      const heightInitialSpace: number = yMaxPx - yMinPx;
+      positionY = 100 - Math.round(((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace) * 100);
     }
-    // if (yMin < 0 && yMax < 0) {
-    //   positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
-    // }
-
-    // if (
-    //   !coordinateIsInInitialSpace(
-    //     parseInt(event.nativeEvent.offsetX, 10),
-    //     parseInt(event.nativeEvent.offsetY, 10),
-    //     this.props.options.coordinateSpaceInitial,
-    //     this.props.options.baseMap
-    //   )
-    // ) {
-    //   //console.error('is not initial space');
-    //   return;
-    // }
 
     if (
       event.nativeEvent.target.id === 'initialSpace' ||
@@ -436,8 +431,6 @@ export class SimplePanel extends PureComponent<Props, State> {
 
   /** get coordinate when use click in panel */
   getCoordinatesToDrawOrientedLinkWithClick = (event: any) => {
-    let positionX = 0;
-    let positionY = 0;
     const coordinates = this.props.options.coordinatesToDrawLinkWithClick;
     const objectIn: any = coordinates[1];
     const objectOut: any = coordinates[2];
@@ -445,26 +438,42 @@ export class SimplePanel extends PureComponent<Props, State> {
     const heightPanel: number = parseInt(this.props.options.baseMap.height, 10);
     const widthPanel: number = parseInt(this.props.options.baseMap.width, 10);
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
-
     const xMin: number = parseInt(initialSpace.xMin, 10);
-    let xMinPx: number = (xMin + 100) * (widthPanel / 200);
     const xMax: number = parseInt(initialSpace.xMax, 10);
-    let xMaxPx: number = (xMax + 100) * (widthPanel / 200);
-
-    // if (xMin < 0 && xMax < 0) {
-    //   xMinPx = (xMax + 100) * (widthPanel / 200);
-    //   xMaxPx = (xMin + 100) * (widthPanel / 200);
-    // }
-
     const yMin: number = parseInt(initialSpace.yMin, 10);
-    let yMinPx: number = (yMin + 100) * (heightPanel / 200);
     const yMax: number = parseInt(initialSpace.yMax, 10);
-    let yMaxPx: number = (yMax + 100) * (heightPanel / 200);
+    const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
+    let positionX = 0;
+    let positionY = 0;
 
-    // if (yMin < 0 && yMax < 0) {
-    //   yMinPx = (yMax + 100) * (heightPanel / 200);
-    //   yMaxPx = (yMin + 100) * (heightPanel / 200);
-    // }
+    let xMinPx = 0;
+    let xMaxPx = 0;
+    if (!defaultReferentiel) {
+      xMinPx = (xMin + 100) * (widthPanel / 200);
+      xMaxPx = (xMax + 100) * (widthPanel / 200);
+      // if (xMin < 0 && xMax < 0) {
+      //   xMinPx = (xMax + 100) * (widthPanel / 200);
+      //   xMaxPx = (xMin + 100) * (widthPanel / 200);
+      // }
+    } else {
+      xMinPx = xMin * (widthPanel / 100);
+      xMaxPx = xMax * (widthPanel / 100);
+    }
+
+    let yMinPx = 0;
+    let yMaxPx = 0;
+    if (!defaultReferentiel) {
+      if (yMin < 0 && yMax < 0) {
+        yMinPx = (yMax + 100) * (heightPanel / 200);
+        yMaxPx = (yMin + 100) * (heightPanel / 200);
+      } else {
+        yMinPx = (yMin + 100) * (heightPanel / 200);
+        yMaxPx = (yMax + 100) * (heightPanel / 200);
+      }
+    } else {
+      yMinPx = yMin * (heightPanel / 100);
+      yMaxPx = yMax * (heightPanel / 100);
+    }
 
     const widthInitialSpace: number = xMaxPx - xMinPx;
     const heightInitialSpace: number = yMaxPx - yMinPx;
@@ -476,25 +485,35 @@ export class SimplePanel extends PureComponent<Props, State> {
       event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG ||
       event.nativeEvent.target.id === this.props.options.baseMap.idSVG
     ) {
-      positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
-      //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
-      positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+      if (!defaultReferentiel) {
+        positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
+      } else {
+        positionX = Math.round(((event.nativeEvent.offsetX - xMinPx) / widthInitialSpace) * 100);
+      }
 
+      if (!defaultReferentiel) {
+        if (yMax < 0) {
+          positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+        } else {
+          positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+        }
+      } else {
+        positionY = 100 - Math.round(((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace) * 100);
+        console.log(positionY);
+      }
+
+      //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
       // if (yMax > 0 && yMax < 100) {
       //   positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
       // }
 
-      if (yMin < 0 && yMax < 0) {
-        positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
-      }
-
       if (coordinates[0].id === 0) {
         objectIn.x = positionX;
-        objectIn.y = positionY * -1;
+        objectIn.y = yMin < 0 ? positionY * -1 : positionY;
         coordinates[0].id++;
       } else if (coordinates[0].id === 1) {
         objectOut.x = positionX;
-        objectOut.y = positionY * -1;
+        objectOut.y = yMin < 0 ? positionY * -1 : positionY;
         pointC.x = ((parseInt(objectIn.x, 10) + parseInt(objectOut.x, 10)) / 2).toString();
         pointC.y = ((parseInt(objectIn.y, 10) + parseInt(objectOut.y, 10)) / 2).toString();
         coordinates[0].id = 0;
@@ -636,8 +655,6 @@ export class SimplePanel extends PureComponent<Props, State> {
   };
 
   getCoordinatesToDrawIncurvedOrientedLinkWithClick = (event: any) => {
-    let positionX = 0;
-    let positionY = 0;
     const coordinates = this.props.options.coordinatesToDrawLinkWithClick;
     const objectIn: any = coordinates[1];
     const objectOut: any = coordinates[2];
@@ -645,25 +662,41 @@ export class SimplePanel extends PureComponent<Props, State> {
     const heightPanel: number = parseInt(this.props.options.baseMap.height, 10);
     const widthPanel: number = parseInt(this.props.options.baseMap.width, 10);
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
-
     const xMin: number = parseInt(initialSpace.xMin, 10);
-    let xMinPx: number = (xMin + 100) * (widthPanel / 200);
     const xMax: number = parseInt(initialSpace.xMax, 10);
-    let xMaxPx: number = (xMax + 100) * (widthPanel / 200);
-
-    // if (xMin < 0 && xMax < 0) {
-    //   xMinPx = (xMax + 100) * (widthPanel / 200);
-    //   xMaxPx = (xMin + 100) * (widthPanel / 200);
-    // }
-
     const yMin: number = parseInt(initialSpace.yMin, 10);
-    let yMinPx: number = (yMin + 100) * (heightPanel / 200);
     const yMax: number = parseInt(initialSpace.yMax, 10);
-    let yMaxPx: number = (yMax + 100) * (heightPanel / 200);
+    const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
+    let positionX = 0;
+    let positionY = 0;
 
-    if (yMin < 0 && yMax < 0) {
-      yMinPx = (yMax + 100) * (heightPanel / 200);
-      yMaxPx = (yMin + 100) * (heightPanel / 200);
+    let xMinPx = 0;
+    let xMaxPx = 0;
+    if (!defaultReferentiel) {
+      xMinPx = (xMin + 100) * (widthPanel / 200);
+      xMaxPx = (xMax + 100) * (widthPanel / 200);
+      // if (xMin < 0 && xMax < 0) {
+      //   xMinPx = (xMax + 100) * (widthPanel / 200);
+      //   xMaxPx = (xMin + 100) * (widthPanel / 200);
+      // }
+    } else {
+      xMinPx = xMin * (widthPanel / 100);
+      xMaxPx = xMax * (widthPanel / 100);
+    }
+
+    let yMinPx = 0;
+    let yMaxPx = 0;
+    if (!defaultReferentiel) {
+      if (yMin < 0 && yMax < 0) {
+        yMinPx = (yMax + 100) * (heightPanel / 200);
+        yMaxPx = (yMin + 100) * (heightPanel / 200);
+      } else {
+        yMinPx = (yMin + 100) * (heightPanel / 200);
+        yMaxPx = (yMax + 100) * (heightPanel / 200);
+      }
+    } else {
+      yMinPx = yMin * (heightPanel / 100);
+      yMaxPx = yMax * (heightPanel / 100);
     }
 
     const widthInitialSpace: number = xMaxPx - xMinPx;
@@ -676,29 +709,37 @@ export class SimplePanel extends PureComponent<Props, State> {
       event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG ||
       event.nativeEvent.target.id === this.props.options.baseMap.idSVG
     ) {
-      positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
-      //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
-      positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+      if (!defaultReferentiel) {
+        positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
+      } else {
+        positionX = Math.round(((event.nativeEvent.offsetX - xMinPx) / widthInitialSpace) * 100);
+      }
+
+      if (!defaultReferentiel) {
+        if (yMax < 0) {
+          positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+        } else {
+          positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+        }
+      } else {
+        positionY = 100 - Math.round(((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace) * 100);
+      }
 
       // if (yMax > 0 && yMax < 100) {
       //   positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
       // }
 
-      if (yMin < 0 && yMax < 0) {
-        positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
-      }
-
       if (coordinates[0].id === 0) {
         objectIn.x = positionX;
-        objectIn.y = positionY * -1;
+        objectIn.y = yMin < 0 ? positionY * -1 : positionY;
         coordinates[0].id++;
       } else if (coordinates[0].id === 1) {
         objectOut.x = positionX;
-        objectOut.y = positionY * -1;
+        objectOut.y = yMin < 0 ? positionY * -1 : positionY;
         coordinates[0].id++;
       } else if (coordinates[0].id === 2) {
         pointC.x = positionX;
-        pointC.y = positionY * -1;
+        pointC.y = yMin < 0 ? positionY * -1 : positionY;
         coordinates[0].id = 0;
         this.createOrientedLinkToClick({ label: 'Yes', value: true });
         this.resetCoordinatesToDrawLinkWithClick();
