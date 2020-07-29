@@ -79,7 +79,7 @@ export default class Point extends React.Component<Props, State> {
     /** new espace coordinate */
     point: PointClass;
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };
@@ -89,7 +89,7 @@ export default class Point extends React.Component<Props, State> {
     /** new line in array input */
     arrayInput: ArrayInputSelectableClass[];
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };

@@ -300,7 +300,7 @@ class ManageQuery extends React.Component<Prop, State> {
     /** new value main metric */
     mainMetric: Metric;
   }) => {
-    return new Promise(resolve => this.setState(state, resolve));
+    return new Promise((resolve) => this.setState(state, resolve));
   };
 
   /** update with promise mainMetric state */
@@ -308,7 +308,7 @@ class ManageQuery extends React.Component<Prop, State> {
     /** new value main metric */
     mainMetricB: Metric;
   }) => {
-    return new Promise(resolve => this.setState(state, resolve));
+    return new Promise((resolve) => this.setState(state, resolve));
   };
 
   /** update data when props is update */
@@ -344,10 +344,10 @@ class ManageQuery extends React.Component<Prop, State> {
             <div style={{ display: 'flex' }}>
               <FormLabel width={15}>Query</FormLabel>
               <Select
-                onChange={value => this.onChangeSelectQuery(value)}
+                onChange={(value) => this.onChangeSelectQuery(value)}
                 allowCustomValue={false}
                 options={this.state.selectQuery}
-                width={15}
+                width={30}
                 value={this.state.selectQueryDefault}
               />
             </div>
@@ -355,29 +355,29 @@ class ManageQuery extends React.Component<Prop, State> {
             <FormField
               label="Key"
               labelWidth={15}
-              inputWidth={20}
+              inputWidth={30}
               type="text"
               value={this.state.mainMetric.key}
               name="key"
-              onChange={event => this._handleChangeKey(event.currentTarget.value)}
+              onChange={(event) => this._handleChangeKey(event.currentTarget.value)}
             />
             <FormField
               label="Value key"
               labelWidth={15}
-              inputWidth={20}
+              inputWidth={30}
               type="text"
               value={this.state.mainMetric.keyValue}
               name="valueKey"
-              onChange={event => this._handleChangeKeyValue(event.currentTarget.value)}
+              onChange={(event) => this._handleChangeKeyValue(event.currentTarget.value)}
             />
             {/* <br /> */}
             <div style={{ display: 'flex' }}>
               <FormLabel width={15}>Manipulate</FormLabel>
               <Select
-                onChange={value => this.onChangeSelectManageValue(value)}
+                onChange={(value) => this.onChangeSelectManageValue(value)}
                 allowCustomValue={false}
                 options={this.state.selectManageValue}
-                width={15}
+                width={30}
                 value={this.getDefaultManageValue()}
               />
             </div>
@@ -386,10 +386,10 @@ class ManageQuery extends React.Component<Prop, State> {
             <div style={{ display: 'flex', marginTop: '10px' }}>
               <FormLabel width={15}>Query</FormLabel>
               <Select
-                onChange={value => this.onChangeSelectQueryB(value)}
+                onChange={(value) => this.onChangeSelectQueryB(value)}
                 allowCustomValue={false}
                 options={this.state.selectQuery}
-                width={10}
+                width={30}
                 value={this.getDefaultQueryB()}
               />
             </div>
@@ -397,29 +397,29 @@ class ManageQuery extends React.Component<Prop, State> {
             <FormField
               label="Key"
               labelWidth={15}
-              inputWidth={20}
+              inputWidth={30}
               type="text"
               value={this.state.mainMetricB.key}
               name="key"
-              onChange={event => this._handleChangeKeyB(event.currentTarget.value)}
+              onChange={(event) => this._handleChangeKeyB(event.currentTarget.value)}
             />
             <FormField
               label="Value key"
               labelWidth={15}
-              inputWidth={20}
+              inputWidth={30}
               type="text"
               value={this.state.mainMetricB.keyValue}
               name="valueKey"
-              onChange={event => this._handleChangeKeyValueB(event.currentTarget.value)}
+              onChange={(event) => this._handleChangeKeyValueB(event.currentTarget.value)}
             />
             {/* <br /> */}
             <div style={{ display: 'flex' }}>
               <FormLabel width={15}>Manipulate</FormLabel>
               <Select
-                onChange={value => this.onChangeSelectManageValueB(value)}
+                onChange={(value) => this.onChangeSelectManageValueB(value)}
                 allowCustomValue={false}
                 options={this.state.selectManageValue}
-                width={10}
+                width={30}
                 value={this.getDefaultManageValueB()}
               />
             </div>
@@ -432,10 +432,10 @@ class ManageQuery extends React.Component<Prop, State> {
           <div style={{ display: 'flex' }}>
             <FormLabel width={15}>Query</FormLabel>
             <Select
-              onChange={value => this.onChangeSelectQuery(value)}
+              onChange={(value) => this.onChangeSelectQuery(value)}
               allowCustomValue={false}
               options={this.state.selectQuery}
-              width={10}
+              width={30}
               value={this.state.selectQueryDefault}
             />
           </div>
@@ -443,29 +443,29 @@ class ManageQuery extends React.Component<Prop, State> {
           <FormField
             label="Key"
             labelWidth={15}
-            inputWidth={10}
+            inputWidth={30}
             type="text"
             value={this.state.mainMetric.key}
             name="key"
-            onChange={event => this._handleChangeKey(event.currentTarget.value)}
+            onChange={(event) => this._handleChangeKey(event.currentTarget.value)}
           />
           <FormField
             label="Value key"
             labelWidth={15}
-            inputWidth={10}
+            inputWidth={30}
             type="text"
             value={this.state.mainMetric.keyValue}
             name="valueKey"
-            onChange={event => this._handleChangeKeyValue(event.currentTarget.value)}
+            onChange={(event) => this._handleChangeKeyValue(event.currentTarget.value)}
           />
           {/* <br /> */}
           <div style={{ display: 'flex' }}>
             <FormLabel width={15}>Manipulate</FormLabel>
             <Select
-              onChange={value => this.onChangeSelectManageValue(value)}
+              onChange={(value) => this.onChangeSelectManageValue(value)}
               allowCustomValue={false}
               options={this.state.selectManageValue}
-              width={10}
+              width={30}
               value={this.getDefaultManageValue()}
             />
           </div>

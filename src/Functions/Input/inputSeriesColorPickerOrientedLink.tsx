@@ -18,7 +18,7 @@ export const InputSeriesColorPickerOrientedLink: FunctionComponent<InputTextFiel
     <div className="form-field">
       <FormLabel width={15}>{text}</FormLabel>
       <div id="colorPicker" style={{ marginTop: '10px', marginLeft: '131px' }}>
-        <ColorPicker color={color} onChange={newColor => _onChange(keyInt, newColor)} />
+        <ColorPicker color={color} onChange={(newColor) => _onChange(keyInt, newColor)} />
       </div>
     </div>
   );

@@ -40,7 +40,7 @@ class CoordinateSpaceInitialClass extends React.Component<Props, State> {
    * @param {string} name name of input
    */
   _handleChange(currentTarget: string, name: string) {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       arrayCoor: editGoodParameter(name, prevState.arrayCoor, currentTarget, this.state.arrayCoor.defaultReferentiel),
     }));
     this.callBack();

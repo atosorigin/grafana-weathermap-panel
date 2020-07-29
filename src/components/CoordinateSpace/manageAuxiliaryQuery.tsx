@@ -1,7 +1,7 @@
 import React from 'react';
 import { SimpleOptions, TManageValue, Metric } from '../../types';
 
-import { PanelEditorProps, SelectableValue } from '@grafana/data';
+import { PanelEditorProps, SelectableValue, DataFrame } from '@grafana/data';
 import { Select, FormField, Collapse, FormLabel, Button } from '@grafana/ui';
 import { PointClass } from 'Models/PointClass';
 import { RegionClass } from 'Models/RegionClass';
@@ -27,8 +27,15 @@ interface State {
   collapseLinkA: boolean;
   /** collapse linkB if orientedLink is bidirectionnal open or close */
   collapseLinkB: boolean;
+  // /**  */
+  // selectQuery: Array<SelectableValue<DataFrame>>;
+  // /** */
+  // selectQueryDefault: SelectableValue<DataFrame>;
+  /** */
+  currentRefQuery: string;
+  /** */
+  currentRefQueryB: string;
 }
-
 /**
  * def
  */
@@ -39,6 +46,10 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
       collapse: false,
       collapseLinkA: false,
       collapseLinkB: false,
+      // selectQuery: [],
+      // selectQueryDefault: [],
+      currentRefQuery: '',
+      currentRefQueryB: '',
     };
   }
 
@@ -70,6 +81,8 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
         ...this.props.options,
         arrayOrientedLinks: newArrayLink,
       });
+      // console.log('arrayLinks');
+      // console.log(this.props.options.arrayOrientedLinks);
     } else if (this.props.isRegion) {
       const newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
       for (const region of newArrayRegion) {
@@ -116,44 +129,44 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
     return auxiliaryMetrics;
   };
 
-  private getReferenceMainMetric = (isLinkB: boolean): string => {
-    let newRefId = '';
-    const idCurrentCoordinateSpace: number = this.props.idCoordinate;
-    if (this.props.isLink) {
-      const arrayOrientedLinks: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
-      for (const orientedLink of arrayOrientedLinks) {
-        if (orientedLink.id === idCurrentCoordinateSpace) {
-          if (isLinkB) {
-            newRefId = orientedLink.mainMetricB.refId || '';
-          } else {
-            newRefId = orientedLink.mainMetric.refId || '';
-          }
-        }
-      }
-    } else if (this.props.isPoint) {
-      const newArrayPoints: PointClass[] = this.props.options.arrayPoints;
-      for (const point of newArrayPoints) {
-        if (point.id === idCurrentCoordinateSpace) {
-          newRefId = point.mainMetric.refId || '';
-        }
-      }
-    } else if (this.props.isRegion) {
-      const arrayRegions: RegionClass[] = this.props.options.regionCoordinateSpace;
-      for (const region of arrayRegions) {
-        if (region.id === idCurrentCoordinateSpace) {
-          newRefId = region.mainMetric.refId || '';
-        }
-      }
-    }
-    const newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(isLinkB);
-    for (const metric of newAuxiliaryMetrics) {
-      if (metric.refId !== newRefId) {
-        metric.refId = newRefId;
-        this.saveAuxMetrics(newAuxiliaryMetrics, isLinkB);
-      }
-    }
-    return newRefId;
-  };
+  // private getReferenceMainMetric = (isLinkB: boolean): string => {
+  //   let newRefId = '';
+  //   const idCurrentCoordinateSpace: number = this.props.idCoordinate;
+  //   if (this.props.isLink) {
+  //     const arrayOrientedLinks: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+  //     for (const orientedLink of arrayOrientedLinks) {
+  //       if (orientedLink.id === idCurrentCoordinateSpace) {
+  //         if (isLinkB) {
+  //           newRefId = orientedLink.mainMetricB.refId || '';
+  //         } else {
+  //           newRefId = orientedLink.mainMetric.refId || '';
+  //         }
+  //       }
+  //     }
+  //   } else if (this.props.isPoint) {
+  //     const newArrayPoints: PointClass[] = this.props.options.arrayPoints;
+  //     for (const point of newArrayPoints) {
+  //       if (point.id === idCurrentCoordinateSpace) {
+  //         newRefId = point.mainMetric.refId || '';
+  //       }
+  //     }
+  //   } else if (this.props.isRegion) {
+  //     const arrayRegions: RegionClass[] = this.props.options.regionCoordinateSpace;
+  //     for (const region of arrayRegions) {
+  //       if (region.id === idCurrentCoordinateSpace) {
+  //         newRefId = region.mainMetric.refId || '';
+  //       }
+  //     }
+  //   }
+  //   const newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(isLinkB);
+  //   for (const metric of newAuxiliaryMetrics) {
+  //     if (metric.refId !== newRefId) {
+  //       metric.refId = newRefId;
+  //       this.saveAuxMetrics(newAuxiliaryMetrics, isLinkB);
+  //     }
+  //   }
+  //   return newRefId;
+  // };
 
   /** switch value collapse when click collapse */
   private onToggleCollapse = (isOpen: boolean) => {
@@ -174,6 +187,60 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
     this.setState({
       collapseLinkB: isOpen,
     });
+  };
+
+  private getAllQuery = (id: string): Array<SelectableValue<DataFrame>> => {
+    let allQuery: Array<SelectableValue<DataFrame>> = [];
+    allQuery.push({ id: id, value: undefined, label: 'No value' });
+    for (const line of this.props.data.series) {
+      let duplicate = false;
+      for (const valueSave of allQuery) {
+        if (valueSave.value?.refId === line.refId) {
+          duplicate = true;
+          break;
+        }
+      }
+      if (!duplicate) {
+        allQuery.push({ id: id, value: line, label: line.refId });
+      }
+    }
+    return allQuery;
+  };
+
+  private getCurrentQuery = (id: string, isLinkB: boolean): SelectableValue<DataFrame> => {
+    let currentQuery: SelectableValue<DataFrame> = [];
+    const newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(false);
+    // console.log('linkA');
+    // console.log(newAuxiliaryMetrics);
+    currentQuery = { id: id, label: newAuxiliaryMetrics[parseInt(id, 10)].refId };
+    return currentQuery;
+  };
+
+  private getCurrentQueryB = (id: string, isLinkB: boolean): SelectableValue<DataFrame> => {
+    let currentQuery: SelectableValue<DataFrame> = [];
+    const newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(true);
+    // console.log('linkB');
+    // console.log(newAuxiliaryMetrics);
+    currentQuery = { id: id, label: newAuxiliaryMetrics[parseInt(id, 10)].refId };
+    return currentQuery;
+  };
+
+  /** edit value for select */
+  private onChangeSelectQuery = (event: any) => {
+    //console.log(event);
+    const newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(false);
+    const id: number = event.id;
+    newAuxiliaryMetrics[id].refId = event.label;
+    this.saveAuxMetrics(newAuxiliaryMetrics, false);
+  };
+
+  /** edit value for select */
+  private onChangeSelectQueryB = (event: any) => {
+    //console.log(event);
+    const newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(true);
+    const id: number = event.id;
+    newAuxiliaryMetrics[id].refId = event.label;
+    this.saveAuxMetrics(newAuxiliaryMetrics, true);
   };
 
   private onChangeKey = (event: any) => {
@@ -210,6 +277,7 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
 
   private onChangeManageValue = (event: any) => {
     const newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(false);
+    // console.log(event);
     const id: number = event.id;
     newAuxiliaryMetrics[id].manageValue = event.value;
     this.saveAuxMetrics(newAuxiliaryMetrics, false);
@@ -223,14 +291,14 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
   };
 
   private addAuxiliaryMetric = () => {
-    const refIdMetric: string = this.getReferenceMainMetric(false);
+    // const refIdMetric: string = this.state.currentRefQuery;
     let newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(false);
     newAuxiliaryMetrics.push({
       key: '',
       unit: '',
       format: '',
       keyValue: '',
-      refId: refIdMetric,
+      refId: '',
       manageValue: 'avg',
     });
     this.saveAuxMetrics(newAuxiliaryMetrics, false);
@@ -238,14 +306,14 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
   };
 
   private addAuxiliaryMetricB = () => {
-    const refIdMetric: string = this.getReferenceMainMetric(true);
+    // const refIdMetric: string = this.state.currentRefQueryB;
     let newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(true);
     newAuxiliaryMetrics.push({
       key: '',
       unit: '',
       format: '',
       keyValue: '',
-      refId: refIdMetric,
+      refId: '',
       manageValue: 'avg',
     });
     this.saveAuxMetrics(newAuxiliaryMetrics, true);
@@ -297,7 +365,7 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
 
   private generateInputs = (index: number, isLinkB: boolean): JSX.Element => {
     const id: number = index;
-    const refIdMetric: string = this.getReferenceMainMetric(isLinkB);
+    //const refIdMetric: string = this.state.currentQuery.label || '';
     const auxMetrics: Metric[] = this.getAuxiliaryMetrics(isLinkB);
     const idCoordinateSpace: string = this.props.idCoordinate?.toString() || '';
 
@@ -324,21 +392,20 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
       marginBottom: '2px',
     } as React.CSSProperties;
 
-    const styleReferenceMetric = {
-      width: '416px',
-      height: '35px',
-      border: '1px solid #262628',
-      borderRadius: '0 3px 3px 0',
-      backgroundColor: '#09090b',
-      padding: '8px',
-      fontSize: '14px',
-      lineHeight: '18px',
-      color: '#d8d9da',
-      marginBottom: '0px',
-    } as React.CSSProperties;
+    // const styleReferenceMetric = {
+    //   width: '416px',
+    //   height: '35px',
+    //   border: '1px solid #262628',
+    //   borderRadius: '0 3px 3px 0',
+    //   backgroundColor: '#09090b',
+    //   padding: '8px',
+    //   fontSize: '14px',
+    //   lineHeight: '18px',
+    //   color: '#d8d9da',
+    //   marginBottom: '0px',
+    // } as React.CSSProperties;
 
     let item: JSX.Element;
-
     if (isLinkB) {
       item = (
         <div key={idCoordinateSpace + 'mainDiv' + id.toString()} style={styleMainDiv}>
@@ -347,20 +414,33 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
           </p>
           <div key={idCoordinateSpace + 'content' + id.toString()} style={styleContent}>
             <div key={idCoordinateSpace + 'inputs' + id.toString()}>
-              <div key={idCoordinateSpace + 'refBloc' + id.toString()} style={styleSelect}>
+              {/* <div key={idCoordinateSpace + 'refBloc' + id.toString()} style={styleSelect}>
                 <FormLabel key={idCoordinateSpace + 'labelref' + id.toString()} width={10}>
                   Query
                 </FormLabel>
                 <p key={this.props.idCoordinate?.toString() || '' + 'refValue' + id.toString()} style={styleReferenceMetric}>
                   {refIdMetric}
                 </p>
+              </div> */}
+              <div key={idCoordinateSpace + 'refBloc' + id.toString()} style={{ display: 'flex' }}>
+                <FormLabel key={idCoordinateSpace + 'labelref' + id.toString()} width={15}>
+                  Query
+                </FormLabel>
+                <Select
+                  key={this.props.idCoordinate?.toString() || '' + 'refValue' + id.toString()}
+                  onChange={this.onChangeSelectQueryB}
+                  allowCustomValue={false}
+                  options={this.getAllQuery(id.toString())}
+                  width={30}
+                  value={this.getCurrentQueryB(id.toString(), isLinkB)}
+                />
               </div>
               <FormField
                 key={idCoordinateSpace + 'inputKey' + id.toString()}
                 id={id.toString()}
                 label="Key"
-                labelWidth={10}
-                inputWidth={20}
+                labelWidth={15}
+                inputWidth={30}
                 type="text"
                 value={auxMetrics[id].key}
                 name="key"
@@ -370,15 +450,15 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
                 key={idCoordinateSpace + 'valueKey' + id.toString()}
                 id={id.toString()}
                 label="Value key"
-                labelWidth={10}
-                inputWidth={20}
+                labelWidth={15}
+                inputWidth={30}
                 type="text"
                 value={auxMetrics[id].keyValue}
                 name="valueKey"
                 onChange={this.onChangeValueKeyB}
               />
               <div key={idCoordinateSpace + 'divTypeOfValue' + id.toString()} id={id.toString()} style={styleSelect}>
-                <FormLabel key={idCoordinateSpace + 'labelTypeOfValue' + id.toString()} width={10}>
+                <FormLabel key={idCoordinateSpace + 'labelTypeOfValue' + id.toString()} width={15}>
                   Value
                 </FormLabel>
                 <Select
@@ -386,7 +466,7 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
                   onChange={this.onChangeManageValueB}
                   allowCustomValue={false}
                   options={this.getAllManageValue(id.toString())}
-                  width={20}
+                  width={30}
                   value={this.getCurrentManageValue(id, isLinkB)}
                 />
               </div>
@@ -407,13 +487,26 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
           </p>
           <div key={idCoordinateSpace + 'content' + id.toString()} style={styleContent}>
             <div key={idCoordinateSpace + 'inputs' + id.toString()}>
-              <div key={idCoordinateSpace + 'refBloc' + id.toString()} style={styleSelect}>
+              {/* <div key={idCoordinateSpace + 'refBloc' + id.toString()} style={styleSelect}>
                 <FormLabel key={idCoordinateSpace + 'labelref' + id.toString()} width={15}>
                   Query
                 </FormLabel>
                 <p key={this.props.idCoordinate?.toString() || '' + 'refValue' + id.toString()} style={styleReferenceMetric}>
                   {refIdMetric}
                 </p>
+              </div> */}
+              <div key={idCoordinateSpace + 'refBloc' + id.toString()} style={{ display: 'flex' }}>
+                <FormLabel key={idCoordinateSpace + 'labelref' + id.toString()} width={15}>
+                  Query
+                </FormLabel>
+                <Select
+                  key={this.props.idCoordinate?.toString() || '' + 'refValue' + id.toString()}
+                  onChange={this.onChangeSelectQuery}
+                  allowCustomValue={false}
+                  options={this.getAllQuery(id.toString())}
+                  width={30}
+                  value={this.getCurrentQuery(id.toString(), isLinkB)}
+                />
               </div>
               <FormField
                 key={idCoordinateSpace + 'inputKey' + id.toString()}
@@ -477,6 +570,10 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
     });
 
     return <div key={idCoordinateSpace + 'listInputAllMetrics'}>{mapItems}</div>;
+  };
+
+  componentDidMount = () => {
+    //this.fillSelectQuery();
   };
 
   /**

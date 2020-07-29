@@ -21,7 +21,7 @@ const InputSelectOrientedLink: FunctionComponent<InputSelectProps> = ({ _onChang
       }}
     >
       <FormLabel width={15}>{label}</FormLabel>
-      <Select onChange={value => _onChange(value, name, index)} allowCustomValue={false} options={data} value={defaultValue} width={20} />
+      <Select onChange={(value) => _onChange(value, name, index)} allowCustomValue={false} options={data} value={defaultValue} width={20} />
     </div>
   );
 };

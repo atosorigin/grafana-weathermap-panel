@@ -369,6 +369,8 @@ export default class DrawPoint extends React.Component<Props, State> {
     } else {
       result = mainMetric + ' ' + unit;
     }
+    // console.log('result');
+    // console.log(result);
     return result;
   };
 
@@ -432,9 +434,10 @@ export default class DrawPoint extends React.Component<Props, State> {
             </p>
           );
         }
+        // Condition Display NaN none Point
         htmlMainMetric.push(
           <p key={'contentTextObject3' + this.props.name} style={styleMainMetric}>
-            {this.defineMainMetric(mainMetric)}
+            {!isNaN(parseFloat(this.defineMainMetric(mainMetric))) && this.defineMainMetric(mainMetric)}
           </p>
         );
       }
@@ -623,7 +626,7 @@ export default class DrawPoint extends React.Component<Props, State> {
           </p>
         );
         let index = 1;
-        this.props.auxiliaryMetrics.forEach(metric => {
+        this.props.auxiliaryMetrics.forEach((metric) => {
           contentTooltipAuxMetric.push(
             <p key={index.toString() + localisation + 'ContentTooltip8' + this.props.name} style={styleTitle2AuxMetric}>
               + Metric {index}
@@ -631,21 +634,28 @@ export default class DrawPoint extends React.Component<Props, State> {
           );
           contentTooltipAuxMetric.push(
             <p key={index.toString() + localisation + 'ContentTooltip9' + this.props.name} style={styleContentAuxMetrics}>
-              - Value : {this.defineAuxMetric(this.props.valuesAuxiliaryMetrics[index - 1])}
+              - Reference : {metric.refId}
             </p>
           );
           contentTooltipAuxMetric.push(
             <p key={index.toString() + localisation + 'ContentTooltip10' + this.props.name} style={styleContentAuxMetrics}>
-              - Key : {metric.key}
+              - Value :{' '}
+              {!isNaN(parseFloat(this.defineAuxMetric(this.props.valuesAuxiliaryMetrics[index - 1]))) &&
+                this.defineAuxMetric(this.props.valuesAuxiliaryMetrics[index - 1])}
             </p>
           );
           contentTooltipAuxMetric.push(
             <p key={index.toString() + localisation + 'ContentTooltip11' + this.props.name} style={styleContentAuxMetrics}>
-              - KeyValue : {metric.keyValue}
+              - Key : {metric.key}
             </p>
           );
           contentTooltipAuxMetric.push(
             <p key={index.toString() + localisation + 'ContentTooltip12' + this.props.name} style={styleContentAuxMetrics}>
+              - KeyValue : {metric.keyValue}
+            </p>
+          );
+          contentTooltipAuxMetric.push(
+            <p key={index.toString() + localisation + 'ContentTooltip13' + this.props.name} style={styleContentAuxMetrics}>
               - Type : {metric.manageValue}
             </p>
           );
@@ -656,14 +666,14 @@ export default class DrawPoint extends React.Component<Props, State> {
 
     if (arrayOrientedLinksIn.length !== 0) {
       contentTooltipAssociateLink.push(
-        <p key={localisation + 'ContentTooltip13' + this.props.name} style={styleTitleAssociateLink}>
+        <p key={localisation + 'ContentTooltip14' + this.props.name} style={styleTitleAssociateLink}>
           Associate Link In :
         </p>
       );
-      arrayOrientedLinksIn.forEach(orientedLinkIn => {
+      arrayOrientedLinksIn.forEach((orientedLinkIn) => {
         const nameOrientedLink: string = orientedLinkIn.label || orientedLinkIn.name;
         contentTooltipAssociateLink.push(
-          <p key={localisation + 'ContentTooltip14' + this.props.name + nameOrientedLink} style={styleContentAssociateLink}>
+          <p key={localisation + 'ContentTooltip15' + this.props.name + nameOrientedLink} style={styleContentAssociateLink}>
             - {nameOrientedLink}
           </p>
         );
@@ -672,14 +682,14 @@ export default class DrawPoint extends React.Component<Props, State> {
 
     if (arrayOrientedLinksOut.length !== 0) {
       contentTooltipAssociateLink.push(
-        <p key={localisation + 'ContentTooltip15' + this.props.name} style={styleTitleAssociateLink}>
+        <p key={localisation + 'ContentTooltip16' + this.props.name} style={styleTitleAssociateLink}>
           Associate Link Out :
         </p>
       );
-      arrayOrientedLinksOut.forEach(orientedLinkOut => {
+      arrayOrientedLinksOut.forEach((orientedLinkOut) => {
         const nameOrientedLink: string = orientedLinkOut.label || orientedLinkOut.name;
         contentTooltipAssociateLink.push(
-          <p key={localisation + 'ContentTooltip16' + this.props.name + nameOrientedLink} style={styleContentAssociateLink}>
+          <p key={localisation + 'ContentTooltip17' + this.props.name + nameOrientedLink} style={styleContentAssociateLink}>
             - {nameOrientedLink}
           </p>
         );

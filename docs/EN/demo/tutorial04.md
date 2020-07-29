@@ -15,9 +15,10 @@ The recommended software to make a background image will be [Inkscape](https://i
 ### Step 2 : Create your shape
 
 Inkscape allows you to choose between several shapes to create your SVG :
-- Circle
-- Square
-- Other...
+
+  - Circle
+  - Square
+  - Other...
 
 ![Inkscape](./../../screenshots/demo/tutorial04/Inkscape.png)
 

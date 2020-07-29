@@ -113,12 +113,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       ? parseInt(region.textObj.valueGenerateObjectText.numericFormatElement, 10)
       : 1;
 
-    if (
-      valueQuery
-      && region.textObj.valueGenerateObjectText
-      && region.textObj.valueGenerateObjectText.numericFormatElement !== ''
-      && roundMetrics
-    ) {
+    if (valueQuery && region.textObj.valueGenerateObjectText && region.textObj.valueGenerateObjectText.numericFormatElement !== '' && roundMetrics) {
       converValueQuery = (valueQuery || 0).toPrecision(roundMetrics).toString();
     } else if (valueQuery) {
       converValueQuery = valueQuery.toString();
@@ -136,7 +131,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
   setStateTooltip = (
     lowerLimit: LowerLimit,
     region: RegionClass,
-    valueQuery: number | null,
+    valueQuery: number | null
     //link: boolean
   ): Tooltip => {
     const styleTooltip = {
@@ -159,11 +154,11 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
           {region.textObj.isTextTooltip && <p>{region.label}</p>}
         </div>
         <div style={styleMetrics}>
-          {region.textObj.generateObjectText && region.textObj.valueGenerateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip && <p>{valueQueryResult}</p>}
+          {region.textObj.generateObjectText &&
+            region.textObj.valueGenerateObjectText &&
+            region.textObj.valueGenerateObjectText.displayObjectInTooltip && <p>{valueQueryResult}</p>}
         </div>
-        <div>
-          {this.displayValuesAuxMetrics()}
-        </div>
+        <div>{this.displayValuesAuxMetrics()}</div>
       </div>
     );
     return {
@@ -176,14 +171,18 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
   };
 
   displayValueQuery = (region: RegionClass): boolean => {
-    if (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText && (!region.textObj.valueGenerateObjectText.displayObjectInTooltip)) {
+    if (
+      region.textObj.generateObjectText &&
+      region.textObj.valueGenerateObjectText &&
+      !region.textObj.valueGenerateObjectText.displayObjectInTooltip
+    ) {
       return true;
     }
     return false;
   };
 
   getPositionTextObjectRegionSVG = (idSVG: string): CoorHTML => {
-    const coor: CoorHTML = {top: '0', bottom: '0', left: '0', right: '0'};
+    const coor: CoorHTML = { top: '0', bottom: '0', left: '0', right: '0' };
     let elementSVG: any;
     if (this.props.options.baseMap.isUploaded) {
       elementSVG = document.getElementById(idSVG);
@@ -262,70 +261,72 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     // const resultTooltip: Tooltip = this.setStateTooltip(lowerLimit, region, valueQuery, this.props.isEnabled);
     const resultTooltip: Tooltip = this.setStateTooltip(lowerLimit, region, valueQuery);
     //if (valueQuery) {
-      //if (region.mode && ((!region.textObj.isTextTooltip) || this.displayValueQuery(region))) {
-      if (region.mode) {
-        //const coordinateWrite: Coord4DInt | null = searchMinMaxIdSVG(region.idSVG);
-        const coordinateTextObject: CoorHTML = this.getPositionTextObjectRegionSVG(region.idSVG);
-        //if (coordinateWrite) {
-          stateIsFill = true;
-          const style: Style = region.textObj.style;
-          const styleWrite = {
-            width: 'auto',
-            position: 'absolute',
-            zIndex: 999,
-            // left: coordinateWrite.xMax - (coordinateWrite.xMax - coordinateWrite.xMin),
-            // top: coordinateWrite.yMax,
-            left : coordinateTextObject.left + 'px',
-            top: coordinateTextObject.top + 'px',
-            border: '1px solid black',
-            // backgroundColor: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorBackElement : 'black',
-            // color: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorTextElement : 'white',
-          } as CSSProperties;
+    //if (region.mode && ((!region.textObj.isTextTooltip) || this.displayValueQuery(region))) {
+    if (region.mode) {
+      //const coordinateWrite: Coord4DInt | null = searchMinMaxIdSVG(region.idSVG);
+      const coordinateTextObject: CoorHTML = this.getPositionTextObjectRegionSVG(region.idSVG);
+      //if (coordinateWrite) {
+      stateIsFill = true;
+      const style: Style = region.textObj.style;
+      const styleWrite = {
+        width: 'auto',
+        position: 'absolute',
+        zIndex: 999,
+        // left: coordinateWrite.xMax - (coordinateWrite.xMax - coordinateWrite.xMin),
+        // top: coordinateWrite.yMax,
+        left: coordinateTextObject.left + 'px',
+        top: coordinateTextObject.top + 'px',
+        border: '1px solid black',
+        // backgroundColor: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorBackElement : 'black',
+        // color: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorTextElement : 'white',
+      } as CSSProperties;
 
-          const styleLabelTooltipSVG = {
-            textDecoration: this.defineTextDecoration(style),
-            fontStyle: this.defineFontStyle(style),
-            fontWeight: this.defineFontWeight(style),
-            fontSize: this.props.options.display.size,
-            fontFamily: this.props.options.display.police,
-            color: region.textObj.colorText,
-            backgroundColor: region.textObj.colorBack,
-            margin: 0,
-            padding: '5px 5px 0 5px',
-          } as React.CSSProperties;
-      
-          const styleMainMetricTooltipSVG = {
-            textDecoration: this.defineTextDecoration(style),
-            fontStyle: this.defineFontStyle(style),
-            fontWeight: this.defineFontWeight(style),
-            color: region.textObj.valueGenerateObjectText.addColorTextElement ? region.textObj.valueGenerateObjectText.colorTextElement : 'white',
-            backgroundColor: region.textObj.valueGenerateObjectText.addColorBackElement
-              ? region.textObj.valueGenerateObjectText.colorBackElement
-              : 'black',
-            fontSize: this.props.options.display.size,
-            fontFamily: this.props.options.display.police,
-            margin: 0,
-            padding: '5px 5px 0 5px',
-          } as React.CSSProperties;
+      const styleLabelTooltipSVG = {
+        textDecoration: this.defineTextDecoration(style),
+        fontStyle: this.defineFontStyle(style),
+        fontWeight: this.defineFontWeight(style),
+        fontSize: this.props.options.display.size,
+        fontFamily: this.props.options.display.police,
+        color: region.textObj.colorText,
+        backgroundColor: region.textObj.colorBack,
+        margin: 0,
+        padding: '5px 5px 0 5px',
+      } as React.CSSProperties;
 
-          let htmlResult = (
-            <div style={styleWrite}>
-              {!region.textObj.isTextTooltip && <p style={styleLabelTooltipSVG}>{region.label}</p>}
-              {region.textObj.generateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInTooltip && <p style={styleMainMetricTooltipSVG}>{this.displayValueQuery(region) && resultTooltip.valueQuery}</p>}
-            </div>
-          );
-          if (region.textObj.isTextTooltip && region.textObj.valueGenerateObjectText.displayObjectInTooltip) {
-            htmlResult = <div></div>;
-          }
-          this.setState({
-            htmlResult: htmlResult,
-            tooltipValue: resultTooltip.tooltipValue,
-            backgroundColor: resultTooltip.backgroundColor,
-            borderColor: resultTooltip.borderColor,
-            sizeBorder: resultTooltip.sizeBorder,
-            valueQuery: resultTooltip.valueQuery,
-          });
-        //}
+      const styleMainMetricTooltipSVG = {
+        textDecoration: this.defineTextDecoration(style),
+        fontStyle: this.defineFontStyle(style),
+        fontWeight: this.defineFontWeight(style),
+        color: region.textObj.valueGenerateObjectText.addColorTextElement ? region.textObj.valueGenerateObjectText.colorTextElement : 'white',
+        backgroundColor: region.textObj.valueGenerateObjectText.addColorBackElement
+          ? region.textObj.valueGenerateObjectText.colorBackElement
+          : 'black',
+        fontSize: this.props.options.display.size,
+        fontFamily: this.props.options.display.police,
+        margin: 0,
+        padding: '5px 5px 0 5px',
+      } as React.CSSProperties;
+
+      let htmlResult = (
+        <div style={styleWrite}>
+          {!region.textObj.isTextTooltip && <p style={styleLabelTooltipSVG}>{region.label}</p>}
+          {region.textObj.generateObjectText && !region.textObj.valueGenerateObjectText.displayObjectInTooltip && (
+            <p style={styleMainMetricTooltipSVG}>{this.displayValueQuery(region) && resultTooltip.valueQuery}</p>
+          )}
+        </div>
+      );
+      if (region.textObj.isTextTooltip && region.textObj.valueGenerateObjectText.displayObjectInTooltip) {
+        htmlResult = <div></div>;
+      }
+      this.setState({
+        htmlResult: htmlResult,
+        tooltipValue: resultTooltip.tooltipValue,
+        backgroundColor: resultTooltip.backgroundColor,
+        borderColor: resultTooltip.borderColor,
+        sizeBorder: resultTooltip.sizeBorder,
+        valueQuery: resultTooltip.valueQuery,
+      });
+      //}
       //}
     }
     if (!stateIsFill) {
@@ -367,18 +368,20 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       let resultTotalValues = 0;
       let result = '';
       if (metric.returnQuery && metric.returnQuery.length > 0) {
-        let numberLoop: number = (metric.returnQuery?.length || 0);
+        let numberLoop: number = metric.returnQuery?.length || 0;
         if (metric.key !== '' && metric.keyValue !== '') {
           for (let i = 0; i < numberLoop; i++) {
             let line = metric.returnQuery[i];
             if (line.fields[0].labels) {
-              if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || (mainMetric.key === '' && mainMetric.keyValue === '')) {
-                if (line.fields[0].labels[metric.key] === metric.keyValue) {
-                  const countValues: number = line.fields[0].values.length;
-                  for (let i = 0; i < countValues; i++) {
-                    if (line.fields[0].values.get(i)) {
-                      resultTotalValues += line.fields[0].values.get(i);
-                      countTotalValues++;
+              if (mainMetric.refId !== '') {
+                if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || (mainMetric.key === '' && mainMetric.keyValue === '')) {
+                  if (line.fields[0].labels[metric.key] === metric.keyValue) {
+                    const countValues: number = line.fields[0].values.length;
+                    for (let i = 0; i < countValues; i++) {
+                      if (line.fields[0].values.get(i)) {
+                        resultTotalValues += line.fields[0].values.get(i);
+                        countTotalValues++;
+                      }
                     }
                   }
                 }
@@ -389,12 +392,14 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
           for (let i = 0; i < numberLoop; i++) {
             let line = metric.returnQuery[i];
             if (line.fields[0].labels) {
-              if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || (mainMetric.key === '' && mainMetric.keyValue === '')) {
-                const countValues: number = line.fields[0].values.length;
-                for (let i = 0; i < countValues; i++) {
-                  if (line.fields[0].values.get(i)) {
-                    resultTotalValues += line.fields[0].values.get(i);
-                    countTotalValues++;
+              if (mainMetric.refId) {
+                if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || (mainMetric.key === '' && mainMetric.keyValue === '')) {
+                  const countValues: number = line.fields[0].values.length;
+                  for (let i = 0; i < countValues; i++) {
+                    if (line.fields[0].values.get(i)) {
+                      resultTotalValues += line.fields[0].values.get(i);
+                      countTotalValues++;
+                    }
                   }
                 }
               }
@@ -427,12 +432,12 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     const roundValue: number = parseInt(region.textObj.generateAuxiliaryElement.numericFormatElement, 10) || 1;
     const unit: string = region.textObj.generateAuxiliaryElement.unit;
     //if (roundValue !== '') {
-    result = (parseFloat(valueBrut).toPrecision(roundValue).toString());
+    result = parseFloat(valueBrut).toPrecision(roundValue).toString();
     // } else {
     //   result = valueBrut;
     // }
     return result + ' ' + unit;
-  }; 
+  };
 
   private displayValuesAuxMetrics = (): JSX.Element => {
     let html: JSX.Element[] = [];
@@ -485,49 +490,54 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       //backgroundColor: colorBack,
     } as React.CSSProperties;
 
-      if (auxMetrics.length > 0) {
+    if (auxMetrics.length > 0) {
+      html.push(
+        <p key={'region' + region.id + 'contentToolTip1'} style={styleTitle}>
+          Auxiliary Metric
+        </p>
+      );
+      html.push(
+        <p key={'region' + region.id + 'contentToolTip2'} style={styleTitle}>
+          {legend}
+        </p>
+      );
+      let index = 1;
+      for (const metric of auxMetrics) {
+        const valueAuxMetric: string = this.getConvertValueAuxMetrics(valuesAuxMetrics[index - 1]);
         html.push(
-          <p key={'region' + region.id + 'contentToolTip1'} style={styleTitle}>
-            Auxiliary Metric
+          <p key={index + 'region' + region.id + 'contentToolTip3'} style={styleTitle2}>
+            + Metric {index}
           </p>
         );
         html.push(
-          <p key={'region' + region.id + 'contentToolTip2'} style={styleTitle}>
-            {legend}
+          <p key={index + 'region' + region.id + 'contentToolTip4'} style={styleContent}>
+            - Reference : {metric.refId}
           </p>
         );
-        let index = 1;
-        for (const metric of auxMetrics) {
-          const valueAuxMetric: string = this.getConvertValueAuxMetrics(valuesAuxMetrics[index - 1]);
-          html.push(
-            <p key={index + 'region' + region.id + 'contentToolTip3'} style={styleTitle2}>
-              + Metric {index}
-            </p>
-          );
-          html.push(
-            <p key={index + 'region' + region.id + 'contentToolTip4'} style={styleContent}>
-              - Value : {valueAuxMetric}
-            </p>
-          );
-          html.push(
-            <p key={index + 'region' + region.id + 'contentToolTip5'} style={styleContent}>
-              - Key : {metric.key}
-            </p>
-          );
-          html.push(
-            <p key={index + 'region' + region.id + 'contentToolTip6'} style={styleContent}>
-              - KeyValue : {metric.keyValue}
-            </p>
-          );
-          html.push(
-            <p key={index + 'region' + region.id + 'contentToolTip7'} style={styleContent}>
-              - Type : {metric.manageValue}
-            </p>
-          );
-          index++;
-        };
-      };
-    return <div style={{backgroundColor: colorBack}}>{html}</div>;
+        html.push(
+          <p key={index + 'region' + region.id + 'contentToolTip5'} style={styleContent}>
+            - Value : {!isNaN(parseFloat(valueAuxMetric)) && valueAuxMetric}
+          </p>
+        );
+        html.push(
+          <p key={index + 'region' + region.id + 'contentToolTip6'} style={styleContent}>
+            - Key : {metric.key}
+          </p>
+        );
+        html.push(
+          <p key={index + 'region' + region.id + 'contentToolTip7'} style={styleContent}>
+            - KeyValue : {metric.keyValue}
+          </p>
+        );
+        html.push(
+          <p key={index + 'region' + region.id + 'contentToolTip8'} style={styleContent}>
+            - Type : {metric.manageValue}
+          </p>
+        );
+        index++;
+      }
+    }
+    return <div style={{ backgroundColor: colorBack }}>{html}</div>;
   };
 
   /**
@@ -563,7 +573,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
   private defineLimitY(coordinateY: number) {
     let result: number = coordinateY;
     if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
-      console.log(coordinateY);
+      //console.log(coordinateY);
       if (coordinateY > 100) {
         result = 100;
       }
@@ -608,8 +618,8 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
         xMaxPx = (xMax + 100) * (widthImage / 200);
       }
     } else {
-        xMinPx = xMin * (widthImage / 100);
-        xMaxPx = xMax * (widthImage / 100);
+      xMinPx = xMin * (widthImage / 100);
+      xMaxPx = xMax * (widthImage / 100);
     }
 
     if (!defaultReferentiel) {
@@ -621,18 +631,21 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
         yMaxPx = (yMax + 100) * (heightImage / 200);
       }
     } else {
-        yMinPx = yMin * (heightImage / 100);
-        yMaxPx = yMax * (heightImage / 100);
+      yMinPx = yMin * (heightImage / 100);
+      yMaxPx = yMax * (heightImage / 100);
     }
 
     const widthInitialSpace: number = xMaxPx - xMinPx;
     const heightInitialSpace: number = yMaxPx - yMinPx;
 
-
     if (parseInt(coorRegion.xMin, 10) < 0 && parseInt(coorRegion.xMax, 10) < 0) {
       //console.log('--');
-      leftPx = xMinPx + ((this.defineLimitX(parseInt(coorRegion.xMax, 10)) + 100) / 2) * (widthInitialSpace / 100) - ((widthImage - xMaxPx) / 100);
-      rightPx = ((widthImage - xMaxPx) / 100) + widthImage - ((this.defineLimitX(parseInt(coorRegion.xMin, 10)) + 100) / 2) * (widthInitialSpace / 100) - xMinPx;
+      leftPx = xMinPx + ((this.defineLimitX(parseInt(coorRegion.xMax, 10)) + 100) / 2) * (widthInitialSpace / 100) - (widthImage - xMaxPx) / 100;
+      rightPx =
+        (widthImage - xMaxPx) / 100 +
+        widthImage -
+        ((this.defineLimitX(parseInt(coorRegion.xMin, 10)) + 100) / 2) * (widthInitialSpace / 100) -
+        xMinPx;
       // leftPx = xMinPx + (parseInt(coorRegion.xMax, 10) * (widthInitialSpace / 200) + widthInitialSpace / 2);
       // rightPx = widthInitialSpace - (parseInt(coorRegion.xMin, 10) * (widthInitialSpace / 200) + widthInitialSpace / 2) - xMinPx;
     } else {
@@ -640,36 +653,41 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
         //console.log('-+');
         leftPx = xMinPx + (this.defineLimitX(parseInt(coorRegion.xMin, 10)) * (widthInitialSpace / 200) + widthInitialSpace / 2);
         rightPx = widthImage - (this.defineLimitX(parseInt(coorRegion.xMax, 10)) * (widthInitialSpace / 200) + widthInitialSpace / 2) - xMinPx;
-        
       } else {
         //console.log('++');
         leftPx = xMinPx + (this.defineLimitX(parseInt(coorRegion.xMin, 10)) * widthInitialSpace) / 100;
-        rightPx = widthImage - ((this.defineLimitX(parseInt(coorRegion.xMax, 10)) * widthInitialSpace) / 100) - xMinPx;
+        rightPx = widthImage - (this.defineLimitX(parseInt(coorRegion.xMax, 10)) * widthInitialSpace) / 100 - xMinPx;
       }
       //leftPx  = xMinPx + ((parseInt(coorRegion.xMin, 10) + 100) / 2) * (widthInitialSpace / 100) - ((widthImage - xMaxPx) / 100);
       //rightPx = ((widthImage - xMaxPx) / 100) + widthImage - ((parseInt(coorRegion.xMax, 10) + 100) / 2) * (widthInitialSpace / 100) - xMinPx;
     }
 
     if (parseInt(coorRegion.yMin, 10) < 0 && parseInt(coorRegion.yMax, 10) < 0) {
-      topPx = (heightImage - yMaxPx) + ((this.defineLimitY(parseInt(coorRegion.yMin, 10)) - 100) / 2 * (-1)) * (heightInitialSpace / 100) - (yMinPx / 200);
-      bottomPx = yMinPx + ((this.defineLimitY(parseInt(coorRegion.yMax, 10)) + 100) / 2 ) * (heightInitialSpace / 100) - ((heightImage - yMaxPx) / 200);
+      topPx = heightImage - yMaxPx + ((this.defineLimitY(parseInt(coorRegion.yMin, 10)) - 100) / 2) * -1 * (heightInitialSpace / 100) - yMinPx / 200;
+      bottomPx = yMinPx + ((this.defineLimitY(parseInt(coorRegion.yMax, 10)) + 100) / 2) * (heightInitialSpace / 100) - (heightImage - yMaxPx) / 200;
       // topPx = (heightImage - yMaxPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
       // bottomPx = (heightImage - yMinPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
     } else {
       if (!defaultReferentiel) {
-        topPx = (heightImage - yMaxPx) + ((this.defineLimitY(parseInt(coorRegion.yMax, 10)) - 100) / 2 * (-1)) * (heightInitialSpace / 100) - yMinPx / 200;
-        bottomPx = yMinPx + ((this.defineLimitY(parseInt(coorRegion.yMin, 10)) + 100) / 2 ) * (heightInitialSpace / 100) - (heightImage - yMaxPx) / 200;
+        topPx =
+          heightImage - yMaxPx + ((this.defineLimitY(parseInt(coorRegion.yMax, 10)) - 100) / 2) * -1 * (heightInitialSpace / 100) - yMinPx / 200;
+        bottomPx =
+          yMinPx + ((this.defineLimitY(parseInt(coorRegion.yMin, 10)) + 100) / 2) * (heightInitialSpace / 100) - (heightImage - yMaxPx) / 200;
         //topPx = (heightImage - yMaxPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMax, 10)) * (heightInitialSpace / 2 / 100));
         //bottomPx = (heightImage - yMinPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
       } else {
-        topPx = (heightImage - yMaxPx) + ((this.defineLimitY(100 - parseInt(coorRegion.yMax, 10)) * heightInitialSpace) / 100);
-        bottomPx = yMinPx + ((this.defineLimitY(parseInt(coorRegion.yMin, 10)) * heightInitialSpace) / 100) - ((heightImage - yMaxPx) / 200);
+        topPx = heightImage - yMaxPx + (this.defineLimitY(100 - parseInt(coorRegion.yMax, 10)) * heightInitialSpace) / 100;
+        bottomPx = yMinPx + (this.defineLimitY(parseInt(coorRegion.yMin, 10)) * heightInitialSpace) / 100 - (heightImage - yMaxPx) / 200;
       }
     }
-    let result: CoorHTML = { top: topPx.toString() + 'px', bottom: bottomPx.toString() + 'px',  left: leftPx.toString() + 'px', right: rightPx.toString() + 'px' };
+    let result: CoorHTML = {
+      top: topPx.toString() + 'px',
+      bottom: bottomPx.toString() + 'px',
+      left: leftPx.toString() + 'px',
+      right: rightPx.toString() + 'px',
+    };
     return result;
   };
-
 
   /** final region zone . Call function after reqMetrics*/
   renduFinal = () => {
@@ -732,7 +750,11 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
           )}
         </div>
       );
-      if (region.textObj.isTextTooltip || (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip) || region.textObj.generateAuxiliaryElement.displayObjectInTooltip) {
+      if (
+        region.textObj.isTextTooltip ||
+        (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip) ||
+        region.textObj.generateAuxiliaryElement.displayObjectInTooltip
+      ) {
         value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
       }
     } else {
@@ -740,7 +762,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       value = (
         <div style={styleDiv} id={this.props.id}>
           <a href={region.linkURL.followLink}>
-            <div style={{height: '100%', width: '100%'}} >
+            <div style={{ height: '100%', width: '100%' }}>
               {(!region.textObj.isTextTooltip || region.textObj.generateObjectText) && (
                 <div>
                   <div style={styleTextDiv}>{!region.textObj.isTextTooltip && region.label}</div>
@@ -753,7 +775,11 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
           </a>
         </div>
       );
-      if (region.textObj.isTextTooltip || (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip) || region.textObj.generateAuxiliaryElement.displayObjectInTooltip) {
+      if (
+        region.textObj.isTextTooltip ||
+        (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip) ||
+        region.textObj.generateAuxiliaryElement.displayObjectInTooltip
+      ) {
         value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
       }
     }

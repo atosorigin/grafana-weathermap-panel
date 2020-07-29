@@ -1190,8 +1190,7 @@ var editGoodParameter = function editGoodParameter(name, editCoor, newValue, def
 };
 var limitValueInitialSpace = function limitValueInitialSpace(coorInitialSpace, defaultInitialSpace) {
   var coorInt = parseInt(coorInitialSpace, 10);
-  var result = 0;
-  console.log(defaultInitialSpace);
+  var result = 0; //console.log(defaultInitialSpace);
 
   if (!defaultInitialSpace) {
     result = coorInt;
@@ -2302,30 +2301,46 @@ var searchNameIsKey = function searchNameIsKey(query, mainMetric) {
   return false;
 };
 
-var getResultQuery = function getResultQuery(mainMetric) {
-  var e_2, _a;
+var searchNameIsFilter = function searchNameIsFilter(query, mainMetric) {
+  var e_2, _a, e_3, _b;
 
-  var cnt = null;
+  var _c;
 
-  if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
-    var debug = [];
-    var countValue = 0;
-    cnt = 0;
+  if (!mainMetric.filter) {
+    return true;
+  }
 
+  var res = 0;
+  var filters = mainMetric.filter;
+  var nameQuery = ((_c = query.name) === null || _c === void 0 ? void 0 : _c.split(',').map(function (value) {
+    return value.replace(/[\"{}]/gm, '');
+  })) || [];
+
+  if (nameQuery && nameQuery.length > 0) {
     try {
-      for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(mainMetric.returnQuery), _c = _b.next(); !_c.done; _c = _b.next()) {
-        var line = _c.value;
-        var result = searchNameIsKey(line, mainMetric);
+      for (var nameQuery_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(nameQuery), nameQuery_2_1 = nameQuery_2.next(); !nameQuery_2_1.done; nameQuery_2_1 = nameQuery_2.next()) {
+        var oneQuery = nameQuery_2_1.value;
+        var keyValue = oneQuery.split('=');
 
-        if (result) {
-          var sizeQuery = line.fields[0].values.length; // in grafana 7 change line.field[0] to line.field[1]
+        try {
+          for (var filters_1 = (e_3 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(filters)), filters_1_1 = filters_1.next(); !filters_1_1.done; filters_1_1 = filters_1.next()) {
+            var filter = filters_1_1.value;
 
-          for (var i = 0; i < sizeQuery; i++) {
-            if (line.fields.length > 0 && line.fields[0].values.get(i)) {
-              cnt += line.fields[0].values.get(i);
-              debug.push(line.fields[0].values.get(i));
-              ++countValue;
+            if (keyValue.length === 2) {
+              if (keyValue[0] === filter.label && keyValue[1] === filter.value) {
+                res++;
+              }
             }
+          }
+        } catch (e_3_1) {
+          e_3 = {
+            error: e_3_1
+          };
+        } finally {
+          try {
+            if (filters_1_1 && !filters_1_1.done && (_b = filters_1["return"])) _b.call(filters_1);
+          } finally {
+            if (e_3) throw e_3.error;
           }
         }
       }
@@ -2335,17 +2350,103 @@ var getResultQuery = function getResultQuery(mainMetric) {
       };
     } finally {
       try {
-        if (_c && !_c.done && (_a = _b["return"])) _a.call(_b);
+        if (nameQuery_2_1 && !nameQuery_2_1.done && (_a = nameQuery_2["return"])) _a.call(nameQuery_2);
       } finally {
         if (e_2) throw e_2.error;
       }
     }
 
-    if (mainMetric.manageValue === 'avg') {
-      cnt /= countValue;
-    } else if (mainMetric.manageValue === 'err') {
-      if (countValue > 1) {
-        cnt = null;
+    if (res === filters.length) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+var getResultQuery = function getResultQuery(mainMetric) {
+  var e_4, _a, e_5, _b;
+
+  var cnt = null;
+
+  if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
+    var debug = [];
+    var countValue = 0;
+    cnt = 0;
+
+    if (!mainMetric.filter) {
+      try {
+        for (var _c = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(mainMetric.returnQuery), _d = _c.next(); !_d.done; _d = _c.next()) {
+          var line = _d.value;
+          var result = searchNameIsKey(line, mainMetric);
+
+          if (result) {
+            var sizeQuery = line.fields[0].values.length; // in grafana 7 change line.field[0] to line.field[1]
+
+            for (var i = 0; i < sizeQuery; i++) {
+              if (line.fields.length > 0 && line.fields[0].values.get(i)) {
+                cnt += line.fields[0].values.get(i);
+                debug.push(line.fields[0].values.get(i));
+                ++countValue;
+              }
+            }
+          }
+        }
+      } catch (e_4_1) {
+        e_4 = {
+          error: e_4_1
+        };
+      } finally {
+        try {
+          if (_d && !_d.done && (_a = _c["return"])) _a.call(_c);
+        } finally {
+          if (e_4) throw e_4.error;
+        }
+      }
+
+      if (mainMetric.manageValue === 'avg') {
+        cnt /= countValue;
+      } else if (mainMetric.manageValue === 'err') {
+        if (countValue > 1) {
+          cnt = null;
+        }
+      }
+    } else {
+      try {
+        for (var _e = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(mainMetric.returnQuery), _f = _e.next(); !_f.done; _f = _e.next()) {
+          var line = _f.value;
+          var result = searchNameIsFilter(line, mainMetric);
+
+          if (result) {
+            var sizeQuery = line.fields[0].values.length; // in grafana 7 change line.field[0] to line.field[1]
+
+            for (var i = 0; i < sizeQuery; i++) {
+              if (line.fields.length > 0 && line.fields[0].values.get(i)) {
+                cnt += line.fields[0].values.get(i);
+                debug.push(line.fields[0].values.get(i));
+                ++countValue;
+              }
+            }
+          }
+        }
+      } catch (e_5_1) {
+        e_5 = {
+          error: e_5_1
+        };
+      } finally {
+        try {
+          if (_f && !_f.done && (_b = _e["return"])) _b.call(_e);
+        } finally {
+          if (e_5) throw e_5.error;
+        }
+      }
+
+      if (mainMetric.manageValue === 'avg') {
+        cnt /= countValue;
+      } else if (mainMetric.manageValue === 'err') {
+        if (countValue > 1) {
+          cnt = null;
+        }
       }
     }
   }
@@ -2659,6 +2760,44 @@ var isNumFloat = function isNumFloat(value) {
   }
 
   return 0;
+};
+
+/***/ }),
+
+/***/ "./Functions/loaderGabarit.tsx":
+/*!*************************************!*\
+  !*** ./Functions/loaderGabarit.tsx ***!
+  \*************************************/
+/*! exports provided: coordParse, filterParse */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "coordParse", function() { return coordParse; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "filterParse", function() { return filterParse; });
+//import { SimpleOptions, GlobalGabarit, GabaritFile, TemplateGabaritLink, TemplateGabaritPoint, TemplateGabaritRegion } from '../types';
+//import { Button } from '@grafana/ui';
+var coordParse = function coordParse(coord) {
+  var tmp = coord.split('#');
+  var result = {
+    x: '',
+    y: ''
+  };
+  result.x = tmp[0].split('|')[1];
+  result.y = tmp[1].split('|')[1];
+  return result;
+};
+var filterParse = function filterParse(filter) {
+  var tmp = filter.split('#');
+  var result = [];
+  tmp.forEach(function (element) {
+    var split = element.split('|');
+    result.push({
+      label: split[0],
+      value: split[1]
+    });
+  });
+  return result;
 };
 
 /***/ }),
@@ -4837,8 +4976,7 @@ function (_super) {
             positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
           }
         } else {
-          positionY = 100 - Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace * 100);
-          console.log(positionY);
+          positionY = 100 - Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace * 100); //console.log(positionY);
         } //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
         // if (yMax > 0 && yMax < 100) {
         //   positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
@@ -5345,81 +5483,7 @@ function (_super) {
       setTimeout(function () {
         _this.displayOrientedLink();
       }, 100);
-    }; // /**
-    //  * to do
-    //  */
-    // getValuesMainMetric(mainMetric: Metric, orientedLink?: OrientedLinkClass, point?: PointClass, isBidirectionnal?: boolean) {
-    //   let valueMainMetric = 0;
-    //   let totalValuesCount = 0;
-    //   const key: string = mainMetric.key;
-    //   const keyValue: string = mainMetric.keyValue;
-    //   if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
-    //     mainMetric.returnQuery.forEach((line: DataFrame) => {
-    //       if (line.fields[0].labels) {
-    //         if (key !== '' && keyValue !== '') {
-    //           if (line.fields[0].labels[key] === keyValue) {
-    //             const countValues: number = line.fields[0].values.length;
-    //             for (let i = 0; i < countValues; i++) {
-    //               if (line.fields[0].values.get(i)) {
-    //                 totalValuesCount++;
-    //                 valueMainMetric += line.fields[0].values.get(i);
-    //               }
-    //             }
-    //           } else {
-    //           }
-    //         } else {
-    //           const countValues: number = line.fields[0].values.length;
-    //           for (let i = 0; i < countValues; i++) {
-    //             if (line.fields[0].values.get(i)) {
-    //               totalValuesCount++;
-    //               valueMainMetric += line.fields[0].values.get(i);
-    //             }
-    //           }
-    //         }
-    //       }
-    //     });
-    //     if (orientedLink) {
-    //       if (!isBidirectionnal) {
-    //         if (mainMetric.manageValue === 'avg') {
-    //           orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
-    //         } else if (mainMetric.manageValue === 'sum') {
-    //           orientedLink.valueMainMetricA = valueMainMetric.toString();
-    //         } else if (mainMetric.manageValue === 'err') {
-    //           if (totalValuesCount > 1) {
-    //             orientedLink.valueMainMetricA = 'error';
-    //           } else {
-    //             orientedLink.valueMainMetricA = valueMainMetric.toString();
-    //           }
-    //         }
-    //       } else {
-    //         if (mainMetric.manageValue === 'avg') {
-    //           orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
-    //         } else if (mainMetric.manageValue === 'sum') {
-    //           orientedLink.valueMainMetricB = valueMainMetric.toString();
-    //         } else if (mainMetric.manageValue === 'err') {
-    //           if (totalValuesCount > 1) {
-    //             orientedLink.valueMainMetricB = 'error';
-    //           } else {
-    //             orientedLink.valueMainMetricB = valueMainMetric.toString();
-    //           }
-    //         }
-    //       }
-    //     } else if (point) {
-    //       if (mainMetric.manageValue === 'avg') {
-    //         point.valueMetric = (valueMainMetric / totalValuesCount).toString();
-    //       } else if (mainMetric.manageValue === 'sum') {
-    //         point.valueMetric = valueMainMetric.toString();
-    //       } else if (mainMetric.manageValue === 'err') {
-    //         if (totalValuesCount > 1) {
-    //           point.valueMetric = 'error';
-    //         } else {
-    //           point.valueMetric = valueMainMetric.toString();
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
-
+    };
 
     _this.getValuesAuxiliaryMetricsPoint = function (point) {
       Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_8__["reqMetricAuxPoint"])(point, _this.props);
@@ -5454,14 +5518,17 @@ function (_super) {
               var line = metric.returnQuery[i];
 
               if (line.fields[0].labels) {
-                if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || mainMetric.key === '' && mainMetric.keyValue === '') {
-                  if (line.fields[0].labels[metric.key] === metric.keyValue) {
-                    var countValues = line.fields[0].values.length;
+                if (mainMetric.refId !== '') {
+                  //console.log(mainMetric);
+                  if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || mainMetric.key === '' && mainMetric.keyValue === '') {
+                    if (line.fields[0].labels[metric.key] === metric.keyValue) {
+                      var countValues = line.fields[0].values.length;
 
-                    for (var i_1 = 0; i_1 < countValues; i_1++) {
-                      if (line.fields[0].values.get(i_1)) {
-                        resultTotalValues += line.fields[0].values.get(i_1);
-                        countTotalValues++;
+                      for (var i_1 = 0; i_1 < countValues; i_1++) {
+                        if (line.fields[0].values.get(i_1)) {
+                          resultTotalValues += line.fields[0].values.get(i_1);
+                          countTotalValues++;
+                        }
                       }
                     }
                   }
@@ -5469,17 +5536,19 @@ function (_super) {
               }
             }
           } else {
-            for (var i = 0; i < numberLoop; i++) {
-              var line = metric.returnQuery[i];
+            if (mainMetric.refId !== '') {
+              for (var i = 0; i < numberLoop; i++) {
+                var line = metric.returnQuery[i];
 
-              if (line.fields[0].labels) {
-                if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || mainMetric.key === '' && mainMetric.keyValue === '') {
-                  var countValues = line.fields[0].values.length;
+                if (line.fields[0].labels) {
+                  if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || mainMetric.key === '' && mainMetric.keyValue === '') {
+                    var countValues = line.fields[0].values.length;
 
-                  for (var i_2 = 0; i_2 < countValues; i_2++) {
-                    if (line.fields[0].values.get(i_2)) {
-                      resultTotalValues += line.fields[0].values.get(i_2);
-                      countTotalValues++;
+                    for (var i_2 = 0; i_2 < countValues; i_2++) {
+                      if (line.fields[0].values.get(i_2)) {
+                        resultTotalValues += line.fields[0].values.get(i_2);
+                        countTotalValues++;
+                      }
                     }
                   }
                 }
@@ -6932,7 +7001,12 @@ function (_super) {
   SimplePanel.prototype.getValuesMainMetricPoint = function (point) {
     Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_8__["reqMetricPoint"])(point, this.props); //this.getValuesMainMetric(point.mainMetric, undefined, point);
 
-    var result = 0;
+    var result = 0; // if(result = 0 || NaN){
+    //   console.log('zone1');
+    // } else{
+    //   console.log('lol'); // Pass in console
+    // }
+
     result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_9__["getResultQuery"])(point.mainMetric) || NaN;
     return result;
   };
@@ -6940,7 +7014,12 @@ function (_super) {
   SimplePanel.prototype.getValuesMainMetricOrientedLink = function (orientedLink) {
     Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_8__["reqMetricOrientedLink"])(orientedLink, this.props); //this.getValuesMainMetric(orientedLink.mainMetric, orientedLink, undefined, false);
 
-    var result = 0;
+    var result = 0; // if(result = 0 || NaN){
+    //   console.log('zone2');
+    // } else{
+    //   console.log('lol'); // Pass in console
+    // }
+
     result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_9__["getResultQuery"])(orientedLink.mainMetric) || NaN;
     return result;
   };
@@ -6948,9 +7027,93 @@ function (_super) {
   SimplePanel.prototype.getValuesMainMetricOrientedLinkB = function (orientedLink) {
     Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_8__["reqMetricOrientedLink"])(orientedLink, this.props); //this.getValuesMainMetric(orientedLink.mainMetricB, orientedLink, undefined, true);
 
-    var result = 0;
+    var result = 0; // if(result = 0 || NaN){
+    //   console.log('zone3');
+    // } else{
+    //   console.log('lol'); // Pass in console
+    // }
+
     result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_9__["getResultQuery"])(orientedLink.mainMetricB) || NaN;
     return result;
+  };
+  /**
+   * to do
+   */
+
+
+  SimplePanel.prototype.getValuesMainMetric = function (mainMetric, orientedLink, point, isBidirectionnal) {
+    var valueMainMetric = 0;
+    var totalValuesCount = 0;
+    var key = mainMetric.key;
+    var keyValue = mainMetric.keyValue;
+
+    if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
+      mainMetric.returnQuery.forEach(function (line) {
+        if (line.fields[0].labels) {
+          if (key !== '' && keyValue !== '') {
+            if (line.fields[0].labels[key] === keyValue) {
+              var countValues = line.fields[0].values.length;
+
+              for (var i = 0; i < countValues; i++) {
+                if (line.fields[0].values.get(i)) {
+                  totalValuesCount++;
+                  valueMainMetric += line.fields[0].values.get(i);
+                }
+              }
+            }
+          } else {
+            var countValues = line.fields[0].values.length;
+
+            for (var i = 0; i < countValues; i++) {
+              if (line.fields[0].values.get(i)) {
+                totalValuesCount++;
+                valueMainMetric += line.fields[0].values.get(i);
+              }
+            }
+          }
+        }
+      });
+
+      if (orientedLink) {
+        if (!isBidirectionnal) {
+          if (mainMetric.manageValue === 'avg') {
+            orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
+          } else if (mainMetric.manageValue === 'sum') {
+            orientedLink.valueMainMetricA = valueMainMetric.toString();
+          } else if (mainMetric.manageValue === 'err') {
+            if (totalValuesCount > 1) {
+              orientedLink.valueMainMetricA = 'error';
+            } else {
+              orientedLink.valueMainMetricA = valueMainMetric.toString();
+            }
+          }
+        } else {
+          if (mainMetric.manageValue === 'avg') {
+            orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
+          } else if (mainMetric.manageValue === 'sum') {
+            orientedLink.valueMainMetricB = valueMainMetric.toString();
+          } else if (mainMetric.manageValue === 'err') {
+            if (totalValuesCount > 1) {
+              orientedLink.valueMainMetricB = 'error';
+            } else {
+              orientedLink.valueMainMetricB = valueMainMetric.toString();
+            }
+          }
+        }
+      } else if (point) {
+        if (mainMetric.manageValue === 'avg') {
+          point.valueMetric = (valueMainMetric / totalValuesCount).toString();
+        } else if (mainMetric.manageValue === 'sum') {
+          point.valueMetric = valueMainMetric.toString();
+        } else if (mainMetric.manageValue === 'err') {
+          if (totalValuesCount > 1) {
+            point.valueMetric = 'error';
+          } else {
+            point.valueMetric = valueMainMetric.toString();
+          }
+        }
+      }
+    }
   };
 
   SimplePanel.prototype.componentDidUpdate = function (prevProps) {
@@ -8505,7 +8668,9 @@ function (_super) {
 
         _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
           arrayOrientedLinks: newArrayLink
-        }));
+        })); // console.log('arrayLinks');
+        // console.log(this.props.options.arrayOrientedLinks);
+
       } else if (_this.props.isRegion) {
         var newArrayRegion = _this.props.options.regionCoordinateSpace;
 
@@ -8614,112 +8779,45 @@ function (_super) {
       }
 
       return auxiliaryMetrics;
-    };
+    }; // private getReferenceMainMetric = (isLinkB: boolean): string => {
+    //   let newRefId = '';
+    //   const idCurrentCoordinateSpace: number = this.props.idCoordinate;
+    //   if (this.props.isLink) {
+    //     const arrayOrientedLinks: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+    //     for (const orientedLink of arrayOrientedLinks) {
+    //       if (orientedLink.id === idCurrentCoordinateSpace) {
+    //         if (isLinkB) {
+    //           newRefId = orientedLink.mainMetricB.refId || '';
+    //         } else {
+    //           newRefId = orientedLink.mainMetric.refId || '';
+    //         }
+    //       }
+    //     }
+    //   } else if (this.props.isPoint) {
+    //     const newArrayPoints: PointClass[] = this.props.options.arrayPoints;
+    //     for (const point of newArrayPoints) {
+    //       if (point.id === idCurrentCoordinateSpace) {
+    //         newRefId = point.mainMetric.refId || '';
+    //       }
+    //     }
+    //   } else if (this.props.isRegion) {
+    //     const arrayRegions: RegionClass[] = this.props.options.regionCoordinateSpace;
+    //     for (const region of arrayRegions) {
+    //       if (region.id === idCurrentCoordinateSpace) {
+    //         newRefId = region.mainMetric.refId || '';
+    //       }
+    //     }
+    //   }
+    //   const newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(isLinkB);
+    //   for (const metric of newAuxiliaryMetrics) {
+    //     if (metric.refId !== newRefId) {
+    //       metric.refId = newRefId;
+    //       this.saveAuxMetrics(newAuxiliaryMetrics, isLinkB);
+    //     }
+    //   }
+    //   return newRefId;
+    // };
 
-    _this.getReferenceMainMetric = function (isLinkB) {
-      var e_7, _a, e_8, _b, e_9, _c, e_10, _d;
-
-      var newRefId = '';
-      var idCurrentCoordinateSpace = _this.props.idCoordinate;
-
-      if (_this.props.isLink) {
-        var arrayOrientedLinks = _this.props.options.arrayOrientedLinks;
-
-        try {
-          for (var arrayOrientedLinks_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayOrientedLinks), arrayOrientedLinks_2_1 = arrayOrientedLinks_2.next(); !arrayOrientedLinks_2_1.done; arrayOrientedLinks_2_1 = arrayOrientedLinks_2.next()) {
-            var orientedLink = arrayOrientedLinks_2_1.value;
-
-            if (orientedLink.id === idCurrentCoordinateSpace) {
-              if (isLinkB) {
-                newRefId = orientedLink.mainMetricB.refId || '';
-              } else {
-                newRefId = orientedLink.mainMetric.refId || '';
-              }
-            }
-          }
-        } catch (e_7_1) {
-          e_7 = {
-            error: e_7_1
-          };
-        } finally {
-          try {
-            if (arrayOrientedLinks_2_1 && !arrayOrientedLinks_2_1.done && (_a = arrayOrientedLinks_2["return"])) _a.call(arrayOrientedLinks_2);
-          } finally {
-            if (e_7) throw e_7.error;
-          }
-        }
-      } else if (_this.props.isPoint) {
-        var newArrayPoints = _this.props.options.arrayPoints;
-
-        try {
-          for (var newArrayPoints_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(newArrayPoints), newArrayPoints_2_1 = newArrayPoints_2.next(); !newArrayPoints_2_1.done; newArrayPoints_2_1 = newArrayPoints_2.next()) {
-            var point = newArrayPoints_2_1.value;
-
-            if (point.id === idCurrentCoordinateSpace) {
-              newRefId = point.mainMetric.refId || '';
-            }
-          }
-        } catch (e_8_1) {
-          e_8 = {
-            error: e_8_1
-          };
-        } finally {
-          try {
-            if (newArrayPoints_2_1 && !newArrayPoints_2_1.done && (_b = newArrayPoints_2["return"])) _b.call(newArrayPoints_2);
-          } finally {
-            if (e_8) throw e_8.error;
-          }
-        }
-      } else if (_this.props.isRegion) {
-        var arrayRegions = _this.props.options.regionCoordinateSpace;
-
-        try {
-          for (var arrayRegions_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayRegions), arrayRegions_2_1 = arrayRegions_2.next(); !arrayRegions_2_1.done; arrayRegions_2_1 = arrayRegions_2.next()) {
-            var region = arrayRegions_2_1.value;
-
-            if (region.id === idCurrentCoordinateSpace) {
-              newRefId = region.mainMetric.refId || '';
-            }
-          }
-        } catch (e_9_1) {
-          e_9 = {
-            error: e_9_1
-          };
-        } finally {
-          try {
-            if (arrayRegions_2_1 && !arrayRegions_2_1.done && (_c = arrayRegions_2["return"])) _c.call(arrayRegions_2);
-          } finally {
-            if (e_9) throw e_9.error;
-          }
-        }
-      }
-
-      var newAuxiliaryMetrics = _this.getAuxiliaryMetrics(isLinkB);
-
-      try {
-        for (var newAuxiliaryMetrics_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(newAuxiliaryMetrics), newAuxiliaryMetrics_1_1 = newAuxiliaryMetrics_1.next(); !newAuxiliaryMetrics_1_1.done; newAuxiliaryMetrics_1_1 = newAuxiliaryMetrics_1.next()) {
-          var metric = newAuxiliaryMetrics_1_1.value;
-
-          if (metric.refId !== newRefId) {
-            metric.refId = newRefId;
-
-            _this.saveAuxMetrics(newAuxiliaryMetrics, isLinkB);
-          }
-        }
-      } catch (e_10_1) {
-        e_10 = {
-          error: e_10_1
-        };
-      } finally {
-        try {
-          if (newAuxiliaryMetrics_1_1 && !newAuxiliaryMetrics_1_1.done && (_d = newAuxiliaryMetrics_1["return"])) _d.call(newAuxiliaryMetrics_1);
-        } finally {
-          if (e_10) throw e_10.error;
-        }
-      }
-
-      return newRefId;
-    };
     /** switch value collapse when click collapse */
 
 
@@ -8743,6 +8841,119 @@ function (_super) {
       _this.setState({
         collapseLinkB: isOpen
       });
+    };
+
+    _this.getAllQuery = function (id) {
+      var e_7, _a, e_8, _b;
+
+      var _c;
+
+      var allQuery = [];
+      allQuery.push({
+        id: id,
+        value: undefined,
+        label: 'No value'
+      });
+
+      try {
+        for (var _d = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(_this.props.data.series), _e = _d.next(); !_e.done; _e = _d.next()) {
+          var line = _e.value;
+          var duplicate = false;
+
+          try {
+            for (var allQuery_1 = (e_8 = void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(allQuery)), allQuery_1_1 = allQuery_1.next(); !allQuery_1_1.done; allQuery_1_1 = allQuery_1.next()) {
+              var valueSave = allQuery_1_1.value;
+
+              if (((_c = valueSave.value) === null || _c === void 0 ? void 0 : _c.refId) === line.refId) {
+                duplicate = true;
+                break;
+              }
+            }
+          } catch (e_8_1) {
+            e_8 = {
+              error: e_8_1
+            };
+          } finally {
+            try {
+              if (allQuery_1_1 && !allQuery_1_1.done && (_b = allQuery_1["return"])) _b.call(allQuery_1);
+            } finally {
+              if (e_8) throw e_8.error;
+            }
+          }
+
+          if (!duplicate) {
+            allQuery.push({
+              id: id,
+              value: line,
+              label: line.refId
+            });
+          }
+        }
+      } catch (e_7_1) {
+        e_7 = {
+          error: e_7_1
+        };
+      } finally {
+        try {
+          if (_e && !_e.done && (_a = _d["return"])) _a.call(_d);
+        } finally {
+          if (e_7) throw e_7.error;
+        }
+      }
+
+      return allQuery;
+    };
+
+    _this.getCurrentQuery = function (id, isLinkB) {
+      var currentQuery = [];
+
+      var newAuxiliaryMetrics = _this.getAuxiliaryMetrics(false); // console.log('linkA');
+      // console.log(newAuxiliaryMetrics);
+
+
+      currentQuery = {
+        id: id,
+        label: newAuxiliaryMetrics[parseInt(id, 10)].refId
+      };
+      return currentQuery;
+    };
+
+    _this.getCurrentQueryB = function (id, isLinkB) {
+      var currentQuery = [];
+
+      var newAuxiliaryMetrics = _this.getAuxiliaryMetrics(true); // console.log('linkB');
+      // console.log(newAuxiliaryMetrics);
+
+
+      currentQuery = {
+        id: id,
+        label: newAuxiliaryMetrics[parseInt(id, 10)].refId
+      };
+      return currentQuery;
+    };
+    /** edit value for select */
+
+
+    _this.onChangeSelectQuery = function (event) {
+      //console.log(event);
+      var newAuxiliaryMetrics = _this.getAuxiliaryMetrics(false);
+
+      var id = event.id;
+      newAuxiliaryMetrics[id].refId = event.label;
+
+      _this.saveAuxMetrics(newAuxiliaryMetrics, false);
+    };
+    /** edit value for select */
+
+
+    _this.onChangeSelectQueryB = function (event) {
+      //console.log(event);
+      var newAuxiliaryMetrics = _this.getAuxiliaryMetrics(true);
+
+      var id = event.id;
+      newAuxiliaryMetrics[id].refId = event.label;
+
+      _this.saveAuxMetrics(newAuxiliaryMetrics, true);
     };
 
     _this.onChangeKey = function (event) {
@@ -8786,7 +8997,8 @@ function (_super) {
     };
 
     _this.onChangeManageValue = function (event) {
-      var newAuxiliaryMetrics = _this.getAuxiliaryMetrics(false);
+      var newAuxiliaryMetrics = _this.getAuxiliaryMetrics(false); // console.log(event);
+
 
       var id = event.id;
       newAuxiliaryMetrics[id].manageValue = event.value;
@@ -8804,8 +9016,7 @@ function (_super) {
     };
 
     _this.addAuxiliaryMetric = function () {
-      var refIdMetric = _this.getReferenceMainMetric(false);
-
+      // const refIdMetric: string = this.state.currentRefQuery;
       var newAuxiliaryMetrics = _this.getAuxiliaryMetrics(false);
 
       newAuxiliaryMetrics.push({
@@ -8813,7 +9024,7 @@ function (_super) {
         unit: '',
         format: '',
         keyValue: '',
-        refId: refIdMetric,
+        refId: '',
         manageValue: 'avg'
       });
 
@@ -8823,8 +9034,7 @@ function (_super) {
     };
 
     _this.addAuxiliaryMetricB = function () {
-      var refIdMetric = _this.getReferenceMainMetric(true);
-
+      // const refIdMetric: string = this.state.currentRefQueryB;
       var newAuxiliaryMetrics = _this.getAuxiliaryMetrics(true);
 
       newAuxiliaryMetrics.push({
@@ -8832,7 +9042,7 @@ function (_super) {
         unit: '',
         format: '',
         keyValue: '',
-        refId: refIdMetric,
+        refId: '',
         manageValue: 'avg'
       });
 
@@ -8906,9 +9116,7 @@ function (_super) {
     _this.generateInputs = function (index, isLinkB) {
       var _a, _b, _c;
 
-      var id = index;
-
-      var refIdMetric = _this.getReferenceMainMetric(isLinkB);
+      var id = index; //const refIdMetric: string = this.state.currentQuery.label || '';
 
       var auxMetrics = _this.getAuxiliaryMetrics(isLinkB);
 
@@ -8931,19 +9139,19 @@ function (_super) {
         display: 'flex',
         flexDirection: 'row',
         marginBottom: '2px'
-      };
-      var styleReferenceMetric = {
-        width: '416px',
-        height: '35px',
-        border: '1px solid #262628',
-        borderRadius: '0 3px 3px 0',
-        backgroundColor: '#09090b',
-        padding: '8px',
-        fontSize: '14px',
-        lineHeight: '18px',
-        color: '#d8d9da',
-        marginBottom: '0px'
-      };
+      }; // const styleReferenceMetric = {
+      //   width: '416px',
+      //   height: '35px',
+      //   border: '1px solid #262628',
+      //   borderRadius: '0 3px 3px 0',
+      //   backgroundColor: '#09090b',
+      //   padding: '8px',
+      //   fontSize: '14px',
+      //   lineHeight: '18px',
+      //   color: '#d8d9da',
+      //   marginBottom: '0px',
+      // } as React.CSSProperties;
+
       var item;
 
       if (isLinkB) {
@@ -8960,19 +9168,25 @@ function (_super) {
           key: idCoordinateSpace + 'inputs' + id.toString()
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           key: idCoordinateSpace + 'refBloc' + id.toString(),
-          style: styleSelect
+          style: {
+            display: 'flex'
+          }
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
           key: idCoordinateSpace + 'labelref' + id.toString(),
-          width: 10
-        }, "Query"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          width: 15
+        }, "Query"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
           key: ((_b = _this.props.idCoordinate) === null || _b === void 0 ? void 0 : _b.toString()) || '' + 'refValue' + id.toString(),
-          style: styleReferenceMetric
-        }, refIdMetric)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+          onChange: _this.onChangeSelectQueryB,
+          allowCustomValue: false,
+          options: _this.getAllQuery(id.toString()),
+          width: 30,
+          value: _this.getCurrentQueryB(id.toString(), isLinkB)
+        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           key: idCoordinateSpace + 'inputKey' + id.toString(),
           id: id.toString(),
           label: "Key",
-          labelWidth: 10,
-          inputWidth: 20,
+          labelWidth: 15,
+          inputWidth: 30,
           type: "text",
           value: auxMetrics[id].key,
           name: "key",
@@ -8981,8 +9195,8 @@ function (_super) {
           key: idCoordinateSpace + 'valueKey' + id.toString(),
           id: id.toString(),
           label: "Value key",
-          labelWidth: 10,
-          inputWidth: 20,
+          labelWidth: 15,
+          inputWidth: 30,
           type: "text",
           value: auxMetrics[id].keyValue,
           name: "valueKey",
@@ -8993,13 +9207,13 @@ function (_super) {
           style: styleSelect
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
           key: idCoordinateSpace + 'labelTypeOfValue' + id.toString(),
-          width: 10
+          width: 15
         }, "Value"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
           key: idCoordinateSpace + 'selectTypeOfValue' + id.toString(),
           onChange: _this.onChangeManageValueB,
           allowCustomValue: false,
           options: _this.getAllManageValue(id.toString()),
-          width: 20,
+          width: 30,
           value: _this.getCurrentManageValue(id, isLinkB)
         }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           key: idCoordinateSpace + 'buttonDelete' + id.toString()
@@ -9022,14 +9236,20 @@ function (_super) {
           key: idCoordinateSpace + 'inputs' + id.toString()
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           key: idCoordinateSpace + 'refBloc' + id.toString(),
-          style: styleSelect
+          style: {
+            display: 'flex'
+          }
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
           key: idCoordinateSpace + 'labelref' + id.toString(),
           width: 15
-        }, "Query"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        }, "Query"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
           key: ((_c = _this.props.idCoordinate) === null || _c === void 0 ? void 0 : _c.toString()) || '' + 'refValue' + id.toString(),
-          style: styleReferenceMetric
-        }, refIdMetric)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+          onChange: _this.onChangeSelectQuery,
+          allowCustomValue: false,
+          options: _this.getAllQuery(id.toString()),
+          width: 30,
+          value: _this.getCurrentQuery(id.toString(), isLinkB)
+        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           key: idCoordinateSpace + 'inputKey' + id.toString(),
           id: id.toString(),
           label: "Key",
@@ -9097,10 +9317,17 @@ function (_super) {
       }, mapItems);
     };
 
+    _this.componentDidMount = function () {//this.fillSelectQuery();
+    };
+
     _this.state = {
       collapse: false,
       collapseLinkA: false,
-      collapseLinkB: false
+      collapseLinkB: false,
+      // selectQuery: [],
+      // selectQueryDefault: [],
+      currentRefQuery: '',
+      currentRefQueryB: ''
     };
     return _this;
   }
@@ -9110,7 +9337,7 @@ function (_super) {
 
 
   ManageAuxiliaryQuery.prototype.render = function () {
-    var e_11, _a;
+    var e_9, _a;
 
     var _b;
 
@@ -9125,22 +9352,22 @@ function (_super) {
     var arrayOrientedLinks = this.props.options.arrayOrientedLinks;
 
     try {
-      for (var arrayOrientedLinks_3 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayOrientedLinks), arrayOrientedLinks_3_1 = arrayOrientedLinks_3.next(); !arrayOrientedLinks_3_1.done; arrayOrientedLinks_3_1 = arrayOrientedLinks_3.next()) {
-        var orientedLink = arrayOrientedLinks_3_1.value;
+      for (var arrayOrientedLinks_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(arrayOrientedLinks), arrayOrientedLinks_2_1 = arrayOrientedLinks_2.next(); !arrayOrientedLinks_2_1.done; arrayOrientedLinks_2_1 = arrayOrientedLinks_2.next()) {
+        var orientedLink = arrayOrientedLinks_2_1.value;
 
         if (orientedLink.id === this.props.idCoordinate) {
           currentOrientedLink = orientedLink;
         }
       }
-    } catch (e_11_1) {
-      e_11 = {
-        error: e_11_1
+    } catch (e_9_1) {
+      e_9 = {
+        error: e_9_1
       };
     } finally {
       try {
-        if (arrayOrientedLinks_3_1 && !arrayOrientedLinks_3_1.done && (_a = arrayOrientedLinks_3["return"])) _a.call(arrayOrientedLinks_3);
+        if (arrayOrientedLinks_2_1 && !arrayOrientedLinks_2_1.done && (_a = arrayOrientedLinks_2["return"])) _a.call(arrayOrientedLinks_2);
       } finally {
-        if (e_11) throw e_11.error;
+        if (e_9) throw e_9.error;
       }
     }
 
@@ -9914,12 +10141,12 @@ function (_super) {
           },
           allowCustomValue: false,
           options: _this.state.selectQuery,
-          width: 15,
+          width: 30,
           value: _this.state.selectQueryDefault
         })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           label: "Key",
           labelWidth: 15,
-          inputWidth: 20,
+          inputWidth: 30,
           type: "text",
           value: _this.state.mainMetric.key,
           name: "key",
@@ -9929,7 +10156,7 @@ function (_super) {
         }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           label: "Value key",
           labelWidth: 15,
-          inputWidth: 20,
+          inputWidth: 30,
           type: "text",
           value: _this.state.mainMetric.keyValue,
           name: "valueKey",
@@ -9948,7 +10175,7 @@ function (_super) {
           },
           allowCustomValue: false,
           options: _this.state.selectManageValue,
-          width: 15,
+          width: 30,
           value: _this.getDefaultManageValue()
         }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
           isOpen: _this.state.collapseLinkB,
@@ -9967,12 +10194,12 @@ function (_super) {
           },
           allowCustomValue: false,
           options: _this.state.selectQuery,
-          width: 10,
+          width: 30,
           value: _this.getDefaultQueryB()
         })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           label: "Key",
           labelWidth: 15,
-          inputWidth: 20,
+          inputWidth: 30,
           type: "text",
           value: _this.state.mainMetricB.key,
           name: "key",
@@ -9982,7 +10209,7 @@ function (_super) {
         }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           label: "Value key",
           labelWidth: 15,
-          inputWidth: 20,
+          inputWidth: 30,
           type: "text",
           value: _this.state.mainMetricB.keyValue,
           name: "valueKey",
@@ -10001,7 +10228,7 @@ function (_super) {
           },
           allowCustomValue: false,
           options: _this.state.selectManageValue,
-          width: 10,
+          width: 30,
           value: _this.getDefaultManageValueB()
         }))));
       } else {
@@ -10021,12 +10248,12 @@ function (_super) {
           },
           allowCustomValue: false,
           options: _this.state.selectQuery,
-          width: 10,
+          width: 30,
           value: _this.state.selectQueryDefault
         })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           label: "Key",
           labelWidth: 15,
-          inputWidth: 10,
+          inputWidth: 30,
           type: "text",
           value: _this.state.mainMetric.key,
           name: "key",
@@ -10036,7 +10263,7 @@ function (_super) {
         }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
           label: "Value key",
           labelWidth: 15,
-          inputWidth: 10,
+          inputWidth: 30,
           type: "text",
           value: _this.state.mainMetric.keyValue,
           name: "valueKey",
@@ -10055,7 +10282,7 @@ function (_super) {
           },
           allowCustomValue: false,
           options: _this.state.selectManageValue,
-          width: 10,
+          width: 30,
           value: _this.getDefaultManageValue()
         })));
       }
@@ -13524,12 +13751,13 @@ function (_super) {
               key: 'contentTextObject2' + _this.props.name,
               style: styleMainMetric
             }, legendMainMetric));
-          }
+          } // Condition Display NaN none Oriented Link
+
 
           htmlMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
             key: 'contentTextObject3' + _this.props.name,
             style: styleMainMetric
-          }, _this.defineMainMetric(mainMetric)));
+          }, !isNaN(parseFloat(_this.defineMainMetric(mainMetric))) && _this.defineMainMetric(mainMetric)));
         }
       }
 
@@ -13728,17 +13956,21 @@ function (_super) {
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
                   key: index_1.toString() + 'contentTooltip12' + _this.props.name,
                   style: styleContentAuxMetrics
-                }, "- Value : ", _this.defineAuxMetric(_this.props.valuesAuxiliaryMetrics[index_1 - 1])));
+                }, "- Reference : ", metric.refId));
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
                   key: index_1.toString() + 'contentTooltip13' + _this.props.name,
                   style: styleContentAuxMetrics
-                }, "- Key : ", metric.key));
+                }, "- Value :", ' ', !isNaN(parseFloat(_this.defineAuxMetric(_this.props.valuesAuxiliaryMetrics[index_1 - 1]))) && _this.defineAuxMetric(_this.props.valuesAuxiliaryMetrics[index_1 - 1])));
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
                   key: index_1.toString() + 'contentTooltip14' + _this.props.name,
                   style: styleContentAuxMetrics
-                }, "- KeyValue : ", metric.keyValue));
+                }, "- Key : ", metric.key));
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
                   key: index_1.toString() + 'contentTooltip15' + _this.props.name,
+                  style: styleContentAuxMetrics
+                }, "- KeyValue : ", metric.keyValue));
+                contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                  key: index_1.toString() + 'contentTooltip16' + _this.props.name,
                   style: styleContentAuxMetrics
                 }, "- Type : ", metric.manageValue));
                 index_1++;
@@ -13747,32 +13979,36 @@ function (_super) {
           } else {
             if (_this.props.auxiliaryMetricsB.length > 0) {
               contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: 'contentTooltip16' + _this.props.name,
+                key: 'contentTooltip17' + _this.props.name,
                 style: styleTitleAuxMetric
               }, "Auxiliary Metric"));
               var index_2 = 1;
 
-              _this.props.auxiliaryMetricsB.forEach(function (metric) {
+              _this.props.auxiliaryMetricsB.forEach(function (metricB) {
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                  key: index_2.toString() + 'contentTooltip17' + _this.props.name,
+                  key: index_2.toString() + 'contentTooltip18' + _this.props.name,
                   style: styleTitle2AuxMetric
                 }, "+ Metric ", index_2));
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                  key: index_2.toString() + 'contentTooltip18' + _this.props.name,
-                  style: styleContentAuxMetrics
-                }, "- Value : ", _this.defineAuxMetric(_this.props.valuesAuxiliaryMetrics[index_2 - 1])));
-                contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
                   key: index_2.toString() + 'contentTooltip19' + _this.props.name,
                   style: styleContentAuxMetrics
-                }, "- Key : ", metric.key));
+                }, "- Reference : ", metricB.refId));
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
                   key: index_2.toString() + 'contentTooltip20' + _this.props.name,
                   style: styleContentAuxMetrics
-                }, "- KeyValue : ", metric.keyValue));
+                }, "- Value :", ' ', !isNaN(parseFloat(_this.defineAuxMetric(_this.props.valuesAuxiliaryMetricsB[index_2 - 1]))) && _this.defineAuxMetric(_this.props.valuesAuxiliaryMetricsB[index_2 - 1])));
                 contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
                   key: index_2.toString() + 'contentTooltip21' + _this.props.name,
                   style: styleContentAuxMetrics
-                }, "- Type : ", metric.manageValue));
+                }, "- Key : ", metricB.key));
+                contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                  key: index_2.toString() + 'contentTooltip22' + _this.props.name,
+                  style: styleContentAuxMetrics
+                }, "- KeyValue : ", metricB.keyValue));
+                contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                  key: index_2.toString() + 'contentTooltip23' + _this.props.name,
+                  style: styleContentAuxMetrics
+                }, "- Type : ", metricB.manageValue));
                 index_2++;
               });
             }
@@ -13780,30 +14016,34 @@ function (_super) {
         } else if (typeLink === 'monodirectional') {
           if (_this.props.auxiliaryMetrics.length > 0) {
             contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-              key: 'contentTooltip22' + _this.props.name,
+              key: 'contentTooltip24' + _this.props.name,
               style: styleTitleAuxMetric
             }, "Auxiliary Metric"));
             var index_3 = 1;
 
             _this.props.auxiliaryMetrics.forEach(function (metric) {
               contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_3.toString() + 'contentTooltip23' + _this.props.name,
+                key: index_3.toString() + 'contentTooltip25' + _this.props.name,
                 style: styleTitle2AuxMetric
               }, "+ Metric ", index_3));
               contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_3.toString() + 'contentTooltip14' + _this.props.name,
+                key: index_3.toString() + 'contentTooltip26' + _this.props.name,
                 style: styleContentAuxMetrics
-              }, "- Value : ", _this.defineAuxMetric(_this.props.valuesAuxiliaryMetrics[index_3 - 1])));
+              }, "- Reference : ", metric.refId));
               contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_3.toString() + 'contentTooltip25' + _this.props.name,
+                key: index_3.toString() + 'contentTooltip27' + _this.props.name,
+                style: styleContentAuxMetrics
+              }, "- Value :", ' ', !isNaN(parseFloat(_this.defineAuxMetric(_this.props.valuesAuxiliaryMetrics[index_3 - 1]))) && _this.defineAuxMetric(_this.props.valuesAuxiliaryMetrics[index_3 - 1])));
+              contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+                key: index_3.toString() + 'contentTooltip28' + _this.props.name,
                 style: styleContentAuxMetrics
               }, "- Key : ", metric.key));
               contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_3.toString() + 'contentTooltip26' + _this.props.name,
+                key: index_3.toString() + 'contentTooltip29' + _this.props.name,
                 style: styleContentAuxMetrics
               }, "- KeyValue : ", metric.keyValue));
               contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-                key: index_3.toString() + 'contentTooltip27' + _this.props.name,
+                key: index_3.toString() + 'contentTooltip30' + _this.props.name,
                 style: styleContentAuxMetrics
               }, "- Type : ", metric.manageValue));
               index_3++;
@@ -15134,7 +15374,9 @@ function (_super) {
         result = parseFloat(mainMetric).toPrecision(roundValue) + ' ' + unit;
       } else {
         result = mainMetric + ' ' + unit;
-      }
+      } // console.log('result');
+      // console.log(result);
+
 
       return result;
     };
@@ -15195,12 +15437,13 @@ function (_super) {
               key: 'contentTextObject2' + _this.props.name,
               style: styleMainMetric
             }, legendMainMetric));
-          }
+          } // Condition Display NaN none Point
+
 
           htmlMainMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
             key: 'contentTextObject3' + _this.props.name,
             style: styleMainMetric
-          }, _this.defineMainMetric(mainMetric)));
+          }, !isNaN(parseFloat(_this.defineMainMetric(mainMetric))) && _this.defineMainMetric(mainMetric)));
         }
       }
 
@@ -15690,17 +15933,21 @@ function (_super) {
           contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
             key: index_1.toString() + localisation + 'ContentTooltip9' + _this.props.name,
             style: styleContentAuxMetrics
-          }, "- Value : ", _this.defineAuxMetric(_this.props.valuesAuxiliaryMetrics[index_1 - 1])));
+          }, "- Reference : ", metric.refId));
           contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
             key: index_1.toString() + localisation + 'ContentTooltip10' + _this.props.name,
             style: styleContentAuxMetrics
-          }, "- Key : ", metric.key));
+          }, "- Value :", ' ', !isNaN(parseFloat(_this.defineAuxMetric(_this.props.valuesAuxiliaryMetrics[index_1 - 1]))) && _this.defineAuxMetric(_this.props.valuesAuxiliaryMetrics[index_1 - 1])));
           contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
             key: index_1.toString() + localisation + 'ContentTooltip11' + _this.props.name,
             style: styleContentAuxMetrics
-          }, "- KeyValue : ", metric.keyValue));
+          }, "- Key : ", metric.key));
           contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
             key: index_1.toString() + localisation + 'ContentTooltip12' + _this.props.name,
+            style: styleContentAuxMetrics
+          }, "- KeyValue : ", metric.keyValue));
+          contentTooltipAuxMetric.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+            key: index_1.toString() + localisation + 'ContentTooltip13' + _this.props.name,
             style: styleContentAuxMetrics
           }, "- Type : ", metric.manageValue));
           index_1++;
@@ -15710,13 +15957,13 @@ function (_super) {
 
     if (arrayOrientedLinksIn.length !== 0) {
       contentTooltipAssociateLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-        key: localisation + 'ContentTooltip13' + this.props.name,
+        key: localisation + 'ContentTooltip14' + this.props.name,
         style: styleTitleAssociateLink
       }, "Associate Link In :"));
       arrayOrientedLinksIn.forEach(function (orientedLinkIn) {
         var nameOrientedLink = orientedLinkIn.label || orientedLinkIn.name;
         contentTooltipAssociateLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-          key: localisation + 'ContentTooltip14' + _this.props.name + nameOrientedLink,
+          key: localisation + 'ContentTooltip15' + _this.props.name + nameOrientedLink,
           style: styleContentAssociateLink
         }, "- ", nameOrientedLink));
       });
@@ -15724,13 +15971,13 @@ function (_super) {
 
     if (arrayOrientedLinksOut.length !== 0) {
       contentTooltipAssociateLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-        key: localisation + 'ContentTooltip15' + this.props.name,
+        key: localisation + 'ContentTooltip16' + this.props.name,
         style: styleTitleAssociateLink
       }, "Associate Link Out :"));
       arrayOrientedLinksOut.forEach(function (orientedLinkOut) {
         var nameOrientedLink = orientedLinkOut.label || orientedLinkOut.name;
         contentTooltipAssociateLink.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-          key: localisation + 'ContentTooltip16' + _this.props.name + nameOrientedLink,
+          key: localisation + 'ContentTooltip17' + _this.props.name + nameOrientedLink,
           style: styleContentAssociateLink
         }, "- ", nameOrientedLink));
       });
@@ -16241,7 +16488,8 @@ function (_super) {
     /** fill state for tooltip, color zone and calc round query */
 
 
-    _this.setStateTooltip = function (lowerLimit, region, valueQuery) {
+    _this.setStateTooltip = function (lowerLimit, region, valueQuery //link: boolean
+    ) {
       var styleTooltip = {
         color: region.textObj.colorText,
         backgroundColor: region.textObj.colorBack
@@ -16491,14 +16739,16 @@ function (_super) {
               var line = metric.returnQuery[i];
 
               if (line.fields[0].labels) {
-                if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || mainMetric.key === '' && mainMetric.keyValue === '') {
-                  if (line.fields[0].labels[metric.key] === metric.keyValue) {
-                    var countValues = line.fields[0].values.length;
+                if (mainMetric.refId !== '') {
+                  if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || mainMetric.key === '' && mainMetric.keyValue === '') {
+                    if (line.fields[0].labels[metric.key] === metric.keyValue) {
+                      var countValues = line.fields[0].values.length;
 
-                    for (var i_1 = 0; i_1 < countValues; i_1++) {
-                      if (line.fields[0].values.get(i_1)) {
-                        resultTotalValues += line.fields[0].values.get(i_1);
-                        countTotalValues++;
+                      for (var i_1 = 0; i_1 < countValues; i_1++) {
+                        if (line.fields[0].values.get(i_1)) {
+                          resultTotalValues += line.fields[0].values.get(i_1);
+                          countTotalValues++;
+                        }
                       }
                     }
                   }
@@ -16510,13 +16760,15 @@ function (_super) {
               var line = metric.returnQuery[i];
 
               if (line.fields[0].labels) {
-                if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || mainMetric.key === '' && mainMetric.keyValue === '') {
-                  var countValues = line.fields[0].values.length;
+                if (mainMetric.refId) {
+                  if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || mainMetric.key === '' && mainMetric.keyValue === '') {
+                    var countValues = line.fields[0].values.length;
 
-                  for (var i_2 = 0; i_2 < countValues; i_2++) {
-                    if (line.fields[0].values.get(i_2)) {
-                      resultTotalValues += line.fields[0].values.get(i_2);
-                      countTotalValues++;
+                    for (var i_2 = 0; i_2 < countValues; i_2++) {
+                      if (line.fields[0].values.get(i_2)) {
+                        resultTotalValues += line.fields[0].values.get(i_2);
+                        countTotalValues++;
+                      }
                     }
                   }
                 }
@@ -16632,17 +16884,21 @@ function (_super) {
             html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
               key: index + 'region' + region.id + 'contentToolTip4',
               style: styleContent
-            }, "- Value : ", valueAuxMetric));
+            }, "- Reference : ", metric.refId));
             html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
               key: index + 'region' + region.id + 'contentToolTip5',
               style: styleContent
-            }, "- Key : ", metric.key));
+            }, "- Value : ", !isNaN(parseFloat(valueAuxMetric)) && valueAuxMetric));
             html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
               key: index + 'region' + region.id + 'contentToolTip6',
               style: styleContent
-            }, "- KeyValue : ", metric.keyValue));
+            }, "- Key : ", metric.key));
             html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
               key: index + 'region' + region.id + 'contentToolTip7',
+              style: styleContent
+            }, "- KeyValue : ", metric.keyValue));
+            html.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+              key: index + 'region' + region.id + 'contentToolTip8',
               style: styleContent
             }, "- Type : ", metric.manageValue));
             index++;
@@ -16658,11 +16914,8 @@ function (_super) {
             if (e_1) throw e_1.error;
           }
         }
-
-        ;
       }
 
-      ;
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         style: {
           backgroundColor: colorBack
@@ -17031,8 +17284,7 @@ function (_super) {
     var result = coordinateY;
 
     if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
-      console.log(coordinateY);
-
+      //console.log(coordinateY);
       if (coordinateY > 100) {
         result = 100;
       }
@@ -20931,7 +21183,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
 /* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Functions/loaderGabarit */ "./Functions/loaderGabarit.tsx");
+/* harmony import */ var Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! Models/OrientedLinkClass */ "./Models/OrientedLinkClass.tsx");
+/* harmony import */ var Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! Models/PositionParameterClass */ "./Models/PositionParameterClass.tsx");
+/* harmony import */ var Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! Models/LinkURLClass */ "./Models/LinkURLClass.tsx");
+/* harmony import */ var Models_PointClass__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! Models/PointClass */ "./Models/PointClass.tsx");
 
+
+ //import /*pointClassImport, regionClassImport, gabaritPointClassImport, gabaritRegionClassImport */ '../../config/testVariable';
+
+ //import { LinkURLClass } from 'Models/LinkURLClass';
+//import { PositionParameterClass } from 'Models/PositionParameterClass';
+
+
+
+ //import { LowerLimitClass } from 'Models/LowerLimitClass';
+//import { TextObject } from 'Models/TextObjectClass';
 
  // interface SelectQueryID {
 //   value: string;
@@ -20956,10 +21223,6 @@ function (_super) {
     /**************************************CATCH******************************************/
 
     _this.onChangeSelectQuerryID = function (value, index) {
-      _this.setState({
-        selectQuerryIDDefault: value
-      });
-
       var newGabaritFile = _this.props.options.saveGabaritFile;
       newGabaritFile[index].queryID = value.value;
 
@@ -21002,15 +21265,15 @@ function (_super) {
       console.log(name[name.length - 1]);
       file.templates.forEach(function (gab) {
         if (gab.type === 'point') {
-          newGabarit.templateGabaritPoint = gab;
+          newGabarit.templateGabaritPoint.push(gab);
         }
 
         if (gab.type === 'region') {
-          newGabarit.templateGabaritRegion = gab;
+          newGabarit.templateGabaritRegion.push(gab);
         }
 
         if (gab.type === 'link') {
-          newGabarit.templateGabaritLink = gab;
+          newGabarit.templateGabaritLink.push(gab);
         }
       });
 
@@ -21097,15 +21360,23 @@ function (_super) {
     };
 
     _this.addGabaritUrlInput = function (onClick) {
-      console.log(onClick.currentTarget);
+      var valid = true;
 
-      _this.props.options.saveGabaritURL.push(_this.props.options.gabaritUrlInput);
+      _this.props.options.saveGabaritURL.forEach(function (element) {
+        if (_this.props.options.gabaritUrlInput === element) {
+          valid = false;
+        }
+      });
 
-      _this.props.options.gabaritUrlInput = '';
+      if (valid === true) {
+        _this.props.options.saveGabaritURL.push(_this.props.options.gabaritUrlInput);
 
-      _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-        saveGabaritURL: _this.props.options.saveGabaritURL
-      }));
+        _this.props.options.gabaritUrlInput = '';
+
+        _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+          saveGabaritURL: _this.props.options.saveGabaritURL
+        }));
+      }
     };
 
     _this.gabaritDeletUrl = function (onClick) {
@@ -21121,6 +21392,317 @@ function (_super) {
     };
 
     _this.tempo = function () {// console.log(this.props.options.saveGabaritURL);
+    };
+    /**************************************LOADER******************************************/
+
+
+    _this.loaderGabarit = function (onClick) {
+      var tmpLabelAPosition;
+      var tmpLabelBPosition;
+      var tmpToolTipA;
+      var tmpToolTipB;
+      /* Point */
+      //template
+
+      var filterPoint = [];
+      var posPoint = [];
+      var namePoint = [];
+      var metaPoint = [];
+      var labelPoint = [];
+      var positionParameterPoint = [];
+      var mainMetricPoint = [];
+      var metricPoint = [];
+      var linkURLPoint = [];
+      var valueMetricPoint = [];
+      var drawGraphicMarkerPoint = [];
+      var shapePoint = [];
+      var sizeWidthPoint = [];
+      var sizeHeightPoint = [];
+      var colorPoint = [];
+      var associateOrientedLinksInPoint = [];
+      var associateOrientedLinksOutPoint = []; //global
+      //let lowerLimit: LowerLimitClass;
+      //let textObject: TextObject;
+
+      var colorMode;
+      var traceBack;
+      var traceBorder;
+      /* Region */
+      //Template
+
+      var gabaritFileTmp = _this.props.options.saveGabaritFile[parseInt(onClick.currentTarget.id, 10)];
+
+      colorMode = Boolean(gabaritFileTmp.globalGabarit.colorMode);
+      traceBack = Boolean(gabaritFileTmp.globalGabarit.traceBack);
+      traceBorder = Boolean(gabaritFileTmp.globalGabarit.traceBorder);
+      gabaritFileTmp.templateGabaritPoint.forEach(function (point, index) {
+        if (point.labelfix.toString() === 'false') {
+          posPoint.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(point.xylabel));
+        } else {
+          posPoint.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(point.xylabelfix));
+        }
+
+        filterPoint.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["filterParse"])(point.filtered));
+        namePoint.push(point.name);
+        metaPoint.push(point.meta);
+        labelPoint.push(point.label);
+        mainMetricPoint.push(point.mainMetric);
+        mainMetricPoint[index].filter = filterPoint[index];
+        mainMetricPoint[index].refId = gabaritFileTmp.queryID;
+
+        if (mainMetricPoint[index].refId === null) {
+          mainMetricPoint[index].refId = 'A';
+        }
+
+        point.metrics.forEach(function (element) {
+          metricPoint[index].push(element);
+        });
+        valueMetricPoint.push(point.valueMetric);
+        drawGraphicMarkerPoint.push(point.drawGraphicMarker);
+        shapePoint.push(point.shape);
+        sizeWidthPoint.push(point.sizeWidth);
+        sizeHeightPoint.push(point.sizeHeight);
+
+        if (point.color.length !== 0) {
+          colorPoint.push(point.color);
+        } else {
+          colorPoint.push(gabaritFileTmp.globalGabarit.defaultColor);
+        }
+
+        associateOrientedLinksInPoint.push(point.associateOrientedLinksIn);
+        associateOrientedLinksOutPoint.push(point.associateOrientedLinksOut);
+        tmpToolTipA = {
+          label: point.positionParameter.tooltipA,
+          value: point.positionParameter.tooltipA
+        };
+        tmpToolTipB = {
+          label: point.positionParameter.tooltipB,
+          value: point.positionParameter.tooltipB
+        };
+        tmpLabelAPosition = Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(point.positionParameter.xylabelA);
+        tmpLabelBPosition = Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(point.positionParameter.xylabelB);
+        positionParameterPoint.push(new Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_5__["PositionParameterClass"](tmpLabelAPosition.x, tmpLabelAPosition.y, tmpLabelBPosition.x, tmpLabelBPosition.y, tmpToolTipA, tmpToolTipB));
+        linkURLPoint.push(new Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_6__["LinkURLClass"](point.linkURL.followLink, point.linkURL.hoveringTooltipLink, point.linkURL.hoveringTooltipTex));
+      }); // console.log('posPoint:')
+      // console.log(posPoint) //
+      // console.log('filterPoint:')
+      // console.log(filterPoint) //
+      // console.log('namePoint:')
+      // console.log(namePoint) //
+      // console.log('metaPoint:')
+      // console.log(metaPoint) //
+      // console.log('labelPoint:')
+      // console.log(labelPoint) //
+      // console.log('mainMetricPoint:')
+      // console.log(mainMetricPoint) //
+      // console.log('metricPoint:')
+      // console.log(metricPoint) // ----fail
+      // console.log('valueMetricPoint:')
+      // console.log(valueMetricPoint) //
+      // console.log('drawGraphicMarkerPoint:')
+      // console.log(drawGraphicMarkerPoint) //
+      // console.log('shapePoint:')
+      // console.log(shapePoint) //
+      // console.log('sizeWidthPoint:')
+      // console.log(sizeWidthPoint) //
+      // console.log('sizeHeightPoint')
+      // console.log(sizeHeightPoint) //
+      // console.log('colorPoint')
+      // console.log(colorPoint) //
+      // console.log('associateOrientedLinksOutPoint:')
+      // console.log(associateOrientedLinksOutPoint) // --------fail
+      // console.log('associateOrientedLinksInPoint:')
+      // console.log(associateOrientedLinksInPoint) // ---------fail
+      // console.log('colorMode:')
+      // console.log(colorMode) //
+      // console.log('traceBack:')
+      // console.log(traceBack) //
+      // console.log('traceBorder:')
+      // console.log(traceBorder) //
+      // console.log('linkURLPoint')
+      // console.log(linkURLPoint) // ------------------fail
+      // console.log('positionParameterPoint')
+      // console.log(positionParameterPoint) //
+
+      var newID = 0;
+
+      _this.props.options.arrayPoints.forEach(function (element) {
+        newID++;
+      });
+
+      filterPoint.forEach(function (element, index) {
+        if (metricPoint.length > 0) {
+          var toLoad = new Models_PointClass__WEBPACK_IMPORTED_MODULE_7__["PointClass"](newID + 1, linkURLPoint[index], metaPoint[index], gabaritFileTmp.globalGabarit.lowerLimit, labelPoint[index], gabaritFileTmp.globalGabarit.textObject, mainMetricPoint[index], metricPoint[index], colorMode, traceBack, traceBorder, positionParameterPoint[index], namePoint[index], valueMetricPoint[index], drawGraphicMarkerPoint[index], shapePoint[index], sizeWidthPoint[index], sizeHeightPoint[index], '', posPoint[index].x, posPoint[index].y, colorPoint[index], associateOrientedLinksInPoint[index], associateOrientedLinksOutPoint[index]);
+          newID++;
+
+          _this.props.options.arrayPoints.push(toLoad);
+        } else {
+          var toLoad = new Models_PointClass__WEBPACK_IMPORTED_MODULE_7__["PointClass"](newID + 1, linkURLPoint[index], metaPoint[index], gabaritFileTmp.globalGabarit.lowerLimit, labelPoint[index], gabaritFileTmp.globalGabarit.textObject, mainMetricPoint[index], [], colorMode, traceBack, traceBorder, positionParameterPoint[index], namePoint[index], valueMetricPoint[index], drawGraphicMarkerPoint[index], shapePoint[index], sizeWidthPoint[index], sizeHeightPoint[index], '', posPoint[index].x, posPoint[index].y, colorPoint[index], associateOrientedLinksInPoint[index], associateOrientedLinksOutPoint[index]);
+          newID++;
+
+          _this.props.options.arrayPoints.push(toLoad);
+        }
+      });
+      /* Link */
+      //Template
+
+      var filterLink = []; //
+
+      var posALink = []; //
+
+      var posBLink = []; //
+
+      var posCLink = []; //
+
+      var nameLink = []; //
+
+      var metaLink = []; //
+
+      var labelLink = []; //
+
+      var positionParameterLink = []; //
+
+      var mainMetricALink = []; //
+
+      var metricALink = []; //
+
+      var mainMetricBLink = []; //
+
+      var metricBLink = []; //
+
+      var linkURLLink = []; //
+
+      var orientationLink = []; //
+
+      var sizeLink = []; //
+
+      var colorALink = []; //
+
+      var colorBLink = []; //
+
+      var valueMetricALink = []; //
+
+      var valueMetricBLink = []; //
+
+      var pointInLink = []; //
+
+      var pointOutLink = []; //
+
+      var regionInLink = []; //
+
+      var regionOutLink = []; //
+
+      var isIncurvedLink = []; //
+
+      gabaritFileTmp.templateGabaritLink.forEach(function (link, index) {
+        if (link.labelfix.toString() === 'false') {
+          posALink.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(link.xylabelA));
+          posBLink.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(link.xylabelB));
+          posCLink.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(link.xylabelC));
+        } else {
+          posALink.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(link.xylabelfixA));
+          posBLink.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(link.xylabelfixB));
+          posCLink.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(link.xylabelfixC));
+        }
+
+        filterLink.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["filterParse"])(link.filtered));
+        nameLink.push(link.name);
+        metaLink.push(link.meta);
+        labelLink.push(link.label);
+        mainMetricALink.push(link.mainMetric);
+        mainMetricALink[index].filter = filterLink[index];
+        mainMetricALink[index].refId = gabaritFileTmp.queryID;
+
+        if (mainMetricALink[index].refId === null) {
+          mainMetricALink[index].refId = 'A';
+        }
+
+        link.metrics.forEach(function (element) {
+          metricALink[index].push(element);
+        });
+        mainMetricBLink.push(link.mainMetricB);
+        mainMetricBLink[index].filter = filterLink[index];
+        mainMetricBLink[index].refId = gabaritFileTmp.queryID;
+
+        if (mainMetricALink[index].refId === null) {
+          mainMetricBLink[index].refId = 'A';
+        }
+
+        link.metricsB.forEach(function (element) {
+          metricBLink[index].push(element);
+        });
+        valueMetricALink.push(link.valueMainMetricA);
+        valueMetricBLink.push(link.valueMainMetricB);
+        sizeLink.push(link.size);
+
+        if (link.colorCoordinateA.length !== 0) {
+          colorALink.push(link.colorCoordinateA);
+          colorBLink.push(link.colorCoordinateB);
+        } else {
+          colorALink.push(gabaritFileTmp.globalGabarit.defaultColor);
+          colorBLink.push(gabaritFileTmp.globalGabarit.defaultColor);
+        }
+
+        tmpToolTipA = {
+          label: link.positionParameter.tooltipA,
+          value: link.positionParameter.tooltipA
+        };
+        tmpToolTipB = {
+          label: link.positionParameter.tooltipB,
+          value: link.positionParameter.tooltipB
+        };
+        tmpLabelAPosition = Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(link.positionParameter.xylabelA);
+        tmpLabelBPosition = Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(link.positionParameter.xylabelB);
+        positionParameterLink.push(new Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_5__["PositionParameterClass"](tmpLabelAPosition.x, tmpLabelAPosition.y, tmpLabelBPosition.x, tmpLabelBPosition.y, tmpToolTipA, tmpToolTipB));
+        linkURLLink.push(new Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_6__["LinkURLClass"](link.linkURL.followlink, link.linkURL.hoveringTooltiplink, link.linkURL.hoveringTooltipTex));
+        orientationLink.push(link.orientationLink);
+        pointInLink.push(link.pointIn);
+        pointOutLink.push(link.pointOut);
+        regionInLink.push(link.regionIn);
+        regionOutLink.push(link.regionOut);
+        isIncurvedLink.push({
+          label: "No",
+          value: Boolean(link.isIncurved.value)
+        });
+      });
+      newID = 0;
+
+      _this.props.options.arrayPoints.forEach(function (element) {
+        newID++;
+      });
+
+      filterLink.forEach(function (element, index) {
+        var maA = metricALink.length;
+        var maB = metricBLink.length;
+
+        if (maA > 0 && maB > 0) {
+          var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index], gabaritFileTmp.globalGabarit.textObject, mainMetricALink[index], metricALink[index], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], posALink[index].x, posALink[index].y, colorALink[index], posBLink[index].x, posBLink[index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLink[index], pointOutLink[index], regionInLink[index], regionOutLink[index], 1, /// à revoir
+          posCLink[index].x, posCLink[index].y, isIncurvedLink[index], mainMetricBLink[index], metricBLink[index]);
+          newID++;
+
+          _this.props.options.arrayOrientedLinks.push(toLoad);
+        }
+
+        if (!(maA > 0) && maB > 0) {
+          var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index], gabaritFileTmp.globalGabarit.textObject, mainMetricALink[index], [], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], posALink[index].x, posALink[index].y, colorALink[index], posBLink[index].x, posBLink[index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLink[index], pointOutLink[index], regionInLink[index], regionOutLink[index], 1, /// à revoir
+          posCLink[index].x, posCLink[index].y, isIncurvedLink[index], mainMetricBLink[index], metricBLink[index]);
+          newID++;
+
+          _this.props.options.arrayOrientedLinks.push(toLoad);
+        } else if (maA > 0 && !(maB > 0)) {
+          var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index], gabaritFileTmp.globalGabarit.textObject, mainMetricALink[index], metricALink[index], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], posALink[index].x, posALink[index].y, colorALink[index], posBLink[index].x, posBLink[index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLink[index], pointOutLink[index], regionInLink[index], regionOutLink[index], 1, /// à revoir
+          posCLink[index].x, posCLink[index].y, isIncurvedLink[index], mainMetricBLink[index], []);
+          newID++;
+
+          _this.props.options.arrayOrientedLinks.push(toLoad);
+        } else {
+          var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index], gabaritFileTmp.globalGabarit.textObject, mainMetricALink[index], [], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], posALink[index].x, posALink[index].y, colorALink[index], posBLink[index].x, posBLink[index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLink[index], pointOutLink[index], regionInLink[index], regionOutLink[index], 1, /// à revoir
+          posCLink[index].x, posCLink[index].y, isIncurvedLink[index], mainMetricBLink[index], []);
+          newID++;
+
+          _this.props.options.arrayOrientedLinks.push(toLoad);
+        }
+      });
     };
 
     _this.gabaritUrlDisplay = function (props) {
@@ -21138,10 +21720,10 @@ function (_super) {
             labelWidth: 5,
             inputWidth: 20,
             onChange: _this.onGabaritListUrlChanged.bind(_this),
-            type: "string",
+            type: 'string',
             value: url || ''
           }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-            variant: "danger",
+            variant: 'danger',
             id: index.toString(),
             key: 'ButtunDel' + index.toString(),
             onClick: _this.gabaritDeletUrl.bind(_this)
@@ -21167,8 +21749,9 @@ function (_super) {
             label: 'Gabarit',
             labelWidth: 5,
             inputWidth: 20,
-            type: "string",
-            value: gabarit.fileName || ''
+            type: 'string',
+            value: gabarit.fileName || '',
+            readOnly: true
           }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
             width: 15
           }, "Querry ID"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Select"], {
@@ -21177,10 +21760,13 @@ function (_super) {
             },
             allowCustomValue: false,
             options: _this.state.selectQuerryID,
-            width: 10,
-            value: _this.state.selectQuerryIDDefault
+            width: 10
           }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-            variant: "danger",
+            id: index.toString(),
+            key: 'ButtunLoad' + index.toString(),
+            onClick: _this.loaderGabarit.bind(_this)
+          }, "Load"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+            variant: 'danger',
             id: index.toString(),
             key: 'ButtunDel' + index.toString(),
             onClick: _this.gabaritDeletUrl.bind(_this)
@@ -21205,7 +21791,7 @@ function (_super) {
     };
 
     _this.toDel = function () {
-      console.log(_this.props.data.series); // console.log(this.props.options.arrayPoints);
+      console.log(_this.props.options.arrayPoints); // console.log(this.props.options.arrayPoints);
     };
 
     _this.state = {
@@ -21288,10 +21874,6 @@ function (_super) {
         label: 'Z',
         value: 'Z'
       }],
-      selectQuerryIDDefault: {
-        label: 'A',
-        value: 'A'
-      },
       collapseSelectURL: false,
       collapseGabarit: false
     };
@@ -21302,21 +21884,21 @@ function (_super) {
     var options = this.props.options;
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
       isOpen: this.state.collapseSelectURL,
-      label: "Url List",
+      label: 'Url List',
       onToggle: this.onToggleSelectUrl
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
-      label: "Gabarit Url",
+      label: 'Gabarit Url',
       labelWidth: 8,
       key: 'GabaritUrl',
       inputWidth: 20,
       onChange: this.onGabaritUrlChanged.bind(this),
-      type: "string",
+      type: 'string',
       value: options.gabaritUrlInput || ''
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
       key: 'AddGabaritUrl',
       onClick: this.addGabaritUrlInput
     }, "Add"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "section gf-form-group"
+      className: 'section gf-form-group'
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
       onClick: this.fetchGabarit
     }, "Finish"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.gabaritUrlDisplay, {
@@ -21328,7 +21910,7 @@ function (_super) {
       onClick: this.toDel
     }, "toDel")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
       isOpen: this.state.collapseGabarit,
-      label: "Gabarit List",
+      label: 'Gabarit List',
       onToggle: this.onToggleGabarit
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.gabaritDisplay, {
       list: options.saveGabaritFile
@@ -22691,14 +23273,14 @@ var defaults = {
     queryID: 'A',
     fileName: 'default',
     globalGabarit: {
-      lowerLimit: {
+      lowerLimit: [{
         id: 0,
         lowerLimitMin: '0',
         lowerLimitMax: '0',
         backColor: 'blue',
         borderColor: 'red',
         sizeBorder: '1px'
-      },
+      }],
       textObject: {
         value: 'default',
         isTextTooltip: false,
@@ -22731,6 +23313,7 @@ var defaults = {
           colorBackElement: 'white'
         }
       },
+      defaultColor: 'black',
       colorMode: true,
       traceBack: true,
       traceBorder: true

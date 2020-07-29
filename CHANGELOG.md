@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.2a2 (2020-07-28)
+
+- Add gabarit
+
 ## v1.0.2a1 (2020-07-21)
 
 - Update init space

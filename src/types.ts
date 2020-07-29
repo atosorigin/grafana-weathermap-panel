@@ -5,7 +5,10 @@ import { LinkClass } from 'Models/LinkClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 import { RegionClass, Coord4D } from 'Models/RegionClass';
 import { Style } from 'components/Parametrage/styleComponent';
-import { TextObject } from 'Models/TextObjectClass';
+//import { TextObject } from 'Models/TextObjectClass';
+import { Filtred } from 'Functions/loaderGabarit';
+
+
 
 /**
  * interface to save texte settings (police, size, style)
@@ -38,8 +41,9 @@ export interface GabaritFile {
 }
 
 export interface GlobalGabarit {
-  lowerLimit: LowerLimit;
-  textObject: TextObject;
+  lowerLimit: any[];
+  textObject: any;
+  defaultColor: string;
   colorMode: boolean;
   traceBack: boolean;
   traceBorder: boolean;
@@ -54,18 +58,15 @@ export interface TemplateGabaritPoint {
   name: string;
   meta: string;
   label: string;
-  positionParameter: string;
+  positionParameter: any;
   mainMetric: Metric;
   metrics: Metric[];
-  linkURL: UrlList;
+  linkURL: any;
   valueMetric: string;
   drawGraphicMarker: SelectableValue<string>;
   shape: SelectableValue<string>;
   sizeWidth: SelectableValue<string>;
   sizeHeight: SelectableValue<string>;
-  roteArrow: SelectableValue<string>;
-  positionShapeX: string;
-  positionShapeY: string;
   color: string;
   associateOrientedLinksIn: OrientedLinkClass[];
   associateOrientedLinksOut: OrientedLinkClass[];
@@ -81,10 +82,10 @@ export interface TemplateGabaritRegion {
   type: string;
   meta: string;
   label: string;
-  positionParameter: string;
+  positionParameter: any;
   mainMetric: Metric;
   metrics: Metric[];
-  linkURL: UrlList;
+  linkURL: any;
   idSVG: string;
   mode: boolean;
   img: string;
@@ -103,12 +104,12 @@ export interface TemplateGabaritLink {
   name: string;
   meta: string;
   label: string;
-  positionParameter: string;
+  positionParameter: any;
   mainMetric: Metric;
   metrics: Metric[];
   mainMetricB: Metric;
   metricsB: Metric[];
-  linkURL: UrlList;
+  linkURL: any;
   orientationLink: SelectableValue<string>;
   size: SelectableValue<string>;
   colorCoordinateA: string;
@@ -120,7 +121,7 @@ export interface TemplateGabaritLink {
   regionIn: string;
   regionOut: string;
   zIndex: string;
-  isIncurved: SelectableValue<string>;
+  isIncurved: SelectableValue<boolean>;
 }
 
 export declare type TManageValue = 'avg' | 'sum' | 'err';
@@ -131,12 +132,14 @@ export interface Metric {
   /** ecriture scientifique */
   format: string;
   keyValue: string;
+  filter?: Filtred[];
   refId?: string;
   expr?: string;
   returnQuery?: DataFrame[];
   /** avg, count, error */
   manageValue: TManageValue;
 }
+
 
 export interface MetricSettings {
   /**
@@ -593,14 +596,14 @@ export const defaults: SimpleOptions = {
     queryID: 'A',
     fileName: 'default',
     globalGabarit: {
-      lowerLimit: {
+      lowerLimit: [{
         id: 0,
         lowerLimitMin: '0',
         lowerLimitMax: '0',
         backColor: 'blue',
         borderColor: 'red',
         sizeBorder: '1px',
-      },
+      }],
       textObject: {
         value: 'default',
         isTextTooltip: false,
@@ -633,6 +636,7 @@ export const defaults: SimpleOptions = {
           colorBackElement: 'white',
         },
       },
+      defaultColor: 'black',
       colorMode: true,
       traceBack: true,
       traceBorder: true,

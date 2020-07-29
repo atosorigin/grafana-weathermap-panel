@@ -6,7 +6,7 @@ import { defaults, SimpleOptions } from '../types';
 import { act } from 'react-dom/test-utils';
 
 describe('waiting test', () => {
-  test('to be pass', done => {
+  test('to be pass', (done) => {
     setTimeout(() => {
       done();
     });
@@ -29,7 +29,7 @@ describe('SimpleEditor tests', () => {
       let testProps = {};
       act(() => {
         ReactDOM.render(
-          <SimpleEditor options={component} data={component} onOptionsChange={component} ref={c => (component = c)} {...testProps} />,
+          <SimpleEditor options={component} data={component} onOptionsChange={component} ref={(c) => (component = c)} {...testProps} />,
           container
         );
       });
@@ -60,7 +60,7 @@ describe('SimpleEditor tests', () => {
 
     act(() => {
       ReactDOM.render(
-        <SimpleEditor options={component} data={component} onOptionsChange={component} ref={c => (component = c)} {...testProps} />,
+        <SimpleEditor options={component} data={component} onOptionsChange={component} ref={(c) => (component = c)} {...testProps} />,
         container
       );
     });

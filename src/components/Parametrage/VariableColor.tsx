@@ -75,7 +75,7 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
      */
     arrayInputClass: ArrayInputClass[];
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };
@@ -89,7 +89,7 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
      */
     lowerLimit: LowerLimitClass[];
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };
@@ -103,7 +103,7 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
      */
     index: number;
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };
@@ -117,7 +117,7 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
      */
     nbVariation: string;
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };
@@ -270,7 +270,7 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
             name="epaisseurContour"
             placeholder={l10n.colorVariable.thicknessOutline}
             value={this.state.lowerLimit[keyInt].sizeBorder}
-            onChange={event => this.onChangeSzContour(keyInt, event.currentTarget.value)}
+            onChange={(event) => this.onChangeSzContour(keyInt, event.currentTarget.value)}
           />
         </div>
       );

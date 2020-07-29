@@ -44,7 +44,7 @@ class ImportInput extends React.Component<Props, State> {
   /**************************************CATCH******************************************/
   PointValidator = (newSpace: PointClass) => {
     let resultId = 0;
-    this.props.options.arrayPoints.forEach(point => {
+    this.props.options.arrayPoints.forEach((point) => {
       if (newSpace.id === point.id) {
         if (newSpace.name === point.name) {
           resultId = 2;
@@ -59,7 +59,7 @@ class ImportInput extends React.Component<Props, State> {
 
   RegionValidator = (newSpace: RegionClass) => {
     let resultId = 0;
-    this.props.options.regionCoordinateSpace.forEach(region => {
+    this.props.options.regionCoordinateSpace.forEach((region) => {
       //Id
       if (newSpace.id === region.id) {
         if (newSpace.label === region.label) {
@@ -75,7 +75,7 @@ class ImportInput extends React.Component<Props, State> {
 
   LinkValidator = (newSpace: OrientedLinkClass) => {
     let resultId = 0;
-    this.props.options.arrayOrientedLinks.forEach(lien => {
+    this.props.options.arrayOrientedLinks.forEach((lien) => {
       if (newSpace.id === lien.id) {
         if (newSpace.name === lien.name) {
           resultId = 2;
@@ -334,7 +334,7 @@ class ImportInput extends React.Component<Props, State> {
 
   fetchMulti = () => {
     //this.result = fetchConfFile(this.props.options.saveImportUrl.multi);
-    this.props.options.saveImportUrl.multi.forEach(async url => {
+    this.props.options.saveImportUrl.multi.forEach(async (url) => {
       try {
         // console.log(url);
         let file = {};

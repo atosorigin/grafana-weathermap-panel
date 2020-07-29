@@ -15,9 +15,10 @@ Le logiciel recommandé pour créer une image de fond sera [Inkscape] (https://i
 ### Étape 2 : Créer votre forme
 
 Inkscape vous permet de choisir entre plusieurs formes pour créer votre SVG :
-- Cercle :
-- Carré
-- Autre..
+
+  - Cercle :
+  - Carré
+  - Autre..
 
 ! [Inkscape](./../../screenshots/demo/tutorial04/Inkscape.png)
 

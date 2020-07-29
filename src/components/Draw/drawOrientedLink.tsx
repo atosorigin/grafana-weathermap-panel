@@ -219,7 +219,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     const arrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
     const listParallelOrientedLinks: number[] = [];
     listParallelOrientedLinks.push(parseInt(this.props.id, 10));
-    arrayOrientedLink.forEach(orientedLink => {
+    arrayOrientedLink.forEach((orientedLink) => {
       if (this.props.name !== orientedLink.name) {
         if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
           //console.log('//1');
@@ -404,7 +404,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     let yMidOut = 0;
 
     if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
@@ -425,7 +425,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
 
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionOut) {
           xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -434,7 +434,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -443,7 +443,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
 
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointOut) {
@@ -464,7 +464,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
     } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associateRegionOut !== '') {
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionOut) {
           xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -477,7 +477,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinIn = parseInt(this.props.pointAPositionY, 10);
       yMaxIn = parseInt(this.props.pointAPositionY, 10);
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -490,7 +490,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinOut = parseInt(this.props.pointBPositionY, 10);
       yMaxOut = parseInt(this.props.pointBPositionY, 10);
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
@@ -515,7 +515,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinOut = parseInt(this.props.pointBPositionY, 10);
       yMaxOut = parseInt(this.props.pointBPositionY, 10);
     } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associatePointOut !== '') {
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointOut) {
@@ -540,7 +540,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinIn = parseInt(this.props.pointAPositionY, 10);
       yMaxIn = parseInt(this.props.pointAPositionY, 10);
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
@@ -578,7 +578,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
     } else {
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -998,7 +998,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     let yMidOut = 0;
 
     if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
@@ -1019,7 +1019,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
 
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionOut) {
           xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -1028,7 +1028,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -1037,7 +1037,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
 
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointOut) {
@@ -1058,7 +1058,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
     } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associateRegionOut !== '') {
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionOut) {
           xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -1071,7 +1071,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinIn = parseInt(this.props.pointAPositionY, 10);
       yMaxIn = parseInt(this.props.pointAPositionY, 10);
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -1084,7 +1084,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinOut = parseInt(this.props.pointBPositionY, 10);
       yMaxOut = parseInt(this.props.pointBPositionY, 10);
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
@@ -1109,7 +1109,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinOut = parseInt(this.props.pointBPositionY, 10);
       yMaxOut = parseInt(this.props.pointBPositionY, 10);
     } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associatePointOut !== '') {
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointOut) {
@@ -1134,7 +1134,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinIn = parseInt(this.props.pointAPositionY, 10);
       yMaxIn = parseInt(this.props.pointAPositionY, 10);
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
@@ -1172,7 +1172,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
     } else {
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -1939,7 +1939,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     if (listParallelOrientedLinks.length > 1) {
       //console.log('multi');
       let indexOrientedLink = 0;
-      listParallelOrientedLinks.forEach(index => {
+      listParallelOrientedLinks.forEach((index) => {
         if (index === parseInt(this.props.id, 10)) {
           if (indexOrientedLink === 0) {
             if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
@@ -2771,9 +2771,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             </p>
           );
         }
+        // Condition Display NaN none Oriented Link
         htmlMainMetric.push(
           <p key={'contentTextObject3' + this.props.name} style={styleMainMetric}>
-            {this.defineMainMetric(mainMetric)}
+            {!isNaN(parseFloat(this.defineMainMetric(mainMetric))) && this.defineMainMetric(mainMetric)}
           </p>
         );
       }
@@ -2977,7 +2978,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               </p>
             );
             let index = 1;
-            this.props.auxiliaryMetrics.forEach(metric => {
+            this.props.auxiliaryMetrics.forEach((metric) => {
               contentTooltipAuxMetric.push(
                 <p key={index.toString() + 'contentTooltip11' + this.props.name} style={styleTitle2AuxMetric}>
                   + Metric {index}
@@ -2985,21 +2986,28 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               );
               contentTooltipAuxMetric.push(
                 <p key={index.toString() + 'contentTooltip12' + this.props.name} style={styleContentAuxMetrics}>
-                  - Value : {this.defineAuxMetric(this.props.valuesAuxiliaryMetrics[index - 1])}
+                  - Reference : {metric.refId}
                 </p>
               );
               contentTooltipAuxMetric.push(
                 <p key={index.toString() + 'contentTooltip13' + this.props.name} style={styleContentAuxMetrics}>
-                  - Key : {metric.key}
+                  - Value :{' '}
+                  {!isNaN(parseFloat(this.defineAuxMetric(this.props.valuesAuxiliaryMetrics[index - 1]))) &&
+                    this.defineAuxMetric(this.props.valuesAuxiliaryMetrics[index - 1])}
                 </p>
               );
               contentTooltipAuxMetric.push(
                 <p key={index.toString() + 'contentTooltip14' + this.props.name} style={styleContentAuxMetrics}>
-                  - KeyValue : {metric.keyValue}
+                  - Key : {metric.key}
                 </p>
               );
               contentTooltipAuxMetric.push(
                 <p key={index.toString() + 'contentTooltip15' + this.props.name} style={styleContentAuxMetrics}>
+                  - KeyValue : {metric.keyValue}
+                </p>
+              );
+              contentTooltipAuxMetric.push(
+                <p key={index.toString() + 'contentTooltip16' + this.props.name} style={styleContentAuxMetrics}>
                   - Type : {metric.manageValue}
                 </p>
               );
@@ -3009,35 +3017,42 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         } else {
           if (this.props.auxiliaryMetricsB.length > 0) {
             contentTooltipAuxMetric.push(
-              <p key={'contentTooltip16' + this.props.name} style={styleTitleAuxMetric}>
+              <p key={'contentTooltip17' + this.props.name} style={styleTitleAuxMetric}>
                 Auxiliary Metric
               </p>
             );
             let index = 1;
-            this.props.auxiliaryMetricsB.forEach(metric => {
+            this.props.auxiliaryMetricsB.forEach((metricB) => {
               contentTooltipAuxMetric.push(
-                <p key={index.toString() + 'contentTooltip17' + this.props.name} style={styleTitle2AuxMetric}>
+                <p key={index.toString() + 'contentTooltip18' + this.props.name} style={styleTitle2AuxMetric}>
                   + Metric {index}
                 </p>
               );
               contentTooltipAuxMetric.push(
-                <p key={index.toString() + 'contentTooltip18' + this.props.name} style={styleContentAuxMetrics}>
-                  - Value : {this.defineAuxMetric(this.props.valuesAuxiliaryMetrics[index - 1])}
-                </p>
-              );
-              contentTooltipAuxMetric.push(
                 <p key={index.toString() + 'contentTooltip19' + this.props.name} style={styleContentAuxMetrics}>
-                  - Key : {metric.key}
+                  - Reference : {metricB.refId}
                 </p>
               );
               contentTooltipAuxMetric.push(
                 <p key={index.toString() + 'contentTooltip20' + this.props.name} style={styleContentAuxMetrics}>
-                  - KeyValue : {metric.keyValue}
+                  - Value :{' '}
+                  {!isNaN(parseFloat(this.defineAuxMetric(this.props.valuesAuxiliaryMetricsB[index - 1]))) &&
+                    this.defineAuxMetric(this.props.valuesAuxiliaryMetricsB[index - 1])}
                 </p>
               );
               contentTooltipAuxMetric.push(
                 <p key={index.toString() + 'contentTooltip21' + this.props.name} style={styleContentAuxMetrics}>
-                  - Type : {metric.manageValue}
+                  - Key : {metricB.key}
+                </p>
+              );
+              contentTooltipAuxMetric.push(
+                <p key={index.toString() + 'contentTooltip22' + this.props.name} style={styleContentAuxMetrics}>
+                  - KeyValue : {metricB.keyValue}
+                </p>
+              );
+              contentTooltipAuxMetric.push(
+                <p key={index.toString() + 'contentTooltip23' + this.props.name} style={styleContentAuxMetrics}>
+                  - Type : {metricB.manageValue}
                 </p>
               );
               index++;
@@ -3047,34 +3062,41 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       } else if (typeLink === 'monodirectional') {
         if (this.props.auxiliaryMetrics.length > 0) {
           contentTooltipAuxMetric.push(
-            <p key={'contentTooltip22' + this.props.name} style={styleTitleAuxMetric}>
+            <p key={'contentTooltip24' + this.props.name} style={styleTitleAuxMetric}>
               Auxiliary Metric
             </p>
           );
           let index = 1;
-          this.props.auxiliaryMetrics.forEach(metric => {
+          this.props.auxiliaryMetrics.forEach((metric) => {
             contentTooltipAuxMetric.push(
-              <p key={index.toString() + 'contentTooltip23' + this.props.name} style={styleTitle2AuxMetric}>
+              <p key={index.toString() + 'contentTooltip25' + this.props.name} style={styleTitle2AuxMetric}>
                 + Metric {index}
               </p>
             );
             contentTooltipAuxMetric.push(
-              <p key={index.toString() + 'contentTooltip14' + this.props.name} style={styleContentAuxMetrics}>
-                - Value : {this.defineAuxMetric(this.props.valuesAuxiliaryMetrics[index - 1])}
-              </p>
-            );
-            contentTooltipAuxMetric.push(
-              <p key={index.toString() + 'contentTooltip25' + this.props.name} style={styleContentAuxMetrics}>
-                - Key : {metric.key}
-              </p>
-            );
-            contentTooltipAuxMetric.push(
               <p key={index.toString() + 'contentTooltip26' + this.props.name} style={styleContentAuxMetrics}>
-                - KeyValue : {metric.keyValue}
+                - Reference : {metric.refId}
               </p>
             );
             contentTooltipAuxMetric.push(
               <p key={index.toString() + 'contentTooltip27' + this.props.name} style={styleContentAuxMetrics}>
+                - Value :{' '}
+                {!isNaN(parseFloat(this.defineAuxMetric(this.props.valuesAuxiliaryMetrics[index - 1]))) &&
+                  this.defineAuxMetric(this.props.valuesAuxiliaryMetrics[index - 1])}
+              </p>
+            );
+            contentTooltipAuxMetric.push(
+              <p key={index.toString() + 'contentTooltip28' + this.props.name} style={styleContentAuxMetrics}>
+                - Key : {metric.key}
+              </p>
+            );
+            contentTooltipAuxMetric.push(
+              <p key={index.toString() + 'contentTooltip29' + this.props.name} style={styleContentAuxMetrics}>
+                - KeyValue : {metric.keyValue}
+              </p>
+            );
+            contentTooltipAuxMetric.push(
+              <p key={index.toString() + 'contentTooltip30' + this.props.name} style={styleContentAuxMetrics}>
                 - Type : {metric.manageValue}
               </p>
             );

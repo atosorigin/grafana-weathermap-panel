@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { SimpleOptions, Background, Metric } from 'types';
 
-import { PanelProps, SelectableValue } from '@grafana/data';
+import { PanelProps, SelectableValue, DataFrame } from '@grafana/data';
 import { CustomScrollbar, Modal, Button } from '@grafana/ui';
 
 import { PointClass } from 'Models/PointClass';
@@ -386,10 +386,10 @@ export class SimplePanel extends PureComponent<Props, State> {
   /** update AssociateOrientedLinkIn of point for tootip  */
   private updateAssociateOrientedLinkInToPoint = () => {
     let indexPoint = 0;
-    this.props.options.arrayPoints.forEach(point => {
+    this.props.options.arrayPoints.forEach((point) => {
       let newAssociateLinkIn: any[] = [];
       const namePoint: string = point.label || point.name;
-      this.props.options.arrayOrientedLinks.forEach(link => {
+      this.props.options.arrayOrientedLinks.forEach((link) => {
         if (link.pointIn === namePoint) {
           newAssociateLinkIn.push({ label: link.label, name: link.name });
         }
@@ -402,10 +402,10 @@ export class SimplePanel extends PureComponent<Props, State> {
   /** update AssociateOrientedLinkOut of point for tootip  */
   private updateAssociateOrientedLinkOutToPoint = () => {
     let indexPoint = 0;
-    this.props.options.arrayPoints.forEach(point => {
+    this.props.options.arrayPoints.forEach((point) => {
       let newAssociateLinkIn: any[] = [];
       const namePoint: string = point.label || point.name;
-      this.props.options.arrayOrientedLinks.forEach(link => {
+      this.props.options.arrayOrientedLinks.forEach((link) => {
         if (link.pointOut === namePoint) {
           newAssociateLinkIn.push({ label: link.label, name: link.name });
         }
@@ -499,7 +499,7 @@ export class SimplePanel extends PureComponent<Props, State> {
         }
       } else {
         positionY = 100 - Math.round(((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace) * 100);
-        console.log(positionY);
+        //console.log(positionY);
       }
 
       //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
@@ -1082,6 +1082,11 @@ export class SimplePanel extends PureComponent<Props, State> {
     reqMetricPoint(point, this.props);
     //this.getValuesMainMetric(point.mainMetric, undefined, point);
     let result = 0;
+    // if(result = 0 || NaN){
+    //   console.log('zone1');
+    // } else{
+    //   console.log('lol'); // Pass in console
+    // }
     result = getResultQuery(point.mainMetric) || NaN;
     return result;
   }
@@ -1090,6 +1095,11 @@ export class SimplePanel extends PureComponent<Props, State> {
     reqMetricOrientedLink(orientedLink, this.props);
     //this.getValuesMainMetric(orientedLink.mainMetric, orientedLink, undefined, false);
     let result = 0;
+    // if(result = 0 || NaN){
+    //   console.log('zone2');
+    // } else{
+    //   console.log('lol'); // Pass in console
+    // }
     result = getResultQuery(orientedLink.mainMetric) || NaN;
     return result;
   }
@@ -1098,85 +1108,88 @@ export class SimplePanel extends PureComponent<Props, State> {
     reqMetricOrientedLink(orientedLink, this.props);
     //this.getValuesMainMetric(orientedLink.mainMetricB, orientedLink, undefined, true);
     let result = 0;
+    // if(result = 0 || NaN){
+    //   console.log('zone3');
+    // } else{
+    //   console.log('lol'); // Pass in console
+    // }
     result = getResultQuery(orientedLink.mainMetricB) || NaN;
     return result;
   }
 
-  // /**
-  //  * to do
-  //  */
-  // getValuesMainMetric(mainMetric: Metric, orientedLink?: OrientedLinkClass, point?: PointClass, isBidirectionnal?: boolean) {
-  //   let valueMainMetric = 0;
-  //   let totalValuesCount = 0;
-  //   const key: string = mainMetric.key;
-  //   const keyValue: string = mainMetric.keyValue;
-  //   if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
-  //     mainMetric.returnQuery.forEach((line: DataFrame) => {
-  //       if (line.fields[0].labels) {
-  //         if (key !== '' && keyValue !== '') {
-  //           if (line.fields[0].labels[key] === keyValue) {
-  //             const countValues: number = line.fields[0].values.length;
-  //             for (let i = 0; i < countValues; i++) {
-  //               if (line.fields[0].values.get(i)) {
-  //                 totalValuesCount++;
-  //                 valueMainMetric += line.fields[0].values.get(i);
-  //               }
-  //             }
-  //           } else {
-
-  //           }
-  //         } else {
-  //           const countValues: number = line.fields[0].values.length;
-  //           for (let i = 0; i < countValues; i++) {
-  //             if (line.fields[0].values.get(i)) {
-  //               totalValuesCount++;
-  //               valueMainMetric += line.fields[0].values.get(i);
-  //             }
-  //           }
-  //         }
-  //       }
-  //     });
-  //     if (orientedLink) {
-  //       if (!isBidirectionnal) {
-  //         if (mainMetric.manageValue === 'avg') {
-  //           orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
-  //         } else if (mainMetric.manageValue === 'sum') {
-  //           orientedLink.valueMainMetricA = valueMainMetric.toString();
-  //         } else if (mainMetric.manageValue === 'err') {
-  //           if (totalValuesCount > 1) {
-  //             orientedLink.valueMainMetricA = 'error';
-  //           } else {
-  //             orientedLink.valueMainMetricA = valueMainMetric.toString();
-  //           }
-  //         }
-  //       } else {
-  //         if (mainMetric.manageValue === 'avg') {
-  //           orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
-  //         } else if (mainMetric.manageValue === 'sum') {
-  //           orientedLink.valueMainMetricB = valueMainMetric.toString();
-  //         } else if (mainMetric.manageValue === 'err') {
-  //           if (totalValuesCount > 1) {
-  //             orientedLink.valueMainMetricB = 'error';
-  //           } else {
-  //             orientedLink.valueMainMetricB = valueMainMetric.toString();
-  //           }
-  //         }
-  //       }
-  //     } else if (point) {
-  //       if (mainMetric.manageValue === 'avg') {
-  //         point.valueMetric = (valueMainMetric / totalValuesCount).toString();
-  //       } else if (mainMetric.manageValue === 'sum') {
-  //         point.valueMetric = valueMainMetric.toString();
-  //       } else if (mainMetric.manageValue === 'err') {
-  //         if (totalValuesCount > 1) {
-  //           point.valueMetric = 'error';
-  //         } else {
-  //           point.valueMetric = valueMainMetric.toString();
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+  /**
+   * to do
+   */
+  getValuesMainMetric(mainMetric: Metric, orientedLink?: OrientedLinkClass, point?: PointClass, isBidirectionnal?: boolean) {
+    let valueMainMetric = 0;
+    let totalValuesCount = 0;
+    const key: string = mainMetric.key;
+    const keyValue: string = mainMetric.keyValue;
+    if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
+      mainMetric.returnQuery.forEach((line: DataFrame) => {
+        if (line.fields[0].labels) {
+          if (key !== '' && keyValue !== '') {
+            if (line.fields[0].labels[key] === keyValue) {
+              const countValues: number = line.fields[0].values.length;
+              for (let i = 0; i < countValues; i++) {
+                if (line.fields[0].values.get(i)) {
+                  totalValuesCount++;
+                  valueMainMetric += line.fields[0].values.get(i);
+                }
+              }
+            }
+          } else {
+            const countValues: number = line.fields[0].values.length;
+            for (let i = 0; i < countValues; i++) {
+              if (line.fields[0].values.get(i)) {
+                totalValuesCount++;
+                valueMainMetric += line.fields[0].values.get(i);
+              }
+            }
+          }
+        }
+      });
+      if (orientedLink) {
+        if (!isBidirectionnal) {
+          if (mainMetric.manageValue === 'avg') {
+            orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
+          } else if (mainMetric.manageValue === 'sum') {
+            orientedLink.valueMainMetricA = valueMainMetric.toString();
+          } else if (mainMetric.manageValue === 'err') {
+            if (totalValuesCount > 1) {
+              orientedLink.valueMainMetricA = 'error';
+            } else {
+              orientedLink.valueMainMetricA = valueMainMetric.toString();
+            }
+          }
+        } else {
+          if (mainMetric.manageValue === 'avg') {
+            orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
+          } else if (mainMetric.manageValue === 'sum') {
+            orientedLink.valueMainMetricB = valueMainMetric.toString();
+          } else if (mainMetric.manageValue === 'err') {
+            if (totalValuesCount > 1) {
+              orientedLink.valueMainMetricB = 'error';
+            } else {
+              orientedLink.valueMainMetricB = valueMainMetric.toString();
+            }
+          }
+        }
+      } else if (point) {
+        if (mainMetric.manageValue === 'avg') {
+          point.valueMetric = (valueMainMetric / totalValuesCount).toString();
+        } else if (mainMetric.manageValue === 'sum') {
+          point.valueMetric = valueMainMetric.toString();
+        } else if (mainMetric.manageValue === 'err') {
+          if (totalValuesCount > 1) {
+            point.valueMetric = 'error';
+          } else {
+            point.valueMetric = valueMainMetric.toString();
+          }
+        }
+      }
+    }
+  }
 
   getValuesAuxiliaryMetricsPoint = (point: PointClass): string[] => {
     reqMetricAuxPoint(point, this.props);
@@ -1206,13 +1219,16 @@ export class SimplePanel extends PureComponent<Props, State> {
           for (let i = 0; i < numberLoop; i++) {
             let line = metric.returnQuery[i];
             if (line.fields[0].labels) {
-              if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || (mainMetric.key === '' && mainMetric.keyValue === '')) {
-                if (line.fields[0].labels[metric.key] === metric.keyValue) {
-                  const countValues: number = line.fields[0].values.length;
-                  for (let i = 0; i < countValues; i++) {
-                    if (line.fields[0].values.get(i)) {
-                      resultTotalValues += line.fields[0].values.get(i);
-                      countTotalValues++;
+              if (mainMetric.refId !== '') {
+                //console.log(mainMetric);
+                if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || (mainMetric.key === '' && mainMetric.keyValue === '')) {
+                  if (line.fields[0].labels[metric.key] === metric.keyValue) {
+                    const countValues: number = line.fields[0].values.length;
+                    for (let i = 0; i < countValues; i++) {
+                      if (line.fields[0].values.get(i)) {
+                        resultTotalValues += line.fields[0].values.get(i);
+                        countTotalValues++;
+                      }
                     }
                   }
                 }
@@ -1220,15 +1236,17 @@ export class SimplePanel extends PureComponent<Props, State> {
             }
           }
         } else {
-          for (let i = 0; i < numberLoop; i++) {
-            let line = metric.returnQuery[i];
-            if (line.fields[0].labels) {
-              if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || (mainMetric.key === '' && mainMetric.keyValue === '')) {
-                const countValues: number = line.fields[0].values.length;
-                for (let i = 0; i < countValues; i++) {
-                  if (line.fields[0].values.get(i)) {
-                    resultTotalValues += line.fields[0].values.get(i);
-                    countTotalValues++;
+          if (mainMetric.refId !== '') {
+            for (let i = 0; i < numberLoop; i++) {
+              let line = metric.returnQuery[i];
+              if (line.fields[0].labels) {
+                if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || (mainMetric.key === '' && mainMetric.keyValue === '')) {
+                  const countValues: number = line.fields[0].values.length;
+                  for (let i = 0; i < countValues; i++) {
+                    if (line.fields[0].values.get(i)) {
+                      resultTotalValues += line.fields[0].values.get(i);
+                      countTotalValues++;
+                    }
                   }
                 }
               }
@@ -1366,7 +1384,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   };
 
   setAsyncButtonManage = (state: { buttonManage: boolean[] }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };
@@ -1613,8 +1631,8 @@ export class SimplePanel extends PureComponent<Props, State> {
         // this.props.onOptionsChange({ ...this.props.options, baseMap: background });
       } else {
         fetch(this.props.options.baseMap.image)
-          .then(res => res.text())
-          .then(text => {
+          .then((res) => res.text())
+          .then((text) => {
             this.setState({ svg: text });
             const result = /id=["']\w*["']/i.exec(text);
             if (result && result.length > 0) {
@@ -2394,7 +2412,7 @@ export class SimplePanel extends PureComponent<Props, State> {
                     // onMouseOver={event => {
                     //   this.displayTooltipSVG(event);
                     // }}
-                    onMouseOut={event => {
+                    onMouseOut={(event) => {
                       this.hideTooltipSVG(event);
                     }}
                     dangerouslySetInnerHTML={{ __html: this.props.options.baseMap.layerImage }}

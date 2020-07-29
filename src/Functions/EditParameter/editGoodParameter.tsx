@@ -33,7 +33,7 @@ export const editGoodParameter = (
 export const limitValueInitialSpace = (coorInitialSpace: string, defaultInitialSpace: boolean): string => {
   const coorInt: number = parseInt(coorInitialSpace, 10);
   let result = 0;
-  console.log(defaultInitialSpace);
+  //console.log(defaultInitialSpace);
   if (!defaultInitialSpace) {
     result = coorInt;
   } else {

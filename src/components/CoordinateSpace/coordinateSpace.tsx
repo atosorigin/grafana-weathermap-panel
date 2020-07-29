@@ -83,7 +83,7 @@ class CoordinateSpace extends React.Component<Props, State> {
     /** new espace coordinate */
     arrayCoor: RegionClass;
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };
@@ -93,7 +93,7 @@ class CoordinateSpace extends React.Component<Props, State> {
     /** new line in array input */
     arrayInput: ArrayInputClass[];
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };
@@ -493,7 +493,7 @@ class CoordinateSpace extends React.Component<Props, State> {
               <div style={{ display: 'flex' }}>
                 <FormLabel width={15}>Zone SVG</FormLabel>
                 <Select
-                  onChange={value => this.onChangeSelectSVG(value)}
+                  onChange={(value) => this.onChangeSelectSVG(value)}
                   allowCustomValue={false}
                   options={this.state.allIDSelected}
                   width={10}
@@ -510,7 +510,7 @@ class CoordinateSpace extends React.Component<Props, State> {
                 type="text"
                 value={this.state.arrayCoor.img}
                 name="image"
-                onChange={event => this._handleChange(event.currentTarget.value, 'image', this.state.arrayCoor.id)}
+                onChange={(event) => this._handleChange(event.currentTarget.value, 'image', this.state.arrayCoor.id)}
               />
               <FormField
                 label="X min"
@@ -519,7 +519,7 @@ class CoordinateSpace extends React.Component<Props, State> {
                 type="text"
                 value={this.state.arrayCoor.coords.xMin}
                 name="positionXMin"
-                onChange={event => this._handleChange(event.currentTarget.value, 'positionXMin', this.state.arrayCoor.id)}
+                onChange={(event) => this._handleChange(event.currentTarget.value, 'positionXMin', this.state.arrayCoor.id)}
               />
               <FormField
                 label="X max"
@@ -528,7 +528,7 @@ class CoordinateSpace extends React.Component<Props, State> {
                 type="text"
                 value={this.state.arrayCoor.coords.xMax}
                 name="positionXMax"
-                onChange={event => this._handleChange(event.currentTarget.value, 'positionXMax', this.state.arrayCoor.id)}
+                onChange={(event) => this._handleChange(event.currentTarget.value, 'positionXMax', this.state.arrayCoor.id)}
               />
               <FormField
                 label="Y min"
@@ -537,7 +537,7 @@ class CoordinateSpace extends React.Component<Props, State> {
                 type="text"
                 value={this.state.arrayCoor.coords.yMin}
                 name="positionYMin"
-                onChange={event => this._handleChange(event.currentTarget.value, 'positionYMin', this.state.arrayCoor.id)}
+                onChange={(event) => this._handleChange(event.currentTarget.value, 'positionYMin', this.state.arrayCoor.id)}
               />
               <FormField
                 label="Y max"
@@ -546,7 +546,7 @@ class CoordinateSpace extends React.Component<Props, State> {
                 type="text"
                 value={this.state.arrayCoor.coords.yMax}
                 name="positionYMax"
-                onChange={event => this._handleChange(event.currentTarget.value, 'positionYMax', this.state.arrayCoor.id)}
+                onChange={(event) => this._handleChange(event.currentTarget.value, 'positionYMax', this.state.arrayCoor.id)}
               />
             </div>
           )}
