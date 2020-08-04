@@ -1,0 +1,202 @@
+{
+    "global": {
+        "lowerLimit": [{
+            "lowerLimitMin": "leMinimum",
+            "lowerLimitMax": "leMaxmum",
+            "backColor": "#0046DE",
+            "borderColor": "#00FF99",
+            "sizeBorder": "20px"
+        }],
+        "textObject": {
+            "value": "",
+            "isTextTooltip": "false",
+            "colorBack": "red",
+            "colorText": "yellow",
+            "style": {
+                "bold": "true",
+                "italic": "false",
+                "underline": "true"
+            },
+            "generateObjectText": "true",
+            "valueGenerateObjectText": {
+                "legendElement": "uneLegend",
+                "numericFormatElement": "",
+                "unit": "Hz",
+                "displayObjectInTooltip": "true",
+                "addColorTextElement": "true",
+                "colorTextElement": "blue",
+                "addColorBackElement": "#FF00FF",
+                "colorBackElement": "white"
+            },
+            "generateAuxiliaryElement": {
+                "legendElement": "uneLegend",
+                "numericFormatElement": "?",
+                "unit": "Hz",
+                "displayObjectInTooltip": "true",
+                "addColorTextElement": "true",
+                "colorTextElement": "blue",
+                "addColorBackElement": "#E0FF0F",
+                "colorBackElement": "#999999"
+            }
+        },
+        "colorMode": "false",
+        "traceBack": "true",
+        "traceBorder": "true"
+    },
+    "templates": [
+        {
+            "filtered": "device|ens3",
+            "labelfix": "true",
+            "xylabel": "x|labelName#y|labelName",
+            "xylabelfix": "x|90#y|90",
+            "type": "point",
+            "name": "unPoint",
+            "meta": "uneMeta",
+            "label": "mtu ens3",
+            "positionParameter": {
+                "xylabelA": "x|0#y|0",
+                "xylabelB": "x|labelName#y|labelName",
+                "tooltipA": "Bottom",
+                "tooltipB": "Bottom"
+            },
+            "mainMetric": {
+                "key": "",
+                "format": ""
+            },
+            "metrics": [],
+            "linkURL": {},
+            "valueMetric": "",
+            "drawGraphicMarker": {
+                "label": "",
+                "value": ""
+            },
+            "shape": {
+                "label": "circle",
+                "value": "circle"
+            },
+            "sizeWidth": {
+                "label": "Medium",
+                "value": "medium"
+            },
+            "sizeHeight": {
+                "label": "10px",
+                "value": "10px"
+            },
+            "rotateArrow": {
+                "label": "",
+                "value": ""
+            },
+            "positionShapeX": "",
+            "positionShapeY": "",
+            "color": "green",
+            "assiciateOrientedLinksIn": [],
+            "associateOrientedLinksOut": []
+        },
+        {
+            "filtered": "device|lo",
+            "labelfix": "true",
+            "xylabel": "x|labelName#y|labelName",
+            "xylabelfix": "x|150#y|150",
+            "type": "point",
+            "name": "unPoint",
+            "meta": "uneMeta",
+            "label": "mtu lo",
+            "positionParameter": {
+                "xylabelA": "x|0#y|0",
+                "xylabelB": "x|labelName#y|labelName",
+                "tooltipA": "Bottom",
+                "tooltipB": "Bottom"
+            },
+            "mainMetric": {
+                "key": "",
+                "format": ""
+            },
+            "metrics": [],
+            "linkURL": {},
+            "valueMetric": "",
+            "drawGraphicMarker": {
+                "label": "",
+                "value": ""
+            },
+            "shape": {
+                "label": "circle",
+                "value": "circle"
+            },
+            "sizeWidth": {
+                "label": "Medium",
+                "value": "medium"
+            },
+            "sizeHeight": {
+                "label": "10px",
+                "value": "10px"
+            },
+            "rotateArrow": {
+                "label": "",
+                "value": ""
+            },
+            "positionShapeX": "",
+            "positionShapeY": "",
+            "color": "red",
+            "assiciateOrientedLinksIn": [],
+            "associateOrientedLinksOut": []
+        },
+        {
+            "filtered": "device|ens3",
+            "labelfix": "true",
+            "xylabelA": "x|labelName#y|labelName",
+            "xylabelB": "x|labelName#y|labelName",
+            "xylabelC": "x|labelName#y|labelName",
+            "xylabelfixA": "x|-70#y|66",
+            "xylabelfixB": "x|10#y|60",
+            "xylabelfixC": "x|labelName#y|labelName",
+            "type": "link",
+            "name": "unLink",
+            "meta": "uneMeta",
+            "label": "lien device",
+            "positionParameter": {
+                "xylabelA": "x|0#y|0",
+                "xylabelB": "x|0#y|0",
+                "tooltipA": "bottom",
+                "tooltipB": "bottom"
+            },
+            "mainMetric": {
+                "format": "",
+                "key": "",
+                "keyValue": ""
+            },
+            "metrics": [],
+            "mainMetricB": {
+                "format": "",
+                "key": "",
+                "keyValue": ""
+            },
+            "metricsB": [],
+            "linkURL": {
+                "followLink": "",
+                "hoveringTooltipLink": "",
+                "hoveringTooltipText": ""
+            },
+            "orientationLink": {
+                "label": "Monodirectional",
+                "value": "AB"
+            },
+            "size": {
+                "label": "20px",
+                "value": "20px"
+            },
+            "colorCoordinateA": "#5794F2",
+            "colorCoordinateB": "#E54658",
+            "valueMainMetricA": "",
+            "valueMainMetricB": "",
+            "pointIn": "",
+            "pointOut": "",
+            "regionIn": "",
+            "regionOut": "",
+            "zIndex": "2",
+            "isIncurved": {
+                "label": "No",
+                "value": "false"
+            }
+        }   
+    ]
+}

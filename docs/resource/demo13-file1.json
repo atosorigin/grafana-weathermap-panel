@@ -45,14 +45,14 @@
     },
     "templates": [
         {
-            "filtered": "quantile|0.5",
+            "filtered": "device|ens3",
             "labelfix": "true",
             "xylabel": "x|labelName#y|labelName",
             "xylabelfix": "x|75#y|80",
             "type": "point",
             "name": "unPoint",
             "meta": "uneMeta",
-            "label": "unLabel",
+            "label": "networkName",
             "positionParameter": {
                 "xylabelA": "x|0#y|0",
                 "xylabelB": "x|labelName#y|labelName",
@@ -79,8 +79,8 @@
                 "value": "medium"
             },
             "sizeHeight": {
-                "label": "10px",
-                "value": "10px"
+                "label": "1px",
+                "value": "1px"
             },
             "rotateArrow": {
                 "label": "",
@@ -91,87 +91,6 @@
             "color": "blue",
             "assiciateOrientedLinksIn": [],
             "associateOrientedLinksOut": []
-        },
-        {
-            "filtered": "quantile|0.5",
-            "labelfix": "true",
-            "xylabelA": "x|labelName#y|labelName",
-            "xylabelB": "x|labelName#y|labelName",
-            "xylabelC": "x|labelName#y|labelName",
-            "xylabelfixA": "x|-70#y|66",
-            "xylabelfixB": "x|10#y|60",
-            "xylabelfixC": "x|labelName#y|labelName",
-            "type": "link",
-            "name": "unLink",
-            "meta": "uneMeta",
-            "label": "unLabel",
-            "positionParameter": {
-                "xylabelA": "x|0#y|0",
-                "xylabelB": "x|0#y|0",
-                "tooltipA": "bottom",
-                "tooltipB": "bottom"
-            },
-            "mainMetric": {
-                "format": "",
-                "key": "",
-                "keyValue": ""
-            },
-            "metrics": [],
-            "mainMetricB": {
-                "format": "",
-                "key": "",
-                "keyValue": ""
-            },
-            "metricsB": [],
-            "linkURL": {
-                "followLink": "",
-                "hoveringTooltipLink": "",
-                "hoveringTooltipText": ""
-            },
-            "orientationLink": {
-                "label": "Monodirectional",
-                "value": "AB"
-            },
-            "size": {
-                "label": "20px",
-                "value": "20px"
-            },
-            "colorCoordinateA": "#5794F2",
-            "colorCoordinateB": "#E54658",
-            "valueMainMetricA": "",
-            "valueMainMetricB": "",
-            "pointIn": "",
-            "pointOut": "",
-            "regionIn": "",
-            "regionOut": "",
-            "zIndex": "2",
-            "isIncurved": {
-                "label": "No",
-                "value": "false"
-            }
-        },
-        {
-            "filtered": "quantile|0.5#slice|inner_eval",
-            "labelfix": "true",
-            "xylabel": "x|labelName#y|labelName",
-            "xylabel0": "x|labelName#y|labelName",
-            "xylabelfix": "x|10#y|20",
-            "xylabelfix0": "x|10#y|20",
-            "type": "region",
-            "meta": "uneMeta",
-            "label": "unLabel",
-            "positionParameter": {
-                "xylabelA": "x|labelName#y|labelName",
-                "xylabelB": "x|labelName#y|labelName",
-                "tooltipA": "bottom",
-                "tooltipB": "bottom"
-            },
-            "mainMetric": {},
-            "metrics": [],
-            "linkURL": {},
-            "idSVG": "path 117",
-            "mode": "true",
-            "img": ""
-        }
+        }  
     ]
 }
