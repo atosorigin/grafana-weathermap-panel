@@ -123,6 +123,7 @@ export default class Point extends React.Component<Props, State> {
   _handleChange(currentTarget: string, name: string, index: number): void {
     let tmp: PointClass = this.state.point;
     tmp = editGoodParameterPoint(name, tmp, currentTarget, {});
+    //console.log(tmp);
     this.setState({
       point: tmp,
     });
@@ -130,6 +131,7 @@ export default class Point extends React.Component<Props, State> {
     if (this.props.isAddPoint === false) {
       this.callBack();
     }
+    //console.log(this.state.point);
   }
 
   /**

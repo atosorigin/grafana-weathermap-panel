@@ -44,6 +44,12 @@ export const initRegionCoordinateSpace = (index: number): RegionClass => {
     yMin: '0',
     yMax: '0',
   };
+  const coordsDefault: Coord4D = {
+    xMin: '0',
+    xMax: '0',
+    yMin: '0',
+    yMax: '0',
+  };
   const positionParameter: PositionParameterClass = new PositionParameterClass('0', '0', '0', '0', {}, {});
   const newCoordinate: RegionClass = new RegionClass(
     newId,
@@ -61,7 +67,10 @@ export const initRegionCoordinateSpace = (index: number): RegionClass => {
     '',
     [],
     coords,
+    coordsDefault,
     true,
+    '',
+    '',
     ''
   );
   return newCoordinate;
@@ -81,6 +90,12 @@ export const cloneRegionCoordinateSpace = (region: RegionClass): RegionClass => 
   );
   const linkURL: LinkURLClass = new LinkURLClass(region.linkURL.followLink, region.linkURL.hoveringTooltipLink, region.linkURL.hoveringTooltipText);
   const coords: Coord4D = {
+    xMin: region.coords.xMin,
+    xMax: region.coords.xMax,
+    yMin: region.coords.yMin,
+    yMax: region.coords.yMax,
+  };
+  const coordsDefault: Coord4D = {
     xMin: region.coords.xMin,
     xMax: region.coords.xMax,
     yMin: region.coords.yMin,
@@ -120,8 +135,11 @@ export const cloneRegionCoordinateSpace = (region: RegionClass): RegionClass => 
     region.idSVG,
     region.orientedLink,
     coords,
+    coordsDefault,
     region.mode,
-    region.img
+    region.img,
+    region.widthInitialSpaceDefault,
+    region.heightInitialSpaceDefault
   );
   return newCoordinate;
 };

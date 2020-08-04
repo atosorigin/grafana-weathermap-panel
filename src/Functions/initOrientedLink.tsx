@@ -83,7 +83,13 @@ export const initOrientedLink = (newId: number, newZIndex: number): OrientedLink
     '0',
     {},
     initMainMetricsB,
-    []
+    [],
+    '',
+    '',
+    '',
+    '',
+    '',
+    ''
   );
   return newCoordinate;
 };
@@ -156,7 +162,13 @@ export const cloneOrientedLink = (orientedLink: OrientedLinkClass): OrientedLink
     orientedLink.pointCPositionY,
     orientedLink.isIncurved,
     orientedLink.mainMetricB,
-    orientedLink.metricsB
+    orientedLink.metricsB,
+    orientedLink.widthInitialSpaceDefault,
+    orientedLink.heightInitialSpaceDefault,
+    orientedLink.pointAPositionXDefault,
+    orientedLink.pointAPositionYDefault,
+    orientedLink.pointBPositionXDefault,
+    orientedLink.pointBPositionYDefault
   );
   return newCoordinate;
 };

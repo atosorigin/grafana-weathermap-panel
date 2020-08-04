@@ -22,9 +22,15 @@ export const editGoodParameterPoint = (name: string, editCoor: PointClass, newVa
   } else if (name.startsWith('rotateArrow')) {
     editCoor.rotateArrow = newValue;
   } else if (name.startsWith('positionShapeX')) {
+    console.log('update x');
+    console.log(newValue);
     editCoor.positionShapeX = newValue;
+    console.log(editCoor);
   } else if (name.startsWith('positionShapeY')) {
+    console.log('update y');
+    console.log(newValue);
     editCoor.positionShapeY = newValue;
+    console.log(editCoor);
   } else if (name.startsWith('color')) {
     editCoor.color = newValue;
   } else if (name.startsWith('refIdMainMetric')) {
@@ -34,5 +40,6 @@ export const editGoodParameterPoint = (name: string, editCoor: PointClass, newVa
   } else if (name.startsWith('keyValueMainMetric')) {
     editCoor.mainMetric.keyValue = newValue;
   }
+  console.log(editCoor)
   return editCoor;
 };

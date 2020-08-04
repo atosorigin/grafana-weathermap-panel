@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.2a3 (2020-08-04)
+
+- Update init space 
+- fixed SUM to query
+
 ## v1.0.2a2 (2020-07-28)
 
 - Add gabarit

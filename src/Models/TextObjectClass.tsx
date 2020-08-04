@@ -1,6 +1,6 @@
 import { Style } from 'components/Parametrage/styleComponent';
 
-interface GenerateTextObject {
+export interface GenerateTextObject {
   /** legend element */
   legendElement: string;
   /** numeric format element */

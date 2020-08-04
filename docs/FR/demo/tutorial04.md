@@ -2,27 +2,29 @@
 
 [![](../../screenshots/other/Go-back.png)](README.md)
  
-## Créer votre SVG sur inkscape
+## Créer votre SVG avec inkscape
 
-### Étape 1 : Télécharger Inkscape
+### Propriétés de l'espace
 
-Le logiciel recommandé pour créer une image de fond sera [Inkscape] (https://inkscape.org). Il est disponible pour :
+A partir du logiciel Inkscape, nous définissions les propriétés de notre espace en pixel avec comme valeurs : 
 
-  - Linux
-  - Windows
-  - Mac
+  - largeur : 400 px
+  - hauteur : 400 px
+
+![Inkscape](./../../screenshots/demo/tutorial04/inkscape-proprietes.jpg)
+
+Vous pouvez également voir plus d'informations sur la création d'image SVG [ici](../appendix/svg.md)
 
 ### Étape 2 : Créer votre forme
 
-Inkscape vous permet de choisir entre plusieurs formes pour créer votre SVG :
 
-  - Cercle :
-  - Carré
-  - Autre..
+Nous créons plusieurs formes géométriques à partir du logiciel Inskcape, qui sont : 
 
-! [Inkscape](./../../screenshots/demo/tutorial04/Inkscape.png)
+  - 2 rectangles
+  - 2 cercles
 
-Vous pouvez également créer votre image SVG avec draw.io. Plus d'informations [ici](./appendix/svg.md)
+![Inkscape](./../../screenshots/demo/tutorial04/shapes.jpg)
+
 
 ### Etape 3 : Ajouter un identifiant à tous vos objets
 
@@ -30,7 +32,7 @@ Il est nécessaire d'ajouter un identifiant à tous vos objets. Il sera plus fac
 
 Pour ajouter un identifiant, `right click` sur votre objet, puis allez sur `Properties of your object`. Une fenêtre apparaîtra et vous permettra de modifier l'identifiant
 
-![Propriete](./../../screenshots/demo/tutorial04/Propriete.png)
+![Propriete](./../../screenshots/demo/tutorial04/inkscape-id.jpg)
 
 ### Étape 4 : Sauvez votre forme
 
@@ -42,7 +44,7 @@ Pour sauvegarder votre forme, vous devez enregistrer au format `SVG Inkscape` ou
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
-L'image sélectionnée sera celle que vous venez de créer. Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copy image address`.
+L'image que vous venez de créer sera uploader à partir de votre ordinateur. Pour ce faire, vous cliquez sur `parcourir` de la ligne upload image, que vous trouverez [ici](../../resource/demo04-background.svg)
 
 Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
 

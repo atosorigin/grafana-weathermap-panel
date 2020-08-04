@@ -22,3 +22,6 @@
   - [serveur de stockage](server.md)
 
 
+- FAQ
+
+  - [FAQ](faq.md)

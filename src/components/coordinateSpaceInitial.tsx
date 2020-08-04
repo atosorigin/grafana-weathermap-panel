@@ -40,8 +40,15 @@ class CoordinateSpaceInitialClass extends React.Component<Props, State> {
    * @param {string} name name of input
    */
   _handleChange(currentTarget: string, name: string) {
-    this.setState((prevState) => ({
-      arrayCoor: editGoodParameter(name, prevState.arrayCoor, currentTarget, this.state.arrayCoor.defaultReferentiel),
+    this.props.options.updateOnlyInitialSpace = true;
+    this.setState(prevState => ({
+      arrayCoor: editGoodParameter(
+        name,
+        prevState.arrayCoor,
+        currentTarget,
+        parseInt(this.props.options.baseMap.width, 10),
+        parseInt(this.props.options.baseMap.height, 10)
+      ),
     }));
     this.callBack();
   }
@@ -78,38 +85,49 @@ class CoordinateSpaceInitialClass extends React.Component<Props, State> {
     this.callBack();
   };
 
-  onChangeSwitchDefaultInitialSpace = () => {
-    const newInitialSpace: CoordinateSpaceInitial = this.state.arrayCoor;
-    newInitialSpace.defaultReferentiel = !newInitialSpace.defaultReferentiel;
-    this.setState({
-      arrayCoor: newInitialSpace,
-    });
-    if (newInitialSpace.defaultReferentiel) {
-      this.props.options.coordinateSpaceInitial.coordinate = {
-        xMin: '0',
-        xMax: '100',
-        yMin: '0',
-        yMax: '100',
-      };
-    } else {
-      this.props.options.coordinateSpaceInitial.coordinate = {
-        xMin: '-100',
-        xMax: '100',
-        yMin: '-100',
-        yMax: '100',
-      };
-    }
-    this.callBack();
+  // onChangeSwitchDefaultInitialSpace = () => {
+  //   const newInitialSpace: CoordinateSpaceInitial = this.state.arrayCoor;
+  //   newInitialSpace.defaultReferentiel = !newInitialSpace.defaultReferentiel;
+  //   this.setState({
+  //     arrayCoor: newInitialSpace,
+  //   });
+  //   if (newInitialSpace.defaultReferentiel) {
+  //     this.props.options.coordinateSpaceInitial.coordinate = {
+  //       xMin: '0',
+  //       xMax: '100',
+  //       yMin: '0',
+  //       yMax: '100',
+  //     };
+  //   } else {
+  //     this.props.options.coordinateSpaceInitial.coordinate = {
+  //       xMin: '-100',
+  //       xMax: '100',
+  //       yMin: '-100',
+  //       yMax: '100',
+  //     };
+  //   }
+  //   this.callBack();
+  // };
+
+  // displayValueReferentiel = (): string => {
+  //   let result = '';
+  //   if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
+  //     result = '(0 : 100)';
+  //   } else {
+  //     result = '(-100 : 100)';
+  //   }
+  //   return result;
+  // };
+
+  componentDidMount = () => {
+    // console.log('initialSpace');
+    // this.props.options.coordinateSpaceInitial.coordinate.xMax = this.props.options.baseMap.width;
+    // this.props.options.coordinateSpaceInitial.coordinate.yMax = this.props.options.baseMap.height;
   };
 
-  displayValueReferentiel = (): string => {
-    let result = '';
-    if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
-      result = '(0 : 100)';
-    } else {
-      result = '(-100 : 100)';
-    }
-    return result;
+  componentDidUpdate = () => {
+    // if (this.props.options.)
+    // console.log('update initialSPace');
   };
 
   /**
@@ -122,10 +140,10 @@ class CoordinateSpaceInitialClass extends React.Component<Props, State> {
           <FormLabel width={15}>Display space initial</FormLabel>
           <Switch label="" checked={this.state.arrayCoor.displayArea} onChange={this.onChangeSwitchDisplayInitialSpace} />
         </div>
-        <div style={{ display: 'flex' }}>
+        {/* <div style={{ display: 'flex' }}>
           <FormLabel width={15}>Default referentiel {this.displayValueReferentiel()}</FormLabel>
           <Switch label="" checked={this.state.arrayCoor.defaultReferentiel} onChange={this.onChangeSwitchDefaultInitialSpace} />
-        </div>
+        </div> */}
         <FormField
           label="X min"
           labelWidth={15}

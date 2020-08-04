@@ -2,27 +2,30 @@
 # How to create and add your own SVG image in Grafana
 [![](../../screenshots/other/Go-back.png)](README.md)
  
+ 
 ## Create you SVG on Inkscape
 
-### Step 1 : Download Inkscape
+### Properties of the space
 
-The recommended software to make a background image will be [Inkscape](https://inkscape.org). It is available for :
+From the Inkscape software, we defined the properties of our space in pixels with the values  : 
 
-  - Linux
-  - Windows
-  - Mac
+  - width : 400 px
+  - height : 400 px
 
-### Step 2 : Create your shape
+![Inkscape](./../../screenshots/demo/tutorial04/inkscape-proprietes.jpg)
 
-Inkscape allows you to choose between several shapes to create your SVG :
+You can also see more information about SVG image creation [here](../appendix/svg.md)
 
-  - Circle
-  - Square
-  - Other...
+### Étape 2 : Create your shape
 
-![Inkscape](./../../screenshots/demo/tutorial04/Inkscape.png)
 
-You can also create you SVG image with draw.io. More information [here](./appendix/svg.md)
+We create several geometric shapes from the Inskcape software, which are : 
+
+  - 2 squares
+  - 2 circles
+
+![Inkscape](./../../screenshots/demo/tutorial04/shapes.jpg)
+
 
 ### Step 3 : Add id to all of your objects
 
@@ -30,7 +33,8 @@ It is necessary to add an id to all of your objects. It will be easier to use wi
 
 To add an id, `right click` on your object, then go on `Properties of your object`. A window will appears and will allow you to change the ID
 
-![Propriete](./../../screenshots/demo/tutorial04/Propriete.png)
+![Propriete](./../../screenshots/demo/tutorial04/inkscape-id.jpg)
+
 
 ### Step 4 : Save you shape
 
@@ -43,7 +47,7 @@ To save your shape, you need to save in `SVG Inkscape` or `SVG simple` format.
 
 Adding a background image is done from the `display` menu.
 
-The selected image will be the one you just created. To do this, we download it in base64 with the `Copy image address` function.
+The image you just created will be uploaded from your computer. To do this, you click on `browse` in the upload image line, which you will find [here](../../resource/demo04-background.svg)
 
 It is possible to have more details with the [display](../editor/display.md) page.
 
@@ -52,5 +56,4 @@ It is possible to have more details with the [display](../editor/display.md) pag
 Then, if you want to add a region, from the menu `Coordinates space`, `region` and `Add region`. You can see the different id of your shape in `Zone SVG`. 
 
 ![Enregistrer](./../../screenshots/demo/tutorial04/Region.png)
-
 

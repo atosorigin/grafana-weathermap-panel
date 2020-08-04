@@ -12,41 +12,53 @@ export const editGoodParameter = (
   name: string,
   editCoor: CoordinateSpaceInitial,
   newValue: string,
-  defaultInitialSpace: boolean
+  widthBackground: number,
+  heigthBackground: number
 ): CoordinateSpaceInitial => {
   if (name.startsWith('positionXMin')) {
-    editCoor.coordinate.xMin = limitValueInitialSpace(newValue, defaultInitialSpace);
+    editCoor.coordinate.xMin = limitValueInitialSpace(newValue, 1, widthBackground, heigthBackground);
     //editCoor.coordinate.xMin = newValue;
   } else if (name.startsWith('positionXMax')) {
-    editCoor.coordinate.xMax = limitValueInitialSpace(newValue, defaultInitialSpace);
+    editCoor.coordinate.xMax = limitValueInitialSpace(newValue, 2, widthBackground, heigthBackground);
     //editCoor.coordinate.xMax = newValue;
   } else if (name.startsWith('positionYMin')) {
-    editCoor.coordinate.yMin = limitValueInitialSpace(newValue, defaultInitialSpace);
+    editCoor.coordinate.yMin = limitValueInitialSpace(newValue, 3, widthBackground, heigthBackground);
     //editCoor.coordinate.yMin = newValue;
   } else if (name.startsWith('positionYMax')) {
-    editCoor.coordinate.yMax = limitValueInitialSpace(newValue, defaultInitialSpace);
+    editCoor.coordinate.yMax = limitValueInitialSpace(newValue, 4, widthBackground, heigthBackground);
     //editCoor.coordinate.yMax = newValue;
   }
   return editCoor;
 };
 
-export const limitValueInitialSpace = (coorInitialSpace: string, defaultInitialSpace: boolean): string => {
-  const coorInt: number = parseInt(coorInitialSpace, 10);
+export const limitValueInitialSpace = (coorInitialSpace: string, position: number, widthBackground: number, heigthBackground: number): string => {
   let result = 0;
-  //console.log(defaultInitialSpace);
-  if (!defaultInitialSpace) {
-    result = coorInt;
-  } else {
-    if (coorInt > 100) {
-      result = 100;
-    } else if (coorInt < 0) {
-      result = 0;
-    } else if (coorInt >= 0 && coorInt <= 100) {
-      result = coorInt;
-    } else {
-      result = 0;
+  result = parseInt(coorInitialSpace, 10);
+  if (position === 1 || position === 2) {
+    //xMin + xMax
+    if (result > widthBackground) {
+      result = widthBackground;
+    }
+  } else if (position === 3 || position === 4) {
+    //yMin + yMax
+    if (result > heigthBackground) {
+      result = heigthBackground;
     }
   }
+  //console.log(defaultInitialSpace);
+  // if (!defaultInitialSpace) {
+  //   result = coorInt;
+  // } else {
+  //   if (coorInt > 100) {
+  //     result = 100;
+  //   } else if (coorInt < 0) {
+  //     result = 0;
+  //   } else if (coorInt >= 0 && coorInt <= 100) {
+  //     result = coorInt;
+  //   } else {
+  //     result = 0;
+  //   }
+  // }
   return result.toString();
 };
 

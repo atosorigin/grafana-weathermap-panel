@@ -8,8 +8,6 @@ import { Style } from 'components/Parametrage/styleComponent';
 //import { TextObject } from 'Models/TextObjectClass';
 import { Filtred } from 'Functions/loaderGabarit';
 
-
-
 /**
  * interface to save texte settings (police, size, style)
  */
@@ -34,6 +32,7 @@ export interface LowerLimit {
 export interface GabaritFile {
   fileName: string;
   queryID: string;
+  loaded: boolean;
   globalGabarit: GlobalGabarit;
   templateGabaritPoint: TemplateGabaritPoint[];
   templateGabaritRegion: TemplateGabaritRegion[];
@@ -140,7 +139,6 @@ export interface Metric {
   manageValue: TManageValue;
 }
 
-
 export interface MetricSettings {
   /**
    * fond is active (color)
@@ -227,7 +225,7 @@ export interface CoordinateSpaceInitial {
   /** display zone in SimplePanel (orange rectangle) */
   displayArea: boolean;
   /** if true use default coor 0-100 else use -100-100 */
-  defaultReferentiel: boolean;
+  //defaultReferentiel: boolean;
 }
 
 interface Legend {
@@ -461,6 +459,11 @@ export interface SimpleOptions extends MetricSettings {
   saveGabaritURL: string[];
   saveGabaritFile: GabaritFile[];
   gabaritDefault: GabaritFile;
+
+  updateOnlyInitialSpace: boolean;
+
+  regionIsCreated: boolean;
+  numberBorderRegionUpdated: number;
 }
 
 export const defaults: SimpleOptions = {
@@ -470,12 +473,11 @@ export const defaults: SimpleOptions = {
   coordinateSpaceInitial: {
     coordinate: {
       xMin: '0',
-      xMax: '100',
+      xMax: '0',
       yMin: '0',
-      yMax: '100',
+      yMax: '0',
     },
     displayArea: true,
-    defaultReferentiel: true,
   },
   displayButton: false,
   regionCoordinateSpace: [],
@@ -568,6 +570,8 @@ export const defaults: SimpleOptions = {
     },
   ],
 
+  regionIsCreated: true,
+  numberBorderRegionUpdated: 0,
   indexOrientedLink: 0,
   indexPoint: 0,
   indexRegion: 0,
@@ -595,15 +599,18 @@ export const defaults: SimpleOptions = {
   gabaritDefault: {
     queryID: 'A',
     fileName: 'default',
+    loaded: false,
     globalGabarit: {
-      lowerLimit: [{
-        id: 0,
-        lowerLimitMin: '0',
-        lowerLimitMax: '0',
-        backColor: 'blue',
-        borderColor: 'red',
-        sizeBorder: '1px',
-      }],
+      lowerLimit: [
+        {
+          id: 0,
+          lowerLimitMin: '0',
+          lowerLimitMax: '0',
+          backColor: 'blue',
+          borderColor: 'red',
+          sizeBorder: '1px',
+        },
+      ],
       textObject: {
         value: 'default',
         isTextTooltip: false,
@@ -645,4 +652,5 @@ export const defaults: SimpleOptions = {
     templateGabaritRegion: [],
     templateGabaritLink: [],
   },
+  updateOnlyInitialSpace: false,
 };

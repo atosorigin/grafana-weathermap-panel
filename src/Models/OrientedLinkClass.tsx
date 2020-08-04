@@ -28,6 +28,12 @@ export class OrientedLinkClass extends CoordinateSpaceClass {
   isIncurved: SelectableValue<boolean>;
   mainMetricB: Metric;
   metricsB: Metric[];
+  widthInitialSpaceDefault: string;
+  heightInitialSpaceDefault: string;
+  pointAPositionXDefault: string;
+  pointAPositionYDefault: string;
+  pointBPositionXDefault: string;
+  pointBPositionYDefault: string;
 
   constructor(
     id: number,
@@ -62,7 +68,13 @@ export class OrientedLinkClass extends CoordinateSpaceClass {
     pointCPositionY: string,
     isIncurved: SelectableValue<boolean>,
     mainMetricB: Metric,
-    metricsB: Metric[]
+    metricsB: Metric[],
+    widthInitialSpaceDefault: string,
+    heightInitialSpaceDefault: string,
+    pointAPositionXDefault: string,
+    pointAPositionYDefault: string,
+    pointBPositionXDefault: string,
+    pointBPositionYDefault: string,
   ) {
     super(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter);
     this.name = name;
@@ -86,5 +98,11 @@ export class OrientedLinkClass extends CoordinateSpaceClass {
     this.isIncurved = isIncurved;
     this.mainMetricB = mainMetricB;
     this.metricsB = metricsB;
+    this.widthInitialSpaceDefault = widthInitialSpaceDefault;
+    this.heightInitialSpaceDefault = heightInitialSpaceDefault;
+    this.pointAPositionXDefault = pointAPositionXDefault;
+    this.pointAPositionYDefault = pointAPositionYDefault;
+    this.pointBPositionXDefault = pointBPositionXDefault;
+    this.pointBPositionYDefault = pointBPositionYDefault;
   }
 }

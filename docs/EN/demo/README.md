@@ -57,3 +57,7 @@ In the form of a **demo**, you will learn how to use the plugin to get a dynamic
 
     [![demo13](../../screenshots/demo/demo13.png)](tutorial13.md)
 
+- 14 [Demo14 avancé](tutorial14.md)
+
+    [![demo14](../../screenshots/demo/demo14.png)](tutorial14.md)
+

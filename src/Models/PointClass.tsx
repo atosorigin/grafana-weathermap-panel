@@ -23,6 +23,10 @@ export class PointClass extends CoordinateSpaceClass {
   color: string;
   associateOrientedLinksIn: any[];
   associateOrientedLinksOut: any[];
+  widthInitialSpaceDefault: string;
+  heightInitialSpaceDefault: string;
+  positionXDefault: string;
+  positionYDefault: string;
 
   constructor(
     id: number,
@@ -48,7 +52,11 @@ export class PointClass extends CoordinateSpaceClass {
     positionShapeY: string,
     color: string,
     associateOrientedLinksIn: any[],
-    associateOrientedLinksOut: any[]
+    associateOrientedLinksOut: any[],
+    widthInitialSpaceDefault: string,
+    heightInitialSpaceDefault: string,
+    positionXDefault: string,
+    positionYDefault: string
   ) {
     super(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter);
     this.name = name;
@@ -63,5 +71,9 @@ export class PointClass extends CoordinateSpaceClass {
     this.color = color;
     this.associateOrientedLinksIn = associateOrientedLinksIn;
     this.associateOrientedLinksOut = associateOrientedLinksOut;
+    this.widthInitialSpaceDefault = widthInitialSpaceDefault;
+    this.heightInitialSpaceDefault = heightInitialSpaceDefault;
+    this.positionXDefault = positionXDefault;
+    this.positionYDefault = positionYDefault;
   }
 }

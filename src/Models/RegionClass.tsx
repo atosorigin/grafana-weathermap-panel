@@ -25,8 +25,14 @@ export class RegionClass extends CoordinateSpaceClass {
   orientedLink: OrientedLinkClass[];
   /** if coordinate mode, stock coordinate here */
   coords: Coord4D;
+  /** coordinate to creation */
+  coordsDefault: Coord4D;
   /** background image region if coordinate mode */
   img: string;
+  /** width of initial */
+  widthInitialSpaceDefault: string;
+  /** height of initial */
+  heightInitialSpaceDefault: string;
 
   constructor(
     id: number,
@@ -44,14 +50,20 @@ export class RegionClass extends CoordinateSpaceClass {
     idSVG: string,
     orientedLink: OrientedLinkClass[],
     coords: Coord4D,
+    coordsDefault: Coord4D,
     mode: boolean,
-    img: string
+    img: string,
+    widthInitialSpaceDefault: string,
+    heightInitialSpaceDefault: string
   ) {
     super(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter);
     this.idSVG = idSVG;
     this.mode = mode;
     this.orientedLink = orientedLink;
     this.coords = coords;
+    this.coordsDefault = coordsDefault;
     this.img = img;
+    this.widthInitialSpaceDefault = widthInitialSpaceDefault;
+    this.heightInitialSpaceDefault = heightInitialSpaceDefault;
   }
 }

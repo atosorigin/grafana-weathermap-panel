@@ -63,7 +63,11 @@ export const initPoint = (index: number): PointClass => {
     '0',
     'black',
     [],
-    []
+    [],
+    '0',
+    '0',
+    '0',
+    '0'
   );
   return newCoordinate;
 };
@@ -124,7 +128,11 @@ export const clonePoint = (point: PointClass): PointClass => {
     point.positionShapeY,
     point.color,
     point.associateOrientedLinksIn,
-    point.associateOrientedLinksOut
+    point.associateOrientedLinksOut,
+    point.widthInitialSpaceDefault,
+    point.heightInitialSpaceDefault,
+    point.positionXDefault,
+    point.positionYDefault
   );
   return newCoordinate;
 };

@@ -138,7 +138,11 @@ class ImportInput extends React.Component<Props, State> {
       point.positionShapeY,
       point.color,
       point.associateOrientedLinksIn,
-      point.associateOrientedLinksOut
+      point.associateOrientedLinksOut,
+      point.widthInitialSpaceDefault,
+      point.heightInitialSpaceDefault,
+      point.positionXDefault,
+      point.positionYDefault
     );
     // console.log(toLoad);
     let selector: number = this.PointValidator(toLoad);
@@ -180,8 +184,11 @@ class ImportInput extends React.Component<Props, State> {
       region.idSVG,
       region.orientedLink,
       region.coords,
+      region.coordsDefault,
       region.mode,
-      region.img
+      region.img,
+      region.widthInitialSpace,
+      region.heightInitialSpace
     );
     // console.log(toLoad);
     // Do some test here to see if your already load a coordinatespace with this id
@@ -239,7 +246,13 @@ class ImportInput extends React.Component<Props, State> {
       link.pointCPositionY,
       link.isIncurved,
       link.mainMetricB,
-      link.metricsB
+      link.metricsB,
+      link.widthInitialSpaceDefault,
+      link.heightInitialSpaceDefault,
+      link.pointAPositionXDefault,
+      link.pointAPositionYDefault,
+      link.pointBPositionXDefault,
+      link.pointBPositionYDefault
     );
     // console.log(toLoad);
     // Do some test here to see if your already load a coordinatespace with this id

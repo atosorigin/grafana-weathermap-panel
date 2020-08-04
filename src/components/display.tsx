@@ -170,6 +170,7 @@ class Display extends React.Component<Props, State> {
     /** new value for height */
     target: HTMLInputElement;
   }) => {
+    this.props.options.updateOnlyInitialSpace = false;
     const { options, onOptionsChange } = this.props;
     const oldValue: Background = options.baseMap;
 
@@ -182,6 +183,7 @@ class Display extends React.Component<Props, State> {
     /** new value for width */
     target: HTMLInputElement;
   }) => {
+    this.props.options.updateOnlyInitialSpace = false;
     const { options, onOptionsChange } = this.props;
     const oldValue: Background = options.baseMap;
 

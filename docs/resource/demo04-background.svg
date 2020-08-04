@@ -9,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="400"
+   height="400"
+   viewBox="0 0 105.83333 105.83333"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="play.svg">
+   sodipodi:docname="demo04-background.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -25,16 +25,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="-68.571429"
-     inkscape:cy="560"
+     inkscape:zoom="0.71"
+     inkscape:cx="83.11117"
+     inkscape:cy="193.12773"
      inkscape:document-units="mm"
-     inkscape:current-layer="g3776"
+     inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1853"
-     inkscape:window-height="1025"
-     inkscape:window-x="1987"
-     inkscape:window-y="27"
+     units="px"
+     inkscape:window-width="1360"
+     inkscape:window-height="591"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata5">
@@ -51,27 +52,33 @@
   <g
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
-     id="layer1">
-    <g
-       id="g3776"
-       transform="matrix(1.28951,0,0,1.2108778,32.242493,75.809466)">
-      <ellipse
-         id="Cercle"
-         pointer-events="all"
-         ry="55"
-         rx="60"
-         cy="55"
-         cx="60"
-         style="fill:#ffffff;stroke:#000000"
-         inkscape:label="#ellipse3772" />
-      <path
-         id="triangle"
-         pointer-events="all"
-         stroke-miterlimit="10"
-         d="M 40,15 100,55 40,95 Z"
-         inkscape:connector-curvature="0"
-         style="fill:#ffffff;stroke:#000000;stroke-miterlimit:10"
-         inkscape:label="#path3774" />
-    </g>
+     id="layer1"
+     transform="translate(0,-191.16665)">
+    <rect
+       id="rect1"
+       width="32.221893"
+       height="61.209225"
+       x="36.157421"
+       y="208.75972"
+       style="fill:#cccccc;stroke-width:0.15279278" />
+    <ellipse
+       style="fill:#ffffff;stroke-width:0.20959006"
+       id="rect1-top"
+       cx="52.737064"
+       cy="221.00157"
+       rx="6.7373056"
+       ry="7.3451076" />
+    <ellipse
+       style="fill:#ffffff;stroke-width:0.20959006"
+       id="rect1-footer"
+       cx="52.44413"
+       cy="257.72711"
+       rx="6.7373056"
+       ry="7.3451076" />
+    <path
+       style="fill:#ff0000;stroke-width:0.05299858"
+       d="m 45.391166,231.09626 v 16.34037 h 14.521802 v -16.34037 z"
+       id="rect1-3"
+       inkscape:connector-curvature="0" />
   </g>
 </svg>

@@ -13,6 +13,8 @@ import { LinkURLClass } from 'Models/LinkURLClass'
 //import { TextObject } from 'Models/TextObjectClass';
 
 import { PointClass } from 'Models/PointClass'
+import { TextObject, GenerateTextObject } from 'Models/TextObjectClass'
+import { Style } from 'components/Parametrage/styleComponent'
 
 interface Props extends PanelEditorProps<SimpleOptions> {}
 
@@ -103,31 +105,44 @@ class Gabarit extends React.Component<Props, State> {
     return result
   }
 
+  GabaritValidator = (name: string) => {
+    let result = true
+    this.props.options.saveGabaritFile.forEach(element => {
+      if (element.fileName === name) {
+        console.log('LoadGabaritFileReject')
+        result = false
+      }
+    })
+    return result
+  }
+
   /**************************************LOADER******************************************/
 
   loadGabarit = (file: any, url: string) => {
     let name = url.split('/')
-    let newGabarit: GabaritFile = {
-      queryID: 'null',
-      fileName: name[name.length - 1],
-      globalGabarit: file.global,
-      templateGabaritPoint: [],
-      templateGabaritRegion: [],
-      templateGabaritLink: [],
+    if (this.GabaritValidator(name[name.length - 1])) {
+      let newGabarit: GabaritFile = {
+        queryID: 'null',
+        fileName: name[name.length - 1],
+        loaded: false,
+        globalGabarit: file.global,
+        templateGabaritPoint: [],
+        templateGabaritRegion: [],
+        templateGabaritLink: [],
+      }
+      file.templates.forEach((gab: any) => {
+        if (gab.type === 'point') {
+          newGabarit.templateGabaritPoint.push(gab)
+        }
+        if (gab.type === 'region') {
+          newGabarit.templateGabaritRegion.push(gab)
+        }
+        if (gab.type === 'link') {
+          newGabarit.templateGabaritLink.push(gab)
+        }
+      })
+      this.props.options.saveGabaritFile.push(newGabarit)
     }
-    console.log(name[name.length - 1])
-    file.templates.forEach((gab: any) => {
-      if (gab.type === 'point') {
-        newGabarit.templateGabaritPoint.push(gab)
-      }
-      if (gab.type === 'region') {
-        newGabarit.templateGabaritRegion.push(gab)
-      }
-      if (gab.type === 'link') {
-        newGabarit.templateGabaritLink.push(gab)
-      }
-    })
-    this.props.options.saveGabaritFile.push(newGabarit)
   }
 
   fetchGabarit = () => {
@@ -174,7 +189,7 @@ class Gabarit extends React.Component<Props, State> {
   }
 
   addGabaritUrlInput = (onClick: { currentTarget: HTMLButtonElement }) => {
-    let valid: boolean = true
+    let valid = true
     this.props.options.saveGabaritURL.forEach(element => {
       if (this.props.options.gabaritUrlInput === element) {
         valid = false
@@ -193,11 +208,25 @@ class Gabarit extends React.Component<Props, State> {
     this.props.onOptionsChange({ ...this.props.options, saveGabaritURL: this.props.options.saveGabaritURL })
   }
 
+  gabaritDeletFile = (onClick: { currentTarget: HTMLButtonElement }) => {
+    const isGabarit = (gabarit: GabaritFile) => gabarit === this.props.options.saveGabaritFile[parseInt(onClick.currentTarget.id, 10)]
+    this.props.options.saveGabaritFile.splice(this.props.options.saveGabaritFile.findIndex(isGabarit), 1)
+    this.props.onOptionsChange({ ...this.props.options, saveGabaritFile: this.props.options.saveGabaritFile })
+  }
+
   tempo = () => {
     // console.log(this.props.options.saveGabaritURL);
   }
 
   /**************************************LOADER******************************************/
+
+  checkLoaderGabarit = (onClick: { currentTarget: HTMLButtonElement }) => {
+    if (!this.props.options.saveGabaritFile[parseInt(onClick.currentTarget.id, 10)].loaded) {
+      this.loaderGabarit(onClick)
+    } else {
+      console.log('loadGabaritReject')
+    }
+  }
 
   loaderGabarit = (onClick: { currentTarget: HTMLButtonElement }) => {
     let tmpLabelAPosition: LabelCoord2D
@@ -225,10 +254,13 @@ class Gabarit extends React.Component<Props, State> {
     let associateOrientedLinksOutPoint: OrientedLinkClass[][] = []
     //global
     //let lowerLimit: LowerLimitClass;
-    //let textObject: TextObject;
     let colorMode: boolean
     let traceBack: boolean
     let traceBorder: boolean
+    let textObj: TextObject
+    let style: Style
+    let generateValue: GenerateTextObject
+    let generateAux: GenerateTextObject
     /* Region */
     //Template
 
@@ -236,6 +268,47 @@ class Gabarit extends React.Component<Props, State> {
     colorMode = Boolean(gabaritFileTmp.globalGabarit.colorMode)
     traceBack = Boolean(gabaritFileTmp.globalGabarit.traceBack)
     traceBorder = Boolean(gabaritFileTmp.globalGabarit.traceBorder)
+
+    ////// Text Object
+    generateValue = {
+      legendElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.legendFormat,
+      numericFormatElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.nemericFormatElement,
+      unit: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.unit,
+      displayObjectInTooltip: Boolean(gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.displayObjectInTooltip),
+      addColorTextElement: Boolean(gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.addColorTextElement),
+      colorTextElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.colorTextElement,
+      addColorBackElement: Boolean(gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.addColorBAckElement),
+      colorBackElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.colorBackElement,
+    }
+
+    generateAux = {
+      legendElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.legendFormat,
+      numericFormatElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.nemericFormatElement,
+      unit: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.unit,
+      displayObjectInTooltip: Boolean(gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.displayObjectInTooltip),
+      addColorTextElement: Boolean(gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.addColorTextElement),
+      colorTextElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.colorTextElement,
+      addColorBackElement: Boolean(gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.addColorBAckElement),
+      colorBackElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.colorBackElement,
+    }
+
+    style = {
+      bold: Boolean(gabaritFileTmp.globalGabarit.textObject.style.bold),
+      italic: Boolean(gabaritFileTmp.globalGabarit.textObject.style.italic),
+      underline: Boolean(gabaritFileTmp.globalGabarit.textObject),
+    }
+
+    textObj = new TextObject(
+      gabaritFileTmp.globalGabarit.textObject.value,
+      Boolean(gabaritFileTmp.globalGabarit.textObject.isTextTooltip),
+      gabaritFileTmp.globalGabarit.textObject.colorBack,
+      gabaritFileTmp.globalGabarit.textObject.colorText,
+      style,
+      Boolean(gabaritFileTmp.globalGabarit.textObject.generateObjectText),
+      generateValue,
+      generateAux
+    )
+
     gabaritFileTmp.templateGabaritPoint.forEach((point, index) => {
       if (point.labelfix.toString() === 'false') {
         posPoint.push(coordParse(point.xylabel))
@@ -245,10 +318,18 @@ class Gabarit extends React.Component<Props, State> {
       filterPoint.push(filterParse(point.filtered))
       namePoint.push(point.name)
       metaPoint.push(point.meta)
-      labelPoint.push(point.label)
-      mainMetricPoint.push(point.mainMetric)
-      mainMetricPoint[index].filter! = filterPoint[index]
-      mainMetricPoint[index].refId = gabaritFileTmp.queryID
+      labelPoint.push(point.label) // c'est le label du point qui est afficher pour la selection
+      mainMetricPoint.push({
+        key: point.mainMetric.key,
+        unit: point.mainMetric.unit,
+        format: point.mainMetric.format,
+        keyValue: '',
+        filter: filterPoint[index],
+        refId: gabaritFileTmp.queryID,
+        expr: '',
+        returnQuery: [],
+        manageValue: point.mainMetric.manageValue,
+      })
       if (mainMetricPoint[index].refId === null) {
         mainMetricPoint[index].refId = 'A'
       }
@@ -256,7 +337,10 @@ class Gabarit extends React.Component<Props, State> {
         metricPoint[index].push(element)
       })
       valueMetricPoint.push(point.valueMetric)
-      drawGraphicMarkerPoint.push(point.drawGraphicMarker)
+      drawGraphicMarkerPoint.push({
+        label: point.drawGraphicMarker.label,
+        value: point.drawGraphicMarker.value,
+      })
       shapePoint.push(point.shape)
       sizeWidthPoint.push(point.sizeWidth)
       sizeHeightPoint.push(point.sizeHeight)
@@ -274,8 +358,7 @@ class Gabarit extends React.Component<Props, State> {
       positionParameterPoint.push(
         new PositionParameterClass(tmpLabelAPosition.x, tmpLabelAPosition.y, tmpLabelBPosition.x, tmpLabelBPosition.y, tmpToolTipA, tmpToolTipB)
       )
-
-      linkURLPoint.push(new LinkURLClass(point.linkURL.followLink, point.linkURL.hoveringTooltipLink, point.linkURL.hoveringTooltipTex))
+      linkURLPoint.push(new LinkURLClass(point.linkURL.followLink, point.linkURL.hoveringTooltipLink, point.linkURL.hoveringTooltipText))
     })
     // console.log('posPoint:')
     // console.log(posPoint) //
@@ -323,67 +406,177 @@ class Gabarit extends React.Component<Props, State> {
       newID++
     })
 
-    filterPoint.forEach((element, index) => {
-      if (metricPoint.length > 0) {
-        let toLoad: PointClass = new PointClass(
-          newID + 1,
-          linkURLPoint[index],
-          metaPoint[index],
-          gabaritFileTmp.globalGabarit.lowerLimit,
-          labelPoint[index],
-          gabaritFileTmp.globalGabarit.textObject,
-          mainMetricPoint[index],
-          metricPoint[index],
-          colorMode,
-          traceBack,
-          traceBorder,
-          positionParameterPoint[index],
-          namePoint[index],
-          valueMetricPoint[index],
-          drawGraphicMarkerPoint[index],
-          shapePoint[index],
-          sizeWidthPoint[index],
-          sizeHeightPoint[index],
-          '',
-          posPoint[index].x,
-          posPoint[index].y,
-          colorPoint[index],
-          associateOrientedLinksInPoint[index],
-          associateOrientedLinksOutPoint[index]
-        )
-        newID++
-        this.props.options.arrayPoints.push(toLoad)
-      } else {
-        let toLoad: PointClass = new PointClass(
-          newID + 1,
-          linkURLPoint[index],
-          metaPoint[index],
-          gabaritFileTmp.globalGabarit.lowerLimit,
-          labelPoint[index],
-          gabaritFileTmp.globalGabarit.textObject,
-          mainMetricPoint[index],
-          [],
-          colorMode,
-          traceBack,
-          traceBorder,
-          positionParameterPoint[index],
-          namePoint[index],
-          valueMetricPoint[index],
-          drawGraphicMarkerPoint[index],
-          shapePoint[index],
-          sizeWidthPoint[index],
-          sizeHeightPoint[index],
-          '',
-          posPoint[index].x,
-          posPoint[index].y,
-          colorPoint[index],
-          associateOrientedLinksInPoint[index],
-          associateOrientedLinksOutPoint[index]
-        )
-        newID++
-        this.props.options.arrayPoints.push(toLoad)
-      }
+    let labelCoordX: string[] = []
+    let labelCoordY: string[] = []
+    let labelCoord: LabelCoord2D[] = []
+
+    posPoint.forEach(pos => {
+      this.props.data.series.forEach(element => {
+        const nameQuery: string[] =
+          element.name?.split(',').map(value => {
+            return value.replace(/[\"{}]/gm, '')
+          }) || []
+
+        for (const oneQuery of nameQuery) {
+          if (nameQuery && nameQuery.length > 0) {
+            const keyValue: string[] = oneQuery.split('=')
+            if (keyValue[0] === pos.x) {
+              labelCoordX.push(keyValue[1])
+            }
+            if (keyValue[0] === pos.y) {
+              labelCoordY.push(keyValue[1])
+            }
+          }
+        }
+      })
     })
+    labelCoordX.forEach((element, index) => {
+      labelCoord.push({ x: labelCoordX[index], y: labelCoordY[index] })
+    })
+
+    if (labelCoord.length > 0) {
+      for (const pos of labelCoord){
+        filterPoint.forEach((element, index) => {
+          if (metricPoint.length > 0) {
+            let toLoad: PointClass = new PointClass(
+              newID + 1,
+              linkURLPoint[index],
+              metaPoint[index],
+              gabaritFileTmp.globalGabarit.lowerLimit,
+              labelPoint[index] + newID,
+              textObj,
+              mainMetricPoint[index],
+              metricPoint[index],
+              colorMode,
+              traceBack,
+              traceBorder,
+              positionParameterPoint[index],
+              namePoint[index] + newID,
+              valueMetricPoint[index],
+              drawGraphicMarkerPoint[index],
+              shapePoint[index],
+              sizeWidthPoint[index],
+              sizeHeightPoint[index],
+              '',
+              pos.x,
+              pos.y,
+              colorPoint[index],
+              associateOrientedLinksInPoint[index],
+              associateOrientedLinksOutPoint[index],
+              '',
+              '',
+              '',
+              ''
+            )
+            newID++
+            this.props.options.arrayPoints.push(toLoad)
+          } else {
+            let toLoad: PointClass = new PointClass(
+              newID + 1,
+              linkURLPoint[index],
+              metaPoint[index],
+              gabaritFileTmp.globalGabarit.lowerLimit,
+              labelPoint[index] + newID,
+              textObj,
+              mainMetricPoint[index],
+              [],
+              colorMode,
+              traceBack,
+              traceBorder,
+              positionParameterPoint[index],
+              namePoint[index] + newID,
+              valueMetricPoint[index],
+              drawGraphicMarkerPoint[index],
+              shapePoint[index],
+              sizeWidthPoint[index],
+              sizeHeightPoint[index],
+              '',
+              pos.x,
+              pos.y,
+              colorPoint[index],
+              associateOrientedLinksInPoint[index],
+              associateOrientedLinksOutPoint[index],
+              '',
+              '',
+              '',
+              ''
+            )
+            newID++
+            this.props.options.arrayPoints.push(toLoad)
+          }
+        })
+      }
+    } else {
+      filterPoint.forEach((element, index) => {
+        if (metricPoint.length > 0) {
+          let toLoad: PointClass = new PointClass(
+            newID + 1,
+            linkURLPoint[index],
+            metaPoint[index],
+            gabaritFileTmp.globalGabarit.lowerLimit,
+            labelPoint[index] + newID,
+            textObj,
+            mainMetricPoint[index],
+            metricPoint[index],
+            colorMode,
+            traceBack,
+            traceBorder,
+            positionParameterPoint[index],
+            namePoint[index] + newID,
+            valueMetricPoint[index],
+            drawGraphicMarkerPoint[index],
+            shapePoint[index],
+            sizeWidthPoint[index],
+            sizeHeightPoint[index],
+            '',
+            posPoint[index].x,
+            posPoint[index].y,
+            colorPoint[index],
+            associateOrientedLinksInPoint[index],
+            associateOrientedLinksOutPoint[index],
+            '',
+            '',
+            '',
+            ''
+          )
+          newID++
+          this.props.options.arrayPoints.push(toLoad)
+        } else {
+          let toLoad: PointClass = new PointClass(
+            newID + 1,
+            linkURLPoint[index],
+            metaPoint[index],
+            gabaritFileTmp.globalGabarit.lowerLimit,
+            labelPoint[index] + newID,
+            textObj,
+            mainMetricPoint[index],
+            [],
+            colorMode,
+            traceBack,
+            traceBorder,
+            positionParameterPoint[index],
+            namePoint[index] + newID,
+            valueMetricPoint[index],
+            drawGraphicMarkerPoint[index],
+            shapePoint[index],
+            sizeWidthPoint[index],
+            sizeHeightPoint[index],
+            '',
+            posPoint[index].x,
+            posPoint[index].y,
+            colorPoint[index],
+            associateOrientedLinksInPoint[index],
+            associateOrientedLinksOutPoint[index],
+            '',
+            '',
+            '',
+            ''
+          )
+          newID++
+          this.props.options.arrayPoints.push(toLoad)
+        }
+      })
+    }
 
     /* Link */
     //Template
@@ -467,7 +660,7 @@ class Gabarit extends React.Component<Props, State> {
       pointOutLink.push(link.pointOut)
       regionInLink.push(link.regionIn)
       regionOutLink.push(link.regionOut)
-      isIncurvedLink.push({label: "No", value: Boolean(link.isIncurved.value)})
+      isIncurvedLink.push({ label: 'No', value: Boolean(link.isIncurved.value) })
     })
 
     newID = 0
@@ -485,7 +678,7 @@ class Gabarit extends React.Component<Props, State> {
           metaLink[index],
           gabaritFileTmp.globalGabarit.lowerLimit,
           labelLink[index],
-          gabaritFileTmp.globalGabarit.textObject,
+          textObj,
           mainMetricALink[index],
           metricALink[index],
           colorMode,
@@ -512,7 +705,13 @@ class Gabarit extends React.Component<Props, State> {
           posCLink[index].y,
           isIncurvedLink[index],
           mainMetricBLink[index],
-          metricBLink[index]
+          metricBLink[index],
+          '',
+          '',
+          '',
+          '',
+          '',
+          ''
         )
         newID++
         this.props.options.arrayOrientedLinks.push(toLoad)
@@ -524,7 +723,7 @@ class Gabarit extends React.Component<Props, State> {
           metaLink[index],
           gabaritFileTmp.globalGabarit.lowerLimit,
           labelLink[index],
-          gabaritFileTmp.globalGabarit.textObject,
+          textObj,
           mainMetricALink[index],
           [],
           colorMode,
@@ -551,7 +750,13 @@ class Gabarit extends React.Component<Props, State> {
           posCLink[index].y,
           isIncurvedLink[index],
           mainMetricBLink[index],
-          metricBLink[index]
+          metricBLink[index],
+          '',
+          '',
+          '',
+          '',
+          '',
+          ''
         )
         newID++
         this.props.options.arrayOrientedLinks.push(toLoad)
@@ -562,7 +767,7 @@ class Gabarit extends React.Component<Props, State> {
           metaLink[index],
           gabaritFileTmp.globalGabarit.lowerLimit,
           labelLink[index],
-          gabaritFileTmp.globalGabarit.textObject,
+          textObj,
           mainMetricALink[index],
           metricALink[index],
           colorMode,
@@ -589,7 +794,13 @@ class Gabarit extends React.Component<Props, State> {
           posCLink[index].y,
           isIncurvedLink[index],
           mainMetricBLink[index],
-          []
+          [],
+          '',
+          '',
+          '',
+          '',
+          '',
+          ''
         )
         newID++
         this.props.options.arrayOrientedLinks.push(toLoad)
@@ -600,7 +811,7 @@ class Gabarit extends React.Component<Props, State> {
           metaLink[index],
           gabaritFileTmp.globalGabarit.lowerLimit,
           labelLink[index],
-          gabaritFileTmp.globalGabarit.textObject,
+          textObj,
           mainMetricALink[index],
           [],
           colorMode,
@@ -627,12 +838,77 @@ class Gabarit extends React.Component<Props, State> {
           posCLink[index].y,
           isIncurvedLink[index],
           mainMetricBLink[index],
-          []
+          [],
+          '',
+          '',
+          '',
+          '',
+          '',
+          ''
         )
         newID++
         this.props.options.arrayOrientedLinks.push(toLoad)
       }
     })
+
+    /*  */
+    //Template
+    let filterRegion: Filtred[][] = [] //
+    let posARegion: LabelCoord2D[] = [] //
+    let posBRegion: LabelCoord2D[] = [] //
+    let metaRegion: string[] = [] //
+    let labelRegion: string[] = [] //
+    let positionParameterRegion: PositionParameterClass[] = [] //
+    let mainMetricRegion: Metric[] = [] //
+    let metricRegion: Metric[][] = [] //
+    let linkURLRegion: LinkURLClass[] = []
+    let idSVGRegion: string[] = []
+    let modeRegion: Boolean[] = []
+    let imgRegion: string[] = []
+
+    gabaritFileTmp.templateGabaritRegion.forEach((region, index) => {
+      if (region.labelfix.toString() === 'false') {
+        posARegion.push(coordParse(region.xylabel))
+        posBRegion.push(coordParse(region.xylabel0))
+      } else {
+        posARegion.push(coordParse(region.xylabelfix))
+        posBRegion.push(coordParse(region.xylabelfix0))
+      }
+      filterRegion.push(filterParse(region.filtered))
+      metaRegion.push(region.meta)
+      labelRegion.push(region.label)
+      mainMetricRegion.push({
+        key: region.mainMetric.key,
+        unit: region.mainMetric.unit,
+        format: region.mainMetric.format,
+        keyValue: '',
+        filter: filterRegion[index],
+        refId: gabaritFileTmp.queryID,
+        expr: '',
+        returnQuery: [],
+        manageValue: region.mainMetric.manageValue,
+      })
+      if (mainMetricPoint[index].refId === null) {
+        mainMetricPoint[index].refId = 'A'
+      }
+      region.metrics.forEach(element => {
+        metricRegion[index].push(element)
+      })
+      //metric todo
+      tmpToolTipA = { label: region.positionParameter.tooltipA, value: region.positionParameter.tooltipA }
+      tmpToolTipB = { label: region.positionParameter.tooltipB, value: region.positionParameter.tooltipB }
+      tmpLabelAPosition = coordParse(region.positionParameter.xylabelA)
+      tmpLabelBPosition = coordParse(region.positionParameter.xylabelB)
+      positionParameterRegion.push(
+        new PositionParameterClass(tmpLabelAPosition.x, tmpLabelAPosition.y, tmpLabelBPosition.x, tmpLabelBPosition.y, tmpToolTipA, tmpToolTipB)
+      )
+      linkURLRegion.push(new LinkURLClass(region.linkURL.followRegion, region.linkURL.hoveringTooltipRegion, region.linkURL.hoveringTooltipTex))
+      idSVGRegion.push(region.idSVG)
+      modeRegion.push(Boolean(region.mode))
+      imgRegion.push(region.img)
+    })
+
+    this.props.options.saveGabaritFile[parseInt(onClick.currentTarget.id, 10)].loaded = true
   }
 
   gabaritUrlDisplay = (props: any): JSX.Element => {
@@ -689,11 +965,12 @@ class Gabarit extends React.Component<Props, State> {
             allowCustomValue={false}
             options={this.state.selectQuerryID}
             width={10}
+            value={{ label: this.props.options.saveGabaritFile[index].queryID, value: this.props.options.saveGabaritFile[index].queryID }}
           />
-          <Button id={index.toString()} key={'ButtunLoad' + index.toString()} onClick={this.loaderGabarit.bind(this)}>
+          <Button id={index.toString()} key={'ButtunLoad' + index.toString()} onClick={this.checkLoaderGabarit.bind(this)}>
             Load
           </Button>
-          <Button variant='danger' id={index.toString()} key={'ButtunDel' + index.toString()} onClick={this.gabaritDeletUrl.bind(this)}>
+          <Button variant='danger' id={index.toString()} key={'ButtunDel' + index.toString()} onClick={this.gabaritDeletFile.bind(this)}>
             Del
           </Button>
         </div>

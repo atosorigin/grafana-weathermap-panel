@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { SimpleOptions, Background, Metric } from 'types';
 
-import { PanelProps, SelectableValue, DataFrame } from '@grafana/data';
+import { PanelProps, SelectableValue } from '@grafana/data';
 import { CustomScrollbar, Modal, Button } from '@grafana/ui';
 
 import { PointClass } from 'Models/PointClass';
@@ -134,53 +134,62 @@ export class SimplePanel extends PureComponent<Props, State> {
    * to do
    */
   getCoordinatesToDrawPointWithClick = (event: any) => {
-    const widthPanel: number = parseInt(this.props.options.baseMap.width, 10);
-    const heightPanel: number = parseInt(this.props.options.baseMap.height, 10);
+    // const widthPanel: number = parseInt(this.props.options.baseMap.width, 10);
+    // const heightPanel: number = parseInt(this.props.options.baseMap.height, 10);
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
     const xMin: number = parseInt(initialSpace.xMin, 10);
     const xMax: number = parseInt(initialSpace.xMax, 10);
     const yMin: number = parseInt(initialSpace.yMin, 10);
     const yMax: number = parseInt(initialSpace.yMax, 10);
-    const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
+    //const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
     let positionX = 0;
     let positionY = 0;
+    const clickX = event.nativeEvent.offsetX;
+    const clickY = event.nativeEvent.offsetY;
+    // const widthBackground: number = parseInt(this.props.options.baseMap.width, 10);
+    // const heightBackground: number = parseInt(this.props.options.baseMap.height, 10);
+    const widthInitialSpace: number = xMax - xMin;
+    const heightInitialSpace: number = yMax - yMin;
+    positionX = clickX;
+    positionY = heightInitialSpace - clickY;
+    
 
-    let xMinPx = 0;
-    let xMaxPx = 0;
-    if (!defaultReferentiel) {
-      xMinPx = (xMin + 100) * (widthPanel / 200);
-      xMaxPx = (xMax + 100) * (widthPanel / 200);
-      const widthInitialSpace: number = xMaxPx - xMinPx;
-      if (xMin < 0 && xMax < 0) {
-        positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2 * -1;
-      } else {
-        positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
-      }
-    } else {
-      xMinPx = xMin * (widthPanel / 100);
-      xMaxPx = xMax * (widthPanel / 100);
-      const widthInitialSpace: number = xMaxPx - xMinPx;
-      positionX = Math.round(((event.nativeEvent.offsetX - xMinPx) / widthInitialSpace) * 100);
-    }
+    // let xMinPx = 0;
+    // let xMaxPx = 0;
+    // if (!defaultReferentiel) {
+    //   xMinPx = (xMin + 100) * (widthPanel / 200);
+    //   xMaxPx = (xMax + 100) * (widthPanel / 200);
+    //   const widthInitialSpace: number = xMaxPx - xMinPx;
+    //   if (xMin < 0 && xMax < 0) {
+    //     positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2 * -1;
+    //   } else {
+    //     positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
+    //   }
+    // } else {
+    //   xMinPx = xMin * (widthPanel / 100);
+    //   xMaxPx = xMax * (widthPanel / 100);
+    //   const widthInitialSpace: number = xMaxPx - xMinPx;
+    //   positionX = Math.round(((event.nativeEvent.offsetX - xMinPx) / widthInitialSpace) * 100);
+    // }
 
-    let yMinPx = 0;
-    let yMaxPx = 0;
-    if (!defaultReferentiel) {
-      if (yMin < 0 && yMax < 0) {
-        yMinPx = (yMax + 100) * (heightPanel / 200);
-        yMaxPx = (yMin + 100) * (heightPanel / 200);
-      } else {
-        yMinPx = (yMin + 100) * (heightPanel / 200);
-        yMaxPx = (yMax + 100) * (heightPanel / 200);
-      }
-      const heightInitialSpace: number = yMaxPx - yMinPx;
-      positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
-    } else {
-      yMinPx = yMin * (heightPanel / 100);
-      yMaxPx = yMax * (heightPanel / 100);
-      const heightInitialSpace: number = yMaxPx - yMinPx;
-      positionY = 100 - Math.round(((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace) * 100);
-    }
+    // let yMinPx = 0;
+    // let yMaxPx = 0;
+    // if (!defaultReferentiel) {
+    //   if (yMin < 0 && yMax < 0) {
+    //     yMinPx = (yMax + 100) * (heightPanel / 200);
+    //     yMaxPx = (yMin + 100) * (heightPanel / 200);
+    //   } else {
+    //     yMinPx = (yMin + 100) * (heightPanel / 200);
+    //     yMaxPx = (yMax + 100) * (heightPanel / 200);
+    //   }
+    //   const heightInitialSpace: number = yMaxPx - yMinPx;
+    //   positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+    // } else {
+    //   yMinPx = yMin * (heightPanel / 100);
+    //   yMaxPx = yMax * (heightPanel / 100);
+    //   const heightInitialSpace: number = yMaxPx - yMinPx;
+    //   positionY = 100 - Math.round(((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace) * 100);
+    // }
 
     if (
       event.nativeEvent.target.id === 'initialSpace' ||
@@ -189,7 +198,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG ||
       event.nativeEvent.target.id === this.props.options.baseMap.idSVG
     ) {
-      this.createPointToClick(positionX, positionY);
+      this.createPointToClick(positionX, positionY, widthInitialSpace, heightInitialSpace);
     }
   };
 
@@ -206,7 +215,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * to do
    */
-  createPointToClick = (x: number, y: number) => {
+  createPointToClick = (x: number, y: number, widthInitialSpace: number, heightInitialSpace: number) => {
     const id: number = this.defineIdPoint();
     const initTextObject: TextObject = new TextObject(
       '',
@@ -271,7 +280,11 @@ export class SimplePanel extends PureComponent<Props, State> {
       y.toString(),
       'black',
       [],
-      []
+      [],
+      widthInitialSpace.toString(),
+      heightInitialSpace.toString(),
+      x.toString(),
+      y.toString()
     );
 
     const newArrayPoint: PointClass[] = this.props.options.arrayPoints;
@@ -285,9 +298,9 @@ export class SimplePanel extends PureComponent<Props, State> {
 
     this.props.options.newPoint = true;
 
-    setTimeout(() => {
-      this.displayPoint();
-    }, 100);
+    // setTimeout(() => {
+    //   this.displayPoint(true);
+    // }, 100);
   };
 
   /**
@@ -296,18 +309,41 @@ export class SimplePanel extends PureComponent<Props, State> {
   displayPoint() {
     const mapItems: JSX.Element[] = [];
     this.props.options.arrayPoints.forEach((line: PointClass) => {
-      //console.log(line);
       const valueMainMetric = this.getValuesMainMetricPoint(line).toString();
       this.updatePositionOrientedLink(line);
       const valuesAuxiliaryMetrics: string[] = this.getValuesAuxiliaryMetricsPoint(line);
+      const ratioX = parseInt(line.positionXDefault, 10) / parseInt(line.widthInitialSpaceDefault, 10);
+      const ratioY = (parseInt(line.heightInitialSpaceDefault, 10) - parseInt(line.positionYDefault, 10)) / parseInt(line.heightInitialSpaceDefault, 10);
+      const xMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
+      const xMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
+      const yMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
+      const yMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10);
+      const widthInitialSpace: number = xMaxInitialSpace - xMinInitialSpace;
+      const heightInitialSpace: number = yMaxInitialSpace - yMinInitialSpace;
+      let x;
+
+      if (parseInt(line.widthInitialSpaceDefault, 10) !== widthInitialSpace) {
+        x = xMinInitialSpace + widthInitialSpace * ratioX;
+      } else {
+        x = widthInitialSpace * parseInt(line.positionShapeX, 10) / parseInt(line.widthInitialSpaceDefault, 10);
+      }
+
+      let y = parseInt(this.props.options.baseMap.height, 10) - yMaxInitialSpace + heightInitialSpace * ratioY;
+
+      line.positionShapeX = x.toString();
+      line.positionShapeY = y.toString();
+      // console.log(x)
+      // console.log(y)
+      // console.log(line)
+
       const item: JSX.Element = (
         <DrawPoint
           key={'point' + line.id.toString()}
           drawGraphicMarker={line.drawGraphicMarker}
           shape={line.shape}
           size={line.sizeWidth}
-          positionShapeX={line.positionShapeX}
-          positionShapeY={line.positionShapeY}
+          positionShapeX={x.toString()}
+          positionShapeY={y.toString()}
           label={line.label}
           widthImage={parseInt(this.props.options.baseMap.width, 10)}
           heightImage={parseInt(this.props.options.baseMap.height, 10)}
@@ -334,6 +370,10 @@ export class SimplePanel extends PureComponent<Props, State> {
           linkUrl={line.linkURL}
           buttonAddLinkIsActive={this.state.buttonAddLinkIsActive}
           buttonAddIncurvedLinkIsActive={this.state.buttonAddIncurvedLinkIsActive}
+          widthInitialSpaceDefault={line.widthInitialSpaceDefault}
+          heightInitialSpaceDefault={line.heightInitialSpaceDefault}
+          // positionXDefault={line.positionXDefault}
+          // positionYDefault={line.positionYDefault}
         />
       );
       mapItems.push(item);
@@ -435,48 +475,51 @@ export class SimplePanel extends PureComponent<Props, State> {
     const objectIn: any = coordinates[1];
     const objectOut: any = coordinates[2];
     const pointC: any = coordinates[3];
-    const heightPanel: number = parseInt(this.props.options.baseMap.height, 10);
-    const widthPanel: number = parseInt(this.props.options.baseMap.width, 10);
+    // const heightPanel: number = parseInt(this.props.options.baseMap.height, 10);
+    // const widthPanel: number = parseInt(this.props.options.baseMap.width, 10);
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
     const xMin: number = parseInt(initialSpace.xMin, 10);
     const xMax: number = parseInt(initialSpace.xMax, 10);
     const yMin: number = parseInt(initialSpace.yMin, 10);
     const yMax: number = parseInt(initialSpace.yMax, 10);
-    const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
-    let positionX = 0;
-    let positionY = 0;
+    //const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
+    // const widthInitialSpace: number = parseInt(this.props.options.baseMap.width, 10);
+    // const heightInitialSpace: number = parseInt(this.props.options.baseMap.height, 10);
+    const widthInitialSpace: number = xMax - xMin;
+    const heightInitialSpace: number = yMax - yMin;
+    let positionX = event.nativeEvent.offsetX;
+    let positionY = heightInitialSpace - event.nativeEvent.offsetY;
+    // let xMinPx = 0;
+    // let xMaxPx = 0;
+    // if (!defaultReferentiel) {
+    //   xMinPx = (xMin + 100) * (widthPanel / 200);
+    //   xMaxPx = (xMax + 100) * (widthPanel / 200);
+    //   // if (xMin < 0 && xMax < 0) {
+    //   //   xMinPx = (xMax + 100) * (widthPanel / 200);
+    //   //   xMaxPx = (xMin + 100) * (widthPanel / 200);
+    //   // }
+    // } else {
+    //   xMinPx = xMin * (widthPanel / 100);
+    //   xMaxPx = xMax * (widthPanel / 100);
+    // }
 
-    let xMinPx = 0;
-    let xMaxPx = 0;
-    if (!defaultReferentiel) {
-      xMinPx = (xMin + 100) * (widthPanel / 200);
-      xMaxPx = (xMax + 100) * (widthPanel / 200);
-      // if (xMin < 0 && xMax < 0) {
-      //   xMinPx = (xMax + 100) * (widthPanel / 200);
-      //   xMaxPx = (xMin + 100) * (widthPanel / 200);
-      // }
-    } else {
-      xMinPx = xMin * (widthPanel / 100);
-      xMaxPx = xMax * (widthPanel / 100);
-    }
+    // let yMinPx = 0;
+    // let yMaxPx = 0;
+    // if (!defaultReferentiel) {
+    //   if (yMin < 0 && yMax < 0) {
+    //     yMinPx = (yMax + 100) * (heightPanel / 200);
+    //     yMaxPx = (yMin + 100) * (heightPanel / 200);
+    //   } else {
+    //     yMinPx = (yMin + 100) * (heightPanel / 200);
+    //     yMaxPx = (yMax + 100) * (heightPanel / 200);
+    //   }
+    // } else {
+    //   yMinPx = yMin * (heightPanel / 100);
+    //   yMaxPx = yMax * (heightPanel / 100);
+    // }
 
-    let yMinPx = 0;
-    let yMaxPx = 0;
-    if (!defaultReferentiel) {
-      if (yMin < 0 && yMax < 0) {
-        yMinPx = (yMax + 100) * (heightPanel / 200);
-        yMaxPx = (yMin + 100) * (heightPanel / 200);
-      } else {
-        yMinPx = (yMin + 100) * (heightPanel / 200);
-        yMaxPx = (yMax + 100) * (heightPanel / 200);
-      }
-    } else {
-      yMinPx = yMin * (heightPanel / 100);
-      yMaxPx = yMax * (heightPanel / 100);
-    }
-
-    const widthInitialSpace: number = xMaxPx - xMinPx;
-    const heightInitialSpace: number = yMaxPx - yMinPx;
+    // const widthInitialSpace: number = xMaxPx - xMinPx;
+    // const heightInitialSpace: number = yMaxPx - yMinPx;
 
     if (
       event.nativeEvent.target.id === 'initialSpace' ||
@@ -485,22 +528,22 @@ export class SimplePanel extends PureComponent<Props, State> {
       event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG ||
       event.nativeEvent.target.id === this.props.options.baseMap.idSVG
     ) {
-      if (!defaultReferentiel) {
-        positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
-      } else {
-        positionX = Math.round(((event.nativeEvent.offsetX - xMinPx) / widthInitialSpace) * 100);
-      }
+      // if (!defaultReferentiel) {
+      //   positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
+      // } else {
+      //   positionX = Math.round(((event.nativeEvent.offsetX - xMinPx) / widthInitialSpace) * 100);
+      // }
 
-      if (!defaultReferentiel) {
-        if (yMax < 0) {
-          positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
-        } else {
-          positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
-        }
-      } else {
-        positionY = 100 - Math.round(((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace) * 100);
-        //console.log(positionY);
-      }
+      // if (!defaultReferentiel) {
+      //   if (yMax < 0) {
+      //     positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+      //   } else {
+      //     positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+      //   }
+      // } else {
+      //   positionY = 100 - Math.round(((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace) * 100);
+      //   //console.log(positionY);
+      // }
 
       //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
       // if (yMax > 0 && yMax < 100) {
@@ -509,15 +552,17 @@ export class SimplePanel extends PureComponent<Props, State> {
 
       if (coordinates[0].id === 0) {
         objectIn.x = positionX;
-        objectIn.y = yMin < 0 ? positionY * -1 : positionY;
+        //objectIn.y = yMin < 0 ? positionY * -1 : positionY;
+        objectIn.y = positionY;
         coordinates[0].id++;
       } else if (coordinates[0].id === 1) {
         objectOut.x = positionX;
-        objectOut.y = yMin < 0 ? positionY * -1 : positionY;
+        //objectOut.y = yMin < 0 ? positionY * -1 : positionY;
+        objectOut.y = positionY;
         pointC.x = ((parseInt(objectIn.x, 10) + parseInt(objectOut.x, 10)) / 2).toString();
         pointC.y = ((parseInt(objectIn.y, 10) + parseInt(objectOut.y, 10)) / 2).toString();
         coordinates[0].id = 0;
-        this.createOrientedLinkToClick({ label: 'No', value: false });
+        this.createOrientedLinkToClick({ label: 'No', value: false }, widthInitialSpace.toString(), heightInitialSpace.toString());
         this.resetCoordinatesToDrawLinkWithClick();
       }
     } else if (event.nativeEvent.target.id.startsWith('point')) {
@@ -543,8 +588,7 @@ export class SimplePanel extends PureComponent<Props, State> {
             pointC.x = ((parseInt(objectIn.x, 10) + parseInt(objectOut.x, 10)) / 2).toString();
             pointC.y = ((parseInt(objectIn.y, 10) + parseInt(objectOut.y, 10)) / 2).toString();
             coordinates[0].id = 0;
-
-            this.createOrientedLinkToClick({ label: 'No', value: false });
+            this.createOrientedLinkToClick({ label: 'No', value: false }, '', '');
             this.resetCoordinatesToDrawLinkWithClick();
           }
         }
@@ -552,7 +596,6 @@ export class SimplePanel extends PureComponent<Props, State> {
     } else {
       const arrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
       //let indexRegion = 0;
-
       arrayRegion.forEach((region: RegionClass) => {
         const xMin: number = parseInt(region.coords.xMin, 10);
         const xMax: number = parseInt(region.coords.xMax, 10);
@@ -563,7 +606,6 @@ export class SimplePanel extends PureComponent<Props, State> {
           const id: number = parseInt(event.nativeEvent.target.id.charAt(6) + event.nativeEvent.target.id.charAt(7), 10);
           if (id === region.id) {
             const coordinates = this.props.options.coordinatesToDrawLinkWithClick;
-
             positionX = (xMin + xMax) / 2;
             positionY = (yMax + yMin) / 2;
             if (coordinates[0].id === 0) {
@@ -580,7 +622,7 @@ export class SimplePanel extends PureComponent<Props, State> {
               pointC.x = ((parseInt(objectIn.x, 10) + parseInt(objectOut.x, 10)) / 2).toString();
               pointC.y = ((parseInt(objectIn.y, 10) + parseInt(objectOut.y, 10)) / 2).toString();
               coordinates[0].id = 0;
-              this.createOrientedLinkToClick({ label: 'No', value: false });
+              this.createOrientedLinkToClick({ label: 'No', value: false }, '', '');
               this.resetCoordinatesToDrawLinkWithClick();
             }
           }
@@ -618,7 +660,7 @@ export class SimplePanel extends PureComponent<Props, State> {
               pointC.x = ((parseInt(objectIn.x, 10) + parseInt(objectOut.x, 10)) / 2).toString();
               pointC.y = ((parseInt(objectIn.y, 10) + parseInt(objectOut.y, 10)) / 2).toString();
               coordinates[0].id = 0;
-              this.createOrientedLinkToClick({ label: 'No', value: false });
+              this.createOrientedLinkToClick({ label: 'No', value: false }, '', '');
               this.resetCoordinatesToDrawLinkWithClick();
             }
           }
@@ -644,7 +686,7 @@ export class SimplePanel extends PureComponent<Props, State> {
               pointC.x = ((parseInt(objectIn.x, 10) + parseInt(objectOut.x, 10)) / 2).toString();
               pointC.y = ((parseInt(objectIn.y, 10) + parseInt(objectOut.y, 10)) / 2).toString();
               coordinates[0].id = 0;
-              this.createOrientedLinkToClick({ label: 'No', value: false });
+              this.createOrientedLinkToClick({ label: 'No', value: false }, '', '');
               this.resetCoordinatesToDrawLinkWithClick();
             }
           }
@@ -659,48 +701,50 @@ export class SimplePanel extends PureComponent<Props, State> {
     const objectIn: any = coordinates[1];
     const objectOut: any = coordinates[2];
     const pointC: any = coordinates[3];
-    const heightPanel: number = parseInt(this.props.options.baseMap.height, 10);
-    const widthPanel: number = parseInt(this.props.options.baseMap.width, 10);
+    // const heightPanel: number = parseInt(this.props.options.baseMap.height, 10);
+    // const widthPanel: number = parseInt(this.props.options.baseMap.width, 10);
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
     const xMin: number = parseInt(initialSpace.xMin, 10);
     const xMax: number = parseInt(initialSpace.xMax, 10);
     const yMin: number = parseInt(initialSpace.yMin, 10);
     const yMax: number = parseInt(initialSpace.yMax, 10);
-    const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
-    let positionX = 0;
-    let positionY = 0;
+    //const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
+    const widthInitialSpace: number = xMax - xMin;
+    const heightInitialSpace: number = yMax - yMin;
+    let positionX = event.nativeEvent.offsetX;
+    let positionY = heightInitialSpace - event.nativeEvent.offsetY;
 
-    let xMinPx = 0;
-    let xMaxPx = 0;
-    if (!defaultReferentiel) {
-      xMinPx = (xMin + 100) * (widthPanel / 200);
-      xMaxPx = (xMax + 100) * (widthPanel / 200);
-      // if (xMin < 0 && xMax < 0) {
-      //   xMinPx = (xMax + 100) * (widthPanel / 200);
-      //   xMaxPx = (xMin + 100) * (widthPanel / 200);
-      // }
-    } else {
-      xMinPx = xMin * (widthPanel / 100);
-      xMaxPx = xMax * (widthPanel / 100);
-    }
+    // let xMinPx = 0;
+    // let xMaxPx = 0;
+    // if (!defaultReferentiel) {
+    //   xMinPx = (xMin + 100) * (widthPanel / 200);
+    //   xMaxPx = (xMax + 100) * (widthPanel / 200);
+    //   // if (xMin < 0 && xMax < 0) {
+    //   //   xMinPx = (xMax + 100) * (widthPanel / 200);
+    //   //   xMaxPx = (xMin + 100) * (widthPanel / 200);
+    //   // }
+    // } else {
+    //   xMinPx = xMin * (widthPanel / 100);
+    //   xMaxPx = xMax * (widthPanel / 100);
+    // }
 
-    let yMinPx = 0;
-    let yMaxPx = 0;
-    if (!defaultReferentiel) {
-      if (yMin < 0 && yMax < 0) {
-        yMinPx = (yMax + 100) * (heightPanel / 200);
-        yMaxPx = (yMin + 100) * (heightPanel / 200);
-      } else {
-        yMinPx = (yMin + 100) * (heightPanel / 200);
-        yMaxPx = (yMax + 100) * (heightPanel / 200);
-      }
-    } else {
-      yMinPx = yMin * (heightPanel / 100);
-      yMaxPx = yMax * (heightPanel / 100);
-    }
+    // let yMinPx = 0;
+    // let yMaxPx = 0;
+    // if (!defaultReferentiel) {
+    //   if (yMin < 0 && yMax < 0) {
+    //     yMinPx = (yMax + 100) * (heightPanel / 200);
+    //     yMaxPx = (yMin + 100) * (heightPanel / 200);
+    //   } else {
+    //     yMinPx = (yMin + 100) * (heightPanel / 200);
+    //     yMaxPx = (yMax + 100) * (heightPanel / 200);
+    //   }
+    // } else {
+    //   yMinPx = yMin * (heightPanel / 100);
+    //   yMaxPx = yMax * (heightPanel / 100);
+    // }
 
-    const widthInitialSpace: number = xMaxPx - xMinPx;
-    const heightInitialSpace: number = yMaxPx - yMinPx;
+    // const widthInitialSpace: number = xMaxPx - xMinPx;
+    // const heightInitialSpace: number = yMaxPx - yMinPx;
 
     if (
       event.nativeEvent.target.id === 'mainPanel' ||
@@ -709,21 +753,21 @@ export class SimplePanel extends PureComponent<Props, State> {
       event.nativeEvent.target.id === 'oct' + this.props.options.baseMap.idSVG ||
       event.nativeEvent.target.id === this.props.options.baseMap.idSVG
     ) {
-      if (!defaultReferentiel) {
-        positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
-      } else {
-        positionX = Math.round(((event.nativeEvent.offsetX - xMinPx) / widthInitialSpace) * 100);
-      }
+      // if (!defaultReferentiel) {
+      //   positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
+      // } else {
+      //   positionX = Math.round(((event.nativeEvent.offsetX - xMinPx) / widthInitialSpace) * 100);
+      // }
 
-      if (!defaultReferentiel) {
-        if (yMax < 0) {
-          positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
-        } else {
-          positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
-        }
-      } else {
-        positionY = 100 - Math.round(((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace) * 100);
-      }
+      // if (!defaultReferentiel) {
+      //   if (yMax < 0) {
+      //     positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+      //   } else {
+      //     positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+      //   }
+      // } else {
+      //   positionY = 100 - Math.round(((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace) * 100);
+      // }
 
       // if (yMax > 0 && yMax < 100) {
       //   positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
@@ -731,17 +775,20 @@ export class SimplePanel extends PureComponent<Props, State> {
 
       if (coordinates[0].id === 0) {
         objectIn.x = positionX;
-        objectIn.y = yMin < 0 ? positionY * -1 : positionY;
+        // objectIn.y = yMin < 0 ? positionY * -1 : positionY;
+        objectIn.y = positionY;
         coordinates[0].id++;
       } else if (coordinates[0].id === 1) {
         objectOut.x = positionX;
-        objectOut.y = yMin < 0 ? positionY * -1 : positionY;
+        // objectOut.y = yMin < 0 ? positionY * -1 : positionY;
+        objectOut.y = positionY;
         coordinates[0].id++;
       } else if (coordinates[0].id === 2) {
         pointC.x = positionX;
-        pointC.y = yMin < 0 ? positionY * -1 : positionY;
+        //pointC.y = yMin < 0 ? positionY * -1 : positionY;
+        pointC.y = positionY;
         coordinates[0].id = 0;
-        this.createOrientedLinkToClick({ label: 'Yes', value: true });
+        this.createOrientedLinkToClick({ label: 'Yes', value: true }, widthInitialSpace.toString(), heightInitialSpace.toString());
         this.resetCoordinatesToDrawLinkWithClick();
       }
     } else if (event.nativeEvent.target.id.startsWith('point')) {
@@ -769,7 +816,7 @@ export class SimplePanel extends PureComponent<Props, State> {
             pointC.x = point.positionShapeX;
             pointC.y = point.positionShapeY;
             coordinates[0].id = 0;
-            this.createOrientedLinkToClick({ label: 'Yes', value: true });
+            this.createOrientedLinkToClick({ label: 'Yes', value: true }, '', '');
             this.resetCoordinatesToDrawLinkWithClick();
           }
         }
@@ -805,7 +852,7 @@ export class SimplePanel extends PureComponent<Props, State> {
               pointC.x = positionX;
               pointC.y = positionY;
               coordinates[0].id = 0;
-              this.createOrientedLinkToClick({ label: 'Yes', value: true });
+              this.createOrientedLinkToClick({ label: 'Yes', value: true }, '', '');
               this.resetCoordinatesToDrawLinkWithClick();
             }
           }
@@ -842,7 +889,7 @@ export class SimplePanel extends PureComponent<Props, State> {
               pointC.x = positionX;
               pointC.y = positionY;
               coordinates[0].id = 0;
-              this.createOrientedLinkToClick({ label: 'Yes', value: true });
+              this.createOrientedLinkToClick({ label: 'Yes', value: true }, '', '');
               this.resetCoordinatesToDrawLinkWithClick();
             }
           }
@@ -870,7 +917,7 @@ export class SimplePanel extends PureComponent<Props, State> {
               pointC.x = positionX;
               pointC.y = positionY;
               coordinates[0].id = 0;
-              this.createOrientedLinkToClick({ label: 'Yes', value: true });
+              this.createOrientedLinkToClick({ label: 'Yes', value: true }, '', '');
               this.resetCoordinatesToDrawLinkWithClick();
             }
           }
@@ -895,7 +942,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * to do
    */
-  createOrientedLinkToClick = (isIncurved: SelectableValue<boolean>) => {
+  createOrientedLinkToClick = (isIncurved: SelectableValue<boolean>, widthInitialSpace: string, heightInitialSpace: string) => {
     const coordinates = this.props.options.coordinatesToDrawLinkWithClick;
     const id: number = this.defineIdOrientedLink();
     const name: string = 'orientedLink' + id.toString();
@@ -983,7 +1030,13 @@ export class SimplePanel extends PureComponent<Props, State> {
         refId: '',
         manageValue: 'avg',
       },
-      []
+      [],
+      widthInitialSpace,
+      heightInitialSpace,
+      objectIn.x.toString(),
+      objectIn.y.toString(),
+      objectOut.x.toString(),
+      objectOut.y.toString(),
     );
     const newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
     newArrayOrientedLink.push(newOrientedLink);
@@ -1019,15 +1072,47 @@ export class SimplePanel extends PureComponent<Props, State> {
       this.getValuesMainMetricOrientedLinkB(orientedLink);
       const valuesAuxiliaryMetrics: string[] = this.getValuesAuxiliaryMetricsOrientedLink(orientedLink);
       const valuesAuxiliaryMetricsB: string[] = this.getValuesAuxiliaryMetricsOrientedLinkB(orientedLink);
+      const ratioXA = parseInt(orientedLink.pointAPositionXDefault, 10) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
+      const ratioYA = (parseInt(orientedLink.heightInitialSpaceDefault, 10) - parseInt(orientedLink.pointAPositionYDefault, 10)) / parseInt(orientedLink.heightInitialSpaceDefault, 10);
+      const ratioXB = parseInt(orientedLink.pointBPositionXDefault, 10) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
+      const ratioYB = (parseInt(orientedLink.heightInitialSpaceDefault, 10) - parseInt(orientedLink.pointBPositionYDefault, 10)) / parseInt(orientedLink.heightInitialSpaceDefault, 10);
+      const xMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
+      const xMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
+      const yMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
+      const yMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10);
+      const widthInitialSpace: number = xMaxInitialSpace - xMinInitialSpace;
+      const heightInitialSpace: number = yMaxInitialSpace - yMinInitialSpace;
+      let xA;
+      let xB;
+      console.log(orientedLink)
+
+      if (parseInt(orientedLink.widthInitialSpaceDefault, 10) !== widthInitialSpace) {
+        xA = xMinInitialSpace + widthInitialSpace * ratioXA;
+        xB = xMinInitialSpace + widthInitialSpace * ratioXB;
+      } else {
+        xA = widthInitialSpace * parseInt(orientedLink.pointAPositionX, 10) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
+        xB = widthInitialSpace * parseInt(orientedLink.pointBPositionX, 10) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
+      }
+
+      let yA = parseInt(this.props.options.baseMap.height, 10) - yMaxInitialSpace + heightInitialSpace * ratioYA;
+      let yB = parseInt(this.props.options.baseMap.height, 10) - yMaxInitialSpace + heightInitialSpace * ratioYB;
+
+      orientedLink.pointAPositionX = xA.toString();
+      orientedLink.pointBPositionX = xB.toString();
+      orientedLink.pointAPositionY = yA.toString();
+      orientedLink.pointBPositionY = yB.toString();
+      console.log(yA)
+      console.log(yB)
+
       item = (
         <DrawOrientedLink
           key={'orientedLink' + orientedLink.id.toString()}
           id={orientedLink.id.toString()}
           orientationLink={orientedLink.orientationLink.value || ''}
-          pointAPositionX={orientedLink.pointAPositionX}
-          pointAPositionY={orientedLink.pointAPositionY}
-          pointBPositionX={orientedLink.pointBPositionX}
-          pointBPositionY={orientedLink.pointBPositionY}
+          pointAPositionX={xA.toString()}
+          pointAPositionY={yA.toString()}
+          pointBPositionX={xB.toString()}
+          pointBPositionY={yB.toString()}
           colorA={orientedLink.colorCoordinateA}
           colorB={orientedLink.colorCoordinateB}
           associatePointIn={orientedLink.pointIn}
@@ -1066,6 +1151,10 @@ export class SimplePanel extends PureComponent<Props, State> {
           sizePolice={this.props.options.display.size}
           linkUrl={orientedLink.linkURL}
           size={orientedLink.size}
+          widthInitialSpaceDefault={orientedLink.widthInitialSpaceDefault}
+          heightInitialSpaceDefault={orientedLink.heightInitialSpaceDefault}
+          // positionXDefault={orientedLink.positionXDefault}
+          // positionYDefault={orientedLink.positionYDefault}
         />
       );
       mapItems.push(item);
@@ -1120,76 +1209,76 @@ export class SimplePanel extends PureComponent<Props, State> {
   /**
    * to do
    */
-  getValuesMainMetric(mainMetric: Metric, orientedLink?: OrientedLinkClass, point?: PointClass, isBidirectionnal?: boolean) {
-    let valueMainMetric = 0;
-    let totalValuesCount = 0;
-    const key: string = mainMetric.key;
-    const keyValue: string = mainMetric.keyValue;
-    if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
-      mainMetric.returnQuery.forEach((line: DataFrame) => {
-        if (line.fields[0].labels) {
-          if (key !== '' && keyValue !== '') {
-            if (line.fields[0].labels[key] === keyValue) {
-              const countValues: number = line.fields[0].values.length;
-              for (let i = 0; i < countValues; i++) {
-                if (line.fields[0].values.get(i)) {
-                  totalValuesCount++;
-                  valueMainMetric += line.fields[0].values.get(i);
-                }
-              }
-            }
-          } else {
-            const countValues: number = line.fields[0].values.length;
-            for (let i = 0; i < countValues; i++) {
-              if (line.fields[0].values.get(i)) {
-                totalValuesCount++;
-                valueMainMetric += line.fields[0].values.get(i);
-              }
-            }
-          }
-        }
-      });
-      if (orientedLink) {
-        if (!isBidirectionnal) {
-          if (mainMetric.manageValue === 'avg') {
-            orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
-          } else if (mainMetric.manageValue === 'sum') {
-            orientedLink.valueMainMetricA = valueMainMetric.toString();
-          } else if (mainMetric.manageValue === 'err') {
-            if (totalValuesCount > 1) {
-              orientedLink.valueMainMetricA = 'error';
-            } else {
-              orientedLink.valueMainMetricA = valueMainMetric.toString();
-            }
-          }
-        } else {
-          if (mainMetric.manageValue === 'avg') {
-            orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
-          } else if (mainMetric.manageValue === 'sum') {
-            orientedLink.valueMainMetricB = valueMainMetric.toString();
-          } else if (mainMetric.manageValue === 'err') {
-            if (totalValuesCount > 1) {
-              orientedLink.valueMainMetricB = 'error';
-            } else {
-              orientedLink.valueMainMetricB = valueMainMetric.toString();
-            }
-          }
-        }
-      } else if (point) {
-        if (mainMetric.manageValue === 'avg') {
-          point.valueMetric = (valueMainMetric / totalValuesCount).toString();
-        } else if (mainMetric.manageValue === 'sum') {
-          point.valueMetric = valueMainMetric.toString();
-        } else if (mainMetric.manageValue === 'err') {
-          if (totalValuesCount > 1) {
-            point.valueMetric = 'error';
-          } else {
-            point.valueMetric = valueMainMetric.toString();
-          }
-        }
-      }
-    }
-  }
+  // getValuesMainMetric(mainMetric: Metric, orientedLink?: OrientedLinkClass, point?: PointClass, isBidirectionnal?: boolean) {
+  //   let valueMainMetric = 0;
+  //   let totalValuesCount = 0;
+  //   const key: string = mainMetric.key;
+  //   const keyValue: string = mainMetric.keyValue;
+  //   if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
+  //     mainMetric.returnQuery.forEach((line: DataFrame) => {
+  //       if (line.fields[0].labels) {
+  //         if (key !== '' && keyValue !== '') {
+  //           if (line.fields[0].labels[key] === keyValue) {
+  //             const countValues: number = line.fields[0].values.length;
+  //             for (let i = 0; i < countValues; i++) {
+  //               if (line.fields[0].values.get(i)) {
+  //                 totalValuesCount++;
+  //                 valueMainMetric += line.fields[0].values.get(i);
+  //               }
+  //             }
+  //           }
+  //         } else {
+  //           const countValues: number = line.fields[0].values.length;
+  //           for (let i = 0; i < countValues; i++) {
+  //             if (line.fields[0].values.get(i)) {
+  //               totalValuesCount++;
+  //               valueMainMetric += line.fields[0].values.get(i);
+  //             }
+  //           }
+  //         }
+  //       }
+  //     });
+  //     if (orientedLink) {
+  //       if (!isBidirectionnal) {
+  //         if (mainMetric.manageValue === 'avg') {
+  //           orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
+  //         } else if (mainMetric.manageValue === 'sum') {
+  //           orientedLink.valueMainMetricA = valueMainMetric.toString();
+  //         } else if (mainMetric.manageValue === 'err') {
+  //           if (totalValuesCount > 1) {
+  //             orientedLink.valueMainMetricA = 'error';
+  //           } else {
+  //             orientedLink.valueMainMetricA = valueMainMetric.toString();
+  //           }
+  //         }
+  //       } else {
+  //         if (mainMetric.manageValue === 'avg') {
+  //           orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
+  //         } else if (mainMetric.manageValue === 'sum') {
+  //           orientedLink.valueMainMetricB = valueMainMetric.toString();
+  //         } else if (mainMetric.manageValue === 'err') {
+  //           if (totalValuesCount > 1) {
+  //             orientedLink.valueMainMetricB = 'error';
+  //           } else {
+  //             orientedLink.valueMainMetricB = valueMainMetric.toString();
+  //           }
+  //         }
+  //       }
+  //     } else if (point) {
+  //       if (mainMetric.manageValue === 'avg') {
+  //         point.valueMetric = (valueMainMetric / totalValuesCount).toString();
+  //       } else if (mainMetric.manageValue === 'sum') {
+  //         point.valueMetric = valueMainMetric.toString();
+  //       } else if (mainMetric.manageValue === 'err') {
+  //         if (totalValuesCount > 1) {
+  //           point.valueMetric = 'error';
+  //         } else {
+  //           point.valueMetric = valueMainMetric.toString();
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   getValuesAuxiliaryMetricsPoint = (point: PointClass): string[] => {
     reqMetricAuxPoint(point, this.props);
@@ -1665,12 +1754,33 @@ export class SimplePanel extends PureComponent<Props, State> {
     } else {
       this.chargeRegion();
     }
+
+    //Set value initialSpace with width and height of background
+    this.props.options.coordinateSpaceInitial.coordinate.xMax = this.props.options.baseMap.width;
+    this.props.options.coordinateSpaceInitial.coordinate.yMax = this.props.options.baseMap.height;
+
     this.updateButtonCss();
   };
 
   componentDidUpdate(prevProps: Props) {
     if (this.state.currentImage !== this.props.options.baseMap.image) {
       this.componentDidMount();
+    }
+    //Set width initialSpace if new width in display
+    if (
+      this.props.options.baseMap.width !== this.props.options.coordinateSpaceInitial.coordinate.xMax &&
+      !this.props.options.updateOnlyInitialSpace
+    ) {
+      //console.log('newWidth');
+      this.props.options.coordinateSpaceInitial.coordinate.xMax = this.props.options.baseMap.width;
+    }
+    //Set height initialSpace if new height in display
+    if (
+      this.props.options.baseMap.height !== this.props.options.coordinateSpaceInitial.coordinate.yMax &&
+      !this.props.options.updateOnlyInitialSpace
+    ) {
+      //console.log('newHeight');
+      this.props.options.coordinateSpaceInitial.coordinate.yMax = this.props.options.baseMap.height;
     }
     // if (this.props.options.baseMap.image !== prevProps.options.baseMap.image) {
     //   this.componentDidMount();
@@ -1946,6 +2056,10 @@ export class SimplePanel extends PureComponent<Props, State> {
       top: '15%',
       left: 0,
     } as React.CSSProperties;
+    // const xMinInitialSpace = parseInt(options.coordinateSpaceInitial.coordinate.xMin, 10);
+    // const xMaxInitialSpace = parseInt(options.coordinateSpaceInitial.coordinate.xMax, 10);
+    // const yMinInitialSpace = parseInt(options.coordinateSpaceInitial.coordinate.yMin, 10);
+    // const yMaxInitialSpace = parseInt(options.coordinateSpaceInitial.coordinate.yMax, 10);
     let mapItems: JSX.Element[];
 
     mapItems = options.regionCoordinateSpace.map((line: RegionClass, index: number) => (
@@ -1961,6 +2075,8 @@ export class SimplePanel extends PureComponent<Props, State> {
         //isEnabled={true}
         buttonAddLinkIsActive={this.state.buttonAddLinkIsActive}
         buttonAddIncurvedLinkIsActive={this.state.buttonAddIncurvedLinkIsActive}
+        widthInitialSpaceDefault={line.widthInitialSpaceDefault}
+        heightInitialSpaceDefault={line.heightInitialSpaceDefault}
       />
     ));
     return <ul style={styleRegion}>{mapItems}</ul>;

@@ -20,17 +20,65 @@ The recommended software to make a background image will be [Inkscape](https://i
   - Windows
   - Mac
 
-  the file will be saved as **Simple SVG** or **SVG Inkscape**.
+#### The properties
+
+![proprietes inkscape](../../screenshots/appendix/inkscape-proprietes.jpg)
+
+When starting the software, you must determine the dimensions of the document, which will be used as the initialization space. To do this, the numerical unit of measurement defined will be the pixel (px).
+
+This parameter is accessed from the properties menu.
+
+
+> It is not necessary to create a background plan of the space you have just created.
+
+
+#### The shapes
+
+![inkscape forme](../../screenshots/appendix/inskcape-formes.jpg)
+
+
+Inkscape offers a simplified interface. It allows you to add and create shapes and objects in the previously defined properties, which are : 
+
+  - Circle
+  - Square
+  - Links
+  - Other...
+
+  
+Each object created, must have an identifier (ID) that will be made available for the **Weathermap** plugin.
+
+
+![inkscape id](../../screenshots/appendix/inkscape-id.jpg)
+
+
+To add an identifier to a graphical form, you need to `right click` on your object, then go to `Properties of the object`. A window will appear allowing you to modify the identifier.
+
+
+  
+#### Backup
+
+You must save your creation in **SVG simple** or **SVG Inkscape** format which can be loaded in the plugin display, with the SVG extension.
+
+#### Demo
+
+You can consult the associated [tutorial 4](../demo/tutorial04.md) for the creation of a SVG file.
+  
+
 
 
 ### Draw.io
 
 The [Draw.io](https://draw.io/) editor is accessible from a browser.
 
-You must activate one of the `networking` shapes libraries to get a graphical representation of your network.
+
+
+The Community version offers a wide choice of graphic objects already ready for use. 
+
+The activation of the shapes we are interested in, are the shapes libraries `networking` which will facilitate visuals of your network.
 
 You must export the image in SVG format.
-The mandatory parameters to check are `shadow` and `embed images`.
+
+The mandatory parameters to be checked are `embed images`.
 
 
 ## Backup
