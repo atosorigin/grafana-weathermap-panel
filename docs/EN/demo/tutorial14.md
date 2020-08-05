@@ -1,30 +1,18 @@
-
 # construire un dashboard par les Query
+
 [![](../../screenshots/other/Go-back.png)](README.md)
-
-
-
-
 
 ## Add a query
 
 The example shows how to use query filters to obtain precise metrics
 
-
-
 ![fileselect background](../../screenshots/demo/tutorial14/query.jpg)
 
-
-
 In a query, we want to analyze what the network card receives
-
-
 
 ```
 prometheus_engine_query_duration_seconds
 ```
-
-
 
 The result shows several possible outcomes
 
@@ -44,7 +32,7 @@ prometheus_engine_query_duration_seconds{instance="localhost:9090",job="promethe
 
 ```
 
-Les elements qui nous interressent sont : 
+Les elements qui nous interressent sont :
 
 - instance
 - job
@@ -53,18 +41,15 @@ Les elements qui nous interressent sont :
 
 qui seront utilisés dans le fichier json de gabarit dans la liste **filtered**
 
-
 ## Add background image
-
-
 
 ![fileselect background](../../screenshots/demo/tutorial14/background.jpg)
 
 Adding a background image can be done from the menu `display`.
 
-The selected image will be [demo14-background.svg](../../resource/demo14-background.svg). 
+The selected image will be [demo14-background.svg](../../resource/demo14-background.svg).
 
-To do this, we download it in base64 with the `Copy image address` function, or with the direct link to the repository: 
+To do this, we download it in base64 with the `Copy image address` function, or with the direct link to the repository:
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo14-background.svg
@@ -73,20 +58,13 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 
 It is possible to have more details with the [display](../editor/display.md) page.
 
-
-
 ## tab Gabarit
 
 Dans l'onglet **Gabarit**
 
-
-
 ![](../../screenshots/demo/tutorial14/demo14-1.png)
 
-
-
-
-vous ajoutez le lien du fichier json 
+vous ajoutez le lien du fichier json
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo14-svg.json
@@ -94,7 +72,6 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 ```
 
 puis 1 clic que le bouton **Add** suivi de **finish**
-
 
 le lien s'affichera dans la deuxième partie de l'écran
 
@@ -107,5 +84,3 @@ puis 1 clic **load**
 ## Resultat
 
 ![](../../screenshots/demo/tutorial14/result.png)
-
-

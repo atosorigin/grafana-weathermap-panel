@@ -1,250 +1,259 @@
 {
-    "regions": [{
-        "colorMode": false,
-        "coords": {
-            "xMin": "-20",
-            "xMax": "-60",
-            "yMin": "-20",
-            "yMax": "-60"
+  "regions": [
+    {
+      "colorMode": false,
+      "coords": {
+        "xMin": "-20",
+        "xMax": "-60",
+        "yMin": "-20",
+        "yMax": "-60"
+      },
+      "id": 1,
+      "idSVG": "",
+      "img": "",
+      "label": "zone1",
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "lowerLimit": [
+        {
+          "backColor": "",
+          "borderColor": "#FF0000",
+          "id": 0,
+          "lowerLimitMax": "",
+          "lowerLimitMin": "",
+          "sizeBorder": "4"
+        }
+      ],
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": "",
+        "manageValue": "avg",
+        "refId": "",
+        "returnQuery": [],
+        "unit": ""
+      },
+      "meta": "",
+      "metrics": [],
+      "mode": false,
+      "orientedLink": [],
+      "positionParameter": {
+        "labelAPositionX": "0",
+        "labelAPositionY": "0",
+        "labelBPositionX": "0",
+        "labelBPositionY": "0",
+        "tooltipPositionA": {},
+        "tooltipPositionB": {}
+      },
+      "textObj": {
+        "colorBack": "rgba(255, 255, 255, 0)",
+        "colorText": "rgba(0, 0, 0, 1)",
+        "generateAuxiliaryElement": {
+          "addColorBackElement": false,
+          "addColorTextElement": false,
+          "colorBackElement": "black",
+          "colorTextElement": "white",
+          "displayObjectInTooltip": false,
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unityMesureElement": ""
         },
-        "id": 1,
-        "idSVG": "",
-        "img": "",
-        "label": "zone1",
-        "linkURL": {
-            "followLink": "",
-            "hoveringTooltipLink": "",
-            "hoveringTooltipText": ""
+        "generateObjectText": false,
+        "isTextTooltip": true,
+        "legend": "",
+        "style": {
+          "bold": true,
+          "italic": false,
+          "underline": true
         },
-        "lowerLimit": [{
-            "backColor": "",
-            "borderColor": "#FF0000",
-            "id": 0,
-            "lowerLimitMax": "",
-            "lowerLimitMin": "",
-            "sizeBorder": "4"
-        }],
-        "mainMetric": {
-            "format": "",
-            "key": "",
-            "keyValue": "",
-            "manageValue": "avg",
-            "refId": "",
-            "returnQuery": [],
-            "unit": ""
-        },
-        "meta": "",
-        "metrics": [],
-        "mode": false,
-        "orientedLink": [],
-        "positionParameter": {
-            "labelAPositionX": "0",
-            "labelAPositionY": "0",
-            "labelBPositionX": "0",
-            "labelBPositionY": "0",
-            "tooltipPositionA": {},
-            "tooltipPositionB": {}
-        },
-        "textObj": {
-            "colorBack": "rgba(255, 255, 255, 0)",
-            "colorText": "rgba(0, 0, 0, 1)",
-            "generateAuxiliaryElement": {
-                "addColorBackElement": false,
-                "addColorTextElement": false,
-                "colorBackElement": "black",
-                "colorTextElement": "white",
-                "displayObjectInTooltip": false,
-                "legendElement": "",
-                "numericFormatElement": "",
-                "unityMesureElement": ""
-            },
-            "generateObjectText": false,
-            "isTextTooltip": true,
-            "legend": "",
-            "style": {
-                "bold": true,
-                "italic": false,
-                "underline": true
-            },
-            "unit": "",
-            "value": "",
-            "valueGenerateObjectText": {
-                "addColorBackElement": false,
-                "addColorTextElement": false,
-                "colorBackElement": "black",
-                "colorTextElement": "white",
-                "displayObjectInTooltip": false,
-                "legendElement": "",
-                "numericFormatElement": "",
-                "unityMesureElement": ""
-            }
-        },
-        "traceBack": false,
-        "traceBorder": true
+        "unit": "",
+        "value": "",
+        "valueGenerateObjectText": {
+          "addColorBackElement": false,
+          "addColorTextElement": false,
+          "colorBackElement": "black",
+          "colorTextElement": "white",
+          "displayObjectInTooltip": false,
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unityMesureElement": ""
+        }
+      },
+      "traceBack": false,
+      "traceBorder": true
     },
     {
-        "colorMode": false,
-        "coords": {
-            "xMin": "-20",
-            "xMax": "20",
-            "yMin": "-20",
-            "yMax": "20"
+      "colorMode": false,
+      "coords": {
+        "xMin": "-20",
+        "xMax": "20",
+        "yMin": "-20",
+        "yMax": "20"
+      },
+      "id": 2,
+      "idSVG": "",
+      "img": "",
+      "label": "zone2",
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "lowerLimit": [
+        {
+          "backColor": "#",
+          "borderColor": "#FFFF00",
+          "id": 0,
+          "lowerLimitMax": "",
+          "lowerLimitMin": "",
+          "sizeBorder": "4"
+        }
+      ],
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": "",
+        "manageValue": "avg",
+        "refId": "",
+        "returnQuery": [],
+        "unit": ""
+      },
+      "meta": "",
+      "metrics": [],
+      "mode": false,
+      "orientedLink": [],
+      "positionParameter": {
+        "labelAPositionX": "0",
+        "labelAPositionY": "0",
+        "labelBPositionX": "0",
+        "labelBPositionY": "0",
+        "tooltipPositionA": {},
+        "tooltipPositionB": {}
+      },
+      "textObj": {
+        "colorBack": "rgba(255, 255, 255, 0)",
+        "colorText": "rgba(0, 0, 0, 1)",
+        "generateAuxiliaryElement": {
+          "addColorBackElement": false,
+          "addColorTextElement": false,
+          "colorBackElement": "black",
+          "colorTextElement": "white",
+          "displayObjectInTooltip": false,
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unityMesureElement": ""
         },
-        "id": 2,
-        "idSVG": "",
-        "img": "",
-        "label": "zone2",
-        "linkURL": {
-            "followLink": "",
-            "hoveringTooltipLink": "",
-            "hoveringTooltipText": ""
+        "generateObjectText": false,
+        "isTextTooltip": true,
+        "legend": "",
+        "style": {
+          "bold": true,
+          "italic": false,
+          "underline": true
         },
-        "lowerLimit": [{
-            "backColor": "#",
-            "borderColor": "#FFFF00",
-            "id": 0,
-            "lowerLimitMax": "",
-            "lowerLimitMin": "",
-            "sizeBorder": "4"
-        }],
-        "mainMetric": {
-            "format": "",
-            "key": "",
-            "keyValue": "",
-            "manageValue": "avg",
-            "refId": "",
-            "returnQuery": [],
-            "unit": ""
+        "unit": "",
+        "value": "",
+        "valueGenerateObjectText": {
+          "addColorBackElement": false,
+          "addColorTextElement": false,
+          "colorBackElement": "black",
+          "colorTextElement": "white",
+          "displayObjectInTooltip": false,
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unityMesureElement": ""
+        }
+      },
+      "traceBack": false,
+      "traceBorder": true
+    },
+    {
+      "colorMode": false,
+      "coords": {
+        "xMin": "20",
+        "xMax": "60",
+        "yMin": "20",
+        "yMax": "60"
+      },
+      "id": 3,
+      "idSVG": "",
+      "img": "",
+      "label": "zone3",
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "lowerLimit": [
+        {
+          "backColor": "",
+          "borderColor": "#0000FF",
+          "id": 0,
+          "lowerLimitMax": "",
+          "lowerLimitMin": "",
+          "sizeBorder": "4"
+        }
+      ],
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": "",
+        "manageValue": "avg",
+        "refId": "",
+        "returnQuery": [],
+        "unit": ""
+      },
+      "meta": "",
+      "metrics": [],
+      "mode": false,
+      "orientedLink": [],
+      "positionParameter": {
+        "labelAPositionX": "0",
+        "labelAPositionY": "0",
+        "labelBPositionX": "0",
+        "labelBPositionY": "0",
+        "tooltipPositionA": {},
+        "tooltipPositionB": {}
+      },
+      "textObj": {
+        "colorBack": "rgba(255, 255, 255, 0)",
+        "colorText": "rgba(0, 0, 0, 1)",
+        "generateAuxiliaryElement": {
+          "addColorBackElement": false,
+          "addColorTextElement": false,
+          "colorBackElement": "black",
+          "colorTextElement": "white",
+          "displayObjectInTooltip": false,
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unityMesureElement": ""
         },
-        "meta": "",
-        "metrics": [],
-        "mode": false,
-        "orientedLink": [],
-        "positionParameter": {
-            "labelAPositionX": "0",
-            "labelAPositionY": "0",
-            "labelBPositionX": "0",
-            "labelBPositionY": "0",
-            "tooltipPositionA": {},
-            "tooltipPositionB": {}
+        "generateObjectText": false,
+        "isTextTooltip": true,
+        "legend": "",
+        "style": {
+          "bold": true,
+          "italic": false,
+          "underline": true
         },
-        "textObj": {
-            "colorBack": "rgba(255, 255, 255, 0)",
-            "colorText": "rgba(0, 0, 0, 1)",
-            "generateAuxiliaryElement": {
-                "addColorBackElement": false,
-                "addColorTextElement": false,
-                "colorBackElement": "black",
-                "colorTextElement": "white",
-                "displayObjectInTooltip": false,
-                "legendElement": "",
-                "numericFormatElement": "",
-                "unityMesureElement": ""
-            },
-            "generateObjectText": false,
-            "isTextTooltip": true,
-            "legend": "",
-            "style": {
-                "bold": true,
-                "italic": false,
-                "underline": true
-            },
-            "unit": "",
-            "value": "",
-            "valueGenerateObjectText": {
-                "addColorBackElement": false,
-                "addColorTextElement": false,
-                "colorBackElement": "black",
-                "colorTextElement": "white",
-                "displayObjectInTooltip": false,
-                "legendElement": "",
-                "numericFormatElement": "",
-                "unityMesureElement": ""
-            }
-        },
-        "traceBack": false,
-        "traceBorder": true
-    },{
-        "colorMode": false,
-        "coords": {
-            "xMin": "20",
-            "xMax": "60",
-            "yMin": "20",
-            "yMax": "60"
-        },
-        "id": 3,
-        "idSVG": "",
-        "img": "",
-        "label": "zone3",
-        "linkURL": {
-            "followLink": "",
-            "hoveringTooltipLink": "",
-            "hoveringTooltipText": ""
-        },
-        "lowerLimit": [{
-            "backColor": "",
-            "borderColor": "#0000FF",
-            "id": 0,
-            "lowerLimitMax": "",
-            "lowerLimitMin": "",
-            "sizeBorder": "4"
-        }],
-        "mainMetric": {
-            "format": "",
-            "key": "",
-            "keyValue": "",
-            "manageValue": "avg",
-            "refId": "",
-            "returnQuery": [],
-            "unit": ""
-        },
-        "meta": "",
-        "metrics": [],
-        "mode": false,
-        "orientedLink": [],
-        "positionParameter": {
-            "labelAPositionX": "0",
-            "labelAPositionY": "0",
-            "labelBPositionX": "0",
-            "labelBPositionY": "0",
-            "tooltipPositionA": {},
-            "tooltipPositionB": {}
-        },
-        "textObj": {
-            "colorBack": "rgba(255, 255, 255, 0)",
-            "colorText": "rgba(0, 0, 0, 1)",
-            "generateAuxiliaryElement": {
-                "addColorBackElement": false,
-                "addColorTextElement": false,
-                "colorBackElement": "black",
-                "colorTextElement": "white",
-                "displayObjectInTooltip": false,
-                "legendElement": "",
-                "numericFormatElement": "",
-                "unityMesureElement": ""
-            },
-            "generateObjectText": false,
-            "isTextTooltip": true,
-            "legend": "",
-            "style": {
-                "bold": true,
-                "italic": false,
-                "underline": true
-            },
-            "unit": "",
-            "value": "",
-            "valueGenerateObjectText": {
-                "addColorBackElement": false,
-                "addColorTextElement": false,
-                "colorBackElement": "black",
-                "colorTextElement": "white",
-                "displayObjectInTooltip": false,
-                "legendElement": "",
-                "numericFormatElement": "",
-                "unityMesureElement": ""
-            }
-        },
-        "traceBack": false,
-        "traceBorder": true
-    }]
+        "unit": "",
+        "value": "",
+        "valueGenerateObjectText": {
+          "addColorBackElement": false,
+          "addColorTextElement": false,
+          "colorBackElement": "black",
+          "colorTextElement": "white",
+          "displayObjectInTooltip": false,
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unityMesureElement": ""
+        }
+      },
+      "traceBack": false,
+      "traceBorder": true
+    }
+  ]
 }

@@ -1,7 +1,7 @@
- 
 # Create advanced modeling
+
 [![](../../screenshots/other/Go-back.png)](README.md)
- 
+
 ## Select query
 
 Let's choose those two queries :
@@ -9,13 +9,11 @@ Let's choose those two queries :
 - node_cpu_frequency_hertz
 - node_network_carrier_changes_total
 
-
 See what they return :
 
 ![values](../../screenshots/demo/tutorial06/values.png)
 
 node_cpu_frequency_hertz
-
 
 ```
 node_cpu_frequency_hertz{cpu="0",instance="localhost:9100",job="node"}
@@ -49,18 +47,15 @@ There are a lot of values, so we have to manipulate them in order to come up wit
 
 Adding a background image is done from the `display` menu.
 
-The selected image will be [demo01-background.svg](../../resource/demo01-background.svg). 
+The selected image will be [demo01-background.svg](../../resource/demo01-background.svg).
 
-To do this, we download it in base64 with the `Copy image address` function, or with the direct link to the repository: 
-
+To do this, we download it in base64 with the `Copy image address` function, or with the direct link to the repository:
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
 ```
 
-
 It is possible to have more details with the [display](../editor/display.md) page.
-
 
 ### Step 2 : Create the region
 
@@ -76,15 +71,12 @@ Then you can choose between "manipulate the average", if you want an average of 
 
 ![average](../../screenshots/demo/tutorial06/average.png)
 
-
 ![total](../../screenshots/demo/tutorial06/total.png)
 
-If your measurement is to return only one value, you must select "handling error". 
+If your measurement is to return only one value, you must select "handling error".
 This will display its value, if it is unique, and will display an error if there are other values.
 
-
 ![demo6](../../screenshots/demo/tutorial06/result.png)
-
 
 ### Import JSON file
 
@@ -92,21 +84,4 @@ This will display its value, if it is unique, and will display an error if there
 
 And here is the JSON file :
 
-[demo06-region](../../resource/demo06-region.json) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[demo06-region](../../resource/demo06-region.json)

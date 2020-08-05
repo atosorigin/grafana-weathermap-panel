@@ -1,4 +1,5 @@
-{"regions": [
+{
+  "regions": [
     {
       "colorMode": false,
       "coords": {
@@ -86,4 +87,5 @@
       "traceBack": true,
       "traceBorder": true
     }
-  ]}
+  ]
+}

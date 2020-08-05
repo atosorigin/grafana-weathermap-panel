@@ -1175,36 +1175,48 @@ __webpack_require__.r(__webpack_exports__);
  * @param {string} newValue value to insert in the parameter
  * @returns {Coor} object edit
  */
-var editGoodParameter = function editGoodParameter(name, editCoor, newValue, defaultInitialSpace) {
+var editGoodParameter = function editGoodParameter(name, editCoor, newValue, widthBackground, heigthBackground) {
   if (name.startsWith('positionXMin')) {
-    editCoor.coordinate.xMin = limitValueInitialSpace(newValue, defaultInitialSpace); //editCoor.coordinate.xMin = newValue;
+    editCoor.coordinate.xMin = limitValueInitialSpace(newValue, 1, widthBackground, heigthBackground); //editCoor.coordinate.xMin = newValue;
   } else if (name.startsWith('positionXMax')) {
-    editCoor.coordinate.xMax = limitValueInitialSpace(newValue, defaultInitialSpace); //editCoor.coordinate.xMax = newValue;
+    editCoor.coordinate.xMax = limitValueInitialSpace(newValue, 2, widthBackground, heigthBackground); //editCoor.coordinate.xMax = newValue;
   } else if (name.startsWith('positionYMin')) {
-    editCoor.coordinate.yMin = limitValueInitialSpace(newValue, defaultInitialSpace); //editCoor.coordinate.yMin = newValue;
+    editCoor.coordinate.yMin = limitValueInitialSpace(newValue, 3, widthBackground, heigthBackground); //editCoor.coordinate.yMin = newValue;
   } else if (name.startsWith('positionYMax')) {
-    editCoor.coordinate.yMax = limitValueInitialSpace(newValue, defaultInitialSpace); //editCoor.coordinate.yMax = newValue;
+    editCoor.coordinate.yMax = limitValueInitialSpace(newValue, 4, widthBackground, heigthBackground); //editCoor.coordinate.yMax = newValue;
   }
 
   return editCoor;
 };
-var limitValueInitialSpace = function limitValueInitialSpace(coorInitialSpace, defaultInitialSpace) {
-  var coorInt = parseInt(coorInitialSpace, 10);
-  var result = 0; //console.log(defaultInitialSpace);
+var limitValueInitialSpace = function limitValueInitialSpace(coorInitialSpace, position, widthBackground, heigthBackground) {
+  var result = 0;
+  result = parseInt(coorInitialSpace, 10);
 
-  if (!defaultInitialSpace) {
-    result = coorInt;
-  } else {
-    if (coorInt > 100) {
-      result = 100;
-    } else if (coorInt < 0) {
-      result = 0;
-    } else if (coorInt >= 0 && coorInt <= 100) {
-      result = coorInt;
-    } else {
-      result = 0;
+  if (position === 1 || position === 2) {
+    //xMin + xMax
+    if (result > widthBackground) {
+      result = widthBackground;
     }
-  }
+  } else if (position === 3 || position === 4) {
+    //yMin + yMax
+    if (result > heigthBackground) {
+      result = heigthBackground;
+    }
+  } //console.log(defaultInitialSpace);
+  // if (!defaultInitialSpace) {
+  //   result = coorInt;
+  // } else {
+  //   if (coorInt > 100) {
+  //     result = 100;
+  //   } else if (coorInt < 0) {
+  //     result = 0;
+  //   } else if (coorInt >= 0 && coorInt <= 100) {
+  //     result = coorInt;
+  //   } else {
+  //     result = 0;
+  //   }
+  // }
+
 
   return result.toString();
 };
@@ -1326,9 +1338,15 @@ var editGoodParameterPoint = function editGoodParameterPoint(name, editCoor, new
   } else if (name.startsWith('rotateArrow')) {
     editCoor.rotateArrow = newValue;
   } else if (name.startsWith('positionShapeX')) {
+    console.log('update x');
+    console.log(newValue);
     editCoor.positionShapeX = newValue;
+    console.log(editCoor);
   } else if (name.startsWith('positionShapeY')) {
+    console.log('update y');
+    console.log(newValue);
     editCoor.positionShapeY = newValue;
+    console.log(editCoor);
   } else if (name.startsWith('color')) {
     editCoor.color = newValue;
   } else if (name.startsWith('refIdMainMetric')) {
@@ -1339,6 +1357,7 @@ var editGoodParameterPoint = function editGoodParameterPoint(name, editCoor, new
     editCoor.mainMetric.keyValue = newValue;
   }
 
+  console.log(editCoor);
   return editCoor;
 };
 
@@ -2269,7 +2288,7 @@ var searchNameIsKey = function searchNameIsKey(query, mainMetric) {
     return true;
   }
 
-  var nameQuery = ((_b = query.name) === null || _b === void 0 ? void 0 : _b.split(',').map(function (value) {
+  var nameQuery = ((_b = query.name) === null || _b === void 0 ? void 0 : _b.split(',').flatMap(function (value) {
     return value.replace(/[\"{}]/gm, '');
   })) || [];
 
@@ -2368,6 +2387,8 @@ var getResultQuery = function getResultQuery(mainMetric) {
   var e_4, _a, e_5, _b;
 
   var cnt = null;
+  console.log('yop');
+  console.log(mainMetric.returnQuery);
 
   if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
     var debug = [];
@@ -2449,10 +2470,51 @@ var getResultQuery = function getResultQuery(mainMetric) {
         }
       }
     }
+
+    console.log(debug);
+    console.log('loua');
   }
 
   return cnt;
 };
+/*********************************** the best solution it's check the instant checbox in addquery */
+
+/*****************************Other solution but there are a problem with average of node_network_up */
+// export const getResultQuery = (mainMetric: Metric) => {
+//   let cnt: number | null = null;
+//   console.log(mainMetric.returnQuery);
+//   if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
+//     const debug: number[] = [];
+//     let countValue = 0;
+//     cnt = 0;
+//     for (const line of mainMetric.returnQuery) {
+//       const result = searchNameIsKey(line, mainMetric);
+//       if (result) {
+//         const sizeQuery: number = line.fields[0].values.length;
+//         // in grafana 7 change line.field[0] to line.field[1]
+//         for (let i = 0; i < sizeQuery; i++) {
+//           if (line.fields.length > 0 && line.fields[0].values.get(i)) {
+//             cnt += line.fields[0].values.get(i);
+//             debug.push(line.fields[0].values.get(i));
+//             ++countValue;
+//           }
+//           if (countValue > -1 && mainMetric.manageValue === 'sum') {
+//             break;
+//           }
+//         }
+//       }
+//     }
+//     if (mainMetric.manageValue === 'avg') {
+//       cnt /= countValue;
+//     } else if (mainMetric.manageValue === 'err') {
+//       if (countValue > -1) {
+//         cnt = null;
+//       }
+//     }
+//     console.log(debug);
+//   }
+//   return cnt;
+// };
 
 /***/ }),
 
@@ -2535,7 +2597,7 @@ var initOrientedLink = function initOrientedLink(newId, newZIndex) {
   }, {
     label: 'Medium',
     value: 'Medium'
-  }, '0', '0', '#5794F2', '0', '0', '#E54658', '', '', '', '', '', '', zIndex, '0', '0', {}, initMainMetricsB, []);
+  }, '0', '0', '#5794F2', '0', '0', '#E54658', '', '', '', '', '', '', zIndex, '0', '0', {}, initMainMetricsB, [], '', '', '', '', '', '');
   return newCoordinate;
 };
 var cloneOrientedLink = function cloneOrientedLink(orientedLink) {
@@ -2553,7 +2615,7 @@ var cloneOrientedLink = function cloneOrientedLink(orientedLink) {
     returnQuery: orientedLink.mainMetric.returnQuery,
     manageValue: orientedLink.mainMetric.manageValue
   };
-  var newCoordinate = new _Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_3__["OrientedLinkClass"](orientedLink.id, linkURL, orientedLink.meta, orientedLink.lowerLimit, orientedLink.label, initTextObject, mainMetric, orientedLink.metrics, orientedLink.colorMode, orientedLink.traceBack, orientedLink.traceBorder, positionParameter, orientedLink.name, orientedLink.orientationLink, orientedLink.size, orientedLink.pointAPositionX, orientedLink.pointAPositionY, orientedLink.colorCoordinateA, orientedLink.pointBPositionX, orientedLink.pointBPositionY, orientedLink.colorCoordinateB, orientedLink.valueMainMetricA, orientedLink.valueMainMetricB, orientedLink.pointIn, orientedLink.pointOut, orientedLink.regionIn, orientedLink.regionOut, orientedLink.zIndex, orientedLink.pointCPositionX, orientedLink.pointCPositionY, orientedLink.isIncurved, orientedLink.mainMetricB, orientedLink.metricsB);
+  var newCoordinate = new _Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_3__["OrientedLinkClass"](orientedLink.id, linkURL, orientedLink.meta, orientedLink.lowerLimit, orientedLink.label, initTextObject, mainMetric, orientedLink.metrics, orientedLink.colorMode, orientedLink.traceBack, orientedLink.traceBorder, positionParameter, orientedLink.name, orientedLink.orientationLink, orientedLink.size, orientedLink.pointAPositionX, orientedLink.pointAPositionY, orientedLink.colorCoordinateA, orientedLink.pointBPositionX, orientedLink.pointBPositionY, orientedLink.colorCoordinateB, orientedLink.valueMainMetricA, orientedLink.valueMainMetricB, orientedLink.pointIn, orientedLink.pointOut, orientedLink.regionIn, orientedLink.regionOut, orientedLink.zIndex, orientedLink.pointCPositionX, orientedLink.pointCPositionY, orientedLink.isIncurved, orientedLink.mainMetricB, orientedLink.metricsB, orientedLink.widthInitialSpaceDefault, orientedLink.heightInitialSpaceDefault, orientedLink.pointAPositionXDefault, orientedLink.pointAPositionYDefault, orientedLink.pointBPositionXDefault, orientedLink.pointBPositionYDefault);
   return newCoordinate;
 };
 
@@ -2627,7 +2689,7 @@ var initPoint = function initPoint(index) {
   }, {
     label: 'Medium',
     value: 'medium'
-  }, '0', '0', '0', 'black', [], []);
+  }, '0', '0', '0', 'black', [], [], '0', '0', '0', '0');
   return newCoordinate;
 };
 var clonePoint = function clonePoint(point) {
@@ -2645,7 +2707,7 @@ var clonePoint = function clonePoint(point) {
     returnQuery: point.mainMetric.returnQuery,
     manageValue: point.mainMetric.manageValue
   };
-  var newCoordinate = new _Models_PointClass__WEBPACK_IMPORTED_MODULE_3__["PointClass"](point.id, linkURL, point.meta, point.lowerLimit, point.label, initTextObject, mainMetric, point.metrics, point.colorMode, point.traceBack, point.traceBorder, positionParameter, point.name, point.valueMetric, point.drawGraphicMarker, point.shape, point.sizeWidth, point.sizeHeight, point.rotateArrow, point.positionShapeX, point.positionShapeY, point.color, point.associateOrientedLinksIn, point.associateOrientedLinksOut);
+  var newCoordinate = new _Models_PointClass__WEBPACK_IMPORTED_MODULE_3__["PointClass"](point.id, linkURL, point.meta, point.lowerLimit, point.label, initTextObject, mainMetric, point.metrics, point.colorMode, point.traceBack, point.traceBorder, positionParameter, point.name, point.valueMetric, point.drawGraphicMarker, point.shape, point.sizeWidth, point.sizeHeight, point.rotateArrow, point.positionShapeX, point.positionShapeY, point.color, point.associateOrientedLinksIn, point.associateOrientedLinksOut, point.widthInitialSpaceDefault, point.heightInitialSpaceDefault, point.positionXDefault, point.positionYDefault);
   return newCoordinate;
 };
 
@@ -2706,6 +2768,12 @@ var initRegionCoordinateSpace = function initRegionCoordinateSpace(index) {
     yMin: '0',
     yMax: '0'
   };
+  var coordsDefault = {
+    xMin: '0',
+    xMax: '0',
+    yMin: '0',
+    yMax: '0'
+  };
   var positionParameter = new Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_3__["PositionParameterClass"]('0', '0', '0', '0', {}, {});
   var newCoordinate = new Models_RegionClass__WEBPACK_IMPORTED_MODULE_0__["RegionClass"](newId, linkURL, '', [], '', initTextObject, {
     key: '',
@@ -2714,7 +2782,7 @@ var initRegionCoordinateSpace = function initRegionCoordinateSpace(index) {
     keyValue: '',
     refId: '',
     manageValue: 'avg'
-  }, [], false, false, false, positionParameter, '', [], coords, true, '');
+  }, [], false, false, false, positionParameter, '', [], coords, coordsDefault, true, '', '', '');
   return newCoordinate;
 };
 var cloneRegionCoordinateSpace = function cloneRegionCoordinateSpace(region) {
@@ -2722,6 +2790,12 @@ var cloneRegionCoordinateSpace = function cloneRegionCoordinateSpace(region) {
   region.textObj.value, region.textObj.isTextTooltip, region.textObj.colorBack, region.textObj.colorText, region.textObj.style, region.textObj.generateObjectText, region.textObj.valueGenerateObjectText, region.textObj.generateAuxiliaryElement);
   var linkURL = new Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_2__["LinkURLClass"](region.linkURL.followLink, region.linkURL.hoveringTooltipLink, region.linkURL.hoveringTooltipText);
   var coords = {
+    xMin: region.coords.xMin,
+    xMax: region.coords.xMax,
+    yMin: region.coords.yMin,
+    yMax: region.coords.yMax
+  };
+  var coordsDefault = {
     xMin: region.coords.xMin,
     xMax: region.coords.xMax,
     yMin: region.coords.yMin,
@@ -2738,7 +2812,7 @@ var cloneRegionCoordinateSpace = function cloneRegionCoordinateSpace(region) {
     returnQuery: region.mainMetric.returnQuery,
     manageValue: region.mainMetric.manageValue
   };
-  var newCoordinate = new Models_RegionClass__WEBPACK_IMPORTED_MODULE_0__["RegionClass"](region.id, linkURL, region.meta, region.lowerLimit, region.label, initTextObject, mainMetric, region.metrics, region.colorMode, region.traceBack, region.traceBorder, positionParameter, region.idSVG, region.orientedLink, coords, region.mode, region.img);
+  var newCoordinate = new Models_RegionClass__WEBPACK_IMPORTED_MODULE_0__["RegionClass"](region.id, linkURL, region.meta, region.lowerLimit, region.label, initTextObject, mainMetric, region.metrics, region.colorMode, region.traceBack, region.traceBorder, positionParameter, region.idSVG, region.orientedLink, coords, coordsDefault, region.mode, region.img, region.widthInitialSpaceDefault, region.heightInitialSpaceDefault);
   return newCoordinate;
 };
 
@@ -3730,7 +3804,7 @@ var OrientedLinkClass =
 function (_super) {
   Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(OrientedLinkClass, _super);
 
-  function OrientedLinkClass(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter, name, orientationLink, size, pointAPositionX, pointAPositionY, colorCoordinateA, pointBPositionX, pointBPositionY, colorCoordinateB, valueMainMetricA, valueMainMetricB, pointIn, pointOut, regionIn, regionOut, zIndex, pointCPositionX, pointCPositionY, isIncurved, mainMetricB, metricsB) {
+  function OrientedLinkClass(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter, name, orientationLink, size, pointAPositionX, pointAPositionY, colorCoordinateA, pointBPositionX, pointBPositionY, colorCoordinateB, valueMainMetricA, valueMainMetricB, pointIn, pointOut, regionIn, regionOut, zIndex, pointCPositionX, pointCPositionY, isIncurved, mainMetricB, metricsB, widthInitialSpaceDefault, heightInitialSpaceDefault, pointAPositionXDefault, pointAPositionYDefault, pointBPositionXDefault, pointBPositionYDefault) {
     var _this = _super.call(this, id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter) || this;
 
     _this.name = name;
@@ -3754,6 +3828,12 @@ function (_super) {
     _this.isIncurved = isIncurved;
     _this.mainMetricB = mainMetricB;
     _this.metricsB = metricsB;
+    _this.widthInitialSpaceDefault = widthInitialSpaceDefault;
+    _this.heightInitialSpaceDefault = heightInitialSpaceDefault;
+    _this.pointAPositionXDefault = pointAPositionXDefault;
+    _this.pointAPositionYDefault = pointAPositionYDefault;
+    _this.pointBPositionXDefault = pointBPositionXDefault;
+    _this.pointBPositionYDefault = pointBPositionYDefault;
     return _this;
   }
 
@@ -3787,7 +3867,7 @@ var PointClass =
 function (_super) {
   Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PointClass, _super);
 
-  function PointClass(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter, name, valueMetric, drawGraphicMarker, shape, sizeWidth, sizeHeight, rotateArrow, positionShapeX, positionShapeY, color, associateOrientedLinksIn, associateOrientedLinksOut) {
+  function PointClass(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter, name, valueMetric, drawGraphicMarker, shape, sizeWidth, sizeHeight, rotateArrow, positionShapeX, positionShapeY, color, associateOrientedLinksIn, associateOrientedLinksOut, widthInitialSpaceDefault, heightInitialSpaceDefault, positionXDefault, positionYDefault) {
     var _this = _super.call(this, id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter) || this;
 
     _this.name = name;
@@ -3802,6 +3882,10 @@ function (_super) {
     _this.color = color;
     _this.associateOrientedLinksIn = associateOrientedLinksIn;
     _this.associateOrientedLinksOut = associateOrientedLinksOut;
+    _this.widthInitialSpaceDefault = widthInitialSpaceDefault;
+    _this.heightInitialSpaceDefault = heightInitialSpaceDefault;
+    _this.positionXDefault = positionXDefault;
+    _this.positionYDefault = positionYDefault;
     return _this;
   }
 
@@ -3861,14 +3945,17 @@ var RegionClass =
 function (_super) {
   Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(RegionClass, _super);
 
-  function RegionClass(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter, idSVG, orientedLink, coords, mode, img) {
+  function RegionClass(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter, idSVG, orientedLink, coords, coordsDefault, mode, img, widthInitialSpaceDefault, heightInitialSpaceDefault) {
     var _this = _super.call(this, id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter) || this;
 
     _this.idSVG = idSVG;
     _this.mode = mode;
     _this.orientedLink = orientedLink;
     _this.coords = coords;
+    _this.coordsDefault = coordsDefault;
     _this.img = img;
+    _this.widthInitialSpaceDefault = widthInitialSpaceDefault;
+    _this.heightInitialSpaceDefault = heightInitialSpaceDefault;
     return _this;
   }
 
@@ -4618,59 +4705,61 @@ function (_super) {
 
 
     _this.getCoordinatesToDrawPointWithClick = function (event) {
-      var widthPanel = parseInt(_this.props.options.baseMap.width, 10);
-      var heightPanel = parseInt(_this.props.options.baseMap.height, 10);
+      // const widthPanel: number = parseInt(this.props.options.baseMap.width, 10);
+      // const heightPanel: number = parseInt(this.props.options.baseMap.height, 10);
       var initialSpace = _this.props.options.coordinateSpaceInitial.coordinate;
       var xMin = parseInt(initialSpace.xMin, 10);
       var xMax = parseInt(initialSpace.xMax, 10);
       var yMin = parseInt(initialSpace.yMin, 10);
-      var yMax = parseInt(initialSpace.yMax, 10);
-      var defaultReferentiel = _this.props.options.coordinateSpaceInitial.defaultReferentiel;
+      var yMax = parseInt(initialSpace.yMax, 10); //const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
+
       var positionX = 0;
       var positionY = 0;
-      var xMinPx = 0;
-      var xMaxPx = 0;
+      var clickX = event.nativeEvent.offsetX;
+      var clickY = event.nativeEvent.offsetY; // const widthBackground: number = parseInt(this.props.options.baseMap.width, 10);
+      // const heightBackground: number = parseInt(this.props.options.baseMap.height, 10);
 
-      if (!defaultReferentiel) {
-        xMinPx = (xMin + 100) * (widthPanel / 200);
-        xMaxPx = (xMax + 100) * (widthPanel / 200);
-        var widthInitialSpace = xMaxPx - xMinPx;
-
-        if (xMin < 0 && xMax < 0) {
-          positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2 * -1;
-        } else {
-          positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
-        }
-      } else {
-        xMinPx = xMin * (widthPanel / 100);
-        xMaxPx = xMax * (widthPanel / 100);
-        var widthInitialSpace = xMaxPx - xMinPx;
-        positionX = Math.round((event.nativeEvent.offsetX - xMinPx) / widthInitialSpace * 100);
-      }
-
-      var yMinPx = 0;
-      var yMaxPx = 0;
-
-      if (!defaultReferentiel) {
-        if (yMin < 0 && yMax < 0) {
-          yMinPx = (yMax + 100) * (heightPanel / 200);
-          yMaxPx = (yMin + 100) * (heightPanel / 200);
-        } else {
-          yMinPx = (yMin + 100) * (heightPanel / 200);
-          yMaxPx = (yMax + 100) * (heightPanel / 200);
-        }
-
-        var heightInitialSpace = yMaxPx - yMinPx;
-        positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
-      } else {
-        yMinPx = yMin * (heightPanel / 100);
-        yMaxPx = yMax * (heightPanel / 100);
-        var heightInitialSpace = yMaxPx - yMinPx;
-        positionY = 100 - Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace * 100);
-      }
+      var widthInitialSpace = xMax - xMin;
+      var heightInitialSpace = yMax - yMin;
+      positionX = clickX;
+      positionY = heightInitialSpace - clickY; // let xMinPx = 0;
+      // let xMaxPx = 0;
+      // if (!defaultReferentiel) {
+      //   xMinPx = (xMin + 100) * (widthPanel / 200);
+      //   xMaxPx = (xMax + 100) * (widthPanel / 200);
+      //   const widthInitialSpace: number = xMaxPx - xMinPx;
+      //   if (xMin < 0 && xMax < 0) {
+      //     positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2 * -1;
+      //   } else {
+      //     positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
+      //   }
+      // } else {
+      //   xMinPx = xMin * (widthPanel / 100);
+      //   xMaxPx = xMax * (widthPanel / 100);
+      //   const widthInitialSpace: number = xMaxPx - xMinPx;
+      //   positionX = Math.round(((event.nativeEvent.offsetX - xMinPx) / widthInitialSpace) * 100);
+      // }
+      // let yMinPx = 0;
+      // let yMaxPx = 0;
+      // if (!defaultReferentiel) {
+      //   if (yMin < 0 && yMax < 0) {
+      //     yMinPx = (yMax + 100) * (heightPanel / 200);
+      //     yMaxPx = (yMin + 100) * (heightPanel / 200);
+      //   } else {
+      //     yMinPx = (yMin + 100) * (heightPanel / 200);
+      //     yMaxPx = (yMax + 100) * (heightPanel / 200);
+      //   }
+      //   const heightInitialSpace: number = yMaxPx - yMinPx;
+      //   positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+      // } else {
+      //   yMinPx = yMin * (heightPanel / 100);
+      //   yMaxPx = yMax * (heightPanel / 100);
+      //   const heightInitialSpace: number = yMaxPx - yMinPx;
+      //   positionY = 100 - Math.round(((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace) * 100);
+      // }
 
       if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'Intent' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG || event.nativeEvent.target.id === _this.props.options.baseMap.idSVG) {
-        _this.createPointToClick(positionX, positionY);
+        _this.createPointToClick(positionX, positionY, widthInitialSpace, heightInitialSpace);
       }
     };
 
@@ -4689,7 +4778,7 @@ function (_super) {
      */
 
 
-    _this.createPointToClick = function (x, y) {
+    _this.createPointToClick = function (x, y, widthInitialSpace, heightInitialSpace) {
       var id = _this.defineIdPoint();
 
       var initTextObject = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_6__["TextObject"]('', false, 'white', 'black', {
@@ -4738,7 +4827,7 @@ function (_super) {
       }, {
         label: 'Medium',
         value: 'medium'
-      }, '0', x.toString(), y.toString(), 'black', [], []);
+      }, '0', x.toString(), y.toString(), 'black', [], [], widthInitialSpace.toString(), heightInitialSpace.toString(), x.toString(), y.toString());
       var newArrayPoint = _this.props.options.arrayPoints;
       newArrayPoint.push(newPoint);
 
@@ -4747,10 +4836,9 @@ function (_super) {
         arrayPoints: newArrayPoint
       }));
 
-      _this.props.options.newPoint = true;
-      setTimeout(function () {
-        _this.displayPoint();
-      }, 100);
+      _this.props.options.newPoint = true; // setTimeout(() => {
+      //   this.displayPoint(true);
+      // }, 100);
     };
 
     _this.updatePositionOrientedLink = function (point) {
@@ -4918,78 +5006,79 @@ function (_super) {
       var coordinates = _this.props.options.coordinatesToDrawLinkWithClick;
       var objectIn = coordinates[1];
       var objectOut = coordinates[2];
-      var pointC = coordinates[3];
-      var heightPanel = parseInt(_this.props.options.baseMap.height, 10);
-      var widthPanel = parseInt(_this.props.options.baseMap.width, 10);
+      var pointC = coordinates[3]; // const heightPanel: number = parseInt(this.props.options.baseMap.height, 10);
+      // const widthPanel: number = parseInt(this.props.options.baseMap.width, 10);
+
       var initialSpace = _this.props.options.coordinateSpaceInitial.coordinate;
       var xMin = parseInt(initialSpace.xMin, 10);
       var xMax = parseInt(initialSpace.xMax, 10);
       var yMin = parseInt(initialSpace.yMin, 10);
-      var yMax = parseInt(initialSpace.yMax, 10);
-      var defaultReferentiel = _this.props.options.coordinateSpaceInitial.defaultReferentiel;
-      var positionX = 0;
-      var positionY = 0;
-      var xMinPx = 0;
-      var xMaxPx = 0;
+      var yMax = parseInt(initialSpace.yMax, 10); //const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
+      // const widthInitialSpace: number = parseInt(this.props.options.baseMap.width, 10);
+      // const heightInitialSpace: number = parseInt(this.props.options.baseMap.height, 10);
 
-      if (!defaultReferentiel) {
-        xMinPx = (xMin + 100) * (widthPanel / 200);
-        xMaxPx = (xMax + 100) * (widthPanel / 200); // if (xMin < 0 && xMax < 0) {
-        //   xMinPx = (xMax + 100) * (widthPanel / 200);
-        //   xMaxPx = (xMin + 100) * (widthPanel / 200);
-        // }
-      } else {
-        xMinPx = xMin * (widthPanel / 100);
-        xMaxPx = xMax * (widthPanel / 100);
-      }
-
-      var yMinPx = 0;
-      var yMaxPx = 0;
-
-      if (!defaultReferentiel) {
-        if (yMin < 0 && yMax < 0) {
-          yMinPx = (yMax + 100) * (heightPanel / 200);
-          yMaxPx = (yMin + 100) * (heightPanel / 200);
-        } else {
-          yMinPx = (yMin + 100) * (heightPanel / 200);
-          yMaxPx = (yMax + 100) * (heightPanel / 200);
-        }
-      } else {
-        yMinPx = yMin * (heightPanel / 100);
-        yMaxPx = yMax * (heightPanel / 100);
-      }
-
-      var widthInitialSpace = xMaxPx - xMinPx;
-      var heightInitialSpace = yMaxPx - yMinPx;
+      var widthInitialSpace = xMax - xMin;
+      var heightInitialSpace = yMax - yMin;
+      var positionX = event.nativeEvent.offsetX;
+      var positionY = heightInitialSpace - event.nativeEvent.offsetY; // let xMinPx = 0;
+      // let xMaxPx = 0;
+      // if (!defaultReferentiel) {
+      //   xMinPx = (xMin + 100) * (widthPanel / 200);
+      //   xMaxPx = (xMax + 100) * (widthPanel / 200);
+      //   // if (xMin < 0 && xMax < 0) {
+      //   //   xMinPx = (xMax + 100) * (widthPanel / 200);
+      //   //   xMaxPx = (xMin + 100) * (widthPanel / 200);
+      //   // }
+      // } else {
+      //   xMinPx = xMin * (widthPanel / 100);
+      //   xMaxPx = xMax * (widthPanel / 100);
+      // }
+      // let yMinPx = 0;
+      // let yMaxPx = 0;
+      // if (!defaultReferentiel) {
+      //   if (yMin < 0 && yMax < 0) {
+      //     yMinPx = (yMax + 100) * (heightPanel / 200);
+      //     yMaxPx = (yMin + 100) * (heightPanel / 200);
+      //   } else {
+      //     yMinPx = (yMin + 100) * (heightPanel / 200);
+      //     yMaxPx = (yMax + 100) * (heightPanel / 200);
+      //   }
+      // } else {
+      //   yMinPx = yMin * (heightPanel / 100);
+      //   yMaxPx = yMax * (heightPanel / 100);
+      // }
+      // const widthInitialSpace: number = xMaxPx - xMinPx;
+      // const heightInitialSpace: number = yMaxPx - yMinPx;
 
       if (event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'Intent' || event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG || event.nativeEvent.target.id === _this.props.options.baseMap.idSVG) {
-        if (!defaultReferentiel) {
-          positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
-        } else {
-          positionX = Math.round((event.nativeEvent.offsetX - xMinPx) / widthInitialSpace * 100);
-        }
-
-        if (!defaultReferentiel) {
-          if (yMax < 0) {
-            positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
-          } else {
-            positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
-          }
-        } else {
-          positionY = 100 - Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace * 100); //console.log(positionY);
-        } //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+        // if (!defaultReferentiel) {
+        //   positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
+        // } else {
+        //   positionX = Math.round(((event.nativeEvent.offsetX - xMinPx) / widthInitialSpace) * 100);
+        // }
+        // if (!defaultReferentiel) {
+        //   if (yMax < 0) {
+        //     positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+        //   } else {
+        //     positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+        //   }
+        // } else {
+        //   positionY = 100 - Math.round(((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace) * 100);
+        //   //console.log(positionY);
+        // }
+        //positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
         // if (yMax > 0 && yMax < 100) {
         //   positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
         // }
-
-
         if (coordinates[0].id === 0) {
-          objectIn.x = positionX;
-          objectIn.y = yMin < 0 ? positionY * -1 : positionY;
+          objectIn.x = positionX; //objectIn.y = yMin < 0 ? positionY * -1 : positionY;
+
+          objectIn.y = positionY;
           coordinates[0].id++;
         } else if (coordinates[0].id === 1) {
-          objectOut.x = positionX;
-          objectOut.y = yMin < 0 ? positionY * -1 : positionY;
+          objectOut.x = positionX; //objectOut.y = yMin < 0 ? positionY * -1 : positionY;
+
+          objectOut.y = positionY;
           pointC.x = ((parseInt(objectIn.x, 10) + parseInt(objectOut.x, 10)) / 2).toString();
           pointC.y = ((parseInt(objectIn.y, 10) + parseInt(objectOut.y, 10)) / 2).toString();
           coordinates[0].id = 0;
@@ -4997,7 +5086,7 @@ function (_super) {
           _this.createOrientedLinkToClick({
             label: 'No',
             value: false
-          });
+          }, widthInitialSpace.toString(), heightInitialSpace.toString());
 
           _this.resetCoordinatesToDrawLinkWithClick();
         }
@@ -5027,7 +5116,7 @@ function (_super) {
               _this.createOrientedLinkToClick({
                 label: 'No',
                 value: false
-              });
+              }, '', '');
 
               _this.resetCoordinatesToDrawLinkWithClick();
             }
@@ -5068,7 +5157,7 @@ function (_super) {
                 _this.createOrientedLinkToClick({
                   label: 'No',
                   value: false
-                });
+                }, '', '');
 
                 _this.resetCoordinatesToDrawLinkWithClick();
               }
@@ -5107,7 +5196,7 @@ function (_super) {
                 _this.createOrientedLinkToClick({
                   label: 'No',
                   value: false
-                });
+                }, '', '');
 
                 _this.resetCoordinatesToDrawLinkWithClick();
               }
@@ -5138,7 +5227,7 @@ function (_super) {
                 _this.createOrientedLinkToClick({
                   label: 'No',
                   value: false
-                });
+                }, '', '');
 
                 _this.resetCoordinatesToDrawLinkWithClick();
               }
@@ -5153,87 +5242,86 @@ function (_super) {
       var coordinates = _this.props.options.coordinatesToDrawLinkWithClick;
       var objectIn = coordinates[1];
       var objectOut = coordinates[2];
-      var pointC = coordinates[3];
-      var heightPanel = parseInt(_this.props.options.baseMap.height, 10);
-      var widthPanel = parseInt(_this.props.options.baseMap.width, 10);
+      var pointC = coordinates[3]; // const heightPanel: number = parseInt(this.props.options.baseMap.height, 10);
+      // const widthPanel: number = parseInt(this.props.options.baseMap.width, 10);
+
       var initialSpace = _this.props.options.coordinateSpaceInitial.coordinate;
       var xMin = parseInt(initialSpace.xMin, 10);
       var xMax = parseInt(initialSpace.xMax, 10);
       var yMin = parseInt(initialSpace.yMin, 10);
-      var yMax = parseInt(initialSpace.yMax, 10);
-      var defaultReferentiel = _this.props.options.coordinateSpaceInitial.defaultReferentiel;
-      var positionX = 0;
-      var positionY = 0;
-      var xMinPx = 0;
-      var xMaxPx = 0;
+      var yMax = parseInt(initialSpace.yMax, 10); //const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
 
-      if (!defaultReferentiel) {
-        xMinPx = (xMin + 100) * (widthPanel / 200);
-        xMaxPx = (xMax + 100) * (widthPanel / 200); // if (xMin < 0 && xMax < 0) {
-        //   xMinPx = (xMax + 100) * (widthPanel / 200);
-        //   xMaxPx = (xMin + 100) * (widthPanel / 200);
-        // }
-      } else {
-        xMinPx = xMin * (widthPanel / 100);
-        xMaxPx = xMax * (widthPanel / 100);
-      }
-
-      var yMinPx = 0;
-      var yMaxPx = 0;
-
-      if (!defaultReferentiel) {
-        if (yMin < 0 && yMax < 0) {
-          yMinPx = (yMax + 100) * (heightPanel / 200);
-          yMaxPx = (yMin + 100) * (heightPanel / 200);
-        } else {
-          yMinPx = (yMin + 100) * (heightPanel / 200);
-          yMaxPx = (yMax + 100) * (heightPanel / 200);
-        }
-      } else {
-        yMinPx = yMin * (heightPanel / 100);
-        yMaxPx = yMax * (heightPanel / 100);
-      }
-
-      var widthInitialSpace = xMaxPx - xMinPx;
-      var heightInitialSpace = yMaxPx - yMinPx;
+      var widthInitialSpace = xMax - xMin;
+      var heightInitialSpace = yMax - yMin;
+      var positionX = event.nativeEvent.offsetX;
+      var positionY = heightInitialSpace - event.nativeEvent.offsetY; // let xMinPx = 0;
+      // let xMaxPx = 0;
+      // if (!defaultReferentiel) {
+      //   xMinPx = (xMin + 100) * (widthPanel / 200);
+      //   xMaxPx = (xMax + 100) * (widthPanel / 200);
+      //   // if (xMin < 0 && xMax < 0) {
+      //   //   xMinPx = (xMax + 100) * (widthPanel / 200);
+      //   //   xMaxPx = (xMin + 100) * (widthPanel / 200);
+      //   // }
+      // } else {
+      //   xMinPx = xMin * (widthPanel / 100);
+      //   xMaxPx = xMax * (widthPanel / 100);
+      // }
+      // let yMinPx = 0;
+      // let yMaxPx = 0;
+      // if (!defaultReferentiel) {
+      //   if (yMin < 0 && yMax < 0) {
+      //     yMinPx = (yMax + 100) * (heightPanel / 200);
+      //     yMaxPx = (yMin + 100) * (heightPanel / 200);
+      //   } else {
+      //     yMinPx = (yMin + 100) * (heightPanel / 200);
+      //     yMaxPx = (yMax + 100) * (heightPanel / 200);
+      //   }
+      // } else {
+      //   yMinPx = yMin * (heightPanel / 100);
+      //   yMaxPx = yMax * (heightPanel / 100);
+      // }
+      // const widthInitialSpace: number = xMaxPx - xMinPx;
+      // const heightInitialSpace: number = yMaxPx - yMinPx;
 
       if (event.nativeEvent.target.id === 'mainPanel' || event.nativeEvent.target.id === 'initialSpace' || event.nativeEvent.target.id === 'Intent' || event.nativeEvent.target.id === 'oct' + _this.props.options.baseMap.idSVG || event.nativeEvent.target.id === _this.props.options.baseMap.idSVG) {
-        if (!defaultReferentiel) {
-          positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
-        } else {
-          positionX = Math.round((event.nativeEvent.offsetX - xMinPx) / widthInitialSpace * 100);
-        }
-
-        if (!defaultReferentiel) {
-          if (yMax < 0) {
-            positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
-          } else {
-            positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
-          }
-        } else {
-          positionY = 100 - Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace * 100);
-        } // if (yMax > 0 && yMax < 100) {
+        // if (!defaultReferentiel) {
+        //   positionX = Math.round((event.nativeEvent.offsetX - xMinPx - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
+        // } else {
+        //   positionX = Math.round(((event.nativeEvent.offsetX - xMinPx) / widthInitialSpace) * 100);
+        // }
+        // if (!defaultReferentiel) {
+        //   if (yMax < 0) {
+        //     positionY = Math.round((event.nativeEvent.offsetY - heightInitialSpace / 2 - (heightPanel - yMaxPx)) * (100 / heightInitialSpace)) * 2 * -1;
+        //   } else {
+        //     positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
+        //   }
+        // } else {
+        //   positionY = 100 - Math.round(((event.nativeEvent.offsetY - (heightPanel - yMaxPx)) / heightInitialSpace) * 100);
+        // }
+        // if (yMax > 0 && yMax < 100) {
         //   positionY = Math.round((event.nativeEvent.offsetY - (heightPanel - yMaxPx) - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2;
         // }
-
-
         if (coordinates[0].id === 0) {
-          objectIn.x = positionX;
-          objectIn.y = yMin < 0 ? positionY * -1 : positionY;
+          objectIn.x = positionX; // objectIn.y = yMin < 0 ? positionY * -1 : positionY;
+
+          objectIn.y = positionY;
           coordinates[0].id++;
         } else if (coordinates[0].id === 1) {
-          objectOut.x = positionX;
-          objectOut.y = yMin < 0 ? positionY * -1 : positionY;
+          objectOut.x = positionX; // objectOut.y = yMin < 0 ? positionY * -1 : positionY;
+
+          objectOut.y = positionY;
           coordinates[0].id++;
         } else if (coordinates[0].id === 2) {
-          pointC.x = positionX;
-          pointC.y = yMin < 0 ? positionY * -1 : positionY;
+          pointC.x = positionX; //pointC.y = yMin < 0 ? positionY * -1 : positionY;
+
+          pointC.y = positionY;
           coordinates[0].id = 0;
 
           _this.createOrientedLinkToClick({
             label: 'Yes',
             value: true
-          });
+          }, widthInitialSpace.toString(), heightInitialSpace.toString());
 
           _this.resetCoordinatesToDrawLinkWithClick();
         }
@@ -5265,7 +5353,7 @@ function (_super) {
               _this.createOrientedLinkToClick({
                 label: 'Yes',
                 value: true
-              });
+              }, '', '');
 
               _this.resetCoordinatesToDrawLinkWithClick();
             }
@@ -5307,7 +5395,7 @@ function (_super) {
                 _this.createOrientedLinkToClick({
                   label: 'Yes',
                   value: true
-                });
+                }, '', '');
 
                 _this.resetCoordinatesToDrawLinkWithClick();
               }
@@ -5346,7 +5434,7 @@ function (_super) {
                 _this.createOrientedLinkToClick({
                   label: 'Yes',
                   value: true
-                });
+                }, '', '');
 
                 _this.resetCoordinatesToDrawLinkWithClick();
               }
@@ -5379,7 +5467,7 @@ function (_super) {
                 _this.createOrientedLinkToClick({
                   label: 'Yes',
                   value: true
-                });
+                }, '', '');
 
                 _this.resetCoordinatesToDrawLinkWithClick();
               }
@@ -5408,7 +5496,7 @@ function (_super) {
      */
 
 
-    _this.createOrientedLinkToClick = function (isIncurved) {
+    _this.createOrientedLinkToClick = function (isIncurved, widthInitialSpace, heightInitialSpace) {
       var coordinates = _this.props.options.coordinatesToDrawLinkWithClick;
 
       var id = _this.defineIdOrientedLink();
@@ -5465,7 +5553,7 @@ function (_super) {
         keyValue: '',
         refId: '',
         manageValue: 'avg'
-      }, []);
+      }, [], widthInitialSpace, heightInitialSpace, objectIn.x.toString(), objectIn.y.toString(), objectOut.x.toString(), objectOut.y.toString());
       var newArrayOrientedLink = _this.props.options.arrayOrientedLinks;
       newArrayOrientedLink.push(newOrientedLink); //const newValue = true;
 
@@ -5484,6 +5572,80 @@ function (_super) {
         _this.displayOrientedLink();
       }, 100);
     };
+    /**
+     * to do
+     */
+    // getValuesMainMetric(mainMetric: Metric, orientedLink?: OrientedLinkClass, point?: PointClass, isBidirectionnal?: boolean) {
+    //   let valueMainMetric = 0;
+    //   let totalValuesCount = 0;
+    //   const key: string = mainMetric.key;
+    //   const keyValue: string = mainMetric.keyValue;
+    //   if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
+    //     mainMetric.returnQuery.forEach((line: DataFrame) => {
+    //       if (line.fields[0].labels) {
+    //         if (key !== '' && keyValue !== '') {
+    //           if (line.fields[0].labels[key] === keyValue) {
+    //             const countValues: number = line.fields[0].values.length;
+    //             for (let i = 0; i < countValues; i++) {
+    //               if (line.fields[0].values.get(i)) {
+    //                 totalValuesCount++;
+    //                 valueMainMetric += line.fields[0].values.get(i);
+    //               }
+    //             }
+    //           }
+    //         } else {
+    //           const countValues: number = line.fields[0].values.length;
+    //           for (let i = 0; i < countValues; i++) {
+    //             if (line.fields[0].values.get(i)) {
+    //               totalValuesCount++;
+    //               valueMainMetric += line.fields[0].values.get(i);
+    //             }
+    //           }
+    //         }
+    //       }
+    //     });
+    //     if (orientedLink) {
+    //       if (!isBidirectionnal) {
+    //         if (mainMetric.manageValue === 'avg') {
+    //           orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
+    //         } else if (mainMetric.manageValue === 'sum') {
+    //           orientedLink.valueMainMetricA = valueMainMetric.toString();
+    //         } else if (mainMetric.manageValue === 'err') {
+    //           if (totalValuesCount > 1) {
+    //             orientedLink.valueMainMetricA = 'error';
+    //           } else {
+    //             orientedLink.valueMainMetricA = valueMainMetric.toString();
+    //           }
+    //         }
+    //       } else {
+    //         if (mainMetric.manageValue === 'avg') {
+    //           orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
+    //         } else if (mainMetric.manageValue === 'sum') {
+    //           orientedLink.valueMainMetricB = valueMainMetric.toString();
+    //         } else if (mainMetric.manageValue === 'err') {
+    //           if (totalValuesCount > 1) {
+    //             orientedLink.valueMainMetricB = 'error';
+    //           } else {
+    //             orientedLink.valueMainMetricB = valueMainMetric.toString();
+    //           }
+    //         }
+    //       }
+    //     } else if (point) {
+    //       if (mainMetric.manageValue === 'avg') {
+    //         point.valueMetric = (valueMainMetric / totalValuesCount).toString();
+    //       } else if (mainMetric.manageValue === 'sum') {
+    //         point.valueMetric = valueMainMetric.toString();
+    //       } else if (mainMetric.manageValue === 'err') {
+    //         if (totalValuesCount > 1) {
+    //           point.valueMetric = 'error';
+    //         } else {
+    //           point.valueMetric = valueMainMetric.toString();
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+
 
     _this.getValuesAuxiliaryMetricsPoint = function (point) {
       Object(Functions_fetchMetrics__WEBPACK_IMPORTED_MODULE_8__["reqMetricAuxPoint"])(point, _this.props);
@@ -6114,8 +6276,11 @@ function (_super) {
             }
           } else {
             this.chargeRegion();
-          }
+          } //Set value initialSpace with width and height of background
 
+
+          this.props.options.coordinateSpaceInitial.coordinate.xMax = this.props.options.baseMap.width;
+          this.props.options.coordinateSpaceInitial.coordinate.yMax = this.props.options.baseMap.height;
           this.updateButtonCss();
           return [2
           /*return*/
@@ -6471,7 +6636,11 @@ function (_super) {
         height: options.baseMap.height + 'px',
         top: '15%',
         left: 0
-      };
+      }; // const xMinInitialSpace = parseInt(options.coordinateSpaceInitial.coordinate.xMin, 10);
+      // const xMaxInitialSpace = parseInt(options.coordinateSpaceInitial.coordinate.xMax, 10);
+      // const yMinInitialSpace = parseInt(options.coordinateSpaceInitial.coordinate.yMin, 10);
+      // const yMaxInitialSpace = parseInt(options.coordinateSpaceInitial.coordinate.yMax, 10);
+
       var mapItems;
       mapItems = options.regionCoordinateSpace.map(function (line, index) {
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Draw_drawRectangleExtend__WEBPACK_IMPORTED_MODULE_15__["default"], {
@@ -6485,7 +6654,9 @@ function (_super) {
           id: 'region' + line.id.toString(),
           //isEnabled={true}
           buttonAddLinkIsActive: _this.state.buttonAddLinkIsActive,
-          buttonAddIncurvedLinkIsActive: _this.state.buttonAddIncurvedLinkIsActive
+          buttonAddIncurvedLinkIsActive: _this.state.buttonAddIncurvedLinkIsActive,
+          widthInitialSpaceDefault: line.widthInitialSpaceDefault,
+          heightInitialSpaceDefault: line.heightInitialSpaceDefault
         });
       });
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
@@ -6872,20 +7043,41 @@ function (_super) {
 
     var mapItems = [];
     this.props.options.arrayPoints.forEach(function (line) {
-      //console.log(line);
       var valueMainMetric = _this.getValuesMainMetricPoint(line).toString();
 
       _this.updatePositionOrientedLink(line);
 
       var valuesAuxiliaryMetrics = _this.getValuesAuxiliaryMetricsPoint(line);
 
+      var ratioX = parseInt(line.positionXDefault, 10) / parseInt(line.widthInitialSpaceDefault, 10);
+      var ratioY = (parseInt(line.heightInitialSpaceDefault, 10) - parseInt(line.positionYDefault, 10)) / parseInt(line.heightInitialSpaceDefault, 10);
+      var xMinInitialSpace = parseInt(_this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
+      var xMaxInitialSpace = parseInt(_this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
+      var yMinInitialSpace = parseInt(_this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
+      var yMaxInitialSpace = parseInt(_this.props.options.coordinateSpaceInitial.coordinate.yMax, 10);
+      var widthInitialSpace = xMaxInitialSpace - xMinInitialSpace;
+      var heightInitialSpace = yMaxInitialSpace - yMinInitialSpace;
+      var x;
+
+      if (parseInt(line.widthInitialSpaceDefault, 10) !== widthInitialSpace) {
+        x = xMinInitialSpace + widthInitialSpace * ratioX;
+      } else {
+        x = widthInitialSpace * parseInt(line.positionShapeX, 10) / parseInt(line.widthInitialSpaceDefault, 10);
+      }
+
+      var y = parseInt(_this.props.options.baseMap.height, 10) - yMaxInitialSpace + heightInitialSpace * ratioY;
+      line.positionShapeX = x.toString();
+      line.positionShapeY = y.toString(); // console.log(x)
+      // console.log(y)
+      // console.log(line)
+
       var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawPoint__WEBPACK_IMPORTED_MODULE_12__["default"], {
         key: 'point' + line.id.toString(),
         drawGraphicMarker: line.drawGraphicMarker,
         shape: line.shape,
         size: line.sizeWidth,
-        positionShapeX: line.positionShapeX,
-        positionShapeY: line.positionShapeY,
+        positionShapeX: x.toString(),
+        positionShapeY: y.toString(),
         label: line.label,
         widthImage: parseInt(_this.props.options.baseMap.width, 10),
         heightImage: parseInt(_this.props.options.baseMap.height, 10),
@@ -6911,7 +7103,9 @@ function (_super) {
         valuesAuxiliaryMetrics: valuesAuxiliaryMetrics,
         linkUrl: line.linkURL,
         buttonAddLinkIsActive: _this.state.buttonAddLinkIsActive,
-        buttonAddIncurvedLinkIsActive: _this.state.buttonAddIncurvedLinkIsActive
+        buttonAddIncurvedLinkIsActive: _this.state.buttonAddIncurvedLinkIsActive,
+        widthInitialSpaceDefault: line.widthInitialSpaceDefault,
+        heightInitialSpaceDefault: line.heightInitialSpaceDefault
       });
       mapItems.push(item);
     });
@@ -6940,14 +7134,44 @@ function (_super) {
 
       var valuesAuxiliaryMetricsB = _this.getValuesAuxiliaryMetricsOrientedLinkB(orientedLink);
 
+      var ratioXA = parseInt(orientedLink.pointAPositionXDefault, 10) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
+      var ratioYA = (parseInt(orientedLink.heightInitialSpaceDefault, 10) - parseInt(orientedLink.pointAPositionYDefault, 10)) / parseInt(orientedLink.heightInitialSpaceDefault, 10);
+      var ratioXB = parseInt(orientedLink.pointBPositionXDefault, 10) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
+      var ratioYB = (parseInt(orientedLink.heightInitialSpaceDefault, 10) - parseInt(orientedLink.pointBPositionYDefault, 10)) / parseInt(orientedLink.heightInitialSpaceDefault, 10);
+      var xMinInitialSpace = parseInt(_this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
+      var xMaxInitialSpace = parseInt(_this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
+      var yMinInitialSpace = parseInt(_this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
+      var yMaxInitialSpace = parseInt(_this.props.options.coordinateSpaceInitial.coordinate.yMax, 10);
+      var widthInitialSpace = xMaxInitialSpace - xMinInitialSpace;
+      var heightInitialSpace = yMaxInitialSpace - yMinInitialSpace;
+      var xA;
+      var xB;
+      console.log(orientedLink);
+
+      if (parseInt(orientedLink.widthInitialSpaceDefault, 10) !== widthInitialSpace) {
+        xA = xMinInitialSpace + widthInitialSpace * ratioXA;
+        xB = xMinInitialSpace + widthInitialSpace * ratioXB;
+      } else {
+        xA = widthInitialSpace * parseInt(orientedLink.pointAPositionX, 10) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
+        xB = widthInitialSpace * parseInt(orientedLink.pointBPositionX, 10) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
+      }
+
+      var yA = parseInt(_this.props.options.baseMap.height, 10) - yMaxInitialSpace + heightInitialSpace * ratioYA;
+      var yB = parseInt(_this.props.options.baseMap.height, 10) - yMaxInitialSpace + heightInitialSpace * ratioYB;
+      orientedLink.pointAPositionX = xA.toString();
+      orientedLink.pointBPositionX = xB.toString();
+      orientedLink.pointAPositionY = yA.toString();
+      orientedLink.pointBPositionY = yB.toString();
+      console.log(yA);
+      console.log(yB);
       item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Draw_drawOrientedLink__WEBPACK_IMPORTED_MODULE_13__["default"], {
         key: 'orientedLink' + orientedLink.id.toString(),
         id: orientedLink.id.toString(),
         orientationLink: orientedLink.orientationLink.value || '',
-        pointAPositionX: orientedLink.pointAPositionX,
-        pointAPositionY: orientedLink.pointAPositionY,
-        pointBPositionX: orientedLink.pointBPositionX,
-        pointBPositionY: orientedLink.pointBPositionY,
+        pointAPositionX: xA.toString(),
+        pointAPositionY: yA.toString(),
+        pointBPositionX: xB.toString(),
+        pointBPositionY: yB.toString(),
         colorA: orientedLink.colorCoordinateA,
         colorB: orientedLink.colorCoordinateB,
         associatePointIn: orientedLink.pointIn,
@@ -6985,7 +7209,9 @@ function (_super) {
         police: _this.props.options.display.police,
         sizePolice: _this.props.options.display.size,
         linkUrl: orientedLink.linkURL,
-        size: orientedLink.size
+        size: orientedLink.size,
+        widthInitialSpaceDefault: orientedLink.widthInitialSpaceDefault,
+        heightInitialSpaceDefault: orientedLink.heightInitialSpaceDefault
       });
       mapItems.push(item);
     });
@@ -7036,89 +7262,22 @@ function (_super) {
     result = Object(Functions_getResultQuery__WEBPACK_IMPORTED_MODULE_9__["getResultQuery"])(orientedLink.mainMetricB) || NaN;
     return result;
   };
-  /**
-   * to do
-   */
-
-
-  SimplePanel.prototype.getValuesMainMetric = function (mainMetric, orientedLink, point, isBidirectionnal) {
-    var valueMainMetric = 0;
-    var totalValuesCount = 0;
-    var key = mainMetric.key;
-    var keyValue = mainMetric.keyValue;
-
-    if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
-      mainMetric.returnQuery.forEach(function (line) {
-        if (line.fields[0].labels) {
-          if (key !== '' && keyValue !== '') {
-            if (line.fields[0].labels[key] === keyValue) {
-              var countValues = line.fields[0].values.length;
-
-              for (var i = 0; i < countValues; i++) {
-                if (line.fields[0].values.get(i)) {
-                  totalValuesCount++;
-                  valueMainMetric += line.fields[0].values.get(i);
-                }
-              }
-            }
-          } else {
-            var countValues = line.fields[0].values.length;
-
-            for (var i = 0; i < countValues; i++) {
-              if (line.fields[0].values.get(i)) {
-                totalValuesCount++;
-                valueMainMetric += line.fields[0].values.get(i);
-              }
-            }
-          }
-        }
-      });
-
-      if (orientedLink) {
-        if (!isBidirectionnal) {
-          if (mainMetric.manageValue === 'avg') {
-            orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
-          } else if (mainMetric.manageValue === 'sum') {
-            orientedLink.valueMainMetricA = valueMainMetric.toString();
-          } else if (mainMetric.manageValue === 'err') {
-            if (totalValuesCount > 1) {
-              orientedLink.valueMainMetricA = 'error';
-            } else {
-              orientedLink.valueMainMetricA = valueMainMetric.toString();
-            }
-          }
-        } else {
-          if (mainMetric.manageValue === 'avg') {
-            orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
-          } else if (mainMetric.manageValue === 'sum') {
-            orientedLink.valueMainMetricB = valueMainMetric.toString();
-          } else if (mainMetric.manageValue === 'err') {
-            if (totalValuesCount > 1) {
-              orientedLink.valueMainMetricB = 'error';
-            } else {
-              orientedLink.valueMainMetricB = valueMainMetric.toString();
-            }
-          }
-        }
-      } else if (point) {
-        if (mainMetric.manageValue === 'avg') {
-          point.valueMetric = (valueMainMetric / totalValuesCount).toString();
-        } else if (mainMetric.manageValue === 'sum') {
-          point.valueMetric = valueMainMetric.toString();
-        } else if (mainMetric.manageValue === 'err') {
-          if (totalValuesCount > 1) {
-            point.valueMetric = 'error';
-          } else {
-            point.valueMetric = valueMainMetric.toString();
-          }
-        }
-      }
-    }
-  };
 
   SimplePanel.prototype.componentDidUpdate = function (prevProps) {
     if (this.state.currentImage !== this.props.options.baseMap.image) {
       this.componentDidMount();
+    } //Set width initialSpace if new width in display
+
+
+    if (this.props.options.baseMap.width !== this.props.options.coordinateSpaceInitial.coordinate.xMax && !this.props.options.updateOnlyInitialSpace) {
+      //console.log('newWidth');
+      this.props.options.coordinateSpaceInitial.coordinate.xMax = this.props.options.baseMap.width;
+    } //Set height initialSpace if new height in display
+
+
+    if (this.props.options.baseMap.height !== this.props.options.coordinateSpaceInitial.coordinate.yMax && !this.props.options.updateOnlyInitialSpace) {
+      //console.log('newHeight');
+      this.props.options.coordinateSpaceInitial.coordinate.yMax = this.props.options.baseMap.height;
     } // if (this.props.options.baseMap.image !== prevProps.options.baseMap.image) {
     //   this.componentDidMount();
     // }
@@ -7737,6 +7896,21 @@ function (_super) {
 
 
     _this.callBack = function () {
+      // Define defaultCoor + defaultWidth + default height to creation of region
+      var newArrayCoor = _this.state.arrayCoor;
+      newArrayCoor.coordsDefault = {
+        xMin: _this.state.arrayCoor.coords.xMin,
+        xMax: _this.state.arrayCoor.coords.xMax,
+        yMin: _this.state.arrayCoor.coords.yMin,
+        yMax: _this.state.arrayCoor.coords.yMax
+      };
+      newArrayCoor.widthInitialSpaceDefault = (parseInt(_this.props.options.coordinateSpaceInitial.coordinate.xMax, 10) - parseInt(_this.props.options.coordinateSpaceInitial.coordinate.xMin, 10)).toString();
+      newArrayCoor.heightInitialSpaceDefault = (parseInt(_this.props.options.coordinateSpaceInitial.coordinate.yMax, 10) - parseInt(_this.props.options.coordinateSpaceInitial.coordinate.yMin, 10)).toString();
+
+      _this.setState({
+        arrayCoor: newArrayCoor
+      });
+
       var waitAlert = 3000;
 
       if (_this.state.arrayCoor.label === '') {
@@ -11836,7 +12010,8 @@ function (_super) {
 
   Point.prototype._handleChange = function (currentTarget, name, index) {
     var tmp = this.state.point;
-    tmp = Object(_Functions_EditParameter_editGoodParameterPoint__WEBPACK_IMPORTED_MODULE_5__["editGoodParameterPoint"])(name, tmp, currentTarget, {});
+    tmp = Object(_Functions_EditParameter_editGoodParameterPoint__WEBPACK_IMPORTED_MODULE_5__["editGoodParameterPoint"])(name, tmp, currentTarget, {}); //console.log(tmp);
+
     this.setState({
       point: tmp
     });
@@ -11844,7 +12019,8 @@ function (_super) {
 
     if (this.props.isAddPoint === false) {
       this.callBack();
-    }
+    } //console.log(this.state.point);
+
   };
   /**
    * Get value of input with state.arrayPointClass
@@ -12088,19 +12264,16 @@ function (_super) {
   Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DrawOrientedLink, _super);
 
   function DrawOrientedLink(props) {
-    var _this = _super.call(this, props) || this;
+    var _this = _super.call(this, props) || this; // private defineValueToAdaptPositionYToInitialSpace = (yMinPx: number, yMaxPx: number): number => {
+    //   let valueToAdaptPositionToInitialSpace = 0;
+    //   if (yMaxPx > yMinPx) {
+    //     valueToAdaptPositionToInitialSpace = this.props.heightImage - yMaxPx;
+    //   } else {
+    //     valueToAdaptPositionToInitialSpace = this.props.heightImage - yMinPx;
+    //   }
+    //   return valueToAdaptPositionToInitialSpace;
+    // };
 
-    _this.defineValueToAdaptPositionYToInitialSpace = function (yMinPx, yMaxPx) {
-      var valueToAdaptPositionToInitialSpace = 0;
-
-      if (yMaxPx > yMinPx) {
-        valueToAdaptPositionToInitialSpace = _this.props.heightImage - yMaxPx;
-      } else {
-        valueToAdaptPositionToInitialSpace = _this.props.heightImage - yMinPx;
-      }
-
-      return valueToAdaptPositionToInitialSpace;
-    };
 
     _this.labelSynchroX = function (whatLabel) {
       var _a, _b;
@@ -14165,25 +14338,21 @@ function (_super) {
 
 
   DrawOrientedLink.prototype.defineLimitX = function (coordinateX) {
-    var result = coordinateX;
-
-    if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
-      if (coordinateX > 100) {
-        result = 100;
-      }
-
-      if (coordinateX < 0) {
-        result = 0;
-      }
-    } else {
-      if (coordinateX > 100) {
-        result = 100;
-      }
-
-      if (coordinateX < -100) {
-        result = -100;
-      }
-    }
+    var result = coordinateX; // if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
+    //   if (coordinateX > 100) {
+    //     result = 100;
+    //   }
+    //   if (coordinateX < 0) {
+    //     result = 0;
+    //   }
+    // } else {
+    //   if (coordinateX > 100) {
+    //     result = 100;
+    //   }
+    //   if (coordinateX < -100) {
+    //     result = -100;
+    //   }
+    // }
 
     return result;
   };
@@ -14195,85 +14364,95 @@ function (_super) {
 
 
   DrawOrientedLink.prototype.defineLimitY = function (coordinateY) {
-    var result = coordinateY;
-
-    if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
-      if (coordinateY > 100) {
-        result = 100;
-      }
-
-      if (coordinateY < 0) {
-        result = 0;
-      }
-    } else {
-      if (coordinateY > 100) {
-        result = 100;
-      }
-
-      if (coordinateY < -100) {
-        result = -100;
-      }
-    }
+    var result = coordinateY; // if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
+    //   if (coordinateY > 100) {
+    //     result = 100;
+    //   }
+    //   if (coordinateY < 0) {
+    //     result = 0;
+    //   }
+    // } else {
+    //   if (coordinateY > 100) {
+    //     result = 100;
+    //   }
+    //   if (coordinateY < -100) {
+    //     result = -100;
+    //   }
+    // }
 
     return result;
   };
 
   DrawOrientedLink.prototype.synchroLinkX = function (positionX) {
-    var initialSpace = this.props.options.coordinateSpaceInitial.coordinate;
-    var xMin = parseInt(initialSpace.xMin, 10);
-    var xMax = parseInt(initialSpace.xMax, 10);
-    var defaultReferentiel = this.props.options.coordinateSpaceInitial.defaultReferentiel;
-    var xMinPx = 0;
-    var xMaxPx = 0;
-    var x = 0;
-
-    if (!defaultReferentiel) {
-      if (xMin < 0 && xMax < 0) {
-        xMinPx = (xMax + 100) * (this.props.widthImage / 200);
-        xMaxPx = (xMin + 100) * (this.props.widthImage / 200);
-      } else {
-        xMinPx = (xMin + 100) * (this.props.widthImage / 200);
-        xMaxPx = (xMax + 100) * (this.props.widthImage / 200);
-      }
-
-      var widthInitialSpace = xMaxPx - xMinPx;
-      x = xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2);
-    } else {
-      xMinPx = xMin * (this.props.widthImage / 100);
-      xMaxPx = xMax * (this.props.widthImage / 100);
-      var widthInitialSpace = xMaxPx - xMinPx;
-      x = xMinPx + this.defineLimitX(positionX) * (widthInitialSpace / 100);
-    }
+    // const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
+    // const xMin: number = parseInt(initialSpace.xMin, 10);
+    // const xMax: number = parseInt(initialSpace.xMax, 10);
+    //const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
+    // let xMinPx = 0;
+    // let xMaxPx = 0;
+    var x = this.defineLimitX(positionX); // if (!defaultReferentiel) {
+    //   if (xMin < 0 && xMax < 0) {
+    //     xMinPx = (xMax + 100) * (this.props.widthImage / 200);
+    //     xMaxPx = (xMin + 100) * (this.props.widthImage / 200);
+    //   } else {
+    //     xMinPx = (xMin + 100) * (this.props.widthImage / 200);
+    //     xMaxPx = (xMax + 100) * (this.props.widthImage / 200);
+    //   }
+    //const widthInitialSpace: number = xMax - xMin;
+    //   x = xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2);
+    // } else {
+    //   xMinPx = xMin * (this.props.widthImage / 100);
+    //   xMaxPx = xMax * (this.props.widthImage / 100);
+    //   const widthInitialSpace: number = xMaxPx - xMinPx;
+    //   x = xMinPx + this.defineLimitX(positionX) * (widthInitialSpace / 100);
+    // }
+    //x = this.defineLimitX(positionX / (parseInt(this.props.widthInitialSpaceDefault, 10) / xMax));
+    // if (parseInt(this.props.widthInitialSpaceDefault, 10) - widthInitialSpace === 0) {
+    //   x = this.defineLimitX(widthInitialSpace * positionX / parseInt(this.props.widthInitialSpaceDefault, 10));
+    // } else {
+    //   x = this.defineLimitX(xMin + widthInitialSpace * positionX / parseInt(this.props.widthInitialSpaceDefault, 10));
+    // }
 
     return x;
   };
 
   DrawOrientedLink.prototype.synchroLinkY = function (positionY) {
-    var initialSpace = this.props.options.coordinateSpaceInitial.coordinate;
-    var yMin = parseInt(initialSpace.yMin, 10);
-    var yMax = parseInt(initialSpace.yMax, 10);
-    var defaultReferentiel = this.props.options.coordinateSpaceInitial.defaultReferentiel;
-    var yMinPx = 0;
-    var yMaxPx = 0;
-    var y = 0;
-
-    if (!defaultReferentiel) {
-      if (yMin < 0 && yMax < 0) {
-        yMinPx = (yMax + 100) * (this.props.heightImage / 200);
-        yMaxPx = (yMin + 100) * (this.props.heightImage / 200);
-      } else {
-        yMinPx = (yMin + 100) * (this.props.heightImage / 200);
-        yMaxPx = (yMax + 100) * (this.props.heightImage / 200);
-      }
-
-      var heightInitialSpace = yMaxPx - yMinPx;
-      y = this.defineValueToAdaptPositionYToInitialSpace(yMinPx, yMaxPx) + (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 200));
-    } else {
-      yMinPx = yMin * (this.props.heightImage / 100);
-      yMaxPx = yMax * (this.props.heightImage / 100);
-      var heightInitialSpace = yMaxPx - yMinPx;
-      y = this.defineValueToAdaptPositionYToInitialSpace(yMinPx, yMaxPx) + this.defineLimitY(100 - positionY) * (heightInitialSpace / 100);
-    }
+    // const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
+    // const yMin: number = parseInt(initialSpace.yMin, 10);
+    // const yMax: number = parseInt(initialSpace.yMax, 10);
+    //const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
+    // let yMinPx = 0;
+    // let yMaxPx = 0;
+    var y = this.defineLimitY(positionY); // if (!defaultReferentiel) {
+    //   if (yMin < 0 && yMax < 0) {
+    //     yMinPx = (yMax + 100) * (this.props.heightImage / 200);
+    //     yMaxPx = (yMin + 100) * (this.props.heightImage / 200);
+    //   } else {
+    //     yMinPx = (yMin + 100) * (this.props.heightImage / 200);
+    //     yMaxPx = (yMax + 100) * (this.props.heightImage / 200);
+    //   }
+    //const heightInitialSpace: number = yMax - yMin;
+    //   y =
+    //     this.defineValueToAdaptPositionYToInitialSpace(yMinPx, yMaxPx) +
+    //     (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 200));
+    // } else {
+    //   yMinPx = yMin * (this.props.heightImage / 100);
+    //   yMaxPx = yMax * (this.props.heightImage / 100);
+    //   const heightInitialSpace: number = yMaxPx - yMinPx;
+    //   y = this.defineValueToAdaptPositionYToInitialSpace(yMinPx, yMaxPx) + this.defineLimitY(100 - positionY) * (heightInitialSpace / 100);
+    // }
+    // y =
+    //   this.props.heightImage -
+    //   yMax +
+    //   this.defineLimitY(parseInt(this.props.heightInitialSpaceDefault, 10) - positionY) /
+    //     (parseInt(this.props.heightInitialSpaceDefault, 10) / yMax) -
+    //   yMin / 2;
+    // y = this.defineLimitY(positionY / (parseInt(this.props.heightInitialSpaceDefault, 10) / yMax));
+    // y = this.defineLimitY(
+    //   this.props.heightImage -
+    //     yMax +
+    //     heightInitialSpace * ((parseInt(this.props.heightInitialSpaceDefault, 10) - positionY) / parseInt(this.props.heightInitialSpaceDefault, 10))
+    // );
 
     return y;
   }; // private ifMultiLinkWithPointDefineX = (isIn: boolean, idMultiLink: number): number => {
@@ -15285,18 +15464,6 @@ function (_super) {
   function DrawPoint(props) {
     var _this = _super.call(this, props) || this;
 
-    _this.defineValueToAdaptPositionYToInitialSpace = function (yMinPx, yMaxPx) {
-      var valueToAdaptPositionToInitialSpace = 0;
-
-      if (yMaxPx > yMinPx) {
-        valueToAdaptPositionToInitialSpace = _this.props.heightImage - yMaxPx;
-      } else {
-        valueToAdaptPositionToInitialSpace = _this.props.heightImage - yMinPx;
-      }
-
-      return valueToAdaptPositionToInitialSpace;
-    };
-
     _this.defineBorderRadius = function () {
       var result = 0;
       var shape = _this.props.shape.value || '';
@@ -15548,25 +15715,31 @@ function (_super) {
 
 
   DrawPoint.prototype.defineLimitX = function (coordinateX) {
-    var result = coordinateX;
+    var result = coordinateX; // if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
+    //   if (coordinateX > 100) {
+    //     result = 100;
+    //   }
+    //   if (coordinateX < 0) {
+    //     result = 0;
+    //   }
+    // } else {
+    //   if (coordinateX > 100) {
+    //     result = 100;
+    //   }
+    //   if (coordinateX < -100) {
+    //     result = -100;
+    //   }
+    // }
 
-    if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
-      if (coordinateX > 100) {
-        result = 100;
-      }
+    if (coordinateX > parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10)) {
+      console.log('trop grand');
+      result = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
+    } else if (coordinateX < parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10)) {
+      console.log('trop petit');
+      result = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
+    } // console.log('x draw')
+    // console.log(result)
 
-      if (coordinateX < 0) {
-        result = 0;
-      }
-    } else {
-      if (coordinateX > 100) {
-        result = 100;
-      }
-
-      if (coordinateX < -100) {
-        result = -100;
-      }
-    }
 
     return result;
   };
@@ -15578,27 +15751,24 @@ function (_super) {
 
 
   DrawPoint.prototype.defineLimitY = function (coordinateY) {
-    var result = coordinateY;
-
-    if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
-      //console.log(coordinateY);
-      if (coordinateY > 100) {
-        result = 100;
-      }
-
-      if (coordinateY < 0) {
-        result = 0;
-      }
-    } else {
-      if (coordinateY > 100) {
-        result = 100;
-      }
-
-      if (coordinateY < -100) {
-        result = -100;
-      }
-    } //console.log(result);
-
+    var result = coordinateY; // if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
+    //   //console.log(coordinateY);
+    //   if (coordinateY > 100) {
+    //     result = 100;
+    //   }
+    //   if (coordinateY < 0) {
+    //     result = 0;
+    //   }
+    // } else {
+    //   if (coordinateY > 100) {
+    //     result = 100;
+    //   }
+    //   if (coordinateY < -100) {
+    //     result = -100;
+    //   }
+    // }
+    // console.log('y draw')
+    // console.log(result);
 
     return result;
   };
@@ -15611,30 +15781,50 @@ function (_super) {
 
 
   DrawPoint.prototype.definePositionX = function (positionX, initialSpace, size, shape) {
-    var xMin = parseInt(initialSpace.xMin, 10);
-    var xMax = parseInt(initialSpace.xMax, 10);
-    var defaultReferentiel = this.props.options.coordinateSpaceInitial.defaultReferentiel;
-    var x;
-    var xMinPx = 0;
-    var xMaxPx = 0;
-
-    if (!defaultReferentiel) {
-      if (xMin < 0 && xMax < 0) {
-        xMinPx = (xMax + 100) * (this.props.widthImage / 200);
-        xMaxPx = (xMin + 100) * (this.props.widthImage / 200);
-      } else {
-        xMinPx = (xMin + 100) * (this.props.widthImage / 200);
-        xMaxPx = (xMax + 100) * (this.props.widthImage / 200);
-      }
-
-      var widthInitialSpace = xMaxPx - xMinPx;
-      x = xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - (size + parseInt(this.defineBorderSize(), 10));
-    } else {
-      xMinPx = xMin * (this.props.widthImage / 100);
-      xMaxPx = xMax * (this.props.widthImage / 100);
-      var widthInitialSpace = xMaxPx - xMinPx;
-      x = xMinPx + this.defineLimitX(positionX) * (widthInitialSpace / 100) - (size + parseInt(this.defineBorderSize(), 10));
-    }
+    // const xMin: number = parseInt(initialSpace.xMin, 10);
+    // const xMax: number = parseInt(initialSpace.xMax, 10);
+    //const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
+    var x = this.defineLimitX(positionX) - (size + parseInt(this.defineBorderSize(), 10)); // if (!defaultReferentiel) {
+    //   if (xMin < 0 && xMax < 0) {console.log('update x');
+    //     xMinPx = (xMax + 100) * (this.props.widthImage / 200);
+    //     xMaxPx = (xMin + 100) * (this.props.widthImage / 200);
+    //   } else {
+    //     xMinPx = (xMin + 100) * (this.props.widthImage / 200);
+    //     xMaxPx = (xMax + 100) * (this.props.widthImage / 200);
+    //   }
+    //const widthInitialSpace: number = xMax - xMin;
+    //   x =
+    //     xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - (size + parseInt(this.defineBorderSize(), 10));
+    // } else {
+    //   xMinPx = xMin * (this.props.widthImage / 100);
+    //   xMaxPx = xMax * (this.props.widthImage / 100);
+    //   const widthInitialSpace: number = xMaxPx - xMinPx;
+    //   x = xMinPx + this.defineLimitX(positionX) * (widthInitialSpace / 100) - (size + parseInt(this.defineBorderSize(), 10));
+    // }
+    // x =
+    //   this.defineLimitX(xMin + positionX / (parseInt(this.props.widthInitialSpaceDefault, 10) / xMax) - xMin / 2) -
+    //   (size + parseInt(this.defineBorderSize(), 10));
+    // if (xMin > 0) {
+    //   x =
+    //     this.defineLimitX(positionX / (parseInt(this.props.widthInitialSpaceDefault, 10) / xMax) + xMin) -
+    //     (size + parseInt(this.defineBorderSize(), 10));
+    // } else {
+    //   x = this.defineLimitX(positionX / (parseInt(this.props.widthInitialSpaceDefault, 10) / xMax)) - (size + parseInt(this.defineBorderSize(), 10));
+    // }
+    // if (parseInt(this.props.widthInitialSpaceDefault, 10) - widthInitialSpace === 0) {
+    //   x =
+    //     this.defineLimitX(widthInitialSpace * positionX / parseInt(this.props.widthInitialSpaceDefault, 10)) -
+    //     (size + parseInt(this.defineBorderSize(), 10));
+    // } else {
+    //   x =
+    //     this.defineLimitX(xMin + widthInitialSpace * positionX / parseInt(this.props.widthInitialSpaceDefault, 10)) -
+    //     (size + parseInt(this.defineBorderSize(), 10));
+    // }
+    // this.props.options.arrayPoints.forEach(point => {
+    //   if (point.name === this.props.name) {
+    //     point.positionShapeX = x.toString();
+    //   }
+    // })
 
     return x;
   };
@@ -15647,33 +15837,73 @@ function (_super) {
 
 
   DrawPoint.prototype.definePositionY = function (positionY, initialSpace, size, shapeGraphicMarker) {
-    var y;
-    var yMin = parseInt(initialSpace.yMin, 10);
-    var yMax = parseInt(initialSpace.yMax, 10);
-    var defaultReferentiel = this.props.options.coordinateSpaceInitial.defaultReferentiel;
-    var yMinPx = 0;
-    var yMaxPx = 0;
-
-    if (!defaultReferentiel) {
-      if (yMin < 0 && yMax < 0) {
-        yMinPx = (yMax + 100) * (this.props.heightImage / 200);
-        yMaxPx = (yMin + 100) * (this.props.heightImage / 200);
-      } else {
-        yMinPx = (yMin + 100) * (this.props.heightImage / 200);
-        yMaxPx = (yMax + 100) * (this.props.heightImage / 200);
-      }
-
-      var heightInitialSpace = yMaxPx - yMinPx;
-      y = this.defineValueToAdaptPositionYToInitialSpace(yMinPx, yMaxPx) + (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 2 / 100) - (size + parseInt(this.defineBorderSize(), 10)));
-    } else {
-      yMinPx = yMin * (this.props.heightImage / 100);
-      yMaxPx = yMax * (this.props.heightImage / 100);
-      var heightInitialSpace = yMaxPx - yMinPx;
-      y = this.defineValueToAdaptPositionYToInitialSpace(yMinPx, yMaxPx) + this.defineLimitY(100 - positionY) * (heightInitialSpace / 100) - (size + parseInt(this.defineBorderSize(), 10));
-    }
+    // const yMin: number = parseInt(initialSpace.yMin, 10);
+    // const yMax: number = parseInt(initialSpace.yMax, 10);
+    //const heightInitialSpace: number = yMax - yMin;
+    //const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
+    var y = this.defineLimitY(positionY) - (size + parseInt(this.defineBorderSize(), 10)); // let yMinPx = 0;
+    // let yMaxPx = 0;
+    // if (!defaultReferentiel) {
+    //   if (yMin < 0 && yMax < 0) {
+    //     yMinPx = (yMax + 100) * (this.props.heightImage / 200);
+    //     yMaxPx = (yMin + 100) * (this.props.heightImage / 200);
+    //   } else {
+    //     yMinPx = (yMin + 100) * (this.props.heightImage / 200);
+    //     yMaxPx = (yMax + 100) * (this.props.heightImage / 200);
+    //   }
+    //   y =
+    //     this.defineValueToAdaptPositionYToInitialSpace(yMinPx, yMaxPx) +
+    //     (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 2 / 100) - (size + parseInt(this.defineBorderSize(), 10)));
+    // } else {
+    //   yMinPx = yMin * (this.props.heightImage / 100);
+    //   yMaxPx = yMax * (this.props.heightImage / 100);
+    // const heightInitialSpace: number = yMax - yMin;
+    //   y =
+    //     this.defineValueToAdaptPositionYToInitialSpace(yMinPx, yMaxPx) +
+    //     this.defineLimitY(100 - positionY) * (heightInitialSpace / 100) -
+    //     (size + parseInt(this.defineBorderSize(), 10));
+    // }
+    // y =
+    //   this.props.heightImage -
+    //   yMax +
+    //   this.defineLimitY(parseInt(this.props.heightInitialSpaceDefault, 10) - positionY) /
+    //     (parseInt(this.props.heightInitialSpaceDefault, 10) / yMax) -
+    //   (size + parseInt(this.defineBorderSize(), 10)) -
+    //   yMin / 2;
+    //y = this.defineLimitY(positionY / (parseInt(this.props.heightInitialSpaceDefault, 10) / yMax)) - (size + parseInt(this.defineBorderSize(), 10));
+    // if (parseInt(this.props.heightInitialSpaceDefault, 10) - heightInitialSpace === 0) {
+    //   y =
+    //     this.defineLimitY(heightInitialSpace * ((heightInitialSpace - positionY) / parseInt(this.props.heightInitialSpaceDefault, 10))) -
+    //     (size + parseInt(this.defineBorderSize(), 10));
+    // } else {
+    //   y =
+    //     this.defineLimitY(yMin + heightInitialSpace * ((heightInitialSpace - positionY) / parseInt(this.props.heightInitialSpaceDefault, 10))) -
+    //     (size + parseInt(this.defineBorderSize(), 10));
+    // }
+    // y =
+    //   this.defineLimitY(
+    //     this.props.heightImage -
+    //       yMax +
+    //       heightInitialSpace * ((parseInt(this.props.heightInitialSpaceDefault, 10) - positionY) / parseInt(this.props.heightInitialSpaceDefault, 10))
+    //   ) -
+    //   (size + parseInt(this.defineBorderSize(), 10));
+    // this.props.options.arrayPoints.forEach(point => {
+    //   if (point.name === this.props.name) {
+    //     point.positionShapeY = y.toString();
+    //   }
+    // })
 
     return y;
-  };
+  }; // private defineValueToAdaptPositionYToInitialSpace = (yMinPx: number, yMaxPx: number): number => {
+  //   let valueToAdaptPositionToInitialSpace = 0;
+  //   if (yMaxPx > yMinPx) {
+  //     valueToAdaptPositionToInitialSpace = this.props.heightImage - yMaxPx;
+  //   } else {
+  //     valueToAdaptPositionToInitialSpace = this.props.heightImage - yMinPx;
+  //   }
+  //   return valueToAdaptPositionToInitialSpace;
+  // };
+
   /**
    * to do
    * @param sizeGraphicMarker
@@ -16139,10 +16369,10 @@ function (_super) {
     var initialSpace = this.props.options.coordinateSpaceInitial.coordinate;
     var shape = this.props.shape.value || '';
     var size = this.defineSizeGraphicMarkerPx(this.props.size.value || '', shape);
-    var valueInputPositionArrowX = parseInt(this.props.positionShapeX, 10) || 0;
-    var valueInputPositionArrowY = parseInt(this.props.positionShapeY, 10) || 0;
-    var positionShapeX = this.definePositionX(valueInputPositionArrowX, initialSpace, size, shape);
-    var positionShapeY = this.definePositionY(valueInputPositionArrowY, initialSpace, size, shape);
+    var valuePositionX = parseInt(this.props.positionShapeX, 10) || 0;
+    var valuePositionY = parseInt(this.props.positionShapeY, 10) || 0;
+    var positionShapeX = this.definePositionX(valuePositionX, initialSpace, size, shape);
+    var positionShapeY = this.definePositionY(valuePositionY, initialSpace, size, shape);
     var label = this.props.label;
     var name = this.props.name;
     var drawGraphicMarker = this.props.drawGraphicMarker.value || '';
@@ -16225,55 +16455,98 @@ function (_super) {
        * Correctif client 0-100
        *
        */
+      var result = 0; // if (!this.props.options.coordinateSpaceInitial.defaultReferentiel) {
+      //   // console.log(position);
+      //   // console.log('-');
+      //   if (size > 100) {
+      //     // console.log('>100');
+      //     // console.log(position);
+      //     size = 100;
+      //   } else if (size < 0 && size < -100) {
+      //     // console.log('<-100');
+      //     // console.log(position);
+      //     size = -100;
+      //   }
+      //   if (size >= 0) {
+      //     // console.log('>0');
+      //     // console.log(position);
+      //     size /= 2;
+      //     size = isMax ? 50 - size : 50 + size;
+      //   } else {
+      //     // console.log('<0');
+      //     // console.log(position);
+      //     size *= -1;
+      //     size /= 2;
+      //     size = 50 - size;
+      //   }
+      //   result = size;
+      //   // console.log(result);
+      // } else {
+      //   // console.log(position);
+      //   // console.log('+');
+      //   if (position === 1) {
+      //     result = size;
+      //   } else if (position === 2) {
+      //     result = 100 - size;
+      //   } else if (position === 3) {
+      //     result = size;
+      //   } else if (position === 4) {
+      //     result = 100 - size;
+      //   }
+      // }
+      // console.log(result);
+
+      return result;
+    };
+
+    _this.limitValueBorder = function (value, position) {
+      var widthBackground = parseInt(_this.props.options.baseMap.width, 10);
+      var heigthBackground = parseInt(_this.props.options.baseMap.height, 10);
+      var result = value;
+
+      if (position === 1 || position === 2) {
+        //xMin + xMax
+        if (value > widthBackground) {
+          result = widthBackground;
+        }
+      } else if (position === 3 || position === 4) {
+        //yMin + yMax
+        if (value > heigthBackground) {
+          result = heigthBackground;
+        }
+      }
+
+      return result;
+    };
+
+    _this.getPositionBorder = function (value, position) {
+      var widthBackground = parseInt(_this.props.options.baseMap.width, 10);
+      var heigthBackground = parseInt(_this.props.options.baseMap.height, 10);
       var result = 0;
 
-      if (!_this.props.options.coordinateSpaceInitial.defaultReferentiel) {
-        // console.log(position);
-        // console.log('-');
-        if (size > 100) {
-          // console.log('>100');
-          // console.log(position);
-          size = 100;
-        } else if (size < 0 && size < -100) {
-          // console.log('<-100');
-          // console.log(position);
-          size = -100;
-        }
-
-        if (size >= 0) {
-          // console.log('>0');
-          // console.log(position);
-          size /= 2;
-          size = isMax ? 50 - size : 50 + size;
-        } else {
-          // console.log('<0');
-          // console.log(position);
-          size *= -1;
-          size /= 2;
-          size = 50 - size;
-        }
-
-        result = size; // console.log(result);
-      } else {
-        // console.log(position);
-        // console.log('+');
-        if (position === 1) {
-          result = size;
-        } else if (position === 2) {
-          result = 100 - size;
-        } else if (position === 3) {
-          result = size;
-        } else if (position === 4) {
-          result = 100 - size;
-        }
-      } // console.log(result);
-
+      if (position === 1) {
+        //xMin
+        result = value;
+      } else if (position === 2) {
+        //xMax
+        result = widthBackground - value;
+      } else if (position === 3) {
+        //yMax
+        result = heigthBackground - value;
+      } else if (position === 4) {
+        //yMin
+        result = value;
+      }
 
       return result;
     };
 
     _this.fillCoordinate = function () {
       var options = _this.props.options;
+      var xMinInitialSpace = parseInt(options.coordinateSpaceInitial.coordinate.xMin, 10);
+      var xMaxInitialSpace = parseInt(options.coordinateSpaceInitial.coordinate.xMax, 10);
+      var yMinInitialSpace = parseInt(options.coordinateSpaceInitial.coordinate.yMin, 10);
+      var yMaxInitialSpace = parseInt(options.coordinateSpaceInitial.coordinate.yMax, 10);
       var mapItems;
       mapItems = options.regionCoordinateSpace.map(function (line, index) {
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_drawRectangleExtend__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -16287,7 +16560,9 @@ function (_super) {
           id: 'region' + line.id.toString(),
           //isEnabled={this.props.isEnabled}
           buttonAddLinkIsActive: _this.props.buttonAddLinkIsActive,
-          buttonAddIncurvedLinkIsActive: _this.props.buttonAddIncurvedLinkIsActive
+          buttonAddIncurvedLinkIsActive: _this.props.buttonAddIncurvedLinkIsActive,
+          widthInitialSpaceDefault: (xMaxInitialSpace - xMinInitialSpace).toString(),
+          heightInitialSpaceDefault: (yMaxInitialSpace - yMinInitialSpace).toString()
         });
       });
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", null, mapItems);
@@ -16314,35 +16589,41 @@ function (_super) {
       // pBottom = this.transformCoordonneesToPx(yMin, false, 3).toString() + '%';
       // pTop = this.transformCoordonneesToPx(yMax, true, 4).toString() + '%';
 
-      if (xMax >= 0) {
-        // console.log('pLeft xMax +');
-        pLeft = _this.transformCoordonneesToPx(xMin, false, 1).toString() + '%'; // console.log(pLeft);
-        // console.log('pRight xMax +');
-
-        pRight = _this.transformCoordonneesToPx(xMax, true, 2).toString() + '%'; // console.log(pRight);
-      } else {
-        xMin = xMin * -1; // console.log('pRight xMax -');
-
-        pRight = _this.transformCoordonneesToPx(xMin, false, 1).toString() + '%'; // console.log(pRight);
-        // console.log('pLeft xMax -');
-
-        pLeft = _this.transformCoordonneesToPx(xMax, true, 2).toString() + '%'; // console.log(pLeft);
-      }
-
-      if (yMax >= 0) {
-        // console.log('pBottom yMax +');
-        pBottom = _this.transformCoordonneesToPx(yMin, false, 3).toString() + '%'; // console.log(pBottom);
-        // console.log('pTop yMax +');
-
-        pTop = _this.transformCoordonneesToPx(yMax, true, 4).toString() + '%'; // console.log(pTop);
-      } else {
-        yMin = yMin * -1; // console.log('pTop yMax -');
-
-        pTop = _this.transformCoordonneesToPx(yMin, false, 3).toString() + '%'; // console.log(pTop);
-        // console.log('pBottom yMax -');
-
-        pBottom = _this.transformCoordonneesToPx(yMax, true, 4).toString() + '%'; // console.log(pBottom);
-      }
+      pLeft = _this.getPositionBorder(xMin, 1).toString() + 'px';
+      pRight = _this.getPositionBorder(xMax, 2).toString() + 'px';
+      pTop = _this.getPositionBorder(yMax, 3).toString() + 'px';
+      pBottom = _this.getPositionBorder(yMin, 4).toString() + 'px'; // if (xMax >= 0) {
+      //   // console.log('pLeft xMax +');
+      //   pLeft = this.transformCoordonneesToPx(xMin, false, 1).toString() + 'px';
+      //   // console.log(pLeft);
+      //   // console.log('pRight xMax +');
+      //   pRight = this.transformCoordonneesToPx(xMax, true, 2).toString() + 'px';
+      //   // console.log(pRight);
+      // } else {
+      //   xMin = xMin * -1;
+      //   // console.log('pRight xMax -');
+      //   pRight = this.transformCoordonneesToPx(xMin, false, 1).toString() + 'px';
+      //   // console.log(pRight);
+      //   // console.log('pLeft xMax -');
+      //   pLeft = this.transformCoordonneesToPx(xMax, true, 2).toString() + 'px';
+      //   // console.log(pLeft);
+      // }
+      // if (yMax >= 0) {
+      //   // console.log('pBottom yMax +');
+      //   pBottom = this.transformCoordonneesToPx(yMin, false, 3).toString() + 'px';
+      //   // console.log(pBottom);
+      //   // console.log('pTop yMax +');
+      //   pTop = this.transformCoordonneesToPx(yMax, true, 4).toString() + 'px';
+      //   // console.log(pTop);
+      // } else {
+      //   yMin = yMin * -1;
+      //   // console.log('pTop yMax -');
+      //   pTop = this.transformCoordonneesToPx(yMin, false, 3).toString() + 'px';
+      //   // console.log(pTop);
+      //   // console.log('pBottom yMax -');
+      //   pBottom = this.transformCoordonneesToPx(yMax, true, 4).toString() + 'px';
+      //   // console.log(pBottom);
+      // }
 
       var data = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         style: {
@@ -16923,86 +17204,116 @@ function (_super) {
       }, html);
     };
 
-    _this.getCoordinatePxAdaptToInitialSpace = function (coorRegion) {
-      var widthImage = parseInt(_this.props.options.baseMap.width, 10);
-      var heightImage = parseInt(_this.props.options.baseMap.height, 10);
+    _this.getCoordinatePxAdaptToInitialSpace = function (region, coorRegion, coorRegionDefault, widthInitialSpaceDefault, heightInitialSpaceDefault) {
+      // const widthImage: number = parseInt(this.props.options.baseMap.width, 10);
+      // const heightImage: number = parseInt(this.props.options.baseMap.height, 10);
       var initialSpace = _this.props.options.coordinateSpaceInitial.coordinate;
       var xMin = parseInt(initialSpace.xMin, 10);
       var xMax = parseInt(initialSpace.xMax, 10);
       var yMin = parseInt(initialSpace.yMin, 10);
-      var yMax = parseInt(initialSpace.yMax, 10);
-      var defaultReferentiel = _this.props.options.coordinateSpaceInitial.defaultReferentiel;
-      var xMinPx = 0;
-      var xMaxPx = 0;
-      var yMinPx = 0;
-      var yMaxPx = 0;
+      var yMax = parseInt(initialSpace.yMax, 10); //const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
+      // let xMinPx = 0;
+      // let xMaxPx = 0;
+      // let yMinPx = 0;
+      // let yMaxPx = 0;
+
       var leftPx = 0;
       var rightPx = 0;
       var topPx = 0;
-      var bottomPx = 0;
+      var bottomPx = 0; // if (!defaultReferentiel) {
+      //   if (xMax < 0) {
+      //     xMinPx = (xMax + 100) * (widthImage / 200);
+      //     xMaxPx = (xMin + 100) * (widthImage / 200);
+      //   } else {
+      //     xMinPx = (xMin + 100) * (widthImage / 200);
+      //     xMaxPx = (xMax + 100) * (widthImage / 200);
+      //   }
+      // } else {
+      //     xMinPx = xMin * (widthImage / 100);
+      //     xMaxPx = xMax * (widthImage / 100);
+      // }
+      // if (!defaultReferentiel) {
+      //   if (yMax < 0) {
+      //     yMinPx = (yMax + 100) * (heightImage / 200);
+      //     yMaxPx = (yMin + 100) * (heightImage / 200);
+      //   } else {
+      //     yMinPx = (yMin + 100) * (heightImage / 200);
+      //     yMaxPx = (yMax + 100) * (heightImage / 200);
+      //   }
+      // } else {
+      //     yMinPx = yMin * (heightImage / 100);
+      //     yMaxPx = yMax * (heightImage / 100);
+      // }
 
-      if (!defaultReferentiel) {
-        if (xMax < 0) {
-          xMinPx = (xMax + 100) * (widthImage / 200);
-          xMaxPx = (xMin + 100) * (widthImage / 200);
-        } else {
-          xMinPx = (xMin + 100) * (widthImage / 200);
-          xMaxPx = (xMax + 100) * (widthImage / 200);
-        }
-      } else {
-        xMinPx = xMin * (widthImage / 100);
-        xMaxPx = xMax * (widthImage / 100);
-      }
+      var widthInitialSpace = xMax - xMin;
+      var heightInitialSpace = yMax - yMin;
 
-      if (!defaultReferentiel) {
-        if (yMax < 0) {
-          yMinPx = (yMax + 100) * (heightImage / 200);
-          yMaxPx = (yMin + 100) * (heightImage / 200);
-        } else {
-          yMinPx = (yMin + 100) * (heightImage / 200);
-          yMaxPx = (yMax + 100) * (heightImage / 200);
-        }
-      } else {
-        yMinPx = yMin * (heightImage / 100);
-        yMaxPx = yMax * (heightImage / 100);
-      }
-
-      var widthInitialSpace = xMaxPx - xMinPx;
-      var heightInitialSpace = yMaxPx - yMinPx;
-
-      if (parseInt(coorRegion.xMin, 10) < 0 && parseInt(coorRegion.xMax, 10) < 0) {
-        //console.log('--');
-        leftPx = xMinPx + (_this.defineLimitX(parseInt(coorRegion.xMax, 10)) + 100) / 2 * (widthInitialSpace / 100) - (widthImage - xMaxPx) / 100;
-        rightPx = (widthImage - xMaxPx) / 100 + widthImage - (_this.defineLimitX(parseInt(coorRegion.xMin, 10)) + 100) / 2 * (widthInitialSpace / 100) - xMinPx; // leftPx = xMinPx + (parseInt(coorRegion.xMax, 10) * (widthInitialSpace / 200) + widthInitialSpace / 2);
+      if (parseInt(coorRegion.xMin, 10) < 0 && parseInt(coorRegion.xMax, 10) < 0) {//console.log('--');
+        // leftPx = xMinPx + ((this.defineLimitX(parseInt(coorRegion.xMax, 10)) + 100) / 2) * (widthInitialSpace / 100) - ((widthImage - xMaxPx) / 100);
+        // rightPx = ((widthImage - xMaxPx) / 100) + widthImage - ((this.defineLimitX(parseInt(coorRegion.xMin, 10)) + 100) / 2) * (widthInitialSpace / 100) - xMinPx;
+        // leftPx = this.defineLimitX(parseInt(coorRegion.xMin, 10) / (parseInt(this.props.heightInitialSpaceDefault, 10) / xMax));
+        // rightPx = ((widthImage - xMaxPx) / 100) + widthImage - ((this.defineLimitX(parseInt(coorRegion.xMin, 10)) + 100) / 2) * (widthInitialSpace / 100) - xMinPx;
+        // leftPx = xMinPx + (parseInt(coorRegion.xMax, 10) * (widthInitialSpace / 200) + widthInitialSpace / 2);
         // rightPx = widthInitialSpace - (parseInt(coorRegion.xMin, 10) * (widthInitialSpace / 200) + widthInitialSpace / 2) - xMinPx;
-      } else {
-        if (!defaultReferentiel) {
-          //console.log('-+');
-          leftPx = xMinPx + (_this.defineLimitX(parseInt(coorRegion.xMin, 10)) * (widthInitialSpace / 200) + widthInitialSpace / 2);
-          rightPx = widthImage - (_this.defineLimitX(parseInt(coorRegion.xMax, 10)) * (widthInitialSpace / 200) + widthInitialSpace / 2) - xMinPx;
-        } else {
-          //console.log('++');
-          leftPx = xMinPx + _this.defineLimitX(parseInt(coorRegion.xMin, 10)) * widthInitialSpace / 100;
-          rightPx = widthImage - _this.defineLimitX(parseInt(coorRegion.xMax, 10)) * widthInitialSpace / 100 - xMinPx;
-        } //leftPx  = xMinPx + ((parseInt(coorRegion.xMin, 10) + 100) / 2) * (widthInitialSpace / 100) - ((widthImage - xMaxPx) / 100);
-        //rightPx = ((widthImage - xMaxPx) / 100) + widthImage - ((parseInt(coorRegion.xMax, 10) + 100) / 2) * (widthInitialSpace / 100) - xMinPx;
-
-      }
-
-      if (parseInt(coorRegion.yMin, 10) < 0 && parseInt(coorRegion.yMax, 10) < 0) {
-        topPx = heightImage - yMaxPx + (_this.defineLimitY(parseInt(coorRegion.yMin, 10)) - 100) / 2 * -1 * (heightInitialSpace / 100) - yMinPx / 200;
-        bottomPx = yMinPx + (_this.defineLimitY(parseInt(coorRegion.yMax, 10)) + 100) / 2 * (heightInitialSpace / 100) - (heightImage - yMaxPx) / 200; // topPx = (heightImage - yMaxPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
-        // bottomPx = (heightImage - yMinPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
-      } else {
-        if (!defaultReferentiel) {
-          topPx = heightImage - yMaxPx + (_this.defineLimitY(parseInt(coorRegion.yMax, 10)) - 100) / 2 * -1 * (heightInitialSpace / 100) - yMinPx / 200;
-          bottomPx = yMinPx + (_this.defineLimitY(parseInt(coorRegion.yMin, 10)) + 100) / 2 * (heightInitialSpace / 100) - (heightImage - yMaxPx) / 200; //topPx = (heightImage - yMaxPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMax, 10)) * (heightInitialSpace / 2 / 100));
-          //bottomPx = (heightImage - yMinPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
-        } else {
-          topPx = heightImage - yMaxPx + _this.defineLimitY(100 - parseInt(coorRegion.yMax, 10)) * heightInitialSpace / 100;
-          bottomPx = yMinPx + _this.defineLimitY(parseInt(coorRegion.yMin, 10)) * heightInitialSpace / 100 - (heightImage - yMaxPx) / 200;
+      } else {// if (!defaultReferentiel) {
+          //   //console.log('-+');
+          //   leftPx = xMinPx + (this.defineLimitX(parseInt(coorRegion.xMin, 10)) * (widthInitialSpace / 200) + widthInitialSpace / 2);
+          //   rightPx = widthImage - (this.defineLimitX(parseInt(coorRegion.xMax, 10)) * (widthInitialSpace / 200) + widthInitialSpace / 2) - xMinPx;
+          // } else {
+          //   //console.log('++');
+          //   leftPx = xMinPx + (this.defineLimitX(parseInt(coorRegion.xMin, 10)) * widthInitialSpace) / 100;
+          //   rightPx = widthImage - ((this.defineLimitX(parseInt(coorRegion.xMax, 10)) * widthInitialSpace) / 100) - xMinPx;
+          // }
+          //leftPx  = xMinPx + ((parseInt(coorRegion.xMin, 10) + 100) / 2) * (widthInitialSpace / 100) - ((widthImage - xMaxPx) / 100);
+          //rightPx = ((widthImage - xMaxPx) / 100) + widthImage - ((parseInt(coorRegion.xMax, 10) + 100) / 2) * (widthInitialSpace / 100) - xMinPx;
         }
-      }
+
+      if (parseInt(coorRegion.yMin, 10) < 0 && parseInt(coorRegion.yMax, 10) < 0) {// topPx = (heightImage - yMaxPx) + ((this.defineLimitY(parseInt(coorRegion.yMin, 10)) - 100) / 2 * (-1)) * (heightInitialSpace / 100) - (yMinPx / 200);
+        // bottomPx = yMinPx + ((this.defineLimitY(parseInt(coorRegion.yMax, 10)) + 100) / 2 ) * (heightInitialSpace / 100) - ((heightImage - yMaxPx) / 200);
+        // topPx = (heightImage - yMaxPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
+        // bottomPx = (heightImage - yMinPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
+      } else {// if (!defaultReferentiel) {
+          //   topPx = (heightImage - yMaxPx) + ((this.defineLimitY(parseInt(coorRegion.yMax, 10)) - 100) / 2 * (-1)) * (heightInitialSpace / 100) - yMinPx / 200;
+          //   bottomPx = yMinPx + ((this.defineLimitY(parseInt(coorRegion.yMin, 10)) + 100) / 2 ) * (heightInitialSpace / 100) - (heightImage - yMaxPx) / 200;
+          //   //topPx = (heightImage - yMaxPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMax, 10)) * (heightInitialSpace / 2 / 100));
+          //   //bottomPx = (heightImage - yMinPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
+          // } else {
+          //   topPx = (heightImage - yMaxPx) + ((this.defineLimitY(100 - parseInt(coorRegion.yMax, 10)) * heightInitialSpace) / 100);
+          //   bottomPx = yMinPx + ((this.defineLimitY(parseInt(coorRegion.yMin, 10)) * heightInitialSpace) / 100) - ((heightImage - yMaxPx) / 200);
+          // }
+        } // console.log(widthInitialSpaceDefault);
+      // console.log(xMin)
+      // console.log(xMax)
+      // console.log(widthInitialSpace);
+      // console.log(ratioLeft);
+      // if (parseInt(orientedLink.widthInitialSpaceDefault, 10) !== widthInitialSpace) {
+      //   xA = xMinInitialSpace + widthInitialSpace * ratioXA;
+      //   xB = xMinInitialSpace + widthInitialSpace * ratioXB;
+      // } else {
+      //   xA = widthInitialSpace * parseInt(orientedLink.pointAPositionX, 10) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
+      //   xB = widthInitialSpace * parseInt(orientedLink.pointBPositionX, 10) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
+      // }
+
+
+      console.log(parseInt(coorRegionDefault.yMin, 10));
+      console.log(parseInt(coorRegionDefault.yMax, 10));
+      var ratioLeft = parseInt(coorRegionDefault.xMin, 10) / widthInitialSpaceDefault;
+      var ratioRight = (widthInitialSpaceDefault - parseInt(coorRegionDefault.xMax, 10)) / widthInitialSpaceDefault;
+      var ratioTop = (heightInitialSpaceDefault - parseInt(coorRegionDefault.yMax, 10)) / heightInitialSpaceDefault;
+      var ratioBottom = parseInt(coorRegionDefault.yMin, 10) / heightInitialSpaceDefault;
+      leftPx = _this.defineLimitX(xMin + widthInitialSpace * ratioLeft);
+      rightPx = _this.defineLimitX(widthInitialSpace * ratioRight + (widthInitialSpaceDefault - xMax));
+      topPx = _this.defineLimitY(heightInitialSpace * ratioTop + (heightInitialSpaceDefault - yMax));
+      bottomPx = _this.defineLimitY(yMin + heightInitialSpace * ratioBottom);
+      console.log(ratioBottom);
+      console.log(bottomPx); // this.props.options.regionCoordinateSpace.forEach((currentRegion) => {
+      //   if (currentRegion.id === region.id) {
+      //     currentRegion.coords.xMin = leftPx.toString();
+      //     currentRegion.coords.xMax = rightPx.toString();
+      //     currentRegion.coords.yMin = bottomPx.toString();
+      //     currentRegion.coords.yMax = topPx.toString();
+      //   }
+      // })
 
       var result = {
         top: topPx.toString() + 'px',
@@ -17027,7 +17338,7 @@ function (_super) {
       var backColor = region.textObj.colorBack;
       var textColor = region.textObj.colorText; //const coorHTML: CoorHTML = calculRealCoordinate(region, this.props.useLimit, this.props.limit);
 
-      var coorHTML = _this.getCoordinatePxAdaptToInitialSpace(region.coords);
+      var coorHTML = _this.getCoordinatePxAdaptToInitialSpace(region, region.coords, region.coordsDefault, parseInt(region.widthInitialSpaceDefault, 10), parseInt(region.heightInitialSpaceDefault, 10));
 
       var style = region.textObj.style;
       var styleDiv = {
@@ -17251,25 +17562,21 @@ function (_super) {
 
 
   DrawRectangleExtend.prototype.defineLimitX = function (coordinateX) {
-    var result = coordinateX;
-
-    if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
-      if (coordinateX > 100) {
-        result = 100;
-      }
-
-      if (coordinateX < 0) {
-        result = 0;
-      }
-    } else {
-      if (coordinateX > 100) {
-        result = 100;
-      }
-
-      if (coordinateX < -100) {
-        result = -100;
-      }
-    }
+    var result = coordinateX; // if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
+    //   if (coordinateX > 100) {
+    //     result = 100;
+    //   }
+    //   if (coordinateX < 0) {
+    //     result = 0;
+    //   }
+    // } else {
+    //   if (coordinateX > 100) {
+    //     result = 100;
+    //   }
+    //   if (coordinateX < -100) {
+    //     result = -100;
+    //   }
+    // }
 
     return result;
   };
@@ -17281,26 +17588,22 @@ function (_super) {
 
 
   DrawRectangleExtend.prototype.defineLimitY = function (coordinateY) {
-    var result = coordinateY;
-
-    if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
-      //console.log(coordinateY);
-      if (coordinateY > 100) {
-        result = 100;
-      }
-
-      if (coordinateY < 0) {
-        result = 0;
-      }
-    } else {
-      if (coordinateY > 100) {
-        result = 100;
-      }
-
-      if (coordinateY < -100) {
-        result = -100;
-      }
-    }
+    var result = coordinateY; // if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
+    //   //console.log(coordinateY);
+    //   if (coordinateY > 100) {
+    //     result = 100;
+    //   }
+    //   if (coordinateY < 0) {
+    //     result = 0;
+    //   }
+    // } else {
+    //   if (coordinateY > 100) {
+    //     result = 100;
+    //   }
+    //   if (coordinateY < -100) {
+    //     result = -100;
+    //   }
+    // }
 
     return result;
   };
@@ -20604,45 +20907,47 @@ function (_super) {
       });
 
       _this.callBack();
+    }; // onChangeSwitchDefaultInitialSpace = () => {
+    //   const newInitialSpace: CoordinateSpaceInitial = this.state.arrayCoor;
+    //   newInitialSpace.defaultReferentiel = !newInitialSpace.defaultReferentiel;
+    //   this.setState({
+    //     arrayCoor: newInitialSpace,
+    //   });
+    //   if (newInitialSpace.defaultReferentiel) {
+    //     this.props.options.coordinateSpaceInitial.coordinate = {
+    //       xMin: '0',
+    //       xMax: '100',
+    //       yMin: '0',
+    //       yMax: '100',
+    //     };
+    //   } else {
+    //     this.props.options.coordinateSpaceInitial.coordinate = {
+    //       xMin: '-100',
+    //       xMax: '100',
+    //       yMin: '-100',
+    //       yMax: '100',
+    //     };
+    //   }
+    //   this.callBack();
+    // };
+    // displayValueReferentiel = (): string => {
+    //   let result = '';
+    //   if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
+    //     result = '(0 : 100)';
+    //   } else {
+    //     result = '(-100 : 100)';
+    //   }
+    //   return result;
+    // };
+
+
+    _this.componentDidMount = function () {// console.log('initialSpace');
+      // this.props.options.coordinateSpaceInitial.coordinate.xMax = this.props.options.baseMap.width;
+      // this.props.options.coordinateSpaceInitial.coordinate.yMax = this.props.options.baseMap.height;
     };
 
-    _this.onChangeSwitchDefaultInitialSpace = function () {
-      var newInitialSpace = _this.state.arrayCoor;
-      newInitialSpace.defaultReferentiel = !newInitialSpace.defaultReferentiel;
-
-      _this.setState({
-        arrayCoor: newInitialSpace
-      });
-
-      if (newInitialSpace.defaultReferentiel) {
-        _this.props.options.coordinateSpaceInitial.coordinate = {
-          xMin: '0',
-          xMax: '100',
-          yMin: '0',
-          yMax: '100'
-        };
-      } else {
-        _this.props.options.coordinateSpaceInitial.coordinate = {
-          xMin: '-100',
-          xMax: '100',
-          yMin: '-100',
-          yMax: '100'
-        };
-      }
-
-      _this.callBack();
-    };
-
-    _this.displayValueReferentiel = function () {
-      var result = '';
-
-      if (_this.props.options.coordinateSpaceInitial.defaultReferentiel) {
-        result = '(0 : 100)';
-      } else {
-        result = '(-100 : 100)';
-      }
-
-      return result;
+    _this.componentDidUpdate = function () {// if (this.props.options.)
+      // console.log('update initialSPace');
     };
 
     _this.state = {
@@ -20660,9 +20965,10 @@ function (_super) {
   CoordinateSpaceInitialClass.prototype._handleChange = function (currentTarget, name) {
     var _this = this;
 
+    this.props.options.updateOnlyInitialSpace = true;
     this.setState(function (prevState) {
       return {
-        arrayCoor: Object(Functions_EditParameter_editGoodParameter__WEBPACK_IMPORTED_MODULE_3__["editGoodParameter"])(name, prevState.arrayCoor, currentTarget, _this.state.arrayCoor.defaultReferentiel)
+        arrayCoor: Object(Functions_EditParameter_editGoodParameter__WEBPACK_IMPORTED_MODULE_3__["editGoodParameter"])(name, prevState.arrayCoor, currentTarget, parseInt(_this.props.options.baseMap.width, 10), parseInt(_this.props.options.baseMap.height, 10))
       };
     });
     this.callBack();
@@ -20711,16 +21017,6 @@ function (_super) {
       label: "",
       checked: this.state.arrayCoor.displayArea,
       onChange: this.onChangeSwitchDisplayInitialSpace
-    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      style: {
-        display: 'flex'
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
-      width: 15
-    }, "Default referentiel ", this.displayValueReferentiel()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-      label: "",
-      checked: this.state.arrayCoor.defaultReferentiel,
-      onChange: this.onChangeSwitchDefaultInitialSpace
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "X min",
       labelWidth: 15,
@@ -20974,6 +21270,7 @@ function (_super) {
 
 
     _this.onChangeHeightBaseMap = function (e) {
+      _this.props.options.updateOnlyInitialSpace = false;
       var _a = _this.props,
           options = _a.options,
           onOptionsChange = _a.onOptionsChange;
@@ -20987,6 +21284,7 @@ function (_super) {
 
 
     _this.onChangeWidthBaseMap = function (e) {
+      _this.props.options.updateOnlyInitialSpace = false;
       var _a = _this.props,
           options = _a.options,
           onOptionsChange = _a.onOptionsChange;
@@ -21188,6 +21486,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! Models/PositionParameterClass */ "./Models/PositionParameterClass.tsx");
 /* harmony import */ var Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! Models/LinkURLClass */ "./Models/LinkURLClass.tsx");
 /* harmony import */ var Models_PointClass__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! Models/PointClass */ "./Models/PointClass.tsx");
+/* harmony import */ var Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! Models/TextObjectClass */ "./Models/TextObjectClass.tsx");
 
 
  //import /*pointClassImport, regionClassImport, gabaritPointClassImport, gabaritRegionClassImport */ '../../config/testVariable';
@@ -21199,6 +21498,7 @@ __webpack_require__.r(__webpack_exports__);
 
  //import { LowerLimitClass } from 'Models/LowerLimitClass';
 //import { TextObject } from 'Models/TextObjectClass';
+
 
  // interface SelectQueryID {
 //   value: string;
@@ -21249,35 +21549,51 @@ function (_super) {
 
       return result;
     };
+
+    _this.GabaritValidator = function (name) {
+      var result = true;
+
+      _this.props.options.saveGabaritFile.forEach(function (element) {
+        if (element.fileName === name) {
+          console.log('LoadGabaritFileReject');
+          result = false;
+        }
+      });
+
+      return result;
+    };
     /**************************************LOADER******************************************/
 
 
     _this.loadGabarit = function (file, url) {
       var name = url.split('/');
-      var newGabarit = {
-        queryID: 'null',
-        fileName: name[name.length - 1],
-        globalGabarit: file.global,
-        templateGabaritPoint: [],
-        templateGabaritRegion: [],
-        templateGabaritLink: []
-      };
-      console.log(name[name.length - 1]);
-      file.templates.forEach(function (gab) {
-        if (gab.type === 'point') {
-          newGabarit.templateGabaritPoint.push(gab);
-        }
 
-        if (gab.type === 'region') {
-          newGabarit.templateGabaritRegion.push(gab);
-        }
+      if (_this.GabaritValidator(name[name.length - 1])) {
+        var newGabarit_1 = {
+          queryID: 'null',
+          fileName: name[name.length - 1],
+          loaded: false,
+          globalGabarit: file.global,
+          templateGabaritPoint: [],
+          templateGabaritRegion: [],
+          templateGabaritLink: []
+        };
+        file.templates.forEach(function (gab) {
+          if (gab.type === 'point') {
+            newGabarit_1.templateGabaritPoint.push(gab);
+          }
 
-        if (gab.type === 'link') {
-          newGabarit.templateGabaritLink.push(gab);
-        }
-      });
+          if (gab.type === 'region') {
+            newGabarit_1.templateGabaritRegion.push(gab);
+          }
 
-      _this.props.options.saveGabaritFile.push(newGabarit);
+          if (gab.type === 'link') {
+            newGabarit_1.templateGabaritLink.push(gab);
+          }
+        });
+
+        _this.props.options.saveGabaritFile.push(newGabarit_1);
+      }
     };
 
     _this.fetchGabarit = function () {
@@ -21391,12 +21707,34 @@ function (_super) {
       }));
     };
 
+    _this.gabaritDeletFile = function (onClick) {
+      var isGabarit = function isGabarit(gabarit) {
+        return gabarit === _this.props.options.saveGabaritFile[parseInt(onClick.currentTarget.id, 10)];
+      };
+
+      _this.props.options.saveGabaritFile.splice(_this.props.options.saveGabaritFile.findIndex(isGabarit), 1);
+
+      _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+        saveGabaritFile: _this.props.options.saveGabaritFile
+      }));
+    };
+
     _this.tempo = function () {// console.log(this.props.options.saveGabaritURL);
     };
     /**************************************LOADER******************************************/
 
 
+    _this.checkLoaderGabarit = function (onClick) {
+      if (!_this.props.options.saveGabaritFile[parseInt(onClick.currentTarget.id, 10)].loaded) {
+        _this.loaderGabarit(onClick);
+      } else {
+        console.log('loadGabaritReject');
+      }
+    };
+
     _this.loaderGabarit = function (onClick) {
+      var e_1, _a;
+
       var tmpLabelAPosition;
       var tmpLabelBPosition;
       var tmpToolTipA;
@@ -21422,11 +21760,14 @@ function (_super) {
       var associateOrientedLinksInPoint = [];
       var associateOrientedLinksOutPoint = []; //global
       //let lowerLimit: LowerLimitClass;
-      //let textObject: TextObject;
 
       var colorMode;
       var traceBack;
       var traceBorder;
+      var textObj;
+      var style;
+      var generateValue;
+      var generateAux;
       /* Region */
       //Template
 
@@ -21434,7 +21775,34 @@ function (_super) {
 
       colorMode = Boolean(gabaritFileTmp.globalGabarit.colorMode);
       traceBack = Boolean(gabaritFileTmp.globalGabarit.traceBack);
-      traceBorder = Boolean(gabaritFileTmp.globalGabarit.traceBorder);
+      traceBorder = Boolean(gabaritFileTmp.globalGabarit.traceBorder); ////// Text Object
+
+      generateValue = {
+        legendElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.legendFormat,
+        numericFormatElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.nemericFormatElement,
+        unit: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.unit,
+        displayObjectInTooltip: Boolean(gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.displayObjectInTooltip),
+        addColorTextElement: Boolean(gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.addColorTextElement),
+        colorTextElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.colorTextElement,
+        addColorBackElement: Boolean(gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.addColorBAckElement),
+        colorBackElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.colorBackElement
+      };
+      generateAux = {
+        legendElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.legendFormat,
+        numericFormatElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.nemericFormatElement,
+        unit: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.unit,
+        displayObjectInTooltip: Boolean(gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.displayObjectInTooltip),
+        addColorTextElement: Boolean(gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.addColorTextElement),
+        colorTextElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.colorTextElement,
+        addColorBackElement: Boolean(gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.addColorBAckElement),
+        colorBackElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.colorBackElement
+      };
+      style = {
+        bold: Boolean(gabaritFileTmp.globalGabarit.textObject.style.bold),
+        italic: Boolean(gabaritFileTmp.globalGabarit.textObject.style.italic),
+        underline: Boolean(gabaritFileTmp.globalGabarit.textObject)
+      };
+      textObj = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_8__["TextObject"](gabaritFileTmp.globalGabarit.textObject.value, Boolean(gabaritFileTmp.globalGabarit.textObject.isTextTooltip), gabaritFileTmp.globalGabarit.textObject.colorBack, gabaritFileTmp.globalGabarit.textObject.colorText, style, Boolean(gabaritFileTmp.globalGabarit.textObject.generateObjectText), generateValue, generateAux);
       gabaritFileTmp.templateGabaritPoint.forEach(function (point, index) {
         if (point.labelfix.toString() === 'false') {
           posPoint.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(point.xylabel));
@@ -21445,10 +21813,19 @@ function (_super) {
         filterPoint.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["filterParse"])(point.filtered));
         namePoint.push(point.name);
         metaPoint.push(point.meta);
-        labelPoint.push(point.label);
-        mainMetricPoint.push(point.mainMetric);
-        mainMetricPoint[index].filter = filterPoint[index];
-        mainMetricPoint[index].refId = gabaritFileTmp.queryID;
+        labelPoint.push(point.label); // c'est le label du point qui est afficher pour la selection
+
+        mainMetricPoint.push({
+          key: point.mainMetric.key,
+          unit: point.mainMetric.unit,
+          format: point.mainMetric.format,
+          keyValue: '',
+          filter: filterPoint[index],
+          refId: gabaritFileTmp.queryID,
+          expr: '',
+          returnQuery: [],
+          manageValue: point.mainMetric.manageValue
+        });
 
         if (mainMetricPoint[index].refId === null) {
           mainMetricPoint[index].refId = 'A';
@@ -21458,7 +21835,10 @@ function (_super) {
           metricPoint[index].push(element);
         });
         valueMetricPoint.push(point.valueMetric);
-        drawGraphicMarkerPoint.push(point.drawGraphicMarker);
+        drawGraphicMarkerPoint.push({
+          label: point.drawGraphicMarker.label,
+          value: point.drawGraphicMarker.value
+        });
         shapePoint.push(point.shape);
         sizeWidthPoint.push(point.sizeWidth);
         sizeHeightPoint.push(point.sizeHeight);
@@ -21482,7 +21862,7 @@ function (_super) {
         tmpLabelAPosition = Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(point.positionParameter.xylabelA);
         tmpLabelBPosition = Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(point.positionParameter.xylabelB);
         positionParameterPoint.push(new Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_5__["PositionParameterClass"](tmpLabelAPosition.x, tmpLabelAPosition.y, tmpLabelBPosition.x, tmpLabelBPosition.y, tmpToolTipA, tmpToolTipB));
-        linkURLPoint.push(new Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_6__["LinkURLClass"](point.linkURL.followLink, point.linkURL.hoveringTooltipLink, point.linkURL.hoveringTooltipTex));
+        linkURLPoint.push(new Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_6__["LinkURLClass"](point.linkURL.followLink, point.linkURL.hoveringTooltipLink, point.linkURL.hoveringTooltipText));
       }); // console.log('posPoint:')
       // console.log(posPoint) //
       // console.log('filterPoint:')
@@ -21530,21 +21910,107 @@ function (_super) {
         newID++;
       });
 
-      filterPoint.forEach(function (element, index) {
-        if (metricPoint.length > 0) {
-          var toLoad = new Models_PointClass__WEBPACK_IMPORTED_MODULE_7__["PointClass"](newID + 1, linkURLPoint[index], metaPoint[index], gabaritFileTmp.globalGabarit.lowerLimit, labelPoint[index], gabaritFileTmp.globalGabarit.textObject, mainMetricPoint[index], metricPoint[index], colorMode, traceBack, traceBorder, positionParameterPoint[index], namePoint[index], valueMetricPoint[index], drawGraphicMarkerPoint[index], shapePoint[index], sizeWidthPoint[index], sizeHeightPoint[index], '', posPoint[index].x, posPoint[index].y, colorPoint[index], associateOrientedLinksInPoint[index], associateOrientedLinksOutPoint[index]);
-          newID++;
+      var labelCoordX = [];
+      var labelCoordY = [];
+      var labelCoord = [];
+      posPoint.forEach(function (pos) {
+        _this.props.data.series.forEach(function (element) {
+          var e_2, _a;
 
-          _this.props.options.arrayPoints.push(toLoad);
-        } else {
-          var toLoad = new Models_PointClass__WEBPACK_IMPORTED_MODULE_7__["PointClass"](newID + 1, linkURLPoint[index], metaPoint[index], gabaritFileTmp.globalGabarit.lowerLimit, labelPoint[index], gabaritFileTmp.globalGabarit.textObject, mainMetricPoint[index], [], colorMode, traceBack, traceBorder, positionParameterPoint[index], namePoint[index], valueMetricPoint[index], drawGraphicMarkerPoint[index], shapePoint[index], sizeWidthPoint[index], sizeHeightPoint[index], '', posPoint[index].x, posPoint[index].y, colorPoint[index], associateOrientedLinksInPoint[index], associateOrientedLinksOutPoint[index]);
-          newID++;
+          var _b;
 
-          _this.props.options.arrayPoints.push(toLoad);
-        }
+          var nameQuery = ((_b = element.name) === null || _b === void 0 ? void 0 : _b.split(',').map(function (value) {
+            return value.replace(/[\"{}]/gm, '');
+          })) || [];
+
+          try {
+            for (var nameQuery_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(nameQuery), nameQuery_1_1 = nameQuery_1.next(); !nameQuery_1_1.done; nameQuery_1_1 = nameQuery_1.next()) {
+              var oneQuery = nameQuery_1_1.value;
+
+              if (nameQuery && nameQuery.length > 0) {
+                var keyValue = oneQuery.split('=');
+
+                if (keyValue[0] === pos.x) {
+                  labelCoordX.push(keyValue[1]);
+                }
+
+                if (keyValue[0] === pos.y) {
+                  labelCoordY.push(keyValue[1]);
+                }
+              }
+            }
+          } catch (e_2_1) {
+            e_2 = {
+              error: e_2_1
+            };
+          } finally {
+            try {
+              if (nameQuery_1_1 && !nameQuery_1_1.done && (_a = nameQuery_1["return"])) _a.call(nameQuery_1);
+            } finally {
+              if (e_2) throw e_2.error;
+            }
+          }
+        });
       });
+      labelCoordX.forEach(function (element, index) {
+        labelCoord.push({
+          x: labelCoordX[index],
+          y: labelCoordY[index]
+        });
+      });
+
+      if (labelCoord.length > 0) {
+        var _loop_1 = function _loop_1(pos) {
+          filterPoint.forEach(function (element, index) {
+            if (metricPoint.length > 0) {
+              var toLoad = new Models_PointClass__WEBPACK_IMPORTED_MODULE_7__["PointClass"](newID + 1, linkURLPoint[index], metaPoint[index], gabaritFileTmp.globalGabarit.lowerLimit, labelPoint[index] + newID, textObj, mainMetricPoint[index], metricPoint[index], colorMode, traceBack, traceBorder, positionParameterPoint[index], namePoint[index] + newID, valueMetricPoint[index], drawGraphicMarkerPoint[index], shapePoint[index], sizeWidthPoint[index], sizeHeightPoint[index], '', pos.x, pos.y, colorPoint[index], associateOrientedLinksInPoint[index], associateOrientedLinksOutPoint[index], '', '', '', '');
+              newID++;
+
+              _this.props.options.arrayPoints.push(toLoad);
+            } else {
+              var toLoad = new Models_PointClass__WEBPACK_IMPORTED_MODULE_7__["PointClass"](newID + 1, linkURLPoint[index], metaPoint[index], gabaritFileTmp.globalGabarit.lowerLimit, labelPoint[index] + newID, textObj, mainMetricPoint[index], [], colorMode, traceBack, traceBorder, positionParameterPoint[index], namePoint[index] + newID, valueMetricPoint[index], drawGraphicMarkerPoint[index], shapePoint[index], sizeWidthPoint[index], sizeHeightPoint[index], '', pos.x, pos.y, colorPoint[index], associateOrientedLinksInPoint[index], associateOrientedLinksOutPoint[index], '', '', '', '');
+              newID++;
+
+              _this.props.options.arrayPoints.push(toLoad);
+            }
+          });
+        };
+
+        try {
+          for (var labelCoord_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(labelCoord), labelCoord_1_1 = labelCoord_1.next(); !labelCoord_1_1.done; labelCoord_1_1 = labelCoord_1.next()) {
+            var pos = labelCoord_1_1.value;
+
+            _loop_1(pos);
+          }
+        } catch (e_1_1) {
+          e_1 = {
+            error: e_1_1
+          };
+        } finally {
+          try {
+            if (labelCoord_1_1 && !labelCoord_1_1.done && (_a = labelCoord_1["return"])) _a.call(labelCoord_1);
+          } finally {
+            if (e_1) throw e_1.error;
+          }
+        }
+      } else {
+        filterPoint.forEach(function (element, index) {
+          if (metricPoint.length > 0) {
+            var toLoad = new Models_PointClass__WEBPACK_IMPORTED_MODULE_7__["PointClass"](newID + 1, linkURLPoint[index], metaPoint[index], gabaritFileTmp.globalGabarit.lowerLimit, labelPoint[index] + newID, textObj, mainMetricPoint[index], metricPoint[index], colorMode, traceBack, traceBorder, positionParameterPoint[index], namePoint[index] + newID, valueMetricPoint[index], drawGraphicMarkerPoint[index], shapePoint[index], sizeWidthPoint[index], sizeHeightPoint[index], '', posPoint[index].x, posPoint[index].y, colorPoint[index], associateOrientedLinksInPoint[index], associateOrientedLinksOutPoint[index], '', '', '', '');
+            newID++;
+
+            _this.props.options.arrayPoints.push(toLoad);
+          } else {
+            var toLoad = new Models_PointClass__WEBPACK_IMPORTED_MODULE_7__["PointClass"](newID + 1, linkURLPoint[index], metaPoint[index], gabaritFileTmp.globalGabarit.lowerLimit, labelPoint[index] + newID, textObj, mainMetricPoint[index], [], colorMode, traceBack, traceBorder, positionParameterPoint[index], namePoint[index] + newID, valueMetricPoint[index], drawGraphicMarkerPoint[index], shapePoint[index], sizeWidthPoint[index], sizeHeightPoint[index], '', posPoint[index].x, posPoint[index].y, colorPoint[index], associateOrientedLinksInPoint[index], associateOrientedLinksOutPoint[index], '', '', '', '');
+            newID++;
+
+            _this.props.options.arrayPoints.push(toLoad);
+          }
+        });
+      }
       /* Link */
       //Template
+
 
       var filterLink = []; //
 
@@ -21661,7 +22127,7 @@ function (_super) {
         regionInLink.push(link.regionIn);
         regionOutLink.push(link.regionOut);
         isIncurvedLink.push({
-          label: "No",
+          label: 'No',
           value: Boolean(link.isIncurved.value)
         });
       });
@@ -21676,33 +22142,105 @@ function (_super) {
         var maB = metricBLink.length;
 
         if (maA > 0 && maB > 0) {
-          var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index], gabaritFileTmp.globalGabarit.textObject, mainMetricALink[index], metricALink[index], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], posALink[index].x, posALink[index].y, colorALink[index], posBLink[index].x, posBLink[index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLink[index], pointOutLink[index], regionInLink[index], regionOutLink[index], 1, /// à revoir
-          posCLink[index].x, posCLink[index].y, isIncurvedLink[index], mainMetricBLink[index], metricBLink[index]);
+          var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index], textObj, mainMetricALink[index], metricALink[index], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], posALink[index].x, posALink[index].y, colorALink[index], posBLink[index].x, posBLink[index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLink[index], pointOutLink[index], regionInLink[index], regionOutLink[index], 1, /// à revoir
+          posCLink[index].x, posCLink[index].y, isIncurvedLink[index], mainMetricBLink[index], metricBLink[index], '', '', '', '', '', '');
           newID++;
 
           _this.props.options.arrayOrientedLinks.push(toLoad);
         }
 
         if (!(maA > 0) && maB > 0) {
-          var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index], gabaritFileTmp.globalGabarit.textObject, mainMetricALink[index], [], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], posALink[index].x, posALink[index].y, colorALink[index], posBLink[index].x, posBLink[index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLink[index], pointOutLink[index], regionInLink[index], regionOutLink[index], 1, /// à revoir
-          posCLink[index].x, posCLink[index].y, isIncurvedLink[index], mainMetricBLink[index], metricBLink[index]);
+          var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index], textObj, mainMetricALink[index], [], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], posALink[index].x, posALink[index].y, colorALink[index], posBLink[index].x, posBLink[index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLink[index], pointOutLink[index], regionInLink[index], regionOutLink[index], 1, /// à revoir
+          posCLink[index].x, posCLink[index].y, isIncurvedLink[index], mainMetricBLink[index], metricBLink[index], '', '', '', '', '', '');
           newID++;
 
           _this.props.options.arrayOrientedLinks.push(toLoad);
         } else if (maA > 0 && !(maB > 0)) {
-          var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index], gabaritFileTmp.globalGabarit.textObject, mainMetricALink[index], metricALink[index], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], posALink[index].x, posALink[index].y, colorALink[index], posBLink[index].x, posBLink[index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLink[index], pointOutLink[index], regionInLink[index], regionOutLink[index], 1, /// à revoir
-          posCLink[index].x, posCLink[index].y, isIncurvedLink[index], mainMetricBLink[index], []);
+          var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index], textObj, mainMetricALink[index], metricALink[index], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], posALink[index].x, posALink[index].y, colorALink[index], posBLink[index].x, posBLink[index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLink[index], pointOutLink[index], regionInLink[index], regionOutLink[index], 1, /// à revoir
+          posCLink[index].x, posCLink[index].y, isIncurvedLink[index], mainMetricBLink[index], [], '', '', '', '', '', '');
           newID++;
 
           _this.props.options.arrayOrientedLinks.push(toLoad);
         } else {
-          var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index], gabaritFileTmp.globalGabarit.textObject, mainMetricALink[index], [], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], posALink[index].x, posALink[index].y, colorALink[index], posBLink[index].x, posBLink[index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLink[index], pointOutLink[index], regionInLink[index], regionOutLink[index], 1, /// à revoir
-          posCLink[index].x, posCLink[index].y, isIncurvedLink[index], mainMetricBLink[index], []);
+          var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index], textObj, mainMetricALink[index], [], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], posALink[index].x, posALink[index].y, colorALink[index], posBLink[index].x, posBLink[index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLink[index], pointOutLink[index], regionInLink[index], regionOutLink[index], 1, /// à revoir
+          posCLink[index].x, posCLink[index].y, isIncurvedLink[index], mainMetricBLink[index], [], '', '', '', '', '', '');
           newID++;
 
           _this.props.options.arrayOrientedLinks.push(toLoad);
         }
       });
+      /*  */
+      //Template
+
+      var filterRegion = []; //
+
+      var posARegion = []; //
+
+      var posBRegion = []; //
+
+      var metaRegion = []; //
+
+      var labelRegion = []; //
+
+      var positionParameterRegion = []; //
+
+      var mainMetricRegion = []; //
+
+      var metricRegion = []; //
+
+      var linkURLRegion = [];
+      var idSVGRegion = [];
+      var modeRegion = [];
+      var imgRegion = [];
+      gabaritFileTmp.templateGabaritRegion.forEach(function (region, index) {
+        if (region.labelfix.toString() === 'false') {
+          posARegion.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(region.xylabel));
+          posBRegion.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(region.xylabel0));
+        } else {
+          posARegion.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(region.xylabelfix));
+          posBRegion.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(region.xylabelfix0));
+        }
+
+        filterRegion.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["filterParse"])(region.filtered));
+        metaRegion.push(region.meta);
+        labelRegion.push(region.label);
+        mainMetricRegion.push({
+          key: region.mainMetric.key,
+          unit: region.mainMetric.unit,
+          format: region.mainMetric.format,
+          keyValue: '',
+          filter: filterRegion[index],
+          refId: gabaritFileTmp.queryID,
+          expr: '',
+          returnQuery: [],
+          manageValue: region.mainMetric.manageValue
+        });
+
+        if (mainMetricPoint[index].refId === null) {
+          mainMetricPoint[index].refId = 'A';
+        }
+
+        region.metrics.forEach(function (element) {
+          metricRegion[index].push(element);
+        }); //metric todo
+
+        tmpToolTipA = {
+          label: region.positionParameter.tooltipA,
+          value: region.positionParameter.tooltipA
+        };
+        tmpToolTipB = {
+          label: region.positionParameter.tooltipB,
+          value: region.positionParameter.tooltipB
+        };
+        tmpLabelAPosition = Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(region.positionParameter.xylabelA);
+        tmpLabelBPosition = Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(region.positionParameter.xylabelB);
+        positionParameterRegion.push(new Models_PositionParameterClass__WEBPACK_IMPORTED_MODULE_5__["PositionParameterClass"](tmpLabelAPosition.x, tmpLabelAPosition.y, tmpLabelBPosition.x, tmpLabelBPosition.y, tmpToolTipA, tmpToolTipB));
+        linkURLRegion.push(new Models_LinkURLClass__WEBPACK_IMPORTED_MODULE_6__["LinkURLClass"](region.linkURL.followRegion, region.linkURL.hoveringTooltipRegion, region.linkURL.hoveringTooltipTex));
+        idSVGRegion.push(region.idSVG);
+        modeRegion.push(Boolean(region.mode));
+        imgRegion.push(region.img);
+      });
+      _this.props.options.saveGabaritFile[parseInt(onClick.currentTarget.id, 10)].loaded = true;
     };
 
     _this.gabaritUrlDisplay = function (props) {
@@ -21720,10 +22258,10 @@ function (_super) {
             labelWidth: 5,
             inputWidth: 20,
             onChange: _this.onGabaritListUrlChanged.bind(_this),
-            type: 'string',
+            type: "string",
             value: url || ''
           }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-            variant: 'danger',
+            variant: "danger",
             id: index.toString(),
             key: 'ButtunDel' + index.toString(),
             onClick: _this.gabaritDeletUrl.bind(_this)
@@ -21749,7 +22287,7 @@ function (_super) {
             label: 'Gabarit',
             labelWidth: 5,
             inputWidth: 20,
-            type: 'string',
+            type: "string",
             value: gabarit.fileName || '',
             readOnly: true
           }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormLabel"], {
@@ -21760,16 +22298,20 @@ function (_super) {
             },
             allowCustomValue: false,
             options: _this.state.selectQuerryID,
-            width: 10
+            width: 10,
+            value: {
+              label: _this.props.options.saveGabaritFile[index].queryID,
+              value: _this.props.options.saveGabaritFile[index].queryID
+            }
           }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
             id: index.toString(),
             key: 'ButtunLoad' + index.toString(),
-            onClick: _this.loaderGabarit.bind(_this)
+            onClick: _this.checkLoaderGabarit.bind(_this)
           }, "Load"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-            variant: 'danger',
+            variant: "danger",
             id: index.toString(),
             key: 'ButtunDel' + index.toString(),
-            onClick: _this.gabaritDeletUrl.bind(_this)
+            onClick: _this.gabaritDeletFile.bind(_this)
           }, "Del"));
         });
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, list);
@@ -21884,21 +22426,21 @@ function (_super) {
     var options = this.props.options;
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
       isOpen: this.state.collapseSelectURL,
-      label: 'Url List',
+      label: "Url List",
       onToggle: this.onToggleSelectUrl
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
-      label: 'Gabarit Url',
+      label: "Gabarit Url",
       labelWidth: 8,
       key: 'GabaritUrl',
       inputWidth: 20,
       onChange: this.onGabaritUrlChanged.bind(this),
-      type: 'string',
+      type: "string",
       value: options.gabaritUrlInput || ''
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
       key: 'AddGabaritUrl',
       onClick: this.addGabaritUrlInput
     }, "Add"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: 'section gf-form-group'
+      className: "section gf-form-group"
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
       onClick: this.fetchGabarit
     }, "Finish"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.gabaritUrlDisplay, {
@@ -21910,7 +22452,7 @@ function (_super) {
       onClick: this.toDel
     }, "toDel")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
       isOpen: this.state.collapseGabarit,
-      label: 'Gabarit List',
+      label: "Gabarit List",
       onToggle: this.onToggleGabarit
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.gabaritDisplay, {
       list: options.saveGabaritFile
@@ -21981,7 +22523,7 @@ function (_super) {
           if (newSpace.name === point.name) {
             resultId = 2;
           } else {
-            console.error('Id of point named "' + newSpace.name + '" already given fail to load!');
+            // console.error('Id of point named "' + newSpace.name + '" already given fail to load!');
             resultId = 1;
           }
         }
@@ -21999,7 +22541,7 @@ function (_super) {
           if (newSpace.label === region.label) {
             resultId = 2;
           } else {
-            console.error('Id of region labeled "' + newSpace.label + '" already given, fail to load!');
+            // console.error('Id of region labeled "' + newSpace.label + '" already given, fail to load!');
             resultId = 1;
           }
         }
@@ -22016,7 +22558,7 @@ function (_super) {
           if (newSpace.name === lien.name) {
             resultId = 2;
           } else {
-            console.error('Id of link named "' + newSpace.name + '" already given, fail to load!');
+            // console.error('Id of link named "' + newSpace.name + '" already given, fail to load!');
             resultId = 1;
           }
         }
@@ -22058,7 +22600,7 @@ function (_super) {
 
 
     _this.loadMonoPoint = function (point) {
-      var toLoad = new _Models_PointClass__WEBPACK_IMPORTED_MODULE_3__["PointClass"](point.id, point.linkURL, point.meta, point.lowerLimit, point.label, point.textObj, point.mainMetric, point.metrics, point.colorMode, point.traceBack, point.traceBorder, point.positionParameter, point.name, point.valueMetric, point.drawGraphicMarker, point.shape, point.sizeWidth, point.sizeHeight, point.rotateArrow, point.positionShapeX, point.positionShapeY, point.color, point.associateOrientedLinksIn, point.associateOrientedLinksOut); // console.log(toLoad);
+      var toLoad = new _Models_PointClass__WEBPACK_IMPORTED_MODULE_3__["PointClass"](point.id, point.linkURL, point.meta, point.lowerLimit, point.label, point.textObj, point.mainMetric, point.metrics, point.colorMode, point.traceBack, point.traceBorder, point.positionParameter, point.name, point.valueMetric, point.drawGraphicMarker, point.shape, point.sizeWidth, point.sizeHeight, point.rotateArrow, point.positionShapeX, point.positionShapeY, point.color, point.associateOrientedLinksIn, point.associateOrientedLinksOut, point.widthInitialSpaceDefault, point.heightInitialSpaceDefault, point.positionXDefault, point.positionYDefault); // console.log(toLoad);
 
       var selector = _this.PointValidator(toLoad); // Do some test here to see if your already load a coordinatespace with this id
 
@@ -22089,7 +22631,7 @@ function (_super) {
 
 
     _this.loadMonoRegion = function (region) {
-      var toLoad = new Models_RegionClass__WEBPACK_IMPORTED_MODULE_4__["RegionClass"](region.id, region.linkURL, region.meta, region.lowerLimit, region.label, region.textObj, region.mainMetric, region.metrics, region.colorMode, region.traceBack, region.traceBorder, region.positionParameter, region.idSVG, region.orientedLink, region.coords, region.mode, region.img); // console.log(toLoad);
+      var toLoad = new Models_RegionClass__WEBPACK_IMPORTED_MODULE_4__["RegionClass"](region.id, region.linkURL, region.meta, region.lowerLimit, region.label, region.textObj, region.mainMetric, region.metrics, region.colorMode, region.traceBack, region.traceBorder, region.positionParameter, region.idSVG, region.orientedLink, region.coords, region.coordsDefault, region.mode, region.img, region.widthInitialSpace, region.heightInitialSpace); // console.log(toLoad);
       // Do some test here to see if your already load a coordinatespace with this id
 
       var selector = _this.RegionValidator(toLoad);
@@ -22119,7 +22661,7 @@ function (_super) {
     };
 
     _this.loadMonoLink = function (link) {
-      var toLoad = new _Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_5__["OrientedLinkClass"](link.id, link.linkURL, link.meta, link.lowerLimit, link.label, link.textObj, link.mainMetric, link.metrics, link.colorMode, link.traceBack, link.traceBorder, link.positionParameter, link.name, link.orientationLink, link.size, link.pointAPositionX, link.pointAPositionY, link.colorCoordinateA, link.pointBPositionX, link.pointBPositionY, link.colorCoordinateB, link.valueMainMetricA, link.valueMainMetricB, link.pointIn, link.pointOut, link.regionIn, link.regionOut, link.zIndex, link.pointCPositionX, link.pointCPositionY, link.isIncurved, link.mainMetricB, link.metricsB); // console.log(toLoad);
+      var toLoad = new _Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_5__["OrientedLinkClass"](link.id, link.linkURL, link.meta, link.lowerLimit, link.label, link.textObj, link.mainMetric, link.metrics, link.colorMode, link.traceBack, link.traceBorder, link.positionParameter, link.name, link.orientationLink, link.size, link.pointAPositionX, link.pointAPositionY, link.colorCoordinateA, link.pointBPositionX, link.pointBPositionY, link.colorCoordinateB, link.valueMainMetricA, link.valueMainMetricB, link.pointIn, link.pointOut, link.regionIn, link.regionOut, link.zIndex, link.pointCPositionX, link.pointCPositionY, link.isIncurved, link.mainMetricB, link.metricsB, link.widthInitialSpaceDefault, link.heightInitialSpaceDefault, link.pointAPositionXDefault, link.pointAPositionYDefault, link.pointBPositionXDefault, link.pointBPositionYDefault); // console.log(toLoad);
       // Do some test here to see if your already load a coordinatespace with this id
 
       var selector = _this.LinkValidator(toLoad);
@@ -23133,12 +23675,11 @@ var defaults = {
   coordinateSpaceInitial: {
     coordinate: {
       xMin: '0',
-      xMax: '100',
+      xMax: '0',
       yMin: '0',
-      yMax: '100'
+      yMax: '0'
     },
-    displayArea: true,
-    defaultReferentiel: true
+    displayArea: true
   },
   displayButton: false,
   regionCoordinateSpace: [],
@@ -23245,6 +23786,8 @@ var defaults = {
     labelRegion: '',
     region: {}
   }],
+  regionIsCreated: true,
+  numberBorderRegionUpdated: 0,
   indexOrientedLink: 0,
   indexPoint: 0,
   indexRegion: 0,
@@ -23272,6 +23815,7 @@ var defaults = {
   gabaritDefault: {
     queryID: 'A',
     fileName: 'default',
+    loaded: false,
     globalGabarit: {
       lowerLimit: [{
         id: 0,
@@ -23321,7 +23865,8 @@ var defaults = {
     templateGabaritPoint: [],
     templateGabaritRegion: [],
     templateGabaritLink: []
-  }
+  },
+  updateOnlyInitialSpace: false
 };
 
 /***/ }),

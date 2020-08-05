@@ -1,85 +1,89 @@
 {
-    "regions": [{
-        "colorMode": false,
-        "coords": {
-            "xMin": "-23",
-            "xMax": "-77",
-            "yMin": "-26",
-            "yMax": "-99"
+  "regions": [
+    {
+      "colorMode": false,
+      "coords": {
+        "xMin": "-23",
+        "xMax": "-77",
+        "yMin": "-26",
+        "yMax": "-99"
+      },
+      "id": 350,
+      "idSVG": "",
+      "img": "",
+      "label": "zone",
+      "linkURL": {
+        "followLink": "www.atos.net",
+        "hoveringTooltipLink": "www.atos.net",
+        "hoveringTooltipText": "ATOS"
+      },
+      "lowerLimit": [
+        {
+          "backColor": "#C4162A",
+          "borderColor": "#FF0000",
+          "id": 0,
+          "lowerLimitMax": "",
+          "lowerLimitMin": "",
+          "sizeBorder": "2"
+        }
+      ],
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": "",
+        "manageValue": "avg",
+        "refId": "",
+        "returnQuery": [],
+        "unit": ""
+      },
+      "meta": "",
+      "metrics": [],
+      "mode": false,
+      "orientedLink": [],
+      "positionParameter": {
+        "labelAPositionX": "0",
+        "labelAPositionY": "0",
+        "labelBPositionX": "0",
+        "labelBPositionY": "0",
+        "tooltipPositionA": {},
+        "tooltipPositionB": {}
+      },
+      "textObj": {
+        "colorBack": "rgba(255, 255, 255, 0)",
+        "colorText": "rgba(0, 0, 0, 1)",
+        "generateAuxiliaryElement": {
+          "addColorBackElement": false,
+          "addColorTextElement": false,
+          "colorBackElement": "black",
+          "colorTextElement": "white",
+          "displayObjectInTooltip": false,
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unityMesureElement": ""
         },
-        "id": 350,
-        "idSVG": "",
-        "img": "",
-        "label": "zone",
-        "linkURL": {
-            "followLink": "www.atos.net",
-            "hoveringTooltipLink": "www.atos.net",
-            "hoveringTooltipText": "ATOS"
+        "generateObjectText": false,
+        "isTextTooltip": true,
+        "legend": "",
+        "style": {
+          "bold": true,
+          "italic": false,
+          "underline": true
         },
-        "lowerLimit": [{
-            "backColor": "#C4162A",
-            "borderColor": "#FF0000",
-            "id": 0,
-            "lowerLimitMax": "",
-            "lowerLimitMin": "",
-            "sizeBorder": "2"
-        }],
-        "mainMetric": {
-            "format": "",
-            "key": "",
-            "keyValue": "",
-            "manageValue": "avg",
-            "refId": "",
-            "returnQuery": [],
-            "unit": ""
-        },
-        "meta": "",
-        "metrics": [],
-        "mode": false,
-        "orientedLink": [],
-        "positionParameter": {
-            "labelAPositionX": "0",
-            "labelAPositionY": "0",
-            "labelBPositionX": "0",
-            "labelBPositionY": "0",
-            "tooltipPositionA": {},
-            "tooltipPositionB": {}
-        },
-        "textObj": {
-            "colorBack": "rgba(255, 255, 255, 0)",
-            "colorText": "rgba(0, 0, 0, 1)",
-            "generateAuxiliaryElement": {
-                "addColorBackElement": false,
-                "addColorTextElement": false,
-                "colorBackElement": "black",
-                "colorTextElement": "white",
-                "displayObjectInTooltip": false,
-                "legendElement": "",
-                "numericFormatElement": "",
-                "unityMesureElement": ""
-            },
-            "generateObjectText": false,
-            "isTextTooltip": true,
-            "legend": "",
-            "style": {
-                "bold": true,
-                "italic": false,
-                "underline": true
-            },
-            "unit": "",
-            "value": "",
-            "valueGenerateObjectText": {
-                "addColorBackElement": false,
-                "addColorTextElement": false,
-                "colorBackElement": "black",
-                "colorTextElement": "white",
-                "displayObjectInTooltip": false,
-                "legendElement": "",
-                "numericFormatElement": "",
-                "unityMesureElement": ""
-            }
-        },
-        "traceBack": false,
-        "traceBorder": true
-    }]
+        "unit": "",
+        "value": "",
+        "valueGenerateObjectText": {
+          "addColorBackElement": false,
+          "addColorTextElement": false,
+          "colorBackElement": "black",
+          "colorTextElement": "white",
+          "displayObjectInTooltip": false,
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unityMesureElement": ""
+        }
+      },
+      "traceBack": false,
+      "traceBorder": true
+    }
+  ]
 }

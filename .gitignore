@@ -1,3 +1,4 @@
+
 # Created by https://www.gitignore.io/api/node,react
 # Edit at https://www.gitignore.io/?templates=node,react
 
@@ -79,20 +80,14 @@ typings/
 # nuxt.js build output
 .nuxt
 
-# rollup.js default build output
-# dist/
-
-# Uncomment the public line if your project uses Gatsby
-# https://nextjs.org/blog/next-9-1#public-directory-support
-# https://create-react-app.dev/docs/using-the-public-folder/#docsNav
-# public
-
-# Storybook build outputs
-.out
-.storybook-out
+# react / gatsby 
+public/
 
 # vuepress build output
 .vuepress/dist
+
+#dist
+dist/
 
 # Serverless directories
 .serverless/
@@ -103,16 +98,13 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
-# Temporary folders
-tmp/
-temp/
-
 ### react ###
 .DS_*
 **/*.backup.*
 **/*.back.*
 
 node_modules
+bower_componets
 
 *.sublime*
 
@@ -121,5 +113,3 @@ thumb
 sketch
 
 # End of https://www.gitignore.io/api/node,react
-
-.directory

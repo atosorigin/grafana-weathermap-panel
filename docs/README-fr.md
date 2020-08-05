@@ -35,8 +35,7 @@ WeatherMap est un plugin pour grafana permettant de visualiser la surveillance..
   - [JSON point](FR/appendix/json-point.md)
   - [JSON link](FR/appendix/json-links.md)
   - [JSON global](FR/appendix/json-global.md)
-  - [JSON gabarit](FR/appendix/json-gabarit.md)  
+  - [JSON gabarit](FR/appendix/json-gabarit.md)
   - [Server](FR/appendix/server.md)
-- [FAQ](EN/init/faq.md) 
+- [FAQ](EN/init/faq.md)
 - [Released](FR/init/released.md)
-

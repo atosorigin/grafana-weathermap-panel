@@ -1,7 +1,5 @@
 # About WeatherMap plugin
 
-
-
 WeatherMap is a plugin for grafana allowing to visualize monitoring...
 
 [Documentation en francais](README-fr.md)
@@ -40,7 +38,3 @@ WeatherMap is a plugin for grafana allowing to visualize monitoring...
   - [Server](EN/appendix/server.md)
 - [FAQ](EN/init/faq.md)
 - [Released](EN/init/released.md)
-
-
-
-

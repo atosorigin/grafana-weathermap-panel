@@ -1,8 +1,8 @@
 # Fichier `region`
+
 [![](../../screenshots/other/Go-back.png)](README.md)
 
 le script complet [sample-region.json](../../../demo/sample-region.json) est disponible, dont le détail de construction se trouve ci-dessous.
-
 
 Le fichier **region** doit être déclaré sous la forme d'un fichier JSON comme ceci:
 
@@ -14,11 +14,11 @@ Le fichier **region** doit être déclaré sous la forme d'un fichier JSON comme
 
 ```
 
-## Structure 
+## Structure
 
 ```
 {
-  "regions": 
+  "regions":
   [
     {
       "colorMode"	:false,
@@ -43,9 +43,10 @@ Le fichier **region** doit être déclaré sous la forme d'un fichier JSON comme
 }
 
 ```
+
 ## Région
 
-Il existe 2 façons de créer une région : 
+Il existe 2 façons de créer une région :
 
 - Région SVG
 - Région coordonnées
@@ -89,7 +90,6 @@ La création d'une région à partir d'un élément SVG doit contenir obligatoir
 
 ```
 
-
 ### Region coordonnées
 
 La création d'une région à partir de coordonnées doit contenir obligatoirement les valeurs suivantes
@@ -99,7 +99,6 @@ La création d'une région à partir de coordonnées doit contenir obligatoireme
 - **label** est le label de la région
 - **idSVG** à vide
 - **coords** les coordonnées
-
 
 ```
 { "regions": [
@@ -129,18 +128,14 @@ La création d'une région à partir de coordonnées doit contenir obligatoireme
 
 ```
 
-
-
 ## lowerLimit
 
-
-Il est possible de choisir entre 2 méthodes de couleurs : 
+Il est possible de choisir entre 2 méthodes de couleurs :
 
 - couleur fixe
 - couleur variable
 
 ### Couleur fixe
-
 
 Si `colorMode` est à false
 
@@ -165,12 +160,13 @@ Alors La couleur sera définit comme ceci
 ```
 
 Avec :
-  - **backColor**: Choisissez une couleur pour le background sous la forme #7FFF00 par exemple
-  - **borderColor** : Choisissez une couleur pour la bordure sous la forme #7FFF00 par exemple
-  - **id** : id de la couleur
-  - **lowerLimitMax** : Valeur maximale de la métrique pour cette couleur
-  - **lowerLimitMin**: Valeur minimale de la métrique pour cette couleur
-  - **sizeBorder** : Épaisseur de la frontière
+
+- **backColor**: Choisissez une couleur pour le background sous la forme #7FFF00 par exemple
+- **borderColor** : Choisissez une couleur pour la bordure sous la forme #7FFF00 par exemple
+- **id** : id de la couleur
+- **lowerLimitMax** : Valeur maximale de la métrique pour cette couleur
+- **lowerLimitMin**: Valeur minimale de la métrique pour cette couleur
+- **sizeBorder** : Épaisseur de la frontière
 
 ### Couleur variable
 
@@ -213,17 +209,19 @@ Alors La couleur sera définit comme ceci
  ],
 
 ```
+
 Avec de même :
-  - **backColor**: Choisissez une couleur pour le background sous la forme #7FFF00 par exemple
-  - **borderColor** : Choisissez une couleur pour la bordure sous la forme #7FFF00 par exemple
-  - **id** : id de la couleur
-  - **lowerLimitMax** : Valeur maximale de la métrique pour cette couleur
-  - **lowerLimitMin**: Valeur minimale de la métrique pour cette couleur
-  - **sizeBorder** : Épaisseur de la frontière
+
+- **backColor**: Choisissez une couleur pour le background sous la forme #7FFF00 par exemple
+- **borderColor** : Choisissez une couleur pour la bordure sous la forme #7FFF00 par exemple
+- **id** : id de la couleur
+- **lowerLimitMax** : Valeur maximale de la métrique pour cette couleur
+- **lowerLimitMin**: Valeur minimale de la métrique pour cette couleur
+- **sizeBorder** : Épaisseur de la frontière
 
 ## img
 
-Il s'agit du chemin représentant une représentation graphique 
+Il s'agit du chemin représentant une représentation graphique
 
 Le format compatible est JPG / PNG / GIF / SVG
 
@@ -233,11 +231,10 @@ Le format compatible est JPG / PNG / GIF / SVG
 
 ## linkURL
 
- - **linkURL** : Vous permet de rendre les régions cliquables 
-    - **followLink** : Vous permet une redirection vers le lien renseigné en cliquant sur la région
-    - **hoveringTooltipLink** : Vous permet une redirection vers le lien renseigné dans le tool type en cliquant sur le lien
-    - **hoveringTooltipText** : Affiche le lien dans le tool type qui apparaît quand on passe le curseur sur la région
-
+- **linkURL** : Vous permet de rendre les régions cliquables
+  - **followLink** : Vous permet une redirection vers le lien renseigné en cliquant sur la région
+  - **hoveringTooltipLink** : Vous permet une redirection vers le lien renseigné dans le tool type en cliquant sur le lien
+  - **hoveringTooltipText** : Affiche le lien dans le tool type qui apparaît quand on passe le curseur sur la région
 
 ```
 "linkURL": {
@@ -248,18 +245,17 @@ Le format compatible est JPG / PNG / GIF / SVG
 
 ```
 
-
 ## mainMetric
 
- - **mainMetric**	
-    - **expr** : Expresison en PrompQL
-    - **format** "" (Laisser vide)
-    - **key** : Correspond à une clef associée à la métrique
-    - **keyValue** : Vous permet de filtrer les données reçues par la Query en renseignant la valeur de la clef associée à la métrique
-    - **manageValue** : Vous avez le choix entre "sum", "avg" ou "err"
-    - **refId** : Référence de la métrique associé à cette région
-    - **returnQuery** : Ne pas renseigner.      
-    - **unit** : (Laisser vide)
+- **mainMetric**
+  - **expr** : Expresison en PrompQL
+  - **format** "" (Laisser vide)
+  - **key** : Correspond à une clef associée à la métrique
+  - **keyValue** : Vous permet de filtrer les données reçues par la Query en renseignant la valeur de la clef associée à la métrique
+  - **manageValue** : Vous avez le choix entre "sum", "avg" ou "err"
+  - **refId** : Référence de la métrique associé à cette région
+  - **returnQuery** : Ne pas renseigner.
+  - **unit** : (Laisser vide)
 
 ```
        "mainMetric": {
@@ -272,8 +268,8 @@ Le format compatible est JPG / PNG / GIF / SVG
                 "returnQuery": [],
                 "unit": ""
             },
-  
-  
+
+
 ```
 
 ## meta
@@ -282,22 +278,22 @@ Pas de valeurs
 
 ## metrics
 
- - **metrics** : Il s'agit d'un tableau de métrique pour ajouter des métriques auxilières
-    - **0**
-        - **expr** : Expresison en PrompQL
-        - **format** "" (Laisser vide)
-        - **key** : Correspond à une clef associée à la métrique
-        - **keyValue** : Vous permet de filtrer les données reçues par la Query en renseignant la valeur de la clef associée à la métrique
-        - **manageValue** : Vous avez le choix entre "sum", "avg" ou "err"
-        - **refId** : Référence de la métrique associé à cette région
-        - **returnQuery** : Ne pas renseigner.      
-        - **unit** : (Laisser vide)
-    - **1**
-        - ...
+- **metrics** : Il s'agit d'un tableau de métrique pour ajouter des métriques auxilières
+  - **0**
+    - **expr** : Expresison en PrompQL
+    - **format** "" (Laisser vide)
+    - **key** : Correspond à une clef associée à la métrique
+    - **keyValue** : Vous permet de filtrer les données reçues par la Query en renseignant la valeur de la clef associée à la métrique
+    - **manageValue** : Vous avez le choix entre "sum", "avg" ou "err"
+    - **refId** : Référence de la métrique associé à cette région
+    - **returnQuery** : Ne pas renseigner.
+    - **unit** : (Laisser vide)
+  - **1**
+    - ...
 
 ```
    "metrics": [
-     "0": 
+     "0":
         {
             "expr": "",
             "format": "",
@@ -327,7 +323,6 @@ Pas de valeurs
 
 Pas de valeurs
 
-
 ## positionParameter
 
 - **positionParameter**
@@ -352,38 +347,38 @@ Pas de valeurs
 
 ## textObj
 
- - **textObj**
-  - **colorBack** : Choisir la couleur du background du texte en rgba. Exemple : rgba(255, 255, 255, 0)
-  - **colorText** : Choisir la couleur du texte en rgba. Exemple : rgba(0, 0, 0, 1)
-  - **generateAuxiliaryElement** : Permet de générer un élément auxiliaire 
-      - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
-      - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
-      - **colorBackElement** : Choisir la couleur du background
-      - **colorTextElement** :  Choisir la couleur du texte 
-      - **displayObjectInText** : Afficher l'objet dans le texte. "true" ou "false"
-      - **displayObjectPermanently** : Afficher l'objet de facon permanente. "true" ou false"
-      - **legendElement** : Associer une légende à votre élément 
-      - **numericFormatElement** : Permet d'arrondir le résultat de la query
-      - **unityMesureElement** : Affiche une unité de mesure
-  - **generateObjectText** : Généré un objet texte. "true" ou "false"
-  - **isTextRegion** : Affichage du texte dans l'élément ou l'infobulle
-  - **legend** : Permet d'ajouter une légende
-  - **style**	
-      - **bold** : "True" ou "False" pour mettre le texte en gras
-      - **italic** : "True" ou "False" pour mettre le texte en italique
-      - **underline** : "True" ou "False" pour mettre le texte en sousligné
-  - **unit** : Permet d'afficher une unité de mesure
-  - **value**	: Valeur de l'objet
-  - **valueGenerateObjectText** : A utiliser et remplir si generateObjectText est true lors de l'utilisation de la variable pour stocker des données
-      - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
-      - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
-      - **colorBackElement** : Choisir la couleur du background
-      - **colorTextElement** :  Choisir la couleur du texte 
-      - **displayObjectInText** : Afficher l'objet dans le texte. "true" ou "false"
-      - **displayObjectPermanently** : Afficher l'objet de façon permanente. "true" ou false"
-      - **legendElement**	: Associer une légende à votre élément 
-      - **numericFormatElement** : Permet d'arrondir le résultat de la query
-      - **unityMesureElement**: Affiche une unité de mesure
+- **textObj**
+- **colorBack** : Choisir la couleur du background du texte en rgba. Exemple : rgba(255, 255, 255, 0)
+- **colorText** : Choisir la couleur du texte en rgba. Exemple : rgba(0, 0, 0, 1)
+- **generateAuxiliaryElement** : Permet de générer un élément auxiliaire
+  - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
+  - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
+  - **colorBackElement** : Choisir la couleur du background
+  - **colorTextElement** : Choisir la couleur du texte
+  - **displayObjectInText** : Afficher l'objet dans le texte. "true" ou "false"
+  - **displayObjectPermanently** : Afficher l'objet de facon permanente. "true" ou false"
+  - **legendElement** : Associer une légende à votre élément
+  - **numericFormatElement** : Permet d'arrondir le résultat de la query
+  - **unityMesureElement** : Affiche une unité de mesure
+- **generateObjectText** : Généré un objet texte. "true" ou "false"
+- **isTextRegion** : Affichage du texte dans l'élément ou l'infobulle
+- **legend** : Permet d'ajouter une légende
+- **style**
+  - **bold** : "True" ou "False" pour mettre le texte en gras
+  - **italic** : "True" ou "False" pour mettre le texte en italique
+  - **underline** : "True" ou "False" pour mettre le texte en sousligné
+- **unit** : Permet d'afficher une unité de mesure
+- **value** : Valeur de l'objet
+- **valueGenerateObjectText** : A utiliser et remplir si generateObjectText est true lors de l'utilisation de la variable pour stocker des données
+  - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
+  - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
+  - **colorBackElement** : Choisir la couleur du background
+  - **colorTextElement** : Choisir la couleur du texte
+  - **displayObjectInText** : Afficher l'objet dans le texte. "true" ou "false"
+  - **displayObjectPermanently** : Afficher l'objet de façon permanente. "true" ou false"
+  - **legendElement** : Associer une légende à votre élément
+  - **numericFormatElement** : Permet d'arrondir le résultat de la query
+  - **unityMesureElement**: Affiche une unité de mesure
 
 ```
    "textObj": {
@@ -422,13 +417,12 @@ Pas de valeurs
           "unityMesureElement": ""
         }
       }
-      
+
 ```
 
 ## traceBack
 
- - **traceBack** : Permet d'associer une couleur au background. "true" ou "false"
-
+- **traceBack** : Permet d'associer une couleur au background. "true" ou "false"
 
 ```
      "traceBack": true,
@@ -437,10 +431,8 @@ Pas de valeurs
 
 ## traceBorder
 
-  - **traceBorder** : Permet d'associer une couleur à la bordure. "true" ou "false"
+- **traceBorder** : Permet d'associer une couleur à la bordure. "true" ou "false"
 
 ```
       "traceBorder": false
 ```
-
-

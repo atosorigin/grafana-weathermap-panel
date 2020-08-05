@@ -1,8 +1,8 @@
 # Fichier `links`
+
 [![](../../screenshots/other/Go-back.png)](README.md)
 
 le script complet [sample-link.json](../../../demo/sample-link.json) est disponible, dont le détail de construction se trouve ci-dessous.
-
 
 Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme ceci:
 
@@ -14,7 +14,6 @@ Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme c
 ```
 
 ## Structure
-
 
 ```
 {
@@ -57,6 +56,7 @@ Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme c
 
 
 ```
+
 ## colorCoordinate A et B
 
 - **colorCoordinateA** et **colorCoordinateB** : Choisissez la couleur des coordonnées A et B
@@ -85,16 +85,17 @@ Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme c
     "id": "1",
 
 ```
+
 ## mainMetric et mainMetricB
 
-- **mainMetric**	
-    - **format** "" (Laisser vide)
-    - **key** : Correspond à une clef associée à la métrique
-    - **keyValue** : Vous permet de filtrer les données reçues par la Query en renseignant la valeur de la clef associée à la métrique
-    - **manageValue** : Vous avez le choix entre "sum", "avg" ou "err"
-    - **refId** : Référence de la métrique associée à cette région
-    - **returnQuery** : Ne pas renseigner.      
-    - **unit** : (Laisser vide)
+- **mainMetric**
+  - **format** "" (Laisser vide)
+  - **key** : Correspond à une clef associée à la métrique
+  - **keyValue** : Vous permet de filtrer les données reçues par la Query en renseignant la valeur de la clef associée à la métrique
+  - **manageValue** : Vous avez le choix entre "sum", "avg" ou "err"
+  - **refId** : Référence de la métrique associée à cette région
+  - **returnQuery** : Ne pas renseigner.
+  - **unit** : (Laisser vide)
 
 ```
 "mainMetric": {
@@ -106,15 +107,15 @@ Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme c
             "returnQuery": [],
             "unit": ""
         },
-  
-  
+
+
 ```
 
 ## isIncurved
 
-- **isIncurved** : Permettra de définir sur il y aura un troisième point pour faire une courbure	
-    - **label** : Saisissez un label
-    - **value** : Choisir si vous voulez une courbure ou non. "true" ou "false"
+- **isIncurved** : Permettra de définir sur il y aura un troisième point pour faire une courbure
+  - **label** : Saisissez un label
+  - **value** : Choisir si vous voulez une courbure ou non. "true" ou "false"
 
 ```
 
@@ -134,15 +135,15 @@ Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme c
 
     "label": "lien1",
     "name": "réseau",
-            
+
 ```
 
 ## linkURL
 
- - **linkURL**
-    - **followLink** : Permet une redirection vers le lien renseigné en cliquant sur la région
-    - **hoveringTooltipLink** : Permet une redirection vers le lien renseigné dans le tool type en cliquant sur le lien
-    - **hoveringTooltipText** : Affiche le lien dans le tool type qui apparaît quand on passe le curseur sur la zone ou sur le point
+- **linkURL**
+  - **followLink** : Permet une redirection vers le lien renseigné en cliquant sur la région
+  - **hoveringTooltipLink** : Permet une redirection vers le lien renseigné dans le tool type en cliquant sur le lien
+  - **hoveringTooltipText** : Affiche le lien dans le tool type qui apparaît quand on passe le curseur sur la zone ou sur le point
 
 ```
  "linkURL": {
@@ -150,19 +151,17 @@ Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme c
             "hoveringTooltipLink": "",
             "hoveringTooltipText": ""
         },
-    
+
 ```
-    
+
 ## lowerLimit
 
-
-Il est possible de choisir entre 2 méthodes de couleur : 
+Il est possible de choisir entre 2 méthodes de couleur :
 
 - Couleur fixe
 - Couleur variable
 
 ### Couleur fixe
-
 
 Si "colorMode" est "false"
 
@@ -170,7 +169,7 @@ Si "colorMode" est "false"
 "colorMode": false,
 ```
 
-La couleur sera alors définie comme cela 
+La couleur sera alors définie comme cela
 
 ```
 "lowerLimit": [
@@ -187,12 +186,13 @@ La couleur sera alors définie comme cela
 ```
 
 Avec :
-  - **backColor**: Choisissez une couleur pour le background sous la forme #7FFF00 par exemple
-  - **borderColor** : Choisissez une couleur pour la bordure sous la forme #7FFF00 par exemple
-  - **id** : id de la couleur
-  - **lowerLimitMax** : Valeur maximale de la métrique pour cette couleur
-  - **lowerLimitMin**: Valeur minimale de la métrique pour cette couleur
-  - **sizeBorder** : Épaisseur de la frontière
+
+- **backColor**: Choisissez une couleur pour le background sous la forme #7FFF00 par exemple
+- **borderColor** : Choisissez une couleur pour la bordure sous la forme #7FFF00 par exemple
+- **id** : id de la couleur
+- **lowerLimitMax** : Valeur maximale de la métrique pour cette couleur
+- **lowerLimitMin**: Valeur minimale de la métrique pour cette couleur
+- **sizeBorder** : Épaisseur de la frontière
 
 ### Couleur variable
 
@@ -235,6 +235,7 @@ La couleur sera alors définie comme suit
  ],
 
 ```
+
 Avec de même :
 
 - **backColor**: Choisissez une couleur pour le background sous la forme #7FFF00 par exemple
@@ -244,29 +245,28 @@ Avec de même :
 - **lowerLimitMin**: Valeur minimale de la métrique pour cette couleur
 - **sizeBorder** : Épaisseur de la frontière
 
-
 ## meta
 
 pas de valeurs
 
 ## metrics et metricsB
 
- - **metrics** : Il s'agit d'un tableau de métrique pour ajouter des métriques auxilières
-    - **0**
-        - **expr** : Expresison en PrompQL
-        - **format** "" (Laisser vide)
-        - **key** : Correspond à une clef associée à la métrique
-        - **keyValue** : Vous permet de filtrer les données reçues par la Query en renseignant la valeur de la clef associée à la métrique
-        - **manageValue** : Vous avez le choix entre "sum", "avg" ou "err"
-        - **refId** : Référence de la métrique associé à cette région
-        - **returnQuery** : Ne pas renseigner.      
-        - **unit** : (Laisser vide)
-    - **1**
-        - ...
+- **metrics** : Il s'agit d'un tableau de métrique pour ajouter des métriques auxilières
+  - **0**
+    - **expr** : Expresison en PrompQL
+    - **format** "" (Laisser vide)
+    - **key** : Correspond à une clef associée à la métrique
+    - **keyValue** : Vous permet de filtrer les données reçues par la Query en renseignant la valeur de la clef associée à la métrique
+    - **manageValue** : Vous avez le choix entre "sum", "avg" ou "err"
+    - **refId** : Référence de la métrique associé à cette région
+    - **returnQuery** : Ne pas renseigner.
+    - **unit** : (Laisser vide)
+  - **1**
+    - ...
 
 ```
    "metrics": [
-     "0": 
+     "0":
         {
             "expr": "",
             "format": "",
@@ -294,9 +294,9 @@ pas de valeurs
 
 ## orientationLink
 
-  - **orientationLink**	
-    - **label** : Choisissez un label pour l'orientation. (monodirectionel ou bidirectionel)
-    - **value**	: Choisissez la valeur de l'orientation. Par exemple "AB".
+- **orientationLink**
+  - **label** : Choisissez un label pour l'orientation. (monodirectionel ou bidirectionel)
+  - **value** : Choisissez la valeur de l'orientation. Par exemple "AB".
 
 ```
 
@@ -305,7 +305,7 @@ pas de valeurs
             "label": "Monodirectional",
             "value": "AB"
         },
-          
+
 ```
 
 ## point A/B/C Position X/Y
@@ -331,18 +331,19 @@ pas de valeurs
 
     "pointIn": "point2",
     "pointOut": "point1",
-        
-        
+
+
 ```
+
 ## positionParameter
 
 - **positionParameter**
-    - **labelAPositionX** : Choisir la position horizontal du label A entre "-100" et "100"
-    - **labelAPositionY** : Choisir la position vertical du label A entre "-100" et "100"
-    - **labelBPositionX** : Choisir la position horizontal du label B entre "-100" et "100"
-    - **labelBPositionY** : Choisir la position vertical du label B entre "-100" et "100"
-    - **tooltipPositionA** : Position du tooltip A
-    - **tooltipPositionB** : Position du tooltip B
+  - **labelAPositionX** : Choisir la position horizontal du label A entre "-100" et "100"
+  - **labelAPositionY** : Choisir la position vertical du label A entre "-100" et "100"
+  - **labelBPositionX** : Choisir la position horizontal du label B entre "-100" et "100"
+  - **labelBPositionY** : Choisir la position vertical du label B entre "-100" et "100"
+  - **tooltipPositionA** : Position du tooltip A
+  - **tooltipPositionB** : Position du tooltip B
 
 ```
  "positionParameter": {
@@ -365,44 +366,44 @@ pas de valeurs
 
     "pointIn": "region2",
     "pointOut": "region1",
-        
+
 ```
 
 ## size
 
 - **size** : Vous permet de choisir la taille de votre lien
-    - **value** : Quelle est la taille. Peut être small, medium, large
-    - **label** : Choisissez un label pour la taille
+  - **value** : Quelle est la taille. Peut être small, medium, large
+  - **label** : Choisissez un label pour la taille
 
 ## textObj
 
 - **colorBack** : Choisir la couleur du background du texte en rgba. Exemple : rgba(255, 255, 255, 0)
-    - **colorText** : Choisir la couleur du texte en rgba. Exemple : rgba(0, 0, 0, 1)
-    - **generateAuxiliaryElement** : Permet de générer un élément auxiliaire 
-        - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
-        - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
-        - **colorBackElement** : Choisir la couleur du background
-        - **colorTextElement** :  Choisir la couleur du texte 
-        - **displayObjectInText** : Afficher l'objet dans le texte. "true" ou "false"
-        - **legendElement** : Associer une légende à votre élément 
-        - **numericFormatElement** : Permet d'arrondir le résultat de la query
-        - **unit** : Affiche une unité de mesure
-    - **generateObjectText** : Généré un objet texte. "true" ou "false"
-    - **isTextRegion** : affichage du texte dans l'élément ou l'infobulle
-    - **style**	
-        - **bold** : "True" ou "False" pour mettre le texte en gras
-        - **italic** : "True" ou "False" pour mettre le texte en italique
-        - **underline** : "True" ou "False" pour mettre le texte en souligné
-    - **value**	: Valeur de l'objet
-    - **valueGenerateObjectText**	
-        - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
-        - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
-        - **colorBackElement** : Choisir la couleur du background
-        - **colorTextElement** :  Choisir la couleur du texte 
-        - **displayObjectInText** : Afficher l'objet dans le texte. "true" ou "false"
-        - **legendElement** : Associer une légende à votre élément 
-        - **numericFormatElement** : Permet d'arrondir le résultat de la query
-        - **unit** : Affiche une unité de mesure
+  - **colorText** : Choisir la couleur du texte en rgba. Exemple : rgba(0, 0, 0, 1)
+  - **generateAuxiliaryElement** : Permet de générer un élément auxiliaire
+    - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
+    - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
+    - **colorBackElement** : Choisir la couleur du background
+    - **colorTextElement** : Choisir la couleur du texte
+    - **displayObjectInText** : Afficher l'objet dans le texte. "true" ou "false"
+    - **legendElement** : Associer une légende à votre élément
+    - **numericFormatElement** : Permet d'arrondir le résultat de la query
+    - **unit** : Affiche une unité de mesure
+  - **generateObjectText** : Généré un objet texte. "true" ou "false"
+  - **isTextRegion** : affichage du texte dans l'élément ou l'infobulle
+  - **style**
+    - **bold** : "True" ou "False" pour mettre le texte en gras
+    - **italic** : "True" ou "False" pour mettre le texte en italique
+    - **underline** : "True" ou "False" pour mettre le texte en souligné
+  - **value** : Valeur de l'objet
+  - **valueGenerateObjectText**
+    - **addColorBackElement** : Ajouter une couleur au background. "true" ou "false"
+    - **addColorTextElement** : Ajouter une couleur au texte. "true ou "false"
+    - **colorBackElement** : Choisir la couleur du background
+    - **colorTextElement** : Choisir la couleur du texte
+    - **displayObjectInText** : Afficher l'objet dans le texte. "true" ou "false"
+    - **legendElement** : Associer une légende à votre élément
+    - **numericFormatElement** : Permet d'arrondir le résultat de la query
+    - **unit** : Affiche une unité de mesure
 
 ```
 
@@ -438,17 +439,13 @@ pas de valeurs
                 "unit": ""
             }
         },
-        
-        
+
+
 ```
-
-
-
 
 ## traceBack
 
- - **traceBack** : Permet d'associer une couleur au background. "true" ou "false"
-
+- **traceBack** : Permet d'associer une couleur au background. "true" ou "false"
 
 ```
      "traceBack": true,
@@ -457,12 +454,11 @@ pas de valeurs
 
 ## traceBorder
 
-  - **traceBorder** : Permet d'associer une couleur à la bordure. "true" ou "false"
+- **traceBorder** : Permet d'associer une couleur à la bordure. "true" ou "false"
 
 ```
       "traceBorder": false
 ```
-
 
 ## valueMainMetric A/B
 
@@ -476,9 +472,9 @@ pas de valeurs
 
 ## zIndex
 
- - **zIndex**: Plus le nombre est grand, plus le lien sera mis en évidence sur l'image en termes de couche.
+- **zIndex**: Plus le nombre est grand, plus le lien sera mis en évidence sur l'image en termes de couche.
 
- ```
-    "zIndex": "5",
+```
+   "zIndex": "5",
 
 ```

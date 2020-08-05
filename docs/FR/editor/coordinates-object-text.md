@@ -1,7 +1,8 @@
 # Text object
+
 [![](../../screenshots/other/Go-back.png)](coordinates.md)
 
-Cette partie est commune pour 
+Cette partie est commune pour
 
 - [Region](coordinates-space-region.md)
 - [Point](coordinates-space-point.md)
@@ -9,13 +10,9 @@ Cette partie est commune pour
 
 ### Principal metric
 
-
 #### Région
 
-
-
 ![text object](../../screenshots/editor/coordinates/text-object/textobject-principal-region.jpg)
-
 
 En décochant cette option, le nom du label sera affiché dans la région définie.
 
@@ -37,11 +34,9 @@ Il apparait ensuite plusieurs options pour l'affichage du texte dans l'info bull
 - Color Text : Permet de choisir la couleur du texte
 - Text style : Permet de choisir entre une écriture en gras, en italique ou souligné
 
-
 ### Generate texte object
 
 ![text object](../../screenshots/editor/coordinates/text-object/textobject-generate.jpg)
-
 
 En cochant cette option, vous allez vouloir afficher la valeur de la métrique. Différentes options s'offrent ensuite à vous :
 
@@ -52,13 +47,9 @@ En cochant cette option, vous allez vouloir afficher la valeur de la métrique. 
 - Color text : En cochant cette case, vous pourrez choisir une couleur pour le texte de la valeur de la métrique
 - Background color : En cochant cette case, vous pourrez choisir une couleur pour le background de la valeur de la métrique
 
-
-
 ### Auxiliary element
 
-
 ![text object](../../screenshots/editor/coordinates/text-object/textobject-auxiliary.jpg)
-
 
 En cochant cette option, vous allez vouloir afficher la valeur de l'auxiliaire définie au préalable. Différentes options s'offrent ensuite à vous :
 
@@ -68,5 +59,3 @@ En cochant cette option, vous allez vouloir afficher la valeur de l'auxiliaire d
 - Object display in text or tooltip : En cochant cette case, la valeur de la métrique s'affichera dans l'info bulle
 - Color text : En cochant cette case, vous pourrez choisir une couleur pour le texte de la valeur de la métrique
 - Background color : En cochant cette case, vous pourrez choisir une couleur pour le background de la valeur de la métrique
-
-

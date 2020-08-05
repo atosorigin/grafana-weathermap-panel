@@ -1,96 +1,98 @@
 {
-    "global": {
-        "lowerLimit": [{
-            "lowerLimitMin": "leMinimum",
-            "lowerLimitMax": "leMaxmum",
-            "backColor": "#0046DE",
-            "borderColor": "#00FF99",
-            "sizeBorder": "20px"
-        }],
-        "textObject": {
-            "value": "",
-            "isTextTooltip": "false",
-            "colorBack": "red",
-            "colorText": "yellow",
-            "style": {
-                "bold": "true",
-                "italic": "false",
-                "underline": "true"
-            },
-            "generateObjectText": "true",
-            "valueGenerateObjectText": {
-                "legendElement": "uneLegend",
-                "numericFormatElement": "",
-                "unit": "Hz",
-                "displayObjectInTooltip": "true",
-                "addColorTextElement": "true",
-                "colorTextElement": "blue",
-                "addColorBackElement": "#FF00FF",
-                "colorBackElement": "white"
-            },
-            "generateAuxiliaryElement": {
-                "legendElement": "uneLegend",
-                "numericFormatElement": "?",
-                "unit": "Hz",
-                "displayObjectInTooltip": "true",
-                "addColorTextElement": "true",
-                "colorTextElement": "blue",
-                "addColorBackElement": "#E0FF0F",
-                "colorBackElement": "#999999"
-            }
-        },
-        "colorMode": "false",
-        "traceBack": "true",
-        "traceBorder": "true"
+  "global": {
+    "lowerLimit": [
+      {
+        "lowerLimitMin": "leMinimum",
+        "lowerLimitMax": "leMaxmum",
+        "backColor": "#0046DE",
+        "borderColor": "#00FF99",
+        "sizeBorder": "20px"
+      }
+    ],
+    "textObject": {
+      "value": "",
+      "isTextTooltip": "false",
+      "colorBack": "red",
+      "colorText": "yellow",
+      "style": {
+        "bold": "true",
+        "italic": "false",
+        "underline": "true"
+      },
+      "generateObjectText": "true",
+      "valueGenerateObjectText": {
+        "legendElement": "uneLegend",
+        "numericFormatElement": "",
+        "unit": "Hz",
+        "displayObjectInTooltip": "true",
+        "addColorTextElement": "true",
+        "colorTextElement": "blue",
+        "addColorBackElement": "#FF00FF",
+        "colorBackElement": "white"
+      },
+      "generateAuxiliaryElement": {
+        "legendElement": "uneLegend",
+        "numericFormatElement": "?",
+        "unit": "Hz",
+        "displayObjectInTooltip": "true",
+        "addColorTextElement": "true",
+        "colorTextElement": "blue",
+        "addColorBackElement": "#E0FF0F",
+        "colorBackElement": "#999999"
+      }
     },
-    "templates": [
-        {
-            "filtered": "device|ens3",
-            "labelfix": "true",
-            "xylabel": "x|labelName#y|labelName",
-            "xylabelfix": "x|75#y|80",
-            "type": "point",
-            "name": "unPoint",
-            "meta": "uneMeta",
-            "label": "networkName",
-            "positionParameter": {
-                "xylabelA": "x|0#y|0",
-                "xylabelB": "x|labelName#y|labelName",
-                "tooltipA": "Bottom",
-                "tooltipB": "Bottom"
-            },
-            "mainMetric": {
-                "key": "",
-                "format": ""
-            },
-            "metrics": [],
-            "linkURL": {},
-            "valueMetric": "",
-            "drawGraphicMarker": {
-                "label": "",
-                "value": ""
-            },
-            "shape": {
-                "label": "circle",
-                "value": "circle"
-            },
-            "sizeWidth": {
-                "label": "Medium",
-                "value": "medium"
-            },
-            "sizeHeight": {
-                "label": "1px",
-                "value": "1px"
-            },
-            "rotateArrow": {
-                "label": "",
-                "value": ""
-            },
-            "positionShapeX": "",
-            "positionShapeY": "",
-            "color": "blue",
-            "assiciateOrientedLinksIn": [],
-            "associateOrientedLinksOut": []
-        }  
-    ]
+    "colorMode": "false",
+    "traceBack": "true",
+    "traceBorder": "true"
+  },
+  "templates": [
+    {
+      "filtered": "device|ens3",
+      "labelfix": "true",
+      "xylabel": "x|labelName#y|labelName",
+      "xylabelfix": "x|75#y|80",
+      "type": "point",
+      "name": "unPoint",
+      "meta": "uneMeta",
+      "label": "networkName",
+      "positionParameter": {
+        "xylabelA": "x|0#y|0",
+        "xylabelB": "x|labelName#y|labelName",
+        "tooltipA": "Bottom",
+        "tooltipB": "Bottom"
+      },
+      "mainMetric": {
+        "key": "",
+        "format": ""
+      },
+      "metrics": [],
+      "linkURL": {},
+      "valueMetric": "",
+      "drawGraphicMarker": {
+        "label": "",
+        "value": ""
+      },
+      "shape": {
+        "label": "circle",
+        "value": "circle"
+      },
+      "sizeWidth": {
+        "label": "Medium",
+        "value": "medium"
+      },
+      "sizeHeight": {
+        "label": "1px",
+        "value": "1px"
+      },
+      "rotateArrow": {
+        "label": "",
+        "value": ""
+      },
+      "positionShapeX": "",
+      "positionShapeY": "",
+      "color": "blue",
+      "assiciateOrientedLinksIn": [],
+      "associateOrientedLinksOut": []
+    }
+  ]
 }

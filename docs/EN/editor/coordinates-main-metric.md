@@ -1,32 +1,28 @@
 # Main metric
+
 [![](../../screenshots/other/Go-back.png)](coordinates.md)
 
-This part is common for 
+This part is common for
 
 - [Region](coordinates-space-region.md)
 - [Point](coordinates-space-point.md)
 - [Oriented Link](coordinates-space-link.md)
 
-
-
 ![main metric](../../screenshots/editor/coordinates/main-metric/main-metric.jpg)
 
-
-The following parameter is used to 
+The following parameter is used to
 
 - Associate a predefined Query to a region or a point. This will allow you to define value and/or a color to a specific area according to the query.
 
 ![main metric](../../screenshots/editor/coordinates/main-metric/main-metric-query-a.jpg)
 
-
 - "Key" and "Value key" allow you to filter the data received by the query to keep only what is important to you.
 
-for example 
+for example
 
 ![main metric](../../screenshots/editor/coordinates/main-metric/main-metric-key-value.png)
 
-
-In the hypothesis where you retrieve several values, the following field proposes to return to you : 
+In the hypothesis where you retrieve several values, the following field proposes to return to you :
 
 - Average: Returns an average of the received values.
 - Total: Returns the total sum of the received values.

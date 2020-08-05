@@ -1,18 +1,16 @@
-# Lower limit du lien 
+# Lower limit du lien
+
 [![](../../screenshots/other/Go-back.png)](coordinates.md)
 
 ### Couleur fixe
-
 
 ![lower limit](../../screenshots/editor/coordinates/lower-limit/lower-limit-link.png)
 
 Si la `color variable` n'est pas cochée, un formulaire de ce type apparaît
 
-
 - Color/size : En cochant cette case, donne la possibilité de changer la couleur de fond et de donner une taille.
-- Edit color: En cliquant sur le cercle, vous pouvez choisir la couleur désirée. 
+- Edit color: En cliquant sur le cercle, vous pouvez choisir la couleur désirée.
 - Edit size: Vous permet de choisir la taille du lien
-
 
 ### Couleur Variable
 
@@ -33,6 +31,3 @@ Vous obtenez cet écran :
 - Une valeur maximale
 - Choisissez une couleur intérieure
 - Choisissez une taille de bordure
-
-
-

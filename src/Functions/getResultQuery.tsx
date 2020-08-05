@@ -8,7 +8,7 @@ const searchNameIsKey = (query: DataFrame, mainMetric: Metric): boolean => {
     return true;
   }
   const nameQuery: string[] =
-    query.name?.split(',').map((value) => {
+    query.name?.split(',').flatMap((value) => {
       return value.replace(/[\"{}]/gm, '');
     }) || [];
   if (nameQuery && nameQuery.length > 0) {
@@ -54,7 +54,8 @@ const searchNameIsFilter = (query: DataFrame, mainMetric: Metric): boolean => {
 
 export const getResultQuery = (mainMetric: Metric) => {
   let cnt: number | null = null;
-
+  console.log('yop');
+  console.log(mainMetric.returnQuery);
   if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
     const debug: number[] = [];
     let countValue = 0;
@@ -105,6 +106,50 @@ export const getResultQuery = (mainMetric: Metric) => {
         }
       }
     }
+    console.log(debug);
+    console.log('loua');
   }
+
   return cnt;
 };
+/*********************************** the best solution it's check the instant checbox in addquery */
+
+/*****************************Other solution but there are a problem with average of node_network_up */
+
+// export const getResultQuery = (mainMetric: Metric) => {
+//   let cnt: number | null = null;
+//   console.log(mainMetric.returnQuery);
+//   if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
+//     const debug: number[] = [];
+//     let countValue = 0;
+
+//     cnt = 0;
+//     for (const line of mainMetric.returnQuery) {
+//       const result = searchNameIsKey(line, mainMetric);
+//       if (result) {
+//         const sizeQuery: number = line.fields[0].values.length;
+//         // in grafana 7 change line.field[0] to line.field[1]
+//         for (let i = 0; i < sizeQuery; i++) {
+//           if (line.fields.length > 0 && line.fields[0].values.get(i)) {
+//             cnt += line.fields[0].values.get(i);
+//             debug.push(line.fields[0].values.get(i));
+//             ++countValue;
+//           }
+//           if (countValue > -1 && mainMetric.manageValue === 'sum') {
+//             break;
+//           }
+//         }
+//       }
+//     }
+//     if (mainMetric.manageValue === 'avg') {
+//       cnt /= countValue;
+//     } else if (mainMetric.manageValue === 'err') {
+//       if (countValue > -1) {
+//         cnt = null;
+//       }
+//     }
+//     console.log(debug);
+//   }
+
+//   return cnt;
+// };

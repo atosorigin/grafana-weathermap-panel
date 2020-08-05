@@ -5,6 +5,8 @@ import { LoadingState } from '@grafana/data';
 import { defaults, SimpleOptions } from '../types';
 import { act } from 'react-dom/test-utils';
 
+// Initialize test
+
 describe('waiting test', () => {
   test('to be pass', (done) => {
     setTimeout(() => {
@@ -26,7 +28,7 @@ describe('SimpleEditor tests', () => {
 //    */
   let mockFunctions = {
     onOptionsChange: (options: SimpleOptions, callback?: () => void) => {
-      let testProps = {};
+      testProps.options = options;
       act(() => {
         ReactDOM.render(
           <SimpleEditor options={component} data={component} onOptionsChange={component} ref={(c) => (component = c)} {...testProps} />,
@@ -35,7 +37,7 @@ describe('SimpleEditor tests', () => {
       });
     },
   };
-  let testProps = {};
+  let testProps = { options: {}, data: {}, onOptionsChange: {} };
   beforeEach(() => {
     let clonedDefaults = JSON.parse(JSON.stringify(defaults));
     clonedDefaults.listStep[1] = JSON.parse(JSON.stringify(additionalStep));
@@ -68,7 +70,7 @@ describe('SimpleEditor tests', () => {
 
   afterEach(() => {
     // document.body.removeChild(container);
-    container = [];
+    container = <div></div>;
     component = [];
     jest.clearAllMocks();
   });
@@ -191,7 +193,7 @@ describe('SimpleEditor tests', () => {
     //   },
     //   'test-id'
     // );
-    // expect(component.props.options.Id).toBe('test-value');
+    // expect(input.setAttribute).toEqual('test-value');
   });
 
   test('onInfoChanged', () => {

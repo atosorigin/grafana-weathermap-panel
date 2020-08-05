@@ -1,8 +1,8 @@
 # File `links`
-[![](../../screenshots/other/Go-back.png)](README.md)
- 
-The complete [sample-link.json](../../resource/sampleJson/sample-link.json) script is available, the construction details of which can be found below.
 
+[![](../../screenshots/other/Go-back.png)](README.md)
+
+The complete [sample-link.json](../../resource/sampleJson/sample-link.json) script is available, the construction details of which can be found below.
 
 The **link** file must be declared as a JSON file like this:
 
@@ -14,7 +14,6 @@ The **link** file must be declared as a JSON file like this:
 ```
 
 ## Structure
-
 
 ```
 {
@@ -58,6 +57,7 @@ The **link** file must be declared as a JSON file like this:
 
 
 ```
+
 ## colorCoordinate A and B
 
 - **colorCoordinateA** and **colorCoordinateB** : Choose the color of the coordinate A and B
@@ -78,7 +78,6 @@ The **link** file must be declared as a JSON file like this:
 
 ```
 
-
 ## id
 
 - **id** : Choose the id of your link
@@ -90,9 +89,9 @@ The **link** file must be declared as a JSON file like this:
 
 ## isIncurved
 
-- **isIncurved** : Will allow to define on there will be a third point to make a curvature	
-    - **label** : Enter a label
-    - **value**: Choose whether you want a curvature or not. "true" or "false"
+- **isIncurved** : Will allow to define on there will be a third point to make a curvature
+  - **label** : Enter a label
+  - **value**: Choose whether you want a curvature or not. "true" or "false"
 
 ```
 
@@ -103,7 +102,6 @@ The **link** file must be declared as a JSON file like this:
 
 ```
 
-
 ## label/name
 
 - **label** : Give a label to the link
@@ -113,17 +111,16 @@ The **link** file must be declared as a JSON file like this:
 
     "label": "link1",
     "name": "network",
-        
-        
-```
 
+
+```
 
 ## linkURL
 
- - **linkURL**
-    - **followLink**: Allows a redirection to the link by clicking on the region.
-    - **hoveringTooltipLink** : Allows a redirection to the link filled in the tool type by clicking on the link.
-    - **hoveringTooltipText** : Displays the link in the tool type that appears when the cursor is passed over the area or point.
+- **linkURL**
+  - **followLink**: Allows a redirection to the link by clicking on the region.
+  - **hoveringTooltipLink** : Allows a redirection to the link filled in the tool type by clicking on the link.
+  - **hoveringTooltipText** : Displays the link in the tool type that appears when the cursor is passed over the area or point.
 
 ```
  "linkURL": {
@@ -134,17 +131,14 @@ The **link** file must be declared as a JSON file like this:
 
 ```
 
-      
 ## lowerLimit
 
-
-It is possible to choose between 2 color methods : 
+It is possible to choose between 2 color methods :
 
 - fixed color
 - variable color
 
 ### Fixed color
-
 
 If `colorMode` is in false
 
@@ -170,12 +164,12 @@ Then the color will be defined like this
 
 With:
 
-  - **backColor**: Fill in a color for the background under the form #7FFF00 for example
-  - **borderColor** : Fill in a color for the border under the form #7FFF00 for example. 
-  - **id** : color id
-  - **lowerLimitMax** : Maximum value of the metric for this colour
-  - **lowerLimitMin**: Minimum metric value for this colour
-  - **sizeBorder** : thickness of the border
+- **backColor**: Fill in a color for the background under the form #7FFF00 for example
+- **borderColor** : Fill in a color for the border under the form #7FFF00 for example.
+- **id** : color id
+- **lowerLimitMax** : Maximum value of the metric for this colour
+- **lowerLimitMin**: Minimum metric value for this colour
+- **sizeBorder** : thickness of the border
 
 ### Variable color
 
@@ -218,27 +212,27 @@ Then the color will be defined like this
  ],
 
 ```
+
 With similarly:
 
-  - **backColor**: Fill in a color for the background under the form #7FFF00 for example
-  - **borderColor** : Fill in a color for the border under the form #7FFF00 for example. 
-  - **id** : color id
-  - **lowerLimitMax** : Maximum value of the metric for this colour
-  - **lowerLimitMin**: Minimum metric value for this colour
-  - **sizeBorder** : thickness of the border
-
+- **backColor**: Fill in a color for the background under the form #7FFF00 for example
+- **borderColor** : Fill in a color for the border under the form #7FFF00 for example.
+- **id** : color id
+- **lowerLimitMax** : Maximum value of the metric for this colour
+- **lowerLimitMin**: Minimum metric value for this colour
+- **sizeBorder** : thickness of the border
 
 ## mainMetric et mainMetricB
 
-- **mainMetric**	
-    - **expr** : Expression in PrompQL
-    - **format** "" (Leaves blank)
-    - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
-    - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
-    - **manageValue** : You can choose between "sum", "avg" or "err".
-    - **refId**: Metric reference associated with this region
-    - **returnQuery**: (Leave blank) 
-    - **unit** : (Leave blank)
+- **mainMetric**
+  - **expr** : Expression in PrompQL
+  - **format** "" (Leaves blank)
+  - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
+  - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
+  - **manageValue** : You can choose between "sum", "avg" or "err".
+  - **refId**: Metric reference associated with this region
+  - **returnQuery**: (Leave blank)
+  - **unit** : (Leave blank)
 
 ```
 "mainMetric": {
@@ -251,10 +245,9 @@ With similarly:
             "returnQuery": [],
             "unit": ""
         },
-  
-  
-```
 
+
+```
 
 ## meta
 
@@ -262,22 +255,22 @@ pas de valeurs
 
 ## metrics et metricsB
 
- - **metrics** : This is a metric table to add auxilary metrics.
-    - **0**
-        - **expr** : Expression in PrompQL
-        - **format** : (Leaves blank)
-        - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
-        - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
-        - **manageValue** : You can choose between "sum", "avg" or "err".
-        - **refId**: Metric reference associated with this region
-        - **returnQuery**: (Leave blank)    
-        - **unit** : (Leave blank)
-    - **1**
-        - ...
+- **metrics** : This is a metric table to add auxilary metrics.
+  - **0**
+    - **expr** : Expression in PrompQL
+    - **format** : (Leaves blank)
+    - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
+    - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
+    - **manageValue** : You can choose between "sum", "avg" or "err".
+    - **refId**: Metric reference associated with this region
+    - **returnQuery**: (Leave blank)
+    - **unit** : (Leave blank)
+  - **1**
+    - ...
 
 ```
    "metrics": [
-     "0": 
+     "0":
         {
             "expr": "",
             "format": "",
@@ -303,12 +296,11 @@ pas de valeurs
 
 ```
 
-
 ## orientationLink
 
-  - **Link orientation**	
-    - **label** : Choose a label for orientation. (monodirectional or bidirectional)
-    - **value**: Choose the value of the orientation. For example "AB".
+- **Link orientation**
+  - **label** : Choose a label for orientation. (monodirectional or bidirectional)
+  - **value**: Choose the value of the orientation. For example "AB".
 
 ```
 
@@ -317,9 +309,8 @@ pas de valeurs
             "label": "Monodirectional",
             "value": "AB"
         },
-          
-```
 
+```
 
 ## point A/B/C Position X/Y
 
@@ -344,19 +335,19 @@ pas de valeurs
 
     "pointIn": "point2",
     "pointOut": "point1",
-        
-        
+
+
 ```
 
 ## positionParameter
 
 - **Parameter position**
-    - **labelAPositionX** : Choose the horizontal position of label A between "-100" and "100".
-    - **labelAPositionY** : Choose the vertical position of label A between "-100" and "100".
-    - **labelBPositionX** : Choose the horizontal position of label B between "-100" and "100".
-    - **labelBPositionY** : Choose the vertical position of label B between "-100" and "100".
-    - **tooltipPositionA**: Tooltip A position
-    - **tooltipPositionB**: Tooltip B position 
+  - **labelAPositionX** : Choose the horizontal position of label A between "-100" and "100".
+  - **labelAPositionY** : Choose the vertical position of label A between "-100" and "100".
+  - **labelBPositionX** : Choose the horizontal position of label B between "-100" and "100".
+  - **labelBPositionY** : Choose the vertical position of label B between "-100" and "100".
+  - **tooltipPositionA**: Tooltip A position
+  - **tooltipPositionB**: Tooltip B position
 
 ```
  "positionParameter": {
@@ -379,44 +370,44 @@ pas de valeurs
 
     "regionIn": "region2",
     "regionOut": "region1",
-        
+
 ```
 
 ## size
 
 - **size** : Allow you to choose the size of your link
-    - **value** : What is the size. Could be Small, Medium, Large
-    - **label** : Choose a label for the size
+  - **value** : What is the size. Could be Small, Medium, Large
+  - **label** : Choose a label for the size
 
 ## textObj
 
 - **colorBack**: Choose the background color of the text in rgba. Example: rgba(255, 255, 255, 0)
 - **colorText**: Choose the color of the text in rgba. Example: rgba(0, 0, 0, 1)
 - **generateAuxiliaryElement**: Allows to generate an auxiliary element
-    - **addColorBackElement**: Add a color to the background. "true" or "false"
-    - **addColorTextElement**: Add a color to the text. "true or "false"
-    - **colorBackElement**: Choose the background color
-    - **colorTextElement** : Choose the color of the text 
-    - **displayObjectInText**: Display the object in the text. "true" or "false"
-    - **legendElement** : Associate a legend to your element 
-    - **numericFormatElement**: Allows to round the result of the Query
-    - **unit**: Displays a unit of measure
+  - **addColorBackElement**: Add a color to the background. "true" or "false"
+  - **addColorTextElement**: Add a color to the text. "true or "false"
+  - **colorBackElement**: Choose the background color
+  - **colorTextElement** : Choose the color of the text
+  - **displayObjectInText**: Display the object in the text. "true" or "false"
+  - **legendElement** : Associate a legend to your element
+  - **numericFormatElement**: Allows to round the result of the Query
+  - **unit**: Displays a unit of measure
 - **generateObjectText**: Generate a text object. "true" or "false"
 - **isTextRegion**: display text in the element or tooltip
-- **style**	
-    - **bold** : "True" or "False" to put the text in bold.
-    - **italic**: "True" or "False" to italicize text
-    - **underline**: "True" or "False" to put the text in underline
+- **style**
+  - **bold** : "True" or "False" to put the text in bold.
+  - **italic**: "True" or "False" to italicize text
+  - **underline**: "True" or "False" to put the text in underline
 - **value**: Value of the object
-- **valueGenerateObjectText**	
-    - **addColorBackElement**: Add a color to the background. "true" or "false"
-    - **addColorTextElement**: Add a color to the text. "true or "false"
-    - **colorBackElement**: Choose the background color
-    - **colorTextElement** : Choose the color of the text 
-    - **displayObjectInText**: Display the object in the text. "true" or "false"
-    - **legendElement** : Associate a legend to your element 
-    - **numericFormatElement**: Allows to round the result of the Query
-    - **unit**: Displays a unit of measure
+- **valueGenerateObjectText**
+  - **addColorBackElement**: Add a color to the background. "true" or "false"
+  - **addColorTextElement**: Add a color to the text. "true or "false"
+  - **colorBackElement**: Choose the background color
+  - **colorTextElement** : Choose the color of the text
+  - **displayObjectInText**: Display the object in the text. "true" or "false"
+  - **legendElement** : Associate a legend to your element
+  - **numericFormatElement**: Allows to round the result of the Query
+  - **unit**: Displays a unit of measure
 
 ```
 
@@ -452,15 +443,13 @@ pas de valeurs
                 "unit": ""
             }
         },
-        
-        
+
+
 ```
-      
 
 ## traceBack
 
- - **traceBack**: Allow you to associate a color to the background. "true" or "false"
-
+- **traceBack**: Allow you to associate a color to the background. "true" or "false"
 
 ```
      "traceBack": true,
@@ -469,13 +458,11 @@ pas de valeurs
 
 ## traceBorder
 
-  - **traceBorder**: Allow you to associate a color to the border. "true" or "false"
+- **traceBorder**: Allow you to associate a color to the border. "true" or "false"
 
 ```
       "traceBorder": false
 ```
-
-
 
 ## valueMainMetric A/B
 
@@ -489,10 +476,9 @@ pas de valeurs
 
 ## zIndex
 
- - **zIndex**: The larger the number, the more the link will be highlighted on the image in terms of layers.
-
- ```
-    "zIndex": "5",
+- **zIndex**: The larger the number, the more the link will be highlighted on the image in terms of layers.
 
 ```
+   "zIndex": "5",
 
+```

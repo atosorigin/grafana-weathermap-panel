@@ -1,4 +1,5 @@
 # Legend
+
 [![](../../screenshots/other/Go-back.png)](README.md)
 
 ![legend](../../screenshots/panel/legend.jpg)
@@ -15,6 +16,5 @@ Sur cette légende, vous trouverez
 
 - L'étiquette de chaque région/point ou lien que vous avez créé
 - Les différentes couleurs que vous avez données à chacun de ces objets
-
 
 ![legend](../../screenshots/panel/legend.png)

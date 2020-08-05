@@ -1,170 +1,172 @@
-{"regions": [
-  {
-    "id": 1,
-    "linkURL": {
-      "followLink": "",
-      "hoveringTooltipLink": "",
-      "hoveringTooltipText": ""
-    },
-    "meta": "",
-    "lowerLimit": [
-      {
-        "id": 0,
-        "lowerLimitMin": "",
-        "lowerLimitMax": "",
-        "backColor": "#37872D",
-        "borderColor": "#37872D",
-        "sizeBorder": "1"
-      }
-    ],
-    "label": "vetha317d1e",
-    "textObj": {
-      "value": "",
-      "isTextTooltip": false,
-      "colorBack": "rgba(255, 255, 255, 0)",
-      "colorText": "rgba(0, 0, 0, 1)",
-      "style": {
-        "bold": false,
-        "italic": false,
-        "underline": false
+{
+  "regions": [
+    {
+      "id": 1,
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
       },
-      "generateObjectText": true,
-      "valueGenerateObjectText": {
-        "legendElement": "",
-        "numericFormatElement": "",
-        "unit": "",
-        "displayObjectInTooltip": false,
-        "addColorTextElement": false,
-        "colorTextElement": "white",
-        "addColorBackElement": false,
-        "colorBackElement": "black"
+      "meta": "",
+      "lowerLimit": [
+        {
+          "id": 0,
+          "lowerLimitMin": "",
+          "lowerLimitMax": "",
+          "backColor": "#37872D",
+          "borderColor": "#37872D",
+          "sizeBorder": "1"
+        }
+      ],
+      "label": "vetha317d1e",
+      "textObj": {
+        "value": "",
+        "isTextTooltip": false,
+        "colorBack": "rgba(255, 255, 255, 0)",
+        "colorText": "rgba(0, 0, 0, 1)",
+        "style": {
+          "bold": false,
+          "italic": false,
+          "underline": false
+        },
+        "generateObjectText": true,
+        "valueGenerateObjectText": {
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unit": "",
+          "displayObjectInTooltip": false,
+          "addColorTextElement": false,
+          "colorTextElement": "white",
+          "addColorBackElement": false,
+          "colorBackElement": "black"
+        },
+        "generateAuxiliaryElement": {
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unit": "",
+          "displayObjectInTooltip": false,
+          "addColorTextElement": false,
+          "colorTextElement": "white",
+          "addColorBackElement": false,
+          "colorBackElement": "black"
+        }
       },
-      "generateAuxiliaryElement": {
-        "legendElement": "",
-        "numericFormatElement": "",
+      "mainMetric": {
+        "key": "device",
         "unit": "",
-        "displayObjectInTooltip": false,
-        "addColorTextElement": false,
-        "colorTextElement": "white",
-        "addColorBackElement": false,
-        "colorBackElement": "black"
-      }
-    },
-    "mainMetric": {
-      "key": "device",
-      "unit": "",
-      "format": "",
-      "keyValue": "vetha317d1e",
-      "refId": "A",
-      "expr": "",
-      "returnQuery": [],
-      "manageValue": "avg"
-    },
-    "metrics": [],
-    "colorMode": false,
-    "traceBack": true,
-    "traceBorder": true,
-    "positionParameter": {
-      "labelAPositionX": "0",
-      "labelAPositionY": "0",
-      "labelBPositionX": "0",
-      "labelBPositionY": "0",
-      "tooltipPositionA": {},
-      "tooltipPositionB": {}
-    },
-    "idSVG": "path163",
-    "mode": true,
-    "orientedLink": [],
-    "coords": {
-      "xMin": "0",
-      "xMax": "0",
-      "yMin": "0",
-      "yMax": "0"
-    },
-    "img": ""
-  },
-  {
-    "id": 2,
-    "linkURL": {
-      "followLink": "",
-      "hoveringTooltipLink": "",
-      "hoveringTooltipText": ""
-    },
-    "meta": "",
-    "lowerLimit": [
-      {
-        "id": 0,
-        "lowerLimitMin": "",
-        "lowerLimitMax": "",
-        "backColor": "#C4162A",
-        "borderColor": "#C4162A",
-        "sizeBorder": "1"
-      }
-    ],
-    "label": "eno0",
-    "textObj": {
-      "value": "",
-      "isTextTooltip": false,
-      "colorBack": "rgba(255, 255, 255, 0)",
-      "colorText": "rgba(0, 0, 0, 1)",
-      "style": {
-        "bold": false,
-        "italic": false,
-        "underline": false
+        "format": "",
+        "keyValue": "vetha317d1e",
+        "refId": "A",
+        "expr": "",
+        "returnQuery": [],
+        "manageValue": "avg"
       },
-      "generateObjectText": true,
-      "valueGenerateObjectText": {
-        "legendElement": "",
-        "numericFormatElement": "",
-        "unit": "",
-        "displayObjectInTooltip": false,
-        "addColorTextElement": false,
-        "colorTextElement": "white",
-        "addColorBackElement": false,
-        "colorBackElement": "black"
+      "metrics": [],
+      "colorMode": false,
+      "traceBack": true,
+      "traceBorder": true,
+      "positionParameter": {
+        "labelAPositionX": "0",
+        "labelAPositionY": "0",
+        "labelBPositionX": "0",
+        "labelBPositionY": "0",
+        "tooltipPositionA": {},
+        "tooltipPositionB": {}
       },
-      "generateAuxiliaryElement": {
-        "legendElement": "",
-        "numericFormatElement": "",
+      "idSVG": "path163",
+      "mode": true,
+      "orientedLink": [],
+      "coords": {
+        "xMin": "0",
+        "xMax": "0",
+        "yMin": "0",
+        "yMax": "0"
+      },
+      "img": ""
+    },
+    {
+      "id": 2,
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "meta": "",
+      "lowerLimit": [
+        {
+          "id": 0,
+          "lowerLimitMin": "",
+          "lowerLimitMax": "",
+          "backColor": "#C4162A",
+          "borderColor": "#C4162A",
+          "sizeBorder": "1"
+        }
+      ],
+      "label": "eno0",
+      "textObj": {
+        "value": "",
+        "isTextTooltip": false,
+        "colorBack": "rgba(255, 255, 255, 0)",
+        "colorText": "rgba(0, 0, 0, 1)",
+        "style": {
+          "bold": false,
+          "italic": false,
+          "underline": false
+        },
+        "generateObjectText": true,
+        "valueGenerateObjectText": {
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unit": "",
+          "displayObjectInTooltip": false,
+          "addColorTextElement": false,
+          "colorTextElement": "white",
+          "addColorBackElement": false,
+          "colorBackElement": "black"
+        },
+        "generateAuxiliaryElement": {
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unit": "",
+          "displayObjectInTooltip": false,
+          "addColorTextElement": false,
+          "colorTextElement": "white",
+          "addColorBackElement": false,
+          "colorBackElement": "black"
+        }
+      },
+      "mainMetric": {
+        "key": "device",
         "unit": "",
-        "displayObjectInTooltip": false,
-        "addColorTextElement": false,
-        "colorTextElement": "white",
-        "addColorBackElement": false,
-        "colorBackElement": "black"
-      }
-    },
-    "mainMetric": {
-      "key": "device",
-      "unit": "",
-      "format": "",
-      "keyValue": "eno0",
-      "refId": "A",
-      "expr": "",
-      "returnQuery": [],
-      "manageValue": "avg"
-    },
-    "metrics": [],
-    "colorMode": false,
-    "traceBack": true,
-    "traceBorder": true,
-    "positionParameter": {
-      "labelAPositionX": "0",
-      "labelAPositionY": "0",
-      "labelBPositionX": "0",
-      "labelBPositionY": "0",
-      "tooltipPositionA": {},
-      "tooltipPositionB": {}
-    },
-    "idSVG": "path147",
-    "mode": true,
-    "orientedLink": [],
-    "coords": {
-      "xMin": "0",
-      "xMax": "0",
-      "yMin": "0",
-      "yMax": "0"
-    },
-    "img": ""
-  }
-]}
+        "format": "",
+        "keyValue": "eno0",
+        "refId": "A",
+        "expr": "",
+        "returnQuery": [],
+        "manageValue": "avg"
+      },
+      "metrics": [],
+      "colorMode": false,
+      "traceBack": true,
+      "traceBorder": true,
+      "positionParameter": {
+        "labelAPositionX": "0",
+        "labelAPositionY": "0",
+        "labelBPositionX": "0",
+        "labelBPositionY": "0",
+        "tooltipPositionA": {},
+        "tooltipPositionB": {}
+      },
+      "idSVG": "path147",
+      "mode": true,
+      "orientedLink": [],
+      "coords": {
+        "xMin": "0",
+        "xMax": "0",
+        "yMin": "0",
+        "yMax": "0"
+      },
+      "img": ""
+    }
+  ]
+}

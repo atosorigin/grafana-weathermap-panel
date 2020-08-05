@@ -49,7 +49,7 @@ class ImportInput extends React.Component<Props, State> {
         if (newSpace.name === point.name) {
           resultId = 2;
         } else {
-          console.error('Id of point named "' + newSpace.name + '" already given fail to load!');
+          // console.error('Id of point named "' + newSpace.name + '" already given fail to load!');
           resultId = 1;
         }
       }
@@ -65,7 +65,7 @@ class ImportInput extends React.Component<Props, State> {
         if (newSpace.label === region.label) {
           resultId = 2;
         } else {
-          console.error('Id of region labeled "' + newSpace.label + '" already given, fail to load!');
+          // console.error('Id of region labeled "' + newSpace.label + '" already given, fail to load!');
           resultId = 1;
         }
       }
@@ -80,7 +80,7 @@ class ImportInput extends React.Component<Props, State> {
         if (newSpace.name === lien.name) {
           resultId = 2;
         } else {
-          console.error('Id of link named "' + newSpace.name + '" already given, fail to load!');
+          // console.error('Id of link named "' + newSpace.name + '" already given, fail to load!');
           resultId = 1;
         }
       }

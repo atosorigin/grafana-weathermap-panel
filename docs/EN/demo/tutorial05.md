@@ -1,27 +1,21 @@
- 
 # Create a customizable query
+
 [![](../../screenshots/other/Go-back.png)](README.md)
- 
+
 ## Add a query
 
 The example shows how to use query filters to obtain precise metrics
 
-
 ![step 01](../../screenshots/demo/tutorial05/step01.png)
 
-
 In a query, we want to analyze what the network card receives
-
 
 ```
 rate(node_network_receive_bytes_total[5m])
 
 ```
 
-
-
 The result shows several possible outcomes
-
 
 ```
 node_network_receive_bytes_total{device="br-565444d7f7ec",instance="localhost:9100",job="node"}
@@ -49,9 +43,7 @@ The difference shows 9 types of devices. Let's choose 2 for these examples
 - vetha317d1e
 - eno0
 
-
 Here we want to filter the result to display only the device we are interested in.
-
 
 ## Create regions and filter the Metric
 
@@ -59,18 +51,15 @@ Here we want to filter the result to display only the device we are interested i
 
 Adding a background image is done from the `display` menu.
 
-The selected image will be [demo1-background.svg](../../resource/demo01-background.svg). 
+The selected image will be [demo1-background.svg](../../resource/demo01-background.svg).
 
-To do this, we download it in base64 with the `Copy image address` function, or with the direct link to the repository: 
-
+To do this, we download it in base64 with the `Copy image address` function, or with the direct link to the repository:
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
 ```
 
-
 It is possible to have more details with the [display](../editor/display.md) page.
-
 
 ### Step 2 : Create the region
 
@@ -81,6 +70,7 @@ For this step, you can follow the [tutorial2](tutorial2.md) to create your regio
 ### Step 3 : Add Main metric to the region and filter
 
 Once you have created your regions, you can edit them in `Region`, `Edit coordinate space`. Then click on `Main metric` and fill it like this :
+
 - `Query` : Choose the query you are interested in
 - `Key` : Represent the key present in the result of your query. Here it's `device`
 - `Value key` : Represent the value of the previous key. Here we want to filter for value `enp0s3` and `lo`
@@ -89,7 +79,6 @@ Once you have created your regions, you can edit them in `Region`, `Edit coordin
 Region 1
 
 ![step 02](../../screenshots/demo/tutorial05/step2.jpg)
-
 
 Region 2
 
@@ -107,4 +96,4 @@ The result display those 2 values
 
 And here is the JSON file :
 
-[demo5-region](../../resource/demo05-region.json) 
+[demo5-region](../../resource/demo05-region.json)

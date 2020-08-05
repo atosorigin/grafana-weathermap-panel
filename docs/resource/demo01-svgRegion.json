@@ -1,263 +1,269 @@
 {
-    "regions": [{
-            "colorMode": false,
-            "coords": {
-                "xMax": "0",
-                "xMin": "0",
-                "yMax": "0",
-                "yMin": "0"
-            },
-            "id": 1,
-            "idSVG": "rect45",
-            "img": "",
-            "label": "dataCenter",
-            "linkURL": {
-                "followLink": "",
-                "hoveringTooltipLink": "",
-                "hoveringTooltipText": ""
-            },
-            "lowerLimit": [{
-                "backColor": "#FF0000",
-                "borderColor": "",
-                "id": 0,
-                "lowerLimitMax": "",
-                "lowerLimitMin": "",
-                "sizeBorder": "1"
-            }],
-            "mainMetric": {
-                "format": "",
-                "key": "",
-                "keyValue": "",
-                "refId": "A",
-                "returnQuery": {},
-                "unit": ""
-            },
-            "meta": "",
-            "metrics": [],
-            "mode": true,
-            "orientedLink": [],
-            "positionParameter": {
-                "labelAPositionX": "0",
-                "labelAPositionY": "0",
-                "labelBPositionX": "0",
-                "labelBPositionY": "0",
-                "tooltipPositionA": {},
-                "tooltipPositionB": {}
-            },
-            "textObj": {
-                "value": "",
-                "isTextTooltip": true,
-                "colorBack": "rgba(255, 255, 255, 0)",
-                "colorText": "rgba(0, 0, 0, 1)",
-                "style": {
-                    "bold": false,
-                    "italic": false,
-                    "underline": false
-                },
-                "generateObjectText": false,
-                "valueGenerateObjectText": {
-                    "legendElement": "",
-                    "numericFormatElement": "",
-                    "unit": "",
-                    "displayObjectInTooltip": false,
-                    "addColorTextElement": false,
-                    "colorTextElement": "white",
-                    "addColorBackElement": false,
-                    "colorBackElement": "black"
-                },
-                "generateAuxiliaryElement": {
-                    "legendElement": "",
-                    "numericFormatElement": "",
-                    "unit": "",
-                    "displayObjectInTooltip": false,
-                    "addColorTextElement": false,
-                    "colorTextElement": "white",
-                    "addColorBackElement": false,
-                    "colorBackElement": "black"
-                }
-            },
-            "traceBack": true,
-            "traceBorder": false
-        },
+  "regions": [
+    {
+      "colorMode": false,
+      "coords": {
+        "xMax": "0",
+        "xMin": "0",
+        "yMax": "0",
+        "yMin": "0"
+      },
+      "id": 1,
+      "idSVG": "rect45",
+      "img": "",
+      "label": "dataCenter",
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "lowerLimit": [
         {
-            "colorMode": false,
-            "coords": {
-                "xMax": "0",
-                "xMin": "0",
-                "yMax": "0",
-                "yMin": "0"
-            },
-            "id": 2,
-            "idSVG": "path147",
-            "img": "",
-            "label": "computer2",
-            "linkURL": {
-                "followLink": "",
-                "hoveringTooltipLink": "",
-                "hoveringTooltipText": ""
-            },
-            "lowerLimit": [{
-                "backColor": "#37872D",
-                "borderColor": "",
-                "id": 0,
-                "lowerLimitMax": "",
-                "lowerLimitMin": "",
-                "sizeBorder": "1"
-            }],
-            "mainMetric": {
-                "format": "",
-                "key": "",
-                "keyValue": "",
-                "refId": "",
-                "returnQuery": {
-                    "fields": [],
-                    "length": 0
-                },
-                "unit": ""
-            },
-            "meta": "",
-            "metrics": [],
-            "mode": true,
-            "orientedLink": [],
-            "positionParameter": {
-                "labelAPositionX": "0",
-                "labelAPositionY": "0",
-                "labelBPositionX": "0",
-                "labelBPositionY": "0",
-                "tooltipPositionA": {},
-                "tooltipPositionB": {}
-            },
-            "textObj": {
-                "value": "",
-                "isTextTooltip": true,
-                "colorBack": "rgba(255, 255, 255, 0)",
-                "colorText": "rgba(0, 0, 0, 1)",
-                "style": {
-                    "bold": false,
-                    "italic": false,
-                    "underline": false
-                },
-                "generateObjectText": false,
-                "valueGenerateObjectText": {
-                    "legendElement": "",
-                    "numericFormatElement": "",
-                    "unit": "",
-                    "displayObjectInTooltip": false,
-                    "addColorTextElement": false,
-                    "colorTextElement": "white",
-                    "addColorBackElement": false,
-                    "colorBackElement": "black"
-                },
-                "generateAuxiliaryElement": {
-                    "legendElement": "",
-                    "numericFormatElement": "",
-                    "unit": "",
-                    "displayObjectInTooltip": false,
-                    "addColorTextElement": false,
-                    "colorTextElement": "white",
-                    "addColorBackElement": false,
-                    "colorBackElement": "black"
-                }
-            },
-            "traceBack": true,
-            "traceBorder": false
-        },
-        {
-            "colorMode": true,
-            "coords": {
-                "xMax": "0",
-                "xMin": "0",
-                "yMax": "0",
-                "yMin": "0"
-            },
-            "id": 3,
-            "idSVG": "path171",
-            "img": "",
-            "label": "network",
-            "linkURL": {
-                "followLink": "https://atos.fr",
-                "hoveringTooltipLink": "https://grafana.com",
-                "hoveringTooltipText": "Grafana website"
-            },
-            "lowerLimit": [{
-                    "backColor": "#73BF69",
-                    "borderColor": "#FADE2A",
-                    "id": 0,
-                    "lowerLimitMax": "1000",
-                    "lowerLimitMin": "",
-                    "sizeBorder": "3"
-                },
-                {
-                    "backColor": "#5794F2",
-                    "borderColor": "#73BF69",
-                    "id": 1,
-                    "lowerLimitMax": "200000",
-                    "lowerLimitMin": ">1000",
-                    "sizeBorder": "2"
-                },
-                {
-                    "backColor": "#C4162A",
-                    "borderColor": "#FA6400",
-                    "id": 2,
-                    "lowerLimitMax": "",
-                    "lowerLimitMin": ">200000",
-                    "sizeBorder": "1"
-                }
-            ],
-            "mainMetric": {
-                "format": "",
-                "key": "",
-                "keyValue": "",
-                "refId": "A",
-                "returnQuery": {},
-                "unit": ""
-            },
-            "meta": "",
-            "metrics": [],
-            "mode": true,
-            "orientedLink": [],
-            "positionParameter": {
-                "labelAPositionX": "0",
-                "labelAPositionY": "0",
-                "labelBPositionX": "0",
-                "labelBPositionY": "0",
-                "tooltipPositionA": {},
-                "tooltipPositionB": {}
-            },
-            "textObj": {
-                "value": "",
-                "isTextTooltip": true,
-                "colorBack": "#5794F2",
-                "colorText": "rgb(255, 255, 255)",
-                "style": {
-                    "bold": false,
-                    "italic": false,
-                    "underline": false
-                },
-                "generateObjectText": true,
-                "valueGenerateObjectText": {
-                    "legendElement": "it's a legend",
-                    "numericFormatElement": "2",
-                    "unit": "um",
-                    "displayObjectInTooltip": false,
-                    "addColorTextElement": true,
-                    "colorTextElement": "#73BF69",
-                    "addColorBackElement": true,
-                    "colorBackElement": "black"
-                },
-                "generateAuxiliaryElement": {
-                    "legendElement": "",
-                    "numericFormatElement": "2",
-                    "unit": "el",
-                    "displayObjectInTooltip": false,
-                    "addColorTextElement": false,
-                    "colorTextElement": "white",
-                    "addColorBackElement": false,
-                    "colorBackElement": "black"
-                }
-            },
-            "traceBack": true,
-            "traceBorder": true
+          "backColor": "#FF0000",
+          "borderColor": "",
+          "id": 0,
+          "lowerLimitMax": "",
+          "lowerLimitMin": "",
+          "sizeBorder": "1"
         }
-    ]
+      ],
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": "",
+        "refId": "A",
+        "returnQuery": {},
+        "unit": ""
+      },
+      "meta": "",
+      "metrics": [],
+      "mode": true,
+      "orientedLink": [],
+      "positionParameter": {
+        "labelAPositionX": "0",
+        "labelAPositionY": "0",
+        "labelBPositionX": "0",
+        "labelBPositionY": "0",
+        "tooltipPositionA": {},
+        "tooltipPositionB": {}
+      },
+      "textObj": {
+        "value": "",
+        "isTextTooltip": true,
+        "colorBack": "rgba(255, 255, 255, 0)",
+        "colorText": "rgba(0, 0, 0, 1)",
+        "style": {
+          "bold": false,
+          "italic": false,
+          "underline": false
+        },
+        "generateObjectText": false,
+        "valueGenerateObjectText": {
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unit": "",
+          "displayObjectInTooltip": false,
+          "addColorTextElement": false,
+          "colorTextElement": "white",
+          "addColorBackElement": false,
+          "colorBackElement": "black"
+        },
+        "generateAuxiliaryElement": {
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unit": "",
+          "displayObjectInTooltip": false,
+          "addColorTextElement": false,
+          "colorTextElement": "white",
+          "addColorBackElement": false,
+          "colorBackElement": "black"
+        }
+      },
+      "traceBack": true,
+      "traceBorder": false
+    },
+    {
+      "colorMode": false,
+      "coords": {
+        "xMax": "0",
+        "xMin": "0",
+        "yMax": "0",
+        "yMin": "0"
+      },
+      "id": 2,
+      "idSVG": "path147",
+      "img": "",
+      "label": "computer2",
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "lowerLimit": [
+        {
+          "backColor": "#37872D",
+          "borderColor": "",
+          "id": 0,
+          "lowerLimitMax": "",
+          "lowerLimitMin": "",
+          "sizeBorder": "1"
+        }
+      ],
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": "",
+        "refId": "",
+        "returnQuery": {
+          "fields": [],
+          "length": 0
+        },
+        "unit": ""
+      },
+      "meta": "",
+      "metrics": [],
+      "mode": true,
+      "orientedLink": [],
+      "positionParameter": {
+        "labelAPositionX": "0",
+        "labelAPositionY": "0",
+        "labelBPositionX": "0",
+        "labelBPositionY": "0",
+        "tooltipPositionA": {},
+        "tooltipPositionB": {}
+      },
+      "textObj": {
+        "value": "",
+        "isTextTooltip": true,
+        "colorBack": "rgba(255, 255, 255, 0)",
+        "colorText": "rgba(0, 0, 0, 1)",
+        "style": {
+          "bold": false,
+          "italic": false,
+          "underline": false
+        },
+        "generateObjectText": false,
+        "valueGenerateObjectText": {
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unit": "",
+          "displayObjectInTooltip": false,
+          "addColorTextElement": false,
+          "colorTextElement": "white",
+          "addColorBackElement": false,
+          "colorBackElement": "black"
+        },
+        "generateAuxiliaryElement": {
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unit": "",
+          "displayObjectInTooltip": false,
+          "addColorTextElement": false,
+          "colorTextElement": "white",
+          "addColorBackElement": false,
+          "colorBackElement": "black"
+        }
+      },
+      "traceBack": true,
+      "traceBorder": false
+    },
+    {
+      "colorMode": true,
+      "coords": {
+        "xMax": "0",
+        "xMin": "0",
+        "yMax": "0",
+        "yMin": "0"
+      },
+      "id": 3,
+      "idSVG": "path171",
+      "img": "",
+      "label": "network",
+      "linkURL": {
+        "followLink": "https://atos.fr",
+        "hoveringTooltipLink": "https://grafana.com",
+        "hoveringTooltipText": "Grafana website"
+      },
+      "lowerLimit": [
+        {
+          "backColor": "#73BF69",
+          "borderColor": "#FADE2A",
+          "id": 0,
+          "lowerLimitMax": "1000",
+          "lowerLimitMin": "",
+          "sizeBorder": "3"
+        },
+        {
+          "backColor": "#5794F2",
+          "borderColor": "#73BF69",
+          "id": 1,
+          "lowerLimitMax": "200000",
+          "lowerLimitMin": ">1000",
+          "sizeBorder": "2"
+        },
+        {
+          "backColor": "#C4162A",
+          "borderColor": "#FA6400",
+          "id": 2,
+          "lowerLimitMax": "",
+          "lowerLimitMin": ">200000",
+          "sizeBorder": "1"
+        }
+      ],
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": "",
+        "refId": "A",
+        "returnQuery": {},
+        "unit": ""
+      },
+      "meta": "",
+      "metrics": [],
+      "mode": true,
+      "orientedLink": [],
+      "positionParameter": {
+        "labelAPositionX": "0",
+        "labelAPositionY": "0",
+        "labelBPositionX": "0",
+        "labelBPositionY": "0",
+        "tooltipPositionA": {},
+        "tooltipPositionB": {}
+      },
+      "textObj": {
+        "value": "",
+        "isTextTooltip": true,
+        "colorBack": "#5794F2",
+        "colorText": "rgb(255, 255, 255)",
+        "style": {
+          "bold": false,
+          "italic": false,
+          "underline": false
+        },
+        "generateObjectText": true,
+        "valueGenerateObjectText": {
+          "legendElement": "it's a legend",
+          "numericFormatElement": "2",
+          "unit": "um",
+          "displayObjectInTooltip": false,
+          "addColorTextElement": true,
+          "colorTextElement": "#73BF69",
+          "addColorBackElement": true,
+          "colorBackElement": "black"
+        },
+        "generateAuxiliaryElement": {
+          "legendElement": "",
+          "numericFormatElement": "2",
+          "unit": "el",
+          "displayObjectInTooltip": false,
+          "addColorTextElement": false,
+          "colorTextElement": "white",
+          "addColorBackElement": false,
+          "colorBackElement": "black"
+        }
+      },
+      "traceBack": true,
+      "traceBorder": true
+    }
+  ]
 }

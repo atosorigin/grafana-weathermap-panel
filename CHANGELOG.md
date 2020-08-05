@@ -2,7 +2,7 @@
 
 ## v1.0.2a3 (2020-08-04)
 
-- Update init space 
+- Update init space
 - fixed SUM to query
 
 ## v1.0.2a2 (2020-07-28)
@@ -20,12 +20,12 @@
 - Fixed css
 - Fixed select link monodirection by defaut
 
-## [v1.0.0](https://github.com/atosorigin/grafana-weathermap-panel/releases/tag/1.0.0)  (2020-05-17)
+## [v1.0.0](https://github.com/atosorigin/grafana-weathermap-panel/releases/tag/1.0.0) (2020-05-17)
 
 - Update Documentation
 - Update Tutorial and demo
-- Update shape dots (none, circle, box...) 
-- Update import global file 
+- Update shape dots (none, circle, box...)
+- Update import global file
 - Update close legend
 - Update test unit
 - fixed data reset for a new dashboard
@@ -47,12 +47,10 @@
 - Update CSS
 - Fixed select svg by import file
 
-
 ## v0.4.11 (2020-04-24)
 
 - Fixed main metrics for the region, point, links
 - Fixed changed select region
-
 
 ## v0.4.10 (2020-04-22)
 
@@ -80,7 +78,6 @@
 - Fixed position point B and link
 - Fixed change the size of a point in the editor
 
-
 ## v0.4.6 (2020-04-12)
 
 - Add new docs
@@ -88,12 +85,10 @@
 - Updated Main metric file import
 - fixed coordinate region
 
-
 ## v0.4.5 (2020-04-09)
 
 - Updated Main metric
-- fixed build 
-
+- fixed build
 
 ## v0.4.4 (2020-04-03)
 
@@ -113,7 +108,7 @@
 
 ## v0.4.2 (2020-03-30)
 
-- Fixed dependencies library 
+- Fixed dependencies library
 
 ## v0.4.1 (2020-03-30)
 
@@ -122,7 +117,7 @@
 - Add parameter block
 - Add parameter levels
 - Add aggregation
-- Add recovery investment 
+- Add recovery investment
 - Update gabari
 - Fixed import
 

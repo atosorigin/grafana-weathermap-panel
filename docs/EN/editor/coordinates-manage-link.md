@@ -1,22 +1,16 @@
-
 # Manage link
+
 [![](../../screenshots/other/Go-back.png)](coordinates.md)
- 
 
-
-This part is common for 
+This part is common for
 
 - [Region](coordinates-space-region.md)
 - [Point](coordinates-space-point.md)
 - [Oriented Link](coordinates-space-link.md)
 
-
 ![main metric](../../screenshots/editor/coordinates/manage-link/manage-link.png)
 
-
-
 3 links are available
-
 
 - Following link : Allows a redirection towards the link by clicking on the region or the point.
 

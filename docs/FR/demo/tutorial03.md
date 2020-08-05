@@ -1,15 +1,13 @@
 # Créer un dashboard avancé avec des liens directionnels
 
 [![](../../screenshots/other/Go-back.png)](README.md)
- 
-
 
 ## Etape 1 : Création des requêtes
-
 
 La première étape est dans l'onglet "Queries".
 
 Vous devez :
+
 - Compléter la ligne "metrics" avec les lignes suivantes
 
 ```
@@ -22,32 +20,25 @@ Les marqueurs "A" et "B" seront utilisés pour identifier cette requête, comme 
 
 ![step 01](../../screenshots/demo/tutorial03/query.jpg)
 
-
 ## Étape 2 : Déterminer un espace
-
-
 
 ![step 02](../../screenshots/demo/tutorial03/display.jpg)
 
-
 La création d'un background se fait à partir du menu `display`.
 
-Elle nécessite 
+Elle nécessite
 
 - Décocher la case `use svg`
 - Entrez la largeur
 - Entrez la hauteur
 
-
-
-## Étape 3 : Ajouter un point 
+## Étape 3 : Ajouter un point
 
 ![step 03](../../screenshots/demo/tutorial03/point1.png)
 
-
 La création d'un point se fait à partir du menu `Coordinates space`, `point` et `Add point`.
 
-Vous devez remplir le formulaire comme ceci : 
+Vous devez remplir le formulaire comme ceci :
 
 - Entrez un `label` par exemple Ordinateur
 - La `shape`
@@ -55,26 +46,22 @@ Vous devez remplir le formulaire comme ceci :
 - position `X`
 - position `Y`
 
-
 ![step 04](../../screenshots/demo/tutorial03/point1-color.jpg)
 
-Nous en profitons pour changer la couleur de notre point. Pour ce faire, nous ajoutons une couleur à notre point comme ceci : 
+Nous en profitons pour changer la couleur de notre point. Pour ce faire, nous ajoutons une couleur à notre point comme ceci :
 
 - Activez l'option `trace the border`
 - Choisissons la couleur comme `vert` pour la ligne `edit border color` et customisons une nuance de notre couleur choisi
 - Épaisseur à 1 avec `size border`
 
+## Etape 4 : Ajouter une image
 
-
-## Etape 4 : Ajouter une image 
-
-
-Pour ajouter une illustration à notre région, allez dans le menu `Coordinates space`, `region`et `Add coordinate space`. 
+Pour ajouter une illustration à notre région, allez dans le menu `Coordinates space`, `region`et `Add coordinate space`.
 Ensuite, choisissez notre région.
 
 ![step 02](../../screenshots/demo/tutorial03/CoordinateMode.png)
 
-Vous devez remplir le formulaire comme ceci : 
+Vous devez remplir le formulaire comme ceci :
 
 - Entrez un `label` par exemple Ordinateur
 - Sélectionnez `Coordinate mode`.
@@ -93,13 +80,7 @@ Choisissez ensuite la taille de la région pour votre image. Ici, nous choisisso
 - Y Min : -10
 - Y Max : -50
 
-
-
 ![illustration1](../../screenshots/demo/tutorial03/illustration1.jpg)
-
-
-
-
 
 ## Étape 5 : Définir ses liens orientés incurvés
 
@@ -143,17 +124,11 @@ Et choisissez l'autre métrique pour le deuxième lien avec
 
 ![texte objet B](../../screenshots/demo/tutorial03/textB.png)
 
-
-
 En option, vous pouvez effacer le label du lien comme le montre le résultat
-
 
 ## Résultat
 
-
 ![resultat](../../screenshots/demo/tutorial03/resultat.png)
-
-
 
 ### Importer un fichier JSON
 
@@ -161,7 +136,6 @@ En option, vous pouvez effacer le label du lien comme le montre le résultat
 
 Et voici les différents fichiers JSON :
 
-- [demo3-region](../../resource/demo03-region.json) 
+- [demo3-region](../../resource/demo03-region.json)
 - [demo3-point](../../resource/demo03-point.json)
 - [demo3-link](../../resource/demo03-link.json)
-

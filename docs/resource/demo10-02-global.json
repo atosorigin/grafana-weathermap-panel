@@ -1,36 +1,32 @@
 {
-    "coordinateSpaceInitial": {
-        "coordinate": {
-            "xMin": "-100",
-            "xMax": "100",
-            "yMin": "-100",
-            "yMax": "100"
-        },
-        "displayArea": false
+  "coordinateSpaceInitial": {
+    "coordinate": {
+      "xMin": "-100",
+      "xMax": "100",
+      "yMin": "-100",
+      "yMax": "100"
     },
-    "texteSettings": {
-        "police": "Helvetica",
-        "size": "1em",
-        "style": {
-            "bold": true,
-            "italic": false,
-            "underline": true
-        }
-    },
-    "baseMap": {
-        "image": "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo02-background.jpg",
-        "layerImage": "",
-        "modeSVG": false,
-        "width": "800",
-        "height": "600",
-        "idSVG": "",
-        "isUploaded": false
-    },
-    "regions": [
-        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo02-CoorRegion.json"
-    ],
-    "points": [],
-    "links": [
-        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo02-link.json"
-    ]
+    "displayArea": false
+  },
+  "texteSettings": {
+    "police": "Helvetica",
+    "size": "1em",
+    "style": {
+      "bold": true,
+      "italic": false,
+      "underline": true
+    }
+  },
+  "baseMap": {
+    "image": "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo02-background.jpg",
+    "layerImage": "",
+    "modeSVG": false,
+    "width": "800",
+    "height": "600",
+    "idSVG": "",
+    "isUploaded": false
+  },
+  "regions": ["https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo02-CoorRegion.json"],
+  "points": [],
+  "links": ["https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo02-link.json"]
 }

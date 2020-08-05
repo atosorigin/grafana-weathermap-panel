@@ -74,7 +74,7 @@ export class OrientedLinkClass extends CoordinateSpaceClass {
     pointAPositionXDefault: string,
     pointAPositionYDefault: string,
     pointBPositionXDefault: string,
-    pointBPositionYDefault: string,
+    pointBPositionYDefault: string
   ) {
     super(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter);
     this.name = name;

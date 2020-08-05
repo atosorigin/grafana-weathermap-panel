@@ -1,17 +1,16 @@
 # How to use auxiliere metric
+
 [![](../../screenshots/other/Go-back.png)](README.md)
- 
+
 ## Add a dashboard SVG
 
 ![step 01](../../screenshots/demo/tutorial01/step01.jpg)
 
-
 Adding a background image is done from the `display` menu.
 
-The selected image will be [demo01-background.svg](../../resource/demo01-background.svg). 
+The selected image will be [demo01-background.svg](../../resource/demo01-background.svg).
 
-To do this, we download it in base64 with the `Copy image address` function, or with the direct link to the repository: 
-
+To do this, we download it in base64 with the `Copy image address` function, or with the direct link to the repository:
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
@@ -22,10 +21,9 @@ It is possible to have more details with the [display](../editor/display.md) pag
 
 You have to save and reload the page.
 
-## Add  an auxiliary metric to a point
+## Add an auxiliary metric to a point
 
 ### Step 1: Add a point
-
 
 ![step 09](../../screenshots/demo/tutorial01/add-coordinate.png)
 
@@ -33,7 +31,7 @@ You have to save and reload the page.
 
 ![step 09](../../screenshots/demo/tutorial01/point1.png)
 
-You have to fill out the form like this: 
+You have to fill out the form like this:
 
 - Fill in the "label" of the point
 - Inform his " size".
@@ -41,9 +39,7 @@ You have to fill out the form like this:
 
 ### Step 2 : Add main metric
 
-
 ![step 05](../../screenshots/demo/tutorial01/step05.jpg)
-
 
 The first step is through the `Queries` tab.
 
@@ -59,23 +55,20 @@ The "A" marker will be used to identify this query as you can see below.
 
 Once you have done that, you will associate this query to your point
 
-
 ![step 06](../../screenshots/demo/tutorial01/step06.jpg)
 
 The second step is from the `Coordinates space`, `region`, and `Edit coordinate space` menu of the `visualization` tab.
 
-You select the `Main metric` line to complete the form like this: 
+You select the `Main metric` line to complete the form like this:
 
 - Enter a `Query` for example A
 - Click on the `load` button
 
-
 The value will be automatically displayed after the page is refreshed.
-
 
 It is possible to fill in the other fields with the additional settings available on the page [coordinates space region](../editor/coordinates-space-region.md)
 
-### Step 3 : Add auxiliary metric 
+### Step 3 : Add auxiliary metric
 
 Go to `Auxiliary metrics` and fill the form like `Main metric`
 
@@ -91,4 +84,4 @@ After that, you will be able to see your auxiliary metric on the toolbox of your
 
 And here is the JSON file :
 
-[demo8-point](../../resource/demo08-point.json) 
+[demo8-point](../../resource/demo08-point.json)

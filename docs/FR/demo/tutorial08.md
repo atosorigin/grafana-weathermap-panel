@@ -1,17 +1,16 @@
 # Comment utiliser la métrique auxiliaire
+
 [![](../../screenshots/other/Go-back.png)](README.md)
- 
+
 ## Ajouter un tableau de bord SVG
 
 ![étape 01](../../screenshots/demo/tutorial07/background.jpg)
-
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
 L'image sélectionnée sera [demo01-background.svg](../../resource/demo01-background.svg).
 
-Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`, ou avec le lien direct du dépôt : 
-
+Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`, ou avec le lien direct du dépôt :
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
@@ -25,14 +24,13 @@ Vous devez sauvegarder et recharger la page.
 
 ### Étape 1 : Ajouter un point
 
-
 ![step 09](../../screenshots/demo/tutorial01/add-coordinate.png)
 
 - Pour placer un point, il faut se rendre dans `Visualization`, puis `Coordinates space`, `Point` et `Add coordinate space`.
 
 ![step 09](../../screenshots/demo/tutorial01/point1.png)
 
-Vous devez remplir le formulaire comme ceci : 
+Vous devez remplir le formulaire comme ceci :
 
 - Renseigner le `label` du point
 - Renseigner sa `size`
@@ -40,11 +38,9 @@ Vous devez remplir le formulaire comme ceci :
 
 ### Etape 2 : Ajout de la métrique principale
 
-
 ![étape 05](../../screenshots/demo/tutorial01/step05.jpg)
 
-
-La première étape est l'onglet  `Queries`
+La première étape est l'onglet `Queries`
 
 Vous devez :
 
@@ -58,23 +54,20 @@ Le marqueur "A" sera utilisé pour identifier cette requête, comme vous pouvez 
 
 Une fois que vous aurez fait cela, vous associerez cette requête à votre point
 
-
 ![step 06](../../screenshots/demo/tutorial01/step06.jpg)
 
 La deuxième étape se fait à partir du menu `Coordinates space`, `region` et `Edit coordinate space` de l'onglet `visualization`.
 
-Vous sélectionnez la ligne `Main metric` pour remplir le formulaire comme ceci : 
+Vous sélectionnez la ligne `Main metric` pour remplir le formulaire comme ceci :
 
 - Entrez une `Query` par exemple A
 - Cliquez sur le bouton `load`
 
-
 La valeur sera automatiquement affichée après le rafraîchissement de la page.
-
 
 Il est possible de remplir les autres champs avec les paramètres supplémentaires disponibles sur la page [coordinates space region](../editor/coordinates-space-region.md)
 
-### Étape 3 : Ajouter une métrique auxiliaire 
+### Étape 3 : Ajouter une métrique auxiliaire
 
 Allez à la rubrique `Auxiliary metrics` et remplissez le formulaire comme `Main metric`
 
@@ -84,11 +77,10 @@ Après cela, vous pourrez voir votre métrique auxiliaire dans la toolbox de vot
 
 ![auxiliere](../../screenshots/demo/tutorial08/toolbox.png)
 
-
 ### Importer un fichier JSON
 
 - Il est possible d'ajouter toutes ces configurations par le biais de fichiers json en faisant une importation. Pour savoir comment faire, [suivez ce lien](../editor/import.md)
 
 Et voici le fichier JSON :
 
-- [demo08-point](../../resource/demo08-point.json) 
+- [demo08-point](../../resource/demo08-point.json)

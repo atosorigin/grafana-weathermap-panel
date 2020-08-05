@@ -1,9 +1,4 @@
- 
 TODO
-
-
-
-
 
 - [fichier json exemple](../appendix/json-gabarit.md)
 

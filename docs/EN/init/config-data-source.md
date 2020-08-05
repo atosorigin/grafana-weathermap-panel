@@ -1,11 +1,10 @@
-
 # Configuration data source
-[![](../../screenshots/other/Go-back.png)](README.md)
 
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 ## Time Series Data as the Data Source
 
-The plugin `grafana-weathermap-panel` can be use with all the database used in Grafana. 
+The plugin `grafana-weathermap-panel` can be use with all the database used in Grafana.
 
 Supported Databases:
 
@@ -15,15 +14,12 @@ Supported Databases:
 - Prometheus
 - MySQL
 - Postgres
-- MSSQL 
+- MSSQL
 - Elasticsearch
-
-
 
 ## Example of use with Prometheus
 
 You can use Grafana's interface from the modules available above
-
 
 ### Add the data source
 
@@ -31,10 +27,8 @@ You can use Grafana's interface from the modules available above
 - Click the `Add data source` button in the top header.
 - Select Prometheus from the Type dropdown.
 
-
 ![data source](../../screenshots/init/datasource.jpg)
 ![data source](../../screenshots/init/add-data-source.png)
-
 
 ### Inserting a `query` into a dashboard
 
@@ -46,22 +40,11 @@ To insert a query into a dashboard, first, you have to create this dashboard and
 
 - You will then click on `Add Query`
 
-
 ![query](../../screenshots/init/query.png)
 
 - Inside the parameter of the panel, you have to choose the Query. Here choose `Prometheus`
 - Then you can choose the Metrics to visualize
 
-
 ### External
 
 It is possible to use the connection without going through the Grafana interface.
-
-
-
-
-
-
-
-
-

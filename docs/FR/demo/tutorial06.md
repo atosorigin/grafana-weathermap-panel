@@ -1,7 +1,7 @@
- 
 # Créer une modélisation avancée
+
 [![](../../screenshots/other/Go-back.png)](README.md)
- 
+
 ## Sélectionner une requête
 
 Choisissons ces deux requêtes :
@@ -9,13 +9,11 @@ Choisissons ces deux requêtes :
 - node_cpu_frequency_hertz
 - node_network_carrier_changes_total
 
-
 Voir ce qu'ils rapportent :
 
 ![values](../../screenshots/demo/tutorial05/values.png)
 
 node_cpu_frequency_hertz
-
 
 ```
 node_cpu_frequency_hertz{cpu="0",instance="localhost:9100",job="node"}
@@ -50,17 +48,15 @@ Il y a beaucoup de valeurs, donc nous devons les manipuler pour arriver à une v
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
-L'image sélectionnée sera [demo01-background.svg](../../resource/demo01-background.svg). 
+L'image sélectionnée sera [demo01-background.svg](../../resource/demo01-background.svg).
 
-Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`, ou avec le lien direct du dépôt : 
+Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`, ou avec le lien direct du dépôt :
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
 ```
 
 Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
-
-
 
 ### Étape 2 : Créer la région
 
@@ -72,19 +68,16 @@ Pour cette étape, vous pouvez suivre le [tutorial2](tutorial2.md) pour créer v
 
 Une fois les régions créées, allez dans la rubrique `Main metric` et ajoutez une de celle que vous avez définis.
 
-Vous pouvez ensuite choisir entre `manipulate the average`, si vous voulez une moyenne des valeurs métriques. Ou  `manipulate the total`, si vous voulez une somme des valeurs de la métrique.
+Vous pouvez ensuite choisir entre `manipulate the average`, si vous voulez une moyenne des valeurs métriques. Ou `manipulate the total`, si vous voulez une somme des valeurs de la métrique.
 
 ![average](../../screenshots/demo/tutorial06/average.png)
 
-
 ![total](../../screenshots/demo/tutorial06/total.png)
 
-Si votre mesure ne doit renvoyer qu'une seule valeur, vous devez sélectionner "erreur de manipulation". 
+Si votre mesure ne doit renvoyer qu'une seule valeur, vous devez sélectionner "erreur de manipulation".
 Cela affichera sa valeur, si elle est unique, et affichera une erreur s'il y a d'autres valeurs.
 
-
 ![demo6](../../screenshots/demo/tutorial06/result.png)
-
 
 ### Importer un fichier JSON
 
@@ -92,21 +85,4 @@ Cela affichera sa valeur, si elle est unique, et affichera une erreur s'il y a d
 
 Et voici le fichier JSON :
 
-- [demo06-region](../../resource/demo06-region.json) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- [demo06-region](../../resource/demo06-region.json)

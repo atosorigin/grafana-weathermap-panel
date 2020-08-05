@@ -77,10 +77,10 @@ export default class DrawPoint extends React.Component<Props, State> {
     //   }
     // }
     if (coordinateX > parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10)) {
-      console.log('trop grand')
+      console.log('trop grand');
       result = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
     } else if (coordinateX < parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10)) {
-      console.log('trop petit')
+      console.log('trop petit');
       result = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
     }
     // console.log('x draw')

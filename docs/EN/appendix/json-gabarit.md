@@ -1,9 +1,8 @@
 # Gabarit file
+
 [![](../../screenshots/other/Go-back.png)](README.md)
- 
 
 The complete [sample-gabarit.json](../../resource/sampleJson/sample-gabarit.json) script is available, the construction details of which can be found below.
-
 
 The **gabarit** file must be declared as a JSON file like this:
 
@@ -11,13 +10,12 @@ The **gabarit** file must be declared as a JSON file like this:
 {
   "global": {
   },
-  "templates": [  
+  "templates": [
   ]
 }
 ```
 
 ## Global
-
 
 ```
   "global": {
@@ -33,7 +31,7 @@ The **gabarit** file must be declared as a JSON file like this:
       "isTextTooltip": "false",
       "colorBack": "red",
       "colorText": "yellow",
-      "style": {  
+      "style": {
         "bold": "true",
           "italic": "false",
         "underline": "true"
@@ -63,9 +61,8 @@ The **gabarit** file must be declared as a JSON file like this:
     "colorMode": "true",
     "traceBack": "true",
     "traceBorder": "true"
-  }  
+  }
 ```
-
 
 ## templates
 
@@ -73,16 +70,15 @@ The creation of a region from an SVG element must contain the following values
 
 - **filtered** : key|value[#key|value][#key|value]
 - **Labelfix** is the name of the region
-- **xylabel** 
-- **xylabelfix** 
-
+- **xylabel**
+- **xylabelfix**
 
 ### points
 
 ```
     {
       "filtered": "device|eno0",
-      "labelfix": "false", 
+      "labelfix": "false",
       "xylabel": "x|labelName#y|labelName",
       "xylabelfix": "",
       "type": "point",
@@ -107,7 +103,6 @@ The creation of a region from an SVG element must contain the following values
     },
 
 ```
-
 
 ### OrientedLink
 
@@ -165,7 +160,4 @@ The creation of a region from an SVG element must contain the following values
       "mode": "true",
       "img": ""
     }
-
-
-
-
+```

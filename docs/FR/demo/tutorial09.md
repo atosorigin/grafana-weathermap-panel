@@ -1,18 +1,16 @@
 # Comment créer une région en mode coordonnée
+
 [![](../../screenshots/other/Go-back.png)](README.md)
 
 ## Ajouter un dashboard SVG
-
 
 ![step 01](../../screenshots/demo/tutorial01/step01.jpg)
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
+L'image sélectionnée sera [demo01-background.svg](../../resource/demo01-background.svg).
 
-L'image sélectionnée sera [demo01-background.svg](../../resource/demo01-background.svg). 
-
-Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`, ou avec le lien direct du dépôt : 
-
+Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`, ou avec le lien direct du dépôt :
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
@@ -30,32 +28,34 @@ Dans cette section, nous allons expliquer comment créer différentes régions s
 ! [AddCoordiante](../../screenshots/demo/tutorial09/RegionCoordinateMode.png)
 
 Ici, nous pouvons voir une section avec `X min`,`X max`,`Y min`,`Y max`.
-Le point de référence est le point (0,0). On peut donc avoir 3 cas différents 
+Le point de référence est le point (0,0). On peut donc avoir 3 cas différents
 
-Pour a<b, 
+Pour a<b,
 
 - Si Xmin et Xmax sont négatives :
-    - Xmin = b
-    - Xmax = a
-    - Exemple : 
-        - `a=-60` et `b=-20`. 
-        - Alors `Xmin=-20` et `Xmax=-60`
+
+  - Xmin = b
+  - Xmax = a
+  - Exemple :
+    - `a=-60` et `b=-20`.
+    - Alors `Xmin=-20` et `Xmax=-60`
 
 - Si Xmin est négative et Xmax est positive :
-    - Xmin = a
-    - Xmax = b
-    - Exemple : 
-        - `a=-20` et `b=20`. 
-        - Alors `Xmin=-20` et `Xmax=20`
+
+  - Xmin = a
+  - Xmax = b
+  - Exemple :
+    - `a=-20` et `b=20`.
+    - Alors `Xmin=-20` et `Xmax=20`
 
 - Si Xmin et Xmax sont positives :
-    - Xmin = a
-    - Xmax = b
-    - Exemple : 
-        - `a=20` et `b=60`. 
-        - Alors `Xmin=20` et `Xmax=60`
+  - Xmin = a
+  - Xmax = b
+  - Exemple :
+    - `a=20` et `b=60`.
+    - Alors `Xmin=20` et `Xmax=60`
 
-Créons ces trois régions sur le tableau de bord. 
+Créons ces trois régions sur le tableau de bord.
 Prenons les mêmes valeurs que X pour Y
 Nous aurons donc les données suivantes :
 
@@ -89,4 +89,4 @@ Une fois que vous avez fait cela pour vos trois régions, vous devriez avoir que
 
 Et voici le fichier JSON :
 
-- [demo09-region](../../resource/demo09-region.json) 
+- [demo09-region](../../resource/demo09-region.json)

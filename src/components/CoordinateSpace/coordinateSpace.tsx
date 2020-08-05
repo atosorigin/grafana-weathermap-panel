@@ -229,7 +229,6 @@ class CoordinateSpace extends React.Component<Props, State> {
 
   /** call function to return arrayCoor a SimpleEditor */
   callBack = (): void => {
-
     // Define defaultCoor + defaultWidth + default height to creation of region
     let newArrayCoor = this.state.arrayCoor;
     newArrayCoor.coordsDefault = {
@@ -237,12 +236,18 @@ class CoordinateSpace extends React.Component<Props, State> {
       xMax: this.state.arrayCoor.coords.xMax,
       yMin: this.state.arrayCoor.coords.yMin,
       yMax: this.state.arrayCoor.coords.yMax,
-    }
-    newArrayCoor.widthInitialSpaceDefault = (parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10) - parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10)).toString();
-    newArrayCoor.heightInitialSpaceDefault = (parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10) - parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10)).toString();
+    };
+    newArrayCoor.widthInitialSpaceDefault = (
+      parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10) -
+      parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10)
+    ).toString();
+    newArrayCoor.heightInitialSpaceDefault = (
+      parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10) -
+      parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10)
+    ).toString();
     this.setState({
       arrayCoor: newArrayCoor,
-    })
+    });
 
     const waitAlert = 3000;
 

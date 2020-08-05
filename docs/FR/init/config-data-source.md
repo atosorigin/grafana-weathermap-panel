@@ -1,10 +1,10 @@
-
 # Configuration data source
+
 [![](../../screenshots/other/Go-back.png)](README.md)
 
 ## Les données des séries chronologiques comme source de données
 
-Le plugin `grafana-weathermap-panel` peut être utilisé avec toute la base de données utilisée dans Grafana. 
+Le plugin `grafana-weathermap-panel` peut être utilisé avec toute la base de données utilisée dans Grafana.
 
 Bases de données supportées :
 
@@ -14,10 +14,8 @@ Bases de données supportées :
 - Prometheus
 - MySQL
 - Postgres
-- MSSQL 
+- MSSQL
 - Elasticsearch
-
-
 
 ## Exemple d'utilisation avec Prometheus
 
@@ -28,7 +26,6 @@ Vous pouvez utiliser l'interface de Grafana à partir des modules disponibles ci
 - Dans la barre latérale de gauche, cliquez sur le bouton `Configuration`
 - Cliquez sur le bouton `Add data source` dans l'en-tête supérieur.
 - Sélectionnez Prometheus dans la liste déroulante Type.
-
 
 ![data source](../../screenshots/init/datasource.jpg)
 ![data source](../../screenshots/init/add-data-source.png)
@@ -43,9 +40,7 @@ Pour insérer une requête dans un dashboard, vous devez d'abord créer ce dashb
 
 - Cliquez ensuite sur `Add Query`
 
-
 ![query](../../screenshots/init/query.png)
-
 
 - Dans les paramètres du panel, vous devez choisir la requête. Ici, choisissez `Prometheus`.
 - Vous pouvez ensuite choisir les métriques à visualiser
@@ -53,14 +48,3 @@ Pour insérer une requête dans un dashboard, vous devez d'abord créer ce dashb
 ### Externe
 
 Il est possible d'utiliser la connexion sans passé par l'interface de Grafana
-
-
-
-
-
-
-
-
-
-
-

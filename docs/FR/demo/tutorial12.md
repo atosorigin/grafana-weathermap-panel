@@ -1,15 +1,12 @@
 # Construire son dashboard depuis son ordinateur
-[![](../../screenshots/other/Go-back.png)](README.md)
 
+[![](../../screenshots/other/Go-back.png)](README.md)
 
 Nous vous proposons dans la démonstration 12, la possibilité de créer un journal sans avoir de serveur.
 
-
-##  Ajouter une Query
-
+## Ajouter une Query
 
 ![step 05](../../screenshots/demo/tutorial01/step05.jpg)
-
 
 La première étape passe par l'onglet `Queries`
 
@@ -18,11 +15,10 @@ Vous devez :
 - compléter la ligne `metrics` avec la ligne suivante
 
 ```
-rate(go_memstats_gc_cpu_fraction[5m]) 
+rate(go_memstats_gc_cpu_fraction[5m])
 ```
 
 Le marqueur "A" sera utilisé pour identifier cette requête
-
 
 ## Ajouter une image de fond
 
@@ -30,14 +26,11 @@ Le marqueur "A" sera utilisé pour identifier cette requête
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
+Nous choisissons le sélecteur de fichier pour choisir l'image sélectionnée sera [demo01-background.svg](../../resource/demo01-background.svg).
 
-Nous choisissons le sélecteur de fichier pour choisir l'image sélectionnée sera [demo01-background.svg](../../resource/demo01-background.svg). 
-
-
-## Importer les fichiers 
+## Importer les fichiers
 
 Pour importer les différents json à partir de votre ordinateur, la sélection s'effectue à partir du menu `import files` et la zone `multi local import`.
-
 
 ### Importer un fichier Région
 
@@ -49,7 +42,6 @@ Après la confirmation, vous cliquez sur le bouton `add`, suivi de `finish`
 
 Le rendu sera affiché automatiquement avec le fichier chargé.
 
-
 ### Importer un fichier Point
 
 ![fileselect region](../../screenshots/demo/tutorial12/point.png)
@@ -60,8 +52,6 @@ Après la confirmation, vous cliquez sur le bouton `add`, suivi de `finish`
 
 Le rendu sera affiché automatiquement avec le fichier chargé.
 
-
-
 ### Importer un fichier lien
 
 ![fileselect region](../../screenshots/demo/tutorial12/link.png)
@@ -71,7 +61,6 @@ Pour importer un fichier json Région, vous pouvez utiliser le sélecteur de fic
 Après la confirmation, vous cliquez sur le bouton `add`, suivi de `finish`
 
 Le rendu sera affiché automatiquement avec le fichier chargé.
-
 
 ## Résultat
 

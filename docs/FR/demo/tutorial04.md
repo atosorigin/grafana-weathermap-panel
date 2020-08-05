@@ -1,15 +1,15 @@
 # Comment créer et ajouter votre propre image SVG dans Grafana
 
 [![](../../screenshots/other/Go-back.png)](README.md)
- 
+
 ## Créer votre SVG avec inkscape
 
 ### Propriétés de l'espace
 
-A partir du logiciel Inkscape, nous définissions les propriétés de notre espace en pixel avec comme valeurs : 
+A partir du logiciel Inkscape, nous définissions les propriétés de notre espace en pixel avec comme valeurs :
 
-  - largeur : 400 px
-  - hauteur : 400 px
+- largeur : 400 px
+- hauteur : 400 px
 
 ![Inkscape](./../../screenshots/demo/tutorial04/inkscape-proprietes.jpg)
 
@@ -17,14 +17,12 @@ Vous pouvez également voir plus d'informations sur la création d'image SVG [ic
 
 ### Étape 2 : Créer votre forme
 
+Nous créons plusieurs formes géométriques à partir du logiciel Inskcape, qui sont :
 
-Nous créons plusieurs formes géométriques à partir du logiciel Inskcape, qui sont : 
-
-  - 2 rectangles
-  - 2 cercles
+- 2 rectangles
+- 2 cercles
 
 ![Inkscape](./../../screenshots/demo/tutorial04/shapes.jpg)
-
 
 ### Etape 3 : Ajouter un identifiant à tous vos objets
 
@@ -50,8 +48,6 @@ Il est possible d'avoir plus de détails avec la page [display](../editor/displa
 
 ![Enregistrer](./../../screenshots/demo/tutorial04/DisplaySVG.png)
 
-Ensuite, si vous voulez ajouter une région, à partir du menu `Coordinates space`, `region` et `Add region`. Vous pouvez voir les différents id de votre forme dans "Zone SVG". 
+Ensuite, si vous voulez ajouter une région, à partir du menu `Coordinates space`, `region` et `Add region`. Vous pouvez voir les différents id de votre forme dans "Zone SVG".
 
 ![Enregistrer](./../../screenshots/demo/tutorial04/Region.png)
-
-

@@ -7,18 +7,18 @@
     "author": {
       "name": "Atos OpenSource"
     },
-    "keywords": ["Grafana","weathermap","panel"],
+    "keywords": ["Grafana", "weathermap", "panel"],
     "logos": {
       "small": "img/logo.svg",
       "large": "img/logo.svg"
     },
     "links": [
-      { "name": "Github", "url": "https://github.com/atosorigin/grafana-weathermap"},
-      { "name": "License", "url": "https://github.com/atosorigin/grafana-weathermap/blob/master/LICENCE"}
+      { "name": "Github", "url": "https://github.com/atosorigin/grafana-weathermap" },
+      { "name": "License", "url": "https://github.com/atosorigin/grafana-weathermap/blob/master/LICENCE" }
     ],
     "screenshots": [],
-    "version": "1.0.2a3",
-    "updated": "2020-08-04"
+    "version": "1.0.2a4",
+    "updated": "2020-08-05"
   },
 
   "dependencies": {

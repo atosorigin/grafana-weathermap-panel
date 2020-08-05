@@ -10,18 +10,10 @@
   - [global](json-global.md)
   - [gabarit](json-gabarit.md)
 
-
-- SVG 
+* SVG
 
   - [Creation image SVG en background](svg.md)
-
- 
 
 - Server
 
   - [serveur de stockage](server.md)
-
-
-
-
-  

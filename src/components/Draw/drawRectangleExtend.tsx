@@ -595,7 +595,13 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     return result;
   }
 
-  getCoordinatePxAdaptToInitialSpace = (region: RegionClass, coorRegion: Coord4D, coorRegionDefault: Coord4D, widthInitialSpaceDefault: number, heightInitialSpaceDefault: number): CoorHTML => {
+  getCoordinatePxAdaptToInitialSpace = (
+    region: RegionClass,
+    coorRegion: Coord4D,
+    coorRegionDefault: Coord4D,
+    widthInitialSpaceDefault: number,
+    heightInitialSpaceDefault: number
+  ): CoorHTML => {
     // const widthImage: number = parseInt(this.props.options.baseMap.width, 10);
     // const heightImage: number = parseInt(this.props.options.baseMap.height, 10);
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
@@ -655,7 +661,6 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       //   //console.log('-+');
       //   leftPx = xMinPx + (this.defineLimitX(parseInt(coorRegion.xMin, 10)) * (widthInitialSpace / 200) + widthInitialSpace / 2);
       //   rightPx = widthImage - (this.defineLimitX(parseInt(coorRegion.xMax, 10)) * (widthInitialSpace / 200) + widthInitialSpace / 2) - xMinPx;
-        
       // } else {
       //   //console.log('++');
       //   leftPx = xMinPx + (this.defineLimitX(parseInt(coorRegion.xMin, 10)) * widthInitialSpace) / 100;
@@ -697,13 +702,13 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
 
     console.log(parseInt(coorRegionDefault.yMin, 10));
     console.log(parseInt(coorRegionDefault.yMax, 10));
-    const ratioLeft = (parseInt(coorRegionDefault.xMin, 10) / widthInitialSpaceDefault);
+    const ratioLeft = parseInt(coorRegionDefault.xMin, 10) / widthInitialSpaceDefault;
     const ratioRight = (widthInitialSpaceDefault - parseInt(coorRegionDefault.xMax, 10)) / widthInitialSpaceDefault;
     const ratioTop = (heightInitialSpaceDefault - parseInt(coorRegionDefault.yMax, 10)) / heightInitialSpaceDefault;
     const ratioBottom = parseInt(coorRegionDefault.yMin, 10) / heightInitialSpaceDefault;
     leftPx = this.defineLimitX(xMin + widthInitialSpace * ratioLeft);
     rightPx = this.defineLimitX(widthInitialSpace * ratioRight + (widthInitialSpaceDefault - xMax));
-    topPx = this.defineLimitY(heightInitialSpace * ratioTop + ((heightInitialSpaceDefault - yMax)));
+    topPx = this.defineLimitY(heightInitialSpace * ratioTop + (heightInitialSpaceDefault - yMax));
     bottomPx = this.defineLimitY(yMin + heightInitialSpace * ratioBottom);
 
     console.log(ratioBottom);
@@ -717,12 +722,12 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     //     currentRegion.coords.yMax = topPx.toString();
     //   }
     // })
-    
-    let result: CoorHTML = { 
+
+    let result: CoorHTML = {
       top: topPx.toString() + 'px',
       bottom: bottomPx.toString() + 'px',
       left: leftPx.toString() + 'px',
-      right: rightPx.toString() + 'px'
+      right: rightPx.toString() + 'px',
     };
     return result;
   };
@@ -739,7 +744,13 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     const textColor: string = region.textObj.colorText;
 
     //const coorHTML: CoorHTML = calculRealCoordinate(region, this.props.useLimit, this.props.limit);
-    const coorHTML: CoorHTML = this.getCoordinatePxAdaptToInitialSpace(region, region.coords, region.coordsDefault, parseInt(region.widthInitialSpaceDefault, 10), parseInt(region.heightInitialSpaceDefault, 10));
+    const coorHTML: CoorHTML = this.getCoordinatePxAdaptToInitialSpace(
+      region,
+      region.coords,
+      region.coordsDefault,
+      parseInt(region.widthInitialSpaceDefault, 10),
+      parseInt(region.heightInitialSpaceDefault, 10)
+    );
     const style: Style = region.textObj.style;
 
     const styleDiv = {

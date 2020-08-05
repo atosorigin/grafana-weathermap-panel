@@ -1,6 +1,7 @@
 # Configuration
+
 [![](../../screenshots/other/Go-back.png)](README.md)
- 
+
 https://www.howtoforge.com/tutorial/how-to-install-prometheus-and-node-exporter-on-centos-8/
 
 ### Prerequisites
@@ -8,7 +9,6 @@ https://www.howtoforge.com/tutorial/how-to-install-prometheus-and-node-exporter-
 It is possible to see to follow a metric in an environment
 
 Example : node_cpu{cpu="cpu0",mode="idle"}
-
 
 - [Prometheus](https://prometheus.io)
 - [Node_exporter](https://prometheus.io/docs/guides/node-exporter/)
@@ -24,7 +24,6 @@ http://localhost:9100/metrics
 
 ![Node Exporter](../../screenshots/init/node_exporter.png)
 
-
 ## Testing Prometheus
 
 ```
@@ -32,7 +31,6 @@ http://localhost:9090/
 ```
 
 ![Prometheus](../../screenshots/init/prometheus.png)
-
 
 ## Testing Grafana
 

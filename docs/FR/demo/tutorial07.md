@@ -1,16 +1,16 @@
 # Créer un lien bi directionnel
+
 [![](../../screenshots/other/Go-back.png)](README.md)
 
 ## Ajouter un tableau de bord SVG
 
 ![étape 01](../../screenshots/demo/tutorial07/background.jpg)
 
-
 L'ajout d'une image de fond se fait à partir du menu `display`.
 
-L'image sélectionnée sera [demo07-background.svg](../../resource/demo07-background.svg). 
+L'image sélectionnée sera [demo07-background.svg](../../resource/demo07-background.svg).
 
-Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`, ou avec le lien direct du dépôt : 
+Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`, ou avec le lien direct du dépôt :
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo07-background.svg
@@ -18,21 +18,15 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 
 Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
 
-
-
-
 ## Créer des régions Routeur et ProxyServer
-
 
 ### Étape 1 : Définir une région SVG
 
-
 ![step 02](../../screenshots/demo/tutorial07/regionsvg.png)
-
 
 La création d'une région dans une image SVG se fait à partir du menu `Coordinates space`, `region` et `Add coordinate space`".
 
-Vous devez remplir le formulaire comme ceci : 
+Vous devez remplir le formulaire comme ceci :
 
 - Entrez un `label` par exemple Routeur
 - Sélectionnez `SVG label`.
@@ -43,23 +37,17 @@ Répétez la même instruction pour ProxyServer et sélectionnez `Proxy` pour la
 
 ### Étape 2 : Ajouter une couleur à l'élément SVG
 
-
-
 ![step 03](../../screenshots/demo/tutorial07/LowerLimitProxy.png)
-
-
 
 L'ajout d'une couleur à un élément SVG s'effectue à partir du menu `Coordinates space`, `region` et `Edit coordinate space`
 
-Vous sélectionnez la ligne `Lower limit` pour compléter le formulaire comme ceci : 
- 
+Vous sélectionnez la ligne `Lower limit` pour compléter le formulaire comme ceci :
 
-- Activer `Trace the background` pour activer la couleur d'arrière-plan 
+- Activer `Trace the background` pour activer la couleur d'arrière-plan
 - Sélectionner la couleur `bleu` à la ligne `Edit background color`
 - Activer `Trace the border` pour activer la couleur de bordure
 - Sélectionner la couleur `bleu` différente à la ligne `Edit border color`
 - Saisir une valeur pour définir la taille de la bordure `size border` par exemple 3
-
 
 Vous obtenez le résultat suivant
 
@@ -67,15 +55,13 @@ Vous obtenez le résultat suivant
 
 Répétez les mêmes choses pour le Routeur et choisissez la couleur rouge
 
-Il est possible de définir d'autres paramètres, en se référant à la page [coordinates lower limit](../editor/coordinates-lower-limit.md) 
-
+Il est possible de définir d'autres paramètres, en se référant à la page [coordinates lower limit](../editor/coordinates-lower-limit.md)
 
 ## Ajouter un lien bi directionnel entre deux points
 
-
 ### Étape 1 : Ajout du lien bidirectionnel
 
-D'abord, vous devez cliquer deux fois sur  `Add Oriented Link` et ensuite, cliquer sur le point Routeur et sur le point ProxyServer.
+D'abord, vous devez cliquer deux fois sur `Add Oriented Link` et ensuite, cliquer sur le point Routeur et sur le point ProxyServer.
 
 Un lien apparaîtra et nous l'éditerons pour le changer en point Bidirectionnel.
 
@@ -93,7 +79,6 @@ Pour changer la couleur, allez dans le menu `lower limit`.
 
 ![LowerLimit](../../screenshots/demo/tutorial07/LowerLimitLink.png)
 
-
 - Coché couleur variable
 - Nombre de tranche de couleurs par exemple 3
 
@@ -101,15 +86,11 @@ Pour changer la couleur, allez dans le menu `lower limit`.
 
 Vous choississez des tranches et une couleur
 
-- <20 - BLeu 
+- <20 - BLeu
 - 20 à 40 - Vert
 - 40 à 60 - jaune
 - 60 à 80 - orange
 - 80< -rouge
-
-
-
-
 
 ### Étape 3 : Ajouter une query à votre lien
 
@@ -117,15 +98,13 @@ Vous devez d'abord créer la requête.
 Pour ce faire, allez à "Requêtes" et remplissez les champs comme suit :
 ![query](../../screenshots/demo/tutorial07/query.png)
 
-
-
 ```
 Metric A :
 
 rate(node_network_receive_bytes{device="enp0s3"}[1m])*100*8/1024/1024
 
 
-Metric B : 
+Metric B :
 
 rate(node_network_transmit_bytes{device="enp0s3"}[1m])*100*8/1024/1024
 ```
@@ -140,12 +119,11 @@ Ensuite, vous pourrez attribuer les méstriques à vos liens A et B
 
 La création d'une région en mode coordonnées se fait à partir du menu `Coordinates space`, `region` et `Add coordinate space`
 
-Vous devez remplir le formulaire comme ceci : 
+Vous devez remplir le formulaire comme ceci :
 
 - Entrez une `label` par exemple Ordinateur
 - Sélectionnez `coordinate mode`.
 - Remplissez les coordonnées de votre région
-
 
 ![Metric](../../screenshots/demo/tutorial07/zone.png)
 ![Metric](../../screenshots/demo/tutorial07/CoordonateMode.png)
@@ -175,6 +153,6 @@ Vous pouvez alors constater sur cette image que le lien est cliquable
 
 Et voici les différents fichiers JSON :
 
-- [demo7-Region SVG](../../resource/demo07-region-svg.json) 
-- [demo7-Region coordonnées](../../resource/demo07-region-coord.json) 
+- [demo7-Region SVG](../../resource/demo07-region-svg.json)
+- [demo7-Region coordonnées](../../resource/demo07-region-coord.json)
 - [demo7-link](../../resource/demo07-link.json)

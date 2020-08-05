@@ -1,30 +1,27 @@
 # Lower limit
+
 [![](../../screenshots/other/Go-back.png)](coordinates.md)
 
-
-Cette partie est commune pour 
+Cette partie est commune pour
 
 - [Region](coordinates-space-region.md)
 - [Point](coordinates-space-point.md)
 
-
 ### Fixe color
-
 
 ![lower limit](../../screenshots/editor/coordinates/lower-limit/fixe-color.jpg)
 
-Si la `variable color`  est décoché, un formulaire de ce type apparait
-
+Si la `variable color` est décoché, un formulaire de ce type apparait
 
 - Trace the background : En cochant cette case, donne la possibilité de modifier la couleur du background
 - Trace the border : En cochant cette case, donne la possibilité de modifier la couleur de la bordure
-- Edit background color : En cliquant sur le rond, vous pouvez choisir la couleur désiré 
-- Edit border color : En cliquant sur le rond, vous pouvez choisir la couleur désiré 
-- Size border : Vous permet de choisir la taille de la bordure 
+- Edit background color : En cliquant sur le rond, vous pouvez choisir la couleur désiré
+- Edit border color : En cliquant sur le rond, vous pouvez choisir la couleur désiré
+- Size border : Vous permet de choisir la taille de la bordure
 
 ### Variable color
 
-Si la `variable color`  est coché, un nouveau formulaire apparaît pour définir le nombre de palier nécessaire comme ceci :
+Si la `variable color` est coché, un nouveau formulaire apparaît pour définir le nombre de palier nécessaire comme ceci :
 
 ![lower limit](../../screenshots/editor/coordinates/lower-limit/lower-limit-variable.png)
 
@@ -41,6 +38,3 @@ Chaque palier, vous devez remplir :
 - Une valeur maximum
 - Choisir une couleur intérieure
 - Choisir une couleur de bordure
-
-
-

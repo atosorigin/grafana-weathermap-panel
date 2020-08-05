@@ -1,23 +1,23 @@
 # Global file
+
 [![](../../screenshots/other/Go-back.png)](README.md)
 
 Le script complet [sample-global.json](../../../../demo/sample-global.json) est disponible, avec les détails de construction ci-dessous.
-
-
 
 Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
 
 ```
 
-{ 
-   
+{
+
 }
 
 ```
+
 ## Structure
 
 ```
-{ 
+{
     "coordinateSpaceInitial": {},
     "texteSettings": {},
     "baseMap": {},
@@ -30,11 +30,10 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
 
 ## coordinateSpaceInitial
 
-- **coordinateSpaceInitial**	
-    - **coordinate** : Vous permet de redimensionner votre espace de travail.  Les axes X et Y allant de -100% à plus 100%. 
-    - **displayArea** : Saisir "true" ou "false" pour afficher l'espace de travail
+- **coordinateSpaceInitial**
+  - **coordinate** : Vous permet de redimensionner votre espace de travail. Les axes X et Y allant de -100% à plus 100%.
+  - **displayArea** : Saisir "true" ou "false" pour afficher l'espace de travail
 
-    
 ```
     "coordinateSpaceInitial": {
         "coordinate": {
@@ -50,13 +49,14 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
 
 ## texteSettings
 
-- **textSettings**	
-    - **font** : Choix de la police du texte entre "Helvetica", "Arial", "sans-serif", "mono".
-    - **size** : Choix de la taille du texte en "em". Exemple : "1em" ou "4em".
-    - **style**	
-        - **bold** : "true" ou "false" pour mettre le texte en gras
-        - **italic** : "true" ou "false" pour mettre le texte en italique
-        - **underline** : "true" ou "false" pour mettre le texte en évidence
+- **textSettings**
+  - **font** : Choix de la police du texte entre "Helvetica", "Arial", "sans-serif", "mono".
+  - **size** : Choix de la taille du texte en "em". Exemple : "1em" ou "4em".
+  - **style**
+    - **bold** : "true" ou "false" pour mettre le texte en gras
+    - **italic** : "true" ou "false" pour mettre le texte en italique
+    - **underline** : "true" ou "false" pour mettre le texte en évidence
+
 ```
     "texteSettings": {
         "police": "Helvetica",
@@ -70,18 +70,17 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
 
 ```
 
-
 ## baseMap
 
-- **baseMap**	
-    - **image** : permet de remplir le lien de l'image, en base 64 ou avec une URL
-    - **layerImage** : ""
-    - **SVG mode** : "True" ou "false" si vous utilisez une image SVG
-    - **width** : Choix de la largeur si vous n'avez pas d'image SVG. Si vous en avez une, laissez vide
-    - **height** : Choix de la hauteur si vous n'avez pas d'image SVG. Si vous en avez une, laissez vide
-    - **idSVG** ""
-    - **isUploaded** : False
-    
+- **baseMap**
+  - **image** : permet de remplir le lien de l'image, en base 64 ou avec une URL
+  - **layerImage** : ""
+  - **SVG mode** : "True" ou "false" si vous utilisez une image SVG
+  - **width** : Choix de la largeur si vous n'avez pas d'image SVG. Si vous en avez une, laissez vide
+  - **height** : Choix de la hauteur si vous n'avez pas d'image SVG. Si vous en avez une, laissez vide
+  - **idSVG** ""
+  - **isUploaded** : False
+
 ```
    "baseMap": {
         "image": "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-background.svg",
@@ -95,41 +94,37 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
 
 ```
 
-
 ## regions
 
-- **regions**	
-    - **0** : Lien vers le fichier .json des régions [Cliquez ici pour savoir comment les remplir](json-region.md)
-
+- **regions**
+  - **0** : Lien vers le fichier .json des régions [Cliquez ici pour savoir comment les remplir](json-region.md)
 
 ```
 
    "regions": [
         "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-svgRegion.json"
     ],
-    
+
 
 ```
-
 
 ## points
 
-- **points**	
-    - **0** : Lien vers le fichier .json des points [Cliquez ici pour savoir comment les remplir](json-point.md)
+- **points**
+  - **0** : Lien vers le fichier .json des points [Cliquez ici pour savoir comment les remplir](json-point.md)
 
-```    
+```
     "points": [
         "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-point.json"
     ],
-    
-    
-```
 
+
+```
 
 ## links
 
-- **links**	
-    - **0** : Lien vers le fichier .json links [Cliquez ici pour savoir comment les remplir](json-links.md)
+- **links**
+  - **0** : Lien vers le fichier .json links [Cliquez ici pour savoir comment les remplir](json-links.md)
 
 ```
     "links": [
@@ -137,4 +132,3 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
     ]
 
 ```
-

@@ -152,7 +152,6 @@ export class SimplePanel extends PureComponent<Props, State> {
     const heightInitialSpace: number = yMax - yMin;
     positionX = clickX;
     positionY = heightInitialSpace - clickY;
-    
 
     // let xMinPx = 0;
     // let xMaxPx = 0;
@@ -313,7 +312,8 @@ export class SimplePanel extends PureComponent<Props, State> {
       this.updatePositionOrientedLink(line);
       const valuesAuxiliaryMetrics: string[] = this.getValuesAuxiliaryMetricsPoint(line);
       const ratioX = parseInt(line.positionXDefault, 10) / parseInt(line.widthInitialSpaceDefault, 10);
-      const ratioY = (parseInt(line.heightInitialSpaceDefault, 10) - parseInt(line.positionYDefault, 10)) / parseInt(line.heightInitialSpaceDefault, 10);
+      const ratioY =
+        (parseInt(line.heightInitialSpaceDefault, 10) - parseInt(line.positionYDefault, 10)) / parseInt(line.heightInitialSpaceDefault, 10);
       const xMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
       const xMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
       const yMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
@@ -325,7 +325,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       if (parseInt(line.widthInitialSpaceDefault, 10) !== widthInitialSpace) {
         x = xMinInitialSpace + widthInitialSpace * ratioX;
       } else {
-        x = widthInitialSpace * parseInt(line.positionShapeX, 10) / parseInt(line.widthInitialSpaceDefault, 10);
+        x = (widthInitialSpace * parseInt(line.positionShapeX, 10)) / parseInt(line.widthInitialSpaceDefault, 10);
       }
 
       let y = parseInt(this.props.options.baseMap.height, 10) - yMaxInitialSpace + heightInitialSpace * ratioY;
@@ -1036,7 +1036,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       objectIn.x.toString(),
       objectIn.y.toString(),
       objectOut.x.toString(),
-      objectOut.y.toString(),
+      objectOut.y.toString()
     );
     const newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
     newArrayOrientedLink.push(newOrientedLink);
@@ -1073,9 +1073,13 @@ export class SimplePanel extends PureComponent<Props, State> {
       const valuesAuxiliaryMetrics: string[] = this.getValuesAuxiliaryMetricsOrientedLink(orientedLink);
       const valuesAuxiliaryMetricsB: string[] = this.getValuesAuxiliaryMetricsOrientedLinkB(orientedLink);
       const ratioXA = parseInt(orientedLink.pointAPositionXDefault, 10) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
-      const ratioYA = (parseInt(orientedLink.heightInitialSpaceDefault, 10) - parseInt(orientedLink.pointAPositionYDefault, 10)) / parseInt(orientedLink.heightInitialSpaceDefault, 10);
+      const ratioYA =
+        (parseInt(orientedLink.heightInitialSpaceDefault, 10) - parseInt(orientedLink.pointAPositionYDefault, 10)) /
+        parseInt(orientedLink.heightInitialSpaceDefault, 10);
       const ratioXB = parseInt(orientedLink.pointBPositionXDefault, 10) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
-      const ratioYB = (parseInt(orientedLink.heightInitialSpaceDefault, 10) - parseInt(orientedLink.pointBPositionYDefault, 10)) / parseInt(orientedLink.heightInitialSpaceDefault, 10);
+      const ratioYB =
+        (parseInt(orientedLink.heightInitialSpaceDefault, 10) - parseInt(orientedLink.pointBPositionYDefault, 10)) /
+        parseInt(orientedLink.heightInitialSpaceDefault, 10);
       const xMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
       const xMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
       const yMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
@@ -1084,14 +1088,14 @@ export class SimplePanel extends PureComponent<Props, State> {
       const heightInitialSpace: number = yMaxInitialSpace - yMinInitialSpace;
       let xA;
       let xB;
-      console.log(orientedLink)
+      console.log(orientedLink);
 
       if (parseInt(orientedLink.widthInitialSpaceDefault, 10) !== widthInitialSpace) {
         xA = xMinInitialSpace + widthInitialSpace * ratioXA;
         xB = xMinInitialSpace + widthInitialSpace * ratioXB;
       } else {
-        xA = widthInitialSpace * parseInt(orientedLink.pointAPositionX, 10) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
-        xB = widthInitialSpace * parseInt(orientedLink.pointBPositionX, 10) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
+        xA = (widthInitialSpace * parseInt(orientedLink.pointAPositionX, 10)) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
+        xB = (widthInitialSpace * parseInt(orientedLink.pointBPositionX, 10)) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
       }
 
       let yA = parseInt(this.props.options.baseMap.height, 10) - yMaxInitialSpace + heightInitialSpace * ratioYA;
@@ -1101,8 +1105,8 @@ export class SimplePanel extends PureComponent<Props, State> {
       orientedLink.pointBPositionX = xB.toString();
       orientedLink.pointAPositionY = yA.toString();
       orientedLink.pointBPositionY = yB.toString();
-      console.log(yA)
-      console.log(yB)
+      console.log(yA);
+      console.log(yB);
 
       item = (
         <DrawOrientedLink

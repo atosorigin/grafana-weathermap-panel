@@ -1,258 +1,259 @@
 {
-    "global": {
-        "lowerLimit": [{
-            "lowerLimitMin": "leMinimum",
-            "lowerLimitMax": "leMaxmum",
-            "backColor": "#0046DE",
-            "borderColor": "#00FF99",
-            "sizeBorder": "20px"
-        }],
-        "textObject": {
-            "value": "",
-            "isTextTooltip": "false",
-            "colorBack": "red",
-            "colorText": "yellow",
-            "style": {
-                "bold": "true",
-                "italic": "false",
-                "underline": "true"
-            },
-            "generateObjectText": "true",
-            "valueGenerateObjectText": {
-                "legendElement": "uneLegend",
-                "numericFormatElement": "",
-                "unit": "Hz",
-                "displayObjectInTooltip": "true",
-                "addColorTextElement": "true",
-                "colorTextElement": "blue",
-                "addColorBackElement": "#FF00FF",
-                "colorBackElement": "white"
-            },
-            "generateAuxiliaryElement": {
-                "legendElement": "uneLegend",
-                "numericFormatElement": "?",
-                "unit": "Hz",
-                "displayObjectInTooltip": "true",
-                "addColorTextElement": "true",
-                "colorTextElement": "blue",
-                "addColorBackElement": "#E0FF0F",
-                "colorBackElement": "#999999"
-            }
-        },
-        "colorMode": "false",
-        "traceBack": "true",
-        "traceBorder": "true"
+  "global": {
+    "lowerLimit": [
+      {
+        "lowerLimitMin": "leMinimum",
+        "lowerLimitMax": "leMaxmum",
+        "backColor": "#0046DE",
+        "borderColor": "#00FF99",
+        "sizeBorder": "20px"
+      }
+    ],
+    "textObject": {
+      "value": "",
+      "isTextTooltip": "false",
+      "colorBack": "red",
+      "colorText": "yellow",
+      "style": {
+        "bold": "true",
+        "italic": "false",
+        "underline": "true"
+      },
+      "generateObjectText": "true",
+      "valueGenerateObjectText": {
+        "legendElement": "uneLegend",
+        "numericFormatElement": "",
+        "unit": "Hz",
+        "displayObjectInTooltip": "true",
+        "addColorTextElement": "true",
+        "colorTextElement": "blue",
+        "addColorBackElement": "#FF00FF",
+        "colorBackElement": "white"
+      },
+      "generateAuxiliaryElement": {
+        "legendElement": "uneLegend",
+        "numericFormatElement": "?",
+        "unit": "Hz",
+        "displayObjectInTooltip": "true",
+        "addColorTextElement": "true",
+        "colorTextElement": "blue",
+        "addColorBackElement": "#E0FF0F",
+        "colorBackElement": "#999999"
+      }
     },
-    "templates": [
-        {
-            "filtered": "quantile|0.5#slice|inner_eval",
-            "labelfix": "true",
-            "xylabel": "x|labelName#y|labelName",
-            "xylabel0": "x|labelName#y|labelName",
-            "xylabelfix": "x|10#y|20",
-            "xylabelfix0": "x|10#y|20",
-            "type": "region",
-            "meta": "uneMeta",
-            "label": "rect1 haut",
-            "positionParameter": {
-                "xylabelA": "x|labelName#y|labelName",
-                "xylabelB": "x|labelName#y|labelName",
-                "tooltipA": "bottom",
-                "tooltipB": "bottom"
-            },
-            "mainMetric": {},
-            "metrics": [],
-            "linkURL": {},
-            "idSVG": "rect1-top",
-            "mode": "true",
-            "img": ""
-        },
-        {
-            "filtered": "quantile|0.9#slice|inner_eval",
-            "labelfix": "true",
-            "xylabel": "x|labelName#y|labelName",
-            "xylabel0": "x|labelName#y|labelName",
-            "xylabelfix": "x|10#y|20",
-            "xylabelfix0": "x|10#y|20",
-            "type": "region",
-            "meta": "uneMeta",
-            "label": "rect1 milieu",
-            "positionParameter": {
-                "xylabelA": "x|labelName#y|labelName",
-                "xylabelB": "x|labelName#y|labelName",
-                "tooltipA": "bottom",
-                "tooltipB": "bottom"
-            },
-            "mainMetric": {},
-            "metrics": [],
-            "linkURL": {},
-            "idSVG": "rect1-middle",
-            "mode": "true",
-            "img": ""
-        },
-        {
-            "filtered": "quantile|0.99#slice|inner_eval",
-            "labelfix": "true",
-            "xylabel": "x|labelName#y|labelName",
-            "xylabel0": "x|labelName#y|labelName",
-            "xylabelfix": "x|10#y|20",
-            "xylabelfix0": "x|10#y|20",
-            "type": "region",
-            "meta": "uneMeta",
-            "label": "rect1 bas",
-            "positionParameter": {
-                "xylabelA": "x|labelName#y|labelName",
-                "xylabelB": "x|labelName#y|labelName",
-                "tooltipA": "bottom",
-                "tooltipB": "bottom"
-            },
-            "mainMetric": {},
-            "metrics": [],
-            "linkURL": {},
-            "idSVG": "rect1-footer",
-            "mode": "true",
-            "img": ""
-        },
-        
-        
-        {
-            "filtered": "quantile|0.5#slice|prepare_time",
-            "labelfix": "true",
-            "xylabel": "x|labelName#y|labelName",
-            "xylabel0": "x|labelName#y|labelName",
-            "xylabelfix": "x|10#y|20",
-            "xylabelfix0": "x|10#y|20",
-            "type": "region",
-            "meta": "uneMeta",
-            "label": "rect2 haut",
-            "positionParameter": {
-                "xylabelA": "x|labelName#y|labelName",
-                "xylabelB": "x|labelName#y|labelName",
-                "tooltipA": "bottom",
-                "tooltipB": "bottom"
-            },
-            "mainMetric": {},
-            "metrics": [],
-            "linkURL": {},
-            "idSVG": "rect2-top",
-            "mode": "true",
-            "img": ""
-        },
-        {
-            "filtered": "quantile|0.9#slice|prepare_time",
-            "labelfix": "true",
-            "xylabel": "x|labelName#y|labelName",
-            "xylabel0": "x|labelName#y|labelName",
-            "xylabelfix": "x|10#y|20",
-            "xylabelfix0": "x|10#y|20",
-            "type": "region",
-            "meta": "uneMeta",
-            "label": "rect2 milieu",
-            "positionParameter": {
-                "xylabelA": "x|labelName#y|labelName",
-                "xylabelB": "x|labelName#y|labelName",
-                "tooltipA": "bottom",
-                "tooltipB": "bottom"
-            },
-            "mainMetric": {},
-            "metrics": [],
-            "linkURL": {},
-            "idSVG": "rect2-middle",
-            "mode": "true",
-            "img": ""
-        },
-        {
-            "filtered": "quantile|0.99#slice|prepare_time",
-            "labelfix": "true",
-            "xylabel": "x|labelName#y|labelName",
-            "xylabel0": "x|labelName#y|labelName",
-            "xylabelfix": "x|10#y|20",
-            "xylabelfix0": "x|10#y|20",
-            "type": "region",
-            "meta": "uneMeta",
-            "label": "rect2 bas",
-            "positionParameter": {
-                "xylabelA": "x|labelName#y|labelName",
-                "xylabelB": "x|labelName#y|labelName",
-                "tooltipA": "bottom",
-                "tooltipB": "bottom"
-            },
-            "mainMetric": {},
-            "metrics": [],
-            "linkURL": {},
-            "idSVG": "rect2-footer",
-            "mode": "true",
-            "img": ""
-        },  
-        
-        {
-            "filtered": "quantile|0.5#slice|queue_time",
-            "labelfix": "true",
-            "xylabel": "x|labelName#y|labelName",
-            "xylabel0": "x|labelName#y|labelName",
-            "xylabelfix": "x|10#y|20",
-            "xylabelfix0": "x|10#y|20",
-            "type": "region",
-            "meta": "uneMeta",
-            "label": "rect3 haut",
-            "positionParameter": {
-                "xylabelA": "x|labelName#y|labelName",
-                "xylabelB": "x|labelName#y|labelName",
-                "tooltipA": "bottom",
-                "tooltipB": "bottom"
-            },
-            "mainMetric": {},
-            "metrics": [],
-            "linkURL": {},
-            "idSVG": "rect3-top",
-            "mode": "true",
-            "img": ""
-        },
-        {
-            "filtered": "quantile|0.9#slice|queue_time",
-            "labelfix": "true",
-            "xylabel": "x|labelName#y|labelName",
-            "xylabel0": "x|labelName#y|labelName",
-            "xylabelfix": "x|10#y|20",
-            "xylabelfix0": "x|10#y|20",
-            "type": "region",
-            "meta": "uneMeta",
-            "label": "rect3 milieu",
-            "positionParameter": {
-                "xylabelA": "x|labelName#y|labelName",
-                "xylabelB": "x|labelName#y|labelName",
-                "tooltipA": "bottom",
-                "tooltipB": "bottom"
-            },
-            "mainMetric": {},
-            "metrics": [],
-            "linkURL": {},
-            "idSVG": "rect3-middle",
-            "mode": "true",
-            "img": ""
-        },
-        {
-            "filtered": "quantile|0.99#slice|queue_time",
-            "labelfix": "true",
-            "xylabel": "x|labelName#y|labelName",
-            "xylabel0": "x|labelName#y|labelName",
-            "xylabelfix": "x|10#y|20",
-            "xylabelfix0": "x|10#y|20",
-            "type": "region",
-            "meta": "uneMeta",
-            "label": "rect3 bas",
-            "positionParameter": {
-                "xylabelA": "x|labelName#y|labelName",
-                "xylabelB": "x|labelName#y|labelName",
-                "tooltipA": "bottom",
-                "tooltipB": "bottom"
-            },
-            "mainMetric": {},
-            "metrics": [],
-            "linkURL": {},
-            "idSVG": "rect3-footer",
-            "mode": "true",
-            "img": ""
-        }         
-    ]
+    "colorMode": "false",
+    "traceBack": "true",
+    "traceBorder": "true"
+  },
+  "templates": [
+    {
+      "filtered": "quantile|0.5#slice|inner_eval",
+      "labelfix": "true",
+      "xylabel": "x|labelName#y|labelName",
+      "xylabel0": "x|labelName#y|labelName",
+      "xylabelfix": "x|10#y|20",
+      "xylabelfix0": "x|10#y|20",
+      "type": "region",
+      "meta": "uneMeta",
+      "label": "rect1 haut",
+      "positionParameter": {
+        "xylabelA": "x|labelName#y|labelName",
+        "xylabelB": "x|labelName#y|labelName",
+        "tooltipA": "bottom",
+        "tooltipB": "bottom"
+      },
+      "mainMetric": {},
+      "metrics": [],
+      "linkURL": {},
+      "idSVG": "rect1-top",
+      "mode": "true",
+      "img": ""
+    },
+    {
+      "filtered": "quantile|0.9#slice|inner_eval",
+      "labelfix": "true",
+      "xylabel": "x|labelName#y|labelName",
+      "xylabel0": "x|labelName#y|labelName",
+      "xylabelfix": "x|10#y|20",
+      "xylabelfix0": "x|10#y|20",
+      "type": "region",
+      "meta": "uneMeta",
+      "label": "rect1 milieu",
+      "positionParameter": {
+        "xylabelA": "x|labelName#y|labelName",
+        "xylabelB": "x|labelName#y|labelName",
+        "tooltipA": "bottom",
+        "tooltipB": "bottom"
+      },
+      "mainMetric": {},
+      "metrics": [],
+      "linkURL": {},
+      "idSVG": "rect1-middle",
+      "mode": "true",
+      "img": ""
+    },
+    {
+      "filtered": "quantile|0.99#slice|inner_eval",
+      "labelfix": "true",
+      "xylabel": "x|labelName#y|labelName",
+      "xylabel0": "x|labelName#y|labelName",
+      "xylabelfix": "x|10#y|20",
+      "xylabelfix0": "x|10#y|20",
+      "type": "region",
+      "meta": "uneMeta",
+      "label": "rect1 bas",
+      "positionParameter": {
+        "xylabelA": "x|labelName#y|labelName",
+        "xylabelB": "x|labelName#y|labelName",
+        "tooltipA": "bottom",
+        "tooltipB": "bottom"
+      },
+      "mainMetric": {},
+      "metrics": [],
+      "linkURL": {},
+      "idSVG": "rect1-footer",
+      "mode": "true",
+      "img": ""
+    },
+
+    {
+      "filtered": "quantile|0.5#slice|prepare_time",
+      "labelfix": "true",
+      "xylabel": "x|labelName#y|labelName",
+      "xylabel0": "x|labelName#y|labelName",
+      "xylabelfix": "x|10#y|20",
+      "xylabelfix0": "x|10#y|20",
+      "type": "region",
+      "meta": "uneMeta",
+      "label": "rect2 haut",
+      "positionParameter": {
+        "xylabelA": "x|labelName#y|labelName",
+        "xylabelB": "x|labelName#y|labelName",
+        "tooltipA": "bottom",
+        "tooltipB": "bottom"
+      },
+      "mainMetric": {},
+      "metrics": [],
+      "linkURL": {},
+      "idSVG": "rect2-top",
+      "mode": "true",
+      "img": ""
+    },
+    {
+      "filtered": "quantile|0.9#slice|prepare_time",
+      "labelfix": "true",
+      "xylabel": "x|labelName#y|labelName",
+      "xylabel0": "x|labelName#y|labelName",
+      "xylabelfix": "x|10#y|20",
+      "xylabelfix0": "x|10#y|20",
+      "type": "region",
+      "meta": "uneMeta",
+      "label": "rect2 milieu",
+      "positionParameter": {
+        "xylabelA": "x|labelName#y|labelName",
+        "xylabelB": "x|labelName#y|labelName",
+        "tooltipA": "bottom",
+        "tooltipB": "bottom"
+      },
+      "mainMetric": {},
+      "metrics": [],
+      "linkURL": {},
+      "idSVG": "rect2-middle",
+      "mode": "true",
+      "img": ""
+    },
+    {
+      "filtered": "quantile|0.99#slice|prepare_time",
+      "labelfix": "true",
+      "xylabel": "x|labelName#y|labelName",
+      "xylabel0": "x|labelName#y|labelName",
+      "xylabelfix": "x|10#y|20",
+      "xylabelfix0": "x|10#y|20",
+      "type": "region",
+      "meta": "uneMeta",
+      "label": "rect2 bas",
+      "positionParameter": {
+        "xylabelA": "x|labelName#y|labelName",
+        "xylabelB": "x|labelName#y|labelName",
+        "tooltipA": "bottom",
+        "tooltipB": "bottom"
+      },
+      "mainMetric": {},
+      "metrics": [],
+      "linkURL": {},
+      "idSVG": "rect2-footer",
+      "mode": "true",
+      "img": ""
+    },
+
+    {
+      "filtered": "quantile|0.5#slice|queue_time",
+      "labelfix": "true",
+      "xylabel": "x|labelName#y|labelName",
+      "xylabel0": "x|labelName#y|labelName",
+      "xylabelfix": "x|10#y|20",
+      "xylabelfix0": "x|10#y|20",
+      "type": "region",
+      "meta": "uneMeta",
+      "label": "rect3 haut",
+      "positionParameter": {
+        "xylabelA": "x|labelName#y|labelName",
+        "xylabelB": "x|labelName#y|labelName",
+        "tooltipA": "bottom",
+        "tooltipB": "bottom"
+      },
+      "mainMetric": {},
+      "metrics": [],
+      "linkURL": {},
+      "idSVG": "rect3-top",
+      "mode": "true",
+      "img": ""
+    },
+    {
+      "filtered": "quantile|0.9#slice|queue_time",
+      "labelfix": "true",
+      "xylabel": "x|labelName#y|labelName",
+      "xylabel0": "x|labelName#y|labelName",
+      "xylabelfix": "x|10#y|20",
+      "xylabelfix0": "x|10#y|20",
+      "type": "region",
+      "meta": "uneMeta",
+      "label": "rect3 milieu",
+      "positionParameter": {
+        "xylabelA": "x|labelName#y|labelName",
+        "xylabelB": "x|labelName#y|labelName",
+        "tooltipA": "bottom",
+        "tooltipB": "bottom"
+      },
+      "mainMetric": {},
+      "metrics": [],
+      "linkURL": {},
+      "idSVG": "rect3-middle",
+      "mode": "true",
+      "img": ""
+    },
+    {
+      "filtered": "quantile|0.99#slice|queue_time",
+      "labelfix": "true",
+      "xylabel": "x|labelName#y|labelName",
+      "xylabel0": "x|labelName#y|labelName",
+      "xylabelfix": "x|10#y|20",
+      "xylabelfix0": "x|10#y|20",
+      "type": "region",
+      "meta": "uneMeta",
+      "label": "rect3 bas",
+      "positionParameter": {
+        "xylabelA": "x|labelName#y|labelName",
+        "xylabelB": "x|labelName#y|labelName",
+        "tooltipA": "bottom",
+        "tooltipB": "bottom"
+      },
+      "mainMetric": {},
+      "metrics": [],
+      "linkURL": {},
+      "idSVG": "rect3-footer",
+      "mode": "true",
+      "img": ""
+    }
+  ]
 }

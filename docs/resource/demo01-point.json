@@ -1,200 +1,206 @@
 {
-    "points": [{
-        "associateLinkIn": [],
-        "associateLinkOut": [],
-        "associateOrientedLinksIn": [],
-        "associateOrientedLinksOut": [],
-        "color": "black",
-        "colorMode": false,
-        "coordinateSpace": {},
-        "drawGraphicMarker": {
-            "label": "Yes",
-            "value": "true"
+  "points": [
+    {
+      "associateLinkIn": [],
+      "associateLinkOut": [],
+      "associateOrientedLinksIn": [],
+      "associateOrientedLinksOut": [],
+      "color": "black",
+      "colorMode": false,
+      "coordinateSpace": {},
+      "drawGraphicMarker": {
+        "label": "Yes",
+        "value": "true"
+      },
+      "id": 1,
+      "label": "point1",
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "lowerLimit": [
+        {
+          "backColor": "#5794F2",
+          "borderColor": "#5794F2",
+          "id": 0,
+          "lowerLimitMax": "",
+          "lowerLimitMin": "",
+          "sizeBorder": "3"
+        }
+      ],
+      "mainMetric": {
+        "expr": "",
+        "format": "",
+        "key": "",
+        "keyValue": "",
+        "manageValue": "avg",
+        "refId": "A",
+        "returnQuery": [],
+        "unit": ""
+      },
+      "meta": "",
+      "metrics": [],
+      "name": "point1",
+      "positionParameter": {
+        "labelAPositionX": "0",
+        "labelAPositionY": "0",
+        "labelBPositionX": "0",
+        "labelBPositionY": "0",
+        "tooltipPositionA": {},
+        "tooltipPositionB": {}
+      },
+      "positionShapeX": "-22",
+      "positionShapeY": "20",
+      "rotateArrow": "0",
+      "shape": {
+        "label": "Circle",
+        "value": "circle"
+      },
+      "sizeHeight": {
+        "label": "Medium",
+        "value": "medium"
+      },
+      "sizeWidth": {
+        "label": "Medium",
+        "value": "medium"
+      },
+      "textObj": {
+        "colorBack": "",
+        "colorText": "",
+        "generateAuxiliaryElement": {
+          "addColorBackElement": false,
+          "addColorTextElement": false,
+          "colorBackElement": "black",
+          "colorTextElement": "white",
+          "displayObjectInTooltip": false,
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unit": ""
         },
-        "id": 1,
-        "label": "point1",
-        "linkURL": {
-            "followLink": "",
-            "hoveringTooltipLink": "",
-            "hoveringTooltipText": ""
+        "generateObjectText": false,
+        "isTextTooltip": false,
+        "style": {
+          "bold": true,
+          "italic": false,
+          "underline": true
         },
-        "lowerLimit": [{
-            "backColor": "#5794F2",
-            "borderColor": "#5794F2",
-            "id": 0,
-            "lowerLimitMax": "",
-            "lowerLimitMin": "",
-            "sizeBorder": "3"
-        }],
-        "mainMetric": {
-            "expr": "",
-            "format": "",
-            "key": "",
-            "keyValue": "",
-            "manageValue": "avg",
-            "refId": "A",
-            "returnQuery": [],
-            "unit": ""
-        },
-        "meta": "",
-        "metrics": [],
-        "name": "point1",
-        "positionParameter": {
-            "labelAPositionX": "0",
-            "labelAPositionY": "0",
-            "labelBPositionX": "0",
-            "labelBPositionY": "0",
-            "tooltipPositionA": {},
-            "tooltipPositionB": {}
-        },
-        "positionShapeX": "-22",
-        "positionShapeY": "20",
-        "rotateArrow": "0",
-        "shape": {
-            "label": "Circle",
-            "value": "circle"
-        },
-        "sizeHeight": {
-            "label": "Medium",
-            "value": "medium"
-        },
-        "sizeWidth": {
-            "label": "Medium",
-            "value": "medium"
-        },
-        "textObj": {
-            "colorBack": "",
-            "colorText": "",
-            "generateAuxiliaryElement": {
-                "addColorBackElement": false,
-                "addColorTextElement": false,
-                "colorBackElement": "black",
-                "colorTextElement": "white",
-                "displayObjectInTooltip": false,
-                "legendElement": "",
-                "numericFormatElement": "",
-                "unit": ""
-            },
-            "generateObjectText": false,
-            "isTextTooltip": false,
-            "style": {
-                "bold": true,
-                "italic": false,
-                "underline": true
-            },
-            "value": "",
-            "valueGenerateObjectText": {
-                "addColorBackElement": false,
-                "addColorTextElement": false,
-                "colorBackElement": "black",
-                "colorTextElement": "white",
-                "displayObjectInTooltip": false,
-                "legendElement": "",
-                "numericFormatElement": "",
-                "unit": ""
-            }
-        },
-        "traceBack": false,
-        "traceBorder": true,
-        "valueMetric": ""
+        "value": "",
+        "valueGenerateObjectText": {
+          "addColorBackElement": false,
+          "addColorTextElement": false,
+          "colorBackElement": "black",
+          "colorTextElement": "white",
+          "displayObjectInTooltip": false,
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unit": ""
+        }
+      },
+      "traceBack": false,
+      "traceBorder": true,
+      "valueMetric": ""
     },
     {
-        "associateLinkIn": [],
-        "associateLinkOut": [],
-        "associateOrientedLinksIn": [],
-        "associateOrientedLinksOut": [],
-        "color": "black",
-        "colorMode": false,
-        "coordinateSpace": {},
-        "drawGraphicMarker": {
-            "label": "Yes",
-            "value": "true"
+      "associateLinkIn": [],
+      "associateLinkOut": [],
+      "associateOrientedLinksIn": [],
+      "associateOrientedLinksOut": [],
+      "color": "black",
+      "colorMode": false,
+      "coordinateSpace": {},
+      "drawGraphicMarker": {
+        "label": "Yes",
+        "value": "true"
+      },
+      "id": 2,
+      "label": "point2",
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "lowerLimit": [
+        {
+          "backColor": "#000000",
+          "borderColor": "#000000",
+          "id": 0,
+          "lowerLimitMax": "",
+          "lowerLimitMin": "",
+          "sizeBorder": "2"
+        }
+      ],
+      "mainMetric": {
+        "expr": "",
+        "format": "",
+        "key": "",
+        "keyValue": "",
+        "manageValue": "avg",
+        "refId": "A",
+        "returnQuery": [],
+        "unit": ""
+      },
+      "meta": "",
+      "metrics": [],
+      "name": "point2",
+      "positionParameter": {
+        "labelAPositionX": "0",
+        "labelAPositionY": "0",
+        "labelBPositionX": "0",
+        "labelBPositionY": "0",
+        "tooltipPositionA": {},
+        "tooltipPositionB": {}
+      },
+      "positionShapeX": "10",
+      "positionShapeY": "66",
+      "rotateArrow": "0",
+      "shape": {
+        "label": "Circle",
+        "value": "circle"
+      },
+      "sizeHeight": {
+        "label": "Medium",
+        "value": "medium"
+      },
+      "sizeWidth": {
+        "label": "Medium",
+        "value": "medium"
+      },
+      "textObj": {
+        "colorBack": "",
+        "colorText": "",
+        "generateAuxiliaryElement": {
+          "addColorBackElement": false,
+          "addColorTextElement": false,
+          "colorBackElement": "black",
+          "colorTextElement": "white",
+          "displayObjectInTooltip": false,
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unit": ""
         },
-        "id": 2,
-        "label": "point2",
-        "linkURL": {
-            "followLink": "",
-            "hoveringTooltipLink": "",
-            "hoveringTooltipText": ""
+        "generateObjectText": false,
+        "isTextTooltip": false,
+        "style": {
+          "bold": true,
+          "italic": false,
+          "underline": true
         },
-        "lowerLimit": [{
-            "backColor": "#000000",
-            "borderColor": "#000000",
-            "id": 0,
-            "lowerLimitMax": "",
-            "lowerLimitMin": "",
-            "sizeBorder": "2"
-        }],
-        "mainMetric": {
-            "expr": "",
-            "format": "",
-            "key": "",
-            "keyValue": "",
-            "manageValue": "avg",
-            "refId": "A",
-            "returnQuery": [],
-            "unit": ""
-        },
-        "meta": "",
-        "metrics": [],
-        "name": "point2",
-        "positionParameter": {
-            "labelAPositionX": "0",
-            "labelAPositionY": "0",
-            "labelBPositionX": "0",
-            "labelBPositionY": "0",
-            "tooltipPositionA": {},
-            "tooltipPositionB": {}
-        },
-        "positionShapeX": "10",
-        "positionShapeY": "66",
-        "rotateArrow": "0",
-        "shape": {
-            "label": "Circle",
-            "value": "circle"
-        },
-        "sizeHeight": {
-            "label": "Medium",
-            "value": "medium"
-        },
-        "sizeWidth": {
-            "label": "Medium",
-            "value": "medium"
-        },
-        "textObj": {
-            "colorBack": "",
-            "colorText": "",
-            "generateAuxiliaryElement": {
-                "addColorBackElement": false,
-                "addColorTextElement": false,
-                "colorBackElement": "black",
-                "colorTextElement": "white",
-                "displayObjectInTooltip": false,
-                "legendElement": "",
-                "numericFormatElement": "",
-                "unit": ""
-            },
-            "generateObjectText": false,
-            "isTextTooltip": false,
-            "style": {
-                "bold": true,
-                "italic": false,
-                "underline": true
-            },
-            "value": "",
-            "valueGenerateObjectText": {
-                "addColorBackElement": false,
-                "addColorTextElement": false,
-                "colorBackElement": "black",
-                "colorTextElement": "white",
-                "displayObjectInTooltip": false,
-                "legendElement": "",
-                "numericFormatElement": "",
-                "unit": ""
-            }
-        },
-        "traceBack": false,
-        "traceBorder": false,
-        "valueMetric": ""
-    }]
+        "value": "",
+        "valueGenerateObjectText": {
+          "addColorBackElement": false,
+          "addColorTextElement": false,
+          "colorBackElement": "black",
+          "colorTextElement": "white",
+          "displayObjectInTooltip": false,
+          "legendElement": "",
+          "numericFormatElement": "",
+          "unit": ""
+        }
+      },
+      "traceBack": false,
+      "traceBorder": false,
+      "valueMetric": ""
+    }
+  ]
 }

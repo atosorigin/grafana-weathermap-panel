@@ -1,8 +1,8 @@
 # File `region`
-[![](../../screenshots/other/Go-back.png)](README.md)
- 
-The full [sample-region.json](../../resource/sampleJson/sample-region.json) script is available, with construction details below.
 
+[![](../../screenshots/other/Go-back.png)](README.md)
+
+The full [sample-region.json](../../resource/sampleJson/sample-region.json) script is available, with construction details below.
 
 The **region** file must be declared as a JSON file like this:
 
@@ -13,11 +13,12 @@ The **region** file must be declared as a JSON file like this:
 ]}
 
 ```
-## Structure 
+
+## Structure
 
 ```
 {
-  "regions": 
+  "regions":
   [
     {
       "colorMode"	:false,
@@ -41,9 +42,10 @@ The **region** file must be declared as a JSON file like this:
   ]
 }
 ```
+
 ## Région
 
-There are 2 ways to create a region: 
+There are 2 ways to create a region:
 
 - SVG Region
 - Coordinated region
@@ -87,7 +89,6 @@ The creation of a region from an SVG element must contain the following values
 
 ```
 
-
 ### Region coordonnées
 
 The creation of a region from coordinates must necessarily contain the following values
@@ -97,7 +98,6 @@ The creation of a region from coordinates must necessarily contain the following
 - **Label** is the name of the region
 - **idSVG** empty
 - **coords** coordinates
-
 
 ```
 { "regions": [
@@ -127,18 +127,14 @@ The creation of a region from coordinates must necessarily contain the following
 
 ```
 
-
-
 ## lowerLimit
 
-
-It is possible to choose between 2 color methods : 
+It is possible to choose between 2 color methods :
 
 - fixed color
 - variable colour
 
 ### fixed color
-
 
 If `colorMode` is in false
 
@@ -164,12 +160,12 @@ Then the color will be defined like this
 
 With:
 
-  - **backColor** Fill in a color for the background under the form #7FFF00 for example
-  - **borderColor**  Fill in a color for the border under the form #7FFF00 for example. 
-  - **id**  color id
-  - **lowerLimitMax**  Maximum value of the metric for this colour
-  - **lowerLimitMin** Minimum metric value for this colour
-  - **sizeBorder**  thickness of the border
+- **backColor** Fill in a color for the background under the form #7FFF00 for example
+- **borderColor** Fill in a color for the border under the form #7FFF00 for example.
+- **id** color id
+- **lowerLimitMax** Maximum value of the metric for this colour
+- **lowerLimitMin** Minimum metric value for this colour
+- **sizeBorder** thickness of the border
 
 ### Variable colors
 
@@ -212,18 +208,19 @@ Then the color will be defined like this
  ],
 
 ```
+
 With similarly:
 
-  - **backColor**: Fill in a color for the background under the form #7FFF00 for example
-  - **borderColor** : Fill in a color for the border under the form #7FFF00 for example. 
-  - **id** : color id
-  - **lowerLimitMax** : Maximum value of the metric for this colour
-  - **lowerLimitMin**: Minimum metric value for this colour
-  - **sizeBorder** : thickness of the border
+- **backColor**: Fill in a color for the background under the form #7FFF00 for example
+- **borderColor** : Fill in a color for the border under the form #7FFF00 for example.
+- **id** : color id
+- **lowerLimitMax** : Maximum value of the metric for this colour
+- **lowerLimitMin**: Minimum metric value for this colour
+- **sizeBorder** : thickness of the border
 
 ## img
 
-This is the path representing a graphical representation 
+This is the path representing a graphical representation
 
 Compatible format is JPG / PNG / GIF / SVG
 
@@ -233,10 +230,9 @@ Compatible format is JPG / PNG / GIF / SVG
 
 ## linkURL
 
-  - **followLink**: Allows a redirection to the link by clicking on the region.
-  - **hoveringTooltipLink** : Allows a redirection to the link filled in the tool type by clicking on the link.
-  - **hoveringTooltipText** : Displays the link in the tool type that appears when the cursor is passed over the area or point.
-
+- **followLink**: Allows a redirection to the link by clicking on the region.
+- **hoveringTooltipLink** : Allows a redirection to the link filled in the tool type by clicking on the link.
+- **hoveringTooltipText** : Displays the link in the tool type that appears when the cursor is passed over the area or point.
 
 ```
 "linkURL": {
@@ -247,18 +243,16 @@ Compatible format is JPG / PNG / GIF / SVG
 
 ```
 
-
 ## mainMetric
 
-
-  - **expr** : Expression in PrompQL
-  - **format** "" (Leaves blank)
-  - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
-  - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
-  - **manageValue** : You can choose between "sum", "avg" or "err".
-  - **refId**: Metric reference associated with this region
-  - **returnQuery**: (Leave blank) 
-  - **unit** : (Leave blank)
+- **expr** : Expression in PrompQL
+- **format** "" (Leaves blank)
+- **key**: Allows you to filter the data received by the Query to keep only what is important to you.
+- **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
+- **manageValue** : You can choose between "sum", "avg" or "err".
+- **refId**: Metric reference associated with this region
+- **returnQuery**: (Leave blank)
+- **unit** : (Leave blank)
 
 ```
        "mainMetric": {
@@ -271,8 +265,8 @@ Compatible format is JPG / PNG / GIF / SVG
                 "returnQuery": [],
                 "unit": ""
             },
-  
-  
+
+
 ```
 
 ## meta
@@ -281,23 +275,25 @@ no value
 
 ## metrics
 
- - **metrics** This is a metric table to add auxilary metrics.
-    - **0**  
-      - **expr** : Expression in PrompQL
-      - **format** : (Leaves blank)
-      - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
-      - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
-      - **manageValue** : You can choose between "sum", "avg" or "err".
-      - **refId**: Metric reference associated with this region
-      - **returnQuery**: (Leave blank)    
-      - **unit** : (Leave blank)
+- **metrics** This is a metric table to add auxilary metrics.
 
-    - **1**
-        - ...
+  - **0**
+
+    - **expr** : Expression in PrompQL
+    - **format** : (Leaves blank)
+    - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
+    - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
+    - **manageValue** : You can choose between "sum", "avg" or "err".
+    - **refId**: Metric reference associated with this region
+    - **returnQuery**: (Leave blank)
+    - **unit** : (Leave blank)
+
+  - **1**
+    - ...
 
 ```
    "metrics": [
-     "0": 
+     "0":
         {
             "expr": "",
             "format": "",
@@ -327,17 +323,16 @@ no value
 
 no value
 
-
 ## positionParameter
 
 - **positionParameter**
 
-    - **labelAPositionX** : Choose the horizontal position of label A between "-100" and "100".
-    - **labelAPositionY** : Choose the vertical position of label A between "-100" and "100".
-    - **labelBPositionX** : Choose the horizontal position of label B between "-100" and "100".
-    - **labelBPositionY** : Choose the vertical position of label B between "-100" and "100".
-    - **tooltipPositionA**: Tooltip A position
-    - **tooltipPositionB**: Tooltip B position 
+  - **labelAPositionX** : Choose the horizontal position of label A between "-100" and "100".
+  - **labelAPositionY** : Choose the vertical position of label A between "-100" and "100".
+  - **labelBPositionX** : Choose the horizontal position of label B between "-100" and "100".
+  - **labelBPositionY** : Choose the vertical position of label B between "-100" and "100".
+  - **tooltipPositionA**: Tooltip A position
+  - **tooltipPositionB**: Tooltip B position
 
 ```
       "positionParameter": {
@@ -353,38 +348,38 @@ no value
 
 ## textObj
 
- - **textObj**
-    - **colorBack**: Choose the background color of the text in rgba. Example: rgba(255, 255, 255, 0)
-    - **colorText**: Choose the color of the text in rgba. Example : rgba(0, 0, 0, 1)
-    - **generateAuxiliaryElement**: Allows to generate an auxiliary element 
-        - **addColorBackElement**: Add a color to the background. "true" or "false"
-        - **addColorTextElement**: Add a color to the text. "true or "false"
-        - **colorBackElement**: Choose the background color
-        - **colorTextElement** : Choose the color of the text 
-        - **displayObjectInText**: Display the object in the text. "true" or "false"
-        - **displayObjectPermanently**: Display the object permanently. "true" or false"
-        - **legendElement** : Associate a legend to your element 
-        - **numericFormatElement**: Allows to round the result of the Query
-        - **unityMesureElement**: Displays a unit of measurement
-    - **generateObjectText**: Generate a text object. "true" or "false"
-    - **isTextRegion**: display text in the element or tooltip
-    - **legend** : Allows to add a legend
-    - **style**	
-        - **bold** : "True" or "False" to put the text in bold.
-        - **italic**: "True" or "False" to italicize text
-        - **underline**: "True" or "False" to put the text in underline
-    - **unit** : Allows to display a unit of measurement
-    - **value**: Value of the object
-    - **valueGenerateObjectText**: Use and fill in if generateObjectText is true when using the variable to store data.
-        - **addColorBackElement**: Add a color to the background. "true" or "false"
-        - **addColorTextElement**: Add a color to the text. "true or "false"
-        - **colorBackElement**: Choose the background color
-        - **colorTextElement** : Choose the color of the text 
-        - **displayObjectInText**: Display the object in the text. "true" or "false"
-        - **displayObjectPermanently**: Display the object permanently. "true" or false"
-        - **legendElement** : Associate a legend to your element 
-        - **numericFormatElement**: Allows to round the result of the Query
-        - **unityMesureElement**: Displays a unit of measurement
+- **textObj**
+  - **colorBack**: Choose the background color of the text in rgba. Example: rgba(255, 255, 255, 0)
+  - **colorText**: Choose the color of the text in rgba. Example : rgba(0, 0, 0, 1)
+  - **generateAuxiliaryElement**: Allows to generate an auxiliary element
+    - **addColorBackElement**: Add a color to the background. "true" or "false"
+    - **addColorTextElement**: Add a color to the text. "true or "false"
+    - **colorBackElement**: Choose the background color
+    - **colorTextElement** : Choose the color of the text
+    - **displayObjectInText**: Display the object in the text. "true" or "false"
+    - **displayObjectPermanently**: Display the object permanently. "true" or false"
+    - **legendElement** : Associate a legend to your element
+    - **numericFormatElement**: Allows to round the result of the Query
+    - **unityMesureElement**: Displays a unit of measurement
+  - **generateObjectText**: Generate a text object. "true" or "false"
+  - **isTextRegion**: display text in the element or tooltip
+  - **legend** : Allows to add a legend
+  - **style**
+    - **bold** : "True" or "False" to put the text in bold.
+    - **italic**: "True" or "False" to italicize text
+    - **underline**: "True" or "False" to put the text in underline
+  - **unit** : Allows to display a unit of measurement
+  - **value**: Value of the object
+  - **valueGenerateObjectText**: Use and fill in if generateObjectText is true when using the variable to store data.
+    - **addColorBackElement**: Add a color to the background. "true" or "false"
+    - **addColorTextElement**: Add a color to the text. "true or "false"
+    - **colorBackElement**: Choose the background color
+    - **colorTextElement** : Choose the color of the text
+    - **displayObjectInText**: Display the object in the text. "true" or "false"
+    - **displayObjectPermanently**: Display the object permanently. "true" or false"
+    - **legendElement** : Associate a legend to your element
+    - **numericFormatElement**: Allows to round the result of the Query
+    - **unityMesureElement**: Displays a unit of measurement
 
 ```
    "textObj": {
@@ -423,13 +418,12 @@ no value
           "unityMesureElement": ""
         }
       }
-      
+
 ```
 
 ## traceBack
 
- - **traceBack**: Allows to associate a color to the background. "true" or "false"
-
+- **traceBack**: Allows to associate a color to the background. "true" or "false"
 
 ```
      "traceBack": true,
@@ -438,7 +432,7 @@ no value
 
 ## traceBorder
 
-  - **traceBorder**: Allows to associate a color to the border. "true" or "false"
+- **traceBorder**: Allows to associate a color to the border. "true" or "false"
 
 ```
       "traceBorder": false
