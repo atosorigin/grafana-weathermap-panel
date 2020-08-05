@@ -330,8 +330,8 @@ export class SimplePanel extends PureComponent<Props, State> {
 
       let y = parseInt(this.props.options.baseMap.height, 10) - yMaxInitialSpace + heightInitialSpace * ratioY;
 
-      line.positionShapeX = x.toString();
-      line.positionShapeY = y.toString();
+      // line.positionShapeX = x.toString();
+      // line.positionShapeY = y.toString();
       // console.log(x)
       // console.log(y)
       // console.log(line)

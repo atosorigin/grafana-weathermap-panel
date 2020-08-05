@@ -122,6 +122,8 @@ export default class Point extends React.Component<Props, State> {
    */
   _handleChange(currentTarget: string, name: string, index: number): void {
     let tmp: PointClass = this.state.point;
+    this.props.options.arrayPoints[this.props.id || 0].positionXDefault = this.props.options.arrayPoints[this.props.id || 0].positionShapeX;
+    this.props.options.arrayPoints[this.props.id || 0].positionYDefault = this.props.options.arrayPoints[this.props.id || 0].positionShapeY;
     tmp = editGoodParameterPoint(name, tmp, currentTarget, {});
     //console.log(tmp);
     this.setState({

@@ -5,7 +5,7 @@
         "lowerLimitMin": "leMinimum",
         "lowerLimitMax": "leMaxmum",
         "backColor": "#0046DE",
-        "borderColor": "#00FF99",
+        "borderColor": "#000000",
         "sizeBorder": "20px"
       }
     ],
@@ -23,7 +23,7 @@
       "valueGenerateObjectText": {
         "legendElement": "uneLegend",
         "numericFormatElement": "",
-        "unit": "Hz",
+        "unit": "u",
         "displayObjectInTooltip": "true",
         "addColorTextElement": "true",
         "colorTextElement": "blue",
@@ -31,10 +31,10 @@
         "colorBackElement": "white"
       },
       "generateAuxiliaryElement": {
-        "legendElement": "uneLegend",
+        "legendElement": "hello",
         "numericFormatElement": "?",
-        "unit": "Hz",
-        "displayObjectInTooltip": "true",
+        "unit": "t",
+        "displayObjectInTooltip": "false",
         "addColorTextElement": "true",
         "colorTextElement": "blue",
         "addColorBackElement": "#E0FF0F",
@@ -50,7 +50,7 @@
       "filtered": "device|ens3",
       "labelfix": "true",
       "xylabel": "x|labelName#y|labelName",
-      "xylabelfix": "x|90#y|90",
+      "xylabelfix": "x|100#y|310",
       "type": "point",
       "name": "unPoint",
       "meta": "uneMeta",
@@ -69,20 +69,20 @@
       "linkURL": {},
       "valueMetric": "",
       "drawGraphicMarker": {
-        "label": "",
-        "value": ""
+        "label": "Yes",
+        "value": "true"
       },
       "shape": {
-        "label": "circle",
-        "value": "circle"
+        "label": "square",
+        "value": "square"
       },
       "sizeWidth": {
         "label": "Medium",
         "value": "medium"
       },
       "sizeHeight": {
-        "label": "10px",
-        "value": "10px"
+        "label": "1px",
+        "value": "1px"
       },
       "rotateArrow": {
         "label": "",
@@ -90,7 +90,7 @@
       },
       "positionShapeX": "",
       "positionShapeY": "",
-      "color": "green",
+      "color": "#00FFFF",
       "assiciateOrientedLinksIn": [],
       "associateOrientedLinksOut": []
     },
@@ -98,7 +98,7 @@
       "filtered": "device|lo",
       "labelfix": "true",
       "xylabel": "x|labelName#y|labelName",
-      "xylabelfix": "x|150#y|150",
+      "xylabelfix": "x|220#y|220",
       "type": "point",
       "name": "unPoint",
       "meta": "uneMeta",
@@ -117,20 +117,20 @@
       "linkURL": {},
       "valueMetric": "",
       "drawGraphicMarker": {
-        "label": "",
-        "value": ""
+        "label": "Yes",
+        "value": "true"
       },
       "shape": {
-        "label": "circle",
-        "value": "circle"
+        "label": "diamond",
+        "value": "diamond"
       },
       "sizeWidth": {
         "label": "Medium",
         "value": "medium"
       },
       "sizeHeight": {
-        "label": "10px",
-        "value": "10px"
+        "label": "5px",
+        "value": "5px"
       },
       "rotateArrow": {
         "label": "",
@@ -148,8 +148,8 @@
       "xylabelA": "x|labelName#y|labelName",
       "xylabelB": "x|labelName#y|labelName",
       "xylabelC": "x|labelName#y|labelName",
-      "xylabelfixA": "x|-70#y|66",
-      "xylabelfixB": "x|10#y|60",
+      "xylabelfixA": "x|70#y|166",
+      "xylabelfixB": "x|100#y|260",
       "xylabelfixC": "x|labelName#y|labelName",
       "type": "link",
       "name": "unLink",
@@ -183,8 +183,8 @@
         "value": "AB"
       },
       "size": {
-        "label": "20px",
-        "value": "20px"
+        "label": "2px",
+        "value": "2px"
       },
       "colorCoordinateA": "#5794F2",
       "colorCoordinateB": "#E54658",

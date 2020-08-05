@@ -54,8 +54,6 @@ const searchNameIsFilter = (query: DataFrame, mainMetric: Metric): boolean => {
 
 export const getResultQuery = (mainMetric: Metric) => {
   let cnt: number | null = null;
-  console.log('yop');
-  console.log(mainMetric.returnQuery);
   if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
     const debug: number[] = [];
     let countValue = 0;
@@ -106,8 +104,6 @@ export const getResultQuery = (mainMetric: Metric) => {
         }
       }
     }
-    console.log(debug);
-    console.log('loua');
   }
 
   return cnt;

@@ -261,6 +261,14 @@ class Gabarit extends React.Component<Props, State> {
     let style: Style;
     let generateValue: GenerateTextObject;
     let generateAux: GenerateTextObject;
+
+    let initialWidth: number =
+      parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10) -
+      parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
+    let initialHeight: number =
+      parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10) -
+      parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
+
     /* Region */
     //Template
 
@@ -410,25 +418,46 @@ class Gabarit extends React.Component<Props, State> {
     let labelCoordY: string[] = [];
     let labelCoord: LabelCoord2D[] = [];
 
-    posPoint.forEach((pos) => {
-      this.props.data.series.forEach((element) => {
-        const nameQuery: string[] =
-          element.name?.split(',').map((value) => {
-            return value.replace(/[\"{}]/gm, '');
-          }) || [];
+    posPoint.forEach((pos, index) => {
+      if (gabaritFileTmp.templateGabaritPoint[index].labelfix.toString() === 'false') {
+        this.props.data.series.forEach((element) => {
+          const nameQuery: string[] =
+            element.name?.split(',').map((value) => {
+              return value.replace(/[\"{}]/gm, '');
+            }) || [];
 
-        for (const oneQuery of nameQuery) {
-          if (nameQuery && nameQuery.length > 0) {
-            const keyValue: string[] = oneQuery.split('=');
-            if (keyValue[0] === pos.x) {
-              labelCoordX.push(keyValue[1]);
-            }
-            if (keyValue[0] === pos.y) {
-              labelCoordY.push(keyValue[1]);
+          for (const oneQuery of nameQuery) {
+            if (nameQuery && nameQuery.length > 0) {
+              const keyValue: string[] = oneQuery.split('=');
+              if (keyValue[0] === pos.x) {
+                labelCoordX.push(keyValue[1]);
+              }
+              if (keyValue[0] === pos.y) {
+                labelCoordY.push(keyValue[1]);
+              }
             }
           }
+        });
+        if (labelCoordX.length > labelCoordY.length) {
+          labelCoordX.forEach((element, index) => {
+            if (!labelCoordX[index]) {
+              labelCoordX[index] = pos.x;
+            }
+            if (!labelCoordY[index]) {
+              labelCoordY[index] = pos.y;
+            }
+          });
+        } else {
+          labelCoordY.forEach((element, index) => {
+            if (!labelCoordX[index]) {
+              labelCoordX[index] = pos.x;
+            }
+            if (!labelCoordY[index]) {
+              labelCoordY[index] = pos.y;
+            }
+          });
         }
-      });
+      }
     });
     labelCoordX.forEach((element, index) => {
       labelCoord.push({ x: labelCoordX[index], y: labelCoordY[index] });
@@ -463,10 +492,10 @@ class Gabarit extends React.Component<Props, State> {
               colorPoint[index],
               associateOrientedLinksInPoint[index],
               associateOrientedLinksOutPoint[index],
-              '',
-              '',
-              '',
-              ''
+              initialWidth.toString(),
+              initialHeight.toString(),
+              pos.x,
+              pos.y
             );
             newID++;
             this.props.options.arrayPoints.push(toLoad);
@@ -496,10 +525,10 @@ class Gabarit extends React.Component<Props, State> {
               colorPoint[index],
               associateOrientedLinksInPoint[index],
               associateOrientedLinksOutPoint[index],
-              '',
-              '',
-              '',
-              ''
+              initialWidth.toString(),
+              initialHeight.toString(),
+              pos.x,
+              pos.y
             );
             newID++;
             this.props.options.arrayPoints.push(toLoad);
@@ -534,10 +563,10 @@ class Gabarit extends React.Component<Props, State> {
             colorPoint[index],
             associateOrientedLinksInPoint[index],
             associateOrientedLinksOutPoint[index],
-            '',
-            '',
-            '',
-            ''
+            initialWidth.toString(),
+            initialHeight.toString(),
+            posPoint[index].x,
+            posPoint[index].y
           );
           newID++;
           this.props.options.arrayPoints.push(toLoad);
@@ -567,10 +596,10 @@ class Gabarit extends React.Component<Props, State> {
             colorPoint[index],
             associateOrientedLinksInPoint[index],
             associateOrientedLinksOutPoint[index],
-            '',
-            '',
-            '',
-            ''
+            initialWidth.toString(),
+            initialHeight.toString(),
+            posPoint[index].x,
+            posPoint[index].y
           );
           newID++;
           this.props.options.arrayPoints.push(toLoad);

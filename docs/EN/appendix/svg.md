@@ -55,6 +55,8 @@ You must save your creation in **SVG simple** or **SVG Inkscape** format which c
 
 You can consult the associated [tutorial 4](../demo/tutorial04.md) for the creation of a SVG file.
 
+the file will be saved as **Simple SVG** or **SVG Inkscape**.
+
 ### Draw.io
 
 The [Draw.io](https://draw.io/) editor is accessible from a browser.

@@ -11,9 +11,9 @@
     ],
     "textObject": {
       "value": "",
-      "isTextTooltip": "false",
-      "colorBack": "red",
-      "colorText": "yellow",
+      "isTextTooltip": "true",
+      "colorBack": "#EEEE00",
+      "colorText": "#DD33DD",
       "style": {
         "bold": "true",
         "italic": "false",
@@ -21,24 +21,24 @@
       },
       "generateObjectText": "true",
       "valueGenerateObjectText": {
-        "legendElement": "uneLegend",
+        "legendElement": "Nombre : ",
         "numericFormatElement": "",
-        "unit": "Hz",
+        "unit": "",
         "displayObjectInTooltip": "true",
-        "addColorTextElement": "true",
-        "colorTextElement": "blue",
+        "addColorTextElement": "false",
+        "colorTextElement": "#FF0099",
         "addColorBackElement": "#FF00FF",
         "colorBackElement": "white"
       },
       "generateAuxiliaryElement": {
-        "legendElement": "uneLegend",
-        "numericFormatElement": "?",
-        "unit": "Hz",
-        "displayObjectInTooltip": "true",
+        "legendElement": "LegendElement",
+        "numericFormatElement": "",
+        "unit": "",
+        "displayObjectInTooltip": "false",
         "addColorTextElement": "true",
-        "colorTextElement": "blue",
+        "colorTextElement": "#99FFCC",
         "addColorBackElement": "#E0FF0F",
-        "colorBackElement": "#999999"
+        "colorBackElement": "#DDDDDD"
       }
     },
     "colorMode": "false",
@@ -50,7 +50,7 @@
       "filtered": "device|ens3",
       "labelfix": "true",
       "xylabel": "x|labelName#y|labelName",
-      "xylabelfix": "x|75#y|80",
+      "xylabelfix": "x|250#y|50",
       "type": "point",
       "name": "unPoint",
       "meta": "uneMeta",
@@ -69,8 +69,8 @@
       "linkURL": {},
       "valueMetric": "",
       "drawGraphicMarker": {
-        "label": "",
-        "value": ""
+        "label": "Yes",
+        "value": "true"
       },
       "shape": {
         "label": "circle",
@@ -81,8 +81,8 @@
         "value": "medium"
       },
       "sizeHeight": {
-        "label": "1px",
-        "value": "1px"
+        "label": "2px",
+        "value": "2px"
       },
       "rotateArrow": {
         "label": "",
@@ -90,7 +90,7 @@
       },
       "positionShapeX": "",
       "positionShapeY": "",
-      "color": "blue",
+      "color": "#00FF00",
       "assiciateOrientedLinksIn": [],
       "associateOrientedLinksOut": []
     }

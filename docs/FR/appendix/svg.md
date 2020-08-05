@@ -53,6 +53,8 @@ Vous devez sauvegarder votre création au format **SVG simple** ou **SVG Inkscap
 
 Vous pouvez consulter le [tutorial 4](../demo/tutorial04.md) associé pour la création d'un fichier SVG.
 
+le fichier sera sauvegardé au format **SVG simple** ou **SVG Inkscape**
+
 ### Draw.io
 
 L'éditeur [Draw.io](https://draw.io/) est accessible à partir d'un navigateur.
