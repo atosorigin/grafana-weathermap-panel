@@ -28,14 +28,14 @@ node_network_name_assign_type{device="ens3",instance="localhost:9100",job="node_
 et la requête RefID B
 
 ```
-node_network_mtu_bytes
+node_network_flags
 ```
 
 Le résultat montre plusieurs issues possibles
 
 ```
-node_network_mtu_bytes{device="ens3",instance="localhost:9100",job="node_exporter"}
-node_network_mtu_bytes{device="lo",instance="localhost:9100",job="node_exporter"}
+node_network_flags{device="ens3",instance="localhost:9100",job="node_exporter"}
+node_network_flags{device="lo",instance="localhost:9100",job="node_exporter"}
 
 ```
 
