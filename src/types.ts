@@ -7,6 +7,8 @@ import { RegionClass, Coord4D } from 'Models/RegionClass';
 import { Style } from 'components/Parametrage/styleComponent';
 //import { TextObject } from 'Models/TextObjectClass';
 import { Filtred } from 'Functions/loaderGabarit';
+import { PositionParameterClass } from 'Models/PositionParameterClass';
+import { TextObject } from 'Models/TextObjectClass';
 
 /**
  * interface to save texte settings (police, size, style)
@@ -27,6 +29,22 @@ export interface LowerLimit {
   backColor: string;
   borderColor: string;
   sizeBorder: string;
+}
+
+export interface GlobalGabaritDefault {
+  colorMode: boolean;
+  coords: Coord4D;
+  linkURL: any[];
+  lowerLimit: LowerLimit[];
+  mainMetric: Metric;
+  meta: string;
+  metrics: Metric[];
+  mode: boolean;
+  orientedLink: OrientedLinkClass[];
+  positionParameter: PositionParameterClass;
+  textObj: TextObject;
+  traceBack: boolean;
+  traceBorder: boolean;
 }
 
 export interface GabaritFile {
@@ -111,7 +129,7 @@ export interface TemplateGabaritLink {
   metricsB: Metric[];
   linkURL: any;
   orientationLink: SelectableValue<string>;
-  size: SelectableValue<string>;
+  size: string;
   colorCoordinateA: string;
   colorCoordinateB: string;
   valueMainMetricA: string;

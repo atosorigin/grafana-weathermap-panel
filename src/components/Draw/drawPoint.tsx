@@ -194,8 +194,6 @@ export default class DrawPoint extends React.Component<Props, State> {
    * @param shapeGraphicMarker
    */
   private definePositionY(positionY: number, initialSpace: SelectableValue<RegionClass>, size: number, shapeGraphicMarker: string): number {
-    console.log('y avant');
-    console.log(this.props.positionYDefault);
     const yMin: number = parseInt(initialSpace.yMin, 10);
     const yMax: number = parseInt(initialSpace.yMax, 10);
     const heightInitialSpace: number = yMax - yMin;
@@ -205,8 +203,6 @@ export default class DrawPoint extends React.Component<Props, State> {
     let y = Math.round(
       this.defineLimitY(this.props.heightImage - yMax + heightInitialSpace * ratioY) - (size + parseInt(this.defineBorderSize(), 10))
     );
-    console.log('y après');
-    console.log(y);
     let newArrayPoint: PointClass[] = this.props.options.arrayPoints;
     newArrayPoint.forEach((point) => {
       if (point.name === this.props.name) {

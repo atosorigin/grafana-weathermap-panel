@@ -74,10 +74,10 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 
 Then chosse the size of the region for your image. Here we choose :
 
-- X Min : -10
-- X Max : -50
-- Y Min : -10
-- Y Max : -50
+- X Min : 10
+- X Max : 50
+- Y Min : 10
+- Y Max : 50
 
 ![illustration1](../../screenshots/demo/tutorial03/illustration1.jpg)
 

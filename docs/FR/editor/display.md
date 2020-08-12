@@ -83,8 +83,8 @@ pour obtenir le résultat suivant
 
 Vous devez remplir l'espace requis pour créer votre environnement sans image de fond :
 
-- Largeur
-- Hauteur
+- Largeur (en pixel)
+- Hauteur (en pixel)
 
 ![no-background](../../screenshots/editor/display/no-background.jpg)
 

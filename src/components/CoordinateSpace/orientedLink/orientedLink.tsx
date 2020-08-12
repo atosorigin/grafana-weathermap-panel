@@ -202,8 +202,7 @@ export default class OrientedLink extends React.Component<Props, State> {
       name.startsWith('pointIn') ||
       name.startsWith('pointOut') ||
       name.startsWith('regionIn') ||
-      name.startsWith('regionOut') ||
-      name.startsWith('size')
+      name.startsWith('regionOut')
     ) {
       if (name.startsWith('orientationLink')) {
         valueSelect = this.state.orientedLink.orientationLink;
@@ -229,8 +228,6 @@ export default class OrientedLink extends React.Component<Props, State> {
           label: this.state.orientedLink.regionOut,
           value: this.state.orientedLink.regionOut,
         };
-      } else if (name.startsWith('size')) {
-        valueSelect = this.state.orientedLink.size;
       }
       return valueSelect;
     } else if (name.startsWith('mainMetric')) {
@@ -261,6 +258,8 @@ export default class OrientedLink extends React.Component<Props, State> {
         value = this.state.orientedLink.pointCPositionX;
       } else if (name.startsWith('pointCY')) {
         value = this.state.orientedLink.pointCPositionY;
+      } else if (name.startsWith('size')) {
+        value = this.state.orientedLink.size;
       }
       return value;
     }

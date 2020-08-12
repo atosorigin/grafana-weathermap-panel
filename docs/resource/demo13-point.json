@@ -2,11 +2,12 @@
   "global": {
     "lowerLimit": [
       {
+        "id": 0,
         "lowerLimitMin": "leMinimum",
         "lowerLimitMax": "leMaxmum",
         "backColor": "#0046DE",
         "borderColor": "#00FF99",
-        "sizeBorder": "20px"
+        "sizeBorder": "2"
       }
     ],
     "textObject": {
@@ -23,7 +24,7 @@
       "valueGenerateObjectText": {
         "legendElement": "Nombre : ",
         "numericFormatElement": "",
-        "unit": "",
+        "unit": "u",
         "displayObjectInTooltip": "true",
         "addColorTextElement": "false",
         "colorTextElement": "#FF0099",
@@ -78,8 +79,8 @@
       },
       "sizeWidth": "12",
       "sizeHeight": {
-        "label": "",
-        "value": ""
+        "label": "2px",
+        "value": "2px"
       },
       "rotateArrow": {
         "label": "",

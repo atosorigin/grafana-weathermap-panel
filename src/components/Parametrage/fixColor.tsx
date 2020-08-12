@@ -121,16 +121,11 @@ class FixColor extends React.Component<Props, State> {
       placeHolderSize = l10n.colorVariable.thicknessOutline;
     }
 
-    if (this.props.isLink && this.props.traceBorder) {
+    if (this.props.isLink && this.props.traceBack) {
       const keyContourDiv = key + 'ContourDiv';
       couleur.push(
         <div key={keyContourDiv}>
-          <InputSeriesColorPicker
-            color={this.state.lowerLimit[0].borderColor}
-            keyInt={0}
-            text={textInputColor}
-            _onChange={this.onChangeColorContour}
-          />
+          <InputSeriesColorPicker color={this.state.lowerLimit[0].backColor} keyInt={0} text={textInputColor} _onChange={this.onChangeColorFond} />
 
           <FormField
             labelWidth={15}

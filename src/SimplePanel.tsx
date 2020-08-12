@@ -183,15 +183,9 @@ export class SimplePanel extends PureComponent<Props, State> {
     if (yMax > parseInt(this.props.options.baseMap.height, 10)) {
       //positionY = Math.round(heightInitialSpace - event.nativeEvent.layerY - (yMax - parseInt(this.props.options.baseMap.height, 10)));
       positionY = Math.round(heightInitialSpace - event.nativeEvent.layerY);
-      console.log('yMax >');
-      console.log(event.nativeEvent);
-      console.log(positionY);
       //positionY = Math.round(heightInitialSpace - event.nativeEvent.layerY);
     } else {
       positionY = Math.round(heightInitialSpace - event.nativeEvent.layerY);
-      console.log('yMax <');
-      console.log(event.nativeEvent);
-      console.log(positionY);
     }
 
     // let xMinPx = 0;
@@ -590,15 +584,9 @@ export class SimplePanel extends PureComponent<Props, State> {
     if (yMax > parseInt(this.props.options.baseMap.height, 10)) {
       //positionY = Math.round(heightInitialSpace - event.nativeEvent.layerY - (yMax - parseInt(this.props.options.baseMap.height, 10)));
       positionY = Math.round(heightInitialSpace - event.nativeEvent.layerY);
-      console.log('yMax >');
-      console.log(event.nativeEvent);
-      console.log(positionY);
       //positionY = Math.round(heightInitialSpace - event.nativeEvent.layerY);
     } else {
       positionY = Math.round(heightInitialSpace - event.nativeEvent.layerY);
-      console.log('yMax <');
-      console.log(event.nativeEvent);
-      console.log(positionY);
     }
     // let xMinPx = 0;
     // let xMaxPx = 0;
@@ -686,20 +674,20 @@ export class SimplePanel extends PureComponent<Props, State> {
           const name: string = point.label || point.name;
 
           if (coordinates[0].id === 0) {
-            objectIn.x = point.positionShapeX;
-            objectIn.y = point.positionShapeY;
+            objectIn.x = point.positionXDefault;
+            objectIn.y = point.positionYDefault;
             objectIn.labelPoint = name;
             objectIn.point = point;
             coordinates[0].id++;
           } else if (coordinates[0].id === 1) {
-            objectOut.x = point.positionShapeX;
-            objectOut.y = point.positionShapeY;
+            objectOut.x = point.positionXDefault;
+            objectOut.y = point.positionYDefault;
             objectOut.labelPoint = name;
             objectOut.point = point;
             pointC.x = ((parseInt(objectIn.x, 10) + parseInt(objectOut.x, 10)) / 2).toString();
             pointC.y = ((parseInt(objectIn.y, 10) + parseInt(objectOut.y, 10)) / 2).toString();
             coordinates[0].id = 0;
-            this.createOrientedLinkToClick({ label: 'No', value: false }, '', '');
+            this.createOrientedLinkToClick({ label: 'No', value: false }, widthInitialSpace.toString(), heightInitialSpace.toString());
             this.resetCoordinatesToDrawLinkWithClick();
           }
         }
@@ -733,7 +721,7 @@ export class SimplePanel extends PureComponent<Props, State> {
               pointC.x = ((parseInt(objectIn.x, 10) + parseInt(objectOut.x, 10)) / 2).toString();
               pointC.y = ((parseInt(objectIn.y, 10) + parseInt(objectOut.y, 10)) / 2).toString();
               coordinates[0].id = 0;
-              this.createOrientedLinkToClick({ label: 'No', value: false }, '', '');
+              this.createOrientedLinkToClick({ label: 'No', value: false }, widthInitialSpace.toString(), heightInitialSpace.toString());
               this.resetCoordinatesToDrawLinkWithClick();
             }
           }
@@ -771,7 +759,7 @@ export class SimplePanel extends PureComponent<Props, State> {
               pointC.x = ((parseInt(objectIn.x, 10) + parseInt(objectOut.x, 10)) / 2).toString();
               pointC.y = ((parseInt(objectIn.y, 10) + parseInt(objectOut.y, 10)) / 2).toString();
               coordinates[0].id = 0;
-              this.createOrientedLinkToClick({ label: 'No', value: false }, '', '');
+              this.createOrientedLinkToClick({ label: 'No', value: false }, widthInitialSpace.toString(), heightInitialSpace.toString());
               this.resetCoordinatesToDrawLinkWithClick();
             }
           }
@@ -797,7 +785,7 @@ export class SimplePanel extends PureComponent<Props, State> {
               pointC.x = ((parseInt(objectIn.x, 10) + parseInt(objectOut.x, 10)) / 2).toString();
               pointC.y = ((parseInt(objectIn.y, 10) + parseInt(objectOut.y, 10)) / 2).toString();
               coordinates[0].id = 0;
-              this.createOrientedLinkToClick({ label: 'No', value: false }, '', '');
+              this.createOrientedLinkToClick({ label: 'No', value: false }, widthInitialSpace.toString(), heightInitialSpace.toString());
               this.resetCoordinatesToDrawLinkWithClick();
             }
           }
@@ -824,9 +812,20 @@ export class SimplePanel extends PureComponent<Props, State> {
     const heightInitialSpace: number = yMax - yMin;
 
     const paddingMarginLeftSimplePanel = 24;
-    let positionX = event.nativeEvent.offsetX - paddingMarginLeftSimplePanel;
-    let positionY = heightInitialSpace - event.nativeEvent.offsetY;
-
+    let positionX = 0;
+    let positionY = 0;
+    if (xMin > 0) {
+      positionX = Math.round(event.nativeEvent.clientX - paddingMarginLeftSimplePanel - xMin);
+    } else {
+      positionX = Math.round(event.nativeEvent.clientX - paddingMarginLeftSimplePanel);
+    }
+    if (yMax > parseInt(this.props.options.baseMap.height, 10)) {
+      //positionY = Math.round(heightInitialSpace - event.nativeEvent.layerY - (yMax - parseInt(this.props.options.baseMap.height, 10)));
+      positionY = Math.round(heightInitialSpace - event.nativeEvent.layerY);
+      //positionY = Math.round(heightInitialSpace - event.nativeEvent.layerY);
+    } else {
+      positionY = Math.round(heightInitialSpace - event.nativeEvent.layerY);
+    }
     // let xMinPx = 0;
     // let xMaxPx = 0;
     // if (!defaultReferentiel) {
@@ -889,7 +888,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       if (coordinates[0].id === 0) {
         objectIn.x = positionX;
         // objectIn.y = yMin < 0 ? positionY * -1 : positionY;
-        objectIn.y = positionY * -1;
+        objectIn.y = positionY;
         coordinates[0].id++;
       } else if (coordinates[0].id === 1) {
         objectOut.x = positionX;
@@ -929,7 +928,7 @@ export class SimplePanel extends PureComponent<Props, State> {
             pointC.x = point.positionShapeX;
             pointC.y = point.positionShapeY;
             coordinates[0].id = 0;
-            this.createOrientedLinkToClick({ label: 'Yes', value: true }, '', '');
+            this.createOrientedLinkToClick({ label: 'Yes', value: true }, widthInitialSpace.toString(), heightInitialSpace.toString());
             this.resetCoordinatesToDrawLinkWithClick();
           }
         }
@@ -965,7 +964,7 @@ export class SimplePanel extends PureComponent<Props, State> {
               pointC.x = positionX;
               pointC.y = positionY;
               coordinates[0].id = 0;
-              this.createOrientedLinkToClick({ label: 'Yes', value: true }, '', '');
+              this.createOrientedLinkToClick({ label: 'Yes', value: true }, widthInitialSpace.toString(), heightInitialSpace.toString());
               this.resetCoordinatesToDrawLinkWithClick();
             }
           }
@@ -1002,7 +1001,7 @@ export class SimplePanel extends PureComponent<Props, State> {
               pointC.x = positionX;
               pointC.y = positionY;
               coordinates[0].id = 0;
-              this.createOrientedLinkToClick({ label: 'Yes', value: true }, '', '');
+              this.createOrientedLinkToClick({ label: 'Yes', value: true }, widthInitialSpace.toString(), heightInitialSpace.toString());
               this.resetCoordinatesToDrawLinkWithClick();
             }
           }
@@ -1030,7 +1029,7 @@ export class SimplePanel extends PureComponent<Props, State> {
               pointC.x = positionX;
               pointC.y = positionY;
               coordinates[0].id = 0;
-              this.createOrientedLinkToClick({ label: 'Yes', value: true }, '', '');
+              this.createOrientedLinkToClick({ label: 'Yes', value: true }, widthInitialSpace.toString(), heightInitialSpace.toString());
               this.resetCoordinatesToDrawLinkWithClick();
             }
           }
@@ -1118,7 +1117,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       positionParameter,
       name,
       { label: 'Monodirectional', value: 'AB' },
-      { label: 'Medium', value: 'Medium' },
+      '9',
       objectIn.x.toString(),
       objectIn.y.toString(),
       '#5794F2',
@@ -1181,7 +1180,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     const mapItems: JSX.Element[] = [];
     let item: JSX.Element = <div></div>;
     arrayOrientedLink.forEach((orientedLink: OrientedLinkClass) => {
-      //console.log(orientedLink);
+      console.log(orientedLink);
       const valueMainMetricA: string = this.getValuesMainMetricOrientedLink(orientedLink).toString();
       const valueMainMetricB: string = this.getValuesMainMetricOrientedLinkB(orientedLink).toString();
       this.getValuesMainMetricOrientedLinkB(orientedLink);
@@ -2524,20 +2523,29 @@ export class SimplePanel extends PureComponent<Props, State> {
   //https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
   /** render */
   render() {
-    console.log('render');
-    let styleBackground;
-    const xMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
+    let xMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
     let xMinMarginLeft = 0;
     if (xMinInitialSpace < 0) {
       xMinMarginLeft = xMinInitialSpace * -1;
     }
-    const yMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
+    if (isNaN(xMinInitialSpace)) {
+      xMinInitialSpace = 0;
+    }
+    let yMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
     let yMinMarginBottom = 0;
     if (yMinInitialSpace < 0) {
       yMinMarginBottom = yMinInitialSpace * -1;
     }
-    const yMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10);
+    if (isNaN(yMinInitialSpace)) {
+      yMinInitialSpace = 0;
+    }
+    let yMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10);
     let yMaxMarginTop = yMaxInitialSpace - parseInt(this.props.options.baseMap.height, 10);
+    if (isNaN(yMaxMarginTop)) {
+      yMaxMarginTop = 0;
+      console.log('isNaN');
+    }
+    let styleBackground;
     if (this.props.options.baseMap.modeSVG) {
       styleBackground = {
         // position: 'absolute',

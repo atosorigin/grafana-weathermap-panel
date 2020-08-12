@@ -709,8 +709,6 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     topPx = Math.round(this.defineLimitY(heightInitialSpace * ratioTop + (heightInitialSpaceDefault - yMax)));
     bottomPx = Math.round(this.defineLimitY(yMin + heightInitialSpace * ratioBottom));
 
-    console.log(rightPx);
-    console.log(widthInitialSpace);
     let newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
     newArrayRegion.forEach((currentRegion) => {
       if (currentRegion.id === region.id) {

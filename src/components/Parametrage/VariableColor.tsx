@@ -254,6 +254,12 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
     }
     if (this.props.traceBorder) {
       const keyContourDiv = key + 'ContourDiv';
+      let nameInputSize = '';
+      if (this.props.isLink) {
+        nameInputSize = 'Size';
+      } else {
+        nameInputSize = l10n.colorVariable.thicknessOutline;
+      }
 
       couleur.push(
         <div key={keyContourDiv}>
@@ -266,7 +272,7 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
 
           <FormField
             labelWidth={15}
-            label={l10n.colorVariable.thicknessOutline}
+            label={nameInputSize}
             name="epaisseurContour"
             placeholder={l10n.colorVariable.thicknessOutline}
             value={this.state.lowerLimit[keyInt].sizeBorder}

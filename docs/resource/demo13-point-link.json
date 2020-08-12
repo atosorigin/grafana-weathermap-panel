@@ -2,11 +2,12 @@
   "global": {
     "lowerLimit": [
       {
+        "id": 0,
         "lowerLimitMin": "leMinimum",
         "lowerLimitMax": "leMaxmum",
         "backColor": "#0046DE",
-        "borderColor": "#000000",
-        "sizeBorder": "20px"
+        "borderColor": "#00FFFF",
+        "sizeBorder": "8"
       }
     ],
     "textObject": {
@@ -24,26 +25,26 @@
         "legendElement": "uneLegend",
         "numericFormatElement": "",
         "unit": "u",
-        "displayObjectInTooltip": "true",
+        "displayObjectInTooltip": "false",
         "addColorTextElement": "true",
         "colorTextElement": "blue",
         "addColorBackElement": "#FF00FF",
         "colorBackElement": "white"
       },
       "generateAuxiliaryElement": {
-        "legendElement": "hello",
+        "legendElement": "",
         "numericFormatElement": "?",
         "unit": "t",
         "displayObjectInTooltip": "false",
         "addColorTextElement": "true",
-        "colorTextElement": "blue",
+        "colorTextElement": "red",
         "addColorBackElement": "#E0FF0F",
         "colorBackElement": "#999999"
       }
     },
-    "colorMode": "false",
-    "traceBack": "true",
-    "traceBorder": "true"
+    "colorMode": false,
+    "traceBack": true,
+    "traceBorder": true
   },
   "templates": [
     {
@@ -142,8 +143,8 @@
       "xylabelA": "x|labelName#y|labelName",
       "xylabelB": "x|labelName#y|labelName",
       "xylabelC": "x|labelName#y|labelName",
-      "xylabelfixA": "x|70#y|166",
-      "xylabelfixB": "x|100#y|260",
+      "xylabelfixA": "x|220#y|220",
+      "xylabelfixB": "x|113#y|297",
       "xylabelfixC": "x|labelName#y|labelName",
       "type": "link",
       "name": "unLink",
@@ -176,10 +177,7 @@
         "label": "Monodirectional",
         "value": "AB"
       },
-      "size": {
-        "label": "2px",
-        "value": "2px"
-      },
+      "size": "12",
       "colorCoordinateA": "#5794F2",
       "colorCoordinateB": "#E54658",
       "valueMainMetricA": "",
@@ -191,7 +189,7 @@
       "zIndex": "2",
       "isIncurved": {
         "label": "No",
-        "value": "false"
+        "value": false
       }
     }
   ]

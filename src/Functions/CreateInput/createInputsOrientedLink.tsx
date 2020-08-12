@@ -23,14 +23,15 @@ export const createInputsOrientedLink = (
   );
   const newFieldSize: InputSelectableClass = new InputSelectableClass(
     id.toString() + 'size',
-    'Size',
+    'Size (px)',
     'size' + id.toString(),
-    'select',
-    [
-      { value: 'Small', label: 'Small' },
-      { value: 'Medium', label: 'Medium' },
-      { value: 'Large', label: 'Large' },
-    ],
+    'text',
+    // [
+    //   { value: 'Small', label: 'Small' },
+    //   { value: 'Medium', label: 'Medium' },
+    //   { value: 'Large', label: 'Large' },
+    // ],
+    [],
     '',
     true,
     'Size',

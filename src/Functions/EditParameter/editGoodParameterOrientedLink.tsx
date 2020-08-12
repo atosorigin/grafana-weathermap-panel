@@ -65,7 +65,7 @@ export const editGoodParameterOrientedLink = (
   } else if (name.startsWith('regionOut')) {
     editCoor.regionOut = newValue;
   } else if (name.startsWith('size')) {
-    editCoor.size = newValueSelect;
+    editCoor.size = newValue;
   }
   return editCoor;
 };

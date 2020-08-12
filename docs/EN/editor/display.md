@@ -83,8 +83,8 @@ to get the following result
 
 You must fill in the space required to create your environment without background image :
 
-- Width
-- Height
+- Width (en pixel)
+- Height (en pixel)
 
 ![no-background](../../screenshots/editor/display/no-background.jpg)
 

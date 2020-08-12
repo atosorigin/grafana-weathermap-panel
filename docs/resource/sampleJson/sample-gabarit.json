@@ -1,12 +1,15 @@
 {
   "global": {
-    "lowerLimit": {
-      "lowerLimitMin": "leMinimum",
-      "lowerLimitMax": "leMaxmum",
-      "backColor": "white",
-      "borderColor": "black",
-      "sizeBorder": "20px"
-    },
+    "lowerLimit": [
+      {
+        "id": 0,
+        "lowerLimitMin": "leMinimum",
+        "lowerLimitMax": "leMaxmum",
+        "backColor": "white",
+        "borderColor": "black",
+        "sizeBorder": "10"
+      }
+    ],
     "textObject": {
       "value": "",
       "isTextTooltip": "false",
@@ -39,29 +42,41 @@
         "colorBackElement": "white"
       }
     },
-    "colorMode": "true",
-    "traceBack": "true",
-    "traceBorder": "true"
+    "colorMode": false,
+    "traceBack": true,
+    "traceBorder": true
   },
   "templates": [
     {
       "filtered": "device|eno0",
-      "labelfix": "false",
+      "labelfix": "true",
       "xylabel": "x|labelName#y|labelName",
-      "xylabelfix": "",
+      "xylabelfix": "x|50#y|100",
       "type": "point",
       "name": "unPoint",
       "meta": "uneMeta",
       "label": "unLabel",
-      "positionParameter": "",
-      "mainMetric": {},
+      "positionParameter": {
+        "xylabelA": "x|0#y|0",
+        "xylabelB": "x|labelName#y|labelName",
+        "tooltipA": "Bottom",
+        "tooltipB": "Bottom"
+      },
+      "mainMetric": {
+        "key": "",
+        "format": ""
+      },
       "metrics": [],
-      "linkURL": {},
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
       "valueMetric": "",
-      "drawGraphicMarker": { "label": "", "value": "" },
-      "shape": { "label": "?", "value": "?" },
+      "drawGraphicMarker": { "label": "Yes", "value": "true" },
+      "shape": { "label": "diamond", "value": "diamond" },
       "sizeWidth": "12",
-      "sizeHeight": { "label": "200px", "value": "200px" },
+      "sizeHeight": { "label": "", "value": "" },
       "rotateArrow": { "label": "", "value": "" },
       "positionShapeX": "",
       "positionShapeY": "",
@@ -71,25 +86,45 @@
     },
     {
       "filtered": "quantile|0.5#slice|inner_eval",
-      "labelfix": "false",
+      "labelfix": "true",
       "xylabelA": "x|labelName#y|labelName",
       "xylabelB": "x|labelName#y|labelName",
       "xylabelC": "x|labelName#y|labelName",
-      "xylabelAfix": "x|labelName#y|labelName",
-      "xylabelBfix": "x|labelName#y|labelName",
-      "xylabelCfix": "x|labelName#y|labelName",
+      "xylabelfixA": "x|100#y|200",
+      "xylabelfixB": "x|300#y|100",
+      "xylabelfixC": "x|220#y|300",
       "type": "link",
       "name": "unLink",
       "meta": "uneMeta",
       "label": "unLabel",
-      "positionParameter": "",
-      "mainMetric": {},
+      "positionParameter": {
+        "xylabelA": "x|0#y|0",
+        "xylabelB": "x|0#y|0",
+        "tooltipA": "bottom",
+        "tooltipB": "bottom"
+      },
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": ""
+      },
       "metrics": [],
-      "mainMetricB": {},
+      "mainMetricB": {
+        "format": "",
+        "key": "",
+        "keyValue": ""
+      },
       "metricsB": [],
-      "linkURL": {},
-      "orientationLink": { "label": "", "value": "" },
-      "size": { "label": "20px", "value": "20px" },
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "orientationLink": {
+        "label": "Monodirectional",
+        "value": "AB"
+      },
+      "size": "9",
       "colorCoordinateA": "",
       "colorCoordinateB": "",
       "valueMainMetricA": "",
@@ -99,7 +134,10 @@
       "regionIn": "",
       "regionOut": "",
       "zIndex": "2",
-      "isIncurved": { "label": "true", "value": "true" }
+      "isIncurved": {
+        "label": "Yes",
+        "value": true
+      }
     },
     {
       "filtered": "quantile|0.5#slice|inner_eval",
