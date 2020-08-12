@@ -34,6 +34,8 @@ export class OrientedLinkClass extends CoordinateSpaceClass {
   pointAPositionYDefault: string;
   pointBPositionXDefault: string;
   pointBPositionYDefault: string;
+  pointCPositionXDefault: string;
+  pointCPositionYDefault: string;
 
   constructor(
     id: number,
@@ -74,7 +76,9 @@ export class OrientedLinkClass extends CoordinateSpaceClass {
     pointAPositionXDefault: string,
     pointAPositionYDefault: string,
     pointBPositionXDefault: string,
-    pointBPositionYDefault: string
+    pointBPositionYDefault: string,
+    pointCPositionXDefault: string,
+    pointCPositionYDefault: string
   ) {
     super(id, linkURL, meta, lowerLimitClass, label, textObj, mainMetric, metrics, colorMode, traceBack, traceBorder, positionParameter);
     this.name = name;
@@ -104,5 +108,7 @@ export class OrientedLinkClass extends CoordinateSpaceClass {
     this.pointAPositionYDefault = pointAPositionYDefault;
     this.pointBPositionXDefault = pointBPositionXDefault;
     this.pointBPositionYDefault = pointBPositionYDefault;
+    this.pointCPositionXDefault = pointCPositionXDefault;
+    this.pointCPositionYDefault = pointCPositionYDefault;
   }
 }

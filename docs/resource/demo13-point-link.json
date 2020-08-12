@@ -76,13 +76,10 @@
         "label": "square",
         "value": "square"
       },
-      "sizeWidth": {
-        "label": "Medium",
-        "value": "medium"
-      },
+      "sizeWidth": "12",
       "sizeHeight": {
-        "label": "1px",
-        "value": "1px"
+        "label": "",
+        "value": ""
       },
       "rotateArrow": {
         "label": "",
@@ -124,13 +121,10 @@
         "label": "diamond",
         "value": "diamond"
       },
-      "sizeWidth": {
-        "label": "Medium",
-        "value": "medium"
-      },
+      "sizeWidth": "12",
       "sizeHeight": {
-        "label": "5px",
-        "value": "5px"
+        "label": "",
+        "value": ""
       },
       "rotateArrow": {
         "label": "",

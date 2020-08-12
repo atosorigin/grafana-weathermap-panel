@@ -50,21 +50,18 @@
         "tooltipPositionA": {},
         "tooltipPositionB": {}
       },
-      "positionShapeX": "-22",
-      "positionShapeY": "20",
+      "positionShapeX": "122",
+      "positionShapeY": "120",
       "rotateArrow": "0",
       "shape": {
         "label": "Circle",
         "value": "circle"
       },
       "sizeHeight": {
-        "label": "Medium",
-        "value": "medium"
+        "label": "",
+        "value": ""
       },
-      "sizeWidth": {
-        "label": "Medium",
-        "value": "medium"
-      },
+      "sizeWidth": "12",
       "textObj": {
         "colorBack": "",
         "colorText": "",
@@ -151,21 +148,18 @@
         "tooltipPositionA": {},
         "tooltipPositionB": {}
       },
-      "positionShapeX": "10",
-      "positionShapeY": "66",
+      "positionShapeX": "100",
+      "positionShapeY": "166",
       "rotateArrow": "0",
       "shape": {
         "label": "Circle",
         "value": "circle"
       },
       "sizeHeight": {
-        "label": "Medium",
-        "value": "medium"
+        "label": "",
+        "value": ""
       },
-      "sizeWidth": {
-        "label": "Medium",
-        "value": "medium"
-      },
+      "sizeWidth": "12",
       "textObj": {
         "colorBack": "",
         "colorText": "",

@@ -60,7 +60,7 @@
       "valueMetric": "",
       "drawGraphicMarker": { "label": "", "value": "" },
       "shape": { "label": "?", "value": "?" },
-      "sizeWidth": { "label": "200px", "value": "200px" },
+      "sizeWidth": "12",
       "sizeHeight": { "label": "200px", "value": "200px" },
       "rotateArrow": { "label": "", "value": "" },
       "positionShapeX": "",

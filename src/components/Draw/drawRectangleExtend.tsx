@@ -700,28 +700,27 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     //   xB = widthInitialSpace * parseInt(orientedLink.pointBPositionX, 10) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
     // }
 
-    console.log(parseInt(coorRegionDefault.yMin, 10));
-    console.log(parseInt(coorRegionDefault.yMax, 10));
     const ratioLeft = parseInt(coorRegionDefault.xMin, 10) / widthInitialSpaceDefault;
     const ratioRight = (widthInitialSpaceDefault - parseInt(coorRegionDefault.xMax, 10)) / widthInitialSpaceDefault;
     const ratioTop = (heightInitialSpaceDefault - parseInt(coorRegionDefault.yMax, 10)) / heightInitialSpaceDefault;
     const ratioBottom = parseInt(coorRegionDefault.yMin, 10) / heightInitialSpaceDefault;
-    leftPx = this.defineLimitX(xMin + widthInitialSpace * ratioLeft);
-    rightPx = this.defineLimitX(widthInitialSpace * ratioRight + (widthInitialSpaceDefault - xMax));
-    topPx = this.defineLimitY(heightInitialSpace * ratioTop + (heightInitialSpaceDefault - yMax));
-    bottomPx = this.defineLimitY(yMin + heightInitialSpace * ratioBottom);
+    leftPx = Math.round(this.defineLimitX(xMin + widthInitialSpace * ratioLeft));
+    rightPx = Math.round(this.defineLimitX(widthInitialSpace * ratioRight + (widthInitialSpaceDefault - xMax)));
+    topPx = Math.round(this.defineLimitY(heightInitialSpace * ratioTop + (heightInitialSpaceDefault - yMax)));
+    bottomPx = Math.round(this.defineLimitY(yMin + heightInitialSpace * ratioBottom));
 
-    console.log(ratioBottom);
-    console.log(bottomPx);
-
-    // this.props.options.regionCoordinateSpace.forEach((currentRegion) => {
-    //   if (currentRegion.id === region.id) {
-    //     currentRegion.coords.xMin = leftPx.toString();
-    //     currentRegion.coords.xMax = rightPx.toString();
-    //     currentRegion.coords.yMin = bottomPx.toString();
-    //     currentRegion.coords.yMax = topPx.toString();
-    //   }
-    // })
+    console.log(rightPx);
+    console.log(widthInitialSpace);
+    let newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
+    newArrayRegion.forEach((currentRegion) => {
+      if (currentRegion.id === region.id) {
+        currentRegion.coords.xMin = leftPx.toString();
+        currentRegion.coords.xMax = (widthInitialSpaceDefault - rightPx).toString();
+        currentRegion.coords.yMin = bottomPx.toString();
+        currentRegion.coords.yMax = (heightInitialSpaceDefault - topPx).toString();
+      }
+    });
+    this.props.options.regionCoordinateSpace = newArrayRegion;
 
     let result: CoorHTML = {
       top: topPx.toString() + 'px',

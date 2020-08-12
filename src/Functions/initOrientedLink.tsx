@@ -89,6 +89,8 @@ export const initOrientedLink = (newId: number, newZIndex: number): OrientedLink
     '',
     '',
     '',
+    '',
+    '',
     ''
   );
   return newCoordinate;
@@ -168,7 +170,9 @@ export const cloneOrientedLink = (orientedLink: OrientedLinkClass): OrientedLink
     orientedLink.pointAPositionXDefault,
     orientedLink.pointAPositionYDefault,
     orientedLink.pointBPositionXDefault,
-    orientedLink.pointBPositionYDefault
+    orientedLink.pointBPositionYDefault,
+    orientedLink.pointCPositionXDefault,
+    orientedLink.pointCPositionYDefault
   );
   return newCoordinate;
 };

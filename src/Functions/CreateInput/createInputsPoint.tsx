@@ -35,14 +35,15 @@ export const createInputsPoint = (id: number): InputSelectableClass[] => {
   );
   const newFieldSizeWidthShape: InputSelectableClass = new InputSelectableClass(
     id.toString() + 'sizeWidth',
-    'Size',
+    'Size (px)',
     'sizeWidth' + id.toString(),
-    'select',
-    [
-      { value: 'small', label: 'Small' },
-      { value: 'medium', label: 'Medium' },
-      { value: 'large', label: 'Large' },
-    ],
+    'text',
+    // [
+    //   { value: 'small', label: 'Small' },
+    //   { value: 'medium', label: 'Medium' },
+    //   { value: 'large', label: 'Large' },
+    // ],
+    [],
     '',
     true,
     'SizeWidth',

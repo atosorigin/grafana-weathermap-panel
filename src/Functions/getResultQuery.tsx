@@ -7,8 +7,9 @@ const searchNameIsKey = (query: DataFrame, mainMetric: Metric): boolean => {
   if (mainMetric.key === '' && mainMetric.keyValue === '') {
     return true;
   }
+  let remove = query.name?.split('{');
   const nameQuery: string[] =
-    query.name?.split(',').flatMap((value) => {
+    remove![1].split(',').flatMap((value) => {
       return value.replace(/[\"{}]/gm, '');
     }) || [];
   if (nameQuery && nameQuery.length > 0) {
@@ -30,8 +31,9 @@ const searchNameIsFilter = (query: DataFrame, mainMetric: Metric): boolean => {
   }
   let res = 0;
   const filters: Filtred[] = mainMetric.filter;
+  let remove = query.name?.split('{');
   const nameQuery: string[] =
-    query.name?.split(',').map((value) => {
+    remove![1].split(',').map((value) => {
       return value.replace(/[\"{}]/gm, '');
     }) || [];
   if (nameQuery && nameQuery.length > 0) {
@@ -45,6 +47,8 @@ const searchNameIsFilter = (query: DataFrame, mainMetric: Metric): boolean => {
         }
       }
     }
+    // console.log(res);
+    // console.log(filters.length)
     if (res === filters.length) {
       return true;
     }

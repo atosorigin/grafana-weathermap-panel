@@ -121,11 +121,36 @@ export default class Point extends React.Component<Props, State> {
    * @param {number} index id of input
    */
   _handleChange(currentTarget: string, name: string, index: number): void {
+    // if (name.startsWith('positionShapeX')) {
+    //   let newArrayPoint: PointClass[] = this.props.options.arrayPoints;
+    //   newArrayPoint.forEach(point => {
+    //     if (point.id === this.props.id) {
+    //       point.positionXDefault = point.positionShapeX;
+    //       point.widthInitialSpaceDefault = (parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10) - parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10)).toString();
+    //     }
+    //   })
+    //   this.props.options.arrayPoints = newArrayPoint;
+    // }
+    // if (name.startsWith('positionShapeY')) {
+    //   let newArrayPoint: PointClass[] = this.props.options.arrayPoints;
+    //   newArrayPoint.forEach(point => {
+    //     if (point.id === this.props.id) {
+    //       point.positionYDefault = point.positionShapeY;
+    //       point.heightInitialSpaceDefault = (parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10) - parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10)).toString();
+    //     }
+    //   })
+    //   this.props.options.arrayPoints = newArrayPoint;
+    // }
     let tmp: PointClass = this.state.point;
-    this.props.options.arrayPoints[this.props.id || 0].positionXDefault = this.props.options.arrayPoints[this.props.id || 0].positionShapeX;
-    this.props.options.arrayPoints[this.props.id || 0].positionYDefault = this.props.options.arrayPoints[this.props.id || 0].positionShapeY;
-    tmp = editGoodParameterPoint(name, tmp, currentTarget, {});
-    //console.log(tmp);
+    const widthInitialSpaceDefault = (
+      parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10) -
+      parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10)
+    ).toString();
+    const heightInitialSpaceDefault = (
+      parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10) -
+      parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10)
+    ).toString();
+    tmp = editGoodParameterPoint(name, tmp, currentTarget, {}, widthInitialSpaceDefault, heightInitialSpaceDefault);
     this.setState({
       point: tmp,
     });
@@ -152,7 +177,7 @@ export default class Point extends React.Component<Props, State> {
     if (
       param.startsWith('drawGraphicMarker') ||
       param.startsWith('shape') ||
-      param.startsWith('sizeWidth') ||
+      //param.startsWith('sizeWidth') ||
       param.startsWith('sizeHeight') ||
       param.startsWith('linkWithCoordinateSpace')
     ) {
@@ -161,7 +186,7 @@ export default class Point extends React.Component<Props, State> {
       } else if (param.startsWith('shape')) {
         valueSelect = this.state.point.shape;
       } else if (param.startsWith('sizeWidth')) {
-        valueSelect = this.state.point.sizeWidth;
+        //value = this.state.point.sizeWidth;
       } else if (param.startsWith('sizeHeight')) {
         valueSelect = this.state.point.sizeHeight;
       }
@@ -177,6 +202,8 @@ export default class Point extends React.Component<Props, State> {
         value = this.state.point.label;
       } else if (param.startsWith('color')) {
         value = this.state.point.color;
+      } else if (param.startsWith('sizeWidth')) {
+        value = this.state.point.sizeWidth;
       }
       return value;
     }
@@ -217,7 +244,13 @@ export default class Point extends React.Component<Props, State> {
               key={obj.id}
               _onChange={(value: SelectableValue<string>, name: string, index: number) => {
                 const newPoint: PointClass = this.state.point;
-                editGoodParameterPoint(name, newPoint, '', value);
+                editGoodParameterPoint(
+                  name,
+                  newPoint,
+                  '',
+                  value
+                  //this.props.options.arrayPoints[this.props.id || 0],
+                );
                 this.setState({
                   point: newPoint,
                 });

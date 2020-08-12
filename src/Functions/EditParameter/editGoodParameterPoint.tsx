@@ -8,7 +8,16 @@ import { SelectableValue } from '@grafana/data';
  * @param {string} newValue value to insert in the parameter
  * @returns {Coor} object edit
  */
-export const editGoodParameterPoint = (name: string, editCoor: PointClass, newValue: string, newValueSelect: SelectableValue<any>): PointClass => {
+export const editGoodParameterPoint = (
+  name: string,
+  editCoor: PointClass,
+  newValue: string,
+  newValueSelect: SelectableValue<any>,
+  widthInitialSPaceDefault?: string,
+  heightInitialSPaceDefault?: string
+  //pointIsUpdatedFromEditor: boolean
+  //currentPoint: PointClass,
+): PointClass => {
   if (name.startsWith('label')) {
     editCoor.label = newValue;
   } else if (name.startsWith('drawGraphicMarker')) {
@@ -16,21 +25,19 @@ export const editGoodParameterPoint = (name: string, editCoor: PointClass, newVa
   } else if (name.startsWith('shape')) {
     editCoor.shape = newValueSelect;
   } else if (name.startsWith('sizeWidth')) {
-    editCoor.sizeWidth = newValueSelect;
+    editCoor.sizeWidth = newValue;
   } else if (name.startsWith('sizeHeight')) {
     editCoor.sizeHeight = newValueSelect;
   } else if (name.startsWith('rotateArrow')) {
     editCoor.rotateArrow = newValue;
   } else if (name.startsWith('positionShapeX')) {
-    console.log('update x');
-    console.log(newValue);
     editCoor.positionShapeX = newValue;
-    console.log(editCoor);
+    editCoor.positionXDefault = newValue;
+    editCoor.widthInitialSpaceDefault = widthInitialSPaceDefault || '';
   } else if (name.startsWith('positionShapeY')) {
-    console.log('update y');
-    console.log(newValue);
     editCoor.positionShapeY = newValue;
-    console.log(editCoor);
+    editCoor.positionYDefault = newValue;
+    editCoor.heightInitialSpaceDefault = heightInitialSPaceDefault || '';
   } else if (name.startsWith('color')) {
     editCoor.color = newValue;
   } else if (name.startsWith('refIdMainMetric')) {

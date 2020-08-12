@@ -252,7 +252,9 @@ class ImportInput extends React.Component<Props, State> {
       link.pointAPositionXDefault,
       link.pointAPositionYDefault,
       link.pointBPositionXDefault,
-      link.pointBPositionYDefault
+      link.pointBPositionYDefault,
+      link.pointCPositionXDefault,
+      link.pointCPositionYDefault
     );
     // console.log(toLoad);
     // Do some test here to see if your already load a coordinatespace with this id

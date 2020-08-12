@@ -2,7 +2,6 @@
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
-
 ## Add the queries
 
 The example shows how to use query filters to obtain precise metrics
@@ -40,7 +39,6 @@ node_network_flags{device="lo",instance="localhost:9100",job="node_exporter"}
 ```
 
 to get a number at the moment, you have to tick the **instant** box for each query
-
 
 To associate refined query elements to a template, we will focus on the :
 
@@ -93,9 +91,7 @@ he must be given a query for
 - A for the first file
 - B for the second file
 
-
 ## Temporary part (but currently the operation is necessary)
-
 
 ![](../../screenshots/demo/tutorial13/tmp13-0.png)
 
@@ -105,16 +101,8 @@ You must go to the **point** tab of **Coordinate space**.
 
 In **Text Object** you uncheck the line **Object display in text or tooltip**.
 
-
-
 ## Result
 
 ![](../../screenshots/demo/tutorial13/result.png)
 
 You will see a dot appear and all the settings will be available in the editor.
-
-
-
-
-
-

@@ -48,19 +48,18 @@
       },
       "positionShapeX": "70",
       "positionShapeY": "70",
+      "positionXDefault": "70",
+      "positionYDefault": "70",
       "rotateArrow": "0",
       "shape": {
         "label": "Diamond",
         "value": "diamond"
       },
       "sizeHeight": {
-        "label": "Medium",
-        "value": "medium"
+        "label": "",
+        "value": ""
       },
-      "sizeWidth": {
-        "label": "Medium",
-        "value": "medium"
-      },
+      "sizeWidth": "12",
       "textObj": {
         "colorBack": "rgba(255, 255, 255, 0)",
         "colorText": "rgba(0, 0, 0, 1)",
@@ -95,7 +94,9 @@
       },
       "traceBack": true,
       "traceBorder": true,
-      "valueMetric": ""
+      "valueMetric": "",
+      "widthInitialSpaceDefault": "",
+      "heightInitialSpaceDefault": ""
     }
   ]
 }

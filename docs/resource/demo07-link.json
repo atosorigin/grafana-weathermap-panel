@@ -102,7 +102,7 @@
       },
       "regionIn": "Routeur",
       "regionOut": "Proxy server",
-      "size": { "value": "Medium", "label": "Medium" },
+      "size": { "value": "12px", "label": "12px" },
       "textObj": {
         "colorBack": "",
         "colorText": "",

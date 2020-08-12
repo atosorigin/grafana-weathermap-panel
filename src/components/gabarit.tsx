@@ -15,6 +15,7 @@ import { LinkURLClass } from 'Models/LinkURLClass';
 import { PointClass } from 'Models/PointClass';
 import { TextObject, GenerateTextObject } from 'Models/TextObjectClass';
 import { Style } from 'components/Parametrage/styleComponent';
+import { RegionClass, Coord4D } from 'Models/RegionClass';
 
 interface Props extends PanelEditorProps<SimpleOptions> {}
 
@@ -26,6 +27,7 @@ interface State {
   selectQuerryID: Array<SelectableValue<string>>;
   collapseSelectURL: boolean;
   collapseGabarit: boolean;
+  gabaritDefaultUrlInput: string;
 }
 
 // interface SelectQueryID {
@@ -67,6 +69,7 @@ class Gabarit extends React.Component<Props, State> {
       ],
       collapseSelectURL: false,
       collapseGabarit: false,
+      gabaritDefaultUrlInput: '',
     };
   }
   result: any[] = [];
@@ -145,6 +148,37 @@ class Gabarit extends React.Component<Props, State> {
     }
   };
 
+  loadDefaultGabarit = (file: any, url: string) => {
+    let name = url.split('/');
+    let check = [false, false, false];
+    let newGabarit: GabaritFile = {
+      queryID: 'null',
+      fileName: name[name.length - 1],
+      loaded: false,
+      globalGabarit: file.global,
+      templateGabaritPoint: [],
+      templateGabaritRegion: [],
+      templateGabaritLink: [],
+    };
+    file.templates.forEach((gab: any) => {
+      if (gab.type === 'point' && check[0] === false) {
+        newGabarit.templateGabaritPoint.push(gab);
+        check[0] = true;
+      }
+      if (gab.type === 'region' && check[1] === false) {
+        newGabarit.templateGabaritRegion.push(gab);
+        check[1] = true;
+      }
+      if (gab.type === 'link' && check[2] === false) {
+        newGabarit.templateGabaritLink.push(gab);
+        check[2] = true;
+      }
+    });
+    this.props.options.saveDefaultGabaritFile = newGabarit;
+    this.loaderGabarit(newGabarit, null);
+    this.props.options.saveDefaultGabaritFile.loaded = true;
+  };
+
   fetchGabarit = () => {
     //this.result = fetchConfFile(this.props.options.saveGabaritURL);
     this.props.options.saveGabaritURL.forEach(async (url) => {
@@ -181,6 +215,18 @@ class Gabarit extends React.Component<Props, State> {
     this.props.onOptionsChange({ ...this.props.options, gabaritUrlInput: newData });
   };
 
+  /*
+   * add url for default gabarit
+   */
+  onGabaritDefaultUrlChanged = (event: { currentTarget: HTMLInputElement }) => {
+    let newData = '';
+
+    newData = event.currentTarget.value;
+    this.setState({
+      gabaritDefaultUrlInput: newData,
+    });
+  };
+
   onGabaritListUrlChanged = (event: { currentTarget: HTMLInputElement }) => {
     let newData: string[] = this.props.options.saveGabaritURL.slice();
     newData[parseInt(event.currentTarget.id, 10)] = event.currentTarget.value;
@@ -199,6 +245,24 @@ class Gabarit extends React.Component<Props, State> {
       this.props.options.saveGabaritURL.push(this.props.options.gabaritUrlInput);
       this.props.options.gabaritUrlInput = '';
       this.props.onOptionsChange({ ...this.props.options, saveGabaritURL: this.props.options.saveGabaritURL });
+    }
+  };
+
+  addGabaritDefaultUrlInput = async (onClick: { currentTarget: HTMLButtonElement }) => {
+    this.props.onOptionsChange({
+      ...this.props.options,
+      saveGabaritDefaultUrl: this.state.gabaritDefaultUrlInput,
+    });
+    try {
+      const url = this.state.gabaritDefaultUrlInput;
+      let file = {};
+      let response = await fetch(this.state.gabaritDefaultUrlInput);
+
+      file = await response.json();
+      this.loadDefaultGabarit(file, url);
+    } catch (error) {
+      console.log('Default gabarit error:');
+      console.error(error);
     }
   };
 
@@ -222,13 +286,13 @@ class Gabarit extends React.Component<Props, State> {
 
   checkLoaderGabarit = (onClick: { currentTarget: HTMLButtonElement }) => {
     if (!this.props.options.saveGabaritFile[parseInt(onClick.currentTarget.id, 10)].loaded) {
-      this.loaderGabarit(onClick);
+      this.loaderGabarit(this.props.options.saveGabaritFile[parseInt(onClick.currentTarget.id, 10)], parseInt(onClick.currentTarget.id, 10));
     } else {
       console.log('loadGabaritReject');
     }
   };
 
-  loaderGabarit = (onClick: { currentTarget: HTMLButtonElement }) => {
+  loaderGabarit = (gab: GabaritFile, idx: number | null) => {
     let tmpLabelAPosition: LabelCoord2D;
     let tmpLabelBPosition: LabelCoord2D;
     let tmpToolTipA: SelectableValue<string>;
@@ -247,7 +311,8 @@ class Gabarit extends React.Component<Props, State> {
     let valueMetricPoint: string[] = [];
     let drawGraphicMarkerPoint: Array<SelectableValue<string>> = [];
     let shapePoint: Array<SelectableValue<string>> = [];
-    let sizeWidthPoint: Array<SelectableValue<string>> = [];
+    //let sizeWidthPoint: Array<SelectableValue<string>> = [];
+    let sizeWidthPoint: string[] = [];
     let sizeHeightPoint: Array<SelectableValue<string>> = [];
     let colorPoint: string[] = [];
     let associateOrientedLinksInPoint: OrientedLinkClass[][] = [];
@@ -272,7 +337,7 @@ class Gabarit extends React.Component<Props, State> {
     /* Region */
     //Template
 
-    const gabaritFileTmp: GabaritFile = this.props.options.saveGabaritFile[parseInt(onClick.currentTarget.id, 10)];
+    const gabaritFileTmp: GabaritFile = gab;
     colorMode = Boolean(gabaritFileTmp.globalGabarit.colorMode);
     traceBack = Boolean(gabaritFileTmp.globalGabarit.traceBack);
     traceBorder = Boolean(gabaritFileTmp.globalGabarit.traceBorder);
@@ -648,18 +713,34 @@ class Gabarit extends React.Component<Props, State> {
       nameLink.push(link.name);
       metaLink.push(link.meta);
       labelLink.push(link.label);
-      mainMetricALink.push(link.mainMetric);
-      mainMetricALink[index].filter! = filterLink[index];
-      mainMetricALink[index].refId = gabaritFileTmp.queryID;
+      mainMetricALink.push({
+        key: link.mainMetric.key,
+        unit: link.mainMetric.unit,
+        format: link.mainMetric.format,
+        keyValue: '',
+        filter: filterLink[index],
+        refId: gabaritFileTmp.queryID,
+        expr: '',
+        returnQuery: [],
+        manageValue: link.mainMetric.manageValue,
+      });
       if (mainMetricALink[index].refId === null) {
         mainMetricALink[index].refId = 'A';
       }
       link.metrics.forEach((element) => {
         metricALink[index].push(element);
       });
-      mainMetricBLink.push(link.mainMetricB);
-      mainMetricBLink[index].filter! = filterLink[index];
-      mainMetricBLink[index].refId = gabaritFileTmp.queryID;
+      mainMetricBLink.push({
+        key: link.mainMetricB.key,
+        unit: link.mainMetricB.unit,
+        format: link.mainMetricB.format,
+        keyValue: '',
+        filter: filterLink[index],
+        refId: gabaritFileTmp.queryID,
+        expr: '',
+        returnQuery: [],
+        manageValue: link.mainMetricB.manageValue,
+      });
       if (mainMetricALink[index].refId === null) {
         mainMetricBLink[index].refId = 'A';
       }
@@ -689,7 +770,7 @@ class Gabarit extends React.Component<Props, State> {
       pointOutLink.push(link.pointOut);
       regionInLink.push(link.regionIn);
       regionOutLink.push(link.regionOut);
-      isIncurvedLink.push({ label: 'No', value: Boolean(link.isIncurved.value) });
+      isIncurvedLink.push({ label: link.isIncurved.label, value: Boolean(link.isIncurved.value) });
     });
 
     newID = 0;
@@ -740,6 +821,8 @@ class Gabarit extends React.Component<Props, State> {
           '',
           '',
           '',
+          '',
+          '',
           ''
         );
         newID++;
@@ -780,6 +863,8 @@ class Gabarit extends React.Component<Props, State> {
           isIncurvedLink[index],
           mainMetricBLink[index],
           metricBLink[index],
+          '',
+          '',
           '',
           '',
           '',
@@ -829,6 +914,8 @@ class Gabarit extends React.Component<Props, State> {
           '',
           '',
           '',
+          '',
+          '',
           ''
         );
         newID++;
@@ -868,6 +955,8 @@ class Gabarit extends React.Component<Props, State> {
           isIncurvedLink[index],
           mainMetricBLink[index],
           [],
+          '',
+          '',
           '',
           '',
           '',
@@ -935,9 +1024,51 @@ class Gabarit extends React.Component<Props, State> {
       idSVGRegion.push(region.idSVG);
       modeRegion.push(Boolean(region.mode));
       imgRegion.push(region.img);
-    });
+      const coor: Coord4D = { xMax: '', xMin: '', yMax: '', yMin: '' };
+      let id = -1;
+      for (const line of this.props.options.regionCoordinateSpace) {
+        if (line.id > id) {
+          id = line.id;
+        }
+      }
+      id += 1;
 
-    this.props.options.saveGabaritFile[parseInt(onClick.currentTarget.id, 10)].loaded = true;
+      const mainMetricRR: Metric = { key: '', keyValue: '', refId: '', expr: '', manageValue: 'avg', format: '', unit: '', returnQuery: [] };
+
+      let regionPush: RegionClass = new RegionClass(
+        id,
+        linkURLRegion[0],
+        metaRegion[0],
+        gabaritFileTmp.globalGabarit.lowerLimit,
+        labelRegion[0],
+        textObj,
+        mainMetricRR,
+        [],
+        colorMode,
+        traceBack,
+        traceBorder,
+        positionParameterRegion[0],
+        idSVGRegion[0],
+        [],
+        coor,
+        coor,
+        modeRegion[0],
+        imgRegion[0],
+        '',
+        ''
+      );
+      console.log(regionPush);
+
+      const newRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
+      newRegion.push(regionPush);
+      this.props.onOptionsChange({
+        ...this.props.options,
+        regionCoordinateSpace: newRegion,
+      });
+    });
+    if (idx) {
+      this.props.options.saveGabaritFile[idx].loaded = true;
+    }
   };
 
   gabaritUrlDisplay = (props: any): JSX.Element => {
@@ -1028,6 +1159,20 @@ class Gabarit extends React.Component<Props, State> {
     const { options } = this.props;
     return (
       <div>
+        <div className="defaultGabarit">
+          <FormField
+            label="Gabarit Default Url"
+            labelWidth={10}
+            key={'GabaritDefaultUrl'}
+            inputWidth={18}
+            onChange={this.onGabaritDefaultUrlChanged.bind(this)}
+            type="string"
+            value={this.state.gabaritDefaultUrlInput || ''}
+          />
+          <Button key={'AddGabaritDefaultUrl'} onClick={this.addGabaritDefaultUrlInput}>
+            Add
+          </Button>
+        </div>
         <Collapse isOpen={this.state.collapseSelectURL} label="Url List" onToggle={this.onToggleSelectUrl}>
           <FormField
             label="Gabarit Url"

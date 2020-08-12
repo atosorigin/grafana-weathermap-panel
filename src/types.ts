@@ -64,7 +64,8 @@ export interface TemplateGabaritPoint {
   valueMetric: string;
   drawGraphicMarker: SelectableValue<string>;
   shape: SelectableValue<string>;
-  sizeWidth: SelectableValue<string>;
+  // sizeWidth: SelectableValue<string>;
+  sizeWidth: string;
   sizeHeight: SelectableValue<string>;
   color: string;
   associateOrientedLinksIn: OrientedLinkClass[];
@@ -456,17 +457,22 @@ export interface SimpleOptions extends MetricSettings {
   currentDashboard: boolean;
 
   gabaritUrlInput: string;
+
+  saveGabaritDefaultUrl: string;
+
   saveGabaritURL: string[];
   saveGabaritFile: GabaritFile[];
+  saveDefaultGabaritFile: GabaritFile | null;
   gabaritDefault: GabaritFile;
 
   updateOnlyInitialSpace: boolean;
 
-  regionIsCreated: boolean;
-  numberBorderRegionUpdated: number;
+  loopDrawOrientedLink: number;
 }
 
 export const defaults: SimpleOptions = {
+  saveGabaritDefaultUrl: '',
+  saveDefaultGabaritFile: null,
   legend: { hiddenLegend: true, x: 0, y: 0 },
   baseMap: { image: '', layerImage: '', modeSVG: true, width: '', height: '', idSVG: '', isUploaded: false },
   // imageUrl: 'https://upload.wikimedia.org/wikipedia/en/b/be/Locator_Grid.png',
@@ -569,9 +575,6 @@ export const defaults: SimpleOptions = {
       region: {},
     },
   ],
-
-  regionIsCreated: true,
-  numberBorderRegionUpdated: 0,
   indexOrientedLink: 0,
   indexPoint: 0,
   indexRegion: 0,
@@ -593,6 +596,7 @@ export const defaults: SimpleOptions = {
   newPoint: true,
   newOrientedLink: true,
   currentDashboard: false,
+  loopDrawOrientedLink: 0,
   gabaritUrlInput: '',
   saveGabaritURL: [],
   saveGabaritFile: [],

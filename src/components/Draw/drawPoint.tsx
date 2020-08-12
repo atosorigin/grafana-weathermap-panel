@@ -7,11 +7,12 @@ import { TextObject } from 'Models/TextObjectClass';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
 import { LinkURLClass } from 'Models/LinkURLClass';
 import { Style } from 'components/Parametrage/styleComponent';
+import { PointClass } from 'Models/PointClass';
 
 interface Props extends PanelEditorProps<SimpleOptions> {
   drawGraphicMarker: SelectableValue<string>;
   shape: SelectableValue<string>;
-  size: SelectableValue<string>;
+  size: string;
   positionShapeX: string;
   positionShapeY: string;
   label: string;
@@ -39,8 +40,8 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   buttonAddIncurvedLinkIsActive: boolean;
   widthInitialSpaceDefault: string;
   heightInitialSpaceDefault: string;
-  // positionXDefault: string;
-  // positionYDefault: string;
+  positionXDefault: string;
+  positionYDefault: string;
 }
 
 interface State {}
@@ -76,13 +77,13 @@ export default class DrawPoint extends React.Component<Props, State> {
     //     result = -100;
     //   }
     // }
-    if (coordinateX > parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10)) {
-      console.log('trop grand');
-      result = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
-    } else if (coordinateX < parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10)) {
-      console.log('trop petit');
-      result = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
-    }
+    // if (coordinateX > parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10)) {
+    //   console.log('trop grand');
+    //   result = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
+    // } else if (coordinateX < parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10)) {
+    //   console.log('trop petit');
+    //   result = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
+    // }
     // console.log('x draw')
     // console.log(result)
     return result;
@@ -123,10 +124,27 @@ export default class DrawPoint extends React.Component<Props, State> {
    * @param shapeGraphicMarker
    */
   private definePositionX(positionX: number, initialSpace: Coord4D, size: number, shape: string): number {
-    // const xMin: number = parseInt(initialSpace.xMin, 10);
-    // const xMax: number = parseInt(initialSpace.xMax, 10);
-    //const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
-    let x = this.defineLimitX(positionX) - (size + parseInt(this.defineBorderSize(), 10));
+    // console.log('x avant');
+    // console.log(this.props.positionXDefault);
+    const xMin: number = parseInt(initialSpace.xMin, 10);
+    const xMax: number = parseInt(initialSpace.xMax, 10);
+    const widthInitialSpace: number = xMax - xMin;
+    const ratioX = parseInt(this.props.positionXDefault, 10) / parseInt(this.props.widthInitialSpaceDefault, 10);
+    //let x = this.defineLimitX(xMin + widthInitialSpace * ratioX) - (size + parseInt(this.defineBorderSize(), 10));
+    let x = Math.round(this.defineLimitX(xMin + widthInitialSpace * ratioX) - (size + parseInt(this.defineBorderSize(), 10)));
+    // console.log(xMin);
+    // console.log(widthInitialSpace);
+    // console.log(ratioX);
+    // console.log(this.props.widthInitialSpaceDefault);
+    // console.log('x après');
+    // console.log(x);
+    let newArrayPoint: PointClass[] = this.props.options.arrayPoints;
+    newArrayPoint.forEach((point) => {
+      if (point.name === this.props.name) {
+        point.positionShapeX = x.toString();
+      }
+    });
+    this.props.options.arrayPoints = newArrayPoint;
     // if (!defaultReferentiel) {
     //   if (xMin < 0 && xMax < 0) {console.log('update x');
     //     xMinPx = (xMax + 100) * (this.props.widthImage / 200);
@@ -135,13 +153,11 @@ export default class DrawPoint extends React.Component<Props, State> {
     //     xMinPx = (xMin + 100) * (this.props.widthImage / 200);
     //     xMaxPx = (xMax + 100) * (this.props.widthImage / 200);
     //   }
-    //const widthInitialSpace: number = xMax - xMin;
     //   x =
     //     xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2) - (size + parseInt(this.defineBorderSize(), 10));
     // } else {
     //   xMinPx = xMin * (this.props.widthImage / 100);
     //   xMaxPx = xMax * (this.props.widthImage / 100);
-    //   const widthInitialSpace: number = xMaxPx - xMinPx;
     //   x = xMinPx + this.defineLimitX(positionX) * (widthInitialSpace / 100) - (size + parseInt(this.defineBorderSize(), 10));
     // }
     // x =
@@ -178,11 +194,27 @@ export default class DrawPoint extends React.Component<Props, State> {
    * @param shapeGraphicMarker
    */
   private definePositionY(positionY: number, initialSpace: SelectableValue<RegionClass>, size: number, shapeGraphicMarker: string): number {
-    // const yMin: number = parseInt(initialSpace.yMin, 10);
-    // const yMax: number = parseInt(initialSpace.yMax, 10);
-    //const heightInitialSpace: number = yMax - yMin;
-    //const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
-    let y = this.defineLimitY(positionY) - (size + parseInt(this.defineBorderSize(), 10));
+    console.log('y avant');
+    console.log(this.props.positionYDefault);
+    const yMin: number = parseInt(initialSpace.yMin, 10);
+    const yMax: number = parseInt(initialSpace.yMax, 10);
+    const heightInitialSpace: number = yMax - yMin;
+    const ratioY =
+      (parseInt(this.props.heightInitialSpaceDefault, 10) - parseInt(this.props.positionYDefault, 10)) /
+      parseInt(this.props.heightInitialSpaceDefault, 10);
+    let y = Math.round(
+      this.defineLimitY(this.props.heightImage - yMax + heightInitialSpace * ratioY) - (size + parseInt(this.defineBorderSize(), 10))
+    );
+    console.log('y après');
+    console.log(y);
+    let newArrayPoint: PointClass[] = this.props.options.arrayPoints;
+    newArrayPoint.forEach((point) => {
+      if (point.name === this.props.name) {
+        point.positionShapeY = (this.props.heightImage - y).toString();
+      }
+    });
+    this.props.options.arrayPoints = newArrayPoint;
+    // let y = parseInt(this.props.options.baseMap.height, 10) - yMaxInitialSpace + heightInitialSpace * ratioY;
     // let yMinPx = 0;
     // let yMaxPx = 0;
     // if (!defaultReferentiel) {
@@ -256,15 +288,16 @@ export default class DrawPoint extends React.Component<Props, State> {
     if (this.props.shape.value === 'none') {
       return 0;
     } else {
-      if (size === 'small') {
-        return 4;
-      } else if (size === 'medium') {
-        return 6;
-      } else if (size === 'large') {
-        return 8;
-      } else {
-        return 0;
-      }
+      // if (size === 'small') {
+      //   return 4;
+      // } else if (size === 'medium') {
+      //   return 6;
+      // } else if (size === 'large') {
+      //   return 8;
+      // } else {
+      //   return 0;
+      // }
+      return parseInt(size, 10) / 2;
     }
   }
 
@@ -364,33 +397,33 @@ export default class DrawPoint extends React.Component<Props, State> {
     }
   }
 
-  private definePositionLabelX = (coordinateX: number) => {
+  private definePositionLabelX = (coordinateX: number): number => {
     const positionLabel: number = parseInt(this.props.labelPositionX, 10);
     let result = 0;
     if (this.props.drawGraphicMarker.value === 'true') {
-      result = coordinateX + positionLabel + 10;
-      if (this.props.size.value === 'large') {
-        result = coordinateX + positionLabel + 18;
-      } else if (this.props.size.value === 'medium') {
-        result = coordinateX + positionLabel + 14;
-      }
+      result = coordinateX + positionLabel + parseInt(this.props.size, 10) + 5;
+      // if (this.props.size.value === 'large') {
+      //   result = coordinateX + positionLabel + 18;
+      // } else if (this.props.size.value === 'medium') {
+      //   result = coordinateX + positionLabel + 14;
+      // }
     } else {
       result = coordinateX + positionLabel;
     }
     return result;
   };
 
-  private definePositionLabelY = (coordinateY: number) => {
+  private definePositionLabelY = (coordinateY: number): number => {
     const inverseAxeY = -1;
     const positionLabel: number = parseInt(this.props.labelPositionY, 10) * inverseAxeY;
     let result = 0;
     if (this.props.drawGraphicMarker.value === 'true') {
-      result = coordinateY + positionLabel + 10;
-      if (this.props.size.value === 'large') {
-        result = coordinateY + positionLabel + 18;
-      } else if (this.props.size.value === 'medium') {
-        result = coordinateY + positionLabel + 14;
-      }
+      result = coordinateY + positionLabel + parseInt(this.props.size, 10) + 5;
+      // if (this.props.size.value === 'large') {
+      //   result = coordinateY + positionLabel + 18;
+      // } else if (this.props.size.value === 'medium') {
+      //   result = coordinateY + positionLabel + 14;
+      // }
     } else {
       result = coordinateY + positionLabel;
     }
@@ -955,7 +988,7 @@ export default class DrawPoint extends React.Component<Props, State> {
   render() {
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
     const shape: string = this.props.shape.value || '';
-    const size: number = this.defineSizeGraphicMarkerPx(this.props.size.value || '', shape);
+    const size: number = this.defineSizeGraphicMarkerPx(this.props.size || '', shape);
     const valuePositionX: number = parseInt(this.props.positionShapeX, 10) || 0;
     const valuePositionY: number = parseInt(this.props.positionShapeY, 10) || 0;
     const positionShapeX: number = this.definePositionX(valuePositionX, initialSpace, size, shape);

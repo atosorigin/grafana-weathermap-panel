@@ -54,8 +54,12 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   size: SelectableValue<string>;
   widthInitialSpaceDefault: string;
   heightInitialSpaceDefault: string;
-  // positionXDefault: string;
-  // positionYDefault: string;
+  positionXADefault: string;
+  positionYADefault: string;
+  positionXBDefault: string;
+  positionYBDefault: string;
+  positionXCDefault: string;
+  positionYCDefault: string;
 }
 
 interface State {
@@ -120,14 +124,26 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     return result;
   }
 
-  private synchroLinkX(positionX: number): number {
-    // const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
-    // const xMin: number = parseInt(initialSpace.xMin, 10);
-    // const xMax: number = parseInt(initialSpace.xMax, 10);
-    //const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
-    // let xMinPx = 0;
-    // let xMaxPx = 0;
-    let x = this.defineLimitX(positionX);
+  private synchroLinkX(positionX: number, name?: string): number {
+    const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
+    const xMin: number = parseInt(initialSpace.xMin, 10);
+    const xMax: number = parseInt(initialSpace.xMax, 10);
+    const widthInitialSpace: number = xMax - xMin;
+    const ratioX = positionX / parseInt(this.props.widthInitialSpaceDefault, 10);
+    let x = Math.round(this.defineLimitX(xMin + widthInitialSpace * ratioX));
+    let newArrayLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+    newArrayLink.forEach((link) => {
+      if (link.name === this.props.name) {
+        if (name === 'xA') {
+          link.pointAPositionX = x.toString();
+        } else if (name === 'xB') {
+          link.pointBPositionX = x.toString();
+        } else if (name === 'xC') {
+          link.pointCPositionX = x.toString();
+        }
+      }
+    });
+    this.props.options.arrayOrientedLinks = newArrayLink;
 
     // if (!defaultReferentiel) {
     //   if (xMin < 0 && xMax < 0) {
@@ -137,7 +153,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     //     xMinPx = (xMin + 100) * (this.props.widthImage / 200);
     //     xMaxPx = (xMax + 100) * (this.props.widthImage / 200);
     //   }
-    //const widthInitialSpace: number = xMax - xMin;
     //   x = xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2);
     // } else {
     //   xMinPx = xMin * (this.props.widthImage / 100);
@@ -154,14 +169,26 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     return x;
   }
 
-  private synchroLinkY(positionY: number): number {
-    // const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
-    // const yMin: number = parseInt(initialSpace.yMin, 10);
-    // const yMax: number = parseInt(initialSpace.yMax, 10);
-    //const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
-    // let yMinPx = 0;
-    // let yMaxPx = 0;
-    let y = this.defineLimitY(positionY);
+  private synchroLinkY(positionY: number, name?: string): number {
+    const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
+    const yMin: number = parseInt(initialSpace.yMin, 10);
+    const yMax: number = parseInt(initialSpace.yMax, 10);
+    const heightInitialSpace: number = yMax - yMin;
+    const ratioY = (parseInt(this.props.heightInitialSpaceDefault, 10) - positionY) / parseInt(this.props.heightInitialSpaceDefault, 10);
+    let y = Math.round(this.defineLimitY(this.props.heightImage - yMax + heightInitialSpace * ratioY));
+    let newArrayLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+    newArrayLink.forEach((link) => {
+      if (link.name === this.props.name) {
+        if (name === 'yA') {
+          link.pointAPositionY = (this.props.heightImage - y).toString();
+        } else if (name === 'yB') {
+          link.pointBPositionY = (this.props.heightImage - y).toString();
+        } else if (name === 'yC') {
+          link.pointCPositionY = (this.props.heightImage - y).toString();
+        }
+      }
+    });
+    this.props.options.arrayOrientedLinks = newArrayLink;
 
     // if (!defaultReferentiel) {
     //   if (yMin < 0 && yMax < 0) {
@@ -171,7 +198,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     //     yMinPx = (yMin + 100) * (this.props.heightImage / 200);
     //     yMaxPx = (yMax + 100) * (this.props.heightImage / 200);
     //   }
-    //const heightInitialSpace: number = yMax - yMin;
     //   y =
     //     this.defineValueToAdaptPositionYToInitialSpace(yMinPx, yMaxPx) +
     //     (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 200));
@@ -3215,12 +3241,12 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
   };
 
   render() {
-    const xCoordinateA: number = this.synchroLinkX(parseInt(this.props.pointAPositionX, 10));
-    const yCoordinateA: number = this.synchroLinkY(parseInt(this.props.pointAPositionY, 10));
-    const xCoordinateB: number = this.synchroLinkX(parseInt(this.props.pointBPositionX, 10));
-    const yCoordinateB: number = this.synchroLinkY(parseInt(this.props.pointBPositionY, 10));
-    const xCoordinateC: number = this.synchroLinkX(parseInt(this.props.pointCPositionX, 10));
-    const yCoordinateC: number = this.synchroLinkY(parseInt(this.props.pointCPositionY, 10));
+    const xCoordinateA: number = this.synchroLinkX(parseInt(this.props.positionXADefault, 10), 'xA');
+    const yCoordinateA: number = this.synchroLinkY(parseInt(this.props.positionYADefault, 10), 'yA');
+    const xCoordinateB: number = this.synchroLinkX(parseInt(this.props.positionXBDefault, 10), 'xB');
+    const yCoordinateB: number = this.synchroLinkY(parseInt(this.props.positionYBDefault, 10), 'yB');
+    const xCoordinateC: number = this.synchroLinkX(parseInt(this.props.positionXCDefault, 10), 'xC');
+    const yCoordinateC: number = this.synchroLinkY(parseInt(this.props.positionYCDefault, 10), 'yC');
     const orientationLink: string = this.props.orientationLink;
 
     // rops.associatePointIn)

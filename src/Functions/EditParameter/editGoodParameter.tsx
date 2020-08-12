@@ -34,17 +34,17 @@ export const editGoodParameter = (
 export const limitValueInitialSpace = (coorInitialSpace: string, position: number, widthBackground: number, heigthBackground: number): string => {
   let result = 0;
   result = parseInt(coorInitialSpace, 10);
-  if (position === 1 || position === 2) {
-    //xMin + xMax
-    if (result > widthBackground) {
-      result = widthBackground;
-    }
-  } else if (position === 3 || position === 4) {
-    //yMin + yMax
-    if (result > heigthBackground) {
-      result = heigthBackground;
-    }
-  }
+  // if (position === 1 || position === 2) {
+  //   //xMin + xMax
+  //   if (result > widthBackground) {
+  //     result = widthBackground;
+  //   }
+  // } else if (position === 3 || position === 4) {
+  //   //yMin + yMax
+  //   if (result > heigthBackground) {
+  //     result = heigthBackground;
+  //   }
+  // }
   //console.log(defaultInitialSpace);
   // if (!defaultInitialSpace) {
   //   result = coorInt;
@@ -62,7 +62,13 @@ export const limitValueInitialSpace = (coorInitialSpace: string, position: numbe
   return result.toString();
 };
 
-export const editGoodParameterExtend = (name: string, editCoor: RegionClass, newValue: string): RegionClass => {
+export const editGoodParameterExtend = (
+  name: string,
+  editCoor: RegionClass,
+  newValue: string
+  // widthInitialSpace?: string,
+  // heightInitialSpace?: string
+): RegionClass => {
   if (name.startsWith('positionXMin')) {
     editCoor.coords.xMin = newValue;
   } else if (name.startsWith('positionXMax')) {

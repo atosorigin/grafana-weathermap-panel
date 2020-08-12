@@ -2,7 +2,6 @@
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
-
 ## Ajouter des requêtes
 
 L'exemple montre comment utiliser des filtres de requête pour obtenir des mesures précises
@@ -39,17 +38,13 @@ node_network_flags{device="lo",instance="localhost:9100",job="node_exporter"}
 
 ```
 
-
 pour obtenir un chiffre à l'instant, il faut cocher la case **instant** pour chaque query
 
-
 Pour associer les élements de requête affinée à un gabarit, nous nous interresserons à l'élément :
-
 
 - device
 
 qui sera utilisé dans le fichier modèle json de la liste **filtered**
-
 
 ## Step 2: Déterminer un espace
 
@@ -98,9 +93,7 @@ il faut lui attribuer une query pour
 
 puis 1 clic **load** par ligne
 
-
 ## Partie temporaire (mais actuellement l'opération est nécessaire)
-
 
 ![](../../screenshots/demo/tutorial13/tmp13-0.png)
 
@@ -110,16 +103,8 @@ Vous devez vous rendre dans l'onglet **point** de **Coordinate space**
 
 Dans **Text Objet** vous décochez la case la ligne **Object display in text or tooltip**
 
-
-
 ## Resultat
 
 ![](../../screenshots/demo/tutorial13/result.png)
 
 Vous verrez un point apparaitre et l'ensemble des réglages seront disponible dans l'éditeur
-
-
-
-
-
-

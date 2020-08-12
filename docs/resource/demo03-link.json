@@ -71,7 +71,7 @@
       },
       "regionIn": "",
       "regionOut": "computer",
-      "size": { "value": "Medium", "label": "Medium" },
+      "size": { "value": "12px", "label": "12px" },
       "textObj": {
         "colorBack": "",
         "colorText": "",
@@ -181,7 +181,7 @@
       },
       "regionIn": "computer",
       "regionOut": "",
-      "size": { "value": "Medium", "label": "Medium" },
+      "size": { "value": "12px", "label": "12px" },
       "textObj": {
         "colorBack": "",
         "colorText": "",

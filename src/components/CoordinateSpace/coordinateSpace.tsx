@@ -125,6 +125,12 @@ class CoordinateSpace extends React.Component<Props, State> {
    */
   _handleChange(currentTarget: string, name: string, index: number): void {
     let tmp: RegionClass = this.state.arrayCoor;
+    // const widthInitialSpaceDefault = (
+    //   parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10) -
+    //    parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10)).toString();
+    // const heightInitialSpaceDefault = (
+    //   parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10) -
+    //    parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10)).toString();
     tmp = editGoodParameterExtend(name, tmp, currentTarget);
     this.setState({
       arrayCoor: tmp,

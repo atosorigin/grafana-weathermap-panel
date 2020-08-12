@@ -51,6 +51,7 @@
       },
       "regionIn": "",
       "regionOut": "",
+      "size": { "value": "12px", "label": "12px" },
       "textObj": {
         "value": "",
         "isTextTooltip": false,

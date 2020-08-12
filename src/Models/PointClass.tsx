@@ -15,7 +15,8 @@ export class PointClass extends CoordinateSpaceClass {
   valueMetric: string;
   drawGraphicMarker: SelectableValue<string>;
   shape: SelectableValue<string>;
-  sizeWidth: SelectableValue<string>;
+  //sizeWidth: SelectableValue<string>;
+  sizeWidth: string;
   sizeHeight: SelectableValue<string>;
   rotateArrow: string;
   positionShapeX: string;
@@ -45,7 +46,8 @@ export class PointClass extends CoordinateSpaceClass {
     valueMetric: string,
     drawGraphicMarker: SelectableValue<string>,
     shape: SelectableValue<string>,
-    sizeWidth: SelectableValue<string>,
+    //sizeWidth: SelectableValue<string>,
+    sizeWidth: string,
     sizeHeight: SelectableValue<string>,
     rotateArrow: string,
     positionShapeX: string,
