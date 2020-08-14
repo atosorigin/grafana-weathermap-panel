@@ -339,7 +339,7 @@ export default class DrawPoint extends React.Component<Props, State> {
    * @param shapeGraphicMarker
    */
   private drawPoint(drawGraphicMarker: string, size: number, positionShapeX: number, positionShapeY: number): any {
-    const valueToolTip: JSX.Element = this.defineContentTooltip('point');
+    const valueToolTip: JSX.Element | null = this.defineContentTooltip('point');
     const linkUrlPoint = this.props.linkUrl.followLink;
     const borderRadius = this.defineBorderRadius() + 'px';
     const rotate = this.defineRotate();
@@ -349,8 +349,8 @@ export default class DrawPoint extends React.Component<Props, State> {
     // console.log(rotate);
     if (drawGraphicMarker === 'true') {
       if (this.props.buttonAddLinkIsActive || this.props.buttonAddIncurvedLinkIsActive) {
-        return (
-          <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
+        if (valueToolTip === null) {
+          return (
             <div
               style={{
                 border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
@@ -365,28 +365,69 @@ export default class DrawPoint extends React.Component<Props, State> {
               }}
               id={this.props.idPoint}
             ></div>
-          </Tooltip>
-        );
+          );
+        } else {
+          return (
+            <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
+              <div
+                style={{
+                  border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
+                  backgroundColor: this.defineBackgroundColor(),
+                  borderRadius: borderRadius,
+                  padding: size + 'px',
+                  position: 'absolute',
+                  zIndex: 1000,
+                  left: positionShapeX,
+                  top: positionShapeY,
+                  transform: rotate,
+                }}
+                id={this.props.idPoint}
+              ></div>
+            </Tooltip>
+          );
+        }
       } else {
-        return (
-          <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
-            <a
-              href={linkUrlPoint}
-              style={{
-                border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
-                backgroundColor: this.defineBackgroundColor(),
-                borderRadius: borderRadius,
-                padding: size + 'px',
-                position: 'absolute',
-                zIndex: 1000,
-                left: positionShapeX,
-                top: positionShapeY,
-                transform: rotate,
-              }}
-              id={this.props.idPoint}
-            ></a>
-          </Tooltip>
-        );
+        if (valueToolTip === null) {
+          return (
+            <div>
+              <a
+                href={linkUrlPoint}
+                style={{
+                  border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
+                  backgroundColor: this.defineBackgroundColor(),
+                  borderRadius: borderRadius,
+                  padding: size + 'px',
+                  position: 'absolute',
+                  zIndex: 1000,
+                  left: positionShapeX,
+                  top: positionShapeY,
+                  transform: rotate,
+                }}
+                id={this.props.idPoint}
+              ></a>
+            </div>
+          );
+        } else {
+          return (
+            <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
+              <a
+                href={linkUrlPoint}
+                style={{
+                  border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
+                  backgroundColor: this.defineBackgroundColor(),
+                  borderRadius: borderRadius,
+                  padding: size + 'px',
+                  position: 'absolute',
+                  zIndex: 1000,
+                  left: positionShapeX,
+                  top: positionShapeY,
+                  transform: rotate,
+                }}
+                id={this.props.idPoint}
+              ></a>
+            </Tooltip>
+          );
+        }
       }
     } else {
       return <div></div>;
@@ -427,9 +468,9 @@ export default class DrawPoint extends React.Component<Props, State> {
   };
 
   private displayLabel(label: string, name: string, positionX: number, positionY: number, police: string) {
-    const valueToolTip: JSX.Element = this.defineContentTooltip('label');
-    return (
-      <Tooltip key={'tooltipLabel' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
+    const valueToolTip: JSX.Element | null = this.defineContentTooltip('label');
+    if (valueToolTip === null) {
+      return (
         <div
           style={{
             textDecoration: this.defineTextDecoration(),
@@ -446,8 +487,29 @@ export default class DrawPoint extends React.Component<Props, State> {
         >
           {this.defineTextObject(this.props.valueMainMetric)}
         </div>
-      </Tooltip>
-    );
+      );
+    } else {
+      return (
+        <Tooltip key={'tooltipLabel' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
+          <div
+            style={{
+              textDecoration: this.defineTextDecoration(),
+              fontStyle: this.defineFontStyle(),
+              fontWeight: this.defineFontWeight(),
+              fontSize: this.props.sizePolice,
+              fontFamily: police,
+              color: this.props.textObject.colorText || 'black',
+              position: 'absolute',
+              zIndex: 1000,
+              top: this.definePositionLabelY(positionY),
+              left: this.definePositionLabelX(positionX),
+            }}
+          >
+            {this.defineTextObject(this.props.valueMainMetric)}
+          </div>
+        </Tooltip>
+      );
+    }
   }
 
   private defineMainMetric = (mainMetric: string): string => {
@@ -569,7 +631,7 @@ export default class DrawPoint extends React.Component<Props, State> {
     return result;
   };
 
-  private defineContentTooltip(localisation: string) {
+  private defineContentTooltip(localisation: string): JSX.Element | null {
     const contentTooltip: JSX.Element[] = [];
     const contentTooltipMainMetric: JSX.Element[] = [];
     const contentTooltipAuxMetric: JSX.Element[] = [];
@@ -785,7 +847,11 @@ export default class DrawPoint extends React.Component<Props, State> {
             - {nameOrientedLink}
           </p>
         );
+        console.log(nameOrientedLink);
       });
+    }
+    if (contentTooltip.length === 0 && contentTooltipMainMetric.length === 0 && contentTooltipAssociateLink.length === 0) {
+      return null;
     }
 
     return (

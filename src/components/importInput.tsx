@@ -114,6 +114,12 @@ class ImportInput extends React.Component<Props, State> {
   };
   //Looking for a update after Point rework
   loadMonoPoint = (point: any) => {
+    const xMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
+    const xMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
+    const yMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
+    const yMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10);
+    const widthInitialSpaceDefault = (xMaxInitialSpace - xMinInitialSpace).toString();
+    const heightInitialSpaceDefault = (yMaxInitialSpace - yMinInitialSpace).toString();
     const toLoad = new PointClass(
       point.id,
       point.linkURL,
@@ -139,8 +145,8 @@ class ImportInput extends React.Component<Props, State> {
       point.color,
       point.associateOrientedLinksIn,
       point.associateOrientedLinksOut,
-      point.widthInitialSpaceDefault,
-      point.heightInitialSpaceDefault,
+      widthInitialSpaceDefault,
+      heightInitialSpaceDefault,
       point.positionXDefault,
       point.positionYDefault
     );
@@ -168,6 +174,12 @@ class ImportInput extends React.Component<Props, State> {
   };
   //Looking for a update after Region rework
   loadMonoRegion = (region: any) => {
+    const xMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
+    const xMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
+    const yMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
+    const yMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10);
+    const widthInitialSpaceDefault = (xMaxInitialSpace - xMinInitialSpace).toString();
+    const heightInitialSpaceDefault = (yMaxInitialSpace - yMinInitialSpace).toString();
     const toLoad = new RegionClass(
       region.id,
       region.linkURL,
@@ -187,8 +199,8 @@ class ImportInput extends React.Component<Props, State> {
       region.coordsDefault,
       region.mode,
       region.img,
-      region.widthInitialSpace,
-      region.heightInitialSpace
+      widthInitialSpaceDefault,
+      heightInitialSpaceDefault
     );
     // console.log(toLoad);
     // Do some test here to see if your already load a coordinatespace with this id
@@ -213,6 +225,12 @@ class ImportInput extends React.Component<Props, State> {
     });
   };
   loadMonoLink = (link: any) => {
+    const xMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
+    const xMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
+    const yMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
+    const yMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10);
+    const widthInitialSpaceDefault = (xMaxInitialSpace - xMinInitialSpace).toString();
+    const heightInitialSpaceDefault = (yMaxInitialSpace - yMinInitialSpace).toString();
     const toLoad = new OrientedLinkClass(
       link.id,
       link.linkURL,
@@ -247,8 +265,8 @@ class ImportInput extends React.Component<Props, State> {
       link.isIncurved,
       link.mainMetricB,
       link.metricsB,
-      link.widthInitialSpaceDefault,
-      link.heightInitialSpaceDefault,
+      widthInitialSpaceDefault,
+      heightInitialSpaceDefault,
       link.pointAPositionXDefault,
       link.pointAPositionYDefault,
       link.pointBPositionXDefault,
@@ -256,7 +274,6 @@ class ImportInput extends React.Component<Props, State> {
       link.pointCPositionXDefault,
       link.pointCPositionYDefault
     );
-    // console.log(toLoad);
     // Do some test here to see if your already load a coordinatespace with this id
     let selector: number = this.LinkValidator(toLoad);
     if (selector === 0) {

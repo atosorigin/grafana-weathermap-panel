@@ -3,11 +3,19 @@
     {
       "colorMode": false,
       "coords": {
-        "xMax": "0",
-        "xMin": "-18",
-        "yMax": "8",
-        "yMin": "-5"
+        "xMax": "374",
+        "xMin": "308",
+        "yMax": "270",
+        "yMin": "237"
       },
+      "coordsDefault": {
+        "xMax": "374",
+        "xMin": "308",
+        "yMax": "270",
+        "yMin": "237"
+      },
+      "widthInitialSpaceDefault": "",
+      "heightInitialSpaceDefault": "",
       "id": 1,
       "idSVG": "",
       "img": "",
@@ -85,11 +93,19 @@
     {
       "colorMode": false,
       "coords": {
-        "xMax": "-80",
-        "xMin": "-55",
-        "yMax": "15",
-        "yMin": "-30"
+        "xMax": "180",
+        "xMin": "70",
+        "yMax": "270",
+        "yMin": "200"
       },
+      "coordsDefault": {
+        "xMax": "180",
+        "xMin": "70",
+        "yMax": "270",
+        "yMin": "200"
+      },
+      "widthInitialSpaceDefault": "",
+      "heightInitialSpaceDefault": "",
       "id": 2,
       "idSVG": "",
       "img": "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/computer-png.png",

@@ -92,11 +92,11 @@ export interface TemplateGabaritPoint {
 
 export interface TemplateGabaritRegion {
   filtered: string;
-  labelfix: boolean;
+  labelfix: string;
   xylabel: string;
-  xylabel0: string;
+  //xylabel0: string;
   xylabelfix: string;
-  xylabelfix0: string;
+  //xylabelfix0: string;
   type: string;
   meta: string;
   label: string;
@@ -107,6 +107,7 @@ export interface TemplateGabaritRegion {
   idSVG: string;
   mode: boolean;
   img: string;
+  orientedLink: OrientedLinkClass[];
 }
 
 export interface TemplateGabaritLink {

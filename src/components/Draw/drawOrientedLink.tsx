@@ -2161,7 +2161,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else {
-      console.log('9');
+      //console.log('9');
       xA = xA0;
       yA = yA0;
       xB = xB0;
@@ -2217,56 +2217,190 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
 
     const sizeArrowTriangle = 8;
 
-    const valueTooltipMonodirectional: JSX.Element = this.defineValueTooptip('monodirectional');
-    const valueTooltipBidirectionalA: JSX.Element = this.defineValueTooptip('bidirectional', 'A');
-    const valueTooltipBidirectionalB: JSX.Element = this.defineValueTooptip('bidirectional', 'B');
+    const valueTooltipMonodirectional: JSX.Element | null = this.defineValueTooptip('monodirectional');
+    const valueTooltipBidirectionalA: JSX.Element | null = this.defineValueTooptip('bidirectional', 'A');
+    const valueTooltipBidirectionalB: JSX.Element | null = this.defineValueTooptip('bidirectional', 'B');
     const linkUrlOrientedLink: string = this.props.linkUrl.followLink;
     const inverseAxeY = -1;
 
     if (orientationLink === 'double') {
-      return (
-        <a href={linkUrlOrientedLink} id="link">
-          <div>
-            <Tooltip content={valueTooltipBidirectionalA} placement={this.props.tooltipPositionA.value}>
+      let first: JSX.Element = <div></div>;
+      if (valueTooltipBidirectionalA) {
+        first = (
+          <Tooltip content={valueTooltipBidirectionalA} placement={this.props.tooltipPositionA.value}>
+            <div
+              id="linkA"
+              style={{
+                position: 'absolute',
+                zIndex: this.props.zIndex,
+                top: yArrowAC - sizeArrowTriangle / 2,
+                left: xArrowAC,
+                transform: 'rotate(' + angleDegreeAC.toString() + 'deg)',
+                width: distanceAC,
+              }}
+            >
               <div
-                id="linkA"
+                id="arrow1"
                 style={{
-                  position: 'absolute',
-                  zIndex: this.props.zIndex,
-                  top: yArrowAC - sizeArrowTriangle / 2,
-                  left: xArrowAC,
-                  transform: 'rotate(' + angleDegreeAC.toString() + 'deg)',
-                  width: distanceAC,
+                  display: 'flex',
+                  alignContent: 'stretch',
                 }}
               >
                 <div
-                  id="arrow1"
+                  className="arrowTriangle"
                   style={{
-                    display: 'flex',
-                    alignContent: 'stretch',
+                    width: '0',
+                    height: '0',
+                    borderLeft: this.defineBorderSize('A') + 'px solid transparent',
+                    borderRight: this.defineBorderSize('A') + 'px solid transparent',
+                    borderBottom: this.defineBorderSize('A') + 'px solid ' + this.defineColorLink('A'),
+                    transform: 'rotate(270deg)',
                   }}
-                >
-                  <div
-                    className="arrowTriangle"
-                    style={{
-                      width: '0',
-                      height: '0',
-                      borderLeft: this.defineBorderSize('A') + 'px solid transparent',
-                      borderRight: this.defineBorderSize('A') + 'px solid transparent',
-                      borderBottom: this.defineBorderSize('A') + 'px solid ' + this.defineColorLink('A'),
-                      transform: 'rotate(270deg)',
-                    }}
-                  ></div>
-                  <div
-                    style={{
-                      border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
-                      backgroundColor: this.defineColorLink('A'),
-                      width: distanceAC,
-                    }}
-                  ></div>
-                </div>
+                ></div>
+                <div
+                  style={{
+                    border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
+                    backgroundColor: this.defineColorLink('A'),
+                    width: distanceAC,
+                  }}
+                ></div>
               </div>
-            </Tooltip>
+            </div>
+          </Tooltip>
+        );
+      } else {
+        first = (
+          <div
+            id="linkA"
+            style={{
+              position: 'absolute',
+              zIndex: this.props.zIndex,
+              top: yArrowAC - sizeArrowTriangle / 2,
+              left: xArrowAC,
+              transform: 'rotate(' + angleDegreeAC.toString() + 'deg)',
+              width: distanceAC,
+            }}
+          >
+            <div
+              id="arrow1"
+              style={{
+                display: 'flex',
+                alignContent: 'stretch',
+              }}
+            >
+              <div
+                className="arrowTriangle"
+                style={{
+                  width: '0',
+                  height: '0',
+                  borderLeft: this.defineBorderSize('A') + 'px solid transparent',
+                  borderRight: this.defineBorderSize('A') + 'px solid transparent',
+                  borderBottom: this.defineBorderSize('A') + 'px solid ' + this.defineColorLink('A'),
+                  transform: 'rotate(270deg)',
+                }}
+              ></div>
+              <div
+                style={{
+                  border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
+                  backgroundColor: this.defineColorLink('A'),
+                  width: distanceAC,
+                }}
+              ></div>
+            </div>
+          </div>
+        );
+      }
+      let second: JSX.Element = <div></div>;
+      if (valueTooltipBidirectionalB) {
+        second = (
+          <Tooltip content={valueTooltipBidirectionalB} placement={this.props.tooltipPositionB.value}>
+            <div
+              id="linkB"
+              style={{
+                position: 'absolute',
+                zIndex: this.props.zIndex,
+                top: yArrowBC - sizeArrowTriangle / 2,
+                left: xArrowBC,
+                transform: 'rotate(' + angleDegreeBC.toString() + 'deg)',
+                width: distanceBC,
+              }}
+            >
+              <div
+                id="arrow2"
+                style={{
+                  display: 'flex',
+                  alignContent: 'stretch',
+                }}
+              >
+                <div
+                  className="arrowTriangle"
+                  style={{
+                    width: '0',
+                    height: '0',
+                    borderLeft: this.defineBorderSize('B') + 'px solid transparent',
+                    borderRight: this.defineBorderSize('B') + 'px solid transparent',
+                    borderBottom: this.defineBorderSize('B') + 'px solid ' + this.defineColorLink('B'),
+                    transform: 'rotate(270deg)',
+                  }}
+                ></div>
+                <div
+                  style={{
+                    border: this.defineBorderSize('B') + ' solid ' + this.defineColorLink('B'),
+                    backgroundColor: this.defineColorLink('B'),
+                    width: distanceBC,
+                  }}
+                ></div>
+              </div>
+            </div>
+          </Tooltip>
+        );
+      } else {
+        second = (
+          <div
+            id="linkB"
+            style={{
+              position: 'absolute',
+              zIndex: this.props.zIndex,
+              top: yArrowBC - sizeArrowTriangle / 2,
+              left: xArrowBC,
+              transform: 'rotate(' + angleDegreeBC.toString() + 'deg)',
+              width: distanceBC,
+            }}
+          >
+            <div
+              id="arrow2"
+              style={{
+                display: 'flex',
+                alignContent: 'stretch',
+              }}
+            >
+              <div
+                className="arrowTriangle"
+                style={{
+                  width: '0',
+                  height: '0',
+                  borderLeft: this.defineBorderSize('B') + 'px solid transparent',
+                  borderRight: this.defineBorderSize('B') + 'px solid transparent',
+                  borderBottom: this.defineBorderSize('B') + 'px solid ' + this.defineColorLink('B'),
+                  transform: 'rotate(270deg)',
+                }}
+              ></div>
+              <div
+                style={{
+                  border: this.defineBorderSize('B') + ' solid ' + this.defineColorLink('B'),
+                  backgroundColor: this.defineColorLink('B'),
+                  width: distanceBC,
+                }}
+              ></div>
+            </div>
+          </div>
+        );
+      }
+
+      return (
+        <a href={linkUrlOrientedLink} id="link">
+          <div>
+            {first}
             <div
               id={'labelMainMetric' + this.props.id}
               style={{
@@ -2288,46 +2422,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             </div>
           </div>
           <div>
-            <Tooltip content={valueTooltipBidirectionalB} placement={this.props.tooltipPositionB.value}>
-              <div
-                id="linkB"
-                style={{
-                  position: 'absolute',
-                  zIndex: this.props.zIndex,
-                  top: yArrowBC - sizeArrowTriangle / 2,
-                  left: xArrowBC,
-                  transform: 'rotate(' + angleDegreeBC.toString() + 'deg)',
-                  width: distanceBC,
-                }}
-              >
-                <div
-                  id="arrow2"
-                  style={{
-                    display: 'flex',
-                    alignContent: 'stretch',
-                  }}
-                >
-                  <div
-                    className="arrowTriangle"
-                    style={{
-                      width: '0',
-                      height: '0',
-                      borderLeft: this.defineBorderSize('B') + 'px solid transparent',
-                      borderRight: this.defineBorderSize('B') + 'px solid transparent',
-                      borderBottom: this.defineBorderSize('B') + 'px solid ' + this.defineColorLink('B'),
-                      transform: 'rotate(270deg)',
-                    }}
-                  ></div>
-                  <div
-                    style={{
-                      border: this.defineBorderSize('B') + ' solid ' + this.defineColorLink('B'),
-                      backgroundColor: this.defineColorLink('B'),
-                      width: distanceBC,
-                    }}
-                  ></div>
-                </div>
-              </div>
-            </Tooltip>
+            {second}
             <div
               id={'labelMainMetricB' + this.props.id}
               style={{
@@ -2351,70 +2446,145 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         </a>
       );
     } else if (orientationLink === 'AB') {
-      if (this.props.isIncurved.value) {
-        return (
-          <a href={linkUrlOrientedLink}>
-            <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
+      let first: JSX.Element = <div></div>;
+      if (valueTooltipMonodirectional) {
+        first = (
+          <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
+            <div
+              id="partA"
+              style={{
+                position: 'absolute',
+                zIndex: this.props.zIndex,
+                top: yArrowAC - sizeArrowTriangle / 2,
+                left: xArrowAC,
+                transform: 'rotate(' + angleDegreeAC.toString() + 'deg)',
+                width: distanceAC,
+              }}
+            >
               <div
-                id="partA"
                 style={{
-                  position: 'absolute',
-                  zIndex: this.props.zIndex,
-                  top: yArrowAC - sizeArrowTriangle / 2,
-                  left: xArrowAC,
-                  transform: 'rotate(' + angleDegreeAC.toString() + 'deg)',
+                  padding: parseInt(this.defineBorderSize('A'), 10) / 2 + 'px',
+                  border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
+                  backgroundColor: this.defineColorLink('A'),
                   width: distanceAC,
+                }}
+              ></div>
+            </div>
+          </Tooltip>
+        );
+      } else {
+        first = (
+          <div
+            id="partA"
+            style={{
+              position: 'absolute',
+              zIndex: this.props.zIndex,
+              top: yArrowAC - sizeArrowTriangle / 2,
+              left: xArrowAC,
+              transform: 'rotate(' + angleDegreeAC.toString() + 'deg)',
+              width: distanceAC,
+            }}
+          >
+            <div
+              style={{
+                padding: parseInt(this.defineBorderSize('A'), 10) / 2 + 'px',
+                border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
+                backgroundColor: this.defineColorLink('A'),
+                width: distanceAC,
+              }}
+            ></div>
+          </div>
+        );
+      }
+      let second: JSX.Element = <div></div>;
+      if (valueTooltipMonodirectional) {
+        second = (
+          <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
+            <div
+              id="partB"
+              style={{
+                position: 'absolute',
+                zIndex: this.props.zIndex,
+                top: yArrowBC - sizeArrowTriangle / 2,
+                left: xArrowBC,
+                transform: 'rotate(' + angleDegreeBC.toString() + 'deg)',
+                width: distanceBC,
+              }}
+            >
+              <div
+                id="arrow2"
+                style={{
+                  display: 'flex',
                 }}
               >
                 <div
                   style={{
-                    padding: parseInt(this.defineBorderSize('A'), 10) / 2 + 'px',
                     border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
                     backgroundColor: this.defineColorLink('A'),
-                    width: distanceAC,
+                    width: distanceBC,
+                  }}
+                ></div>
+                <div
+                  className="arrowTriangle"
+                  style={{
+                    width: '0',
+                    height: '0',
+                    borderLeft: this.defineBorderSize('A') + 'px solid transparent',
+                    borderRight: this.defineBorderSize('A') + 'px solid transparent',
+                    borderBottom: this.defineBorderSize('A') + 'px solid ' + this.defineColorLink('A'),
+                    transform: 'rotate(90deg)',
                   }}
                 ></div>
               </div>
-            </Tooltip>
-            <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
+            </div>
+          </Tooltip>
+        );
+      } else {
+        second = (
+          <div
+            id="partB"
+            style={{
+              position: 'absolute',
+              zIndex: this.props.zIndex,
+              top: yArrowBC - sizeArrowTriangle / 2,
+              left: xArrowBC,
+              transform: 'rotate(' + angleDegreeBC.toString() + 'deg)',
+              width: distanceBC,
+            }}
+          >
+            <div
+              id="arrow2"
+              style={{
+                display: 'flex',
+              }}
+            >
               <div
-                id="partB"
                 style={{
-                  position: 'absolute',
-                  zIndex: this.props.zIndex,
-                  top: yArrowBC - sizeArrowTriangle / 2,
-                  left: xArrowBC,
-                  transform: 'rotate(' + angleDegreeBC.toString() + 'deg)',
+                  border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
+                  backgroundColor: this.defineColorLink('A'),
                   width: distanceBC,
                 }}
-              >
-                <div
-                  id="arrow2"
-                  style={{
-                    display: 'flex',
-                  }}
-                >
-                  <div
-                    style={{
-                      border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
-                      backgroundColor: this.defineColorLink('A'),
-                      width: distanceBC,
-                    }}
-                  ></div>
-                  <div
-                    className="arrowTriangle"
-                    style={{
-                      width: '0',
-                      height: '0',
-                      borderLeft: this.defineBorderSize('A') + 'px solid transparent',
-                      borderRight: this.defineBorderSize('A') + 'px solid transparent',
-                      borderBottom: this.defineBorderSize('A') + 'px solid ' + this.defineColorLink('A'),
-                      transform: 'rotate(90deg)',
-                    }}
-                  ></div>
-                </div>
-              </div>
-            </Tooltip>
+              ></div>
+              <div
+                className="arrowTriangle"
+                style={{
+                  width: '0',
+                  height: '0',
+                  borderLeft: this.defineBorderSize('A') + 'px solid transparent',
+                  borderRight: this.defineBorderSize('A') + 'px solid transparent',
+                  borderBottom: this.defineBorderSize('A') + 'px solid ' + this.defineColorLink('A'),
+                  transform: 'rotate(90deg)',
+                }}
+              ></div>
+            </div>
+          </div>
+        );
+      }
+      if (this.props.isIncurved.value) {
+        return (
+          <a href={linkUrlOrientedLink}>
+            {first}
+            {second}
             <div
               id={'labelMainMetric' + this.props.id}
               style={{
@@ -2437,8 +2607,9 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           </a>
         );
       } else {
-        return (
-          <a href={linkUrlOrientedLink} target="_blank">
+        let first: JSX.Element = <div></div>;
+        if (valueTooltipMonodirectional) {
+          first = (
             <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
               <div
                 id="link"
@@ -2480,6 +2651,53 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 </div>
               </div>
             </Tooltip>
+          );
+        } else {
+          first = (
+            <div
+              id="link"
+              style={{
+                position: 'absolute',
+                zIndex: this.props.zIndex,
+                top: yArrowAB - sizeArrowTriangle / 2,
+                left: xArrowAB,
+                transform: 'rotate(' + angleDegreeAB.toString() + 'deg)',
+                width: distanceAB,
+              }}
+            >
+              <div
+                id="arrow1"
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}
+              >
+                <div
+                  className="arrowTriangle"
+                  style={{
+                    //position: 'absolute',
+                    width: '0',
+                    height: '0',
+                    borderLeft: this.defineBorderSize('A') + 'px solid transparent',
+                    borderRight: this.defineBorderSize('A') + 'px solid transparent',
+                    borderBottom: this.defineBorderSize('A') + 'px solid ' + this.defineColorLink('A'),
+                    transform: 'rotate(270deg)',
+                  }}
+                ></div>
+                <div
+                  style={{
+                    border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
+                    backgroundColor: this.defineColorLink('A'),
+                    width: distanceAB,
+                  }}
+                ></div>
+              </div>
+            </div>
+          );
+        }
+        return (
+          <a href={linkUrlOrientedLink} target="_blank">
+            {first}
             <div
               id={'labelMainMetric' + this.props.id}
               style={{
@@ -2504,8 +2722,9 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       }
     } else if (orientationLink === 'no') {
       if (this.props.isIncurved.value) {
-        return (
-          <a href={linkUrlOrientedLink}>
+        let first: JSX.Element = <div></div>;
+        if (valueTooltipMonodirectional) {
+          first = (
             <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
               <div
                 id="partA"
@@ -2522,6 +2741,28 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 }}
               ></div>
             </Tooltip>
+          );
+        } else {
+          first = (
+            <div
+              id="partA"
+              style={{
+                position: 'absolute',
+                zIndex: this.props.zIndex,
+                top: yArrowAC,
+                left: xArrowAC,
+                transform: 'rotate(' + angleDegreeAC.toString() + 'deg)',
+                height: this.defineBorderSize('A') + 'px',
+                width: distanceAC,
+                border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
+                backgroundColor: this.defineColorLink('A'),
+              }}
+            ></div>
+          );
+        }
+        let second: JSX.Element = <div></div>;
+        if (valueTooltipMonodirectional) {
+          second = (
             <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
               <div
                 id="partB"
@@ -2538,6 +2779,29 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 }}
               ></div>
             </Tooltip>
+          );
+        } else {
+          second = (
+            <div
+              id="partB"
+              style={{
+                position: 'absolute',
+                zIndex: this.props.zIndex,
+                top: yArrowBC,
+                left: xArrowBC,
+                transform: 'rotate(' + angleDegreeBC.toString() + 'deg)',
+                height: this.defineBorderSize('A') + 'px',
+                width: distanceBC,
+                border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
+                backgroundColor: this.defineColorLink('A'),
+              }}
+            ></div>
+          );
+        }
+        return (
+          <a href={linkUrlOrientedLink}>
+            {first}
+            {second}
             <div
               id={'labelMainMetric' + this.props.id}
               style={{
@@ -2560,8 +2824,9 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           </a>
         );
       } else {
-        return (
-          <a href={linkUrlOrientedLink} target="_blank">
+        let first: JSX.Element = <div></div>;
+        if (valueTooltipMonodirectional) {
+          first = (
             <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
               <div
                 id="link"
@@ -2578,6 +2843,28 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 }}
               ></div>
             </Tooltip>
+          );
+        } else {
+          first = (
+            <div
+              id="link"
+              style={{
+                position: 'absolute',
+                zIndex: this.props.zIndex,
+                top: yArrowAB,
+                left: xArrowAB,
+                transform: 'rotate(' + angleDegreeAB.toString() + 'deg)',
+                width: distanceAB,
+                height: this.defineBorderSize('A') + 'px',
+                border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
+                backgroundColor: this.defineColorLink('A'),
+              }}
+            ></div>
+          );
+        }
+        return (
+          <a href={linkUrlOrientedLink} target="_blank">
+            {first}
             <div
               id={'labelMainMetric' + this.props.id}
               style={{
@@ -2863,7 +3150,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     return result;
   };
 
-  private defineValueTooptip = (typeLink: string, link?: string) => {
+  private defineValueTooptip = (typeLink: string, link?: string): JSX.Element | null => {
     const contentTooltip: JSX.Element[] = [];
     const contentTooltipMainMetric: JSX.Element[] = [];
     const contentTooltipAuxMetric: JSX.Element[] = [];
@@ -3161,7 +3448,9 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       }
     }
-
+    if (contentTooltip.length === 0 && contentTooltipAuxMetric.length === 0 && contentTooltipMainMetric.length === 0) {
+      return null;
+    }
     return (
       <div style={{ border: '1px solid black', padding: 0 }}>
         {contentTooltip}

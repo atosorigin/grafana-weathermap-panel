@@ -1,10 +1,10 @@
 {
   "coordinateSpaceInitial": {
     "coordinate": {
-      "xMin": "-100",
-      "xMax": "100",
-      "yMin": "-100",
-      "yMax": "100"
+      "xMin": "0",
+      "xMax": "776",
+      "yMin": "0",
+      "yMax": "411"
     },
     "displayArea": false
   },

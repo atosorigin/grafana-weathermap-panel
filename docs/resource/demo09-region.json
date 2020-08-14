@@ -3,10 +3,10 @@
     {
       "colorMode": false,
       "coords": {
-        "xMin": "-20",
-        "xMax": "-60",
-        "yMin": "-20",
-        "yMax": "-60"
+        "xMin": "160",
+        "xMax": "310",
+        "yMin": "80",
+        "yMax": "160"
       },
       "id": 1,
       "idSVG": "",
@@ -88,10 +88,10 @@
     {
       "colorMode": false,
       "coords": {
-        "xMin": "-20",
-        "xMax": "20",
-        "yMin": "-20",
-        "yMax": "20"
+        "xMin": "310",
+        "xMax": "470",
+        "yMin": "160",
+        "yMax": "250"
       },
       "id": 2,
       "idSVG": "",
@@ -105,7 +105,7 @@
       "lowerLimit": [
         {
           "backColor": "#",
-          "borderColor": "#FFFF00",
+          "borderColor": "#8F3BB8",
           "id": 0,
           "lowerLimitMax": "",
           "lowerLimitMin": "",
@@ -173,10 +173,10 @@
     {
       "colorMode": false,
       "coords": {
-        "xMin": "20",
-        "xMax": "60",
-        "yMin": "20",
-        "yMax": "60"
+        "xMin": "470",
+        "xMax": "630",
+        "yMin": "250",
+        "yMax": "330"
       },
       "id": 3,
       "idSVG": "",
@@ -190,7 +190,7 @@
       "lowerLimit": [
         {
           "backColor": "",
-          "borderColor": "#0000FF",
+          "borderColor": "#37872D",
           "id": 0,
           "lowerLimitMax": "",
           "lowerLimitMin": "",

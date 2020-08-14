@@ -3,7 +3,7 @@ import { PanelEditorProps, SelectableValue } from '@grafana/data';
 import { SimpleOptions, GabaritFile, Metric, GlobalGabaritDefault } from '../types';
 import { FormField, Button, Collapse, FormLabel, Select } from '@grafana/ui';
 //import /*pointClassImport, regionClassImport, gabaritPointClassImport, gabaritRegionClassImport */ '../../config/testVariable';
-import { coordParse, LabelCoord2D, Filtred, filterParse } from '../Functions/loaderGabarit';
+import { coordParse, LabelCoord2D, Filtred, filterParse, coordParseRegion, filterParseRegion } from '../Functions/loaderGabarit';
 //import { LinkURLClass } from 'Models/LinkURLClass';
 //import { PositionParameterClass } from 'Models/PositionParameterClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
@@ -17,6 +17,8 @@ import { TextObject, GenerateTextObject } from 'Models/TextObjectClass';
 import { Style } from 'components/Parametrage/styleComponent';
 import { RegionClass, Coord4D } from 'Models/RegionClass';
 import { initRegionCoordinateSpace } from 'Functions/initRegionCoordinateSpace';
+// import { LowerLimitClass } from 'Models/LowerLimitClass';
+// import { initPoint } from 'Functions/initPoint';
 
 interface Props extends PanelEditorProps<SimpleOptions> {}
 
@@ -198,7 +200,6 @@ class Gabarit extends React.Component<Props, State> {
     let points: any = [];
     let links: any = [];
     const defaultValue: GlobalGabaritDefault = this.fillGlobalGabaritDefault(file);
-    console.log(defaultValue);
 
     for (const region of file.templates.regions) {
       try {
@@ -244,61 +245,84 @@ class Gabarit extends React.Component<Props, State> {
     // this.props.options.saveDefaultGabaritFile.loaded = true;
   };
 
-  // export interface GlobalGabaritDefault {
-  //   colorMode: boolean;
-  //   coords: Coord4D;
-  //   linkURL: any[];
-  //   lowerLimit: LowerLimit[];
-  //   mainMetric: Metric;
-  //   meta: string;
-  //   metrics: Metric[];
-  //   mode: boolean;
-  //   orientedLink: OrientedLinkClass[];
-  //   positionParameter: PositionParameterClass;
-  //   textObj: TextObject;
-  //   traceBack: boolean;
-  //   traceBorder: boolean;
-  // }
-
-  // constructor(
-  //   id: number,
-  //   linkURL: LinkURLClass,
-  //   meta: string,
-  //   lowerLimitClass: LowerLimitClass[],
-  //   label: string,
-  //   textObj: TextObject,
-  //   mainMetric: Metric,
-  //   metrics: Metric[],
-  //   colorMode: boolean,
-  //   traceBack: boolean,
-  //   traceBorder: boolean,
-  //   positionParameter: PositionParameterClass,
-  //   idSVG: string,
-  //   orientedLink: OrientedLinkClass[],
-  //   coords: Coord4D,
-  //   coordsDefault: Coord4D,
-  //   mode: boolean,
-  //   img: string,
-  //   widthInitialSpaceDefault: string,
-  //   heightInitialSpaceDefault: string
-  // )
-
   fillRegionDefault = (uneRegion: any, defaultValue: GlobalGabaritDefault, id: number) => {
     let newRegion: RegionClass = initRegionCoordinateSpace(id);
-    console.log(newRegion);
 
+    const coor: Coord4D = {
+      xMin: uneRegion.coords.xMin.toString(),
+      xMax: uneRegion.coords.xMax.toString(),
+      yMin: uneRegion.coords.yMin.toString(),
+      yMax: uneRegion.coords.yMax.toString(),
+    };
+    //console.log(coor);
+
+    // add real value region and if is null replace by default gabarit
     newRegion.linkURL = uneRegion.linkURL ? uneRegion.linkURL : defaultValue.linkURL;
+    newRegion.linkURL = uneRegion.meta ? uneRegion.meta : defaultValue.meta;
+    newRegion.linkURL = uneRegion.lowerLimitClass ? uneRegion.lowerLimitClass : defaultValue.lowerLimit;
     newRegion.label = uneRegion.label;
+    newRegion.textObj = uneRegion.textObj ? uneRegion.textObj : defaultValue.textObj;
+    newRegion.mainMetric = uneRegion.mainMetric ? uneRegion.mainMetric : defaultValue.mainMetric;
+    newRegion.metrics = uneRegion.metrics ? uneRegion.metrics : defaultValue.metrics;
+    newRegion.colorMode = uneRegion.colorMode; // ? uneRegion.colorMode : defaultValue.colorMode;
+    newRegion.traceBack = uneRegion.traceBack; // ? uneRegion.traceBack : defaultValue.traceBack;
+    newRegion.traceBorder = uneRegion.traceBorder; // ? uneRegion.traceBorder : defaultValue.traceBorder;
+    newRegion.positionParameter = uneRegion.positionParameter ? uneRegion.positionParameter : defaultValue.positionParameter;
+    newRegion.idSVG = uneRegion.idSVG;
+    newRegion.orientedLink = uneRegion.orientedLink ? uneRegion.orientedLink : defaultValue.orientedLink;
+    newRegion.coords = coor;
 
-    // fill region with uneRegion and if value is undefined and if exist in GlobalGabaritDefault -> add value
+    newRegion.coordsDefault = coor;
+    newRegion.mode = uneRegion.mode;
+    newRegion.img = uneRegion.img;
+    newRegion.widthInitialSpaceDefault = uneRegion.widthInitialSpaceDefault;
+    newRegion.heightInitialSpaceDefault = uneRegion.heightInitialSpaceDefault;
+
+    //console.log(newRegion);
+
+    const newAllRegion: RegionClass[] = this.props.options.regionCoordinateSpace.concat(newRegion);
+
+    this.props.onOptionsChange({
+      ...this.props.options,
+      regionCoordinateSpace: newAllRegion,
+    });
+    //console.log(newAllRegion);
   };
 
-  fillPointDefault = (unPoint: any, defaultValue: GlobalGabaritDefault) => {
-    console.log(unPoint);
+  fillPointDefault = (unPoint: any, defaultValue: GlobalGabaritDefault, id: number) => {
+    // let newPoint: PointClass = initPoint(id);
+    // linkURL: LinkURLClass,
+    // meta: string,
+    // lowerLimitClass: LowerLimitClass[],
+    // label: string,
+    // textObj: TextObject,
+    // mainMetric: Metric,
+    // metrics: Metric[],
+    // colorMode: boolean,
+    // traceBack: boolean,
+    // traceBorder: boolean,
+    // positionParameter: PositionParameterClass,
+    // name: string,
+    // valueMetric: string,
+    // drawGraphicMarker: SelectableValue<string>,
+    // shape: SelectableValue<string>,
+    // //sizeWidth: SelectableValue<string>,
+    // sizeWidth: string,
+    // sizeHeight: SelectableValue<string>,
+    // rotateArrow: string,
+    // positionShapeX: string,
+    // positionShapeY: string,
+    // color: string,
+    // associateOrientedLinksIn: any[],
+    // associateOrientedLinksOut: any[],
+    // widthInitialSpaceDefault: string,
+    // heightInitialSpaceDefault: string,
+    // positionXDefault: string,
+    // positionYDefault: string
   };
 
   fillLinkDefault = (unLink: any, defaultValue: GlobalGabaritDefault) => {
-    console.log(unLink);
+    // console.log(unLink);
   };
 
   fetchDataGabaritDefault = (defaultValue: GlobalGabaritDefault, regions: any, points: any, links: any) => {
@@ -319,9 +343,19 @@ class Gabarit extends React.Component<Props, State> {
     }
 
     // points
+
+    let idPoint = 0;
+    for (const line of this.props.options.arrayPoints) {
+      if (idPoint < line.id) {
+        idPoint = line.id;
+      }
+    }
+    idPoint += 1;
+
     for (const line of points) {
       for (const unPoint of line.points) {
-        this.fillPointDefault(unPoint, defaultValue);
+        this.fillPointDefault(unPoint, defaultValue, idPoint);
+        ++idPoint;
       }
     }
 
@@ -342,7 +376,6 @@ class Gabarit extends React.Component<Props, State> {
         // console.log(file);
         let response = await fetch(url);
         file = await response.json();
-        console.log(file);
         this.loadGabarit(file, url);
       } catch (error) {
         console.error(error);
@@ -501,8 +534,8 @@ class Gabarit extends React.Component<Props, State> {
 
     ////// Text Object
     generateValue = {
-      legendElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.legendFormat,
-      numericFormatElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.nemericFormatElement,
+      legendElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.legendElement,
+      numericFormatElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.numericFormatElement,
       unit: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.unit,
       displayObjectInTooltip: Boolean(gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.displayObjectInTooltip),
       addColorTextElement: Boolean(gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.addColorTextElement),
@@ -512,8 +545,8 @@ class Gabarit extends React.Component<Props, State> {
     };
 
     generateAux = {
-      legendElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.legendFormat,
-      numericFormatElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.nemericFormatElement,
+      legendElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.legendElement,
+      numericFormatElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.numericFormatElement,
       unit: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.unit,
       displayObjectInTooltip: Boolean(gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.displayObjectInTooltip),
       addColorTextElement: Boolean(gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.addColorTextElement),
@@ -934,14 +967,6 @@ class Gabarit extends React.Component<Props, State> {
     this.props.options.arrayPoints.forEach((element) => {
       newID++;
     });
-    const xMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
-    const xMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
-    const yMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
-    const yMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10);
-    const widthInitialSpaceDefault = (xMaxInitialSpace - xMinInitialSpace).toString();
-    const heightInitialSpaceDefault = (yMaxInitialSpace - yMinInitialSpace).toString();
-    console.log(widthInitialSpaceDefault);
-    console.log(heightInitialSpaceDefault);
 
     filterLink.forEach((element, index) => {
       let maA = metricALink.length;
@@ -982,14 +1007,14 @@ class Gabarit extends React.Component<Props, State> {
           isIncurvedLink[index],
           mainMetricBLink[index],
           metricBLink[index],
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          ''
+          initialWidth.toString(),
+          initialHeight.toString(),
+          posALink[index].x,
+          posALink[index].y,
+          posBLink[index].x,
+          posBLink[index].y,
+          posCLink[index].x,
+          posCLink[index].y
         );
         newID++;
         this.props.options.arrayOrientedLinks.push(toLoad);
@@ -1031,14 +1056,14 @@ class Gabarit extends React.Component<Props, State> {
           isIncurvedLink[index],
           mainMetricBLink[index],
           metricBLink[index],
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          ''
+          initialWidth.toString(),
+          initialHeight.toString(),
+          posALink[index].x,
+          posALink[index].y,
+          posBLink[index].x,
+          posBLink[index].y,
+          posCLink[index].x,
+          posCLink[index].y
         );
         newID++;
         this.props.options.arrayOrientedLinks.push(toLoad);
@@ -1079,14 +1104,14 @@ class Gabarit extends React.Component<Props, State> {
           isIncurvedLink[index],
           mainMetricBLink[index],
           [],
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          ''
+          initialWidth.toString(),
+          initialHeight.toString(),
+          posALink[index].x,
+          posALink[index].y,
+          posBLink[index].x,
+          posBLink[index].y,
+          posCLink[index].x,
+          posCLink[index].y
         );
         newID++;
         this.props.options.arrayOrientedLinks.push(toLoad);
@@ -1132,8 +1157,8 @@ class Gabarit extends React.Component<Props, State> {
           isIncurvedLink[index],
           mainMetricBLink[index],
           [],
-          widthInitialSpaceDefault,
-          heightInitialSpaceDefault,
+          initialWidth.toString(),
+          initialHeight.toString(),
           posALink[index].x,
           posALink[index].y,
           posBLink[index].x,
@@ -1150,8 +1175,8 @@ class Gabarit extends React.Component<Props, State> {
     /*  */
     //Template
     let filterRegion: Filtred[][] = []; //
-    let posARegion: LabelCoord2D[] = []; //
-    let posBRegion: LabelCoord2D[] = []; //
+    let posRegion: Coord4D[] = []; //
+
     let metaRegion: string[] = []; //
     let labelRegion: string[] = []; //
     let positionParameterRegion: PositionParameterClass[] = []; //
@@ -1161,16 +1186,16 @@ class Gabarit extends React.Component<Props, State> {
     let idSVGRegion: string[] = [];
     let modeRegion: boolean[] = [];
     let imgRegion: string[] = [];
+    let orientedLinkAssociate: OrientedLinkClass[][] = [];
 
     gabaritFileTmp.templateGabaritRegion.forEach((region, index) => {
       if (region.labelfix.toString() === 'false') {
-        posARegion.push(coordParse(region.xylabel));
-        posBRegion.push(coordParse(region.xylabel0));
+        posRegion.push(coordParseRegion(region.xylabel));
       } else {
-        posARegion.push(coordParse(region.xylabelfix));
-        posBRegion.push(coordParse(region.xylabelfix0));
+        posRegion.push(coordParseRegion(region.xylabelfix));
       }
-      filterRegion.push(filterParse(region.filtered));
+      filterRegion.push(filterParseRegion(region.filtered));
+      linkURLRegion.push(region.linkURL);
       metaRegion.push(region.meta);
       labelRegion.push(region.label);
       mainMetricRegion.push({
@@ -1184,13 +1209,33 @@ class Gabarit extends React.Component<Props, State> {
         returnQuery: [],
         manageValue: region.mainMetric.manageValue,
       });
-      if (mainMetricPoint[index].refId === null) {
-        mainMetricPoint[index].refId = 'A';
+      if (mainMetricRegion[index].refId === null) {
+        mainMetricRegion[index].refId = 'A';
       }
       region.metrics.forEach((element) => {
         metricRegion[index].push(element);
       });
-      //metric todo
+      mainMetricRegion.push({
+        key: region.mainMetric.key,
+        unit: region.mainMetric.unit,
+        format: region.mainMetric.format,
+        keyValue: '',
+        filter: filterRegion[index],
+        refId: gabaritFileTmp.queryID,
+        expr: '',
+        returnQuery: [],
+        manageValue: region.mainMetric.manageValue,
+      });
+      if (mainMetricRegion[index].refId === null) {
+        mainMetricRegion[index].refId = 'A';
+      }
+      region.metrics.forEach((element) => {
+        metricRegion[index].push(element);
+      });
+      modeRegion.push(region.mode);
+      idSVGRegion.push(region.idSVG);
+      imgRegion.push(region.img);
+
       tmpToolTipA = { label: region.positionParameter.tooltipA, value: region.positionParameter.tooltipA };
       tmpToolTipB = { label: region.positionParameter.tooltipB, value: region.positionParameter.tooltipB };
       tmpLabelAPosition = coordParse(region.positionParameter.xylabelA);
@@ -1198,56 +1243,201 @@ class Gabarit extends React.Component<Props, State> {
       positionParameterRegion.push(
         new PositionParameterClass(tmpLabelAPosition.x, tmpLabelAPosition.y, tmpLabelBPosition.x, tmpLabelBPosition.y, tmpToolTipA, tmpToolTipB)
       );
-      linkURLRegion.push(new LinkURLClass(region.linkURL.followRegion, region.linkURL.hoveringTooltipRegion, region.linkURL.hoveringTooltipTex));
-      idSVGRegion.push(region.idSVG);
-      modeRegion.push(Boolean(region.mode));
-      imgRegion.push(region.img);
-      const coor: Coord4D = { xMax: '', xMin: '', yMax: '', yMin: '' };
-      let id = -1;
-      for (const line of this.props.options.regionCoordinateSpace) {
-        if (line.id > id) {
-          id = line.id;
-        }
-      }
-      id += 1;
-
-      const mainMetricRR: Metric = { key: '', keyValue: '', refId: '', expr: '', manageValue: 'avg', format: '', unit: '', returnQuery: [] };
-
-      let regionPush: RegionClass = new RegionClass(
-        id,
-        linkURLRegion[0],
-        metaRegion[0],
-        gabaritFileTmp.globalGabarit.lowerLimit,
-        labelRegion[0],
-        textObj,
-        mainMetricRR,
-        [],
-        colorMode,
-        traceBack,
-        traceBorder,
-        positionParameterRegion[0],
-        idSVGRegion[0],
-        [],
-        coor,
-        coor,
-        modeRegion[0],
-        imgRegion[0],
-        '',
-        ''
-      );
-      console.log(regionPush);
-
-      const newRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
-      newRegion.push(regionPush);
-      this.props.onOptionsChange({
-        ...this.props.options,
-        regionCoordinateSpace: newRegion,
-      });
+      orientedLinkAssociate.push(region.orientedLink);
     });
-    if (idx) {
-      this.props.options.saveGabaritFile[idx].loaded = true;
-    }
+
+    newID = 0;
+    this.props.options.regionCoordinateSpace.forEach((element) => {
+      newID++;
+    });
+
+    filterRegion.forEach((element, index) => {
+      if (metricRegion.length > 0) {
+        console.log('1');
+        let toLoad: RegionClass = new RegionClass(
+          newID + 1,
+          linkURLRegion[index],
+          metaRegion[index],
+          gabaritFileTmp.globalGabarit.lowerLimit,
+          labelRegion[index],
+          textObj,
+          mainMetricRegion[index],
+          metricRegion[index],
+          colorMode,
+          traceBack,
+          traceBorder,
+          positionParameterRegion[index],
+          idSVGRegion[index],
+          orientedLinkAssociate[index],
+          posRegion[index],
+          posRegion[index],
+          modeRegion[index],
+          imgRegion[index],
+          initialWidth.toString(),
+          initialHeight.toString()
+        );
+        newID++;
+        this.props.options.regionCoordinateSpace.push(toLoad);
+      } else {
+        console.log('2');
+        let toLoad: RegionClass = new RegionClass(
+          newID + 1,
+          linkURLRegion[index],
+          metaRegion[index],
+          gabaritFileTmp.globalGabarit.lowerLimit,
+          labelRegion[index],
+          textObj,
+          mainMetricRegion[index],
+          [],
+          colorMode,
+          traceBack,
+          traceBorder,
+          positionParameterRegion[index],
+          idSVGRegion[index],
+          orientedLinkAssociate[index],
+          posRegion[index],
+          posRegion[index],
+          modeRegion[index],
+          imgRegion[index],
+          initialWidth.toString(),
+          initialHeight.toString()
+        );
+        newID++;
+        this.props.options.regionCoordinateSpace.push(toLoad);
+      }
+    });
   };
+
+  // gabaritFileTmp.templateGabaritRegion.forEach((region, index) => {
+  //   if (region.labelfix.toString() === 'false') {
+  //     posARegion.push(coordParse(region.xylabel));
+  //     posBRegion.push(coordParse(region.xylabel0));
+  //   } else {
+  //     posARegion.push(coordParse(region.xylabelfix));
+  //     posBRegion.push(coordParse(region.xylabelfix0));
+  //   }
+  //   filterRegion.push(filterParse(region.filtered));
+  //   metaRegion.push(region.meta);
+  //   labelRegion.push(region.label);
+  //   mainMetricRegion.push({
+  //     key: region.mainMetric.key,
+  //     unit: region.mainMetric.unit,
+  //     format: region.mainMetric.format,
+  //     keyValue: '',
+  //     filter: filterRegion[index],
+  //     refId: gabaritFileTmp.queryID,
+  //     expr: '',
+  //     returnQuery: [],
+  //     manageValue: region.mainMetric.manageValue,
+  //   });
+  //   if (mainMetricPoint[index].refId === null) {
+  //     mainMetricPoint[index].refId = 'A';
+  //   }
+  //   region.metrics.forEach(element => {
+  //     metricRegion[index].push(element);
+  //   });
+  //   //metric todo
+  //   tmpToolTipA = { label: region.positionParameter.tooltipA, value: region.positionParameter.tooltipA };
+  //   tmpToolTipB = { label: region.positionParameter.tooltipB, value: region.positionParameter.tooltipB };
+  //   tmpLabelAPosition = coordParse(region.positionParameter.xylabelA);
+  //   tmpLabelBPosition = coordParse(region.positionParameter.xylabelB);
+  //   positionParameterRegion.push(
+  //     new PositionParameterClass(tmpLabelAPosition.x, tmpLabelAPosition.y, tmpLabelBPosition.x, tmpLabelBPosition.y, tmpToolTipA, tmpToolTipB)
+  //   );
+  //   linkURLRegion.push(new LinkURLClass(region.linkURL.followRegion, region.linkURL.hoveringTooltipRegion, region.linkURL.hoveringTooltipTex));
+  //   idSVGRegion.push(region.idSVG);
+  //   modeRegion.push(Boolean(region.mode));
+  //   imgRegion.push(region.img);
+  //   const coor: Coord4D = { xMax: '', xMin: '', yMax: '', yMin: '' };
+  //   let id = -1;
+  //   for (const line of this.props.options.regionCoordinateSpace) {
+  //     if (line.id > id) {
+  //       id = line.id;
+  //     }
+  //   }
+  //   id += 1;
+
+  //   const mainMetricRR: Metric = { key: '', keyValue: '', refId: '', expr: '', manageValue: 'avg', format: '', unit: '', returnQuery: [] };
+
+  //     let regionPush: RegionClass = new RegionClass(
+  //       id,
+  //     linkURL,
+  //     meta,
+  //     uneRegion.lowerLimitClass,
+  //     uneRegion.label,
+  //     uneRegion.textObj,
+  //     uneRegion.mainMetric,
+  //     uneRegion.metrics,
+  //     uneRegion.colorMode,
+  //     uneRegion.traceBack,
+  //     uneRegion.traceBorder,
+  //     uneRegion.positionParameter,
+  //     uneRegion.idSVG,
+  //     uneRegion.orientedLink,
+  //     {
+  //     xMin: uneRegion.coords.xMin.toString(),
+  //     xMax: uneRegion.coords.xMax.toString(),
+  //     yMin: uneRegion.coords.yMin.toString(),
+  //     yMax: uneRegion.coords.yMax.toString(),
+  // },
+  // {
+  //     xMin: uneRegion.coords.xMin.toString(),
+  //     xMax: uneRegion.coords.xMax.toString(),
+  //     yMin: uneRegion.coords.yMin.toString(),
+  //     yMax: uneRegion.coords.yMax.toString(),
+  // },
+  // uneRegion.mode,
+  // uneRegion.img,
+  // uneRegion.widthInitialSpaceDefault,
+  // uneRegion.heightInitialSpaceDefault
+  // );
+  //     );
+  //     console.log(regionPush);
+
+  //     const newRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
+  //     newRegion.push(regionPush);
+  //     this.props.onOptionsChange({
+  //       ...this.props.options,
+  //       regionCoordinateSpace: newRegion,
+  //     });
+  //   });
+  //   if (idx) {
+  //     this.props.options.saveGabaritFile[idx].loaded = true;
+  //   }
+  // };
+
+  //   const nn: RegionClass = new RegionClass(
+  //     id,
+  //     uneRegion.linkURL,
+  //     uneRegion.meta,
+  //     uneRegion.lowerLimitClass,
+  //     uneRegion.label,
+  //     uneRegion.textObj,
+  //     uneRegion.mainMetric,
+  //     uneRegion.metrics,
+  //     uneRegion.colorMode,
+  //     uneRegion.traceBack,
+  //     uneRegion.traceBorder,
+  //     uneRegion.positionParameter,
+  //     uneRegion.idSVG,
+  //     uneRegion.orientedLink,
+  //     {
+  //     xMin: uneRegion.coords.xMin.toString(),
+  //     xMax: uneRegion.coords.xMax.toString(),
+  //     yMin: uneRegion.coords.yMin.toString(),
+  //     yMax: uneRegion.coords.yMax.toString(),
+  // },
+  // {
+  //     xMin: uneRegion.coords.xMin.toString(),
+  //     xMax: uneRegion.coords.xMax.toString(),
+  //     yMin: uneRegion.coords.yMin.toString(),
+  //     yMax: uneRegion.coords.yMax.toString(),
+  // },
+  // uneRegion.mode,
+  // uneRegion.img,
+  // uneRegion.widthInitialSpaceDefault,
+  // uneRegion.heightInitialSpaceDefault
+  // );
 
   gabaritUrlDisplay = (props: any): JSX.Element => {
     if (props.list.lenght !== 0) {

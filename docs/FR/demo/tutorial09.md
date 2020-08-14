@@ -17,46 +17,26 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 
 ```
 
-Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
+Les dimensions (largeur x hauteur) seront automatiquement renseignées.
 
-Vous devez sauvegarder et recharger la page.
+Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
 
 ## Ajouter une région avec le mode de coordonnées
 
-Dans cette section, nous allons expliquer comment créer différentes régions sur le dashboard avec le mode de coordonnées.
+Dans cette section, nous expliquons comment créer différentes régions sur le dashboard avec le mode de coordonnées.
 
-! [AddCoordiante](../../screenshots/demo/tutorial09/RegionCoordinateMode.png)
+![header](../../screenshots/demo/tutorial09/header.png)
+
+L'accès s'effectue à partir du menu `Coordinates space`, `region` et `Àdd coordinate space`. Nous renseignons le `label`
+
+![AddCoordiante](../../screenshots/demo/tutorial09/RegionCoordinateMode.png)
 
 Ici, nous pouvons voir une section avec `X min`,`X max`,`Y min`,`Y max`.
-Le point de référence est le point (0,0). On peut donc avoir 3 cas différents
 
-Pour a<b,
-
-- Si Xmin et Xmax sont négatives :
-
-  - Xmin = b
-  - Xmax = a
-  - Exemple :
-    - `a=-60` et `b=-20`.
-    - Alors `Xmin=-20` et `Xmax=-60`
-
-- Si Xmin est négative et Xmax est positive :
-
-  - Xmin = a
-  - Xmax = b
-  - Exemple :
-    - `a=-20` et `b=20`.
-    - Alors `Xmin=-20` et `Xmax=20`
-
-- Si Xmin et Xmax sont positives :
-  - Xmin = a
-  - Xmax = b
-  - Exemple :
-    - `a=20` et `b=60`.
-    - Alors `Xmin=20` et `Xmax=60`
+Le point de référence est le point (0,0) qui se trouve en bas à gauche de l'image.
 
 Créons ces trois régions sur le tableau de bord.
-Prenons les mêmes valeurs que X pour Y
+
 Nous aurons donc les données suivantes :
 
 Region 1

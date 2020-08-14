@@ -75,3 +75,7 @@ Il est important que chaque élément doit posséder une clef `ID` pour que le f
 
 > Attention :
 > il ne faut pas sauvegarder au format à plat, ni compresser le fichier
+
+# Voir aussi
+
+- [Tutorial 04 : Comment créer et ajouter votre propre image SVG dans Grafana](tutorial04.md)

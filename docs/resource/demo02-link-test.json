@@ -10,7 +10,7 @@
         "key": "",
         "keyValue": "",
         "manageValue": "avg",
-        "refId": "A",
+        "refId": "",
         "returnQuery": [],
         "unit": ""
       },
@@ -18,7 +18,7 @@
         "label": "No",
         "value": false
       },
-      "label": "",
+      "label": "link",
       "linkURL": {
         "followLink": "",
         "hoveringTooltipLink": "",
@@ -33,22 +33,22 @@
         "label": "Monodirectional",
         "value": "AB"
       },
-      "pointAPositionX": "125",
-      "pointAPositionY": "344",
-      "pointBPositionX": "",
-      "pointBPositionY": "",
+      "pointAPositionX": "300",
+      "pointAPositionY": "250",
+      "pointBPositionX": "180",
+      "pointBPositionY": "250",
       "pointCPositionX": "",
       "pointCPositionY": "",
-      "pointAPositionXDefault": "125",
-      "pointAPositionYDefault": "344",
-      "pointBPositionXDefault": "",
-      "pointBPositionYDefault": "",
+      "pointAPositionXDefault": "300",
+      "pointAPositionYDefault": "250",
+      "pointBPositionXDefault": "180",
+      "pointBPositionYDefault": "250",
       "pointCPositionXDefault": "",
       "pointCPositionYDefault": "",
       "widthInitialSpaceDefault": "",
       "heightInitialSpaceDefault": "",
       "pointIn": "",
-      "pointOut": "point2",
+      "pointOut": "",
       "positionParameter": {
         "labelAPositionX": "0",
         "labelAPositionY": "0",
@@ -59,10 +59,10 @@
       },
       "regionIn": "",
       "regionOut": "",
-      "size": "12",
+      "size": "9",
       "textObj": {
         "value": "",
-        "isTextTooltip": true,
+        "isTextTooltip": false,
         "colorBack": "rgba(255, 255, 255, 0)",
         "colorText": "rgba(0, 0, 0, 1)",
         "style": {
@@ -70,7 +70,7 @@
           "italic": false,
           "underline": false
         },
-        "generateObjectText": true,
+        "generateObjectText": false,
         "valueGenerateObjectText": {
           "legendElement": "",
           "numericFormatElement": "",

@@ -17,47 +17,26 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 
 ```
 
-It is possible to have more details with the [display](../editor/display.md) page.
+The dimensions (width x height) will be automatically filled in.
 
-You have to save and reload the page.
+It is possible to have more details with the [display](../editor/display.md) page.
 
 ## Add region with coordinate mode
 
 In this section we will explain how to create different regions on the dashboard with the coordinate mode.
 
+![header](../../screenshots/demo/tutorial09/header.png)
+
+Once you have placed your link on the image you can go to `Coordinates space` and ``OrientedLink`menu of the`visualization`tab. We inform the`label`
+
 ![AddCoordiante](../../screenshots/demo/tutorial09/RegionCoordinateMode.png)
 
 Here, we can see a section with `X min`,`X max`,`Y min`,`Y max`.
-t
-The reference point is the point (0,0). So we can have 3 different case
 
-For a<b,
-
-- If Xmin and Xmax are negative :
-
-  - Xmin = b
-  - Xmax = a
-  - Exemple :
-    - `a=-60` and `b=-20`.
-    - So `Xmin=-20` and `Xmax=-60`
-
-- If Xmin is negative Xmax is positive :
-
-  - Xmin = a
-  - Xmax = b
-  - Exemple :
-    - `a=-20` and `b=20`.
-    - So `Xmin=-20` and `Xmax=20`
-
-- If Xmin and Xmax are positive :
-  - Xmin = a
-  - Xmax = b
-  - Exemple :
-    - `a=20` and `b=60`.
-    - So `Xmin=20` and `Xmax=60`
+The reference point is the point (0,0) at the bottom left of the image.
 
 Let's create these three regions on the dashboard.
-Let's take the same values as X for Y
+
 So we will have the following data :
 
 Region 1

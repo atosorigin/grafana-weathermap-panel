@@ -6,254 +6,315 @@
         "lowerLimitMax": "leMaxmum",
         "backColor": "#0046DE",
         "borderColor": "#00FF99",
-        "sizeBorder": "20px"
+        "sizeBorder": "2"
       }
     ],
     "textObject": {
       "value": "",
-      "isTextTooltip": "false",
+      "isTextTooltip": true,
       "colorBack": "red",
       "colorText": "yellow",
       "style": {
-        "bold": "true",
-        "italic": "false",
-        "underline": "true"
+        "bold": true,
+        "italic": false,
+        "underline": true
       },
-      "generateObjectText": "true",
+      "generateObjectText": true,
       "valueGenerateObjectText": {
         "legendElement": "uneLegend",
-        "numericFormatElement": "",
+        "numericFormatElement": "5",
         "unit": "Hz",
-        "displayObjectInTooltip": "true",
-        "addColorTextElement": "true",
+        "displayObjectInTooltip": true,
+        "addColorTextElement": true,
         "colorTextElement": "blue",
         "addColorBackElement": "#FF00FF",
         "colorBackElement": "white"
       },
       "generateAuxiliaryElement": {
         "legendElement": "uneLegend",
-        "numericFormatElement": "?",
+        "numericFormatElement": "",
         "unit": "Hz",
-        "displayObjectInTooltip": "true",
-        "addColorTextElement": "true",
+        "displayObjectInTooltip": true,
+        "addColorTextElement": true,
         "colorTextElement": "blue",
         "addColorBackElement": "#E0FF0F",
         "colorBackElement": "#999999"
       }
     },
-    "colorMode": "false",
-    "traceBack": "true",
-    "traceBorder": "true"
+    "colorMode": false,
+    "traceBack": true,
+    "traceBorder": true
   },
   "templates": [
     {
       "filtered": "quantile|0.5#slice|inner_eval",
-      "labelfix": "true",
-      "xylabel": "x|labelName#y|labelName",
-      "xylabel0": "x|labelName#y|labelName",
-      "xylabelfix": "x|10#y|20",
-      "xylabelfix0": "x|10#y|20",
+      "labelfix": "false",
+      "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
       "meta": "uneMeta",
-      "label": "rect1 haut",
+      "label": "0.5-inner_eval",
       "positionParameter": {
-        "xylabelA": "x|labelName#y|labelName",
-        "xylabelB": "x|labelName#y|labelName",
+        "xylabelA": "x|0#y|0",
+        "xylabelB": "x|0#y|0",
         "tooltipA": "bottom",
         "tooltipB": "bottom"
       },
-      "mainMetric": {},
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": ""
+      },
       "metrics": [],
-      "linkURL": {},
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
       "idSVG": "rect1-top",
-      "mode": "true",
-      "img": ""
+      "mode": true,
+      "img": "",
+      "orientedLink": []
+    },
+    {
+      "filtered": "quantile|0.5#slice|prepare_time",
+      "labelfix": "true",
+      "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "type": "region",
+      "meta": "uneMeta",
+      "label": "0.5-prepare_time",
+      "positionParameter": {
+        "xylabelA": "x|0#y|0",
+        "xylabelB": "x|0#y|0",
+        "tooltipA": "bottom",
+        "tooltipB": "bottom"
+      },
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": ""
+      },
+      "metrics": [],
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "idSVG": "rect1-middle",
+      "mode": true,
+      "img": "",
+      "orientedLink": []
+    },
+    {
+      "filtered": "quantile|0.5#slice|queue_time",
+      "labelfix": "true",
+      "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "type": "region",
+      "meta": "uneMeta",
+      "label": "0.5-queue_time",
+      "positionParameter": {
+        "xylabelA": "x|0#y|0",
+        "xylabelB": "x|0#y|0",
+        "tooltipA": "bottom",
+        "tooltipB": "bottom"
+      },
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": ""
+      },
+      "metrics": [],
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "idSVG": "rect1-footer",
+      "mode": true,
+      "img": "",
+      "orientedLink": []
     },
     {
       "filtered": "quantile|0.9#slice|inner_eval",
       "labelfix": "true",
-      "xylabel": "x|labelName#y|labelName",
-      "xylabel0": "x|labelName#y|labelName",
-      "xylabelfix": "x|10#y|20",
-      "xylabelfix0": "x|10#y|20",
+      "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
       "meta": "uneMeta",
-      "label": "rect1 milieu",
+      "label": "0.9-inner_eval",
       "positionParameter": {
-        "xylabelA": "x|labelName#y|labelName",
-        "xylabelB": "x|labelName#y|labelName",
+        "xylabelA": "x|0#y|0",
+        "xylabelB": "x|0#y|0",
         "tooltipA": "bottom",
         "tooltipB": "bottom"
       },
-      "mainMetric": {},
-      "metrics": [],
-      "linkURL": {},
-      "idSVG": "rect1-middle",
-      "mode": "true",
-      "img": ""
-    },
-    {
-      "filtered": "quantile|0.99#slice|inner_eval",
-      "labelfix": "true",
-      "xylabel": "x|labelName#y|labelName",
-      "xylabel0": "x|labelName#y|labelName",
-      "xylabelfix": "x|10#y|20",
-      "xylabelfix0": "x|10#y|20",
-      "type": "region",
-      "meta": "uneMeta",
-      "label": "rect1 bas",
-      "positionParameter": {
-        "xylabelA": "x|labelName#y|labelName",
-        "xylabelB": "x|labelName#y|labelName",
-        "tooltipA": "bottom",
-        "tooltipB": "bottom"
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": ""
       },
-      "mainMetric": {},
       "metrics": [],
-      "linkURL": {},
-      "idSVG": "rect1-footer",
-      "mode": "true",
-      "img": ""
-    },
-
-    {
-      "filtered": "quantile|0.5#slice|prepare_time",
-      "labelfix": "true",
-      "xylabel": "x|labelName#y|labelName",
-      "xylabel0": "x|labelName#y|labelName",
-      "xylabelfix": "x|10#y|20",
-      "xylabelfix0": "x|10#y|20",
-      "type": "region",
-      "meta": "uneMeta",
-      "label": "rect2 haut",
-      "positionParameter": {
-        "xylabelA": "x|labelName#y|labelName",
-        "xylabelB": "x|labelName#y|labelName",
-        "tooltipA": "bottom",
-        "tooltipB": "bottom"
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
       },
-      "mainMetric": {},
-      "metrics": [],
-      "linkURL": {},
       "idSVG": "rect2-top",
-      "mode": "true",
-      "img": ""
+      "mode": true,
+      "img": "",
+      "orientedLink": []
     },
     {
       "filtered": "quantile|0.9#slice|prepare_time",
       "labelfix": "true",
-      "xylabel": "x|labelName#y|labelName",
-      "xylabel0": "x|labelName#y|labelName",
-      "xylabelfix": "x|10#y|20",
-      "xylabelfix0": "x|10#y|20",
+      "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
       "meta": "uneMeta",
-      "label": "rect2 milieu",
+      "label": "0.9-prepare_time",
       "positionParameter": {
-        "xylabelA": "x|labelName#y|labelName",
-        "xylabelB": "x|labelName#y|labelName",
+        "xylabelA": "x|0#y|0",
+        "xylabelB": "x|0#y|0",
         "tooltipA": "bottom",
         "tooltipB": "bottom"
       },
-      "mainMetric": {},
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": ""
+      },
       "metrics": [],
-      "linkURL": {},
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
       "idSVG": "rect2-middle",
-      "mode": "true",
-      "img": ""
-    },
-    {
-      "filtered": "quantile|0.99#slice|prepare_time",
-      "labelfix": "true",
-      "xylabel": "x|labelName#y|labelName",
-      "xylabel0": "x|labelName#y|labelName",
-      "xylabelfix": "x|10#y|20",
-      "xylabelfix0": "x|10#y|20",
-      "type": "region",
-      "meta": "uneMeta",
-      "label": "rect2 bas",
-      "positionParameter": {
-        "xylabelA": "x|labelName#y|labelName",
-        "xylabelB": "x|labelName#y|labelName",
-        "tooltipA": "bottom",
-        "tooltipB": "bottom"
-      },
-      "mainMetric": {},
-      "metrics": [],
-      "linkURL": {},
-      "idSVG": "rect2-footer",
-      "mode": "true",
-      "img": ""
-    },
-
-    {
-      "filtered": "quantile|0.5#slice|queue_time",
-      "labelfix": "true",
-      "xylabel": "x|labelName#y|labelName",
-      "xylabel0": "x|labelName#y|labelName",
-      "xylabelfix": "x|10#y|20",
-      "xylabelfix0": "x|10#y|20",
-      "type": "region",
-      "meta": "uneMeta",
-      "label": "rect3 haut",
-      "positionParameter": {
-        "xylabelA": "x|labelName#y|labelName",
-        "xylabelB": "x|labelName#y|labelName",
-        "tooltipA": "bottom",
-        "tooltipB": "bottom"
-      },
-      "mainMetric": {},
-      "metrics": [],
-      "linkURL": {},
-      "idSVG": "rect3-top",
-      "mode": "true",
-      "img": ""
+      "mode": true,
+      "img": "",
+      "orientedLink": []
     },
     {
       "filtered": "quantile|0.9#slice|queue_time",
       "labelfix": "true",
-      "xylabel": "x|labelName#y|labelName",
-      "xylabel0": "x|labelName#y|labelName",
-      "xylabelfix": "x|10#y|20",
-      "xylabelfix0": "x|10#y|20",
+      "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
       "meta": "uneMeta",
-      "label": "rect3 milieu",
+      "label": "0.9-queue_time",
       "positionParameter": {
-        "xylabelA": "x|labelName#y|labelName",
-        "xylabelB": "x|labelName#y|labelName",
+        "xylabelA": "x|0#y|0",
+        "xylabelB": "x|0#y|0",
         "tooltipA": "bottom",
         "tooltipB": "bottom"
       },
-      "mainMetric": {},
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": ""
+      },
       "metrics": [],
-      "linkURL": {},
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "idSVG": "rect2-footer",
+      "mode": true,
+      "img": "",
+      "orientedLink": []
+    },
+    {
+      "filtered": "quantile|0.99#slice|inner_eval",
+      "labelfix": "true",
+      "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "type": "region",
+      "meta": "uneMeta",
+      "label": "0.99-inner_eval",
+      "positionParameter": {
+        "xylabelA": "x|0#y|0",
+        "xylabelB": "x|0#y|0",
+        "tooltipA": "bottom",
+        "tooltipB": "bottom"
+      },
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": ""
+      },
+      "metrics": [],
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "idSVG": "rect3-top",
+      "mode": true,
+      "img": "",
+      "orientedLink": []
+    },
+    {
+      "filtered": "quantile|0.99#slice|prepare_time",
+      "labelfix": "true",
+      "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "type": "region",
+      "meta": "uneMeta",
+      "label": "0.99-prepare_time",
+      "positionParameter": {
+        "xylabelA": "x|0#y|0",
+        "xylabelB": "x|0#y|0",
+        "tooltipA": "bottom",
+        "tooltipB": "bottom"
+      },
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": ""
+      },
+      "metrics": [],
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
       "idSVG": "rect3-middle",
-      "mode": "true",
-      "img": ""
+      "mode": true,
+      "img": "",
+      "orientedLink": []
     },
     {
       "filtered": "quantile|0.99#slice|queue_time",
       "labelfix": "true",
-      "xylabel": "x|labelName#y|labelName",
-      "xylabel0": "x|labelName#y|labelName",
-      "xylabelfix": "x|10#y|20",
-      "xylabelfix0": "x|10#y|20",
+      "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "xylabelfix": "xMin|50#xMax|150#yMin|250#yMax|300",
       "type": "region",
       "meta": "uneMeta",
-      "label": "rect3 bas",
+      "label": "0.99-queue_time",
       "positionParameter": {
-        "xylabelA": "x|labelName#y|labelName",
-        "xylabelB": "x|labelName#y|labelName",
+        "xylabelA": "x|0#y|0",
+        "xylabelB": "x|0#y|0",
         "tooltipA": "bottom",
         "tooltipB": "bottom"
       },
-      "mainMetric": {},
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": ""
+      },
       "metrics": [],
-      "linkURL": {},
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
       "idSVG": "rect3-footer",
-      "mode": "true",
-      "img": ""
+      "mode": true,
+      "img": "",
+      "orientedLink": []
     }
   ]
 }

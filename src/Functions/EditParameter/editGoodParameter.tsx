@@ -32,8 +32,8 @@ export const editGoodParameter = (
 };
 
 export const limitValueInitialSpace = (coorInitialSpace: string, position: number, widthBackground: number, heigthBackground: number): string => {
-  let result = 0;
-  result = parseInt(coorInitialSpace, 10);
+  //let result = 0;
+  //result = parseInt(coorInitialSpace, 10);
   // if (position === 1 || position === 2) {
   //   //xMin + xMax
   //   if (result > widthBackground) {
@@ -59,7 +59,7 @@ export const limitValueInitialSpace = (coorInitialSpace: string, position: numbe
   //     result = 0;
   //   }
   // }
-  return result.toString();
+  return coorInitialSpace;
 };
 
 export const editGoodParameterExtend = (

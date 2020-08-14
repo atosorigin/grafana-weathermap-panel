@@ -77,3 +77,7 @@ It is important that each element must have an `ID` key so that the created file
 
 > Warning:
 > you must not save in flat format, nor compress the file
+
+# See too
+
+- [Tutorial 04 : How to create and add your own SVG image in Grafana](tutorial04.md)

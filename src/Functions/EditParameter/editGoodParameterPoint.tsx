@@ -47,6 +47,6 @@ export const editGoodParameterPoint = (
   } else if (name.startsWith('keyValueMainMetric')) {
     editCoor.mainMetric.keyValue = newValue;
   }
-  console.log(editCoor);
+  //console.log(editCoor);
   return editCoor;
 };

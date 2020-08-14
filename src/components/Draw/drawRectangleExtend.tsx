@@ -40,7 +40,7 @@ interface Props extends PanelEditorProps<SimpleOptions> {
 
 interface State {
   /** value of tooltip */
-  tooltipValue: JSX.Element;
+  tooltipValue: JSX.Element | null;
   /** background color with lower limit */
   backgroundColor: string;
   /** border color with lower llimit */
@@ -65,7 +65,7 @@ interface CoorHTML {
 }
 
 interface Tooltip {
-  tooltipValue: JSX.Element;
+  tooltipValue: JSX.Element | null;
   backgroundColor: string;
   borderColor: string;
   sizeBorder: number;
@@ -79,7 +79,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      tooltipValue: <div></div>,
+      tooltipValue: null,
       backgroundColor: 'rgba(255, 255, 255, 0)',
       borderColor: 'rgba(255, 255, 255, 0)',
       sizeBorder: 1,
@@ -124,7 +124,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     }
     // (Math.round(valueQuery * roundMetrics + Number.EPSILON) / roundMetrics).toString()
     let value: string = converValueQuery;
-    if (region.textObj.valueGenerateObjectText) {
+    if (region.textObj.valueGenerateObjectText && converValueQuery !== 'NaN') {
       value = region.textObj.valueGenerateObjectText.legendElement + ' ' + converValueQuery + ' ' + region.textObj.valueGenerateObjectText.unit;
     }
 
@@ -150,21 +150,22 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
 
     const valueQueryResult: string = this.generateValueMetricElement(region, valueQuery);
 
-    const tooltipValue: JSX.Element = (
-      <div>
-        <div style={styleTooltip}>
-          {/* {link && <a href={region.linkURL.hoveringTooltipLink}>{region.linkURL.hoveringTooltipText}</a>} */}
-          <a href={region.linkURL.hoveringTooltipLink}>{region.linkURL.hoveringTooltipText}</a>
-          {region.textObj.isTextTooltip && <p>{region.label}</p>}
+    const tooltipValue: JSX.Element | null =
+      valueQueryResult !== 'NaN' ? (
+        <div>
+          <div style={styleTooltip}>
+            {/* {link && <a href={region.linkURL.hoveringTooltipLink}>{region.linkURL.hoveringTooltipText}</a>} */}
+            <a href={region.linkURL.hoveringTooltipLink}>{region.linkURL.hoveringTooltipText}</a>
+            {region.textObj.isTextTooltip && <p>{region.label}</p>}
+          </div>
+          <div style={styleMetrics}>
+            {region.textObj.generateObjectText &&
+              region.textObj.valueGenerateObjectText &&
+              region.textObj.valueGenerateObjectText.displayObjectInTooltip && <p>{valueQueryResult}</p>}
+          </div>
+          <div>{this.displayValuesAuxMetrics()}</div>
         </div>
-        <div style={styleMetrics}>
-          {region.textObj.generateObjectText &&
-            region.textObj.valueGenerateObjectText &&
-            region.textObj.valueGenerateObjectText.displayObjectInTooltip && <p>{valueQueryResult}</p>}
-        </div>
-        <div>{this.displayValuesAuxMetrics()}</div>
-      </div>
-    );
+      ) : null;
     return {
       tooltipValue: tooltipValue,
       backgroundColor: lowerLimit.colorBack,
@@ -801,7 +802,11 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
         (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip) ||
         region.textObj.generateAuxiliaryElement.displayObjectInTooltip
       ) {
-        value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
+        if (this.state.tooltipValue) {
+          value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
+        } else {
+          <div>{value}</div>;
+        }
       }
     } else {
       //console.log('not active');
@@ -826,7 +831,11 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
         (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip) ||
         region.textObj.generateAuxiliaryElement.displayObjectInTooltip
       ) {
-        value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
+        if (this.state.tooltipValue) {
+          value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
+        } else {
+          <div>{value}</div>;
+        }
       }
     }
     // if (!this.props.isEnabled && region.linkURL.followLink !== '') {

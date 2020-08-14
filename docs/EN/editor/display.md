@@ -113,3 +113,7 @@ It is possible to load an image in _base 64_ like this :
 to do that, you have to _copy the address of the image_
 
 ![display](../../screenshots/editor/display/base64-capture.jpg)
+
+# See too
+
+- [Tutorial 09 : How to create a coordinate mode region](tutorial09.md)

@@ -40,7 +40,7 @@ Sous la forme d'une **démo**, vous apprendrez à utiliser le plugin pour obteni
 
   [![demo9](../../screenshots/demo/demo09.png)](tutorial09.md)
 
-- 10 [Comment ajouter un fichier json global ](tutorial10.md)
+- 10 [Comment ajouter un fichier json global](tutorial10.md)
 
   [![demo10](../../screenshots/demo/demo01.png)](tutorial10.md)
 

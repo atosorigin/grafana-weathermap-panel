@@ -44,3 +44,7 @@ Après, vous cliquez sur le bouton `add`, suivi du bouton `finish`
 Le résultat est instantanné
 
 Il est possible d'uploader un fichier de configuration supplémentaire mais il faut sauvegarder la page et recharger la page
+
+# Voir aussi
+
+- [Tutorial 10 : Comment ajouter un fichier json global](tutorial10.md)

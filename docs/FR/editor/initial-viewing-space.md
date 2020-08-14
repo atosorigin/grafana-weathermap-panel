@@ -33,6 +33,6 @@ sans inpacter l'image d'arrière plan
 
 `La position des éléments graphiques de l'espace de visionnage, peut être changer si celui-ci est réduit. La proportion sera respectée.`
 
-# En savoir plus
+# Voir aussi
 
 - [Tutorial 11 : Comment utiliser initial viewing space](tutorial11.md)

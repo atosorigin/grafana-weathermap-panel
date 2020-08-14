@@ -10,7 +10,7 @@
         "value": "true"
       },
       "id": 1,
-      "label": "",
+      "label": "coucou",
       "linkURL": {
         "followLink": "",
         "hoveringTooltipLink": "",
@@ -46,10 +46,10 @@
         "tooltipPositionA": {},
         "tooltipPositionB": {}
       },
-      "positionShapeX": "70",
-      "positionShapeY": "70",
-      "positionXDefault": "70",
-      "positionYDefault": "70",
+      "positionShapeX": "400",
+      "positionShapeY": "241",
+      "positionXDefault": "400",
+      "positionYDefault": "241",
       "rotateArrow": "0",
       "shape": {
         "label": "Diamond",

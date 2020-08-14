@@ -345,6 +345,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     const mapItems: JSX.Element[] = [];
     let newArrayPoint: PointClass[] = this.props.options.arrayPoints;
     newArrayPoint.forEach((line: PointClass) => {
+      //console.log(line);
       const valueMainMetric = this.getValuesMainMetricPoint(line).toString();
       this.updatePositionOrientedLink(line);
       const valuesAuxiliaryMetrics: string[] = this.getValuesAuxiliaryMetricsPoint(line);
@@ -1180,7 +1181,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     const mapItems: JSX.Element[] = [];
     let item: JSX.Element = <div></div>;
     arrayOrientedLink.forEach((orientedLink: OrientedLinkClass) => {
-      console.log(orientedLink);
+      //console.log(orientedLink);
       const valueMainMetricA: string = this.getValuesMainMetricOrientedLink(orientedLink).toString();
       const valueMainMetricB: string = this.getValuesMainMetricOrientedLinkB(orientedLink).toString();
       this.getValuesMainMetricOrientedLinkB(orientedLink);
@@ -1420,20 +1421,39 @@ export class SimplePanel extends PureComponent<Props, State> {
   getValuesAuxiliaryMetrics = (auxiliaryMetrics: Metric[], mainMetric: Metric): string[] => {
     let valueAuxiliaryMetric: string[] = [];
     //const countMetrics: number = auxiliaryMetrics.length;
-    auxiliaryMetrics.forEach((metric: Metric) => {
-      let countTotalValues = 0;
-      let resultTotalValues = 0;
-      let result = '';
-      if (metric.returnQuery && metric.returnQuery.length > 0) {
-        let numberLoop: number = metric.returnQuery?.length || 0;
-        if (metric.key !== '' && metric.keyValue !== '') {
-          for (let i = 0; i < numberLoop; i++) {
-            let line = metric.returnQuery[i];
-            if (line.fields[0].labels) {
-              if (mainMetric.refId !== '') {
-                //console.log(mainMetric);
-                if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || (mainMetric.key === '' && mainMetric.keyValue === '')) {
-                  if (line.fields[0].labels[metric.key] === metric.keyValue) {
+    if (auxiliaryMetrics.length < 1) {
+      auxiliaryMetrics.forEach((metric: Metric) => {
+        let countTotalValues = 0;
+        let resultTotalValues = 0;
+        let result = '';
+        if (metric.returnQuery && metric.returnQuery.length > 0) {
+          let numberLoop: number = metric.returnQuery?.length || 0;
+          if (metric.key !== '' && metric.keyValue !== '') {
+            for (let i = 0; i < numberLoop; i++) {
+              let line = metric.returnQuery[i];
+              if (line.fields[0].labels) {
+                if (mainMetric.refId !== '') {
+                  //console.log(mainMetric);
+                  if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || (mainMetric.key === '' && mainMetric.keyValue === '')) {
+                    if (line.fields[0].labels[metric.key] === metric.keyValue) {
+                      const countValues: number = line.fields[0].values.length;
+                      for (let i = 0; i < countValues; i++) {
+                        if (line.fields[0].values.get(i)) {
+                          resultTotalValues += line.fields[0].values.get(i);
+                          countTotalValues++;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          } else {
+            if (mainMetric.refId !== '') {
+              for (let i = 0; i < numberLoop; i++) {
+                let line = metric.returnQuery[i];
+                if (line.fields[0].labels) {
+                  if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || (mainMetric.key === '' && mainMetric.keyValue === '')) {
                     const countValues: number = line.fields[0].values.length;
                     for (let i = 0; i < countValues; i++) {
                       if (line.fields[0].values.get(i)) {
@@ -1446,40 +1466,23 @@ export class SimplePanel extends PureComponent<Props, State> {
               }
             }
           }
-        } else {
-          if (mainMetric.refId !== '') {
-            for (let i = 0; i < numberLoop; i++) {
-              let line = metric.returnQuery[i];
-              if (line.fields[0].labels) {
-                if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || (mainMetric.key === '' && mainMetric.keyValue === '')) {
-                  const countValues: number = line.fields[0].values.length;
-                  for (let i = 0; i < countValues; i++) {
-                    if (line.fields[0].values.get(i)) {
-                      resultTotalValues += line.fields[0].values.get(i);
-                      countTotalValues++;
-                    }
-                  }
-                }
-              }
+          if (metric.manageValue === 'avg') {
+            result = (resultTotalValues / countTotalValues).toString();
+          } else if (metric.manageValue === 'sum') {
+            result = resultTotalValues.toString();
+          } else if (metric.manageValue === 'err') {
+            if (countTotalValues > 1) {
+              result = 'error';
+            } else {
+              result = resultTotalValues.toString();
             }
           }
         }
-        if (metric.manageValue === 'avg') {
-          result = (resultTotalValues / countTotalValues).toString();
-        } else if (metric.manageValue === 'sum') {
-          result = resultTotalValues.toString();
-        } else if (metric.manageValue === 'err') {
-          if (countTotalValues > 1) {
-            result = 'error';
-          } else {
-            result = resultTotalValues.toString();
-          }
+        if (result !== '') {
+          valueAuxiliaryMetric.push(result);
         }
-      }
-      if (result !== '') {
-        valueAuxiliaryMetric.push(result);
-      }
-    });
+      });
+    }
     return valueAuxiliaryMetric;
   };
 
@@ -1969,7 +1972,9 @@ export class SimplePanel extends PureComponent<Props, State> {
         let heightSVG = 0;
         let positionX = '';
         let positionY = '';
+        //console.log(idSVG);
         if (event.target.localName === 'rect') {
+          //console.log('rect');
           xSVG = parseInt(event.target.attributes['x'].nodeValue, 10);
           ySVG = parseInt(event.target.attributes['y'].nodeValue, 10);
           widthSVG = parseInt(event.target.attributes['width'].nodeValue, 10);
@@ -1977,6 +1982,7 @@ export class SimplePanel extends PureComponent<Props, State> {
           positionX = (xSVG + widthSVG).toString();
           positionY = (ySVG - heightSVG / 2).toString();
         } else if (event.target.localName === 'ellipse') {
+          //console.log('ellipse');
           xSVG = parseInt(event.target.attributes['cx'].nodeValue, 10);
           ySVG = parseInt(event.target.attributes['cy'].nodeValue, 10);
           widthSVG = parseInt(event.target.attributes['rx'].nodeValue, 10) * 2;
@@ -1984,6 +1990,7 @@ export class SimplePanel extends PureComponent<Props, State> {
           positionX = xSVG.toString();
           positionY = ySVG.toString();
         } else if (event.target.localName === 'path') {
+          //console.log('path');
           const allValues: string = event.target.attributes['d'].nodeValue;
           const arrayAllValues: string[] = allValues.split(' ');
           let iX = -2;
@@ -2368,6 +2375,9 @@ export class SimplePanel extends PureComponent<Props, State> {
   private defineMainMetric = (region: RegionClass): string => {
     let result = '';
     const legend: string = region.textObj.valueGenerateObjectText.legendElement;
+    //console.log('legend-tooltip');
+    //console.log(region.textObj.valueGenerateObjectText);
+    //console.log(legend);
     const unit: string = region.textObj.valueGenerateObjectText.unit;
     const decimal: string = region.textObj.valueGenerateObjectText.numericFormatElement;
     //const roundMetrics: number = parseInt(decimal, 10) || 1;
@@ -2523,6 +2533,8 @@ export class SimplePanel extends PureComponent<Props, State> {
   //https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg
   /** render */
   render() {
+    // console.log('simplePanel');
+    // console.log(this.props.options.regionCoordinateSpace);
     let xMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
     let xMinMarginLeft = 0;
     if (xMinInitialSpace < 0) {
@@ -2543,7 +2555,6 @@ export class SimplePanel extends PureComponent<Props, State> {
     let yMaxMarginTop = yMaxInitialSpace - parseInt(this.props.options.baseMap.height, 10);
     if (isNaN(yMaxMarginTop)) {
       yMaxMarginTop = 0;
-      console.log('isNaN');
     }
     let styleBackground;
     if (this.props.options.baseMap.modeSVG) {

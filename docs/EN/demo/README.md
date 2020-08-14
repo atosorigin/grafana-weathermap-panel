@@ -40,7 +40,7 @@ In the form of a **demo**, you will learn how to use the plugin to get a dynamic
 
   [![demo9](../../screenshots/demo/demo09.png)](tutorial09.md)
 
-- 10 [How to add a global json file ](tutorial10.md)
+- 10 [How to add a global json file](tutorial10.md)
 
   [![demo10](../../screenshots/demo/demo01.png)](tutorial10.md)
 

@@ -31,6 +31,6 @@ The viewing space can be adjusted as needed:
 
 `The position of the graphic elements in the viewing space can be changed if the viewing space is reduced. The proportion will be respected.`
 
-# Find out more
+# See too
 
 - [Tutorial 11 : How to use initial viewing space](tutorial11.md)

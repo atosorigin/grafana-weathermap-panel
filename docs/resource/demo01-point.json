@@ -50,8 +50,12 @@
         "tooltipPositionA": {},
         "tooltipPositionB": {}
       },
-      "positionShapeX": "122",
-      "positionShapeY": "120",
+      "positionShapeX": "300",
+      "positionShapeY": "250",
+      "positionXDefault": "300",
+      "positionYDefault": "250",
+      "widthInitialSpaceDefault": "",
+      "heightInitialSpaceDefault": "",
       "rotateArrow": "0",
       "shape": {
         "label": "Circle",
@@ -148,8 +152,12 @@
         "tooltipPositionA": {},
         "tooltipPositionB": {}
       },
-      "positionShapeX": "100",
-      "positionShapeY": "166",
+      "positionShapeX": "420",
+      "positionShapeY": "340",
+      "positionXDefault": "420",
+      "positionYDefault": "340",
+      "widthInitialSpaceDefault": "",
+      "heightInitialSpaceDefault": "",
       "rotateArrow": "0",
       "shape": {
         "label": "Circle",

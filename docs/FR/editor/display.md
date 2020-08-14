@@ -113,3 +113,7 @@ Il est possible de charger une image en _base 64_ comme ceci :
 pour cela, il faut _copier l'adresse de l'image_
 
 ![display](../../screenshots/editor/display/base64-capture.jpg)
+
+# Voir aussi
+
+- [Tutorial 09 : Comment créer une région en mode coordonnée](tutorial09.md)

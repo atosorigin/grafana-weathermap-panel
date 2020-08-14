@@ -43,3 +43,7 @@ After that, you click the `add` button, followed by the `finish` button.
 
 The result is instantaneous
 It is possible to upload an additional configuration file but you have to save the page and reload the page
+
+# See too
+
+- [Tutorial 10 : How to add a global json file](tutorial10.md)
