@@ -2,7 +2,7 @@ import { createInputsPoint } from '../CreateInput/createInputsPoint';
 import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
 
 describe('waiting test', () => {
-  test('to be pass', (done) => {
+  test('to be pass', done => {
     setTimeout(() => {
       done();
     });

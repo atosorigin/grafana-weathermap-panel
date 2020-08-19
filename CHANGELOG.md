@@ -1,33 +1,12 @@
 # Changelog
 
-## v1.0.2a3 (2020-08-04)
-
-- Update init space
-- fixed SUM to query
-
-## v1.0.2a2 (2020-07-28)
-
-- Add gabarit
-
-## v1.0.2a1 (2020-07-21)
-
-- Update init space
-- Add gabarit
-
-## [v1.0.1](https://github.com/atosorigin/grafana-weathermap-panel/releases/tag/1.0.1) (2020-05-21)
-
-- Update to upload by fileselect background image
-- Fixed css
-- Fixed select link monodirection by defaut
-
-## [v1.0.0](https://github.com/atosorigin/grafana-weathermap-panel/releases/tag/1.0.0) (2020-05-17)
+## v1.0.0 (2020-05-17)
 
 - Update Documentation
 - Update Tutorial and demo
 - Update shape dots (none, circle, box...)
 - Update import global file
 - Update close legend
-- Update test unit
 - fixed data reset for a new dashboard
 - fixed panel menu
 
@@ -143,7 +122,6 @@
 - Add legende
 - Add Type of graphic representation
 - Add compatibility SVG file
-- Add test unit
 - Update Graphic representation
 - Update metrics
 - Fixed panel

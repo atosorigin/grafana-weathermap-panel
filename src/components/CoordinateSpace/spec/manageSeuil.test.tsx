@@ -7,7 +7,7 @@ import ManageLowerLimit from '../../Parametrage/manageLowerLimit';
 
 // test for yarn to pass
 describe('waiting test', () => {
-  test('to be pass', (done) => {
+  test('to be pass', done => {
     setTimeout(() => {
       done();
     });
@@ -38,7 +38,7 @@ describe('ManageSeuil tests', () => {
             coordinate={container}
             options={component}
             callBack={container}
-            ref={(c) => (component = c)}
+            ref={c => (component = c)}
             {...testProps}
           />,
           container
@@ -80,7 +80,7 @@ describe('ManageSeuil tests', () => {
           coordinate={container}
           options={component}
           callBack={container}
-          ref={(c) => (component = c)}
+          ref={c => (component = c)}
           {...testProps}
         />,
         container

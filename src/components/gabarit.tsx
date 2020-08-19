@@ -113,7 +113,7 @@ class Gabarit extends React.Component<Props, State> {
 
   GabaritValidator = (name: string) => {
     let result = true;
-    this.props.options.saveGabaritFile.forEach((element) => {
+    this.props.options.saveGabaritFile.forEach(element => {
       if (element.fileName === name) {
         console.log('LoadGabaritFileReject');
         result = false;
@@ -369,7 +369,7 @@ class Gabarit extends React.Component<Props, State> {
 
   fetchGabarit = () => {
     //this.result = fetchConfFile(this.props.options.saveGabaritURL);
-    this.props.options.saveGabaritURL.forEach(async (url) => {
+    this.props.options.saveGabaritURL.forEach(async url => {
       try {
         // console.log(url);
         let file = {};
@@ -424,7 +424,7 @@ class Gabarit extends React.Component<Props, State> {
 
   addGabaritUrlInput = (onClick: { currentTarget: HTMLButtonElement }) => {
     let valid = true;
-    this.props.options.saveGabaritURL.forEach((element) => {
+    this.props.options.saveGabaritURL.forEach(element => {
       if (this.props.options.gabaritUrlInput === element) {
         valid = false;
       }
@@ -596,7 +596,7 @@ class Gabarit extends React.Component<Props, State> {
       if (mainMetricPoint[index].refId === null) {
         mainMetricPoint[index].refId = 'A';
       }
-      point.metrics.forEach((element) => {
+      point.metrics.forEach(element => {
         metricPoint[index].push(element);
       });
       valueMetricPoint.push(point.valueMetric);
@@ -665,7 +665,7 @@ class Gabarit extends React.Component<Props, State> {
     // console.log(positionParameterPoint) //
 
     let newID = 0;
-    this.props.options.arrayPoints.forEach((element) => {
+    this.props.options.arrayPoints.forEach(element => {
       newID++;
     });
 
@@ -675,9 +675,9 @@ class Gabarit extends React.Component<Props, State> {
 
     posPoint.forEach((pos, index) => {
       if (gabaritFileTmp.templateGabaritPoint[index].labelfix.toString() === 'false') {
-        this.props.data.series.forEach((element) => {
+        this.props.data.series.forEach(element => {
           const nameQuery: string[] =
-            element.name?.split(',').map((value) => {
+            element.name?.split(',').map(value => {
               return value.replace(/[\"{}]/gm, '');
             }) || [];
 
@@ -917,7 +917,7 @@ class Gabarit extends React.Component<Props, State> {
       if (mainMetricALink[index].refId === null) {
         mainMetricALink[index].refId = 'A';
       }
-      link.metrics.forEach((element) => {
+      link.metrics.forEach(element => {
         metricALink[index].push(element);
       });
       mainMetricBLink.push({
@@ -934,7 +934,7 @@ class Gabarit extends React.Component<Props, State> {
       if (mainMetricALink[index].refId === null) {
         mainMetricBLink[index].refId = 'A';
       }
-      link.metricsB.forEach((element) => {
+      link.metricsB.forEach(element => {
         metricBLink[index].push(element);
       });
       valueMetricALink.push(link.valueMainMetricA);
@@ -964,7 +964,7 @@ class Gabarit extends React.Component<Props, State> {
     });
 
     newID = 0;
-    this.props.options.arrayPoints.forEach((element) => {
+    this.props.options.arrayPoints.forEach(element => {
       newID++;
     });
 
@@ -1212,7 +1212,7 @@ class Gabarit extends React.Component<Props, State> {
       if (mainMetricRegion[index].refId === null) {
         mainMetricRegion[index].refId = 'A';
       }
-      region.metrics.forEach((element) => {
+      region.metrics.forEach(element => {
         metricRegion[index].push(element);
       });
       mainMetricRegion.push({
@@ -1229,7 +1229,7 @@ class Gabarit extends React.Component<Props, State> {
       if (mainMetricRegion[index].refId === null) {
         mainMetricRegion[index].refId = 'A';
       }
-      region.metrics.forEach((element) => {
+      region.metrics.forEach(element => {
         metricRegion[index].push(element);
       });
       modeRegion.push(region.mode);
@@ -1247,7 +1247,7 @@ class Gabarit extends React.Component<Props, State> {
     });
 
     newID = 0;
-    this.props.options.regionCoordinateSpace.forEach((element) => {
+    this.props.options.regionCoordinateSpace.forEach(element => {
       newID++;
     });
 
@@ -1489,7 +1489,7 @@ class Gabarit extends React.Component<Props, State> {
           />
           <FormLabel width={15}>Querry ID</FormLabel>
           <Select
-            onChange={(value) => this.onChangeSelectQuerryID(value, index)}
+            onChange={value => this.onChangeSelectQuerryID(value, index)}
             allowCustomValue={false}
             options={this.state.selectQuerryID}
             width={10}

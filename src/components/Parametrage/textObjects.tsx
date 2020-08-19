@@ -38,7 +38,7 @@ class TextObjects extends React.Component<Props, State> {
     /** new text object */
     textObject: TextObject;
   }) => {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.setState(state, resolve);
       //this.callBack();
     });

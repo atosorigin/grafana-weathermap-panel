@@ -45,7 +45,7 @@ class ManageLowerLimit extends React.Component<Props, State> {
     /** new value */
     coordinate: CoordinateSpaceClass;
   }) => {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.setState(state, resolve);
     });
   };
@@ -55,7 +55,7 @@ class ManageLowerLimit extends React.Component<Props, State> {
     /** new value */
     openLowerLimit: boolean;
   }) => {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.setState(state, resolve);
     });
   };

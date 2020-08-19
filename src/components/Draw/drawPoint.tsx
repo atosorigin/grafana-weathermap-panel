@@ -139,7 +139,7 @@ export default class DrawPoint extends React.Component<Props, State> {
     // console.log('x après');
     // console.log(x);
     let newArrayPoint: PointClass[] = this.props.options.arrayPoints;
-    newArrayPoint.forEach((point) => {
+    newArrayPoint.forEach(point => {
       if (point.name === this.props.name) {
         point.positionShapeX = x.toString();
       }
@@ -204,7 +204,7 @@ export default class DrawPoint extends React.Component<Props, State> {
       this.defineLimitY(this.props.heightImage - yMax + heightInitialSpace * ratioY) - (size + parseInt(this.defineBorderSize(), 10))
     );
     let newArrayPoint: PointClass[] = this.props.options.arrayPoints;
-    newArrayPoint.forEach((point) => {
+    newArrayPoint.forEach(point => {
       if (point.name === this.props.name) {
         point.positionShapeY = (this.props.heightImage - y).toString();
       }
@@ -780,7 +780,7 @@ export default class DrawPoint extends React.Component<Props, State> {
           </p>
         );
         let index = 1;
-        this.props.auxiliaryMetrics.forEach((metric) => {
+        this.props.auxiliaryMetrics.forEach(metric => {
           contentTooltipAuxMetric.push(
             <p key={index.toString() + localisation + 'ContentTooltip8' + this.props.name} style={styleTitle2AuxMetric}>
               + Metric {index}
@@ -824,7 +824,7 @@ export default class DrawPoint extends React.Component<Props, State> {
           Associate Link In :
         </p>
       );
-      arrayOrientedLinksIn.forEach((orientedLinkIn) => {
+      arrayOrientedLinksIn.forEach(orientedLinkIn => {
         const nameOrientedLink: string = orientedLinkIn.label || orientedLinkIn.name;
         contentTooltipAssociateLink.push(
           <p key={localisation + 'ContentTooltip15' + this.props.name + nameOrientedLink} style={styleContentAssociateLink}>
@@ -840,7 +840,7 @@ export default class DrawPoint extends React.Component<Props, State> {
           Associate Link Out :
         </p>
       );
-      arrayOrientedLinksOut.forEach((orientedLinkOut) => {
+      arrayOrientedLinksOut.forEach(orientedLinkOut => {
         const nameOrientedLink: string = orientedLinkOut.label || orientedLinkOut.name;
         contentTooltipAssociateLink.push(
           <p key={localisation + 'ContentTooltip17' + this.props.name + nameOrientedLink} style={styleContentAssociateLink}>

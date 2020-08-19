@@ -82,7 +82,7 @@ export default class OrientedLink extends React.Component<Props, State> {
     /** new espace coordinate */
     orientedLink: OrientedLinkClass;
   }) => {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.setState(state, resolve);
     });
   };
@@ -92,7 +92,7 @@ export default class OrientedLink extends React.Component<Props, State> {
     /** new line in array input */
     arrayInput: ArrayInputSelectableClass[];
   }) => {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.setState(state, resolve);
     });
   };
@@ -113,7 +113,7 @@ export default class OrientedLink extends React.Component<Props, State> {
 
     arrayOptionsRegion.push(optionRegionNull);
 
-    regionCoordinateSpace.forEach((region) => {
+    regionCoordinateSpace.forEach(region => {
       const optionRegion: SelectableValue<string> = {
         label: region.label,
         value: region.label,
@@ -130,7 +130,7 @@ export default class OrientedLink extends React.Component<Props, State> {
 
     arrayOptionsPoint.push(optionPointNull);
 
-    arrayPoints.forEach((point) => {
+    arrayPoints.forEach(point => {
       let valueLabel = point.label || point.name;
 
       const optionPoint: SelectableValue<string> = {
@@ -288,7 +288,7 @@ export default class OrientedLink extends React.Component<Props, State> {
 
     for (const line of arrayInput) {
       const mapItems: JSX.Element[] = [];
-      line.uneClassInput.forEach((obj) => {
+      line.uneClassInput.forEach(obj => {
         if (obj.input_type === 'text') {
           item = (
             <InputTextOrientedLink

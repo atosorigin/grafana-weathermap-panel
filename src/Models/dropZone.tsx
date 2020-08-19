@@ -30,7 +30,7 @@ class DropZone extends React.Component<Props, State> {
   };
 
   upload = () => {
-    this.state.selectedFile.onload = function (event: any) {
+    this.state.selectedFile.onload = function(event: any) {
       if (event.target?.result != null) {
         this.props.options.saveImportFile.push(this.state.readerFile.result as string);
         this.props.onOptionsChange({ ...this.props.options, saveImportFile: this.props.options.saveImportFile });
@@ -48,7 +48,7 @@ class DropZone extends React.Component<Props, State> {
     if (this.state.readerFile.result != null) {
       this.props.options.saveImportFile.push({ name: this.state.selectedFile.name, content: this.state.readerFile.result as string });
       let loader: ImportInput = new ImportInput(this.props);
-      this.props.options.saveImportFile.forEach((file) => {
+      this.props.options.saveImportFile.forEach(file => {
         if (file.name) {
           const arrayFileName = file.name.split('.');
           let newBaseMap: Background = this.props.options.baseMap;

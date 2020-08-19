@@ -49,7 +49,7 @@ class FixColor extends React.Component<Props, State> {
      */
     lowerLimit: LowerLimitClass[];
   }) => {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.setState(state, resolve);
     });
   };
@@ -133,7 +133,7 @@ class FixColor extends React.Component<Props, State> {
             name="epaisseurContour"
             placeholder={placeHolderSize}
             value={this.state.lowerLimit[0].sizeBorder}
-            onChange={(event) => this.onChangeSzContour(event.currentTarget.value)}
+            onChange={event => this.onChangeSzContour(event.currentTarget.value)}
           />
         </div>
       );
@@ -167,7 +167,7 @@ class FixColor extends React.Component<Props, State> {
               name="epaisseurContour"
               placeholder={placeHolderSize}
               value={this.state.lowerLimit[0].sizeBorder}
-              onChange={(event) => this.onChangeSzContour(event.currentTarget.value)}
+              onChange={event => this.onChangeSzContour(event.currentTarget.value)}
             />
           </div>
         );

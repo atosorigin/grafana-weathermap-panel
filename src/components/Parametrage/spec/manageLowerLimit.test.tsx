@@ -25,7 +25,7 @@ describe('CoordinatSpaceInitial tests', () => {
             isLink={component}
             callBack={component}
             lowerLimitCallBack={component}
-            ref={(c) => (component = c)}
+            ref={c => (component = c)}
             {...testProps}
           />,
           container
@@ -385,7 +385,7 @@ describe('CoordinatSpaceInitial tests', () => {
     };
     act(() => {
       ReactDOM.render(
-        <ManageLowerLimit isLink={component} callBack={component} lowerLimitCallBack={component} ref={(c) => (component = c)} {...testProps} />,
+        <ManageLowerLimit isLink={component} callBack={component} lowerLimitCallBack={component} ref={c => (component = c)} {...testProps} />,
         container
       );
     });

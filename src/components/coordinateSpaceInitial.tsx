@@ -41,7 +41,7 @@ class CoordinateSpaceInitialClass extends React.Component<Props, State> {
    */
   _handleChange(currentTarget: string, name: string) {
     this.props.options.updateOnlyInitialSpace = true;
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       arrayCoor: editGoodParameter(
         name,
         prevState.arrayCoor,

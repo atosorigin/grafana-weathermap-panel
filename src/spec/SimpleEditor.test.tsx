@@ -8,7 +8,7 @@ import { act } from 'react-dom/test-utils';
 // Initialize test
 
 describe('waiting test', () => {
-  test('to be pass', (done) => {
+  test('to be pass', done => {
     setTimeout(() => {
       done();
     });
@@ -31,7 +31,7 @@ describe('SimpleEditor tests', () => {
       testProps.options = options;
       act(() => {
         ReactDOM.render(
-          <SimpleEditor options={component} data={component} onOptionsChange={component} ref={(c) => (component = c)} {...testProps} />,
+          <SimpleEditor options={component} data={component} onOptionsChange={component} ref={c => (component = c)} {...testProps} />,
           container
         );
       });
@@ -62,7 +62,7 @@ describe('SimpleEditor tests', () => {
 
     act(() => {
       ReactDOM.render(
-        <SimpleEditor options={component} data={component} onOptionsChange={component} ref={(c) => (component = c)} {...testProps} />,
+        <SimpleEditor options={component} data={component} onOptionsChange={component} ref={c => (component = c)} {...testProps} />,
         container
       );
     });

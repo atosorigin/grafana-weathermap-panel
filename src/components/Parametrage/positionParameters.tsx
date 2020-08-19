@@ -218,7 +218,7 @@ class PositionParameter extends React.Component<Props, State> {
     let listOptions: Array<SelectableValue<OrientedLinkClass>> = [];
     const arrayOrientedLinks: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
 
-    arrayOrientedLinks.forEach((orientedLink) => {
+    arrayOrientedLinks.forEach(orientedLink => {
       let selectableValue = {
         label: orientedLink.label || orientedLink.name,
         value: orientedLink,
@@ -384,7 +384,7 @@ class PositionParameter extends React.Component<Props, State> {
         <Collapse
           isOpen={this.state.collapseLayerLevel}
           label={'LayerLevel'}
-          onToggle={(isOpen) => {
+          onToggle={isOpen => {
             this.setState({
               collapseLayerLevel: isOpen,
             });
@@ -426,7 +426,7 @@ class PositionParameter extends React.Component<Props, State> {
       <Collapse
         isOpen={this.state.collapsepositionParameter}
         label={'Position Parameter'}
-        onToggle={(isOpen) => {
+        onToggle={isOpen => {
           this.setState({
             collapsepositionParameter: isOpen,
           });
@@ -435,7 +435,7 @@ class PositionParameter extends React.Component<Props, State> {
         <Collapse
           isOpen={this.state.collapseLabel}
           label={'Label'}
-          onToggle={(isOpen) => {
+          onToggle={isOpen => {
             this.setState({
               collapseLabel: isOpen,
             });
@@ -446,7 +446,7 @@ class PositionParameter extends React.Component<Props, State> {
         <Collapse
           isOpen={this.state.collapseTooltip}
           label={'Tooltip'}
-          onToggle={(isOpen) => {
+          onToggle={isOpen => {
             this.setState({
               collapseTooltip: isOpen,
             });

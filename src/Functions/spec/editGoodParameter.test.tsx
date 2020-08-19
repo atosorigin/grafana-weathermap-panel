@@ -6,7 +6,7 @@
 // import { ParametrageMetrique } from 'Models/SettingMetricClass';
 
 describe('waiting test', () => {
-  test('to be pass', (done) => {
+  test('to be pass', done => {
     setTimeout(() => {
       done();
     });

@@ -512,10 +512,10 @@ export class SimplePanel extends PureComponent<Props, State> {
   /** update AssociateOrientedLinkIn of point for tootip  */
   private updateAssociateOrientedLinkInToPoint = () => {
     let indexPoint = 0;
-    this.props.options.arrayPoints.forEach((point) => {
+    this.props.options.arrayPoints.forEach(point => {
       let newAssociateLinkIn: any[] = [];
       const namePoint: string = point.label || point.name;
-      this.props.options.arrayOrientedLinks.forEach((link) => {
+      this.props.options.arrayOrientedLinks.forEach(link => {
         if (link.pointIn === namePoint) {
           newAssociateLinkIn.push({ label: link.label, name: link.name });
         }
@@ -528,10 +528,10 @@ export class SimplePanel extends PureComponent<Props, State> {
   /** update AssociateOrientedLinkOut of point for tootip  */
   private updateAssociateOrientedLinkOutToPoint = () => {
     let indexPoint = 0;
-    this.props.options.arrayPoints.forEach((point) => {
+    this.props.options.arrayPoints.forEach(point => {
       let newAssociateLinkIn: any[] = [];
       const namePoint: string = point.label || point.name;
-      this.props.options.arrayOrientedLinks.forEach((link) => {
+      this.props.options.arrayOrientedLinks.forEach(link => {
         if (link.pointOut === namePoint) {
           newAssociateLinkIn.push({ label: link.label, name: link.name });
         }
@@ -1598,7 +1598,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   };
 
   setAsyncButtonManage = (state: { buttonManage: boolean[] }) => {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.setState(state, resolve);
     });
   };
@@ -1845,8 +1845,8 @@ export class SimplePanel extends PureComponent<Props, State> {
         // this.props.onOptionsChange({ ...this.props.options, baseMap: background });
       } else {
         fetch(this.props.options.baseMap.image)
-          .then((res) => res.text())
-          .then((text) => {
+          .then(res => res.text())
+          .then(text => {
             this.setState({ svg: text });
             const result = /id=["']\w*["']/i.exec(text);
             if (result && result.length > 0) {
@@ -1917,14 +1917,25 @@ export class SimplePanel extends PureComponent<Props, State> {
 
   // Zoom in Panel
   /********************************  Zoom Panel*********************************** */
-
   // Zoom Plus
   ZoomIn = () => {
     const intialfirst = document.getElementById('more');
+    // let scale = 1;
     intialfirst?.addEventListener('click', () => {
-      let elmnt = document.getElementById('mainPanel');
+      const elmnt = document.getElementById('mainPanel');
+
       if (elmnt) {
-        elmnt.style.transform += 'scale(1.01,1.01)';
+        // let zoneelmnt = elmnt.;
+        // let goodzone = zonee;
+        console.log('start');
+        // let height = elmnt?.offsetHeight;
+        // let width = elmnt?.offsetWidth;
+        // let svgback = height + width;
+        // elmnt.style.transform += 'scale(1.01,1.01)';
+        // elmnt.style.transform += 'scale(1.01,1.01)';
+        elmnt.addEventListener('wheel', () => {
+          elmnt.style.transform += 'scale(1.01)';
+        });
       }
     });
   };
@@ -1941,6 +1952,8 @@ export class SimplePanel extends PureComponent<Props, State> {
       //console.log('-');
     });
   };
+
+  /****************** Zoom************************** */
   // Zoom Initial
   // ZoomInitial = () => {
 
@@ -2692,7 +2705,7 @@ export class SimplePanel extends PureComponent<Props, State> {
                     // onMouseOver={event => {
                     //   this.displayTooltipSVG(event);
                     // }}
-                    onMouseOut={(event) => {
+                    onMouseOut={event => {
                       this.hideTooltipSVG(event);
                     }}
                     dangerouslySetInnerHTML={{ __html: this.props.options.baseMap.layerImage }}

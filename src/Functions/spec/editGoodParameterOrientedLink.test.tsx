@@ -1,7 +1,7 @@
 import { editGoodParameterOrientedLink } from '../EditParameter/editGoodParameterOrientedLink';
 
 describe('waiting test', () => {
-  test('to be pass', (done) => {
+  test('to be pass', done => {
     setTimeout(() => {
       done();
     });

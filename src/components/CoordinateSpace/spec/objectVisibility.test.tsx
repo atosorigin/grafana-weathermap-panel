@@ -7,7 +7,7 @@ import { act } from 'react-dom/test-utils';
 
 // test for yarn to pass
 describe('waiting test', () => {
-  test('to be pass', (done) => {
+  test('to be pass', done => {
     setTimeout(() => {
       done();
     });
@@ -28,7 +28,7 @@ describe('ObjectVisibility tests', () => {
     onOptionsChange: (options: SimpleOptions, callback?: () => void) => {
       let testProps = { options: {}, data: {}, onOptionsChange: {} };
       act(() => {
-        ReactDOM.render(<ObjectVisibility ref={(c) => (component = c)} {...testProps} />, container);
+        ReactDOM.render(<ObjectVisibility ref={c => (component = c)} {...testProps} />, container);
       });
     },
   };
@@ -55,7 +55,7 @@ describe('ObjectVisibility tests', () => {
     };
 
     act(() => {
-      ReactDOM.render(<ObjectVisibility ref={(c) => (component = c)} {...testProps} />, container);
+      ReactDOM.render(<ObjectVisibility ref={c => (component = c)} {...testProps} />, container);
     });
   });
 

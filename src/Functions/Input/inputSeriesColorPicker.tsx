@@ -28,7 +28,7 @@ export const InputSeriesColorPicker: FunctionComponent<InputTextFieldProps> = ({
         border: '3px solid black',
       }}
     >
-      <ColorPicker color={color} onChange={(newColor) => _onChange(keyInt, newColor)} />
+      <ColorPicker color={color} onChange={newColor => _onChange(keyInt, newColor)} />
     </div>
   </div>
 );

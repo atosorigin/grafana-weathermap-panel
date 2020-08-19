@@ -112,7 +112,7 @@ class EditOrientedLink extends React.Component<Props, State> {
     //     ? valueSelect[0]
     //     : prevState.selectCoordinateSpaceDefault,
     // }));
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       selectCoordinateSpace: valueSelect,
       selectCoordinateSpaceDefault: valueExist ? prevState.selectCoordinateSpaceDefault : valueSelect.length > 0 ? valueSelect[0] : [],
     }));
@@ -148,7 +148,7 @@ class EditOrientedLink extends React.Component<Props, State> {
         <div style={{ display: 'flex' }}>
           <FormLabel width={15}>Select Oriented Link</FormLabel>
           <Select
-            onChange={(value) => this.onChangeSelectCoordinate(value)}
+            onChange={value => this.onChangeSelectCoordinate(value)}
             allowCustomValue={false}
             options={this.state.selectCoordinateSpace}
             width={10}

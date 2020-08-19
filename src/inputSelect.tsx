@@ -10,6 +10,6 @@ type InputSelectProps = {
 
 export const InputSelect: FunctionComponent<InputSelectProps> = ({ _onChange, data, defaultValue }) => (
   <div>
-    <Select onChange={(value) => _onChange(value)} allowCustomValue={false} options={data} value={defaultValue} />
+    <Select onChange={value => _onChange(value)} allowCustomValue={false} options={data} value={defaultValue} />
   </div>
 );

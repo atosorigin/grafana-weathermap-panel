@@ -133,7 +133,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     const ratioX = positionX / parseInt(this.props.widthInitialSpaceDefault, 10);
     let x = Math.round(this.defineLimitX(xMin + widthInitialSpace * ratioX));
     let newArrayLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
-    newArrayLink.forEach((link) => {
+    newArrayLink.forEach(link => {
       if (link.name === this.props.name) {
         if (name === 'xA') {
           link.pointAPositionX = x.toString();
@@ -178,7 +178,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     const ratioY = (parseInt(this.props.heightInitialSpaceDefault, 10) - positionY) / parseInt(this.props.heightInitialSpaceDefault, 10);
     let y = Math.round(this.defineLimitY(this.props.heightImage - yMax + heightInitialSpace * ratioY));
     let newArrayLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
-    newArrayLink.forEach((link) => {
+    newArrayLink.forEach(link => {
       if (link.name === this.props.name) {
         if (name === 'yA') {
           link.pointAPositionY = (this.props.heightImage - y).toString();
@@ -268,7 +268,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     const arrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
     const listParallelOrientedLinks: number[] = [];
     listParallelOrientedLinks.push(parseInt(this.props.id, 10));
-    arrayOrientedLink.forEach((orientedLink) => {
+    arrayOrientedLink.forEach(orientedLink => {
       if (this.props.name !== orientedLink.name) {
         if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
           //console.log('//1');
@@ -453,7 +453,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     let yMidOut = 0;
 
     if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-      arrayPoints.forEach((point) => {
+      arrayPoints.forEach(point => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
@@ -474,7 +474,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
 
-      arrayRegions.forEach((region) => {
+      arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionOut) {
           xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -483,7 +483,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
-      arrayRegions.forEach((region) => {
+      arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -492,7 +492,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
 
-      arrayPoints.forEach((point) => {
+      arrayPoints.forEach(point => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointOut) {
@@ -513,7 +513,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
     } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associateRegionOut !== '') {
-      arrayRegions.forEach((region) => {
+      arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionOut) {
           xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -526,7 +526,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinIn = parseInt(this.props.pointAPositionY, 10);
       yMaxIn = parseInt(this.props.pointAPositionY, 10);
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      arrayRegions.forEach((region) => {
+      arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -539,7 +539,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinOut = parseInt(this.props.pointBPositionY, 10);
       yMaxOut = parseInt(this.props.pointBPositionY, 10);
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      arrayPoints.forEach((point) => {
+      arrayPoints.forEach(point => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
@@ -564,7 +564,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinOut = parseInt(this.props.pointBPositionY, 10);
       yMaxOut = parseInt(this.props.pointBPositionY, 10);
     } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associatePointOut !== '') {
-      arrayPoints.forEach((point) => {
+      arrayPoints.forEach(point => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointOut) {
@@ -589,7 +589,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinIn = parseInt(this.props.pointAPositionY, 10);
       yMaxIn = parseInt(this.props.pointAPositionY, 10);
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
-      arrayPoints.forEach((point) => {
+      arrayPoints.forEach(point => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
@@ -627,7 +627,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
     } else {
-      arrayRegions.forEach((region) => {
+      arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -1047,7 +1047,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     let yMidOut = 0;
 
     if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-      arrayPoints.forEach((point) => {
+      arrayPoints.forEach(point => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
@@ -1068,7 +1068,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
 
-      arrayRegions.forEach((region) => {
+      arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionOut) {
           xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -1077,7 +1077,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
-      arrayRegions.forEach((region) => {
+      arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -1086,7 +1086,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
 
-      arrayPoints.forEach((point) => {
+      arrayPoints.forEach(point => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointOut) {
@@ -1107,7 +1107,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
     } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associateRegionOut !== '') {
-      arrayRegions.forEach((region) => {
+      arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionOut) {
           xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -1120,7 +1120,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinIn = parseInt(this.props.pointAPositionY, 10);
       yMaxIn = parseInt(this.props.pointAPositionY, 10);
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      arrayRegions.forEach((region) => {
+      arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -1133,7 +1133,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinOut = parseInt(this.props.pointBPositionY, 10);
       yMaxOut = parseInt(this.props.pointBPositionY, 10);
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      arrayPoints.forEach((point) => {
+      arrayPoints.forEach(point => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
@@ -1158,7 +1158,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinOut = parseInt(this.props.pointBPositionY, 10);
       yMaxOut = parseInt(this.props.pointBPositionY, 10);
     } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associatePointOut !== '') {
-      arrayPoints.forEach((point) => {
+      arrayPoints.forEach(point => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointOut) {
@@ -1183,7 +1183,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinIn = parseInt(this.props.pointAPositionY, 10);
       yMaxIn = parseInt(this.props.pointAPositionY, 10);
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
-      arrayPoints.forEach((point) => {
+      arrayPoints.forEach(point => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
@@ -1221,7 +1221,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
     } else {
-      arrayRegions.forEach((region) => {
+      arrayRegions.forEach(region => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -1988,7 +1988,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     if (listParallelOrientedLinks.length > 1) {
       //console.log('multi');
       let indexOrientedLink = 0;
-      listParallelOrientedLinks.forEach((index) => {
+      listParallelOrientedLinks.forEach(index => {
         if (index === parseInt(this.props.id, 10)) {
           if (indexOrientedLink === 0) {
             if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
@@ -3321,7 +3321,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               </p>
             );
             let index = 1;
-            this.props.auxiliaryMetrics.forEach((metric) => {
+            this.props.auxiliaryMetrics.forEach(metric => {
               contentTooltipAuxMetric.push(
                 <p key={index.toString() + 'contentTooltip11' + this.props.name} style={styleTitle2AuxMetric}>
                   + Metric {index}
@@ -3365,7 +3365,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               </p>
             );
             let index = 1;
-            this.props.auxiliaryMetricsB.forEach((metricB) => {
+            this.props.auxiliaryMetricsB.forEach(metricB => {
               contentTooltipAuxMetric.push(
                 <p key={index.toString() + 'contentTooltip18' + this.props.name} style={styleTitle2AuxMetric}>
                   + Metric {index}
@@ -3410,7 +3410,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             </p>
           );
           let index = 1;
-          this.props.auxiliaryMetrics.forEach((metric) => {
+          this.props.auxiliaryMetrics.forEach(metric => {
             contentTooltipAuxMetric.push(
               <p key={index.toString() + 'contentTooltip25' + this.props.name} style={styleTitle2AuxMetric}>
                 + Metric {index}

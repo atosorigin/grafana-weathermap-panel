@@ -3,7 +3,7 @@ import { createInputsOrientedLink } from '../CreateInput/createInputsOrientedLin
 // import { PointClass } from 'Models/PointClass';
 
 describe('waiting test', () => {
-  test('to be pass', (done) => {
+  test('to be pass', done => {
     setTimeout(() => {
       done();
     });

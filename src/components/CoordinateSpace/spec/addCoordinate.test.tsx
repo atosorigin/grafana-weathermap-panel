@@ -7,7 +7,7 @@ import { act } from 'react-dom/test-utils';
 
 // test for yarn to pass
 describe('waiting test', () => {
-  test('to be pass', (done) => {
+  test('to be pass', done => {
     setTimeout(() => {
       done();
     });
@@ -37,7 +37,7 @@ describe('AddCoordinate tests', () => {
             isLink={component}
             isPoint={component}
             isRegion={component}
-            ref={(c) => (component = c)}
+            ref={c => (component = c)}
             {...testProps}
           />,
           container
@@ -109,7 +109,7 @@ describe('AddCoordinate tests', () => {
           isLink={component}
           isPoint={component}
           isRegion={component}
-          ref={(c) => (component = c)}
+          ref={c => (component = c)}
           {...testProps}
         />,
         container

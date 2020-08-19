@@ -11,7 +11,7 @@ The example shows how to use query filters to obtain precise metrics
 In a query, we want to analyze what the network card receives
 
 ```
-prometheus_engine_query_duration_seconds
+prometheus_engine_query_duration_seconds*100000
 ```
 
 The result shows several possible outcomes

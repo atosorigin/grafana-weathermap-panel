@@ -9,7 +9,7 @@
 
 // test for yarn to pass
 describe('waiting test', () => {
-  test('to be pass', (done) => {
+  test('to be pass', done => {
     setTimeout(() => {
       done();
     });

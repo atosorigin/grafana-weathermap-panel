@@ -1,14 +1,47 @@
 {
   "global": {
-    "lowerLimit": [
-      {
-        "lowerLimitMin": "leMinimum",
-        "lowerLimitMax": "leMaxmum",
-        "backColor": "#0046DE",
-        "borderColor": "#00FF99",
-        "sizeBorder": "2"
-      }
-    ],
+      "lowerLimit": [
+       {
+          "backColor": "#1F60C4",
+          "borderColor": "#1F60C4",
+          "id": 0,
+          "lowerLimitMax": "20",
+          "lowerLimitMin": "",
+          "sizeBorder": "10"
+        },
+        {
+          "backColor": "#37872D",
+          "borderColor": "#37872D",
+          "id": 1,
+          "lowerLimitMax": "40",
+          "lowerLimitMin": ">20",
+          "sizeBorder": "10"
+        },
+        {
+          "backColor": "#E0B400",
+          "borderColor": "#E0B400",
+          "id": 2,
+          "lowerLimitMax": "60",
+          "lowerLimitMin": ">40",
+          "sizeBorder": "10"
+        },
+        {
+          "backColor": "#FA6400",
+          "borderColor": "#FA6400",
+          "id": 3,
+          "lowerLimitMax": "80",
+          "lowerLimitMin": ">60",
+          "sizeBorder": "10"
+        },
+        {
+          "backColor": "#C4162A",
+          "borderColor": "#C4162A",
+          "id": 4,
+          "lowerLimitMax": "",
+          "lowerLimitMin": ">80",
+          "sizeBorder": "10"
+        }
+      ],
     "textObject": {
       "value": "",
       "isTextTooltip": true,
@@ -21,9 +54,9 @@
       },
       "generateObjectText": true,
       "valueGenerateObjectText": {
-        "legendElement": "uneLegend",
+        "legendElement": "",
         "numericFormatElement": "5",
-        "unit": "Hz",
+        "unit": "s",
         "displayObjectInTooltip": true,
         "addColorTextElement": true,
         "colorTextElement": "blue",
@@ -31,9 +64,9 @@
         "colorBackElement": "white"
       },
       "generateAuxiliaryElement": {
-        "legendElement": "uneLegend",
+        "legendElement": "",
         "numericFormatElement": "",
-        "unit": "Hz",
+        "unit": "s",
         "displayObjectInTooltip": true,
         "addColorTextElement": true,
         "colorTextElement": "blue",
@@ -41,7 +74,7 @@
         "colorBackElement": "#999999"
       }
     },
-    "colorMode": false,
+    "colorMode": true,
     "traceBack": true,
     "traceBorder": true
   },
@@ -314,6 +347,36 @@
       "idSVG": "rect3-footer",
       "mode": true,
       "img": "",
+      "orientedLink": []
+    },
+    {
+      "filtered": "quantile|0.5",
+      "labelfix": "true",
+      "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "xylabelfix": "xMin|50#xMax|150#yMin|250#yMax|350",
+      "type": "region",
+      "meta": "uneMeta",
+      "label": "Computer",
+      "positionParameter": {
+        "xylabelA": "x|0#y|0",
+        "xylabelB": "x|0#y|0",
+        "tooltipA": "bottom",
+        "tooltipB": "bottom"
+      },
+      "mainMetric": {
+        "format": "",
+        "key": "",
+        "keyValue": ""
+      },
+      "metrics": [],
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "idSVG": "",
+      "mode": false,
+      "img": "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/computer-png.png",
       "orientedLink": []
     }
   ]

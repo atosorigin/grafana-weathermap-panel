@@ -6,7 +6,7 @@ import { defaults, SimpleOptions } from '../../../types';
 import { act } from 'react-dom/test-utils';
 
 describe('waiting test', () => {
-  test('to be pass', (done) => {
+  test('to be pass', done => {
     setTimeout(() => {
       done();
     });
@@ -37,7 +37,7 @@ describe('FixColor tests', () => {
             isLink={component}
             traceBack={component}
             traceBorder={component}
-            ref={(c) => (component = c)}
+            ref={c => (component = c)}
             {...testProps}
           />,
           container
@@ -89,7 +89,7 @@ describe('FixColor tests', () => {
           isLink={component}
           traceBack={component}
           traceBorder={component}
-          ref={(c) => (component = c)}
+          ref={c => (component = c)}
           {...testProps}
         />,
         container
