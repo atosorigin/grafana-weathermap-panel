@@ -63,7 +63,7 @@ class Display extends React.Component<Props, State> {
     /** new police value */
     newPolice: SelectableValue<string>;
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
       this.callParent();
     });
@@ -76,7 +76,7 @@ class Display extends React.Component<Props, State> {
     /** new size value */
     size: string;
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
       this.callParent();
     });
@@ -89,7 +89,7 @@ class Display extends React.Component<Props, State> {
     /** new style value */
     style: Style;
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
       this.callParent();
     });
@@ -205,7 +205,7 @@ class Display extends React.Component<Props, State> {
     } else {
       readerFile.readAsText(selectedFile);
     }
-    readerFile.onload = function() {
+    readerFile.onload = function () {
       file = readerFile.result;
     };
 

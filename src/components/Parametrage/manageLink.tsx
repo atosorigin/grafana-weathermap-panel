@@ -47,7 +47,7 @@ class ManageLink extends React.Component<Props, State> {
      */
     followLink: string;
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };
@@ -61,7 +61,7 @@ class ManageLink extends React.Component<Props, State> {
      */
     hoveringTooltipLink: string;
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };
@@ -75,7 +75,7 @@ class ManageLink extends React.Component<Props, State> {
      */
     hoveringTooltipText: string;
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };

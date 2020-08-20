@@ -62,78 +62,65 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   positionYCDefault: string;
 }
 
-interface State {
-  //pointTest: JSX.Element;
-}
+interface State {}
 
 export default class DrawOrientedLink extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {
-      //pointTest: <div></div>,
-    };
+    this.state = {};
   }
 
   /**
-   * to do
+   * détermine la valeur de X pour les points A, B et C du lien en fonction des limites
+   * de l'initialSpace
    * @param coordinateX
    *
    */
   private defineLimitX(coordinateX: number) {
     let result: number = coordinateX;
-    // if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
-    //   if (coordinateX > 100) {
-    //     result = 100;
-    //   }
-    //   if (coordinateX < 0) {
-    //     result = 0;
-    //   }
-    // } else {
-    //   if (coordinateX > 100) {
-    //     result = 100;
-    //   }
-    //   if (coordinateX < -100) {
-    //     result = -100;
-    //   }
-    // }
+    const xMin: number = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
+    const xMax: number = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
+    if (coordinateX < xMin) {
+      result = xMin;
+    } else if (coordinateX > xMax) {
+      result = xMax;
+    }
     return result;
   }
 
   /**
-   * to do
+   * détermine la valeur de Y pour les points A, B et C du lien en fonction des limites
+   * de l'initialSpace
    * @param coordinateY
    *
    */
   private defineLimitY(coordinateY: number) {
     let result: number = coordinateY;
-    // if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
-    //   if (coordinateY > 100) {
-    //     result = 100;
-    //   }
-    //   if (coordinateY < 0) {
-    //     result = 0;
-    //   }
-    // } else {
-    //   if (coordinateY > 100) {
-    //     result = 100;
-    //   }
-    //   if (coordinateY < -100) {
-    //     result = -100;
-    //   }
-    // }
+    const yMin: number = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
+    const yMax: number = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10);
+    if (coordinateY < yMin) {
+      result = yMin;
+    } else if (coordinateY > yMax) {
+      result = yMax;
+    }
     return result;
   }
 
+  // définit la bonne position X des points A, B et C composant le lien
+  // en fonction des valeurs de l'initialSpace (xMin, xMax, yMin, yMax)
   private synchroLinkX(positionX: number, name?: string): number {
-    //console.log(positionX);
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
     const xMin: number = parseInt(initialSpace.xMin, 10);
     const xMax: number = parseInt(initialSpace.xMax, 10);
     const widthInitialSpace: number = xMax - xMin;
-    const ratioX = positionX / parseInt(this.props.widthInitialSpaceDefault, 10);
-    let x = Math.round(this.defineLimitX(xMin + widthInitialSpace * ratioX));
+    const ratioX = positionX / this.props.widthImage;
+
+    // define value to display in input positionShapeX
+    const x = Math.round(xMin + widthInitialSpace * ratioX);
+
+    // saving data new positionShapeX
     let newArrayLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
-    newArrayLink.forEach(link => {
+    newArrayLink.forEach((link) => {
       if (link.name === this.props.name) {
         if (name === 'xA') {
           link.pointAPositionX = x.toString();
@@ -146,81 +133,49 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     });
     this.props.options.arrayOrientedLinks = newArrayLink;
 
-    // if (!defaultReferentiel) {
-    //   if (xMin < 0 && xMax < 0) {
-    //     xMinPx = (xMax + 100) * (this.props.widthImage / 200);
-    //     xMaxPx = (xMin + 100) * (this.props.widthImage / 200);
-    //   } else {
-    //     xMinPx = (xMin + 100) * (this.props.widthImage / 200);
-    //     xMaxPx = (xMax + 100) * (this.props.widthImage / 200);
-    //   }
-    //   x = xMinPx + (this.defineLimitX(positionX) * (widthInitialSpace / 200) + widthInitialSpace / 2);
-    // } else {
-    //   xMinPx = xMin * (this.props.widthImage / 100);
-    //   xMaxPx = xMax * (this.props.widthImage / 100);
-    //   const widthInitialSpace: number = xMaxPx - xMinPx;
-    //   x = xMinPx + this.defineLimitX(positionX) * (widthInitialSpace / 100);
-    // }
-    //x = this.defineLimitX(positionX / (parseInt(this.props.widthInitialSpaceDefault, 10) / xMax));
-    // if (parseInt(this.props.widthInitialSpaceDefault, 10) - widthInitialSpace === 0) {
-    //   x = this.defineLimitX(widthInitialSpace * positionX / parseInt(this.props.widthInitialSpaceDefault, 10));
-    // } else {
-    //   x = this.defineLimitX(xMin + widthInitialSpace * positionX / parseInt(this.props.widthInitialSpaceDefault, 10));
-    // }
-    return x;
+    // define limit x in fonction of values xMin and xMax of initialSpace
+    const xLimited = this.defineLimitX(x);
+
+    // define display x
+    const result = ((xLimited - xMin) / widthInitialSpace) * this.props.widthImage;
+
+    // return result and center display of point in fonction of sizePoint and borderPoint
+    return result;
   }
 
+  // définit la bonne position Y des points A, B et C composant le lien
+  // en fonction des valeurs de l'initialSpace (xMin, xMax, yMin, yMax)
   private synchroLinkY(positionY: number, name?: string): number {
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
     const yMin: number = parseInt(initialSpace.yMin, 10);
     const yMax: number = parseInt(initialSpace.yMax, 10);
     const heightInitialSpace: number = yMax - yMin;
-    const ratioY = (parseInt(this.props.heightInitialSpaceDefault, 10) - positionY) / parseInt(this.props.heightInitialSpaceDefault, 10);
-    let y = Math.round(this.defineLimitY(this.props.heightImage - yMax + heightInitialSpace * ratioY));
+    const ratioY = positionY / this.props.heightImage;
+
+    // define value to display in input positionShapeY
+    let y = Math.round(yMin + heightInitialSpace * ratioY);
+    // saving data new positionShapeY
     let newArrayLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
-    newArrayLink.forEach(link => {
+    newArrayLink.forEach((link) => {
       if (link.name === this.props.name) {
         if (name === 'yA') {
-          link.pointAPositionY = (this.props.heightImage - y).toString();
+          link.pointAPositionY = y.toString();
         } else if (name === 'yB') {
-          link.pointBPositionY = (this.props.heightImage - y).toString();
+          link.pointBPositionY = y.toString();
         } else if (name === 'yC') {
-          link.pointCPositionY = (this.props.heightImage - y).toString();
+          link.pointCPositionY = y.toString();
         }
       }
     });
     this.props.options.arrayOrientedLinks = newArrayLink;
 
-    // if (!defaultReferentiel) {
-    //   if (yMin < 0 && yMax < 0) {
-    //     yMinPx = (yMax + 100) * (this.props.heightImage / 200);
-    //     yMaxPx = (yMin + 100) * (this.props.heightImage / 200);
-    //   } else {
-    //     yMinPx = (yMin + 100) * (this.props.heightImage / 200);
-    //     yMaxPx = (yMax + 100) * (this.props.heightImage / 200);
-    //   }
-    //   y =
-    //     this.defineValueToAdaptPositionYToInitialSpace(yMinPx, yMaxPx) +
-    //     (heightInitialSpace / 2 - this.defineLimitY(positionY) * (heightInitialSpace / 200));
-    // } else {
-    //   yMinPx = yMin * (this.props.heightImage / 100);
-    //   yMaxPx = yMax * (this.props.heightImage / 100);
-    //   const heightInitialSpace: number = yMaxPx - yMinPx;
-    //   y = this.defineValueToAdaptPositionYToInitialSpace(yMinPx, yMaxPx) + this.defineLimitY(100 - positionY) * (heightInitialSpace / 100);
-    // }
-    // y =
-    //   this.props.heightImage -
-    //   yMax +
-    //   this.defineLimitY(parseInt(this.props.heightInitialSpaceDefault, 10) - positionY) /
-    //     (parseInt(this.props.heightInitialSpaceDefault, 10) / yMax) -
-    //   yMin / 2;
-    // y = this.defineLimitY(positionY / (parseInt(this.props.heightInitialSpaceDefault, 10) / yMax));
-    // y = this.defineLimitY(
-    //   this.props.heightImage -
-    //     yMax +
-    //     heightInitialSpace * ((parseInt(this.props.heightInitialSpaceDefault, 10) - positionY) / parseInt(this.props.heightInitialSpaceDefault, 10))
-    // );
-    return y;
+    // define limit y in fonction of values yMin and yMax of initialSpace
+    const yLimited = this.defineLimitY(y);
+
+    // define display y
+    const result = ((yMin + heightInitialSpace - yLimited) / heightInitialSpace) * this.props.heightImage;
+
+    return result;
   }
 
   // private defineValueToAdaptPositionYToInitialSpace = (yMinPx: number, yMaxPx: number): number => {
@@ -268,7 +223,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     const arrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
     const listParallelOrientedLinks: number[] = [];
     listParallelOrientedLinks.push(parseInt(this.props.id, 10));
-    arrayOrientedLink.forEach(orientedLink => {
+    arrayOrientedLink.forEach((orientedLink) => {
       if (this.props.name !== orientedLink.name) {
         if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
           //console.log('//1');
@@ -313,6 +268,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     return listParallelOrientedLinkSorted;
   };
 
+  /**
+   * to do
+   * @param region
+   */
   private defineCoor4DRegion = (region: RegionClass): Coord4D => {
     let coor4D: Coord4D = { xMin: '0', xMax: '0', yMin: '0', yMax: '0' };
     let xMin = 0;
@@ -320,6 +279,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     let yMin = 0;
     let yMax = 0;
     if (region.idSVG !== '') {
+      // region SVG
       const heightPanel: number = parseInt(this.props.options.baseMap.height, 10);
       const widthPanel: number = parseInt(this.props.options.baseMap.width, 10);
       const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
@@ -400,10 +360,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       const xMaxSVGCoor: number = Math.round((xMaxSVG - widthInitialSpace / 2) * (100 / widthInitialSpace)) * 2;
       const yMinSVGCoor: number = Math.round((yMinSVG - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1;
       const yMaxSVGCoor: number = Math.round((yMaxSVG - heightInitialSpace / 2) * (100 / heightInitialSpace)) * 2 * -1;
-      xMin = xMinSVGCoor;
-      xMax = xMaxSVGCoor;
-      yMin = yMinSVGCoor;
-      yMax = yMaxSVGCoor;
+      xMin = Math.round(xMinSVG);
+      xMax = Math.round(xMaxSVG);
+      yMin = Math.round(this.props.heightImage - yMinSVG);
+      yMax = Math.round(this.props.heightImage - yMaxSVG);
 
       if (xMin < 0 && xMax < 0) {
         xMin = xMaxSVGCoor;
@@ -414,16 +374,17 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         yMax = yMinSVGCoor;
       }
     } else {
-      xMin = parseInt(region.coords.xMin, 10);
-      xMax = parseInt(region.coords.xMax, 10);
-      yMin = parseInt(region.coords.yMin, 10);
-      yMax = parseInt(region.coords.yMax, 10);
+      // region coordinate
+      xMin = parseInt(region.coordsDefault.xMin, 10);
+      xMax = parseInt(region.coordsDefault.xMax, 10);
+      yMin = parseInt(region.coordsDefault.yMin, 10);
+      yMax = parseInt(region.coordsDefault.yMax, 10);
     }
     coor4D = { xMin: xMin.toString(), xMax: xMax.toString(), yMin: yMin.toString(), yMax: yMax.toString() };
     return coor4D;
   };
 
-  getPaddingPoint = (point: PointClass, idMultiLink: number): number => {
+  private getPaddingPoint = (point: PointClass, idMultiLink: number): number => {
     let result = 0;
     const pointHtml = document.getElementById(point.name);
     if (pointHtml) {
@@ -435,7 +396,11 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     return result;
   };
 
-  private ifMultiLinkWithRegionDefineX = (isIn: boolean, idMultiLink: number): number => {
+  // permet de définir le bon placement X des extrémités du lien :
+  // - selon si il y a un ou plusieurs liens entre deux extrémités
+  // - selon si l'extrémité A est un point, une région ou le panel
+  // - selon si l'extrémité B est un point, une région ou le panel
+  private definePositionX = (isIn: boolean, idMultiLink: number): number => {
     let xResult = 0;
     const arrayRegions = this.props.options.regionCoordinateSpace;
     const arrayPoints = this.props.options.arrayPoints;
@@ -453,28 +418,28 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     let yMidOut = 0;
 
     if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
-          xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
-          xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
-          yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
-          yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+          xMinIn = parseInt(point.positionXDefault, 10) - paddingPoint;
+          xMaxIn = parseInt(point.positionXDefault, 10) + paddingPoint;
+          yMinIn = parseInt(point.positionYDefault, 10) - paddingPoint;
+          yMaxIn = parseInt(point.positionYDefault, 10) + paddingPoint;
 
           if (xMinIn < 0 && xMaxIn < 0) {
-            xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
-            xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMinIn = parseInt(point.positionXDefault, 10) + paddingPoint;
+            xMaxIn = parseInt(point.positionXDefault, 10) - paddingPoint;
           }
 
           if (yMinIn < 0 && yMaxIn < 0) {
-            yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
-            yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMinIn = parseInt(point.positionYDefault, 10) + paddingPoint;
+            yMaxIn = parseInt(point.positionYDefault, 10) - paddingPoint;
           }
         }
       });
 
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionOut) {
           xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -483,7 +448,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -492,28 +457,28 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
 
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointOut) {
-          xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
-          xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
-          yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
-          yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+          xMinOut = parseInt(point.positionXDefault, 10) - paddingPoint;
+          xMaxOut = parseInt(point.positionXDefault, 10) + paddingPoint;
+          yMinOut = parseInt(point.positionYDefault, 10) - paddingPoint;
+          yMaxOut = parseInt(point.positionYDefault, 10) + paddingPoint;
 
           if (xMinOut < 0 && xMaxOut < 0) {
-            xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
-            xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMinOut = parseInt(point.positionXDefault, 10) + paddingPoint;
+            xMaxOut = parseInt(point.positionXDefault, 10) - paddingPoint;
           }
 
           if (yMinOut < 0 && yMaxOut < 0) {
-            yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
-            yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMinOut = parseInt(point.positionYDefault, 10) + paddingPoint;
+            yMaxOut = parseInt(point.positionYDefault, 10) - paddingPoint;
           }
         }
       });
     } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associateRegionOut !== '') {
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionOut) {
           xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -521,12 +486,12 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           yMaxOut = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
-      xMinIn = parseInt(this.props.pointAPositionX, 10);
-      xMaxIn = parseInt(this.props.pointAPositionX, 10);
-      yMinIn = parseInt(this.props.pointAPositionY, 10);
-      yMaxIn = parseInt(this.props.pointAPositionY, 10);
+      xMinIn = parseInt(this.props.positionXADefault, 10);
+      xMaxIn = parseInt(this.props.positionXADefault, 10);
+      yMinIn = parseInt(this.props.positionYADefault, 10);
+      yMaxIn = parseInt(this.props.positionYADefault, 10);
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -534,100 +499,100 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           yMaxIn = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
-      xMinOut = parseInt(this.props.pointBPositionX, 10);
-      xMaxOut = parseInt(this.props.pointBPositionX, 10);
-      yMinOut = parseInt(this.props.pointBPositionY, 10);
-      yMaxOut = parseInt(this.props.pointBPositionY, 10);
+      xMinOut = parseInt(this.props.positionXBDefault, 10);
+      xMaxOut = parseInt(this.props.positionXBDefault, 10);
+      yMinOut = parseInt(this.props.positionYBDefault, 10);
+      yMaxOut = parseInt(this.props.positionYBDefault, 10);
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
-          xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
-          xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
-          yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
-          yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+          xMinIn = parseInt(point.positionXDefault, 10) - paddingPoint;
+          xMaxIn = parseInt(point.positionXDefault, 10) + paddingPoint;
+          yMinIn = parseInt(point.positionYDefault, 10) - paddingPoint;
+          yMaxIn = parseInt(point.positionYDefault, 10) + paddingPoint;
 
           if (xMinIn < 0 && xMaxIn < 0) {
-            xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
-            xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMinIn = parseInt(point.positionXDefault, 10) + paddingPoint;
+            xMaxIn = parseInt(point.positionXDefault, 10) - paddingPoint;
           }
 
           if (yMinIn < 0 && yMaxIn < 0) {
-            yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
-            yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMinIn = parseInt(point.positionYDefault, 10) + paddingPoint;
+            yMaxIn = parseInt(point.positionYDefault, 10) - paddingPoint;
           }
         }
       });
-      xMinOut = parseInt(this.props.pointBPositionX, 10);
-      xMaxOut = parseInt(this.props.pointBPositionX, 10);
-      yMinOut = parseInt(this.props.pointBPositionY, 10);
-      yMaxOut = parseInt(this.props.pointBPositionY, 10);
+      xMinOut = parseInt(this.props.positionXBDefault, 10);
+      xMaxOut = parseInt(this.props.positionXBDefault, 10);
+      yMinOut = parseInt(this.props.positionYBDefault, 10);
+      yMaxOut = parseInt(this.props.positionYBDefault, 10);
     } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associatePointOut !== '') {
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointOut) {
-          xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
-          xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
-          yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
-          yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+          xMinOut = parseInt(point.positionXDefault, 10) - paddingPoint;
+          xMaxOut = parseInt(point.positionXDefault, 10) + paddingPoint;
+          yMinOut = parseInt(point.positionYDefault, 10) - paddingPoint;
+          yMaxOut = parseInt(point.positionYDefault, 10) + paddingPoint;
 
           if (xMinOut < 0 && xMaxOut < 0) {
-            xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
-            xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMinOut = parseInt(point.positionXDefault, 10) + paddingPoint;
+            xMaxOut = parseInt(point.positionXDefault, 10) - paddingPoint;
           }
 
           if (yMinOut < 0 && yMaxOut < 0) {
-            yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
-            yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMinOut = parseInt(point.positionYDefault, 10) + paddingPoint;
+            yMaxOut = parseInt(point.positionYDefault, 10) - paddingPoint;
           }
         }
       });
-      xMinIn = parseInt(this.props.pointAPositionX, 10);
-      xMaxIn = parseInt(this.props.pointAPositionX, 10);
-      yMinIn = parseInt(this.props.pointAPositionY, 10);
-      yMaxIn = parseInt(this.props.pointAPositionY, 10);
+      xMinIn = parseInt(this.props.positionXADefault, 10);
+      xMaxIn = parseInt(this.props.positionXADefault, 10);
+      yMinIn = parseInt(this.props.positionYADefault, 10);
+      yMaxIn = parseInt(this.props.positionYADefault, 10);
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
-          xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
-          xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
-          yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
-          yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+          xMinIn = parseInt(point.positionXDefault, 10) - paddingPoint;
+          xMaxIn = parseInt(point.positionXDefault, 10) + paddingPoint;
+          yMinIn = parseInt(point.positionYDefault, 10) - paddingPoint;
+          yMaxIn = parseInt(point.positionYDefault, 10) + paddingPoint;
 
           if (xMinIn < 0 && xMaxIn < 0) {
-            xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
-            xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMinIn = parseInt(point.positionXDefault, 10) + paddingPoint;
+            xMaxIn = parseInt(point.positionXDefault, 10) - paddingPoint;
           }
 
           if (yMinIn < 0 && yMaxIn < 0) {
-            yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
-            yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMinIn = parseInt(point.positionYDefault, 10) + paddingPoint;
+            yMaxIn = parseInt(point.positionYDefault, 10) - paddingPoint;
           }
         }
 
         if (name === this.props.associatePointOut) {
-          xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
-          xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
-          yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
-          yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+          xMinOut = parseInt(point.positionXDefault, 10) - paddingPoint;
+          xMaxOut = parseInt(point.positionXDefault, 10) + paddingPoint;
+          yMinOut = parseInt(point.positionYDefault, 10) - paddingPoint;
+          yMaxOut = parseInt(point.positionYDefault, 10) + paddingPoint;
 
           if (xMinOut < 0 && xMaxOut < 0) {
-            xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
-            xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMinOut = parseInt(point.positionXDefault, 10) + paddingPoint;
+            xMaxOut = parseInt(point.positionXDefault, 10) - paddingPoint;
           }
 
           if (yMinOut < 0 && yMaxOut < 0) {
-            yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
-            yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMinOut = parseInt(point.positionYDefault, 10) + paddingPoint;
+            yMaxOut = parseInt(point.positionYDefault, 10) - paddingPoint;
           }
         }
       });
     } else {
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -1029,7 +994,11 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     return xResult;
   };
 
-  private ifMultiLinkWithRegionDefineY = (isIn: boolean, idMultiLink: number): number => {
+  // permet de définir le bon placement Y des extrémités du lien :
+  // - selon si il y a un ou plusieurs liens entre deux extrémités
+  // - selon si l'extrémité A est un point, une région ou le panel
+  // - selon si l'extrémité B est un point, une région ou le panel
+  private definePositionY = (isIn: boolean, idMultiLink: number): number => {
     let yResult = 0;
     const arrayPoints = this.props.options.arrayPoints;
     const arrayRegions = this.props.options.regionCoordinateSpace;
@@ -1047,28 +1016,28 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     let yMidOut = 0;
 
     if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
-          xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
-          xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
-          yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
-          yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+          xMinIn = parseInt(point.positionXDefault, 10) - paddingPoint;
+          xMaxIn = parseInt(point.positionXDefault, 10) + paddingPoint;
+          yMinIn = parseInt(point.positionYDefault, 10) - paddingPoint;
+          yMaxIn = parseInt(point.positionYDefault, 10) + paddingPoint;
 
           if (xMinIn < 0 && xMaxIn < 0) {
-            xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
-            xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMinIn = parseInt(point.positionXDefault, 10) + paddingPoint;
+            xMaxIn = parseInt(point.positionXDefault, 10) - paddingPoint;
           }
 
           if (yMinIn < 0 && yMaxIn < 0) {
-            yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
-            yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMinIn = parseInt(point.positionYDefault, 10) + paddingPoint;
+            yMaxIn = parseInt(point.positionYDefault, 10) - paddingPoint;
           }
         }
       });
 
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionOut) {
           xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -1077,7 +1046,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -1086,28 +1055,28 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
 
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointOut) {
-          xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
-          xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
-          yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
-          yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+          xMinOut = parseInt(point.positionXDefault, 10) - paddingPoint;
+          xMaxOut = parseInt(point.positionXDefault, 10) + paddingPoint;
+          yMinOut = parseInt(point.positionYDefault, 10) - paddingPoint;
+          yMaxOut = parseInt(point.positionYDefault, 10) + paddingPoint;
 
           if (xMinOut < 0 && xMaxOut < 0) {
-            xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
-            xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMinOut = parseInt(point.positionXDefault, 10) + paddingPoint;
+            xMaxOut = parseInt(point.positionXDefault, 10) - paddingPoint;
           }
 
           if (yMinOut < 0 && yMaxOut < 0) {
-            yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
-            yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMinOut = parseInt(point.positionYDefault, 10) + paddingPoint;
+            yMaxOut = parseInt(point.positionYDefault, 10) - paddingPoint;
           }
         }
       });
     } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associateRegionOut !== '') {
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionOut) {
           xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxOut = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -1115,12 +1084,12 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           yMaxOut = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
-      xMinIn = parseInt(this.props.pointAPositionX, 10);
-      xMaxIn = parseInt(this.props.pointAPositionX, 10);
-      yMinIn = parseInt(this.props.pointAPositionY, 10);
-      yMaxIn = parseInt(this.props.pointAPositionY, 10);
+      xMinIn = parseInt(this.props.positionXADefault, 10);
+      xMaxIn = parseInt(this.props.positionXADefault, 10);
+      yMinIn = parseInt(this.props.positionYADefault, 10);
+      yMaxIn = parseInt(this.props.positionYADefault, 10);
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -1128,100 +1097,100 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           yMaxIn = parseInt(this.defineCoor4DRegion(region).yMax, 10);
         }
       });
-      xMinOut = parseInt(this.props.pointBPositionX, 10);
-      xMaxOut = parseInt(this.props.pointBPositionX, 10);
-      yMinOut = parseInt(this.props.pointBPositionY, 10);
-      yMaxOut = parseInt(this.props.pointBPositionY, 10);
+      xMinOut = parseInt(this.props.positionXBDefault, 10);
+      xMaxOut = parseInt(this.props.positionXBDefault, 10);
+      yMinOut = parseInt(this.props.positionYBDefault, 10);
+      yMaxOut = parseInt(this.props.positionYBDefault, 10);
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
-          xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
-          xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
-          yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
-          yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+          xMinIn = parseInt(point.positionXDefault, 10) - paddingPoint;
+          xMaxIn = parseInt(point.positionXDefault, 10) + paddingPoint;
+          yMinIn = parseInt(point.positionYDefault, 10) - paddingPoint;
+          yMaxIn = parseInt(point.positionYDefault, 10) + paddingPoint;
 
           if (xMinIn < 0 && xMaxIn < 0) {
-            xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
-            xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMinIn = parseInt(point.positionXDefault, 10) + paddingPoint;
+            xMaxIn = parseInt(point.positionXDefault, 10) - paddingPoint;
           }
 
           if (yMinIn < 0 && yMaxIn < 0) {
-            yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
-            yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMinIn = parseInt(point.positionYDefault, 10) + paddingPoint;
+            yMaxIn = parseInt(point.positionYDefault, 10) - paddingPoint;
           }
         }
       });
-      xMinOut = parseInt(this.props.pointBPositionX, 10);
-      xMaxOut = parseInt(this.props.pointBPositionX, 10);
-      yMinOut = parseInt(this.props.pointBPositionY, 10);
-      yMaxOut = parseInt(this.props.pointBPositionY, 10);
+      xMinOut = parseInt(this.props.positionXBDefault, 10);
+      xMaxOut = parseInt(this.props.positionXBDefault, 10);
+      yMinOut = parseInt(this.props.positionYBDefault, 10);
+      yMaxOut = parseInt(this.props.positionYBDefault, 10);
     } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associatePointOut !== '') {
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointOut) {
-          xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
-          xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
-          yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
-          yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+          xMinOut = parseInt(point.positionXDefault, 10) - paddingPoint;
+          xMaxOut = parseInt(point.positionXDefault, 10) + paddingPoint;
+          yMinOut = parseInt(point.positionYDefault, 10) - paddingPoint;
+          yMaxOut = parseInt(point.positionYDefault, 10) + paddingPoint;
 
           if (xMinOut < 0 && xMaxOut < 0) {
-            xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
-            xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMinOut = parseInt(point.positionXDefault, 10) + paddingPoint;
+            xMaxOut = parseInt(point.positionXDefault, 10) - paddingPoint;
           }
 
           if (yMinOut < 0 && yMaxOut < 0) {
-            yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
-            yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMinOut = parseInt(point.positionYDefault, 10) + paddingPoint;
+            yMaxOut = parseInt(point.positionYDefault, 10) - paddingPoint;
           }
         }
       });
-      xMinIn = parseInt(this.props.pointAPositionX, 10);
-      xMaxIn = parseInt(this.props.pointAPositionX, 10);
-      yMinIn = parseInt(this.props.pointAPositionY, 10);
-      yMaxIn = parseInt(this.props.pointAPositionY, 10);
+      xMinIn = parseInt(this.props.positionXADefault, 10);
+      xMaxIn = parseInt(this.props.positionXADefault, 10);
+      yMinIn = parseInt(this.props.positionYADefault, 10);
+      yMaxIn = parseInt(this.props.positionYADefault, 10);
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
-      arrayPoints.forEach(point => {
+      arrayPoints.forEach((point) => {
         let paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
-          xMinIn = parseInt(point.positionShapeX, 10) - paddingPoint;
-          xMaxIn = parseInt(point.positionShapeX, 10) + paddingPoint;
-          yMinIn = parseInt(point.positionShapeY, 10) - paddingPoint;
-          yMaxIn = parseInt(point.positionShapeY, 10) + paddingPoint;
+          xMinIn = parseInt(point.positionXDefault, 10) - paddingPoint;
+          xMaxIn = parseInt(point.positionXDefault, 10) + paddingPoint;
+          yMinIn = parseInt(point.positionYDefault, 10) - paddingPoint;
+          yMaxIn = parseInt(point.positionYDefault, 10) + paddingPoint;
 
           if (xMinIn < 0 && xMaxIn < 0) {
-            xMinIn = parseInt(point.positionShapeX, 10) + paddingPoint;
-            xMaxIn = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMinIn = parseInt(point.positionXDefault, 10) + paddingPoint;
+            xMaxIn = parseInt(point.positionXDefault, 10) - paddingPoint;
           }
 
           if (yMinIn < 0 && yMaxIn < 0) {
-            yMinIn = parseInt(point.positionShapeY, 10) + paddingPoint;
-            yMaxIn = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMinIn = parseInt(point.positionYDefault, 10) + paddingPoint;
+            yMaxIn = parseInt(point.positionYDefault, 10) - paddingPoint;
           }
         }
 
         if (name === this.props.associatePointOut) {
-          xMinOut = parseInt(point.positionShapeX, 10) - paddingPoint;
-          xMaxOut = parseInt(point.positionShapeX, 10) + paddingPoint;
-          yMinOut = parseInt(point.positionShapeY, 10) - paddingPoint;
-          yMaxOut = parseInt(point.positionShapeY, 10) + paddingPoint;
+          xMinOut = parseInt(point.positionXDefault, 10) - paddingPoint;
+          xMaxOut = parseInt(point.positionXDefault, 10) + paddingPoint;
+          yMinOut = parseInt(point.positionYDefault, 10) - paddingPoint;
+          yMaxOut = parseInt(point.positionYDefault, 10) + paddingPoint;
 
           if (xMinOut < 0 && xMaxOut < 0) {
-            xMinOut = parseInt(point.positionShapeX, 10) + paddingPoint;
-            xMaxOut = parseInt(point.positionShapeX, 10) - paddingPoint;
+            xMinOut = parseInt(point.positionXDefault, 10) + paddingPoint;
+            xMaxOut = parseInt(point.positionXDefault, 10) - paddingPoint;
           }
 
           if (yMinOut < 0 && yMaxOut < 0) {
-            yMinOut = parseInt(point.positionShapeY, 10) + paddingPoint;
-            yMaxOut = parseInt(point.positionShapeY, 10) - paddingPoint;
+            yMinOut = parseInt(point.positionYDefault, 10) + paddingPoint;
+            yMaxOut = parseInt(point.positionYDefault, 10) - paddingPoint;
           }
         }
       });
     } else {
-      arrayRegions.forEach(region => {
+      arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
           xMaxIn = parseInt(this.defineCoor4DRegion(region).xMax, 10);
@@ -1988,107 +1957,107 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     if (listParallelOrientedLinks.length > 1) {
       //console.log('multi');
       let indexOrientedLink = 0;
-      listParallelOrientedLinks.forEach(index => {
+      listParallelOrientedLinks.forEach((index) => {
         if (index === parseInt(this.props.id, 10)) {
           if (indexOrientedLink === 0) {
             if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
               //console.log('m0-1');
-              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 0));
-              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 0));
-              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 0));
-              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 0));
+              xA = this.synchroLinkX(this.definePositionX(true, 0));
+              yA = this.synchroLinkY(this.definePositionY(true, 0));
+              xB = this.synchroLinkX(this.definePositionX(false, 0));
+              yB = this.synchroLinkY(this.definePositionY(false, 0));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
               //console.log('m0-2');
-              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 0));
-              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 0));
-              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 0));
-              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 0));
+              xA = this.synchroLinkX(this.definePositionX(true, 0));
+              yA = this.synchroLinkY(this.definePositionY(true, 0));
+              xB = this.synchroLinkX(this.definePositionX(false, 0));
+              yB = this.synchroLinkY(this.definePositionY(false, 0));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
               //console.log('m0-3');
-              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 0));
-              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 0));
-              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 0));
-              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 0));
+              xA = this.synchroLinkX(this.definePositionX(true, 0));
+              yA = this.synchroLinkY(this.definePositionY(true, 0));
+              xB = this.synchroLinkX(this.definePositionX(false, 0));
+              yB = this.synchroLinkY(this.definePositionY(false, 0));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
               //console.log('m0-4');
-              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 0));
-              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 0));
-              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 0));
-              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 0));
+              xA = this.synchroLinkX(this.definePositionX(true, 0));
+              yA = this.synchroLinkY(this.definePositionY(true, 0));
+              xB = this.synchroLinkX(this.definePositionX(false, 0));
+              yB = this.synchroLinkY(this.definePositionY(false, 0));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             }
           } else if (indexOrientedLink === 1) {
             if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
               //console.log('m1-1');
-              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 1));
-              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 1));
-              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 1));
-              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 1));
+              xA = this.synchroLinkX(this.definePositionX(true, 1));
+              yA = this.synchroLinkY(this.definePositionY(true, 1));
+              xB = this.synchroLinkX(this.definePositionX(false, 1));
+              yB = this.synchroLinkY(this.definePositionY(false, 1));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
               //console.log('m1-2');
-              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 1));
-              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 1));
-              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 1));
-              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 1));
+              xA = this.synchroLinkX(this.definePositionX(true, 1));
+              yA = this.synchroLinkY(this.definePositionY(true, 1));
+              xB = this.synchroLinkX(this.definePositionX(false, 1));
+              yB = this.synchroLinkY(this.definePositionY(false, 1));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
               //console.log('m1-3');
-              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 1));
-              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 1));
-              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 1));
-              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 1));
+              xA = this.synchroLinkX(this.definePositionX(true, 1));
+              yA = this.synchroLinkY(this.definePositionY(true, 1));
+              xB = this.synchroLinkX(this.definePositionX(false, 1));
+              yB = this.synchroLinkY(this.definePositionY(false, 1));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
               //console.log('m1-4');
-              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 1));
-              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 1));
-              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 1));
-              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 1));
+              xA = this.synchroLinkX(this.definePositionX(true, 1));
+              yA = this.synchroLinkY(this.definePositionY(true, 1));
+              xB = this.synchroLinkX(this.definePositionX(false, 1));
+              yB = this.synchroLinkY(this.definePositionY(false, 1));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             }
           } else if (indexOrientedLink === 2) {
             if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
               //console.log('m2-1');
-              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
-              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
-              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
-              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
+              xA = this.synchroLinkX(this.definePositionX(true, 2));
+              yA = this.synchroLinkY(this.definePositionY(true, 2));
+              xB = this.synchroLinkX(this.definePositionX(false, 2));
+              yB = this.synchroLinkY(this.definePositionY(false, 2));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
               //console.log('m2-2');
-              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
-              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
-              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
-              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
+              xA = this.synchroLinkX(this.definePositionX(true, 2));
+              yA = this.synchroLinkY(this.definePositionY(true, 2));
+              xB = this.synchroLinkX(this.definePositionX(false, 2));
+              yB = this.synchroLinkY(this.definePositionY(false, 2));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
               //console.log('m2-3');
-              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
-              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
-              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
-              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
+              xA = this.synchroLinkX(this.definePositionX(true, 2));
+              yA = this.synchroLinkY(this.definePositionY(true, 2));
+              xB = this.synchroLinkX(this.definePositionX(false, 2));
+              yB = this.synchroLinkY(this.definePositionY(false, 2));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
               //console.log('m2-4');
-              xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
-              yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
-              xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
-              yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
+              xA = this.synchroLinkX(this.definePositionX(true, 2));
+              yA = this.synchroLinkY(this.definePositionY(true, 2));
+              xB = this.synchroLinkX(this.definePositionX(false, 2));
+              yB = this.synchroLinkY(this.definePositionY(false, 2));
               xCByClick = xCByClick0 || (xA + xB) / 2;
               yCByClick = yCByClick0 || (yA + yB) / 2;
             }
@@ -2098,8 +2067,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       });
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
       //console.log('1');
-      xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
-      yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
+      xA = this.synchroLinkX(this.definePositionX(true, 2));
+      yA = this.synchroLinkY(this.definePositionY(true, 2));
       xB = xB0;
       yB = yB0;
       xCByClick = xCByClick0 || (xA + xB) / 2;
@@ -2108,22 +2077,22 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       //console.log('2');
       xA = xA0;
       yA = yA0;
-      xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
-      yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
+      xB = this.synchroLinkX(this.definePositionX(false, 2));
+      yB = this.synchroLinkY(this.definePositionY(false, 2));
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
       //console.log('3');
-      xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
-      yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
-      xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
-      yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
+      xA = this.synchroLinkX(this.definePositionX(true, 2));
+      yA = this.synchroLinkY(this.definePositionY(true, 2));
+      xB = this.synchroLinkX(this.definePositionX(false, 2));
+      yB = this.synchroLinkY(this.definePositionY(false, 2));
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
       //console.log('4');
-      xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
-      yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
+      xA = this.synchroLinkX(this.definePositionX(true, 2));
+      yA = this.synchroLinkY(this.definePositionY(true, 2));
       xB = xB0;
       yB = yB0;
       xCByClick = xCByClick0 || (xA + xB) / 2;
@@ -2132,32 +2101,32 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       //console.log('5');
       xA = xA0;
       yA = yA0;
-      xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
-      yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
+      xB = this.synchroLinkX(this.definePositionX(false, 2));
+      yB = this.synchroLinkY(this.definePositionY(false, 2));
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
       //console.log('6');
-      xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
-      yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
-      xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
-      yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
+      xA = this.synchroLinkX(this.definePositionX(true, 2));
+      yA = this.synchroLinkY(this.definePositionY(true, 2));
+      xB = this.synchroLinkX(this.definePositionX(false, 2));
+      yB = this.synchroLinkY(this.definePositionY(false, 2));
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
       //console.log('7');
-      xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
-      yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
-      xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
-      yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
+      xA = this.synchroLinkX(this.definePositionX(true, 2));
+      yA = this.synchroLinkY(this.definePositionY(true, 2));
+      xB = this.synchroLinkX(this.definePositionX(false, 2));
+      yB = this.synchroLinkY(this.definePositionY(false, 2));
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
       //console.log('8');
-      xA = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(true, 2));
-      yA = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(true, 2));
-      xB = this.synchroLinkX(this.ifMultiLinkWithRegionDefineX(false, 2));
-      yB = this.synchroLinkY(this.ifMultiLinkWithRegionDefineY(false, 2));
+      xA = this.synchroLinkX(this.definePositionX(true, 2));
+      yA = this.synchroLinkY(this.definePositionY(true, 2));
+      xB = this.synchroLinkX(this.definePositionX(false, 2));
+      yB = this.synchroLinkY(this.definePositionY(false, 2));
       xCByClick = xCByClick0 || (xA + xB) / 2;
       yCByClick = yCByClick0 || (yA + yB) / 2;
     } else {
@@ -3321,7 +3290,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               </p>
             );
             let index = 1;
-            this.props.auxiliaryMetrics.forEach(metric => {
+            this.props.auxiliaryMetrics.forEach((metric) => {
               contentTooltipAuxMetric.push(
                 <p key={index.toString() + 'contentTooltip11' + this.props.name} style={styleTitle2AuxMetric}>
                   + Metric {index}
@@ -3365,7 +3334,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               </p>
             );
             let index = 1;
-            this.props.auxiliaryMetricsB.forEach(metricB => {
+            this.props.auxiliaryMetricsB.forEach((metricB) => {
               contentTooltipAuxMetric.push(
                 <p key={index.toString() + 'contentTooltip18' + this.props.name} style={styleTitle2AuxMetric}>
                   + Metric {index}
@@ -3410,7 +3379,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             </p>
           );
           let index = 1;
-          this.props.auxiliaryMetrics.forEach(metric => {
+          this.props.auxiliaryMetrics.forEach((metric) => {
             contentTooltipAuxMetric.push(
               <p key={index.toString() + 'contentTooltip25' + this.props.name} style={styleTitle2AuxMetric}>
                 + Metric {index}

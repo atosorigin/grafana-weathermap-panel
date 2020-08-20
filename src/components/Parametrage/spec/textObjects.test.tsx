@@ -88,7 +88,7 @@ describe('TextObjects tests', () => {
     onOptionsChange: (options: SimpleOptions, callback?: () => void) => {
       testProps.options = options;
       act(() => {
-        ReactDOM.render(<TextObjects ref={c => (component = c)} {...testProps} />, container);
+        ReactDOM.render(<TextObjects ref={(c) => (component = c)} {...testProps} />, container);
       });
     },
     callBackToParent: (followLink: string, hoveringTooltipLink: string, hoveringTooltipText: string, textObj: TextObject) => {
@@ -97,7 +97,7 @@ describe('TextObjects tests', () => {
       coordinateSpaceTest.linkURL.hoveringTooltipText = hoveringTooltipText ? hoveringTooltipText : coordinateSpaceTest.linkURL.hoveringTooltipText;
       coordinateSpaceTest.linkURL.hoveringTooltipText = hoveringTooltipText ? hoveringTooltipText : coordinateSpaceTest.linkURL.hoveringTooltipText;
       act(() => {
-        ReactDOM.render(<TextObjects ref={c => (component = c)} {...testProps} />, container);
+        ReactDOM.render(<TextObjects ref={(c) => (component = c)} {...testProps} />, container);
       });
     },
   };
@@ -156,7 +156,7 @@ describe('TextObjects tests', () => {
     };
 
     act(() => {
-      ReactDOM.render(<TextObjects ref={c => (component = c)} {...testProps} />, container);
+      ReactDOM.render(<TextObjects ref={(c) => (component = c)} {...testProps} />, container);
     });
   });
 
@@ -167,56 +167,56 @@ describe('TextObjects tests', () => {
     jest.clearAllMocks();
   });
   describe('testBasicOnChangeOption', () => {
-    test('onChangeValeur', done => {
+    test('onChangeValeur', (done) => {
       component.onChangeValeur('testText');
       setTimeout(() => {
         expect(component.state.textObject.value).toBe('testText');
         done();
       });
     });
-    test('onChangeBackColor', done => {
+    test('onChangeBackColor', (done) => {
       component.onChangeBackColor(2, 'testText');
       setTimeout(() => {
         expect(component.state.textObject.colorBack).toBe('testText');
         done();
       });
     });
-    test('onChangeColorText', done => {
+    test('onChangeColorText', (done) => {
       component.onChangeColorText(2, 'testText');
       setTimeout(() => {
         expect(component.state.textObject.colorText).toBe('testText');
         done();
       });
     });
-    test('onChangeColorTextElement', done => {
+    test('onChangeColorTextElement', (done) => {
       component.onChangeColorTextElement(2, 'testText');
       setTimeout(() => {
         expect(component.state.textObject.generateAuxiliaryElement.colorTextElement).toBe('testText');
         done();
       });
     });
-    test('onChangeColorBackElement', done => {
+    test('onChangeColorBackElement', (done) => {
       component.onChangeColorBackElement(2, 'testText');
       setTimeout(() => {
         expect(component.state.textObject.generateAuxiliaryElement.colorBackElement).toBe('testText');
         done();
       });
     });
-    test('onChangeValueGenerateObjectTextColorTextElement', done => {
+    test('onChangeValueGenerateObjectTextColorTextElement', (done) => {
       component.onChangeValueGenerateObjectTextColorTextElement(2, 'testText');
       setTimeout(() => {
         expect(component.state.textObject.valueGenerateObjectText.colorTextElement).toBe('testText');
         done();
       });
     });
-    test('onChangeValueGenerateObjectTextColorBackElement', done => {
+    test('onChangeValueGenerateObjectTextColorBackElement', (done) => {
       component.onChangeValueGenerateObjectTextColorBackElement(2, 'testText');
       setTimeout(() => {
         expect(component.state.textObject.valueGenerateObjectText.colorBackElement).toBe('testText');
         done();
       });
     });
-    test('saveData', done => {
+    test('saveData', (done) => {
       component.saveData({ bold: 'false', italic: 'false', underline: 'true' });
       setTimeout(() => {
         expect(component.state.textObject.style.bold).toStrictEqual('false');
@@ -233,42 +233,42 @@ describe('TextObjects tests', () => {
     let event = {
       currentTarget: target,
     };
-    test('onChangeLegendElement', done => {
+    test('onChangeLegendElement', (done) => {
       component.onChangeLegendElement(event);
       setTimeout(() => {
         expect(component.state.textObject.generateAuxiliaryElement.legendElement).toBe('200');
         done();
       });
     });
-    test('onChangeunit', done => {
+    test('onChangeunit', (done) => {
       component.onChangeunit(event);
       setTimeout(() => {
         expect(component.state.textObject.generateAuxiliaryElement.unit).toBe('200');
         done();
       });
     });
-    test('onChangeFormatageNumeriqueTextObject', done => {
+    test('onChangeFormatageNumeriqueTextObject', (done) => {
       component.onChangeFormatageNumeriqueTextObject(event);
       setTimeout(() => {
         expect(component.state.textObject.generateAuxiliaryElement.numericFormatElement).toBe('200');
         done();
       });
     });
-    test('onChangeValueGenerateObjectTextLegendElement', done => {
+    test('onChangeValueGenerateObjectTextLegendElement', (done) => {
       component.onChangeValueGenerateObjectTextLegendElement(event);
       setTimeout(() => {
         expect(component.state.textObject.valueGenerateObjectText.legendElement).toBe('200');
         done();
       });
     });
-    test('onChangeValueGenerateObjectTextunit', done => {
+    test('onChangeValueGenerateObjectTextunit', (done) => {
       component.onChangeValueGenerateObjectTextunit(event);
       setTimeout(() => {
         expect(component.state.textObject.valueGenerateObjectText.unit).toBe('200');
         done();
       });
     });
-    test('onChangeValueGenerateObjectTextFormatageNumeriqueTextObject', done => {
+    test('onChangeValueGenerateObjectTextFormatageNumeriqueTextObject', (done) => {
       component.onChangeValueGenerateObjectTextFormatageNumeriqueTextObject(event);
       setTimeout(() => {
         expect(component.state.textObject.valueGenerateObjectText.numericFormatElement).toBe('200');
@@ -284,7 +284,7 @@ describe('TextObjects tests', () => {
     //   currentTarget: target,
     // };
     let save: any = testTextObject.generateObjectText;
-    test('onSwitchGenerateObjectText', done => {
+    test('onSwitchGenerateObjectText', (done) => {
       component.onSwitchGenerateObjectText();
       setTimeout(() => {
         expect(component.state.textObject.generateObjectText).toBe(!save.generateObjectText);
@@ -292,7 +292,7 @@ describe('TextObjects tests', () => {
       });
     });
     save = testTextObject.generateAuxiliaryElement.displayObjectInTooltip;
-    test('onSwitchdisplayObjectInTooltip', done => {
+    test('onSwitchdisplayObjectInTooltip', (done) => {
       component.onSwitchdisplayObjectInTooltip();
       setTimeout(() => {
         expect(component.state.textObject.generateAuxiliaryElement.displayObjectInTooltip).toBe(!save);
@@ -300,7 +300,7 @@ describe('TextObjects tests', () => {
       });
     });
     save = testTextObject.generateAuxiliaryElement.addColorTextElement;
-    test('onSwitchAddColorTextElement', done => {
+    test('onSwitchAddColorTextElement', (done) => {
       component.onSwitchAddColorTextElement();
       setTimeout(() => {
         expect(component.state.textObject.generateAuxiliaryElement.addColorTextElement).toBe(!save);
@@ -308,7 +308,7 @@ describe('TextObjects tests', () => {
       });
     });
     save = testTextObject.generateAuxiliaryElement.addColorTextElement;
-    test('onSwitchAddColorBackElement', done => {
+    test('onSwitchAddColorBackElement', (done) => {
       component.onSwitchAddColorBackElement();
       setTimeout(() => {
         expect(component.state.textObject.generateAuxiliaryElement.addColorBackElement).toBe(!save);
@@ -316,7 +316,7 @@ describe('TextObjects tests', () => {
       });
     });
     save = testTextObject.generateAuxiliaryElement.addColorTextElement;
-    test('onSwitchisTextTooltip', done => {
+    test('onSwitchisTextTooltip', (done) => {
       component.onSwitchisTextTooltip();
       setTimeout(() => {
         expect(component.state.textObject.isTextTooltip).toBe(!save);
@@ -324,7 +324,7 @@ describe('TextObjects tests', () => {
       });
     });
     save = testTextObject.valueGenerateObjectText.displayObjectInTooltip;
-    test('onSwitchValueGenerateObjectTextdisplayObjectInTooltip', done => {
+    test('onSwitchValueGenerateObjectTextdisplayObjectInTooltip', (done) => {
       component.onSwitchValueGenerateObjectTextdisplayObjectInTooltip();
       setTimeout(() => {
         expect(component.state.textObject.valueGenerateObjectText.displayObjectInTooltip).toBe(!save);
@@ -332,7 +332,7 @@ describe('TextObjects tests', () => {
       });
     });
     save = testTextObject.valueGenerateObjectText.addColorTextElement;
-    test('onSwitchValueGenerateObjectTextAddColorTextElement', done => {
+    test('onSwitchValueGenerateObjectTextAddColorTextElement', (done) => {
       component.onSwitchValueGenerateObjectTextAddColorTextElement();
       setTimeout(() => {
         expect(component.state.textObject.valueGenerateObjectText.addColorTextElement).toBe(!save);
@@ -340,7 +340,7 @@ describe('TextObjects tests', () => {
       });
     });
     save = testTextObject.valueGenerateObjectText.addColorBackElement;
-    test('onSwitchValueGenerateObjectTextAddColorBackElement', done => {
+    test('onSwitchValueGenerateObjectTextAddColorBackElement', (done) => {
       component.onSwitchValueGenerateObjectTextAddColorBackElement();
       setTimeout(() => {
         expect(component.state.textObject.valueGenerateObjectText.addColorBackElement).toBe(!save);

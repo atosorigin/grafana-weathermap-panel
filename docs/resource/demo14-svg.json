@@ -1,47 +1,47 @@
 {
   "global": {
-      "lowerLimit": [
-       {
-          "backColor": "#1F60C4",
-          "borderColor": "#1F60C4",
-          "id": 0,
-          "lowerLimitMax": "20",
-          "lowerLimitMin": "",
-          "sizeBorder": "10"
-        },
-        {
-          "backColor": "#37872D",
-          "borderColor": "#37872D",
-          "id": 1,
-          "lowerLimitMax": "40",
-          "lowerLimitMin": ">20",
-          "sizeBorder": "10"
-        },
-        {
-          "backColor": "#E0B400",
-          "borderColor": "#E0B400",
-          "id": 2,
-          "lowerLimitMax": "60",
-          "lowerLimitMin": ">40",
-          "sizeBorder": "10"
-        },
-        {
-          "backColor": "#FA6400",
-          "borderColor": "#FA6400",
-          "id": 3,
-          "lowerLimitMax": "80",
-          "lowerLimitMin": ">60",
-          "sizeBorder": "10"
-        },
-        {
-          "backColor": "#C4162A",
-          "borderColor": "#C4162A",
-          "id": 4,
-          "lowerLimitMax": "",
-          "lowerLimitMin": ">80",
-          "sizeBorder": "10"
-        }
-      ],
+    "lowerLimit": [
+      {
+        "backColor": "#1F60C4",
+        "borderColor": "#1F60C4",
+        "id": 0,
+        "lowerLimitMax": "20",
+        "lowerLimitMin": "",
+        "sizeBorder": "10"
+      },
+      {
+        "backColor": "#37872D",
+        "borderColor": "#37872D",
+        "id": 1,
+        "lowerLimitMax": "40",
+        "lowerLimitMin": ">20",
+        "sizeBorder": "10"
+      },
+      {
+        "backColor": "#E0B400",
+        "borderColor": "#E0B400",
+        "id": 2,
+        "lowerLimitMax": "60",
+        "lowerLimitMin": ">40",
+        "sizeBorder": "10"
+      },
+      {
+        "backColor": "#FA6400",
+        "borderColor": "#FA6400",
+        "id": 3,
+        "lowerLimitMax": "80",
+        "lowerLimitMin": ">60",
+        "sizeBorder": "10"
+      },
+      {
+        "backColor": "#C4162A",
+        "borderColor": "#C4162A",
+        "id": 4,
+        "lowerLimitMax": "",
+        "lowerLimitMin": ">80",
+        "sizeBorder": "10"
+      }
+    ],
     "textObject": {
       "value": "",
       "isTextTooltip": true,
@@ -81,7 +81,7 @@
   "templates": [
     {
       "filtered": "quantile|0.5#slice|inner_eval",
-      "labelfix": "false",
+      "labelfix": false,
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
@@ -94,9 +94,15 @@
         "tooltipB": "bottom"
       },
       "mainMetric": {
-        "format": "",
         "key": "",
-        "keyValue": ""
+        "unit": "",
+        "format": "",
+        "keyValue": "",
+        "filter": [],
+        "refId": "",
+        "expr": "",
+        "returnQuery": [],
+        "manageValue": ""
       },
       "metrics": [],
       "linkURL": {
@@ -124,9 +130,15 @@
         "tooltipB": "bottom"
       },
       "mainMetric": {
-        "format": "",
         "key": "",
-        "keyValue": ""
+        "unit": "",
+        "format": "",
+        "keyValue": "",
+        "filter": [],
+        "refId": "",
+        "expr": "",
+        "returnQuery": [],
+        "manageValue": ""
       },
       "metrics": [],
       "linkURL": {
@@ -154,9 +166,15 @@
         "tooltipB": "bottom"
       },
       "mainMetric": {
-        "format": "",
         "key": "",
-        "keyValue": ""
+        "unit": "",
+        "format": "",
+        "keyValue": "",
+        "filter": [],
+        "refId": "",
+        "expr": "",
+        "returnQuery": [],
+        "manageValue": ""
       },
       "metrics": [],
       "linkURL": {
@@ -184,9 +202,15 @@
         "tooltipB": "bottom"
       },
       "mainMetric": {
-        "format": "",
         "key": "",
-        "keyValue": ""
+        "unit": "",
+        "format": "",
+        "keyValue": "",
+        "filter": [],
+        "refId": "",
+        "expr": "",
+        "returnQuery": [],
+        "manageValue": ""
       },
       "metrics": [],
       "linkURL": {
@@ -214,9 +238,15 @@
         "tooltipB": "bottom"
       },
       "mainMetric": {
-        "format": "",
         "key": "",
-        "keyValue": ""
+        "unit": "",
+        "format": "",
+        "keyValue": "",
+        "filter": [],
+        "refId": "",
+        "expr": "",
+        "returnQuery": [],
+        "manageValue": ""
       },
       "metrics": [],
       "linkURL": {
@@ -244,9 +274,15 @@
         "tooltipB": "bottom"
       },
       "mainMetric": {
-        "format": "",
         "key": "",
-        "keyValue": ""
+        "unit": "",
+        "format": "",
+        "keyValue": "",
+        "filter": [],
+        "refId": "",
+        "expr": "",
+        "returnQuery": [],
+        "manageValue": ""
       },
       "metrics": [],
       "linkURL": {
@@ -274,9 +310,15 @@
         "tooltipB": "bottom"
       },
       "mainMetric": {
-        "format": "",
         "key": "",
-        "keyValue": ""
+        "unit": "",
+        "format": "",
+        "keyValue": "",
+        "filter": [],
+        "refId": "",
+        "expr": "",
+        "returnQuery": [],
+        "manageValue": ""
       },
       "metrics": [],
       "linkURL": {
@@ -304,9 +346,15 @@
         "tooltipB": "bottom"
       },
       "mainMetric": {
-        "format": "",
         "key": "",
-        "keyValue": ""
+        "unit": "",
+        "format": "",
+        "keyValue": "",
+        "filter": [],
+        "refId": "",
+        "expr": "",
+        "returnQuery": [],
+        "manageValue": ""
       },
       "metrics": [],
       "linkURL": {
@@ -334,9 +382,15 @@
         "tooltipB": "bottom"
       },
       "mainMetric": {
-        "format": "",
         "key": "",
-        "keyValue": ""
+        "unit": "",
+        "format": "",
+        "keyValue": "",
+        "filter": [],
+        "refId": "",
+        "expr": "",
+        "returnQuery": [],
+        "manageValue": ""
       },
       "metrics": [],
       "linkURL": {
@@ -364,9 +418,15 @@
         "tooltipB": "bottom"
       },
       "mainMetric": {
-        "format": "",
         "key": "",
-        "keyValue": ""
+        "unit": "",
+        "format": "",
+        "keyValue": "",
+        "filter": [],
+        "refId": "",
+        "expr": "",
+        "returnQuery": [],
+        "manageValue": ""
       },
       "metrics": [],
       "linkURL": {

@@ -33,7 +33,7 @@ const InputSelectLink: FunctionComponent<InputSelectProps> = ({
           }}
         >
           <FormLabel width={10}>{label}</FormLabel>
-          <Select onChange={value => _onChange(value, name, index)} allowCustomValue={false} options={data} value={defaultValue} width={20} />
+          <Select onChange={(value) => _onChange(value, name, index)} allowCustomValue={false} options={data} value={defaultValue} width={20} />
         </div>
       );
     } else {
@@ -49,7 +49,7 @@ const InputSelectLink: FunctionComponent<InputSelectProps> = ({
           }}
         >
           <FormLabel width={10}>{label}</FormLabel>
-          <Select onChange={value => _onChange(value, name, index)} allowCustomValue={false} options={data} value={defaultValue} width={20} />
+          <Select onChange={(value) => _onChange(value, name, index)} allowCustomValue={false} options={data} value={defaultValue} width={20} />
         </div>
       );
     } else {
@@ -66,7 +66,7 @@ const InputSelectLink: FunctionComponent<InputSelectProps> = ({
             }}
           >
             <FormLabel width={10}>{label}</FormLabel>
-            <Select onChange={value => _onChange(value, name, index)} allowCustomValue={false} options={data} value={defaultValue} width={20} />
+            <Select onChange={(value) => _onChange(value, name, index)} allowCustomValue={false} options={data} value={defaultValue} width={20} />
             <p
               style={{
                 color: 'red',
@@ -87,7 +87,7 @@ const InputSelectLink: FunctionComponent<InputSelectProps> = ({
             }}
           >
             <FormLabel width={10}>{label}</FormLabel>
-            <Select onChange={value => _onChange(value, name, index)} allowCustomValue={false} options={data} value={defaultValue} width={20} />
+            <Select onChange={(value) => _onChange(value, name, index)} allowCustomValue={false} options={data} value={defaultValue} width={20} />
           </div>
         );
       }
@@ -103,7 +103,7 @@ const InputSelectLink: FunctionComponent<InputSelectProps> = ({
         }}
       >
         <FormLabel width={10}>{label}</FormLabel>
-        <Select onChange={value => _onChange(value, name, index)} allowCustomValue={false} options={data} value={defaultValue} width={20} />
+        <Select onChange={(value) => _onChange(value, name, index)} allowCustomValue={false} options={data} value={defaultValue} width={20} />
       </div>
     );
   }

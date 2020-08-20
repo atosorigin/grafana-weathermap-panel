@@ -21,7 +21,7 @@ describe('Display tests', () => {
     onOptionsChange: (options: SimpleOptions, callback?: () => void) => {
       testProps.options = options;
       act(() => {
-        ReactDOM.render(<Display ref={c => (component = c)} {...testProps} />, container);
+        ReactDOM.render(<Display ref={(c) => (component = c)} {...testProps} />, container);
       });
     },
   };
@@ -47,7 +47,7 @@ describe('Display tests', () => {
       },
     };
     act(() => {
-      ReactDOM.render(<Display ref={c => (component = c)} {...testProps} />, container);
+      ReactDOM.render(<Display ref={(c) => (component = c)} {...testProps} />, container);
     });
   });
 
@@ -117,7 +117,7 @@ describe('Display tests', () => {
     expect(component.state.style).toBe(style);
   });
 
-  test('onChangeHeightBaseMap', done => {
+  test('onChangeHeightBaseMap', (done) => {
     let target = {
       value: '200',
     } as HTMLInputElement;
@@ -131,7 +131,7 @@ describe('Display tests', () => {
     });
   });
 
-  test('onChangeWidthBaseMap', done => {
+  test('onChangeWidthBaseMap', (done) => {
     let target = {
       value: '200',
     } as HTMLInputElement;
@@ -145,7 +145,7 @@ describe('Display tests', () => {
     });
   });
 
-  test('onImageChanged', done => {
+  test('onImageChanged', (done) => {
     let target = {
       value: 'uneImageOnSenFouCUneStringCommeUneAutreEnBase64OuPasCaChangeRien',
     } as HTMLInputElement;

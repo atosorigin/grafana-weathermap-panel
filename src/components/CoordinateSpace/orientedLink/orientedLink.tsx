@@ -82,7 +82,7 @@ export default class OrientedLink extends React.Component<Props, State> {
     /** new espace coordinate */
     orientedLink: OrientedLinkClass;
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };
@@ -92,7 +92,7 @@ export default class OrientedLink extends React.Component<Props, State> {
     /** new line in array input */
     arrayInput: ArrayInputSelectableClass[];
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };
@@ -113,7 +113,7 @@ export default class OrientedLink extends React.Component<Props, State> {
 
     arrayOptionsRegion.push(optionRegionNull);
 
-    regionCoordinateSpace.forEach(region => {
+    regionCoordinateSpace.forEach((region) => {
       const optionRegion: SelectableValue<string> = {
         label: region.label,
         value: region.label,
@@ -130,7 +130,7 @@ export default class OrientedLink extends React.Component<Props, State> {
 
     arrayOptionsPoint.push(optionPointNull);
 
-    arrayPoints.forEach(point => {
+    arrayPoints.forEach((point) => {
       let valueLabel = point.label || point.name;
 
       const optionPoint: SelectableValue<string> = {
@@ -164,15 +164,34 @@ export default class OrientedLink extends React.Component<Props, State> {
    */
   _handleChange(currentTarget: string, name: string, index: number): void {
     let tmp: OrientedLinkClass = this.state.orientedLink;
-    const widthInitialSpaceDefault = (
-      parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10) -
-      parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10)
-    ).toString();
-    const heightInitialSpaceDefault = (
-      parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10) -
-      parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10)
-    ).toString();
-    tmp = editGoodParameterOrientedLink(name, tmp, currentTarget, {}, widthInitialSpaceDefault, heightInitialSpaceDefault);
+
+    // UPDATE PositionXdefault
+    const widthBackground = parseInt(this.props.options.baseMap.width, 10);
+    const xMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
+    const xMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
+    const widthInitialSpace = xMaxInitialSpace - xMinInitialSpace;
+    if (name.startsWith('pointAX')) {
+      tmp.pointAPositionXDefault = (((parseInt(currentTarget, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
+    } else if (name.startsWith('pointBX')) {
+      tmp.pointBPositionXDefault = (((parseInt(currentTarget, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
+    } else if (name.startsWith('pointCX')) {
+      tmp.pointCPositionXDefault = (((parseInt(currentTarget, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
+    }
+
+    // UPDATE PositionYdefault
+    const heightBackground = parseInt(this.props.options.baseMap.height, 10);
+    const yMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
+    const yMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10);
+    const heightInitialSpace = yMaxInitialSpace - yMinInitialSpace;
+    if (name.startsWith('pointAY')) {
+      tmp.pointAPositionYDefault = (((parseInt(currentTarget, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
+    } else if (name.startsWith('pointBY')) {
+      tmp.pointBPositionYDefault = (((parseInt(currentTarget, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
+    } else if (name.startsWith('pointCY')) {
+      tmp.pointCPositionYDefault = (((parseInt(currentTarget, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
+    }
+
+    tmp = editGoodParameterOrientedLink(name, tmp, currentTarget, {});
     this.setState({
       orientedLink: tmp,
     });
@@ -288,7 +307,7 @@ export default class OrientedLink extends React.Component<Props, State> {
 
     for (const line of arrayInput) {
       const mapItems: JSX.Element[] = [];
-      line.uneClassInput.forEach(obj => {
+      line.uneClassInput.forEach((obj) => {
         if (obj.input_type === 'text') {
           item = (
             <InputTextOrientedLink

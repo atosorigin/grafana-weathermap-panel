@@ -12,44 +12,44 @@
     ],
     "textObject": {
       "value": "",
-      "isTextTooltip": "true",
-      "colorBack": "#EEEE00",
-      "colorText": "#DD33DD",
+      "isTextTooltip": true,
+      "colorBack": "",
+      "colorText": "",
       "style": {
-        "bold": "true",
-        "italic": "false",
-        "underline": "true"
+        "bold": true,
+        "italic": true,
+        "underline": false
       },
-      "generateObjectText": "true",
+      "generateObjectText": true,
       "valueGenerateObjectText": {
         "legendElement": "Nombre : ",
         "numericFormatElement": "",
         "unit": "u",
-        "displayObjectInTooltip": "true",
-        "addColorTextElement": "false",
-        "colorTextElement": "#FF0099",
-        "addColorBackElement": "#FF00FF",
-        "colorBackElement": "white"
+        "displayObjectInTooltip": false,
+        "addColorTextElement": true,
+        "addColorBackElement": true,
+        "colorTextElement": "blue",
+        "colorBackElement": "orange"
       },
       "generateAuxiliaryElement": {
         "legendElement": "LegendElement",
         "numericFormatElement": "",
         "unit": "",
-        "displayObjectInTooltip": "false",
-        "addColorTextElement": "true",
+        "displayObjectInTooltip": false,
+        "addColorTextElement": true,
+        "addColorBackElement": true,
         "colorTextElement": "#99FFCC",
-        "addColorBackElement": "#E0FF0F",
         "colorBackElement": "#DDDDDD"
       }
     },
-    "colorMode": "false",
-    "traceBack": "true",
-    "traceBorder": "true"
+    "colorMode": false,
+    "traceBack": true,
+    "traceBorder": true
   },
   "templates": [
     {
       "filtered": "device|ens3",
-      "labelfix": "true",
+      "labelfix": true,
       "xylabel": "x|labelName#y|labelName",
       "xylabelfix": "x|250#y|50",
       "type": "point",
@@ -64,7 +64,14 @@
       },
       "mainMetric": {
         "key": "",
-        "format": ""
+        "unit": "",
+        "format": "",
+        "keyValue": "",
+        "filter": [],
+        "refId": "",
+        "expr": "",
+        "returnQuery": [],
+        "manageValue": ""
       },
       "metrics": [],
       "linkURL": {},
@@ -79,8 +86,8 @@
       },
       "sizeWidth": "12",
       "sizeHeight": {
-        "label": "2px",
-        "value": "2px"
+        "label": "",
+        "value": ""
       },
       "rotateArrow": {
         "label": "",

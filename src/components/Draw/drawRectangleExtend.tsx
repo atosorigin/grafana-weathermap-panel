@@ -439,9 +439,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     const roundValue: number = parseInt(region.textObj.generateAuxiliaryElement.numericFormatElement, 10) || 1;
     const unit: string = region.textObj.generateAuxiliaryElement.unit;
     //if (roundValue !== '') {
-    result = parseFloat(valueBrut)
-      .toPrecision(roundValue)
-      .toString();
+    result = parseFloat(valueBrut).toPrecision(roundValue).toString();
     // } else {
     //   result = valueBrut;
     // }
@@ -607,129 +605,58 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     widthInitialSpaceDefault: number,
     heightInitialSpaceDefault: number
   ): CoorHTML => {
-    // const widthImage: number = parseInt(this.props.options.baseMap.width, 10);
-    // const heightImage: number = parseInt(this.props.options.baseMap.height, 10);
+    const widthBackground: number = parseInt(this.props.options.baseMap.width, 10);
+    const heightBackground: number = parseInt(this.props.options.baseMap.height, 10);
     const initialSpace: Coord4D = this.props.options.coordinateSpaceInitial.coordinate;
     const xMin: number = parseInt(initialSpace.xMin, 10);
     const xMax: number = parseInt(initialSpace.xMax, 10);
     const yMin: number = parseInt(initialSpace.yMin, 10);
     const yMax: number = parseInt(initialSpace.yMax, 10);
-    //const defaultReferentiel: boolean = this.props.options.coordinateSpaceInitial.defaultReferentiel;
-    // let xMinPx = 0;
-    // let xMaxPx = 0;
-    // let yMinPx = 0;
-    // let yMaxPx = 0;
+    const widthInitialSpace: number = xMax - xMin;
+    const heightInitialSpace: number = yMax - yMin;
     let leftPx = 0;
     let rightPx = 0;
     let topPx = 0;
     let bottomPx = 0;
 
-    // if (!defaultReferentiel) {
-    //   if (xMax < 0) {
-    //     xMinPx = (xMax + 100) * (widthImage / 200);
-    //     xMaxPx = (xMin + 100) * (widthImage / 200);
-    //   } else {
-    //     xMinPx = (xMin + 100) * (widthImage / 200);
-    //     xMaxPx = (xMax + 100) * (widthImage / 200);
-    //   }
-    // } else {
-    //     xMinPx = xMin * (widthImage / 100);
-    //     xMaxPx = xMax * (widthImage / 100);
-    // }
-
-    // if (!defaultReferentiel) {
-    //   if (yMax < 0) {
-    //     yMinPx = (yMax + 100) * (heightImage / 200);
-    //     yMaxPx = (yMin + 100) * (heightImage / 200);
-    //   } else {
-    //     yMinPx = (yMin + 100) * (heightImage / 200);
-    //     yMaxPx = (yMax + 100) * (heightImage / 200);
-    //   }
-    // } else {
-    //     yMinPx = yMin * (heightImage / 100);
-    //     yMaxPx = yMax * (heightImage / 100);
-    // }
-
-    const widthInitialSpace: number = xMax - xMin;
-    const heightInitialSpace: number = yMax - yMin;
-
-    if (parseInt(coorRegion.xMin, 10) < 0 && parseInt(coorRegion.xMax, 10) < 0) {
-      //console.log('--');
-      // leftPx = xMinPx + ((this.defineLimitX(parseInt(coorRegion.xMax, 10)) + 100) / 2) * (widthInitialSpace / 100) - ((widthImage - xMaxPx) / 100);
-      // rightPx = ((widthImage - xMaxPx) / 100) + widthImage - ((this.defineLimitX(parseInt(coorRegion.xMin, 10)) + 100) / 2) * (widthInitialSpace / 100) - xMinPx;
-      // leftPx = this.defineLimitX(parseInt(coorRegion.xMin, 10) / (parseInt(this.props.heightInitialSpaceDefault, 10) / xMax));
-      // rightPx = ((widthImage - xMaxPx) / 100) + widthImage - ((this.defineLimitX(parseInt(coorRegion.xMin, 10)) + 100) / 2) * (widthInitialSpace / 100) - xMinPx;
-      // leftPx = xMinPx + (parseInt(coorRegion.xMax, 10) * (widthInitialSpace / 200) + widthInitialSpace / 2);
-      // rightPx = widthInitialSpace - (parseInt(coorRegion.xMin, 10) * (widthInitialSpace / 200) + widthInitialSpace / 2) - xMinPx;
-    } else {
-      // if (!defaultReferentiel) {
-      //   //console.log('-+');
-      //   leftPx = xMinPx + (this.defineLimitX(parseInt(coorRegion.xMin, 10)) * (widthInitialSpace / 200) + widthInitialSpace / 2);
-      //   rightPx = widthImage - (this.defineLimitX(parseInt(coorRegion.xMax, 10)) * (widthInitialSpace / 200) + widthInitialSpace / 2) - xMinPx;
-      // } else {
-      //   //console.log('++');
-      //   leftPx = xMinPx + (this.defineLimitX(parseInt(coorRegion.xMin, 10)) * widthInitialSpace) / 100;
-      //   rightPx = widthImage - ((this.defineLimitX(parseInt(coorRegion.xMax, 10)) * widthInitialSpace) / 100) - xMinPx;
-      // }
-      //leftPx  = xMinPx + ((parseInt(coorRegion.xMin, 10) + 100) / 2) * (widthInitialSpace / 100) - ((widthImage - xMaxPx) / 100);
-      //rightPx = ((widthImage - xMaxPx) / 100) + widthImage - ((parseInt(coorRegion.xMax, 10) + 100) / 2) * (widthInitialSpace / 100) - xMinPx;
-    }
-
-    if (parseInt(coorRegion.yMin, 10) < 0 && parseInt(coorRegion.yMax, 10) < 0) {
-      // topPx = (heightImage - yMaxPx) + ((this.defineLimitY(parseInt(coorRegion.yMin, 10)) - 100) / 2 * (-1)) * (heightInitialSpace / 100) - (yMinPx / 200);
-      // bottomPx = yMinPx + ((this.defineLimitY(parseInt(coorRegion.yMax, 10)) + 100) / 2 ) * (heightInitialSpace / 100) - ((heightImage - yMaxPx) / 200);
-      // topPx = (heightImage - yMaxPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
-      // bottomPx = (heightImage - yMinPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
-    } else {
-      // if (!defaultReferentiel) {
-      //   topPx = (heightImage - yMaxPx) + ((this.defineLimitY(parseInt(coorRegion.yMax, 10)) - 100) / 2 * (-1)) * (heightInitialSpace / 100) - yMinPx / 200;
-      //   bottomPx = yMinPx + ((this.defineLimitY(parseInt(coorRegion.yMin, 10)) + 100) / 2 ) * (heightInitialSpace / 100) - (heightImage - yMaxPx) / 200;
-      //   //topPx = (heightImage - yMaxPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMax, 10)) * (heightInitialSpace / 2 / 100));
-      //   //bottomPx = (heightImage - yMinPx) + (heightInitialSpace / 2 - (parseInt(coorRegion.yMin, 10)) * (heightInitialSpace / 2 / 100));
-      // } else {
-      //   topPx = (heightImage - yMaxPx) + ((this.defineLimitY(100 - parseInt(coorRegion.yMax, 10)) * heightInitialSpace) / 100);
-      //   bottomPx = yMinPx + ((this.defineLimitY(parseInt(coorRegion.yMin, 10)) * heightInitialSpace) / 100) - ((heightImage - yMaxPx) / 200);
-      // }
-    }
-    // console.log(widthInitialSpaceDefault);
-    // console.log(xMin)
-    // console.log(xMax)
-    // console.log(widthInitialSpace);
-    // console.log(ratioLeft);
-
-    // if (parseInt(orientedLink.widthInitialSpaceDefault, 10) !== widthInitialSpace) {
-    //   xA = xMinInitialSpace + widthInitialSpace * ratioXA;
-    //   xB = xMinInitialSpace + widthInitialSpace * ratioXB;
-    // } else {
-    //   xA = widthInitialSpace * parseInt(orientedLink.pointAPositionX, 10) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
-    //   xB = widthInitialSpace * parseInt(orientedLink.pointBPositionX, 10) / parseInt(orientedLink.widthInitialSpaceDefault, 10);
-    // }
-
-    const ratioLeft = parseInt(coorRegionDefault.xMin, 10) / widthInitialSpaceDefault;
-    const ratioRight = (widthInitialSpaceDefault - parseInt(coorRegionDefault.xMax, 10)) / widthInitialSpaceDefault;
-    const ratioTop = (heightInitialSpaceDefault - parseInt(coorRegionDefault.yMax, 10)) / heightInitialSpaceDefault;
-    const ratioBottom = parseInt(coorRegionDefault.yMin, 10) / heightInitialSpaceDefault;
+    const ratioLeft = parseInt(coorRegionDefault.xMin, 10) / widthBackground;
+    const ratioRight = (widthBackground - parseInt(coorRegionDefault.xMax, 10)) / widthBackground;
+    const ratioTop = (heightBackground - parseInt(coorRegionDefault.yMax, 10)) / heightBackground;
+    const ratioBottom = parseInt(coorRegionDefault.yMin, 10) / heightBackground;
     leftPx = Math.round(this.defineLimitX(xMin + widthInitialSpace * ratioLeft));
-    rightPx = Math.round(this.defineLimitX(widthInitialSpace * ratioRight + (widthInitialSpaceDefault - xMax)));
-    topPx = Math.round(this.defineLimitY(heightInitialSpace * ratioTop + (heightInitialSpaceDefault - yMax)));
+    rightPx = Math.round(this.defineLimitX(widthInitialSpace * ratioRight + (widthBackground - xMax)));
+    topPx = Math.round(this.defineLimitY(heightInitialSpace * ratioTop + (heightBackground - yMax)));
     bottomPx = Math.round(this.defineLimitY(yMin + heightInitialSpace * ratioBottom));
+
 
     let newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
     newArrayRegion.forEach((currentRegion) => {
+      // console.log('avant update coords');
+      // console.log(currentRegion.coords);
       if (currentRegion.id === region.id) {
+        console.log('saving data');
         currentRegion.coords.xMin = leftPx.toString();
-        currentRegion.coords.xMax = (widthInitialSpaceDefault - rightPx).toString();
+        currentRegion.coords.xMax = (widthBackground - rightPx).toString();
         currentRegion.coords.yMin = bottomPx.toString();
-        currentRegion.coords.yMax = (heightInitialSpaceDefault - topPx).toString();
+        currentRegion.coords.yMax = (heightBackground - topPx).toString();
       }
+      // console.log('après update coords');
+      // console.log(currentRegion.coords);
     });
     this.props.options.regionCoordinateSpace = newArrayRegion;
 
+    const leftToDraw = (leftPx - xMin) / widthInitialSpace * widthBackground;
+    const rightToDraw = (rightPx - (widthBackground - xMax)) / widthInitialSpace * widthBackground;
+    const topToDraw = (topPx - (heightBackground - yMax)) / heightInitialSpace * heightBackground;
+    const bottomToDraw = (bottomPx - yMin) / heightInitialSpace * heightBackground;;
+
+    // console.log(leftToDraw);
+
     let result: CoorHTML = {
-      top: topPx.toString() + 'px',
-      bottom: bottomPx.toString() + 'px',
-      left: leftPx.toString() + 'px',
-      right: rightPx.toString() + 'px',
+      top: topToDraw.toString() + 'px',
+      bottom: bottomToDraw.toString() + 'px',
+      left: leftToDraw.toString() + 'px',
+      right: rightToDraw.toString() + 'px',
     };
     return result;
   };

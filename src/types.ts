@@ -424,7 +424,9 @@ export interface SimpleOptions extends MetricSettings {
     },
     {
       x: number;
+      xDefault: number;
       y: number;
+      yDefault: number;
       labelPoint: string;
       point: any;
       labelRegion: string;
@@ -432,7 +434,9 @@ export interface SimpleOptions extends MetricSettings {
     },
     {
       x: number;
+      xDefault: number;
       y: number;
+      yDefault: number;
       labelPoint: string;
       point: any;
       labelRegion: string;
@@ -481,17 +485,70 @@ export interface SimpleOptions extends MetricSettings {
 
   saveGabaritURL: string[];
   saveGabaritFile: GabaritFile[];
-  saveDefaultGabaritFile: GabaritFile | null;
+  saveDefaultGabaritFile: GabaritFile;
   gabaritDefault: GabaritFile;
 
   updateOnlyInitialSpace: boolean;
-
-  loopDrawOrientedLink: number;
 }
 
 export const defaults: SimpleOptions = {
   saveGabaritDefaultUrl: '',
-  saveDefaultGabaritFile: null,
+  saveDefaultGabaritFile: {
+    queryID: 'A',
+    fileName: '',
+    loaded: false,
+    globalGabarit: {
+      lowerLimit: [
+        {
+          id: 0,
+          lowerLimitMin: '0',
+          lowerLimitMax: '0',
+          backColor: 'blue',
+          borderColor: 'red',
+          sizeBorder: '1px',
+        },
+      ],
+      textObject: {
+        value: 'default',
+        isTextTooltip: false,
+        colorBack: 'blue',
+        colorText: 'black',
+        style: {
+          bold: false,
+          italic: false,
+          underline: false,
+        },
+        generateObjectText: false,
+        valueGenerateObjectText: {
+          legendElement: 'default',
+          numericFormatElement: 'default',
+          unit: 'default',
+          displayObjectInTooltip: false,
+          addColorTextElement: false,
+          colorTextElement: 'black',
+          addColorBackElement: false,
+          colorBackElement: 'white',
+        },
+        generateAuxiliaryElement: {
+          legendElement: 'default',
+          numericFormatElement: 'default',
+          unit: 'default',
+          displayObjectInTooltip: false,
+          addColorTextElement: false,
+          colorTextElement: 'black',
+          addColorBackElement: false,
+          colorBackElement: 'white',
+        },
+      },
+      defaultColor: 'black',
+      colorMode: true,
+      traceBack: true,
+      traceBorder: true,
+    },
+    templateGabaritPoint: [],
+    templateGabaritRegion: [],
+    templateGabaritLink: [],
+  },
   legend: { hiddenLegend: true, x: 0, y: 0 },
   baseMap: { image: '', layerImage: '', modeSVG: true, width: '', height: '', idSVG: '', isUploaded: false },
   // imageUrl: 'https://upload.wikimedia.org/wikipedia/en/b/be/Locator_Grid.png',
@@ -571,7 +628,9 @@ export const defaults: SimpleOptions = {
     },
     {
       x: 0,
+      xDefault: 0,
       y: 0,
+      yDefault: 0,
       labelPoint: '',
       point: {},
       labelRegion: '',
@@ -579,7 +638,9 @@ export const defaults: SimpleOptions = {
     },
     {
       x: 0,
+      xDefault: 0,
       y: 0,
+      yDefault: 0,
       labelPoint: '',
       point: {},
       labelRegion: '',
@@ -615,7 +676,6 @@ export const defaults: SimpleOptions = {
   newPoint: true,
   newOrientedLink: true,
   currentDashboard: false,
-  loopDrawOrientedLink: 0,
   gabaritUrlInput: '',
   saveGabaritURL: [],
   saveGabaritFile: [],

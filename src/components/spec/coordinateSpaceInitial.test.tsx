@@ -19,7 +19,7 @@ describe('CoordinatSpaceInitial tests', () => {
     onOptionsChange: (options: SimpleOptions, callback?: () => void) => {
       testProps.options = options;
       act(() => {
-        ReactDOM.render(<CoordinatSpaceInitial ref={c => (component = c)} {...testProps} />, container);
+        ReactDOM.render(<CoordinatSpaceInitial ref={(c) => (component = c)} {...testProps} />, container);
       });
     },
   };
@@ -45,7 +45,7 @@ describe('CoordinatSpaceInitial tests', () => {
       },
     };
     act(() => {
-      ReactDOM.render(<CoordinatSpaceInitial ref={c => (component = c)} {...testProps} />, container);
+      ReactDOM.render(<CoordinatSpaceInitial ref={(c) => (component = c)} {...testProps} />, container);
     });
   });
 

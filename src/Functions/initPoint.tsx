@@ -72,7 +72,15 @@ export const initPoint = (index: number): PointClass => {
   return newCoordinate;
 };
 
-export const clonePoint = (point: PointClass): PointClass => {
+export const clonePoint = (
+  point: PointClass,
+  xMinInitialSpace: number,
+  xMaxInitialSpace: number,
+  widthBackground: number,
+  yMinInitialSpace: number,
+  yMaxInitialSpace: number,
+  heightBackground: number
+): PointClass => {
   const initTextObject: TextObject = new TextObject(
     // point.textObj.legend,
     point.textObj.value,
@@ -105,6 +113,12 @@ export const clonePoint = (point: PointClass): PointClass => {
     manageValue: point.mainMetric.manageValue,
   };
 
+  const widthInitialSpace = xMaxInitialSpace - xMinInitialSpace;
+  const positionXDefault = (((parseInt(point.positionShapeX, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
+
+  const heightInitialSpace = yMaxInitialSpace - yMinInitialSpace;
+  const positionYDefault = (((parseInt(point.positionShapeY, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
+
   const newCoordinate: PointClass = new PointClass(
     point.id,
     linkURL,
@@ -132,8 +146,8 @@ export const clonePoint = (point: PointClass): PointClass => {
     point.associateOrientedLinksOut,
     point.widthInitialSpaceDefault,
     point.heightInitialSpaceDefault,
-    point.positionXDefault,
-    point.positionYDefault
+    positionXDefault,
+    positionYDefault
   );
   return newCoordinate;
 };

@@ -3408,14 +3408,14 @@ describe('Display tests', () => {
   ];
 
   describe('reqMetricRegion', () => {
-    test('Empty returnQuery', done => {
+    test('Empty returnQuery', (done) => {
       reqMetricRegion(regionClass, propsA);
       setTimeout(() => {
         expect(regionClass.mainMetric.returnQuery).toStrictEqual([]);
         done();
       });
     });
-    test('Have to fill the returnQuery', done => {
+    test('Have to fill the returnQuery', (done) => {
       reqMetricRegion(regionClass, propsAB);
       setTimeout(() => {
         expect(regionClass.mainMetric.returnQuery).toEqual(result);
@@ -3424,7 +3424,7 @@ describe('Display tests', () => {
     });
   });
   describe('reqMetricAuxRegion', () => {
-    test('Have to fill the returnQuery', done => {
+    test('Have to fill the returnQuery', (done) => {
       reqMetricAuxRegion(regionClass, propsAB);
       setTimeout(() => {
         expect(regionClass.metrics[0].returnQuery).toEqual(result);
@@ -3432,7 +3432,7 @@ describe('Display tests', () => {
         done();
       });
     });
-    test('Empty returnQuery', done => {
+    test('Empty returnQuery', (done) => {
       reqMetricAuxRegion(regionClass, propsA);
       setTimeout(() => {
         expect(regionClass.metrics[0].returnQuery).toEqual([]);
@@ -3442,14 +3442,14 @@ describe('Display tests', () => {
     });
   });
   describe('reqMetricPoint', () => {
-    test('Empty returnQuery', done => {
+    test('Empty returnQuery', (done) => {
       reqMetricPoint(pointClass, propsA);
       setTimeout(() => {
         expect(pointClass.mainMetric.returnQuery).toStrictEqual([]);
         done();
       });
     });
-    test('Have to fill the returnQuery', done => {
+    test('Have to fill the returnQuery', (done) => {
       reqMetricPoint(pointClass, propsAB);
       setTimeout(() => {
         expect(pointClass.mainMetric.returnQuery).toEqual(result);
@@ -3458,7 +3458,7 @@ describe('Display tests', () => {
     });
   });
   describe('reqMetricAuxPoint', () => {
-    test('Have to fill the returnQuery', done => {
+    test('Have to fill the returnQuery', (done) => {
       reqMetricAuxPoint(pointClass, propsAB);
       setTimeout(() => {
         expect(pointClass.metrics[0].returnQuery).toEqual(result);
@@ -3466,7 +3466,7 @@ describe('Display tests', () => {
         done();
       });
     });
-    test('Empty returnQuery', done => {
+    test('Empty returnQuery', (done) => {
       reqMetricAuxPoint(pointClass, propsA);
       setTimeout(() => {
         expect(pointClass.metrics[0].returnQuery).toEqual([]);
@@ -3476,14 +3476,14 @@ describe('Display tests', () => {
     });
   });
   describe('reqMetricLink', () => {
-    test('Empty returnQuery', done => {
+    test('Empty returnQuery', (done) => {
       reqMetricLink(orientedLinkClass, propsA);
       setTimeout(() => {
         expect(orientedLinkClass.mainMetric.returnQuery).toStrictEqual([]);
         done();
       });
     });
-    test('Have to fill the returnQuery', done => {
+    test('Have to fill the returnQuery', (done) => {
       reqMetricLink(orientedLinkClass, propsAB);
       setTimeout(() => {
         expect(orientedLinkClass.mainMetric.returnQuery).toEqual(result);
@@ -3492,7 +3492,7 @@ describe('Display tests', () => {
     });
   });
   describe('reqMetricAuxLink', () => {
-    test('Have to fill the returnQuery', done => {
+    test('Have to fill the returnQuery', (done) => {
       reqMetricAuxLink(orientedLinkClass, propsAB);
       setTimeout(() => {
         expect(orientedLinkClass.metrics[0].returnQuery).toEqual(result);
@@ -3500,7 +3500,7 @@ describe('Display tests', () => {
         done();
       });
     });
-    test('Empty returnQuery', done => {
+    test('Empty returnQuery', (done) => {
       reqMetricAuxLink(orientedLinkClass, propsA);
       setTimeout(() => {
         expect(orientedLinkClass.metrics[0].returnQuery).toEqual([]);
@@ -3528,7 +3528,7 @@ describe('Display tests', () => {
   //   });
   // });
   describe('reqUpdateMetrics', () => {
-    test('Empty returnQuery', done => {
+    test('Empty returnQuery', (done) => {
       reqUpdateMetrics(propsA);
       setTimeout(() => {
         expect(propsA.options.regionCoordinateSpace[0].mainMetric.returnQuery).toStrictEqual([]);
@@ -3544,7 +3544,7 @@ describe('Display tests', () => {
       });
     });
   });
-  test('Have to fill the returnQuery', done => {
+  test('Have to fill the returnQuery', (done) => {
     reqUpdateMetrics(propsAB);
     setTimeout(() => {
       expect(propsAB.options.regionCoordinateSpace[0].mainMetric.returnQuery).toStrictEqual(result);

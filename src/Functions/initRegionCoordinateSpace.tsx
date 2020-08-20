@@ -76,7 +76,15 @@ export const initRegionCoordinateSpace = (index: number): RegionClass => {
   return newCoordinate;
 };
 
-export const cloneRegionCoordinateSpace = (region: RegionClass): RegionClass => {
+export const cloneRegionCoordinateSpace = (
+  region: RegionClass,
+  xMinInitialSpace: number,
+  xMaxInitialSpace: number,
+  widthBackground: number,
+  yMinInitialSpace: number,
+  yMaxInitialSpace: number,
+  heightBackground: number
+): RegionClass => {
   const initTextObject: TextObject = new TextObject(
     // region.textObj.legend,
     region.textObj.value,
@@ -96,10 +104,10 @@ export const cloneRegionCoordinateSpace = (region: RegionClass): RegionClass => 
     yMax: region.coords.yMax,
   };
   const coordsDefault: Coord4D = {
-    xMin: region.coords.xMin,
-    xMax: region.coords.xMax,
-    yMin: region.coords.yMin,
-    yMax: region.coords.yMax,
+    xMin: region.coordsDefault.xMin,
+    xMax: region.coordsDefault.xMax,
+    yMin: region.coordsDefault.yMin,
+    yMax: region.coordsDefault.yMax,
   };
   const positionParameter: PositionParameterClass = new PositionParameterClass(
     region.positionParameter.labelAPositionX,
@@ -119,6 +127,22 @@ export const cloneRegionCoordinateSpace = (region: RegionClass): RegionClass => 
     returnQuery: region.mainMetric.returnQuery,
     manageValue: region.mainMetric.manageValue,
   };
+
+  // const widthInitialSpace = xMaxInitialSpace - xMinInitialSpace;
+  // const xMinDefault = (((parseInt(region.coordsDefault.xMin, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
+  // const xMaxDefault = (((parseInt(region.coordsDefault.xMax, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
+
+  // const heightInitialSpace = yMaxInitialSpace - yMinInitialSpace;
+  // const yMinDefault = (((parseInt(region.coordsDefault.yMin, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
+  // const yMaxDefault = (((parseInt(region.coordsDefault.yMax, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
+
+  // const coordsDefault: Coord4D = {
+  //   xMin: xMinDefault,
+  //   xMax: xMaxDefault,
+  //   yMin: yMinDefault,
+  //   yMax: yMaxDefault,
+  // };
+
   const newCoordinate: RegionClass = new RegionClass(
     region.id,
     linkURL,

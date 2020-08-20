@@ -8,7 +8,7 @@ import { ArrayInputClass } from 'Models/ArrayInputClass';
 import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
 import { InputClass } from 'Models/InputClass';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
-import { RegionClass } from 'Models/RegionClass';
+import { RegionClass, Coord4D } from 'Models/RegionClass';
 import { TextObject } from 'Models/TextObjectClass';
 
 import InputButtonField from 'Functions/Input/inputButton';
@@ -66,7 +66,15 @@ class CoordinateSpace extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      arrayCoor: cloneRegionCoordinateSpace(this.props.coordinate),
+      arrayCoor: cloneRegionCoordinateSpace(
+        this.props.coordinate,
+        parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10),
+        parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10),
+        parseInt(this.props.options.baseMap.width, 10),
+        parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10),
+        parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10),
+        parseInt(this.props.options.baseMap.height, 10)
+      ),
       arrayInput: [],
       htmlInput: <div></div>,
       hiddenAlert: true,
@@ -83,7 +91,7 @@ class CoordinateSpace extends React.Component<Props, State> {
     /** new espace coordinate */
     arrayCoor: RegionClass;
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };
@@ -93,7 +101,7 @@ class CoordinateSpace extends React.Component<Props, State> {
     /** new line in array input */
     arrayInput: ArrayInputClass[];
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };
@@ -125,13 +133,40 @@ class CoordinateSpace extends React.Component<Props, State> {
    */
   _handleChange(currentTarget: string, name: string, index: number): void {
     let tmp: RegionClass = this.state.arrayCoor;
-    // const widthInitialSpaceDefault = (
-    //   parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10) -
-    //    parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10)).toString();
-    // const heightInitialSpaceDefault = (
-    //   parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10) -
-    //    parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10)).toString();
+
+    // UPDATE xMinDefault and xMaxDefault
+    const widthBackground = parseInt(this.props.options.baseMap.width, 10);
+    const xMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
+    const xMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
+    const widthInitialSpace = xMaxInitialSpace - xMinInitialSpace;
+    let newCoordDefault: Coord4D = tmp.coordsDefault;
+    if (name.startsWith('positionXMin')) {
+      console.log('update xMin');
+      newCoordDefault.xMin = (((parseInt(currentTarget, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
+    }
+    if (name.startsWith('positionXMax')) {
+      console.log('update xMax');
+      newCoordDefault.xMax = (((parseInt(currentTarget, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
+    }
+
+    // UPDATE yMinDefault and yMaxDefault
+    const heightBackground = parseInt(this.props.options.baseMap.height, 10);
+    const yMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
+    const yMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10);
+    const heightInitialSpace = yMaxInitialSpace - yMinInitialSpace;
+    if (name.startsWith('positionYMin')) {
+      console.log('update yMin');
+      newCoordDefault.yMin = (((parseInt(currentTarget, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
+    }
+    if (name.startsWith('positionYMax')) {
+      console.log('update yMax');
+      newCoordDefault.yMax = (((parseInt(currentTarget, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
+    }
+    console.log(newCoordDefault);
+    tmp.coordsDefault = newCoordDefault;
+
     tmp = editGoodParameterExtend(name, tmp, currentTarget);
+    console.log(tmp);
     this.setState({
       arrayCoor: tmp,
     });
@@ -237,12 +272,12 @@ class CoordinateSpace extends React.Component<Props, State> {
   callBack = (): void => {
     // Define defaultCoor + defaultWidth + default height to creation of region
     let newArrayCoor = this.state.arrayCoor;
-    newArrayCoor.coordsDefault = {
-      xMin: this.state.arrayCoor.coords.xMin,
-      xMax: this.state.arrayCoor.coords.xMax,
-      yMin: this.state.arrayCoor.coords.yMin,
-      yMax: this.state.arrayCoor.coords.yMax,
-    };
+    // newArrayCoor.coordsDefault = {
+    //   xMin: this.state.arrayCoor.coords.xMin,
+    //   xMax: this.state.arrayCoor.coords.xMax,
+    //   yMin: this.state.arrayCoor.coords.yMin,
+    //   yMax: this.state.arrayCoor.coords.yMax,
+    // };
     newArrayCoor.widthInitialSpaceDefault = (
       parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10) -
       parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10)
@@ -428,7 +463,15 @@ class CoordinateSpace extends React.Component<Props, State> {
   componentDidUpdate = async (prevProps: Props, prevState: State) => {
     if (prevProps.coordinate.id !== this.props.coordinate.id) {
       await this.setStateAsyncArrayCoor({
-        arrayCoor: cloneRegionCoordinateSpace(this.props.coordinate),
+        arrayCoor: cloneRegionCoordinateSpace(
+          this.props.coordinate,
+          parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10),
+          parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10),
+          parseInt(this.props.options.baseMap.width, 10),
+          parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10),
+          parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10),
+          parseInt(this.props.options.baseMap.height, 10)
+        ),
       });
       await this.setStateAsyncArrayInput({
         arrayInput: [],
@@ -519,7 +562,7 @@ class CoordinateSpace extends React.Component<Props, State> {
               <div style={{ display: 'flex' }}>
                 <FormLabel width={15}>Zone SVG</FormLabel>
                 <Select
-                  onChange={value => this.onChangeSelectSVG(value)}
+                  onChange={(value) => this.onChangeSelectSVG(value)}
                   allowCustomValue={false}
                   options={this.state.allIDSelected}
                   width={10}
@@ -536,7 +579,7 @@ class CoordinateSpace extends React.Component<Props, State> {
                 type="text"
                 value={this.state.arrayCoor.img}
                 name="image"
-                onChange={event => this._handleChange(event.currentTarget.value, 'image', this.state.arrayCoor.id)}
+                onChange={(event) => this._handleChange(event.currentTarget.value, 'image', this.state.arrayCoor.id)}
               />
               <FormField
                 label="X min"
@@ -545,7 +588,7 @@ class CoordinateSpace extends React.Component<Props, State> {
                 type="text"
                 value={this.state.arrayCoor.coords.xMin}
                 name="positionXMin"
-                onChange={event => this._handleChange(event.currentTarget.value, 'positionXMin', this.state.arrayCoor.id)}
+                onChange={(event) => this._handleChange(event.currentTarget.value, 'positionXMin', this.state.arrayCoor.id)}
               />
               <FormField
                 label="X max"
@@ -554,7 +597,7 @@ class CoordinateSpace extends React.Component<Props, State> {
                 type="text"
                 value={this.state.arrayCoor.coords.xMax}
                 name="positionXMax"
-                onChange={event => this._handleChange(event.currentTarget.value, 'positionXMax', this.state.arrayCoor.id)}
+                onChange={(event) => this._handleChange(event.currentTarget.value, 'positionXMax', this.state.arrayCoor.id)}
               />
               <FormField
                 label="Y min"
@@ -563,7 +606,7 @@ class CoordinateSpace extends React.Component<Props, State> {
                 type="text"
                 value={this.state.arrayCoor.coords.yMin}
                 name="positionYMin"
-                onChange={event => this._handleChange(event.currentTarget.value, 'positionYMin', this.state.arrayCoor.id)}
+                onChange={(event) => this._handleChange(event.currentTarget.value, 'positionYMin', this.state.arrayCoor.id)}
               />
               <FormField
                 label="Y max"
@@ -572,7 +615,7 @@ class CoordinateSpace extends React.Component<Props, State> {
                 type="text"
                 value={this.state.arrayCoor.coords.yMax}
                 name="positionYMax"
-                onChange={event => this._handleChange(event.currentTarget.value, 'positionYMax', this.state.arrayCoor.id)}
+                onChange={(event) => this._handleChange(event.currentTarget.value, 'positionYMax', this.state.arrayCoor.id)}
               />
             </div>
           )}

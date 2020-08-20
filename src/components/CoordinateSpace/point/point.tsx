@@ -65,7 +65,15 @@ export default class Point extends React.Component<Props, State> {
     super(props);
     this.state = {
       arrayInput: [],
-      point: clonePoint(this.props.point),
+      point: clonePoint(
+        this.props.point,
+        parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10),
+        parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10),
+        parseInt(this.props.options.baseMap.width, 10),
+        parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10),
+        parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10),
+        parseInt(this.props.options.baseMap.height, 10)
+      ),
       arrayPointClass: [],
       htmlInput: <div></div>,
       hiddenAlert: true,
@@ -79,7 +87,7 @@ export default class Point extends React.Component<Props, State> {
     /** new espace coordinate */
     point: PointClass;
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };
@@ -89,7 +97,7 @@ export default class Point extends React.Component<Props, State> {
     /** new line in array input */
     arrayInput: ArrayInputSelectableClass[];
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };
@@ -121,36 +129,28 @@ export default class Point extends React.Component<Props, State> {
    * @param {number} index id of input
    */
   _handleChange(currentTarget: string, name: string, index: number): void {
-    // if (name.startsWith('positionShapeX')) {
-    //   let newArrayPoint: PointClass[] = this.props.options.arrayPoints;
-    //   newArrayPoint.forEach(point => {
-    //     if (point.id === this.props.id) {
-    //       point.positionXDefault = point.positionShapeX;
-    //       point.widthInitialSpaceDefault = (parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10) - parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10)).toString();
-    //     }
-    //   })
-    //   this.props.options.arrayPoints = newArrayPoint;
-    // }
-    // if (name.startsWith('positionShapeY')) {
-    //   let newArrayPoint: PointClass[] = this.props.options.arrayPoints;
-    //   newArrayPoint.forEach(point => {
-    //     if (point.id === this.props.id) {
-    //       point.positionYDefault = point.positionShapeY;
-    //       point.heightInitialSpaceDefault = (parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10) - parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10)).toString();
-    //     }
-    //   })
-    //   this.props.options.arrayPoints = newArrayPoint;
-    // }
     let tmp: PointClass = this.state.point;
-    const widthInitialSpaceDefault = (
-      parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10) -
-      parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10)
-    ).toString();
-    const heightInitialSpaceDefault = (
-      parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10) -
-      parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10)
-    ).toString();
-    tmp = editGoodParameterPoint(name, tmp, currentTarget, {}, widthInitialSpaceDefault, heightInitialSpaceDefault);
+
+    // UPDATE PositionXdefault
+    const widthBackground = parseInt(this.props.options.baseMap.width, 10);
+    const xMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
+    const xMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
+    const widthInitialSpace = xMaxInitialSpace - xMinInitialSpace;
+    if (name.startsWith('positionShapeX')) {
+      tmp.positionXDefault = (((parseInt(currentTarget, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
+    }
+
+    // UPDATE PositionYdefault
+    const heightBackground = parseInt(this.props.options.baseMap.height, 10);
+    const yMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
+    const yMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10);
+    const heightInitialSpace = yMaxInitialSpace - yMinInitialSpace;
+    if (name.startsWith('positionShapeY')) {
+      tmp.positionYDefault = (((parseInt(currentTarget, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
+    }
+
+    // update point attribut
+    tmp = editGoodParameterPoint(name, tmp, currentTarget, {});
     this.setState({
       point: tmp,
     });
@@ -158,7 +158,6 @@ export default class Point extends React.Component<Props, State> {
     if (this.props.isAddPoint === false) {
       this.callBack();
     }
-    //console.log(this.state.point);
   }
 
   /**
@@ -395,7 +394,15 @@ export default class Point extends React.Component<Props, State> {
   componentDidUpdate = async (prevProps: Props, prevState: State) => {
     if (prevProps.point.id !== this.props.point.id) {
       await this.setStateAsyncArrayCoor({
-        point: clonePoint(this.props.point),
+        point: clonePoint(
+          this.props.point,
+          parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10),
+          parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10),
+          parseInt(this.props.options.baseMap.width, 10),
+          parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10),
+          parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10),
+          parseInt(this.props.options.baseMap.height, 10)
+        ),
       });
       await this.setStateAsyncArrayInput({
         arrayInput: [],

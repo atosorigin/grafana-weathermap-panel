@@ -20,7 +20,7 @@ export const InputSeriesColorPickerPoint: FunctionComponent<InputTextFieldProps>
   <div className="form-field">
     <FormLabel width={width || Math.round(text.length * 1.7)}>{text}</FormLabel>
     <div id="colorPicker" style={{ marginTop: '10px', marginLeft: '131px' }}>
-      <ColorPicker color={color} onChange={newColor => _onChange(keyInt, newColor)} />
+      <ColorPicker color={color} onChange={(newColor) => _onChange(keyInt, newColor)} />
     </div>
   </div>
 );

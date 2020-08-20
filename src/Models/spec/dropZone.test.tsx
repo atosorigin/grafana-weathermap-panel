@@ -20,7 +20,7 @@ describe('waiting test', () => {
       let testProps = {};
       act(() => {
         ReactDOM.render(
-          <DropZone onOptionsChange={component} options={component} data={component} ref={c => (component = c)} {...testProps} />,
+          <DropZone onOptionsChange={component} options={component} data={component} ref={(c) => (component = c)} {...testProps} />,
           container
         );
       });
@@ -50,14 +50,14 @@ describe('waiting test', () => {
 
     act(() => {
       ReactDOM.render(
-        <DropZone onOptionsChange={component} options={component} data={component} ref={c => (component = c)} {...testProps} />,
+        <DropZone onOptionsChange={component} options={component} data={component} ref={(c) => (component = c)} {...testProps} />,
         container
       );
     });
   });
 
   describe('save', () => {
-    test('region', done => {
+    test('region', (done) => {
       setTimeout(() => {
         //expect(result).toStrictEqual(expected);
         done();

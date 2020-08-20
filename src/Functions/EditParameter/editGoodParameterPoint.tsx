@@ -12,11 +12,9 @@ export const editGoodParameterPoint = (
   name: string,
   editCoor: PointClass,
   newValue: string,
-  newValueSelect: SelectableValue<any>,
-  widthInitialSPaceDefault?: string,
-  heightInitialSPaceDefault?: string
-  //pointIsUpdatedFromEditor: boolean
-  //currentPoint: PointClass,
+  newValueSelect: SelectableValue<any>
+  // widthInitialSPaceDefault?: string,
+  // heightInitialSPaceDefault?: string
 ): PointClass => {
   if (name.startsWith('label')) {
     editCoor.label = newValue;
@@ -31,13 +29,15 @@ export const editGoodParameterPoint = (
   } else if (name.startsWith('rotateArrow')) {
     editCoor.rotateArrow = newValue;
   } else if (name.startsWith('positionShapeX')) {
+    console.log('update X');
     editCoor.positionShapeX = newValue;
-    editCoor.positionXDefault = newValue;
-    editCoor.widthInitialSpaceDefault = widthInitialSPaceDefault || '';
+    // editCoor.positionXDefault = newValue;
+    // editCoor.widthInitialSpaceDefault = widthInitialSPaceDefault || '';
   } else if (name.startsWith('positionShapeY')) {
+    console.log('update Y');
     editCoor.positionShapeY = newValue;
-    editCoor.positionYDefault = newValue;
-    editCoor.heightInitialSpaceDefault = heightInitialSPaceDefault || '';
+    // editCoor.positionYDefault = newValue;
+    // editCoor.heightInitialSpaceDefault = heightInitialSPaceDefault || '';
   } else if (name.startsWith('color')) {
     editCoor.color = newValue;
   } else if (name.startsWith('refIdMainMetric')) {

@@ -42,7 +42,7 @@ class LegendComponent extends React.Component<Props, State> {
     /** mew value */
     finalHTML: JSX.Element;
   }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };
@@ -238,7 +238,7 @@ class LegendComponent extends React.Component<Props, State> {
   };
 
   setStateLegendAsync = (state: { legend: Legend }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, resolve);
     });
   };

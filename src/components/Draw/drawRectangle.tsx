@@ -134,22 +134,48 @@ export default class DrawRectangle extends React.Component<Props, State> {
   };
 
   getPositionBorder = (value: number, position: number): number => {
-    const widthBackground = parseInt(this.props.options.baseMap.width, 10);
-    const heigthBackground = parseInt(this.props.options.baseMap.height, 10);
+    // const widthBackground = parseInt(this.props.options.baseMap.width, 10);
+    // const heigthBackground = parseInt(this.props.options.baseMap.height, 10);
+    // const xMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10);
+    // const xMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10);
+    // const yMinInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10);
+    // const yMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10);
+    // const widthInitialSpace = xMaxInitialSpace - xMinInitialSpace;
+    // const heightInitialSpace = yMaxInitialSpace - yMinInitialSpace;
     let result = 0;
-    if (position === 1) {
-      //xMin
-      result = value;
-    } else if (position === 2) {
-      //xMax
-      result = widthBackground - value;
-    } else if (position === 3) {
-      //yMax
-      result = heigthBackground - value;
-    } else if (position === 4) {
-      //yMin
-      result = value;
-    }
+    // if (position === 1) {
+    //   //xMin
+    //   if (value < 0) {
+    //     result = 0;
+    //   } else if (xMaxInitialSpace > widthBackground) {
+    //     result = (value / xMaxInitialSpace) * widthBackground;
+    //   } else {
+    //     result = value;
+    //   }
+    // } else if (position === 2) {
+    //   //xMax
+    //   if (value > widthBackground) {
+    //     result = 0;
+    //   } else {
+    //     result = widthBackground - value;
+    //   }
+    // } else if (position === 3) {
+    //   //yMax
+    //   if (value > heigthBackground) {
+    //     result = 0;
+    //   } else {
+    //     result = heigthBackground - value;
+    //   }
+    // } else if (position === 4) {
+    //   //yMin
+    //   if (value < 0) {
+    //     result = 0;
+    //   } else if (yMaxInitialSpace > heigthBackground) {
+    //     result = (value / yMaxInitialSpace) * heigthBackground;
+    //   } else {
+    //     result = value;
+    //   }
+    // }
     return result;
   };
 
