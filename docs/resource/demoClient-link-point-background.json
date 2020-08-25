@@ -1,223 +1,222 @@
 {
-    "global": {
-      "lowerLimit": [
-        {
-          "id": 0,
-          "lowerLimitMin": "leMinimum",
-          "lowerLimitMax": "leMaxmum",
-          "backColor": "#0046DE",
-          "borderColor": "#00FFFF",
-          "sizeBorder": "9"
-        }
-      ],
-      "textObject": {
-        "value": "",
-        "isTextTooltip": false,
-        "colorBack": "red",
-        "colorText": "yellow",
-        "style": {
-          "bold": true,
-          "italic": false,
-          "underline": true
-        },
-        "generateObjectText": true,
-        "valueGenerateObjectText": {
-          "legendElement": "uneLegend",
-          "numericFormatElement": "",
-          "unit": "u",
-          "displayObjectInTooltip": false,
-          "addColorTextElement": true,
-          "colorTextElement": "blue",
-          "addColorBackElement": "#FF00FF",
-          "colorBackElement": "white"
-        },
-        "generateAuxiliaryElement": {
-          "legendElement": "",
-          "numericFormatElement": "?",
-          "unit": "t",
-          "displayObjectInTooltip": false,
-          "addColorTextElement": true,
-          "colorTextElement": "red",
-          "addColorBackElement": "#E0FF0F",
-          "colorBackElement": "#999999"
-        }
-      },
-      "colorMode": false,
-      "traceBack": true,
-      "traceBorder": true
-    },
-    "templates": [
+  "global": {
+    "lowerLimit": [
       {
-        "filtered": "device|ens3",
-        "labelfix": true,
-        "xylabel": "x|labelName#y|labelName",
-        "xylabelfix": "x|100#y|310",
-        "type": "point",
-        "name": "unPoint",
-        "meta": "uneMeta",
-        "label": "mtu ens3",
-        "positionParameter": {
-          "xylabelA": "x|0#y|0",
-          "xylabelB": "x|labelName#y|labelName",
-          "tooltipA": "Bottom",
-          "tooltipB": "Bottom"
-        },
-        "mainMetric": {
-          "key": "",
-          "unit": "",
-          "format": "",
-          "keyValue": "",
-          "filter": [],
-          "refId": "",
-          "expr": "",
-          "returnQuery": [],
-          "manageValue": ""
-        },
-        "metrics": [],
-        "linkURL": {},
-        "valueMetric": "",
-        "drawGraphicMarker": {
-          "label": "Yes",
-          "value": "true"
-        },
-        "shape": {
-          "label": "square",
-          "value": "square"
-        },
-        "sizeWidth": "12",
-        "sizeHeight": {
-          "label": "",
-          "value": ""
-        },
-        "rotateArrow": {
-          "label": "",
-          "value": ""
-        },
-        "positionShapeX": "",
-        "positionShapeY": "",
-        "color": "#00FFFF",
-        "assiciateOrientedLinksIn": [],
-        "associateOrientedLinksOut": []
-      },
-      {
-        "filtered": "device|lo",
-        "labelfix": true,
-        "xylabel": "x|labelName#y|labelName",
-        "xylabelfix": "x|500#y|100",
-        "type": "point",
-        "name": "unPoint",
-        "meta": "uneMeta",
-        "label": "mtu lo",
-        "positionParameter": {
-          "xylabelA": "x|0#y|0",
-          "xylabelB": "x|labelName#y|labelName",
-          "tooltipA": "Bottom",
-          "tooltipB": "Bottom"
-        },
-        "mainMetric": {
-          "key": "",
-          "unit": "",
-          "format": "",
-          "keyValue": "",
-          "filter": [],
-          "refId": "",
-          "expr": "",
-          "returnQuery": [],
-          "manageValue": ""
-        },
-        "metrics": [],
-        "linkURL": {},
-        "valueMetric": "",
-        "drawGraphicMarker": {
-          "label": "Yes",
-          "value": "true"
-        },
-        "shape": {
-          "label": "diamond",
-          "value": "diamond"
-        },
-        "sizeWidth": "12",
-        "sizeHeight": {
-          "label": "",
-          "value": ""
-        },
-        "rotateArrow": {
-          "label": "",
-          "value": ""
-        },
-        "positionShapeX": "",
-        "positionShapeY": "",
-        "color": "red",
-        "assiciateOrientedLinksIn": [],
-        "associateOrientedLinksOut": []
-      },
-      {
-        "filtered": "device|ens3",
-        "labelfix": true,
-        "xylabelA": "x|labelName#y|labelName",
-        "xylabelB": "x|labelName#y|labelName",
-        "xylabelC": "x|labelName#y|labelName",
-        "xylabelfixA": "x|100#y|310",
-        "xylabelfixB": "x|500#y|100",
-        "xylabelfixC": "x|labelName#y|labelName",
-        "type": "link",
-        "name": "unLink",
-        "meta": "uneMeta",
-        "label": "lien device",
-        "positionParameter": {
-          "xylabelA": "x|0#y|0",
-          "xylabelB": "x|0#y|0",
-          "tooltipA": "bottom",
-          "tooltipB": "bottom"
-        },
-        "mainMetric": {
-          "key": "",
-          "unit": "",
-          "format": "",
-          "keyValue": "",
-          "filter": [],
-          "refId": "",
-          "expr": "",
-          "returnQuery": [],
-          "manageValue": ""
-        },
-        "metrics": [],
-        "mainMetricB": {
-          "key": "",
-          "unit": "",
-          "format": "",
-          "keyValue": "",
-          "filter": [],
-          "refId": "",
-          "expr": "",
-          "returnQuery": [],
-          "manageValue": ""
-        },
-        "metricsB": [],
-        "linkURL": {
-          "followLink": "",
-          "hoveringTooltipLink": "",
-          "hoveringTooltipText": ""
-        },
-        "orientationLink": {
-          "label": "Monodirectional",
-          "value": "AB"
-        },
-        "size": "9",
-        "colorCoordinateA": "#5794F2",
-        "colorCoordinateB": "#E54658",
-        "valueMainMetricA": "",
-        "valueMainMetricB": "",
-        "pointIn": "",
-        "pointOut": "",
-        "regionIn": "",
-        "regionOut": "",
-        "isIncurved": {
-          "label": "No",
-          "value": false
-        },
-        "zIndex": "2"
+        "id": 0,
+        "lowerLimitMin": "leMinimum",
+        "lowerLimitMax": "leMaxmum",
+        "backColor": "#5794f2",
+        "borderColor": "#f2495c",
+        "sizeBorder": "2"
       }
-    ]
-  }
-  
+    ],
+    "textObject": {
+      "value": "",
+      "isTextTooltip": false,
+      "colorBack": "red",
+      "colorText": "yellow",
+      "style": {
+        "bold": true,
+        "italic": false,
+        "underline": true
+      },
+      "generateObjectText": true,
+      "valueGenerateObjectText": {
+        "legendElement": "uneLegend",
+        "numericFormatElement": "",
+        "unit": "u",
+        "displayObjectInTooltip": false,
+        "addColorTextElement": true,
+        "colorTextElement": "blue",
+        "addColorBackElement": "#FF00FF",
+        "colorBackElement": "white"
+      },
+      "generateAuxiliaryElement": {
+        "legendElement": "",
+        "numericFormatElement": "?",
+        "unit": "t",
+        "displayObjectInTooltip": false,
+        "addColorTextElement": true,
+        "colorTextElement": "red",
+        "addColorBackElement": "#E0FF0F",
+        "colorBackElement": "#999999"
+      }
+    },
+    "colorMode": false,
+    "traceBack": true,
+    "traceBorder": true
+  },
+  "templates": [
+    {
+      "filtered": "device|ens3",
+      "labelfix": true,
+      "xylabel": "x|labelName#y|labelName",
+      "xylabelfix": "x|100#y|310",
+      "type": "point",
+      "name": "unPoint",
+      "meta": "uneMeta",
+      "label": "mtu ens3",
+      "positionParameter": {
+        "xylabelA": "x|0#y|0",
+        "xylabelB": "x|labelName#y|labelName",
+        "tooltipA": "Bottom",
+        "tooltipB": "Bottom"
+      },
+      "mainMetric": {
+        "key": "",
+        "unit": "",
+        "format": "",
+        "keyValue": "",
+        "filter": [],
+        "refId": "",
+        "expr": "",
+        "returnQuery": [],
+        "manageValue": ""
+      },
+      "metrics": [],
+      "linkURL": {},
+      "valueMetric": "",
+      "drawGraphicMarker": {
+        "label": "Yes",
+        "value": "true"
+      },
+      "shape": {
+        "label": "square",
+        "value": "square"
+      },
+      "sizeWidth": "12",
+      "sizeHeight": {
+        "label": "",
+        "value": ""
+      },
+      "rotateArrow": {
+        "label": "",
+        "value": ""
+      },
+      "positionShapeX": "",
+      "positionShapeY": "",
+      "color": "#00FFFF",
+      "assiciateOrientedLinksIn": [],
+      "associateOrientedLinksOut": []
+    },
+    {
+      "filtered": "device|lo",
+      "labelfix": true,
+      "xylabel": "x|labelName#y|labelName",
+      "xylabelfix": "x|500#y|100",
+      "type": "point",
+      "name": "unPoint",
+      "meta": "uneMeta",
+      "label": "mtu lo",
+      "positionParameter": {
+        "xylabelA": "x|0#y|0",
+        "xylabelB": "x|labelName#y|labelName",
+        "tooltipA": "Bottom",
+        "tooltipB": "Bottom"
+      },
+      "mainMetric": {
+        "key": "",
+        "unit": "",
+        "format": "",
+        "keyValue": "",
+        "filter": [],
+        "refId": "",
+        "expr": "",
+        "returnQuery": [],
+        "manageValue": ""
+      },
+      "metrics": [],
+      "linkURL": {},
+      "valueMetric": "",
+      "drawGraphicMarker": {
+        "label": "Yes",
+        "value": "true"
+      },
+      "shape": {
+        "label": "diamond",
+        "value": "diamond"
+      },
+      "sizeWidth": "12",
+      "sizeHeight": {
+        "label": "",
+        "value": ""
+      },
+      "rotateArrow": {
+        "label": "",
+        "value": ""
+      },
+      "positionShapeX": "",
+      "positionShapeY": "",
+      "color": "red",
+      "assiciateOrientedLinksIn": [],
+      "associateOrientedLinksOut": []
+    },
+    {
+      "filtered": "device|ens3",
+      "labelfix": true,
+      "xylabelA": "x|labelName#y|labelName",
+      "xylabelB": "x|labelName#y|labelName",
+      "xylabelC": "x|labelName#y|labelName",
+      "xylabelfixA": "x|0#y|0",
+      "xylabelfixB": "x|0#y|0",
+      "xylabelfixC": "x|labelName#y|labelName",
+      "type": "link",
+      "name": "unLink",
+      "meta": "uneMeta",
+      "label": "lien device",
+      "positionParameter": {
+        "xylabelA": "x|110#y|300",
+        "xylabelB": "x|490#y|110",
+        "tooltipA": "bottom",
+        "tooltipB": "bottom"
+      },
+      "mainMetric": {
+        "key": "",
+        "unit": "",
+        "format": "",
+        "keyValue": "",
+        "filter": [],
+        "refId": "",
+        "expr": "",
+        "returnQuery": [],
+        "manageValue": ""
+      },
+      "metrics": [],
+      "mainMetricB": {
+        "key": "",
+        "unit": "",
+        "format": "",
+        "keyValue": "",
+        "filter": [],
+        "refId": "",
+        "expr": "",
+        "returnQuery": [],
+        "manageValue": ""
+      },
+      "metricsB": [],
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
+      "orientationLink": {
+        "label": "Monodirectional",
+        "value": "AB"
+      },
+      "size": "10",
+      "colorCoordinateA": "#5794F2",
+      "colorCoordinateB": "#E54658",
+      "valueMainMetricA": "",
+      "valueMainMetricB": "",
+      "pointIn": "",
+      "pointOut": "",
+      "regionIn": "",
+      "regionOut": "",
+      "isIncurved": {
+        "label": "No",
+        "value": false
+      },
+      "zIndex": "2"
+    }
+  ]
+}

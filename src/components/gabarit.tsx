@@ -663,7 +663,7 @@ class Gabarit extends React.Component<Props, State> {
       style = {
         bold: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.style.bold),
         italic: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.style.italic),
-        underline: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject),
+        underline: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.style.underline),
       };
     }
 
@@ -932,13 +932,13 @@ class Gabarit extends React.Component<Props, State> {
           const defaultPositionX = (((parseInt(pos.x, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
           const defaultPositionY = (((parseInt(pos.y, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
           if (metricPoint.length > 0) {
-            console.log('1');
+            // console.log('1');
             let toLoad: PointClass = new PointClass(
               newID + 1,
               linkURLPoint[index],
               metaPoint[index],
               gabaritFileTmp.globalGabarit.lowerLimit,
-              labelPoint[index] + newID,
+              labelPoint[index] + '_' + newID,
               textObj,
               mainMetricPoint[index],
               metricPoint[index],
@@ -946,7 +946,7 @@ class Gabarit extends React.Component<Props, State> {
               traceBack,
               traceBorder,
               positionParameterPoint[index],
-              namePoint[index] + newID,
+              namePoint[index] + '_' + newID,
               valueMetricPoint[index],
               drawGraphicMarkerPoint[index],
               shapePoint[index],
@@ -971,7 +971,7 @@ class Gabarit extends React.Component<Props, State> {
               linkURLPoint[index],
               metaPoint[index],
               gabaritFileTmp.globalGabarit.lowerLimit,
-              labelPoint[index] + newID,
+              labelPoint[index] + '_' + newID,
               textObj,
               mainMetricPoint[index],
               [],
@@ -979,7 +979,7 @@ class Gabarit extends React.Component<Props, State> {
               traceBack,
               traceBorder,
               positionParameterPoint[index],
-              namePoint[index] + newID,
+              namePoint[index] + '_' + newID,
               valueMetricPoint[index],
               drawGraphicMarkerPoint[index],
               shapePoint[index],
@@ -1011,7 +1011,7 @@ class Gabarit extends React.Component<Props, State> {
             linkURLPoint[index],
             metaPoint[index],
             gabaritFileTmp.globalGabarit.lowerLimit,
-            labelPoint[index] + newID,
+            labelPoint[index] + '_' + newID,
             textObj,
             mainMetricPoint[index],
             metricPoint[index],
@@ -1019,7 +1019,7 @@ class Gabarit extends React.Component<Props, State> {
             traceBack,
             traceBorder,
             positionParameterPoint[index],
-            namePoint[index] + newID,
+            namePoint[index] + '_' + newID,
             valueMetricPoint[index],
             drawGraphicMarkerPoint[index],
             shapePoint[index],
@@ -1044,7 +1044,7 @@ class Gabarit extends React.Component<Props, State> {
             linkURLPoint[index],
             metaPoint[index],
             gabaritFileTmp.globalGabarit.lowerLimit,
-            labelPoint[index] + newID,
+            labelPoint[index] + '_' + newID,
             textObj,
             mainMetricPoint[index],
             [],
@@ -1052,7 +1052,7 @@ class Gabarit extends React.Component<Props, State> {
             traceBack,
             traceBorder,
             positionParameterPoint[index],
-            namePoint[index] + newID,
+            namePoint[index] + '_' + newID,
             valueMetricPoint[index],
             drawGraphicMarkerPoint[index],
             shapePoint[index],
@@ -1333,7 +1333,7 @@ class Gabarit extends React.Component<Props, State> {
           linkURLLink[index],
           metaLink[index],
           gabaritFileTmp.globalGabarit.lowerLimit,
-          labelLink[index],
+          labelLink[index] + '_' + newID,
           textObj,
           mainMetricALink[index],
           metricALink[index],
@@ -1380,7 +1380,7 @@ class Gabarit extends React.Component<Props, State> {
           linkURLLink[index],
           metaLink[index],
           gabaritFileTmp.globalGabarit.lowerLimit,
-          labelLink[index],
+          labelLink[index] + '_' + newID,
           textObj,
           mainMetricALink[index],
           [],
@@ -1426,7 +1426,7 @@ class Gabarit extends React.Component<Props, State> {
           linkURLLink[index],
           metaLink[index],
           gabaritFileTmp.globalGabarit.lowerLimit,
-          labelLink[index],
+          labelLink[index] + '_' + newID,
           textObj,
           mainMetricALink[index],
           metricALink[index],
@@ -1472,7 +1472,7 @@ class Gabarit extends React.Component<Props, State> {
           linkURLLink[index],
           metaLink[index],
           gabaritFileTmp.globalGabarit.lowerLimit,
-          labelLink[index],
+          labelLink[index] + '_' + newID,
           textObj,
           mainMetricALink[index],
           [],
@@ -1659,7 +1659,7 @@ class Gabarit extends React.Component<Props, State> {
           linkURLRegion[index],
           metaRegion[index],
           gabaritFileTmp.globalGabarit.lowerLimit,
-          labelRegion[index],
+          labelRegion[index] + '_' + newID,
           textObj,
           mainMetricRegion[index],
           metricRegion[index],
@@ -1684,7 +1684,7 @@ class Gabarit extends React.Component<Props, State> {
           linkURLRegion[index],
           metaRegion[index],
           gabaritFileTmp.globalGabarit.lowerLimit,
-          labelRegion[index],
+          labelRegion[index] + '_' + newID,
           textObj,
           mainMetricRegion[index],
           [],
@@ -1955,20 +1955,24 @@ class Gabarit extends React.Component<Props, State> {
     //   addColorBackElement: Boolean("gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.addColorBAckElement"),
     //   colorBackElement: "#FF00FF",
     // };
-    let generateValueEmpty: GenerateTextObject = {
-      legendElement: '',
-      numericFormatElement: '',
-      unit: '',
-      displayObjectInTooltip: Boolean(''),
-      addColorTextElement: Boolean(''),
-      colorTextElement: '',
-      addColorBackElement: Boolean('.globalGabarit.textObject.valueGenerateObjectText.addColorBAckElement'),
-      colorBackElement: '',
-    };
-    if (!generateValueEmpty.displayObjectInTooltip) {
-      console.log('trankil');
-    }
+    // let generateValueEmpty: GenerateTextObject = {
+    //   legendElement: '',
+    //   numericFormatElement: '',
+    //   unit: '',
+    //   displayObjectInTooltip: Boolean(''),
+    //   addColorTextElement: Boolean(''),
+    //   colorTextElement: '',
+    //   addColorBackElement: Boolean('.globalGabarit.textObject.valueGenerateObjectText.addColorBAckElement'),
+    //   colorBackElement: '',
+    // };
+
     // console.log(this.props.options.arrayPoints);
+    console.log('Point ------------');
+    console.log(this.props.options.arrayPoints);
+    console.log('Link ------------');
+    console.log(this.props.options.arrayOrientedLinks);
+    console.log('Region ------------');
+    console.log(this.props.options.regionCoordinateSpace);
   };
 
   render() {

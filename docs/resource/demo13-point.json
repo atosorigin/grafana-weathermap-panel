@@ -1,15 +1,6 @@
 {
   "global": {
-    "lowerLimit": [
-      {
-        "id": 0,
-        "lowerLimitMin": "leMinimum",
-        "lowerLimitMax": "leMaxmum",
-        "backColor": "#0046DE",
-        "borderColor": "#00FF99",
-        "sizeBorder": "2"
-      }
-    ],
+    "lowerLimit": [],
     "textObject": {
       "value": "",
       "isTextTooltip": true,

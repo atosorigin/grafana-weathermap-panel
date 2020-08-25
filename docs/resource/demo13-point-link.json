@@ -1,15 +1,6 @@
 {
   "global": {
-    "lowerLimit": [
-      {
-        "id": 0,
-        "lowerLimitMin": "leMinimum",
-        "lowerLimitMax": "leMaxmum",
-        "backColor": "#0046DE",
-        "borderColor": "#00FFFF",
-        "sizeBorder": "8"
-      }
-    ],
+    "lowerLimit": [],
     "textObject": {
       "value": "",
       "isTextTooltip": false,
@@ -203,7 +194,7 @@
         "label": "Monodirectional",
         "value": "AB"
       },
-      "size": "12",
+      "size": "10",
       "colorCoordinateA": "#5794F2",
       "colorCoordinateB": "#E54658",
       "valueMainMetricA": "",

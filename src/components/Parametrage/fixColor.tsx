@@ -107,25 +107,33 @@ class FixColor extends React.Component<Props, State> {
     const key = '0';
     const couleur: JSX.Element[] = [];
     const l10n = require('Localization/en.json');
-    let textInputColor = '';
-    let labelSize = '';
-    let placeHolderSize = '';
-
-    if (this.props.isLink) {
-      textInputColor = 'Edit color';
-      labelSize = 'Edit size';
-      placeHolderSize = 'Edit size';
-    } else {
-      textInputColor = l10n.colorVariable.switchOutlineColor;
-      labelSize = l10n.colorVariable.thicknessOutline;
-      placeHolderSize = l10n.colorVariable.thicknessOutline;
+    let textInputColor = l10n.colorVariable.switchOutlineColor;
+    let labelSize = l10n.colorVariable.thicknessOutline;
+    let placeHolderSize = l10n.colorVariable.thicknessOutline;
+    if (this.props.traceBack) {
+      console.log('2');
+      const keyFondColorPicker = key + 'FondcolorPicker';
+      couleur.push(
+        <InputSeriesColorPicker
+          key={keyFondColorPicker}
+          color={this.state.lowerLimit[0].backColor}
+          keyInt={0}
+          text={l10n.colorVariable.switchBackgroundColor}
+          _onChange={this.onChangeColorFond}
+        />
+      );
     }
-
-    if (this.props.isLink && this.props.traceBack) {
+    if (this.props.traceBorder) {
+      console.log('3');
       const keyContourDiv = key + 'ContourDiv';
       couleur.push(
         <div key={keyContourDiv}>
-          <InputSeriesColorPicker color={this.state.lowerLimit[0].backColor} keyInt={0} text={textInputColor} _onChange={this.onChangeColorFond} />
+          <InputSeriesColorPicker
+            color={this.state.lowerLimit[0].borderColor}
+            keyInt={0}
+            text={textInputColor}
+            _onChange={this.onChangeColorContour}
+          />
 
           <FormField
             labelWidth={15}
@@ -137,41 +145,6 @@ class FixColor extends React.Component<Props, State> {
           />
         </div>
       );
-    } else {
-      if (this.props.traceBack) {
-        const keyFondColorPicker = key + 'FondcolorPicker';
-        couleur.push(
-          <InputSeriesColorPicker
-            key={keyFondColorPicker}
-            color={this.state.lowerLimit[0].backColor}
-            keyInt={0}
-            text={l10n.colorVariable.switchBackgroundColor}
-            _onChange={this.onChangeColorFond}
-          />
-        );
-      }
-      if (this.props.traceBorder) {
-        const keyContourDiv = key + 'ContourDiv';
-        couleur.push(
-          <div key={keyContourDiv}>
-            <InputSeriesColorPicker
-              color={this.state.lowerLimit[0].borderColor}
-              keyInt={0}
-              text={textInputColor}
-              _onChange={this.onChangeColorContour}
-            />
-
-            <FormField
-              labelWidth={15}
-              label={labelSize}
-              name="epaisseurContour"
-              placeholder={placeHolderSize}
-              value={this.state.lowerLimit[0].sizeBorder}
-              onChange={(event) => this.onChangeSzContour(event.currentTarget.value)}
-            />
-          </div>
-        );
-      }
     }
     return couleur;
   };
@@ -186,12 +159,8 @@ class FixColor extends React.Component<Props, State> {
   /** init component when component is mount */
   componentDidMount = async () => {
     if (this.state.lowerLimit.length === 0) {
-      let defaultSizeBorder = '1';
-      if (this.props.isLink) {
-        defaultSizeBorder = '10';
-      }
       await this.setStateAsyncSeuil({
-        lowerLimit: [new LowerLimitClass(0, '', '', '', '', defaultSizeBorder)],
+        lowerLimit: [new LowerLimitClass(0, '', '', '', '', '2')],
       });
     }
     this.initComponent();

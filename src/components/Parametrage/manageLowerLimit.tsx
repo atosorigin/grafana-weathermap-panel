@@ -146,9 +146,8 @@ class ManageLowerLimit extends React.Component<Props, State> {
             <FormLabel width={15}>{l10n.genericParameter.variableColor}</FormLabel>
             <Switch label={''} checked={this.state.coordinate.colorMode} onChange={this.onSwitchColorMode} />
           </div>
-
           <br />
-          {!this.props.isLink ? (
+          {/* {!this.props.isLink ? (
             <div>
               <div style={{ display: 'flex' }}>
                 <FormLabel width={15}>{l10n.genericParameter.traceBackground}</FormLabel>
@@ -162,10 +161,20 @@ class ManageLowerLimit extends React.Component<Props, State> {
           ) : (
             <div style={{ display: 'flex' }}>
               <FormLabel width={15}>{'Color/Size'}</FormLabel>
-              <Switch label={''} checked={this.state.coordinate.traceBorder} onChange={this.onSwitchContour} />
-              {/* <Switch label={'Color/Size'} checked={this.state.coordinate.traceBorder} onChange={this.onSwitchContour} /> */}
+              <Switch label={''} checked={this.state.coordinate.traceBack} onChange={this.onSwitchFond} />
             </div>
-          )}
+          )} 
+          */}
+          <div>
+            <div style={{ display: 'flex' }}>
+              <FormLabel width={15}>{l10n.genericParameter.traceBackground}</FormLabel>
+              <Switch label={''} checked={this.state.coordinate.traceBack} onChange={this.onSwitchFond} />
+            </div>
+            <div style={{ display: 'flex' }}>
+              <FormLabel width={15}>{l10n.genericParameter.traceContour}</FormLabel>
+              <Switch label={''} checked={this.state.coordinate.traceBorder} onChange={this.onSwitchContour} />
+            </div>
+          </div>
 
           {this.state.coordinate.colorMode ? (
             <VariableColor

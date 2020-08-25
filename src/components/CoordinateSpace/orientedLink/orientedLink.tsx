@@ -442,6 +442,8 @@ export default class OrientedLink extends React.Component<Props, State> {
   private callBackLowerLimit = (lowerLimit: LowerLimitClass[], id?: number) => {
     const newValue: OrientedLinkClass = this.state.orientedLink;
     newValue.lowerLimit = lowerLimit;
+    console.log('orientedLink');
+    console.log(newValue.lowerLimit);
     this.setState({
       orientedLink: newValue,
     });

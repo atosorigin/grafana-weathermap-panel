@@ -126,10 +126,10 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     let value: string = converValueQuery;
     if (region.textObj.valueGenerateObjectText && converValueQuery !== 'NaN') {
       value = region.textObj.valueGenerateObjectText.legendElement + ' ' + converValueQuery + ' ' + region.textObj.valueGenerateObjectText.unit;
-		}
-		if (value === 'NaN') {
-			return '';
-		}
+    }
+    if (value === 'NaN') {
+      return '';
+    }
 
     return value;
   };
@@ -153,21 +153,22 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
 
     const valueQueryResult: string = this.generateValueMetricElement(region, valueQuery);
 
-    const tooltipValue: JSX.Element | null = valueQueryResult !== '' ? (
-      <div>
-        <div style={styleTooltip}>
-          {/* {link && <a href={region.linkURL.hoveringTooltipLink}>{region.linkURL.hoveringTooltipText}</a>} */}
-          <a href={region.linkURL.hoveringTooltipLink}>{region.linkURL.hoveringTooltipText}</a>
-          {region.textObj.isTextTooltip && <p>{region.label}</p>}
+    const tooltipValue: JSX.Element | null =
+      valueQueryResult !== '' ? (
+        <div>
+          <div style={styleTooltip}>
+            {/* {link && <a href={region.linkURL.hoveringTooltipLink}>{region.linkURL.hoveringTooltipText}</a>} */}
+            <a href={region.linkURL.hoveringTooltipLink}>{region.linkURL.hoveringTooltipText}</a>
+            {region.textObj.isTextTooltip && <p>{region.label}</p>}
+          </div>
+          <div style={styleMetrics}>
+            {region.textObj.generateObjectText &&
+              region.textObj.valueGenerateObjectText &&
+              region.textObj.valueGenerateObjectText.displayObjectInTooltip && <p>{valueQueryResult}</p>}
+          </div>
+          <div>{this.displayValuesAuxMetrics()}</div>
         </div>
-        <div style={styleMetrics}>
-          {region.textObj.generateObjectText &&
-            region.textObj.valueGenerateObjectText &&
-            region.textObj.valueGenerateObjectText.displayObjectInTooltip && <p>{valueQueryResult}</p>}
-        </div>
-        <div>{this.displayValuesAuxMetrics()}</div>
-      </div>
-    ) : null;
+      ) : null;
     return {
       tooltipValue: tooltipValue,
       backgroundColor: lowerLimit.colorBack,
@@ -628,7 +629,6 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     topPx = Math.round(this.defineLimitY(heightInitialSpace * ratioTop + (heightBackground - yMax)));
     bottomPx = Math.round(this.defineLimitY(yMin + heightInitialSpace * ratioBottom));
 
-
     let newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
     newArrayRegion.forEach((currentRegion) => {
       // console.log('avant update coords');
@@ -645,10 +645,10 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     });
     this.props.options.regionCoordinateSpace = newArrayRegion;
 
-    const leftToDraw = (leftPx - xMin) / widthInitialSpace * widthBackground;
-    const rightToDraw = (rightPx - (widthBackground - xMax)) / widthInitialSpace * widthBackground;
-    const topToDraw = (topPx - (heightBackground - yMax)) / heightInitialSpace * heightBackground;
-    const bottomToDraw = (bottomPx - yMin) / heightInitialSpace * heightBackground;;
+    const leftToDraw = ((leftPx - xMin) / widthInitialSpace) * widthBackground;
+    const rightToDraw = ((rightPx - (widthBackground - xMax)) / widthInitialSpace) * widthBackground;
+    const topToDraw = ((topPx - (heightBackground - yMax)) / heightInitialSpace) * heightBackground;
+    const bottomToDraw = ((bottomPx - yMin) / heightInitialSpace) * heightBackground;
 
     // console.log(leftToDraw);
 
@@ -668,7 +668,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     }
     const region: RegionClass = this.props.uneCoor;
     const pBorder: string = this.state.sizeBorder.toString() + 'px solid ' + this.state.borderColor;
-    
+
     const backColor: string = region.textObj.colorBack;
     const textColor: string = region.textObj.colorText;
 
@@ -733,11 +733,11 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
         (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip) ||
         region.textObj.generateAuxiliaryElement.displayObjectInTooltip
       ) {
-				if (this.state.tooltipValue) {
-					value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
-				} else {
-					<div>{value}</div>;
-				}
+        if (this.state.tooltipValue) {
+          value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
+        } else {
+          <div>{value}</div>;
+        }
       }
     } else {
       //console.log('not active');
@@ -762,12 +762,11 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
         (region.textObj.generateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip) ||
         region.textObj.generateAuxiliaryElement.displayObjectInTooltip
       ) {
-				if (this.state.tooltipValue) {
-					value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
-				} else {
-					<div>{value}</div>;
-				}
-
+        if (this.state.tooltipValue) {
+          value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
+        } else {
+          <div>{value}</div>;
+        }
       }
     }
     // if (!this.props.isEnabled && region.linkURL.followLink !== '') {

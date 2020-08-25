@@ -728,7 +728,7 @@ export default class DrawPoint extends React.Component<Props, State> {
             - {nameOrientedLink}
           </p>
         );
-        console.log(nameOrientedLink);
+        // console.log(nameOrientedLink);
       });
     }
     if (contentTooltip.length === 0 && contentTooltipMainMetric.length === 0 && contentTooltipAssociateLink.length === 0) {

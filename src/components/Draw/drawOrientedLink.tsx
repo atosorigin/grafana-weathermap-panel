@@ -33,6 +33,7 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   valueMainMetricB: string;
   textObject: TextObject;
   traceBorder: boolean;
+  traceBack: boolean;
   seuil: LowerLimitClass[];
   labelAPositionX: string;
   labelAPositionY: string;
@@ -2181,9 +2182,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     const xArrowAB: number = xMidAB - distanceAB / 2;
     const yArrowAB: number = yMidAB;
 
-    //const angleRadianBA: number = Math.atan2(yB - yA, xB - xA);
-    //const angleDegreeBA: number = (angleRadianBA * 180) / Math.PI;
-
     const sizeArrowTriangle = 8;
 
     const valueTooltipMonodirectional: JSX.Element | null = this.defineValueTooptip('monodirectional');
@@ -2220,17 +2218,18 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                   style={{
                     width: '0',
                     height: '0',
-                    borderLeft: this.defineBorderSize('A') + 'px solid transparent',
-                    borderRight: this.defineBorderSize('A') + 'px solid transparent',
-                    borderBottom: this.defineBorderSize('A') + 'px solid ' + this.defineColorLink('A'),
+                    borderLeft: this.defineSizeLink() + 'px solid transparent',
+                    borderRight: this.defineSizeLink() + 'px solid transparent',
+                    borderBottom: this.defineSizeLink() + 'px solid ' + this.defineBackColor('A'),
                     transform: 'rotate(270deg)',
                   }}
                 ></div>
                 <div
                   style={{
-                    border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
-                    backgroundColor: this.defineColorLink('A'),
+                    border: this.defineBorderSize('A') + 'px solid ' + this.defineBorderColor('A'),
+                    backgroundColor: this.defineBackColor('A'),
                     width: distanceAC,
+                    height: this.defineSizeLink() + 'px',
                   }}
                 ></div>
               </div>
@@ -2262,17 +2261,18 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 style={{
                   width: '0',
                   height: '0',
-                  borderLeft: this.defineBorderSize('A') + 'px solid transparent',
-                  borderRight: this.defineBorderSize('A') + 'px solid transparent',
-                  borderBottom: this.defineBorderSize('A') + 'px solid ' + this.defineColorLink('A'),
+                  borderLeft: this.defineSizeLink() + 'px solid transparent',
+                  borderRight: this.defineSizeLink() + 'px solid transparent',
+                  borderBottom: this.defineSizeLink() + 'px solid ' + this.defineBackColor('A'),
                   transform: 'rotate(270deg)',
                 }}
               ></div>
               <div
                 style={{
-                  border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
-                  backgroundColor: this.defineColorLink('A'),
+                  border: this.defineBorderSize('A') + 'px solid ' + this.defineBorderColor('A'),
+                  backgroundColor: this.defineBackColor('A'),
                   width: distanceAC,
+                  height: this.defineSizeLink() + 'px',
                 }}
               ></div>
             </div>
@@ -2306,17 +2306,18 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                   style={{
                     width: '0',
                     height: '0',
-                    borderLeft: this.defineBorderSize('B') + 'px solid transparent',
-                    borderRight: this.defineBorderSize('B') + 'px solid transparent',
-                    borderBottom: this.defineBorderSize('B') + 'px solid ' + this.defineColorLink('B'),
+                    borderLeft: this.defineSizeLink() + 'px solid transparent',
+                    borderRight: this.defineSizeLink() + 'px solid transparent',
+                    borderBottom: this.defineSizeLink() + 'px solid ' + this.defineBackColor('B'),
                     transform: 'rotate(270deg)',
                   }}
                 ></div>
                 <div
                   style={{
-                    border: this.defineBorderSize('B') + ' solid ' + this.defineColorLink('B'),
-                    backgroundColor: this.defineColorLink('B'),
+                    border: this.defineBorderSize('B') + 'px solid ' + this.defineBorderColor('B'),
+                    backgroundColor: this.defineBackColor('B'),
                     width: distanceBC,
+                    height: this.defineSizeLink() + 'px',
                   }}
                 ></div>
               </div>
@@ -2348,17 +2349,18 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 style={{
                   width: '0',
                   height: '0',
-                  borderLeft: this.defineBorderSize('B') + 'px solid transparent',
-                  borderRight: this.defineBorderSize('B') + 'px solid transparent',
-                  borderBottom: this.defineBorderSize('B') + 'px solid ' + this.defineColorLink('B'),
+                  borderLeft: this.defineSizeLink() + 'px solid transparent',
+                  borderRight: this.defineSizeLink() + 'px solid transparent',
+                  borderBottom: this.defineSizeLink() + 'px solid ' + this.defineBackColor('B'),
                   transform: 'rotate(270deg)',
                 }}
               ></div>
               <div
                 style={{
-                  border: this.defineBorderSize('B') + ' solid ' + this.defineColorLink('B'),
-                  backgroundColor: this.defineColorLink('B'),
+                  border: this.defineBorderSize('B') + 'px solid ' + this.defineBorderColor('B'),
+                  backgroundColor: this.defineBackColor('B'),
                   width: distanceBC,
+                  height: this.defineSizeLink() + 'px',
                 }}
               ></div>
             </div>
@@ -2433,9 +2435,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               <div
                 style={{
                   padding: parseInt(this.defineBorderSize('A'), 10) / 2 + 'px',
-                  border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
-                  backgroundColor: this.defineColorLink('A'),
+                  border: this.defineBorderSize('A') + 'px solid ' + this.defineBorderColor('A'),
+                  backgroundColor: this.defineBackColor('A'),
                   width: distanceAC,
+                  height: this.defineSizeLink() + 'px',
                 }}
               ></div>
             </div>
@@ -2457,9 +2460,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             <div
               style={{
                 padding: parseInt(this.defineBorderSize('A'), 10) / 2 + 'px',
-                border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
-                backgroundColor: this.defineColorLink('A'),
+                border: this.defineBorderSize('A') + 'px solid ' + this.defineBorderColor('A'),
+                backgroundColor: this.defineBackColor('A'),
                 width: distanceAC,
+                height: this.defineSizeLink() + 'px',
               }}
             ></div>
           </div>
@@ -2488,9 +2492,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               >
                 <div
                   style={{
-                    border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
-                    backgroundColor: this.defineColorLink('A'),
+                    border: this.defineBorderSize('A') + 'px solid ' + this.defineBorderColor('A'),
+                    backgroundColor: this.defineBackColor('A'),
                     width: distanceBC,
+                    height: this.defineSizeLink() + 'px',
                   }}
                 ></div>
                 <div
@@ -2498,9 +2503,9 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                   style={{
                     width: '0',
                     height: '0',
-                    borderLeft: this.defineBorderSize('A') + 'px solid transparent',
-                    borderRight: this.defineBorderSize('A') + 'px solid transparent',
-                    borderBottom: this.defineBorderSize('A') + 'px solid ' + this.defineColorLink('A'),
+                    borderLeft: this.defineSizeLink() + 'px solid transparent',
+                    borderRight: this.defineSizeLink() + 'px solid transparent',
+                    borderBottom: this.defineSizeLink() + 'px solid ' + this.defineBackColor('A'),
                     transform: 'rotate(90deg)',
                   }}
                 ></div>
@@ -2519,6 +2524,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
               left: xArrowBC,
               transform: 'rotate(' + angleDegreeBC.toString() + 'deg)',
               width: distanceBC,
+              height: this.defineSizeLink() + 'px',
             }}
           >
             <div
@@ -2529,9 +2535,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             >
               <div
                 style={{
-                  border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
-                  backgroundColor: this.defineColorLink('A'),
+                  border: this.defineBorderSize('A') + 'px solid ' + this.defineBorderColor('A'),
+                  backgroundColor: this.defineBackColor('A'),
                   width: distanceBC,
+                  height: this.defineSizeLink() + 'px',
                 }}
               ></div>
               <div
@@ -2539,9 +2546,9 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 style={{
                   width: '0',
                   height: '0',
-                  borderLeft: this.defineBorderSize('A') + 'px solid transparent',
-                  borderRight: this.defineBorderSize('A') + 'px solid transparent',
-                  borderBottom: this.defineBorderSize('A') + 'px solid ' + this.defineColorLink('A'),
+                  borderLeft: this.defineSizeLink() + 'px solid transparent',
+                  borderRight: this.defineSizeLink() + 'px solid transparent',
+                  borderBottom: this.defineSizeLink() + 'px solid ' + this.defineBackColor('A'),
                   transform: 'rotate(90deg)',
                 }}
               ></div>
@@ -2604,17 +2611,18 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                       //position: 'absolute',
                       width: '0',
                       height: '0',
-                      borderLeft: this.defineBorderSize('A') + 'px solid transparent',
-                      borderRight: this.defineBorderSize('A') + 'px solid transparent',
-                      borderBottom: this.defineBorderSize('A') + 'px solid ' + this.defineColorLink('A'),
+                      borderLeft: this.defineSizeLink() + 'px solid transparent',
+                      borderRight: this.defineSizeLink() + 'px solid transparent',
+                      borderBottom: this.defineSizeLink() + 'px solid ' + this.defineBackColor('A'),
                       transform: 'rotate(270deg)',
                     }}
                   ></div>
                   <div
                     style={{
-                      border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
-                      backgroundColor: this.defineColorLink('A'),
+                      border: this.defineBorderSize('A') + 'px solid ' + this.defineBorderColor('A'),
+                      backgroundColor: this.defineBackColor('A'),
                       width: distanceAB,
+                      height: this.defineSizeLink() + 'px',
                     }}
                   ></div>
                 </div>
@@ -2647,17 +2655,18 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                     //position: 'absolute',
                     width: '0',
                     height: '0',
-                    borderLeft: this.defineBorderSize('A') + 'px solid transparent',
-                    borderRight: this.defineBorderSize('A') + 'px solid transparent',
-                    borderBottom: this.defineBorderSize('A') + 'px solid ' + this.defineColorLink('A'),
+                    borderLeft: this.defineSizeLink() + 'px solid transparent',
+                    borderRight: this.defineSizeLink() + 'px solid transparent',
+                    borderBottom: this.defineSizeLink() + 'px solid ' + this.defineBackColor('A'),
                     transform: 'rotate(270deg)',
                   }}
                 ></div>
                 <div
                   style={{
-                    border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
-                    backgroundColor: this.defineColorLink('A'),
+                    border: this.defineBorderSize('A') + 'px solid ' + this.defineBorderColor('A'),
+                    backgroundColor: this.defineBackColor('A'),
                     width: distanceAB,
+                    height: this.defineSizeLink() + 'px',
                   }}
                 ></div>
               </div>
@@ -2705,8 +2714,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                   transform: 'rotate(' + angleDegreeAC.toString() + 'deg)',
                   height: this.defineBorderSize('A') + 'px',
                   width: distanceAC,
-                  border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
-                  backgroundColor: this.defineColorLink('A'),
+                  border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
+                  backgroundColor: this.defineBackColor('A'),
                 }}
               ></div>
             </Tooltip>
@@ -2723,8 +2732,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 transform: 'rotate(' + angleDegreeAC.toString() + 'deg)',
                 height: this.defineBorderSize('A') + 'px',
                 width: distanceAC,
-                border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
-                backgroundColor: this.defineColorLink('A'),
+                border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
+                backgroundColor: this.defineBackColor('A'),
               }}
             ></div>
           );
@@ -2743,8 +2752,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                   transform: 'rotate(' + angleDegreeBC.toString() + 'deg)',
                   height: this.defineBorderSize('A') + 'px',
                   width: distanceBC,
-                  border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
-                  backgroundColor: this.defineColorLink('A'),
+                  border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
+                  backgroundColor: this.defineBackColor('A'),
                 }}
               ></div>
             </Tooltip>
@@ -2761,8 +2770,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 transform: 'rotate(' + angleDegreeBC.toString() + 'deg)',
                 height: this.defineBorderSize('A') + 'px',
                 width: distanceBC,
-                border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
-                backgroundColor: this.defineColorLink('A'),
+                border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
+                backgroundColor: this.defineBackColor('A'),
               }}
             ></div>
           );
@@ -2807,8 +2816,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                   transform: 'rotate(' + angleDegreeAB.toString() + 'deg)',
                   width: distanceAB,
                   height: this.defineBorderSize('A') + 'px',
-                  border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
-                  backgroundColor: this.defineColorLink('A'),
+                  border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
+                  backgroundColor: this.defineBackColor('A'),
                 }}
               ></div>
             </Tooltip>
@@ -2825,8 +2834,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 transform: 'rotate(' + angleDegreeAB.toString() + 'deg)',
                 width: distanceAB,
                 height: this.defineBorderSize('A') + 'px',
-                border: this.defineBorderSize('A') + ' solid ' + this.defineColorLink('A'),
-                backgroundColor: this.defineColorLink('A'),
+                border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
+                backgroundColor: this.defineBackColor('A'),
               }}
             ></div>
           );
@@ -2861,49 +2870,60 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     }
   }
 
-  // private defineBackgroundColor() {
-  //   let colorBackground = '';
+  private defineBackColor(link: string) {
+    let colorBack = '';
+    let seuil: LowerLimitClass[] = this.props.seuil;
+    let valueMainMetric = 0;
 
-  //   if (this.props.seuil.length > 0) {
-  //     if (this.props.seuil[0].backColor !== '') {
-  //       colorBackground = this.props.seuil[0].backColor;
-  //     } else {
-  //       colorBackground = 'black';
-  //     }
-  //   } else {
-  //     colorBackground = 'black';
-  //   }
+    if (link === 'A') {
+      valueMainMetric = parseInt(this.props.valueMainMetricA, 10);
+    } else {
+      valueMainMetric = parseInt(this.props.valueMainMetricB, 10);
+    }
 
-  //   const valueMainMetric: number = parseInt(this.props.valueMainMetricA, 10);
-  //   let index = 0;
-  //   this.props.seuil.forEach((level: LowerLimitClass) => {
-  //     let lowerLimitMin = 0;
+    if (this.props.traceBack) {
+      if (seuil.length > 0) {
+        if (seuil[0].backColor !== '') {
+          colorBack = seuil[0].backColor;
+        } else {
+          colorBack = 'black';
+        }
+      } else {
+        colorBack = 'black';
+      }
+    } else {
+      colorBack = 'black';
+    }
 
-  //     if (level.lowerLimitMin === '') {
-  //       lowerLimitMin = 0;
-  //     } else {
-  //       lowerLimitMin = parseInt(level.lowerLimitMin.substring(1), 10);
-  //     }
+    let index = 0;
+    seuil.forEach((level: LowerLimitClass) => {
+      let lowerLimitMin = 0;
 
-  //     if (lowerLimitMin === 0) {
-  //       if (valueMainMetric >= lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
-  //         colorBackground = level.backColor;
-  //       }
-  //     } else if (this.props.seuil.length === index + 1) {
-  //       if (valueMainMetric > lowerLimitMin) {
-  //         colorBackground = level.backColor;
-  //       }
-  //     } else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
-  //       colorBackground = level.backColor;
-  //     }
+      if (level.lowerLimitMin === '') {
+        lowerLimitMin = 0;
+      } else {
+        lowerLimitMin = parseInt(level.lowerLimitMin.substring(1), 10);
+      }
 
-  //     index++;
-  //   });
+      if (lowerLimitMin === 0) {
+        if (valueMainMetric >= lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+          colorBack = level.backColor;
+        }
+      } else if (this.props.seuil.length === index + 1) {
+        if (valueMainMetric > lowerLimitMin) {
+          colorBack = level.backColor;
+        }
+      } else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+        colorBack = level.backColor;
+      }
 
-  //   return colorBackground;
-  // }
+      index++;
+    });
 
-  private defineColorLink(link: string) {
+    return colorBack;
+  }
+
+  private defineBorderColor(link: string) {
     let colorBorder = '';
     let seuil: LowerLimitClass[] = this.props.seuil;
     let valueMainMetric = 0;
@@ -2916,8 +2936,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
 
     if (this.props.traceBorder) {
       if (seuil.length > 0) {
-        if (seuil[0].backColor !== '') {
-          colorBorder = seuil[0].backColor;
+        if (seuil[0].borderColor !== '') {
+          colorBorder = seuil[0].borderColor;
         } else {
           colorBorder = 'black';
         }
@@ -2940,19 +2960,18 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
 
       if (lowerLimitMin === 0) {
         if (valueMainMetric >= lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
-          colorBorder = level.backColor;
+          colorBorder = level.borderColor;
         }
       } else if (this.props.seuil.length === index + 1) {
         if (valueMainMetric > lowerLimitMin) {
-          colorBorder = level.backColor;
+          colorBorder = level.borderColor;
         }
       } else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
-        colorBorder = level.backColor;
+        colorBorder = level.borderColor;
       }
 
       index++;
     });
-
     return colorBorder;
   }
 
@@ -2968,18 +2987,17 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     }
 
     if (this.props.traceBorder) {
-      //sizeBorder = seuil[0].sizeBorder;
       if (seuil.length > 0) {
         if (seuil[0].sizeBorder !== '') {
           sizeBorder = seuil[0].sizeBorder;
         } else {
-          sizeBorder = this.defineSizeLink();
+          sizeBorder = '0';
         }
       } else {
-        sizeBorder = this.defineSizeLink();
+        sizeBorder = '0';
       }
     } else {
-      sizeBorder = this.defineSizeLink();
+      sizeBorder = '0';
     }
 
     let index = 0;
@@ -3004,7 +3022,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       } else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
         sizeBorder = level.sizeBorder;
       }
-
       index++;
     });
     return sizeBorder;
@@ -3493,16 +3510,9 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     let result = '';
     if (this.props.size) {
       const size: string = this.props.size || '';
-      // if (size === 'Small') {
-      //   result = '8';
-      // } else if (size === 'Medium') {
-      //   result = '9';
-      // } else if (size === 'Large') {
-      //   result = '10';
-      // }
       result = size;
     } else {
-      result = '9';
+      result = '2';
     }
     return result;
   };
@@ -3516,38 +3526,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     const yCoordinateC: number = this.synchroLinkY(parseInt(this.props.positionYCDefault, 10) || 0, 'yC');
     const orientationLink: string = this.props.orientationLink;
 
-    // rops.associatePointIn)
-    // rops.associatePointOut)
-    // rops.associateRegionIn)
-    // rops.associateRegionOut)
-    // const labelA: string = this.props.labelA;
-    // const labelB: string = this.props.labelB;
-    // const labelAPositionX: number = parseInt(this.props.labelAPositionX, 10);
-    // const labelAPositionY: number = parseInt(this.props.labelAPositionY, 10) * (-1);
-    // const labelBPositionX: number = parseInt(this.props.labelBPositionX, 10);
-    // const labelBPositionY: number = parseInt(this.props.labelBPositionY, 10) * (-1);
-    // const associatePointIn: SelectableValue<PointClass> = this.props.associatePointIn || {};
-    // const associatePointOut: SelectableValue<PointClass> = this.props.associatePointOut || {};
-    // const associateRegionIn: SelectableValue<RegionClass> = this.props.associateRegionIn || {};
-    // const associateRegionOut: SelectableValue<RegionClass> = this.props.associateRegionOut || {};
-    // const xMinAssociateRegionIn: number = parseInt(associateRegionIn.value?.coords.xMin || '0');
-    // const xMaxAssociateRegionIn: number = parseInt(associateRegionIn.value?.coords.xMax || '0');
-    // const xMinAssociateRegionOut: number = parseInt(associateRegionOut.value?.coords.xMin || '0');
-    // const xMaxAssociateRegionOut: number = parseInt(associateRegionOut.value?.coords.xMax || '0');
-    // const yMinAssociateRegionIn: number = parseInt(associateRegionIn.value?.coords.yMin || '0');
-    // const yMaxAssociateRegionIn: number = parseInt(associateRegionIn.value?.coords.yMax || '0');
-    // const yMinAssociateRegionOut: number = parseInt(associateRegionOut.value?.coords.yMin || '0');
-    // const yMaxAssociateRegionOut: number = parseInt(associateRegionOut.value?.coords.yMax || '0');
-    // const xRegionIn: number = this.synchroLinkX((xMaxAssociateRegionIn + xMinAssociateRegionIn) / 2, defineCenter);
-    // const yRegionIn: number = this.synchroLinkY((yMaxAssociateRegionIn + yMinAssociateRegionIn) / 2, defineCenter);
-    // const xRegionOut: number = this.synchroLinkX((xMaxAssociateRegionOut + xMinAssociateRegionOut) / 2, defineCenter);
-    // const yRegionOut: number = this.synchroLinkY((yMaxAssociateRegionOut + yMinAssociateRegionOut) / 2, defineCenter);
-
-    return (
-      <div>
-        {/* {this.state.pointTest} */}
-        {this.drawLink(xCoordinateA, yCoordinateA, xCoordinateB, yCoordinateB, xCoordinateC, yCoordinateC, orientationLink)}
-      </div>
-    );
+    return <div>{this.drawLink(xCoordinateA, yCoordinateA, xCoordinateB, yCoordinateB, xCoordinateC, yCoordinateC, orientationLink)}</div>;
   }
 }
