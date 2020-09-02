@@ -18,11 +18,11 @@
       "lowerLimit": [
         {
           "backColor": "#C4162A",
-          "borderColor": "",
+          "borderColor": "#C4162A",
           "id": 0,
           "lowerLimitMax": "",
           "lowerLimitMin": "",
-          "sizeBorder": "10"
+          "sizeBorder": "1"
         }
       ],
       "lowerLimitB": [],
@@ -30,7 +30,7 @@
         "expr": "",
         "format": "",
         "key": "device",
-        "keyValue": "enp0s3",
+        "keyValue": "ens3",
         "manageValue": "avg",
         "refId": "A",
         "returnQuery": [],
@@ -112,7 +112,7 @@
           "unit": ""
         }
       },
-      "traceBack": false,
+      "traceBack": true,
       "traceBorder": true,
       "valueMainMetricA": "",
       "valueMainMetricB": "",
@@ -136,11 +136,11 @@
       "lowerLimit": [
         {
           "backColor": "#5794F2",
-          "borderColor": "",
+          "borderColor": "#5794F2",
           "id": 0,
           "lowerLimitMax": "",
           "lowerLimitMin": "",
-          "sizeBorder": "10"
+          "sizeBorder": "1"
         }
       ],
       "lowerLimitB": [],
@@ -148,7 +148,7 @@
         "expr": "",
         "format": "",
         "key": "device",
-        "keyValue": "enp0s3",
+        "keyValue": "ens3",
         "manageValue": "avg",
         "refId": "B",
         "returnQuery": [],
@@ -230,7 +230,7 @@
           "unit": ""
         }
       },
-      "traceBack": false,
+      "traceBack": true,
       "traceBorder": true,
       "valueMainMetricA": "",
       "valueMainMetricB": "",

@@ -4,7 +4,13 @@
       "colorMode": false,
       "coords": {
         "xMin": "90",
-        "xMax": "310",
+        "xMax": "280",
+        "yMin": "2",
+        "yMax": "130"
+      },
+      "coordsDefault": {
+        "xMin": "90",
+        "xMax": "280",
         "yMin": "2",
         "yMax": "130"
       },

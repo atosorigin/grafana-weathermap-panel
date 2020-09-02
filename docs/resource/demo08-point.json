@@ -56,8 +56,10 @@
         "tooltipPositionA": {},
         "tooltipPositionB": {}
       },
-      "positionShapeX": "220",
-      "positionShapeY": "204",
+      "positionShapeX": "260",
+      "positionShapeY": "220",
+      "positionXDefault": "260",
+      "positionYDefault": "220",
       "rotateArrow": "0",
       "shape": {
         "label": "Circle",

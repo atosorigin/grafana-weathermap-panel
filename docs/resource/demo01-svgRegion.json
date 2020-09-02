@@ -8,6 +8,12 @@
         "yMax": "0",
         "yMin": "0"
       },
+      "coordsDefault": {
+        "xMax": "0",
+        "xMin": "0",
+        "yMax": "0",
+        "yMin": "0"
+      },
       "id": 1,
       "idSVG": "rect45",
       "img": "",
@@ -85,6 +91,12 @@
     {
       "colorMode": false,
       "coords": {
+        "xMax": "0",
+        "xMin": "0",
+        "yMax": "0",
+        "yMin": "0"
+      },
+      "coordsDefault": {
         "xMax": "0",
         "xMin": "0",
         "yMax": "0",
@@ -170,6 +182,12 @@
     {
       "colorMode": true,
       "coords": {
+        "xMax": "0",
+        "xMin": "0",
+        "yMax": "0",
+        "yMin": "0"
+      },
+      "coordsDefault": {
         "xMax": "0",
         "xMin": "0",
         "yMax": "0",

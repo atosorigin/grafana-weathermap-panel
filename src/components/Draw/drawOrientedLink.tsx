@@ -992,6 +992,20 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       }
     }
 
+    let newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+    newArrayOrientedLink.forEach((orientedLink) => {
+      if (orientedLink.name === this.props.name) {
+        if (isIn) {
+          orientedLink.pointAPositionX = xResult.toString();
+          orientedLink.pointAPositionXDefault = xResult.toString();
+        } else {
+          orientedLink.pointBPositionX = xResult.toString();
+          orientedLink.pointBPositionXDefault = xResult.toString();
+        }
+      }
+    });
+    this.props.options.arrayOrientedLinks = newArrayOrientedLink;
+
     return xResult;
   };
 
@@ -1720,6 +1734,21 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       }
     }
+
+    let newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+    newArrayOrientedLink.forEach((orientedLink) => {
+      if (orientedLink.name === this.props.name) {
+        if (isIn) {
+          orientedLink.pointAPositionY = yResult.toString();
+          orientedLink.pointAPositionYDefault = yResult.toString();
+        } else {
+          orientedLink.pointBPositionY = yResult.toString();
+          orientedLink.pointBPositionYDefault = yResult.toString();
+        }
+      }
+    });
+    this.props.options.arrayOrientedLinks = newArrayOrientedLink;
+
     return yResult;
   };
 
@@ -2150,13 +2179,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       xC = (xA + xB) / 2;
       yC = (yA + yB) / 2;
     }
-
-    // console.log(xA);
-    // console.log(yA);
-    // console.log(xB);
-    // console.log(yB);
-    // console.log(xC);
-    // console.log(yC);
 
     const distanceAC: number = Math.sqrt((xA - xC) * (xA - xC) + (yA - yC) * (yA - yC));
     const angleRadianAC: number = Math.atan2(yA - yC, xA - xC);

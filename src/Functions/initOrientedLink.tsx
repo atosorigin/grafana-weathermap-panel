@@ -65,7 +65,7 @@ export const initOrientedLink = (newId: number, newZIndex: number): OrientedLink
     initPositionParameter,
     'orientedLink' + num.toString(),
     { label: 'Monodirectional', value: 'AB' },
-    '12',
+    '9',
     '0',
     '0',
     '#5794F2',

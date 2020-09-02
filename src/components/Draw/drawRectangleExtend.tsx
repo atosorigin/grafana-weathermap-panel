@@ -634,7 +634,6 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       // console.log('avant update coords');
       // console.log(currentRegion.coords);
       if (currentRegion.id === region.id) {
-        console.log('saving data');
         currentRegion.coords.xMin = leftPx.toString();
         currentRegion.coords.xMax = (widthBackground - rightPx).toString();
         currentRegion.coords.yMin = bottomPx.toString();

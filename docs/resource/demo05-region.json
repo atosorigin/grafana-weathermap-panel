@@ -55,7 +55,7 @@
         "key": "device",
         "unit": "",
         "format": "",
-        "keyValue": "vetha317d1e",
+        "keyValue": "lo",
         "refId": "A",
         "expr": "",
         "returnQuery": [],
@@ -77,6 +77,12 @@
       "mode": true,
       "orientedLink": [],
       "coords": {
+        "xMin": "0",
+        "xMax": "0",
+        "yMin": "0",
+        "yMax": "0"
+      },
+      "coordsDefault": {
         "xMin": "0",
         "xMax": "0",
         "yMin": "0",
@@ -139,7 +145,7 @@
         "key": "device",
         "unit": "",
         "format": "",
-        "keyValue": "eno0",
+        "keyValue": "ens3",
         "refId": "A",
         "expr": "",
         "returnQuery": [],
@@ -161,6 +167,12 @@
       "mode": true,
       "orientedLink": [],
       "coords": {
+        "xMin": "0",
+        "xMax": "0",
+        "yMin": "0",
+        "yMax": "0"
+      },
+      "coordsDefault": {
         "xMin": "0",
         "xMax": "0",
         "yMin": "0",

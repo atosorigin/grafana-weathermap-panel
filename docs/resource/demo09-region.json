@@ -8,6 +8,12 @@
         "yMin": "80",
         "yMax": "160"
       },
+      "coordsDefault": {
+        "xMin": "160",
+        "xMax": "310",
+        "yMin": "80",
+        "yMax": "160"
+      },
       "id": 1,
       "idSVG": "",
       "img": "",
@@ -93,6 +99,12 @@
         "yMin": "160",
         "yMax": "250"
       },
+      "coordsDefault": {
+        "xMin": "310",
+        "xMax": "470",
+        "yMin": "160",
+        "yMax": "250"
+      },
       "id": 2,
       "idSVG": "",
       "img": "",
@@ -173,6 +185,12 @@
     {
       "colorMode": false,
       "coords": {
+        "xMin": "470",
+        "xMax": "630",
+        "yMin": "250",
+        "yMax": "330"
+      },
+      "coordsDefault": {
         "xMin": "470",
         "xMax": "630",
         "yMin": "250",

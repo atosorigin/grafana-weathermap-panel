@@ -7,8 +7,6 @@ import { RegionClass, Coord4D } from 'Models/RegionClass';
 import { Style } from 'components/Parametrage/styleComponent';
 //import { TextObject } from 'Models/TextObjectClass';
 import { Filtred } from 'Functions/loaderGabarit';
-import { PositionParameterClass } from 'Models/PositionParameterClass';
-import { TextObject } from 'Models/TextObjectClass';
 
 /**
  * interface to save texte settings (police, size, style)
@@ -31,22 +29,6 @@ export interface LowerLimit {
   sizeBorder: string;
 }
 
-export interface GlobalGabaritDefault {
-  colorMode: boolean;
-  coords: Coord4D;
-  linkURL: any[];
-  lowerLimit: LowerLimit[];
-  mainMetric: Metric;
-  meta: string;
-  metrics: Metric[];
-  mode: boolean;
-  orientedLink: OrientedLinkClass[];
-  positionParameter: PositionParameterClass;
-  textObj: TextObject;
-  traceBack: boolean;
-  traceBorder: boolean;
-}
-
 export interface GabaritFile {
   fileName: string;
   queryID: string;
@@ -55,6 +37,9 @@ export interface GabaritFile {
   templateGabaritPoint: TemplateGabaritPoint[];
   templateGabaritRegion: TemplateGabaritRegion[];
   templateGabaritLink: TemplateGabaritLink[];
+  templateGabaritPointDefault: TemplateGabaritPoint[];
+  templateGabaritRegionDefault: TemplateGabaritRegion[];
+  templateGabaritLinkDefault: TemplateGabaritLink[];
 }
 
 export interface GlobalGabarit {
@@ -108,6 +93,7 @@ export interface TemplateGabaritRegion {
   mode: boolean;
   img: string;
   orientedLink: OrientedLinkClass[];
+  color: string;
 }
 
 export interface TemplateGabaritLink {
@@ -141,6 +127,7 @@ export interface TemplateGabaritLink {
   regionOut: string;
   zIndex: string;
   isIncurved: SelectableValue<boolean>;
+  color: string;
 }
 
 export declare type TManageValue = 'avg' | 'sum' | 'err';
@@ -548,6 +535,9 @@ export const defaults: SimpleOptions = {
     templateGabaritPoint: [],
     templateGabaritRegion: [],
     templateGabaritLink: [],
+    templateGabaritPointDefault: [],
+    templateGabaritRegionDefault: [],
+    templateGabaritLinkDefault: [],
   },
   legend: { hiddenLegend: true, x: 0, y: 0 },
   baseMap: { image: '', layerImage: '', modeSVG: true, width: '', height: '', idSVG: '', isUploaded: false },
@@ -734,6 +724,9 @@ export const defaults: SimpleOptions = {
     templateGabaritPoint: [],
     templateGabaritRegion: [],
     templateGabaritLink: [],
+    templateGabaritPointDefault: [],
+    templateGabaritRegionDefault: [],
+    templateGabaritLinkDefault: [],
   },
   updateOnlyInitialSpace: false,
 };

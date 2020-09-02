@@ -22,7 +22,7 @@
           "id": 0,
           "lowerLimitMax": "20",
           "lowerLimitMin": "",
-          "sizeBorder": "10"
+          "sizeBorder": "1"
         },
         {
           "backColor": "#37872D",
@@ -30,7 +30,7 @@
           "id": 1,
           "lowerLimitMax": "40",
           "lowerLimitMin": ">20",
-          "sizeBorder": "10"
+          "sizeBorder": "1"
         },
         {
           "backColor": "#E0B400",
@@ -38,7 +38,7 @@
           "id": 2,
           "lowerLimitMax": "60",
           "lowerLimitMin": ">40",
-          "sizeBorder": "10"
+          "sizeBorder": "1"
         },
         {
           "backColor": "#FA6400",
@@ -46,7 +46,7 @@
           "id": 3,
           "lowerLimitMax": "80",
           "lowerLimitMin": ">60",
-          "sizeBorder": "10"
+          "sizeBorder": "1"
         },
         {
           "backColor": "#C4162A",
@@ -54,7 +54,7 @@
           "id": 4,
           "lowerLimitMax": "",
           "lowerLimitMin": ">80",
-          "sizeBorder": "10"
+          "sizeBorder": "1"
         }
       ],
       "mainMetric": {
@@ -102,7 +102,7 @@
       },
       "regionIn": "Routeur",
       "regionOut": "Proxy server",
-      "size": { "value": "12px", "label": "12px" },
+      "size": "9",
       "textObj": {
         "colorBack": "",
         "colorText": "",
@@ -135,7 +135,7 @@
           "unit": "%"
         }
       },
-      "traceBack": false,
+      "traceBack": true,
       "traceBorder": true,
       "valueMainMetricA": "",
       "valueMainMetricB": "",

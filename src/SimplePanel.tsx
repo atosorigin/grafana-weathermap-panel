@@ -843,7 +843,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       positionParameter,
       name,
       { label: 'Monodirectional', value: 'AB' },
-      '10',
+      '9',
       objectIn.x.toString(),
       objectIn.y.toString(),
       '#5794F2',
@@ -898,6 +898,138 @@ export class SimplePanel extends PureComponent<Props, State> {
     }, 100);
   };
 
+  private defineValueX = (orientedLink: OrientedLinkClass, defaultPosition: boolean, isIn: boolean): string => {
+    let result = '';
+    if (isIn) {
+      if (orientedLink.pointIn !== '') {
+        const arrayPoint: PointClass[] = this.props.options.arrayPoints;
+        arrayPoint.forEach((point) => {
+          if (point.name === orientedLink.pointIn || point.label === orientedLink.pointIn) {
+            if (defaultPosition) {
+              result = point.positionXDefault;
+            } else {
+              result = point.positionShapeX;
+            }
+          }
+        });
+      } else if (orientedLink.regionIn !== '') {
+        const arrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
+        arrayRegion.forEach((region) => {
+          if (region.label === orientedLink.regionIn) {
+            if (defaultPosition) {
+              result = (parseInt(region.coords.xMax, 10) - parseInt(region.coords.xMin, 10)).toString();
+            } else {
+              result = (parseInt(region.coordsDefault.xMax, 10) - parseInt(region.coordsDefault.xMin, 10)).toString();
+            }
+          }
+        });
+      } else {
+        if (defaultPosition) {
+          result = orientedLink.pointAPositionX;
+        } else {
+          result = orientedLink.pointAPositionXDefault;
+        }
+      }
+    } else {
+      if (orientedLink.pointOut !== '') {
+        const arrayPoint: PointClass[] = this.props.options.arrayPoints;
+        arrayPoint.forEach((point) => {
+          if (point.name === orientedLink.pointOut || point.label === orientedLink.pointOut) {
+            if (defaultPosition) {
+              result = point.positionXDefault;
+            } else {
+              result = point.positionShapeX;
+            }
+          }
+        });
+      } else if (orientedLink.regionOut !== '') {
+        const arrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
+        arrayRegion.forEach((region) => {
+          if (region.label === orientedLink.regionOut) {
+            if (defaultPosition) {
+              result = (parseInt(region.coords.xMax, 10) - parseInt(region.coords.xMin, 10)).toString();
+            } else {
+              result = (parseInt(region.coordsDefault.xMax, 10) - parseInt(region.coordsDefault.xMin, 10)).toString();
+            }
+          }
+        });
+      } else {
+        if (defaultPosition) {
+          result = orientedLink.pointBPositionX;
+        } else {
+          result = orientedLink.pointBPositionXDefault;
+        }
+      }
+    }
+    return result;
+  };
+
+  private defineValueY = (orientedLink: OrientedLinkClass, defaultPosition: boolean, isIn: boolean): string => {
+    let result = '';
+    if (isIn) {
+      if (orientedLink.pointIn !== '') {
+        const arrayPoint: PointClass[] = this.props.options.arrayPoints;
+        arrayPoint.forEach((point) => {
+          if (point.name === orientedLink.pointIn) {
+            if (defaultPosition) {
+              result = point.positionYDefault;
+            } else {
+              result = point.positionShapeY;
+            }
+          }
+        });
+      } else if (orientedLink.regionIn !== '') {
+        const arrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
+        arrayRegion.forEach((region) => {
+          if (region.label === orientedLink.regionIn) {
+            if (defaultPosition) {
+              result = (parseInt(region.coords.yMax, 10) - parseInt(region.coords.yMin, 10)).toString();
+            } else {
+              result = (parseInt(region.coordsDefault.yMax, 10) - parseInt(region.coordsDefault.yMin, 10)).toString();
+            }
+          }
+        });
+      } else {
+        if (defaultPosition) {
+          result = orientedLink.pointAPositionY;
+        } else {
+          result = orientedLink.pointAPositionYDefault;
+        }
+      }
+    } else {
+      if (orientedLink.pointOut !== '') {
+        const arrayPoint: PointClass[] = this.props.options.arrayPoints;
+        arrayPoint.forEach((point) => {
+          if (point.name === orientedLink.pointIn) {
+            if (defaultPosition) {
+              result = point.positionYDefault;
+            } else {
+              result = point.positionShapeY;
+            }
+          }
+        });
+      } else if (orientedLink.regionOut !== '') {
+        const arrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
+        arrayRegion.forEach((region) => {
+          if (region.label === orientedLink.regionIn) {
+            if (defaultPosition) {
+              result = (parseInt(region.coords.yMax, 10) - parseInt(region.coords.yMin, 10)).toString();
+            } else {
+              result = (parseInt(region.coordsDefault.yMax, 10) - parseInt(region.coordsDefault.yMin, 10)).toString();
+            }
+          }
+        });
+      } else {
+        if (defaultPosition) {
+          result = orientedLink.pointBPositionY;
+        } else {
+          result = orientedLink.pointBPositionYDefault;
+        }
+      }
+    }
+    return result;
+  };
+
   /**
    * to do
    */
@@ -906,23 +1038,31 @@ export class SimplePanel extends PureComponent<Props, State> {
     const mapItems: JSX.Element[] = [];
     let item: JSX.Element = <div></div>;
     arrayOrientedLink.forEach((orientedLink: OrientedLinkClass) => {
-      // console.log('simplePanel');
-      // console.log(orientedLink.lowerLimit);
+      console.log('simplePanel');
+      console.log(orientedLink);
       const valueMainMetricA: string = this.getValuesMainMetricOrientedLink(orientedLink).toString();
       const valueMainMetricB: string = this.getValuesMainMetricOrientedLinkB(orientedLink).toString();
       this.getValuesMainMetricOrientedLinkB(orientedLink);
       const valuesAuxiliaryMetrics: string[] = this.getValuesAuxiliaryMetricsOrientedLink(orientedLink);
       const valuesAuxiliaryMetricsB: string[] = this.getValuesAuxiliaryMetricsOrientedLinkB(orientedLink);
+      const pointAX: string = this.defineValueX(orientedLink, false, true);
+      const pointDefaultAX: string = this.defineValueX(orientedLink, true, true);
+      const pointBX: string = this.defineValueX(orientedLink, false, false);
+      const pointDefaultBX: string = this.defineValueX(orientedLink, true, false);
+      const pointAY: string = this.defineValueY(orientedLink, false, true);
+      const pointDefaultAY: string = this.defineValueY(orientedLink, true, true);
+      const pointBY: string = this.defineValueY(orientedLink, false, false);
+      const pointDefaultBY: string = this.defineValueY(orientedLink, true, false);
 
       item = (
         <DrawOrientedLink
           key={'orientedLink' + orientedLink.id.toString()}
           id={orientedLink.id.toString()}
           orientationLink={orientedLink.orientationLink.value || ''}
-          pointAPositionX={orientedLink.pointAPositionX}
-          pointAPositionY={orientedLink.pointAPositionY}
-          pointBPositionX={orientedLink.pointBPositionX}
-          pointBPositionY={orientedLink.pointBPositionY}
+          pointAPositionX={pointAX}
+          pointAPositionY={pointAY}
+          pointBPositionX={pointBX}
+          pointBPositionY={pointBY}
           colorA={orientedLink.colorCoordinateA}
           colorB={orientedLink.colorCoordinateB}
           associatePointIn={orientedLink.pointIn}
@@ -964,10 +1104,10 @@ export class SimplePanel extends PureComponent<Props, State> {
           size={orientedLink.size}
           widthInitialSpaceDefault={orientedLink.widthInitialSpaceDefault}
           heightInitialSpaceDefault={orientedLink.heightInitialSpaceDefault}
-          positionXADefault={orientedLink.pointAPositionXDefault}
-          positionYADefault={orientedLink.pointAPositionYDefault}
-          positionXBDefault={orientedLink.pointBPositionXDefault}
-          positionYBDefault={orientedLink.pointBPositionYDefault}
+          positionXADefault={pointDefaultAX}
+          positionYADefault={pointDefaultAY}
+          positionXBDefault={pointDefaultBX}
+          positionYBDefault={pointDefaultBY}
           positionXCDefault={orientedLink.pointCPositionXDefault}
           positionYCDefault={orientedLink.pointCPositionYDefault}
         />
@@ -1277,10 +1417,10 @@ export class SimplePanel extends PureComponent<Props, State> {
           Position Legend
         </Button>
 
-        <Button style={{ marginLeft: '85%', zIndex: 18, position: 'absolute' }} id="more" onClick={this.ZoomIn} variant={'primary'}>
+        <Button style={{ marginLeft: '85%', zIndex: 18, position: 'absolute' }} id="more" onWheel={this.ZoomIn} variant={'primary'}>
           <i className="fa fa-plus" aria-hidden="true"></i>
         </Button>
-        <Button style={{ marginLeft: '90%', zIndex: 18, position: 'absolute' }} id="less" onClick={this.ZoomOut} variant={'primary'}>
+        <Button style={{ marginLeft: '90%', zIndex: 18, position: 'absolute' }} id="less" onWheel={this.ZoomOut} variant={'primary'}>
           <i className="fa fa-minus" aria-hidden="true"></i>
         </Button>
       </div>
@@ -1621,30 +1761,41 @@ export class SimplePanel extends PureComponent<Props, State> {
       this.chargeRegion();
     }
   }
+
   // Zoom in Panel
   /********************************  Zoom Panel*********************************** */
   // Zoom Plus
-  ZoomIn = (event: MouseEventInit) => {
+  ZoomIn = (event: any) => {
     const elmnt = document.getElementById('coordinateSpaces');
     if (elmnt) {
       // console.log('more');
+      if (event.deltaY < 0) {
+        console.log('scrolling up');
+        elmnt.style.cursor = 'zoom-in';
+        elmnt.style.transform += 'scale(1.01,1.01)' + 'translateX(0.5%)';
+      }
 
-      elmnt.addEventListener('click', () => {
-        elmnt.style.transform += 'scale(1.01,1.01)' + 'translate(1%)';
-        console.warn((elmnt.style.transform += 'scale(1.01,1.01)'));
-      });
+      // elmnt.addEventListener('wheel', () => {
+      // let mouse = event.pageX + event.pageY;
+      // console.log(mouse);
+      // elmnt.style.cursor = 'zoom-in';
+      // elmnt.style.transform += 'scale(1.01,1.01)' + 'translate(1%)';
+      // console.warn((elmnt.style.transform += 'scale(1.01,1.01)'));
+      //});
     }
   };
 
   // Zoom Negative
 
-  ZoomOut = (event: MouseEventInit) => {
+  ZoomOut = (event: any) => {
     const elmnt = document.getElementById('coordinateSpaces');
     if (elmnt) {
-      console.log('less');
-      elmnt.addEventListener('click', () => {
-        elmnt.style.transform += 'scale(0.98,0.98)' + 'translate(-1%)';
-      });
+      // console.log('more');
+      if (event.deltaY < 0) {
+        console.log('scrolling down');
+        elmnt.style.cursor = 'zoom-out';
+        elmnt.style.transform += 'scale(0.98,0.98)' + 'translateX(-1%)';
+      }
     }
     //console.log('-');
   };
@@ -2245,13 +2396,16 @@ export class SimplePanel extends PureComponent<Props, State> {
     let styleBackground;
     if (this.props.options.baseMap.modeSVG) {
       styleBackground = {
-        // position: 'absolute',
+        position: 'absolute',
         // textAlign: 'center',
         // backgroundRepeat: 'no-repeat',
         height: this.props.options.baseMap.height + 'px',
         width: this.props.options.baseMap.width + 'px',
         // opacity: 0.8,
         // zIndex: 4,
+        translate: '(2,1)',
+        backgroundPosition: 'bottom center',
+        transformOrigin: '50% 0%',
       } as React.CSSProperties;
     } else {
       if (this.props.options.baseMap.image.split(',')[0] === 'base64') {
