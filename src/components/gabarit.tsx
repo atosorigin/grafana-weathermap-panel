@@ -228,6 +228,7 @@ class Gabarit extends React.Component<Props, State> {
       format: metric.format,
       keyValue: metric.keyValue,
       filter: JSON.parse(JSON.stringify(metric.filter)),
+      refId: metric.refId,
       expr: metric.expr,
       returnQuery: metric.returnQuery,
       manageValue: metric.manageValue,
@@ -246,6 +247,7 @@ class Gabarit extends React.Component<Props, State> {
     point.mainMetric.returnQuery?.forEach((dataFrame) => {
       const result = searchNameIsFilter(dataFrame, point.mainMetric);
       if (result) {
+        console.log('Filter OK -> loaded');
         this.props.options.arrayPoints.push(point);
       } else {
         console.log('Filter not found -> no load');
@@ -644,9 +646,6 @@ class Gabarit extends React.Component<Props, State> {
           returnQuery: [],
           manageValue: this.props.options.gabaritDefault.templateGabaritPointDefault[0].mainMetric.manageValue,
         };
-      }
-      if (!mainMetricPoint[index].refId) {
-        mainMetricPoint[index].refId = 'A';
       }
       point.metrics.forEach((element) => {
         metricPoint[index].push({
@@ -1150,9 +1149,6 @@ class Gabarit extends React.Component<Props, State> {
           manageValue: this.props.options.gabaritDefault.templateGabaritLinkDefault[0].mainMetric.manageValue,
         };
       }
-      if (!mainMetricALink[index].refId) {
-        mainMetricALink[index].refId = 'A';
-      }
       link.metrics.forEach((element) => {
         metricALink[index].push({
           key: element.key,
@@ -1202,9 +1198,6 @@ class Gabarit extends React.Component<Props, State> {
           returnQuery: [],
           manageValue: this.props.options.gabaritDefault.templateGabaritLinkDefault[0].mainMetric.manageValue,
         };
-      }
-      if (!mainMetricALink[index].refId) {
-        mainMetricBLink[index].refId = 'A';
       }
       link.metricsB.forEach((element) => {
         metricBLink[index].push({
@@ -2053,9 +2046,6 @@ class Gabarit extends React.Component<Props, State> {
           manageValue: this.props.options.gabaritDefault.templateGabaritRegionDefault[0].mainMetric.manageValue,
         };
       }
-      if (!mainMetricRegion[index].refId) {
-        mainMetricRegion[index].refId = 'A';
-      }
       region.metrics.forEach((element) => {
         metricRegion[index].push({
           key: element.key,
@@ -2314,23 +2304,23 @@ class Gabarit extends React.Component<Props, State> {
   };
 
   printPoint = () => {
-    console.log('gabaritPoint');
+    console.log('Point');
     console.log(this.props.options.arrayPoints);
   };
 
   printRegion = () => {
-    console.log('gabaritRegion');
+    console.log('Region');
     console.log(this.props.options.regionCoordinateSpace);
   };
 
   printLink = () => {
-    console.log('gabaritDefault');
+    console.log('Link');
     console.log(this.props.options.arrayOrientedLinks);
   };
 
   printTemp = () => {
     console.log('gabaritDefault');
-    console.log(this.props.options.gabaritDefault);
+    console.log(this.props.options.saveGabaritFile);
   };
 
   render() {

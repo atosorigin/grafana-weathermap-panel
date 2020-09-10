@@ -64,7 +64,6 @@ It is possible to have more details with the [display](../editor/display.md) pag
 
 In the **Gabarit** tab
 
-
 ![](../../screenshots/demo/tutorial14/demo14-0.png)
 
 vous ajoutez le fichier par défaut
@@ -74,8 +73,7 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 
 ```
 
-puis 1 clic que le bouton **Add** 
-
+puis 1 clic que le bouton **Add**
 
 ![](../../screenshots/demo/tutorial13/demo13-1.png)
 

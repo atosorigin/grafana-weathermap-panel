@@ -71,9 +71,7 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 
 ```
 
-puis 1 clic que le bouton **Add** 
-
-
+puis 1 clic que le bouton **Add**
 
 ![](../../screenshots/demo/tutorial14/demo14-1.png)
 

@@ -1,4 +1,4 @@
-# construire un dashboard par les Query
+# chargement multiple de gabarit
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
@@ -11,50 +11,45 @@ The example shows how to use query filters to obtain precise metrics
 In a query, we want to analyze what the network card receives
 
 ```
-prometheus_engine_query_duration_seconds*100000
+prometheus_http_request_duration_seconds_bucket
 ```
 
 The result shows several possible outcomes
 
 ```
-prometheus_engine_query_duration_seconds{instance="localhost:9090",job="prometheus",quantile="0.5",slice="inner_eval"}
-prometheus_engine_query_duration_seconds{instance="localhost:9090",job="prometheus",quantile="0.5",slice="prepare_time"}
-prometheus_engine_query_duration_seconds{instance="localhost:9090",job="prometheus",quantile="0.5",slice="queue_time"}
-prometheus_engine_query_duration_seconds{instance="localhost:9090",job="prometheus",quantile="0.5",slice="result_sort"}
-prometheus_engine_query_duration_seconds{instance="localhost:9090",job="prometheus",quantile="0.9",slice="inner_eval"}
-prometheus_engine_query_duration_seconds{instance="localhost:9090",job="prometheus",quantile="0.9",slice="prepare_time"}
-prometheus_engine_query_duration_seconds{instance="localhost:9090",job="prometheus",quantile="0.9",slice="queue_time"}
-prometheus_engine_query_duration_seconds{instance="localhost:9090",job="prometheus",quantile="0.9",slice="result_sort"}
-prometheus_engine_query_duration_seconds{instance="localhost:9090",job="prometheus",quantile="0.99",slice="inner_eval"}
-prometheus_engine_query_duration_seconds{instance="localhost:9090",job="prometheus",quantile="0.99",slice="prepare_time"}
-prometheus_engine_query_duration_seconds{instance="localhost:9090",job="prometheus",quantile="0.99",slice="queue_time"}
-prometheus_engine_query_duration_seconds{instance="localhost:9090",job="prometheus",quantile="0.99",slice="result_sort"}
+prometheus_http_request_duration_seconds_bucket{handler="/api/v1/label/:name/values",instance="localhost:9090",job="prometheus",le="+Inf"}
+prometheus_http_request_duration_seconds_bucket{handler="/api/v1/label/:name/values",instance="localhost:9090",job="prometheus",le="0.1"}
+prometheus_http_request_duration_seconds_bucket{handler="/api/v1/label/:name/values",instance="localhost:9090",job="prometheus",le="0.2"}
+prometheus_http_request_duration_seconds_bucket{handler="/api/v1/label/:name/values",instance="localhost:9090",job="prometheus",le="0.4"}
+prometheus_http_request_duration_seconds_bucket{handler="/api/v1/label/:name/values",instance="localhost:9090",job="prometheus",le="1"}
+prometheus_http_request_duration_seconds_bucket{handler="/api/v1/label/:name/values",instance="localhost:9090",job="prometheus",le="120"}
+prometheus_http_request_duration_seconds_bucket{handler="/api/v1/label/:name/values",instance="localhost:9090",job="prometheus",le="20"}
+prometheus_http_request_duration_seconds_bucket{handler="/api/v1/label/:name/values",instance="localhost:9090",job="prometheus",le="3"}
+prometheus_http_request_duration_seconds_bucket{handler="/api/v1/label/:name/values",instance="localhost:9090",job="prometheus",le="60"}
+prometheus_http_request_duration_seconds_bucket{handler="/api/v1/label/:name/values",instance="localhost:9090",job="prometheus",le="8"}
 
 ```
 
 Les elements qui nous interressent sont :
 
+- handler
 - instance
 - job
-- quantile
-- slice
+- le
 
 qui seront utilisés dans le fichier json de gabarit dans la liste **filtered**
 
-## Add background image
+## Determining a space
 
-![fileselect background](../../screenshots/demo/tutorial14/background.jpg)
+![step 02](../../screenshots/demo/tutorial13/display.png)
 
-Adding a background image can be done from the menu `display`.
+The creation of a background space is done from the `display' menu.
 
-The selected image will be [demo14-background.svg](../../resource/demo14-background.svg).
+It requires
 
-To do this, we download it in base64 with the `Copy image address` function, or with the direct link to the repository:
-
-```
-https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo14-background.svg
-
-```
+- Uncheck `use svg`
+- Enter the width (ex : 400)
+- Enter height (ex : 400)
 
 It is possible to have more details with the [display](../editor/display.md) page.
 
@@ -67,7 +62,7 @@ Dans l'onglet **Gabarit**
 vous ajoutez le lien du fichier json
 
 ```
-https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo14-svg.json
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo15-point-multi.json
 
 ```
 
@@ -83,4 +78,4 @@ puis 1 clic **load**
 
 ## Resultat
 
-![](../../screenshots/demo/tutorial14/result.png)
+![](../../screenshots/demo/tutorial15/result.png)

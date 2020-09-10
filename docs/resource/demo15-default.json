@@ -1,37 +1,4 @@
-# Gabarit file
-
-[![](../../screenshots/other/Go-back.png)](README.md)
-
-http://localhost/demo/sampleJson/gabarit-default-new.json
-
-The complete [gabarit-default.json](../../resource/sampleJson/gabarit-default.json) script is available, the construction details of which can be found below.
-
-The **gabarit** file must be declared as a JSON file like this:
-
-```
 {
-  "global": {
-  },
-  "default": {
-    "templates": [
-      {
-        // point
-      },
-      {
-        // link
-      },
-      {
-        // region
-      },
-    ]
-  }
-}
-
-```
-
-## Global
-
-```
   "global": {
     "lowerLimit": [
       {
@@ -79,30 +46,9 @@ The **gabarit** file must be declared as a JSON file like this:
     "traceBack": false,
     "traceBorder": false
   },
-```
-
-## Default templates
-
-```
   "default": {
     "templates": [
       {
-        // point
-      },
-      {
-        // link
-      },
-      {
-        // region
-      },
-    ]
-
-```
-
-### point
-
-```
-{
         "filtered": "",
         "labelfix": true,
         "xylabel": "x|labelName#y|labelName",
@@ -157,14 +103,8 @@ The **gabarit** file must be declared as a JSON file like this:
         "color": "green",
         "assiciateOrientedLinksIn": [],
         "associateOrientedLinksOut": []
-  }
-
-```
-
-### link
-
-```
-     {
+      },
+      {
         "filtered": "device|ens3",
         "labelfix": true,
         "xylabelA": "x|quantile#y|quantile",
@@ -232,12 +172,7 @@ The **gabarit** file must be declared as a JSON file like this:
         "zIndex": "2",
         "color": "black"
       },
-
-```
-
-### region
-
-    {
+      {
         "filtered": "quantile|0.5#slice|inner_eval",
         "labelfix": false,
         "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
@@ -274,3 +209,6 @@ The **gabarit** file must be declared as a JSON file like this:
         "orientedLink": [],
         "color": "black"
       }
+    ]
+  }
+}
