@@ -53,9 +53,20 @@ It requires
 
 It is possible to have more details with the [display](../editor/display.md) page.
 
+
 ## Advanced gabarit
 
 Dans l'onglet **Gabarit**
+
+![](../../screenshots/demo/tutorial14/demo14-0.png)
+
+vous ajoutez le fichier par défaut
+
+```
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo15-default.json
+
+```
+
 
 ![](../../screenshots/demo/tutorial14/demo14-1.png)
 
