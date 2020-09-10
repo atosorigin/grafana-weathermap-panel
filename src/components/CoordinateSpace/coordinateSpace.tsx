@@ -141,11 +141,11 @@ class CoordinateSpace extends React.Component<Props, State> {
     const widthInitialSpace = xMaxInitialSpace - xMinInitialSpace;
     let newCoordDefault: Coord4D = tmp.coordsDefault;
     if (name.startsWith('positionXMin')) {
-      console.log('update xMin');
+      // console.log('update xMin');
       newCoordDefault.xMin = (((parseInt(currentTarget, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
     }
     if (name.startsWith('positionXMax')) {
-      console.log('update xMax');
+      // console.log('update xMax');
       newCoordDefault.xMax = (((parseInt(currentTarget, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
     }
 
@@ -155,14 +155,14 @@ class CoordinateSpace extends React.Component<Props, State> {
     const yMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10);
     const heightInitialSpace = yMaxInitialSpace - yMinInitialSpace;
     if (name.startsWith('positionYMin')) {
-      console.log('update yMin');
+      // console.log('update yMin');
       newCoordDefault.yMin = (((parseInt(currentTarget, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
     }
     if (name.startsWith('positionYMax')) {
-      console.log('update yMax');
+      // console.log('update yMax');
       newCoordDefault.yMax = (((parseInt(currentTarget, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
     }
-    console.log(newCoordDefault);
+    // console.log(newCoordDefault);
     tmp.coordsDefault = newCoordDefault;
 
     tmp = editGoodParameterExtend(name, tmp, currentTarget);

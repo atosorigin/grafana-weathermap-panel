@@ -25,3 +25,7 @@ In the hypothesis where you retrieve several values, the following field propose
 - Error: Returns the value if this one is single, return `error` if there are several values
 
 Choose the one you want.
+
+# See too
+
+- [Tutorial 08 : How to use auxiliere metric](../demo/tutorial08.md)

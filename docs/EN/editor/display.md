@@ -116,4 +116,7 @@ to do that, you have to _copy the address of the image_
 
 # See too
 
-- [Tutorial 09 : How to create a coordinate mode region](tutorial09.md)
+- [Tutorial 01 : Add a dashboard SVG](../demo/tutorial01.md)
+- [Tutorial 02 : Add a dashboard PNG/JPEG](../demo/tutorial02.md)
+- [Tutorial 03 : Create dashboard Avanced with link directionnel](../demo/tutorial03.md)
+- [Tutorial 09 : How to create a coordinate mode region](../demo/tutorial09.md)

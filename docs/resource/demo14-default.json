@@ -3,61 +3,53 @@
     "lowerLimit": [
       {
         "id": 0,
-        "lowerLimitMin": "",
-        "lowerLimitMax": "50",
-        "backColor": "",
-        "borderColor": "",
-        "sizeBorder": "10"
-      },
-      {
-        "id": 1,
-        "lowerLimitMin": ">50",
-        "lowerLimitMax": "",
-        "backColor": "",
-        "borderColor": "",
-        "sizeBorder": "10"
+        "lowerLimitMin": "leMinimum",
+        "lowerLimitMax": "leMaxmum",
+        "backColor": "black",
+        "borderColor": "black",
+        "sizeBorder": "2"
       }
     ],
     "textObject": {
       "value": "",
       "isTextTooltip": false,
-      "colorBack": "#C4162A",
-      "colorText": "#E0B400",
+      "colorBack": "black",
+      "colorText": "white",
       "style": {
         "bold": true,
         "italic": false,
-        "underline": true
+        "underline": false
       },
-      "generateObjectText": "",
+      "generateObjectText": true,
       "valueGenerateObjectText": {
-        "legendElement": "TestLink",
-        "numericFormatElement": "5",
-        "unit": "u",
-        "displayObjectInTooltip": false,
-        "addColorTextElement": true,
-        "colorTextElement": "##5794F2",
-        "addColorBackElement": true,
-        "colorBackElement": "black"
+        "legendElement": "uneLegend",
+        "numericFormatElement": "2",
+        "unit": "Hz",
+        "displayObjectInTooltip": true,
+        "addColorTextElement": false,
+        "addColorBackElement": false,
+        "colorTextElement": "",
+        "colorBackElement": ""
       },
       "generateAuxiliaryElement": {
-        "legendElement": "",
-        "numericFormatElement": "5",
-        "unit": "",
-        "displayObjectInTooltip": false,
+        "legendElement": "uneLegend",
+        "numericFormatElement": "?",
+        "unit": "Hz",
+        "displayObjectInTooltip": true,
         "addColorTextElement": true,
-        "colorTextElement": "#5794F2",
         "addColorBackElement": true,
-        "colorBackElement": "black"
+        "colorTextElement": "#000000",
+        "colorBackElement": "#FFFFFF"
       }
     },
-    "colorMode": false,
-    "traceBack": true,
-    "traceBorder": true
+    "colorMode": true,
+    "traceBack": false,
+    "traceBorder": false
   },
   "default": {
     "templates": [
       {
-        "filtered": "device|ens3",
+        "filtered": "",
         "labelfix": true,
         "xylabel": "x|labelName#y|labelName",
         "xylabelfix": "x|90#y|90",
@@ -84,9 +76,9 @@
         },
         "metrics": [],
         "linkURL": {
-          "followLink": "",
-          "hoveringTooltipLink": "",
-          "hoveringTooltipText": ""
+          "followLink": "defaulFiletpass",
+          "hoveringTooltipLink": "defaultFilepass",
+          "hoveringTooltipText": "defaultFilepass"
         },
         "valueMetric": "",
         "drawGraphicMarker": {
@@ -177,7 +169,8 @@
           "label": "No",
           "value": false
         },
-        "zIndex": "2"
+        "zIndex": "2",
+        "color": "black"
       },
       {
         "filtered": "quantile|0.5#slice|inner_eval",
@@ -213,65 +206,9 @@
         "idSVG": "",
         "mode": true,
         "img": "",
-        "orientedLink": []
+        "orientedLink": [],
+        "color": "black"
       }
     ]
-  },
-  "templates": [
-    {
-      "filtered": "device|ens3",
-      "labelfix": true,
-      "xylabelA": "",
-      "xylabelB": "",
-      "xylabelC": "",
-      "xylabelfixA": "x|0#y|0",
-      "xylabelfixB": "x|250#y|50",
-      "xylabelfixC": "x|#y|",
-      "type": "link",
-      "name": "orientedLink1",
-      "meta": "",
-      "label": "lien device",
-      "positionParameter": {
-        "xylabelA": "x|0#y|0",
-        "xylabelB": "x|0#y|0",
-        "tooltipA": "Bottom",
-        "tooltipB": "Bottom"
-      },
-      "mainMetric": {
-        "format": "",
-        "key": "",
-        "keyValue": ""
-      },
-      "metrics": [],
-      "mainMetricB": {
-        "format": "",
-        "key": "",
-        "keyValue": ""
-      },
-      "metricsB": [],
-      "linkURL": {
-        "followLink": "",
-        "hoveringTooltipLink": "",
-        "hoveringTooltipText": ""
-      },
-      "orientationLink": {
-        "label": "Monodirectional",
-        "value": "AB"
-      },
-      "size": "10",
-      "colorCoordinateA": "#5794F2",
-      "colorCoordinateB": "#E54658",
-      "valueMainMetricA": "",
-      "valueMainMetricB": "",
-      "pointIn": "",
-      "pointOut": "networkName",
-      "regionIn": "0.5-inner_eval",
-      "regionOut": "",
-      "zIndex": 2,
-      "isIncurved": {
-        "label": "No",
-        "value": false
-      }
-    }
-  ]
+  }
 }

@@ -5,7 +5,7 @@ import { LinkClass } from 'Models/LinkClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 import { RegionClass, Coord4D } from 'Models/RegionClass';
 import { Style } from 'components/Parametrage/styleComponent';
-//import { TextObject } from 'Models/TextObjectClass';
+import { TextObject } from 'Models/TextObjectClass';
 import { Filtred } from 'Functions/loaderGabarit';
 
 /**
@@ -58,7 +58,7 @@ export interface TemplateGabaritPoint {
   xylabelfix: string;
   type: string;
   name: string;
-  meta: string;
+  meta: Metadata[];
   label: string;
   positionParameter: any;
   mainMetric: Metric;
@@ -83,7 +83,7 @@ export interface TemplateGabaritRegion {
   xylabelfix: string;
   //xylabelfix0: string;
   type: string;
-  meta: string;
+  meta: Metadata[];
   label: string;
   positionParameter: any;
   mainMetric: Metric;
@@ -107,7 +107,7 @@ export interface TemplateGabaritLink {
   xylabelfixC: string;
   type: string;
   name: string;
-  meta: string;
+  meta: Metadata[];
   label: string;
   positionParameter: any;
   mainMetric: Metric;
@@ -129,7 +129,10 @@ export interface TemplateGabaritLink {
   isIncurved: SelectableValue<boolean>;
   color: string;
 }
-
+export interface Metadata {
+  meta: string;
+  obj: TextObject;
+}
 export declare type TManageValue = 'avg' | 'sum' | 'err';
 
 export interface Metric {
@@ -540,7 +543,15 @@ export const defaults: SimpleOptions = {
     templateGabaritLinkDefault: [],
   },
   legend: { hiddenLegend: true, x: 0, y: 0 },
-  baseMap: { image: '', layerImage: '', modeSVG: true, width: '', height: '', idSVG: '', isUploaded: false },
+  baseMap: {
+    image: '',
+    layerImage: '',
+    modeSVG: true,
+    width: '',
+    height: '',
+    idSVG: '',
+    isUploaded: false,
+  },
   // imageUrl: 'https://upload.wikimedia.org/wikipedia/en/b/be/Locator_Grid.png',
   coordinateSpaceInitial: {
     coordinate: {

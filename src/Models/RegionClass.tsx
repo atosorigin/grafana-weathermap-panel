@@ -3,7 +3,7 @@ import { OrientedLinkClass } from './OrientedLinkClass';
 import { LowerLimitClass } from './LowerLimitClass';
 import { TextObject } from './TextObjectClass';
 import { LinkURLClass } from './LinkURLClass';
-import { Metric } from 'types';
+import { Metric, Metadata } from 'types';
 import { PositionParameterClass } from './PositionParameterClass';
 
 export interface Coord4D {
@@ -37,7 +37,7 @@ export class RegionClass extends CoordinateSpaceClass {
   constructor(
     id: number,
     linkURL: LinkURLClass,
-    meta: string,
+    meta: Metadata[],
     lowerLimitClass: LowerLimitClass[],
     label: string,
     textObj: TextObject,

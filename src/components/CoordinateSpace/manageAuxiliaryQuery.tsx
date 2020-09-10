@@ -290,6 +290,22 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
     this.saveAuxMetrics(newAuxiliaryMetrics, true);
   };
 
+  // private onChangeMeta = (event: any) => {
+  //   const newValueMeta: Metadata[] = [];
+  //   const idCurrentAuxMetrics: number = event.currentTarget.id;
+  //   const value: string = event.currentTarget.value;
+  //   meta = value;
+  //   this.saveAuxMetrics(newValueMeta, false);
+  // };
+
+  // private onChangeMetaB = (event: any) => {
+  //   const newAuxiliaryMetrics: Metadata[] = this.getAuxiliaryMetrics(true);
+  //   const idCurrentAuxMetrics: number = event.currentTarget.id;
+  //   const value: string = event.currentTarget.value;
+  //   newAuxiliaryMetrics[idCurrentAuxMetrics].meta = value;
+  //   this.saveAuxMetrics(newAuxiliaryMetrics, true);
+  // };
+
   private addAuxiliaryMetric = () => {
     // const refIdMetric: string = this.state.currentRefQuery;
     let newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(false);

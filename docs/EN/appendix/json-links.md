@@ -482,3 +482,7 @@ pas de valeurs
    "zIndex": "5",
 
 ```
+
+# See too
+
+- [Tutorial 12 : Building your dashboard from your computer](../demo/tutorial12.md)

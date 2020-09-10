@@ -13,3 +13,5 @@ https://addons.mozilla.org/fr/firefox/addon/cors-everywhere/
 ## Problème de totaux
 
 coché Instant pour instantanner
+
+## L'image SVG ne s'affiche pas

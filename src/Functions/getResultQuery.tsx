@@ -25,7 +25,7 @@ const searchNameIsKey = (query: DataFrame, mainMetric: Metric): boolean => {
   return false;
 };
 
-const searchNameIsFilter = (query: DataFrame, mainMetric: Metric): boolean => {
+export const searchNameIsFilter = (query: DataFrame, mainMetric: Metric): boolean => {
   if (!mainMetric.filter) {
     return true;
   }

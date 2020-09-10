@@ -62,6 +62,19 @@ It is possible to have more details with the [display](../editor/display.md) pag
 
 Dans l'onglet **Gabarit**
 
+![](../../screenshots/demo/tutorial14/demo14-0.png)
+
+vous ajoutez le fichier par défaut
+
+```
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo14-default.json
+
+```
+
+puis 1 clic que le bouton **Add** 
+
+
+
 ![](../../screenshots/demo/tutorial14/demo14-1.png)
 
 vous ajoutez le lien du fichier json

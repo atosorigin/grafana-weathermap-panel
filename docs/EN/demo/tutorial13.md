@@ -64,6 +64,19 @@ It is possible to have more details with the [display](../editor/display.md) pag
 
 In the **Gabarit** tab
 
+
+![](../../screenshots/demo/tutorial14/demo14-0.png)
+
+vous ajoutez le fichier par défaut
+
+```
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo14-default.json
+
+```
+
+puis 1 clic que le bouton **Add** 
+
+
 ![](../../screenshots/demo/tutorial13/demo13-1.png)
 
 you add the link to the json file
@@ -76,7 +89,7 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 then 1 click that the button **Add** followed by **finish**
 
 ```
-https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo13-poînt-link.json
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo13-point-link.json
 
 ```
 

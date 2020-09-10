@@ -11,9 +11,9 @@ Vous devez :
 - Compléter la ligne "metrics" avec les lignes suivantes
 
 ```
-rate(node_network_receive_bytes{device="enp0s3"}[10s])
+rate(node_network_receive_bytes_total{device="ens3"}[10s])
 
-rate(node_network_transmit_bytes{device="enp0s3"}[10s])
+rate(node_network_transmit_bytes_total{device="ens3"}[10s])
 ```
 
 Les marqueurs "A" et "B" seront utilisés pour identifier cette requête, comme vous pouvez le voir ci-dessous.
@@ -75,10 +75,10 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 
 Choisissez ensuite la taille de la région pour votre image. Ici, nous choisissons :
 
-- X Min : 10
-- X Max : 50
-- Y Min : 10
-- Y Max : 50
+- X Min : 150
+- X Max : 250
+- Y Min : 100
+- Y Max : 150
 
 ![illustration1](../../screenshots/demo/tutorial03/illustration1.jpg)
 

@@ -4,8 +4,8 @@
     "textObject": {
       "value": "",
       "isTextTooltip": true,
-      "colorBack": "",
-      "colorText": "",
+      "colorBack": "#eeee00",
+      "colorText": "#dd33dd",
       "style": {
         "bold": true,
         "italic": true,
@@ -13,72 +13,131 @@
       },
       "generateObjectText": true,
       "valueGenerateObjectText": {
-        "legendElement": "Nombre : ",
+        "legendElement": "Nombre",
         "numericFormatElement": "",
         "unit": "u",
-        "displayObjectInTooltip": false,
-        "addColorTextElement": true,
-        "addColorBackElement": true,
-        "colorTextElement": "blue",
-        "colorBackElement": "orange"
+        "displayObjectInTooltip": true,
+        "addColorTextElement": false,
+        "colorTextElement": "white",
+        "addColorBackElement": false,
+        "colorBackElement": "green"
       },
       "generateAuxiliaryElement": {
-        "legendElement": "LegendElement",
-        "numericFormatElement": "",
+        "legendElement": "",
+        "numericFormatElement": "5",
         "unit": "",
-        "displayObjectInTooltip": false,
+        "displayObjectInTooltip": true,
         "addColorTextElement": true,
-        "addColorBackElement": true,
-        "colorTextElement": "#99FFCC",
-        "colorBackElement": "#DDDDDD"
+        "colorTextElement": "",
+        "addColorBackElement": false,
+        "colorBackElement": "red"
       }
     },
     "colorMode": false,
     "traceBack": true,
     "traceBorder": true
   },
+  "default": {
+    "templates": [
+      {
+        "filtered": "device|ens",
+        "labelfix": true,
+        "xylabel": "x|labelName#y|labelName",
+        "xylabelfix": "x|90#y|90",
+        "type": "point",
+        "name": "unPoint",
+        "meta": "uneMeta",
+        "label": "mtu ens3",
+        "positionParameter": {
+          "xylabelA": "x|0#y|0",
+          "xylabelB": "x|labelName#y|labelName",
+          "tooltipA": "Bottom",
+          "tooltipB": "Bottom"
+        },
+        "mainMetric": {
+          "key": "",
+          "unit": "",
+          "format": "",
+          "keyValue": "",
+          "filter": [],
+          "refId": "",
+          "expr": "",
+          "returnQuery": [],
+          "manageValue": "avg"
+        },
+        "metrics": [],
+        "linkURL": {
+          "followLink": "",
+          "hoveringTooltipLink": "",
+          "hoveringTooltipText": ""
+        },
+        "valueMetric": "",
+        "drawGraphicMarker": {
+          "label": "Yes",
+          "value": "true"
+        },
+        "shape": {
+          "label": "circle",
+          "value": "circle"
+        },
+        "sizeWidth": "12",
+        "sizeHeight": {
+          "label": "",
+          "value": ""
+        },
+        "rotateArrow": {
+          "label": "",
+          "value": ""
+        },
+        "positionShapeX": "",
+        "positionShapeY": "",
+        "color": "green",
+        "assiciateOrientedLinksIn": [],
+        "associateOrientedLinksOut": []
+      }
+    ]
+  },
   "templates": [
     {
       "filtered": "device|ens3",
       "labelfix": true,
       "xylabel": "x|labelName#y|labelName",
-      "xylabelfix": "x|250#y|50",
+      "xylabelfix": "x|243#y|57",
       "type": "point",
-      "name": "unPoint",
-      "meta": "uneMeta",
+      "name": "point1",
+      "meta": "",
       "label": "networkName",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
-        "xylabelB": "x|labelName#y|labelName",
+        "xylabelB": "x|0#y|0",
         "tooltipA": "Bottom",
         "tooltipB": "Bottom"
       },
       "mainMetric": {
-        "key": "",
-        "unit": "",
         "format": "",
+        "key": "",
         "keyValue": "",
-        "filter": [],
-        "refId": "",
-        "expr": "",
-        "returnQuery": [],
-        "manageValue": ""
+        "manageValue": "avg"
       },
       "metrics": [],
-      "linkURL": {},
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
       "valueMetric": "",
       "drawGraphicMarker": {
         "label": "Yes",
         "value": "true"
       },
       "shape": {
-        "label": "circle",
+        "label": "Circle",
         "value": "circle"
       },
       "sizeWidth": "12",
       "sizeHeight": {
-        "label": "",
-        "value": ""
+        "label": "Medium",
+        "value": "medium"
       },
       "rotateArrow": {
         "label": "",
@@ -86,9 +145,14 @@
       },
       "positionShapeX": "",
       "positionShapeY": "",
-      "color": "#00FF00",
+      "color": "black",
       "assiciateOrientedLinksIn": [],
-      "associateOrientedLinksOut": []
+      "associateOrientedLinksOut": [
+        {
+          "label": "lien device",
+          "name": "orientedLink1"
+        }
+      ]
     }
   ]
 }

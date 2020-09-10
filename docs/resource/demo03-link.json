@@ -67,7 +67,7 @@
       "pointCPositionYDefault": "244",
       "widthInitialSpaceDefault": "",
       "heightInitialSpaceDefault": "",
-      "pointIn": "coucou",
+      "pointIn": "point1",
       "pointOut": "",
       "positionParameter": {
         "labelAPositionX": "0",
@@ -79,7 +79,7 @@
       },
       "regionIn": "",
       "regionOut": "computer",
-      "size": "9",
+      "size": "11",
       "textObj": {
         "colorBack": "",
         "colorText": "",
@@ -186,7 +186,7 @@
       "widthInitialSpaceDefault": "",
       "heightInitialSpaceDefault": "",
       "pointIn": "",
-      "pointOut": "coucou",
+      "pointOut": "point1",
       "positionParameter": {
         "labelAPositionX": "0",
         "labelAPositionY": "0",

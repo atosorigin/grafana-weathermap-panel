@@ -1,7 +1,7 @@
 import { LinkURLClass } from './LinkURLClass';
 import { LowerLimitClass } from './LowerLimitClass';
 import { TextObject } from './TextObjectClass';
-import { Metric } from 'types';
+import { Metric, Metadata } from 'types';
 import { PositionParameterClass } from 'Models/PositionParameterClass';
 
 export class CoordinateSpaceClass {
@@ -9,7 +9,7 @@ export class CoordinateSpaceClass {
   id: number;
   /** query */
   linkURL: LinkURLClass;
-  meta: string;
+  meta: Metadata[];
   lowerLimit: LowerLimitClass[];
   label: string;
   textObj: TextObject;
@@ -23,7 +23,7 @@ export class CoordinateSpaceClass {
   constructor(
     id: number,
     linkURL: LinkURLClass,
-    meta: string,
+    meta: Metadata[],
     lowerLimit: LowerLimitClass[],
     label: string,
     textObj: TextObject,

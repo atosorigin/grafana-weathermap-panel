@@ -94,3 +94,7 @@ Vous pouvez définir la position du e différent paramètre.
 - Layer level
   - Upgrade on : choisissez l'autre lien que vous voulez voir en dessous de celui ci
   - Downgrade on : choisissez l'autre lien que vous voulez voir au-dessus de celui-ci
+
+# Voir aussi
+
+- [Tutorial 07 : Créer un lien bi directionnel](../demo/tutorial07.md)

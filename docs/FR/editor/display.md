@@ -116,4 +116,7 @@ pour cela, il faut _copier l'adresse de l'image_
 
 # Voir aussi
 
-- [Tutorial 09 : Comment créer une région en mode coordonnée](tutorial09.md)
+- [Tutorial 01 : Ajoutez SVG dans votre tableau de bord](../demo/tutorial01.md)
+- [Tutorial 02 : Ajoutez PNG/JPG dans votre tableau de bord](../demo/tutorial02.md)
+- [Tutorial 03 : Créer un dashboard avancé avec des liens directionnels](../demo/tutorial03.md)
+- [Tutorial 09 : Comment créer une région en mode coordonnée](../demo/tutorial09.md)

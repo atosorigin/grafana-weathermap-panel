@@ -19,7 +19,7 @@ interface State {
   selectCoordinateSpaceDefault: SelectableValue<OrientedLinkClass>;
 }
 
-interface SelectPoint {
+interface SelectOrientedLink {
   value: OrientedLinkClass;
   /** label select */
   label: string;
@@ -55,7 +55,7 @@ class EditOrientedLink extends React.Component<Props, State> {
         ...this.props.options,
         arrayOrientedLinks: oldData,
       });
-      //this.fillSelectPoint();
+      //this.fillSelectOrientedLink();
     } else {
       let find = false;
       const oldData: OrientedLinkClass[] = this.props.options.arrayOrientedLinks.slice();
@@ -73,7 +73,7 @@ class EditOrientedLink extends React.Component<Props, State> {
           ...this.props.options,
           arrayOrientedLinks: oldData,
         });
-        this.fillSelectPoint();
+        this.fillSelectOrientedLink();
       }
     }
   };
@@ -86,9 +86,9 @@ class EditOrientedLink extends React.Component<Props, State> {
   };
 
   /** fill select whith array region object */
-  fillSelectPoint = () => {
+  fillSelectOrientedLink = () => {
     let valueExist = false;
-    const valueSelect: SelectPoint[] = [];
+    const valueSelect: SelectOrientedLink[] = [];
     const stockTmpCoordinatesSpace: OrientedLinkClass[] = this.props.options.arrayOrientedLinks.slice();
 
     for (const line of stockTmpCoordinatesSpace) {
@@ -126,17 +126,16 @@ class EditOrientedLink extends React.Component<Props, State> {
 
   /** fill data for select */
   componentDidMount = () => {
-    this.fillSelectPoint();
+    this.fillSelectOrientedLink();
   };
 
   /** update state if value props change */
   componentDidUpdate = (prevProps: Props) => {
     if (prevProps.options.arrayOrientedLinks !== this.props.options.arrayOrientedLinks) {
-      this.fillSelectPoint();
+      this.fillSelectOrientedLink();
     }
-    // console.log(prevProps.options.newPoint);
     if (prevProps.options.newOrientedLink) {
-      this.fillSelectPoint();
+      this.fillSelectOrientedLink();
       this.props.options.newOrientedLink = false;
     }
   };

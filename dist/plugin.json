@@ -1,13 +1,13 @@
 {
   "type": "panel",
-  "name": "preprodWeatherMap",
-  "id": "preprod-atosorigin-weathermap-panel",
+  "name": "WeatherMap",
+  "id": "atosorigin-weathermap-panel",
   "info": {
     "description": "WeatherMap Panel Plugin for Grafana",
     "author": {
       "name": "Atos OpenSource"
     },
-    "keywords": ["Grafana", "weathermap", "panel"],
+    "keywords": ["Grafana", "weathermap", "panel", "react"],
     "logos": {
       "small": "img/logo.svg",
       "large": "img/logo.svg"
@@ -17,8 +17,8 @@
       { "name": "License", "url": "https://github.com/atosorigin/grafana-weathermap/blob/master/LICENCE" }
     ],
     "screenshots": [],
-    "version": "1.0.0",
-    "updated": "2020-05-17"
+    "version": "1.0.2rc1",
+    "updated": "2020-08-14"
   },
 
   "dependencies": {

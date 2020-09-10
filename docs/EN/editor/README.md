@@ -12,4 +12,5 @@ This editing panel offers different menus
   - [Region](coordinates-space-region.md)
   - [Point](coordinates-space-point.md)
   - [Oriented link](coordinates-space-link.md)
+- [Gabarit](gabarit.md)
 - [Import files](import.md)

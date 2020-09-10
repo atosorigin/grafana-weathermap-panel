@@ -1,3 +1,5 @@
+refaire capture ecran
+
 # Create link bi directionnel
 
 [![](../../screenshots/other/Go-back.png)](README.md)
@@ -105,12 +107,12 @@ To do that, go to `Queries` and fill the input like follow :
 ```
 Metric A :
 
-rate(node_network_receive_bytes{device="enp0s3"}[10s])*100*8/1024/1024
+rate(nnode_network_receive_bytes_total{device="ens3"}[10s])*100*8/1024/1024
 
 
 Metric B :
 
-rate(node_network_transmit_bytes{device="enp0s3"}[10s])*100*8/1024/1024
+rate(node_network_transmit_bytes_total{device="ens3"}[10s])*100*8/1024/1024
 ```
 
 Then, you will be able to assign the metrics to your Link A and your Link B

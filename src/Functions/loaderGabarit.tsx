@@ -49,11 +49,14 @@ export const filterParseRegion = (filter: string) => {
 };
 
 export const filterParse = (filter: string) => {
-  let tmp: string[] = filter.split('#');
-  let result: Filtred[] = [];
-  tmp.forEach((element) => {
-    let split: string[] = element.split('|');
-    result.push({ label: split[0], value: split[1] });
-  });
-  return result;
+  if (filter.length > 0) {
+    let tmp: string[] = filter.split('#');
+    let result: Filtred[] = [];
+    tmp.forEach((element) => {
+      let split: string[] = element.split('|');
+      result.push({ label: split[0], value: split[1] });
+    });
+    return result;
+  }
+  return [];
 };

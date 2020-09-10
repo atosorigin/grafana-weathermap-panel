@@ -14,26 +14,19 @@ export const editGoodParameterOrientedLink = (
   newValue: string,
   newValueSelect: SelectableValue<any>
 ): OrientedLinkClass => {
+  console.log('edit');
   if (name.startsWith('label')) {
     editCoor.label = newValue;
   } else if (name.startsWith('orientationLink')) {
     editCoor.orientationLink = newValueSelect;
   } else if (name.startsWith('pointAX')) {
     editCoor.pointAPositionX = newValue;
-    // editCoor.pointAPositionXDefault = newValue;
-    // editCoor.widthInitialSpaceDefault = widthInitialSpace || '';
   } else if (name.startsWith('pointAY')) {
     editCoor.pointAPositionY = newValue;
-    // editCoor.pointAPositionYDefault = newValue;
-    // editCoor.heightInitialSpaceDefault = heightInitialSpace || '';
   } else if (name.startsWith('pointBX')) {
     editCoor.pointBPositionX = newValue;
-    // editCoor.pointBPositionXDefault = newValue;
-    // editCoor.widthInitialSpaceDefault = widthInitialSpace || '';
   } else if (name.startsWith('pointBY')) {
     editCoor.pointBPositionY = newValue;
-    // editCoor.pointBPositionYDefault = newValue;
-    // editCoor.heightInitialSpaceDefault = heightInitialSpace || '';
   } else if (name.startsWith('colorCoordinateA')) {
     editCoor.colorCoordinateA = newValue;
   } else if (name.startsWith('colorCoordinateB')) {
@@ -48,12 +41,8 @@ export const editGoodParameterOrientedLink = (
     editCoor.isIncurved = newValueSelect;
   } else if (name.startsWith('pointCX')) {
     editCoor.pointCPositionX = newValue;
-    // editCoor.pointCPositionXDefault = newValue;
-    // editCoor.widthInitialSpaceDefault = widthInitialSpace || '';
   } else if (name.startsWith('pointCY')) {
     editCoor.pointCPositionY = newValue;
-    // editCoor.pointCPositionYDefault = newValue;
-    // editCoor.heightInitialSpaceDefault = heightInitialSpace || '';
   } else if (name.startsWith('pointIn')) {
     editCoor.pointIn = newValue;
   } else if (name.startsWith('pointOut')) {

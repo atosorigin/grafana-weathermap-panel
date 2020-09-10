@@ -179,16 +179,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     return result;
   }
 
-  // private defineValueToAdaptPositionYToInitialSpace = (yMinPx: number, yMaxPx: number): number => {
-  //   let valueToAdaptPositionToInitialSpace = 0;
-  //   if (yMaxPx > yMinPx) {
-  //     valueToAdaptPositionToInitialSpace = this.props.heightImage - yMaxPx;
-  //   } else {
-  //     valueToAdaptPositionToInitialSpace = this.props.heightImage - yMinPx;
-  //   }
-  //   return valueToAdaptPositionToInitialSpace;
-  // };
-
   private labelSynchroX = (whatLabel: string): number => {
     let result = 0;
     let labelMainMetric: HTMLElement | null = null;
@@ -227,38 +217,26 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     arrayOrientedLink.forEach((orientedLink) => {
       if (this.props.name !== orientedLink.name) {
         if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
-          //console.log('//1');
           if (this.props.associateRegionIn === orientedLink.regionIn || this.props.associateRegionIn === orientedLink.regionOut) {
-            //console.log('//1.1');
             if (this.props.associateRegionOut === orientedLink.regionIn || this.props.associateRegionOut === orientedLink.regionOut) {
-              //console.log('//1.2');
               listParallelOrientedLinks.push(orientedLink.id);
             }
           }
         } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
-          //console.log('//2');
           if (this.props.associatePointIn === orientedLink.pointIn || this.props.associatePointIn === orientedLink.pointOut) {
-            //console.log('//2.1');
             if (this.props.associatePointOut === orientedLink.pointIn || this.props.associatePointOut === orientedLink.pointOut) {
-              //console.log('//2.2');
               listParallelOrientedLinks.push(orientedLink.id);
             }
           }
         } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
-          //console.log('//3');
           if (this.props.associateRegionIn === orientedLink.regionIn || this.props.associateRegionIn === orientedLink.regionOut) {
-            //console.log('//3.1');
             if (this.props.associatePointOut === orientedLink.pointOut || this.props.associatePointOut === orientedLink.pointIn) {
-              //console.log('//3.2');
               listParallelOrientedLinks.push(orientedLink.id);
             }
           }
         } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-          //console.log('//4');
           if (this.props.associatePointIn === orientedLink.pointIn || this.props.associatePointIn === orientedLink.pointOut) {
-            //console.log('//4.1');
             if (this.props.associateRegionOut === orientedLink.regionOut || this.props.associateRegionOut === orientedLink.regionIn) {
-              //console.log('//4.2');
               listParallelOrientedLinks.push(orientedLink.id);
             }
           }
@@ -389,7 +367,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     let result = 0;
     const pointHtml = document.getElementById(point.name);
     if (pointHtml) {
-      result = parseInt(pointHtml.style.padding.substring(-2), 10);
+      result = parseInt(pointHtml.style.padding.substring(-2), 10) + parseInt(this.props.size, 10) / 10;
       if (idMultiLink === 2) {
         result = result / 2;
       }
@@ -417,10 +395,13 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     let xMidOut = 0;
     let yMidIn = 0;
     let yMidOut = 0;
+    let paddingPoint = 0;
 
     if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
+      // pointIn + regionOut
+      //console.log('1');
       arrayPoints.forEach((point) => {
-        let paddingPoint = this.getPaddingPoint(point, idMultiLink);
+        paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
           xMinIn = parseInt(point.positionXDefault, 10) - paddingPoint;
@@ -449,6 +430,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
+      // regionIn + pointOut
+      //console.log('2');
       arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
@@ -459,7 +442,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       });
 
       arrayPoints.forEach((point) => {
-        let paddingPoint = this.getPaddingPoint(point, idMultiLink);
+        paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointOut) {
           xMinOut = parseInt(point.positionXDefault, 10) - paddingPoint;
@@ -479,6 +462,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
     } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associateRegionOut !== '') {
+      // vide + regionOut
+      //console.log('3');
       arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionOut) {
           xMinOut = parseInt(this.defineCoor4DRegion(region).xMin, 10);
@@ -492,6 +477,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinIn = parseInt(this.props.positionYADefault, 10);
       yMaxIn = parseInt(this.props.positionYADefault, 10);
     } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
+      // regionIn + vide
+      //console.log('4');
       arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
@@ -505,8 +492,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinOut = parseInt(this.props.positionYBDefault, 10);
       yMaxOut = parseInt(this.props.positionYBDefault, 10);
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
+      // pointIn + vide
+      //console.log('5');
       arrayPoints.forEach((point) => {
-        let paddingPoint = this.getPaddingPoint(point, idMultiLink);
+        paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
           xMinIn = parseInt(point.positionXDefault, 10) - paddingPoint;
@@ -530,8 +519,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinOut = parseInt(this.props.positionYBDefault, 10);
       yMaxOut = parseInt(this.props.positionYBDefault, 10);
     } else if (this.props.associatePointIn === '' && this.props.associateRegionIn === '' && this.props.associatePointOut !== '') {
+      // vide + pointOut
+      //console.log('6');
       arrayPoints.forEach((point) => {
-        let paddingPoint = this.getPaddingPoint(point, idMultiLink);
+        paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointOut) {
           xMinOut = parseInt(point.positionXDefault, 10) - paddingPoint;
@@ -555,8 +546,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       yMinIn = parseInt(this.props.positionYADefault, 10);
       yMaxIn = parseInt(this.props.positionYADefault, 10);
     } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
+      // pointIn + pointOut
+      //console.log('7');
       arrayPoints.forEach((point) => {
-        let paddingPoint = this.getPaddingPoint(point, idMultiLink);
+        paddingPoint = this.getPaddingPoint(point, idMultiLink);
         let name: string = point.label || point.name;
         if (name === this.props.associatePointIn) {
           xMinIn = parseInt(point.positionXDefault, 10) - paddingPoint;
@@ -593,6 +586,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       });
     } else {
+      //console.log('8');
       arrayRegions.forEach((region) => {
         if (region.label === this.props.associateRegionIn) {
           xMinIn = parseInt(this.defineCoor4DRegion(region).xMin, 10);
@@ -615,378 +609,340 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     yMidIn = (yMinIn + yMaxIn) / 2;
     yMidOut = (yMinOut + yMaxOut) / 2;
 
+    const ratioXin = xMidIn / this.props.widthImage;
+    const ratioXout = xMidOut / this.props.widthImage;
+
     if (isIn) {
       if (idMultiLink === 0) {
-        if (yMidIn > yMidOut) {
-          if (xMidIn > xMidOut) {
+        if (xMidIn > xMidOut) {
+          if (yMidIn > yMidOut) {
             //console.log('x1');
             if (xMinIn < 0 && xMaxIn < 0) {
-              xResult = xMaxIn;
-            } else {
               xResult = xMinIn;
+            } else {
+              xResult = xMaxIn;
             }
-          } else if (xMidIn < xMidOut) {
+          } else if (yMidIn < yMidOut) {
             //console.log('x2');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMinIn;
             } else {
               xResult = xMaxIn;
             }
-          } else if (xMidIn === xMidOut) {
+          } else if (yMidIn === yMidOut) {
             //console.log('x3');
-            xResult = xMinIn;
+            xResult = xMidIn;
           }
-        } else if (yMidIn < yMidOut) {
-          if (xMidIn > xMidOut) {
+        } else if (xMidIn < xMidOut) {
+          if (yMidIn > yMidOut) {
             //console.log('x4');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMinIn;
             } else {
               xResult = xMaxIn;
             }
-          } else if (xMidIn < xMidOut) {
+          } else if (yMidIn < yMidOut) {
             //console.log('x5');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMaxIn;
             } else {
               xResult = xMinIn;
             }
-          } else if (xMidIn === xMidOut) {
+          } else if (yMidIn === yMidOut) {
             //console.log('x6');
-            xResult = xMinIn;
+            xResult = xMidIn;
           }
-        } else if (yMidIn === yMidOut) {
-          if (xMidIn > xMidOut) {
-            //console.log('x7');
-            if (xMinIn < 0 && xMaxIn < 0) {
-              xResult = xMaxIn;
-            } else {
-              xResult = xMinIn;
-            }
-          } else if (xMidIn < xMidOut) {
+        } else if (xMidIn === xMidOut) {
+          //console.log('x7');
+          xResult = xMidIn;
+        }
+      } else if (idMultiLink === 1) {
+        if (xMidIn > xMidOut) {
+          if (yMidIn > yMidOut) {
             //console.log('x8');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMinIn;
             } else {
               xResult = xMaxIn;
             }
-          } else if (xMidIn === xMidOut) {
+          } else if (yMidIn < yMidOut) {
             //console.log('x9');
-            xResult = xMinIn;
-          }
-        }
-      } else if (idMultiLink === 1) {
-        if (yMidIn > yMidOut) {
-          if (xMidIn > xMidOut) {
-            //console.log('x10');
             if (xMinIn < 0 && xMaxIn < 0) {
-              xResult = xMinIn;
-            } else {
               xResult = xMaxIn;
+            } else {
+              xResult = xMinIn;
             }
-          } else if (xMidIn < xMidOut) {
+          } else if (yMidIn === yMidOut) {
+            //console.log('x10');
+            xResult = xMidIn;
+          }
+        } else if (xMidIn < xMidOut) {
+          if (yMidIn > yMidOut) {
             //console.log('x11');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMaxIn;
             } else {
               xResult = xMinIn;
             }
-          } else if (xMidIn === xMidOut) {
+          } else if (xMidIn < xMidOut) {
             //console.log('x12');
-            xResult = xMaxIn;
-          }
-        } else if (yMidIn < yMidOut) {
-          if (xMidIn > xMidOut) {
+            if (xMinIn < 0 && xMaxIn < 0) {
+              xResult = xMaxIn;
+            } else {
+              xResult = xMinIn;
+            }
+          } else if (xMidIn === xMidOut) {
             //console.log('x13');
-            if (xMinIn < 0 && xMaxIn < 0) {
-              xResult = xMaxIn;
-            } else {
-              xResult = xMinIn;
-            }
-          } else if (xMidIn < xMidOut) {
-            //console.log('x14');
-            if (xMinIn < 0 && xMaxIn < 0) {
-              xResult = xMinIn;
-            } else {
-              xResult = xMaxIn;
-            }
-          } else if (xMidIn === xMidOut) {
-            //console.log('x15');
-            xResult = xMaxIn;
+            xResult = xMidIn;
           }
-        } else if (yMidIn === yMidOut) {
-          if (xMidIn > xMidOut) {
-            //console.log('x16');
-            if (xMinIn < 0 && xMaxIn < 0) {
-              xResult = xMaxIn;
-            } else {
-              xResult = xMinIn;
-            }
-          } else if (xMidIn < xMidOut) {
-            //console.log('x17');
-            if (xMinIn < 0 && xMaxIn < 0) {
-              xResult = xMinIn;
-            } else {
-              xResult = xMaxIn;
-            }
-          } else if (xMidIn === xMidOut) {
-            //console.log('x18');
-            xResult = xMinIn;
-          }
+        } else if (xMidIn === xMidOut) {
+          //console.log('x14');
+          xResult = xMidIn;
         }
       } else if (idMultiLink === 2) {
-        if (yMidIn > yMidOut) {
-          if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
-            //console.log('x19');
-            xResult = (xMinIn + xMaxIn) / 2;
-          } else if (xMidIn > xMidOut) {
-            //console.log('x20');
-            if (xMinIn < 0 && xMaxIn < 0) {
-              xResult = xMaxIn;
-            } else {
+        if (this.props.associatePointIn !== '' && this.props.associateRegionIn === '') {
+          if (yMidIn === yMidOut) {
+            if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
+              xResult = xMidIn;
+            } else if (xMidIn > xMidOut) {
+              if (xMinIn < 0 && xMaxIn < 0) {
+                xResult = xMaxIn;
+              } else {
+                xResult = xMinIn;
+              }
+            } else if (xMidIn < xMidOut) {
+              if (xMinIn < 0 && xMaxIn < 0) {
+                xResult = xMinIn;
+              } else {
+                xResult = xMaxIn;
+              }
+            } else if (xMidIn === xMidOut) {
               xResult = xMinIn;
             }
-          } else if (xMidIn < xMidOut) {
-            //console.log('x21');
-            if (xMinIn < 0 && xMaxIn < 0) {
-              //console.log('xmin');
-              xResult = xMinIn;
-            } else {
-              //console.log('xmax');
-              xResult = xMaxIn;
+          } else {
+            if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
+              xResult = xMidIn;
+            } else if (xMidIn > xMidOut) {
+              if (ratioXin - ratioXout < 0.05) {
+                xResult = xMidIn;
+              } else if (ratioXin - ratioXout < 0.11) {
+                xResult = xMidIn + paddingPoint - parseInt(this.props.size, 10) / 2;
+              } else if (ratioXin - ratioXout < 0.37) {
+                xResult = xMidIn - paddingPoint / 2;
+              } else {
+                if (xMinIn < 0 && xMaxIn < 0) {
+                  xResult = xMaxIn;
+                } else {
+                  xResult = xMinIn;
+                }
+              }
+            } else if (xMidIn < xMidOut) {
+              if (ratioXout - ratioXin < 0.05) {
+                xResult = xMidIn;
+              } else if (ratioXout - ratioXin < 0.11) {
+                xResult = xMidIn - paddingPoint + parseInt(this.props.size, 10) / 2;
+              } else if (ratioXout - ratioXin < 0.37) {
+                xResult = xMidIn + paddingPoint / 2;
+              } else {
+                if (xMinIn < 0 && xMaxIn < 0) {
+                  xResult = xMinIn;
+                } else {
+                  xResult = xMaxIn;
+                }
+              }
+            } else if (xMidIn === xMidOut) {
+              xResult = xMidIn;
             }
-          } else if (xMidIn === xMidOut) {
-            //console.log('x22');
-            xResult = (xMinIn + xMaxIn) / 2;
           }
-        } else if (yMidIn < yMidOut) {
-          if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
-            //console.log('x23');
-            xResult = (xMinIn + xMaxIn) / 2;
-          } else if (xMidIn > xMidOut) {
-            //console.log('x24');
-            if (xMinIn < 0 && xMaxIn < 0) {
-              xResult = xMaxIn;
-            } else {
+        } else if (this.props.associatePointIn === '' && this.props.associateRegionIn !== '') {
+          if (yMidIn === yMidOut) {
+            if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
+              xResult = xMidIn;
+            } else if (xMidIn > xMidOut) {
+              if (xMinIn < 0 && xMaxIn < 0) {
+                xResult = xMaxIn;
+              } else {
+                xResult = xMinIn;
+              }
+            } else if (xMidIn < xMidOut) {
+              if (xMinIn < 0 && xMaxIn < 0) {
+                xResult = xMinIn;
+              } else {
+                xResult = xMaxIn;
+              }
+            } else if (xMidIn === xMidOut) {
               xResult = xMinIn;
             }
-          } else if (xMidIn < xMidOut) {
-            //console.log('x25');
-            if (xMinIn < 0 && xMaxIn < 0) {
-              xResult = xMinIn;
-            } else {
-              xResult = xMaxIn;
+          } else {
+            if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
+              xResult = xMidIn;
+            } else if (xMidIn > xMidOut) {
+              if (xMinIn < 0 && xMaxIn < 0) {
+                xResult = xMaxIn;
+              } else {
+                xResult = xMinIn;
+              }
+            } else if (xMidIn < xMidOut) {
+              if (xMinIn < 0 && xMaxIn < 0) {
+                xResult = xMinIn;
+              } else {
+                xResult = xMaxIn;
+              }
+            } else if (xMidIn === xMidOut) {
+              xResult = xMidIn;
             }
-          } else if (xMidIn === xMidOut) {
-            //console.log('x26');
-            xResult = (xMinIn + xMaxIn) / 2;
-          }
-        } else if (yMidIn === yMidOut) {
-          if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
-            //console.log('x27');
-            xResult = (xMinIn + xMaxIn) / 2;
-          } else if (xMidIn > xMidOut) {
-            //console.log('x28');
-            if (xMinIn < 0 && xMaxIn < 0) {
-              xResult = xMaxIn;
-            } else {
-              xResult = xMinIn;
-            }
-          } else if (xMidIn < xMidOut) {
-            //console.log('x29');
-            if (xMinIn < 0 && xMaxIn < 0) {
-              xResult = xMinIn;
-            } else {
-              xResult = xMaxIn;
-            }
-          } else if (xMidIn === xMidOut) {
-            //console.log('x30');
-            xResult = xMinIn;
           }
         }
       }
     } else {
       if (idMultiLink === 0) {
-        if (yMidIn > yMidOut) {
-          //console.log('x31');
-          if (xMidIn > xMidOut) {
-            if (xMinOut < 0 && xMaxOut < 0) {
-              xResult = xMaxOut;
-            } else {
-              xResult = xMinOut;
-            }
-          } else if (xMidIn < xMidOut) {
-            //console.log('x32');
+        if (xMidIn > xMidOut) {
+          if (yMidIn > yMidOut) {
+            //console.log('x15');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMinOut;
             } else {
               xResult = xMaxOut;
             }
-          } else if (xMidIn === xMidOut) {
-            //console.log('x33');
-            xResult = xMinOut;
+          } else if (yMidIn < yMidOut) {
+            //console.log('x16');
+            if (xMinOut < 0 && xMaxOut < 0) {
+              xResult = xMinOut;
+            } else {
+              xResult = xMaxOut;
+            }
+          } else if (yMidIn === yMidOut) {
+            //console.log('x17');
+            xResult = xMidOut;
           }
-        } else if (yMidIn < yMidOut) {
-          if (xMidIn > xMidOut) {
-            //console.log('x34');
+        } else if (xMidIn < xMidOut) {
+          if (yMidIn > yMidOut) {
+            //console.log('x18');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMinOut;
             } else {
               xResult = xMaxOut;
             }
-          } else if (xMidIn < xMidOut) {
-            //console.log('x35');
+          } else if (yMidIn < yMidOut) {
+            //console.log('x19');
             if (xMinOut < 0 && xMaxOut < 0) {
-              xResult = xMaxOut;
-            } else {
               xResult = xMinOut;
+            } else {
+              xResult = xMaxOut;
             }
-          } else if (xMidIn === xMidOut) {
-            //console.log('x36');
-            xResult = xMinOut;
+          } else if (yMidIn === yMidOut) {
+            //console.log('x20');
+            xResult = xMidOut;
           }
-        } else if (yMidIn === yMidOut) {
-          if (xMidIn > xMidOut) {
-            //console.log('x37');
-            if (xMinOut < 0 && xMaxOut < 0) {
-              xResult = xMinOut;
-            } else {
-              xResult = xMaxOut;
-            }
-          } else if (xMidIn < xMidOut) {
-            //console.log('x38');
-            if (xMinOut < 0 && xMaxOut < 0) {
-              xResult = xMaxOut;
-            } else {
-              xResult = xMinOut;
-            }
-          } else if (xMidIn === xMidOut) {
-            //console.log('x39');
-            xResult = xMinOut;
-          }
+        } else if (xMidIn === xMidOut) {
+          //console.log('x21');
+          xResult = xMidOut;
         }
       } else if (idMultiLink === 1) {
-        if (yMidIn > yMidOut) {
-          //console.log('x40');
-          if (xMidIn > xMidOut) {
+        if (xMidIn > xMidOut) {
+          if (yMidIn > yMidOut) {
+            //console.log('x22');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMinOut;
             } else {
               xResult = xMaxOut;
             }
-          } else if (xMidIn < xMidOut) {
-            //console.log('x41');
+          } else if (yMidIn < yMidOut) {
+            //console.log('x23');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMaxOut;
             } else {
               xResult = xMinOut;
             }
-          } else if (xMidIn === xMidOut) {
-            //console.log('x42');
-            xResult = xMaxOut;
+          } else if (yMidIn === yMidOut) {
+            //console.log('x24');
+            xResult = xMidOut;
           }
-        } else if (yMidIn < yMidOut) {
-          if (xMidIn > xMidOut) {
-            //console.log('x43');
+        } else if (xMidIn < xMidOut) {
+          if (yMidIn > yMidOut) {
+            //console.log('x25');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMaxOut;
             } else {
               xResult = xMinOut;
             }
-          } else if (xMidIn < xMidOut) {
-            //console.log('x44');
+          } else if (yMidIn < yMidOut) {
+            //console.log('x26');
             if (xMinOut < 0 && xMaxOut < 0) {
-              xResult = xMinOut;
-            } else {
               xResult = xMaxOut;
+            } else {
+              xResult = xMinOut;
             }
-          } else if (xMidIn === xMidOut) {
-            //console.log('x45');
-            xResult = xMaxOut;
+          } else if (yMidIn === yMidOut) {
+            //console.log('x27');
+            xResult = xMidOut;
           }
-        } else if (yMidIn === yMidOut) {
-          if (xMidIn > xMidOut) {
-            //console.log('x46');
-            if (xMinOut < 0 && xMaxOut < 0) {
-              xResult = xMinOut;
-            } else {
-              xResult = xMaxOut;
-            }
-          } else if (xMidIn < xMidOut) {
-            //console.log('x47');
-            if (xMinOut < 0 && xMaxOut < 0) {
-              xResult = xMaxOut;
-            } else {
-              xResult = xMinOut;
-            }
-          } else if (xMidIn === xMidOut) {
-            //console.log('x48');
-            xResult = xMinOut;
-          }
+        } else if (xMidIn === xMidOut) {
+          //console.log('x28');
+          xResult = xMidOut;
         }
       } else if (idMultiLink === 2) {
-        if (yMidIn > yMidOut) {
-          if ((xMidIn > xMinOut && xMidIn < xMaxOut) || (xMidIn < xMinOut && xMidIn > xMaxOut)) {
-            //console.log('x49');
-            xResult = (xMinOut + xMaxOut) / 2;
-          } else if (xMidIn > xMidOut) {
-            //console.log('x50');
-            if (xMinOut < 0 && xMaxOut < 0) {
+        if (this.props.associatePointOut !== '' && this.props.associateRegionOut === '') {
+          if (yMidIn === yMidOut) {
+            if (xMidIn > xMidOut) {
+              if (xMinOut < 0 && xMaxOut < 0) {
+                xResult = xMinOut;
+              } else {
+                xResult = xMaxOut;
+              }
+            } else if (xMidIn < xMidOut) {
+              if (xMinOut < 0 && xMaxOut < 0) {
+                xResult = xMaxOut;
+              } else {
+                xResult = xMinOut;
+              }
+            } else if (xMidIn === xMidOut) {
               xResult = xMinOut;
-            } else {
-              xResult = xMaxOut;
             }
-          } else if (xMidIn < xMidOut) {
-            //console.log('x51');
-            if (xMinOut < 0 && xMaxOut < 0) {
-              xResult = xMaxOut;
-            } else {
-              xResult = xMinOut;
+          } else {
+            if ((xMidIn > xMinOut && xMidIn < xMaxOut) || (xMidIn < xMinOut && xMidIn > xMaxOut)) {
+              xResult = xMidOut;
+            } else if (xMidIn > xMidOut) {
+              if (ratioXin - ratioXout < 0.23) {
+                xResult = xMidOut;
+              } else {
+                if (xMinOut < 0 && xMaxOut < 0) {
+                  xResult = xMinOut;
+                } else {
+                  xResult = xMaxOut;
+                }
+              }
+            } else if (xMidIn < xMidOut) {
+              if (ratioXout - ratioXin < 0.23) {
+                xResult = xMidOut;
+              } else {
+                if (xMinOut < 0 && xMaxOut < 0) {
+                  xResult = xMaxOut;
+                } else {
+                  xResult = xMinOut;
+                }
+              }
+            } else if (xMidIn === xMidOut) {
+              xResult = xMidOut;
             }
-          } else if (xMidIn === xMidOut) {
-            //console.log('x52');
-            xResult = (xMinOut + xMaxOut) / 2;
           }
-        } else if (yMidIn < yMidOut) {
+        } else if (this.props.associatePointOut === '' && this.props.associateRegionOut !== '') {
           if ((xMidIn > xMinOut && xMidIn < xMaxOut) || (xMidIn < xMinOut && xMidIn > xMaxOut)) {
-            //console.log('x53');
-            xResult = (xMinOut + xMaxOut) / 2;
+            xResult = xMidOut;
           } else if (xMidIn > xMidOut) {
-            //console.log('x54');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMinOut;
             } else {
               xResult = xMaxOut;
             }
           } else if (xMidIn < xMidOut) {
-            //console.log('x55');
             if (xMinOut < 0 && xMaxOut < 0) {
               xResult = xMaxOut;
             } else {
               xResult = xMinOut;
             }
           } else if (xMidIn === xMidOut) {
-            //console.log('x56');
-            xResult = (xMinOut + xMaxOut) / 2;
-          }
-        } else if (yMidIn === yMidOut) {
-          if (xMidIn > xMidOut) {
-            //console.log('x57');
-            if (xMinOut < 0 && xMaxOut < 0) {
-              xResult = xMinOut;
-            } else {
-              xResult = xMaxOut;
-            }
-          } else if (xMidIn < xMidOut) {
-            //console.log('x58');
-            if (xMinOut < 0 && xMaxOut < 0) {
-              xResult = xMaxOut;
-            } else {
-              xResult = xMinOut;
-            }
-          } else if (xMidIn === xMidOut) {
-            //console.log('x59');
-            xResult = xMinOut;
+            xResult = xMidOut;
           }
         }
       }
@@ -1229,31 +1185,27 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
 
     if (isIn) {
       if (idMultiLink === 0) {
-        if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
-          if (yMidIn > yMidOut) {
+        if (yMidIn > yMidOut) {
+          if (xMidIn > xMidOut) {
             //console.log('y1');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMaxIn;
             } else {
               yResult = yMinIn;
             }
-          } else if (yMidIn < yMidOut) {
+          } else if (xMidIn < xMidOut) {
             //console.log('y2');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMinIn;
             } else {
               yResult = yMaxIn;
             }
-          } else if (yMidIn === yMidOut) {
+          } else if (xMidIn === xMidOut) {
             //console.log('y3');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMinIn;
-            } else {
-              yResult = yMaxIn;
-            }
+            yResult = yMidIn;
           }
-        } else if (xMidIn > xMidOut) {
-          if (yMidIn > yMidOut) {
+        } else if (yMidIn < yMidOut) {
+          if (xMidIn > xMidOut) {
             //console.log('y4');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMinIn;
@@ -1263,473 +1215,224 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           } else if (yMidIn < yMidOut) {
             //console.log('y5');
             if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMinIn;
-            } else {
               yResult = yMaxIn;
+            } else {
+              yResult = yMinIn;
             }
           } else if (yMidIn === yMidOut) {
             //console.log('y6');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMinIn;
-            } else {
-              yResult = yMaxIn;
-            }
+            yResult = yMidIn;
           }
-        } else if (xMidIn < xMidOut) {
-          if (yMidIn > yMidOut) {
-            //console.log('y7');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMinIn;
-            } else {
-              yResult = yMaxIn;
-            }
-          } else if (yMidIn < yMidOut) {
+        } else if (yMidIn === yMidOut) {
+          //console.log('y7');
+          yResult = yMidIn;
+        }
+      } else if (idMultiLink === 1) {
+        if (yMidIn > yMidOut) {
+          if (xMidIn > xMidOut) {
             //console.log('y8');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMinIn;
             } else {
               yResult = yMaxIn;
             }
-          } else if (yMidIn === yMidOut) {
+          } else if (xMidIn < xMidOut) {
             //console.log('y9');
             if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMinIn;
-            } else {
               yResult = yMaxIn;
+            } else {
+              yResult = yMinIn;
             }
-          }
-        } else if (xMidIn === xMidOut) {
-          if (yMidIn > yMidOut) {
+          } else if (xMidIn === xMidOut) {
             //console.log('y10');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMaxIn;
-            } else {
-              yResult = yMinIn;
-            }
-          } else if (yMidIn < yMidOut) {
+            yResult = yMidIn;
+          }
+        } else if (yMidIn < yMidOut) {
+          if (xMidIn > xMidOut) {
             //console.log('y11');
             if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMinIn;
-            } else {
               yResult = yMaxIn;
+            } else {
+              yResult = yMinIn;
             }
-          }
-        }
-      } else if (idMultiLink === 1) {
-        if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
-          if (yMidIn > yMidOut) {
+          } else if (xMidIn < xMidOut) {
             //console.log('y12');
             if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMaxIn;
-            } else {
               yResult = yMinIn;
+            } else {
+              yResult = yMaxIn;
             }
-          } else if (yMidIn < yMidOut) {
+          } else if (xMidIn === xMidOut) {
             //console.log('y13');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMinIn;
-            } else {
-              yResult = yMaxIn;
-            }
-          } else if (yMidIn === yMidOut) {
-            //console.log('y14');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMinOut;
-            } else {
-              yResult = yMaxOut;
-            }
+            yResult = yMidIn;
           }
-        } else if (xMidIn > xMidOut) {
-          //console.log('y16');
-          if (yMidIn > yMidOut) {
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMaxIn;
-            } else {
-              yResult = yMinIn;
-            }
-          } else if (yMidIn < yMidOut) {
-            //console.log('y17');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMaxIn;
-            } else {
-              yResult = yMinIn;
-            }
-          } else if (yMidIn === yMidOut) {
-            //console.log('y18');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMaxIn;
-            } else {
-              yResult = yMinIn;
-            }
-          }
-        } else if (xMidIn < xMidOut) {
-          if (yMidIn > yMidOut) {
-            //console.log('y19');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMaxIn;
-            } else {
-              yResult = yMinIn;
-            }
-          } else if (yMidIn < yMidOut) {
-            //console.log('y20');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMaxIn;
-            } else {
-              yResult = yMinIn;
-            }
-          } else if (yMidIn === yMidOut) {
-            //console.log('y21');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMaxIn;
-            } else {
-              yResult = yMinIn;
-            }
-          }
-        } else if (xMidIn === xMidOut) {
-          if (yMidIn > yMidOut) {
-            //console.log('y22');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMaxIn;
-            } else {
-              yResult = yMinIn;
-            }
-          } else if (yMidIn < yMidOut) {
-            //console.log('y23');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMinIn;
-            } else {
-              yResult = yMaxIn;
-            }
-          }
+        } else if (yMidIn === yMidOut) {
+          //console.log('y14');
+          yResult = yMidIn;
         }
       } else if (idMultiLink === 2) {
-        if ((xMidOut > xMinIn && xMidOut < xMaxIn) || (xMidOut < xMinIn && xMidOut > xMaxIn)) {
+        if (this.props.associatePointIn !== '' && this.props.associateRegionIn === '') {
+          if (xMidIn === xMidOut) {
+            if (yMidIn > yMidOut) {
+              if (yMinIn < 0 && yMaxIn < 0) {
+                yResult = yMaxIn;
+              } else {
+                yResult = yMinIn;
+              }
+            } else if (yMidIn < yMidOut) {
+              if (yMinIn < 0 && yMaxIn < 0) {
+                yResult = yMinIn;
+              } else {
+                yResult = yMaxIn;
+              }
+            }
+          } else {
+            yResult = yMidIn;
+          }
+        } else if (this.props.associatePointIn === '' && this.props.associateRegionIn !== '') {
           if (yMidIn > yMidOut) {
-            //console.log('y24');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMaxIn;
             } else {
               yResult = yMinIn;
             }
           } else if (yMidIn < yMidOut) {
-            //console.log('y25');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMinIn;
             } else {
               yResult = yMaxIn;
             }
           } else if (yMidIn === yMidOut) {
-            //console.log('y26');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMinOut;
-            } else {
-              yResult = yMaxOut;
-            }
-          }
-        } else if (xMidIn > xMidOut) {
-          if (yMidIn > yMidOut) {
-            //console.log('y28');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMaxIn;
-            } else {
-              yResult = yMinIn;
-            }
-          } else if (yMidIn < yMidOut) {
-            //console.log('y29');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMinIn;
-            } else {
-              yResult = yMaxIn;
-            }
-          } else if (yMidIn === yMidOut) {
-            //console.log('y30');
-            yResult = (yMinIn + yMaxIn) / 2;
-          }
-        } else if (xMidIn < xMidOut) {
-          if (yMidIn > yMidOut) {
-            //console.log('y31');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMaxIn;
-            } else {
-              yResult = yMinIn;
-            }
-          } else if (yMidIn < yMidOut) {
-            //console.log('y32');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMinIn;
-            } else {
-              yResult = yMaxIn;
-            }
-          } else if (yMidIn === yMidOut) {
-            //console.log('y33');
-            yResult = (yMinIn + yMaxIn) / 2;
-          }
-        } else if (xMidIn === xMidOut) {
-          if (yMidIn > yMidOut) {
-            //console.log('y34');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMaxIn;
-            } else {
-              yResult = yMinIn;
-            }
-          } else if (yMidIn < yMidOut) {
-            //console.log('y35');
-            if (yMinIn < 0 && yMaxIn < 0) {
-              yResult = yMinIn;
-            } else {
-              yResult = yMaxIn;
-            }
+            yResult = yMidIn;
           }
         }
       }
     } else {
+      // ce lien est le premier parmis deux ou trois liens
       if (idMultiLink === 0) {
-        if ((xMidIn > xMinOut && xMidIn < xMaxOut) || (xMidIn < xMinOut && xMidIn > xMaxOut)) {
-          if (yMidIn > yMidOut) {
-            //console.log('y37');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMinOut;
-            } else {
-              yResult = yMaxOut;
-            }
-          } else if (yMidIn < yMidOut) {
-            //console.log('y38');
+        if (yMidIn > yMidOut) {
+          if (xMidIn > xMidOut) {
+            //console.log('y15');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMaxOut;
             } else {
               yResult = yMinOut;
             }
-          } else if (yMidIn === yMidOut) {
-            //console.log('y39');
+          } else if (xMidIn < xMidOut) {
+            //console.log('y16');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMinOut;
             } else {
               yResult = yMaxOut;
             }
+          } else if (xMidIn === xMidOut) {
+            //console.log('y17');
+            yResult = yMidOut;
           }
-        } else if (xMidIn > xMidOut) {
-          if (yMidIn > yMidOut) {
-            //console.log('y40');
+        } else if (yMidIn < yMidOut) {
+          if (xMidIn > xMidOut) {
+            //console.log('y18');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMinOut;
             } else {
               yResult = yMaxOut;
             }
-          } else if (yMidIn < yMidOut) {
-            //console.log('y41');
+          } else if (xMidIn < xMidOut) {
+            //console.log('y19');
             if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMinOut;
-            } else {
               yResult = yMaxOut;
-            }
-          } else if (yMidIn === yMidOut) {
-            //console.log('y42');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMinOut;
             } else {
-              yResult = yMaxOut;
+              yResult = yMinOut;
             }
+          } else if (xMidIn === xMidOut) {
+            //console.log('y20');
+            yResult = yMidOut;
           }
-        } else if (xMidIn < xMidOut) {
-          if (yMidIn > yMidOut) {
-            //console.log('y43');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMinOut;
-            } else {
-              yResult = yMaxOut;
-            }
-          } else if (yMidIn < yMidOut) {
-            //console.log('y44');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMinOut;
-            } else {
-              yResult = yMaxOut;
-            }
-          } else if (yMidIn === yMidOut) {
-            //console.log('y45');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMinOut;
-            } else {
-              yResult = yMaxOut;
-            }
-          }
-        } else if (xMidIn === xMidOut) {
-          if (yMidIn > yMidOut) {
-            //console.log('y46');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMinOut;
-            } else {
-              yResult = yMaxOut;
-            }
-          } else if (yMidIn < yMidOut) {
-            //console.log('y47');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMaxOut;
-            } else {
-              yResult = yMinOut;
-            }
-          }
+        } else if (yMidIn === yMidOut) {
+          //console.log('y21');
+          yResult = yMidOut;
         }
+        // ce lien est le deuxième parmis deux ou trois liens
       } else if (idMultiLink === 1) {
-        if ((xMidIn > xMinOut && xMidIn < xMaxOut) || (xMidIn < xMinOut && xMidIn > xMaxOut)) {
-          if (yMidIn > yMidOut) {
-            //console.log('y49');
+        if (yMidIn > yMidOut) {
+          if (xMidIn > xMidOut) {
+            //console.log('y22');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMinOut;
             } else {
               yResult = yMaxOut;
             }
-          } else if (yMidIn < yMidOut) {
-            //console.log('y50');
+          } else if (xMidIn < xMidOut) {
+            //console.log('y23');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMaxOut;
             } else {
               yResult = yMinOut;
             }
-          } else if (yMidIn === yMidOut) {
-            //console.log('y51');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMinOut;
-            } else {
-              yResult = yMaxOut;
-            }
+          } else if (xMidIn === xMidOut) {
+            //console.log('y24');
+            yResult = yMidOut;
           }
-        } else if (xMidIn > xMidOut) {
-          if (yMidIn > yMidOut) {
-            //console.log('y52');
+        } else if (yMidIn < yMidOut) {
+          if (xMidIn > xMidOut) {
+            //console.log('y25');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMaxOut;
             } else {
               yResult = yMinOut;
             }
-          } else if (yMidIn < yMidOut) {
-            //console.log('y53');
+          } else if (xMidIn < xMidOut) {
+            //console.log('y26');
             if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMaxOut;
-            } else {
               yResult = yMinOut;
-            }
-          } else if (yMidIn === yMidOut) {
-            //console.log('y54');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMaxOut;
             } else {
-              yResult = yMinOut;
+              yResult = yMaxOut;
             }
+          } else if (xMidIn === xMidOut) {
+            //console.log('y27');
+            yResult = yMidOut;
           }
-        } else if (xMidIn < xMidOut) {
-          if (yMidIn > yMidOut) {
-            //console.log('y55');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMaxOut;
-            } else {
-              yResult = yMinOut;
-            }
-          } else if (yMidIn < yMidOut) {
-            //console.log('y56');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMaxOut;
-            } else {
-              yResult = yMinOut;
-            }
-          } else if (yMidIn === yMidOut) {
-            //console.log('y57');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMaxOut;
-            } else {
-              yResult = yMinOut;
-            }
-          }
-        } else if (xMidIn === xMidOut) {
-          if (yMidIn > yMidOut) {
-            //console.log('y58');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMinOut;
-            } else {
-              yResult = yMaxOut;
-            }
-          } else if (yMidIn < yMidOut) {
-            //console.log('y59');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMaxOut;
-            } else {
-              yResult = yMinOut;
-            }
-          }
+        } else if (yMidIn === yMidOut) {
+          //console.log('y28');
+          yResult = yMidOut;
         }
+        // le lien est seul ou au milieu de trois liens
       } else if (idMultiLink === 2) {
-        if ((xMidIn > xMinOut && xMidIn < xMaxOut) || (xMidIn < xMinOut && xMidIn > xMaxOut)) {
+        // un point en sortie
+        if (this.props.associatePointOut !== '' && this.props.associateRegionOut === '') {
+          if (xMidIn === xMidOut) {
+            if (yMidIn > yMidOut) {
+              if (yMinOut < 0 && yMaxOut < 0) {
+                yResult = yMinOut;
+              } else {
+                yResult = yMaxOut;
+              }
+            } else if (yMidIn < yMidOut) {
+              if (yMinOut < 0 && yMaxOut < 0) {
+                yResult = yMaxOut;
+              } else {
+                yResult = yMinOut;
+              }
+            }
+          } else {
+            yResult = yMidOut;
+          }
+          // une région en sortie
+        } else if (this.props.associatePointOut === '' && this.props.associateRegionOut !== '') {
           if (yMidIn > yMidOut) {
-            //console.log('y61');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMinOut;
             } else {
               yResult = yMaxOut;
             }
           } else if (yMidIn < yMidOut) {
-            //console.log('y62');
             if (yMinOut < 0 && yMaxOut < 0) {
               yResult = yMaxOut;
             } else {
               yResult = yMinOut;
             }
           } else if (yMidIn === yMidOut) {
-            //console.log('y64');
-            yResult = (yMinOut + yMaxOut) / 2;
-          }
-        } else if (xMidIn > xMidOut) {
-          if (yMidIn > yMidOut) {
-            //console.log('y65');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMinOut;
-            } else {
-              yResult = yMaxOut;
-            }
-          } else if (yMidIn < yMidOut) {
-            //console.log('y66');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMaxOut;
-            } else {
-              yResult = yMinOut;
-            }
-          } else if (yMidIn === yMidOut) {
-            //console.log('y67');
-            yResult = (yMinOut + yMaxOut) / 2;
-          }
-        } else if (xMidIn < xMidOut) {
-          if (yMidIn > yMidOut) {
-            //console.log('y68');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMinOut;
-            } else {
-              yResult = yMaxOut;
-            }
-          } else if (yMidIn < yMidOut) {
-            //console.log('y69');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMaxOut;
-            } else {
-              yResult = yMinOut;
-            }
-          } else if (yMidIn === yMidOut) {
-            //console.log('y70');
-            yResult = (yMinOut + yMaxOut) / 2;
-          }
-        } else if (xMidIn === xMidOut) {
-          if (yMidIn > yMidOut) {
-            //console.log('y71');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMinOut;
-            } else {
-              yResult = yMaxOut;
-            }
-          } else if (yMidIn < yMidOut) {
-            //console.log('y72');
-            if (yMinOut < 0 && yMaxOut < 0) {
-              yResult = yMaxOut;
-            } else {
-              yResult = yMinOut;
-            }
+            yResult = yMidOut;
           }
         }
       }
@@ -1752,226 +1455,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     return yResult;
   };
 
-  // private ifMultiLinkWithPointDefineX = (isIn: boolean, idMultiLink: number): number => {
-  //   let xResult = 0;
-  //   const arrayPoints: PointClass[] = this.props.options.arrayPoints;
-  //   let xIn = 0;
-  //   let yIn = 0;
-  //   let xOut = 0;
-  //   let yOut = 0;
-  //   const ajustPosition = 5;
-  //   arrayPoints.forEach(point => {
-  //     let name: string = point.label || point.name;
-  //     if (name === this.props.associatePointIn) {
-  //       xIn = parseInt(point.positionShapeX, 10);
-  //       yIn = parseInt(point.positionShapeY, 10);
-  //     }
-  //     if (name === this.props.associatePointOut) {
-  //       xOut = parseInt(point.positionShapeX, 10);
-  //       yOut = parseInt(point.positionShapeY, 10);
-  //     }
-  //   });
-
-  //   const angleRadian: number = Math.atan2(yIn - yOut, xIn - xOut);
-  //   const angleDegre: number = (angleRadian * 180) / Math.PI;
-
-  //   if (isIn) {
-  //     if (idMultiLink === 0) {
-  //       if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
-  //         xResult = xIn;
-  //       } else if (angleDegre > 0 && angleDegre < 90) {
-  //         xResult = xIn - ajustPosition * (angleDegre / 90);
-  //       } else if (angleDegre === 90) {
-  //         xResult = xIn + ajustPosition;
-  //       } else if (angleDegre > 90 && angleDegre < 180) {
-  //         xResult = xIn + ajustPosition * (((angleDegre - 180) / 90) * -1);
-  //       } else if (angleDegre < 0 && angleDegre > -90) {
-  //         xResult = xIn + ajustPosition * ((angleDegre / 90) * -1);
-  //       } else if (angleDegre === -90) {
-  //         xResult = xIn + ajustPosition;
-  //       } else if (angleDegre < -90 && angleDegre > -180) {
-  //         xResult = xIn - ajustPosition * ((angleDegre + 180) / 90);
-  //       }
-  //     } else if (idMultiLink === 1) {
-  //       if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
-  //         xResult = xIn;
-  //       } else if (angleDegre > 0 && angleDegre < 90) {
-  //         xResult = xIn + ajustPosition * (angleDegre / 90);
-  //       } else if (angleDegre === 90) {
-  //         xResult = xIn - ajustPosition;
-  //       } else if (angleDegre > 90 && angleDegre < 180) {
-  //         xResult = xIn - ajustPosition * (((angleDegre - 180) / 90) * -1);
-  //       } else if (angleDegre < 0 && angleDegre > -90) {
-  //         xResult = xIn - ajustPosition * ((angleDegre / 90) * -1);
-  //       } else if (angleDegre === -90) {
-  //         xResult = xIn - ajustPosition;
-  //       } else if (angleDegre < -90 && angleDegre > -180) {
-  //         xResult = xIn + ajustPosition * ((angleDegre + 180) / 90);
-  //       }
-  //     } else if (idMultiLink === 2) {
-  //       xResult = xIn;
-  //     }
-  //   } else {
-  //     if (idMultiLink === 0) {
-  //       if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
-  //         xResult = xOut;
-  //       } else if (angleDegre > 0 && angleDegre < 90) {
-  //         xResult = xOut - ajustPosition * (angleDegre / 90);
-  //       } else if (angleDegre === 90) {
-  //         xResult = xOut + ajustPosition;
-  //       } else if (angleDegre > 90 && angleDegre < 180) {
-  //         xResult = xOut + ajustPosition * (((angleDegre - 180) / 90) * -1);
-  //       } else if (angleDegre < 0 && angleDegre > -90) {
-  //         xResult = xOut + ajustPosition * ((angleDegre / 90) * -1);
-  //       } else if (angleDegre === -90) {
-  //         xResult = xOut + ajustPosition;
-  //       } else if (angleDegre < -90 && angleDegre > -180) {
-  //         xResult = xOut - ajustPosition * ((angleDegre + 180) / 90);
-  //       }
-  //     } else if (idMultiLink === 1) {
-  //       if (angleDegre === 0 || angleDegre === 180 || angleDegre === -180) {
-  //         xResult = xOut;
-  //       } else if (angleDegre > 0 && angleDegre < 90) {
-  //         xResult = xOut + ajustPosition * (angleDegre / 90);
-  //       } else if (angleDegre === 90) {
-  //         xResult = xOut - ajustPosition;
-  //       } else if (angleDegre > 90 && angleDegre < 180) {
-  //         xResult = xOut - ajustPosition * (((angleDegre - 180) / 90) * -1);
-  //       } else if (angleDegre < 0 && angleDegre > -90) {
-  //         xResult = xOut - ajustPosition * ((angleDegre / 90) * -1);
-  //       } else if (angleDegre === -90) {
-  //         xResult = xOut - ajustPosition;
-  //       } else if (angleDegre < -90 && angleDegre > -180) {
-  //         xResult = xOut + ajustPosition * ((angleDegre + 180) / 90);
-  //       }
-  //     } else if (idMultiLink === 2) {
-  //       xResult = xOut;
-  //     }
-  //   }
-  //   return xResult;
-  // };
-
-  // private ifMultiLinkWithPointDefineY = (isIn: boolean, idMultiLink: number): number => {
-  //   let yResult = 0;
-  //   const arrayPoints: PointClass[] = this.props.options.arrayPoints;
-  //   let xIn = 0;
-  //   let yIn = 0;
-  //   let xOut = 0;
-  //   let yOut = 0;
-  //   const ajustPosition = 5;
-  //   arrayPoints.forEach(point => {
-  //     let name: string = point.label || point.name;
-  //     if (name === this.props.associatePointIn) {
-  //       xIn = parseInt(point.positionShapeX, 10);
-  //       yIn = parseInt(point.positionShapeY, 10);
-  //     }
-  //     if (name === this.props.associatePointOut) {
-  //       xOut = parseInt(point.positionShapeX, 10);
-  //       yOut = parseInt(point.positionShapeY, 10);
-  //     }
-  //   });
-
-  //   const angleRadian: number = Math.atan2(yIn - yOut, xIn - xOut);
-  //   const angleDegre: number = (angleRadian * 180) / Math.PI;
-
-  //   if (isIn) {
-  //     if (idMultiLink === 0) {
-  //       if (angleDegre === 0) {
-  //         yResult = yIn + ajustPosition;
-  //       } else if (angleDegre > 0 && angleDegre < 90) {
-  //         yResult = yIn + ajustPosition * (((angleDegre - 90) / 90) * -1);
-  //       } else if (angleDegre === 90 || angleDegre === -90) {
-  //         yResult = yIn;
-  //       } else if (angleDegre > 90 && angleDegre < 180) {
-  //         yResult = yIn + ajustPosition * ((angleDegre - 90) / 90);
-  //       } else if (angleDegre < 0 && angleDegre > -90) {
-  //         yResult = yIn + ajustPosition * ((angleDegre + 90) / 90);
-  //       } else if (angleDegre < -90 && angleDegre > -180) {
-  //         yResult = yIn + ajustPosition * (((angleDegre + 90) / 90) * -1);
-  //       } else if (angleDegre === 180 || angleDegre === -180) {
-  //         yResult = yIn + ajustPosition;
-  //       }
-  //     } else if (idMultiLink === 1) {
-  //       if (angleDegre === 0) {
-  //         yResult = yIn - ajustPosition;
-  //       } else if (angleDegre > 0 && angleDegre < 90) {
-  //         yResult = yIn - ajustPosition * (((angleDegre - 90) / 90) * -1);
-  //       } else if (angleDegre === 90 || angleDegre === -90) {
-  //         yResult = yIn;
-  //       } else if (angleDegre > 90 && angleDegre < 180) {
-  //         yResult = yIn - ajustPosition * ((angleDegre - 90) / 90);
-  //       } else if (angleDegre < 0 && angleDegre > -90) {
-  //         yResult = yIn - ajustPosition * ((angleDegre + 90) / 90);
-  //       } else if (angleDegre < -90 && angleDegre > -180) {
-  //         yResult = yIn - ajustPosition * (((angleDegre + 90) / 90) * -1);
-  //       } else if (angleDegre === 180 || angleDegre === -180) {
-  //         yResult = yIn - ajustPosition;
-  //       }
-  //     } else if (idMultiLink === 2) {
-  //       yResult = yIn;
-  //     }
-  //   } else {
-  //     if (idMultiLink === 0) {
-  //       if (angleDegre === 0) {
-  //         yResult = yOut + ajustPosition;
-  //       } else if (angleDegre > 0 && angleDegre < 90) {
-  //         yResult = yOut + ajustPosition * (((angleDegre - 90) / 90) * -1);
-  //       } else if (angleDegre === 90 || angleDegre === -90) {
-  //         yResult = yOut;
-  //       } else if (angleDegre > 90 && angleDegre < 180) {
-  //         yResult = yOut + ajustPosition * ((angleDegre - 90) / 90);
-  //       } else if (angleDegre < 0 && angleDegre > -90) {
-  //         yResult = yOut + ajustPosition * ((angleDegre + 90) / 90);
-  //       } else if (angleDegre < -90 && angleDegre > -180) {
-  //         yResult = yOut + ajustPosition * (((angleDegre + 90) / 90) * -1);
-  //       } else if (angleDegre === 180 || angleDegre === -180) {
-  //         yResult = yOut + ajustPosition;
-  //       }
-  //     } else if (idMultiLink === 1) {
-  //       if (angleDegre === 0) {
-  //         yResult = yOut - ajustPosition;
-  //       } else if (angleDegre > 0 && angleDegre < 90) {
-  //         yResult = yOut - ajustPosition * (((angleDegre - 90) / 90) * -1);
-  //       } else if (angleDegre === 90 || angleDegre === -90) {
-  //         yResult = yOut;
-  //       } else if (angleDegre > 90 && angleDegre < 180) {
-  //         yResult = yOut - ajustPosition * ((angleDegre - 90) / 90);
-  //       } else if (angleDegre < 0 && angleDegre > -90) {
-  //         yResult = yOut - ajustPosition * ((angleDegre + 90) / 90);
-  //       } else if (angleDegre < -90 && angleDegre > -180) {
-  //         yResult = yOut - ajustPosition * (((angleDegre + 90) / 90) * -1);
-  //       } else if (angleDegre === 180 || angleDegre === -180) {
-  //         yResult = yOut - ajustPosition;
-  //       }
-  //     } else if (idMultiLink === 2) {
-  //       yResult = yOut;
-  //     }
-  //   }
-  //   return yResult;
-  // };
-
-  // private getX = (labelPoint: string): number => {
-  //   let result = 0;
-  //   const arrayPoint: PointClass[] = this.props.options.arrayPoints;
-  //   for (const point of arrayPoint) {
-  //     if (point.label === labelPoint || point.name === labelPoint) {
-  //       result = this.synchroLinkX(parseInt(point.positionShapeX, 10));
-  //     }
-  //   }
-  //   return result;
-  // };
-
-  // private getY = (labelPoint: string): number => {
-  //   let result = 0;
-  //   const arrayPoint: PointClass[] = this.props.options.arrayPoints;
-  //   for (const point of arrayPoint) {
-  //     if (point.label === labelPoint || point.name === labelPoint) {
-  //       result = this.synchroLinkY(parseInt(point.positionShapeY, 10));
-  //     }
-  //   }
-  //   return result;
-  // };
-
   /**
    * to do
    */
@@ -1985,188 +1468,86 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     let yCByClick = 0;
 
     if (listParallelOrientedLinks.length > 1) {
-      //console.log('multi');
       let indexOrientedLink = 0;
       listParallelOrientedLinks.forEach((index) => {
         if (index === parseInt(this.props.id, 10)) {
           if (indexOrientedLink === 0) {
-            if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
-              //console.log('m0-1');
-              xA = this.synchroLinkX(this.definePositionX(true, 0));
-              yA = this.synchroLinkY(this.definePositionY(true, 0));
-              xB = this.synchroLinkX(this.definePositionX(false, 0));
-              yB = this.synchroLinkY(this.definePositionY(false, 0));
-              xCByClick = xCByClick0 || (xA + xB) / 2;
-              yCByClick = yCByClick0 || (yA + yB) / 2;
-            } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
-              //console.log('m0-2');
-              xA = this.synchroLinkX(this.definePositionX(true, 0));
-              yA = this.synchroLinkY(this.definePositionY(true, 0));
-              xB = this.synchroLinkX(this.definePositionX(false, 0));
-              yB = this.synchroLinkY(this.definePositionY(false, 0));
-              xCByClick = xCByClick0 || (xA + xB) / 2;
-              yCByClick = yCByClick0 || (yA + yB) / 2;
-            } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-              //console.log('m0-3');
-              xA = this.synchroLinkX(this.definePositionX(true, 0));
-              yA = this.synchroLinkY(this.definePositionY(true, 0));
-              xB = this.synchroLinkX(this.definePositionX(false, 0));
-              yB = this.synchroLinkY(this.definePositionY(false, 0));
-              xCByClick = xCByClick0 || (xA + xB) / 2;
-              yCByClick = yCByClick0 || (yA + yB) / 2;
-            } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
-              //console.log('m0-4');
-              xA = this.synchroLinkX(this.definePositionX(true, 0));
-              yA = this.synchroLinkY(this.definePositionY(true, 0));
-              xB = this.synchroLinkX(this.definePositionX(false, 0));
-              yB = this.synchroLinkY(this.definePositionY(false, 0));
-              xCByClick = xCByClick0 || (xA + xB) / 2;
-              yCByClick = yCByClick0 || (yA + yB) / 2;
-            }
+            //console.log(this.props.name);
+            //console.log(index);
+            //console.log(indexOrientedLink);
+            xA = this.synchroLinkX(this.definePositionX(true, 0));
+            yA = this.synchroLinkY(this.definePositionY(true, 0));
+            xB = this.synchroLinkX(this.definePositionX(false, 0));
+            yB = this.synchroLinkY(this.definePositionY(false, 0));
+            xCByClick = xCByClick0 || (xA + xB) / 2;
+            yCByClick = yCByClick0 || (yA + yB) / 2;
           } else if (indexOrientedLink === 1) {
-            if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
-              //console.log('m1-1');
-              xA = this.synchroLinkX(this.definePositionX(true, 1));
-              yA = this.synchroLinkY(this.definePositionY(true, 1));
-              xB = this.synchroLinkX(this.definePositionX(false, 1));
-              yB = this.synchroLinkY(this.definePositionY(false, 1));
-              xCByClick = xCByClick0 || (xA + xB) / 2;
-              yCByClick = yCByClick0 || (yA + yB) / 2;
-            } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
-              //console.log('m1-2');
-              xA = this.synchroLinkX(this.definePositionX(true, 1));
-              yA = this.synchroLinkY(this.definePositionY(true, 1));
-              xB = this.synchroLinkX(this.definePositionX(false, 1));
-              yB = this.synchroLinkY(this.definePositionY(false, 1));
-              xCByClick = xCByClick0 || (xA + xB) / 2;
-              yCByClick = yCByClick0 || (yA + yB) / 2;
-            } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-              //console.log('m1-3');
-              xA = this.synchroLinkX(this.definePositionX(true, 1));
-              yA = this.synchroLinkY(this.definePositionY(true, 1));
-              xB = this.synchroLinkX(this.definePositionX(false, 1));
-              yB = this.synchroLinkY(this.definePositionY(false, 1));
-              xCByClick = xCByClick0 || (xA + xB) / 2;
-              yCByClick = yCByClick0 || (yA + yB) / 2;
-            } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
-              //console.log('m1-4');
-              xA = this.synchroLinkX(this.definePositionX(true, 1));
-              yA = this.synchroLinkY(this.definePositionY(true, 1));
-              xB = this.synchroLinkX(this.definePositionX(false, 1));
-              yB = this.synchroLinkY(this.definePositionY(false, 1));
-              xCByClick = xCByClick0 || (xA + xB) / 2;
-              yCByClick = yCByClick0 || (yA + yB) / 2;
-            }
+            //console.log(this.props.name);
+            //console.log(index);
+            //console.log(indexOrientedLink);
+            xA = this.synchroLinkX(this.definePositionX(true, 1));
+            yA = this.synchroLinkY(this.definePositionY(true, 1));
+            xB = this.synchroLinkX(this.definePositionX(false, 1));
+            yB = this.synchroLinkY(this.definePositionY(false, 1));
+            xCByClick = xCByClick0 || (xA + xB) / 2;
+            yCByClick = yCByClick0 || (yA + yB) / 2;
           } else if (indexOrientedLink === 2) {
-            if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
-              //console.log('m2-1');
-              xA = this.synchroLinkX(this.definePositionX(true, 2));
-              yA = this.synchroLinkY(this.definePositionY(true, 2));
-              xB = this.synchroLinkX(this.definePositionX(false, 2));
-              yB = this.synchroLinkY(this.definePositionY(false, 2));
-              xCByClick = xCByClick0 || (xA + xB) / 2;
-              yCByClick = yCByClick0 || (yA + yB) / 2;
-            } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
-              //console.log('m2-2');
-              xA = this.synchroLinkX(this.definePositionX(true, 2));
-              yA = this.synchroLinkY(this.definePositionY(true, 2));
-              xB = this.synchroLinkX(this.definePositionX(false, 2));
-              yB = this.synchroLinkY(this.definePositionY(false, 2));
-              xCByClick = xCByClick0 || (xA + xB) / 2;
-              yCByClick = yCByClick0 || (yA + yB) / 2;
-            } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-              //console.log('m2-3');
-              xA = this.synchroLinkX(this.definePositionX(true, 2));
-              yA = this.synchroLinkY(this.definePositionY(true, 2));
-              xB = this.synchroLinkX(this.definePositionX(false, 2));
-              yB = this.synchroLinkY(this.definePositionY(false, 2));
-              xCByClick = xCByClick0 || (xA + xB) / 2;
-              yCByClick = yCByClick0 || (yA + yB) / 2;
-            } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
-              //console.log('m2-4');
-              xA = this.synchroLinkX(this.definePositionX(true, 2));
-              yA = this.synchroLinkY(this.definePositionY(true, 2));
-              xB = this.synchroLinkX(this.definePositionX(false, 2));
-              yB = this.synchroLinkY(this.definePositionY(false, 2));
-              xCByClick = xCByClick0 || (xA + xB) / 2;
-              yCByClick = yCByClick0 || (yA + yB) / 2;
-            }
+            //console.log(this.props.name);
+            //console.log(index);
+            //console.log(indexOrientedLink);
+            xA = this.synchroLinkX(this.definePositionX(true, 2));
+            yA = this.synchroLinkY(this.definePositionY(true, 2));
+            xB = this.synchroLinkX(this.definePositionX(false, 2));
+            yB = this.synchroLinkY(this.definePositionY(false, 2));
+            xCByClick = xCByClick0 || (xA + xB) / 2;
+            yCByClick = yCByClick0 || (yA + yB) / 2;
           }
         }
         indexOrientedLink++;
       });
-    } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      //console.log('1');
-      xA = this.synchroLinkX(this.definePositionX(true, 2));
-      yA = this.synchroLinkY(this.definePositionY(true, 2));
-      xB = xB0;
-      yB = yB0;
-      xCByClick = xCByClick0 || (xA + xB) / 2;
-      yCByClick = yCByClick0 || (yA + yB) / 2;
-    } else if (this.props.associateRegionOut !== '' && this.props.associateRegionIn === '' && this.props.associatePointIn === '') {
-      //console.log('2');
-      xA = xA0;
-      yA = yA0;
-      xB = this.synchroLinkX(this.definePositionX(false, 2));
-      yB = this.synchroLinkY(this.definePositionY(false, 2));
-      xCByClick = xCByClick0 || (xA + xB) / 2;
-      yCByClick = yCByClick0 || (yA + yB) / 2;
-    } else if (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '') {
-      //console.log('3');
-      xA = this.synchroLinkX(this.definePositionX(true, 2));
-      yA = this.synchroLinkY(this.definePositionY(true, 2));
-      xB = this.synchroLinkX(this.definePositionX(false, 2));
-      yB = this.synchroLinkY(this.definePositionY(false, 2));
-      xCByClick = xCByClick0 || (xA + xB) / 2;
-      yCByClick = yCByClick0 || (yA + yB) / 2;
-    } else if (this.props.associatePointIn !== '' && this.props.associatePointOut === '' && this.props.associateRegionOut === '') {
-      //console.log('4');
-      xA = this.synchroLinkX(this.definePositionX(true, 2));
-      yA = this.synchroLinkY(this.definePositionY(true, 2));
-      xB = xB0;
-      yB = yB0;
-      xCByClick = xCByClick0 || (xA + xB) / 2;
-      yCByClick = yCByClick0 || (yA + yB) / 2;
-    } else if (this.props.associatePointOut !== '' && this.props.associatePointIn === '' && this.props.associateRegionIn === '') {
-      //console.log('5');
-      xA = xA0;
-      yA = yA0;
-      xB = this.synchroLinkX(this.definePositionX(false, 2));
-      yB = this.synchroLinkY(this.definePositionY(false, 2));
-      xCByClick = xCByClick0 || (xA + xB) / 2;
-      yCByClick = yCByClick0 || (yA + yB) / 2;
-    } else if (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') {
-      //console.log('6');
-      xA = this.synchroLinkX(this.definePositionX(true, 2));
-      yA = this.synchroLinkY(this.definePositionY(true, 2));
-      xB = this.synchroLinkX(this.definePositionX(false, 2));
-      yB = this.synchroLinkY(this.definePositionY(false, 2));
-      xCByClick = xCByClick0 || (xA + xB) / 2;
-      yCByClick = yCByClick0 || (yA + yB) / 2;
-    } else if (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') {
-      //console.log('7');
-      xA = this.synchroLinkX(this.definePositionX(true, 2));
-      yA = this.synchroLinkY(this.definePositionY(true, 2));
-      xB = this.synchroLinkX(this.definePositionX(false, 2));
-      yB = this.synchroLinkY(this.definePositionY(false, 2));
-      xCByClick = xCByClick0 || (xA + xB) / 2;
-      yCByClick = yCByClick0 || (yA + yB) / 2;
-    } else if (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') {
-      //console.log('8');
-      xA = this.synchroLinkX(this.definePositionX(true, 2));
-      yA = this.synchroLinkY(this.definePositionY(true, 2));
-      xB = this.synchroLinkX(this.definePositionX(false, 2));
-      yB = this.synchroLinkY(this.definePositionY(false, 2));
-      xCByClick = xCByClick0 || (xA + xB) / 2;
-      yCByClick = yCByClick0 || (yA + yB) / 2;
     } else {
-      //console.log('9');
-      xA = xA0;
-      yA = yA0;
-      xB = xB0;
-      yB = yB0;
-      xCByClick = xCByClick0;
-      yCByClick = yCByClick0;
+      if (
+        (this.props.associateRegionIn !== '' || this.props.associatePointIn !== '') &&
+        this.props.associateRegionOut === '' &&
+        this.props.associatePointOut === ''
+      ) {
+        xA = this.synchroLinkX(this.definePositionX(true, 2));
+        yA = this.synchroLinkY(this.definePositionY(true, 2));
+        xB = xB0;
+        yB = yB0;
+        xCByClick = xCByClick0 || (xA + xB) / 2;
+        yCByClick = yCByClick0 || (yA + yB) / 2;
+      } else if (
+        (this.props.associateRegionIn === '' || this.props.associatePointIn === '') &&
+        this.props.associateRegionOut !== '' &&
+        this.props.associatePointOut !== ''
+      ) {
+        xA = xA0;
+        yA = yA0;
+        xB = this.synchroLinkX(this.definePositionX(false, 2));
+        yB = this.synchroLinkY(this.definePositionY(false, 2));
+        xCByClick = xCByClick0 || (xA + xB) / 2;
+        yCByClick = yCByClick0 || (yA + yB) / 2;
+      } else if (
+        (this.props.associatePointIn !== '' && this.props.associatePointOut !== '') ||
+        (this.props.associatePointIn !== '' && this.props.associateRegionOut !== '') ||
+        (this.props.associateRegionIn !== '' && this.props.associatePointOut !== '') ||
+        (this.props.associateRegionIn !== '' && this.props.associateRegionOut !== '')
+      ) {
+        xA = this.synchroLinkX(this.definePositionX(true, 2));
+        yA = this.synchroLinkY(this.definePositionY(true, 2));
+        xB = this.synchroLinkX(this.definePositionX(false, 2));
+        yB = this.synchroLinkY(this.definePositionY(false, 2));
+        xCByClick = xCByClick0 || (xA + xB) / 2;
+        yCByClick = yCByClick0 || (yA + yB) / 2;
+      } else {
+        xA = xA0;
+        yA = yA0;
+        xB = xB0;
+        yB = yB0;
+        xCByClick = xCByClick0;
+        yCByClick = yCByClick0;
+      }
     }
 
     let xC = 0;
@@ -2674,7 +2055,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 <div
                   className="arrowTriangle"
                   style={{
-                    //position: 'absolute',
                     width: '0',
                     height: '0',
                     borderLeft: this.defineSizeLink() + 'px solid transparent',

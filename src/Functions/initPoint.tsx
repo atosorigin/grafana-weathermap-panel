@@ -42,7 +42,7 @@ export const initPoint = (index: number): PointClass => {
   const newCoordinate: PointClass = new PointClass(
     newId,
     linkURL,
-    '',
+    [],
     [],
     '',
     initTextObject,

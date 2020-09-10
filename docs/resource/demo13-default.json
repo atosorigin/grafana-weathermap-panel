@@ -1,46 +1,55 @@
 {
   "global": {
-    "lowerLimit": [],
+    "lowerLimit": [
+      {
+        "id": 0,
+        "lowerLimitMin": "leMinimum",
+        "lowerLimitMax": "leMaxmum",
+        "backColor": "black",
+        "borderColor": "black",
+        "sizeBorder": "2"
+      }
+    ],
     "textObject": {
       "value": "",
-      "isTextTooltip": true,
-      "colorBack": "#eeee00",
-      "colorText": "#dd33dd",
+      "isTextTooltip": false,
+      "colorBack": "black",
+      "colorText": "white",
       "style": {
-        "bold": false,
-        "italic": true,
+        "bold": true,
+        "italic": false,
         "underline": false
       },
       "generateObjectText": true,
       "valueGenerateObjectText": {
-        "legendElement": "Nombre",
-        "numericFormatElement": "5",
-        "unit": "u",
+        "legendElement": "uneLegend",
+        "numericFormatElement": "2",
+        "unit": "Hz",
         "displayObjectInTooltip": true,
         "addColorTextElement": false,
-        "colorTextElement": "white",
         "addColorBackElement": false,
-        "colorBackElement": "black"
+        "colorTextElement": "",
+        "colorBackElement": ""
       },
       "generateAuxiliaryElement": {
-        "legendElement": "",
-        "numericFormatElement": "5",
-        "unit": "",
+        "legendElement": "uneLegend",
+        "numericFormatElement": "?",
+        "unit": "Hz",
         "displayObjectInTooltip": true,
-        "addColorTextElement": false,
-        "colorTextElement": "",
-        "addColorBackElement": false,
-        "colorBackElement": "black"
+        "addColorTextElement": true,
+        "addColorBackElement": true,
+        "colorTextElement": "#000000",
+        "colorBackElement": "#FFFFFF"
       }
     },
-    "colorMode": false,
-    "traceBack": true,
-    "traceBorder": true
+    "colorMode": true,
+    "traceBack": false,
+    "traceBorder": false
   },
   "default": {
     "templates": [
       {
-        "filtered": "device|ens3",
+        "filtered": "",
         "labelfix": true,
         "xylabel": "x|labelName#y|labelName",
         "xylabelfix": "x|90#y|90",
@@ -67,9 +76,9 @@
         },
         "metrics": [],
         "linkURL": {
-          "followLink": "",
-          "hoveringTooltipLink": "",
-          "hoveringTooltipText": ""
+          "followLink": "defaulFiletpass",
+          "hoveringTooltipLink": "defaultFilepass",
+          "hoveringTooltipText": "defaultFilepass"
         },
         "valueMetric": "",
         "drawGraphicMarker": {
@@ -160,7 +169,8 @@
           "label": "No",
           "value": false
         },
-        "zIndex": "2"
+        "zIndex": "2",
+        "color": "black"
       },
       {
         "filtered": "quantile|0.5#slice|inner_eval",
@@ -196,66 +206,9 @@
         "idSVG": "",
         "mode": true,
         "img": "",
-        "orientedLink": []
+        "orientedLink": [],
+        "color": "black"
       }
     ]
-  },
-  "templates": [
-    {
-      "filtered": "device|ens3",
-      "labelfix": true,
-      "xylabel": "x|labelName#y|labelName",
-      "xylabelfix": "x|243#y|57",
-      "type": "point",
-      "name": "point1",
-      "meta": "",
-      "label": "networkName",
-      "positionParameter": {
-        "xylabelA": "x|0#y|0",
-        "xylabelB": "x|0#y|0",
-        "tooltipA": "Bottom",
-        "tooltipB": "Bottom"
-      },
-      "mainMetric": {
-        "format": "",
-        "key": "",
-        "keyValue": "",
-        "manageValue": "avg"
-      },
-      "metrics": [],
-      "linkURL": {
-        "folloLink": "",
-        "hoveringTooltipLink": "",
-        "hoverhoveringTooltipText": ""
-      },
-      "valueMetric": "",
-      "drawGraphicMarker": {
-        "label": "Yes",
-        "value": "true"
-      },
-      "shape": {
-        "label": "Circle",
-        "value": "circle"
-      },
-      "sizeWidth": "12",
-      "sizeHeight": {
-        "label": "Medium",
-        "value": "medium"
-      },
-      "rotateArrow": {
-        "label": "",
-        "value": ""
-      },
-      "positionShapeX": "",
-      "positionShapeY": "",
-      "color": "black",
-      "assiciateOrientedLinksIn": [],
-      "associateOrientedLinksOut": [
-        {
-          "label": "lien device",
-          "name": "orientedLink1"
-        }
-      ]
-    }
-  ]
+  }
 }

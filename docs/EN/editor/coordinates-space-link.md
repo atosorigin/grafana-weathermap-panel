@@ -22,6 +22,7 @@ This is a key to add the result of value to the parameters
 
 - monodirectional
 - bi-directional
+- nodirectional
 
 ### Size
 
@@ -94,3 +95,7 @@ You can define the position of the
 - Layer level
   - Upgrade on : choose the other link that you want to see bellow this one
   - Downgrade on : choose the other link that you want to see above this one
+
+# See too
+
+- [Tutorial 07 : Create bi directionnel](../demo/tutorial07.md)

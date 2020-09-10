@@ -3,7 +3,7 @@ import { CoordinateSpaceClass } from './CoordinateSpaceClass';
 import { LinkURLClass } from './LinkURLClass';
 import { LowerLimitClass } from './LowerLimitClass';
 import { TextObject } from './TextObjectClass';
-import { Metric } from 'types';
+import { Metric, Metadata } from 'types';
 //import { LinkClass } from './LinkClass';
 import { PositionParameterClass } from './PositionParameterClass';
 
@@ -32,7 +32,7 @@ export class PointClass extends CoordinateSpaceClass {
   constructor(
     id: number,
     linkURL: LinkURLClass,
-    meta: string,
+    meta: Metadata[],
     lowerLimitClass: LowerLimitClass[],
     label: string,
     textObj: TextObject,

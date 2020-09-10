@@ -1,3 +1,5 @@
+a refaire
+
 # Initial viewing space
 
 [![](../../screenshots/other/Go-back.png)](README.md)
@@ -9,6 +11,10 @@ This section allows you to resize your workspace.
 You must have defined a background space in the [Display](display.md) tab as the initial viewing space.
 
 ## Viewving space
+
+![display](../../screenshots/editor/initial/initial-space-border.jpg)
+
+La ligne `Display space initial` est utile si vous ne choississez pas d'image d'arrière plan, c'est pourquoi, il est important de voir ou cacher les limites de la vue.
 
 ![display](../../screenshots/editor/initial/initial-space.jpg)
 
@@ -33,4 +39,4 @@ The viewing space can be adjusted as needed:
 
 # See too
 
-- [Tutorial 11 : How to use initial viewing space](tutorial11.md)
+- [Tutorial 11 : How to use initial viewing space](../demo/tutorial11.md)

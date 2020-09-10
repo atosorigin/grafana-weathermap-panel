@@ -7,7 +7,7 @@
         "id": 0,
         "lowerLimitMax": "20",
         "lowerLimitMin": "",
-        "sizeBorder": "10"
+        "sizeBorder": "5"
       },
       {
         "backColor": "#37872D",
@@ -78,6 +78,47 @@
     "traceBack": true,
     "traceBorder": true
   },
+  "default": {
+    "templates": [
+      {
+        "filtered": "quantile|0.5#slice|inner_eval",
+        "labelfix": false,
+        "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+        "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+        "type": "region",
+        "meta": "uneMeta",
+        "label": "0.5-inner_eval",
+        "positionParameter": {
+          "xylabelA": "x|0#y|0",
+          "xylabelB": "x|0#y|0",
+          "tooltipA": "Bottom",
+          "tooltipB": "Bottom"
+        },
+        "mainMetric": {
+          "key": "",
+          "unit": "",
+          "format": "",
+          "keyValue": "",
+          "filter": [],
+          "refId": "",
+          "expr": "",
+          "returnQuery": [],
+          "manageValue": "avg"
+        },
+        "metrics": [],
+        "linkURL": {
+          "followLink": "",
+          "hoveringTooltipLink": "",
+          "hoveringTooltipText": ""
+        },
+        "idSVG": "",
+        "mode": true,
+        "img": "",
+        "orientedLink": [],
+        "color": "black"
+      }
+    ]
+  },
   "templates": [
     {
       "filtered": "quantile|0.5#slice|inner_eval",
@@ -117,7 +158,7 @@
     },
     {
       "filtered": "quantile|0.5#slice|prepare_time",
-      "labelfix": "true",
+      "labelfix": false,
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
@@ -153,7 +194,7 @@
     },
     {
       "filtered": "quantile|0.5#slice|queue_time",
-      "labelfix": "true",
+      "labelfix": false,
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
@@ -189,7 +230,7 @@
     },
     {
       "filtered": "quantile|0.9#slice|inner_eval",
-      "labelfix": "true",
+      "labelfix": false,
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
@@ -225,7 +266,7 @@
     },
     {
       "filtered": "quantile|0.9#slice|prepare_time",
-      "labelfix": "true",
+      "labelfix": false,
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
@@ -261,7 +302,7 @@
     },
     {
       "filtered": "quantile|0.9#slice|queue_time",
-      "labelfix": "true",
+      "labelfix": false,
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
@@ -297,7 +338,7 @@
     },
     {
       "filtered": "quantile|0.99#slice|inner_eval",
-      "labelfix": "true",
+      "labelfix": false,
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
@@ -333,7 +374,7 @@
     },
     {
       "filtered": "quantile|0.99#slice|prepare_time",
-      "labelfix": "true",
+      "labelfix": false,
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
@@ -369,7 +410,7 @@
     },
     {
       "filtered": "quantile|0.99#slice|queue_time",
-      "labelfix": "true",
+      "labelfix": false,
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|50#xMax|150#yMin|250#yMax|300",
       "type": "region",
@@ -405,7 +446,7 @@
     },
     {
       "filtered": "quantile|0.5",
-      "labelfix": "true",
+      "labelfix": false,
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|50#xMax|150#yMin|250#yMax|350",
       "type": "region",

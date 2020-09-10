@@ -488,3 +488,7 @@ pas de valeurs
 "valueMetric": ""
 
 ```
+
+# Voir aussi
+
+- [Tutorial 12 : Construire son dashboard depuis son ordinateur](../demo/tutorial12.md)

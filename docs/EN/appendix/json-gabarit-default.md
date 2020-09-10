@@ -1,87 +1,109 @@
+# Gabarit file
+
+[![](../../screenshots/other/Go-back.png)](README.md)
+
+http://localhost/demo/sampleJson/gabarit-default-new.json
+
+The complete [gabarit-default.json](../../resource/sampleJson/gabarit-default.json) script is available, the construction details of which can be found below.
+
+The **gabarit** file must be declared as a JSON file like this:
+
+```
 {
+  "global": {
+  },
+  "default": {
+    "templates": [
+      { 
+        // point 
+      },
+      { 
+        // link 
+      },
+      { 
+        // region 
+      },  
+    ]
+  }
+}
+
+```
+
+## Global
+
+```
   "global": {
     "lowerLimit": [
       {
-        "backColor": "#1F60C4",
-        "borderColor": "#1F60C4",
         "id": 0,
-        "lowerLimitMax": "20",
-        "lowerLimitMin": "",
-        "sizeBorder": "10"
-      },
-      {
-        "backColor": "#37872D",
-        "borderColor": "#37872D",
-        "id": 1,
-        "lowerLimitMax": "40",
-        "lowerLimitMin": ">20",
-        "sizeBorder": "10"
-      },
-      {
-        "backColor": "#E0B400",
-        "borderColor": "#E0B400",
-        "id": 2,
-        "lowerLimitMax": "60",
-        "lowerLimitMin": ">40",
-        "sizeBorder": "10"
-      },
-      {
-        "backColor": "#FA6400",
-        "borderColor": "#FA6400",
-        "id": 3,
-        "lowerLimitMax": "80",
-        "lowerLimitMin": ">60",
-        "sizeBorder": "10"
-      },
-      {
-        "backColor": "#C4162A",
-        "borderColor": "#C4162A",
-        "id": 4,
-        "lowerLimitMax": "",
-        "lowerLimitMin": ">80",
-        "sizeBorder": "10"
+        "lowerLimitMin": "leMinimum",
+        "lowerLimitMax": "leMaxmum",
+        "backColor": "black",
+        "borderColor": "black",
+        "sizeBorder": "2"
       }
     ],
     "textObject": {
       "value": "",
-      "isTextTooltip": "false",
-      "colorBack": "#C4162A",
-      "colorText": "#8F3BB8",
+      "isTextTooltip": false,
+      "colorBack": "black",
+      "colorText": "white",
       "style": {
         "bold": true,
         "italic": false,
-        "underline": true
+        "underline": false
       },
-      "generateObjectText": "",
+      "generateObjectText": true,
       "valueGenerateObjectText": {
-        "legendElement": "",
-        "numericFormatElement": "5",
-        "unit": "u",
-        "displayObjectInTooltip": true,
-        "addColorTextElement": true,
-        "colorTextElement": "black",
-        "addColorBackElement": true,
-        "colorBackElement": "#ff00ff"
-      },
-      "generateAuxiliaryElement": {
-        "legendElement": "",
-        "numericFormatElement": "5",
-        "unit": "s",
+        "legendElement": "uneLegend",
+        "numericFormatElement": "2",
+        "unit": "Hz",
         "displayObjectInTooltip": true,
         "addColorTextElement": false,
-        "colorTextElement": "white",
         "addColorBackElement": false,
-        "colorBackElement": "black"
+        "colorTextElement": "",
+        "colorBackElement": ""
+      },
+      "generateAuxiliaryElement": {
+        "legendElement": "uneLegend",
+        "numericFormatElement": "?",
+        "unit": "Hz",
+        "displayObjectInTooltip": true,
+        "addColorTextElement": true,
+        "addColorBackElement": true,
+        "colorTextElement": "#000000",
+        "colorBackElement": "#FFFFFF"
       }
     },
-    "colorMode": false,
-    "traceBack": true,
-    "traceBorder": true
+    "colorMode": true,
+    "traceBack": false,
+    "traceBorder": false
   },
+```
+  
+## Default templates
+
+```
   "default": {
     "templates": [
-      {
-        "filtered": "device|ens3",
+      { 
+        // point 
+      },
+      { 
+        // link 
+      },
+      { 
+        // region 
+      },  
+    ]
+
+```
+
+### point
+
+```
+{
+        "filtered": "",
         "labelfix": true,
         "xylabel": "x|labelName#y|labelName",
         "xylabelfix": "x|90#y|90",
@@ -108,9 +130,9 @@
         },
         "metrics": [],
         "linkURL": {
-          "followLink": "",
-          "hoveringTooltipLink": "",
-          "hoveringTooltipText": ""
+          "followLink": "defaulFiletpass",
+          "hoveringTooltipLink": "defaultFilepass",
+          "hoveringTooltipText": "defaultFilepass"
         },
         "valueMetric": "",
         "drawGraphicMarker": {
@@ -135,8 +157,14 @@
         "color": "green",
         "assiciateOrientedLinksIn": [],
         "associateOrientedLinksOut": []
-      },
-      {
+  }
+
+```
+  
+### link
+
+```
+     {
         "filtered": "device|ens3",
         "labelfix": true,
         "xylabelA": "x|quantile#y|quantile",
@@ -201,9 +229,15 @@
           "label": "No",
           "value": false
         },
-        "zIndex": "2"
+        "zIndex": "2",
+        "color": "black"
       },
-      {
+      
+```
+
+### region
+
+    {
         "filtered": "quantile|0.5#slice|inner_eval",
         "labelfix": false,
         "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
@@ -237,40 +271,8 @@
         "idSVG": "",
         "mode": true,
         "img": "",
-        "orientedLink": []
+        "orientedLink": [],
+        "color": "black"
       }
-    ]
-  },
-  "templates": [
-    {
-      "filtered": "quantile|0.5#slice|inner_eval",
-      "labelfix": false,
-      "xylabel": "xMin|#xMax|#yMin|#yMax|",
-      "xylabelfix": "xMin|0#xMax|0#yMin|0#yMax|0",
-      "type": "region",
-      "meta": "uneMeta",
-      "label": "0.5-inner_eval",
-      "positionParameter": {
-        "xylabelA": "x|0#y|0",
-        "xylabelB": "x|0#y|0",
-        "tooltipA": "Bottom",
-        "tooltipB": "Bottom"
-      },
-      "mainMetric": {
-        "format": "",
-        "key": "",
-        "keyValue": ""
-      },
-      "metrics": [],
-      "linkURL": {
-        "followLink": "",
-        "hoveringTooltipLink": "",
-        "hoveringTooltipText": ""
-      },
-      "idSVG": "rect1-top",
-      "mode": true,
-      "img": "",
-      "orientedLink": []
-    }
-  ]
-}
+      
+      

@@ -37,6 +37,66 @@
     "traceBack": true,
     "traceBorder": true
   },
+  "default": {
+    "templates": [
+      {
+        "filtered": "device|ens3",
+        "labelfix": true,
+        "xylabel": "x|labelName#y|labelName",
+        "xylabelfix": "x|90#y|90",
+        "type": "point",
+        "name": "unPoint",
+        "meta": "uneMeta",
+        "label": "mtu ens3",
+        "positionParameter": {
+          "xylabelA": "x|0#y|0",
+          "xylabelB": "x|labelName#y|labelName",
+          "tooltipA": "Bottom",
+          "tooltipB": "Bottom"
+        },
+        "mainMetric": {
+          "key": "",
+          "unit": "",
+          "format": "",
+          "keyValue": "",
+          "filter": [],
+          "refId": "",
+          "expr": "",
+          "returnQuery": [],
+          "manageValue": "avg"
+        },
+        "metrics": [],
+        "linkURL": {
+          "followLink": "",
+          "hoveringTooltipLink": "",
+          "hoveringTooltipText": ""
+        },
+        "valueMetric": "",
+        "drawGraphicMarker": {
+          "label": "Yes",
+          "value": "true"
+        },
+        "shape": {
+          "label": "circle",
+          "value": "circle"
+        },
+        "sizeWidth": "12",
+        "sizeHeight": {
+          "label": "",
+          "value": ""
+        },
+        "rotateArrow": {
+          "label": "",
+          "value": ""
+        },
+        "positionShapeX": "",
+        "positionShapeY": "",
+        "color": "green",
+        "assiciateOrientedLinksIn": [],
+        "associateOrientedLinksOut": []
+      }
+    ]
+  },
   "templates": [
     {
       "filtered": "device|ens3",
@@ -44,8 +104,8 @@
       "xylabel": "x|labelName#y|labelName",
       "xylabelfix": "x|100#y|310",
       "type": "point",
-      "name": "unPoint",
-      "meta": "uneMeta",
+      "name": "point0",
+      "meta": "meta",
       "label": "mtu ens3",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -54,18 +114,17 @@
         "tooltipB": "Bottom"
       },
       "mainMetric": {
-        "key": "",
-        "unit": "",
         "format": "",
+        "key": "",
         "keyValue": "",
-        "filter": [],
-        "refId": "",
-        "expr": "",
-        "returnQuery": [],
-        "manageValue": ""
+        "manageValue": "avg"
       },
       "metrics": [],
-      "linkURL": {},
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
       "valueMetric": "",
       "drawGraphicMarker": {
         "label": "Yes",
@@ -77,8 +136,8 @@
       },
       "sizeWidth": "12",
       "sizeHeight": {
-        "label": "",
-        "value": ""
+        "label": "Medium",
+        "value": "medium"
       },
       "rotateArrow": {
         "label": "",
@@ -88,7 +147,12 @@
       "positionShapeY": "",
       "color": "#00FFFF",
       "assiciateOrientedLinksIn": [],
-      "associateOrientedLinksOut": []
+      "associateOrientedLinksOut": [
+        {
+          "label": "lien device",
+          "name": "orientedLink1"
+        }
+      ]
     },
     {
       "filtered": "device|lo",
@@ -96,28 +160,27 @@
       "xylabel": "x|labelName#y|labelName",
       "xylabelfix": "x|220#y|220",
       "type": "point",
-      "name": "unPoint",
-      "meta": "uneMeta",
+      "name": "point1",
+      "meta": "meta2",
       "label": "mtu lo",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
-        "xylabelB": "x|labelName#y|labelName",
+        "xylabelB": "x|0#y|0",
         "tooltipA": "Bottom",
         "tooltipB": "Bottom"
       },
       "mainMetric": {
-        "key": "",
-        "unit": "",
         "format": "",
+        "key": "",
         "keyValue": "",
-        "filter": [],
-        "refId": "",
-        "expr": "",
-        "returnQuery": [],
-        "manageValue": ""
+        "manageValue": "avg"
       },
       "metrics": [],
-      "linkURL": {},
+      "linkURL": {
+        "followLink": "",
+        "hoveringTooltipLink": "",
+        "hoveringTooltipText": ""
+      },
       "valueMetric": "",
       "drawGraphicMarker": {
         "label": "Yes",
@@ -129,8 +192,8 @@
       },
       "sizeWidth": "12",
       "sizeHeight": {
-        "label": "",
-        "value": ""
+        "label": "Medium",
+        "value": "medium"
       },
       "rotateArrow": {
         "label": "",
@@ -152,37 +215,25 @@
       "xylabelfixB": "x|113#y|297",
       "xylabelfixC": "x|labelName#y|labelName",
       "type": "link",
-      "name": "unLink",
-      "meta": "uneMeta",
+      "name": "orientedLink1",
+      "meta": "meta1",
       "label": "lien device",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
-        "tooltipA": "bottom",
-        "tooltipB": "bottom"
+        "tooltipA": "Bottom",
+        "tooltipB": "Bottom"
       },
       "mainMetric": {
-        "key": "",
-        "unit": "",
         "format": "",
-        "keyValue": "",
-        "filter": [],
-        "refId": "",
-        "expr": "",
-        "returnQuery": [],
-        "manageValue": ""
+        "key": "",
+        "keyValue": ""
       },
       "metrics": [],
       "mainMetricB": {
-        "key": "",
-        "unit": "",
         "format": "",
-        "keyValue": "",
-        "filter": [],
-        "refId": "",
-        "expr": "",
-        "returnQuery": [],
-        "manageValue": ""
+        "key": "",
+        "keyValue": ""
       },
       "metricsB": [],
       "linkURL": {
@@ -200,14 +251,15 @@
       "valueMainMetricA": "",
       "valueMainMetricB": "",
       "pointIn": "",
-      "pointOut": "",
+      "pointOut": "networkName",
       "regionIn": "",
       "regionOut": "",
+      "zIndex": 2,
       "isIncurved": {
         "label": "No",
         "value": false
       },
-      "zIndex": "2"
+      "color": "#CCCCCC"
     }
   ]
 }

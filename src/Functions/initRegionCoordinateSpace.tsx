@@ -54,7 +54,7 @@ export const initRegionCoordinateSpace = (index: number): RegionClass => {
   const newCoordinate: RegionClass = new RegionClass(
     newId,
     linkURL,
-    '',
+    [],
     [],
     '',
     initTextObject,

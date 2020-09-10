@@ -38,14 +38,14 @@ export const initOrientedLink = (newId: number, newZIndex: number): OrientedLink
     }
   );
 
-  const parametrageMetric: LinkURLClass = new LinkURLClass('', '', '');
-  const initPositionParameter: PositionParameterClass = new PositionParameterClass('', '', '', '', {}, {});
+  const linkUrl: LinkURLClass = new LinkURLClass('', '', '');
+  const initPositionParameter: PositionParameterClass = new PositionParameterClass('0', '0', '0', '0', {}, {});
   const initMainMetrics: Metric = { key: '', unit: '', format: '', keyValue: '', refId: '', manageValue: 'avg' };
   const initMainMetricsB: Metric = { key: '', unit: '', format: '', keyValue: '', refId: '', manageValue: 'avg' };
   const newCoordinate: OrientedLinkClass = new OrientedLinkClass(
     num,
-    parametrageMetric,
-    '',
+    linkUrl,
+    [],
     [],
     '',
     initTextObject,
@@ -79,20 +79,22 @@ export const initOrientedLink = (newId: number, newZIndex: number): OrientedLink
     '',
     '',
     zIndex,
-    '0',
-    '0',
+    '',
+    '',
     {},
     initMainMetricsB,
     [],
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    ''
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0'
   );
+  // console.log('newCoordinate');
+  // console.log(newCoordinate);
   return newCoordinate;
 };
 

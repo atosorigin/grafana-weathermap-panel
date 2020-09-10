@@ -132,3 +132,7 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
     ]
 
 ```
+
+# Voir aussi
+
+- [Tutorial 10 : Comment ajouter un fichier json global](../demo/tutorial10.md)

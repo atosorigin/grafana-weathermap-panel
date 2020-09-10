@@ -2,7 +2,7 @@ import { SelectableValue } from '@grafana/data';
 import { LinkURLClass } from './LinkURLClass';
 import { LowerLimitClass } from './LowerLimitClass';
 import { TextObject } from './TextObjectClass';
-import { Metric } from 'types';
+import { Metric, Metadata } from 'types';
 import { CoordinateSpaceClass } from './CoordinateSpaceClass';
 import { PositionParameterClass } from './PositionParameterClass';
 
@@ -40,7 +40,7 @@ export class OrientedLinkClass extends CoordinateSpaceClass {
   constructor(
     id: number,
     linkURL: LinkURLClass,
-    meta: string,
+    meta: Metadata[],
     lowerLimitClass: LowerLimitClass[],
     label: string,
     textObj: TextObject,

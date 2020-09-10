@@ -8,9 +8,15 @@
   - [point](json-point.md)
   - [link](json-links.md)
   - [global](json-global.md)
-  - [gabarit](json-gabarit.md)
 
-* SVG
+- Gabarit
+
+  - [Defaut](json-gabarit-defaut.md)
+  - [Region](json-gabarit-region.md)
+  - [Point](json-gabarit-point.md)
+  - [Link](json-gabarit-link.md)
+
+- SVG
 
   - [Creation image SVG en background](svg.md)
 

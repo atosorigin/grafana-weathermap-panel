@@ -206,7 +206,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     const newPoint: PointClass = new PointClass(
       id,
       linkUrl,
-      '',
+      [],
       [],
       '',
       initTextObject,
@@ -443,6 +443,8 @@ export class SimplePanel extends PureComponent<Props, State> {
         this.createOrientedLinkToClick({ label: 'No', value: false }, widthInitialSpace.toString(), heightInitialSpace.toString());
         this.resetCoordinatesToDrawLinkWithClick();
       }
+      // console.log('click');
+      // console.log(objectIn);
     } else if (event.nativeEvent.target.id.startsWith('point')) {
       const id: number = parseInt(event.nativeEvent.target.id.charAt(5) + event.nativeEvent.target.id.charAt(6), 10);
       const arrayPoint: PointClass[] = this.props.options.arrayPoints;
@@ -788,8 +790,8 @@ export class SimplePanel extends PureComponent<Props, State> {
     const id: number = this.defineIdOrientedLink();
     const name: string = 'orientedLink' + id.toString();
     const zIndex: number = this.props.options.zIndexOrientedLink + 1;
-    const objectIn: any = coordinates[1];
-    const objectOut: any = coordinates[2];
+    const pointA: any = coordinates[1];
+    const pointB: any = coordinates[2];
     const pointC: any = coordinates[3];
     const initTextObject: TextObject = new TextObject(
       '',
@@ -819,12 +821,13 @@ export class SimplePanel extends PureComponent<Props, State> {
         colorBackElement: 'black',
       }
     );
-    const parametrageMetric: LinkURLClass = new LinkURLClass('', '', '');
+    const linkUrl: LinkURLClass = new LinkURLClass('', '', '');
     const positionParameter: PositionParameterClass = new PositionParameterClass('0', '0', '0', '0', {}, {});
+
     const newOrientedLink: OrientedLinkClass = new OrientedLinkClass(
       id,
-      parametrageMetric,
-      '',
+      linkUrl,
+      [],
       [],
       '',
       initTextObject,
@@ -844,18 +847,18 @@ export class SimplePanel extends PureComponent<Props, State> {
       name,
       { label: 'Monodirectional', value: 'AB' },
       '9',
-      objectIn.x.toString(),
-      objectIn.y.toString(),
+      pointA.x.toString(),
+      pointA.y.toString(),
       '#5794F2',
-      objectOut.x.toString(),
-      objectOut.y.toString(),
+      pointB.x.toString(),
+      pointB.y.toString(),
       '#E54658',
       '',
       '',
-      objectIn.labelPoint,
-      objectOut.labelPoint,
-      objectIn.labelRegion,
-      objectOut.labelRegion,
+      pointA.labelPoint,
+      pointB.labelPoint,
+      pointA.labelRegion,
+      pointB.labelRegion,
       zIndex,
       pointC.x,
       pointC.y,
@@ -871,16 +874,17 @@ export class SimplePanel extends PureComponent<Props, State> {
       [],
       widthInitialSpace,
       heightInitialSpace,
-      objectIn.xDefault.toString(),
-      objectIn.yDefault.toString(),
-      objectOut.xDefault.toString(),
-      objectOut.yDefault.toString(),
+      pointA.xDefault.toString(),
+      pointA.yDefault.toString(),
+      pointB.xDefault.toString(),
+      pointB.yDefault.toString(),
       pointC.x,
       pointC.y
     );
+
     const newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
     newArrayOrientedLink.push(newOrientedLink);
-    //const newValue = true;
+
     this.props.onOptionsChange({
       ...this.props.options,
       arrayOrientedLinks: newArrayOrientedLink,
@@ -889,13 +893,12 @@ export class SimplePanel extends PureComponent<Props, State> {
       newOrientedLink: true,
     });
 
+    this.props.options.arrayOrientedLinks = newArrayOrientedLink;
+    this.props.options.indexOrientedLink = id;
+    this.props.options.zIndexOrientedLink = zIndex;
     this.props.options.newOrientedLink = true;
 
-    this.addAssociateOrientedLinkToPoint(objectIn.labelPoint || '', objectOut.labelPoint || '', newOrientedLink.id);
-
-    setTimeout(() => {
-      this.displayOrientedLink();
-    }, 100);
+    this.addAssociateOrientedLinkToPoint(pointA.labelPoint || '', pointB.labelPoint || '', newOrientedLink.id);
   };
 
   private defineValueX = (orientedLink: OrientedLinkClass, defaultPosition: boolean, isIn: boolean): string => {
@@ -925,9 +928,9 @@ export class SimplePanel extends PureComponent<Props, State> {
         });
       } else {
         if (defaultPosition) {
-          result = orientedLink.pointAPositionX;
-        } else {
           result = orientedLink.pointAPositionXDefault;
+        } else {
+          result = orientedLink.pointAPositionX;
         }
       }
     } else {
@@ -955,9 +958,9 @@ export class SimplePanel extends PureComponent<Props, State> {
         });
       } else {
         if (defaultPosition) {
-          result = orientedLink.pointBPositionX;
-        } else {
           result = orientedLink.pointBPositionXDefault;
+        } else {
+          result = orientedLink.pointBPositionX;
         }
       }
     }
@@ -991,9 +994,9 @@ export class SimplePanel extends PureComponent<Props, State> {
         });
       } else {
         if (defaultPosition) {
-          result = orientedLink.pointAPositionY;
-        } else {
           result = orientedLink.pointAPositionYDefault;
+        } else {
+          result = orientedLink.pointAPositionY;
         }
       }
     } else {
@@ -1021,9 +1024,9 @@ export class SimplePanel extends PureComponent<Props, State> {
         });
       } else {
         if (defaultPosition) {
-          result = orientedLink.pointBPositionY;
-        } else {
           result = orientedLink.pointBPositionYDefault;
+        } else {
+          result = orientedLink.pointBPositionY;
         }
       }
     }
@@ -1038,8 +1041,6 @@ export class SimplePanel extends PureComponent<Props, State> {
     const mapItems: JSX.Element[] = [];
     let item: JSX.Element = <div></div>;
     arrayOrientedLink.forEach((orientedLink: OrientedLinkClass) => {
-      console.log('simplePanel');
-      console.log(orientedLink);
       const valueMainMetricA: string = this.getValuesMainMetricOrientedLink(orientedLink).toString();
       const valueMainMetricB: string = this.getValuesMainMetricOrientedLinkB(orientedLink).toString();
       this.getValuesMainMetricOrientedLinkB(orientedLink);
@@ -1124,116 +1125,24 @@ export class SimplePanel extends PureComponent<Props, State> {
    */
   getValuesMainMetricPoint(point: PointClass) {
     reqMetricPoint(point, this.props);
-    //this.getValuesMainMetric(point.mainMetric, undefined, point);
     let result = 0;
-    // if(result = 0 || NaN){
-    //   console.log('zone1');
-    // } else{
-    //   console.log('lol'); // Pass in console
-    // }
     result = getResultQuery(point.mainMetric) || NaN;
     return result;
   }
 
   getValuesMainMetricOrientedLink(orientedLink: OrientedLinkClass): number {
     reqMetricOrientedLink(orientedLink, this.props);
-    //this.getValuesMainMetric(orientedLink.mainMetric, orientedLink, undefined, false);
     let result = 0;
-    // if(result = 0 || NaN){
-    //   console.log('zone2');
-    // } else{
-    //   console.log('lol'); // Pass in console
-    // }
     result = getResultQuery(orientedLink.mainMetric) || NaN;
     return result;
   }
 
   getValuesMainMetricOrientedLinkB(orientedLink: OrientedLinkClass) {
     reqMetricOrientedLink(orientedLink, this.props);
-    //this.getValuesMainMetric(orientedLink.mainMetricB, orientedLink, undefined, true);
     let result = 0;
-    // if(result = 0 || NaN){
-    //   console.log('zone3');
-    // } else{
-    //   console.log('lol'); // Pass in console
-    // }
     result = getResultQuery(orientedLink.mainMetricB) || NaN;
     return result;
   }
-
-  /**
-   * to do
-   */
-  // getValuesMainMetric(mainMetric: Metric, orientedLink?: OrientedLinkClass, point?: PointClass, isBidirectionnal?: boolean) {
-  //   let valueMainMetric = 0;
-  //   let totalValuesCount = 0;
-  //   const key: string = mainMetric.key;
-  //   const keyValue: string = mainMetric.keyValue;
-  //   if (mainMetric.returnQuery && mainMetric.returnQuery.length > 0) {
-  //     mainMetric.returnQuery.forEach((line: DataFrame) => {
-  //       if (line.fields[0].labels) {
-  //         if (key !== '' && keyValue !== '') {
-  //           if (line.fields[0].labels[key] === keyValue) {
-  //             const countValues: number = line.fields[0].values.length;
-  //             for (let i = 0; i < countValues; i++) {
-  //               if (line.fields[0].values.get(i)) {
-  //                 totalValuesCount++;
-  //                 valueMainMetric += line.fields[0].values.get(i);
-  //               }
-  //             }
-  //           }
-  //         } else {
-  //           const countValues: number = line.fields[0].values.length;
-  //           for (let i = 0; i < countValues; i++) {
-  //             if (line.fields[0].values.get(i)) {
-  //               totalValuesCount++;
-  //               valueMainMetric += line.fields[0].values.get(i);
-  //             }
-  //           }
-  //         }
-  //       }
-  //     });
-  //     if (orientedLink) {
-  //       if (!isBidirectionnal) {
-  //         if (mainMetric.manageValue === 'avg') {
-  //           orientedLink.valueMainMetricA = (valueMainMetric / totalValuesCount).toString();
-  //         } else if (mainMetric.manageValue === 'sum') {
-  //           orientedLink.valueMainMetricA = valueMainMetric.toString();
-  //         } else if (mainMetric.manageValue === 'err') {
-  //           if (totalValuesCount > 1) {
-  //             orientedLink.valueMainMetricA = 'error';
-  //           } else {
-  //             orientedLink.valueMainMetricA = valueMainMetric.toString();
-  //           }
-  //         }
-  //       } else {
-  //         if (mainMetric.manageValue === 'avg') {
-  //           orientedLink.valueMainMetricB = (valueMainMetric / totalValuesCount).toString();
-  //         } else if (mainMetric.manageValue === 'sum') {
-  //           orientedLink.valueMainMetricB = valueMainMetric.toString();
-  //         } else if (mainMetric.manageValue === 'err') {
-  //           if (totalValuesCount > 1) {
-  //             orientedLink.valueMainMetricB = 'error';
-  //           } else {
-  //             orientedLink.valueMainMetricB = valueMainMetric.toString();
-  //           }
-  //         }
-  //       }
-  //     } else if (point) {
-  //       if (mainMetric.manageValue === 'avg') {
-  //         point.valueMetric = (valueMainMetric / totalValuesCount).toString();
-  //       } else if (mainMetric.manageValue === 'sum') {
-  //         point.valueMetric = valueMainMetric.toString();
-  //       } else if (mainMetric.manageValue === 'err') {
-  //         if (totalValuesCount > 1) {
-  //           point.valueMetric = 'error';
-  //         } else {
-  //           point.valueMetric = valueMainMetric.toString();
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
 
   getValuesAuxiliaryMetricsPoint = (point: PointClass): string[] => {
     reqMetricAuxPoint(point, this.props);
@@ -1417,11 +1326,8 @@ export class SimplePanel extends PureComponent<Props, State> {
           Position Legend
         </Button>
 
-        <Button style={{ marginLeft: '85%', zIndex: 18, position: 'absolute' }} id="more" onWheel={this.ZoomIn} variant={'primary'}>
-          <i className="fa fa-plus" aria-hidden="true"></i>
-        </Button>
-        <Button style={{ marginLeft: '90%', zIndex: 18, position: 'absolute' }} id="less" onWheel={this.ZoomOut} variant={'primary'}>
-          <i className="fa fa-minus" aria-hidden="true"></i>
+        <Button id="zoompan" style={{ marginLeft: '80%', zIndex: 18, position: 'absolute' }} variant={'primary'} onClick={this.ZoomSVG}>
+          Zoom [P/M]
         </Button>
       </div>
     );
@@ -1686,16 +1592,18 @@ export class SimplePanel extends PureComponent<Props, State> {
           }
         }
         this.chargeRegion();
-        // const newStr: string = this.editIdString(this.state.svg);
-        // const background: Background = this.props.options.baseMap;
-        // background.layerImage = newStr;
-        // this.props.onOptionsChange({ ...this.props.options, baseMap: background });
       } else {
         fetch(this.props.options.baseMap.image)
           .then((res) => res.text())
           .then((text) => {
-            this.setState({ svg: text });
-            const result = /id=["']\w*["']/i.exec(text);
+            let data: any;
+            if (this.props.options.baseMap.image.split(',')[0] === 'base64') {
+              data = atob(this.props.options.baseMap.image.split(',')[1]);
+            } else {
+              data = text;
+            }
+            this.setState({ svg: data });
+            const result = /id=["']\w*["']/i.exec(data);
             if (result && result.length > 0) {
               const id: string[] = result[0].split('"');
               if (id.length > 1) {
@@ -1728,6 +1636,12 @@ export class SimplePanel extends PureComponent<Props, State> {
     }
 
     //Set value initialSpace with width and height of background
+    // const widthInitialSpace = this.props.options.baseMap.width === '' ? '0' : this.props.options.baseMap.width;
+    // console.log(widthInitialSpace);
+    // const heightInitialSpace = this.props.options.baseMap.height === '' ? '0' : this.props.options.baseMap.height;
+    // console.log(heightInitialSpace);
+    // this.props.options.coordinateSpaceInitial.coordinate.xMax = widthInitialSpace;
+    // this.props.options.coordinateSpaceInitial.coordinate.yMax = heightInitialSpace;
     this.props.options.coordinateSpaceInitial.coordinate.xMax = this.props.options.baseMap.width;
     this.props.options.coordinateSpaceInitial.coordinate.yMax = this.props.options.baseMap.height;
 
@@ -1761,19 +1675,30 @@ export class SimplePanel extends PureComponent<Props, State> {
       this.chargeRegion();
     }
   }
-
   // Zoom in Panel
   /********************************  Zoom Panel*********************************** */
   // Zoom Plus
-  ZoomIn = (event: any) => {
+  ZoomSVG = (event: any) => {
     const elmnt = document.getElementById('coordinateSpaces');
     if (elmnt) {
-      // console.log('more');
-      if (event.deltaY < 0) {
-        console.log('scrolling up');
-        elmnt.style.cursor = 'zoom-in';
-        elmnt.style.transform += 'scale(1.01,1.01)' + 'translateX(0.5%)';
-      }
+      // const lol = document.getElementById('zoompan');
+      // console.log('1');
+
+      // console.log('2');
+      // console.log(lol);
+
+      document.body.addEventListener('keyup', (evt: any) => {
+        if (evt.keyCode === 80) {
+          // m
+          // event.preventDefault();
+          elmnt.style.cursor = 'zoom-in';
+          elmnt.style.transform += 'scale(1.01,1.01)' + 'translate(0.5%)' + 'translateY(0.5%)';
+        } else if (evt.keyCode === 77) {
+          // p
+          elmnt.style.cursor = 'zoom-out';
+          elmnt.style.transform += 'scale(0.98,0.98)' + 'translate(-1%)' + 'translateY(-1%)';
+        }
+      });
 
       // elmnt.addEventListener('wheel', () => {
       // let mouse = event.pageX + event.pageY;
@@ -1787,18 +1712,16 @@ export class SimplePanel extends PureComponent<Props, State> {
 
   // Zoom Negative
 
-  ZoomOut = (event: any) => {
-    const elmnt = document.getElementById('coordinateSpaces');
-    if (elmnt) {
-      // console.log('more');
-      if (event.deltaY < 0) {
-        console.log('scrolling down');
-        elmnt.style.cursor = 'zoom-out';
-        elmnt.style.transform += 'scale(0.98,0.98)' + 'translateX(-1%)';
-      }
-    }
-    //console.log('-');
-  };
+  // ZoomOut = (event: MouseEventInit) => {
+  //   const elmnt = document.getElementById('coordinateSpaces');
+  //   if (elmnt) {
+  //     console.log('less');
+  //     elmnt.addEventListener('click', () => {
+  //       elmnt.style.transform += 'scale(0.98,0.98)' + 'translate(-1%)';
+  //     });
+  //   }
+  //   //console.log('-');
+  // };
 
   /****************** Zoom************************** */
   // Zoom Initial
@@ -1917,66 +1840,66 @@ export class SimplePanel extends PureComponent<Props, State> {
   };
 
   // Tooltip in Svg
-  tooltip_SVG = () => {
-    const red = document.getElementById('part1');
+  //tooltip_SVG = () => {
+  //   const red = document.getElementById('part1');
 
-    red?.addEventListener('mouseenter', () => {
-      red.addEventListener('mouseover', () => {
-        const tooltip = document.createElement('span');
-        const texttest = document.createTextNode('rectanglered');
-        tooltip.appendChild(texttest);
-        red.appendChild(tooltip).style.position = 'absolute';
-        red.appendChild(tooltip).style.backgroundColor = '#000000';
-        red.appendChild(tooltip).style.padding = '8px';
-        red.appendChild(tooltip).style.float = 'top';
-        red.appendChild(tooltip).style.color = '#d8d9da';
-        red.appendChild(tooltip).style.boxShadow = '0 0 2px rgba(0, 0, 0, 0.5)';
-        red.appendChild(tooltip).style.borderRadius = '2px';
-        red.appendChild(tooltip).style.fontWeight = '500';
-        red.addEventListener('mouseout', () => {
-          red.appendChild(tooltip).style.visibility = 'hidden';
-        });
-      });
-      const yellow = document.getElementById('part2');
-      yellow?.addEventListener('mouseenter', () => {
-        yellow.addEventListener('mouseover', () => {
-          const tooltip = document.createElement('span');
-          const texttest = document.createTextNode('rectangleyellow');
-          tooltip.appendChild(texttest);
-          yellow.appendChild(tooltip).style.position = 'absolute';
-          yellow.appendChild(tooltip).style.backgroundColor = '#000000';
-          yellow.appendChild(tooltip).style.padding = '8px';
-          yellow.appendChild(tooltip).style.float = 'top';
-          yellow.appendChild(tooltip).style.color = '#d8d9da';
-          yellow.appendChild(tooltip).style.boxShadow = '0 0 2px rgba(0, 0, 0, 0.5)';
-          yellow.appendChild(tooltip).style.borderRadius = '2px';
-          yellow.appendChild(tooltip).style.fontWeight = '500';
-          yellow.addEventListener('mouseout', () => {
-            yellow.appendChild(tooltip).style.visibility = 'hidden';
-          });
-        });
-        const rect = document.getElementById('carre');
-        rect?.addEventListener('mouseenter', () => {
-          rect.addEventListener('mouseover', () => {
-            const tooltip = document.createElement('span');
-            const texttest = document.createTextNode('rectanglegreen');
-            tooltip.appendChild(texttest);
-            rect.appendChild(tooltip).style.position = 'absolute';
-            rect.appendChild(tooltip).style.backgroundColor = '#000000';
-            rect.appendChild(tooltip).style.padding = '8px';
-            rect.appendChild(tooltip).style.marginTop = '20%';
-            rect.appendChild(tooltip).style.color = '#d8d9da';
-            rect.appendChild(tooltip).style.boxShadow = '0 0 2px rgba(0, 0, 0, 0.5)';
-            rect.appendChild(tooltip).style.borderRadius = '2px';
-            rect.appendChild(tooltip).style.fontWeight = '500';
-            rect.addEventListener('mouseout', () => {
-              rect.appendChild(tooltip).style.visibility = 'hidden';
-            });
-          });
-        });
-      });
-    });
-  };
+  //   red?.addEventListener('mouseenter', () => {
+  //     red.addEventListener('mouseover', () => {
+  //       const tooltip = document.createElement('span');
+  //       const texttest = document.createTextNode('rectanglered');
+  //       tooltip.appendChild(texttest);
+  //       red.appendChild(tooltip).style.position = 'absolute';
+  //       red.appendChild(tooltip).style.backgroundColor = '#000000';
+  //       red.appendChild(tooltip).style.padding = '8px';
+  //       red.appendChild(tooltip).style.float = 'top';
+  //       red.appendChild(tooltip).style.color = '#d8d9da';
+  //       red.appendChild(tooltip).style.boxShadow = '0 0 2px rgba(0, 0, 0, 0.5)';
+  //       red.appendChild(tooltip).style.borderRadius = '2px';
+  //       red.appendChild(tooltip).style.fontWeight = '500';
+  //       red.addEventListener('mouseout', () => {
+  //         red.appendChild(tooltip).style.visibility = 'hidden';
+  //       });
+  //     });
+  //     const yellow = document.getElementById('part2');
+  //     yellow?.addEventListener('mouseenter', () => {
+  //       yellow.addEventListener('mouseover', () => {
+  //         const tooltip = document.createElement('span');
+  //         const texttest = document.createTextNode('rectangleyellow');
+  //         tooltip.appendChild(texttest);
+  //         yellow.appendChild(tooltip).style.position = 'absolute';
+  //         yellow.appendChild(tooltip).style.backgroundColor = '#000000';
+  //         yellow.appendChild(tooltip).style.padding = '8px';
+  //         yellow.appendChild(tooltip).style.float = 'top';
+  //         yellow.appendChild(tooltip).style.color = '#d8d9da';
+  //         yellow.appendChild(tooltip).style.boxShadow = '0 0 2px rgba(0, 0, 0, 0.5)';
+  //         yellow.appendChild(tooltip).style.borderRadius = '2px';
+  //         yellow.appendChild(tooltip).style.fontWeight = '500';
+  //         yellow.addEventListener('mouseout', () => {
+  //           yellow.appendChild(tooltip).style.visibility = 'hidden';
+  //         });
+  //       });
+  //       const rect = document.getElementById('carre');
+  //       rect?.addEventListener('mouseenter', () => {
+  //         rect.addEventListener('mouseover', () => {
+  //           const tooltip = document.createElement('span');
+  //           const texttest = document.createTextNode('rectanglegreen');
+  //           tooltip.appendChild(texttest);
+  //           rect.appendChild(tooltip).style.position = 'absolute';
+  //           rect.appendChild(tooltip).style.backgroundColor = '#000000';
+  //           rect.appendChild(tooltip).style.padding = '8px';
+  //           rect.appendChild(tooltip).style.marginTop = '20%';
+  //           rect.appendChild(tooltip).style.color = '#d8d9da';
+  //           rect.appendChild(tooltip).style.boxShadow = '0 0 2px rgba(0, 0, 0, 0.5)';
+  //           rect.appendChild(tooltip).style.borderRadius = '2px';
+  //           rect.appendChild(tooltip).style.fontWeight = '500';
+  //           rect.addEventListener('mouseout', () => {
+  //             rect.appendChild(tooltip).style.visibility = 'hidden';
+  //           });
+  //         });
+  //       });
+  //     });
+  //   });
+  // };
 
   /*************************************test create tooltip **********************************************************/
 
@@ -2070,53 +1993,6 @@ export class SimplePanel extends PureComponent<Props, State> {
     ));
     return <ul style={styleRegion}>{mapItems}</ul>;
   };
-
-  /*************************************** create link regionbyid**************************************** */
-
-  // CreateLinkArea = () => {
-  //   // All Id in SVG Test
-  //   const allidSvg = document.getElementById('octsvg12');
-  //   allidSvg?.addEventListener('click', () => {
-  //     const elms = allidSvg.querySelectorAll('[id]');
-  //     console.log(elms);
-  //   });
-
-  // Test Svg Christophe search ID corrrigé
-
-  // const allidSvg3 = document.getElementById('octsvg12');
-  // allidSvg3?.addEventListener('click', () => {
-  //   const elms = allidSvg3.querySelectorAll('[id]');
-  //   console.log(elms);
-  // });
-  // });
-  // All Region in SVG
-  // const allidSvg2 = document.getElementById('octsvg12');
-  // allidSvg2?.addEventListener('click', () => {
-  // this.props.options.regionCoordinateSpace.forEach(region => {
-  //   console.log(region.idSVG);
-  //   console.log(region.linkURL.followLink);
-  // const dam = allidSvg2.querySelectorAll('[id]');
-  // console.log(dam);
-  // console.log('loua');
-  // });
-  // });
-
-  // const elms = document.querySelectorAll('[id]');
-  // for (var i = 0; i < elms.length; i++) {
-  //   let lpo = document.getElementById('octsvg213');
-  //   lpo?.addEventListener('click', () => {
-  //     console.log('rer');
-  //   });
-  //   let lpo1 = document.getElementById('octsvg213');
-  //   lpo1?.addEventListener('click', () => {
-  //     console.log('rer1');
-  //   });
-  //   let lpo2 = document.getElementById('octsvg213');
-  //   lpo2?.addEventListener('click', () => {
-  //     console.log('rer2');
-  //   });
-  // }
-  // };
 
   getValuesAuxiliaryMetricsRegionSVG = (region: RegionClass): string[] => {
     reqMetricAuxRegion(region, this.props);
@@ -2396,16 +2272,8 @@ export class SimplePanel extends PureComponent<Props, State> {
     let styleBackground;
     if (this.props.options.baseMap.modeSVG) {
       styleBackground = {
-        position: 'absolute',
-        // textAlign: 'center',
-        // backgroundRepeat: 'no-repeat',
         height: this.props.options.baseMap.height + 'px',
         width: this.props.options.baseMap.width + 'px',
-        // opacity: 0.8,
-        // zIndex: 4,
-        translate: '(2,1)',
-        backgroundPosition: 'bottom center',
-        transformOrigin: '50% 0%',
       } as React.CSSProperties;
     } else {
       if (this.props.options.baseMap.image.split(',')[0] === 'base64') {
@@ -2469,11 +2337,7 @@ export class SimplePanel extends PureComponent<Props, State> {
             marginTop: '-7px',
             marginLeft: '86%',
           }}
-        >
-          {/* <Button id="init" onClick={this.ZoomInitial} variant={'secondary'}>
-            =
-          </Button> */}
-        </div>
+        ></div>
         <div style={{ textAlign: 'left', position: 'relative', display: 'inline-grid' }}>
           {this.props.options.displayButton && this.state.allActionButton}
         </div>
@@ -2544,6 +2408,8 @@ export class SimplePanel extends PureComponent<Props, State> {
                   />
                   {/* <div onClick={this.CreateLinkArea}></div> */}
                   {this.htmlTooltipRegionSVG()}
+
+                  {/* Ordre d'affichage du plus éloigné au plus proche : background - liens - régions - points*/}
                   {this.displayOrientedLink()}
                   {this.fillCoordinate()}
                   {this.displayPoint()}

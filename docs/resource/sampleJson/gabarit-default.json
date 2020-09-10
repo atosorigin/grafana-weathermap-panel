@@ -49,7 +49,7 @@
   "default": {
     "templates": [
       {
-        "filtered": "device|ens3",
+        "filtered": "",
         "labelfix": true,
         "xylabel": "x|labelName#y|labelName",
         "xylabelfix": "x|90#y|90",

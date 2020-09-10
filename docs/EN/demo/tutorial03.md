@@ -1,3 +1,5 @@
+A corriger
+
 # Create an advanced dashboard with directional links
 
 [![](../../screenshots/other/Go-back.png)](README.md)
@@ -11,9 +13,9 @@ You must:
 - Complete the line `metrics` with the following line
 
 ```
-rate(node_network_receive_bytes{device="enp0s3"}[10s])
+rate(node_network_receive_bytes_total{device="ens3"}[10s])
 
-rate(node_network_transmit_bytes{device="enp0s3"}[10s])
+rate(node_network_transmit_bytes_total{device="ens3"}[10s])
 ```
 
 The "A" and "B" markers will be used to identify this query as you can see below.
@@ -74,10 +76,10 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 
 Then chosse the size of the region for your image. Here we choose :
 
-- X Min : 10
-- X Max : 50
-- Y Min : 10
-- Y Max : 50
+- X Min : 100
+- X Max : 250
+- Y Min : 100
+- Y Max : 150
 
 ![illustration1](../../screenshots/demo/tutorial03/illustration1.jpg)
 

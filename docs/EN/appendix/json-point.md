@@ -483,3 +483,7 @@ no values
 "valueMetric": ""
 
 ```
+
+# See too
+
+- [Tutorial 12 : Building your dashboard from your computer](../demo/tutorial12.md)

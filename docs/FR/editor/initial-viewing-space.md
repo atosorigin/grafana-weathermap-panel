@@ -10,17 +10,24 @@ Vous devez avoir défini un espace d'arrière plan se trouvant dans l'onglet [Di
 
 ## espace de visionnage
 
+![display](../../screenshots/editor/initial/initial-space-border.jpg)
+
+La ligne `Display space initial` est utile si vous ne choississez pas d'image d'arrière plan, c'est pourquoi, il est important de voir ou cacher les limites de la vue.
+
 ![display](../../screenshots/editor/initial/initial-space.jpg)
 
-La largeur (X MAX) et la hauteur (Y MAX) prennent les valeurs largeur et hauteur défnit par l'image que vous avez chargé à partir de l'onglet Display.
+Par défaut, La largeur (X MAX) et la hauteur (Y MAX) prennent les valeurs **largeur** et **hauteur** défnit par l'image que vous avez préalablement charger de l'onglet
+[Display](display.md).
 
 ![init-space-compete](../../screenshots/editor/initial/initial-space-complete.svg)
 
 Par défaut, l'espace de visionnage correspondra aux dimensions de l'image d'arrière plan
 
-## modifier l'espace de visionnage
+## La graduation
 
-L'espace de visionnage peut être ajuster suivant le besoin :
+L'espace de visionnage détermine la graduation. Ainsi, vous il peut être définit de plusieurs manières
+
+peut être ajuster suivant le besoin sans modifier l'image d'arrière plan
 
 - En augmentant / diminuant l'espace à droite
 - En augmentant / diminuant l'espace à gauche
@@ -35,4 +42,4 @@ sans inpacter l'image d'arrière plan
 
 # Voir aussi
 
-- [Tutorial 11 : Comment utiliser initial viewing space](tutorial11.md)
+- [Tutorial 11 : Comment utiliser initial viewing space](../tutorial11.md)

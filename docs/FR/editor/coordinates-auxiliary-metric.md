@@ -25,3 +25,7 @@ Dans l'hypothèse où vous récupérez plusieurs valeurs, le champ suivant propo
 - Error : Retourne la valeur si celle-ci est unique, retourne "erreur" s'il y a plusieurs valeurs
 
 Choisissez celle qui vous désirez.
+
+# Voir aussi
+
+- [Tutorial 08 : Comment utiliser la métrique auxiliaire](../demo/tutorial08.md)

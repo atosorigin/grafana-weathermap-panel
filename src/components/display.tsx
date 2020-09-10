@@ -142,13 +142,20 @@ class Display extends React.Component<Props, State> {
   }) => {
     const newBaseMap: Background = this.props.options.baseMap;
     const image = e.target.value;
-    const arrayImage = image.split('.');
+    //const arrayImage = image.split('.');
     newBaseMap.image = image;
-    if (image.split('.')[arrayImage.length - 1] === 'svg') {
-      newBaseMap.modeSVG = true;
-    } else {
-      newBaseMap.modeSVG = false;
-    }
+    // if (image.split(',')[0] === 'base64') {
+    //   // on ne fait rien car la base 64 peut être un jpeg ou un svg
+    //   // l'utilisateur doit bien le spécifier avant sur le switch Use SVG
+    // } else if (image.split('.')[arrayImage.length - 1] === 'svg') {
+    //   // si la valeur renseignée est une url et que l'extension du fichier est svg
+    //   // on passe automatiquement le swith Use SVG à true
+    //   newBaseMap.modeSVG = true;
+    // } else {
+    //   // si la valeur renseignée est une url et que l'extension du fichier n'est pas un svg
+    //   // on passe automatiquement le swith Use SVG à false
+    //   newBaseMap.modeSVG = false;
+    // }
     this.props.onOptionsChange({
       ...this.props.options,
       baseMap: newBaseMap,

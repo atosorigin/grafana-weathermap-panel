@@ -1,6 +1,7 @@
 import React from 'react';
 import { PanelEditorProps, SelectableValue } from '@grafana/data';
-import { SimpleOptions, GabaritFile, Metric } from '../types';
+// add Metadata
+import { SimpleOptions, GabaritFile, Metric, Metadata } from '../types';
 import { FormField, Button, Collapse, FormLabel, Select } from '@grafana/ui';
 //import /*pointClassImport, regionClassImport, gabaritPointClassImport, gabaritRegionClassImport */ '../../config/testVariable';
 import { coordParse, LabelCoord2D, Filtred, filterParse, coordParseRegion, filterParseRegion } from '../Functions/loaderGabarit';
@@ -12,10 +13,13 @@ import { LinkURLClass } from 'Models/LinkURLClass';
 //import { LowerLimitClass } from 'Models/LowerLimitClass';
 //import { TextObject } from 'Models/TextObjectClass';
 
+import { reqMetricPoint, reqMetricOrientedLink } from '../Functions/fetchMetrics';
+
 import { PointClass } from 'Models/PointClass';
 import { TextObject, GenerateTextObject } from 'Models/TextObjectClass';
 import { Style } from 'components/Parametrage/styleComponent';
 import { RegionClass, Coord4D } from 'Models/RegionClass';
+import { searchNameIsFilter } from 'Functions/getResultQuery';
 // import { initRegionCoordinateSpace } from 'Functions/initRegionCoordinateSpace';
 // import { LowerLimitClass } from 'Models/LowerLimitClass';
 // import { initPoint } from 'Functions/initPoint';
@@ -215,6 +219,52 @@ class Gabarit extends React.Component<Props, State> {
     });
   };
 
+  /**************************************CHECK TOLOAD/ADD FILTER******************************************/
+
+  addFilterDynamic = (metric: Metric, label: LabelCoord2D, value: LabelCoord2D) => {
+    let result: Metric = {
+      key: metric.key,
+      unit: metric.unit,
+      format: metric.format,
+      keyValue: metric.keyValue,
+      filter: JSON.parse(JSON.stringify(metric.filter)),
+      expr: metric.expr,
+      returnQuery: metric.returnQuery,
+      manageValue: metric.manageValue,
+    };
+    if (label.x !== value.x) {
+      result.filter!.push({ label: label.x, value: value.x });
+    }
+    if (label.y !== value.y) {
+      result.filter!.push({ label: label.y, value: value.y });
+    }
+    return result;
+  };
+
+  checkCoordinateFilterPoint = (point: PointClass, props: any) => {
+    reqMetricPoint(point, props);
+    point.mainMetric.returnQuery?.forEach((dataFrame) => {
+      const result = searchNameIsFilter(dataFrame, point.mainMetric);
+      if (result) {
+        this.props.options.arrayPoints.push(point);
+      } else {
+        console.log('Filter not found -> no load');
+      }
+    });
+  };
+
+  checkCoordinateFilterLink = (link: OrientedLinkClass, props: any) => {
+    reqMetricOrientedLink(link, props);
+    link.mainMetric.returnQuery?.forEach((dataFrame) => {
+      const result = searchNameIsFilter(dataFrame, link.mainMetric);
+      if (result) {
+        this.props.options.arrayOrientedLinks.push(link);
+      } else {
+        console.log('Filter not found -> no load');
+      }
+    });
+  };
+
   /**************************************INPUT******************************************/
 
   onToggleGabaritUrl = (isOpen: boolean): void => {
@@ -381,7 +431,8 @@ class Gabarit extends React.Component<Props, State> {
     let filterPoint: Filtred[][] = [];
     let posPoint: LabelCoord2D[] = [];
     let namePoint: string[] = [];
-    let metaPoint: string[] = [];
+    // add metadata
+    let metaPoint: Metadata[][] = [];
     let labelPoint: string[] = [];
     let positionParameterPoint: PositionParameterClass[] = [];
     let mainMetricPoint: Metric[] = [];
@@ -741,46 +792,6 @@ class Gabarit extends React.Component<Props, State> {
         );
       }
     });
-    // console.log('posPoint:')
-    // console.log(posPoint) //
-    // console.log('filterPoint:')
-    // console.log(filterPoint) //
-    // console.log('namePoint:')
-    // console.log(namePoint) //
-    // console.log('metaPoint:')
-    // console.log(metaPoint) //
-    // console.log('labelPoint:')
-    // console.log(labelPoint) //
-    // console.log('mainMetricPoint:')
-    // console.log(mainMetricPoint) //
-    // console.log('metricPoint:')
-    // console.log(metricPoint) // ----fail
-    // console.log('valueMetricPoint:')
-    // console.log(valueMetricPoint) //
-    // console.log('drawGraphicMarkerPoint:')
-    // console.log(drawGraphicMarkerPoint) //
-    // console.log('shapePoint:')
-    // console.log(shapePoint) //
-    // console.log('sizeWidthPoint:')
-    // console.log(sizeWidthPoint) //
-    // console.log('sizeHeightPoint')
-    // console.log(sizeHeightPoint) //
-    // console.log('colorPoint')
-    // console.log(colorPoint) //
-    // console.log('associateOrientedLinksOutPoint:')
-    // console.log(associateOrientedLinksOutPoint) // --------fail
-    // console.log('associateOrientedLinksInPoint:')
-    // console.log(associateOrientedLinksInPoint) // ---------fail
-    // console.log('colorMode:')
-    // console.log(colorMode) //
-    // console.log('traceBack:')
-    // console.log(traceBack) //
-    // console.log('traceBorder:')
-    // console.log(traceBorder) //
-    // console.log('linkURLPoint')
-    // console.log(linkURLPoint) // ------------------fail
-    // console.log('positionParameterPoint')
-    // console.log(positionParameterPoint) //
 
     let newID = 0;
     this.props.options.arrayPoints.forEach((element) => {
@@ -789,24 +800,26 @@ class Gabarit extends React.Component<Props, State> {
 
     let labelCoordX: string[] = [];
     let labelCoordY: string[] = [];
-    let labelCoord: LabelCoord2D[] = [];
+    let labelCoord: LabelCoord2D[][] = [];
 
     posPoint.forEach((pos, index) => {
       if (gabaritFileTmp.templateGabaritPoint[index].labelfix.toString() === 'false') {
         this.props.data.series.forEach((element) => {
-          const nameQuery: string[] =
-            element.name?.split(',').map((value) => {
-              return value.replace(/[\"{}]/gm, '');
-            }) || [];
+          if (element.refId === mainMetricPoint[index]!.refId) {
+            const nameQuery: string[] =
+              element.name?.split(',').map((value) => {
+                return value.replace(/[\"{}]/gm, '');
+              }) || [];
 
-          for (const oneQuery of nameQuery) {
-            if (nameQuery && nameQuery.length > 0) {
-              const keyValue: string[] = oneQuery.split('=');
-              if (keyValue[0] === pos.x) {
-                labelCoordX.push(keyValue[1]);
-              }
-              if (keyValue[0] === pos.y) {
-                labelCoordY.push(keyValue[1]);
+            for (const oneQuery of nameQuery) {
+              if (nameQuery && nameQuery.length > 0) {
+                const keyValue: string[] = oneQuery.split('=');
+                if (keyValue[0] === pos.x) {
+                  labelCoordX.push(keyValue[1]);
+                }
+                if (keyValue[0] === pos.y) {
+                  labelCoordY.push(keyValue[1]);
+                }
               }
             }
           }
@@ -831,21 +844,104 @@ class Gabarit extends React.Component<Props, State> {
           });
         }
       }
-    });
-    labelCoordX.forEach((element, index) => {
-      labelCoord.push({ x: labelCoordX[index], y: labelCoordY[index] });
+      if (labelCoordX.length > 0) {
+        labelCoord.push([]);
+        labelCoordX.forEach((element, add) => {
+          labelCoord[index].push({ x: labelCoordX[add], y: labelCoordY[add] });
+        });
+      } else {
+        labelCoord[index] = [];
+      }
     });
 
-    if (labelCoord.length > 0) {
-      for (const pos of labelCoord) {
+    //console.log(labelCoord)
+
+    labelCoord.forEach((labelCo) => {
+      if (labelCo.length > 0) {
+        for (const pos of labelCo) {
+          filterPoint.forEach((element, index) => {
+            const defaultPositionX = (((parseInt(pos.x, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
+            const defaultPositionY = (((parseInt(pos.y, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
+            if (metricPoint.length > 0) {
+              let toLoad: PointClass = new PointClass(
+                newID + 1,
+                linkURLPoint[index],
+                metaPoint[index],
+                gabaritFileTmp.globalGabarit.lowerLimit,
+                labelPoint[index] + '_' + newID,
+                textObj,
+                this.addFilterDynamic(mainMetricPoint[index], posPoint[index], pos),
+                metricPoint[index],
+                colorMode,
+                traceBack,
+                traceBorder,
+                positionParameterPoint[index],
+                namePoint[index] + '_' + newID,
+                valueMetricPoint[index],
+                drawGraphicMarkerPoint[index],
+                shapePoint[index],
+                sizeWidthPoint[index],
+                sizeHeightPoint[index],
+                '',
+                pos.x,
+                pos.y,
+                colorPoint[index],
+                associateOrientedLinksInPoint[index],
+                associateOrientedLinksOutPoint[index],
+                widthInitialSpace.toString(),
+                heightInitialSpace.toString(),
+                defaultPositionX,
+                defaultPositionY
+              );
+              newID++;
+              this.checkCoordinateFilterPoint(toLoad, this.props);
+            } else {
+              let toLoad: PointClass = new PointClass(
+                newID + 1,
+                linkURLPoint[index],
+                metaPoint[index],
+                gabaritFileTmp.globalGabarit.lowerLimit,
+                labelPoint[index] + '_' + newID,
+                textObj,
+                this.addFilterDynamic(mainMetricPoint[index], posPoint[index], pos),
+                [],
+                colorMode,
+                traceBack,
+                traceBorder,
+                positionParameterPoint[index],
+                namePoint[index] + '_' + newID,
+                valueMetricPoint[index],
+                drawGraphicMarkerPoint[index],
+                shapePoint[index],
+                sizeWidthPoint[index],
+                sizeHeightPoint[index],
+                '',
+                pos.x,
+                pos.y,
+                colorPoint[index],
+                associateOrientedLinksInPoint[index],
+                associateOrientedLinksOutPoint[index],
+                widthInitialSpace.toString(),
+                heightInitialSpace.toString(),
+                defaultPositionX,
+                defaultPositionY
+              );
+              newID++;
+              this.checkCoordinateFilterPoint(toLoad, this.props);
+            }
+          });
+        }
+      } else {
         filterPoint.forEach((element, index) => {
-          const defaultPositionX = (((parseInt(pos.x, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
-          const defaultPositionY = (((parseInt(pos.y, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
+          const defaultPositionX = (((parseInt(posPoint[index].x, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
+          const defaultPositionY = (((parseInt(posPoint[index].y, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
           if (metricPoint.length > 0) {
             let toLoad: PointClass = new PointClass(
               newID + 1,
               linkURLPoint[index],
-              metaPoint[index],
+              // changement
+              // metaPoint[index],
+              [],
               gabaritFileTmp.globalGabarit.lowerLimit,
               labelPoint[index] + '_' + newID,
               textObj,
@@ -862,8 +958,8 @@ class Gabarit extends React.Component<Props, State> {
               sizeWidthPoint[index],
               sizeHeightPoint[index],
               '',
-              pos.x,
-              pos.y,
+              posPoint[index].x,
+              posPoint[index].y,
               colorPoint[index],
               associateOrientedLinksInPoint[index],
               associateOrientedLinksOutPoint[index],
@@ -873,12 +969,13 @@ class Gabarit extends React.Component<Props, State> {
               defaultPositionY
             );
             newID++;
-            this.props.options.arrayPoints.push(toLoad);
+            this.checkCoordinateFilterPoint(toLoad, this.props);
           } else {
             let toLoad: PointClass = new PointClass(
               newID + 1,
               linkURLPoint[index],
-              metaPoint[index],
+              // changement
+              [],
               gabaritFileTmp.globalGabarit.lowerLimit,
               labelPoint[index] + '_' + newID,
               textObj,
@@ -895,8 +992,8 @@ class Gabarit extends React.Component<Props, State> {
               sizeWidthPoint[index],
               sizeHeightPoint[index],
               '',
-              pos.x,
-              pos.y,
+              posPoint[index].x,
+              posPoint[index].y,
               colorPoint[index],
               associateOrientedLinksInPoint[index],
               associateOrientedLinksOutPoint[index],
@@ -906,83 +1003,11 @@ class Gabarit extends React.Component<Props, State> {
               defaultPositionY
             );
             newID++;
-            this.props.options.arrayPoints.push(toLoad);
+            this.checkCoordinateFilterPoint(toLoad, this.props);
           }
         });
       }
-    } else {
-      filterPoint.forEach((element, index) => {
-        const defaultPositionX = (((parseInt(posPoint[index].x, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
-        const defaultPositionY = (((parseInt(posPoint[index].y, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
-        if (metricPoint.length > 0) {
-          let toLoad: PointClass = new PointClass(
-            newID + 1,
-            linkURLPoint[index],
-            metaPoint[index],
-            gabaritFileTmp.globalGabarit.lowerLimit,
-            labelPoint[index] + '_' + newID,
-            textObj,
-            mainMetricPoint[index],
-            metricPoint[index],
-            colorMode,
-            traceBack,
-            traceBorder,
-            positionParameterPoint[index],
-            namePoint[index] + '_' + newID,
-            valueMetricPoint[index],
-            drawGraphicMarkerPoint[index],
-            shapePoint[index],
-            sizeWidthPoint[index],
-            sizeHeightPoint[index],
-            '',
-            posPoint[index].x,
-            posPoint[index].y,
-            colorPoint[index],
-            associateOrientedLinksInPoint[index],
-            associateOrientedLinksOutPoint[index],
-            widthInitialSpace.toString(),
-            heightInitialSpace.toString(),
-            defaultPositionX,
-            defaultPositionY
-          );
-          newID++;
-          this.props.options.arrayPoints.push(toLoad);
-        } else {
-          let toLoad: PointClass = new PointClass(
-            newID + 1,
-            linkURLPoint[index],
-            metaPoint[index],
-            gabaritFileTmp.globalGabarit.lowerLimit,
-            labelPoint[index] + '_' + newID,
-            textObj,
-            mainMetricPoint[index],
-            [],
-            colorMode,
-            traceBack,
-            traceBorder,
-            positionParameterPoint[index],
-            namePoint[index] + '_' + newID,
-            valueMetricPoint[index],
-            drawGraphicMarkerPoint[index],
-            shapePoint[index],
-            sizeWidthPoint[index],
-            sizeHeightPoint[index],
-            '',
-            posPoint[index].x,
-            posPoint[index].y,
-            colorPoint[index],
-            associateOrientedLinksInPoint[index],
-            associateOrientedLinksOutPoint[index],
-            widthInitialSpace.toString(),
-            heightInitialSpace.toString(),
-            defaultPositionX,
-            defaultPositionY
-          );
-          newID++;
-          this.props.options.arrayPoints.push(toLoad);
-        }
-      });
-    }
+    });
 
     /* Link */
     //Template
@@ -1071,12 +1096,15 @@ class Gabarit extends React.Component<Props, State> {
       if (!nameLink[index]) {
         nameLink[index] = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].name;
       }
-      metaLink.push(link.meta);
+      // changement
+      metaLink.push(link.meta.toString());
       if (!metaLink[index]) {
-        metaLink[index] = gabaritFileTmp.templateGabaritLinkDefault[0].meta;
+        // changement
+        [] = gabaritFileTmp.templateGabaritLinkDefault[0].meta;
       }
       if (!metaLink[index]) {
-        metaLink[index] = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].meta;
+        // changement
+        [] = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].meta;
       }
       labelLink.push(link.label);
       if (!labelLink[index]) {
@@ -1270,7 +1298,6 @@ class Gabarit extends React.Component<Props, State> {
       );
       linkURLLink.push(new LinkURLClass(link.linkURL.followLink, link.linkURL.hoveringTooltipLink, link.linkURL.hoveringTooltipText));
       if (!linkURLLink[index].followLink) {
-        console.log('default spé');
         linkURLLink[index] = new LinkURLClass(
           gabaritFileTmp.templateGabaritLinkDefault[0].linkURL.followLink,
           gabaritFileTmp.templateGabaritLinkDefault[0].linkURL.hoveringTooltipLink,
@@ -1278,7 +1305,6 @@ class Gabarit extends React.Component<Props, State> {
         );
       }
       if (!linkURLLink[index].followLink) {
-        console.log('default default');
         linkURLLink[index] = new LinkURLClass(
           this.props.options.gabaritDefault.templateGabaritLinkDefault[0].linkURL.followLink,
           this.props.options.gabaritDefault.templateGabaritLinkDefault[0].linkURL.hoveringTooltipLink,
@@ -1340,200 +1366,578 @@ class Gabarit extends React.Component<Props, State> {
       newID++;
     });
 
-    filterLink.forEach((element, index) => {
-      const defaultPositionAX = (((parseInt(posALink[index].x, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
-      const defaultPositionBX = (((parseInt(posBLink[index].x, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
-      const defaultPositionCX = (((parseInt(posCLink[index].x, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
-      const defaultPositionAY = (((parseInt(posALink[index].y, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
-      const defaultPositionBY = (((parseInt(posBLink[index].y, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
-      const defaultPositionCY = (((parseInt(posCLink[index].y, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
-      let maA = metricALink.length;
-      let maB = metricBLink.length;
-      if (maA > 0 && maB > 0) {
-        let toLoad: OrientedLinkClass = new OrientedLinkClass(
-          newID + 1,
-          linkURLLink[index],
-          metaLink[index],
-          gabaritFileTmp.globalGabarit.lowerLimit,
-          labelLink[index] + '_' + newID,
-          textObj,
-          mainMetricALink[index],
-          metricALink[index],
-          colorMode,
-          traceBack,
-          traceBorder,
-          positionParameterLink[index],
-          nameLink[index],
-          orientationLink[index],
-          sizeLink[index],
-          posALink[index].x,
-          posALink[index].y,
-          colorALink[index],
-          posBLink[index].x,
-          posBLink[index].y,
-          colorBLink[index],
-          valueMetricALink[index],
-          valueMetricBLink[index],
-          pointInLink[index],
-          pointOutLink[index],
-          regionInLink[index],
-          regionOutLink[index],
-          this.props.options.zIndexOrientedLink + 1,
-          posCLink[index].x,
-          posCLink[index].y,
-          isIncurvedLink[index],
-          mainMetricBLink[index],
-          metricBLink[index],
-          widthInitialSpace.toString(),
-          heightInitialSpace.toString(),
-          defaultPositionAX,
-          defaultPositionAY,
-          defaultPositionBX,
-          defaultPositionBY,
-          defaultPositionCX,
-          defaultPositionCY
-        );
-        newID++;
-        this.props.options.arrayOrientedLinks.push(toLoad);
+    labelCoordX = [];
+    labelCoordY = [];
+    let labelCoordA: LabelCoord2D[][] = [];
+
+    posALink.forEach((pos, index) => {
+      if (gabaritFileTmp.templateGabaritLink[index].labelfix.toString() === 'false') {
+        this.props.data.series.forEach((element) => {
+          if (element.refId === mainMetricALink[index]!.refId) {
+            const nameQuery: string[] =
+              element.name?.split(',').map((value) => {
+                return value.replace(/[\"{}]/gm, '');
+              }) || [];
+
+            for (const oneQuery of nameQuery) {
+              if (nameQuery && nameQuery.length > 0) {
+                const keyValue: string[] = oneQuery.split('=');
+                if (keyValue[0] === pos.x) {
+                  labelCoordX.push(keyValue[1]);
+                }
+                if (keyValue[0] === pos.y) {
+                  labelCoordY.push(keyValue[1]);
+                }
+              }
+            }
+          }
+        });
+        if (labelCoordX.length > labelCoordY.length) {
+          labelCoordX.forEach((element, index) => {
+            if (!labelCoordX[index]) {
+              labelCoordX[index] = pos.x;
+            }
+            if (!labelCoordY[index]) {
+              labelCoordY[index] = pos.y;
+            }
+          });
+        } else {
+          labelCoordY.forEach((element, index) => {
+            if (!labelCoordX[index]) {
+              labelCoordX[index] = pos.x;
+            }
+            if (!labelCoordY[index]) {
+              labelCoordY[index] = pos.y;
+            }
+          });
+        }
       }
-      if (!(maA > 0) && maB > 0) {
-        let toLoad: OrientedLinkClass = new OrientedLinkClass(
-          newID + 1,
-          linkURLLink[index],
-          metaLink[index],
-          gabaritFileTmp.globalGabarit.lowerLimit,
-          labelLink[index] + '_' + newID,
-          textObj,
-          mainMetricALink[index],
-          [],
-          colorMode,
-          traceBack,
-          traceBorder,
-          positionParameterLink[index],
-          nameLink[index],
-          orientationLink[index],
-          sizeLink[index],
-          posALink[index].x,
-          posALink[index].y,
-          colorALink[index],
-          posBLink[index].x,
-          posBLink[index].y,
-          colorBLink[index],
-          valueMetricALink[index],
-          valueMetricBLink[index],
-          pointInLink[index],
-          pointOutLink[index],
-          regionInLink[index],
-          regionOutLink[index],
-          this.props.options.zIndexOrientedLink + 1,
-          posCLink[index].x,
-          posCLink[index].y,
-          isIncurvedLink[index],
-          mainMetricBLink[index],
-          metricBLink[index],
-          widthInitialSpace.toString(),
-          heightInitialSpace.toString(),
-          defaultPositionAX,
-          defaultPositionAY,
-          defaultPositionBX,
-          defaultPositionBY,
-          defaultPositionCX,
-          defaultPositionCY
-        );
-        newID++;
-        this.props.options.arrayOrientedLinks.push(toLoad);
-      } else if (maA > 0 && !(maB > 0)) {
-        let toLoad: OrientedLinkClass = new OrientedLinkClass(
-          newID + 1,
-          linkURLLink[index],
-          metaLink[index],
-          gabaritFileTmp.globalGabarit.lowerLimit,
-          labelLink[index] + '_' + newID,
-          textObj,
-          mainMetricALink[index],
-          metricALink[index],
-          colorMode,
-          traceBack,
-          traceBorder,
-          positionParameterLink[index],
-          nameLink[index],
-          orientationLink[index],
-          sizeLink[index],
-          posALink[index].x,
-          posALink[index].y,
-          colorALink[index],
-          posBLink[index].x,
-          posBLink[index].y,
-          colorBLink[index],
-          valueMetricALink[index],
-          valueMetricBLink[index],
-          pointInLink[index],
-          pointOutLink[index],
-          regionInLink[index],
-          regionOutLink[index],
-          this.props.options.zIndexOrientedLink + 1,
-          posCLink[index].x,
-          posCLink[index].y,
-          isIncurvedLink[index],
-          mainMetricBLink[index],
-          [],
-          widthInitialSpace.toString(),
-          heightInitialSpace.toString(),
-          defaultPositionAX,
-          defaultPositionAY,
-          defaultPositionBX,
-          defaultPositionBY,
-          defaultPositionCX,
-          defaultPositionCY
-        );
-        newID++;
-        this.props.options.arrayOrientedLinks.push(toLoad);
+      if (labelCoordX.length > 0) {
+        labelCoordX.forEach((element, index) => {
+          labelCoordA[index].push({ x: labelCoordX[index], y: labelCoordY[index] });
+        });
       } else {
-        let toLoad: OrientedLinkClass = new OrientedLinkClass(
-          newID + 1,
-          linkURLLink[index],
-          metaLink[index],
-          gabaritFileTmp.globalGabarit.lowerLimit,
-          labelLink[index] + '_' + newID,
-          textObj,
-          mainMetricALink[index],
-          [],
-          colorMode,
-          traceBack,
-          traceBorder,
-          positionParameterLink[index],
-          nameLink[index],
-          orientationLink[index],
-          sizeLink[index],
-          posALink[index].x,
-          posALink[index].y,
-          colorALink[index],
-          posBLink[index].x,
-          posBLink[index].y,
-          colorBLink[index],
-          valueMetricALink[index],
-          valueMetricBLink[index],
-          pointInLink[index],
-          pointOutLink[index],
-          regionInLink[index],
-          regionOutLink[index],
-          this.props.options.zIndexOrientedLink + 1,
-          posCLink[index].x,
-          posCLink[index].y,
-          isIncurvedLink[index],
-          mainMetricBLink[index],
-          [],
-          widthInitialSpace.toString(),
-          heightInitialSpace.toString(),
-          defaultPositionAX,
-          defaultPositionAY,
-          defaultPositionBX,
-          defaultPositionBY,
-          defaultPositionCX,
-          defaultPositionCY
-        );
-        newID++;
-        this.props.options.arrayOrientedLinks.push(toLoad);
+        labelCoordA[index] = [];
+      }
+    });
+
+    labelCoordX = [];
+    labelCoordY = [];
+    let labelCoordB: LabelCoord2D[][] = [];
+
+    posALink.forEach((pos, index) => {
+      if (gabaritFileTmp.templateGabaritLink[index].labelfix.toString() === 'false') {
+        this.props.data.series.forEach((element) => {
+          if (element.refId === mainMetricBLink[index]!.refId) {
+            const nameQuery: string[] =
+              element.name?.split(',').map((value) => {
+                return value.replace(/[\"{}]/gm, '');
+              }) || [];
+
+            for (const oneQuery of nameQuery) {
+              if (nameQuery && nameQuery.length > 0) {
+                const keyValue: string[] = oneQuery.split('=');
+                if (keyValue[0] === pos.x) {
+                  labelCoordX.push(keyValue[1]);
+                }
+                if (keyValue[0] === pos.y) {
+                  labelCoordY.push(keyValue[1]);
+                }
+              }
+            }
+          }
+        });
+        if (labelCoordX.length > labelCoordY.length) {
+          labelCoordX.forEach((element, index) => {
+            if (!labelCoordX[index]) {
+              labelCoordX[index] = pos.x;
+            }
+            if (!labelCoordY[index]) {
+              labelCoordY[index] = pos.y;
+            }
+          });
+        } else {
+          labelCoordY.forEach((element, index) => {
+            if (!labelCoordX[index]) {
+              labelCoordX[index] = pos.x;
+            }
+            if (!labelCoordY[index]) {
+              labelCoordY[index] = pos.y;
+            }
+          });
+        }
+      }
+      if (labelCoordX.length > 0) {
+        labelCoordX.forEach((element, index) => {
+          labelCoordB[index].push({ x: labelCoordX[index], y: labelCoordY[index] });
+        });
+      } else {
+        labelCoordB[index] = [];
+      }
+    });
+
+    labelCoordX = [];
+    labelCoordY = [];
+    let labelCoordC: LabelCoord2D[][] = [];
+
+    posALink.forEach((pos, index) => {
+      if (gabaritFileTmp.templateGabaritLink[index].labelfix.toString() === 'false') {
+        this.props.data.series.forEach((element) => {
+          const nameQuery: string[] =
+            element.name?.split(',').map((value) => {
+              return value.replace(/[\"{}]/gm, '');
+            }) || [];
+
+          for (const oneQuery of nameQuery) {
+            if (nameQuery && nameQuery.length > 0) {
+              const keyValue: string[] = oneQuery.split('=');
+              if (keyValue[0] === pos.x) {
+                labelCoordX.push(keyValue[1]);
+              }
+              if (keyValue[0] === pos.y) {
+                labelCoordY.push(keyValue[1]);
+              }
+            }
+          }
+        });
+        if (labelCoordX.length > labelCoordY.length) {
+          labelCoordX.forEach((element, index) => {
+            if (!labelCoordX[index]) {
+              labelCoordX[index] = pos.x;
+            }
+            if (!labelCoordY[index]) {
+              labelCoordY[index] = pos.y;
+            }
+          });
+        } else {
+          labelCoordY.forEach((element, index) => {
+            if (!labelCoordX[index]) {
+              labelCoordX[index] = pos.x;
+            }
+            if (!labelCoordY[index]) {
+              labelCoordY[index] = pos.y;
+            }
+          });
+        }
+      }
+      if (labelCoordX.length > 0) {
+        labelCoordX.forEach((element, index) => {
+          labelCoordC[index].push({ x: labelCoordX[index], y: labelCoordY[index] });
+        });
+      } else {
+        labelCoordC[index] = [];
+      }
+    });
+
+    labelCoordA.forEach((element, coordindex) => {
+      if (element.length > 0) {
+        for (const pos of element) {
+          filterLink.forEach((element, index) => {
+            const defaultPositionAX = (((parseInt(pos.x, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
+            const defaultPositionBX = (
+              ((parseInt(labelCoordB[coordindex][index].x, 10) - xMinInitialSpace) / widthInitialSpace) *
+              widthBackground
+            ).toString();
+            const defaultPositionCX = (
+              ((parseInt(labelCoordC[coordindex][index].x, 10) - xMinInitialSpace) / widthInitialSpace) *
+              widthBackground
+            ).toString();
+            const defaultPositionAY = (((parseInt(pos.y, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
+            const defaultPositionBY = (
+              ((parseInt(labelCoordB[coordindex][index].y, 10) - yMinInitialSpace) / heightInitialSpace) *
+              heightBackground
+            ).toString();
+            const defaultPositionCY = (
+              ((parseInt(labelCoordC[coordindex][index].y, 10) - yMinInitialSpace) / heightInitialSpace) *
+              heightBackground
+            ).toString();
+            let maA = metricALink.length;
+            let maB = metricBLink.length;
+            if (maA > 0 && maB > 0) {
+              let toLoad: OrientedLinkClass = new OrientedLinkClass(
+                newID + 1,
+                linkURLLink[index],
+                [],
+                gabaritFileTmp.globalGabarit.lowerLimit,
+                labelLink[index] + '_' + newID,
+                textObj,
+                this.addFilterDynamic(mainMetricALink[index], posALink[index], pos),
+                metricALink[index],
+                colorMode,
+                traceBack,
+                traceBorder,
+                positionParameterLink[index],
+                nameLink[index],
+                orientationLink[index],
+                sizeLink[index],
+                pos.x,
+                pos.y,
+                colorALink[index],
+                labelCoordB[coordindex][index].x,
+                labelCoordB[coordindex][index].y,
+                colorBLink[index],
+                valueMetricALink[index],
+                valueMetricBLink[index],
+                pointInLink[index],
+                pointOutLink[index],
+                regionInLink[index],
+                regionOutLink[index],
+                this.props.options.zIndexOrientedLink + 1,
+                labelCoordC[coordindex][index].x,
+                labelCoordC[coordindex][index].y,
+                isIncurvedLink[index],
+                this.addFilterDynamic(mainMetricBLink[index], posALink[index], pos),
+                metricBLink[index],
+                widthInitialSpace.toString(),
+                heightInitialSpace.toString(),
+                defaultPositionAX,
+                defaultPositionAY,
+                defaultPositionBX,
+                defaultPositionBY,
+                defaultPositionCX,
+                defaultPositionCY
+              );
+              newID++;
+              this.checkCoordinateFilterLink(toLoad, this.props);
+            }
+            if (!(maA > 0) && maB > 0) {
+              let toLoad: OrientedLinkClass = new OrientedLinkClass(
+                newID + 1,
+                linkURLLink[index],
+                [],
+                gabaritFileTmp.globalGabarit.lowerLimit,
+                labelLink[index] + '_' + newID,
+                textObj,
+                this.addFilterDynamic(mainMetricALink[index], posALink[index], pos),
+                [],
+                colorMode,
+                traceBack,
+                traceBorder,
+                positionParameterLink[index],
+                nameLink[index],
+                orientationLink[index],
+                sizeLink[index],
+                pos.x,
+                pos.y,
+                colorALink[index],
+                labelCoordB[coordindex][index].x,
+                labelCoordB[coordindex][index].y,
+                colorBLink[index],
+                valueMetricALink[index],
+                valueMetricBLink[index],
+                pointInLink[index],
+                pointOutLink[index],
+                regionInLink[index],
+                regionOutLink[index],
+                this.props.options.zIndexOrientedLink + 1,
+                labelCoordC[coordindex][index].x,
+                labelCoordC[coordindex][index].y,
+                isIncurvedLink[index],
+                this.addFilterDynamic(mainMetricBLink[index], posALink[index], pos),
+                metricBLink[index],
+                widthInitialSpace.toString(),
+                heightInitialSpace.toString(),
+                defaultPositionAX,
+                defaultPositionAY,
+                defaultPositionBX,
+                defaultPositionBY,
+                defaultPositionCX,
+                defaultPositionCY
+              );
+              newID++;
+              this.checkCoordinateFilterLink(toLoad, this.props);
+            } else if (maA > 0 && !(maB > 0)) {
+              let toLoad: OrientedLinkClass = new OrientedLinkClass(
+                newID + 1,
+                linkURLLink[index],
+                [],
+                gabaritFileTmp.globalGabarit.lowerLimit,
+                labelLink[index] + '_' + newID,
+                textObj,
+                this.addFilterDynamic(mainMetricALink[index], posALink[index], pos),
+                metricALink[index],
+                colorMode,
+                traceBack,
+                traceBorder,
+                positionParameterLink[index],
+                nameLink[index],
+                orientationLink[index],
+                sizeLink[index],
+                pos.x,
+                pos.y,
+                colorALink[index],
+                labelCoordB[coordindex][index].x,
+                labelCoordB[coordindex][index].y,
+                colorBLink[index],
+                valueMetricALink[index],
+                valueMetricBLink[index],
+                pointInLink[index],
+                pointOutLink[index],
+                regionInLink[index],
+                regionOutLink[index],
+                this.props.options.zIndexOrientedLink + 1,
+                labelCoordC[coordindex][index].x,
+                labelCoordC[coordindex][index].y,
+                isIncurvedLink[index],
+                this.addFilterDynamic(mainMetricBLink[index], posALink[index], pos),
+                [],
+                widthInitialSpace.toString(),
+                heightInitialSpace.toString(),
+                defaultPositionAX,
+                defaultPositionAY,
+                defaultPositionBX,
+                defaultPositionBY,
+                defaultPositionCX,
+                defaultPositionCY
+              );
+              newID++;
+              this.checkCoordinateFilterLink(toLoad, this.props);
+            } else {
+              let toLoad: OrientedLinkClass = new OrientedLinkClass(
+                newID + 1,
+                linkURLLink[index],
+                [],
+                gabaritFileTmp.globalGabarit.lowerLimit,
+                labelLink[index] + '_' + newID,
+                textObj,
+                this.addFilterDynamic(mainMetricALink[index], posALink[index], pos),
+                [],
+                colorMode,
+                traceBack,
+                traceBorder,
+                positionParameterLink[index],
+                nameLink[index],
+                orientationLink[index],
+                sizeLink[index],
+                pos.x,
+                pos.y,
+                colorALink[index],
+                labelCoordB[coordindex][index].x,
+                labelCoordB[coordindex][index].y,
+                colorBLink[index],
+                valueMetricALink[index],
+                valueMetricBLink[index],
+                pointInLink[index],
+                pointOutLink[index],
+                regionInLink[index],
+                regionOutLink[index],
+                this.props.options.zIndexOrientedLink + 1,
+                labelCoordC[coordindex][index].x,
+                labelCoordC[coordindex][index].y,
+                isIncurvedLink[index],
+                this.addFilterDynamic(mainMetricBLink[index], posALink[index], pos),
+                [],
+                widthInitialSpace.toString(),
+                heightInitialSpace.toString(),
+                defaultPositionAX,
+                defaultPositionAY,
+                defaultPositionBX,
+                defaultPositionBY,
+                defaultPositionCX,
+                defaultPositionCY
+              );
+              newID++;
+              this.checkCoordinateFilterLink(toLoad, this.props);
+            }
+          });
+        } /////////////////
+      } else {
+        filterLink.forEach((element, index) => {
+          const defaultPositionAX = (((parseInt(posALink[index].x, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
+          const defaultPositionBX = (((parseInt(posBLink[index].x, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
+          const defaultPositionCX = (((parseInt(posCLink[index].x, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
+          const defaultPositionAY = (((parseInt(posALink[index].y, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
+          const defaultPositionBY = (((parseInt(posBLink[index].y, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
+          const defaultPositionCY = (((parseInt(posCLink[index].y, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
+          let maA = metricALink.length;
+          let maB = metricBLink.length;
+          if (maA > 0 && maB > 0) {
+            let toLoad: OrientedLinkClass = new OrientedLinkClass(
+              newID + 1,
+              linkURLLink[index],
+              [],
+              gabaritFileTmp.globalGabarit.lowerLimit,
+              labelLink[index] + '_' + newID,
+              textObj,
+              mainMetricALink[index],
+              metricALink[index],
+              colorMode,
+              traceBack,
+              traceBorder,
+              positionParameterLink[index],
+              nameLink[index],
+              orientationLink[index],
+              sizeLink[index],
+              posALink[index].x,
+              posALink[index].y,
+              colorALink[index],
+              posBLink[index].x,
+              posBLink[index].y,
+              colorBLink[index],
+              valueMetricALink[index],
+              valueMetricBLink[index],
+              pointInLink[index],
+              pointOutLink[index],
+              regionInLink[index],
+              regionOutLink[index],
+              this.props.options.zIndexOrientedLink + 1,
+              posCLink[index].x,
+              posCLink[index].y,
+              isIncurvedLink[index],
+              mainMetricBLink[index],
+              metricBLink[index],
+              widthInitialSpace.toString(),
+              heightInitialSpace.toString(),
+              defaultPositionAX,
+              defaultPositionAY,
+              defaultPositionBX,
+              defaultPositionBY,
+              defaultPositionCX,
+              defaultPositionCY
+            );
+            newID++;
+            this.checkCoordinateFilterLink(toLoad, this.props);
+          }
+          if (!(maA > 0) && maB > 0) {
+            let toLoad: OrientedLinkClass = new OrientedLinkClass(
+              newID + 1,
+              linkURLLink[index],
+              [],
+              gabaritFileTmp.globalGabarit.lowerLimit,
+              labelLink[index] + '_' + newID,
+              textObj,
+              mainMetricALink[index],
+              [],
+              colorMode,
+              traceBack,
+              traceBorder,
+              positionParameterLink[index],
+              nameLink[index],
+              orientationLink[index],
+              sizeLink[index],
+              posALink[index].x,
+              posALink[index].y,
+              colorALink[index],
+              posBLink[index].x,
+              posBLink[index].y,
+              colorBLink[index],
+              valueMetricALink[index],
+              valueMetricBLink[index],
+              pointInLink[index],
+              pointOutLink[index],
+              regionInLink[index],
+              regionOutLink[index],
+              this.props.options.zIndexOrientedLink + 1,
+              posCLink[index].x,
+              posCLink[index].y,
+              isIncurvedLink[index],
+              mainMetricBLink[index],
+              metricBLink[index],
+              widthInitialSpace.toString(),
+              heightInitialSpace.toString(),
+              defaultPositionAX,
+              defaultPositionAY,
+              defaultPositionBX,
+              defaultPositionBY,
+              defaultPositionCX,
+              defaultPositionCY
+            );
+            newID++;
+            this.checkCoordinateFilterLink(toLoad, this.props);
+          } else if (maA > 0 && !(maB > 0)) {
+            let toLoad: OrientedLinkClass = new OrientedLinkClass(
+              newID + 1,
+              linkURLLink[index],
+              [],
+              gabaritFileTmp.globalGabarit.lowerLimit,
+              labelLink[index] + '_' + newID,
+              textObj,
+              mainMetricALink[index],
+              metricALink[index],
+              colorMode,
+              traceBack,
+              traceBorder,
+              positionParameterLink[index],
+              nameLink[index],
+              orientationLink[index],
+              sizeLink[index],
+              posALink[index].x,
+              posALink[index].y,
+              colorALink[index],
+              posBLink[index].x,
+              posBLink[index].y,
+              colorBLink[index],
+              valueMetricALink[index],
+              valueMetricBLink[index],
+              pointInLink[index],
+              pointOutLink[index],
+              regionInLink[index],
+              regionOutLink[index],
+              this.props.options.zIndexOrientedLink + 1,
+              posCLink[index].x,
+              posCLink[index].y,
+              isIncurvedLink[index],
+              mainMetricBLink[index],
+              [],
+              widthInitialSpace.toString(),
+              heightInitialSpace.toString(),
+              defaultPositionAX,
+              defaultPositionAY,
+              defaultPositionBX,
+              defaultPositionBY,
+              defaultPositionCX,
+              defaultPositionCY
+            );
+            newID++;
+            this.checkCoordinateFilterLink(toLoad, this.props);
+          } else {
+            let toLoad: OrientedLinkClass = new OrientedLinkClass(
+              newID + 1,
+              linkURLLink[index],
+              [],
+              gabaritFileTmp.globalGabarit.lowerLimit,
+              labelLink[index] + '_' + newID,
+              textObj,
+              mainMetricALink[index],
+              [],
+              colorMode,
+              traceBack,
+              traceBorder,
+              positionParameterLink[index],
+              nameLink[index],
+              orientationLink[index],
+              sizeLink[index],
+              posALink[index].x,
+              posALink[index].y,
+              colorALink[index],
+              posBLink[index].x,
+              posBLink[index].y,
+              colorBLink[index],
+              valueMetricALink[index],
+              valueMetricBLink[index],
+              pointInLink[index],
+              pointOutLink[index],
+              regionInLink[index],
+              regionOutLink[index],
+              this.props.options.zIndexOrientedLink + 1,
+              posCLink[index].x,
+              posCLink[index].y,
+              isIncurvedLink[index],
+              mainMetricBLink[index],
+              [],
+              widthInitialSpace.toString(),
+              heightInitialSpace.toString(),
+              defaultPositionAX,
+              defaultPositionAY,
+              defaultPositionBX,
+              defaultPositionBY,
+              defaultPositionCX,
+              defaultPositionCY
+            );
+            newID++;
+            this.checkCoordinateFilterLink(toLoad, this.props);
+          }
+        });
       }
     });
 
@@ -1593,12 +1997,17 @@ class Gabarit extends React.Component<Props, State> {
           this.props.options.gabaritDefault.templateGabaritRegionDefault[0].linkURL.hoveringTooltipText
         );
       }
-      metaRegion.push(region.meta);
+      // changement
+      metaRegion.push(region.meta.toString());
       if (!metaRegion[index]) {
-        metaRegion[index] = gabaritFileTmp.templateGabaritRegionDefault[0].meta;
+        // changement
+        // metaRegion[index] = gabaritFileTmp.templateGabaritRegionDefault[0].meta;
+        [] = gabaritFileTmp.templateGabaritRegionDefault[0].meta;
       }
       if (!metaRegion[index]) {
-        metaRegion[index] = this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta;
+        // changement
+        // metaRegion[index] = this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta;
+        [] = this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta;
       }
       labelRegion.push(region.label);
       if (!labelRegion[index]) {
@@ -1743,7 +2152,7 @@ class Gabarit extends React.Component<Props, State> {
         let toLoad: RegionClass = new RegionClass(
           newID + 1,
           linkURLRegion[index],
-          metaRegion[index],
+          [],
           gabaritFileTmp.globalGabarit.lowerLimit,
           labelRegion[index] + '_' + newID,
           textObj,
@@ -1768,7 +2177,7 @@ class Gabarit extends React.Component<Props, State> {
         let toLoad: RegionClass = new RegionClass(
           newID + 1,
           linkURLRegion[index],
-          metaRegion[index],
+          [],
           gabaritFileTmp.globalGabarit.lowerLimit,
           labelRegion[index] + '_' + newID,
           textObj,

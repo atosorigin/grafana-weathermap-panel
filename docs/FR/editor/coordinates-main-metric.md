@@ -29,3 +29,8 @@ Dans l'hypothèse où vous récupérez plusieurs valeurs, le champ suivant propo
 - Error : Retourne la valeur si celle-ci est unique, retourne "erreur" s'il y a plusieurs valeurs
 
 Choisissez celle qui vous désirez.
+
+# Voir aussi
+
+- [Tutorial 05 : Créer une requête personnalisable](../demo/tutorial05.md)
+- [Tutorial 06 : Créer une modélisation avancée](../demo/tutorial06.md)

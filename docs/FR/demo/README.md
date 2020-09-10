@@ -4,7 +4,7 @@
 
 Sous la forme d'une **démo**, vous apprendrez à utiliser le plugin pour obtenir un tableau de bord dynamique
 
-- 1 [Les basiques](tutorial01.md)
+- 1 [Ajoutez SVG dans votre tableau de bord](tutorial01.md)
 
   [![demo1](../../screenshots/demo/demo01.png)](tutorial01.md)
 

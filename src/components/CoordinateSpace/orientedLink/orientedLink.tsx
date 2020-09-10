@@ -17,6 +17,8 @@ import PositionParameter from '../../Parametrage/positionParameters';
 import ManageQuery from '../../CoordinateSpace/manageQuery';
 import ManageAuxiliaryQuery from '../../CoordinateSpace/manageAuxiliaryQuery';
 import { cloneOrientedLink } from '../../../Functions/initOrientedLink';
+import { PointClass } from 'Models/PointClass';
+import { RegionClass } from 'Models/RegionClass';
 
 /**
  * IProps
@@ -287,16 +289,91 @@ export default class OrientedLink extends React.Component<Props, State> {
   /** set point in/out to empty in if orientedLink is associate to region in/out
    *  set region in/out to empty in if orientedLink is associate to point in/out
    */
-  private updateAssociatePointAndRegion = (orientedLink: OrientedLinkClass, name: string) => {
+  private updateAssociatePointAndRegion = (newOrientedLink: OrientedLinkClass, name: string): OrientedLinkClass => {
+    const arrayPoint: PointClass[] = this.props.options.arrayPoints;
+    const arrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
     if (name.startsWith('pointIn')) {
-      orientedLink = editGoodParameterOrientedLink('regionIn', orientedLink, '', {});
+      // supprime la valeur de regionIn si un point est associé à un lien en entrée
+      newOrientedLink = editGoodParameterOrientedLink('regionIn', newOrientedLink, '', {});
+
+      // MAJ des valeurs x et y du pointA du lien si un point est associé en entrée
+      arrayPoint.forEach((point) => {
+        if (this.state.orientedLink.pointIn === point.name || this.state.orientedLink.pointIn === point.label) {
+          newOrientedLink.pointAPositionXDefault = point.positionXDefault;
+          newOrientedLink.pointAPositionYDefault = point.positionYDefault;
+          newOrientedLink = editGoodParameterOrientedLink('pointAX', newOrientedLink, point.positionShapeX, {});
+          newOrientedLink = editGoodParameterOrientedLink('pointAY', newOrientedLink, point.positionShapeY, {});
+        }
+      });
     } else if (name.startsWith('regionIn')) {
-      orientedLink = editGoodParameterOrientedLink('pointIn', orientedLink, '', {});
+      // supprime la valeur de pointIn si une region est associée à un lien en entrée
+      newOrientedLink = editGoodParameterOrientedLink('pointIn', newOrientedLink, '', {});
+
+      // MAJ des valeurs x et y du pointA du lien si une region est associée en entrée
+      arrayRegion.forEach((region) => {
+        if (this.state.orientedLink.regionIn === region.label) {
+          newOrientedLink = editGoodParameterOrientedLink(
+            'pointAX',
+            newOrientedLink,
+            (parseInt(region.coords.xMax, 10) - parseInt(region.coords.xMin, 10)).toString(),
+            {}
+          );
+          newOrientedLink = editGoodParameterOrientedLink(
+            'pointAY',
+            newOrientedLink,
+            (parseInt(region.coords.yMax, 10) - parseInt(region.coords.yMin, 10)).toString(),
+            {}
+          );
+          this.state.orientedLink.pointAPositionXDefault = (
+            parseInt(region.coordsDefault.xMax, 10) - parseInt(region.coordsDefault.xMin, 10)
+          ).toString();
+          this.state.orientedLink.pointAPositionYDefault = (
+            parseInt(region.coordsDefault.yMax, 10) - parseInt(region.coordsDefault.yMin, 10)
+          ).toString();
+        }
+      });
     } else if (name.startsWith('pointOut')) {
-      orientedLink = editGoodParameterOrientedLink('regionOut', orientedLink, '', {});
+      // supprime la valeur de regionOut si un point est associé à un lien en sortie
+      newOrientedLink = editGoodParameterOrientedLink('regionOut', newOrientedLink, '', {});
+
+      // MAJ des valeurs x et y du pointB du lien si un point est associé en sortie
+      arrayPoint.forEach((point) => {
+        if (this.state.orientedLink.pointOut === point.name || this.state.orientedLink.pointOut === point.label) {
+          this.state.orientedLink.pointBPositionXDefault = point.positionXDefault;
+          this.state.orientedLink.pointBPositionYDefault = point.positionYDefault;
+          newOrientedLink = editGoodParameterOrientedLink('pointBX', newOrientedLink, point.positionShapeX, {});
+          newOrientedLink = editGoodParameterOrientedLink('pointBY', newOrientedLink, point.positionShapeY, {});
+        }
+      });
     } else if (name.startsWith('regionOut')) {
-      orientedLink = editGoodParameterOrientedLink('pointOut', orientedLink, '', {});
+      // supprime la valeur de pointOut si une region est associée à un lien en sortie
+      newOrientedLink = editGoodParameterOrientedLink('pointOut', newOrientedLink, '', {});
+
+      // MAJ des valeurs x et y du pointB du lien si une region est associée en entrée
+      arrayRegion.forEach((region) => {
+        if (this.state.orientedLink.regionOut === region.label) {
+          this.state.orientedLink.pointBPositionXDefault = (
+            parseInt(region.coordsDefault.xMax, 10) - parseInt(region.coordsDefault.xMin, 10)
+          ).toString();
+          this.state.orientedLink.pointBPositionYDefault = (
+            parseInt(region.coordsDefault.yMax, 10) - parseInt(region.coordsDefault.yMin, 10)
+          ).toString();
+          newOrientedLink = editGoodParameterOrientedLink(
+            'pointBX',
+            newOrientedLink,
+            (parseInt(region.coords.xMax, 10) - parseInt(region.coords.xMin, 10)).toString(),
+            {}
+          );
+          newOrientedLink = editGoodParameterOrientedLink(
+            'pointBY',
+            newOrientedLink,
+            (parseInt(region.coords.yMax, 10) - parseInt(region.coords.yMin, 10)).toString(),
+            {}
+          );
+        }
+      });
     }
+    return newOrientedLink;
   };
 
   /** create dynamic input */
@@ -333,7 +410,7 @@ export default class OrientedLink extends React.Component<Props, State> {
             <InputSelectOrientedLink
               key={obj.id}
               _onChange={(value: SelectableValue<string>, name: string, index: number) => {
-                const newOrientedLink: OrientedLinkClass = this.state.orientedLink;
+                let newOrientedLink: OrientedLinkClass = this.state.orientedLink;
                 editGoodParameterOrientedLink(name, newOrientedLink, value.value || '', value);
                 this.updateAssociatePointAndRegion(newOrientedLink, name);
                 this.setState({
@@ -442,8 +519,6 @@ export default class OrientedLink extends React.Component<Props, State> {
   private callBackLowerLimit = (lowerLimit: LowerLimitClass[], id?: number) => {
     const newValue: OrientedLinkClass = this.state.orientedLink;
     newValue.lowerLimit = lowerLimit;
-    console.log('orientedLink');
-    console.log(newValue.lowerLimit);
     this.setState({
       orientedLink: newValue,
     });
