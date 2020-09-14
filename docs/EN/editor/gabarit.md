@@ -12,7 +12,7 @@ Vous saisissez l'url du fichier et cliquer sur le bouton **Add**.
 
 Le résultat est instantanné
 
-La décomposition du fichier [gabarit.json](../appendix/json-gabarit.md) est disponible avec tous les détails.
+La décomposition du fichier [gabarit.json](../appendix/gabarit-default.md) est disponible avec tous les détails.
 
 ## URL List
 
@@ -33,7 +33,9 @@ Vous pouvez ajouter à volonter des fichiers d'import supplémentaires
 
 TODO
 
-# Voir aussi
+# See too
 
-- [tutorial 13](../demo/tutorial13.md)
-- [tutorial 14](../demo/tutorial14.md)
+- [tutorial 13 : Dynamic gabarit](../demo/tutorial13.md)
+- [tutorial 14 : Advanced dynamic template](../demo/tutorial14.md)
+- [tutorial 15 : Multiple gabarit loading](../demo/tutorial15.md)
+

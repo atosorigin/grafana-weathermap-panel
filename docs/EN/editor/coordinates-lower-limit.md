@@ -38,3 +38,9 @@ At each level, you have to fill in:
 - A maximum value
 - Choose an interior color
 - Choose a border color
+
+# See too
+
+- [Tutorial 07 : Create bi directionnel](../demo/tutorial07.md)
+- [Tutorial 14 : Advanced dynamic template](../demo/tutorial14.md)
+

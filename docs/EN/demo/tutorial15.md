@@ -1,4 +1,4 @@
-# chargement multiple de gabarit
+# Multiple gabarit loading
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
@@ -6,7 +6,7 @@
 
 The example shows how to use query filters to obtain precise metrics
 
-![fileselect background](../../screenshots/demo/tutorial14/query.jpg)
+![fileselect background](../../screenshots/demo/tutorial15/query.jpg)
 
 In a query, we want to analyze what the network card receives
 
@@ -41,7 +41,7 @@ qui seront utilisés dans le fichier json de gabarit dans la liste **filtered**
 
 ## Determining a space
 
-![step 02](../../screenshots/demo/tutorial13/display.png)
+![step 02](../../screenshots/demo/tutorial15/display.png)
 
 The creation of a background space is done from the `display' menu.
 
@@ -53,12 +53,11 @@ It requires
 
 It is possible to have more details with the [display](../editor/display.md) page.
 
-
 ## Advanced gabarit
 
 Dans l'onglet **Gabarit**
 
-![](../../screenshots/demo/tutorial14/demo14-0.png)
+![](../../screenshots/demo/tutorial15/demo15-0.png)
 
 vous ajoutez le fichier par défaut
 
@@ -67,8 +66,7 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 
 ```
 
-
-![](../../screenshots/demo/tutorial14/demo14-1.png)
+![](../../screenshots/demo/tutorial15/demo15-1.png)
 
 vous ajoutez le lien du fichier json
 
@@ -81,7 +79,7 @@ puis 1 clic que le bouton **Add** suivi de **finish**
 
 le lien s'affichera dans la deuxième partie de l'écran
 
-![](../../screenshots/demo/tutorial14/demo14-2.png)
+![](../../screenshots/demo/tutorial14/demo15-2.png)
 
 il faut lui attribuer une query
 

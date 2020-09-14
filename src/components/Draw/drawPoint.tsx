@@ -517,6 +517,7 @@ export default class DrawPoint extends React.Component<Props, State> {
     const contentTooltipMainMetric: JSX.Element[] = [];
     const contentTooltipAuxMetric: JSX.Element[] = [];
     const contentTooltipAssociateLink: JSX.Element[] = [];
+    const contentTooltipMetadata: JSX.Element[] = [];
     const arrayOrientedLinksIn: any[] = this.props.associateOrientedLinkIn;
     const arrayOrientedLinksOut: any[] = this.props.associateOrientedLinkOut;
     const refMainMetric: string = this.props.refMainMetric;
@@ -746,6 +747,9 @@ export default class DrawPoint extends React.Component<Props, State> {
             {contentTooltipAuxMetric}
           </div>
           <div>{contentTooltipAssociateLink}</div>
+          <div style={{ backgroundColor: addBackColorMainMetric ? backColorMainMetric : backColoTextObject, padding: '0 5px' }}>
+            {contentTooltipMetadata}
+          </div>
           {this.defineHtmlLinkTooltip()}
         </div>
       </div>

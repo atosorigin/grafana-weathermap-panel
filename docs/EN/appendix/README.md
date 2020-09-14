@@ -2,19 +2,17 @@
 
 [![](../../screenshots/other/Go-back.png)](../../README.md)
 
-- Json
+- Import JSON
 
-  - [Region](json-region.md)
-  - [point](json-point.md)
-  - [link](json-links.md)
-  - [global](json-global.md)
+  - [Region](import-region.md)
+  - [point](import-point.md)
+  - [link](import-links.md)
+  - [global](import-global.md)
 
 - Gabarit
 
-  - [Defaut](json-gabarit-defaut.md)
-  - [Region](json-gabarit-region.md)
-  - [Point](json-gabarit-point.md)
-  - [Link](json-gabarit-link.md)
+  - [Defaut](gabarit-default.md)
+  - [Template](gabarit-template.md)
 
 - SVG
 
@@ -24,6 +22,6 @@
 
   - [serveur de stockage](server.md)
 
-* FAQ
+- Frequently Asked Questions (FAQ)
 
   - [FAQ](faq.md)

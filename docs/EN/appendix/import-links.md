@@ -299,7 +299,7 @@ pas de valeurs
 ## orientationLink
 
 - **Link orientation**
-  - **label** : Choose a label for orientation. (monodirectional or bidirectional)
+  - **label** : Choose a label for orientation. (monodirectional or bidirectional or nodirectional)
   - **value**: Choose the value of the orientation. For example "AB".
 
 ```

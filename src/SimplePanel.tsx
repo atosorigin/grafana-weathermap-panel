@@ -1329,6 +1329,9 @@ export class SimplePanel extends PureComponent<Props, State> {
         <Button id="zoompan" style={{ marginLeft: '80%', zIndex: 18, position: 'absolute' }} variant={'primary'} onClick={this.ZoomSVG}>
           Zoom [P/M]
         </Button>
+        <Button id="zoomstop" style={{ marginLeft: '89%', zIndex: 18, position: 'absolute' }} variant={'primary'} onClick={this.ZoomInactive}>
+          <i className="fa fa-stop" aria-hidden="true"></i>
+        </Button>
       </div>
     );
     this.setState({
@@ -1678,65 +1681,44 @@ export class SimplePanel extends PureComponent<Props, State> {
   // Zoom in Panel
   /********************************  Zoom Panel*********************************** */
   // Zoom Plus
-  ZoomSVG = (event: any) => {
+
+  ZoomInactive = (event: any) => {
+    document.body.removeEventListener('keyup', this.applyZoom);
+
     const elmnt = document.getElementById('coordinateSpaces');
+    console.log('start');
     if (elmnt) {
-      // const lol = document.getElementById('zoompan');
-      // console.log('1');
-
-      // console.log('2');
-      // console.log(lol);
-
-      document.body.addEventListener('keyup', (evt: any) => {
-        if (evt.keyCode === 80) {
-          // m
-          // event.preventDefault();
-          elmnt.style.cursor = 'zoom-in';
-          elmnt.style.transform += 'scale(1.01,1.01)' + 'translate(0.5%)' + 'translateY(0.5%)';
-        } else if (evt.keyCode === 77) {
-          // p
-          elmnt.style.cursor = 'zoom-out';
-          elmnt.style.transform += 'scale(0.98,0.98)' + 'translate(-1%)' + 'translateY(-1%)';
-        }
-      });
-
-      // elmnt.addEventListener('wheel', () => {
-      // let mouse = event.pageX + event.pageY;
-      // console.log(mouse);
-      // elmnt.style.cursor = 'zoom-in';
-      // elmnt.style.transform += 'scale(1.01,1.01)' + 'translate(1%)';
-      // console.warn((elmnt.style.transform += 'scale(1.01,1.01)'));
-      //});
+      const stop = document.getElementById('zoomstop');
+      if (stop) {
+        // document.body.removeEventListener('keyup', this.ZoomSVG, true);
+      }
     }
   };
 
-  // Zoom Negative
+  applyZoom = (evt: any) => {
+    const elmnt = document.getElementById('coordinateSpaces');
+    const lol = document.getElementById('zoompan');
 
-  // ZoomOut = (event: MouseEventInit) => {
-  //   const elmnt = document.getElementById('coordinateSpaces');
-  //   if (elmnt) {
-  //     console.log('less');
-  //     elmnt.addEventListener('click', () => {
-  //       elmnt.style.transform += 'scale(0.98,0.98)' + 'translate(-1%)';
-  //     });
-  //   }
-  //   //console.log('-');
-  // };
+    if (elmnt && evt.keyCode === 80) {
+      // m
+      if (lol) {
+        // lol.style.background = 'linear-gradient(to bottom,#e02f44,#c4162a)';
+        elmnt.style.cursor = 'zoom-in';
+        elmnt.style.transform += 'scale(1.01,1.01)' + 'translate(0.5%)' + 'translateY(0.5%)';
+      }
+    } else if (elmnt && evt.keyCode === 77) {
+      // p
+      if (lol) {
+        // lol.style.background = 'linear-gradient(to bottom,#e02f44,#c4162a);';
+        elmnt.style.cursor = 'zoom-out';
+        elmnt.style.transform += 'scale(0.98,0.98)' + 'translate(-1%)' + 'translateY(-1%)';
+      }
+    }
+  };
 
-  /****************** Zoom************************** */
-  // Zoom Initial
-  // ZoomInitial = () => {
-
-  //   const intialsecond = document.getElementById('init');
-  //   intialsecond?.addEventListener('click', () => {
-  //     const elmnt = document.getElementById('mainPanel');
-
-  //     if(elmnt ){
-  //       elmnt.style.transform = 'scale(1,1)';
-  //     }
-
-  //   });
-  // };
+  ZoomSVG = () => {
+    document.body.addEventListener('keyup', this.applyZoom);
+  };
 
   private displayTooltipSVG = (event: any) => {
     let idSVG = '';

@@ -31,3 +31,8 @@ Vous obtenez cet écran :
 - Une valeur maximale
 - Choisissez une couleur intérieure
 - Choisissez une taille de bordure
+
+# Voir aussi
+
+- [Tutorial 07 : Créer un lien bi directionnel](../demo/tutorial07.md)
+- [Tutorial 14 : Gabarit dynamique avancé](../demo/tutorial14.md)

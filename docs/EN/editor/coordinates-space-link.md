@@ -21,12 +21,12 @@ This is a key to add the result of value to the parameters
 2 orientations are possible:
 
 - monodirectional
-- bi-directional
+- bidirectional
 - nodirectional
 
 ### Size
 
-Allow you to choose the size of the link between Small, Medium and Large
+Allows you to choose the size of the link by typing a number (ex: 1 to 128)
 
 ## Associate Point/Region In
 
@@ -65,6 +65,10 @@ A dedicated page to fill in the fields is available [here](coordinates-space-mai
 ### Auxiliary metrics
 
 A dedicated page for filling in the fields is available [here](coordinates-auxiliary-metric.md)
+
+## Metadata
+
+A dedicated page to fill in the fields is available [here](coordinates-metada.md)
 
 ### Manage link
 

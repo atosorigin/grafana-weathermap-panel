@@ -48,6 +48,10 @@ A dedicated page for filling in the fields is available [here](coordinates-main-
 
 A dedicated page for filling in the fields is available [here](coordinates-auxiliary-metric.md)
 
+## Metadata
+
+A dedicated page to fill in the fields is available [here](coordinates-metada.md)
+
 ## Manage link
 
 A dedicated page to fill in the fields is available [here](coordinates-manage-link.md)

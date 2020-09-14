@@ -1,19 +1,10 @@
 {
   "global": {
-    "lowerLimit": [
-      {
-        "id": 0,
-        "lowerLimitMin": "leMinimum",
-        "lowerLimitMax": "leMaxmum",
-        "backColor": "black",
-        "borderColor": "black",
-        "sizeBorder": "2"
-      }
-    ],
+    "lowerLimit": [],
     "textObject": {
       "value": "",
       "isTextTooltip": false,
-      "colorBack": "black",
+      "colorBack": "yellow",
       "colorText": "white",
       "style": {
         "bold": true,
@@ -22,7 +13,7 @@
       },
       "generateObjectText": true,
       "valueGenerateObjectText": {
-        "legendElement": "uneLegend",
+        "legendElement": "Welcome",
         "numericFormatElement": "2",
         "unit": "Hz",
         "displayObjectInTooltip": true,
@@ -32,7 +23,7 @@
         "colorBackElement": ""
       },
       "generateAuxiliaryElement": {
-        "legendElement": "uneLegend",
+        "legendElement": "Legend Auxiliary",
         "numericFormatElement": "?",
         "unit": "Hz",
         "displayObjectInTooltip": true,
@@ -51,12 +42,12 @@
       {
         "filtered": "",
         "labelfix": true,
-        "xylabel": "x|labelName#y|labelName",
+        "xylabel": "",
         "xylabelfix": "x|90#y|90",
         "type": "point",
-        "name": "unPoint",
-        "meta": "uneMeta",
-        "label": "mtu ens3",
+        "name": "Point",
+        "meta": "Message in the meta",
+        "label": "label",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|labelName#y|labelName",
@@ -170,7 +161,7 @@
           "value": false
         },
         "zIndex": "2",
-        "color": "black"
+        "color": "green"
       },
       {
         "filtered": "quantile|0.5#slice|inner_eval",

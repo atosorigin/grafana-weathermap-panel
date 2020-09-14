@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SimpleOptions, Metadata } from './types';
+import { SimpleOptions } from './types';
 
 import { PanelEditorProps } from '@grafana/data';
 import { Tab, TabsBar, TabContent } from '@grafana/ui';
@@ -12,10 +12,10 @@ import ManageCoordinateSpace from 'components/CoordinateSpace/manageCoordinateSp
 import Display from 'components/display';
 import Gabarit from 'components/gabarit';
 
-import MetadataComponent from 'components/metadataComponent';
+// import MetadataComponent from 'components/metadataComponent';
 
 import 'style/SimpleEditor.css';
-import { TextObject } from 'Models/TextObjectClass';
+// import { TextObject } from 'Models/TextObjectClass';
 
 interface Props extends PanelEditorProps<SimpleOptions> {}
 
@@ -206,36 +206,36 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
    * HTML code
    */
   render() {
-    const tt = new TextObject(
-      '',
-      false,
-      'white',
-      'black',
-      { bold: false, italic: false, underline: false },
-      true,
-      {
-        legendElement: '',
-        numericFormatElement: '5',
-        unit: '',
-        displayObjectInTooltip: false,
-        addColorTextElement: false,
-        colorTextElement: 'white',
-        addColorBackElement: false,
-        colorBackElement: 'black',
-      },
-      {
-        legendElement: '',
-        numericFormatElement: '5',
-        unit: '',
-        displayObjectInTooltip: true,
-        addColorTextElement: true,
-        colorTextElement: 'white',
-        addColorBackElement: true,
-        colorBackElement: 'black',
-      }
-    );
+    // const tt = new TextObject(
+    //   '',
+    //   false,
+    //   'white',
+    //   'black',
+    //   { bold: false, italic: false, underline: false },
+    //   true,
+    //   {
+    //     legendElement: '',
+    //     numericFormatElement: '5',
+    //     unit: '',
+    //     displayObjectInTooltip: false,
+    //     addColorTextElement: false,
+    //     colorTextElement: 'white',
+    //     addColorBackElement: false,
+    //     colorBackElement: 'black',
+    //   },
+    //   {
+    //     legendElement: '',
+    //     numericFormatElement: '5',
+    //     unit: '',
+    //     displayObjectInTooltip: true,
+    //     addColorTextElement: true,
+    //     colorTextElement: 'white',
+    //     addColorBackElement: true,
+    //     colorBackElement: 'black',
+    //   }
+    // );
 
-    const testtt: Metadata = { meta: '', obj: tt };
+    // const testtt: Metadata = { meta: '', obj: tt };
 
     const l10n = require('Localization/en.json');
 
@@ -363,7 +363,7 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
             </div>
           )}
         </TabContent>
-        <MetadataComponent options={this.props.options} onOptionsChange={this.props.onOptionsChange} data={this.props.data} meta={testtt} />
+        {/* <MetadataComponent options={this.props.options} onOptionsChange={this.props.onOptionsChange} data={this.props.data} meta={testtt} /> */}
       </div>
     );
   }

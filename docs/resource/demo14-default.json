@@ -3,10 +3,10 @@
     "lowerLimit": [
       {
         "id": 0,
-        "lowerLimitMin": "leMinimum",
-        "lowerLimitMax": "leMaxmum",
-        "backColor": "black",
-        "borderColor": "black",
+        "lowerLimitMin": "",
+        "lowerLimitMax": "",
+        "backColor": "red",
+        "borderColor": "red",
         "sizeBorder": "2"
       }
     ],
@@ -22,7 +22,7 @@
       },
       "generateObjectText": true,
       "valueGenerateObjectText": {
-        "legendElement": "uneLegend",
+        "legendElement": "welcome",
         "numericFormatElement": "2",
         "unit": "Hz",
         "displayObjectInTooltip": true,
@@ -32,7 +32,7 @@
         "colorBackElement": ""
       },
       "generateAuxiliaryElement": {
-        "legendElement": "uneLegend",
+        "legendElement": "Legend Auxiliary",
         "numericFormatElement": "?",
         "unit": "Hz",
         "displayObjectInTooltip": true,
@@ -55,8 +55,8 @@
         "xylabelfix": "x|90#y|90",
         "type": "point",
         "name": "unPoint",
-        "meta": "uneMeta",
-        "label": "mtu ens3",
+        "meta": "metadata",
+        "label": "no label",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|labelName#y|labelName",
@@ -173,13 +173,13 @@
         "color": "black"
       },
       {
-        "filtered": "quantile|0.5#slice|inner_eval",
+        "filtered": "quantile|0.5",
         "labelfix": false,
         "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
-        "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+        "xylabelfix": "",
         "type": "region",
         "meta": "uneMeta",
-        "label": "0.5-inner_eval",
+        "label": "default",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|0#y|0",
@@ -204,7 +204,7 @@
           "hoveringTooltipText": ""
         },
         "idSVG": "",
-        "mode": true,
+        "mode": false,
         "img": "",
         "orientedLink": [],
         "color": "black"

@@ -42,6 +42,10 @@ Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-mai
 
 Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-auxiliary-metric.md)
 
+## Metadata
+
+Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-metadata.md)
+
 ## Manage link
 
 Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-manage-link.md)

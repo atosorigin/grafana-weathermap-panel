@@ -249,10 +249,13 @@ class Gabarit extends React.Component<Props, State> {
       if (result) {
         console.log('Filter OK -> loaded');
         this.props.options.arrayPoints.push(point);
+        return true;
       } else {
         console.log('Filter not found -> no load');
+        return false;
       }
     });
+    return false;
   };
 
   checkCoordinateFilterLink = (link: OrientedLinkClass, props: any) => {
@@ -261,10 +264,13 @@ class Gabarit extends React.Component<Props, State> {
       const result = searchNameIsFilter(dataFrame, link.mainMetric);
       if (result) {
         this.props.options.arrayOrientedLinks.push(link);
+        return true;
       } else {
         console.log('Filter not found -> no load');
+        return false;
       }
     });
+    return false;
   };
 
   /**************************************INPUT******************************************/
@@ -892,8 +898,9 @@ class Gabarit extends React.Component<Props, State> {
                 defaultPositionX,
                 defaultPositionY
               );
-              newID++;
-              this.checkCoordinateFilterPoint(toLoad, this.props);
+              if (this.checkCoordinateFilterPoint(toLoad, this.props)) {
+                newID++;
+              }
             } else {
               let toLoad: PointClass = new PointClass(
                 newID + 1,
@@ -925,8 +932,9 @@ class Gabarit extends React.Component<Props, State> {
                 defaultPositionX,
                 defaultPositionY
               );
-              newID++;
-              this.checkCoordinateFilterPoint(toLoad, this.props);
+              if (this.checkCoordinateFilterPoint(toLoad, this.props)) {
+                newID++;
+              }
             }
           });
         }
@@ -967,8 +975,9 @@ class Gabarit extends React.Component<Props, State> {
               defaultPositionX,
               defaultPositionY
             );
-            newID++;
-            this.checkCoordinateFilterPoint(toLoad, this.props);
+            if (this.checkCoordinateFilterPoint(toLoad, this.props)) {
+              newID++;
+            }
           } else {
             let toLoad: PointClass = new PointClass(
               newID + 1,
@@ -1001,8 +1010,9 @@ class Gabarit extends React.Component<Props, State> {
               defaultPositionX,
               defaultPositionY
             );
-            newID++;
-            this.checkCoordinateFilterPoint(toLoad, this.props);
+            if (this.checkCoordinateFilterPoint(toLoad, this.props)) {
+              newID++;
+            }
           }
         });
       }
@@ -1590,8 +1600,9 @@ class Gabarit extends React.Component<Props, State> {
                 defaultPositionCX,
                 defaultPositionCY
               );
-              newID++;
-              this.checkCoordinateFilterLink(toLoad, this.props);
+              if (this.checkCoordinateFilterLink(toLoad, this.props)) {
+                newID++;
+              }
             }
             if (!(maA > 0) && maB > 0) {
               let toLoad: OrientedLinkClass = new OrientedLinkClass(
@@ -1637,8 +1648,9 @@ class Gabarit extends React.Component<Props, State> {
                 defaultPositionCX,
                 defaultPositionCY
               );
-              newID++;
-              this.checkCoordinateFilterLink(toLoad, this.props);
+              if (this.checkCoordinateFilterLink(toLoad, this.props)) {
+                newID++;
+              }
             } else if (maA > 0 && !(maB > 0)) {
               let toLoad: OrientedLinkClass = new OrientedLinkClass(
                 newID + 1,
@@ -1683,8 +1695,9 @@ class Gabarit extends React.Component<Props, State> {
                 defaultPositionCX,
                 defaultPositionCY
               );
-              newID++;
-              this.checkCoordinateFilterLink(toLoad, this.props);
+              if (this.checkCoordinateFilterLink(toLoad, this.props)) {
+                newID++;
+              }
             } else {
               let toLoad: OrientedLinkClass = new OrientedLinkClass(
                 newID + 1,
@@ -1729,8 +1742,9 @@ class Gabarit extends React.Component<Props, State> {
                 defaultPositionCX,
                 defaultPositionCY
               );
-              newID++;
-              this.checkCoordinateFilterLink(toLoad, this.props);
+              if (this.checkCoordinateFilterLink(toLoad, this.props)) {
+                newID++;
+              }
             }
           });
         } /////////////////
@@ -1788,8 +1802,9 @@ class Gabarit extends React.Component<Props, State> {
               defaultPositionCX,
               defaultPositionCY
             );
-            newID++;
-            this.checkCoordinateFilterLink(toLoad, this.props);
+            if (this.checkCoordinateFilterLink(toLoad, this.props)) {
+              newID++;
+            }
           }
           if (!(maA > 0) && maB > 0) {
             let toLoad: OrientedLinkClass = new OrientedLinkClass(
@@ -1835,8 +1850,9 @@ class Gabarit extends React.Component<Props, State> {
               defaultPositionCX,
               defaultPositionCY
             );
-            newID++;
-            this.checkCoordinateFilterLink(toLoad, this.props);
+            if (this.checkCoordinateFilterLink(toLoad, this.props)) {
+              newID++;
+            }
           } else if (maA > 0 && !(maB > 0)) {
             let toLoad: OrientedLinkClass = new OrientedLinkClass(
               newID + 1,
@@ -1881,8 +1897,9 @@ class Gabarit extends React.Component<Props, State> {
               defaultPositionCX,
               defaultPositionCY
             );
-            newID++;
-            this.checkCoordinateFilterLink(toLoad, this.props);
+            if (this.checkCoordinateFilterLink(toLoad, this.props)) {
+              newID++;
+            }
           } else {
             let toLoad: OrientedLinkClass = new OrientedLinkClass(
               newID + 1,
@@ -1927,15 +1944,16 @@ class Gabarit extends React.Component<Props, State> {
               defaultPositionCX,
               defaultPositionCY
             );
-            newID++;
-            this.checkCoordinateFilterLink(toLoad, this.props);
+            if (this.checkCoordinateFilterLink(toLoad, this.props)) {
+              newID++;
+            }
           }
         });
       }
     });
 
     /*  */
-    //Template
+    //Template region
     let filterRegion: Filtred[][] = []; //
     let posRegion: Coord4D[] = []; //
 
@@ -2060,10 +2078,10 @@ class Gabarit extends React.Component<Props, State> {
         });
       });
       modeRegion.push(Boolean(region.mode));
-      if (!modeRegion[index]) {
+      if (typeof modeRegion[index] === 'undefined') {
         modeRegion[index] = Boolean(gabaritFileTmp.templateGabaritRegionDefault[0].mode);
       }
-      if (!modeRegion[index]) {
+      if (typeof modeRegion[index] === 'undefined') {
         modeRegion[index] = Boolean(this.props.options.gabaritDefault.templateGabaritRegionDefault[0].mode);
       }
       idSVGRegion.push(region.idSVG);
@@ -2366,11 +2384,6 @@ class Gabarit extends React.Component<Props, State> {
         <Collapse isOpen={this.state.collapseGabarit} label="Gabarit List" onToggle={this.onToggleGabarit}>
           <this.gabaritDisplay list={options.saveGabaritFile} />
         </Collapse>
-        <Button onClick={this.printDefault}>Default</Button>
-        <Button onClick={this.printPoint}>Point</Button>
-        <Button onClick={this.printRegion}>Region</Button>
-        <Button onClick={this.printLink}>Link</Button>
-        <Button onClick={this.printTemp}>Temp</Button>
       </div>
     );
   }

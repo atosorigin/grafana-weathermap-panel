@@ -98,7 +98,7 @@ The **global** file must be declared as a JSON file like this:
 ## regions
 
 - **regions**
-  - **0** : Link to the .json file of the regions [Click here to know how to fill them](json-region.md)
+  - **0** : Link to the .json file of the regions [Click here to know how to fill them](import-region.md)
 
 ```
 
@@ -112,7 +112,7 @@ The **global** file must be declared as a JSON file like this:
 ## points
 
 - **points**
-  - **0** : Link to the .json file of the points [Click here to know how to fill them](json-point.md)
+  - **0** : Link to the .json file of the points [Click here to know how to fill them](import-point.md)
 
 ```
     "points": [
@@ -124,7 +124,7 @@ The **global** file must be declared as a JSON file like this:
 ## links
 
 - **links**
-  - **0** : Link to the .json links file [Click here to know how to fill them](json-links.md)
+  - **0** : Link to the .json links file [Click here to know how to fill them](import-links.md)
 
 ```
     "links": [

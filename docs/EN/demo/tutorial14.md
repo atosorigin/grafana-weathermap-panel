@@ -1,4 +1,4 @@
-# construire un dashboard par les Query
+# Advanced dynamic template
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
@@ -43,7 +43,7 @@ qui seront utilisés dans le fichier json de gabarit dans la liste **filtered**
 
 ## Add background image
 
-![fileselect background](../../screenshots/demo/tutorial14/background.jpg)
+![background](../../screenshots/demo/tutorial14/background.png)
 
 Adding a background image can be done from the menu `display`.
 

@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { SimpleOptions, Metric } from 'types';
+import { SimpleOptions, Metric, Metadata } from 'types';
 
 import { PanelEditorProps, SelectableValue } from '@grafana/data';
 import { Button, Select, Alert, FormField, FormLabel } from '@grafana/ui';
@@ -24,6 +24,8 @@ import ParametresGeneriques from 'components/Parametrage/parametresGeneriques';
 
 import 'style/CoordinateSpace.css';
 import ManageAuxiliaryQuery from './manageAuxiliaryQuery';
+
+import ManageMetadata from '../../components/CoordinateSpace/manageMetada';
 
 export declare type AlertVariant = 'success' | 'warning' | 'error' | 'info';
 
@@ -458,6 +460,14 @@ class CoordinateSpace extends React.Component<Props, State> {
   componentDidMount = () => {
     this.getDataInInput();
   };
+  // meta
+  saveMetaData = (meta: Metadata[]) => {
+    const old = this.state.arrayCoor;
+    old.meta = meta;
+    this.setState({
+      arrayCoor: old,
+    });
+  };
 
   /** function is call when props is update. Update state */
   componentDidUpdate = async (prevProps: Props, prevState: State) => {
@@ -522,6 +532,16 @@ class CoordinateSpace extends React.Component<Props, State> {
             />
           </div>
         )}
+        <div>
+          {/* meta */}
+          <ManageMetadata
+            options={this.props.options}
+            onOptionsChange={this.props.onOptionsChange}
+            data={this.props.data}
+            meta={this.state.arrayCoor.meta}
+            saveToParent={this.saveMetaData}
+          />
+        </div>
         <div>
           <ParametresGeneriques
             options={this.props.options}

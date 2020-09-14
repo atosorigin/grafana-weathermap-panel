@@ -7,7 +7,7 @@ import { OrientedLinkClass } from '../../../Models/OrientedLinkClass';
 import { createInputsOrientedLink } from '../../../Functions/CreateInput/createInputsOrientedLink';
 import { editGoodParameterOrientedLink } from '../../../Functions/EditParameter/editGoodParameterOrientedLink';
 import { TextObject } from '../../../Models/TextObjectClass';
-import { SimpleOptions, Metric } from '../../../types';
+import { SimpleOptions, Metric, Metadata } from '../../../types';
 import { AlertVariant, Alert, Button } from '@grafana/ui';
 import ParametresGeneriques from '../../Parametrage/parametresGeneriques';
 import { LowerLimitClass } from '../../../Models/LowerLimitClass';
@@ -19,7 +19,7 @@ import ManageAuxiliaryQuery from '../../CoordinateSpace/manageAuxiliaryQuery';
 import { cloneOrientedLink } from '../../../Functions/initOrientedLink';
 import { PointClass } from 'Models/PointClass';
 import { RegionClass } from 'Models/RegionClass';
-
+import ManageMetadata from 'components/CoordinateSpace/manageMetada';
 /**
  * IProps
  */
@@ -41,6 +41,7 @@ interface Props extends PanelEditorProps<SimpleOptions> {
  * IState
  */
 interface State {
+  arrayCoor: OrientedLinkClass;
   /**
    * to do
    */
@@ -68,6 +69,7 @@ export default class OrientedLink extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
+      arrayCoor: cloneOrientedLink(this.props.orientedLink),
       arrayInput: [],
       orientedLink: cloneOrientedLink(this.props.orientedLink),
       arrayOrientedLink: [],
@@ -562,7 +564,14 @@ export default class OrientedLink extends React.Component<Props, State> {
       this.callBack();
     }
   }
-
+  // Meta
+  saveMetaData = (meta: Metadata[]) => {
+    const old = this.state.arrayCoor;
+    old.meta = meta;
+    this.setState({
+      arrayCoor: old,
+    });
+  };
   /**
    * fill input whith data
    * this function is called by mount and update event
@@ -630,6 +639,15 @@ export default class OrientedLink extends React.Component<Props, State> {
             idCoordinate={this.state.orientedLink.id}
             metrics={this.state.orientedLink.metrics}
             isLink={true}
+          />
+        </div>
+        <div>
+          <ManageMetadata
+            options={this.props.options}
+            onOptionsChange={this.props.onOptionsChange}
+            data={this.props.data}
+            meta={this.state.arrayCoor.meta}
+            saveToParent={this.saveMetaData}
           />
         </div>
         <div>

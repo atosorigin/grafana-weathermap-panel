@@ -91,7 +91,7 @@ Second method :
 
 #### Method 3
 
-![workflow2](../../screenshots/init/workflow3.png)
+![workflow3](../../screenshots/init/workflow3.png)
 
 Third method :
 
@@ -99,3 +99,10 @@ Third method :
 - Then, to add the different regions, points, and links, you can use a global json file. This file contains all the necessary information to create and associate each object with its metrics
 
 Step 7 : Once you have done all of those steps, you will see the result of your query on the dashboard, assimilate with a region/a point, or a link.
+
+#### Method 4
+
+![workflow4](../../screenshots/init/workflow4.png)
+
+Fourth method
+

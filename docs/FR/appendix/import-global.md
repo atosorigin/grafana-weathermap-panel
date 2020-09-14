@@ -2,7 +2,7 @@
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
-Le script complet [sample-global.json](../../../../demo/sample-global.json) est disponible, avec les détails de construction ci-dessous.
+Le script complet [import-global.json](../../../../demo/import-global.json) est disponible, avec les détails de construction ci-dessous.
 
 Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
 
@@ -97,7 +97,7 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
 ## regions
 
 - **regions**
-  - **0** : Lien vers le fichier .json des régions [Cliquez ici pour savoir comment les remplir](json-region.md)
+  - **0** : Lien vers le fichier .json des régions [Cliquez ici pour savoir comment les remplir](import-region.md)
 
 ```
 
@@ -111,7 +111,7 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
 ## points
 
 - **points**
-  - **0** : Lien vers le fichier .json des points [Cliquez ici pour savoir comment les remplir](json-point.md)
+  - **0** : Lien vers le fichier .json des points [Cliquez ici pour savoir comment les remplir](import-point.md)
 
 ```
     "points": [
@@ -124,7 +124,7 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
 ## links
 
 - **links**
-  - **0** : Lien vers le fichier .json links [Cliquez ici pour savoir comment les remplir](json-links.md)
+  - **0** : Lien vers le fichier .json links [Cliquez ici pour savoir comment les remplir](import-links.md)
 
 ```
     "links": [

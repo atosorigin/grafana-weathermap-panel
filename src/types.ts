@@ -5,7 +5,7 @@ import { LinkClass } from 'Models/LinkClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 import { RegionClass, Coord4D } from 'Models/RegionClass';
 import { Style } from 'components/Parametrage/styleComponent';
-import { TextObject } from 'Models/TextObjectClass';
+// import { TextObject } from 'Models/TextObjectClass';
 import { Filtred } from 'Functions/loaderGabarit';
 
 /**
@@ -129,10 +129,17 @@ export interface TemplateGabaritLink {
   isIncurved: SelectableValue<boolean>;
   color: string;
 }
+export interface TextObjectMetadata {
+  isTooltip: boolean;
+  colorBack: string;
+  colorText: string;
+  style: Style;
+}
 export interface Metadata {
   meta: string;
-  obj: TextObject;
+  obj: TextObjectMetadata;
 }
+
 export declare type TManageValue = 'avg' | 'sum' | 'err';
 
 export interface Metric {
@@ -473,6 +480,7 @@ export interface SimpleOptions extends MetricSettings {
 
   saveGabaritDefaultUrl: string;
 
+  saveMetadatavalue: string[];
   saveGabaritURL: string[];
   saveGabaritFile: GabaritFile[];
   saveDefaultGabaritFile: GabaritFile;
@@ -679,6 +687,7 @@ export const defaults: SimpleOptions = {
   currentDashboard: false,
   gabaritUrlInput: '',
   saveGabaritURL: [],
+  saveMetadatavalue: [],
   saveGabaritFile: [],
   gabaritDefault: {
     queryID: 'A',

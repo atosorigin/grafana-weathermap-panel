@@ -22,10 +22,11 @@ il s'agit d'une clé permettant d'ajouter le résultat d'une valeur à des param
 
 - monodirectionnel
 - birectionnel
+- nodirectionnel
 
 ### Taille
 
-Vous permet de choisir la taille du lien entre Small, Medium et Large
+Vous permet de choisir la taille du lien en tapant un chiffre (ex : 1 à 128)
 
 ## Associate Point/Region In
 
@@ -60,6 +61,10 @@ Pour cela, vous devez dire **oui** au champ **incurved** pour ajouter un nouveau
 ### Main metric
 
 Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-main-metric.md)
+
+## Metadata
+
+Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-metadata.md)
 
 ### Auxiliary metrics
 

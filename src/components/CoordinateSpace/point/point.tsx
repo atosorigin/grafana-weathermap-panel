@@ -8,7 +8,7 @@ import { PointClass } from '../../../Models/PointClass';
 import InputSelectPoint from '../../../Functions/Input/inputSelectPoint';
 import { SelectableValue, PanelEditorProps } from '@grafana/data';
 import { Button, AlertVariant, Alert } from '@grafana/ui';
-import { SimpleOptions, Metric } from '../../../types';
+import { SimpleOptions, Metric, Metadata } from '../../../types';
 
 import ManageQuery from '../manageQuery';
 import ManageAuxiliaryQuery from '../manageAuxiliaryQuery';
@@ -19,6 +19,7 @@ import PositionParameter from '../../Parametrage/positionParameters';
 import ParametresGeneriques from '../../Parametrage/parametresGeneriques';
 import ManageLowerLimit from '../../Parametrage/manageLowerLimit';
 import { clonePoint } from 'Functions/initPoint';
+import ManageMetadata from 'components/CoordinateSpace/manageMetada';
 
 /**
  * IProps
@@ -42,6 +43,8 @@ interface Props extends PanelEditorProps<SimpleOptions> {
  */
 interface State {
   /** */
+  arrayCoor: PointClass;
+  /** */
   arrayInput: ArrayInputSelectableClass[];
   /** */
   arrayPointClass: PointClass[];
@@ -64,7 +67,6 @@ export default class Point extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      arrayInput: [],
       point: clonePoint(
         this.props.point,
         parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10),
@@ -74,6 +76,16 @@ export default class Point extends React.Component<Props, State> {
         parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10),
         parseInt(this.props.options.baseMap.height, 10)
       ),
+      arrayCoor: clonePoint(
+        this.props.point,
+        parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMin, 10),
+        parseInt(this.props.options.coordinateSpaceInitial.coordinate.xMax, 10),
+        parseInt(this.props.options.baseMap.width, 10),
+        parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMin, 10),
+        parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10),
+        parseInt(this.props.options.baseMap.height, 10)
+      ),
+      arrayInput: [],
       arrayPointClass: [],
       htmlInput: <div></div>,
       hiddenAlert: true,
@@ -389,7 +401,14 @@ export default class Point extends React.Component<Props, State> {
   componentDidMount = () => {
     this.getDataInInput();
   };
-
+  // Meta
+  saveMetaData = (meta: Metadata[]) => {
+    const old = this.state.arrayCoor;
+    old.meta = meta;
+    this.setState({
+      arrayCoor: old,
+    });
+  };
   /** function is call when props is update. Update state */
   componentDidUpdate = async (prevProps: Props, prevState: State) => {
     if (prevProps.point.id !== this.props.point.id) {
@@ -455,6 +474,16 @@ export default class Point extends React.Component<Props, State> {
           </div>
         )}
         <div>
+          {/* meta */}
+          <ManageMetadata
+            options={this.props.options}
+            onOptionsChange={this.props.onOptionsChange}
+            data={this.props.data}
+            meta={this.state.arrayCoor.meta}
+            saveToParent={this.saveMetaData}
+          />
+        </div>
+        <div>
           <ParametresGeneriques
             options={this.props.options}
             onOptionsChange={this.props.onOptionsChange}
@@ -463,6 +492,7 @@ export default class Point extends React.Component<Props, State> {
             callBackToParent={this.callBackToOther}
           />
         </div>
+
         <div>
           <ManageLowerLimit
             options={this.props.options}

@@ -43,6 +43,8 @@ export class TextObject {
   valueGenerateObjectText: GenerateTextObject;
   /** text value for auxiliary metrics */
   generateAuxiliaryElement: GenerateTextObject;
+  // generate metadata with text object
+  // generateMetadataElement: GenerateTextObject;
 
   constructor(
     // legend: boolean,
@@ -55,6 +57,8 @@ export class TextObject {
     generateObjectText: boolean,
     valueGenerateObjectText: GenerateTextObject,
     generateAuxiliaryElement: GenerateTextObject
+    // meta
+    // generateMetadataElement: GenerateTextObject
   ) {
     // this.legend = legend;
     this.value = value;
@@ -66,5 +70,7 @@ export class TextObject {
     this.generateObjectText = generateObjectText;
     this.valueGenerateObjectText = valueGenerateObjectText;
     this.generateAuxiliaryElement = generateAuxiliaryElement;
+    // add Meta
+    // this.generateMetadataElement = generateMetadataElement;
   }
 }

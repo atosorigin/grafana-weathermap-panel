@@ -52,14 +52,14 @@ In the form of a **demo**, you will learn how to use the plugin to get a dynamic
 
   [![demo12](../../screenshots/demo/demo12.png)](tutorial12.md)
 
-- 13 [Gabarit dynamique](tutorial13.md)
+- 13 [Dynamic gabarit](tutorial13.md)
 
   [![demo13](../../screenshots/demo/demo13.png)](tutorial13.md)
 
-- 14 [Gabarit dynamique avancé](tutorial14.md)
+- 14 [Advanced dynamic template](tutorial14.md)
 
   [![demo14](../../screenshots/demo/demo14.png)](tutorial14.md)
 
-- 15 [Chargement multiple de gabarit](tutorial15.md)
+- 15 [Multiple gabarit loading](tutorial15.md)
 
   [![demo15](../../screenshots/demo/demo15.png)](tutorial15.md)

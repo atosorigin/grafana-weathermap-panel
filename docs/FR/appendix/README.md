@@ -2,19 +2,19 @@
 
 [![](../../screenshots/other/Go-back.png)](../../README-fr.md)
 
-- Modèles de Json
+- Modèles de Json pour les fichiers Imports
 
-  - [Region](json-region.md)
-  - [point](json-point.md)
-  - [link](json-links.md)
-  - [global](json-global.md)
+  - [Region](import-region.md)
+  - [point](import-point.md)
+  - [link](import-links.md)
+  - [global](import-global.md)
 
 - Gabarit
 
-  - [Defaut](json-gabarit-defaut.md)
-  - [Region](json-gabarit-region.md)
-  - [Point](json-gabarit-point.md)
-  - [Link](json-gabarit-link.md)
+  - [Defaut](gabarit-defaut.md)
+  - [Region](gabarit-region.md)
+  - [Point](gabarit-point.md)
+  - [Link](gabarit-link.md)
 
 - SVG
 
@@ -23,3 +23,7 @@
 - Server
 
   - [serveur de stockage](server.md)
+
+- FAQ
+
+  - [FAQ](faq.md)
