@@ -2,6 +2,9 @@
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
+Demo 15 will position a variable element in an X and Y space, and display its value at the point defined by the query.
+
+
 ## Add a query
 
 The example shows how to use query filters to obtain precise metrics
@@ -27,7 +30,7 @@ prometheus_http_request_duration_seconds_bucket{handler="/api/v1/label/:name/val
 prometheus_http_request_duration_seconds_bucket{handler="/api/v1/label/:name/values",instance="localhost:9090",job="prometheus",le="3"}
 prometheus_http_request_duration_seconds_bucket{handler="/api/v1/label/:name/values",instance="localhost:9090",job="prometheus",le="60"}
 prometheus_http_request_duration_seconds_bucket{handler="/api/v1/label/:name/values",instance="localhost:9090",job="prometheus",le="8"}
-
+...
 ```
 
 Les elements qui nous interressent sont :
@@ -41,7 +44,7 @@ qui seront utilisés dans le fichier json de gabarit dans la liste **filtered**
 
 ## Determining a space
 
-![step 02](../../screenshots/demo/tutorial15/display.png)
+![](../../screenshots/demo/tutorial15/display.png)
 
 The creation of a background space is done from the `display' menu.
 
@@ -79,7 +82,7 @@ puis 1 clic que le bouton **Add** suivi de **finish**
 
 le lien s'affichera dans la deuxième partie de l'écran
 
-![](../../screenshots/demo/tutorial14/demo15-2.png)
+![](../../screenshots/demo/tutorial15/demo15-2.png)
 
 il faut lui attribuer une query
 
@@ -88,3 +91,64 @@ puis 1 clic **load**
 ## Resultat
 
 ![](../../screenshots/demo/tutorial15/result.png)
+
+
+
+## Structure gabarit files
+
+
+### default gabarit : demo15-default.json
+
+```
+{
+  "global": {
+     // global
+  },
+  "default": {
+    "templates": [
+      {
+        // Point 
+      },
+      {
+        // Link
+      },
+      {
+        // Region
+      }      
+    ]
+  }
+}
+
+```
+
+### Template gabarit : demo15-point-multi.json
+
+
+```
+{
+  "global": {
+    // global
+  },
+  "default": {
+    "templates": [
+      {
+        // Point 
+      }
+    ]  
+  },
+  "templates": [
+      {
+        // Point
+      } 
+   ]
+}
+
+```
+
+
+
+# See too
+
+- [Gabarit default](../appendix/gabarit-default.md)
+- [Gabarit template](../appendix/gabarit-template.md)
+

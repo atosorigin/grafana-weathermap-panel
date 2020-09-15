@@ -2,6 +2,11 @@
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
+
+
+Demo 13 shows the way to display several points, coming from several requests, of which 2 points will be linked with a link.
+
+
 ## Add the queries
 
 The example shows how to use query filters to obtain precise metrics
@@ -60,16 +65,18 @@ It requires
 
 It is possible to have more details with the [display](../editor/display.md) page.
 
+
+
 ## Gabarit
 
 In the **Gabarit** tab
 
-![](../../screenshots/demo/tutorial14/demo14-0.png)
+![](../../screenshots/demo/tutorial13/demo13-0.png)
 
 vous ajoutez le fichier par défaut
 
 ```
-https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo14-default.json
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo13-default.json
 
 ```
 
@@ -117,3 +124,94 @@ In **Text Object** you uncheck the line **Object display in text or tooltip**.
 ![](../../screenshots/demo/tutorial13/result.png)
 
 You will see a dot appear and all the settings will be available in the editor.
+
+
+## Structure gabarit files
+
+
+### default gabarit : demo13-default.json
+
+```
+{
+  "global": {
+     // global
+  },
+  "default": {
+    "templates": [
+      {
+        // Point 
+      },
+      {
+        // Link
+      }     
+    ]
+  }
+}
+
+```
+
+### Template gabarit : demo13-point.json
+
+
+```
+{
+  "global": {
+    // global
+  },
+  "default": {
+    "templates": [
+      {
+        // Point 
+      }
+    ]  
+  },
+  "templates": [
+      {
+        // Point
+      } 
+   ]
+}
+
+```
+
+
+### Template gabarit : demo13-point-link.json
+
+
+```
+{
+  "global": {
+    // global
+  },
+  "default": {
+    "templates": [
+      {
+        // Point
+      },
+      {
+        // Link
+      }      
+    ]  
+  },
+  "templates": [
+      {
+        // Point 
+      }, 
+      {
+        // second Point 
+      },       
+      {
+        // Link
+      },      
+   ]
+}
+
+```
+
+
+# See too
+
+- [Gabarit default](../appendix/gabarit-default.md)
+- [Gabarit template](../appendix/gabarit-template.md)
+
+

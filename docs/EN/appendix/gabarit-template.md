@@ -19,16 +19,11 @@ The **template** file must be declared as a JSON file like this:
   },
   "templates": [
       {
-        // point
-      },
-      {
-        // link
-      },
-      {
-        // region
-      },  
+        // Point and/or Link and/or region
+      }, 
    ]
 }
+
 
 ```
 

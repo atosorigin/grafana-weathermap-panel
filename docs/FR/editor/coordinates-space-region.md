@@ -63,3 +63,7 @@ Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-obj
 ## Lower Limit
 
 Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-lower-limit.md)
+
+# Voir aussi
+
+- [Tutorial 09 : Comment créer une région en mode coordonnée](../demo/tutorial09.md)

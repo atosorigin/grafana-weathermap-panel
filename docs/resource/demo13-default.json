@@ -162,43 +162,6 @@
         },
         "zIndex": "2",
         "color": "green"
-      },
-      {
-        "filtered": "quantile|0.5#slice|inner_eval",
-        "labelfix": false,
-        "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
-        "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
-        "type": "region",
-        "meta": "uneMeta",
-        "label": "0.5-inner_eval",
-        "positionParameter": {
-          "xylabelA": "x|0#y|0",
-          "xylabelB": "x|0#y|0",
-          "tooltipA": "Bottom",
-          "tooltipB": "Bottom"
-        },
-        "mainMetric": {
-          "key": "",
-          "unit": "",
-          "format": "",
-          "keyValue": "",
-          "filter": [],
-          "refId": "",
-          "expr": "",
-          "returnQuery": [],
-          "manageValue": "avg"
-        },
-        "metrics": [],
-        "linkURL": {
-          "followLink": "",
-          "hoveringTooltipLink": "",
-          "hoveringTooltipText": ""
-        },
-        "idSVG": "",
-        "mode": true,
-        "img": "",
-        "orientedLink": [],
-        "color": "black"
       }
     ]
   }

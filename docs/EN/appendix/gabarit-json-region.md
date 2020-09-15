@@ -9,7 +9,7 @@ The **gabarit** file must be declared as a JSON file like this:
 
 
 
-## Region
+## Structure
 
 
 ```     
@@ -35,26 +35,29 @@ The **gabarit** file must be declared as a JSON file like this:
 
 
 
+## Type
 
+- **type** : region
+- **label** is name
 
-
-
-##
-
+## Filter
 
         "filtered": "quantile|0.5#slice|inner_eval",
         "labelfix": false,
         "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
 
-        
-        "type": "region",
-        
-        
-        "meta": "uneMeta",
-        "label": "0.5-inner_eval",
+       
 
         
+- **filtered** is the id of the region. Working as a counter
+- **labelfix** - **value**: Choose a value. "true" or "false"
+- **xylabel** to true
+- **xylabelfix** is the id of the desired SVG area as region
+
+## Meta
+
+- **meta** descriptif
 
 ## Région
 

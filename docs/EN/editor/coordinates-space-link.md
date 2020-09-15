@@ -102,4 +102,5 @@ You can define the position of the
 
 # See too
 
+- [Tutorial 03 : Create dashboard Avanced with link directionnel](../demo/tutorial03.md)
 - [Tutorial 07 : Create bi directionnel](../demo/tutorial07.md)

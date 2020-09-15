@@ -4,19 +4,24 @@
 
 Initial viewing space allows you to choose the part of the dashboard you want to work on.
 
-For this demonstration 11, we will take the result of the [tutorial9](tutorial9.md)
+For this demonstration 11, we will take the result of the [tutorial 09](tutorial09.md)
 
 ![tutorial9](../../screenshots/demo/tutorial09/result.png)
 
-And we will modify the `initial viewing space` to work only on the upper right part of the dashboard
+We modify the graduation of the rendering. For that, we modify `initial viewing space` with the new values.
 
-To do that :
 
-- Change xMin from -100 to 0
-- Change Ymin from -100 to 0
 
 ![result](../../screenshots/demo/tutorial11/initial.png)
 
-Then, you will see that the initial space will move and you will be able to work only on the upper right part of the dashboard.
+The representation is recalculated with the new limitations. The objects will be automatically recalculated to get new values like this with region 3:
 
-![result](../../screenshots/demo/tutorial11/result.png)
+
+
+![result](../../screenshots/demo/tutorial11/region3.png)
+
+
+the new result will be
+
+
+![result](../../screenshots/demo/tutorial11/newresult.png)

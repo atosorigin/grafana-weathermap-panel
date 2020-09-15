@@ -55,3 +55,8 @@ You can define the position of the
   - down
   - right
   - left
+
+  
+# See too
+
+- [Tutorial 03 : Create dashboard Avanced with link directionnel](../demo/tutorial03.md)

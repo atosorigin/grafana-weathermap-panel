@@ -59,3 +59,11 @@ By checking this option, you will want to display the value of the auxiliary def
 - Object display in text or tooltip : By checking this box, the value of the metric will be displayed in the tooltip.
 - Color text: By checking this box, you can choose a color for the text of the metric value.
 - Background color: By checking this box, you can choose a color for the background of the metric value.
+
+# See too
+
+- [Tutorial 01 : Add a dashboard SVG](../demo/tutorial01.md)
+- [Tutorial 05 : Create a customizable query](../demo/tutorial05.md)
+- [Tutorial 06 : Create modelisation advanced](../demo/tutorial06.md)
+- [Tutorial 07 : Create bi directionnel](../demo/tutorial07.md)
+- [Tutorial 10 : How to add a global json file](../demo/tutorial10.md)

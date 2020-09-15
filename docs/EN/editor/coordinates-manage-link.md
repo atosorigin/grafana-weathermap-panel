@@ -17,3 +17,7 @@ This part is common for
 - Link tooltip : Allows a redirection to the link filled in the tool type by clicking on the link.
 
 - Text in tooltip: Displays the link in the tooltip that appears when the cursor is passed over the area or point.
+
+# See too
+
+- [Tutorial 07 : Create bi directionnel](../demo/tutorial07.md)

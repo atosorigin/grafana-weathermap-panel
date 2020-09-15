@@ -11,7 +11,7 @@
 
 - Gabarit
 
-  - [Defaut](gabarit-default.md)
+  - [Default](gabarit-default.md)
   - [Template](gabarit-template.md)
 
 - SVG

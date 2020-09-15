@@ -15,19 +15,14 @@ The **gabarit** file must be declared as a JSON file like this:
   "default": {
     "templates": [
       {
-        // point
-      },
-      {
-        // link
-      },
-      {
-        // region
-      },
+        // Point and/or Link and/or Region
+      }
     ]
   }
 }
 
 ```
+
 
 This structure is fixed. The default template must imperatively have a region, a point and a link.
 

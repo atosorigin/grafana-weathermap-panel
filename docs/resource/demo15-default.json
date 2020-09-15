@@ -3,8 +3,8 @@
     "lowerLimit": [
       {
         "id": 0,
-        "lowerLimitMin": "leMinimum",
-        "lowerLimitMax": "leMaxmum",
+        "lowerLimitMin": "",
+        "lowerLimitMax": "",
         "backColor": "black",
         "borderColor": "black",
         "sizeBorder": "2"

@@ -13,7 +13,7 @@
       },
       "generateObjectText": true,
       "valueGenerateObjectText": {
-        "legendElement": "uneLegend",
+        "legendElement": "a Legend",
         "numericFormatElement": "",
         "unit": "u",
         "displayObjectInTooltip": false,
@@ -42,7 +42,7 @@
       {
         "filtered": "device|ens3",
         "labelfix": true,
-        "xylabel": "x|labelName#y|labelName",
+        "xylabel": "",
         "xylabelfix": "x|90#y|90",
         "type": "point",
         "name": "unPoint",
@@ -94,6 +94,74 @@
         "color": "green",
         "assiciateOrientedLinksIn": [],
         "associateOrientedLinksOut": []
+      },
+{
+        "filtered": "device|ens3",
+        "labelfix": true,
+        "xylabelA": "x|quantile#y|quantile",
+        "xylabelB": "x|quantile#y|quantile",
+        "xylabelC": "x|quantile#y|quantile",
+        "xylabelfixA": "x|-70#y|66",
+        "xylabelfixB": "x|10#y|60",
+        "xylabelfixC": "x|0#y|0",
+        "type": "link",
+        "name": "unLink",
+        "meta": "uneMeta",
+        "label": "lien device",
+        "positionParameter": {
+          "xylabelA": "x|0#y|0",
+          "xylabelB": "x|0#y|0",
+          "tooltipA": "Bottom",
+          "tooltipB": "Bottom"
+        },
+        "mainMetric": {
+          "key": "",
+          "unit": "",
+          "format": "",
+          "keyValue": "",
+          "filter": [],
+          "refId": "",
+          "expr": "",
+          "returnQuery": [],
+          "manageValue": "avg"
+        },
+        "metrics": [],
+        "mainMetricB": {
+          "key": "",
+          "unit": "",
+          "format": "",
+          "keyValue": "",
+          "filter": [],
+          "refId": "",
+          "expr": "",
+          "returnQuery": [],
+          "manageValue": "avg"
+        },
+        "metricsB": [],
+        "linkURL": {
+          "followLink": "",
+          "hoveringTooltipLink": "",
+          "hoveringTooltipText": ""
+        },
+        "orientationLink": {
+          "label": "Monodirectional",
+          "value": "AB"
+        },
+        "size": "9",
+        "colorCoordinateA": "#5794F2",
+        "colorCoordinateB": "#E54658",
+        "valueMainMetricA": "",
+        "valueMainMetricB": "",
+        "pointIn": "",
+        "pointOut": "",
+        "regionIn": "",
+        "regionOut": "",
+        "isIncurved": {
+          "label": "No",
+          "value": false
+        },
+        "zIndex": "2",
+        "color": "black"
       }
     ]
   },
@@ -101,7 +169,7 @@
     {
       "filtered": "device|ens3",
       "labelfix": true,
-      "xylabel": "x|labelName#y|labelName",
+      "xylabel": "",
       "xylabelfix": "x|100#y|310",
       "type": "point",
       "name": "point0",
@@ -157,7 +225,7 @@
     {
       "filtered": "device|lo",
       "labelfix": true,
-      "xylabel": "x|labelName#y|labelName",
+      "xylabel": "",
       "xylabelfix": "x|220#y|220",
       "type": "point",
       "name": "point1",
@@ -208,15 +276,15 @@
     {
       "filtered": "device|ens3",
       "labelfix": true,
-      "xylabelA": "x|labelName#y|labelName",
-      "xylabelB": "x|labelName#y|labelName",
-      "xylabelC": "x|labelName#y|labelName",
-      "xylabelfixA": "x|220#y|220",
-      "xylabelfixB": "x|113#y|297",
-      "xylabelfixC": "x|labelName#y|labelName",
+      "xylabelA": "",
+      "xylabelB": "",
+      "xylabelC": "",
+      "xylabelfixA": "x|0#y|0",
+      "xylabelfixB": "x|250#y|50",
+      "xylabelfixC": "x|#y|",
       "type": "link",
       "name": "orientedLink1",
-      "meta": "meta1",
+      "meta": "meta vide",
       "label": "lien device",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -251,7 +319,7 @@
       "valueMainMetricA": "",
       "valueMainMetricB": "",
       "pointIn": "",
-      "pointOut": "networkName",
+      "pointOut": "point0",
       "regionIn": "",
       "regionOut": "",
       "zIndex": 2,
@@ -259,7 +327,7 @@
         "label": "No",
         "value": false
       },
-      "color": "#CCCCCC"
+      "color": "blue"
     }
   ]
 }
