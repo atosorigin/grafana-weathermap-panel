@@ -32,7 +32,7 @@ The **point** file must be declared as a JSON file like this:
             "linkURL": {},
             "lowerLimit": [],
             "mainMetric": {},
-            "meta": "",
+            "meta": [],
             "metrics": [],
             "name": "point1",
             "positionParameter": {},
@@ -252,7 +252,18 @@ With similarly:
 
 ## meta
 
-no values
+```
+"meta": [
+        {
+          "meta": "string",
+          "colorText": "string",
+          "colorBack": "string",
+          "bold": true,
+          "italic": true,
+          "underline": true
+        }
+      ]
+```
 
 ## metrics
 

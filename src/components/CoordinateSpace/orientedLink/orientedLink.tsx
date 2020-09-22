@@ -646,7 +646,8 @@ export default class OrientedLink extends React.Component<Props, State> {
             options={this.props.options}
             onOptionsChange={this.props.onOptionsChange}
             data={this.props.data}
-            meta={this.state.arrayCoor.meta}
+            idCoordinate={this.state.orientedLink.id}
+            type="link"
             saveToParent={this.saveMetaData}
           />
         </div>

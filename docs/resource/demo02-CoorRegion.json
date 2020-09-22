@@ -43,7 +43,20 @@
         "returnQuery": {},
         "unit": ""
       },
-      "meta": "",
+      "meta": [
+        {
+          "meta": "meta region 1",
+          "obj": {
+            "colorText": "#FF0000",
+            "colorBack": "#CCCCCC",
+            "style": {
+              "bold": true,
+              "italic": false,
+              "underline": false
+            }
+          }
+        }
+      ],
       "metrics": [],
       "mode": false,
       "orientedLink": [],
@@ -136,7 +149,20 @@
         },
         "unit": ""
       },
-      "meta": "",
+      "meta": [
+        {
+          "meta": "meta region 2",
+          "obj": {
+            "colorText": "#FF0000",
+            "colorBack": "#CCCCCC",
+            "style": {
+              "bold": true,
+              "italic": false,
+              "underline": false
+            }
+          }
+        }
+      ],
       "metrics": [],
       "mode": false,
       "orientedLink": [],

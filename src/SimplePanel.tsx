@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import { SimpleOptions, Background, Metric } from 'types';
+import React, { PureComponent, CSSProperties } from 'react';
+import { SimpleOptions, Background, Metric, Metadata } from 'types';
 
 import { PanelProps, SelectableValue } from '@grafana/data';
 import { CustomScrollbar, Modal, Button } from '@grafana/ui';
@@ -302,6 +302,7 @@ export class SimplePanel extends PureComponent<Props, State> {
           heightInitialSpaceDefault={line.heightInitialSpaceDefault}
           positionXDefault={line.positionXDefault}
           positionYDefault={line.positionYDefault}
+          metaData={line.meta}
         />
       );
       mapItems.push(item);
@@ -1111,6 +1112,7 @@ export class SimplePanel extends PureComponent<Props, State> {
           positionYBDefault={pointDefaultBY}
           positionXCDefault={orientedLink.pointCPositionXDefault}
           positionYCDefault={orientedLink.pointCPositionYDefault}
+          metaData={orientedLink.meta}
         />
       );
       mapItems.push(item);
@@ -1994,6 +1996,41 @@ export class SimplePanel extends PureComponent<Props, State> {
     return result + ' ' + unit;
   };
 
+  private displayMetaDataRegionSVG = (region: RegionClass): JSX.Element => {
+    let resultHtml: JSX.Element[] = [];
+    const arrayMeta: Metadata[] = region.meta;
+    if (arrayMeta.length !== 0) {
+      resultHtml.push(
+        <p
+          style={{
+            fontFamily: this.props.options.display.police,
+            fontSize: '10px',
+            marginTop: '5px',
+            marginBottom: '0px',
+            color: 'white',
+          }}
+        >
+          Metadata
+        </p>
+      );
+      arrayMeta.forEach((meta) => {
+        const styleContentMetaData = {
+          color: meta.obj.colorText,
+          backgroundColor: meta.obj.colorBack,
+          fontWeight: meta.obj.style.bold ? 'bold' : 'normal',
+          fontStyle: meta.obj.style.italic ? 'italic' : 'normal',
+          textDecoration: meta.obj.style.underline ? 'underline' : 'normal',
+          fontFamily: this.props.options.display.police,
+          fontSize: '9px',
+          marginLeft: '10px',
+          marginBottom: '0px',
+        } as CSSProperties;
+        resultHtml.push(<p style={styleContentMetaData}>{meta.meta}</p>);
+      });
+    }
+    return <div id="metadataTooltipSVG">{resultHtml}</div>;
+  };
+
   private displayAuxiliaryMetricsRegionSVG = (region: RegionClass): JSX.Element => {
     let html: JSX.Element[] = [];
     const valuesAuxMetrics: string[] = this.getValuesAuxiliaryMetrics(region.metrics, region.mainMetric);
@@ -2087,7 +2124,11 @@ export class SimplePanel extends PureComponent<Props, State> {
         index++;
       }
     }
-    return <div style={{ backgroundColor: colorBack }}>{html}</div>;
+    return (
+      <div id="auxMetTooltipSVG" style={{ backgroundColor: colorBack }}>
+        {html}
+      </div>
+    );
   };
 
   private defineMainMetric = (region: RegionClass): string => {
@@ -2207,6 +2248,7 @@ export class SimplePanel extends PureComponent<Props, State> {
         : 'black',
       fontSize: this.props.options.display.size,
       fontFamily: this.props.options.display.police,
+      overflow: 'visible',
     } as React.CSSProperties;
 
     const styleElementTooltipSVG = {
@@ -2221,13 +2263,27 @@ export class SimplePanel extends PureComponent<Props, State> {
         style={styleMainTooltipSVG}
         onMouseOver={(event: any) => {
           const tooltipSVG: any = document.getElementById('tooltipSVG');
-          if (event.target.id === 'tooltipSVG' || event.target.parentElement.id === 'tooltipSVG') {
+          if (
+            event.target.id === 'tooltipSVG' ||
+            event.target.parentElement.id === 'tooltipSVG' ||
+            event.target.id === 'auxMetTooltipSVG' ||
+            event.target.parentElement.id === 'auxMetTooltipSVG' ||
+            event.target.id === 'metadataTooltipSVG' ||
+            event.target.parentElement.id === 'metadataTooltipSVG'
+          ) {
             tooltipSVG.style.display = 'initial';
           }
         }}
         onMouseOut={(event: any) => {
           const tooltipSVG: any = document.getElementById('tooltipSVG');
-          if (event.target.id !== 'tooltipSVG' || event.target.parentElement.id !== 'tooltipSVG') {
+          if (
+            event.target.id !== 'tooltipSVG' ||
+            event.target.parentElement.id !== 'tooltipSVG' ||
+            event.target.id !== 'auxMetTooltipSVG' ||
+            event.target.parentElement.id !== 'metadataTooltipSVG' ||
+            event.target.id !== 'metadataTooltipSVG' ||
+            event.target.parentElement.id !== 'auxMetTooltipSVG'
+          ) {
             tooltipSVG.style.display = 'none';
           }
         }}
@@ -2237,6 +2293,7 @@ export class SimplePanel extends PureComponent<Props, State> {
           <p style={styleMainMetricTooltipSVG}>{this.defineMainMetric(regionSVG)}</p>
         )}
         {regionSVG.textObj.generateAuxiliaryElement.displayObjectInTooltip && this.displayAuxiliaryMetricsRegionSVG(regionSVG)}
+        {this.displayMetaDataRegionSVG(regionSVG)}
         <a style={styleElementTooltipSVG} href={regionSVG.linkURL.hoveringTooltipLink}>
           {regionSVG.linkURL.hoveringTooltipText}
         </a>

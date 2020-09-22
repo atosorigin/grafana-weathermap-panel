@@ -67,7 +67,7 @@
         "xylabelfixC": "x|0#y|0",
         "type": "link",
         "name": "unLink",
-        "meta": "uneMeta",
+        "meta": [],
         "label": "lien device",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -138,7 +138,7 @@
       "xylabelfixC": "x|#y|",
       "type": "link",
       "name": "orientedLink1",
-      "meta": "",
+      "meta": [],
       "label": "lien device",
       "positionParameter": {
         "xylabelA": "x|0#y|0",

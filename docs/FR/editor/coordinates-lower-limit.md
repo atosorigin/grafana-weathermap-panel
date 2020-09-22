@@ -43,4 +43,3 @@ Chaque palier, vous devez remplir :
 
 - [Tutorial 07 : Créer un lien bi directionnel](../demo/tutorial07.md)
 - [Tutorial 14 : Gabarit dynamique avancé](../demo/tutorial14.md)
-

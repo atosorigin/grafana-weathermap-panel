@@ -41,7 +41,20 @@
         "returnQuery": {},
         "unit": ""
       },
-      "meta": "",
+      "meta": [
+        {
+          "meta": "meta svg 1",
+          "obj": {
+            "colorText": "white",
+            "colorBack": "black",
+            "style": {
+              "bold": true,
+              "italic": true,
+              "underline": true
+            }
+          }
+        }
+      ],
       "metrics": [],
       "mode": true,
       "orientedLink": [],
@@ -132,7 +145,7 @@
         },
         "unit": ""
       },
-      "meta": "",
+      "meta": [],
       "metrics": [],
       "mode": true,
       "orientedLink": [],
@@ -236,7 +249,7 @@
         "returnQuery": {},
         "unit": ""
       },
-      "meta": "",
+      "meta": [],
       "metrics": [],
       "mode": true,
       "orientedLink": [],

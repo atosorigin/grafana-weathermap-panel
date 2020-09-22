@@ -25,7 +25,20 @@
         "hoveringTooltipText": ""
       },
       "lowerLimit": [],
-      "meta": "",
+      "meta": [
+        {
+          "meta": "meta link",
+          "obj": {
+            "colorText": "orange",
+            "colorBack": "blue",
+            "style": {
+              "bold": false,
+              "italic": false,
+              "underline": false
+            }
+          }
+        }
+      ],
       "metrics": [],
       "name": "orientedLink1",
       "orientationLink": {
@@ -34,20 +47,20 @@
       },
       "pointAPositionX": "125",
       "pointAPositionY": "344",
-      "pointBPositionX": "",
-      "pointBPositionY": "",
+      "pointBPositionX": "420",
+      "pointBPositionY": "340",
       "pointCPositionX": "",
       "pointCPositionY": "",
       "pointAPositionXDefault": "125",
       "pointAPositionYDefault": "344",
-      "pointBPositionXDefault": "",
-      "pointBPositionYDefault": "",
+      "pointBPositionXDefault": "420",
+      "pointBPositionYDefault": "340",
       "pointCPositionXDefault": "",
       "pointCPositionYDefault": "",
       "widthInitialSpaceDefault": "",
       "heightInitialSpaceDefault": "",
       "pointIn": "",
-      "pointOut": "point2",
+      "pointOut": "",
       "positionParameter": {
         "labelAPositionX": "0",
         "labelAPositionY": "0",

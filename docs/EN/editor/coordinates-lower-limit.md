@@ -43,4 +43,3 @@ At each level, you have to fill in:
 
 - [Tutorial 07 : Create bi directionnel](../demo/tutorial07.md)
 - [Tutorial 14 : Advanced dynamic template](../demo/tutorial14.md)
-

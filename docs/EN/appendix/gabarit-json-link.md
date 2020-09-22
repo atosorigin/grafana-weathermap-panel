@@ -6,8 +6,6 @@ The complete [sample-gabarit.json](../../resource/sampleJson/sample-gabarit.json
 
 The **gabarit** file must be declared as a JSON file like this:
 
-
-
 ### OrientedLink
 
 ```
@@ -22,7 +20,7 @@ The **gabarit** file must be declared as a JSON file like this:
         "xylabelfixC": "x|0#y|0",
         "type": "link",
         "name": "unLink",
-        "meta": "uneMeta",
+        "meta": [],
         "label": "lien device",
         "positionParameter": {},
         "mainMetric": {},
@@ -46,8 +44,6 @@ The **gabarit** file must be declared as a JSON file like this:
       },
 ```
 
-
-  
 ## mainMetric et mainMetricB
 
 - **expr** : Expression in PrompQL
@@ -73,7 +69,6 @@ The **gabarit** file must be declared as a JSON file like this:
         },
 ```
 
-
 ## linkURL
 
 - **followLink**: Allows a redirection to the link by clicking on the region.
@@ -88,8 +83,6 @@ The **gabarit** file must be declared as a JSON file like this:
 },
 
 ```
-
-
 
 ## orientationLink
 
@@ -107,14 +100,13 @@ The **gabarit** file must be declared as a JSON file like this:
 
 ```
 
-       
 ## positionParameter
 
 - **positionParameter**
 
   - **labelAPosition** : Choose the horizontal position of label A
   - **labelAPosition** : Choose the vertical position of label A
-  - **labelBPosition** : Choose the horizontal position of label B 
+  - **labelBPosition** : Choose the horizontal position of label B
   - **labelBPosition** : Choose the vertical position of label B
   - **tooltipPositionA**: Tooltip A position
   - **tooltipPositionB**: Tooltip B position
@@ -126,8 +118,7 @@ The **gabarit** file must be declared as a JSON file like this:
           "tooltipA": "Bottom",
           "tooltipB": "Bottom"
         },
-```         
-
+```
 
 ## isIncurved
 
@@ -142,4 +133,19 @@ The **gabarit** file must be declared as a JSON file like this:
             "value": false
         },
 
+```
+
+## meta
+
+```
+"meta": [
+        {
+          "meta": "string",
+          "colorText": "string",
+          "colorBack": "string",
+          "bold": true,
+          "italic": true,
+          "underline": true
+        }
+      ]
 ```

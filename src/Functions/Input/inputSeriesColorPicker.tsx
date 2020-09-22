@@ -18,12 +18,13 @@ type InputTextFieldProps = {
  */
 export const InputSeriesColorPicker: FunctionComponent<InputTextFieldProps> = ({ color, keyInt, text, _onChange, width }) => (
   <div className="form-field">
-    <FormLabel width={15}>{text}</FormLabel>
+    <FormLabel width={width ? width : 15}>{text}</FormLabel>
     <div
       id="colorPicker"
       style={{
         margin: '0.5%',
         padding: '0.5%',
+        paddingTop: '5px',
         backgroundColor: '#1f1f20',
         border: '3px solid black',
       }}

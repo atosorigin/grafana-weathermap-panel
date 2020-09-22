@@ -28,7 +28,7 @@ The **link** file must be declared as a JSON file like this:
         "lowerLimit": [{...},{...}],
         "mainMetric": {...},
         "mainMetricB": {...},
-        "meta": "",
+        "meta": [],
         "metrics": [],
         "metricsB": [],
         "name": "orientedLink1",
@@ -251,7 +251,18 @@ With similarly:
 
 ## meta
 
-pas de valeurs
+```
+"meta": [
+        {
+          "meta": "string",
+          "colorText": "string",
+          "colorBack": "string",
+          "bold": true,
+          "italic": true,
+          "underline": true
+        }
+      ]
+```
 
 ## metrics et metricsB
 

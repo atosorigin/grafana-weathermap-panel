@@ -55,7 +55,7 @@
         "xylabelfix": "x|90#y|90",
         "type": "point",
         "name": "unPoint",
-        "meta": "uneMeta",
+        "meta": [],
         "label": "mtu ens3",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -115,7 +115,7 @@
         "xylabelfixC": "x|0#y|0",
         "type": "link",
         "name": "unLink",
-        "meta": "uneMeta",
+        "meta": [],
         "label": "lien device",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -178,7 +178,7 @@
         "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "type": "region",
-        "meta": "uneMeta",
+        "meta": [],
         "label": "0.5-inner_eval",
         "positionParameter": {
           "xylabelA": "x|0#y|0",

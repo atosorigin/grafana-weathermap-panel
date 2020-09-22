@@ -25,7 +25,16 @@
         "hoveringTooltipLink": "",
         "hoveringTooltipText": ""
       },
-      "lowerLimit": [],
+      "lowerLimit": [
+        {
+          "backColor": "",
+          "borderColor": "orange",
+          "id": 0,
+          "lowerLimitMax": "",
+          "lowerLimitMin": "",
+          "sizeBorder": "2"
+        }
+      ],
       "mainMetric": {
         "format": "",
         "key": "",
@@ -35,7 +44,20 @@
         "returnQuery": [],
         "unit": ""
       },
-      "meta": "",
+      "meta": [
+        {
+          "meta": "meta region 1",
+          "obj": {
+            "colorText": "white",
+            "colorBack": "black",
+            "style": {
+              "bold": true,
+              "italic": true,
+              "underline": false
+            }
+          }
+        }
+      ],
       "metrics": [],
       "mode": false,
       "orientedLink": [],
@@ -50,8 +72,8 @@
       "textObj": {
         "value": "",
         "isTextTooltip": true,
-        "colorBack": "rgba(255, 255, 255, 0)",
-        "colorText": "rgba(0, 0, 0, 1)",
+        "colorBack": "black",
+        "colorText": "white",
         "style": {
           "bold": false,
           "italic": false,
@@ -80,7 +102,7 @@
         }
       },
       "traceBack": false,
-      "traceBorder": false
+      "traceBorder": true
     }
   ]
 }

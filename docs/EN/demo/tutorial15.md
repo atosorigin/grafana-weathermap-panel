@@ -4,7 +4,6 @@
 
 Demo 15 will position a variable element in an X and Y space, and display its value at the point defined by the query.
 
-
 ## Add a query
 
 The example shows how to use query filters to obtain precise metrics
@@ -92,10 +91,7 @@ puis 1 clic **load**
 
 ![](../../screenshots/demo/tutorial15/result.png)
 
-
-
 ## Structure gabarit files
-
 
 ### default gabarit : demo15-default.json
 
@@ -107,14 +103,14 @@ puis 1 clic **load**
   "default": {
     "templates": [
       {
-        // Point 
+        // Point
       },
       {
         // Link
       },
       {
         // Region
-      }      
+      }
     ]
   }
 }
@@ -122,7 +118,6 @@ puis 1 clic **load**
 ```
 
 ### Template gabarit : demo15-point-multi.json
-
 
 ```
 {
@@ -132,23 +127,20 @@ puis 1 clic **load**
   "default": {
     "templates": [
       {
-        // Point 
+        // Point
       }
-    ]  
+    ]
   },
   "templates": [
       {
         // Point
-      } 
+      }
    ]
 }
 
 ```
 
-
-
 # See too
 
 - [Gabarit default](../appendix/gabarit-default.md)
 - [Gabarit template](../appendix/gabarit-template.md)
-

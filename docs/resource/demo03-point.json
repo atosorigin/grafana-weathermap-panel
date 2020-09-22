@@ -35,7 +35,20 @@
         "returnQuery": [],
         "unit": ""
       },
-      "meta": "",
+      "meta": [
+        {
+          "meta": "meta point 1",
+          "obj": {
+            "colorText": "orange",
+            "colorBack": "yellow",
+            "style": {
+              "bold": false,
+              "italic": true,
+              "underline": true
+            }
+          }
+        }
+      ],
       "metrics": [],
       "name": "point1",
       "positionParameter": {

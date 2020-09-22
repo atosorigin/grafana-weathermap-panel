@@ -2,7 +2,7 @@ import React, { CSSProperties } from 'react';
 import { SelectableValue, PanelEditorProps } from '@grafana/data';
 import { Coord4D, RegionClass } from 'Models/RegionClass';
 import { Tooltip } from '@grafana/ui';
-import { SimpleOptions, Metric } from 'types';
+import { SimpleOptions, Metric, Metadata } from 'types';
 import { TextObject } from 'Models/TextObjectClass';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
@@ -61,6 +61,7 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   positionYBDefault: string;
   positionXCDefault: string;
   positionYCDefault: string;
+  metaData: Metadata[];
 }
 
 interface State {}
@@ -2542,6 +2543,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     const contentTooltip: JSX.Element[] = [];
     const contentTooltipMainMetric: JSX.Element[] = [];
     const contentTooltipAuxMetric: JSX.Element[] = [];
+    const contentTooltipMetaData: JSX.Element[] = [];
     const valueMainMetricA = this.props.valueMainMetricA;
     const valueMainMetricB = this.props.valueMainMetricB;
     const refMainMetricA = this.props.refMainMetricA;
@@ -2604,6 +2606,14 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       marginLeft: '5px',
       marginBottom: '0px',
       color: addTextColorAuxMetric ? textColorAuxMetric : textColorTextObject,
+    } as React.CSSProperties;
+
+    const styleTitleMetaData = {
+      fontFamily: this.props.police,
+      fontSize: '10px',
+      marginTop: '5px',
+      marginBottom: '0px',
+      color: 'white',
     } as React.CSSProperties;
 
     const styleContentMainMetrics = {
@@ -2836,9 +2846,42 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         }
       }
     }
-    if (contentTooltip.length === 0 && contentTooltipAuxMetric.length === 0 && contentTooltipMainMetric.length === 0) {
+
+    if (this.props.metaData.length !== 0) {
+      contentTooltipMetaData.push(
+        <p key={'ContentTooltip31' + this.props.name} style={styleTitleMetaData}>
+          Metadata
+        </p>
+      );
+      this.props.metaData.forEach((oneMetaData, index) => {
+        const styleContentMetaData = {
+          color: oneMetaData.obj.colorText,
+          backgroundColor: oneMetaData.obj.colorBack,
+          fontWeight: oneMetaData.obj.style.bold ? 'bold' : 'normal',
+          fontStyle: oneMetaData.obj.style.italic ? 'italic' : 'normal',
+          textDecoration: oneMetaData.obj.style.underline ? 'underline' : 'normal',
+          fontFamily: this.props.police,
+          fontSize: '9px',
+          marginLeft: '10px',
+          marginBottom: '0px',
+        } as CSSProperties;
+        contentTooltipMetaData.push(
+          <p key={index + 'ContentTooltip32' + this.props.name} style={styleContentMetaData}>
+            - {oneMetaData.meta}
+          </p>
+        );
+      });
+    }
+
+    if (
+      contentTooltip.length === 0 &&
+      contentTooltipAuxMetric.length === 0 &&
+      contentTooltipMainMetric.length === 0 &&
+      contentTooltipMetaData.length === 0
+    ) {
       return null;
     }
+
     return (
       <div style={{ border: '1px solid black', padding: 0 }}>
         {contentTooltip}
@@ -2848,6 +2891,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         <div style={{ backgroundColor: addBackColorAuxMetric ? backColorAuxMetric : backColoTextObject, padding: '0 5px' }}>
           {contentTooltipAuxMetric}
         </div>
+        <div style={{ padding: '0 5px' }}>{contentTooltipMetaData}</div>
         {this.defineHtmlLinkTooltip()}
       </div>
     );

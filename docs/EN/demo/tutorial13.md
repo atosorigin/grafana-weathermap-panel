@@ -2,10 +2,7 @@
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
-
-
 Demo 13 shows the way to display several points, coming from several requests, of which 2 points will be linked with a link.
-
 
 ## Add the queries
 
@@ -65,8 +62,6 @@ It requires
 
 It is possible to have more details with the [display](../editor/display.md) page.
 
-
-
 ## Gabarit
 
 In the **Gabarit** tab
@@ -125,9 +120,7 @@ In **Text Object** you uncheck the line **Object display in text or tooltip**.
 
 You will see a dot appear and all the settings will be available in the editor.
 
-
 ## Structure gabarit files
-
 
 ### default gabarit : demo13-default.json
 
@@ -139,11 +132,11 @@ You will see a dot appear and all the settings will be available in the editor.
   "default": {
     "templates": [
       {
-        // Point 
+        // Point
       },
       {
         // Link
-      }     
+      }
     ]
   }
 }
@@ -152,7 +145,6 @@ You will see a dot appear and all the settings will be available in the editor.
 
 ### Template gabarit : demo13-point.json
 
-
 ```
 {
   "global": {
@@ -161,22 +153,20 @@ You will see a dot appear and all the settings will be available in the editor.
   "default": {
     "templates": [
       {
-        // Point 
+        // Point
       }
-    ]  
+    ]
   },
   "templates": [
       {
         // Point
-      } 
+      }
    ]
 }
 
 ```
 
-
 ### Template gabarit : demo13-point-link.json
-
 
 ```
 {
@@ -190,28 +180,25 @@ You will see a dot appear and all the settings will be available in the editor.
       },
       {
         // Link
-      }      
-    ]  
+      }
+    ]
   },
   "templates": [
       {
-        // Point 
-      }, 
+        // Point
+      },
       {
-        // second Point 
-      },       
+        // second Point
+      },
       {
         // Link
-      },      
+      },
    ]
 }
 
 ```
 
-
 # See too
 
 - [Gabarit default](../appendix/gabarit-default.md)
 - [Gabarit template](../appendix/gabarit-template.md)
-
-

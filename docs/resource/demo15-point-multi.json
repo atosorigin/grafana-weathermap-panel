@@ -46,7 +46,16 @@
         "xylabelfix": "x|90#y|90",
         "type": "point",
         "name": "P",
-        "meta": "uneMeta",
+        "meta": [
+          {
+            "meta": "meta exemple",
+            "colorText": "#FF00FF",
+            "colorBack": "#CCCCCC",
+            "bold": false,
+            "italic": false,
+            "underline": true
+          }
+        ],
         "label": "histo",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -105,7 +114,16 @@
       "xylabelfix": "",
       "type": "point",
       "name": "point1",
-      "meta": "",
+      "meta": [
+        {
+          "meta": "meta exemple",
+          "colorText": "#FF00FF",
+          "colorBack": "#CCCCCC",
+          "bold": false,
+          "italic": false,
+          "underline": true
+        }
+      ],
       "label": "V",
       "positionParameter": {
         "xylabelA": "x|0#y|0",

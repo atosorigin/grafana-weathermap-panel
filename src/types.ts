@@ -7,6 +7,7 @@ import { RegionClass, Coord4D } from 'Models/RegionClass';
 import { Style } from 'components/Parametrage/styleComponent';
 // import { TextObject } from 'Models/TextObjectClass';
 import { Filtred } from 'Functions/loaderGabarit';
+import { TextObject } from 'Models/TextObjectClass';
 
 /**
  * interface to save texte settings (police, size, style)
@@ -18,6 +19,15 @@ export interface TexteSettings {
   size: string;
   /** style simple panel */
   style: Style;
+}
+
+export interface MetaFile {
+  meta: string;
+  colorText: string;
+  colorBack: string;
+  bold: boolean;
+  italic: boolean;
+  underline: boolean;
 }
 
 export interface LowerLimit {
@@ -58,7 +68,7 @@ export interface TemplateGabaritPoint {
   xylabelfix: string;
   type: string;
   name: string;
-  meta: Metadata[];
+  meta: MetaFile[];
   label: string;
   positionParameter: any;
   mainMetric: Metric;
@@ -83,7 +93,7 @@ export interface TemplateGabaritRegion {
   xylabelfix: string;
   //xylabelfix0: string;
   type: string;
-  meta: Metadata[];
+  meta: MetaFile[];
   label: string;
   positionParameter: any;
   mainMetric: Metric;
@@ -107,7 +117,7 @@ export interface TemplateGabaritLink {
   xylabelfixC: string;
   type: string;
   name: string;
-  meta: Metadata[];
+  meta: MetaFile[];
   label: string;
   positionParameter: any;
   mainMetric: Metric;
@@ -129,15 +139,10 @@ export interface TemplateGabaritLink {
   isIncurved: SelectableValue<boolean>;
   color: string;
 }
-export interface TextObjectMetadata {
-  isTooltip: boolean;
-  colorBack: string;
-  colorText: string;
-  style: Style;
-}
+
 export interface Metadata {
   meta: string;
-  obj: TextObjectMetadata;
+  obj: TextObject;
 }
 
 export declare type TManageValue = 'avg' | 'sum' | 'err';

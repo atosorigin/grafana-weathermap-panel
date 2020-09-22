@@ -10,18 +10,12 @@ For this demonstration 11, we will take the result of the [tutorial 09](tutorial
 
 We modify the graduation of the rendering. For that, we modify `initial viewing space` with the new values.
 
-
-
 ![result](../../screenshots/demo/tutorial11/initial.png)
 
 The representation is recalculated with the new limitations. The objects will be automatically recalculated to get new values like this with region 3:
 
-
-
 ![result](../../screenshots/demo/tutorial11/region3.png)
 
-
 the new result will be
-
 
 ![result](../../screenshots/demo/tutorial11/newresult.png)

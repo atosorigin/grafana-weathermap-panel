@@ -64,7 +64,6 @@ A dedicated page to fill in the fields is available [here](coordinates-object-te
 
 A dedicated page to fill in the fields is available [here](coordinates-lower-limit.md)
 
-
 # See too
 
 - [Tutorial 01 : Add a dashboard SVG](../demo/tutorial01.md)

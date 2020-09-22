@@ -86,7 +86,7 @@
         "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "type": "region",
-        "meta": "meta 0.5-inner_eval",
+        "meta": [],
         "label": "0.5-inner_eval",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -126,7 +126,16 @@
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
-      "meta": "meta 0.5-inner_eva",
+      "meta": [
+        {
+          "meta": "meta exemple 1",
+          "colorText": "#FF0000",
+          "colorBack": "#CCCCCC",
+          "bold": true,
+          "italic": false,
+          "underline": false
+        }
+      ],
       "label": "0.5-inner_eval",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -162,7 +171,7 @@
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
-      "meta": "meta 0.5-prepare_time",
+      "meta": [],
       "label": "0.5-prepare_time",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -198,7 +207,7 @@
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
-      "meta": "meta 0.5-queue_time",
+      "meta": [],
       "label": "0.5-queue_time",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -234,7 +243,7 @@
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
-      "meta": "meta 0.9-inner_eval",
+      "meta": [],
       "label": "0.9-inner_eval",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -270,7 +279,7 @@
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "",
       "type": "region",
-      "meta": "meta 0.9-prepare_time",
+      "meta": [],
       "label": "0.9-prepare_time",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -306,7 +315,7 @@
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "",
       "type": "region",
-      "meta": "meta 0.9-queue_time",
+      "meta": [],
       "label": "0.9-queue_time",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -342,7 +351,7 @@
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "",
       "type": "region",
-      "meta": "meta 0.99-inner_eval",
+      "meta": [],
       "label": "0.99-inner_eval",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -378,7 +387,7 @@
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
-      "meta": "meta 0.99-prepare_time",
+      "meta": [],
       "label": "0.99-prepare_time",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -414,7 +423,7 @@
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "",
       "type": "region",
-      "meta": "meta 0.99-queue_time",
+      "meta": [],
       "label": "0.99-queue_time",
       "positionParameter": {
         "xylabelA": "x|100#y|100",
@@ -450,7 +459,16 @@
       "xylabel": "",
       "xylabelfix": "xMin|50#xMax|150#yMin|250#yMax|350",
       "type": "region",
-      "meta": "meta computer",
+      "meta": [
+        {
+          "meta": "meta exemple 2",
+          "colorText": "#FF00FF",
+          "colorBack": "#CCCCCC",
+          "bold": false,
+          "italic": false,
+          "underline": true
+        }
+      ],
       "label": "Computer",
       "positionParameter": {
         "xylabelA": "x|0#y|0",

@@ -105,4 +105,3 @@ Step 7 : Once you have done all of those steps, you will see the result of your 
 ![workflow4](../../screenshots/init/workflow4.png)
 
 Fourth method
-

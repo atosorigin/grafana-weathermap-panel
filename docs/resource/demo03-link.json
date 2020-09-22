@@ -45,7 +45,20 @@
         "returnQuery": [],
         "unit": ""
       },
-      "meta": "",
+      "meta": [
+        {
+          "meta": "meta link 1",
+          "obj": {
+            "colorText": "green",
+            "colorBack": "blue",
+            "style": {
+              "bold": false,
+              "italic": true,
+              "underline": false
+            }
+          }
+        }
+      ],
       "metrics": [],
       "metricsB": [],
       "name": "orientedLink1",
@@ -57,14 +70,14 @@
       "pointAPositionY": "",
       "pointBPositionX": "",
       "pointBPositionY": "",
-      "pointCPositionX": "209",
-      "pointCPositionY": "244",
+      "pointCPositionX": "390",
+      "pointCPositionY": "142",
       "pointAPositionXDefault": "",
       "pointAPositionYDefault": "",
       "pointBPositionXDefault": "",
       "pointBPositionYDefault": "",
-      "pointCPositionXDefault": "209",
-      "pointCPositionYDefault": "244",
+      "pointCPositionXDefault": "390",
+      "pointCPositionYDefault": "142",
       "widthInitialSpaceDefault": "",
       "heightInitialSpaceDefault": "",
       "pointIn": "point1",
@@ -163,7 +176,20 @@
         "returnQuery": [],
         "unit": ""
       },
-      "meta": "",
+      "meta": [
+        {
+          "meta": "meta link 2",
+          "obj": {
+            "colorText": "red",
+            "colorBack": "blue",
+            "style": {
+              "bold": true,
+              "italic": true,
+              "underline": true
+            }
+          }
+        }
+      ],
       "metrics": [],
       "metricsB": [],
       "name": "orientedLink2",
@@ -175,14 +201,14 @@
       "pointAPositionY": "",
       "pointBPositionX": "",
       "pointBPositionY": "",
-      "pointCPositionX": "390",
-      "pointCPositionY": "142",
+      "pointCPositionX": "209",
+      "pointCPositionY": "244",
       "pointAPositionXDefault": "",
       "pointAPositionYDefault": "",
       "pointBPositionXDefault": "",
       "pointBPositionYDefault": "",
-      "pointCPositionXDefault": "390",
-      "pointCPositionYDefault": "142",
+      "pointCPositionXDefault": "209",
+      "pointCPositionYDefault": "244",
       "widthInitialSpaceDefault": "",
       "heightInitialSpaceDefault": "",
       "pointIn": "",

@@ -6,20 +6,16 @@ The complete [gabarit-region.json](../../resource/sampleJson/gabarit-region.json
 
 The **gabarit** file must be declared as a JSON file like this:
 
-
-
-
 ## Structure
 
-
-```     
+```
       {
         "filtered": "quantile|0.5#slice|inner_eval",
         "labelfix": false,
         "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "type": "region",
-        "meta": "uneMeta",
+        "meta": [],
         "label": "label",
         "positionParameter": {},
         "mainMetric": {},
@@ -33,8 +29,6 @@ The **gabarit** file must be declared as a JSON file like this:
       }
 ```
 
-
-
 ## Type
 
 - **type** : region
@@ -47,9 +41,10 @@ The **gabarit** file must be declared as a JSON file like this:
         "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
 
-       
 
-        
+
+
+
 - **filtered** is the id of the region. Working as a counter
 - **labelfix** - **value**: Choose a value. "true" or "false"
 - **xylabel** to true
@@ -74,15 +69,14 @@ The creation of a region from an SVG element must contain the following values
 - **Label** is the name of the region
 - **mode** to true
 - **idSVG** is the id of the desired SVG area as region
-        
-        
+
 ## positionParameter
 
 - **positionParameter**
 
   - **labelAPosition** : Choose the horizontal position of label A
   - **labelAPosition** : Choose the vertical position of label A
-  - **labelBPosition** : Choose the horizontal position of label B 
+  - **labelBPosition** : Choose the horizontal position of label B
   - **labelBPosition** : Choose the vertical position of label B
   - **tooltipPositionA**: Tooltip A position
   - **tooltipPositionB**: Tooltip B position
@@ -94,9 +88,8 @@ The creation of a region from an SVG element must contain the following values
           "tooltipA": "Bottom",
           "tooltipB": "Bottom"
         },
-```         
-        
-  
+```
+
 ## mainMetric
 
 - **expr** : Expression in PrompQL
@@ -177,7 +170,6 @@ The creation of a region from an SVG element must contain the following values
           "expr": "",
           "returnQuery": [],
           "manageValue": "avg"
-        
 
 
 ## linkURL
@@ -202,4 +194,19 @@ The creation of a region from an SVG element must contain the following values
           "label": "lien device",
           "name": "orientedLink1"
         }
-```        
+```
+
+## meta
+
+```
+"meta": [
+        {
+          "meta": "string",
+          "colorText": "string",
+          "colorBack": "string",
+          "bold": true,
+          "italic": true,
+          "underline": true
+        }
+      ]
+```

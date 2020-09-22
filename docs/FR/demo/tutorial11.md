@@ -21,7 +21,6 @@ Ensuite, vous verrez que l'espace inital se déplacera et vous ne pourrez travai
 
 ![result](../../screenshots/demo/tutorial11/result.png)
 
-
 -200
 376
 100

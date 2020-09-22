@@ -46,7 +46,16 @@
         "xylabelfix": "x|90#y|90",
         "type": "point",
         "name": "Point",
-        "meta": "Message in the meta",
+        "meta": [
+          {
+            "meta": "meta exemple",
+            "colorText": "#FF0000",
+            "colorBack": "#CCCCCC",
+            "bold": true,
+            "italic": false,
+            "underline": false
+          }
+        ],
         "label": "label",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -106,7 +115,16 @@
         "xylabelfixC": "x|0#y|0",
         "type": "link",
         "name": "unLink",
-        "meta": "uneMeta",
+        "meta": [
+          {
+            "meta": "meta exemple",
+            "colorText": "#FF0000",
+            "colorBack": "#CCCCCC",
+            "bold": true,
+            "italic": false,
+            "underline": false
+          }
+        ],
         "label": "lien device",
         "positionParameter": {
           "xylabelA": "x|0#y|0",

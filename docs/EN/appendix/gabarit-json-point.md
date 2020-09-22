@@ -6,9 +6,6 @@ The complete [sample-gabarit.json](../../resource/sampleJson/sample-gabarit.json
 
 The **gabarit** file must be declared as a JSON file like this:
 
-
-
-
 ### points
 
 ```
@@ -19,7 +16,7 @@ The **gabarit** file must be declared as a JSON file like this:
         "xylabelfix": "x|90#y|90",
         "type": "point",
         "name": "unPoint",
-        "meta": "uneMeta",
+        "meta": [],
         "label": "label",
         "positionParameter": {},
         "mainMetric": {},
@@ -49,19 +46,19 @@ The creation of a region from an SVG element must contain the following values
 - **xylabelfix**
 - **type** : point
 
-
        "name": "unPoint",
         "meta": "uneMeta",
         "label": "mtu ens3",
-        
-       
+
+
+
 ## positionParameter
 
 - **positionParameter**
 
   - **labelAPosition** : Choose the horizontal position of label A
   - **labelAPosition** : Choose the vertical position of label A
-  - **labelBPosition** : Choose the horizontal position of label B 
+  - **labelBPosition** : Choose the horizontal position of label B
   - **labelBPosition** : Choose the vertical position of label B
   - **tooltipPositionA**: Tooltip A position
   - **tooltipPositionB**: Tooltip B position
@@ -73,9 +70,9 @@ The creation of a region from an SVG element must contain the following values
           "tooltipA": "Bottom",
           "tooltipB": "Bottom"
         },
-```         
-        
- ## linkURL
+```
+
+## linkURL
 
 - **followLink**: Allows a redirection to the link by clicking on the region.
 - **hoveringTooltipLink** : Allows a redirection to the link filled in the tool type by clicking on the link.
@@ -88,9 +85,8 @@ The creation of a region from an SVG element must contain the following values
   "hoveringTooltipText": ""
 },
 
-```    
-   
-  
+```
+
 ## mainMetric
 
 - **expr** : Expression in PrompQL
@@ -115,7 +111,6 @@ The creation of a region from an SVG element must contain the following values
           "manageValue": "avg"
         },
 ```
-
 
 ## drawGraphicMarker
 
@@ -145,15 +140,27 @@ The creation of a region from an SVG element must contain the following values
 
 ```
 
+## meta
+
+```
+"meta": [
+        {
+          "meta": "string",
+          "colorText": "string",
+          "colorBack": "string",
+          "bold": true,
+          "italic": true,
+          "underline": true
+        }
+      ]
+```
 
 ///////////////////////////////
-
-
 
 "metrics": [],
 
         "valueMetric": "",
-   
+
         "sizeWidth": "12",
         "sizeHeight": {
           "label": "",

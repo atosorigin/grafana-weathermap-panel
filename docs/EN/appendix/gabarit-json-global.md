@@ -4,11 +4,9 @@
 
 The complete [gabarit-default.json](../../resource/sampleJson/gabarit-default.json) script is available, the construction details of which can be found below.
 
-
 ## global
 
-la structure de la partie **global** se décompose de la manière suivante : 
-
+la structure de la partie **global** se décompose de la manière suivante :
 
 ```
   "global": {
@@ -50,7 +48,6 @@ la structure de la partie **global** se décompose de la manière suivante :
     "traceBorder": false
   },
 ```
-
 
 ## lowerLimit
 
@@ -143,8 +140,6 @@ With similarly:
 - **lowerLimitMin**: Minimum metric value for this colour
 - **sizeBorder** : thickness of the border
 
- 
-    
 ## textObject
 
 - **value**: Value of the object
@@ -174,9 +169,6 @@ With similarly:
   - **addColorBackElement**: Add a color to the background. "true" or "false"
   - **colorTextElement** : Choose the color of the text
   - **colorBackElement**: Choose the background color
-
-   
-    
 
 ## traceBack
 

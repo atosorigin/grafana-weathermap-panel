@@ -2,7 +2,7 @@ import React, { CSSProperties } from 'react';
 import { SelectableValue, PanelEditorProps } from '@grafana/data';
 import { RegionClass, Coord4D } from 'Models/RegionClass';
 import { Tooltip } from '@grafana/ui';
-import { SimpleOptions, Metric } from 'types';
+import { SimpleOptions, Metric, Metadata } from 'types';
 import { TextObject } from 'Models/TextObjectClass';
 import { LowerLimitClass } from 'Models/LowerLimitClass';
 import { LinkURLClass } from 'Models/LinkURLClass';
@@ -42,6 +42,7 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   heightInitialSpaceDefault: string;
   positionXDefault: string;
   positionYDefault: string;
+  metaData: Metadata[];
 }
 
 interface State {}
@@ -563,15 +564,6 @@ export default class DrawPoint extends React.Component<Props, State> {
       color: addTextColorAuxMetric ? textColorAuxMetric : textColorTextObject,
     } as React.CSSProperties;
 
-    // const styleTitle2MainMetric = {
-    //   fontFamily: this.props.police,
-    //   fontSize: '10px',
-    //   marginTop: '5px',
-    //   marginLeft: '5px',
-    //   marginBottom: '0px',
-    //   color: addTextColorMainMetric ? textColorMainMetric : textColorTextObject,
-    // } as React.CSSProperties;
-
     const styleTitle2AuxMetric = {
       fontFamily: this.props.police,
       fontSize: '10px',
@@ -579,6 +571,14 @@ export default class DrawPoint extends React.Component<Props, State> {
       marginLeft: '5px',
       marginBottom: '0px',
       color: addTextColorAuxMetric ? textColorAuxMetric : textColorTextObject,
+    } as React.CSSProperties;
+
+    const styleTitleMetaData = {
+      fontFamily: this.props.police,
+      fontSize: '10px',
+      marginTop: '5px',
+      marginBottom: '0px',
+      color: 'white',
     } as React.CSSProperties;
 
     const styleContentMainMetrics = {
@@ -729,10 +729,42 @@ export default class DrawPoint extends React.Component<Props, State> {
             - {nameOrientedLink}
           </p>
         );
-        // console.log(nameOrientedLink);
       });
     }
-    if (contentTooltip.length === 0 && contentTooltipMainMetric.length === 0 && contentTooltipAssociateLink.length === 0) {
+
+    if (this.props.metaData.length !== 0) {
+      contentTooltipMetadata.push(
+        <p key={localisation + 'ContentTooltip18' + this.props.name} style={styleTitleMetaData}>
+          Metadata
+        </p>
+      );
+      console.log(this.props.metaData);
+      this.props.metaData.forEach((oneMetaData, index) => {
+        const styleContentMetaData = {
+          color: oneMetaData.obj.colorText,
+          backgroundColor: oneMetaData.obj.colorBack,
+          fontWeight: oneMetaData.obj.style.bold ? 'bold' : 'normal',
+          fontStyle: oneMetaData.obj.style.italic ? 'italic' : 'normal',
+          textDecoration: oneMetaData.obj.style.underline ? 'underline' : 'normal',
+          fontFamily: this.props.police,
+          fontSize: '9px',
+          marginLeft: '10px',
+          marginBottom: '0px',
+        } as CSSProperties;
+        contentTooltipMetadata.push(
+          <p key={localisation + index + 'ContentTooltip19' + this.props.name} style={styleContentMetaData}>
+            - {oneMetaData.meta}
+          </p>
+        );
+      });
+    }
+
+    if (
+      contentTooltip.length === 0 &&
+      contentTooltipMainMetric.length === 0 &&
+      contentTooltipAssociateLink.length === 0 &&
+      contentTooltipMetadata.length === 0
+    ) {
       return null;
     }
 
@@ -746,10 +778,8 @@ export default class DrawPoint extends React.Component<Props, State> {
           <div style={{ backgroundColor: addBackColorAuxMetric ? backColorAuxMetric : backColoTextObject, padding: '0 5px' }}>
             {contentTooltipAuxMetric}
           </div>
-          <div>{contentTooltipAssociateLink}</div>
-          <div style={{ backgroundColor: addBackColorMainMetric ? backColorMainMetric : backColoTextObject, padding: '0 5px' }}>
-            {contentTooltipMetadata}
-          </div>
+          <div style={{ padding: '0 5px' }}>{contentTooltipMetadata}</div>
+          <div style={{ padding: '0 5px' }}>{contentTooltipAssociateLink}</div>
           {this.defineHtmlLinkTooltip()}
         </div>
       </div>

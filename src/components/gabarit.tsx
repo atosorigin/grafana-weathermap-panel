@@ -1,7 +1,7 @@
 import React from 'react';
 import { PanelEditorProps, SelectableValue } from '@grafana/data';
 // add Metadata
-import { SimpleOptions, GabaritFile, Metric, Metadata } from '../types';
+import { SimpleOptions, GabaritFile, Metric, Metadata, MetaFile } from '../types';
 import { FormField, Button, Collapse, FormLabel, Select } from '@grafana/ui';
 //import /*pointClassImport, regionClassImport, gabaritPointClassImport, gabaritRegionClassImport */ '../../config/testVariable';
 import { coordParse, LabelCoord2D, Filtred, filterParse, coordParseRegion, filterParseRegion } from '../Functions/loaderGabarit';
@@ -429,6 +429,42 @@ class Gabarit extends React.Component<Props, State> {
     }
   };
 
+  metaConstructor = (metas: MetaFile[]) => {
+    let result: Metadata[] = [];
+    metas.forEach((meta, index) => {
+      let obj = new TextObject(
+        '',
+        false,
+        meta.colorBack,
+        meta.colorText,
+        { bold: Boolean(meta.bold), italic: Boolean(meta.italic), underline: Boolean(meta.underline) },
+        false,
+        {
+          legendElement: '',
+          numericFormatElement: '',
+          unit: '',
+          displayObjectInTooltip: false,
+          addColorTextElement: false,
+          colorTextElement: meta.colorText,
+          addColorBackElement: false,
+          colorBackElement: meta.colorBack,
+        },
+        {
+          legendElement: '',
+          numericFormatElement: '',
+          unit: '',
+          displayObjectInTooltip: false,
+          addColorTextElement: false,
+          colorTextElement: meta.colorText,
+          addColorBackElement: false,
+          colorBackElement: meta.colorBack,
+        }
+      );
+      result.push({ meta: meta.meta, obj });
+    });
+    return result;
+  };
+
   loaderGabarit = (gab: GabaritFile, idx: number | null) => {
     let tmpLabelAPosition: LabelCoord2D;
     let tmpLabelBPosition: LabelCoord2D;
@@ -602,12 +638,12 @@ class Gabarit extends React.Component<Props, State> {
       if (!namePoint[index]) {
         namePoint[index] = this.props.options.gabaritDefault.templateGabaritPointDefault[0].name;
       }
-      metaPoint.push(point.meta);
+      metaPoint.push(this.metaConstructor(point.meta));
       if (!metaPoint[index]) {
-        metaPoint[index] = gabaritFileTmp.templateGabaritPointDefault[0].meta;
+        metaPoint[index] = this.metaConstructor(gabaritFileTmp.templateGabaritPointDefault[0].meta);
       }
       if (!metaPoint[index]) {
-        metaPoint[index] = this.props.options.gabaritDefault.templateGabaritPointDefault[0].meta;
+        metaPoint[index] = this.metaConstructor(this.props.options.gabaritDefault.templateGabaritPointDefault[0].meta);
       }
       labelPoint.push(point.label); // c'est le label du point qui est afficher pour la selection
       if (!labelPoint[index]) {
@@ -972,9 +1008,7 @@ class Gabarit extends React.Component<Props, State> {
           let toLoad: PointClass = new PointClass(
             newID + 1,
             linkURLPoint[posIndex],
-            // changement
-            // metaPoint[index],
-            [],
+            metaPoint[posIndex],
             gabaritFileTmp.globalGabarit.lowerLimit,
             labelPoint[posIndex] + '_' + newID,
             textObj,
@@ -1010,7 +1044,7 @@ class Gabarit extends React.Component<Props, State> {
             newID + 1,
             linkURLPoint[posIndex],
             // changement
-            [],
+            metaPoint[posIndex],
             gabaritFileTmp.globalGabarit.lowerLimit,
             labelPoint[posIndex] + '_' + newID,
             textObj,
@@ -1052,7 +1086,7 @@ class Gabarit extends React.Component<Props, State> {
     let posBLink: LabelCoord2D[] = []; //
     let posCLink: LabelCoord2D[] = []; //
     let nameLink: string[] = []; //
-    let metaLink: string[] = []; //
+    let metaLink: Metadata[][] = []; //
     let labelLink: string[] = []; //
     let positionParameterLink: PositionParameterClass[] = []; //
     let mainMetricALink: Metric[] = []; //
@@ -1132,15 +1166,12 @@ class Gabarit extends React.Component<Props, State> {
       if (!nameLink[index]) {
         nameLink[index] = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].name;
       }
-      // changement
-      metaLink.push(link.meta.toString());
+      metaLink.push(this.metaConstructor(link.meta));
       if (!metaLink[index]) {
-        // changement
-        [] = gabaritFileTmp.templateGabaritLinkDefault[0].meta;
+        metaLink[index] = this.metaConstructor(gabaritFileTmp.templateGabaritLinkDefault[0].meta);
       }
       if (!metaLink[index]) {
-        // changement
-        [] = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].meta;
+        metaLink[index] = this.metaConstructor(this.props.options.gabaritDefault.templateGabaritLinkDefault[0].meta);
       }
       labelLink.push(link.label);
       if (!labelLink[index]) {
@@ -1625,7 +1656,7 @@ class Gabarit extends React.Component<Props, State> {
               let toLoad: OrientedLinkClass = new OrientedLinkClass(
                 newID + 1,
                 linkURLLink[index],
-                [],
+                metaLink[index],
                 gabaritFileTmp.globalGabarit.lowerLimit,
                 labelLink[index] + '_' + newID,
                 textObj,
@@ -1674,7 +1705,7 @@ class Gabarit extends React.Component<Props, State> {
               let toLoad: OrientedLinkClass = new OrientedLinkClass(
                 newID + 1,
                 linkURLLink[index],
-                [],
+                metaLink[index],
                 gabaritFileTmp.globalGabarit.lowerLimit,
                 labelLink[index] + '_' + newID,
                 textObj,
@@ -1722,7 +1753,7 @@ class Gabarit extends React.Component<Props, State> {
               let toLoad: OrientedLinkClass = new OrientedLinkClass(
                 newID + 1,
                 linkURLLink[index],
-                [],
+                metaLink[index],
                 gabaritFileTmp.globalGabarit.lowerLimit,
                 labelLink[index] + '_' + newID,
                 textObj,
@@ -1770,7 +1801,7 @@ class Gabarit extends React.Component<Props, State> {
               let toLoad: OrientedLinkClass = new OrientedLinkClass(
                 newID + 1,
                 linkURLLink[index],
-                [],
+                metaLink[index],
                 gabaritFileTmp.globalGabarit.lowerLimit,
                 labelLink[index] + '_' + newID,
                 textObj,
@@ -1830,7 +1861,7 @@ class Gabarit extends React.Component<Props, State> {
           let toLoad: OrientedLinkClass = new OrientedLinkClass(
             newID + 1,
             linkURLLink[coordindex],
-            [],
+            metaLink[coordindex],
             gabaritFileTmp.globalGabarit.lowerLimit,
             labelLink[coordindex] + '_' + newID,
             textObj,
@@ -1879,7 +1910,7 @@ class Gabarit extends React.Component<Props, State> {
           let toLoad: OrientedLinkClass = new OrientedLinkClass(
             newID + 1,
             linkURLLink[coordindex],
-            [],
+            metaLink[coordindex],
             gabaritFileTmp.globalGabarit.lowerLimit,
             labelLink[coordindex] + '_' + newID,
             textObj,
@@ -1927,7 +1958,7 @@ class Gabarit extends React.Component<Props, State> {
           let toLoad: OrientedLinkClass = new OrientedLinkClass(
             newID + 1,
             linkURLLink[coordindex],
-            [],
+            metaLink[coordindex],
             gabaritFileTmp.globalGabarit.lowerLimit,
             labelLink[coordindex] + '_' + newID,
             textObj,
@@ -1975,7 +2006,7 @@ class Gabarit extends React.Component<Props, State> {
           let toLoad: OrientedLinkClass = new OrientedLinkClass(
             newID + 1,
             linkURLLink[coordindex],
-            [],
+            metaLink[coordindex],
             gabaritFileTmp.globalGabarit.lowerLimit,
             labelLink[coordindex] + '_' + newID,
             textObj,
@@ -2028,7 +2059,7 @@ class Gabarit extends React.Component<Props, State> {
     let filterRegion: Filtred[][] = []; //
     let posRegion: Coord4D[] = []; //
 
-    let metaRegion: string[] = []; //
+    let metaRegion: Metadata[][] = []; //
     let labelRegion: string[] = []; //
     let positionParameterRegion: PositionParameterClass[] = []; //
     let mainMetricRegion: Metric[] = []; //
@@ -2080,16 +2111,14 @@ class Gabarit extends React.Component<Props, State> {
         );
       }
       // changement
-      metaRegion.push(region.meta.toString());
+      metaRegion.push(this.metaConstructor(region.meta));
       if (!metaRegion[index]) {
-        // changement
-        // metaRegion[index] = gabaritFileTmp.templateGabaritRegionDefault[0].meta;
-        [] = gabaritFileTmp.templateGabaritRegionDefault[0].meta;
+        metaRegion[index] = this.metaConstructor(gabaritFileTmp.templateGabaritRegionDefault[0].meta);
       }
       if (!metaRegion[index]) {
         // changement
         // metaRegion[index] = this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta;
-        [] = this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta;
+        metaRegion[index] = this.metaConstructor(this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta);
       }
       labelRegion.push(region.label);
       if (!labelRegion[index]) {
@@ -2231,7 +2260,7 @@ class Gabarit extends React.Component<Props, State> {
         let toLoad: RegionClass = new RegionClass(
           newID + 1,
           linkURLRegion[index],
-          [],
+          metaRegion[index],
           gabaritFileTmp.globalGabarit.lowerLimit,
           labelRegion[index] + '_' + newID,
           textObj,
@@ -2256,7 +2285,7 @@ class Gabarit extends React.Component<Props, State> {
         let toLoad: RegionClass = new RegionClass(
           newID + 1,
           linkURLRegion[index],
-          [],
+          metaRegion[index],
           gabaritFileTmp.globalGabarit.lowerLimit,
           labelRegion[index] + '_' + newID,
           textObj,
@@ -2382,37 +2411,9 @@ class Gabarit extends React.Component<Props, State> {
     // this.props.options.arrayOrientedLinks = [];
     // this.props.options.arrayPoints = [];
     this.props.options.saveGabaritURL = [];
-    this.props.options.saveGabaritURL = [];
+    //this.props.options.saveGabaritURL = [];
     // this.props.options.saveGabaritURL.mono = [];
     this.props.onOptionsChange({ ...this.props.options, saveGabaritURL: this.props.options.saveGabaritURL });
-  };
-
-  printDefault = () => {
-    console.log('gabaritDefault');
-    console.log(this.props.options.gabaritDefault);
-  };
-
-  printPoint = () => {
-    console.log('Point');
-    console.log(this.props.options.arrayPoints);
-    this.props.options.arrayPoints.forEach((element) => {
-      console.log(element.mainMetric.filter);
-    });
-  };
-
-  printRegion = () => {
-    console.log('Region');
-    console.log(this.props.options.regionCoordinateSpace);
-  };
-
-  printLink = () => {
-    console.log('Link');
-    console.log(this.props.options.arrayOrientedLinks);
-  };
-
-  printTemp = () => {
-    console.log('gabaritDefault');
-    console.log(this.props.options.saveGabaritFile);
   };
 
   render() {
@@ -2458,11 +2459,6 @@ class Gabarit extends React.Component<Props, State> {
         <Collapse isOpen={this.state.collapseGabarit} label="Gabarit List" onToggle={this.onToggleGabarit}>
           <this.gabaritDisplay list={options.saveGabaritFile} />
         </Collapse>
-        <Button onClick={this.printDefault}>Default</Button>
-        <Button onClick={this.printPoint}>Point</Button>
-        <Button onClick={this.printRegion}>Region</Button>
-        <Button onClick={this.printLink}>Link</Button>
-        <Button onClick={this.printTemp}>Temp</Button>
       </div>
     );
   }

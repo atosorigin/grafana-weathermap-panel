@@ -426,7 +426,7 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
       item = (
         <div key={idCoordinateSpace + 'mainDiv' + id.toString()} style={styleMainDiv}>
           <p key={idCoordinateSpace + 'title' + id.toString()} style={styleTitle}>
-            {'Metric ' + (id + 1).toString()}
+            {'Auxiliary Metric ' + (id + 1).toString()}
           </p>
           <div key={idCoordinateSpace + 'content' + id.toString()} style={styleContent}>
             <div key={idCoordinateSpace + 'inputs' + id.toString()}>
@@ -499,7 +499,7 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
       item = (
         <div key={idCoordinateSpace + 'mainDiv' + id.toString()} style={styleMainDiv}>
           <p key={idCoordinateSpace + 'title' + id.toString()} style={styleTitle}>
-            {'Metric ' + (id + 1).toString()}
+            {'Auxiliary Metric ' + (id + 1).toString()}
           </p>
           <div key={idCoordinateSpace + 'content' + id.toString()} style={styleContent}>
             <div key={idCoordinateSpace + 'inputs' + id.toString()}>

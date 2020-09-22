@@ -46,7 +46,16 @@
         "xylabelfix": "x|90#y|90",
         "type": "point",
         "name": "unPoint",
-        "meta": "uneMeta",
+        "meta": [
+          {
+            "meta": "meta exemple",
+            "colorText": "#FF0000",
+            "colorBack": "#CCCCCC",
+            "bold": true,
+            "italic": false,
+            "underline": false
+          }
+        ],
         "label": "mtu ens3",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -95,7 +104,7 @@
         "assiciateOrientedLinksIn": [],
         "associateOrientedLinksOut": []
       },
-{
+      {
         "filtered": "device|ens3",
         "labelfix": true,
         "xylabelA": "x|quantile#y|quantile",
@@ -106,7 +115,16 @@
         "xylabelfixC": "x|0#y|0",
         "type": "link",
         "name": "unLink",
-        "meta": "uneMeta",
+        "meta": [
+          {
+            "meta": "meta exemple",
+            "colorText": "#FF0000",
+            "colorBack": "#CCCCCC",
+            "bold": true,
+            "italic": false,
+            "underline": false
+          }
+        ],
         "label": "lien device",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -173,10 +191,19 @@
       "xylabelfix": "x|100#y|310",
       "type": "point",
       "name": "point0",
-      "meta": "meta",
+      "meta": [
+        {
+          "meta": "meta exemple",
+          "colorText": "#FF0000",
+          "colorBack": "#CCCCCC",
+          "bold": true,
+          "italic": false,
+          "underline": false
+        }
+      ],
       "label": "mtu ens3",
       "positionParameter": {
-        "xylabelA": "x|0#y|0",
+        "xylabelA": "x|-100#y|0",
         "xylabelB": "x|labelName#y|labelName",
         "tooltipA": "Bottom",
         "tooltipB": "Bottom"
@@ -214,22 +241,31 @@
       "positionShapeX": "",
       "positionShapeY": "",
       "color": "#00FFFF",
-      "assiciateOrientedLinksIn": [],
-      "associateOrientedLinksOut": [
+      "assiciateOrientedLinksIn": [
         {
           "label": "lien device",
           "name": "orientedLink1"
         }
-      ]
+      ],
+      "associateOrientedLinksOut": []
     },
     {
       "filtered": "device|lo",
       "labelfix": true,
       "xylabel": "",
-      "xylabelfix": "x|220#y|220",
+      "xylabelfix": "x|350#y|150",
       "type": "point",
       "name": "point1",
-      "meta": "meta2",
+      "meta": [
+        {
+          "meta": "meta exemple",
+          "colorText": "#FF0000",
+          "colorBack": "#CCCCCC",
+          "bold": true,
+          "italic": false,
+          "underline": false
+        }
+      ],
       "label": "mtu lo",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -271,7 +307,12 @@
       "positionShapeY": "",
       "color": "red",
       "assiciateOrientedLinksIn": [],
-      "associateOrientedLinksOut": []
+      "associateOrientedLinksOut": [
+        {
+          "label": "lien device",
+          "name": "orientedLink1"
+        }
+      ]
     },
     {
       "filtered": "device|ens3",
@@ -284,7 +325,16 @@
       "xylabelfixC": "x|#y|",
       "type": "link",
       "name": "orientedLink1",
-      "meta": "meta vide",
+      "meta": [
+        {
+          "meta": "meta exemple",
+          "colorText": "#FF0000",
+          "colorBack": "#CCCCCC",
+          "bold": true,
+          "italic": false,
+          "underline": false
+        }
+      ],
       "label": "lien device",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -318,8 +368,8 @@
       "colorCoordinateB": "#E54658",
       "valueMainMetricA": "",
       "valueMainMetricB": "",
-      "pointIn": "",
-      "pointOut": "point0",
+      "pointIn": "mtu ens3_1",
+      "pointOut": "mtu lo_2",
       "regionIn": "",
       "regionOut": "",
       "zIndex": 2,

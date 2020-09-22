@@ -26,7 +26,20 @@
       },
       "lowerLimit": [],
 
-      "meta": "",
+      "meta": [
+        {
+          "meta": "meta link",
+          "obj": {
+            "colorText": "#FF0000",
+            "colorBack": "white",
+            "style": {
+              "bold": true,
+              "italic": true,
+              "underline": true
+            }
+          }
+        }
+      ],
       "metrics": [],
       "name": "orientedLink1",
       "orientationLink": {

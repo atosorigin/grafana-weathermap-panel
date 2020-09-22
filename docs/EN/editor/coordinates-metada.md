@@ -8,5 +8,4 @@ This part is common for
 - [Point](coordinates-space-point.md)
 - [Oriented Link](coordinates-space-link.md)
 
-
 to be continued

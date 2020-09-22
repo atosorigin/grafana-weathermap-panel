@@ -55,7 +55,16 @@
         "xylabelfix": "x|90#y|90",
         "type": "point",
         "name": "unPoint",
-        "meta": "uneMeta",
+        "meta": [
+          {
+            "meta": "meta exemple",
+            "colorText": "#FF0000",
+            "colorBack": "#CCCCCC",
+            "bold": true,
+            "italic": false,
+            "underline": false
+          }
+        ],
         "label": "mtu ens3",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -114,7 +123,16 @@
       "xylabelfix": "x|243#y|57",
       "type": "point",
       "name": "point1",
-      "meta": "",
+      "meta": [
+        {
+          "meta": "meta exemple",
+          "colorText": "#FF0000",
+          "colorBack": "#CCCCCC",
+          "bold": true,
+          "italic": false,
+          "underline": false
+        }
+      ],
       "label": "networkName",
       "positionParameter": {
         "xylabelA": "x|0#y|0",

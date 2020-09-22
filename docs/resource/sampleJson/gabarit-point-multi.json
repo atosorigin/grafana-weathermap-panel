@@ -46,7 +46,7 @@
         "xylabelfix": "x|90#y|90",
         "type": "point",
         "name": "unPoint",
-        "meta": "uneMeta",
+        "meta": [],
         "label": "mtu ens3",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -105,7 +105,7 @@
       "xylabelfix": "x|243#y|57",
       "type": "point",
       "name": "point1",
-      "meta": "",
+      "meta": [],
       "label": "networkName",
       "positionParameter": {
         "xylabelA": "x|0#y|0",

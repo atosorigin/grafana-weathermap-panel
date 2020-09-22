@@ -30,7 +30,7 @@ The **region** file must be declared as a JSON file like this:
       "linkURL": {},
       "lowerLimit": [],
       "mainMetric": {},
-      "meta": "",
+      "meta": [],
       "metrics": [],
       "mode": true,
       "orientedLink": [],
@@ -77,7 +77,7 @@ The creation of a region from an SVG element must contain the following values
       "linkURL": {},
       "lowerLimit": [],
       "mainMetric": {},
-      "meta": "",
+      "meta": [],
       "metrics": [],
       "mode": true,
       "orientedLink": [],
@@ -116,7 +116,7 @@ The creation of a region from coordinates must necessarily contain the following
       "linkURL": {},
       "lowerLimit": [],
       "mainMetric": {},
-      "meta": "",
+      "meta": [],
       "metrics": [],
       "mode": true,
       "orientedLink": [],
@@ -271,7 +271,18 @@ Compatible format is JPG / PNG / GIF / SVG
 
 ## meta
 
-no value
+```
+"meta": [
+        {
+          "meta": "string",
+          "colorText": "string",
+          "colorBack": "string",
+          "bold": true,
+          "italic": true,
+          "underline": true
+        }
+      ]
+```
 
 ## metrics
 

@@ -6,7 +6,6 @@ The SVG file is made up of different ID elements, which will serve as the region
 
 Demo 14 will display the value of the same request in a request, with a predefined variable color.
 
-
 ## Add a query
 
 The example shows how to use query filters to obtain precise metrics
@@ -101,10 +100,7 @@ puis 1 clic **load**
 
 ![](../../screenshots/demo/tutorial14/result.png)
 
-
-
 ## Structure gabarit files
-
 
 ### default gabarit : demo14-default.json
 
@@ -116,14 +112,14 @@ puis 1 clic **load**
   "default": {
     "templates": [
       {
-        // Point 
+        // Point
       },
       {
         // Link
       },
       {
         // Region
-      }       
+      }
     ]
   }
 }
@@ -131,7 +127,6 @@ puis 1 clic **load**
 ```
 
 ### Template gabarit : demo14-svg.json
-
 
 ```
 {
@@ -141,50 +136,47 @@ puis 1 clic **load**
   "default": {
     "templates": [
       {
-        // Region 
+        // Region
       }
-    ]  
+    ]
   },
   "templates": [
       {
         // Region 0
-      }, 
+      },
       {
         // Region 1
-      }, 
+      },
       {
         // Region 2
-      }, 
+      },
       {
         // Region 3
-      }, 
+      },
       {
         // Region 4
-      }, 
+      },
       {
         // Region 5
-      }, 
+      },
       {
         // Region 6
-      }, 
+      },
       {
         // Region 7
-      }, 
+      },
       {
         // Region 8
-      }, 
+      },
       {
         // Coordinate Region
-      }, 
+      },
    ]
 }
 
 ```
 
-
-
 # See too
 
 - [Gabarit default](../appendix/gabarit-default.md)
 - [Gabarit template](../appendix/gabarit-template.md)
-
