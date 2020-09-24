@@ -111,7 +111,6 @@ class FixColor extends React.Component<Props, State> {
     let labelSize = l10n.colorVariable.thicknessOutline;
     let placeHolderSize = l10n.colorVariable.thicknessOutline;
     if (this.props.traceBack) {
-      console.log('2');
       const keyFondColorPicker = key + 'FondcolorPicker';
       couleur.push(
         <InputSeriesColorPicker
@@ -124,7 +123,6 @@ class FixColor extends React.Component<Props, State> {
       );
     }
     if (this.props.traceBorder) {
-      console.log('3');
       const keyContourDiv = key + 'ContourDiv';
       couleur.push(
         <div key={keyContourDiv}>

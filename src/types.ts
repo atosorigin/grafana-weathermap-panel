@@ -23,11 +23,15 @@ export interface TexteSettings {
 
 export interface MetaFile {
   meta: string;
-  colorText: string;
-  colorBack: string;
-  bold: boolean;
-  italic: boolean;
-  underline: boolean;
+  obj: {
+    colorText: string;
+    colorBack: string;
+    style: {
+      bold: boolean;
+      italic: boolean;
+      underline: boolean;
+    };
+  };
 }
 
 export interface LowerLimit {

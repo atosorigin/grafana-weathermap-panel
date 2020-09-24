@@ -85,7 +85,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     super(props);
     this.state = {
       valueButton: '',
-      buttonManage: [false, false, false, false, false],
+      buttonManage: [false, false, false, false, false, false],
       numberClickDiv: 0,
       allActionButton: <div></div>,
       nbClickButton: false,
@@ -260,8 +260,6 @@ export class SimplePanel extends PureComponent<Props, State> {
     const mapItems: JSX.Element[] = [];
     let newArrayPoint: PointClass[] = this.props.options.arrayPoints;
     newArrayPoint.forEach((line: PointClass) => {
-      // console.log(line.name);
-      // console.log(line);
       const valueMainMetric = this.getValuesMainMetricPoint(line).toString();
       this.updatePositionOrientedLink(line);
       const valuesAuxiliaryMetrics: string[] = this.getValuesAuxiliaryMetricsPoint(line);
@@ -1261,38 +1259,41 @@ export class SimplePanel extends PureComponent<Props, State> {
       this.getCoordinatesToDrawPointWithClick(event);
     }
   };
-  // Close Legend
-  callInFunc = () => {
-    if (this.state.buttonAddIncurvedLinkIsActive) {
-      this.setState((prevState: State) => ({
-        buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive,
-      }));
-    }
-    if (this.state.buttonAddLinkIsActive) {
-      this.setState((prevState: State) => ({
-        buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive,
-      }));
-    }
-    this.resetButtonManage(2);
-  };
 
   /**
    * add button click to manage region, point, oriented link, position legend
    */
   updateButtonCss = () => {
     const final: JSX.Element = (
-      <div id="allButton" style={{ marginTop: '1%', marginBottom: '50px' }}>
+      <div
+        id="allButton"
+        style={{
+          marginTop: '1%',
+          marginBottom: '50px',
+          // display: 'flex',
+          // justifyContent: 'space-around',
+          // position: 'absolute',
+          // zIndex: 18,
+        }}
+      >
         <Button
-          style={{ marginLeft: '1%', zIndex: 18, position: 'absolute' }}
+          style={{
+            marginLeft: '1%',
+            zIndex: 18,
+            position: 'absolute',
+          }}
           variant={this.state.buttonManage[0] ? 'danger' : 'primary'}
           className="button"
           onClick={this.addNode}
         >
           Add Region
         </Button>
-
         <Button
-          style={{ marginLeft: '15%', zIndex: 18, position: 'absolute' }}
+          style={{
+            marginLeft: '15%',
+            zIndex: 18,
+            position: 'absolute',
+          }}
           variant={this.state.buttonManage[3] ? 'danger' : 'primary'}
           className="button"
           onClick={this.addPoint}
@@ -1301,7 +1302,11 @@ export class SimplePanel extends PureComponent<Props, State> {
         </Button>
 
         <Button
-          style={{ marginLeft: '27%', zIndex: 18, position: 'absolute' }}
+          style={{
+            marginLeft: '27%',
+            zIndex: 18,
+            position: 'absolute',
+          }}
           variant={this.state.buttonManage[1] ? 'danger' : 'primary'}
           className="button"
           onClick={this.addLink}
@@ -1310,7 +1315,11 @@ export class SimplePanel extends PureComponent<Props, State> {
         </Button>
 
         <Button
-          style={{ marginLeft: '46%', zIndex: 18, position: 'absolute' }}
+          style={{
+            marginLeft: '46%',
+            zIndex: 18,
+            position: 'absolute',
+          }}
           variant={this.state.buttonManage[4] ? 'danger' : 'primary'}
           className="button"
           onClick={this.addIncurvedLink}
@@ -1320,20 +1329,33 @@ export class SimplePanel extends PureComponent<Props, State> {
 
         <Button
           id="legnd"
-          style={{ marginLeft: '67%', zIndex: 18, position: 'absolute' }}
+          style={{
+            marginLeft: '67%',
+            zIndex: 18,
+            position: 'absolute',
+          }}
           variant={this.state.buttonManage[2] ? 'danger' : 'primary'}
           className="button"
-          onClick={this.callInFunc} // Method Close legend
+          onClick={this.closeLegend}
         >
           Position Legend
         </Button>
 
-        <Button id="zoompan" style={{ marginLeft: '80%', zIndex: 18, position: 'absolute' }} variant={'primary'} onClick={this.ZoomSVG}>
+        <Button
+          id="zoomButton"
+          style={{
+            marginLeft: '80%',
+            zIndex: 18,
+            position: 'absolute',
+          }}
+          variant={this.state.buttonManage[5] ? 'danger' : 'primary'}
+          onClick={this.ZoomSVG}
+        >
           Zoom [P/M]
         </Button>
-        <Button id="zoomstop" style={{ marginLeft: '89%', zIndex: 18, position: 'absolute' }} variant={'primary'} onClick={this.ZoomInactive}>
+        {/* <Button id="zoomstop" style={{ marginLeft: '89%', zIndex: 18, position: 'absolute' }} variant={'primary'} onClick={this.ZoomInactive}>
           <i className="fa fa-stop" aria-hidden="true"></i>
-        </Button>
+        </Button> */}
       </div>
     );
     this.setState({
@@ -1346,7 +1368,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       this.setState({ numberClickDiv: 1 });
     } else {
       await this.setAsyncButtonManage({
-        buttonManage: [false, false, false, false, false],
+        buttonManage: [false, false, false, false, false, false],
       });
       this.setState({
         numberClickDiv: 0,
@@ -1365,7 +1387,8 @@ export class SimplePanel extends PureComponent<Props, State> {
     let tmp: boolean[] = this.state.buttonManage;
     const oldValue: boolean = tmp[index];
 
-    tmp = [false, false, false, false, false];
+    tmp = [false, false, false, false, false, this.state.buttonManage[5]];
+
     if (oldValue) {
       tmp[index] = false;
       this.setState({
@@ -1454,6 +1477,21 @@ export class SimplePanel extends PureComponent<Props, State> {
     this.changeValueButtonToIncurvedLink();
   };
 
+  // Close Legend
+  closeLegend = () => {
+    if (this.state.buttonAddIncurvedLinkIsActive) {
+      this.setState((prevState: State) => ({
+        buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive,
+      }));
+    }
+    if (this.state.buttonAddLinkIsActive) {
+      this.setState((prevState: State) => ({
+        buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive,
+      }));
+    }
+    this.resetButtonManage(2);
+  };
+
   positionLegend = (e: any) => {
     if (!this.state.buttonManage[2]) {
       return;
@@ -1475,6 +1513,17 @@ export class SimplePanel extends PureComponent<Props, State> {
       ...this.props.options,
       legend: newLegend,
     });
+  };
+
+  ZoomSVG = () => {
+    if (!this.state.buttonManage[5]) {
+      this.state.buttonManage[5] = true;
+      document.body.addEventListener('keyup', this.applyZoom);
+    } else if (this.state.buttonManage[5]) {
+      this.state.buttonManage[5] = false;
+      this.ZoomInactive();
+    }
+    this.updateButtonCss();
   };
 
   // Close legend click on close
@@ -1684,42 +1733,40 @@ export class SimplePanel extends PureComponent<Props, State> {
   /********************************  Zoom Panel*********************************** */
   // Zoom Plus
 
-  ZoomInactive = (event: any) => {
+  ZoomInactive = () => {
     document.body.removeEventListener('keyup', this.applyZoom);
-
     const elmnt = document.getElementById('coordinateSpaces');
-    console.log('start');
-    if (elmnt) {
-      const stop = document.getElementById('zoomstop');
-      if (stop) {
-        // document.body.removeEventListener('keyup', this.ZoomSVG, true);
-      }
+    const button = document.getElementById('zoomButton');
+    if (elmnt && button && !this.state.buttonManage[5]) {
+      elmnt.style.cursor = 'default';
     }
+    // if (elmnt) {
+    //   const stop = document.getElementById('zoomstop');
+    //   if (stop) {
+    //     // document.body.removeEventListener('keyup', this.ZoomSVG, true);
+    //   }
+    // }
   };
 
   applyZoom = (evt: any) => {
     const elmnt = document.getElementById('coordinateSpaces');
-    const lol = document.getElementById('zoompan');
+    const button = document.getElementById('zoomButton');
 
     if (elmnt && evt.keyCode === 80) {
       // m
-      if (lol) {
+      if (button) {
         // lol.style.background = 'linear-gradient(to bottom,#e02f44,#c4162a)';
         elmnt.style.cursor = 'zoom-in';
         elmnt.style.transform += 'scale(1.01,1.01)' + 'translate(0.5%)' + 'translateY(0.5%)';
       }
     } else if (elmnt && evt.keyCode === 77) {
       // p
-      if (lol) {
+      if (button) {
         // lol.style.background = 'linear-gradient(to bottom,#e02f44,#c4162a);';
         elmnt.style.cursor = 'zoom-out';
         elmnt.style.transform += 'scale(0.98,0.98)' + 'translate(-1%)' + 'translateY(-1%)';
       }
     }
-  };
-
-  ZoomSVG = () => {
-    document.body.addEventListener('keyup', this.applyZoom);
   };
 
   private displayTooltipSVG = (event: any) => {
@@ -2019,7 +2066,7 @@ export class SimplePanel extends PureComponent<Props, State> {
           backgroundColor: meta.obj.colorBack,
           fontWeight: meta.obj.style.bold ? 'bold' : 'normal',
           fontStyle: meta.obj.style.italic ? 'italic' : 'normal',
-          textDecoration: meta.obj.style.underline ? 'underline' : 'normal',
+          textDecoration: meta.obj.style.underline ? 'underline' : 'none',
           fontFamily: this.props.options.display.police,
           fontSize: '9px',
           marginLeft: '10px',
@@ -2201,7 +2248,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   // Close Legend
 
   private stopDisplayLegend = () => {
-    this.callInFunc();
+    this.closeLegend();
     this.setState({
       hiddenLegend: true,
     });
@@ -2221,7 +2268,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       top: parseInt(this.state.dataTooltipSVG.y, 10),
       left: parseInt(this.state.dataTooltipSVG.x, 10),
       zIndex: 9999,
-      width: 'auto',
+      //width: 'auto',
       border: '1px solid black',
       borderRadius: '5px',
       backgroundColor: 'black',
@@ -2396,6 +2443,7 @@ export class SimplePanel extends PureComponent<Props, State> {
                   height: '40%',
                 }}
               >
+                <p>hello</p>
                 <Modal title="Add Region" onDismiss={this.addNode} onClickBackdrop={this.addNode} isOpen={this.state.nbClickButton}>
                   <AddCoordinate
                     options={this.props.options}

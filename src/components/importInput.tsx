@@ -29,7 +29,7 @@ class ImportInput extends React.Component<Props, State> {
       collapseTotalUrl: false,
       collapseMultiUrl: false,
       // collapseMonoUrl: false,
-      collapseMultiUpload: true,
+      collapseMultiUpload: false,
     };
   }
   result: any[] = [];
@@ -605,36 +605,40 @@ class ImportInput extends React.Component<Props, State> {
     return (
       <div>
         <Collapse isOpen={this.state.collapseTotalUrl} label="Global Url Import" onToggle={this.onToggleTotalUrl}>
-          <FormField
-            label="Total Url"
-            labelWidth={8}
-            key={'TotalUrl'}
-            inputWidth={20}
-            onChange={this.onTotalUrlChanged.bind(this)}
-            type="string"
-            value={options.totalUrlInput || ''}
-          />
+          <div style={{ display: 'flex' }}>
+            <FormField
+              label="Total Url"
+              labelWidth={8}
+              key={'TotalUrl'}
+              inputWidth={20}
+              onChange={this.onTotalUrlChanged.bind(this)}
+              type="string"
+              value={options.totalUrlInput || ''}
+            />
+            <Button onClick={this.loaderTotal}>Finish</Button>
+          </div>
           {/* <Button key={'AddTotalUrl'} onClick={this.addTotalUrlInput}>Add</Button> */}
           <div className="section gf-form-group">
-            <Button onClick={this.loaderTotal}>Finish</Button>
             <this.totalUrlDisplay list={options.saveImportUrl} />
           </div>
         </Collapse>
         <Collapse isOpen={this.state.collapseMultiUrl} label="Multi Url Import" onToggle={this.onToggleMultiUrl}>
-          <FormField
-            label="Multi Url"
-            labelWidth={8}
-            key={'MultiUrl'}
-            inputWidth={20}
-            onChange={this.onMultiUrlChanged.bind(this)}
-            type="string"
-            value={options.multiUrlInput || ''}
-          />
-          <Button key={'AddMultiUrl'} onClick={this.addMultiUrlInput}>
-            Add
-          </Button>
-          <div className="section gf-form-group">
+          <div style={{ display: 'flex' }}>
+            <FormField
+              label="Multi Url"
+              labelWidth={8}
+              key={'MultiUrl'}
+              inputWidth={20}
+              onChange={this.onMultiUrlChanged.bind(this)}
+              type="string"
+              value={options.multiUrlInput || ''}
+            />
+            <Button key={'AddMultiUrl'} onClick={this.addMultiUrlInput}>
+              Add
+            </Button>
             <Button onClick={this.fetchMulti}>Finish</Button>
+          </div>
+          <div className="section gf-form-group">
             <this.multiUrlDisplay list={options.saveImportUrl} />
           </div>
         </Collapse>
@@ -656,12 +660,12 @@ class ImportInput extends React.Component<Props, State> {
 				        </div>
 					</Collapse>
                 </div> */}
-        <div className="section gf-form-group">
+        {/* <div className="section gf-form-group">
           <Button key={'delAll'} onClick={this.delAll}>
             Del all urls
           </Button>
         </div>
-        <Button onClick={this.toDel}>toDel</Button>
+        <Button onClick={this.toDel}>toDel</Button> */}
       </div>
     );
   }

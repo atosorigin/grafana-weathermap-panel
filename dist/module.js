@@ -1254,8 +1254,6 @@ __webpack_require__.r(__webpack_exports__);
  * @returns {Coor} object edit
  */
 var editGoodParameterOrientedLink = function editGoodParameterOrientedLink(name, editCoor, newValue, newValueSelect) {
-  console.log('edit');
-
   if (name.startsWith('label')) {
     editCoor.label = newValue;
   } else if (name.startsWith('orientationLink')) {
@@ -5780,27 +5778,6 @@ function (_super) {
       } else if (valueButton === 'point') {
         _this.getCoordinatesToDrawPointWithClick(event);
       }
-    }; // Close Legend
-
-
-    _this.callInFunc = function () {
-      if (_this.state.buttonAddIncurvedLinkIsActive) {
-        _this.setState(function (prevState) {
-          return {
-            buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive
-          };
-        });
-      }
-
-      if (_this.state.buttonAddLinkIsActive) {
-        _this.setState(function (prevState) {
-          return {
-            buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive
-          };
-        });
-      }
-
-      _this.resetButtonManage(2);
     };
     /**
      * add button click to manage region, point, oriented link, position legend
@@ -5859,29 +5836,17 @@ function (_super) {
         },
         variant: _this.state.buttonManage[2] ? 'danger' : 'primary',
         className: "button",
-        onClick: _this.callInFunc
+        onClick: _this.closeLegend
       }, "Position Legend"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-        id: "zoompan",
+        id: "zoomButton",
         style: {
           marginLeft: '80%',
           zIndex: 18,
           position: 'absolute'
         },
-        variant: 'primary',
+        variant: _this.state.buttonManage[5] ? 'danger' : 'primary',
         onClick: _this.ZoomSVG
-      }, "Zoom [P/M]"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-        id: "zoomstop",
-        style: {
-          marginLeft: '89%',
-          zIndex: 18,
-          position: 'absolute'
-        },
-        variant: 'primary',
-        onClick: _this.ZoomInactive
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-        className: "fa fa-stop",
-        "aria-hidden": "true"
-      })));
+      }, "Zoom [P/M]"));
 
       _this.setState({
         allActionButton: _final
@@ -5907,7 +5872,7 @@ function (_super) {
               return [4
               /*yield*/
               , this.setAsyncButtonManage({
-                buttonManage: [false, false, false, false, false]
+                buttonManage: [false, false, false, false, false, false]
               })];
 
             case 2:
@@ -5942,7 +5907,7 @@ function (_super) {
             case 0:
               tmp = this.state.buttonManage;
               oldValue = tmp[index];
-              tmp = [false, false, false, false, false];
+              tmp = [false, false, false, false, false, this.state.buttonManage[5]];
 
               if (oldValue) {
                 tmp[index] = false;
@@ -6078,6 +6043,27 @@ function (_super) {
       _this.resetButtonManage(4);
 
       _this.changeValueButtonToIncurvedLink();
+    }; // Close Legend
+
+
+    _this.closeLegend = function () {
+      if (_this.state.buttonAddIncurvedLinkIsActive) {
+        _this.setState(function (prevState) {
+          return {
+            buttonAddIncurvedLinkIsActive: !prevState.buttonAddIncurvedLinkIsActive
+          };
+        });
+      }
+
+      if (_this.state.buttonAddLinkIsActive) {
+        _this.setState(function (prevState) {
+          return {
+            buttonAddLinkIsActive: !prevState.buttonAddLinkIsActive
+          };
+        });
+      }
+
+      _this.resetButtonManage(2);
     };
 
     _this.positionLegend = function (e) {
@@ -6098,6 +6084,19 @@ function (_super) {
       _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
         legend: newLegend
       }));
+    };
+
+    _this.ZoomSVG = function () {
+      if (!_this.state.buttonManage[5]) {
+        _this.state.buttonManage[5] = true;
+        document.body.addEventListener('keyup', _this.applyZoom);
+      } else if (_this.state.buttonManage[5]) {
+        _this.state.buttonManage[5] = false;
+
+        _this.ZoomInactive();
+      }
+
+      _this.updateButtonCss();
     }; // Close legend click on close
 
 
@@ -6328,42 +6327,41 @@ function (_super) {
     // Zoom Plus
 
 
-    _this.ZoomInactive = function (event) {
+    _this.ZoomInactive = function () {
       document.body.removeEventListener('keyup', _this.applyZoom);
       var elmnt = document.getElementById('coordinateSpaces');
-      console.log('start');
+      var button = document.getElementById('zoomButton');
 
-      if (elmnt) {
-        var stop_1 = document.getElementById('zoomstop');
+      if (elmnt && button && !_this.state.buttonManage[5]) {
+        elmnt.style.cursor = 'default';
+      } // if (elmnt) {
+      //   const stop = document.getElementById('zoomstop');
+      //   if (stop) {
+      //     // document.body.removeEventListener('keyup', this.ZoomSVG, true);
+      //   }
+      // }
 
-        if (stop_1) {// document.body.removeEventListener('keyup', this.ZoomSVG, true);
-        }
-      }
     };
 
     _this.applyZoom = function (evt) {
       var elmnt = document.getElementById('coordinateSpaces');
-      var lol = document.getElementById('zoompan');
+      var button = document.getElementById('zoomButton');
 
       if (elmnt && evt.keyCode === 80) {
         // m
-        if (lol) {
+        if (button) {
           // lol.style.background = 'linear-gradient(to bottom,#e02f44,#c4162a)';
           elmnt.style.cursor = 'zoom-in';
           elmnt.style.transform += 'scale(1.01,1.01)' + 'translate(0.5%)' + 'translateY(0.5%)';
         }
       } else if (elmnt && evt.keyCode === 77) {
         // p
-        if (lol) {
+        if (button) {
           // lol.style.background = 'linear-gradient(to bottom,#e02f44,#c4162a);';
           elmnt.style.cursor = 'zoom-out';
           elmnt.style.transform += 'scale(0.98,0.98)' + 'translate(-1%)' + 'translateY(-1%)';
         }
       }
-    };
-
-    _this.ZoomSVG = function () {
-      document.body.addEventListener('keyup', _this.applyZoom);
     };
 
     _this.displayTooltipSVG = function (event) {
@@ -6735,7 +6733,7 @@ function (_super) {
             backgroundColor: meta.obj.colorBack,
             fontWeight: meta.obj.style.bold ? 'bold' : 'normal',
             fontStyle: meta.obj.style.italic ? 'italic' : 'normal',
-            textDecoration: meta.obj.style.underline ? 'underline' : 'normal',
+            textDecoration: meta.obj.style.underline ? 'underline' : 'none',
             fontFamily: _this.props.options.display.police,
             fontSize: '9px',
             marginLeft: '10px',
@@ -6940,7 +6938,7 @@ function (_super) {
 
 
     _this.stopDisplayLegend = function () {
-      _this.callInFunc();
+      _this.closeLegend();
 
       _this.setState({
         hiddenLegend: true
@@ -6978,7 +6976,7 @@ function (_super) {
         top: parseInt(_this.state.dataTooltipSVG.y, 10),
         left: parseInt(_this.state.dataTooltipSVG.x, 10),
         zIndex: 9999,
-        width: 'auto',
+        //width: 'auto',
         border: '1px solid black',
         borderRadius: '5px',
         backgroundColor: 'black',
@@ -7038,7 +7036,7 @@ function (_super) {
 
     _this.state = {
       valueButton: '',
-      buttonManage: [false, false, false, false, false],
+      buttonManage: [false, false, false, false, false, false],
       numberClickDiv: 0,
       allActionButton: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null),
       nbClickButton: false,
@@ -7074,8 +7072,6 @@ function (_super) {
     var mapItems = [];
     var newArrayPoint = this.props.options.arrayPoints;
     newArrayPoint.forEach(function (line) {
-      // console.log(line.name);
-      // console.log(line);
       var valueMainMetric = _this.getValuesMainMetricPoint(line).toString();
 
       _this.updatePositionOrientedLink(line);
@@ -7375,7 +7371,7 @@ function (_super) {
         border: '5px solid aliceblue',
         height: '40%'
       }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Modal"], {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "hello"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Modal"], {
       title: "Add Region",
       onDismiss: this.addNode,
       onClickBackdrop: this.addNode,
@@ -8284,7 +8280,6 @@ function (_super) {
 
     tmp.coordsDefault = newCoordDefault;
     tmp = Object(Functions_EditParameter_editGoodParameter__WEBPACK_IMPORTED_MODULE_7__["editGoodParameterExtend"])(name, tmp, currentTarget);
-    console.log(tmp);
     this.setState({
       arrayCoor: tmp
     });
@@ -9843,9 +9838,6 @@ function (_super) {
     var _this = _super.call(this, props) || this;
 
     _this.onMetaStrChanged = function (event) {
-      console.log('onChangeString');
-      console.log(event.currentTarget.id);
-
       if (_this.props.type === 'point') {
         var newData = _this.props.options.arrayPoints[_this.props.idCoordinate - 1].meta[parseInt(event.currentTarget.id, 10)];
 
@@ -10110,9 +10102,6 @@ function (_super) {
       var l10n = __webpack_require__(/*! Localization/en.json */ "./Localization/en.json");
 
       if (props.type === 'point') {
-        console.log(_this.props.options.arrayPoints);
-        console.log(_this.props.idCoordinate);
-
         var list = _this.props.options.arrayPoints[_this.props.idCoordinate - 1].meta.map(function (meta, index) {
           return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             style: {
@@ -10123,16 +10112,17 @@ function (_super) {
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             style: {
               display: 'flex',
-              justifyContent: 'right'
+              justifyContent: 'right',
+              marginBottom: '10px'
             }
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
             variant: 'danger',
             onClick: function onClick() {
-              var newArrayRegion = _this.props.options.regionCoordinateSpace;
-              newArrayRegion[_this.props.idCoordinate - 1].meta.splice(index, 1);
+              var newArrayPoints = _this.props.options.arrayPoints;
+              newArrayPoints[_this.props.idCoordinate - 1].meta.splice(index, 1);
 
               _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-                regionCoordinateSpace: newArrayRegion
+                arrayPoints: newArrayPoints
               }));
             }
           }, "Delete")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -10259,7 +10249,8 @@ function (_super) {
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             style: {
               display: 'flex',
-              justifyContent: 'right'
+              justifyContent: 'right',
+              marginBottom: '10px'
             }
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
             variant: 'danger',
@@ -10395,16 +10386,17 @@ function (_super) {
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             style: {
               display: 'flex',
-              justifyContent: 'right'
+              justifyContent: 'right',
+              marginBottom: '10px'
             }
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
             variant: 'danger',
             onClick: function onClick() {
-              var newArrayRegion = _this.props.options.regionCoordinateSpace;
-              newArrayRegion[_this.props.idCoordinate - 1].meta.splice(index, 1);
+              var newArrayOrientedLink = _this.props.options.arrayOrientedLinks;
+              newArrayOrientedLink[_this.props.idCoordinate - 1].meta.splice(index, 1);
 
               _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-                regionCoordinateSpace: newArrayRegion
+                arrayOrientedLinks: newArrayOrientedLink
               }));
             }
           }, "Delete")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -14960,7 +14952,7 @@ function (_super) {
             backgroundColor: oneMetaData.obj.colorBack,
             fontWeight: oneMetaData.obj.style.bold ? 'bold' : 'normal',
             fontStyle: oneMetaData.obj.style.italic ? 'italic' : 'normal',
-            textDecoration: oneMetaData.obj.style.underline ? 'underline' : 'normal',
+            textDecoration: oneMetaData.obj.style.underline ? 'underline' : 'none',
             fontFamily: _this.props.police,
             fontSize: '9px',
             marginLeft: '10px',
@@ -16826,14 +16818,13 @@ function (_super) {
         key: localisation + 'ContentTooltip18' + this.props.name,
         style: styleTitleMetaData
       }, "Metadata"));
-      console.log(this.props.metaData);
       this.props.metaData.forEach(function (oneMetaData, index) {
         var styleContentMetaData = {
           color: oneMetaData.obj.colorText,
           backgroundColor: oneMetaData.obj.colorBack,
           fontWeight: oneMetaData.obj.style.bold ? 'bold' : 'normal',
           fontStyle: oneMetaData.obj.style.italic ? 'italic' : 'normal',
-          textDecoration: oneMetaData.obj.style.underline ? 'underline' : 'normal',
+          textDecoration: oneMetaData.obj.style.underline ? 'underline' : 'none',
           fontFamily: _this.props.police,
           fontSize: '9px',
           marginLeft: '10px',
@@ -17476,7 +17467,6 @@ function (_super) {
       // ) : null;
 
       if (valueQueryResult !== '' && region.textObj.valueGenerateObjectText.displayObjectInTooltip || region.metrics.length !== 0 || valueMetaData !== null) {
-        console.log('ok');
         tooltipValue = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: styleTooltip
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
@@ -17484,8 +17474,6 @@ function (_super) {
         }, region.linkURL.hoveringTooltipText), region.textObj.isTextTooltip && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, region.label)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: styleMetrics
         }, region.textObj.generateObjectText && region.textObj.valueGenerateObjectText && region.textObj.valueGenerateObjectText.displayObjectInTooltip && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, valueQueryResult)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, _this.displayValuesAuxMetrics()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, valueMetaData));
-      } else {
-        console.log('null');
       }
 
       return {
@@ -17926,7 +17914,7 @@ function (_super) {
             backgroundColor: oneMetaData.obj.colorBack,
             fontWeight: oneMetaData.obj.style.bold ? 'bold' : 'normal',
             fontStyle: oneMetaData.obj.style.italic ? 'italic' : 'normal',
-            textDecoration: oneMetaData.obj.style.underline ? 'underline' : 'normal',
+            textDecoration: oneMetaData.obj.style.underline ? 'underline' : 'none',
             fontFamily: _this.props.options.display.police,
             fontSize: '9px',
             marginLeft: '10px',
@@ -17945,9 +17933,7 @@ function (_super) {
     };
 
     _this.getCoordinatePxAdaptToInitialSpace = function (region, // coorRegion: Coord4D,
-    coorRegionDefault // widthInitialSpaceDefault: number,
-    // heightInitialSpaceDefault: number
-    ) {
+    coorRegionDefault) {
       var widthBackground = parseInt(_this.props.options.baseMap.width, 10);
       var heightBackground = parseInt(_this.props.options.baseMap.height, 10);
       var initialSpace = _this.props.options.coordinateSpaceInitial.coordinate;
@@ -18063,13 +18049,9 @@ function (_super) {
           // } else {
           //   <div>{value}</div>;
           // }
-          console.log(_this.state.tooltipValue);
-
           if (_this.state.tooltipValue === null) {
-            console.log('null');
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, value);
           } else {
-            console.log('not null');
             value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
               content: _this.state.tooltipValue
             }, value);
@@ -18099,13 +18081,9 @@ function (_super) {
           // } else {
           //   <div>{value}</div>;
           // }
-          console.log(_this.state.tooltipValue);
-
           if (_this.state.tooltipValue === null) {
-            console.log('null');
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, value);
           } else {
-            console.log('not null');
             value = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
               content: _this.state.tooltipValue
             }, value);
@@ -19209,7 +19187,6 @@ function (_super) {
       var placeHolderSize = l10n.colorVariable.thicknessOutline;
 
       if (_this.props.traceBack) {
-        console.log('2');
         var keyFondColorPicker = key + 'FondcolorPicker';
         couleur.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Functions_Input_inputSeriesColorPicker__WEBPACK_IMPORTED_MODULE_4__["default"], {
           key: keyFondColorPicker,
@@ -19221,7 +19198,6 @@ function (_super) {
       }
 
       if (_this.props.traceBorder) {
-        console.log('3');
         var keyContourDiv = key + 'ContourDiv';
         couleur.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           key: keyContourDiv
@@ -22687,6 +22663,8 @@ function (_super) {
     _this.checkLoaderGabarit = function (onClick) {
       if (!_this.props.options.saveGabaritFile[parseInt(onClick.currentTarget.id, 10)].loaded) {
         _this.loaderGabarit(_this.props.options.saveGabaritFile[parseInt(onClick.currentTarget.id, 10)], parseInt(onClick.currentTarget.id, 10));
+
+        _this.props.options.saveGabaritFile[parseInt(onClick.currentTarget.id, 10)].loaded = true;
       } else {
         console.log('loadGabaritReject');
       }
@@ -22695,32 +22673,32 @@ function (_super) {
     _this.metaConstructor = function (metas) {
       var result = [];
       metas.forEach(function (meta, index) {
-        var obj = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_9__["TextObject"]('', false, meta.colorBack, meta.colorText, {
-          bold: Boolean(meta.bold),
-          italic: Boolean(meta.italic),
-          underline: Boolean(meta.underline)
+        var textObject = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_9__["TextObject"]('', false, meta.obj.colorBack, meta.obj.colorText, {
+          bold: meta.obj.style.bold,
+          italic: meta.obj.style.italic,
+          underline: meta.obj.style.underline
         }, false, {
           legendElement: '',
           numericFormatElement: '',
           unit: '',
           displayObjectInTooltip: false,
           addColorTextElement: false,
-          colorTextElement: meta.colorText,
+          colorTextElement: '',
           addColorBackElement: false,
-          colorBackElement: meta.colorBack
+          colorBackElement: ''
         }, {
           legendElement: '',
           numericFormatElement: '',
           unit: '',
           displayObjectInTooltip: false,
           addColorTextElement: false,
-          colorTextElement: meta.colorText,
+          colorTextElement: meta.obj.colorText,
           addColorBackElement: false,
-          colorBackElement: meta.colorBack
+          colorBackElement: ''
         });
         result.push({
           meta: meta.meta,
-          obj: obj
+          obj: textObject
         });
       });
       return result;
@@ -23132,11 +23110,7 @@ function (_super) {
       var labelCoordX = [];
       var labelCoordY = [];
       var labelCoord = [];
-      console.log(labelCoord);
-      console.log(posPoint);
       posPoint.forEach(function (pos, index) {
-        console.log(index);
-
         if (gabaritFileTmp.templateGabaritPoint[index].labelfix.toString() === 'false') {
           _this.props.data.series.forEach(function (element) {
             var e_1, _a, e_2, _b, e_3, _c;
@@ -23264,7 +23238,6 @@ function (_super) {
         }
       });
       var upId = false;
-      console.log(labelCoord);
       labelCoord.forEach(function (labelCo, posIndex) {
         var e_4, _a;
 
@@ -24119,20 +24092,91 @@ function (_super) {
       labelCoordA.forEach(function (element, coordindex) {
         var e_12, _a;
 
+        var pointInLinkWithId = '';
+        var labelPointIn = pointInLink[coordindex].split('_')[0];
+
+        _this.props.options.arrayPoints.forEach(function (point, index) {
+          if (point.label.startsWith(labelPointIn)) {
+            pointInLinkWithId = labelPointIn + '_' + index;
+          }
+        });
+
+        var pointOutLinkWithId = '';
+        var labelPointOut = pointOutLink[coordindex].split('_')[0];
+
+        _this.props.options.arrayPoints.forEach(function (point, index) {
+          if (point.label.startsWith(labelPointOut)) {
+            pointOutLinkWithId = labelPointOut + '_' + index;
+          }
+        });
+
+        var regionInLinkWithId = '';
+        var labelRegionIn = regionInLink[coordindex].split('_')[0];
+
+        _this.props.options.regionCoordinateSpace.forEach(function (region, index) {
+          if (region.label.startsWith(labelPointIn)) {
+            pointInLinkWithId = labelRegionIn + '_' + index;
+          }
+        });
+
+        var regionOutLinkWithId = '';
+        var labelRegionOut = regionOutLink[coordindex].split('_')[0];
+
+        _this.props.options.regionCoordinateSpace.forEach(function (region, index) {
+          if (region.label.startsWith(labelPointOut)) {
+            pointOutLinkWithId = labelRegionOut + '_' + index;
+          }
+        });
+
         if (element.length > 0) {
           var _loop_2 = function _loop_2(pos) {
             filterLink.forEach(function (element, index) {
+              var pointInLinkWithId = pointInLink[index];
               var defaultPositionAX = ((parseInt(pos.x, 10) - xMinInitialSpace) / widthInitialSpace * widthBackground).toString();
               var defaultPositionBX = ((parseInt(labelCoordB[coordindex][index].x, 10) - xMinInitialSpace) / widthInitialSpace * widthBackground).toString();
               var defaultPositionCX = ((parseInt(labelCoordC[coordindex][index].x, 10) - xMinInitialSpace) / widthInitialSpace * widthBackground).toString();
               var defaultPositionAY = ((parseInt(pos.y, 10) - yMinInitialSpace) / heightInitialSpace * heightBackground).toString();
               var defaultPositionBY = ((parseInt(labelCoordB[coordindex][index].y, 10) - yMinInitialSpace) / heightInitialSpace * heightBackground).toString();
               var defaultPositionCY = ((parseInt(labelCoordC[coordindex][index].y, 10) - yMinInitialSpace) / heightInitialSpace * heightBackground).toString();
+              var labelPointIn = pointInLink[index].split('_')[0];
+
+              _this.props.options.arrayPoints.forEach(function (point, index) {
+                if (point.label.startsWith(labelPointIn)) {
+                  pointInLinkWithId = labelPointIn + '_' + index;
+                }
+              });
+
+              var labelPointOut = pointOutLink[index].split('_')[0];
+
+              _this.props.options.arrayPoints.forEach(function (point, index) {
+                if (point.label.startsWith(labelPointOut)) {
+                  pointOutLinkWithId = labelPointOut + '_' + index;
+                }
+              });
+
+              var regionInLinkWithId = '';
+              var labelRegionIn = regionInLink[index].split('_')[0];
+
+              _this.props.options.regionCoordinateSpace.forEach(function (region, index) {
+                if (region.label.startsWith(labelPointIn)) {
+                  pointInLinkWithId = labelRegionIn + '_' + index;
+                }
+              });
+
+              var regionOutLinkWithId = '';
+              var labelRegionOut = regionOutLink[index].split('_')[0];
+
+              _this.props.options.regionCoordinateSpace.forEach(function (region, index) {
+                if (region.label.startsWith(labelPointOut)) {
+                  pointOutLinkWithId = labelRegionOut + '_' + index;
+                }
+              });
+
               var maA = metricALink.length;
               var maB = metricBLink.length;
 
               if (maA > 0 && maB > 0) {
-                var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index] + '_' + newID, textObj, _this.addFilterDynamic(mainMetricALink[index], posALink[index], pos), metricALink[index], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], pos.x, pos.y, colorALink[index], labelCoordB[coordindex][index].x, labelCoordB[coordindex][index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLink[index], pointOutLink[index], regionInLink[index], regionOutLink[index], _this.props.options.zIndexOrientedLink + 1, labelCoordC[coordindex][index].x, labelCoordC[coordindex][index].y, isIncurvedLink[index], _this.addFilterDynamic(mainMetricBLink[index], posALink[index], pos), metricBLink[index], widthInitialSpace.toString(), heightInitialSpace.toString(), defaultPositionAX, defaultPositionAY, defaultPositionBX, defaultPositionBY, defaultPositionCX, defaultPositionCY);
+                var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index] + '_' + newID, textObj, _this.addFilterDynamic(mainMetricALink[index], posALink[index], pos), metricALink[index], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], pos.x, pos.y, colorALink[index], labelCoordB[coordindex][index].x, labelCoordB[coordindex][index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLinkWithId, pointOutLinkWithId, regionInLinkWithId, regionOutLinkWithId, _this.props.options.zIndexOrientedLink + 1, labelCoordC[coordindex][index].x, labelCoordC[coordindex][index].y, isIncurvedLink[index], _this.addFilterDynamic(mainMetricBLink[index], posALink[index], pos), metricBLink[index], widthInitialSpace.toString(), heightInitialSpace.toString(), defaultPositionAX, defaultPositionAY, defaultPositionBX, defaultPositionBY, defaultPositionCX, defaultPositionCY);
                 upId = _this.checkCoordinateFilterLink(toLoad, _this.props);
 
                 if (upId) {
@@ -24141,21 +24185,21 @@ function (_super) {
               }
 
               if (!(maA > 0) && maB > 0) {
-                var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index] + '_' + newID, textObj, _this.addFilterDynamic(mainMetricALink[index], posALink[index], pos), [], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], pos.x, pos.y, colorALink[index], labelCoordB[coordindex][index].x, labelCoordB[coordindex][index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLink[index], pointOutLink[index], regionInLink[index], regionOutLink[index], _this.props.options.zIndexOrientedLink + 1, labelCoordC[coordindex][index].x, labelCoordC[coordindex][index].y, isIncurvedLink[index], _this.addFilterDynamic(mainMetricBLink[index], posALink[index], pos), metricBLink[index], widthInitialSpace.toString(), heightInitialSpace.toString(), defaultPositionAX, defaultPositionAY, defaultPositionBX, defaultPositionBY, defaultPositionCX, defaultPositionCY);
+                var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index] + '_' + newID, textObj, _this.addFilterDynamic(mainMetricALink[index], posALink[index], pos), [], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], pos.x, pos.y, colorALink[index], labelCoordB[coordindex][index].x, labelCoordB[coordindex][index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLinkWithId, pointOutLinkWithId, regionInLinkWithId, regionOutLinkWithId, _this.props.options.zIndexOrientedLink + 1, labelCoordC[coordindex][index].x, labelCoordC[coordindex][index].y, isIncurvedLink[index], _this.addFilterDynamic(mainMetricBLink[index], posALink[index], pos), metricBLink[index], widthInitialSpace.toString(), heightInitialSpace.toString(), defaultPositionAX, defaultPositionAY, defaultPositionBX, defaultPositionBY, defaultPositionCX, defaultPositionCY);
                 upId = _this.checkCoordinateFilterLink(toLoad, _this.props);
 
                 if (upId) {
                   newID++;
                 }
               } else if (maA > 0 && !(maB > 0)) {
-                var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index] + '_' + newID, textObj, _this.addFilterDynamic(mainMetricALink[index], posALink[index], pos), metricALink[index], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], pos.x, pos.y, colorALink[index], labelCoordB[coordindex][index].x, labelCoordB[coordindex][index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLink[index], pointOutLink[index], regionInLink[index], regionOutLink[index], _this.props.options.zIndexOrientedLink + 1, labelCoordC[coordindex][index].x, labelCoordC[coordindex][index].y, isIncurvedLink[index], _this.addFilterDynamic(mainMetricBLink[index], posALink[index], pos), [], widthInitialSpace.toString(), heightInitialSpace.toString(), defaultPositionAX, defaultPositionAY, defaultPositionBX, defaultPositionBY, defaultPositionCX, defaultPositionCY);
+                var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index] + '_' + newID, textObj, _this.addFilterDynamic(mainMetricALink[index], posALink[index], pos), metricALink[index], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], pos.x, pos.y, colorALink[index], labelCoordB[coordindex][index].x, labelCoordB[coordindex][index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLinkWithId, pointOutLinkWithId, regionInLinkWithId, regionOutLinkWithId, _this.props.options.zIndexOrientedLink + 1, labelCoordC[coordindex][index].x, labelCoordC[coordindex][index].y, isIncurvedLink[index], _this.addFilterDynamic(mainMetricBLink[index], posALink[index], pos), [], widthInitialSpace.toString(), heightInitialSpace.toString(), defaultPositionAX, defaultPositionAY, defaultPositionBX, defaultPositionBY, defaultPositionCX, defaultPositionCY);
                 upId = _this.checkCoordinateFilterLink(toLoad, _this.props);
 
                 if (upId) {
                   newID++;
                 }
               } else {
-                var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index] + '_' + newID, textObj, _this.addFilterDynamic(mainMetricALink[index], posALink[index], pos), [], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], pos.x, pos.y, colorALink[index], labelCoordB[coordindex][index].x, labelCoordB[coordindex][index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLink[index], pointOutLink[index], regionInLink[index], regionOutLink[index], _this.props.options.zIndexOrientedLink + 1, labelCoordC[coordindex][index].x, labelCoordC[coordindex][index].y, isIncurvedLink[index], _this.addFilterDynamic(mainMetricBLink[index], posALink[index], pos), [], widthInitialSpace.toString(), heightInitialSpace.toString(), defaultPositionAX, defaultPositionAY, defaultPositionBX, defaultPositionBY, defaultPositionCX, defaultPositionCY);
+                var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[index], metaLink[index], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[index] + '_' + newID, textObj, _this.addFilterDynamic(mainMetricALink[index], posALink[index], pos), [], colorMode, traceBack, traceBorder, positionParameterLink[index], nameLink[index], orientationLink[index], sizeLink[index], pos.x, pos.y, colorALink[index], labelCoordB[coordindex][index].x, labelCoordB[coordindex][index].y, colorBLink[index], valueMetricALink[index], valueMetricBLink[index], pointInLinkWithId, pointOutLinkWithId, regionInLinkWithId, regionOutLinkWithId, _this.props.options.zIndexOrientedLink + 1, labelCoordC[coordindex][index].x, labelCoordC[coordindex][index].y, isIncurvedLink[index], _this.addFilterDynamic(mainMetricBLink[index], posALink[index], pos), [], widthInitialSpace.toString(), heightInitialSpace.toString(), defaultPositionAX, defaultPositionAY, defaultPositionBX, defaultPositionBY, defaultPositionCX, defaultPositionCY);
                 upId = _this.checkCoordinateFilterLink(toLoad, _this.props);
 
                 if (upId) {
@@ -24194,7 +24238,7 @@ function (_super) {
           var maB = metricBLink.length;
 
           if (maA > 0 && maB > 0) {
-            var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[coordindex], metaLink[coordindex], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[coordindex] + '_' + newID, textObj, mainMetricALink[coordindex], metricALink[coordindex], colorMode, traceBack, traceBorder, positionParameterLink[coordindex], nameLink[coordindex], orientationLink[coordindex], sizeLink[coordindex], posALink[coordindex].x, posALink[coordindex].y, colorALink[coordindex], posBLink[coordindex].x, posBLink[coordindex].y, colorBLink[coordindex], valueMetricALink[coordindex], valueMetricBLink[coordindex], pointInLink[coordindex], pointOutLink[coordindex], regionInLink[coordindex], regionOutLink[coordindex], _this.props.options.zIndexOrientedLink + 1, posCLink[coordindex].x, posCLink[coordindex].y, isIncurvedLink[coordindex], mainMetricBLink[coordindex], metricBLink[coordindex], widthInitialSpace.toString(), heightInitialSpace.toString(), defaultPositionAX, defaultPositionAY, defaultPositionBX, defaultPositionBY, defaultPositionCX, defaultPositionCY);
+            var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[coordindex], metaLink[coordindex], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[coordindex] + '_' + newID, textObj, mainMetricALink[coordindex], metricALink[coordindex], colorMode, traceBack, traceBorder, positionParameterLink[coordindex], nameLink[coordindex], orientationLink[coordindex], sizeLink[coordindex], posALink[coordindex].x, posALink[coordindex].y, colorALink[coordindex], posBLink[coordindex].x, posBLink[coordindex].y, colorBLink[coordindex], valueMetricALink[coordindex], valueMetricBLink[coordindex], pointInLinkWithId, pointOutLinkWithId, regionInLinkWithId, regionOutLinkWithId, _this.props.options.zIndexOrientedLink + 1, posCLink[coordindex].x, posCLink[coordindex].y, isIncurvedLink[coordindex], mainMetricBLink[coordindex], metricBLink[coordindex], widthInitialSpace.toString(), heightInitialSpace.toString(), defaultPositionAX, defaultPositionAY, defaultPositionBX, defaultPositionBY, defaultPositionCX, defaultPositionCY);
             upId = _this.checkCoordinateFilterLink(toLoad, _this.props);
 
             if (upId) {
@@ -24203,21 +24247,21 @@ function (_super) {
           }
 
           if (!(maA > 0) && maB > 0) {
-            var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[coordindex], metaLink[coordindex], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[coordindex] + '_' + newID, textObj, mainMetricALink[coordindex], [], colorMode, traceBack, traceBorder, positionParameterLink[coordindex], nameLink[coordindex], orientationLink[coordindex], sizeLink[coordindex], posALink[coordindex].x, posALink[coordindex].y, colorALink[coordindex], posBLink[coordindex].x, posBLink[coordindex].y, colorBLink[coordindex], valueMetricALink[coordindex], valueMetricBLink[coordindex], pointInLink[coordindex], pointOutLink[coordindex], regionInLink[coordindex], regionOutLink[coordindex], _this.props.options.zIndexOrientedLink + 1, posCLink[coordindex].x, posCLink[coordindex].y, isIncurvedLink[coordindex], mainMetricBLink[coordindex], metricBLink[coordindex], widthInitialSpace.toString(), heightInitialSpace.toString(), defaultPositionAX, defaultPositionAY, defaultPositionBX, defaultPositionBY, defaultPositionCX, defaultPositionCY);
+            var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[coordindex], metaLink[coordindex], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[coordindex] + '_' + newID, textObj, mainMetricALink[coordindex], [], colorMode, traceBack, traceBorder, positionParameterLink[coordindex], nameLink[coordindex], orientationLink[coordindex], sizeLink[coordindex], posALink[coordindex].x, posALink[coordindex].y, colorALink[coordindex], posBLink[coordindex].x, posBLink[coordindex].y, colorBLink[coordindex], valueMetricALink[coordindex], valueMetricBLink[coordindex], pointInLinkWithId, pointOutLinkWithId, regionInLinkWithId, regionOutLinkWithId, _this.props.options.zIndexOrientedLink + 1, posCLink[coordindex].x, posCLink[coordindex].y, isIncurvedLink[coordindex], mainMetricBLink[coordindex], metricBLink[coordindex], widthInitialSpace.toString(), heightInitialSpace.toString(), defaultPositionAX, defaultPositionAY, defaultPositionBX, defaultPositionBY, defaultPositionCX, defaultPositionCY);
             upId = _this.checkCoordinateFilterLink(toLoad, _this.props);
 
             if (upId) {
               newID++;
             }
           } else if (maA > 0 && !(maB > 0)) {
-            var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[coordindex], metaLink[coordindex], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[coordindex] + '_' + newID, textObj, mainMetricALink[coordindex], metricALink[coordindex], colorMode, traceBack, traceBorder, positionParameterLink[coordindex], nameLink[coordindex], orientationLink[coordindex], sizeLink[coordindex], posALink[coordindex].x, posALink[coordindex].y, colorALink[coordindex], posBLink[coordindex].x, posBLink[coordindex].y, colorBLink[coordindex], valueMetricALink[coordindex], valueMetricBLink[coordindex], pointInLink[coordindex], pointOutLink[coordindex], regionInLink[coordindex], regionOutLink[coordindex], _this.props.options.zIndexOrientedLink + 1, posCLink[coordindex].x, posCLink[coordindex].y, isIncurvedLink[coordindex], mainMetricBLink[coordindex], [], widthInitialSpace.toString(), heightInitialSpace.toString(), defaultPositionAX, defaultPositionAY, defaultPositionBX, defaultPositionBY, defaultPositionCX, defaultPositionCY);
+            var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[coordindex], metaLink[coordindex], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[coordindex] + '_' + newID, textObj, mainMetricALink[coordindex], metricALink[coordindex], colorMode, traceBack, traceBorder, positionParameterLink[coordindex], nameLink[coordindex], orientationLink[coordindex], sizeLink[coordindex], posALink[coordindex].x, posALink[coordindex].y, colorALink[coordindex], posBLink[coordindex].x, posBLink[coordindex].y, colorBLink[coordindex], valueMetricALink[coordindex], valueMetricBLink[coordindex], pointInLinkWithId, pointOutLinkWithId, regionInLinkWithId, regionOutLinkWithId, _this.props.options.zIndexOrientedLink + 1, posCLink[coordindex].x, posCLink[coordindex].y, isIncurvedLink[coordindex], mainMetricBLink[coordindex], [], widthInitialSpace.toString(), heightInitialSpace.toString(), defaultPositionAX, defaultPositionAY, defaultPositionBX, defaultPositionBY, defaultPositionCX, defaultPositionCY);
             upId = _this.checkCoordinateFilterLink(toLoad, _this.props);
 
             if (upId) {
               newID++;
             }
           } else {
-            var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[coordindex], metaLink[coordindex], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[coordindex] + '_' + newID, textObj, mainMetricALink[coordindex], [], colorMode, traceBack, traceBorder, positionParameterLink[coordindex], nameLink[coordindex], orientationLink[coordindex], sizeLink[coordindex], posALink[coordindex].x, posALink[coordindex].y, colorALink[coordindex], posBLink[coordindex].x, posBLink[coordindex].y, colorBLink[coordindex], valueMetricALink[coordindex], valueMetricBLink[coordindex], pointInLink[coordindex], pointOutLink[coordindex], regionInLink[coordindex], regionOutLink[coordindex], _this.props.options.zIndexOrientedLink + 1, posCLink[coordindex].x, posCLink[coordindex].y, isIncurvedLink[coordindex], mainMetricBLink[coordindex], [], widthInitialSpace.toString(), heightInitialSpace.toString(), defaultPositionAX, defaultPositionAY, defaultPositionBX, defaultPositionBY, defaultPositionCX, defaultPositionCY);
+            var toLoad = new Models_OrientedLinkClass__WEBPACK_IMPORTED_MODULE_4__["OrientedLinkClass"](newID + 1, linkURLLink[coordindex], metaLink[coordindex], gabaritFileTmp.globalGabarit.lowerLimit, labelLink[coordindex] + '_' + newID, textObj, mainMetricALink[coordindex], [], colorMode, traceBack, traceBorder, positionParameterLink[coordindex], nameLink[coordindex], orientationLink[coordindex], sizeLink[coordindex], posALink[coordindex].x, posALink[coordindex].y, colorALink[coordindex], posBLink[coordindex].x, posBLink[coordindex].y, colorBLink[coordindex], valueMetricALink[coordindex], valueMetricBLink[coordindex], pointInLinkWithId, pointOutLinkWithId, regionInLinkWithId, regionOutLinkWithId, _this.props.options.zIndexOrientedLink + 1, posCLink[coordindex].x, posCLink[coordindex].y, isIncurvedLink[coordindex], mainMetricBLink[coordindex], [], widthInitialSpace.toString(), heightInitialSpace.toString(), defaultPositionAX, defaultPositionAY, defaultPositionBX, defaultPositionBY, defaultPositionCX, defaultPositionCY);
             upId = _this.checkCoordinateFilterLink(toLoad, _this.props);
 
             if (upId) {
@@ -24499,7 +24543,7 @@ function (_super) {
             id: index.toString(),
             key: 'GabaritUrl' + index.toString(),
             label: 'Url',
-            labelWidth: 5,
+            labelWidth: 10,
             inputWidth: 20,
             onChange: _this.onGabaritListUrlChanged.bind(_this),
             type: "string",
@@ -24509,7 +24553,7 @@ function (_super) {
             id: index.toString(),
             key: 'ButtunDel' + index.toString(),
             onClick: _this.gabaritDeletUrl.bind(_this)
-          }, "Del"));
+          }, "Delete"));
         });
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, list);
       }
@@ -24556,7 +24600,7 @@ function (_super) {
             id: index.toString(),
             key: 'ButtunDel' + index.toString(),
             onClick: _this.gabaritDeletFile.bind(_this)
-          }, "Del"));
+          }, "Delete"));
         });
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, list);
       }
@@ -24582,7 +24626,7 @@ function (_super) {
           variant: "danger",
           key: 'ButtunDelDefault',
           onClick: _this.gabaritDeletFileDefault.bind(_this)
-        }, "Del"));
+        }, "Delete"));
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, list);
       }
 
@@ -24599,6 +24643,35 @@ function (_super) {
       _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
         saveGabaritURL: _this.props.options.saveGabaritURL
       }));
+    };
+
+    _this.printDefault = function () {
+      console.log('gabaritDefault');
+      console.log(_this.props.options.gabaritDefault);
+    };
+
+    _this.printPoint = function () {
+      console.log('Point');
+      console.log(_this.props.options.arrayPoints);
+
+      _this.props.options.arrayPoints.forEach(function (element) {
+        console.log(element.mainMetric.filter);
+      });
+    };
+
+    _this.printRegion = function () {
+      console.log('Region');
+      console.log(_this.props.options.regionCoordinateSpace);
+    };
+
+    _this.printLink = function () {
+      console.log('Link');
+      console.log(_this.props.options.arrayOrientedLinks);
+    };
+
+    _this.printTemp = function () {
+      console.log('gabaritDefault');
+      console.log(_this.props.options.saveGabaritFile);
     };
 
     _this.state = {
@@ -24694,26 +24767,34 @@ function (_super) {
       isOpen: this.state.collapseGabaritDefault,
       label: "Default Gabarit URL",
       onToggle: this.onToggleGabaritDefault
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "Gabarit Default Url",
       labelWidth: 10,
       key: 'GabaritDefaultUrl',
-      inputWidth: 18,
+      inputWidth: 20,
       onChange: this.onGabaritDefaultUrlChanged.bind(this),
       type: "string",
       value: options.saveGabaritDefaultUrl || ''
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
       key: 'AddGabaritDefaultUrl',
       onClick: this.addGabaritDefaultUrlInput
-    }, "Finish"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.gabaritDefaultDisplay, {
+    }, "Finish")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.gabaritDefaultDisplay, {
       list: options.gabaritDefault
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
       isOpen: this.state.collapseSelectURL,
       label: "Url List",
       onToggle: this.onToggleSelectUrl
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "Gabarit Url",
-      labelWidth: 8,
+      labelWidth: 10,
       key: 'GabaritUrl',
       inputWidth: 20,
       onChange: this.onGabaritUrlChanged.bind(this),
@@ -24722,16 +24803,15 @@ function (_super) {
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
       key: 'AddGabaritUrl',
       onClick: this.addGabaritUrlInput
-    }, "Add"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "section gf-form-group"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    }, "Add"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
       onClick: this.fetchGabarit
-    }, "Finish"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.gabaritUrlDisplay, {
+    }, "Finish")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.gabaritUrlDisplay, {
       list: options.saveGabaritURL
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
       key: 'delAll',
-      onClick: this.delAll
-    }, "Del all urls"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
+      onClick: this.delAll,
+      variant: "danger"
+    }, "Delete all urls"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
       isOpen: this.state.collapseGabarit,
       label: "Gabarit List",
       onToggle: this.onToggleGabarit
@@ -25381,7 +25461,7 @@ function (_super) {
       collapseTotalUrl: false,
       collapseMultiUrl: false,
       // collapseMonoUrl: false,
-      collapseMultiUpload: true
+      collapseMultiUpload: false
     };
     return _this;
   }
@@ -25392,6 +25472,10 @@ function (_super) {
       isOpen: this.state.collapseTotalUrl,
       label: "Global Url Import",
       onToggle: this.onToggleTotalUrl
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "Total Url",
       labelWidth: 8,
@@ -25400,16 +25484,20 @@ function (_super) {
       onChange: this.onTotalUrlChanged.bind(this),
       type: "string",
       value: options.totalUrlInput || ''
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "section gf-form-group"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
       onClick: this.loaderTotal
-    }, "Finish"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.totalUrlDisplay, {
+    }, "Finish")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "section gf-form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.totalUrlDisplay, {
       list: options.saveImportUrl
     }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
       isOpen: this.state.collapseMultiUrl,
       label: "Multi Url Import",
       onToggle: this.onToggleMultiUrl
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "Multi Url",
       labelWidth: 8,
@@ -25421,11 +25509,11 @@ function (_super) {
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
       key: 'AddMultiUrl',
       onClick: this.addMultiUrlInput
-    }, "Add"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "section gf-form-group"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    }, "Add"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
       onClick: this.fetchMulti
-    }, "Finish"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.multiUrlDisplay, {
+    }, "Finish")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "section gf-form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.multiUrlDisplay, {
       list: options.saveImportUrl
     }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
       isOpen: this.state.collapseMultiUpload,
@@ -25435,14 +25523,7 @@ function (_super) {
       options: this.props.options,
       onOptionsChange: this.props.onOptionsChange,
       data: this.props.data
-    }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "section gf-form-group"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-      key: 'delAll',
-      onClick: this.delAll
-    }, "Del all urls")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-      onClick: this.toDel
-    }, "toDel"));
+    }))));
   };
 
   return ImportInput;

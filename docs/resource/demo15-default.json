@@ -42,9 +42,9 @@
         "colorBackElement": "#FFFFFF"
       }
     },
-    "colorMode": true,
-    "traceBack": false,
-    "traceBorder": false
+    "colorMode": false,
+    "traceBack": true,
+    "traceBorder": true
   },
   "default": {
     "templates": [
@@ -55,7 +55,20 @@
         "xylabelfix": "x|90#y|90",
         "type": "point",
         "name": "unPoint",
-        "meta": [],
+        "meta": [
+          {
+            "meta": "meta exemple",
+            "obj": {
+              "colorText": "#FF00FF",
+              "colorBack": "#CCCCCC",
+              "style": {
+                "bold": false,
+                "italic": false,
+                "underline": true
+              }
+            }
+          }
+        ],
         "label": "mtu ens3",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -115,7 +128,20 @@
         "xylabelfixC": "x|0#y|0",
         "type": "link",
         "name": "unLink",
-        "meta": [],
+        "meta": [
+          {
+            "meta": "meta exemple",
+            "obj": {
+              "colorText": "#FF00FF",
+              "colorBack": "#CCCCCC",
+              "style": {
+                "bold": false,
+                "italic": false,
+                "underline": true
+              }
+            }
+          }
+        ],
         "label": "lien device",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -178,7 +204,20 @@
         "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "type": "region",
-        "meta": [],
+        "meta": [
+          {
+            "meta": "meta exemple",
+            "obj": {
+              "colorText": "#FF00FF",
+              "colorBack": "#CCCCCC",
+              "style": {
+                "bold": false,
+                "italic": false,
+                "underline": true
+              }
+            }
+          }
+        ],
         "label": "0.5-inner_eval",
         "positionParameter": {
           "xylabelA": "x|0#y|0",

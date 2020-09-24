@@ -424,6 +424,7 @@ class Gabarit extends React.Component<Props, State> {
   checkLoaderGabarit = (onClick: { currentTarget: HTMLButtonElement }) => {
     if (!this.props.options.saveGabaritFile[parseInt(onClick.currentTarget.id, 10)].loaded) {
       this.loaderGabarit(this.props.options.saveGabaritFile[parseInt(onClick.currentTarget.id, 10)], parseInt(onClick.currentTarget.id, 10));
+      this.props.options.saveGabaritFile[parseInt(onClick.currentTarget.id, 10)].loaded = true;
     } else {
       console.log('loadGabaritReject');
     }
@@ -432,12 +433,12 @@ class Gabarit extends React.Component<Props, State> {
   metaConstructor = (metas: MetaFile[]) => {
     let result: Metadata[] = [];
     metas.forEach((meta, index) => {
-      let obj = new TextObject(
+      let textObject = new TextObject(
         '',
         false,
-        meta.colorBack,
-        meta.colorText,
-        { bold: Boolean(meta.bold), italic: Boolean(meta.italic), underline: Boolean(meta.underline) },
+        meta.obj.colorBack,
+        meta.obj.colorText,
+        { bold: meta.obj.style.bold, italic: meta.obj.style.italic, underline: meta.obj.style.underline },
         false,
         {
           legendElement: '',
@@ -445,9 +446,9 @@ class Gabarit extends React.Component<Props, State> {
           unit: '',
           displayObjectInTooltip: false,
           addColorTextElement: false,
-          colorTextElement: meta.colorText,
+          colorTextElement: '',
           addColorBackElement: false,
-          colorBackElement: meta.colorBack,
+          colorBackElement: '',
         },
         {
           legendElement: '',
@@ -455,12 +456,12 @@ class Gabarit extends React.Component<Props, State> {
           unit: '',
           displayObjectInTooltip: false,
           addColorTextElement: false,
-          colorTextElement: meta.colorText,
+          colorTextElement: meta.obj.colorText,
           addColorBackElement: false,
-          colorBackElement: meta.colorBack,
+          colorBackElement: '',
         }
       );
-      result.push({ meta: meta.meta, obj });
+      result.push({ meta: meta.meta, obj: textObject });
     });
     return result;
   };
@@ -843,11 +844,7 @@ class Gabarit extends React.Component<Props, State> {
     let labelCoordY: string[] = [];
     let labelCoord: LabelCoord2D[][] = [];
 
-    console.log(labelCoord);
-
-    console.log(posPoint);
     posPoint.forEach((pos, index) => {
-      console.log(index);
       if (gabaritFileTmp.templateGabaritPoint[index].labelfix.toString() === 'false') {
         this.props.data.series.forEach((element) => {
           let remove = element.name?.split('{');
@@ -918,8 +915,6 @@ class Gabarit extends React.Component<Props, State> {
     });
 
     let upId = false;
-
-    console.log(labelCoord);
 
     labelCoord.forEach((labelCo, posIndex) => {
       console.log('passage1');
@@ -1629,9 +1624,42 @@ class Gabarit extends React.Component<Props, State> {
     });
 
     labelCoordA.forEach((element, coordindex) => {
+      let pointInLinkWithId = '';
+      let labelPointIn = pointInLink[coordindex].split('_')[0];
+      this.props.options.arrayPoints.forEach((point, index) => {
+        if (point.label.startsWith(labelPointIn)) {
+          pointInLinkWithId = labelPointIn + '_' + index;
+        }
+      });
+
+      let pointOutLinkWithId = '';
+      let labelPointOut = pointOutLink[coordindex].split('_')[0];
+      this.props.options.arrayPoints.forEach((point, index) => {
+        if (point.label.startsWith(labelPointOut)) {
+          pointOutLinkWithId = labelPointOut + '_' + index;
+        }
+      });
+
+      let regionInLinkWithId = '';
+      let labelRegionIn = regionInLink[coordindex].split('_')[0];
+      this.props.options.regionCoordinateSpace.forEach((region, index) => {
+        if (region.label.startsWith(labelPointIn)) {
+          pointInLinkWithId = labelRegionIn + '_' + index;
+        }
+      });
+
+      let regionOutLinkWithId = '';
+      let labelRegionOut = regionOutLink[coordindex].split('_')[0];
+      this.props.options.regionCoordinateSpace.forEach((region, index) => {
+        if (region.label.startsWith(labelPointOut)) {
+          pointOutLinkWithId = labelRegionOut + '_' + index;
+        }
+      });
+
       if (element.length > 0) {
         for (const pos of element) {
           filterLink.forEach((element, index) => {
+            let pointInLinkWithId = pointInLink[index];
             const defaultPositionAX = (((parseInt(pos.x, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
             const defaultPositionBX = (
               ((parseInt(labelCoordB[coordindex][index].x, 10) - xMinInitialSpace) / widthInitialSpace) *
@@ -1650,6 +1678,37 @@ class Gabarit extends React.Component<Props, State> {
               ((parseInt(labelCoordC[coordindex][index].y, 10) - yMinInitialSpace) / heightInitialSpace) *
               heightBackground
             ).toString();
+
+            let labelPointIn = pointInLink[index].split('_')[0];
+            this.props.options.arrayPoints.forEach((point, index) => {
+              if (point.label.startsWith(labelPointIn)) {
+                pointInLinkWithId = labelPointIn + '_' + index;
+              }
+            });
+
+            let labelPointOut = pointOutLink[index].split('_')[0];
+            this.props.options.arrayPoints.forEach((point, index) => {
+              if (point.label.startsWith(labelPointOut)) {
+                pointOutLinkWithId = labelPointOut + '_' + index;
+              }
+            });
+
+            let regionInLinkWithId = '';
+            let labelRegionIn = regionInLink[index].split('_')[0];
+            this.props.options.regionCoordinateSpace.forEach((region, index) => {
+              if (region.label.startsWith(labelPointIn)) {
+                pointInLinkWithId = labelRegionIn + '_' + index;
+              }
+            });
+
+            let regionOutLinkWithId = '';
+            let labelRegionOut = regionOutLink[index].split('_')[0];
+            this.props.options.regionCoordinateSpace.forEach((region, index) => {
+              if (region.label.startsWith(labelPointOut)) {
+                pointOutLinkWithId = labelRegionOut + '_' + index;
+              }
+            });
+
             let maA = metricALink.length;
             let maB = metricBLink.length;
             if (maA > 0 && maB > 0) {
@@ -1677,10 +1736,10 @@ class Gabarit extends React.Component<Props, State> {
                 colorBLink[index],
                 valueMetricALink[index],
                 valueMetricBLink[index],
-                pointInLink[index],
-                pointOutLink[index],
-                regionInLink[index],
-                regionOutLink[index],
+                pointInLinkWithId,
+                pointOutLinkWithId,
+                regionInLinkWithId,
+                regionOutLinkWithId,
                 this.props.options.zIndexOrientedLink + 1,
                 labelCoordC[coordindex][index].x,
                 labelCoordC[coordindex][index].y,
@@ -1726,10 +1785,10 @@ class Gabarit extends React.Component<Props, State> {
                 colorBLink[index],
                 valueMetricALink[index],
                 valueMetricBLink[index],
-                pointInLink[index],
-                pointOutLink[index],
-                regionInLink[index],
-                regionOutLink[index],
+                pointInLinkWithId,
+                pointOutLinkWithId,
+                regionInLinkWithId,
+                regionOutLinkWithId,
                 this.props.options.zIndexOrientedLink + 1,
                 labelCoordC[coordindex][index].x,
                 labelCoordC[coordindex][index].y,
@@ -1774,10 +1833,10 @@ class Gabarit extends React.Component<Props, State> {
                 colorBLink[index],
                 valueMetricALink[index],
                 valueMetricBLink[index],
-                pointInLink[index],
-                pointOutLink[index],
-                regionInLink[index],
-                regionOutLink[index],
+                pointInLinkWithId,
+                pointOutLinkWithId,
+                regionInLinkWithId,
+                regionOutLinkWithId,
                 this.props.options.zIndexOrientedLink + 1,
                 labelCoordC[coordindex][index].x,
                 labelCoordC[coordindex][index].y,
@@ -1822,10 +1881,10 @@ class Gabarit extends React.Component<Props, State> {
                 colorBLink[index],
                 valueMetricALink[index],
                 valueMetricBLink[index],
-                pointInLink[index],
-                pointOutLink[index],
-                regionInLink[index],
-                regionOutLink[index],
+                pointInLinkWithId,
+                pointOutLinkWithId,
+                regionInLinkWithId,
+                regionOutLinkWithId,
                 this.props.options.zIndexOrientedLink + 1,
                 labelCoordC[coordindex][index].x,
                 labelCoordC[coordindex][index].y,
@@ -1882,10 +1941,10 @@ class Gabarit extends React.Component<Props, State> {
             colorBLink[coordindex],
             valueMetricALink[coordindex],
             valueMetricBLink[coordindex],
-            pointInLink[coordindex],
-            pointOutLink[coordindex],
-            regionInLink[coordindex],
-            regionOutLink[coordindex],
+            pointInLinkWithId,
+            pointOutLinkWithId,
+            regionInLinkWithId,
+            regionOutLinkWithId,
             this.props.options.zIndexOrientedLink + 1,
             posCLink[coordindex].x,
             posCLink[coordindex].y,
@@ -1931,10 +1990,10 @@ class Gabarit extends React.Component<Props, State> {
             colorBLink[coordindex],
             valueMetricALink[coordindex],
             valueMetricBLink[coordindex],
-            pointInLink[coordindex],
-            pointOutLink[coordindex],
-            regionInLink[coordindex],
-            regionOutLink[coordindex],
+            pointInLinkWithId,
+            pointOutLinkWithId,
+            regionInLinkWithId,
+            regionOutLinkWithId,
             this.props.options.zIndexOrientedLink + 1,
             posCLink[coordindex].x,
             posCLink[coordindex].y,
@@ -1979,10 +2038,10 @@ class Gabarit extends React.Component<Props, State> {
             colorBLink[coordindex],
             valueMetricALink[coordindex],
             valueMetricBLink[coordindex],
-            pointInLink[coordindex],
-            pointOutLink[coordindex],
-            regionInLink[coordindex],
-            regionOutLink[coordindex],
+            pointInLinkWithId,
+            pointOutLinkWithId,
+            regionInLinkWithId,
+            regionOutLinkWithId,
             this.props.options.zIndexOrientedLink + 1,
             posCLink[coordindex].x,
             posCLink[coordindex].y,
@@ -2027,10 +2086,10 @@ class Gabarit extends React.Component<Props, State> {
             colorBLink[coordindex],
             valueMetricALink[coordindex],
             valueMetricBLink[coordindex],
-            pointInLink[coordindex],
-            pointOutLink[coordindex],
-            regionInLink[coordindex],
-            regionOutLink[coordindex],
+            pointInLinkWithId,
+            pointOutLinkWithId,
+            regionInLinkWithId,
+            regionOutLinkWithId,
             this.props.options.zIndexOrientedLink + 1,
             posCLink[coordindex].x,
             posCLink[coordindex].y,
@@ -2323,14 +2382,14 @@ class Gabarit extends React.Component<Props, State> {
             id={index.toString()}
             key={'GabaritUrl' + index.toString()}
             label={'Url'}
-            labelWidth={5}
+            labelWidth={10}
             inputWidth={20}
             onChange={this.onGabaritListUrlChanged.bind(this)}
             type="string"
             value={url || ''}
           />
           <Button variant="danger" id={index.toString()} key={'ButtunDel' + index.toString()} onClick={this.gabaritDeletUrl.bind(this)}>
-            Del
+            Delete
           </Button>
         </div>
       ));
@@ -2370,7 +2429,7 @@ class Gabarit extends React.Component<Props, State> {
             Load
           </Button>
           <Button variant="danger" id={index.toString()} key={'ButtunDel' + index.toString()} onClick={this.gabaritDeletFile.bind(this)}>
-            Del
+            Delete
           </Button>
         </div>
       ));
@@ -2397,7 +2456,7 @@ class Gabarit extends React.Component<Props, State> {
             readOnly
           />
           <Button variant="danger" key={'ButtunDelDefault'} onClick={this.gabaritDeletFileDefault.bind(this)}>
-            Del
+            Delete
           </Button>
         </div>
       );
@@ -2416,49 +2475,87 @@ class Gabarit extends React.Component<Props, State> {
     this.props.onOptionsChange({ ...this.props.options, saveGabaritURL: this.props.options.saveGabaritURL });
   };
 
+  printDefault = () => {
+    console.log('gabaritDefault');
+    console.log(this.props.options.gabaritDefault);
+  };
+
+  printPoint = () => {
+    console.log('Point');
+    console.log(this.props.options.arrayPoints);
+    this.props.options.arrayPoints.forEach((element) => {
+      console.log(element.mainMetric.filter);
+    });
+  };
+
+  printRegion = () => {
+    console.log('Region');
+    console.log(this.props.options.regionCoordinateSpace);
+  };
+
+  printLink = () => {
+    console.log('Link');
+    console.log(this.props.options.arrayOrientedLinks);
+  };
+
+  printTemp = () => {
+    console.log('gabaritDefault');
+    console.log(this.props.options.saveGabaritFile);
+  };
+
   render() {
     const { options } = this.props;
     return (
       <div>
         <Collapse isOpen={this.state.collapseGabaritDefault} label="Default Gabarit URL" onToggle={this.onToggleGabaritDefault}>
-          <FormField
-            label="Gabarit Default Url"
-            labelWidth={10}
-            key={'GabaritDefaultUrl'}
-            inputWidth={18}
-            onChange={this.onGabaritDefaultUrlChanged.bind(this)}
-            type="string"
-            value={options.saveGabaritDefaultUrl || ''}
-          />
-          <Button key={'AddGabaritDefaultUrl'} onClick={this.addGabaritDefaultUrlInput}>
-            Finish
-          </Button>
+          <div style={{ display: 'flex' }}>
+            <FormField
+              label="Gabarit Default Url"
+              labelWidth={10}
+              key={'GabaritDefaultUrl'}
+              inputWidth={20}
+              onChange={this.onGabaritDefaultUrlChanged.bind(this)}
+              type="string"
+              value={options.saveGabaritDefaultUrl || ''}
+            />
+            <Button key={'AddGabaritDefaultUrl'} onClick={this.addGabaritDefaultUrlInput}>
+              Finish
+            </Button>
+          </div>
           <this.gabaritDefaultDisplay list={options.gabaritDefault} />
         </Collapse>
         <Collapse isOpen={this.state.collapseSelectURL} label="Url List" onToggle={this.onToggleSelectUrl}>
-          <FormField
-            label="Gabarit Url"
-            labelWidth={8}
-            key={'GabaritUrl'}
-            inputWidth={20}
-            onChange={this.onGabaritUrlChanged.bind(this)}
-            type="string"
-            value={options.gabaritUrlInput || ''}
-          />
-          <Button key={'AddGabaritUrl'} onClick={this.addGabaritUrlInput}>
-            Add
-          </Button>
-          <div className="section gf-form-group">
+          <div style={{ display: 'flex' }}>
+            <FormField
+              label="Gabarit Url"
+              labelWidth={10}
+              key={'GabaritUrl'}
+              inputWidth={20}
+              onChange={this.onGabaritUrlChanged.bind(this)}
+              type="string"
+              value={options.gabaritUrlInput || ''}
+            />
+            <Button key={'AddGabaritUrl'} onClick={this.addGabaritUrlInput}>
+              Add
+            </Button>
             <Button onClick={this.fetchGabarit}>Finish</Button>
+          </div>
+          {/* <div className="section gf-form-group"> */}
+          <div>
             <this.gabaritUrlDisplay list={options.saveGabaritURL} />
-            <Button key={'delAll'} onClick={this.delAll}>
-              Del all urls
+            <Button key={'delAll'} onClick={this.delAll} variant="danger">
+              Delete all urls
             </Button>
           </div>
         </Collapse>
         <Collapse isOpen={this.state.collapseGabarit} label="Gabarit List" onToggle={this.onToggleGabarit}>
           <this.gabaritDisplay list={options.saveGabaritFile} />
         </Collapse>
+        {/* <Button onClick={this.printDefault}>Default</Button>
+        <Button onClick={this.printPoint}>Point</Button>
+        <Button onClick={this.printRegion}>Region</Button>
+        <Button onClick={this.printLink}>Link</Button>
+        <Button onClick={this.printTemp}>Temp</Button> */}
       </div>
     );
   }

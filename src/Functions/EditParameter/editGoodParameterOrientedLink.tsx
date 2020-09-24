@@ -14,7 +14,6 @@ export const editGoodParameterOrientedLink = (
   newValue: string,
   newValueSelect: SelectableValue<any>
 ): OrientedLinkClass => {
-  console.log('edit');
   if (name.startsWith('label')) {
     editCoor.label = newValue;
   } else if (name.startsWith('orientationLink')) {

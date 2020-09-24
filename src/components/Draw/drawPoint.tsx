@@ -738,14 +738,13 @@ export default class DrawPoint extends React.Component<Props, State> {
           Metadata
         </p>
       );
-      console.log(this.props.metaData);
       this.props.metaData.forEach((oneMetaData, index) => {
         const styleContentMetaData = {
           color: oneMetaData.obj.colorText,
           backgroundColor: oneMetaData.obj.colorBack,
           fontWeight: oneMetaData.obj.style.bold ? 'bold' : 'normal',
           fontStyle: oneMetaData.obj.style.italic ? 'italic' : 'normal',
-          textDecoration: oneMetaData.obj.style.underline ? 'underline' : 'normal',
+          textDecoration: oneMetaData.obj.style.underline ? 'underline' : 'none',
           fontFamily: this.props.police,
           fontSize: '9px',
           marginLeft: '10px',

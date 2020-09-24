@@ -1,6 +1,47 @@
 {
   "global": {
-    "lowerLimit": [],
+    "lowerLimit": [      
+      {
+        "backColor": "yellow",
+        "borderColor": "#FFFFFF",
+        "id": 0,
+        "lowerLimitMax": "450",
+        "lowerLimitMin": "",
+        "sizeBorder": "3"
+      },
+      {
+        "backColor": "orange",
+        "borderColor": "#FFFFFF",
+        "id": 1,
+        "lowerLimitMax": "1500",
+        "lowerLimitMin": ">450",
+        "sizeBorder": "3"
+      },
+      {
+        "backColor": "red",
+        "borderColor": "#FFFFFF",
+        "id": 2,
+        "lowerLimitMax": "5000",
+        "lowerLimitMin": ">1500",
+        "sizeBorder": "3"
+      },
+      {
+        "backColor": "puple",
+        "borderColor": "#FFFFFF",
+        "id": 3,
+        "lowerLimitMax": "20000",
+        "lowerLimitMin": ">5000",
+        "sizeBorder": "3"
+      },
+      {
+        "backColor": "blue",
+        "borderColor": "#FFFFFF",
+        "id": 4,
+        "lowerLimitMax": "",
+        "lowerLimitMin": ">20000",
+        "sizeBorder": "3"
+      }
+    ],
     "textObject": {
       "value": "",
       "isTextTooltip": true,
@@ -33,7 +74,7 @@
         "colorBackElement": "black"
       }
     },
-    "colorMode": false,
+    "colorMode": true,
     "traceBack": true,
     "traceBorder": true
   },
@@ -49,11 +90,15 @@
         "meta": [
           {
             "meta": "meta exemple",
-            "colorText": "#FF00FF",
-            "colorBack": "#CCCCCC",
-            "bold": false,
-            "italic": false,
-            "underline": true
+            "obj": {
+              "colorText": "#FF00FF",
+              "colorBack": "#CCCCCC",
+              "style": {
+                "bold": false,
+                "italic": false,
+                "underline": true
+              }
+            }
           }
         ],
         "label": "histo",
@@ -89,7 +134,7 @@
           "label": "circle",
           "value": "circle"
         },
-        "sizeWidth": "12",
+        "sizeWidth": "10",
         "sizeHeight": {
           "label": "",
           "value": ""
@@ -117,11 +162,15 @@
       "meta": [
         {
           "meta": "meta exemple",
-          "colorText": "#FF00FF",
-          "colorBack": "#CCCCCC",
-          "bold": false,
-          "italic": false,
-          "underline": true
+          "obj": {
+            "colorText": "#FF00FF",
+            "colorBack": "#CCCCCC",
+            "style": {
+              "bold": false,
+              "italic": false,
+              "underline": true
+            }
+          }
         }
       ],
       "label": "V",
@@ -152,7 +201,7 @@
         "label": "Circle",
         "value": "circle"
       },
-      "sizeWidth": "10",
+      "sizeWidth": "12",
       "sizeHeight": {
         "label": "",
         "value": ""

@@ -33,7 +33,7 @@
         "colorBackElement": "#FFFFFF"
       }
     },
-    "colorMode": true,
+    "colorMode": false,
     "traceBack": false,
     "traceBorder": false
   },
@@ -49,11 +49,15 @@
         "meta": [
           {
             "meta": "meta exemple",
-            "colorText": "#FF0000",
-            "colorBack": "#CCCCCC",
-            "bold": true,
-            "italic": false,
-            "underline": false
+            "obj": {
+              "colorText": "#FF00FF",
+              "colorBack": "#CCCCCC",
+              "style": {
+                "bold": false,
+                "italic": false,
+                "underline": true
+              }
+            }
           }
         ],
         "label": "label",
@@ -118,11 +122,15 @@
         "meta": [
           {
             "meta": "meta exemple",
-            "colorText": "#FF0000",
-            "colorBack": "#CCCCCC",
-            "bold": true,
-            "italic": false,
-            "underline": false
+            "obj": {
+              "colorText": "#FF00FF",
+              "colorBack": "#CCCCCC",
+              "style": {
+                "bold": false,
+                "italic": false,
+                "underline": true
+              }
+            }
           }
         ],
         "label": "lien device",

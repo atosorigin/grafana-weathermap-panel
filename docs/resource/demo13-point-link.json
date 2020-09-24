@@ -34,8 +34,8 @@
       }
     },
     "colorMode": false,
-    "traceBack": true,
-    "traceBorder": true
+    "traceBack": false,
+    "traceBorder": false
   },
   "default": {
     "templates": [
@@ -49,11 +49,15 @@
         "meta": [
           {
             "meta": "meta exemple",
-            "colorText": "#FF0000",
-            "colorBack": "#CCCCCC",
-            "bold": true,
-            "italic": false,
-            "underline": false
+            "obj": {
+              "colorText": "#FF00FF",
+              "colorBack": "#CCCCCC",
+              "style": {
+                "bold": false,
+                "italic": false,
+                "underline": true
+              }
+            }
           }
         ],
         "label": "mtu ens3",
@@ -118,11 +122,15 @@
         "meta": [
           {
             "meta": "meta exemple",
-            "colorText": "#FF0000",
-            "colorBack": "#CCCCCC",
-            "bold": true,
-            "italic": false,
-            "underline": false
+            "obj": {
+              "colorText": "#FF00FF",
+              "colorBack": "#CCCCCC",
+              "style": {
+                "bold": false,
+                "italic": false,
+                "underline": true
+              }
+            }
           }
         ],
         "label": "lien device",
@@ -194,11 +202,15 @@
       "meta": [
         {
           "meta": "meta exemple",
-          "colorText": "#FF0000",
-          "colorBack": "#CCCCCC",
-          "bold": true,
-          "italic": false,
-          "underline": false
+          "obj": {
+            "colorText": "#FF00FF",
+            "colorBack": "#CCCCCC",
+            "style": {
+              "bold": false,
+              "italic": false,
+              "underline": true
+            }
+          }
         }
       ],
       "label": "mtu ens3",
@@ -259,11 +271,15 @@
       "meta": [
         {
           "meta": "meta exemple",
-          "colorText": "#FF0000",
-          "colorBack": "#CCCCCC",
-          "bold": true,
-          "italic": false,
-          "underline": false
+          "obj": {
+            "colorText": "#FF00FF",
+            "colorBack": "#CCCCCC",
+            "style": {
+              "bold": false,
+              "italic": false,
+              "underline": true
+            }
+          }
         }
       ],
       "label": "mtu lo",
@@ -328,11 +344,15 @@
       "meta": [
         {
           "meta": "meta exemple",
-          "colorText": "#FF0000",
-          "colorBack": "#CCCCCC",
-          "bold": true,
-          "italic": false,
-          "underline": false
+          "obj": {
+            "colorText": "#FF00FF",
+            "colorBack": "#CCCCCC",
+            "style": {
+              "bold": false,
+              "italic": false,
+              "underline": true
+            }
+          }
         }
       ],
       "label": "lien device",
@@ -368,8 +388,8 @@
       "colorCoordinateB": "#E54658",
       "valueMainMetricA": "",
       "valueMainMetricB": "",
-      "pointIn": "mtu ens3_1",
-      "pointOut": "mtu lo_2",
+      "pointIn": "mtu ens3",
+      "pointOut": "mtu lo",
       "regionIn": "",
       "regionOut": "",
       "zIndex": 2,

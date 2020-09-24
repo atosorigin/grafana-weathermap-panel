@@ -26,6 +26,7 @@ import 'style/CoordinateSpace.css';
 import ManageAuxiliaryQuery from './manageAuxiliaryQuery';
 
 import ManageMetadata from '../../components/CoordinateSpace/manageMetada';
+//import PositionParameter from 'components/Parametrage/positionParameters';
 
 export declare type AlertVariant = 'success' | 'warning' | 'error' | 'info';
 
@@ -168,7 +169,6 @@ class CoordinateSpace extends React.Component<Props, State> {
     tmp.coordsDefault = newCoordDefault;
 
     tmp = editGoodParameterExtend(name, tmp, currentTarget);
-    console.log(tmp);
     this.setState({
       arrayCoor: tmp,
     });
@@ -563,6 +563,18 @@ class CoordinateSpace extends React.Component<Props, State> {
             isLink={false}
           />
         </div>
+        {/* <div>
+          <PositionParameter
+            options={this.props.options}
+            onOptionsChange={this.props.onOptionsChange}
+            data={this.props.data}
+            callBackToParentZIndex={() => {}}
+            isPoint={false}
+            isLink={false}
+            isRegion={true}
+            id={this.state.arrayCoor.id}
+          />
+        </div> */}
         <br />
         <div>
           <div className="radio">

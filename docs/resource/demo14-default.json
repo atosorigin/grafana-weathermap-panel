@@ -13,12 +13,12 @@
     "textObject": {
       "value": "",
       "isTextTooltip": false,
-      "colorBack": "black",
-      "colorText": "white",
+      "colorBack": "#000000",
+      "colorText": "#FFFFFF",
       "style": {
-        "bold": true,
+        "bold": false,
         "italic": false,
-        "underline": false
+        "underline": true
       },
       "generateObjectText": true,
       "valueGenerateObjectText": {
@@ -42,7 +42,7 @@
         "colorBackElement": "#FFFFFF"
       }
     },
-    "colorMode": true,
+    "colorMode": false,
     "traceBack": false,
     "traceBorder": false
   },
@@ -55,7 +55,20 @@
         "xylabelfix": "x|90#y|90",
         "type": "point",
         "name": "unPoint",
-        "meta": [],
+        "meta": [
+          {
+            "meta": "meta exemple",
+            "obj": {
+              "colorText": "#FF00FF",
+              "colorBack": "#CCCCCC",
+              "style": {
+                "bold": false,
+                "italic": false,
+                "underline": false
+              }
+            }
+          }
+        ],
         "label": "no label",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -115,7 +128,20 @@
         "xylabelfixC": "x|0#y|0",
         "type": "link",
         "name": "unLink",
-        "meta": [],
+        "meta": [
+          {
+            "meta": "meta exemple",
+            "obj": {
+              "colorText": "#FF00FF",
+              "colorBack": "#CCCCCC",
+              "style": {
+                "bold": false,
+                "italic": false,
+                "underline": false
+              }
+            }
+          }
+        ],
         "label": "lien device",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -178,7 +204,20 @@
         "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "xylabelfix": "",
         "type": "region",
-        "meta": [],
+        "meta": [
+          {
+            "meta": "meta exemple",
+            "obj": {
+              "colorText": "#FF00FF",
+              "colorBack": "#CCCCCC",
+              "style": {
+                "bold": false,
+                "italic": false,
+                "underline": false
+              }
+            }
+          }
+        ],
         "label": "default",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -204,7 +243,7 @@
           "hoveringTooltipText": ""
         },
         "idSVG": "",
-        "mode": false,
+        "mode": true,
         "img": "",
         "orientedLink": [],
         "color": "black"

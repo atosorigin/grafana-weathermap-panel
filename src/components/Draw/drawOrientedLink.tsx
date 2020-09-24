@@ -2859,7 +2859,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           backgroundColor: oneMetaData.obj.colorBack,
           fontWeight: oneMetaData.obj.style.bold ? 'bold' : 'normal',
           fontStyle: oneMetaData.obj.style.italic ? 'italic' : 'normal',
-          textDecoration: oneMetaData.obj.style.underline ? 'underline' : 'normal',
+          textDecoration: oneMetaData.obj.style.underline ? 'underline' : 'none',
           fontFamily: this.props.police,
           fontSize: '9px',
           marginLeft: '10px',

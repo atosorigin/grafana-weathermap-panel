@@ -86,7 +86,20 @@
         "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "type": "region",
-        "meta": [],
+        "meta": [
+          {
+            "meta": "meta exemple",
+            "obj": {
+              "colorText": "#FF00FF",
+              "colorBack": "#CCCCCC",
+              "style": {
+                "bold": false,
+                "italic": false,
+                "underline": false
+              }
+            }
+          }
+        ],
         "label": "0.5-inner_eval",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -128,12 +141,16 @@
       "type": "region",
       "meta": [
         {
-          "meta": "meta exemple 1",
-          "colorText": "#FF0000",
-          "colorBack": "#CCCCCC",
-          "bold": true,
-          "italic": false,
-          "underline": false
+          "meta": "meta exemple",
+          "obj": {
+            "colorText": "#FF00FF",
+            "colorBack": "#CCCCCC",
+            "style": {
+              "bold": false,
+              "italic": false,
+              "underline": true
+            }
+          }
         }
       ],
       "label": "0.5-inner_eval",
@@ -171,7 +188,20 @@
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
-      "meta": [],
+      "meta": [
+        {
+          "meta": "meta exemple",
+          "obj": {
+            "colorText": "green",
+            "colorBack": "#000000",
+            "style": {
+              "bold": false,
+              "italic": true,
+              "underline": false
+            }
+          }
+        }
+      ],
       "label": "0.5-prepare_time",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -207,7 +237,20 @@
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
-      "meta": [],
+      "meta": [
+        {
+          "meta": "meta exemple",
+          "obj": {
+            "colorText": "red",
+            "colorBack": "#000000",
+            "style": {
+              "bold": false,
+              "italic": false,
+              "underline": false
+            }
+          }
+        }
+      ],
       "label": "0.5-queue_time",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -243,7 +286,20 @@
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
-      "meta": [],
+      "meta": [
+        {
+          "meta": "meta exemple",
+          "obj": {
+            "colorText": "yellow",
+            "colorBack": "#000000",
+            "style": {
+              "bold": false,
+              "italic": false,
+              "underline": true
+            }
+          }
+        }
+      ],
       "label": "0.9-inner_eval",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -279,7 +335,20 @@
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "",
       "type": "region",
-      "meta": [],
+      "meta": [
+        {
+          "meta": "meta exemple",
+          "obj": {
+            "colorText": "orange",
+            "colorBack": "#000000",
+            "style": {
+              "bold": false,
+              "italic": true,
+              "underline": false
+            }
+          }
+        }
+      ],
       "label": "0.9-prepare_time",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -315,7 +384,20 @@
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "",
       "type": "region",
-      "meta": [],
+      "meta": [
+        {
+          "meta": "meta exemple",
+          "obj": {
+            "colorText": "white",
+            "colorBack": "#000000",
+            "style": {
+              "bold": false,
+              "italic": false,
+              "underline": false
+            }
+          }
+        }
+      ],
       "label": "0.9-queue_time",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -351,7 +433,20 @@
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "",
       "type": "region",
-      "meta": [],
+      "meta": [
+        {
+          "meta": "meta exemple",
+          "obj": {
+            "colorText": "white",
+            "colorBack": "#000000",
+            "style": {
+              "bold": true,
+              "italic": true,
+              "underline": true
+            }
+          }
+        }
+      ],
       "label": "0.99-inner_eval",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -387,7 +482,20 @@
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "type": "region",
-      "meta": [],
+      "meta": [
+        {
+          "meta": "meta exemple",
+          "obj": {
+            "colorText": "blue",
+            "colorBack": "orange",
+            "style": {
+              "bold": true,
+              "italic": false,
+              "underline": true
+            }
+          }
+        }
+      ],
       "label": "0.99-prepare_time",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
@@ -423,7 +531,20 @@
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "",
       "type": "region",
-      "meta": [],
+      "meta": [
+        {
+          "meta": "meta exemple",
+          "obj": {
+            "colorText": "#FF00FF",
+            "colorBack": "#CCCCCC",
+            "style": {
+              "bold": false,
+              "italic": false,
+              "underline": true
+            }
+          }
+        }
+      ],
       "label": "0.99-queue_time",
       "positionParameter": {
         "xylabelA": "x|100#y|100",
@@ -461,12 +582,16 @@
       "type": "region",
       "meta": [
         {
-          "meta": "meta exemple 2",
-          "colorText": "#FF00FF",
-          "colorBack": "#CCCCCC",
-          "bold": false,
-          "italic": false,
-          "underline": true
+          "meta": "meta exemple",
+          "obj": {
+            "colorText": "#FF00FF",
+            "colorBack": "#CCCCCC",
+            "style": {
+              "bold": false,
+              "italic": false,
+              "underline": true
+            }
+          }
         }
       ],
       "label": "Computer",

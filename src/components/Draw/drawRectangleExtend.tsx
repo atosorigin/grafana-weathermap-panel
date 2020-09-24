@@ -140,7 +140,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     region: RegionClass,
     valueQuery: number | null
     //link: boolean
-    // ): Tooltip => {
+  // ): Tooltip => {
   ) => {
     const styleTooltip = {
       color: region.textObj.colorText,
@@ -155,28 +155,23 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     const valueQueryResult: string = this.generateValueMetricElement(region, valueQuery);
     const valueMetaData: JSX.Element | null = this.displayValuesMetaData();
     let tooltipValue: JSX.Element | null = null;
-    // valueQueryResult !== '' ? (
-    //   <div>
-    //     <div style={styleTooltip}>
-    //       {/* {link && <a href={region.linkURL.hoveringTooltipLink}>{region.linkURL.hoveringTooltipText}</a>} */}
-    //       <a href={region.linkURL.hoveringTooltipLink}>{region.linkURL.hoveringTooltipText}</a>
-    //       {region.textObj.isTextTooltip && <p>{region.label}</p>}
-    //     </div>
-    //     <div style={styleMetrics}>
-    //       {region.textObj.generateObjectText &&
-    //         region.textObj.valueGenerateObjectText &&
-    //         region.textObj.valueGenerateObjectText.displayObjectInTooltip && <p>{valueQueryResult}</p>}
-    //     </div>
-    //     <div>{this.displayValuesAuxMetrics()}</div>
-    //     <div>{this.displayValuesMetaData()}</div>
-    //   </div>
-    // ) : null;
-    if (
-      (valueQueryResult !== '' && region.textObj.valueGenerateObjectText.displayObjectInTooltip) ||
-      region.metrics.length !== 0 ||
-      valueMetaData !== null
-    ) {
-      console.log('ok');
+      // valueQueryResult !== '' ? (
+      //   <div>
+      //     <div style={styleTooltip}>
+      //       {/* {link && <a href={region.linkURL.hoveringTooltipLink}>{region.linkURL.hoveringTooltipText}</a>} */}
+      //       <a href={region.linkURL.hoveringTooltipLink}>{region.linkURL.hoveringTooltipText}</a>
+      //       {region.textObj.isTextTooltip && <p>{region.label}</p>}
+      //     </div>
+      //     <div style={styleMetrics}>
+      //       {region.textObj.generateObjectText &&
+      //         region.textObj.valueGenerateObjectText &&
+      //         region.textObj.valueGenerateObjectText.displayObjectInTooltip && <p>{valueQueryResult}</p>}
+      //     </div>
+      //     <div>{this.displayValuesAuxMetrics()}</div>
+      //     <div>{this.displayValuesMetaData()}</div>
+      //   </div>
+      // ) : null;
+    if ((valueQueryResult !== '' && region.textObj.valueGenerateObjectText.displayObjectInTooltip) || region.metrics.length !== 0 || valueMetaData !== null) {
       tooltipValue = (
         <div>
           <div style={styleTooltip}>
@@ -185,15 +180,13 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
           </div>
           <div style={styleMetrics}>
             {region.textObj.generateObjectText &&
-              region.textObj.valueGenerateObjectText &&
-              region.textObj.valueGenerateObjectText.displayObjectInTooltip && <p>{valueQueryResult}</p>}
+            region.textObj.valueGenerateObjectText &&
+            region.textObj.valueGenerateObjectText.displayObjectInTooltip && <p>{valueQueryResult}</p>}
           </div>
           <div>{this.displayValuesAuxMetrics()}</div>
           <div>{valueMetaData}</div>
         </div>
-      );
-    } else {
-      console.log('null');
+        );
     }
     return {
       tooltipValue: tooltipValue,
@@ -597,7 +590,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
           backgroundColor: oneMetaData.obj.colorBack,
           fontWeight: oneMetaData.obj.style.bold ? 'bold' : 'normal',
           fontStyle: oneMetaData.obj.style.italic ? 'italic' : 'normal',
-          textDecoration: oneMetaData.obj.style.underline ? 'underline' : 'normal',
+          textDecoration: oneMetaData.obj.style.underline ? 'underline' : 'none',
           fontFamily: this.props.options.display.police,
           fontSize: '9px',
           marginLeft: '10px',
@@ -669,7 +662,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
   getCoordinatePxAdaptToInitialSpace = (
     region: RegionClass,
     // coorRegion: Coord4D,
-    coorRegionDefault: Coord4D
+    coorRegionDefault: Coord4D,
     // widthInitialSpaceDefault: number,
     // heightInitialSpaceDefault: number
   ): CoorHTML => {
@@ -770,6 +763,8 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       fontWeight: this.defineFontWeight(style),
       color: textColor,
       verticalAlign: 'middle',
+      // marginTop: region.positionParameter.labelAPositionY,
+      // marginLeft: region.positionParameter.labelAPositionX,
     } as React.CSSProperties;
 
     const styleMetricsDiv = {
@@ -805,12 +800,9 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
         // } else {
         //   <div>{value}</div>;
         // }
-        console.log(this.state.tooltipValue);
         if (this.state.tooltipValue === null) {
-          console.log('null');
           <div>{value}</div>;
         } else {
-          console.log('not null');
           value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
         }
       }
@@ -843,12 +835,9 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
         // } else {
         //   <div>{value}</div>;
         // }
-        console.log(this.state.tooltipValue);
         if (this.state.tooltipValue === null) {
-          console.log('null');
           <div>{value}</div>;
         } else {
-          console.log('not null');
           value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
         }
       }

@@ -33,8 +33,6 @@ class ManageMetadata extends React.Component<Props, State> {
   }
 
   onMetaStrChanged = (event: { currentTarget: HTMLInputElement }) => {
-    console.log('onChangeString');
-    console.log(event.currentTarget.id);
     if (this.props.type === 'point') {
       let newData: Metadata = this.props.options.arrayPoints[this.props.idCoordinate - 1].meta[parseInt(event.currentTarget.id, 10)];
       newData.meta = event.currentTarget.value;
@@ -256,8 +254,6 @@ class ManageMetadata extends React.Component<Props, State> {
   displayMetaList = (props: any): JSX.Element => {
     const l10n = require('Localization/en.json');
     if (props.type === 'point') {
-      console.log(this.props.options.arrayPoints);
-      console.log(this.props.idCoordinate);
       const list = this.props.options.arrayPoints[this.props.idCoordinate - 1].meta.map((meta: Metadata, index: number) => (
         <div
           style={{
@@ -270,14 +266,15 @@ class ManageMetadata extends React.Component<Props, State> {
             style={{
               display: 'flex',
               justifyContent: 'right',
+              marginBottom: '10px',
             }}
           >
             <Button
               variant={'danger'}
               onClick={() => {
-                let newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
-                newArrayRegion[this.props.idCoordinate - 1].meta.splice(index, 1);
-                this.props.onOptionsChange({ ...this.props.options, regionCoordinateSpace: newArrayRegion });
+                let newArrayPoints: PointClass[] = this.props.options.arrayPoints;
+                newArrayPoints[this.props.idCoordinate - 1].meta.splice(index, 1);
+                this.props.onOptionsChange({ ...this.props.options, arrayPoints: newArrayPoints });
               }}
             >
               Delete
@@ -397,6 +394,7 @@ class ManageMetadata extends React.Component<Props, State> {
             style={{
               display: 'flex',
               justifyContent: 'right',
+              marginBottom: '10px',
             }}
           >
             <Button
@@ -522,14 +520,15 @@ class ManageMetadata extends React.Component<Props, State> {
             style={{
               display: 'flex',
               justifyContent: 'right',
+              marginBottom: '10px',
             }}
           >
             <Button
               variant={'danger'}
               onClick={() => {
-                let newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
-                newArrayRegion[this.props.idCoordinate - 1].meta.splice(index, 1);
-                this.props.onOptionsChange({ ...this.props.options, regionCoordinateSpace: newArrayRegion });
+                let newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+                newArrayOrientedLink[this.props.idCoordinate - 1].meta.splice(index, 1);
+                this.props.onOptionsChange({ ...this.props.options, arrayOrientedLinks: newArrayOrientedLink });
               }}
             >
               Delete
