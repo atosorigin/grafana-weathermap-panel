@@ -26,7 +26,7 @@ import 'style/CoordinateSpace.css';
 import ManageAuxiliaryQuery from './manageAuxiliaryQuery';
 
 import ManageMetadata from '../../components/CoordinateSpace/manageMetada';
-//import PositionParameter from 'components/Parametrage/positionParameters';
+import PositionParameter from 'components/Parametrage/positionParameters';
 
 export declare type AlertVariant = 'success' | 'warning' | 'error' | 'info';
 
@@ -563,7 +563,7 @@ class CoordinateSpace extends React.Component<Props, State> {
             isLink={false}
           />
         </div>
-        {/* <div>
+        <div>
           <PositionParameter
             options={this.props.options}
             onOptionsChange={this.props.onOptionsChange}
@@ -574,7 +574,7 @@ class CoordinateSpace extends React.Component<Props, State> {
             isRegion={true}
             id={this.state.arrayCoor.id}
           />
-        </div> */}
+        </div>
         <br />
         <div>
           <div className="radio">

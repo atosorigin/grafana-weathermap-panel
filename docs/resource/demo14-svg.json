@@ -104,8 +104,11 @@
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|0#y|0",
-          "tooltipA": "Bottom",
-          "tooltipB": "Bottom"
+          "tooltipA": {
+            "label": "Right",
+            "value": "right"
+          },
+          "tooltipB": {}
         },
         "mainMetric": {
           "key": "",
@@ -157,8 +160,11 @@
       "positionParameter": {
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
-        "tooltipA": "bottom",
-        "tooltipB": "bottom"
+        "tooltipA": {
+          "label": "Bottom",
+          "value": "BOTTOM"
+        },
+        "tooltipB": {}
       },
       "mainMetric": {
         "key": "",
@@ -206,8 +212,11 @@
       "positionParameter": {
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
-        "tooltipA": "bottom",
-        "tooltipB": "bottom"
+        "tooltipA": {
+          "label": "Bottom",
+          "value": "boTTom"
+        },
+        "tooltipB": {}
       },
       "mainMetric": {
         "key": "",
@@ -255,8 +264,11 @@
       "positionParameter": {
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
-        "tooltipA": "bottom",
-        "tooltipB": "bottom"
+        "tooltipA": {
+          "label": "Bottom",
+          "value": "bOTtom"
+        },
+        "tooltipB": {}
       },
       "mainMetric": {
         "key": "",
@@ -304,8 +316,8 @@
       "positionParameter": {
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
-        "tooltipA": "",
-        "tooltipB": ""
+        "tooltipA": {},
+        "tooltipB": {}
       },
       "mainMetric": {
         "key": "",
@@ -353,8 +365,8 @@
       "positionParameter": {
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
-        "tooltipA": "",
-        "tooltipB": ""
+        "tooltipA": {},
+        "tooltipB": {}
       },
       "mainMetric": {
         "key": "",
@@ -402,8 +414,8 @@
       "positionParameter": {
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
-        "tooltipA": "",
-        "tooltipB": ""
+        "tooltipA": {},
+        "tooltipB": {}
       },
       "mainMetric": {
         "key": "",
@@ -451,8 +463,11 @@
       "positionParameter": {
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
-        "tooltipA": "bottom",
-        "tooltipB": "bottom"
+        "tooltipA": {
+          "label": "Right",
+          "value": "right"
+        },
+        "tooltipB": {}
       },
       "mainMetric": {
         "key": "",
@@ -500,8 +515,11 @@
       "positionParameter": {
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
-        "tooltipA": "bottom",
-        "tooltipB": "bottom"
+        "tooltipA": {
+          "label": "Top",
+          "value": "Top"
+        },
+        "tooltipB": {}
       },
       "mainMetric": {
         "key": "",
@@ -547,10 +565,13 @@
       ],
       "label": "0.99-queue_time",
       "positionParameter": {
-        "xylabelA": "x|100#y|100",
-        "xylabelB": "x|100#y|100",
-        "tooltipA": "bottom",
-        "tooltipB": "bottom"
+        "xylabelA": "x|-50#y|-50",
+        "xylabelB": "x|0#y|0",
+        "tooltipA": {
+          "label": "Left",
+          "value": "Left"
+        },
+        "tooltipB": {}
       },
       "mainMetric": {
         "key": "",
@@ -598,8 +619,11 @@
       "positionParameter": {
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
-        "tooltipA": "bottom",
-        "tooltipB": "bottom"
+        "tooltipA": {
+          "label": "Bottom",
+          "value": "Bottom"
+        },
+        "tooltipB": {}
       },
       "mainMetric": {
         "key": "",

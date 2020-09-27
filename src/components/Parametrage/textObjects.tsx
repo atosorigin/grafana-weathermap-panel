@@ -111,7 +111,7 @@ class TextObjects extends React.Component<Props, State> {
     /** target for legend text element input */
     currentTarget: HTMLInputElement;
   }) => {
-    const newTextObject: TextObject = this.state.textObject;
+    let newTextObject: TextObject = this.state.textObject;
 
     newTextObject.generateAuxiliaryElement.legendElement = event.currentTarget.value;
     await this.stateAsyncTextObject({ textObject: newTextObject });
@@ -123,7 +123,7 @@ class TextObjects extends React.Component<Props, State> {
     /** target for unity mesure element input */
     currentTarget: HTMLInputElement;
   }) => {
-    const newTextObject: TextObject = this.state.textObject;
+    let newTextObject: TextObject = this.state.textObject;
 
     newTextObject.generateAuxiliaryElement.unit = event.currentTarget.value;
     await this.stateAsyncTextObject({ textObject: newTextObject });
@@ -135,7 +135,7 @@ class TextObjects extends React.Component<Props, State> {
     /** target for numeric format text object input */
     currentTarget: HTMLInputElement;
   }) => {
-    const newTextObject: TextObject = this.state.textObject;
+    let newTextObject: TextObject = this.state.textObject;
 
     newTextObject.generateAuxiliaryElement.numericFormatElement = event.currentTarget.value;
     await this.stateAsyncTextObject({ textObject: newTextObject });
@@ -144,7 +144,7 @@ class TextObjects extends React.Component<Props, State> {
 
   /** switch value for display object text */
   onSwitchdisplayObjectInTooltip = async () => {
-    const newTextObject: TextObject = this.state.textObject;
+    let newTextObject: TextObject = this.state.textObject;
 
     newTextObject.generateAuxiliaryElement.displayObjectInTooltip = !this.state.textObject.generateAuxiliaryElement.displayObjectInTooltip;
     await this.stateAsyncTextObject({ textObject: newTextObject });
@@ -163,7 +163,7 @@ class TextObjects extends React.Component<Props, State> {
 
   /** choice to apply color or not for text element */
   onSwitchAddColorTextElement = async () => {
-    const newTextObject: TextObject = this.state.textObject;
+    let newTextObject: TextObject = this.state.textObject;
 
     newTextObject.generateAuxiliaryElement.addColorTextElement = !this.state.textObject.generateAuxiliaryElement.addColorTextElement;
     await this.stateAsyncTextObject({ textObject: newTextObject });
@@ -172,7 +172,7 @@ class TextObjects extends React.Component<Props, State> {
 
   /** choice to apply color or not for back element */
   onSwitchAddColorBackElement = async () => {
-    const newTextObject: TextObject = this.state.textObject;
+    let newTextObject: TextObject = this.state.textObject;
 
     newTextObject.generateAuxiliaryElement.addColorBackElement = !this.state.textObject.generateAuxiliaryElement.addColorBackElement;
     await this.stateAsyncTextObject({ textObject: newTextObject });
@@ -184,7 +184,7 @@ class TextObjects extends React.Component<Props, State> {
     // console.clear();
     // console.log('am here --');
 
-    const newTextObject: TextObject = this.state.textObject;
+    let newTextObject: TextObject = this.state.textObject;
 
     newTextObject.isTextTooltip = !this.state.textObject.isTextTooltip;
     await this.stateAsyncTextObject({ textObject: newTextObject });
@@ -193,7 +193,7 @@ class TextObjects extends React.Component<Props, State> {
 
   /** change value for color text element */
   onChangeColorTextElement = async (key: number, color: string) => {
-    const newTextObject: TextObject = this.state.textObject;
+    let newTextObject: TextObject = this.state.textObject;
 
     newTextObject.generateAuxiliaryElement.colorTextElement = color;
     await this.stateAsyncTextObject({ textObject: newTextObject });
@@ -202,7 +202,7 @@ class TextObjects extends React.Component<Props, State> {
 
   /** change value for back element */
   onChangeColorBackElement = async (key: number, color: string) => {
-    const newTextObject: TextObject = this.state.textObject;
+    let newTextObject: TextObject = this.state.textObject;
 
     newTextObject.generateAuxiliaryElement.colorBackElement = color;
     await this.stateAsyncTextObject({ textObject: newTextObject });
@@ -214,7 +214,7 @@ class TextObjects extends React.Component<Props, State> {
     /** target for legend text element input */
     currentTarget: HTMLInputElement;
   }) => {
-    const newTextObject: TextObject = this.state.textObject;
+    let newTextObject: TextObject = this.state.textObject;
 
     newTextObject.valueGenerateObjectText.legendElement = event.currentTarget.value;
     await this.stateAsyncTextObject({ textObject: newTextObject });
@@ -226,7 +226,7 @@ class TextObjects extends React.Component<Props, State> {
     /** target for unity mesure element input */
     currentTarget: HTMLInputElement;
   }) => {
-    const newTextObject: TextObject = this.state.textObject;
+    let newTextObject: TextObject = this.state.textObject;
 
     newTextObject.valueGenerateObjectText.unit = event.currentTarget.value;
     await this.stateAsyncTextObject({ textObject: newTextObject });
@@ -238,7 +238,7 @@ class TextObjects extends React.Component<Props, State> {
     /** target for numeric format text object input */
     currentTarget: HTMLInputElement;
   }) => {
-    const newTextObject: TextObject = this.state.textObject;
+    let newTextObject: TextObject = this.state.textObject;
 
     newTextObject.valueGenerateObjectText.numericFormatElement = event.currentTarget.value;
     await this.stateAsyncTextObject({ textObject: newTextObject });
@@ -247,7 +247,7 @@ class TextObjects extends React.Component<Props, State> {
 
   /** switch value for display object text */
   onSwitchValueGenerateObjectTextdisplayObjectInTooltip = async () => {
-    const newTextObject: TextObject = this.state.textObject;
+    let newTextObject: TextObject = this.state.textObject;
 
     newTextObject.valueGenerateObjectText.displayObjectInTooltip = !this.state.textObject.valueGenerateObjectText.displayObjectInTooltip;
     await this.stateAsyncTextObject({ textObject: newTextObject });
@@ -266,7 +266,7 @@ class TextObjects extends React.Component<Props, State> {
 
   /** choice to apply color or not for text element */
   onSwitchValueGenerateObjectTextAddColorTextElement = async () => {
-    const newTextObject: TextObject = this.state.textObject;
+    let newTextObject: TextObject = this.state.textObject;
 
     newTextObject.valueGenerateObjectText.addColorTextElement = !this.state.textObject.valueGenerateObjectText.addColorTextElement;
     await this.stateAsyncTextObject({ textObject: newTextObject });
@@ -275,7 +275,7 @@ class TextObjects extends React.Component<Props, State> {
 
   /** choice to apply color or not for back element */
   onSwitchValueGenerateObjectTextAddColorBackElement = async () => {
-    const newTextObject: TextObject = this.state.textObject;
+    let newTextObject: TextObject = this.state.textObject;
 
     newTextObject.valueGenerateObjectText.addColorBackElement = !this.state.textObject.valueGenerateObjectText.addColorBackElement;
     await this.stateAsyncTextObject({ textObject: newTextObject });
@@ -284,7 +284,7 @@ class TextObjects extends React.Component<Props, State> {
 
   /** change value for color text element */
   onChangeValueGenerateObjectTextColorTextElement = async (key: number, color: string) => {
-    const newTextObject: TextObject = this.state.textObject;
+    let newTextObject: TextObject = this.state.textObject;
 
     newTextObject.valueGenerateObjectText.colorTextElement = color;
     await this.stateAsyncTextObject({ textObject: newTextObject });
@@ -293,7 +293,7 @@ class TextObjects extends React.Component<Props, State> {
 
   /** change value for back element */
   onChangeValueGenerateObjectTextColorBackElement = async (key: number, color: string) => {
-    const newTextObject: TextObject = this.state.textObject;
+    let newTextObject: TextObject = this.state.textObject;
 
     newTextObject.valueGenerateObjectText.colorBackElement = color;
     await this.stateAsyncTextObject({ textObject: newTextObject });
@@ -301,7 +301,7 @@ class TextObjects extends React.Component<Props, State> {
   };
 
   saveData = (style: Style): void => {
-    const newText = this.state.textObject;
+    let newText = this.state.textObject;
     newText.style = style;
     this.setState({
       textObject: newText,

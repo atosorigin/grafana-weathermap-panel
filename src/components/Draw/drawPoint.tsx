@@ -225,10 +225,11 @@ export default class DrawPoint extends React.Component<Props, State> {
     const linkUrlPoint = this.props.linkUrl.followLink;
     const borderRadius = this.defineBorderRadius() + 'px';
     const rotate = this.defineRotate();
-    // const padding = this.definePadding(size);
-    // console.log(this.props.shape.value);
-    // console.log(borderRadius);
-    // console.log(rotate);
+    let positionTooltip: any = '';
+    if (this.props.tooltipPosition.value) {
+      positionTooltip = this.props.tooltipPosition.value.toLowerCase();
+    }
+
     if (drawGraphicMarker === 'true') {
       if (this.props.buttonAddLinkIsActive || this.props.buttonAddIncurvedLinkIsActive) {
         if (valueToolTip === null) {
@@ -250,7 +251,7 @@ export default class DrawPoint extends React.Component<Props, State> {
           );
         } else {
           return (
-            <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
+            <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={positionTooltip}>
               <div
                 style={{
                   border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
@@ -274,6 +275,8 @@ export default class DrawPoint extends React.Component<Props, State> {
             <div>
               <a
                 href={linkUrlPoint}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
                   border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
                   backgroundColor: this.defineBackgroundColor(),
@@ -291,9 +294,11 @@ export default class DrawPoint extends React.Component<Props, State> {
           );
         } else {
           return (
-            <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
+            <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={positionTooltip}>
               <a
                 href={linkUrlPoint}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
                   border: this.defineBorderSize() + 'px solid ' + this.defineBorderColor(),
                   backgroundColor: this.defineBackgroundColor(),
@@ -351,6 +356,10 @@ export default class DrawPoint extends React.Component<Props, State> {
 
   private displayLabel(label: string, name: string, positionX: number, positionY: number, police: string) {
     const valueToolTip: JSX.Element | null = this.defineContentTooltip('label');
+    let positionTooltip: any = '';
+    if (this.props.tooltipPosition.value) {
+      positionTooltip = this.props.tooltipPosition.value.toLowerCase();
+    }
     if (valueToolTip === null) {
       return (
         <div
@@ -372,7 +381,7 @@ export default class DrawPoint extends React.Component<Props, State> {
       );
     } else {
       return (
-        <Tooltip key={'tooltipLabel' + this.props.name} content={valueToolTip} placement={this.props.tooltipPosition.value}>
+        <Tooltip key={'tooltipLabel' + this.props.name} content={valueToolTip} placement={positionTooltip}>
           <div
             style={{
               textDecoration: this.defineTextDecoration(),
@@ -505,6 +514,8 @@ export default class DrawPoint extends React.Component<Props, State> {
         <a
           style={{ fontFamily: this.props.police, fontSize: '11px', marginBottom: '0px', textAlign: 'center' }}
           href={this.props.linkUrl.hoveringTooltipLink}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           {this.props.linkUrl.hoveringTooltipText}
         </a>

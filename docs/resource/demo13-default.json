@@ -3,7 +3,7 @@
     "lowerLimit": [],
     "textObject": {
       "value": "",
-      "isTextTooltip": false,
+      "isTextTooltip": true,
       "colorBack": "yellow",
       "colorText": "white",
       "style": {
@@ -16,7 +16,7 @@
         "legendElement": "Welcome",
         "numericFormatElement": "2",
         "unit": "Hz",
-        "displayObjectInTooltip": true,
+        "displayObjectInTooltip": false,
         "addColorTextElement": false,
         "addColorBackElement": false,
         "colorTextElement": "",
@@ -64,8 +64,11 @@
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|labelName#y|labelName",
-          "tooltipA": "Bottom",
-          "tooltipB": "Bottom"
+          "tooltipA": {
+            "label": "Right",
+            "value": "right"
+          },
+          "tooltipB": {}
         },
         "mainMetric": {
           "key": "",
@@ -137,8 +140,11 @@
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|0#y|0",
-          "tooltipA": "Bottom",
-          "tooltipB": "Bottom"
+          "tooltipA": {
+            "label": "Right",
+            "value": "right"
+          },
+          "tooltipB": {}
         },
         "mainMetric": {
           "key": "",

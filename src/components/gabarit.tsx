@@ -708,13 +708,15 @@ class Gabarit extends React.Component<Props, State> {
         label: point.drawGraphicMarker.label,
         value: point.drawGraphicMarker.value,
       });
-      if (!drawGraphicMarkerPoint[index].label || !drawGraphicMarkerPoint[index].label) {
+      //if (!drawGraphicMarkerPoint[index].label || !drawGraphicMarkerPoint[index].label) {
+      if (!drawGraphicMarkerPoint[index].label) {
         drawGraphicMarkerPoint[index] = {
           label: gabaritFileTmp.templateGabaritPointDefault[0].drawGraphicMarker.label,
           value: gabaritFileTmp.templateGabaritPointDefault[0].drawGraphicMarker.value,
         };
       }
-      if (!drawGraphicMarkerPoint[index].label || !drawGraphicMarkerPoint[index].label) {
+      //if (!drawGraphicMarkerPoint[index].label || !drawGraphicMarkerPoint[index].label) {
+      if (!drawGraphicMarkerPoint[index].label) {
         drawGraphicMarkerPoint[index] = {
           label: this.props.options.gabaritDefault.templateGabaritPointDefault[0].drawGraphicMarker.label,
           value: this.props.options.gabaritDefault.templateGabaritPointDefault[0].drawGraphicMarker.value,
@@ -763,30 +765,30 @@ class Gabarit extends React.Component<Props, State> {
       if (!associateOrientedLinksOutPoint[index]) {
         associateOrientedLinksOutPoint[index] = this.props.options.gabaritDefault.templateGabaritPointDefault[0].associateOrientedLinksOut;
       }
-      tmpToolTipA = { label: point.positionParameter.tooltipA, value: point.positionParameter.tooltipA };
+      tmpToolTipA = { label: point.positionParameter.tooltipA.label, value: point.positionParameter.tooltipA.value };
       if (!tmpToolTipA.label || !tmpToolTipA.value) {
         tmpToolTipA = {
-          label: gabaritFileTmp.templateGabaritPointDefault[0].positionParameter.tooltipA,
-          value: gabaritFileTmp.templateGabaritPointDefault[0].positionParameter.tooltipA,
+          label: gabaritFileTmp.templateGabaritPointDefault[0].positionParameter.tooltipA.label,
+          value: gabaritFileTmp.templateGabaritPointDefault[0].positionParameter.tooltipA.value,
         };
       }
       if (!tmpToolTipA.label || !tmpToolTipA.value) {
         tmpToolTipA = {
-          label: this.props.options.gabaritDefault.templateGabaritPointDefault[0].positionParameter.tooltipA,
-          value: this.props.options.gabaritDefault.templateGabaritPointDefault[0].positionParameter.tooltipA,
+          label: this.props.options.gabaritDefault.templateGabaritPointDefault[0].positionParameter.tooltipA.label,
+          value: this.props.options.gabaritDefault.templateGabaritPointDefault[0].positionParameter.tooltipA.value,
         };
       }
-      tmpToolTipB = { label: point.positionParameter.tooltipB, value: point.positionParameter.tooltipB };
+      tmpToolTipB = { label: point.positionParameter.tooltipB.label, value: point.positionParameter.tooltipB.value };
       if (!tmpToolTipB.label || !tmpToolTipB.value) {
         tmpToolTipB = {
-          label: gabaritFileTmp.templateGabaritPointDefault[0].positionParameter.tooltipB,
-          value: gabaritFileTmp.templateGabaritPointDefault[0].positionParameter.tooltipB,
+          label: gabaritFileTmp.templateGabaritPointDefault[0].positionParameter.tooltipB.label,
+          value: gabaritFileTmp.templateGabaritPointDefault[0].positionParameter.tooltipB.value,
         };
       }
       if (!tmpToolTipB.label || !tmpToolTipB.value) {
         tmpToolTipB = {
-          label: this.props.options.gabaritDefault.templateGabaritPointDefault[0].positionParameter.tooltipB,
-          value: this.props.options.gabaritDefault.templateGabaritPointDefault[0].positionParameter.tooltipB,
+          label: this.props.options.gabaritDefault.templateGabaritPointDefault[0].positionParameter.tooltipB.label,
+          value: this.props.options.gabaritDefault.templateGabaritPointDefault[0].positionParameter.tooltipB.value,
         };
       }
       tmpLabelAPosition = coordParse(point.positionParameter.xylabelA);
@@ -1309,30 +1311,30 @@ class Gabarit extends React.Component<Props, State> {
       if (!colorBLink[index]) {
         colorBLink[index] = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].colorCoordinateB;
       }
-      tmpToolTipA = { label: link.positionParameter.tooltipA, value: link.positionParameter.tooltipA };
+      tmpToolTipA = { label: link.positionParameter.tooltipA.label, value: link.positionParameter.tooltipA.value };
       if (!tmpToolTipA.value || !tmpToolTipA.label) {
         tmpToolTipA = {
-          label: gabaritFileTmp.templateGabaritLinkDefault[0].positionParameter.tooltipA,
-          value: gabaritFileTmp.templateGabaritLinkDefault[0].positionParameter.tooltipA,
+          label: gabaritFileTmp.templateGabaritLinkDefault[0].positionParameter.tooltipA.label,
+          value: gabaritFileTmp.templateGabaritLinkDefault[0].positionParameter.tooltipA.value,
         };
       }
       if (!tmpToolTipA.value || !tmpToolTipA.label) {
         tmpToolTipA = {
-          label: this.props.options.gabaritDefault.templateGabaritLinkDefault[0].positionParameter.tooltipA,
-          value: this.props.options.gabaritDefault.templateGabaritLinkDefault[0].positionParameter.tooltipA,
+          label: this.props.options.gabaritDefault.templateGabaritLinkDefault[0].positionParameter.tooltipA.label,
+          value: this.props.options.gabaritDefault.templateGabaritLinkDefault[0].positionParameter.tooltipA.value,
         };
       }
-      tmpToolTipB = { label: link.positionParameter.tooltipB, value: link.positionParameter.tooltipB };
+      tmpToolTipB = { label: link.positionParameter.tooltipB.label, value: link.positionParameter.tooltipB.value };
       if (!tmpToolTipB.value || !tmpToolTipB.label) {
         tmpToolTipB = {
-          label: gabaritFileTmp.templateGabaritLinkDefault[0].positionParameter.tooltipB,
-          value: gabaritFileTmp.templateGabaritLinkDefault[0].positionParameter.tooltipB,
+          label: gabaritFileTmp.templateGabaritLinkDefault[0].positionParameter.tooltipB.label,
+          value: gabaritFileTmp.templateGabaritLinkDefault[0].positionParameter.tooltipB.value,
         };
       }
       if (!tmpToolTipB.value || !tmpToolTipB.label) {
         tmpToolTipB = {
-          label: this.props.options.gabaritDefault.templateGabaritLinkDefault[0].positionParameter.tooltipB,
-          value: this.props.options.gabaritDefault.templateGabaritLinkDefault[0].positionParameter.tooltipB,
+          label: this.props.options.gabaritDefault.templateGabaritLinkDefault[0].positionParameter.tooltipB.label,
+          value: this.props.options.gabaritDefault.templateGabaritLinkDefault[0].positionParameter.tooltipB.value,
         };
       }
       tmpLabelAPosition = coordParse(link.positionParameter.xylabelA);
@@ -2257,30 +2259,30 @@ class Gabarit extends React.Component<Props, State> {
       if (!imgRegion[index]) {
         imgRegion[index] = this.props.options.gabaritDefault.templateGabaritRegionDefault[0].img;
       }
-      tmpToolTipA = { label: region.positionParameter.tooltipA, value: region.positionParameter.tooltipA };
+      tmpToolTipA = { label: region.positionParameter.tooltipA.label, value: region.positionParameter.tooltipA.value };
       if (!tmpToolTipA.label || !tmpToolTipA.value) {
         tmpToolTipA = {
-          label: gabaritFileTmp.templateGabaritRegionDefault[0].positionParameter.tooltipA,
-          value: gabaritFileTmp.templateGabaritRegionDefault[0].positionParameter.tooltipA,
+          label: gabaritFileTmp.templateGabaritRegionDefault[0].positionParameter.tooltipA.label,
+          value: gabaritFileTmp.templateGabaritRegionDefault[0].positionParameter.tooltipA.value,
         };
       }
       if (!tmpToolTipA.label || !tmpToolTipA.value) {
         tmpToolTipA = {
-          label: this.props.options.gabaritDefault.templateGabaritRegionDefault[0].positionParameter.tooltipA,
-          value: this.props.options.gabaritDefault.templateGabaritRegionDefault[0].positionParameter.tooltipA,
+          label: this.props.options.gabaritDefault.templateGabaritRegionDefault[0].positionParameter.tooltipA.label,
+          value: this.props.options.gabaritDefault.templateGabaritRegionDefault[0].positionParameter.tooltipA.value,
         };
       }
-      tmpToolTipB = { label: region.positionParameter.tooltipB, value: region.positionParameter.tooltipB };
+      tmpToolTipB = { label: region.positionParameter.tooltipB.label, value: region.positionParameter.tooltipB.value };
       if (!tmpToolTipB.label || !tmpToolTipB.value) {
         tmpToolTipB = {
-          label: gabaritFileTmp.templateGabaritRegionDefault[0].positionParameter.tooltipB,
-          value: gabaritFileTmp.templateGabaritRegionDefault[0].positionParameter.tooltipB,
+          label: gabaritFileTmp.templateGabaritRegionDefault[0].positionParameter.tooltipB.label,
+          value: gabaritFileTmp.templateGabaritRegionDefault[0].positionParameter.tooltipB.value,
         };
       }
       if (!tmpToolTipB.label || !tmpToolTipB.value) {
         tmpToolTipB = {
-          label: this.props.options.gabaritDefault.templateGabaritRegionDefault[0].positionParameter.tooltipB,
-          value: this.props.options.gabaritDefault.templateGabaritRegionDefault[0].positionParameter.tooltipB,
+          label: this.props.options.gabaritDefault.templateGabaritRegionDefault[0].positionParameter.tooltipB.label,
+          value: this.props.options.gabaritDefault.templateGabaritRegionDefault[0].positionParameter.tooltipB.value,
         };
       }
       tmpLabelAPosition = coordParse(region.positionParameter.xylabelA);

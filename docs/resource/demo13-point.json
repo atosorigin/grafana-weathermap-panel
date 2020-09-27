@@ -5,16 +5,16 @@
         "id": 0,
         "lowerLimitMin": "",
         "lowerLimitMax": "",
-        "backColor": "magenta",
-        "borderColor": "#FF00FF",
-        "sizeBorder": "2"
+        "backColor": "#063eb8",
+        "borderColor": "#06d2d3",
+        "sizeBorder": "5"
       }
     ],
     "textObject": {
       "value": "",
       "isTextTooltip": true,
-      "colorBack": "#eeee00",
-      "colorText": "#dd33dd",
+      "colorBack": "white",
+      "colorText": "black",
       "style": {
         "bold": true,
         "italic": true,
@@ -25,11 +25,11 @@
         "legendElement": "Nombre",
         "numericFormatElement": "",
         "unit": "u",
-        "displayObjectInTooltip": true,
-        "addColorTextElement": false,
-        "colorTextElement": "white",
-        "addColorBackElement": false,
-        "colorBackElement": "green"
+        "displayObjectInTooltip": false,
+        "addColorTextElement": true,
+        "colorTextElement": "#e54658",
+        "addColorBackElement": true,
+        "colorBackElement": "#c5c507"
       },
       "generateAuxiliaryElement": {
         "legendElement": "",
@@ -73,8 +73,11 @@
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|labelName#y|labelName",
-          "tooltipA": "Bottom",
-          "tooltipB": "Bottom"
+          "tooltipA": {
+            "label": "Right",
+            "value": "right"
+          },
+          "tooltipB": {}
         },
         "mainMetric": {
           "key": "",
@@ -145,8 +148,11 @@
       "positionParameter": {
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
-        "tooltipA": "Bottom",
-        "tooltipB": "Bottom"
+        "tooltipA": {
+          "label": "Right",
+          "value": "right"
+        },
+        "tooltipB": {}
       },
       "mainMetric": {
         "format": "",

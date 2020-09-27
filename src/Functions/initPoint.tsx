@@ -38,7 +38,7 @@ export const initPoint = (index: number): PointClass => {
   );
   const linkURL: LinkURLClass = new LinkURLClass('', '', '');
 
-  const positionParameter: PositionParameterClass = new PositionParameterClass('0', '0', '0', '0', {}, {});
+  const positionParameter: PositionParameterClass = new PositionParameterClass('0', '0', '0', '0', { label: 'Right', value: 'Right' }, {});
   const newCoordinate: PointClass = new PointClass(
     newId,
     linkURL,

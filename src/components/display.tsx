@@ -262,7 +262,9 @@ class Display extends React.Component<Props, State> {
     return (
       <div>
         <div style={{ display: 'flex', marginBottom: 1 }}>
-          <FormLabel width={15}>Police</FormLabel>
+          <div style={{ marginBottom: '1px' }}>
+            <FormLabel width={15}>Police</FormLabel>
+          </div>
           <InputSelect _onChange={this.onChangePolice} data={police} defaultValue={this.state.newPolice} />
         </div>
 

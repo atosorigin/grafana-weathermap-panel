@@ -270,8 +270,8 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
         left = (xSVG + widthSVG).toString();
         top = (ySVG + heightSVG).toString();
       }
-      coor.top = top;
-      coor.left = left;
+      coor.top = (parseInt(top, 10) + parseInt(this.props.uneCoor.positionParameter.labelAPositionY, 10) * (-1)).toString();
+      coor.left = (parseInt(left, 10) + parseInt(this.props.uneCoor.positionParameter.labelAPositionX, 10)).toString();
     }
     return coor;
   };
@@ -763,8 +763,8 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       fontWeight: this.defineFontWeight(style),
       color: textColor,
       verticalAlign: 'middle',
-      // marginTop: region.positionParameter.labelAPositionY,
-      // marginLeft: region.positionParameter.labelAPositionX,
+      marginTop: (parseInt(region.positionParameter.labelAPositionY, 10) * -1) + 'px',
+      marginLeft: region.positionParameter.labelAPositionX + 'px',
     } as React.CSSProperties;
 
     const styleMetricsDiv = {
@@ -772,6 +772,12 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       color: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorTextElement : 'white',
       verticalAlign: 'middle',
     } as React.CSSProperties;
+
+    let positionTooltip: any = '';
+    if (region.positionParameter.tooltipPositionA.value) {
+      console.log(region.positionParameter);
+      positionTooltip = region.positionParameter.tooltipPositionA.value.toLowerCase();
+    }
 
     let value: JSX.Element;
 
@@ -803,14 +809,14 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
         if (this.state.tooltipValue === null) {
           <div>{value}</div>;
         } else {
-          value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
+          value = <Tooltip placement={positionTooltip} content={this.state.tooltipValue}>{value}</Tooltip>;
         }
       }
     } else {
       //console.log('not active');
       value = (
         <div style={styleDiv} id={this.props.id}>
-          <a href={region.linkURL.followLink}>
+          <a href={region.linkURL.followLink} target="_blank" rel="noopener noreferrer">
             <div style={{ height: '100%', width: '100%' }}>
               {(!region.textObj.isTextTooltip || region.textObj.generateObjectText) && (
                 <div>
@@ -838,7 +844,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
         if (this.state.tooltipValue === null) {
           <div>{value}</div>;
         } else {
-          value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
+          value = <Tooltip placement={positionTooltip} content={this.state.tooltipValue}>{value}</Tooltip>;
         }
       }
     }

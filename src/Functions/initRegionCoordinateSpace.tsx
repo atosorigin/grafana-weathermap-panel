@@ -50,7 +50,7 @@ export const initRegionCoordinateSpace = (index: number): RegionClass => {
     yMin: '0',
     yMax: '0',
   };
-  const positionParameter: PositionParameterClass = new PositionParameterClass('0', '0', '0', '0', {}, {});
+  const positionParameter: PositionParameterClass = new PositionParameterClass('0', '0', '0', '0', { label: 'Right', value: 'Right' }, {});
   const newCoordinate: RegionClass = new RegionClass(
     newId,
     linkURL,

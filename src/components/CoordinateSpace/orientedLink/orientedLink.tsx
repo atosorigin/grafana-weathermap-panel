@@ -41,15 +41,10 @@ interface Props extends PanelEditorProps<SimpleOptions> {
  * IState
  */
 interface State {
-  arrayCoor: OrientedLinkClass;
   /**
    * to do
    */
   arrayInput: ArrayInputSelectableClass[];
-  /**
-   * to do
-   */
-  arrayOrientedLink: OrientedLinkClass[];
   /** */
   orientedLink: OrientedLinkClass;
   /** */
@@ -69,10 +64,8 @@ export default class OrientedLink extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      arrayCoor: cloneOrientedLink(this.props.orientedLink),
       arrayInput: [],
       orientedLink: cloneOrientedLink(this.props.orientedLink),
-      arrayOrientedLink: [],
       //debug: false,
       htmlInput: <div></div>,
       hiddenAlert: true,
@@ -326,12 +319,14 @@ export default class OrientedLink extends React.Component<Props, State> {
             (parseInt(region.coords.yMax, 10) - parseInt(region.coords.yMin, 10)).toString(),
             {}
           );
-          this.state.orientedLink.pointAPositionXDefault = (
-            parseInt(region.coordsDefault.xMax, 10) - parseInt(region.coordsDefault.xMin, 10)
-          ).toString();
-          this.state.orientedLink.pointAPositionYDefault = (
-            parseInt(region.coordsDefault.yMax, 10) - parseInt(region.coordsDefault.yMin, 10)
-          ).toString();
+          newOrientedLink.pointAPositionXDefault = (parseInt(region.coordsDefault.xMax, 10) - parseInt(region.coordsDefault.xMin, 10)).toString();
+          // this.state.orientedLink.pointAPositionXDefault = (
+          //   parseInt(region.coordsDefault.xMax, 10) - parseInt(region.coordsDefault.xMin, 10)
+          // ).toString();
+          newOrientedLink.pointAPositionYDefault = (parseInt(region.coordsDefault.yMax, 10) - parseInt(region.coordsDefault.yMin, 10)).toString();
+          // this.state.orientedLink.pointAPositionYDefault = (
+          //   parseInt(region.coordsDefault.yMax, 10) - parseInt(region.coordsDefault.yMin, 10)
+          // ).toString();
         }
       });
     } else if (name.startsWith('pointOut')) {
@@ -341,8 +336,10 @@ export default class OrientedLink extends React.Component<Props, State> {
       // MAJ des valeurs x et y du pointB du lien si un point est associé en sortie
       arrayPoint.forEach((point) => {
         if (this.state.orientedLink.pointOut === point.name || this.state.orientedLink.pointOut === point.label) {
-          this.state.orientedLink.pointBPositionXDefault = point.positionXDefault;
-          this.state.orientedLink.pointBPositionYDefault = point.positionYDefault;
+          // this.state.orientedLink.pointBPositionXDefault = point.positionXDefault;
+          // this.state.orientedLink.pointBPositionYDefault = point.positionYDefault;
+          newOrientedLink.pointBPositionXDefault = point.positionXDefault;
+          newOrientedLink.pointBPositionYDefault = point.positionYDefault;
           newOrientedLink = editGoodParameterOrientedLink('pointBX', newOrientedLink, point.positionShapeX, {});
           newOrientedLink = editGoodParameterOrientedLink('pointBY', newOrientedLink, point.positionShapeY, {});
         }
@@ -354,12 +351,14 @@ export default class OrientedLink extends React.Component<Props, State> {
       // MAJ des valeurs x et y du pointB du lien si une region est associée en entrée
       arrayRegion.forEach((region) => {
         if (this.state.orientedLink.regionOut === region.label) {
-          this.state.orientedLink.pointBPositionXDefault = (
-            parseInt(region.coordsDefault.xMax, 10) - parseInt(region.coordsDefault.xMin, 10)
-          ).toString();
-          this.state.orientedLink.pointBPositionYDefault = (
-            parseInt(region.coordsDefault.yMax, 10) - parseInt(region.coordsDefault.yMin, 10)
-          ).toString();
+          newOrientedLink.pointBPositionXDefault = (parseInt(region.coordsDefault.xMax, 10) - parseInt(region.coordsDefault.xMin, 10)).toString();
+          // this.state.orientedLink.pointBPositionXDefault = (
+          //   parseInt(region.coordsDefault.xMax, 10) - parseInt(region.coordsDefault.xMin, 10)
+          // ).toString();
+          newOrientedLink.pointBPositionYDefault = (parseInt(region.coordsDefault.yMax, 10) - parseInt(region.coordsDefault.yMin, 10)).toString();
+          // this.state.orientedLink.pointBPositionYDefault = (
+          //   parseInt(region.coordsDefault.yMax, 10) - parseInt(region.coordsDefault.yMin, 10)
+          // ).toString();
           newOrientedLink = editGoodParameterOrientedLink(
             'pointBX',
             newOrientedLink,
@@ -566,10 +565,10 @@ export default class OrientedLink extends React.Component<Props, State> {
   }
   // Meta
   saveMetaData = (meta: Metadata[]) => {
-    const old = this.state.arrayCoor;
+    const old = this.state.orientedLink;
     old.meta = meta;
     this.setState({
-      arrayCoor: old,
+      orientedLink: old,
     });
   };
   /**

@@ -39,7 +39,20 @@ export const initOrientedLink = (newId: number, newZIndex: number): OrientedLink
   );
 
   const linkUrl: LinkURLClass = new LinkURLClass('', '', '');
-  const initPositionParameter: PositionParameterClass = new PositionParameterClass('0', '0', '0', '0', {}, {});
+  const initPositionParameter: PositionParameterClass = new PositionParameterClass(
+    '0',
+    '0',
+    '0',
+    '0',
+    {
+      label: 'Right',
+      value: 'Right',
+    },
+    {
+      label: 'Right',
+      value: 'Right',
+    }
+  );
   const initMainMetrics: Metric = { key: '', unit: '', format: '', keyValue: '', refId: '', manageValue: 'avg' };
   const initMainMetricsB: Metric = { key: '', unit: '', format: '', keyValue: '', refId: '', manageValue: 'avg' };
   const newCoordinate: OrientedLinkClass = new OrientedLinkClass(

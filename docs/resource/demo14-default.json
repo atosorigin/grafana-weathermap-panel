@@ -73,8 +73,11 @@
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|labelName#y|labelName",
-          "tooltipA": "Bottom",
-          "tooltipB": "Bottom"
+          "tooltipA": {
+            "label": "Right",
+            "value": "right"
+          },
+          "tooltipB": {}
         },
         "mainMetric": {
           "key": "",
@@ -146,8 +149,11 @@
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|0#y|0",
-          "tooltipA": "Bottom",
-          "tooltipB": "Bottom"
+          "tooltipA": {
+            "label": "Right",
+            "value": "right"
+          },
+          "tooltipB": {}
         },
         "mainMetric": {
           "key": "",
@@ -222,8 +228,11 @@
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|0#y|0",
-          "tooltipA": "Bottom",
-          "tooltipB": "Bottom"
+          "tooltipA": {
+            "label": "Right",
+            "value": "right"
+          },
+          "tooltipB": {}
         },
         "mainMetric": {
           "key": "",

@@ -202,7 +202,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       }
     );
     const linkUrl: LinkURLClass = new LinkURLClass('', '', '');
-    const positionParameter: PositionParameterClass = new PositionParameterClass('0', '0', '0', '0', {}, {});
+    const positionParameter: PositionParameterClass = new PositionParameterClass('0', '0', '0', '0', { label: 'Right', value: 'Right' }, {});
     const newPoint: PointClass = new PointClass(
       id,
       linkUrl,
@@ -821,7 +821,20 @@ export class SimplePanel extends PureComponent<Props, State> {
       }
     );
     const linkUrl: LinkURLClass = new LinkURLClass('', '', '');
-    const positionParameter: PositionParameterClass = new PositionParameterClass('0', '0', '0', '0', {}, {});
+    const positionParameter: PositionParameterClass = new PositionParameterClass(
+      '0',
+      '0',
+      '0',
+      '0',
+      {
+        label: 'Right',
+        value: 'Right',
+      },
+      {
+        label: 'Right',
+        value: 'Right',
+      }
+    );
 
     const newOrientedLink: OrientedLinkClass = new OrientedLinkClass(
       id,
@@ -1516,13 +1529,17 @@ export class SimplePanel extends PureComponent<Props, State> {
   };
 
   ZoomSVG = () => {
-    if (!this.state.buttonManage[5]) {
-      this.state.buttonManage[5] = true;
+    let newButtonManage = this.state.buttonManage;
+    if (!newButtonManage[5]) {
+      newButtonManage[5] = true;
       document.body.addEventListener('keyup', this.applyZoom);
-    } else if (this.state.buttonManage[5]) {
-      this.state.buttonManage[5] = false;
+    } else if (newButtonManage[5]) {
+      newButtonManage[5] = false;
       this.ZoomInactive();
     }
+    this.setState({
+      buttonManage: newButtonManage,
+    });
     this.updateButtonCss();
   };
 
@@ -1611,9 +1628,14 @@ export class SimplePanel extends PureComponent<Props, State> {
     this.checkIfDisplayButton();
 
     // save background in state
-    this.setState({
-      currentImage: this.props.options.baseMap.image,
-    });
+    // this.setState({
+    //   currentImage: this.props.options.baseMap.image,
+    // });
+    if (this.props.options.baseMap.image !== '') {
+      this.setState({
+        currentImage: this.props.options.baseMap.image,
+      });
+    }
 
     // load backgroundSVG
     if (this.props.options.baseMap.modeSVG && this.props.options.baseMap.image !== '') {
@@ -1769,7 +1791,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     }
   };
 
-  private displayTooltipSVG = (event: any) => {
+  private displayAndGetPositionTooltipSVG = (event: any) => {
     let idSVG = '';
     if (this.props.options.baseMap.isUploaded) {
       idSVG = event.target.id;
@@ -1786,23 +1808,54 @@ export class SimplePanel extends PureComponent<Props, State> {
         let heightSVG = 0;
         let positionX = '';
         let positionY = '';
-        //console.log(idSVG);
+        let widthTooltip = 0;
+        let heightTooltip = 0;
+
+        const tooltip = document.getElementById('tooltipSVG');
+        if (tooltip) {
+          widthTooltip = parseInt(tooltip?.style.width, 10);
+          heightTooltip = parseInt(tooltip?.style.minHeight, 10);
+        }
+
+        let positionParameter: any = '';
+        if (region.positionParameter.tooltipPositionA.value) {
+          positionParameter = region.positionParameter.tooltipPositionA.value.toLowerCase();
+        }
+
         if (event.target.localName === 'rect') {
           //console.log('rect');
           xSVG = parseInt(event.target.attributes['x'].nodeValue, 10);
           ySVG = parseInt(event.target.attributes['y'].nodeValue, 10);
           widthSVG = parseInt(event.target.attributes['width'].nodeValue, 10);
           heightSVG = parseInt(event.target.attributes['height'].nodeValue, 10);
-          positionX = (xSVG + widthSVG).toString();
-          positionY = (ySVG - heightSVG / 2).toString();
+          // positionX = (xSVG + widthSVG).toString();
+          // positionY = (ySVG - heightSVG / 2).toString();
         } else if (event.target.localName === 'ellipse') {
-          //console.log('ellipse');
+          console.log('ellipse');
+          console.log(region.positionParameter.tooltipPositionA);
           xSVG = parseInt(event.target.attributes['cx'].nodeValue, 10);
           ySVG = parseInt(event.target.attributes['cy'].nodeValue, 10);
           widthSVG = parseInt(event.target.attributes['rx'].nodeValue, 10) * 2;
           heightSVG = parseInt(event.target.attributes['ry'].nodeValue, 10) * 2;
           positionX = xSVG.toString();
           positionY = ySVG.toString();
+          if (positionParameter === 'top') {
+            console.log('top');
+            positionX = (xSVG - widthTooltip / 2).toString();
+            positionY = (ySVG - heightTooltip - heightSVG / 2).toString();
+          } else if (positionParameter === 'bottom') {
+            console.log('bottom');
+            positionX = (xSVG - widthTooltip / 2).toString();
+            positionY = (ySVG + heightSVG / 2).toString();
+          } else if (positionParameter === 'left') {
+            console.log('left');
+            positionX = (xSVG - widthTooltip).toString();
+            positionY = ySVG.toString();
+          } else if (positionParameter === 'right') {
+            console.log('right');
+            positionX = xSVG.toString();
+            positionY = ySVG.toString();
+          }
         } else if (event.target.localName === 'path') {
           //console.log('path');
           const allValues: string = event.target.attributes['d'].nodeValue;
@@ -1837,9 +1890,27 @@ export class SimplePanel extends PureComponent<Props, State> {
           xSVG = xMin;
           ySVG = yMin;
           widthSVG = xMax - xMin;
-          // heightSVG = xMax - xMin;
-          positionX = (xSVG + widthSVG).toString();
-          positionY = ySVG.toString();
+          heightSVG = xMax - xMin;
+          // positionX = (xSVG + widthSVG).toString();
+          // positionY = ySVG.toString();
+        }
+
+        // define positionTooltip for path and rect
+        if (event.target.localName === 'path' || event.target.localName === 'rect') {
+          console.log('rect - path');
+          if (positionParameter === 'top') {
+            positionX = (xSVG + widthSVG / 4).toString();
+            positionY = (ySVG - heightSVG / 2).toString();
+          } else if (positionParameter === 'bottom') {
+            positionX = (xSVG + widthSVG / 4).toString();
+            positionY = (ySVG + heightSVG / 2).toString();
+          } else if (positionParameter === 'left') {
+            positionX = (xSVG - widthSVG).toString();
+            positionY = ySVG.toString();
+          } else if (positionParameter === 'right') {
+            positionX = (xSVG + widthSVG).toString();
+            positionY = ySVG.toString();
+          }
         }
         newDataSVG.x = positionX;
         newDataSVG.y = positionY;
@@ -1935,7 +2006,7 @@ export class SimplePanel extends PureComponent<Props, State> {
   /*************************************test create tooltip **********************************************************/
 
   SVG_PathImage = (event: any) => {
-    this.displayTooltipSVG(event);
+    this.displayAndGetPositionTooltipSVG(event);
     const elementSVG: any = event.target;
     const parentElementSVG: any = elementSVG.parentNode;
     let idSVG = '';
@@ -2049,6 +2120,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     if (arrayMeta.length !== 0) {
       resultHtml.push(
         <p
+          key={'titleMetadataRegionSVG' + region.id + region.idSVG}
           style={{
             fontFamily: this.props.options.display.police,
             fontSize: '10px',
@@ -2060,6 +2132,7 @@ export class SimplePanel extends PureComponent<Props, State> {
           Metadata
         </p>
       );
+      let indexMeta = 0;
       arrayMeta.forEach((meta) => {
         const styleContentMetaData = {
           color: meta.obj.colorText,
@@ -2072,10 +2145,19 @@ export class SimplePanel extends PureComponent<Props, State> {
           marginLeft: '10px',
           marginBottom: '0px',
         } as CSSProperties;
-        resultHtml.push(<p style={styleContentMetaData}>{meta.meta}</p>);
+        resultHtml.push(
+          <p key={indexMeta + 'textMetadataRegionSVG' + region.id} style={styleContentMetaData}>
+            {meta.meta}
+          </p>
+        );
+        indexMeta++;
       });
     }
-    return <div id="metadataTooltipSVG">{resultHtml}</div>;
+    return (
+      <div key={'metadataTooltipRegionSVG' + region.id + region.idSVG} id="metadataTooltipSVG">
+        {resultHtml}
+      </div>
+    );
   };
 
   private displayAuxiliaryMetricsRegionSVG = (region: RegionClass): JSX.Element => {
@@ -2267,6 +2349,8 @@ export class SimplePanel extends PureComponent<Props, State> {
       position: 'absolute',
       top: parseInt(this.state.dataTooltipSVG.y, 10),
       left: parseInt(this.state.dataTooltipSVG.x, 10),
+      width: '150px',
+      minHeight: '100px',
       zIndex: 9999,
       //width: 'auto',
       border: '1px solid black',
@@ -2304,48 +2388,69 @@ export class SimplePanel extends PureComponent<Props, State> {
       fontFamily: this.props.options.display.police,
     } as React.CSSProperties;
 
-    const html: JSX.Element = (
-      <div
-        id="tooltipSVG"
-        style={styleMainTooltipSVG}
-        onMouseOver={(event: any) => {
-          const tooltipSVG: any = document.getElementById('tooltipSVG');
-          if (
-            event.target.id === 'tooltipSVG' ||
-            event.target.parentElement.id === 'tooltipSVG' ||
-            event.target.id === 'auxMetTooltipSVG' ||
-            event.target.parentElement.id === 'auxMetTooltipSVG' ||
-            event.target.id === 'metadataTooltipSVG' ||
-            event.target.parentElement.id === 'metadataTooltipSVG'
-          ) {
-            tooltipSVG.style.display = 'initial';
-          }
-        }}
-        onMouseOut={(event: any) => {
-          const tooltipSVG: any = document.getElementById('tooltipSVG');
-          if (
-            event.target.id !== 'tooltipSVG' ||
-            event.target.parentElement.id !== 'tooltipSVG' ||
-            event.target.id !== 'auxMetTooltipSVG' ||
-            event.target.parentElement.id !== 'metadataTooltipSVG' ||
-            event.target.id !== 'metadataTooltipSVG' ||
-            event.target.parentElement.id !== 'auxMetTooltipSVG'
-          ) {
-            tooltipSVG.style.display = 'none';
-          }
-        }}
-      >
-        {regionSVG.textObj.isTextTooltip && <p style={styleLabelTooltipSVG}>{regionSVG.label}</p>}
-        {regionSVG.textObj.generateObjectText && regionSVG.textObj.valueGenerateObjectText.displayObjectInTooltip && (
-          <p style={styleMainMetricTooltipSVG}>{this.defineMainMetric(regionSVG)}</p>
-        )}
-        {regionSVG.textObj.generateAuxiliaryElement.displayObjectInTooltip && this.displayAuxiliaryMetricsRegionSVG(regionSVG)}
-        {this.displayMetaDataRegionSVG(regionSVG)}
-        <a style={styleElementTooltipSVG} href={regionSVG.linkURL.hoveringTooltipLink}>
-          {regionSVG.linkURL.hoveringTooltipText}
-        </a>
-      </div>
-    );
+    let html: JSX.Element = <div></div>;
+    if (regionSVG.idSVG) {
+      html = (
+        <div
+          id="tooltipSVG"
+          style={styleMainTooltipSVG}
+          onMouseOver={(event: any) => {
+            const tooltipSVG: any = document.getElementById('tooltipSVG');
+            if (
+              event.target.id === 'tooltipSVG' ||
+              event.target.parentElement.id === 'tooltipSVG' ||
+              event.target.id === 'auxMetTooltipSVG' ||
+              event.target.parentElement.id === 'auxMetTooltipSVG' ||
+              event.target.id === 'metadataTooltipSVG' ||
+              event.target.parentElement.id === 'metadataTooltipSVG'
+            ) {
+              tooltipSVG.style.display = 'initial';
+            }
+          }}
+          onMouseOut={(event: any) => {
+            const tooltipSVG: any = document.getElementById('tooltipSVG');
+            if (
+              event.target.id !== 'tooltipSVG' ||
+              event.target.parentElement.id !== 'tooltipSVG' ||
+              event.target.id !== 'auxMetTooltipSVG' ||
+              event.target.parentElement.id !== 'metadataTooltipSVG' ||
+              event.target.id !== 'metadataTooltipSVG' ||
+              event.target.parentElement.id !== 'auxMetTooltipSVG'
+            ) {
+              tooltipSVG.style.display = 'none';
+            }
+          }}
+        >
+          {regionSVG.textObj.isTextTooltip && <p style={styleLabelTooltipSVG}>{regionSVG.label}</p>}
+          {regionSVG.textObj.generateObjectText && regionSVG.textObj.valueGenerateObjectText.displayObjectInTooltip && (
+            <p style={styleMainMetricTooltipSVG}>{this.defineMainMetric(regionSVG)}</p>
+          )}
+          {regionSVG.textObj.generateAuxiliaryElement.displayObjectInTooltip && this.displayAuxiliaryMetricsRegionSVG(regionSVG)}
+          {this.displayMetaDataRegionSVG(regionSVG)}
+          <a style={styleElementTooltipSVG} href={regionSVG.linkURL.hoveringTooltipLink}>
+            {regionSVG.linkURL.hoveringTooltipText}
+          </a>
+        </div>
+      );
+    }
+
+    // if no data in tooltipRegionSVG => not display
+    if (
+      !regionSVG.textObj.isTextTooltip &&
+      (!regionSVG.textObj.valueGenerateObjectText.displayObjectInTooltip ||
+        (regionSVG.textObj.valueGenerateObjectText.displayObjectInTooltip &&
+          regionSVG.mainMetric.returnQuery &&
+          regionSVG.mainMetric.returnQuery.length === 0)) &&
+      regionSVG.metrics.length === 0 &&
+      regionSVG.meta.length === 0 &&
+      regionSVG.linkURL.hoveringTooltipText === ''
+    ) {
+      console.log('null');
+      const tooltipSVG: any = document.getElementById('tooltipSVG');
+      if (tooltipSVG) {
+        tooltipSVG.style.display = 'none';
+      }
+    }
     return html;
   };
 

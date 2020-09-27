@@ -256,6 +256,7 @@ class ManageMetadata extends React.Component<Props, State> {
     if (props.type === 'point') {
       const list = this.props.options.arrayPoints[this.props.idCoordinate - 1].meta.map((meta: Metadata, index: number) => (
         <div
+          key={'point' + this.props.idCoordinate + 'EditorMetadata'}
           style={{
             marginTop: '5px',
             border: '1px solid black',
@@ -383,6 +384,7 @@ class ManageMetadata extends React.Component<Props, State> {
     if (props.type === 'region') {
       const list = this.props.options.regionCoordinateSpace[props.id].meta.map((meta: Metadata, index: number) => (
         <div
+          key={'region' + this.props.idCoordinate + 'EditorMetadata'}
           style={{
             marginTop: '5px',
             border: '1px solid black',
@@ -510,6 +512,7 @@ class ManageMetadata extends React.Component<Props, State> {
     if (props.type === 'link') {
       const list = this.props.options.arrayOrientedLinks[props.id].meta.map((meta: Metadata, index: number) => (
         <div
+          key={'link' + this.props.idCoordinate + 'EditorMetadata'}
           style={{
             marginTop: '5px',
             border: '1px solid black',

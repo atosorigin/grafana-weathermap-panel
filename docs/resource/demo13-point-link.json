@@ -1,11 +1,20 @@
 {
   "global": {
-    "lowerLimit": [],
+    "lowerLimit": [
+      {
+        "id": 0,
+        "lowerLimitMin": "",
+        "lowerLimitMax": "",
+        "backColor": "#063eb8",
+        "borderColor": "#06d2d3",
+        "sizeBorder": "3"
+      }
+    ],
     "textObject": {
       "value": "",
-      "isTextTooltip": false,
-      "colorBack": "red",
-      "colorText": "yellow",
+      "isTextTooltip": true,
+      "colorBack": "black",
+      "colorText": "white",
       "style": {
         "bold": true,
         "italic": false,
@@ -18,9 +27,9 @@
         "unit": "u",
         "displayObjectInTooltip": false,
         "addColorTextElement": true,
-        "colorTextElement": "blue",
-        "addColorBackElement": "#FF00FF",
-        "colorBackElement": "white"
+        "colorTextElement": "#034ea2",
+        "addColorBackElement": true,
+        "colorBackElement": "#d20607"
       },
       "generateAuxiliaryElement": {
         "legendElement": "",
@@ -29,13 +38,13 @@
         "displayObjectInTooltip": false,
         "addColorTextElement": true,
         "colorTextElement": "red",
-        "addColorBackElement": "#E0FF0F",
+        "addColorBackElement": true,
         "colorBackElement": "#999999"
       }
     },
     "colorMode": false,
-    "traceBack": false,
-    "traceBorder": false
+    "traceBack": true,
+    "traceBorder": true
   },
   "default": {
     "templates": [
@@ -64,8 +73,11 @@
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|labelName#y|labelName",
-          "tooltipA": "Bottom",
-          "tooltipB": "Bottom"
+          "tooltipA": {
+            "label": "Right",
+            "value": "right"
+          },
+          "tooltipB": {}
         },
         "mainMetric": {
           "key": "",
@@ -137,8 +149,11 @@
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|0#y|0",
-          "tooltipA": "Bottom",
-          "tooltipB": "Bottom"
+          "tooltipA": {
+            "label": "Right",
+            "value": "right"
+          },
+          "tooltipB": {}
         },
         "mainMetric": {
           "key": "",
@@ -217,8 +232,11 @@
       "positionParameter": {
         "xylabelA": "x|-100#y|0",
         "xylabelB": "x|labelName#y|labelName",
-        "tooltipA": "Bottom",
-        "tooltipB": "Bottom"
+        "tooltipA": {
+          "label": "Bottom",
+          "value": "bottom"
+        },
+        "tooltipB": {}
       },
       "mainMetric": {
         "format": "",
@@ -286,8 +304,11 @@
       "positionParameter": {
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
-        "tooltipA": "Bottom",
-        "tooltipB": "Bottom"
+        "tooltipA": {
+          "label": "Bottom",
+          "value": "bottom"
+        },
+        "tooltipB": {}
       },
       "mainMetric": {
         "format": "",
@@ -359,8 +380,11 @@
       "positionParameter": {
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
-        "tooltipA": "Bottom",
-        "tooltipB": "Bottom"
+        "tooltipA": {
+          "label": "Left",
+          "value": "left"
+        },
+        "tooltipB": {}
       },
       "mainMetric": {
         "format": "",
@@ -383,13 +407,13 @@
         "label": "Monodirectional",
         "value": "AB"
       },
-      "size": "10",
+      "size": "12",
       "colorCoordinateA": "#5794F2",
       "colorCoordinateB": "#E54658",
       "valueMainMetricA": "",
       "valueMainMetricB": "",
-      "pointIn": "mtu ens3",
-      "pointOut": "mtu lo",
+      "pointIn": "mtu lo",
+      "pointOut": "mtu ens3",
       "regionIn": "",
       "regionOut": "",
       "zIndex": 2,

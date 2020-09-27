@@ -253,7 +253,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
    * @param region
    */
   private defineCoor4DRegion = (region: RegionClass): Coord4D => {
-    let coor4D: Coord4D = { xMin: '0', xMax: '0', yMin: '0', yMax: '0' };
+    // let coor4D: Coord4D = { xMin: '0', xMax: '0', yMin: '0', yMax: '0' };
+    let coor4D: Coord4D;
     let xMin = 0;
     let xMax = 0;
     let yMin = 0;
@@ -685,14 +686,14 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             } else {
               xResult = xMinIn;
             }
-          } else if (xMidIn < xMidOut) {
+          } else if (yMidIn < yMidOut) {
             //console.log('x12');
             if (xMinIn < 0 && xMaxIn < 0) {
               xResult = xMaxIn;
             } else {
               xResult = xMinIn;
             }
-          } else if (xMidIn === xMidOut) {
+          } else if (yMidIn === yMidOut) {
             //console.log('x13');
             xResult = xMidIn;
           }
@@ -1213,14 +1214,14 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             } else {
               yResult = yMaxIn;
             }
-          } else if (yMidIn < yMidOut) {
+          } else if (xMidIn < xMidOut) {
             //console.log('y5');
             if (yMinIn < 0 && yMaxIn < 0) {
               yResult = yMaxIn;
             } else {
               yResult = yMinIn;
             }
-          } else if (yMidIn === yMidOut) {
+          } else if (xMidIn === xMidOut) {
             //console.log('y6');
             yResult = yMidIn;
           }
@@ -1594,11 +1595,21 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     const linkUrlOrientedLink: string = this.props.linkUrl.followLink;
     const inverseAxeY = -1;
 
+    let positionTooltipA: any = '';
+    if (this.props.tooltipPositionA.value) {
+      positionTooltipA = this.props.tooltipPositionA.value.toLowerCase();
+    }
+
+    let positionTooltipB: any = '';
+    if (this.props.tooltipPositionB.value) {
+      positionTooltipB = this.props.tooltipPositionB.value.toLowerCase();
+    }
+
     if (orientationLink === 'double') {
-      let first: JSX.Element = <div></div>;
+      let first: JSX.Element;
       if (valueTooltipBidirectionalA) {
         first = (
-          <Tooltip content={valueTooltipBidirectionalA} placement={this.props.tooltipPositionA.value}>
+          <Tooltip content={valueTooltipBidirectionalA} placement={positionTooltipA}>
             <div
               id="linkA"
               style={{
@@ -1683,10 +1694,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           </div>
         );
       }
-      let second: JSX.Element = <div></div>;
+      let second: JSX.Element;
       if (valueTooltipBidirectionalB) {
         second = (
-          <Tooltip content={valueTooltipBidirectionalB} placement={this.props.tooltipPositionB.value}>
+          <Tooltip content={valueTooltipBidirectionalB} placement={positionTooltipB}>
             <div
               id="linkB"
               style={{
@@ -1773,7 +1784,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       }
 
       return (
-        <a href={linkUrlOrientedLink} id="link">
+        <a href={linkUrlOrientedLink} target="_blank" rel="noopener noreferrer" id="link">
           <div>
             {first}
             <div
@@ -1821,10 +1832,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
         </a>
       );
     } else if (orientationLink === 'AB') {
-      let first: JSX.Element = <div></div>;
+      let first: JSX.Element;
       if (valueTooltipMonodirectional) {
         first = (
-          <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
+          <Tooltip content={valueTooltipMonodirectional} placement={positionTooltipA}>
             <div
               id="partA"
               style={{
@@ -1873,10 +1884,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           </div>
         );
       }
-      let second: JSX.Element = <div></div>;
+      let second: JSX.Element;
       if (valueTooltipMonodirectional) {
         second = (
-          <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
+          <Tooltip content={valueTooltipMonodirectional} placement={positionTooltipA}>
             <div
               id="partB"
               style={{
@@ -1962,7 +1973,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       }
       if (this.props.isIncurved.value) {
         return (
-          <a href={linkUrlOrientedLink}>
+          <a href={linkUrlOrientedLink} target="_blank" rel="noopener noreferrer">
             {first}
             {second}
             <div
@@ -1987,10 +1998,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           </a>
         );
       } else {
-        let first: JSX.Element = <div></div>;
+        let first: JSX.Element;
         if (valueTooltipMonodirectional) {
           first = (
-            <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
+            <Tooltip content={valueTooltipMonodirectional} placement={positionTooltipA}>
               <div
                 id="link"
                 style={{
@@ -2077,7 +2088,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           );
         }
         return (
-          <a href={linkUrlOrientedLink} target="_blank">
+          <a href={linkUrlOrientedLink} target="_blank" rel="noopener noreferrer">
             {first}
             <div
               id={'labelMainMetric' + this.props.id}
@@ -2103,10 +2114,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       }
     } else if (orientationLink === 'no') {
       if (this.props.isIncurved.value) {
-        let first: JSX.Element = <div></div>;
+        let first: JSX.Element;
         if (valueTooltipMonodirectional) {
           first = (
-            <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
+            <Tooltip content={valueTooltipMonodirectional} placement={positionTooltipA}>
               <div
                 id="partA"
                 style={{
@@ -2115,7 +2126,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                   top: yArrowAC,
                   left: xArrowAC,
                   transform: 'rotate(' + angleDegreeAC.toString() + 'deg)',
-                  height: this.defineBorderSize('A') + 'px',
+                  height: this.defineSizeLink() + 'px',
                   width: distanceAC,
                   border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
                   backgroundColor: this.defineBackColor('A'),
@@ -2133,7 +2144,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 top: yArrowAC,
                 left: xArrowAC,
                 transform: 'rotate(' + angleDegreeAC.toString() + 'deg)',
-                height: this.defineBorderSize('A') + 'px',
+                height: this.defineSizeLink() + 'px',
                 width: distanceAC,
                 border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
                 backgroundColor: this.defineBackColor('A'),
@@ -2141,10 +2152,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             ></div>
           );
         }
-        let second: JSX.Element = <div></div>;
+        let second: JSX.Element;
         if (valueTooltipMonodirectional) {
           second = (
-            <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
+            <Tooltip content={valueTooltipMonodirectional} placement={positionTooltipA}>
               <div
                 id="partB"
                 style={{
@@ -2153,7 +2164,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                   top: yArrowBC,
                   left: xArrowBC,
                   transform: 'rotate(' + angleDegreeBC.toString() + 'deg)',
-                  height: this.defineBorderSize('A') + 'px',
+                  height: this.defineSizeLink() + 'px',
                   width: distanceBC,
                   border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
                   backgroundColor: this.defineBackColor('A'),
@@ -2171,7 +2182,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 top: yArrowBC,
                 left: xArrowBC,
                 transform: 'rotate(' + angleDegreeBC.toString() + 'deg)',
-                height: this.defineBorderSize('A') + 'px',
+                height: this.defineSizeLink() + 'px',
                 width: distanceBC,
                 border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
                 backgroundColor: this.defineBackColor('A'),
@@ -2180,7 +2191,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           );
         }
         return (
-          <a href={linkUrlOrientedLink}>
+          <a href={linkUrlOrientedLink} target="_blank" rel="noopener noreferrer">
             {first}
             {second}
             <div
@@ -2205,10 +2216,10 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           </a>
         );
       } else {
-        let first: JSX.Element = <div></div>;
+        let first: JSX.Element;
         if (valueTooltipMonodirectional) {
           first = (
-            <Tooltip content={valueTooltipMonodirectional} placement={this.props.tooltipPositionA.value}>
+            <Tooltip content={valueTooltipMonodirectional} placement={positionTooltipA}>
               <div
                 id="link"
                 style={{
@@ -2218,7 +2229,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                   left: xArrowAB,
                   transform: 'rotate(' + angleDegreeAB.toString() + 'deg)',
                   width: distanceAB,
-                  height: this.defineBorderSize('A') + 'px',
+                  height: this.defineSizeLink() + 'px',
                   border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
                   backgroundColor: this.defineBackColor('A'),
                 }}
@@ -2236,7 +2247,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 left: xArrowAB,
                 transform: 'rotate(' + angleDegreeAB.toString() + 'deg)',
                 width: distanceAB,
-                height: this.defineBorderSize('A') + 'px',
+                height: this.defineSizeLink() + 'px',
                 border: this.defineBorderSize('A') + ' solid ' + this.defineBorderColor('A'),
                 backgroundColor: this.defineBackColor('A'),
               }}
@@ -2244,7 +2255,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           );
         }
         return (
-          <a href={linkUrlOrientedLink} target="_blank">
+          <a href={linkUrlOrientedLink} target="_blank" rel="noopener noreferrer">
             {first}
             <div
               id={'labelMainMetric' + this.props.id}
@@ -2534,7 +2545,11 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
   private defineHtmlLinkTooltip = (): JSX.Element => {
     let result: JSX.Element = <div></div>;
     if (this.props.linkUrl.hoveringTooltipText !== '') {
-      result = <a href={this.props.linkUrl.hoveringTooltipLink}>{this.props.linkUrl.hoveringTooltipText}</a>;
+      result = (
+        <a href={this.props.linkUrl.hoveringTooltipLink} target="_blank" rel="noopener noreferrer">
+          {this.props.linkUrl.hoveringTooltipText}
+        </a>
+      );
     }
     return result;
   };
