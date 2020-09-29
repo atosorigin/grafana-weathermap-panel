@@ -137,7 +137,6 @@ class EditPoint extends React.Component<Props, State> {
     if (prevProps.options.arrayPoints !== this.props.options.arrayPoints) {
       this.fillSelectPoint();
     }
-    // console.log(prevProps.options.newPoint);
     if (prevProps.options.newPoint) {
       this.fillSelectPoint();
       this.props.options.newPoint = false;
@@ -181,8 +180,6 @@ class EditPoint extends React.Component<Props, State> {
             </p>
           )}
         </div>
-        {/* <Button onClick={() => console.log(this.props.options.regionCoordinateSpace)}>Info region</Button>
-				<Button onClick={() => console.log(this.state.selectCoordinateSpaceDefault)}>Info region</Button> */}
       </div>
     );
   }

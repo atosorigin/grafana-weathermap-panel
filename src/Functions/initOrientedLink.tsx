@@ -106,8 +106,6 @@ export const initOrientedLink = (newId: number, newZIndex: number): OrientedLink
     '0',
     '0'
   );
-  // console.log('newCoordinate');
-  // console.log(newCoordinate);
   return newCoordinate;
 };
 

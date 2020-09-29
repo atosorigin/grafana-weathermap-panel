@@ -26,6 +26,8 @@ interface State {
   coordinate: CoordinateSpaceClass;
   /** collapse */
   openLowerLimit: boolean;
+  lowerLimitFix: LowerLimitClass;
+  lowerLimitVariable: LowerLimitClass[];
 }
 
 /**
@@ -37,6 +39,8 @@ class ManageLowerLimit extends React.Component<Props, State> {
     this.state = {
       coordinate: this.props.coordinate,
       openLowerLimit: false,
+      lowerLimitFix: new LowerLimitClass(0, '', '', '', '', ''),
+      lowerLimitVariable: [],
     };
   }
 
@@ -64,8 +68,6 @@ class ManageLowerLimit extends React.Component<Props, State> {
    * save data in type
    */
   onSave = () => {
-    // console.log('lower');
-    // console.log(this.props.id);
     this.props.callBack(this.props.coordinate);
     this.props.lowerLimitCallBack(this.state.coordinate.lowerLimit);
   };
@@ -100,18 +102,37 @@ class ManageLowerLimit extends React.Component<Props, State> {
 
     newValue.colorMode = !newValue.colorMode;
     if (!this.state.coordinate.colorMode) {
-      let defaultSizeBorder = '';
-      if (this.props.isLink) {
-        defaultSizeBorder = '10';
+      if (this.state.coordinate.lowerLimit.length > 0) {
+        this.setState({
+          lowerLimitVariable: this.state.coordinate.lowerLimit,
+        });
       }
-      newValue.lowerLimit = [new LowerLimitClass(0, '', '', '', '', defaultSizeBorder)];
+      // let defaultSizeBorder = '';
+      // if (this.props.isLink) {
+      //   defaultSizeBorder = '10';
+      // }
+      //newValue.lowerLimit = new LowerLimitClass(0, '', '', '', '', defaultSizeBorder);
+      let lowerLimitFix = this.state.lowerLimitFix;
+      //lowerLimitFix.sizeBorder = defaultSizeBorder;
+      newValue.lowerLimit[0] = lowerLimitFix;
       await this.setStateAsyncCoordinate({ coordinate: newValue });
     } else {
-      newValue.lowerLimit = [];
+      if (this.state.coordinate.lowerLimit.length > 0) {
+        this.setState({
+          lowerLimitFix: this.state.coordinate.lowerLimit[0],
+        });
+      }
+      newValue.lowerLimit = this.state.lowerLimitVariable;
       await this.setStateAsyncCoordinate({ coordinate: newValue });
     }
     this.onSave();
   };
+
+  // updateLowerLimitDefault = (value: LowerLimitClass) => {
+  //   this.setState({
+  //     lowerLimitFix: value,
+  //   })
+  // }
 
   /** open or close toggle lower limit */
   onToggleLowerLimit = (isOpen: boolean) => {
@@ -137,8 +158,6 @@ class ManageLowerLimit extends React.Component<Props, State> {
    */
   render() {
     const l10n = require('Localization/en.json');
-    // console.log(this.props.coordinate)
-    // console.log(this.props.id)
     return (
       <div>
         <Collapse label={'Lower limit'} isOpen={this.state.openLowerLimit} onToggle={this.onToggleLowerLimit}>
@@ -192,6 +211,7 @@ class ManageLowerLimit extends React.Component<Props, State> {
               traceBorder={this.state.coordinate.traceBorder}
               traceBack={this.state.coordinate.traceBack}
               lowerLimit={this.state.coordinate.lowerLimit}
+              //lowerLimitDefault={this.updateLowerLimitDefault}
               lowerLimitCallBack={this.props.lowerLimitCallBack}
               isLink={this.props.isLink}
             />

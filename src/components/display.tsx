@@ -16,8 +16,6 @@ interface State {
   size: string;
   /** style variable for input */
   style: Style;
-  /** background uploaded from computer */
-  imageUploaded: string;
 }
 
 /**
@@ -33,7 +31,6 @@ class Display extends React.Component<Props, State> {
       },
       size: this.props.options.display.size,
       style: this.props.options.display.style,
-      imageUploaded: '',
     };
   }
 

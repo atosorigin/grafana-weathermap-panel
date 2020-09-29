@@ -65,7 +65,10 @@
         "labelAPositionY": "0",
         "labelBPositionX": "0",
         "labelBPositionY": "0",
-        "tooltipPositionA": {},
+        "tooltipPositionA": {
+          "label": "Top",
+          "value": "top"
+        },
         "tooltipPositionB": {}
       },
       "textObj": {
@@ -167,11 +170,14 @@
       "mode": false,
       "orientedLink": [],
       "positionParameter": {
-        "labelAPositionX": "0",
-        "labelAPositionY": "0",
+        "labelAPositionX": "20",
+        "labelAPositionY": "20",
         "labelBPositionX": "0",
         "labelBPositionY": "0",
-        "tooltipPositionA": {},
+        "tooltipPositionA": {
+          "label": "Right",
+          "value": "right"
+        },
         "tooltipPositionB": {}
       },
       "textObj": {

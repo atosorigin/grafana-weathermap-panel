@@ -75,8 +75,8 @@
       "textObj": {
         "value": "",
         "isTextTooltip": true,
-        "colorBack": "rgba(255, 255, 255, 0)",
-        "colorText": "rgba(0, 0, 0, 1)",
+        "colorBack": "black",
+        "colorText": "white",
         "style": {
           "bold": false,
           "italic": false,
@@ -88,10 +88,10 @@
           "numericFormatElement": "",
           "unit": "",
           "displayObjectInTooltip": false,
-          "addColorTextElement": false,
-          "colorTextElement": "white",
-          "addColorBackElement": false,
-          "colorBackElement": "black"
+          "addColorTextElement": true,
+          "colorTextElement": "black",
+          "addColorBackElement": true,
+          "colorBackElement": "white"
         },
         "generateAuxiliaryElement": {
           "legendElement": "",

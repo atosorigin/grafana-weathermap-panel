@@ -9,12 +9,13 @@ import { TextObject } from 'Models/TextObjectClass';
 
 import InputTextField from 'Functions/Input/inputText';
 import InputSeriesColorPicker from 'Functions/Input/inputSeriesColorPicker';
+import { LinkURLClass } from 'Models/LinkURLClass';
 
 interface Props {
   /** id coordinate */
   coordinateSpace: CoordinateSpaceClass;
   /** call function to save data in parent */
-  callBackToParent: (followLink?: string, hoveringTooltipLink?: string, hoveringTooltipText?: string, textObj?: TextObject) => void;
+  callBackToParent: (linkUrl?: LinkURLClass, textObj?: TextObject) => void;
 }
 
 interface State {
@@ -46,7 +47,7 @@ class TextObjects extends React.Component<Props, State> {
 
   /** call back to parent */
   callBack = () => {
-    this.props.callBackToParent(undefined, undefined, undefined, this.state.textObject);
+    this.props.callBackToParent(undefined, this.state.textObject);
   };
 
   // /** change value for legend input */
@@ -182,7 +183,6 @@ class TextObjects extends React.Component<Props, State> {
   /** switch display text */
   onSwitchisTextTooltip = async () => {
     // console.clear();
-    // console.log('am here --');
 
     let newTextObject: TextObject = this.state.textObject;
 

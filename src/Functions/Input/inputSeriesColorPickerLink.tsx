@@ -24,7 +24,6 @@ export const InputSeriesColorPickerLink: FunctionComponent<InputTextFieldProps> 
   name,
   width,
 }) => {
-  // console.log(defineHowToGetCoordinate)
   if (defineHowToGetCoordinate === 'coordinate') {
     if (name.startsWith('colorCoordinate')) {
       return (

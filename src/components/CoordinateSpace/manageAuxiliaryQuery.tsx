@@ -31,10 +31,10 @@ interface State {
   // selectQuery: Array<SelectableValue<DataFrame>>;
   // /** */
   // selectQueryDefault: SelectableValue<DataFrame>;
-  /** */
-  currentRefQuery: string;
-  /** */
-  currentRefQueryB: string;
+  // /** */
+  // currentRefQuery: string;
+  // /** */
+  // currentRefQueryB: string;
 }
 /**
  * def
@@ -48,8 +48,8 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
       collapseLinkB: false,
       // selectQuery: [],
       // selectQueryDefault: [],
-      currentRefQuery: '',
-      currentRefQueryB: '',
+      // currentRefQuery: '',
+      // currentRefQueryB: '',
     };
   }
 
@@ -81,8 +81,6 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
         ...this.props.options,
         arrayOrientedLinks: newArrayLink,
       });
-      // console.log('arrayLinks');
-      // console.log(this.props.options.arrayOrientedLinks);
     } else if (this.props.isRegion) {
       const newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
       for (const region of newArrayRegion) {
@@ -210,8 +208,6 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
   private getCurrentQuery = (id: string, isLinkB: boolean): SelectableValue<DataFrame> => {
     let currentQuery: SelectableValue<DataFrame> = [];
     const newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(false);
-    // console.log('linkA');
-    // console.log(newAuxiliaryMetrics);
     currentQuery = { id: id, label: newAuxiliaryMetrics[parseInt(id, 10)].refId };
     return currentQuery;
   };
@@ -219,15 +215,12 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
   private getCurrentQueryB = (id: string, isLinkB: boolean): SelectableValue<DataFrame> => {
     let currentQuery: SelectableValue<DataFrame> = [];
     const newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(true);
-    // console.log('linkB');
-    // console.log(newAuxiliaryMetrics);
     currentQuery = { id: id, label: newAuxiliaryMetrics[parseInt(id, 10)].refId };
     return currentQuery;
   };
 
   /** edit value for select */
   private onChangeSelectQuery = (event: any) => {
-    //console.log(event);
     const newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(false);
     const id: number = event.id;
     newAuxiliaryMetrics[id].refId = event.label;
@@ -236,7 +229,6 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
 
   /** edit value for select */
   private onChangeSelectQueryB = (event: any) => {
-    //console.log(event);
     const newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(true);
     const id: number = event.id;
     newAuxiliaryMetrics[id].refId = event.label;
@@ -277,7 +269,6 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
 
   private onChangeManageValue = (event: any) => {
     const newAuxiliaryMetrics: Metric[] = this.getAuxiliaryMetrics(false);
-    // console.log(event);
     const id: number = event.id;
     newAuxiliaryMetrics[id].manageValue = event.value;
     this.saveAuxMetrics(newAuxiliaryMetrics, false);
@@ -289,22 +280,6 @@ class ManageAuxiliaryQuery extends React.Component<Props, State> {
     newAuxiliaryMetrics[id].manageValue = event.value;
     this.saveAuxMetrics(newAuxiliaryMetrics, true);
   };
-
-  // private onChangeMeta = (event: any) => {
-  //   const newValueMeta: Metadata[] = [];
-  //   const idCurrentAuxMetrics: number = event.currentTarget.id;
-  //   const value: string = event.currentTarget.value;
-  //   meta = value;
-  //   this.saveAuxMetrics(newValueMeta, false);
-  // };
-
-  // private onChangeMetaB = (event: any) => {
-  //   const newAuxiliaryMetrics: Metadata[] = this.getAuxiliaryMetrics(true);
-  //   const idCurrentAuxMetrics: number = event.currentTarget.id;
-  //   const value: string = event.currentTarget.value;
-  //   newAuxiliaryMetrics[idCurrentAuxMetrics].meta = value;
-  //   this.saveAuxMetrics(newAuxiliaryMetrics, true);
-  // };
 
   private addAuxiliaryMetric = () => {
     // const refIdMetric: string = this.state.currentRefQuery;

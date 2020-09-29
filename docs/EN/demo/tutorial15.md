@@ -2,7 +2,9 @@
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
-Demo 15 will position a variable element in an X and Y space, and display its value at the point defined by the query.
+Demo 15 will position a variable element in an X and Y space, and display its value at the point defined by an element in a query.
+
+In the example, it will display a certain number of points in relation to the return of the filtred query.
 
 ## Add a query
 
@@ -32,14 +34,16 @@ prometheus_http_request_duration_seconds_bucket{handler="/api/v1/label/:name/val
 ...
 ```
 
-Les elements qui nous interressent sont :
+The elements that interest us are :
 
 - handler
 - instance
 - job
 - le
 
-qui seront utilisés dans le fichier json de gabarit dans la liste **filtered**
+that will be used in the json template file in the list **filtered**
+
+we will use the element `le` of the query which will be used as the position of the point (X, Y) 
 
 ## Determining a space
 
@@ -57,43 +61,54 @@ It is possible to have more details with the [display](../editor/display.md) pag
 
 ## Advanced gabarit
 
-Dans l'onglet **Gabarit**
+In the tab **Gabarit**
 
 ![](../../screenshots/demo/tutorial15/demo15-0.png)
 
-vous ajoutez le fichier par défaut
+you add the default file
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo15-default.json
 
 ```
+then 1 click that the button **finish**
+
 
 ![](../../screenshots/demo/tutorial15/demo15-1.png)
 
-vous ajoutez le lien du fichier json
+you add the link of the `json` file in the tab `url list`
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo15-point-multi.json
 
 ```
 
-puis 1 clic que le bouton **Add** suivi de **finish**
+then 1 click that the button **Add** followed by **finish**.
 
-le lien s'affichera dans la deuxième partie de l'écran
+the link will be displayed in the second part of the screen
 
 ![](../../screenshots/demo/tutorial15/demo15-2.png)
 
-il faut lui attribuer une query
+this file must be associated to a query
 
-puis 1 clic **load**
+then 1 click **load**
 
-## Resultat
+## Result
 
 ![](../../screenshots/demo/tutorial15/result.png)
 
 ## Structure gabarit files
 
+the `template` file will use : 
+
+ - a fixed color in lowerlimit
+ - the position of the points in X and Y will be variable and defined by the name of the element
+ - the result of the query is displayed in a tooltip. The value appears when the mouse passes over the point
+ - Position parameter
+
 ### default gabarit : demo15-default.json
+
+for the good functioning of the demo 15, the structure of the file will be : 
 
 ```
 {
@@ -118,6 +133,8 @@ puis 1 clic **load**
 ```
 
 ### Template gabarit : demo15-point-multi.json
+
+for the good functioning of the demo 15, the structure of the file will be : 
 
 ```
 {

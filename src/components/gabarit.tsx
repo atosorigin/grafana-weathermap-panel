@@ -20,6 +20,7 @@ import { TextObject, GenerateTextObject } from 'Models/TextObjectClass';
 import { Style } from 'components/Parametrage/styleComponent';
 import { RegionClass, Coord4D } from 'Models/RegionClass';
 import { searchNameIsFilter } from 'Functions/getResultQuery';
+import { LowerLimitClass } from 'Models/LowerLimitClass';
 // import { initRegionCoordinateSpace } from 'Functions/initRegionCoordinateSpace';
 // import { LowerLimitClass } from 'Models/LowerLimitClass';
 // import { initPoint } from 'Functions/initPoint';
@@ -365,49 +366,49 @@ class Gabarit extends React.Component<Props, State> {
         lowerLimit: [
           {
             id: 0,
-            lowerLimitMin: '0',
-            lowerLimitMax: '0',
+            lowerLimitMin: '',
+            lowerLimitMax: '',
             backColor: 'blue',
             borderColor: 'red',
-            sizeBorder: '1px',
+            sizeBorder: '1',
           },
         ],
         textObject: {
           value: 'default',
-          isTextTooltip: false,
+          isTextTooltip: 'false',
           colorBack: 'blue',
           colorText: 'black',
           style: {
-            bold: false,
-            italic: false,
-            underline: false,
+            bold: 'false',
+            italic: 'false',
+            underline: 'false',
           },
-          generateObjectText: false,
+          generateObjectText: 'false',
           valueGenerateObjectText: {
             legendElement: 'default',
             numericFormatElement: 'default',
             unit: 'default',
-            displayObjectInTooltip: false,
-            addColorTextElement: false,
+            displayObjectInTooltip: 'false',
+            addColorTextElement: 'false',
             colorTextElement: 'black',
-            addColorBackElement: false,
+            addColorBackElement: 'false',
             colorBackElement: 'white',
           },
           generateAuxiliaryElement: {
             legendElement: 'default',
             numericFormatElement: 'default',
             unit: 'default',
-            displayObjectInTooltip: false,
-            addColorTextElement: false,
+            displayObjectInTooltip: 'false',
+            addColorTextElement: 'false',
             colorTextElement: 'black',
-            addColorBackElement: false,
+            addColorBackElement: 'false',
             colorBackElement: 'white',
           },
         },
         defaultColor: 'black',
-        colorMode: true,
-        traceBack: true,
-        traceBorder: true,
+        colorMode: 'true',
+        traceBack: 'true',
+        traceBorder: 'true',
       },
       templateGabaritPoint: [],
       templateGabaritRegion: [],
@@ -466,6 +467,10 @@ class Gabarit extends React.Component<Props, State> {
     return result;
   };
 
+  transformStringToBoolean = (text: string): boolean => {
+    return text === 'true' ? true : false;
+  };
+
   loaderGabarit = (gab: GabaritFile, idx: number | null) => {
     let tmpLabelAPosition: LabelCoord2D;
     let tmpLabelBPosition: LabelCoord2D;
@@ -493,12 +498,17 @@ class Gabarit extends React.Component<Props, State> {
     let associateOrientedLinksInPoint: OrientedLinkClass[][] = [];
     let associateOrientedLinksOutPoint: OrientedLinkClass[][] = [];
     //global
-    //let lowerLimit: LowerLimitClass;
+    let lowerLimit: LowerLimitClass[];
     let colorMode: boolean;
     let traceBack: boolean;
     let traceBorder: boolean;
     let textObj: TextObject;
+    let value: string;
+    let isTextTooltip: boolean;
+    let colorBack: string;
+    let colorText: string;
     let style: Style;
+    let generateObjectText: boolean;
     let generateValue: GenerateTextObject;
     let generateAux: GenerateTextObject;
 
@@ -516,96 +526,299 @@ class Gabarit extends React.Component<Props, State> {
     //Template
 
     const gabaritFileTmp: GabaritFile = gab;
-    colorMode = Boolean(gabaritFileTmp.globalGabarit.colorMode);
-    traceBack = Boolean(gabaritFileTmp.globalGabarit.traceBack);
-    traceBorder = Boolean(gabaritFileTmp.globalGabarit.traceBorder);
+
+    // GLOBAL
+
+    //colorMode = Boolean(gabaritFileTmp.globalGabarit.colorMode);
+    if (!gabaritFileTmp.globalGabarit.colorMode) {
+      //default
+      colorMode = this.transformStringToBoolean(this.props.options.gabaritDefault.globalGabarit.colorMode);
+    } else {
+      //normal
+      colorMode = this.transformStringToBoolean(gabaritFileTmp.globalGabarit.colorMode);
+    }
+
+    //traceBack = Boolean(gabaritFileTmp.globalGabarit.traceBack);
+    if (!gabaritFileTmp.globalGabarit.traceBack) {
+      //default
+      traceBack = this.transformStringToBoolean(this.props.options.gabaritDefault.globalGabarit.traceBack);
+    } else {
+      //normal
+      traceBack = this.transformStringToBoolean(gabaritFileTmp.globalGabarit.traceBack);
+    }
+
+    //traceBorder = Boolean(gabaritFileTmp.globalGabarit.traceBorder);
+    if (!gabaritFileTmp.globalGabarit.traceBorder) {
+      //default
+      traceBorder = this.transformStringToBoolean(this.props.options.gabaritDefault.globalGabarit.traceBorder);
+    } else {
+      //normal
+      traceBorder = this.transformStringToBoolean(gabaritFileTmp.globalGabarit.traceBorder);
+    }
 
     ////// Text Object
+    value = gabaritFileTmp.globalGabarit.textObject.value;
+    if (!value) {
+      value = this.props.options.gabaritDefault.globalGabarit.textObject.value;
+    }
+
+    if (!gabaritFileTmp.globalGabarit.textObject.isTextTooltip) {
+      //default
+      isTextTooltip = this.transformStringToBoolean(this.props.options.gabaritDefault.globalGabarit.textObject.isTextTooltip);
+    } else {
+      //normal
+      isTextTooltip = this.transformStringToBoolean(gabaritFileTmp.globalGabarit.textObject.isTextTooltip);
+    }
+
+    colorBack = gabaritFileTmp.globalGabarit.textObject.colorBack;
+    if (!colorBack) {
+      colorBack = this.props.options.gabaritDefault.globalGabarit.textObject.colorBack;
+    }
+
+    colorText = gabaritFileTmp.globalGabarit.textObject.colorText;
+    if (!colorBack) {
+      colorText = this.props.options.gabaritDefault.globalGabarit.textObject.colorText;
+    }
+
+    if (!gabaritFileTmp.globalGabarit.textObject.generateObjectText) {
+      //default
+      generateObjectText = this.transformStringToBoolean(this.props.options.gabaritDefault.globalGabarit.textObject.generateObjectText);
+    } else {
+      //normal
+      generateObjectText = this.transformStringToBoolean(gabaritFileTmp.globalGabarit.textObject.generateObjectText);
+    }
+
+    // generateValue = {
+    //   legendElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.legendElement,
+    //   numericFormatElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.numericFormatElement,
+    //   unit: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.unit,
+    //   displayObjectInTooltip: Boolean(gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.displayObjectInTooltip),
+    //   addColorTextElement: Boolean(gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.addColorTextElement),
+    //   colorTextElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.colorTextElement,
+    //   addColorBackElement: Boolean(gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.addColorBackElement),
+    //   colorBackElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.colorBackElement,
+    // };
+
+    // if (!generateValue.unit) {
+    //   generateValue = {
+    //     legendElement: this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.legendElement,
+    //     numericFormatElement: this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.numericFormatElement,
+    //     unit: this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.unit,
+    //     displayObjectInTooltip: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.displayObjectInTooltip),
+    //     addColorTextElement: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.addColorTextElement),
+    //     colorTextElement: this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.colorTextElement,
+    //     addColorBackElement: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.addColorBackElement),
+    //     colorBackElement: this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.colorBackElement,
+    //   };
+    // }
+
     generateValue = {
       legendElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.legendElement,
       numericFormatElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.numericFormatElement,
       unit: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.unit,
-      displayObjectInTooltip: Boolean(gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.displayObjectInTooltip),
-      addColorTextElement: Boolean(gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.addColorTextElement),
+      displayObjectInTooltip: false,
+      addColorTextElement: false,
       colorTextElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.colorTextElement,
-      addColorBackElement: Boolean(gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.addColorBackElement),
+      addColorBackElement: false,
       colorBackElement: gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.colorBackElement,
     };
 
-    if (!generateValue.unit) {
-      generateValue = {
-        legendElement: this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.legendElement,
-        numericFormatElement: this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.numericFormatElement,
-        unit: this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.unit,
-        displayObjectInTooltip: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.displayObjectInTooltip),
-        addColorTextElement: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.addColorTextElement),
-        colorTextElement: this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.colorTextElement,
-        addColorBackElement: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.addColorBackElement),
-        colorBackElement: this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.colorBackElement,
-      };
+    if (!gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.addColorTextElement) {
+      generateValue.addColorTextElement = this.transformStringToBoolean(
+        this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.addColorTextElement
+      );
+    } else {
+      generateValue.addColorTextElement = this.transformStringToBoolean(
+        gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.addColorTextElement
+      );
     }
+    if (!generateValue.colorTextElement) {
+      generateValue.colorTextElement = this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.colorTextElement;
+    }
+    if (!gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.addColorBackElement) {
+      generateValue.addColorBackElement = this.transformStringToBoolean(
+        this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.addColorBackElement
+      );
+    } else {
+      generateValue.addColorBackElement = this.transformStringToBoolean(
+        gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.addColorBackElement
+      );
+    }
+    if (!generateValue.colorBackElement) {
+      generateValue.colorBackElement = this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.colorBackElement;
+    }
+    if (!gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.displayObjectInTooltip) {
+      generateValue.displayObjectInTooltip = this.transformStringToBoolean(
+        this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.displayObjectInTooltip
+      );
+    } else {
+      generateValue.displayObjectInTooltip = this.transformStringToBoolean(
+        gabaritFileTmp.globalGabarit.textObject.valueGenerateObjectText.displayObjectInTooltip
+      );
+    }
+    if (!generateValue.legendElement) {
+      generateValue.legendElement = this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.legendElement;
+    }
+    if (!generateValue.numericFormatElement) {
+      generateValue.numericFormatElement = this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.numericFormatElement;
+    }
+    if (!generateValue.unit) {
+      generateValue.unit = this.props.options.gabaritDefault.globalGabarit.textObject.valueGenerateObjectText.unit;
+    }
+
+    // generateAux = {
+    //   legendElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.legendElement,
+    //   numericFormatElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.numericFormatElement,
+    //   unit: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.unit,
+    //   displayObjectInTooltip: Boolean(gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.displayObjectInTooltip),
+    //   addColorTextElement: Boolean(gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.addColorTextElement),
+    //   colorTextElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.colorTextElement,
+    //   addColorBackElement: Boolean(gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.addColorBackElement),
+    //   colorBackElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.colorBackElement,
+    // };
+
+    // if (!generateAux.unit) {
+    //   generateAux = {
+    //     legendElement: this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.legendElement,
+    //     numericFormatElement: this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.numericFormatElement,
+    //     unit: this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.unit,
+    //     displayObjectInTooltip: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.displayObjectInTooltip),
+    //     addColorTextElement: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.addColorTextElement),
+    //     colorTextElement: this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.colorTextElement,
+    //     addColorBackElement: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.addColorBackElement),
+    //     colorBackElement: this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.colorBackElement,
+    //   };
+    // }
 
     generateAux = {
       legendElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.legendElement,
       numericFormatElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.numericFormatElement,
       unit: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.unit,
-      displayObjectInTooltip: Boolean(gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.displayObjectInTooltip),
-      addColorTextElement: Boolean(gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.addColorTextElement),
+      displayObjectInTooltip: false,
+      addColorTextElement: false,
       colorTextElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.colorTextElement,
-      addColorBackElement: Boolean(gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.addColorBackElement),
+      addColorBackElement: false,
       colorBackElement: gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.colorBackElement,
     };
 
-    if (!generateAux.unit) {
-      generateAux = {
-        legendElement: this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.legendElement,
-        numericFormatElement: this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.numericFormatElement,
-        unit: this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.unit,
-        displayObjectInTooltip: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.displayObjectInTooltip),
-        addColorTextElement: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.addColorTextElement),
-        colorTextElement: this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.colorTextElement,
-        addColorBackElement: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.addColorBackElement),
-        colorBackElement: this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.colorBackElement,
-      };
-    }
-
-    style = {
-      bold: Boolean(gabaritFileTmp.globalGabarit.textObject.style.bold),
-      italic: Boolean(gabaritFileTmp.globalGabarit.textObject.style.italic),
-      underline: Boolean(gabaritFileTmp.globalGabarit.textObject),
-    };
-
-    if (!style.bold) {
-      style = {
-        bold: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.style.bold),
-        italic: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.style.italic),
-        underline: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.style.underline),
-      };
-    }
-
-    textObj = new TextObject(
-      gabaritFileTmp.globalGabarit.textObject.value,
-      Boolean(gabaritFileTmp.globalGabarit.textObject.isTextTooltip),
-      gabaritFileTmp.globalGabarit.textObject.colorBack,
-      gabaritFileTmp.globalGabarit.textObject.colorText,
-      style,
-      Boolean(gabaritFileTmp.globalGabarit.textObject.generateObjectText),
-      generateValue,
-      generateAux
-    );
-
-    if (!textObj.value) {
-      textObj = new TextObject(
-        this.props.options.gabaritDefault.globalGabarit.textObject.value,
-        Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.isTextTooltip),
-        this.props.options.gabaritDefault.globalGabarit.textObject.colorBack,
-        this.props.options.gabaritDefault.globalGabarit.textObject.colorText,
-        style,
-        Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.generateObjectText),
-        generateValue,
-        generateAux
+    if (!gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.addColorBackElement) {
+      generateAux.addColorBackElement = this.transformStringToBoolean(
+        this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.addColorBackElement
+      );
+    } else {
+      generateAux.addColorBackElement = this.transformStringToBoolean(
+        gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.addColorBackElement
       );
     }
+    if (!generateAux.colorBackElement) {
+      generateAux.colorBackElement = this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.colorBackElement;
+    }
+    if (!gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.addColorTextElement) {
+      generateAux.addColorTextElement = this.transformStringToBoolean(
+        this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.addColorTextElement
+      );
+    } else {
+      generateAux.addColorTextElement = this.transformStringToBoolean(
+        gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.addColorTextElement
+      );
+    }
+    if (!generateAux.colorTextElement) {
+      generateAux.colorTextElement = this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.colorTextElement;
+    }
+    if (!gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.displayObjectInTooltip) {
+      generateAux.displayObjectInTooltip = this.transformStringToBoolean(
+        this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.displayObjectInTooltip
+      );
+    } else {
+      generateAux.displayObjectInTooltip = this.transformStringToBoolean(
+        gabaritFileTmp.globalGabarit.textObject.generateAuxiliaryElement.displayObjectInTooltip
+      );
+    }
+    if (!generateAux.legendElement) {
+      generateAux.legendElement = this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.legendElement;
+    }
+    if (!generateAux.numericFormatElement) {
+      generateAux.numericFormatElement = this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.numericFormatElement;
+    }
+    if (!generateAux.unit) {
+      generateAux.unit = this.props.options.gabaritDefault.globalGabarit.textObject.generateAuxiliaryElement.unit;
+    }
+
+    // style = {
+    //   bold: Boolean(gabaritFileTmp.globalGabarit.textObject.style.bold),
+    //   italic: Boolean(gabaritFileTmp.globalGabarit.textObject.style.italic),
+    //   underline: Boolean(gabaritFileTmp.globalGabarit.textObject),
+    // };
+
+    // if (!style.bold) {
+    //   style = {
+    //     bold: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.style.bold),
+    //     italic: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.style.italic),
+    //     underline: Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.style.underline),
+    //   };
+    // }
+
+    style = { bold: false, italic: false, underline: false };
+
+    if (!gabaritFileTmp.globalGabarit.textObject.style.bold) {
+      //default
+      style.bold = this.transformStringToBoolean(this.props.options.gabaritDefault.globalGabarit.textObject.style.bold);
+    } else {
+      //normal
+      style.bold = this.transformStringToBoolean(gabaritFileTmp.globalGabarit.textObject.style.bold);
+    }
+
+    if (!gabaritFileTmp.globalGabarit.textObject.style.italic) {
+      //default
+      style.italic = this.transformStringToBoolean(this.props.options.gabaritDefault.globalGabarit.textObject.style.italic);
+    } else {
+      //normal
+      style.italic = this.transformStringToBoolean(gabaritFileTmp.globalGabarit.textObject.style.italic);
+    }
+
+    if (!gabaritFileTmp.globalGabarit.textObject.style.underline) {
+      //default
+      style.underline = this.transformStringToBoolean(this.props.options.gabaritDefault.globalGabarit.textObject.style.underline);
+    } else {
+      //normal
+      style.underline = this.transformStringToBoolean(gabaritFileTmp.globalGabarit.textObject.style.underline);
+    }
+
+    // textObj = new TextObject(
+    //   gabaritFileTmp.globalGabarit.textObject.value,
+    //   Boolean(gabaritFileTmp.globalGabarit.textObject.isTextTooltip),
+    //   gabaritFileTmp.globalGabarit.textObject.colorBack,
+    //   gabaritFileTmp.globalGabarit.textObject.colorText,
+    //   style,
+    //   Boolean(gabaritFileTmp.globalGabarit.textObject.generateObjectText),
+    //   generateValue,
+    //   generateAux
+    // );
+
+    textObj = new TextObject(value, isTextTooltip, colorBack, colorText, style, generateObjectText, generateValue, generateAux);
+
+    // if (!textObj.value) {
+    //   textObj = new TextObject(
+    //     this.props.options.gabaritDefault.globalGabarit.textObject.value,
+    //     Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.isTextTooltip),
+    //     this.props.options.gabaritDefault.globalGabarit.textObject.colorBack,
+    //     this.props.options.gabaritDefault.globalGabarit.textObject.colorText,
+    //     style,
+    //     Boolean(this.props.options.gabaritDefault.globalGabarit.textObject.generateObjectText),
+    //     generateValue,
+    //     generateAux
+    //   );
+    // }
+
+    /// Lower Limit
+    lowerLimit = gabaritFileTmp.globalGabarit.lowerLimit;
+    console.log(lowerLimit);
+    if (lowerLimit.length === 0) {
+      console.log('default');
+      lowerLimit = this.props.options.gabaritDefault.globalGabarit.lowerLimit;
+      console.log(lowerLimit);
+    }
+    console.log(lowerLimit);
 
     gabaritFileTmp.templateGabaritPoint.forEach((point, index) => {
       if (point.labelfix.toString() === 'false') {
@@ -930,9 +1143,9 @@ class Gabarit extends React.Component<Props, State> {
                 newID + 1,
                 linkURLPoint[index],
                 metaPoint[index],
-                gabaritFileTmp.globalGabarit.lowerLimit,
+                JSON.parse(JSON.stringify(lowerLimit)),
                 labelPoint[index] + '_' + newID,
-                textObj,
+                JSON.parse(JSON.stringify(textObj)),
                 this.addFilterDynamic(mainMetricPoint[index], posPoint[index], pos),
                 metricPoint[index],
                 colorMode,
@@ -965,9 +1178,9 @@ class Gabarit extends React.Component<Props, State> {
                 newID + 1,
                 linkURLPoint[index],
                 metaPoint[index],
-                gabaritFileTmp.globalGabarit.lowerLimit,
+                JSON.parse(JSON.stringify(lowerLimit)),
                 labelPoint[index] + '_' + newID,
-                textObj,
+                JSON.parse(JSON.stringify(textObj)),
                 this.addFilterDynamic(mainMetricPoint[index], posPoint[index], pos),
                 [],
                 colorMode,
@@ -1006,9 +1219,9 @@ class Gabarit extends React.Component<Props, State> {
             newID + 1,
             linkURLPoint[posIndex],
             metaPoint[posIndex],
-            gabaritFileTmp.globalGabarit.lowerLimit,
+            JSON.parse(JSON.stringify(lowerLimit)),
             labelPoint[posIndex] + '_' + newID,
-            textObj,
+            JSON.parse(JSON.stringify(textObj)),
             mainMetricPoint[posIndex],
             metricPoint[posIndex],
             colorMode,
@@ -1042,9 +1255,9 @@ class Gabarit extends React.Component<Props, State> {
             linkURLPoint[posIndex],
             // changement
             metaPoint[posIndex],
-            gabaritFileTmp.globalGabarit.lowerLimit,
+            JSON.parse(JSON.stringify(lowerLimit)),
             labelPoint[posIndex] + '_' + newID,
-            textObj,
+            JSON.parse(JSON.stringify(textObj)),
             mainMetricPoint[posIndex],
             [],
             colorMode,
@@ -1718,9 +1931,9 @@ class Gabarit extends React.Component<Props, State> {
                 newID + 1,
                 linkURLLink[index],
                 metaLink[index],
-                gabaritFileTmp.globalGabarit.lowerLimit,
+                JSON.parse(JSON.stringify(lowerLimit)),
                 labelLink[index] + '_' + newID,
-                textObj,
+                JSON.parse(JSON.stringify(textObj)),
                 this.addFilterDynamic(mainMetricALink[index], posALink[index], pos),
                 metricALink[index],
                 colorMode,
@@ -1767,9 +1980,9 @@ class Gabarit extends React.Component<Props, State> {
                 newID + 1,
                 linkURLLink[index],
                 metaLink[index],
-                gabaritFileTmp.globalGabarit.lowerLimit,
+                JSON.parse(JSON.stringify(lowerLimit)),
                 labelLink[index] + '_' + newID,
-                textObj,
+                JSON.parse(JSON.stringify(textObj)),
                 this.addFilterDynamic(mainMetricALink[index], posALink[index], pos),
                 [],
                 colorMode,
@@ -1815,9 +2028,9 @@ class Gabarit extends React.Component<Props, State> {
                 newID + 1,
                 linkURLLink[index],
                 metaLink[index],
-                gabaritFileTmp.globalGabarit.lowerLimit,
+                JSON.parse(JSON.stringify(lowerLimit)),
                 labelLink[index] + '_' + newID,
-                textObj,
+                JSON.parse(JSON.stringify(textObj)),
                 this.addFilterDynamic(mainMetricALink[index], posALink[index], pos),
                 metricALink[index],
                 colorMode,
@@ -1863,9 +2076,9 @@ class Gabarit extends React.Component<Props, State> {
                 newID + 1,
                 linkURLLink[index],
                 metaLink[index],
-                gabaritFileTmp.globalGabarit.lowerLimit,
+                JSON.parse(JSON.stringify(lowerLimit)),
                 labelLink[index] + '_' + newID,
-                textObj,
+                JSON.parse(JSON.stringify(textObj)),
                 this.addFilterDynamic(mainMetricALink[index], posALink[index], pos),
                 [],
                 colorMode,
@@ -1923,9 +2136,9 @@ class Gabarit extends React.Component<Props, State> {
             newID + 1,
             linkURLLink[coordindex],
             metaLink[coordindex],
-            gabaritFileTmp.globalGabarit.lowerLimit,
+            JSON.parse(JSON.stringify(lowerLimit)),
             labelLink[coordindex] + '_' + newID,
-            textObj,
+            JSON.parse(JSON.stringify(textObj)),
             mainMetricALink[coordindex],
             metricALink[coordindex],
             colorMode,
@@ -1972,9 +2185,9 @@ class Gabarit extends React.Component<Props, State> {
             newID + 1,
             linkURLLink[coordindex],
             metaLink[coordindex],
-            gabaritFileTmp.globalGabarit.lowerLimit,
+            JSON.parse(JSON.stringify(lowerLimit)),
             labelLink[coordindex] + '_' + newID,
-            textObj,
+            JSON.parse(JSON.stringify(textObj)),
             mainMetricALink[coordindex],
             [],
             colorMode,
@@ -2020,9 +2233,9 @@ class Gabarit extends React.Component<Props, State> {
             newID + 1,
             linkURLLink[coordindex],
             metaLink[coordindex],
-            gabaritFileTmp.globalGabarit.lowerLimit,
+            JSON.parse(JSON.stringify(lowerLimit)),
             labelLink[coordindex] + '_' + newID,
-            textObj,
+            JSON.parse(JSON.stringify(textObj)),
             mainMetricALink[coordindex],
             metricALink[coordindex],
             colorMode,
@@ -2068,9 +2281,9 @@ class Gabarit extends React.Component<Props, State> {
             newID + 1,
             linkURLLink[coordindex],
             metaLink[coordindex],
-            gabaritFileTmp.globalGabarit.lowerLimit,
+            JSON.parse(JSON.stringify(lowerLimit)),
             labelLink[coordindex] + '_' + newID,
-            textObj,
+            JSON.parse(JSON.stringify(textObj)),
             mainMetricALink[coordindex],
             [],
             colorMode,
@@ -2322,9 +2535,9 @@ class Gabarit extends React.Component<Props, State> {
           newID + 1,
           linkURLRegion[index],
           metaRegion[index],
-          gabaritFileTmp.globalGabarit.lowerLimit,
+          JSON.parse(JSON.stringify(lowerLimit)),
           labelRegion[index] + '_' + newID,
-          textObj,
+          JSON.parse(JSON.stringify(textObj)),
           mainMetricRegion[index],
           metricRegion[index],
           colorMode,
@@ -2347,9 +2560,9 @@ class Gabarit extends React.Component<Props, State> {
           newID + 1,
           linkURLRegion[index],
           metaRegion[index],
-          gabaritFileTmp.globalGabarit.lowerLimit,
+          JSON.parse(JSON.stringify(lowerLimit)),
           labelRegion[index] + '_' + newID,
-          textObj,
+          JSON.parse(JSON.stringify(textObj)),
           mainMetricRegion[index],
           [],
           colorMode,

@@ -73,34 +73,21 @@ export default class DrawRectangle extends React.Component<Props, State> {
      */
     let result = 0;
     // if (!this.props.options.coordinateSpaceInitial.defaultReferentiel) {
-    //   // console.log(position);
-    //   // console.log('-');
     //   if (size > 100) {
-    //     // console.log('>100');
-    //     // console.log(position);
     //     size = 100;
     //   } else if (size < 0 && size < -100) {
-    //     // console.log('<-100');
-    //     // console.log(position);
     //     size = -100;
     //   }
     //   if (size >= 0) {
-    //     // console.log('>0');
-    //     // console.log(position);
     //     size /= 2;
     //     size = isMax ? 50 - size : 50 + size;
     //   } else {
-    //     // console.log('<0');
-    //     // console.log(position);
     //     size *= -1;
     //     size /= 2;
     //     size = 50 - size;
     //   }
     //   result = size;
-    //   // console.log(result);
     // } else {
-    //   // console.log(position);
-    //   // console.log('+');
     //   if (position === 1) {
     //     result = size;
     //   } else if (position === 2) {
@@ -111,7 +98,6 @@ export default class DrawRectangle extends React.Component<Props, State> {
     //     result = 100 - size;
     //   }
     // }
-    // console.log(result);
     return result;
   };
 
@@ -234,36 +220,20 @@ export default class DrawRectangle extends React.Component<Props, State> {
     pBottom = this.getPositionBorder(yMin, 4).toString() + 'px';
 
     // if (xMax >= 0) {
-    //   // console.log('pLeft xMax +');
     //   pLeft = this.transformCoordonneesToPx(xMin, false, 1).toString() + 'px';
-    //   // console.log(pLeft);
-    //   // console.log('pRight xMax +');
     //   pRight = this.transformCoordonneesToPx(xMax, true, 2).toString() + 'px';
-    //   // console.log(pRight);
     // } else {
     //   xMin = xMin * -1;
-    //   // console.log('pRight xMax -');
     //   pRight = this.transformCoordonneesToPx(xMin, false, 1).toString() + 'px';
-    //   // console.log(pRight);
-    //   // console.log('pLeft xMax -');
     //   pLeft = this.transformCoordonneesToPx(xMax, true, 2).toString() + 'px';
-    //   // console.log(pLeft);
     // }
     // if (yMax >= 0) {
-    //   // console.log('pBottom yMax +');
     //   pBottom = this.transformCoordonneesToPx(yMin, false, 3).toString() + 'px';
-    //   // console.log(pBottom);
-    //   // console.log('pTop yMax +');
     //   pTop = this.transformCoordonneesToPx(yMax, true, 4).toString() + 'px';
-    //   // console.log(pTop);
     // } else {
     //   yMin = yMin * -1;
-    //   // console.log('pTop yMax -');
     //   pTop = this.transformCoordonneesToPx(yMin, false, 3).toString() + 'px';
-    //   // console.log(pTop);
-    //   // console.log('pBottom yMax -');
     //   pBottom = this.transformCoordonneesToPx(yMax, true, 4).toString() + 'px';
-    //   // console.log(pBottom);
     // }
 
     const data: JSX.Element = (

@@ -13,11 +13,22 @@ type InputTextFieldProps = {
   value: string;
   _handleChange: (event: ChangeEvent<HTMLInputElement>) => any;
   disabled?: boolean;
+  id?: string;
 };
 
-export const InputTextField: FunctionComponent<InputTextFieldProps> = ({ label, name, placeholder, required, value, _handleChange, disabled }) => (
+export const InputTextField: FunctionComponent<InputTextFieldProps> = ({
+  label,
+  name,
+  placeholder,
+  required,
+  value,
+  _handleChange,
+  disabled,
+  id,
+}) => (
   <div>
     <FormField
+      id={id}
       label={label}
       labelWidth={15}
       inputWidth={15}

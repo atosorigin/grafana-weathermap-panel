@@ -104,13 +104,7 @@ he must be given a query for
 - A for the first file
 - B for the second file
 
-## Temporary part (but currently the operation is necessary)
 
-![](../../screenshots/demo/tutorial13/tmp13-0.png)
-
-You must go to the **point** tab of **Coordinate space**.
-
-![](../../screenshots/demo/tutorial13/tmp13-1.png)
 
 In **Text Object** you uncheck the line **Object display in text or tooltip**.
 
@@ -122,6 +116,15 @@ You will see a dot appear and all the settings will be available in the editor.
 
 ## Structure gabarit files
 
+the `template` file will use : 
+
+ - a fixed color in lowerlimit
+ - several requests
+ - point and link
+ - Position parameter
+ - Meta data
+ 
+ 
 ### default gabarit : demo13-default.json
 
 ```

@@ -20,14 +20,10 @@ import 'style/SimpleEditor.css';
 interface Props extends PanelEditorProps<SimpleOptions> {}
 
 interface State {
-  collapseDashboardData: boolean;
-  collapseTimeSelector: boolean;
-  collapsePanelData: boolean;
-
-  /**
-   * index
-   */
-  collapsePrincipalTarget: boolean;
+  // collapseDashboardData: boolean;
+  // collapseTimeSelector: boolean;
+  // collapsePanelData: boolean;
+  // collapsePrincipalTarget: boolean;
 
   tabsVariable: boolean[];
 
@@ -41,10 +37,10 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
   constructor(props: Props) {
     super(props);
     this.state = {
-      collapseDashboardData: false,
-      collapsePanelData: false,
-      collapseTimeSelector: false,
-      collapsePrincipalTarget: false,
+      // collapseDashboardData: false,
+      // collapsePanelData: false,
+      // collapseTimeSelector: false,
+      // collapsePrincipalTarget: false,
       tabsVariable: [true, false, false, false, false],
       tabsCoordinateSpace: [true, false, false, false],
     };
@@ -93,29 +89,29 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
     this.props.onOptionsChange({ ...this.props.options, Id: target.value });
   };
 
-  onToggleDashboardData = (isOpen: boolean): void => {
-    this.setState({
-      collapseDashboardData: isOpen,
-    });
-  };
+  // onToggleDashboardData = (isOpen: boolean): void => {
+  //   this.setState({
+  //     collapseDashboardData: isOpen,
+  //   });
+  // };
 
-  onToggleTimeSelector = (isOpen: boolean): void => {
-    this.setState({
-      collapseTimeSelector: isOpen,
-    });
-  };
+  // onToggleTimeSelector = (isOpen: boolean): void => {
+  //   this.setState({
+  //     collapseTimeSelector: isOpen,
+  //   });
+  // };
 
-  onTogglePanelData = (isOpen: boolean): void => {
-    this.setState({
-      collapsePanelData: isOpen,
-    });
-  };
+  // onTogglePanelData = (isOpen: boolean): void => {
+  //   this.setState({
+  //     collapsePanelData: isOpen,
+  //   });
+  // };
 
-  onTogglePrincipalTargets = (isOpen: boolean): void => {
-    this.setState({
-      collapsePrincipalTarget: isOpen,
-    });
-  };
+  // onTogglePrincipalTargets = (isOpen: boolean): void => {
+  //   this.setState({
+  //     collapsePrincipalTarget: isOpen,
+  //   });
+  // };
 
   /**
    * switch tab
@@ -147,15 +143,11 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
   };
 
   componentDidMount = async () => {
-    // console.log('mount Editor');
-
     // delete data if new dashboard
     const url: string = window.location.pathname;
     const arrayUrl: string[] = url.split('/');
-    // console.log('currentDashboard : ' + this.props.options.currentDashboard);
     for (const element of arrayUrl) {
       if (element === 'new' && !this.props.options.currentDashboard) {
-        // console.log('new dashboard');
         this.props.onOptionsChange({
           ...this.props.options,
           arrayPoints: [],
@@ -190,8 +182,6 @@ export class SimpleEditor extends React.PureComponent<PanelEditorProps<SimpleOpt
   };
 
   componentWillUnmount = async () => {
-    // console.log('unMount Editor');
-
     // not display Button of Panel if is mode View
     await Promise.resolve('Success').then(() => {
       this.props.onOptionsChange({

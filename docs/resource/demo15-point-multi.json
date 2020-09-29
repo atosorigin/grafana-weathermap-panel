@@ -1,50 +1,50 @@
 {
   "global": {
-    "lowerLimit": [      
+    "lowerLimit": [
       {
-        "backColor": "red",
-        "borderColor": "#FFFFFF",
         "id": 0,
-        "lowerLimitMax": "",
         "lowerLimitMin": "",
+        "lowerLimitMax": "",
+        "backColor": "#FFCCCC",
+        "borderColor": "#00BBBB",
         "sizeBorder": "3"
       }
     ],
     "textObject": {
       "value": "",
-      "isTextTooltip": true,
+      "isTextTooltip": "true",
       "colorBack": "#eeee00",
       "colorText": "#dd33dd",
       "style": {
-        "bold": false,
-        "italic": true,
-        "underline": false
+        "bold": "false",
+        "italic": "true",
+        "underline": "false"
       },
-      "generateObjectText": true,
+      "generateObjectText": "true",
       "valueGenerateObjectText": {
-        "legendElement": "Nombre",
+        "legendElement": "",
         "numericFormatElement": "5",
         "unit": "u",
-        "displayObjectInTooltip": true,
-        "addColorTextElement": false,
+        "displayObjectInTooltip": "true",
+        "addColorTextElement": "true",
         "colorTextElement": "white",
-        "addColorBackElement": false,
-        "colorBackElement": "black"
+        "addColorBackElement": "true",
+        "colorBackElement": "#770000"
       },
       "generateAuxiliaryElement": {
         "legendElement": "",
         "numericFormatElement": "5",
         "unit": "",
-        "displayObjectInTooltip": true,
-        "addColorTextElement": false,
+        "displayObjectInTooltip": "false",
+        "addColorTextElement": "false",
         "colorTextElement": "",
-        "addColorBackElement": false,
-        "colorBackElement": "black"
+        "addColorBackElement": "false",
+        "colorBackElement": "green"
       }
     },
-    "colorMode": false,
-    "traceBack": true,
-    "traceBorder": true
+    "colorMode": "false",
+    "traceBack": "true",
+    "traceBorder": "true"
   },
   "default": {
     "templates": [
@@ -73,11 +73,8 @@
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|labelName#y|labelName",
-          "tooltipA": {
-            "label": "Bottom",
-            "value": "bottom"
-          },
-          "tooltipB": {}
+          "tooltipA": "Bottom",
+          "tooltipB": "Bottom"
         },
         "mainMetric": {
           "key": "",
@@ -130,29 +127,13 @@
       "xylabelfix": "",
       "type": "point",
       "name": "point1",
-      "meta": [
-        {
-          "meta": "meta exemple",
-          "obj": {
-            "colorText": "#FF00FF",
-            "colorBack": "#CCCCCC",
-            "style": {
-              "bold": false,
-              "italic": false,
-              "underline": true
-            }
-          }
-        }
-      ],
+      "meta": [],
       "label": "V",
       "positionParameter": {
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
-        "tooltipA": {
-          "label": "Bottom",
-          "value": "bottom"
-        },
-        "tooltipB": {}
+        "tooltipA": "",
+        "tooltipB": ""
       },
       "mainMetric": {
         "format": "",

@@ -98,10 +98,6 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     const colorBorderSVG: Color = parseColor(border);
     const changeColorElement: HTMLElement | null = document.getElementById(id);
 
-    // if (id === 'rect45') {
-    //   console.log('am here');
-    // }
-
     if (changeColorElement) {
       changeColorElement.style.fill = colorSVG.color;
       changeColorElement.style.fillOpacity = colorSVG.transparency;
@@ -171,11 +167,10 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       //     <div>{this.displayValuesMetaData()}</div>
       //   </div>
       // ) : null;
-    if ((valueQueryResult !== '' && region.textObj.valueGenerateObjectText.displayObjectInTooltip) || region.metrics.length !== 0 || valueMetaData !== null) {
+    if ((valueQueryResult !== '' && region.textObj.valueGenerateObjectText.displayObjectInTooltip) || region.metrics.length !== 0 || valueMetaData !== null || this.props.uneCoor.linkURL.hoveringTooltipText) {
       tooltipValue = (
         <div>
           <div style={styleTooltip}>
-            <a href={region.linkURL.hoveringTooltipLink}>{region.linkURL.hoveringTooltipText}</a>
             {region.textObj.isTextTooltip && <p>{region.label}</p>}
           </div>
           <div style={styleMetrics}>
@@ -185,6 +180,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
           </div>
           <div>{this.displayValuesAuxMetrics()}</div>
           <div>{valueMetaData}</div>
+          <a href={region.linkURL.hoveringTooltipLink}>{region.linkURL.hoveringTooltipText}</a>
         </div>
         );
     }
@@ -195,6 +191,36 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       sizeBorder: lowerLimit.sizeBorder,
       valueQuery: valueQueryResult,
     };
+  };
+
+  private desactiveLink = (event: any) => {
+    // const inputFollowingLink: any = document.getElementById('followLink');
+    // if (inputFollowingLink) {
+    //   if (inputFollowingLink.defaultValue === '') {
+    //     event.preventDefault();
+    //   }
+    // } else if (this.props.uneCoor.linkURL.followLink === '') {
+    //   event.preventDefault();
+    // }
+    if (this.props.uneCoor.linkURL.followLink === '') {
+      event.preventDefault();
+    }
+  };
+
+  private defineCursor = (): string => {
+    let result = 'pointer';
+    // const inputFollowingLink: any = document.getElementById('followLink');
+    // if (inputFollowingLink) {
+    //   if (inputFollowingLink.defaultValue === '') {
+    //     result = 'default';
+    //   }
+    // } else if (this.props.uneCoor.linkURL.followLink === '') {
+    //   result = 'default';
+    // }
+    if (this.props.uneCoor.linkURL.followLink === '') {
+      result = 'default';
+    }
+    return result;
   };
 
   displayValueQuery = (region: RegionClass): boolean => {
@@ -386,9 +412,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     const region: RegionClass = this.props.uneCoor;
     reqMetricAuxRegion(region, this.props);
     const mainMetric: Metric = region.mainMetric;
-    //console.log(mainMetric.refId);
     const auxiliaryMetrics: Metric[] = region.metrics;
-    //console.log(auxiliaryMetrics);
     let valueAuxiliaryMetric: string[] = [];
     //const countMetrics: number = auxiliaryMetrics.length;
     auxiliaryMetrics.forEach((metric: Metric) => {
@@ -641,7 +665,6 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
   private defineLimitY(coordinateY: number) {
     let result: number = coordinateY;
     // if (this.props.options.coordinateSpaceInitial.defaultReferentiel) {
-    //   //console.log(coordinateY);
     //   if (coordinateY > 100) {
     //     result = 100;
     //   }
@@ -691,16 +714,12 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
 
     let newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
     newArrayRegion.forEach((currentRegion) => {
-      // console.log('avant update coords');
-      // console.log(currentRegion.coords);
       if (currentRegion.id === region.id) {
         currentRegion.coords.xMin = leftPx.toString();
         currentRegion.coords.xMax = (widthBackground - rightPx).toString();
         currentRegion.coords.yMin = bottomPx.toString();
         currentRegion.coords.yMax = (heightBackground - topPx).toString();
       }
-      // console.log('après update coords');
-      // console.log(currentRegion.coords);
     });
     this.props.options.regionCoordinateSpace = newArrayRegion;
 
@@ -708,8 +727,6 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     const rightToDraw = ((rightPx - (widthBackground - xMax)) / widthInitialSpace) * widthBackground;
     const topToDraw = ((topPx - (heightBackground - yMax)) / heightInitialSpace) * heightBackground;
     const bottomToDraw = ((bottomPx - yMin) / heightInitialSpace) * heightBackground;
-
-    // console.log(leftToDraw);
 
     let result: CoorHTML = {
       top: topToDraw.toString() + 'px',
@@ -741,6 +758,11 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     );
     const style: Style = region.textObj.style;
 
+    let valueCursor = 'default';
+    if (this.props.buttonAddLinkIsActive || this.props.buttonAddIncurvedLinkIsActive) {
+      valueCursor = 'pointer';
+    }
+
     const styleDiv = {
       position: 'absolute',
       border: pBorder,
@@ -753,7 +775,7 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       background: 'url(' + region.img + ') no-repeat center center',
       backgroundColor: this.state.backgroundColor,
       backgroundSize: 'contain',
-      cursor: 'pointer',
+      cursor: valueCursor,
     } as React.CSSProperties;
 
     const styleTextDiv = {
@@ -761,28 +783,31 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       textDecoration: this.defineTextDecoration(style),
       fontStyle: this.defineFontStyle(style),
       fontWeight: this.defineFontWeight(style),
+      textAlign: 'center',
+      //verticalAlign: 'middle',
       color: textColor,
-      verticalAlign: 'middle',
       marginTop: (parseInt(region.positionParameter.labelAPositionY, 10) * -1) + 'px',
       marginLeft: region.positionParameter.labelAPositionX + 'px',
     } as React.CSSProperties;
 
     const styleMetricsDiv = {
+      textDecoration: this.defineTextDecoration(style),
+      fontStyle: this.defineFontStyle(style),
+      fontWeight: this.defineFontWeight(style),
       backgroundColor: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorBackElement : 'black',
       color: region.textObj.valueGenerateObjectText ? region.textObj.valueGenerateObjectText.colorTextElement : 'white',
-      verticalAlign: 'middle',
+      textAlign: 'center',
+      //verticalAlign: 'middle',
     } as React.CSSProperties;
 
     let positionTooltip: any = '';
     if (region.positionParameter.tooltipPositionA.value) {
-      console.log(region.positionParameter);
       positionTooltip = region.positionParameter.tooltipPositionA.value.toLowerCase();
     }
 
     let value: JSX.Element;
 
     if (this.props.buttonAddLinkIsActive || this.props.buttonAddIncurvedLinkIsActive) {
-      //console.log('active');
       value = (
         <div style={styleDiv} id={this.props.id}>
           {(!region.textObj.isTextTooltip || region.textObj.generateObjectText) && (
@@ -813,10 +838,9 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
         }
       }
     } else {
-      //console.log('not active');
       value = (
         <div style={styleDiv} id={this.props.id}>
-          <a href={region.linkURL.followLink} target="_blank" rel="noopener noreferrer">
+          <a href={region.linkURL.followLink} onClick={this.desactiveLink} style={{cursor: this.defineCursor()}} target="_blank" rel="noopener noreferrer">
             <div style={{ height: '100%', width: '100%' }}>
               {(!region.textObj.isTextTooltip || region.textObj.generateObjectText) && (
                 <div>
@@ -849,7 +873,6 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
       }
     }
     // if (!this.props.isEnabled && region.linkURL.followLink !== '') {
-    //   console.log('not active');
     //   value = (
     //     <div style={styleDiv} id={this.props.id}>
     //       <a href={region.linkURL.followLink}>
@@ -870,7 +893,6 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
     //     value = <Tooltip content={this.state.tooltipValue}>{value}</Tooltip>;
     //   }
     // } else {
-    //   console.log('active');
     //   value = (
     //     <div style={styleDiv} id={this.props.id}>
     //       {(!region.textObj.isTextTooltip || region.textObj.generateObjectText) && (
@@ -961,8 +983,6 @@ export default class DrawRectangleExtend extends React.Component<Props, State> {
 
   /** render */
   render() {
-    // console.log(this.props.uneCoor.metrics);
-    // console.log(this.getValuesAuxiliaryMetrics());
     return this.state.htmlResult;
   }
 }

@@ -41,6 +41,7 @@ class EditCoordinateSpace extends React.Component<Props, State> {
    */
   callBack = (id: number, newCoordinate?: RegionClass): void => {
     if (newCoordinate) {
+      // update region
       const oldData: RegionClass[] = this.props.options.regionCoordinateSpace.slice();
       let i = 0;
       for (const line of oldData) {
@@ -55,6 +56,7 @@ class EditCoordinateSpace extends React.Component<Props, State> {
         regionCoordinateSpace: oldData,
       });
     } else {
+      // delete region
       let find = false;
       const oldData: RegionClass[] = this.props.options.regionCoordinateSpace.slice();
       let i = 0;

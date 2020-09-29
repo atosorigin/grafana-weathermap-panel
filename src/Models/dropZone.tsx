@@ -156,8 +156,8 @@ class DropZone extends React.Component<Props, State> {
       <div>
         <div>
           <input type="file" name="file" onChange={this.onChangeHandler} />
-          <Button onClick={this.upload}>add</Button>
-          <Button onClick={this.save}>finish</Button>
+          <Button onClick={this.upload}>Add</Button>
+          <Button onClick={this.save}>Finish</Button>
         </div>
         <div>
           <this.multiUploadDisplay file={this.props.options.saveImportFile} />

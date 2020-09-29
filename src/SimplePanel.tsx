@@ -61,9 +61,7 @@ interface State {
   svg: string;
   // loading: boolean;
   // url: string;
-  displayRegion: JSX.Element;
-  idSVG: string;
-  tooltip: JSX.Element;
+  //displayRegion: JSX.Element;
   // check if button Add Oriented Link is active
   buttonAddLinkIsActive: boolean;
   // check if button Add Incurved Oriented Link is active
@@ -91,9 +89,7 @@ export class SimplePanel extends PureComponent<Props, State> {
       nbClickButton: false,
       legend: { hiddenLegend: true, x: 0, y: 0 },
       svg: '',
-      displayRegion: <div></div>,
-      tooltip: <div>salut</div>,
-      idSVG: '',
+      //displayRegion: <div></div>,
       buttonAddLinkIsActive: false,
       buttonAddIncurvedLinkIsActive: false,
       dataTooltipSVG: { idSVG: '', x: '0', y: '0' },
@@ -301,6 +297,9 @@ export class SimplePanel extends PureComponent<Props, State> {
           positionXDefault={line.positionXDefault}
           positionYDefault={line.positionYDefault}
           metaData={line.meta}
+          colorMode={line.colorMode}
+          traceBack={line.traceBack}
+          traceBorder={line.traceBorder}
         />
       );
       mapItems.push(item);
@@ -350,7 +349,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     });
   };
 
-  /** update AssociateOrientedLinkIn of point for tootip  */
+  /** update AssociateOrientedLinkIn of point for tooltip  */
   private updateAssociateOrientedLinkInToPoint = () => {
     let indexPoint = 0;
     this.props.options.arrayPoints.forEach((point) => {
@@ -366,7 +365,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     });
   };
 
-  /** update AssociateOrientedLinkOut of point for tootip  */
+  /** update AssociateOrientedLinkOut of point for tooltip  */
   private updateAssociateOrientedLinkOutToPoint = () => {
     let indexPoint = 0;
     this.props.options.arrayPoints.forEach((point) => {
@@ -442,8 +441,6 @@ export class SimplePanel extends PureComponent<Props, State> {
         this.createOrientedLinkToClick({ label: 'No', value: false }, widthInitialSpace.toString(), heightInitialSpace.toString());
         this.resetCoordinatesToDrawLinkWithClick();
       }
-      // console.log('click');
-      // console.log(objectIn);
     } else if (event.nativeEvent.target.id.startsWith('point')) {
       const id: number = parseInt(event.nativeEvent.target.id.charAt(5) + event.nativeEvent.target.id.charAt(6), 10);
       const arrayPoint: PointClass[] = this.props.options.arrayPoints;
@@ -525,7 +522,6 @@ export class SimplePanel extends PureComponent<Props, State> {
               event.nativeEvent.target.id.startsWith('rect') ||
               event.nativeEvent.target.id.startsWith('ellipse')))
         ) {
-          // console.log('4');
           let id = '';
           if (this.props.options.baseMap.isUploaded) {
             id = event.nativeEvent.target.id;
@@ -1124,6 +1120,7 @@ export class SimplePanel extends PureComponent<Props, State> {
           positionXCDefault={orientedLink.pointCPositionXDefault}
           positionYCDefault={orientedLink.pointCPositionYDefault}
           metaData={orientedLink.meta}
+          colorMode={orientedLink.colorMode}
         />
       );
       mapItems.push(item);
@@ -1187,7 +1184,6 @@ export class SimplePanel extends PureComponent<Props, State> {
               let line = metric.returnQuery[i];
               if (line.fields[0].labels) {
                 if (mainMetric.refId !== '') {
-                  //console.log(mainMetric);
                   if (line.fields[0].labels[mainMetric.key] === mainMetric.keyValue || (mainMetric.key === '' && mainMetric.keyValue === '')) {
                     if (line.fields[0].labels[metric.key] === metric.keyValue) {
                       const countValues: number = line.fields[0].values.length;
@@ -1562,22 +1558,22 @@ export class SimplePanel extends PureComponent<Props, State> {
   };
 
   chargeRegion = () => {
-    this.setState({
-      displayRegion: (
-        <DrawRectangle
-          key="limitCoor"
-          color="orange"
-          coordinateInitial={this.props.options.coordinateSpaceInitial}
-          id="initialSpace"
-          onOptionsChange={this.props.onOptionsChange}
-          options={this.props.options}
-          data={this.props.data}
-          // isEnabled={!this.state.buttonManage[1]}
-          buttonAddLinkIsActive={this.state.buttonAddLinkIsActive}
-          buttonAddIncurvedLinkIsActive={this.state.buttonAddIncurvedLinkIsActive}
-        />
-      ),
-    });
+    // this.setState({
+    //   displayRegion: (
+    //     <DrawRectangle
+    //       key="limitCoor"
+    //       color="orange"
+    //       coordinateInitial={this.props.options.coordinateSpaceInitial}
+    //       id="initialSpace"
+    //       onOptionsChange={this.props.onOptionsChange}
+    //       options={this.props.options}
+    //       data={this.props.data}
+    //       // isEnabled={!this.state.buttonManage[1]}
+    //       buttonAddLinkIsActive={this.state.buttonAddLinkIsActive}
+    //       buttonAddIncurvedLinkIsActive={this.state.buttonAddIncurvedLinkIsActive}
+    //     />
+    //   ),
+    // });
   };
 
   editIdString = (str: string): string => {
@@ -1622,8 +1618,6 @@ export class SimplePanel extends PureComponent<Props, State> {
    * update button css when mount component
    */
   componentDidMount = async () => {
-    // console.log('mount Panel');
-
     // not display Button of Panel if it is in the mode View
     this.checkIfDisplayButton();
 
@@ -1713,9 +1707,7 @@ export class SimplePanel extends PureComponent<Props, State> {
 
     //Set value initialSpace with width and height of background
     // const widthInitialSpace = this.props.options.baseMap.width === '' ? '0' : this.props.options.baseMap.width;
-    // console.log(widthInitialSpace);
     // const heightInitialSpace = this.props.options.baseMap.height === '' ? '0' : this.props.options.baseMap.height;
-    // console.log(heightInitialSpace);
     // this.props.options.coordinateSpaceInitial.coordinate.xMax = widthInitialSpace;
     // this.props.options.coordinateSpaceInitial.coordinate.yMax = heightInitialSpace;
     this.props.options.coordinateSpaceInitial.coordinate.xMax = this.props.options.baseMap.width;
@@ -1733,7 +1725,6 @@ export class SimplePanel extends PureComponent<Props, State> {
       this.props.options.baseMap.width !== this.props.options.coordinateSpaceInitial.coordinate.xMax &&
       !this.props.options.updateOnlyInitialSpace
     ) {
-      //console.log('newWidth');
       this.props.options.coordinateSpaceInitial.coordinate.xMax = this.props.options.baseMap.width;
     }
     //Set height initialSpace if new height in display
@@ -1741,7 +1732,6 @@ export class SimplePanel extends PureComponent<Props, State> {
       this.props.options.baseMap.height !== this.props.options.coordinateSpaceInitial.coordinate.yMax &&
       !this.props.options.updateOnlyInitialSpace
     ) {
-      //console.log('newHeight');
       this.props.options.coordinateSpaceInitial.coordinate.yMax = this.props.options.baseMap.height;
     }
     // if (this.props.options.baseMap.image !== prevProps.options.baseMap.image) {
@@ -1799,22 +1789,22 @@ export class SimplePanel extends PureComponent<Props, State> {
       idSVG = event.target.id.substring(3);
     }
     const arrayRegions: RegionClass[] = this.props.options.regionCoordinateSpace;
-    let newDataSVG: DataTooltipRegionSVG = { idSVG: idSVG, x: '', y: '' };
+    let newDataSVG: DataTooltipRegionSVG = { idSVG: idSVG, x: '0', y: '0' };
     for (const region of arrayRegions) {
       if (region.idSVG === idSVG) {
         let xSVG = 0;
         let ySVG = 0;
         let widthSVG = 0;
         let heightSVG = 0;
-        let positionX = '';
-        let positionY = '';
+        let positionX = '0';
+        let positionY = '0';
         let widthTooltip = 0;
         let heightTooltip = 0;
 
         const tooltip = document.getElementById('tooltipSVG');
         if (tooltip) {
           widthTooltip = parseInt(tooltip?.style.width, 10);
-          heightTooltip = parseInt(tooltip?.style.minHeight, 10);
+          heightTooltip = parseInt(tooltip?.style.height, 10) ? parseInt(tooltip?.style.height, 10) : parseInt(tooltip?.style.minHeight, 10);
         }
 
         let positionParameter: any = '';
@@ -1823,7 +1813,6 @@ export class SimplePanel extends PureComponent<Props, State> {
         }
 
         if (event.target.localName === 'rect') {
-          //console.log('rect');
           xSVG = parseInt(event.target.attributes['x'].nodeValue, 10);
           ySVG = parseInt(event.target.attributes['y'].nodeValue, 10);
           widthSVG = parseInt(event.target.attributes['width'].nodeValue, 10);
@@ -1831,8 +1820,6 @@ export class SimplePanel extends PureComponent<Props, State> {
           // positionX = (xSVG + widthSVG).toString();
           // positionY = (ySVG - heightSVG / 2).toString();
         } else if (event.target.localName === 'ellipse') {
-          console.log('ellipse');
-          console.log(region.positionParameter.tooltipPositionA);
           xSVG = parseInt(event.target.attributes['cx'].nodeValue, 10);
           ySVG = parseInt(event.target.attributes['cy'].nodeValue, 10);
           widthSVG = parseInt(event.target.attributes['rx'].nodeValue, 10) * 2;
@@ -1840,24 +1827,22 @@ export class SimplePanel extends PureComponent<Props, State> {
           positionX = xSVG.toString();
           positionY = ySVG.toString();
           if (positionParameter === 'top') {
-            console.log('top');
             positionX = (xSVG - widthTooltip / 2).toString();
             positionY = (ySVG - heightTooltip - heightSVG / 2).toString();
           } else if (positionParameter === 'bottom') {
-            console.log('bottom');
             positionX = (xSVG - widthTooltip / 2).toString();
             positionY = (ySVG + heightSVG / 2).toString();
           } else if (positionParameter === 'left') {
-            console.log('left');
             positionX = (xSVG - widthTooltip).toString();
             positionY = ySVG.toString();
           } else if (positionParameter === 'right') {
-            console.log('right');
+            positionX = xSVG.toString();
+            positionY = ySVG.toString();
+          } else {
             positionX = xSVG.toString();
             positionY = ySVG.toString();
           }
         } else if (event.target.localName === 'path') {
-          //console.log('path');
           const allValues: string = event.target.attributes['d'].nodeValue;
           const arrayAllValues: string[] = allValues.split(' ');
           let iX = -2;
@@ -1897,7 +1882,6 @@ export class SimplePanel extends PureComponent<Props, State> {
 
         // define positionTooltip for path and rect
         if (event.target.localName === 'path' || event.target.localName === 'rect') {
-          console.log('rect - path');
           if (positionParameter === 'top') {
             positionX = (xSVG + widthSVG / 4).toString();
             positionY = (ySVG - heightSVG / 2).toString();
@@ -1908,6 +1892,9 @@ export class SimplePanel extends PureComponent<Props, State> {
             positionX = (xSVG - widthSVG).toString();
             positionY = ySVG.toString();
           } else if (positionParameter === 'right') {
+            positionX = (xSVG + widthSVG).toString();
+            positionY = ySVG.toString();
+          } else {
             positionX = (xSVG + widthSVG).toString();
             positionY = ySVG.toString();
           }
@@ -2075,7 +2062,6 @@ export class SimplePanel extends PureComponent<Props, State> {
     // const yMinInitialSpace = parseInt(options.coordinateSpaceInitial.coordinate.yMin, 10);
     // const yMaxInitialSpace = parseInt(options.coordinateSpaceInitial.coordinate.yMax, 10);
     let mapItems: JSX.Element[];
-
     mapItems = options.regionCoordinateSpace.map((line: RegionClass, index: number) => (
       <DrawRectangleExtend
         key={'drawRectangleExtend' + index.toString()}
@@ -2263,9 +2249,6 @@ export class SimplePanel extends PureComponent<Props, State> {
   private defineMainMetric = (region: RegionClass): string => {
     let result = '';
     const legend: string = region.textObj.valueGenerateObjectText.legendElement;
-    //console.log('legend-tooltip');
-    //console.log(region.textObj.valueGenerateObjectText);
-    //console.log(legend);
     const unit: string = region.textObj.valueGenerateObjectText.unit;
     const decimal: string = region.textObj.valueGenerateObjectText.numericFormatElement;
     //const roundMetrics: number = parseInt(decimal, 10) || 1;
@@ -2445,7 +2428,6 @@ export class SimplePanel extends PureComponent<Props, State> {
       regionSVG.meta.length === 0 &&
       regionSVG.linkURL.hoveringTooltipText === ''
     ) {
-      console.log('null');
       const tooltipSVG: any = document.getElementById('tooltipSVG');
       if (tooltipSVG) {
         tooltipSVG.style.display = 'none';

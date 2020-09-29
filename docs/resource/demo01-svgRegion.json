@@ -69,14 +69,14 @@
       "textObj": {
         "value": "",
         "isTextTooltip": true,
-        "colorBack": "rgba(255, 255, 255, 0)",
-        "colorText": "rgba(0, 0, 0, 1)",
+        "colorBack": "black",
+        "colorText": "white",
         "style": {
           "bold": false,
           "italic": false,
           "underline": false
         },
-        "generateObjectText": false,
+        "generateObjectText": true,
         "valueGenerateObjectText": {
           "legendElement": "",
           "numericFormatElement": "",
@@ -127,22 +127,19 @@
       "lowerLimit": [
         {
           "backColor": "#37872D",
-          "borderColor": "",
+          "borderColor": "red",
           "id": 0,
           "lowerLimitMax": "",
           "lowerLimitMin": "",
-          "sizeBorder": "1"
+          "sizeBorder": "2"
         }
       ],
       "mainMetric": {
         "format": "",
         "key": "",
         "keyValue": "",
-        "refId": "",
-        "returnQuery": {
-          "fields": [],
-          "length": 0
-        },
+        "refId": "A",
+        "returnQuery": {},
         "unit": ""
       },
       "meta": [],
@@ -160,23 +157,23 @@
       "textObj": {
         "value": "",
         "isTextTooltip": true,
-        "colorBack": "rgba(255, 255, 255, 0)",
-        "colorText": "rgba(0, 0, 0, 1)",
+        "colorBack": "black",
+        "colorText": "white",
         "style": {
           "bold": false,
           "italic": false,
           "underline": false
         },
-        "generateObjectText": false,
+        "generateObjectText": true,
         "valueGenerateObjectText": {
-          "legendElement": "",
-          "numericFormatElement": "",
-          "unit": "",
+          "legendElement": "MEM",
+          "numericFormatElement": "3",
+          "unit": "qw",
           "displayObjectInTooltip": false,
-          "addColorTextElement": false,
+          "addColorTextElement": true,
           "colorTextElement": "white",
-          "addColorBackElement": false,
-          "colorBackElement": "black"
+          "addColorBackElement": true,
+          "colorBackElement": "#EE82EE"
         },
         "generateAuxiliaryElement": {
           "legendElement": "",
@@ -190,7 +187,7 @@
         }
       },
       "traceBack": true,
-      "traceBorder": false
+      "traceBorder": true
     },
     {
       "colorMode": true,

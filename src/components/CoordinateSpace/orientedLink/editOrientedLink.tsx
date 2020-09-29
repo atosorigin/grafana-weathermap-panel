@@ -177,8 +177,6 @@ class EditOrientedLink extends React.Component<Props, State> {
             </p>
           )}
         </div>
-        {/* <Button onClick={() => console.log(this.props.options.regionCoordinateSpace)}>Info region</Button>
-				<Button onClick={() => console.log(this.state.selectCoordinateSpaceDefault)}>Info region</Button> */}
       </div>
     );
   }

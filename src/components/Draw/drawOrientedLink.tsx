@@ -32,8 +32,6 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   valueMainMetricA: string;
   valueMainMetricB: string;
   textObject: TextObject;
-  traceBorder: boolean;
-  traceBack: boolean;
   seuil: LowerLimitClass[];
   labelAPositionX: string;
   labelAPositionY: string;
@@ -62,6 +60,9 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   positionXCDefault: string;
   positionYCDefault: string;
   metaData: Metadata[];
+  colorMode: boolean;
+  traceBorder: boolean;
+  traceBack: boolean;
 }
 
 interface State {}
@@ -1474,9 +1475,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       listParallelOrientedLinks.forEach((index) => {
         if (index === parseInt(this.props.id, 10)) {
           if (indexOrientedLink === 0) {
-            //console.log(this.props.name);
-            //console.log(index);
-            //console.log(indexOrientedLink);
             xA = this.synchroLinkX(this.definePositionX(true, 0));
             yA = this.synchroLinkY(this.definePositionY(true, 0));
             xB = this.synchroLinkX(this.definePositionX(false, 0));
@@ -1484,9 +1482,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             xCByClick = xCByClick0 || (xA + xB) / 2;
             yCByClick = yCByClick0 || (yA + yB) / 2;
           } else if (indexOrientedLink === 1) {
-            //console.log(this.props.name);
-            //console.log(index);
-            //console.log(indexOrientedLink);
             xA = this.synchroLinkX(this.definePositionX(true, 1));
             yA = this.synchroLinkY(this.definePositionY(true, 1));
             xB = this.synchroLinkX(this.definePositionX(false, 1));
@@ -1494,9 +1489,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
             xCByClick = xCByClick0 || (xA + xB) / 2;
             yCByClick = yCByClick0 || (yA + yB) / 2;
           } else if (indexOrientedLink === 2) {
-            //console.log(this.props.name);
-            //console.log(index);
-            //console.log(indexOrientedLink);
             xA = this.synchroLinkX(this.definePositionX(true, 2));
             yA = this.synchroLinkY(this.definePositionY(true, 2));
             xB = this.synchroLinkX(this.definePositionX(false, 2));
@@ -1784,7 +1776,14 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       }
 
       return (
-        <a href={linkUrlOrientedLink} target="_blank" rel="noopener noreferrer" id="link">
+        <a
+          id="link"
+          href={linkUrlOrientedLink}
+          onClick={this.desactiveLink}
+          style={{ cursor: this.defineCursor() }}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <div>
             {first}
             <div
@@ -1973,7 +1972,13 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       }
       if (this.props.isIncurved.value) {
         return (
-          <a href={linkUrlOrientedLink} target="_blank" rel="noopener noreferrer">
+          <a
+            href={linkUrlOrientedLink}
+            onClick={this.desactiveLink}
+            style={{ cursor: this.defineCursor() }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {first}
             {second}
             <div
@@ -1990,7 +1995,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 fontSize: this.props.sizePolice,
                 color: this.defineColorTextLabel(),
                 padding: '0',
-                cursor: 'pointer',
               }}
             >
               {this.defineTextObject(this.props.valueMainMetricA)}
@@ -2088,7 +2092,13 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           );
         }
         return (
-          <a href={linkUrlOrientedLink} target="_blank" rel="noopener noreferrer">
+          <a
+            href={linkUrlOrientedLink}
+            onClick={this.desactiveLink}
+            style={{ cursor: this.defineCursor() }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {first}
             <div
               id={'labelMainMetric' + this.props.id}
@@ -2104,7 +2114,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 fontSize: this.props.sizePolice,
                 color: this.defineColorTextLabel(),
                 padding: '0',
-                cursor: 'pointer',
               }}
             >
               {this.defineTextObject(this.props.valueMainMetricA)}
@@ -2191,7 +2200,13 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           );
         }
         return (
-          <a href={linkUrlOrientedLink} target="_blank" rel="noopener noreferrer">
+          <a
+            href={linkUrlOrientedLink}
+            onClick={this.desactiveLink}
+            style={{ cursor: this.defineCursor() }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {first}
             {second}
             <div
@@ -2208,7 +2223,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 fontSize: this.props.sizePolice,
                 color: this.defineColorTextLabel(),
                 padding: '0',
-                cursor: 'pointer',
               }}
             >
               {this.defineTextObject(this.props.valueMainMetricA)}
@@ -2255,7 +2269,13 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
           );
         }
         return (
-          <a href={linkUrlOrientedLink} target="_blank" rel="noopener noreferrer">
+          <a
+            href={linkUrlOrientedLink}
+            onClick={this.desactiveLink}
+            style={{ cursor: this.defineCursor() }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {first}
             <div
               id={'labelMainMetric' + this.props.id}
@@ -2271,7 +2291,6 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
                 fontSize: this.props.sizePolice,
                 color: this.defineColorTextLabel(),
                 padding: '0',
-                cursor: 'pointer',
               }}
             >
               {this.defineTextObject(this.props.valueMainMetricA)}
@@ -2283,6 +2302,36 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       return <div></div>;
     }
   }
+
+  private desactiveLink = (event: any) => {
+    // const inputFollowingLink: any = document.getElementById('followLink');
+    // if (inputFollowingLink) {
+    //   if (inputFollowingLink.defaultValue === '') {
+    //     event.preventDefault();
+    //   }
+    // } else if (this.props.linkUrl.followLink === '') {
+    //   event.preventDefault();
+    // }
+    if (this.props.linkUrl.followLink === '') {
+      event.preventDefault();
+    }
+  };
+
+  private defineCursor = (): string => {
+    let result = 'pointer';
+    // const inputFollowingLink: any = document.getElementById('followLink');
+    // if (inputFollowingLink) {
+    //   if (inputFollowingLink.defaultValue === '') {
+    //     result = 'default';
+    //   }
+    // } else if (this.props.linkUrl.followLink === '') {
+    //   result = 'default';
+    // }
+    if (this.props.linkUrl.followLink === '') {
+      result = 'default';
+    }
+    return result;
+  };
 
   private defineBackColor(link: string) {
     let colorBack = '';
@@ -2296,7 +2345,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     }
 
     if (this.props.traceBack) {
-      if (seuil.length > 0) {
+      if (!this.props.colorMode && this.props.seuil.length > 0) {
         if (seuil[0].backColor !== '') {
           colorBack = seuil[0].backColor;
         } else {
@@ -2310,29 +2359,28 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     }
 
     let index = 0;
-    seuil.forEach((level: LowerLimitClass) => {
-      let lowerLimitMin = 0;
-
-      if (level.lowerLimitMin === '') {
-        lowerLimitMin = 0;
-      } else {
-        lowerLimitMin = parseInt(level.lowerLimitMin.substring(1), 10);
-      }
-
-      if (lowerLimitMin === 0) {
-        if (valueMainMetric >= lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+    if (this.props.colorMode && this.props.seuil.length > 0) {
+      seuil.forEach((level: LowerLimitClass) => {
+        let lowerLimitMin = 0;
+        if (level.lowerLimitMin === '') {
+          lowerLimitMin = 0;
+        } else {
+          lowerLimitMin = parseInt(level.lowerLimitMin.substring(1), 10);
+        }
+        if (lowerLimitMin === 0) {
+          if (valueMainMetric >= lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+            colorBack = level.backColor;
+          }
+        } else if (this.props.seuil.length === index + 1) {
+          if (valueMainMetric > lowerLimitMin) {
+            colorBack = level.backColor;
+          }
+        } else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
           colorBack = level.backColor;
         }
-      } else if (this.props.seuil.length === index + 1) {
-        if (valueMainMetric > lowerLimitMin) {
-          colorBack = level.backColor;
-        }
-      } else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
-        colorBack = level.backColor;
-      }
-
-      index++;
-    });
+        index++;
+      });
+    }
 
     return colorBack;
   }
@@ -2349,7 +2397,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     }
 
     if (this.props.traceBorder) {
-      if (seuil.length > 0) {
+      if (!this.props.colorMode && this.props.seuil.length > 0) {
         if (seuil[0].borderColor !== '') {
           colorBorder = seuil[0].borderColor;
         } else {
@@ -2363,29 +2411,28 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     }
 
     let index = 0;
-    seuil.forEach((level: LowerLimitClass) => {
-      let lowerLimitMin = 0;
-
-      if (level.lowerLimitMin === '') {
-        lowerLimitMin = 0;
-      } else {
-        lowerLimitMin = parseInt(level.lowerLimitMin.substring(1), 10);
-      }
-
-      if (lowerLimitMin === 0) {
-        if (valueMainMetric >= lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+    if (this.props.colorMode && this.props.seuil.length > 0) {
+      seuil.forEach((level: LowerLimitClass) => {
+        let lowerLimitMin = 0;
+        if (level.lowerLimitMin === '') {
+          lowerLimitMin = 0;
+        } else {
+          lowerLimitMin = parseInt(level.lowerLimitMin.substring(1), 10);
+        }
+        if (lowerLimitMin === 0) {
+          if (valueMainMetric >= lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+            colorBorder = level.borderColor;
+          }
+        } else if (this.props.seuil.length === index + 1) {
+          if (valueMainMetric > lowerLimitMin) {
+            colorBorder = level.borderColor;
+          }
+        } else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
           colorBorder = level.borderColor;
         }
-      } else if (this.props.seuil.length === index + 1) {
-        if (valueMainMetric > lowerLimitMin) {
-          colorBorder = level.borderColor;
-        }
-      } else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
-        colorBorder = level.borderColor;
-      }
-
-      index++;
-    });
+        index++;
+      });
+    }
     return colorBorder;
   }
 
@@ -2401,7 +2448,7 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     }
 
     if (this.props.traceBorder) {
-      if (seuil.length > 0) {
+      if (!this.props.colorMode && this.props.seuil.length > 0) {
         if (seuil[0].sizeBorder !== '') {
           sizeBorder = seuil[0].sizeBorder;
         } else {
@@ -2415,29 +2462,28 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
     }
 
     let index = 0;
-
-    seuil.forEach((level: LowerLimitClass) => {
-      let lowerLimitMin = 0;
-
-      if (level.lowerLimitMin === '') {
-        lowerLimitMin = 0;
-      } else {
-        lowerLimitMin = parseInt(level.lowerLimitMin.substring(1), 10);
-      }
-
-      if (lowerLimitMin === 0) {
-        if (valueMainMetric >= lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+    if (this.props.colorMode && this.props.seuil.length > 0) {
+      seuil.forEach((level: LowerLimitClass) => {
+        let lowerLimitMin = 0;
+        if (level.lowerLimitMin === '') {
+          lowerLimitMin = 0;
+        } else {
+          lowerLimitMin = parseInt(level.lowerLimitMin.substring(1), 10);
+        }
+        if (lowerLimitMin === 0) {
+          if (valueMainMetric >= lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+            sizeBorder = level.sizeBorder;
+          }
+        } else if (this.props.seuil.length === index + 1) {
+          if (valueMainMetric > lowerLimitMin) {
+            sizeBorder = level.sizeBorder;
+          }
+        } else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
           sizeBorder = level.sizeBorder;
         }
-      } else if (this.props.seuil.length === index + 1) {
-        if (valueMainMetric > lowerLimitMin) {
-          sizeBorder = level.sizeBorder;
-        }
-      } else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
-        sizeBorder = level.sizeBorder;
-      }
-      index++;
-    });
+        index++;
+      });
+    }
     return sizeBorder;
   }
 
@@ -2892,7 +2938,8 @@ export default class DrawOrientedLink extends React.Component<Props, State> {
       contentTooltip.length === 0 &&
       contentTooltipAuxMetric.length === 0 &&
       contentTooltipMainMetric.length === 0 &&
-      contentTooltipMetaData.length === 0
+      contentTooltipMetaData.length === 0 &&
+      !this.props.linkUrl.hoveringTooltipText
     ) {
       return null;
     }

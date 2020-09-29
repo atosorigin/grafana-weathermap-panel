@@ -4,12 +4,13 @@ import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
 import { TextObject } from 'Models/TextObjectClass';
 
 import InputTextField from 'Functions/Input/inputText';
+import { LinkURLClass } from 'Models/LinkURLClass';
 
 interface Props {
   /** id for coordinate space */
   coordinateSpace: CoordinateSpaceClass;
   /** save data to parent */
-  callBackToParent: (followLink: string, hoveringTooltipLink: string, hoveringTooltipText: string, textObj?: TextObject) => void;
+  callBackToParent: (linkUrl?: LinkURLClass, textObj?: TextObject) => void;
 }
 
 interface State {
@@ -84,7 +85,7 @@ class ManageLink extends React.Component<Props, State> {
    * save data
    */
   callBack = () => {
-    this.props.callBackToParent(this.state.followLink, this.state.hoveringTooltipLink, this.state.hoveringTooltipText, undefined);
+    this.props.callBackToParent(new LinkURLClass(this.state.followLink, this.state.hoveringTooltipLink, this.state.hoveringTooltipText), undefined);
   };
 
   /**
@@ -132,10 +133,10 @@ class ManageLink extends React.Component<Props, State> {
    */
   render() {
     const l10n = require('Localization/en.json');
-
     return (
       <div>
         <InputTextField
+          id="followLink"
           label={l10n.metricPrincipalSetting.followLink}
           name="followLink"
           placeholder={l10n.metricPrincipalSetting.link}

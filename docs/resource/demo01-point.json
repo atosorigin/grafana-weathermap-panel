@@ -80,8 +80,8 @@
       },
       "sizeWidth": "12",
       "textObj": {
-        "colorBack": "",
-        "colorText": "",
+        "colorBack": "black",
+        "colorText": "white",
         "generateAuxiliaryElement": {
           "addColorBackElement": false,
           "addColorTextElement": false,
@@ -195,8 +195,8 @@
       },
       "sizeWidth": "12",
       "textObj": {
-        "colorBack": "",
-        "colorText": "",
+        "colorBack": "rgba(0,0,0,0)",
+        "colorText": "black",
         "generateAuxiliaryElement": {
           "addColorBackElement": false,
           "addColorTextElement": false,

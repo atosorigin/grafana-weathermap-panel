@@ -5,29 +5,29 @@
         "id": 0,
         "lowerLimitMin": "",
         "lowerLimitMax": "",
-        "backColor": "black",
-        "borderColor": "black",
+        "backColor": "#777777",
+        "borderColor": "#BBBBBB",
         "sizeBorder": "2"
       }
     ],
     "textObject": {
       "value": "",
-      "isTextTooltip": false,
-      "colorBack": "black",
+      "isTextTooltip": "false",
+      "colorBack": "red",
       "colorText": "white",
       "style": {
-        "bold": true,
-        "italic": false,
-        "underline": false
+        "bold": "true",
+        "italic": "false",
+        "underline": "false"
       },
-      "generateObjectText": true,
+      "generateObjectText": "true",
       "valueGenerateObjectText": {
         "legendElement": "uneLegend",
         "numericFormatElement": "2",
         "unit": "Hz",
-        "displayObjectInTooltip": true,
-        "addColorTextElement": false,
-        "addColorBackElement": false,
+        "displayObjectInTooltip": "true",
+        "addColorTextElement": "false",
+        "addColorBackElement": "false",
         "colorTextElement": "",
         "colorBackElement": ""
       },
@@ -35,16 +35,16 @@
         "legendElement": "uneLegend",
         "numericFormatElement": "?",
         "unit": "Hz",
-        "displayObjectInTooltip": true,
-        "addColorTextElement": true,
-        "addColorBackElement": true,
+        "displayObjectInTooltip": "true",
+        "addColorTextElement": "true",
+        "addColorBackElement": "true",
         "colorTextElement": "#000000",
         "colorBackElement": "#FFFFFF"
       }
     },
-    "colorMode": false,
-    "traceBack": true,
-    "traceBorder": true
+    "colorMode": "false",
+    "traceBack": "true",
+    "traceBorder": "true"
   },
   "default": {
     "templates": [
@@ -73,11 +73,8 @@
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|labelName#y|labelName",
-          "tooltipA": {
-            "label": "Bottom",
-            "value": "bottom"
-          },
-          "tooltipB": {}
+          "tooltipA": "Bottom",
+          "tooltipB": "Bottom"
         },
         "mainMetric": {
           "key": "",
@@ -92,9 +89,9 @@
         },
         "metrics": [],
         "linkURL": {
-          "followLink": "defaulFiletpass",
-          "hoveringTooltipLink": "defaultFilepass",
-          "hoveringTooltipText": "defaultFilepass"
+          "followLink": "",
+          "hoveringTooltipLink": "",
+          "hoveringTooltipText": ""
         },
         "valueMetric": "",
         "drawGraphicMarker": {
@@ -149,11 +146,8 @@
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|0#y|0",
-          "tooltipA": {
-            "label": "Right",
-            "value": "right"
-          },
-          "tooltipB": {}
+          "tooltipA": "Bottom",
+          "tooltipB": "Bottom"
         },
         "mainMetric": {
           "key": "",
@@ -228,11 +222,8 @@
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|0#y|0",
-          "tooltipA": {
-            "label": "Right",
-            "value": "right"
-          },
-          "tooltipB": {}
+          "tooltipA": "Bottom",
+          "tooltipB": "Bottom"
         },
         "mainMetric": {
           "key": "",

@@ -5,46 +5,46 @@
         "id": 0,
         "lowerLimitMin": "",
         "lowerLimitMax": "",
-        "backColor": "#063eb8",
-        "borderColor": "#06d2d3",
-        "sizeBorder": "3"
+        "backColor": "#0000DD",
+        "borderColor": "#FFCC00",
+        "sizeBorder": "2"
       }
     ],
     "textObject": {
       "value": "",
-      "isTextTooltip": true,
-      "colorBack": "black",
+      "isTextTooltip": "false",
+      "colorBack": "red",
       "colorText": "white",
       "style": {
-        "bold": true,
-        "italic": false,
-        "underline": true
+        "bold": "true",
+        "italic": "false",
+        "underline": "true"
       },
-      "generateObjectText": true,
+      "generateObjectText": "true",
       "valueGenerateObjectText": {
-        "legendElement": "a Legend",
+        "legendElement": "",
         "numericFormatElement": "",
         "unit": "u",
-        "displayObjectInTooltip": false,
-        "addColorTextElement": true,
-        "colorTextElement": "#034ea2",
-        "addColorBackElement": true,
-        "colorBackElement": "#d20607"
+        "displayObjectInTooltip": "false",
+        "addColorTextElement": "true",
+        "colorTextElement": "blue",
+        "addColorBackElement": "true",
+        "colorBackElement": "white"
       },
       "generateAuxiliaryElement": {
         "legendElement": "",
         "numericFormatElement": "?",
         "unit": "t",
-        "displayObjectInTooltip": false,
-        "addColorTextElement": true,
+        "displayObjectInTooltip": "false",
+        "addColorTextElement": "true",
         "colorTextElement": "red",
-        "addColorBackElement": true,
+        "addColorBackElement": "true",
         "colorBackElement": "#999999"
       }
     },
-    "colorMode": false,
-    "traceBack": true,
-    "traceBorder": true
+    "colorMode": "false",
+    "traceBack": "true",
+    "traceBorder": "true"
   },
   "default": {
     "templates": [
@@ -55,29 +55,13 @@
         "xylabelfix": "x|90#y|90",
         "type": "point",
         "name": "unPoint",
-        "meta": [
-          {
-            "meta": "meta exemple",
-            "obj": {
-              "colorText": "#FF00FF",
-              "colorBack": "#CCCCCC",
-              "style": {
-                "bold": false,
-                "italic": false,
-                "underline": true
-              }
-            }
-          }
-        ],
+        "meta": [],
         "label": "mtu ens3",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|labelName#y|labelName",
-          "tooltipA": {
-            "label": "Right",
-            "value": "right"
-          },
-          "tooltipB": {}
+          "tooltipA": "Bottom",
+          "tooltipB": "Bottom"
         },
         "mainMetric": {
           "key": "",
@@ -133,7 +117,7 @@
         "name": "unLink",
         "meta": [
           {
-            "meta": "meta exemple",
+            "meta": "link meta",
             "obj": {
               "colorText": "#FF00FF",
               "colorBack": "#CCCCCC",
@@ -145,15 +129,12 @@
             }
           }
         ],
-        "label": "lien device",
+        "label": "link device",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|0#y|0",
-          "tooltipA": {
-            "label": "Right",
-            "value": "right"
-          },
-          "tooltipB": {}
+          "tooltipA": "Bottom",
+          "tooltipB": "Bottom"
         },
         "mainMetric": {
           "key": "",
@@ -211,32 +192,16 @@
       "filtered": "device|ens3",
       "labelfix": true,
       "xylabel": "",
-      "xylabelfix": "x|100#y|310",
+      "xylabelfix": "x|90#y|310",
       "type": "point",
       "name": "point0",
-      "meta": [
-        {
-          "meta": "meta exemple",
-          "obj": {
-            "colorText": "#FF00FF",
-            "colorBack": "#CCCCCC",
-            "style": {
-              "bold": false,
-              "italic": false,
-              "underline": true
-            }
-          }
-        }
-      ],
+      "meta": [],
       "label": "mtu ens3",
       "positionParameter": {
         "xylabelA": "x|-100#y|0",
         "xylabelB": "x|labelName#y|labelName",
-        "tooltipA": {
-          "label": "Bottom",
-          "value": "bottom"
-        },
-        "tooltipB": {}
+        "tooltipA": "Bottom",
+        "tooltipB": "Bottom"
       },
       "mainMetric": {
         "format": "",
@@ -283,12 +248,12 @@
       "filtered": "device|lo",
       "labelfix": true,
       "xylabel": "",
-      "xylabelfix": "x|350#y|150",
+      "xylabelfix": "x|320#y|180",
       "type": "point",
       "name": "point1",
       "meta": [
         {
-          "meta": "meta exemple",
+          "meta": "link meta",
           "obj": {
             "colorText": "#FF00FF",
             "colorBack": "#CCCCCC",
@@ -304,11 +269,8 @@
       "positionParameter": {
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
-        "tooltipA": {
-          "label": "Bottom",
-          "value": "bottom"
-        },
-        "tooltipB": {}
+        "tooltipA": "Bottom",
+        "tooltipB": "Bottom"
       },
       "mainMetric": {
         "format": "",
@@ -359,7 +321,7 @@
       "xylabelC": "",
       "xylabelfixA": "x|0#y|0",
       "xylabelfixB": "x|250#y|50",
-      "xylabelfixC": "x|#y|",
+      "xylabelfixC": "x|290#y|290",
       "type": "link",
       "name": "orientedLink1",
       "meta": [
@@ -380,22 +342,21 @@
       "positionParameter": {
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
-        "tooltipA": {
-          "label": "Left",
-          "value": "left"
-        },
-        "tooltipB": {}
+        "tooltipA": "Bottom",
+        "tooltipB": "Bottom"
       },
       "mainMetric": {
         "format": "",
         "key": "",
-        "keyValue": ""
-      },
+        "keyValue": "",
+        "manageValue": "avg"
+      },      
       "metrics": [],
       "mainMetricB": {
         "format": "",
         "key": "",
-        "keyValue": ""
+        "keyValue": "",
+        "manageValue": ""        
       },
       "metricsB": [],
       "linkURL": {
@@ -407,18 +368,18 @@
         "label": "Monodirectional",
         "value": "AB"
       },
-      "size": "12",
-      "colorCoordinateA": "#5794F2",
-      "colorCoordinateB": "#E54658",
+      "size": "10",
+      "colorCoordinateA": "#F794F2",
+      "colorCoordinateB": "#E54008",
       "valueMainMetricA": "",
       "valueMainMetricB": "",
-      "pointIn": "mtu lo",
-      "pointOut": "mtu ens3",
+      "pointIn": "mtu ens3",
+      "pointOut": "mtu lo",
       "regionIn": "",
       "regionOut": "",
       "zIndex": 2,
       "isIncurved": {
-        "label": "No",
+        "label": "yes",
         "value": false
       },
       "color": "blue"

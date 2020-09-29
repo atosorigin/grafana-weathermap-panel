@@ -20,7 +20,8 @@ export const getLowerLimit = (coordinate: RegionClass, value: number | null): Lo
 
   if (coordinate.colorMode && value) {
     for (const line of lowerLimit) {
-      const min: string = line.lowerLimitMin.replace('>', '');
+      //const min: string = line.lowerLimitMin.replace('>', '');
+      const min = line.lowerLimitMin.split('')[0] === '>' ? line.lowerLimitMin.substr(1) : line.lowerLimitMin;
       const minFloat: number = parseFloat(min);
       const maxFloat: number = parseFloat(line.lowerLimitMax);
       if ((minFloat <= value || !line.lowerLimitMin) && (maxFloat >= value || !line.lowerLimitMax)) {

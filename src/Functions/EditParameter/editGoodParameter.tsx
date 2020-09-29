@@ -45,7 +45,6 @@ export const limitValueInitialSpace = (coorInitialSpace: string, position: numbe
   //     result = heigthBackground;
   //   }
   // }
-  //console.log(defaultInitialSpace);
   // if (!defaultInitialSpace) {
   //   result = coorInt;
   // } else {

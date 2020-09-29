@@ -20,6 +20,7 @@ import { cloneOrientedLink } from '../../../Functions/initOrientedLink';
 import { PointClass } from 'Models/PointClass';
 import { RegionClass } from 'Models/RegionClass';
 import ManageMetadata from 'components/CoordinateSpace/manageMetada';
+import { LinkURLClass } from 'Models/LinkURLClass';
 /**
  * IProps
  */
@@ -461,7 +462,6 @@ export default class OrientedLink extends React.Component<Props, State> {
           hiddenAlert: true,
         });
       }, waitAlert);
-      //console.log('ok');
     } else {
       this.props.callBackToParent(this.state.orientedLink.id, this.state.orientedLink);
       this.setState({
@@ -480,16 +480,12 @@ export default class OrientedLink extends React.Component<Props, State> {
   };
 
   /** update data for manageLink and textObject */
-  private callBackToOther = (followLink?: string, hoveringTooltipLink?: string, hoveringTooltipText?: string, textObj?: TextObject): void => {
+  private callBackToOther = (linkUrl?: LinkURLClass, textObj?: TextObject): void => {
     const oldCoor: OrientedLinkClass = this.state.orientedLink;
-    if (followLink) {
-      oldCoor.linkURL.followLink = followLink;
-    }
-    if (hoveringTooltipLink) {
-      oldCoor.linkURL.hoveringTooltipLink = hoveringTooltipLink;
-    }
-    if (hoveringTooltipText) {
-      oldCoor.linkURL.hoveringTooltipText = hoveringTooltipText;
+    if (linkUrl) {
+      oldCoor.linkURL.followLink = linkUrl.followLink;
+      oldCoor.linkURL.hoveringTooltipLink = linkUrl.hoveringTooltipLink;
+      oldCoor.linkURL.hoveringTooltipText = linkUrl.hoveringTooltipText;
     }
     if (textObj) {
       oldCoor.textObj = textObj;

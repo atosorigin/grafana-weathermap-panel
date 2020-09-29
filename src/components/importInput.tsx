@@ -545,20 +545,21 @@ class ImportInput extends React.Component<Props, State> {
           key={'MultiUrlDiv' + index.toString()}
           style={{
             display: 'flex',
+            marginTop: '5px',
           }}
         >
           <FormField
             id={index.toString()}
             key={'MultiUrl' + index.toString()}
             label={'Url'}
-            labelWidth={5}
+            labelWidth={10}
             inputWidth={20}
             onChange={this.onMultiListUrlChanged.bind(this)}
             type="string"
             value={url || ''}
           />
           <Button variant="danger" id={index.toString()} key={'ButtunDel' + index.toString()} onClick={this.multiDeletUrl.bind(this)}>
-            Del
+            Delete
           </Button>
         </div>
       ));
@@ -608,7 +609,7 @@ class ImportInput extends React.Component<Props, State> {
           <div style={{ display: 'flex' }}>
             <FormField
               label="Total Url"
-              labelWidth={8}
+              labelWidth={10}
               key={'TotalUrl'}
               inputWidth={20}
               onChange={this.onTotalUrlChanged.bind(this)}
@@ -626,7 +627,7 @@ class ImportInput extends React.Component<Props, State> {
           <div style={{ display: 'flex' }}>
             <FormField
               label="Multi Url"
-              labelWidth={8}
+              labelWidth={10}
               key={'MultiUrl'}
               inputWidth={20}
               onChange={this.onMultiUrlChanged.bind(this)}

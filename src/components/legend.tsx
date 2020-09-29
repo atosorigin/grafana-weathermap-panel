@@ -112,7 +112,6 @@ class LegendComponent extends React.Component<Props, State> {
     this.props.callBackClose();
     // const close = document.getElementById('iconclose');
     // close?.addEventListener('click', () => {
-    //   console.log('goodzone');
 
     //   const disapear = document.getElementById('L');
     //   const appear = document.getElementById('legnd');
@@ -121,7 +120,6 @@ class LegendComponent extends React.Component<Props, State> {
     //   }
     //   appear?.addEventListener('click', () => {
     //     if (disapear) {
-    //       console.log('dam');
     //       disapear.style.visibility = 'visible';
     //     }
     //   });

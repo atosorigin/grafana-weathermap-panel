@@ -47,7 +47,7 @@ interface State {
    */
   dynamicInput: JSX.Element;
   /** input final form */
-  displayInput: boolean;
+  //displayInput: boolean;
 }
 
 /**
@@ -62,7 +62,7 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
       index: 0,
       nbVariation: '3',
       dynamicInput: <br />,
-      displayInput: false,
+      //displayInput: false,
     };
   }
 
@@ -360,9 +360,9 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
       lowerLimit: [],
     });
 
-    this.setState({
-      displayInput: true,
-    });
+    // this.setState({
+    //   displayInput: true,
+    // });
 
     const nb: number = parseInt(this.state.nbVariation, 10);
     await this.addVariation(nb);
@@ -428,12 +428,7 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
   /**
    * debug
    */
-  infoSeuil = () => {
-    // console.group('info');
-    // console.log(this.state.lowerLimit);
-    // console.log(this.state.arrayInputClass);
-    // console.groupEnd();
-  };
+  infoSeuil = () => {};
 
   /**
    * component mount

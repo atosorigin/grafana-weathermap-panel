@@ -55,8 +55,8 @@
         "tooltipPositionB": {}
       },
       "textObj": {
-        "colorBack": "rgba(255, 255, 255, 0)",
-        "colorText": "rgba(0, 0, 0, 1)",
+        "colorBack": "black",
+        "colorText": "white",
         "generateAuxiliaryElement": {
           "addColorBackElement": false,
           "addColorTextElement": false,

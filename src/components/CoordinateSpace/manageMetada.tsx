@@ -7,6 +7,9 @@ import { InputSeriesColorPicker } from 'Functions/Input/inputSeriesColorPicker';
 import { PointClass } from 'Models/PointClass';
 import { OrientedLinkClass } from 'Models/OrientedLinkClass';
 import { RegionClass } from 'Models/RegionClass';
+import { initPoint } from 'Functions/initPoint';
+import { initRegionCoordinateSpace } from 'Functions/initRegionCoordinateSpace';
+import { initOrientedLink } from 'Functions/initOrientedLink';
 // import InputSeriesColorPicker from 'Functions/Input/inputSeriesColorPicker';
 // import StyleComponent, { Style } from './../Parametrage/styleComponent';
 
@@ -34,76 +37,74 @@ class ManageMetadata extends React.Component<Props, State> {
 
   onMetaStrChanged = (event: { currentTarget: HTMLInputElement }) => {
     if (this.props.type === 'point') {
-      let newData: Metadata = this.props.options.arrayPoints[this.props.idCoordinate - 1].meta[parseInt(event.currentTarget.id, 10)];
+      let newData: Metadata = this.getCurrentPoint().meta[parseInt(event.currentTarget.id, 10)];
       newData.meta = event.currentTarget.value;
-      this.props.options.arrayPoints[this.props.idCoordinate - 1].meta[parseInt(event.currentTarget.id, 10)].meta = newData.meta;
+      this.getCurrentPoint().meta[parseInt(event.currentTarget.id, 10)].meta = newData.meta;
       this.props.onOptionsChange({ ...this.props.options, arrayPoints: this.props.options.arrayPoints });
     }
     if (this.props.type === 'region') {
-      let newData: Metadata = this.props.options.regionCoordinateSpace[this.props.idCoordinate - 1].meta[parseInt(event.currentTarget.id, 10)];
+      let newData: Metadata = this.getCurrentRegion().meta[parseInt(event.currentTarget.id, 10)];
       newData.meta = event.currentTarget.value;
-      this.props.options.regionCoordinateSpace[this.props.idCoordinate - 1].meta[parseInt(event.currentTarget.id, 10)].meta = newData.meta;
+      this.getCurrentRegion().meta[parseInt(event.currentTarget.id, 10)].meta = newData.meta;
       this.props.onOptionsChange({ ...this.props.options, regionCoordinateSpace: this.props.options.regionCoordinateSpace });
     }
     if (this.props.type === 'link') {
-      let newData: Metadata = this.props.options.arrayOrientedLinks[this.props.idCoordinate - 1].meta[parseInt(event.currentTarget.id, 10)];
+      let newData: Metadata = this.getCurrentLink().meta[parseInt(event.currentTarget.id, 10)];
       newData.meta = event.currentTarget.value;
-      this.props.options.arrayOrientedLinks[this.props.idCoordinate - 1].meta[parseInt(event.currentTarget.id, 10)].meta = newData.meta;
+      this.getCurrentLink().meta[parseInt(event.currentTarget.id, 10)].meta = newData.meta;
       this.props.onOptionsChange({ ...this.props.options, arrayOrientedLinks: this.props.options.arrayOrientedLinks });
     }
   };
 
   onChangeBackColor = (keyInt: number, color: string) => {
     if (this.props.type === 'point') {
-      const newTextObject: TextObject = this.props.options.arrayPoints[this.props.idCoordinate - 1].meta[keyInt].obj;
+      const newTextObject: TextObject = this.getCurrentPoint().meta[keyInt].obj;
 
       newTextObject.colorBack = color;
-      this.props.options.arrayPoints[this.props.idCoordinate - 1].meta[keyInt].obj = newTextObject;
+      this.getCurrentPoint().meta[keyInt].obj = newTextObject;
       this.props.onOptionsChange({ ...this.props.options, arrayPoints: this.props.options.arrayPoints });
     }
     if (this.props.type === 'link') {
-      const newTextObject: TextObject = this.props.options.arrayOrientedLinks[this.props.idCoordinate - 1].meta[keyInt].obj;
+      const newTextObject: TextObject = this.getCurrentLink().meta[keyInt].obj;
 
       newTextObject.colorBack = color;
-      this.props.options.arrayOrientedLinks[this.props.idCoordinate - 1].meta[keyInt].obj = newTextObject;
+      this.getCurrentLink().meta[keyInt].obj = newTextObject;
       this.props.onOptionsChange({ ...this.props.options, arrayOrientedLinks: this.props.options.arrayOrientedLinks });
     }
     if (this.props.type === 'region') {
-      const newTextObject: TextObject = this.props.options.regionCoordinateSpace[this.props.idCoordinate - 1].meta[keyInt].obj;
+      const newTextObject: TextObject = this.getCurrentRegion().meta[keyInt].obj;
 
       newTextObject.colorBack = color;
-      this.props.options.regionCoordinateSpace[this.props.idCoordinate - 1].meta[keyInt].obj = newTextObject;
+      this.getCurrentRegion().meta[keyInt].obj = newTextObject;
       this.props.onOptionsChange({ ...this.props.options, regionCoordinateSpace: this.props.options.regionCoordinateSpace });
     }
   };
 
   onChangeTextColor = (keyInt: number, color: string) => {
     if (this.props.type === 'point') {
-      const newTextObject: TextObject = this.props.options.arrayPoints[this.props.idCoordinate - 1].meta[keyInt].obj;
+      const newTextObject: TextObject = this.getCurrentPoint().meta[keyInt].obj;
 
       newTextObject.colorText = color;
-      this.props.options.arrayPoints[this.props.idCoordinate - 1].meta[keyInt].obj = newTextObject;
+      this.getCurrentPoint().meta[keyInt].obj = newTextObject;
       this.props.onOptionsChange({ ...this.props.options, arrayPoints: this.props.options.arrayPoints });
     }
     if (this.props.type === 'link') {
-      const newTextObject: TextObject = this.props.options.arrayOrientedLinks[this.props.idCoordinate - 1].meta[keyInt].obj;
+      const newTextObject: TextObject = this.getCurrentLink().meta[keyInt].obj;
 
       newTextObject.colorText = color;
-      this.props.options.arrayOrientedLinks[this.props.idCoordinate - 1].meta[keyInt].obj = newTextObject;
+      this.getCurrentLink().meta[keyInt].obj = newTextObject;
       this.props.onOptionsChange({ ...this.props.options, arrayOrientedLinks: this.props.options.arrayOrientedLinks });
     }
     if (this.props.type === 'region') {
-      const newTextObject: TextObject = this.props.options.regionCoordinateSpace[this.props.idCoordinate - 1].meta[keyInt].obj;
+      const newTextObject: TextObject = this.getCurrentRegion().meta[keyInt].obj;
 
       newTextObject.colorText = color;
-      this.props.options.regionCoordinateSpace[this.props.idCoordinate - 1].meta[keyInt].obj = newTextObject;
+      this.getCurrentRegion().meta[keyInt].obj = newTextObject;
       this.props.onOptionsChange({ ...this.props.options, regionCoordinateSpace: this.props.options.regionCoordinateSpace });
     }
   };
 
   // onChangeBold = (event: SyntheticEvent<HTMLInputElement, Event> | undefined ) => {
-  //   console.log(event?.currentTarget.value)
-  //   console.log(event?.currentTarget)
   //   // if (this.props.type === 'point') {
   //   //   const newTextObject: TextObject = this.props.options.arrayPoints[this.props.idCoordinate - 1].meta[keyInt].obj;
 
@@ -128,11 +129,8 @@ class ManageMetadata extends React.Component<Props, State> {
   // };
 
   // onChangeBold = (index: number, event: any) => {
-  //   console.log('onChangeBold');
-  //   console.log(event.currentTarget);
   //   const divParent
   //   const id = event.currentTarget;
-  //   console.log(id);
   //   if (this.props.type === 'point') {
   //     let newArrayPoint: PointClass[] = this.props.options.arrayPoints;
   //     if (newArrayPoint[this.props.idCoordinate - 1].meta[parseInt(event.currentTarget.id, 10) - 5].obj.style.bold) {
@@ -141,7 +139,6 @@ class ManageMetadata extends React.Component<Props, State> {
   //       newArrayPoint[this.props.idCoordinate - 1].meta[parseInt(event.currentTarget.id, 10) - 5].obj.style.bold = true;
   //     }
   //     this.props.onOptionsChange({ ...this.props.options, arrayPoints: newArrayPoint });
-  //     console.log(newArrayPoint[this.props.idCoordinate - 1].meta[parseInt(event.currentTarget.id, 10) - 5].obj.style.bold)
   //   }
   // }
 
@@ -176,7 +173,7 @@ class ManageMetadata extends React.Component<Props, State> {
         }
       );
       let meta = this.state.newMeta;
-      this.props.options.arrayPoints[this.props.idCoordinate - 1].meta.push({ meta, obj });
+      this.getCurrentPoint().meta.push({ meta, obj });
       this.props.onOptionsChange({ ...this.props.options, arrayPoints: this.props.options.arrayPoints });
       this.setState({ newMeta: '' });
     }
@@ -210,7 +207,7 @@ class ManageMetadata extends React.Component<Props, State> {
         }
       );
       let meta = this.state.newMeta;
-      this.props.options.arrayOrientedLinks[this.props.idCoordinate - 1].meta.push({ meta, obj });
+      this.getCurrentLink().meta.push({ meta, obj });
       this.props.onOptionsChange({ ...this.props.options, arrayOrientedLinks: this.props.options.arrayOrientedLinks });
       this.setState({ newMeta: '' });
     }
@@ -244,17 +241,48 @@ class ManageMetadata extends React.Component<Props, State> {
         }
       );
       let meta = this.state.newMeta;
-      this.props.options.regionCoordinateSpace[this.props.idCoordinate - 1].meta.push({ meta, obj });
+      this.getCurrentRegion().meta.push({ meta, obj });
       this.props.onOptionsChange({ ...this.props.options, regionCoordinateSpace: this.props.options.regionCoordinateSpace });
       this.setState({ newMeta: '' });
     }
   };
 
+  getCurrentPoint = (): PointClass => {
+    let point: PointClass = initPoint(0);
+    this.props.options.arrayPoints.forEach((pointToFind) => {
+      if (pointToFind.id === this.props.idCoordinate) {
+        point = pointToFind;
+      }
+    });
+    return point;
+  };
+
+  getCurrentRegion = (): RegionClass => {
+    let region: RegionClass = initRegionCoordinateSpace(0);
+    this.props.options.regionCoordinateSpace.forEach((regionToFind) => {
+      if (regionToFind.id === this.props.idCoordinate) {
+        region = regionToFind;
+      }
+    });
+    return region;
+  };
+
+  getCurrentLink = (): OrientedLinkClass => {
+    let link: OrientedLinkClass = initOrientedLink(0, 0);
+    this.props.options.arrayOrientedLinks.forEach((linkToFind) => {
+      if (linkToFind.id === this.props.idCoordinate) {
+        link = linkToFind;
+      }
+    });
+    return link;
+  };
+
   // element for one Meta
   displayMetaList = (props: any): JSX.Element => {
     const l10n = require('Localization/en.json');
-    if (props.type === 'point') {
-      const list = this.props.options.arrayPoints[this.props.idCoordinate - 1].meta.map((meta: Metadata, index: number) => (
+    if (props.type === 'point' && this.props.options.arrayPoints.length !== 0) {
+      let point: PointClass = this.getCurrentPoint();
+      const list = point.meta.map((meta: Metadata, index: number) => (
         <div
           key={'point' + this.props.idCoordinate + 'EditorMetadata'}
           style={{
@@ -274,7 +302,7 @@ class ManageMetadata extends React.Component<Props, State> {
               variant={'danger'}
               onClick={() => {
                 let newArrayPoints: PointClass[] = this.props.options.arrayPoints;
-                newArrayPoints[this.props.idCoordinate - 1].meta.splice(index, 1);
+                this.getCurrentPoint().meta.splice(index, 1);
                 this.props.onOptionsChange({ ...this.props.options, arrayPoints: newArrayPoints });
               }}
             >
@@ -334,10 +362,10 @@ class ManageMetadata extends React.Component<Props, State> {
                   checked={meta.obj.style.bold}
                   onChange={() => {
                     let newArrayPoint: PointClass[] = this.props.options.arrayPoints;
-                    if (newArrayPoint[this.props.idCoordinate - 1].meta[index].obj.style.bold) {
-                      newArrayPoint[this.props.idCoordinate - 1].meta[index].obj.style.bold = false;
+                    if (this.getCurrentPoint().meta[index].obj.style.bold) {
+                      this.getCurrentPoint().meta[index].obj.style.bold = false;
                     } else {
-                      newArrayPoint[this.props.idCoordinate - 1].meta[index].obj.style.bold = true;
+                      this.getCurrentPoint().meta[index].obj.style.bold = true;
                     }
                     this.props.onOptionsChange({ ...this.props.options, arrayPoints: newArrayPoint });
                   }}
@@ -350,10 +378,10 @@ class ManageMetadata extends React.Component<Props, State> {
                   checked={meta.obj.style.italic}
                   onChange={() => {
                     let newArrayPoint: PointClass[] = this.props.options.arrayPoints;
-                    if (newArrayPoint[this.props.idCoordinate - 1].meta[index].obj.style.italic) {
-                      newArrayPoint[this.props.idCoordinate - 1].meta[index].obj.style.italic = false;
+                    if (this.getCurrentPoint().meta[index].obj.style.italic) {
+                      this.getCurrentPoint().meta[index].obj.style.italic = false;
                     } else {
-                      newArrayPoint[this.props.idCoordinate - 1].meta[index].obj.style.italic = true;
+                      this.getCurrentPoint().meta[index].obj.style.italic = true;
                     }
                     this.props.onOptionsChange({ ...this.props.options, arrayPoints: newArrayPoint });
                   }}
@@ -366,10 +394,10 @@ class ManageMetadata extends React.Component<Props, State> {
                   checked={meta.obj.style.underline}
                   onChange={() => {
                     let newArrayPoint: PointClass[] = this.props.options.arrayPoints;
-                    if (newArrayPoint[this.props.idCoordinate - 1].meta[index].obj.style.underline) {
-                      newArrayPoint[this.props.idCoordinate - 1].meta[index].obj.style.underline = false;
+                    if (this.getCurrentPoint().meta[index].obj.style.underline) {
+                      this.getCurrentPoint().meta[index].obj.style.underline = false;
                     } else {
-                      newArrayPoint[this.props.idCoordinate - 1].meta[index].obj.style.underline = true;
+                      this.getCurrentPoint().meta[index].obj.style.underline = true;
                     }
                     this.props.onOptionsChange({ ...this.props.options, arrayPoints: newArrayPoint });
                   }}
@@ -381,10 +409,11 @@ class ManageMetadata extends React.Component<Props, State> {
       ));
       return <div>{list}</div>;
     }
-    if (props.type === 'region') {
-      const list = this.props.options.regionCoordinateSpace[props.id].meta.map((meta: Metadata, index: number) => (
+    if (props.type === 'region' && this.props.options.regionCoordinateSpace.length !== 0) {
+      let region: RegionClass = this.getCurrentRegion();
+      const list = region.meta.map((meta: Metadata, index: number) => (
         <div
-          key={'region' + this.props.idCoordinate + 'EditorMetadata'}
+          key={'region' + this.props.idCoordinate + 'EditorMetadata' + index}
           style={{
             marginTop: '5px',
             border: '1px solid black',
@@ -403,7 +432,7 @@ class ManageMetadata extends React.Component<Props, State> {
               variant={'danger'}
               onClick={() => {
                 let newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
-                newArrayRegion[this.props.idCoordinate - 1].meta.splice(index, 1);
+                this.getCurrentRegion().meta.splice(index, 1);
                 this.props.onOptionsChange({ ...this.props.options, regionCoordinateSpace: newArrayRegion });
               }}
             >
@@ -462,10 +491,10 @@ class ManageMetadata extends React.Component<Props, State> {
                   checked={meta.obj.style.bold}
                   onChange={() => {
                     let newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
-                    if (newArrayRegion[this.props.idCoordinate - 1].meta[index].obj.style.bold) {
-                      newArrayRegion[this.props.idCoordinate - 1].meta[index].obj.style.bold = false;
+                    if (this.getCurrentRegion().meta[index].obj.style.bold) {
+                      this.getCurrentRegion().meta[index].obj.style.bold = false;
                     } else {
-                      newArrayRegion[this.props.idCoordinate - 1].meta[index].obj.style.bold = true;
+                      this.getCurrentRegion().meta[index].obj.style.bold = true;
                     }
                     this.props.onOptionsChange({ ...this.props.options, regionCoordinateSpace: newArrayRegion });
                   }}
@@ -478,10 +507,10 @@ class ManageMetadata extends React.Component<Props, State> {
                   checked={meta.obj.style.italic}
                   onChange={() => {
                     let newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
-                    if (newArrayRegion[this.props.idCoordinate - 1].meta[index].obj.style.italic) {
-                      newArrayRegion[this.props.idCoordinate - 1].meta[index].obj.style.italic = false;
+                    if (this.getCurrentRegion().meta[index].obj.style.italic) {
+                      this.getCurrentRegion().meta[index].obj.style.italic = false;
                     } else {
-                      newArrayRegion[this.props.idCoordinate - 1].meta[index].obj.style.italic = true;
+                      this.getCurrentRegion().meta[index].obj.style.italic = true;
                     }
                     this.props.onOptionsChange({ ...this.props.options, regionCoordinateSpace: newArrayRegion });
                   }}
@@ -494,10 +523,10 @@ class ManageMetadata extends React.Component<Props, State> {
                   checked={meta.obj.style.underline}
                   onChange={() => {
                     let newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
-                    if (newArrayRegion[this.props.idCoordinate - 1].meta[index].obj.style.underline) {
-                      newArrayRegion[this.props.idCoordinate - 1].meta[index].obj.style.underline = false;
+                    if (this.getCurrentRegion().meta[index].obj.style.underline) {
+                      this.getCurrentRegion().meta[index].obj.style.underline = false;
                     } else {
-                      newArrayRegion[this.props.idCoordinate - 1].meta[index].obj.style.underline = true;
+                      this.getCurrentRegion().meta[index].obj.style.underline = true;
                     }
                     this.props.onOptionsChange({ ...this.props.options, regionCoordinateSpace: newArrayRegion });
                   }}
@@ -509,8 +538,9 @@ class ManageMetadata extends React.Component<Props, State> {
       ));
       return <div>{list}</div>;
     }
-    if (props.type === 'link') {
-      const list = this.props.options.arrayOrientedLinks[props.id].meta.map((meta: Metadata, index: number) => (
+    if (props.type === 'link' && this.props.options.arrayOrientedLinks.length !== 0) {
+      let link: OrientedLinkClass = this.getCurrentLink();
+      const list = link.meta.map((meta: Metadata, index: number) => (
         <div
           key={'link' + this.props.idCoordinate + 'EditorMetadata'}
           style={{
@@ -530,7 +560,7 @@ class ManageMetadata extends React.Component<Props, State> {
               variant={'danger'}
               onClick={() => {
                 let newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
-                newArrayOrientedLink[this.props.idCoordinate - 1].meta.splice(index, 1);
+                this.getCurrentLink().meta.splice(index, 1);
                 this.props.onOptionsChange({ ...this.props.options, arrayOrientedLinks: newArrayOrientedLink });
               }}
             >
@@ -590,10 +620,10 @@ class ManageMetadata extends React.Component<Props, State> {
                   checked={meta.obj.style.bold}
                   onChange={() => {
                     let newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
-                    if (newArrayOrientedLink[this.props.idCoordinate - 1].meta[index].obj.style.bold) {
-                      newArrayOrientedLink[this.props.idCoordinate - 1].meta[index].obj.style.bold = false;
+                    if (this.getCurrentLink().meta[index].obj.style.bold) {
+                      this.getCurrentLink().meta[index].obj.style.bold = false;
                     } else {
-                      newArrayOrientedLink[this.props.idCoordinate - 1].meta[index].obj.style.bold = true;
+                      this.getCurrentLink().meta[index].obj.style.bold = true;
                     }
                     this.props.onOptionsChange({ ...this.props.options, arrayOrientedLinks: newArrayOrientedLink });
                   }}
@@ -606,10 +636,10 @@ class ManageMetadata extends React.Component<Props, State> {
                   checked={meta.obj.style.italic}
                   onChange={() => {
                     let newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
-                    if (newArrayOrientedLink[this.props.idCoordinate - 1].meta[index].obj.style.italic) {
-                      newArrayOrientedLink[this.props.idCoordinate - 1].meta[index].obj.style.italic = false;
+                    if (this.getCurrentLink().meta[index].obj.style.italic) {
+                      this.getCurrentLink().meta[index].obj.style.italic = false;
                     } else {
-                      newArrayOrientedLink[this.props.idCoordinate - 1].meta[index].obj.style.italic = true;
+                      this.getCurrentLink().meta[index].obj.style.italic = true;
                     }
                     this.props.onOptionsChange({ ...this.props.options, arrayOrientedLinks: newArrayOrientedLink });
                   }}
@@ -622,10 +652,10 @@ class ManageMetadata extends React.Component<Props, State> {
                   checked={meta.obj.style.underline}
                   onChange={() => {
                     let newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
-                    if (newArrayOrientedLink[this.props.idCoordinate - 1].meta[index].obj.style.underline) {
-                      newArrayOrientedLink[this.props.idCoordinate - 1].meta[index].obj.style.underline = false;
+                    if (this.getCurrentLink().meta[index].obj.style.underline) {
+                      this.getCurrentLink().meta[index].obj.style.underline = false;
                     } else {
-                      newArrayOrientedLink[this.props.idCoordinate - 1].meta[index].obj.style.underline = true;
+                      this.getCurrentLink().meta[index].obj.style.underline = true;
                     }
                     this.props.onOptionsChange({ ...this.props.options, arrayOrientedLinks: newArrayOrientedLink });
                   }}

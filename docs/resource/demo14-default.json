@@ -12,39 +12,39 @@
     ],
     "textObject": {
       "value": "",
-      "isTextTooltip": false,
+      "isTextTooltip": "true",
       "colorBack": "#000000",
       "colorText": "#FFFFFF",
       "style": {
-        "bold": false,
-        "italic": false,
-        "underline": true
+        "bold": "false",
+        "italic": "false",
+        "underline": "false"
       },
-      "generateObjectText": true,
+      "generateObjectText": "true",
       "valueGenerateObjectText": {
-        "legendElement": "welcome",
+        "legendElement": "",
         "numericFormatElement": "2",
         "unit": "Hz",
-        "displayObjectInTooltip": true,
-        "addColorTextElement": false,
-        "addColorBackElement": false,
-        "colorTextElement": "",
-        "colorBackElement": ""
+        "displayObjectInTooltip": "false",
+        "addColorTextElement": "true",
+        "addColorBackElement": "true",
+        "colorTextElement": "#000000",
+        "colorBackElement": "#FFFFFF"
       },
       "generateAuxiliaryElement": {
-        "legendElement": "Legend Auxiliary",
+        "legendElement": "Auxiliary",
         "numericFormatElement": "?",
         "unit": "Hz",
-        "displayObjectInTooltip": true,
-        "addColorTextElement": true,
-        "addColorBackElement": true,
+        "displayObjectInTooltip": "true",
+        "addColorTextElement": "true",
+        "addColorBackElement": "true",
         "colorTextElement": "#000000",
         "colorBackElement": "#FFFFFF"
       }
     },
-    "colorMode": false,
-    "traceBack": false,
-    "traceBorder": false
+    "colorMode": "false",
+    "traceBack": "true",
+    "traceBorder": "true"
   },
   "default": {
     "templates": [

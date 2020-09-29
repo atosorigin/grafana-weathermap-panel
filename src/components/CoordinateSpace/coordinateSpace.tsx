@@ -27,6 +27,7 @@ import ManageAuxiliaryQuery from './manageAuxiliaryQuery';
 
 import ManageMetadata from '../../components/CoordinateSpace/manageMetada';
 import PositionParameter from 'components/Parametrage/positionParameters';
+import { LinkURLClass } from 'Models/LinkURLClass';
 
 export declare type AlertVariant = 'success' | 'warning' | 'error' | 'info';
 
@@ -126,6 +127,18 @@ class CoordinateSpace extends React.Component<Props, State> {
     if (del) {
       this.props.callBackToParent(this.state.arrayCoor.id, undefined);
     }
+
+    // update by default SVG style after delete regionSVG
+    if (this.state.arrayCoor.idSVG) {
+      const htmlRegionSVG = document.getElementById(this.state.arrayCoor.idSVG);
+      if (htmlRegionSVG) {
+        htmlRegionSVG.style.fill = 'white';
+        htmlRegionSVG.style.fillOpacity = '';
+        htmlRegionSVG.style.stroke = 'white';
+        htmlRegionSVG.style.strokeOpacity = '';
+        htmlRegionSVG.style.strokeWidth = '';
+      }
+    }
   };
 
   /**
@@ -144,11 +157,9 @@ class CoordinateSpace extends React.Component<Props, State> {
     const widthInitialSpace = xMaxInitialSpace - xMinInitialSpace;
     let newCoordDefault: Coord4D = tmp.coordsDefault;
     if (name.startsWith('positionXMin')) {
-      // console.log('update xMin');
       newCoordDefault.xMin = (((parseInt(currentTarget, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
     }
     if (name.startsWith('positionXMax')) {
-      // console.log('update xMax');
       newCoordDefault.xMax = (((parseInt(currentTarget, 10) - xMinInitialSpace) / widthInitialSpace) * widthBackground).toString();
     }
 
@@ -158,14 +169,11 @@ class CoordinateSpace extends React.Component<Props, State> {
     const yMaxInitialSpace = parseInt(this.props.options.coordinateSpaceInitial.coordinate.yMax, 10);
     const heightInitialSpace = yMaxInitialSpace - yMinInitialSpace;
     if (name.startsWith('positionYMin')) {
-      // console.log('update yMin');
       newCoordDefault.yMin = (((parseInt(currentTarget, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
     }
     if (name.startsWith('positionYMax')) {
-      // console.log('update yMax');
       newCoordDefault.yMax = (((parseInt(currentTarget, 10) - yMinInitialSpace) / heightInitialSpace) * heightBackground).toString();
     }
-    // console.log(newCoordDefault);
     tmp.coordsDefault = newCoordDefault;
 
     tmp = editGoodParameterExtend(name, tmp, currentTarget);
@@ -305,7 +313,6 @@ class CoordinateSpace extends React.Component<Props, State> {
           hiddenAlert: true,
         });
       }, waitAlert);
-      //console.log('ok');
     } else {
       this.props.callBackToParent(this.state.arrayCoor.id, this.state.arrayCoor);
       this.setState({
@@ -324,16 +331,21 @@ class CoordinateSpace extends React.Component<Props, State> {
   };
 
   /** save data in parent */
-  callBackToOther = (followLink?: string, hoveringTooltipLink?: string, hoveringTooltipText?: string, textObj?: TextObject): void => {
+  callBackToOther = (linkUrl?: LinkURLClass, textObj?: TextObject): void => {
     const oldCoor: RegionClass = this.state.arrayCoor;
-    if (followLink || followLink === '') {
-      oldCoor.linkURL.followLink = followLink;
-    }
-    if (hoveringTooltipLink || hoveringTooltipLink === '') {
-      oldCoor.linkURL.hoveringTooltipLink = hoveringTooltipLink;
-    }
-    if (hoveringTooltipText || hoveringTooltipText === '') {
-      oldCoor.linkURL.hoveringTooltipText = hoveringTooltipText;
+    // if (followLink || followLink === '') {
+    //   oldCoor.linkURL.followLink = followLink;
+    // }
+    // if (hoveringTooltipLink || hoveringTooltipLink === '') {
+    //   oldCoor.linkURL.hoveringTooltipLink = hoveringTooltipLink;
+    // }
+    // if (hoveringTooltipText || hoveringTooltipText === '') {
+    //   oldCoor.linkURL.hoveringTooltipText = hoveringTooltipText;
+    // }
+    if (linkUrl) {
+      oldCoor.linkURL.followLink = linkUrl.followLink;
+      oldCoor.linkURL.hoveringTooltipLink = linkUrl.hoveringTooltipLink;
+      oldCoor.linkURL.hoveringTooltipText = linkUrl.hoveringTooltipText;
     }
     if (textObj) {
       oldCoor.textObj = textObj;
@@ -532,17 +544,18 @@ class CoordinateSpace extends React.Component<Props, State> {
             />
           </div>
         )}
-        <div>
-          {/* meta */}
-          <ManageMetadata
-            options={this.props.options}
-            onOptionsChange={this.props.onOptionsChange}
-            data={this.props.data}
-            idCoordinate={this.state.arrayCoor.id}
-            type="region"
-            saveToParent={this.saveMetaData}
-          />
-        </div>
+        {!this.props.isAddCoordinate && (
+          <div>
+            <ManageMetadata
+              options={this.props.options}
+              onOptionsChange={this.props.onOptionsChange}
+              data={this.props.data}
+              idCoordinate={this.state.arrayCoor.id}
+              type="region"
+              saveToParent={this.saveMetaData}
+            />
+          </div>
+        )}
         <div>
           <ParametresGeneriques
             options={this.props.options}
@@ -666,7 +679,6 @@ class CoordinateSpace extends React.Component<Props, State> {
             </Button>
           )}
         </div>
-        {/* <Button onClick={() => console.log(this.state.arrayCoor)}>load</Button> */}
       </div>
     );
   }

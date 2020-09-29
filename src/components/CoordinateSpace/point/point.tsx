@@ -20,6 +20,7 @@ import ParametresGeneriques from '../../Parametrage/parametresGeneriques';
 import ManageLowerLimit from '../../Parametrage/manageLowerLimit';
 import { clonePoint } from 'Functions/initPoint';
 import ManageMetadata from 'components/CoordinateSpace/manageMetada';
+import { LinkURLClass } from 'Models/LinkURLClass';
 
 /**
  * IProps
@@ -47,7 +48,7 @@ interface State {
   /** */
   arrayInput: ArrayInputSelectableClass[];
   /** */
-  arrayPointClass: PointClass[];
+  //arrayPointClass: PointClass[];
   /** */
   point: PointClass;
   /** */
@@ -86,7 +87,7 @@ export default class Point extends React.Component<Props, State> {
         parseInt(this.props.options.baseMap.height, 10)
       ),
       arrayInput: [],
-      arrayPointClass: [],
+      //arrayPointClass: [],
       htmlInput: <div></div>,
       hiddenAlert: true,
       titleAlert: 'Error: label is empty',
@@ -329,16 +330,12 @@ export default class Point extends React.Component<Props, State> {
     }
   };
 
-  private callBackToOther = (followLink?: string, hoveringTooltipLink?: string, hoveringTooltipText?: string, textObj?: TextObject): void => {
+  private callBackToOther = (linkUrl?: LinkURLClass, textObj?: TextObject): void => {
     const oldCoor: PointClass = this.state.point;
-    if (followLink) {
-      oldCoor.linkURL.followLink = followLink;
-    }
-    if (hoveringTooltipLink) {
-      oldCoor.linkURL.hoveringTooltipLink = hoveringTooltipLink;
-    }
-    if (hoveringTooltipText) {
-      oldCoor.linkURL.hoveringTooltipText = hoveringTooltipText;
+    if (linkUrl) {
+      oldCoor.linkURL.followLink = linkUrl.followLink;
+      oldCoor.linkURL.hoveringTooltipLink = linkUrl.hoveringTooltipLink;
+      oldCoor.linkURL.hoveringTooltipText = linkUrl.hoveringTooltipText;
     }
     if (textObj) {
       oldCoor.textObj = textObj;
@@ -473,17 +470,18 @@ export default class Point extends React.Component<Props, State> {
             />
           </div>
         )}
-        <div>
-          {/* meta */}
-          <ManageMetadata
-            options={this.props.options}
-            onOptionsChange={this.props.onOptionsChange}
-            data={this.props.data}
-            idCoordinate={this.state.point.id}
-            type="point"
-            saveToParent={this.saveMetaData}
-          />
-        </div>
+        {!this.props.isAddPoint && (
+          <div>
+            <ManageMetadata
+              options={this.props.options}
+              onOptionsChange={this.props.onOptionsChange}
+              data={this.props.data}
+              idCoordinate={this.state.point.id}
+              type="point"
+              saveToParent={this.saveMetaData}
+            />
+          </div>
+        )}
         <div>
           <ParametresGeneriques
             options={this.props.options}

@@ -1,18 +1,15 @@
 # Changelog
 
-## v1.0.2a3 (2020-08-04)
+## v1.0.2 (2020-09-24)
 
+- Add gabarit
+- Add meta data
+- Update documentation
 - Update init space
+- Update zoom
+- Update UI
+- fixed import file
 - fixed SUM to query
-
-## v1.0.2a2 (2020-07-28)
-
-- Add gabarit
-
-## v1.0.2a1 (2020-07-21)
-
-- Update init space
-- Add gabarit
 
 ## [v1.0.1](https://github.com/atosorigin/grafana-weathermap-panel/releases/tag/1.0.1) (2020-05-21)
 

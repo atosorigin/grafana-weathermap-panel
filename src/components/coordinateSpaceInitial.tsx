@@ -119,17 +119,6 @@ class CoordinateSpaceInitialClass extends React.Component<Props, State> {
   //   return result;
   // };
 
-  componentDidMount = () => {
-    // console.log('initialSpace');
-    // this.props.options.coordinateSpaceInitial.coordinate.xMax = this.props.options.baseMap.width;
-    // this.props.options.coordinateSpaceInitial.coordinate.yMax = this.props.options.baseMap.height;
-  };
-
-  componentDidUpdate = () => {
-    // if (this.props.options.)
-    // console.log('update initialSPace');
-  };
-
   /**
    * HTML render
    */

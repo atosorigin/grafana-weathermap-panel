@@ -15,7 +15,7 @@
         "id": 1,
         "lowerLimitMax": "40",
         "lowerLimitMin": ">20",
-        "sizeBorder": "10"
+        "sizeBorder": "6"
       },
       {
         "backColor": "#E0B400",
@@ -23,7 +23,7 @@
         "id": 2,
         "lowerLimitMax": "60",
         "lowerLimitMin": ">40",
-        "sizeBorder": "10"
+        "sizeBorder": "7"
       },
       {
         "backColor": "#FA6400",
@@ -31,7 +31,7 @@
         "id": 3,
         "lowerLimitMax": "80",
         "lowerLimitMin": ">60",
-        "sizeBorder": "10"
+        "sizeBorder": "8"
       },
       {
         "backColor": "#C4162A",
@@ -39,44 +39,44 @@
         "id": 4,
         "lowerLimitMax": "",
         "lowerLimitMin": ">80",
-        "sizeBorder": "10"
+        "sizeBorder": "9"
       }
     ],
     "textObject": {
       "value": "",
-      "isTextTooltip": true,
+      "isTextTooltip": "true",
       "colorBack": "red",
       "colorText": "yellow",
       "style": {
-        "bold": true,
-        "italic": false,
-        "underline": true
+        "bold": "true",
+        "italic": "true",
+        "underline": "true"
       },
-      "generateObjectText": true,
+      "generateObjectText": "true",
       "valueGenerateObjectText": {
         "legendElement": "",
         "numericFormatElement": "5",
         "unit": "s",
-        "displayObjectInTooltip": true,
-        "addColorTextElement": true,
+        "displayObjectInTooltip": "false",
+        "addColorTextElement": "true",
         "colorTextElement": "blue",
-        "addColorBackElement": "#FF00FF",
+        "addColorBackElement": "",
         "colorBackElement": "white"
       },
       "generateAuxiliaryElement": {
         "legendElement": "",
-        "numericFormatElement": "",
+        "numericFormatElement": "3",
         "unit": "s",
-        "displayObjectInTooltip": true,
-        "addColorTextElement": true,
+        "displayObjectInTooltip": "",
+        "addColorTextElement": "",
         "colorTextElement": "blue",
-        "addColorBackElement": "#E0FF0F",
+        "addColorBackElement": "",
         "colorBackElement": "#999999"
       }
     },
-    "colorMode": true,
-    "traceBack": true,
-    "traceBorder": true
+    "colorMode": "true",
+    "traceBack": "true",
+    "traceBorder": "true"
   },
   "default": {
     "templates": [
@@ -84,7 +84,7 @@
         "filtered": "quantile|0.5#slice|inner_eval",
         "labelfix": false,
         "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
-        "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+        "xylabelfix": "",
         "type": "region",
         "meta": [
           {
@@ -106,7 +106,7 @@
           "xylabelB": "x|0#y|0",
           "tooltipA": {
             "label": "Right",
-            "value": "right"
+            "value": "Right"
           },
           "tooltipB": {}
         },
@@ -140,11 +140,11 @@
       "filtered": "quantile|0.5#slice|inner_eval",
       "labelfix": false,
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
-      "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "xylabelfix": "",
       "type": "region",
       "meta": [
         {
-          "meta": "meta exemple",
+          "meta": "message",
           "obj": {
             "colorText": "#FF00FF",
             "colorBack": "#CCCCCC",
@@ -158,11 +158,11 @@
       ],
       "label": "0.5-inner_eval",
       "positionParameter": {
-        "xylabelA": "x|0#y|0",
+        "xylabelA": "x|0#y|20",
         "xylabelB": "x|0#y|0",
         "tooltipA": {
-          "label": "Bottom",
-          "value": "BOTTOM"
+          "label": "Left",
+          "value": "left"
         },
         "tooltipB": {}
       },
@@ -192,14 +192,14 @@
       "filtered": "quantile|0.5#slice|prepare_time",
       "labelfix": false,
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
-      "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "xylabelfix": "",
       "type": "region",
       "meta": [
         {
-          "meta": "meta exemple",
+          "meta": "meta 0.5-prepare_time",
           "obj": {
             "colorText": "green",
-            "colorBack": "#000000",
+            "colorBack": "#006600",
             "style": {
               "bold": false,
               "italic": true,
@@ -210,11 +210,11 @@
       ],
       "label": "0.5-prepare_time",
       "positionParameter": {
-        "xylabelA": "x|0#y|0",
+        "xylabelA": "x|0#y|20",
         "xylabelB": "x|0#y|0",
         "tooltipA": {
-          "label": "Bottom",
-          "value": "boTTom"
+          "label": "Left",
+          "value": "left"
         },
         "tooltipB": {}
       },
@@ -244,14 +244,14 @@
       "filtered": "quantile|0.5#slice|queue_time",
       "labelfix": false,
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
-      "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "xylabelfix": "",
       "type": "region",
       "meta": [
         {
-          "meta": "meta exemple",
+          "meta": "meta 0.5-queue_time",
           "obj": {
             "colorText": "red",
-            "colorBack": "#000000",
+            "colorBack": "black",
             "style": {
               "bold": false,
               "italic": false,
@@ -262,11 +262,11 @@
       ],
       "label": "0.5-queue_time",
       "positionParameter": {
-        "xylabelA": "x|0#y|0",
+        "xylabelA": "x|0#y|20",
         "xylabelB": "x|0#y|0",
         "tooltipA": {
-          "label": "Bottom",
-          "value": "bOTtom"
+          "label": "Left",
+          "value": "left"
         },
         "tooltipB": {}
       },
@@ -294,13 +294,13 @@
     },
     {
       "filtered": "quantile|0.9#slice|inner_eval",
-      "labelfix": true,
+      "labelfix": false,
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
-      "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "xylabelfix": "",
       "type": "region",
       "meta": [
         {
-          "meta": "meta exemple",
+          "meta": "meta 0.9-inner_eval",
           "obj": {
             "colorText": "yellow",
             "colorBack": "#000000",
@@ -314,9 +314,12 @@
       ],
       "label": "0.9-inner_eval",
       "positionParameter": {
-        "xylabelA": "x|0#y|0",
+        "xylabelA": "x|0#y|10",
         "xylabelB": "x|0#y|0",
-        "tooltipA": {},
+        "tooltipA": {
+          "label": "Top",
+          "value": "top"
+        },
         "tooltipB": {}
       },
       "mainMetric": {
@@ -349,7 +352,7 @@
       "type": "region",
       "meta": [
         {
-          "meta": "meta exemple",
+          "meta": "meta 0.9-prepare_time",
           "obj": {
             "colorText": "orange",
             "colorBack": "#000000",
@@ -363,9 +366,12 @@
       ],
       "label": "0.9-prepare_time",
       "positionParameter": {
-        "xylabelA": "x|0#y|0",
+        "xylabelA": "x|0#y|10",
         "xylabelB": "x|0#y|0",
-        "tooltipA": {},
+        "tooltipA": {
+          "label": "Top",
+          "value": "top"
+        },
         "tooltipB": {}
       },
       "mainMetric": {
@@ -398,7 +404,7 @@
       "type": "region",
       "meta": [
         {
-          "meta": "meta exemple",
+          "meta": "meta 0.9-queue_time",
           "obj": {
             "colorText": "white",
             "colorBack": "#000000",
@@ -412,9 +418,12 @@
       ],
       "label": "0.9-queue_time",
       "positionParameter": {
-        "xylabelA": "x|0#y|0",
+        "xylabelA": "x|0#y|10",
         "xylabelB": "x|0#y|0",
-        "tooltipA": {},
+        "tooltipA": {
+          "label": "Top",
+          "value": "top"
+        },
         "tooltipB": {}
       },
       "mainMetric": {
@@ -447,7 +456,7 @@
       "type": "region",
       "meta": [
         {
-          "meta": "meta exemple",
+          "meta": "meta 0.99-inner_eval",
           "obj": {
             "colorText": "white",
             "colorBack": "#000000",
@@ -464,8 +473,8 @@
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
         "tooltipA": {
-          "label": "Right",
-          "value": "right"
+          "label": "Bottom",
+          "value": "bottom"
         },
         "tooltipB": {}
       },
@@ -495,14 +504,14 @@
       "filtered": "quantile|0.99#slice|prepare_time",
       "labelfix": false,
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
-      "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+      "xylabelfix": "",
       "type": "region",
       "meta": [
         {
-          "meta": "meta exemple",
+          "meta": "meta 0.99-prepare_time",
           "obj": {
             "colorText": "blue",
-            "colorBack": "orange",
+            "colorBack": "#999999",
             "style": {
               "bold": true,
               "italic": false,
@@ -516,8 +525,8 @@
         "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
         "tooltipA": {
-          "label": "Top",
-          "value": "Top"
+          "label": "Bottom",
+          "value": "bottom"
         },
         "tooltipB": {}
       },
@@ -551,7 +560,7 @@
       "type": "region",
       "meta": [
         {
-          "meta": "meta exemple",
+          "meta": "meta 0.99-queue_time",
           "obj": {
             "colorText": "#FF00FF",
             "colorBack": "#CCCCCC",
@@ -565,11 +574,11 @@
       ],
       "label": "0.99-queue_time",
       "positionParameter": {
-        "xylabelA": "x|-50#y|-50",
+        "xylabelA": "x|0#y|0",
         "xylabelB": "x|0#y|0",
         "tooltipA": {
-          "label": "Left",
-          "value": "Left"
+          "label": "Bottom",
+          "value": "bottom"
         },
         "tooltipB": {}
       },
@@ -603,25 +612,25 @@
       "type": "region",
       "meta": [
         {
-          "meta": "meta exemple",
+          "meta": "message computer",
           "obj": {
-            "colorText": "#FF00FF",
-            "colorBack": "#CCCCCC",
+            "colorText": "#FFFFFF",
+            "colorBack": "#000000",
             "style": {
               "bold": false,
-              "italic": false,
-              "underline": true
+              "italic": true,
+              "underline": false
             }
           }
         }
       ],
       "label": "Computer",
       "positionParameter": {
-        "xylabelA": "x|0#y|0",
+        "xylabelA": "x|0#y|-100",
         "xylabelB": "x|0#y|0",
         "tooltipA": {
-          "label": "Bottom",
-          "value": "Bottom"
+          "label": "Right",
+          "value": "right"
         },
         "tooltipB": {}
       },

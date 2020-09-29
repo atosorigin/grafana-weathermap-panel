@@ -60,9 +60,9 @@ export interface GlobalGabarit {
   lowerLimit: any[];
   textObject: any;
   defaultColor: string;
-  colorMode: boolean;
-  traceBack: boolean;
-  traceBorder: boolean;
+  colorMode: string;
+  traceBack: string;
+  traceBorder: string;
 }
 
 export interface TemplateGabaritPoint {
@@ -494,7 +494,6 @@ export interface SimpleOptions extends MetricSettings {
   saveGabaritFile: GabaritFile[];
   saveDefaultGabaritFile: GabaritFile;
   gabaritDefault: GabaritFile;
-
   updateOnlyInitialSpace: boolean;
 }
 
@@ -517,40 +516,40 @@ export const defaults: SimpleOptions = {
       ],
       textObject: {
         value: 'default',
-        isTextTooltip: false,
+        isTextTooltip: 'false',
         colorBack: 'blue',
         colorText: 'black',
         style: {
-          bold: false,
-          italic: false,
-          underline: false,
+          bold: 'false',
+          italic: 'false',
+          underline: 'false',
         },
-        generateObjectText: false,
+        generateObjectText: 'false',
         valueGenerateObjectText: {
           legendElement: 'default',
           numericFormatElement: 'default',
           unit: 'default',
-          displayObjectInTooltip: false,
-          addColorTextElement: false,
+          displayObjectInTooltip: 'false',
+          addColorTextElement: 'false',
           colorTextElement: 'black',
-          addColorBackElement: false,
+          addColorBackElement: 'false',
           colorBackElement: 'white',
         },
         generateAuxiliaryElement: {
           legendElement: 'default',
           numericFormatElement: 'default',
           unit: 'default',
-          displayObjectInTooltip: false,
-          addColorTextElement: false,
+          displayObjectInTooltip: 'false',
+          addColorTextElement: 'false',
           colorTextElement: 'black',
-          addColorBackElement: false,
+          addColorBackElement: 'false',
           colorBackElement: 'white',
         },
       },
       defaultColor: 'black',
-      colorMode: true,
-      traceBack: true,
-      traceBorder: true,
+      colorMode: 'true',
+      traceBack: 'true',
+      traceBorder: 'true',
     },
     templateGabaritPoint: [],
     templateGabaritRegion: [],
@@ -706,49 +705,49 @@ export const defaults: SimpleOptions = {
       lowerLimit: [
         {
           id: 0,
-          lowerLimitMin: '0',
-          lowerLimitMax: '0',
+          lowerLimitMin: '',
+          lowerLimitMax: '',
           backColor: 'blue',
           borderColor: 'red',
-          sizeBorder: '1px',
+          sizeBorder: '1',
         },
       ],
       textObject: {
         value: 'default',
-        isTextTooltip: false,
+        isTextTooltip: 'false',
         colorBack: 'blue',
         colorText: 'black',
         style: {
-          bold: false,
-          italic: false,
-          underline: false,
+          bold: 'false',
+          italic: 'false',
+          underline: 'false',
         },
-        generateObjectText: false,
+        generateObjectText: 'false',
         valueGenerateObjectText: {
           legendElement: 'default',
           numericFormatElement: 'default',
           unit: 'default',
-          displayObjectInTooltip: false,
-          addColorTextElement: false,
+          displayObjectInTooltip: 'false',
+          addColorTextElement: 'false',
           colorTextElement: 'black',
-          addColorBackElement: false,
+          addColorBackElement: 'false',
           colorBackElement: 'white',
         },
         generateAuxiliaryElement: {
           legendElement: 'default',
           numericFormatElement: 'default',
           unit: 'default',
-          displayObjectInTooltip: false,
-          addColorTextElement: false,
+          displayObjectInTooltip: 'false',
+          addColorTextElement: 'false',
           colorTextElement: 'black',
-          addColorBackElement: false,
+          addColorBackElement: 'false',
           colorBackElement: 'white',
         },
       },
       defaultColor: 'black',
-      colorMode: true,
-      traceBack: true,
-      traceBorder: true,
+      colorMode: 'true',
+      traceBack: 'true',
+      traceBorder: 'true',
     },
     templateGabaritPoint: [],
     templateGabaritRegion: [],

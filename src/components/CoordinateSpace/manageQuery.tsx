@@ -37,7 +37,7 @@ interface State {
   /** value for manage value (for query => ) */
   selectManageValue: Array<SelectableValue<TManageValue>>;
   /** default value for manage value */
-  selectDefaultManageValue: SelectableValue<TManageValue>;
+  //selectDefaultManageValue: SelectableValue<TManageValue>;
   /** select aux query */
   selectQuery: Array<SelectableValue<DataFrame>>;
   /** select main query */
@@ -57,7 +57,7 @@ class ManageQuery extends React.Component<Prop, State> {
       collapseLinkA: false,
       collapseLinkB: false,
       selectManageValue: [],
-      selectDefaultManageValue: { value: 'avg', label: 'avg' },
+      // selectDefaultManageValue: { value: 'avg', label: 'avg' },
       selectQuery: [],
       selectQueryDefault: [],
     };
@@ -259,7 +259,6 @@ class ManageQuery extends React.Component<Prop, State> {
 
     defaultValue = { value: undefined, label: 'No value' };
     if (refId) {
-      // console.log(valueSelect.filter((a) => { return a.value?.refId === refId; }));
       for (const line of valueSelect) {
         if (line.value?.refId === refId) {
           defaultValue = line;
@@ -282,16 +281,16 @@ class ManageQuery extends React.Component<Prop, State> {
       { value: 'sum', label: 'total' },
       { value: 'err', label: 'error' },
     ];
-    let defaultValue: SelectableValue<TManageValue> = newSelectManageValue[0];
-    for (const line of newSelectManageValue) {
-      if (line.value === this.state.mainMetric.manageValue) {
-        defaultValue = line;
-      }
-    }
+    // let defaultValue: SelectableValue<TManageValue> = newSelectManageValue[0];
+    // for (const line of newSelectManageValue) {
+    //   if (line.value === this.state.mainMetric.manageValue) {
+    //     defaultValue = line;
+    //   }
+    // }
 
     this.setState({
       selectManageValue: newSelectManageValue,
-      selectDefaultManageValue: defaultValue,
+      //selectDefaultManageValue: defaultValue,
     });
   };
 

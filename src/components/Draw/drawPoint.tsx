@@ -43,6 +43,9 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   positionXDefault: string;
   positionYDefault: string;
   metaData: Metadata[];
+  colorMode: boolean;
+  traceBorder: boolean;
+  traceBack: boolean;
 }
 
 interface State {}
@@ -185,9 +188,6 @@ export default class DrawPoint extends React.Component<Props, State> {
     if (shape === 'circle') {
       result = 50;
     }
-    // console.log('radius');
-    // console.log(shape);
-    // console.log(result);
     return result;
   };
 
@@ -197,20 +197,8 @@ export default class DrawPoint extends React.Component<Props, State> {
     if (shape === 'diamond') {
       result = 'rotate(45deg)';
     }
-    // console.log('rotate');
-    // console.log(shape);
-    // console.log(result);
     return result;
   };
-
-  // definePadding = (size: number): string => {
-  //   let result = size + 'px';
-  //   if (this.props.shape.value === 'none') {
-  //     result = '0px';
-  //   }
-  //   console.log(result);
-  //   return result;
-  // };
 
   /**
    * to do
@@ -275,6 +263,7 @@ export default class DrawPoint extends React.Component<Props, State> {
             <div>
               <a
                 href={linkUrlPoint}
+                onClick={this.desactiveLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -287,6 +276,7 @@ export default class DrawPoint extends React.Component<Props, State> {
                   left: positionShapeX,
                   top: positionShapeY,
                   transform: rotate,
+                  cursor: this.defineCursor(),
                 }}
                 id={this.props.idPoint}
               ></a>
@@ -297,6 +287,7 @@ export default class DrawPoint extends React.Component<Props, State> {
             <Tooltip key={'tooltip' + this.props.name} content={valueToolTip} placement={positionTooltip}>
               <a
                 href={linkUrlPoint}
+                onClick={this.desactiveLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -309,6 +300,7 @@ export default class DrawPoint extends React.Component<Props, State> {
                   left: positionShapeX,
                   top: positionShapeY,
                   transform: rotate,
+                  cursor: this.defineCursor(),
                 }}
                 id={this.props.idPoint}
               ></a>
@@ -320,6 +312,36 @@ export default class DrawPoint extends React.Component<Props, State> {
       return <div></div>;
     }
   }
+
+  private desactiveLink = (event: any) => {
+    // const inputFollowingLink: any = document.getElementById('followLink');
+    // if (inputFollowingLink) {
+    //   if (inputFollowingLink.defaultValue === '') {
+    //     event.preventDefault();
+    //   }
+    // } else if (this.props.linkUrl.followLink === '') {
+    //   event.preventDefault();
+    // }
+    if (this.props.linkUrl.followLink === '') {
+      event.preventDefault();
+    }
+  };
+
+  private defineCursor = (): string => {
+    let result = 'pointer';
+    // const inputFollowingLink: any = document.getElementById('followLink');
+    // if (inputFollowingLink) {
+    //   if (inputFollowingLink.defaultValue === '') {
+    //     result = 'default';
+    //   }
+    // } else if (this.props.linkUrl.followLink === '') {
+    //   result = 'default';
+    // }
+    if (this.props.linkUrl.followLink === '') {
+      result = 'default';
+    }
+    return result;
+  };
 
   private definePositionLabelX = (coordinateX: number): number => {
     const positionLabel: number = parseInt(this.props.labelPositionX, 10);
@@ -414,8 +436,6 @@ export default class DrawPoint extends React.Component<Props, State> {
     } else {
       result = mainMetric + ' ' + unit;
     }
-    // console.log('result');
-    // console.log(result);
     return result;
   };
 
@@ -498,7 +518,6 @@ export default class DrawPoint extends React.Component<Props, State> {
         backgroundColor: backColoTextObject,
       };
     }
-
     return (
       <div style={styleMainDiv}>
         {htmlTextObject}
@@ -773,7 +792,8 @@ export default class DrawPoint extends React.Component<Props, State> {
       contentTooltip.length === 0 &&
       contentTooltipMainMetric.length === 0 &&
       contentTooltipAssociateLink.length === 0 &&
-      contentTooltipMetadata.length === 0
+      contentTooltipMetadata.length === 0 &&
+      !this.props.linkUrl.hoveringTooltipText
     ) {
       return null;
     }
@@ -799,7 +819,7 @@ export default class DrawPoint extends React.Component<Props, State> {
   private defineBackgroundColor() {
     let colorBackground = '';
 
-    if (this.props.seuil.length > 0) {
+    if (!this.props.colorMode && this.props.seuil.length > 0) {
       if (this.props.seuil[0].backColor !== '') {
         colorBackground = this.props.seuil[0].backColor;
       } else {
@@ -812,32 +832,29 @@ export default class DrawPoint extends React.Component<Props, State> {
     const valueMainMetric: number = parseInt(this.props.valueMainMetric, 10);
     let index = 0;
 
-    this.props.seuil.forEach((level: LowerLimitClass) => {
-      let lowerLimitMin = 0;
-
-      if (level.lowerLimitMin === '') {
-        lowerLimitMin = 0;
-      } else {
-        lowerLimitMin = parseInt(level.lowerLimitMin.substring(1), 10);
+    if (this.props.traceBack) {
+      if (this.props.colorMode && this.props.seuil.length > 0) {
+        this.props.seuil.forEach((level: LowerLimitClass) => {
+          let lowerLimitMin = 0;
+          if (level.lowerLimitMin === '') {
+            lowerLimitMin = 0;
+          } else {
+            lowerLimitMin = parseInt(level.lowerLimitMin.substring(1), 10);
+          }
+          if (lowerLimitMin === 0) {
+            if (valueMainMetric >= lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+              colorBackground = level.backColor;
+            }
+          } else if (this.props.seuil.length === index + 1) {
+            if (valueMainMetric > lowerLimitMin) {
+              colorBackground = level.backColor;
+            }
+          } else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+            colorBackground = level.backColor;
+          }
+          index++;
+        });
       }
-
-      if (lowerLimitMin === 0) {
-        if (valueMainMetric >= lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
-          colorBackground = level.backColor;
-        }
-      } else if (this.props.seuil.length === index + 1) {
-        if (valueMainMetric > lowerLimitMin) {
-          colorBackground = level.backColor;
-        }
-      } else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
-        colorBackground = level.backColor;
-      }
-
-      index++;
-    });
-
-    if (colorBackground === '') {
-      colorBackground = 'black';
     }
 
     return colorBackground;
@@ -846,7 +863,7 @@ export default class DrawPoint extends React.Component<Props, State> {
   private defineBorderColor() {
     let colorBorder = '';
 
-    if (this.props.seuil.length > 0) {
+    if (!this.props.colorMode && this.props.seuil.length > 0) {
       if (this.props.seuil[0].borderColor !== '') {
         colorBorder = this.props.seuil[0].borderColor;
       } else {
@@ -859,29 +876,30 @@ export default class DrawPoint extends React.Component<Props, State> {
     const valueMainMetric: number = parseInt(this.props.valueMainMetric, 10);
     let index = 0;
 
-    this.props.seuil.forEach((level: LowerLimitClass) => {
-      let lowerLimitMin = 0;
-
-      if (level.lowerLimitMin === '') {
-        lowerLimitMin = 0;
-      } else {
-        lowerLimitMin = parseInt(level.lowerLimitMin.substring(1), 10);
+    if (this.props.traceBorder) {
+      if (this.props.colorMode && this.props.seuil.length > 0) {
+        this.props.seuil.forEach((level: LowerLimitClass) => {
+          let lowerLimitMin = 0;
+          if (level.lowerLimitMin === '') {
+            lowerLimitMin = 0;
+          } else {
+            lowerLimitMin = parseInt(level.lowerLimitMin.substring(1), 10);
+          }
+          if (lowerLimitMin === 0) {
+            if (valueMainMetric >= lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+              colorBorder = level.borderColor;
+            }
+          } else if (this.props.seuil.length === index + 1) {
+            if (valueMainMetric > lowerLimitMin) {
+              colorBorder = level.borderColor;
+            }
+          } else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+            colorBorder = level.borderColor;
+          }
+          index++;
+        });
       }
-
-      if (lowerLimitMin === 0) {
-        if (valueMainMetric >= lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
-          colorBorder = level.borderColor;
-        }
-      } else if (this.props.seuil.length === index + 1) {
-        if (valueMainMetric > lowerLimitMin) {
-          colorBorder = level.borderColor;
-        }
-      } else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
-        colorBorder = level.borderColor;
-      }
-
-      index++;
-    });
+    }
 
     return colorBorder;
   }
@@ -889,7 +907,7 @@ export default class DrawPoint extends React.Component<Props, State> {
   private defineBorderSize() {
     let sizeBorder = '';
 
-    if (this.props.seuil.length > 0) {
+    if (!this.props.colorMode && this.props.seuil.length > 0) {
       sizeBorder = this.props.seuil[0].sizeBorder;
     } else {
       sizeBorder = '1';
@@ -898,28 +916,30 @@ export default class DrawPoint extends React.Component<Props, State> {
     const valueMainMetric: number = parseInt(this.props.valueMainMetric, 10);
     let index = 0;
 
-    this.props.seuil.forEach((level: LowerLimitClass) => {
-      let lowerLimitMin = 0;
-
-      if (level.lowerLimitMin === '') {
-        lowerLimitMin = 0;
-      } else {
-        lowerLimitMin = parseInt(level.lowerLimitMin.substring(1), 10);
+    if (this.props.traceBorder) {
+      if (this.props.colorMode && this.props.seuil.length > 0) {
+        this.props.seuil.forEach((level: LowerLimitClass) => {
+          let lowerLimitMin = 0;
+          if (level.lowerLimitMin === '') {
+            lowerLimitMin = 0;
+          } else {
+            lowerLimitMin = parseInt(level.lowerLimitMin.substring(1), 10);
+          }
+          if (lowerLimitMin === 0) {
+            if (valueMainMetric >= lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+              sizeBorder = level.sizeBorder;
+            }
+          } else if (this.props.seuil.length === index + 1) {
+            if (valueMainMetric > lowerLimitMin) {
+              sizeBorder = level.sizeBorder;
+            }
+          } else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
+            sizeBorder = level.sizeBorder;
+          }
+          index++;
+        });
       }
-
-      if (lowerLimitMin === 0) {
-        if (valueMainMetric >= lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
-          sizeBorder = level.sizeBorder;
-        }
-      } else if (this.props.seuil.length === index + 1) {
-        if (valueMainMetric > lowerLimitMin) {
-          sizeBorder = level.sizeBorder;
-        }
-      } else if (valueMainMetric > lowerLimitMin && valueMainMetric <= parseInt(level.lowerLimitMax, 10)) {
-        sizeBorder = level.sizeBorder;
-      }
-      index++;
-    });
+    }
 
     return sizeBorder;
   }

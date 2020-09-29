@@ -71,10 +71,15 @@ const getText = (region: RegionClass, valueMetric: number | null): ModeDisplayRe
   if (!region.textObj.isTextTooltip) {
     generateTextRegion = getTextRegion(region);
   }
+
+  const displayTextRegion = generateTextRegion.modeHTML ? generateTextRegion.modeHTML : null;
+  const displayText = generateText.modeHTML ? generateText.modeHTML : null;
   const modeHTML = (
     <div>
-      {generateTextRegion.modeHTML && generateTextRegion.modeHTML}
-      {generateText.modeHTML && generateText.modeHTML}
+      {/* {generateTextRegion.modeHTML && generateTextRegion.modeHTML} */}
+      {displayTextRegion}
+      {/* {generateText.modeHTML && generateText.modeHTML} */}
+      {displayText}
     </div>
   );
   const modeText = (generateTextRegion.modeText ? generateTextRegion.modeText + ' ' : '') + (generateText.modeText ? generateText.modeText : '');
@@ -91,10 +96,14 @@ const getTooltip = (region: RegionClass, valueMetric: number | null): ModeDispla
   if (region.textObj.isTextTooltip) {
     generateTextRegion = getTextRegion(region);
   }
+  const displayTextRegion = generateTextRegion.modeHTML ? generateTextRegion.modeHTML : null;
+  const displayText = generateText.modeHTML ? generateText.modeHTML : null;
   const modeHTML = (
     <div>
-      {generateTextRegion.modeHTML && generateTextRegion.modeHTML}
-      {generateText.modeHTML && generateText.modeHTML}
+      {/* {generateTextRegion.modeHTML && generateTextRegion.modeHTML} */}
+      {displayTextRegion}
+      {/* {generateText.modeHTML && generateText.modeHTML} */}
+      {displayText}
     </div>
   );
   const modeText = (generateTextRegion.modeText ? generateTextRegion.modeText + ' ' : '') + (generateText.modeText ? generateText.modeText : '');

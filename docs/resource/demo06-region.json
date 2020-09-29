@@ -52,11 +52,11 @@
         }
       },
       "mainMetric": {
-        "key": "device",
+        "key": "",
         "unit": "",
         "format": "",
-        "keyValue": "ens3",
-        "refId": "A",
+        "keyValue": "",
+        "refId": "B",
         "expr": "",
         "returnQuery": [],
         "manageValue": "sum"
@@ -142,10 +142,10 @@
         }
       },
       "mainMetric": {
-        "key": "device",
+        "key": "",
         "unit": "",
         "format": "",
-        "keyValue": "ens3",
+        "keyValue": "",
         "refId": "A",
         "expr": "",
         "returnQuery": [],

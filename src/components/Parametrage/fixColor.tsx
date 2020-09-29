@@ -18,6 +18,8 @@ interface Props extends PanelEditorProps<SimpleOptions> {
   /** function parent to save lower limit */
   lowerLimitCallBack: (lowerLimit: LowerLimitClass[], id?: number) => void;
 
+  //lowerLimitDefault: (value: LowerLimitClass) => void;
+
   isLink: boolean;
 }
 
@@ -72,6 +74,7 @@ class FixColor extends React.Component<Props, State> {
     });
     this.callBack();
     this.initComponent();
+    //this.props.lowerLimitDefault(this.state.lowerLimit[0]);
   };
 
   /**
@@ -85,6 +88,7 @@ class FixColor extends React.Component<Props, State> {
     });
     this.callBack();
     this.initComponent();
+    //this.props.lowerLimitDefault(this.state.lowerLimit[0]);
   };
 
   /**
@@ -98,6 +102,7 @@ class FixColor extends React.Component<Props, State> {
     });
     this.callBack();
     this.initComponent();
+    //this.props.lowerLimitDefault(this.state.lowerLimit[0]);
   };
 
   /**

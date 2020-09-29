@@ -10,12 +10,13 @@ import { TextObject } from 'Models/TextObjectClass';
 import ManageLink from './manageLink';
 import TextObjects from './textObjects';
 import { CoordinateSpaceClass } from 'Models/CoordinateSpaceClass';
+import { LinkURLClass } from 'Models/LinkURLClass';
 
 interface Props extends PanelEditorProps<SimpleOptions> {
   /** id coordinate */
   coordinateSpace: CoordinateSpaceClass;
   /** call function to save data in parent */
-  callBackToParent: (followLink?: string, hoveringTooltipLink?: string, hoveringTooltipText?: string, textObj?: TextObject) => void;
+  callBackToParent: (linkUrl?: LinkURLClass, textObj?: TextObject) => void;
 }
 
 interface State {

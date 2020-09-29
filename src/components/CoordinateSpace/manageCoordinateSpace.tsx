@@ -108,7 +108,6 @@ class ManageCoordinateSpace extends React.Component<Props, State> {
             )}
             {this.state.tabsVariable[1] && this.contentTabEdit()}
           </TabContent>
-          {/* <Button onClick={() => console.log(this.props.data.series)}>List all metrics</Button> */}
         </div>
       );
     } else {
@@ -123,7 +122,6 @@ class ManageCoordinateSpace extends React.Component<Props, State> {
             />
           </TabsBar>
           <TabContent>{this.state.tabsVariable[1] && this.contentTabEdit()}</TabContent>
-          {/* <Button onClick={() => console.log(this.props.data.series)}>List all metrics</Button> */}
         </div>
       );
     }

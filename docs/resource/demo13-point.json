@@ -5,46 +5,46 @@
         "id": 0,
         "lowerLimitMin": "",
         "lowerLimitMax": "",
-        "backColor": "#063eb8",
-        "borderColor": "#06d2d3",
-        "sizeBorder": "5"
+        "backColor": "#777777",
+        "borderColor": "magenta",
+        "sizeBorder": "2"
       }
     ],
     "textObject": {
       "value": "",
-      "isTextTooltip": true,
-      "colorBack": "white",
-      "colorText": "black",
+      "isTextTooltip": "true",
+      "colorBack": "#222222",
+      "colorText": "#EEEEEE",
       "style": {
-        "bold": true,
-        "italic": true,
-        "underline": false
+        "bold": "true",
+        "italic": "true",
+        "underline": "false"
       },
-      "generateObjectText": true,
+      "generateObjectText": "true",
       "valueGenerateObjectText": {
-        "legendElement": "Nombre",
+        "legendElement": "Number",
         "numericFormatElement": "",
         "unit": "u",
-        "displayObjectInTooltip": false,
-        "addColorTextElement": true,
-        "colorTextElement": "#e54658",
-        "addColorBackElement": true,
-        "colorBackElement": "#c5c507"
+        "displayObjectInTooltip": "false",
+        "addColorTextElement": "true",
+        "colorTextElement": "white",
+        "addColorBackElement": "true",
+        "colorBackElement": "green"
       },
       "generateAuxiliaryElement": {
         "legendElement": "",
         "numericFormatElement": "5",
         "unit": "",
-        "displayObjectInTooltip": true,
-        "addColorTextElement": true,
+        "displayObjectInTooltip": "true",
+        "addColorTextElement": "true",
         "colorTextElement": "",
-        "addColorBackElement": false,
+        "addColorBackElement": "false",
         "colorBackElement": "red"
       }
     },
-    "colorMode": false,
-    "traceBack": true,
-    "traceBorder": true
+    "colorMode": "false",
+    "traceBack": "true",
+    "traceBorder": "true"
   },
   "default": {
     "templates": [
@@ -59,12 +59,12 @@
           {
             "meta": "meta exemple",
             "obj": {
-              "colorText": "#FF00FF",
+              "colorText": "#0000FF",
               "colorBack": "#CCCCCC",
               "style": {
                 "bold": false,
                 "italic": false,
-                "underline": true
+                "underline": false
               }
             }
           }
@@ -73,11 +73,8 @@
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|labelName#y|labelName",
-          "tooltipA": {
-            "label": "Right",
-            "value": "right"
-          },
-          "tooltipB": {}
+          "tooltipA": "Bottom",
+          "tooltipB": "Bottom"
         },
         "mainMetric": {
           "key": "",
@@ -126,7 +123,7 @@
     {
       "filtered": "device|ens3",
       "labelfix": true,
-      "xylabel": "x|labelName#y|labelName",
+      "xylabel": "",
       "xylabelfix": "x|243#y|57",
       "type": "point",
       "name": "point1",
@@ -146,13 +143,10 @@
       ],
       "label": "networkName",
       "positionParameter": {
-        "xylabelA": "x|0#y|0",
+        "xylabelA": "x|5#y|15",
         "xylabelB": "x|0#y|0",
-        "tooltipA": {
-          "label": "Right",
-          "value": "right"
-        },
-        "tooltipB": {}
+        "tooltipA": "Bottom",
+        "tooltipB": "Bottom"
       },
       "mainMetric": {
         "format": "",

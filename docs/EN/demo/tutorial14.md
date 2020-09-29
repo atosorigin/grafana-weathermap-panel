@@ -36,18 +36,18 @@ prometheus_engine_query_duration_seconds{instance="localhost:9090",job="promethe
 
 ```
 
-Les elements qui nous interressent sont :
+The elements that interest us are :
 
 - instance
 - job
 - quantile
 - slice
 
-qui seront utilisés dans le fichier json de gabarit dans la liste **filtered**
+that will be used in the json template file in the list **filtered**
 
 ## Add background image
 
-![background](../../screenshots/demo/tutorial14/background.png)
+![background](../../screenshots/demo/tutorial14/display.png)
 
 Adding a background image can be done from the menu `display`.
 
@@ -64,37 +64,37 @@ It is possible to have more details with the [display](../editor/display.md) pag
 
 ## Advanced gabarit
 
-Dans l'onglet **Gabarit**
+In the tab **Gabarit**
 
 ![](../../screenshots/demo/tutorial14/demo14-0.png)
 
-vous ajoutez le fichier par défaut
+you add the default file
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo14-default.json
 
 ```
 
-puis 1 clic que le bouton **Add**
+then 1 click that the **finish** button
 
 ![](../../screenshots/demo/tutorial14/demo14-1.png)
 
-vous ajoutez le lien du fichier json
+you add the link of the json file
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo14-svg.json
 
 ```
 
-puis 1 clic que le bouton **Add** suivi de **finish**
+then 1 click that the button **Add** followed by **finish**.
 
-le lien s'affichera dans la deuxième partie de l'écran
+the link will be displayed in the second part of the screen
 
 ![](../../screenshots/demo/tutorial14/demo14-2.png)
 
-il faut lui attribuer une query
+it must be assigned a query
 
-puis 1 clic **load**
+then 1 click **load**
 
 ## Resultat
 
@@ -102,7 +102,20 @@ puis 1 clic **load**
 
 ## Structure gabarit files
 
+the `template` file will use : 
+
+- A variable color in lowerlimit
+- Each SVG ID will be determined as a region
+- In an SVG background, each SVG ID will display the color of the request according to the defined limits
+- Displays a Meta data when you hover the mouse over one of the regions
+- Addition of a region of coordinates with the result of the query filter
+
+
 ### default gabarit : demo14-default.json
+
+for the good functioning of the demo 14, the structure of the file will be : 
+
+
 
 ```
 {
@@ -127,6 +140,8 @@ puis 1 clic **load**
 ```
 
 ### Template gabarit : demo14-svg.json
+
+for the good functioning of the demo 14, the structure of the file will be : 
 
 ```
 {
