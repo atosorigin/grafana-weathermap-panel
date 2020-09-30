@@ -50,12 +50,25 @@
     "templates": [
       {
         "filtered": "device|ens3",
-        "labelfix": true,
+        "labelfix": "true",
         "xylabel": "",
         "xylabelfix": "x|90#y|90",
         "type": "point",
         "name": "unPoint",
-        "meta": [],
+        "meta": [
+          {
+            "meta": "meta exemple",
+            "obj": {
+              "colorText": "#FF00FF",
+              "colorBack": "#CCCCCC",
+              "style": {
+                "bold": "false",
+                "italic": "false",
+                "underline": "true"
+              }
+            }
+          }
+        ],
         "label": "mtu ens3",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -106,7 +119,7 @@
       },
       {
         "filtered": "device|ens3",
-        "labelfix": true,
+        "labelfix": "true",
         "xylabelA": "x|quantile#y|quantile",
         "xylabelB": "x|quantile#y|quantile",
         "xylabelC": "x|quantile#y|quantile",
@@ -117,19 +130,19 @@
         "name": "unLink",
         "meta": [
           {
-            "meta": "link meta",
+            "meta": "meta exemple",
             "obj": {
               "colorText": "#FF00FF",
               "colorBack": "#CCCCCC",
               "style": {
-                "bold": false,
-                "italic": false,
-                "underline": true
+                "bold": "false",
+                "italic": "false",
+                "underline": "true"
               }
             }
           }
         ],
-        "label": "link device",
+        "label": "lien device",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
           "xylabelB": "x|0#y|0",
@@ -180,7 +193,7 @@
         "regionOut": "",
         "isIncurved": {
           "label": "No",
-          "value": false
+          "value": "false"
         },
         "zIndex": "2",
         "color": "black"
@@ -190,12 +203,25 @@
   "templates": [
     {
       "filtered": "device|ens3",
-      "labelfix": true,
+      "labelfix": "true",
       "xylabel": "",
       "xylabelfix": "x|90#y|310",
       "type": "point",
       "name": "point0",
-      "meta": [],
+      "meta": [
+        {
+          "meta": "meta exemple",
+          "obj": {
+            "colorText": "#FF00FF",
+            "colorBack": "#CCCCCC",
+            "style": {
+              "bold": "false",
+              "italic": "false",
+              "underline": "true"
+            }
+          }
+        }
+      ],
       "label": "mtu ens3",
       "positionParameter": {
         "xylabelA": "x|-100#y|0",
@@ -246,21 +272,21 @@
     },
     {
       "filtered": "device|lo",
-      "labelfix": true,
+      "labelfix": "true",
       "xylabel": "",
       "xylabelfix": "x|320#y|180",
       "type": "point",
       "name": "point1",
       "meta": [
         {
-          "meta": "link meta",
+          "meta": "meta exemple",
           "obj": {
             "colorText": "#FF00FF",
             "colorBack": "#CCCCCC",
             "style": {
-              "bold": false,
-              "italic": false,
-              "underline": true
+              "bold": "false",
+              "italic": "false",
+              "underline": "true"
             }
           }
         }
@@ -315,7 +341,7 @@
     },
     {
       "filtered": "device|ens3",
-      "labelfix": true,
+      "labelfix": "true",
       "xylabelA": "",
       "xylabelB": "",
       "xylabelC": "",
@@ -331,9 +357,9 @@
             "colorText": "#FF00FF",
             "colorBack": "#CCCCCC",
             "style": {
-              "bold": false,
-              "italic": false,
-              "underline": true
+              "bold": "false",
+              "italic": "false",
+              "underline": "true"
             }
           }
         }
@@ -349,14 +375,14 @@
         "format": "",
         "key": "",
         "keyValue": "",
-        "manageValue": "avg"
-      },      
+        "manageValue": "sum"
+      },
       "metrics": [],
       "mainMetricB": {
         "format": "",
         "key": "",
         "keyValue": "",
-        "manageValue": ""        
+        "manageValue": ""
       },
       "metricsB": [],
       "linkURL": {
@@ -380,7 +406,7 @@
       "zIndex": 2,
       "isIncurved": {
         "label": "yes",
-        "value": false
+        "value": "false"
       },
       "color": "blue"
     }

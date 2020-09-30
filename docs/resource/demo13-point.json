@@ -50,7 +50,7 @@
     "templates": [
       {
         "filtered": "device|ens3",
-        "labelfix": true,
+        "labelfix": "true",
         "xylabel": "x|labelName#y|labelName",
         "xylabelfix": "x|90#y|90",
         "type": "point",
@@ -62,9 +62,9 @@
               "colorText": "#0000FF",
               "colorBack": "#CCCCCC",
               "style": {
-                "bold": false,
-                "italic": false,
-                "underline": false
+                "bold": "false",
+                "italic": "false",
+                "underline": "false"
               }
             }
           }
@@ -122,7 +122,7 @@
   "templates": [
     {
       "filtered": "device|ens3",
-      "labelfix": true,
+      "labelfix": "true",
       "xylabel": "",
       "xylabelfix": "x|243#y|57",
       "type": "point",
@@ -134,16 +134,16 @@
             "colorText": "#FF00FF",
             "colorBack": "#CCCCCC",
             "style": {
-              "bold": false,
-              "italic": false,
-              "underline": true
+              "bold": "false",
+              "italic": "false",
+              "underline": "true"
             }
           }
         }
       ],
       "label": "networkName",
       "positionParameter": {
-        "xylabelA": "x|5#y|15",
+        "xylabelA": "x|25#y|15",
         "xylabelB": "x|0#y|0",
         "tooltipA": "Bottom",
         "tooltipB": "Bottom"

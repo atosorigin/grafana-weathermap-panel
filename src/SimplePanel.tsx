@@ -1,5 +1,5 @@
 import React, { PureComponent, CSSProperties } from 'react';
-import { SimpleOptions, Background, Metric, Metadata } from 'types';
+import { SimpleOptions, Background, Metric, Metadata, CoordinateSpaceInitial } from 'types';
 
 import { PanelProps, SelectableValue } from '@grafana/data';
 import { CustomScrollbar, Modal, Button } from '@grafana/ui';
@@ -1706,13 +1706,19 @@ export class SimplePanel extends PureComponent<Props, State> {
     }
 
     //Set value initialSpace with width and height of background
-    // const widthInitialSpace = this.props.options.baseMap.width === '' ? '0' : this.props.options.baseMap.width;
-    // const heightInitialSpace = this.props.options.baseMap.height === '' ? '0' : this.props.options.baseMap.height;
-    // this.props.options.coordinateSpaceInitial.coordinate.xMax = widthInitialSpace;
-    // this.props.options.coordinateSpaceInitial.coordinate.yMax = heightInitialSpace;
-    this.props.options.coordinateSpaceInitial.coordinate.xMax = this.props.options.baseMap.width;
-    this.props.options.coordinateSpaceInitial.coordinate.yMax = this.props.options.baseMap.height;
-
+    const coordinateSpace: CoordinateSpaceInitial = this.props.options.coordinateSpaceInitial;
+    coordinateSpace.coordinate.xMax = this.props.options.baseMap.width || '0';
+    coordinateSpace.coordinate.yMax = this.props.options.baseMap.height || '0';
+    // if (coordinateSpace.coordinate.xMax === '') {
+    //   coordinateSpace.coordinate.xMax = '0';
+    // }
+    // if (!coordinateSpace.coordinate.yMax) {
+    //   coordinateSpace.coordinate.yMax = '0';
+    // }
+    // this.props.onOptionsChange({
+    //   ...this.props.options,
+    //   coordinateSpaceInitial: coordinateSpace,
+    // });
     this.updateButtonCss();
   };
 
@@ -1725,14 +1731,14 @@ export class SimplePanel extends PureComponent<Props, State> {
       this.props.options.baseMap.width !== this.props.options.coordinateSpaceInitial.coordinate.xMax &&
       !this.props.options.updateOnlyInitialSpace
     ) {
-      this.props.options.coordinateSpaceInitial.coordinate.xMax = this.props.options.baseMap.width;
+      this.props.options.coordinateSpaceInitial.coordinate.xMax = this.props.options.baseMap.width || '0';
     }
     //Set height initialSpace if new height in display
     if (
       this.props.options.baseMap.height !== this.props.options.coordinateSpaceInitial.coordinate.yMax &&
       !this.props.options.updateOnlyInitialSpace
     ) {
-      this.props.options.coordinateSpaceInitial.coordinate.yMax = this.props.options.baseMap.height;
+      this.props.options.coordinateSpaceInitial.coordinate.yMax = this.props.options.baseMap.height || '0';
     }
     // if (this.props.options.baseMap.image !== prevProps.options.baseMap.image) {
     //   this.componentDidMount();

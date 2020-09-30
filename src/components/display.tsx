@@ -325,7 +325,7 @@ class Display extends React.Component<Props, State> {
             inputWidth={30}
             type="text"
             onChange={this.onChangeWidthBaseMap}
-            value={options.baseMap.width || ''}
+            value={options.baseMap.width || '0'}
           />
           <FormField
             label="Height"
@@ -333,7 +333,7 @@ class Display extends React.Component<Props, State> {
             inputWidth={30}
             type="text"
             onChange={this.onChangeHeightBaseMap}
-            value={options.baseMap.height || ''}
+            value={options.baseMap.height || '0'}
           />
         </div>
         {/* )} */}

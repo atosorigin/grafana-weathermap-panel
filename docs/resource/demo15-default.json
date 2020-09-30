@@ -50,7 +50,7 @@
     "templates": [
       {
         "filtered": "",
-        "labelfix": true,
+        "labelfix": "true",
         "xylabel": "x|labelName#y|labelName",
         "xylabelfix": "x|90#y|90",
         "type": "point",
@@ -62,9 +62,9 @@
               "colorText": "#FF00FF",
               "colorBack": "#CCCCCC",
               "style": {
-                "bold": false,
-                "italic": false,
-                "underline": true
+                "bold": "false",
+                "italic": "false",
+                "underline": "true"
               }
             }
           }
@@ -119,7 +119,7 @@
       },
       {
         "filtered": "device|ens3",
-        "labelfix": true,
+        "labelfix": "true",
         "xylabelA": "x|quantile#y|quantile",
         "xylabelB": "x|quantile#y|quantile",
         "xylabelC": "x|quantile#y|quantile",
@@ -135,9 +135,9 @@
               "colorText": "#FF00FF",
               "colorBack": "#CCCCCC",
               "style": {
-                "bold": false,
-                "italic": false,
-                "underline": true
+                "bold": "false",
+                "italic": "false",
+                "underline": "true"
               }
             }
           }
@@ -193,14 +193,14 @@
         "regionOut": "",
         "isIncurved": {
           "label": "No",
-          "value": false
+          "value": "false"
         },
         "zIndex": "2",
         "color": "black"
       },
       {
         "filtered": "quantile|0.5#slice|inner_eval",
-        "labelfix": false,
+        "labelfix": "false",
         "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "type": "region",
@@ -211,9 +211,9 @@
               "colorText": "#FF00FF",
               "colorBack": "#CCCCCC",
               "style": {
-                "bold": false,
-                "italic": false,
-                "underline": true
+                "bold": "false",
+                "italic": "false",
+                "underline": "true"
               }
             }
           }
@@ -243,7 +243,7 @@
           "hoveringTooltipText": ""
         },
         "idSVG": "",
-        "mode": true,
+        "mode": "true",
         "img": "",
         "orientedLink": [],
         "color": "black"

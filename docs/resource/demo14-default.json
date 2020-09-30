@@ -12,7 +12,7 @@
     ],
     "textObject": {
       "value": "",
-      "isTextTooltip": "true",
+      "isTextTooltip": "false",
       "colorBack": "#000000",
       "colorText": "#FFFFFF",
       "style": {
@@ -25,7 +25,7 @@
         "legendElement": "",
         "numericFormatElement": "2",
         "unit": "Hz",
-        "displayObjectInTooltip": "false",
+        "displayObjectInTooltip": "true",
         "addColorTextElement": "true",
         "addColorBackElement": "true",
         "colorTextElement": "#000000",
@@ -50,7 +50,7 @@
     "templates": [
       {
         "filtered": "",
-        "labelfix": true,
+        "labelfix": "true",
         "xylabel": "x|labelName#y|labelName",
         "xylabelfix": "x|90#y|90",
         "type": "point",
@@ -62,9 +62,9 @@
               "colorText": "#FF00FF",
               "colorBack": "#CCCCCC",
               "style": {
-                "bold": false,
-                "italic": false,
-                "underline": false
+                "bold": "false",
+                "italic": "false",
+                "underline": "false"
               }
             }
           }
@@ -122,7 +122,7 @@
       },
       {
         "filtered": "device|ens3",
-        "labelfix": true,
+        "labelfix": "true",
         "xylabelA": "x|quantile#y|quantile",
         "xylabelB": "x|quantile#y|quantile",
         "xylabelC": "x|quantile#y|quantile",
@@ -138,9 +138,9 @@
               "colorText": "#FF00FF",
               "colorBack": "#CCCCCC",
               "style": {
-                "bold": false,
-                "italic": false,
-                "underline": false
+                "bold": "false",
+                "italic": "false",
+                "underline": "false"
               }
             }
           }
@@ -199,14 +199,14 @@
         "regionOut": "",
         "isIncurved": {
           "label": "No",
-          "value": false
+          "value": "false"
         },
         "zIndex": "2",
         "color": "black"
       },
       {
         "filtered": "quantile|0.5",
-        "labelfix": false,
+        "labelfix": "false",
         "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "xylabelfix": "",
         "type": "region",
@@ -217,9 +217,9 @@
               "colorText": "#FF00FF",
               "colorBack": "#CCCCCC",
               "style": {
-                "bold": false,
-                "italic": false,
-                "underline": false
+                "bold": "false",
+                "italic": "false",
+                "underline": "false"
               }
             }
           }
@@ -252,7 +252,7 @@
           "hoveringTooltipText": ""
         },
         "idSVG": "",
-        "mode": true,
+        "mode": "true",
         "img": "",
         "orientedLink": [],
         "color": "black"

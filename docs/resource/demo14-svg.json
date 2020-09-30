@@ -82,7 +82,7 @@
     "templates": [
       {
         "filtered": "quantile|0.5#slice|inner_eval",
-        "labelfix": false,
+        "labelfix": "false",
         "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "xylabelfix": "",
         "type": "region",
@@ -93,9 +93,9 @@
               "colorText": "#FF00FF",
               "colorBack": "#CCCCCC",
               "style": {
-                "bold": false,
-                "italic": false,
-                "underline": false
+                "bold": "false",
+                "italic": "false",
+                "underline": "false"
               }
             }
           }
@@ -128,7 +128,7 @@
           "hoveringTooltipText": ""
         },
         "idSVG": "",
-        "mode": true,
+        "mode": "true",
         "img": "",
         "orientedLink": [],
         "color": "black"
@@ -138,7 +138,7 @@
   "templates": [
     {
       "filtered": "quantile|0.5#slice|inner_eval",
-      "labelfix": false,
+      "labelfix": "false",
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "",
       "type": "region",
@@ -149,9 +149,9 @@
             "colorText": "#FF00FF",
             "colorBack": "#CCCCCC",
             "style": {
-              "bold": false,
-              "italic": false,
-              "underline": true
+              "bold": "false",
+              "italic": "false",
+              "underline": "true"
             }
           }
         }
@@ -184,13 +184,13 @@
         "hoveringTooltipText": ""
       },
       "idSVG": "rect1-top",
-      "mode": true,
+      "mode": "true",
       "img": "",
       "orientedLink": []
     },
     {
       "filtered": "quantile|0.5#slice|prepare_time",
-      "labelfix": false,
+      "labelfix": "false",
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "",
       "type": "region",
@@ -201,9 +201,9 @@
             "colorText": "green",
             "colorBack": "#006600",
             "style": {
-              "bold": false,
-              "italic": true,
-              "underline": false
+              "bold": "false",
+              "italic": "true",
+              "underline": "false"
             }
           }
         }
@@ -236,13 +236,13 @@
         "hoveringTooltipText": ""
       },
       "idSVG": "rect1-middle",
-      "mode": true,
+      "mode": "true",
       "img": "",
       "orientedLink": []
     },
     {
       "filtered": "quantile|0.5#slice|queue_time",
-      "labelfix": false,
+      "labelfix": "false",
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "",
       "type": "region",
@@ -253,9 +253,9 @@
             "colorText": "red",
             "colorBack": "black",
             "style": {
-              "bold": false,
-              "italic": false,
-              "underline": false
+              "bold": "false",
+              "italic": "false",
+              "underline": "false"
             }
           }
         }
@@ -288,13 +288,13 @@
         "hoveringTooltipText": ""
       },
       "idSVG": "rect1-footer",
-      "mode": true,
+      "mode": "true",
       "img": "",
       "orientedLink": []
     },
     {
       "filtered": "quantile|0.9#slice|inner_eval",
-      "labelfix": false,
+      "labelfix": "false",
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "",
       "type": "region",
@@ -305,9 +305,9 @@
             "colorText": "yellow",
             "colorBack": "#000000",
             "style": {
-              "bold": false,
-              "italic": false,
-              "underline": true
+              "bold": "false",
+              "italic": "false",
+              "underline": "true"
             }
           }
         }
@@ -340,13 +340,13 @@
         "hoveringTooltipText": ""
       },
       "idSVG": "rect2-top",
-      "mode": true,
+      "mode": "true",
       "img": "",
       "orientedLink": []
     },
     {
       "filtered": "quantile|0.9#slice|prepare_time",
-      "labelfix": false,
+      "labelfix": "false",
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "",
       "type": "region",
@@ -357,9 +357,9 @@
             "colorText": "orange",
             "colorBack": "#000000",
             "style": {
-              "bold": false,
-              "italic": true,
-              "underline": false
+              "bold": "false",
+              "italic": "true",
+              "underline": "false"
             }
           }
         }
@@ -392,13 +392,13 @@
         "hoveringTooltipText": ""
       },
       "idSVG": "rect2-middle",
-      "mode": true,
+      "mode": "true",
       "img": "",
       "orientedLink": []
     },
     {
       "filtered": "quantile|0.9#slice|queue_time",
-      "labelfix": false,
+      "labelfix": "false",
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "",
       "type": "region",
@@ -409,9 +409,9 @@
             "colorText": "white",
             "colorBack": "#000000",
             "style": {
-              "bold": false,
-              "italic": false,
-              "underline": false
+              "bold": "false",
+              "italic": "false",
+              "underline": "false"
             }
           }
         }
@@ -444,13 +444,13 @@
         "hoveringTooltipText": ""
       },
       "idSVG": "rect2-footer",
-      "mode": true,
+      "mode": "true",
       "img": "",
       "orientedLink": []
     },
     {
       "filtered": "quantile|0.99#slice|inner_eval",
-      "labelfix": false,
+      "labelfix": "false",
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "",
       "type": "region",
@@ -461,9 +461,9 @@
             "colorText": "white",
             "colorBack": "#000000",
             "style": {
-              "bold": true,
-              "italic": true,
-              "underline": true
+              "bold": "true",
+              "italic": "true",
+              "underline": "true"
             }
           }
         }
@@ -496,13 +496,13 @@
         "hoveringTooltipText": ""
       },
       "idSVG": "rect3-top",
-      "mode": true,
+      "mode": "true",
       "img": "",
       "orientedLink": []
     },
     {
       "filtered": "quantile|0.99#slice|prepare_time",
-      "labelfix": false,
+      "labelfix": "false",
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "",
       "type": "region",
@@ -513,9 +513,9 @@
             "colorText": "blue",
             "colorBack": "#999999",
             "style": {
-              "bold": true,
-              "italic": false,
-              "underline": true
+              "bold": "true",
+              "italic": "false",
+              "underline": "true"
             }
           }
         }
@@ -548,13 +548,13 @@
         "hoveringTooltipText": ""
       },
       "idSVG": "rect3-middle",
-      "mode": true,
+      "mode": "true",
       "img": "",
       "orientedLink": []
     },
     {
       "filtered": "quantile|0.99#slice|queue_time",
-      "labelfix": false,
+      "labelfix": "false",
       "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
       "xylabelfix": "",
       "type": "region",
@@ -565,9 +565,9 @@
             "colorText": "#FF00FF",
             "colorBack": "#CCCCCC",
             "style": {
-              "bold": false,
-              "italic": false,
-              "underline": true
+              "bold": "false",
+              "italic": "false",
+              "underline": "true"
             }
           }
         }
@@ -600,13 +600,13 @@
         "hoveringTooltipText": ""
       },
       "idSVG": "rect3-footer",
-      "mode": true,
+      "mode": "true",
       "img": "",
       "orientedLink": []
     },
     {
       "filtered": "quantile|0.5",
-      "labelfix": true,
+      "labelfix": "true",
       "xylabel": "",
       "xylabelfix": "xMin|50#xMax|150#yMin|250#yMax|350",
       "type": "region",
@@ -617,9 +617,9 @@
             "colorText": "#FFFFFF",
             "colorBack": "#000000",
             "style": {
-              "bold": false,
-              "italic": true,
-              "underline": false
+              "bold": "false",
+              "italic": "true",
+              "underline": "false"
             }
           }
         }
@@ -652,7 +652,7 @@
         "hoveringTooltipText": ""
       },
       "idSVG": "",
-      "mode": false,
+      "mode": "false",
       "img": "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/computer-png.png",
       "orientedLink": []
     }

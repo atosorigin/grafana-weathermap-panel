@@ -291,25 +291,7 @@ class ManageMetadata extends React.Component<Props, State> {
             padding: '10px',
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'right',
-              marginBottom: '10px',
-            }}
-          >
-            <Button
-              variant={'danger'}
-              onClick={() => {
-                let newArrayPoints: PointClass[] = this.props.options.arrayPoints;
-                this.getCurrentPoint().meta.splice(index, 1);
-                this.props.onOptionsChange({ ...this.props.options, arrayPoints: newArrayPoints });
-              }}
-            >
-              Delete
-            </Button>
-          </div>
-          {/* <p style={{ fontSize: '16px', fontWeight: 'normal', textAlign: 'center' }}>Metadata {index + 1}</p> */}
+          <p style={{ fontSize: '16px', fontWeight: 'normal', textAlign: 'left', paddingLeft: '8px' }}>Metadata {index + 1}</p>
           <div
             key={'Meta' + index}
             style={{
@@ -405,6 +387,24 @@ class ManageMetadata extends React.Component<Props, State> {
               </div>
             </div>
           </div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'right',
+              margin: '10px 0px',
+            }}
+          >
+            <Button
+              variant={'danger'}
+              onClick={() => {
+                let newArrayPoints: PointClass[] = this.props.options.arrayPoints;
+                this.getCurrentPoint().meta.splice(index, 1);
+                this.props.onOptionsChange({ ...this.props.options, arrayPoints: newArrayPoints });
+              }}
+            >
+              Delete
+            </Button>
+          </div>
         </div>
       ));
       return <div>{list}</div>;
@@ -420,25 +420,7 @@ class ManageMetadata extends React.Component<Props, State> {
             padding: '10px',
           }}
         >
-          {/* <p style={{ fontSize: '16px', fontWeight: 'normal', textAlign: 'center' }}>Metadata {index + 1}</p> */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'right',
-              marginBottom: '10px',
-            }}
-          >
-            <Button
-              variant={'danger'}
-              onClick={() => {
-                let newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
-                this.getCurrentRegion().meta.splice(index, 1);
-                this.props.onOptionsChange({ ...this.props.options, regionCoordinateSpace: newArrayRegion });
-              }}
-            >
-              Delete
-            </Button>
-          </div>
+          <p style={{ fontSize: '16px', fontWeight: 'normal', textAlign: 'center', paddingLeft: '8px' }}>Metadata {index + 1}</p>
           <div
             key={'Meta' + index}
             style={{
@@ -534,6 +516,24 @@ class ManageMetadata extends React.Component<Props, State> {
               </div>
             </div>
           </div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'right',
+              margin: '10px',
+            }}
+          >
+            <Button
+              variant={'danger'}
+              onClick={() => {
+                let newArrayRegion: RegionClass[] = this.props.options.regionCoordinateSpace;
+                this.getCurrentRegion().meta.splice(index, 1);
+                this.props.onOptionsChange({ ...this.props.options, regionCoordinateSpace: newArrayRegion });
+              }}
+            >
+              Delete
+            </Button>
+          </div>
         </div>
       ));
       return <div>{list}</div>;
@@ -549,25 +549,7 @@ class ManageMetadata extends React.Component<Props, State> {
             padding: '10px',
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'right',
-              marginBottom: '10px',
-            }}
-          >
-            <Button
-              variant={'danger'}
-              onClick={() => {
-                let newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
-                this.getCurrentLink().meta.splice(index, 1);
-                this.props.onOptionsChange({ ...this.props.options, arrayOrientedLinks: newArrayOrientedLink });
-              }}
-            >
-              Delete
-            </Button>
-          </div>
-          {/* <p style={{ fontSize: '16px', fontWeight: 'normal', textAlign: 'center' }}>Metadata {index + 1}</p> */}
+          <p style={{ fontSize: '16px', fontWeight: 'normal', textAlign: 'center', paddingLeft: '8px' }}>Metadata {index + 1}</p>
           <div
             key={'Meta' + index}
             style={{
@@ -663,6 +645,24 @@ class ManageMetadata extends React.Component<Props, State> {
               </div>
             </div>
           </div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'right',
+              marginBottom: '10px',
+            }}
+          >
+            <Button
+              variant={'danger'}
+              onClick={() => {
+                let newArrayOrientedLink: OrientedLinkClass[] = this.props.options.arrayOrientedLinks;
+                this.getCurrentLink().meta.splice(index, 1);
+                this.props.onOptionsChange({ ...this.props.options, arrayOrientedLinks: newArrayOrientedLink });
+              }}
+            >
+              Delete
+            </Button>
+          </div>
         </div>
       ));
       return <div>{list}</div>;
@@ -711,7 +711,7 @@ class ManageMetadata extends React.Component<Props, State> {
               }) => this.setState({ newMeta: event.currentTarget.value })}
             />
             <Button variant="primary" className="button" onClick={this.addMeta}>
-              Add
+              <span style={{ padding: '0px 8px' }}>Add</span>
             </Button>
           </div>
           <this.displayMetaList type={this.props.type} id={this.props.idCoordinate - 1} />

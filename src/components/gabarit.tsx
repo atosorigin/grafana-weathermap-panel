@@ -77,7 +77,7 @@ class Gabarit extends React.Component<Props, State> {
       ],
       collapseSelectURL: false,
       collapseGabarit: false,
-      collapseGabaritDefault: false,
+      collapseGabaritDefault: true,
     };
   }
   result: any[] = [];
@@ -214,6 +214,9 @@ class Gabarit extends React.Component<Props, State> {
         let response = await fetch(url);
         file = await response.json();
         this.loadGabarit(file, url);
+        this.setState({
+          collapseGabarit: true,
+        });
       } catch (error) {
         console.error(error);
       }
@@ -337,8 +340,17 @@ class Gabarit extends React.Component<Props, State> {
       let file = {};
       let response = await fetch(this.props.options.saveGabaritDefaultUrl);
 
+      // update fileName to display in input 'GabaritDefault' of collapse 'Default Gabarit URL'
+      const newFileName = url.split('/')[url.split('/').length - 1];
+      let newGabaritDefault: GabaritFile = this.props.options.gabaritDefault;
+      newGabaritDefault.fileName = newFileName;
+      this.props.onOptionsChange({ ...this.props.options, gabaritDefault: newGabaritDefault });
+
       file = await response.json();
       this.loadDefaultGabarit(file, url);
+      this.setState({
+        collapseSelectURL: true,
+      });
     } catch (error) {
       console.log('Default gabarit error:');
       console.error(error);
@@ -417,7 +429,11 @@ class Gabarit extends React.Component<Props, State> {
       templateGabaritRegionDefault: [],
       templateGabaritLinkDefault: [],
     };
-    this.props.onOptionsChange({ ...this.props.options, gabaritDefault: this.props.options.gabaritDefault });
+    this.props.onOptionsChange({
+      ...this.props.options,
+      gabaritDefault: this.props.options.gabaritDefault,
+      saveGabaritDefaultUrl: '',
+    });
   };
 
   /**************************************LOADER******************************************/
@@ -439,7 +455,11 @@ class Gabarit extends React.Component<Props, State> {
         false,
         meta.obj.colorBack,
         meta.obj.colorText,
-        { bold: meta.obj.style.bold, italic: meta.obj.style.italic, underline: meta.obj.style.underline },
+        {
+          bold: this.transformStringToBoolean(meta.obj.style.bold),
+          italic: this.transformStringToBoolean(meta.obj.style.italic),
+          underline: this.transformStringToBoolean(meta.obj.style.underline),
+        },
         false,
         {
           legendElement: '',
@@ -469,6 +489,20 @@ class Gabarit extends React.Component<Props, State> {
 
   transformStringToBoolean = (text: string): boolean => {
     return text === 'true' ? true : false;
+  };
+
+  transformWithUpperCase = (oldSelectableValue: SelectableValue<boolean>): SelectableValue<boolean> => {
+    let newSelectableValue: SelectableValue<boolean> = { label: '', value: false };
+    let newLabel = '';
+    (oldSelectableValue.label || '').split('').forEach((letter, index) => {
+      if (index === 0) {
+        newLabel += letter.toUpperCase();
+      } else {
+        newLabel += letter;
+      }
+    });
+    newSelectableValue = { label: newLabel, value: oldSelectableValue.value };
+    return newSelectableValue;
   };
 
   loaderGabarit = (gab: GabaritFile, idx: number | null) => {
@@ -812,16 +846,12 @@ class Gabarit extends React.Component<Props, State> {
 
     /// Lower Limit
     lowerLimit = gabaritFileTmp.globalGabarit.lowerLimit;
-    console.log(lowerLimit);
     if (lowerLimit.length === 0) {
-      console.log('default');
       lowerLimit = this.props.options.gabaritDefault.globalGabarit.lowerLimit;
-      console.log(lowerLimit);
     }
-    console.log(lowerLimit);
 
     gabaritFileTmp.templateGabaritPoint.forEach((point, index) => {
-      if (point.labelfix.toString() === 'false') {
+      if (point.labelfix === 'false') {
         posPoint.push(coordParse(point.xylabel));
         if (!posPoint[index].y || !posPoint[index].x) {
           posPoint[index] = coordParse(gabaritFileTmp.templateGabaritPointDefault[0].xylabel);
@@ -852,13 +882,50 @@ class Gabarit extends React.Component<Props, State> {
       if (!namePoint[index]) {
         namePoint[index] = this.props.options.gabaritDefault.templateGabaritPointDefault[0].name;
       }
+
       metaPoint.push(this.metaConstructor(point.meta));
-      if (!metaPoint[index]) {
-        metaPoint[index] = this.metaConstructor(gabaritFileTmp.templateGabaritPointDefault[0].meta);
-      }
-      if (!metaPoint[index]) {
-        metaPoint[index] = this.metaConstructor(this.props.options.gabaritDefault.templateGabaritPointDefault[0].meta);
-      }
+      point.meta.forEach((oneMeta, indexMeta) => {
+        // BOLD
+        if (!oneMeta.obj.style.bold) {
+          metaPoint[index][indexMeta].obj.style.bold = this.transformStringToBoolean(
+            gabaritFileTmp.templateGabaritPointDefault[0].meta[indexMeta].obj.style.bold
+          );
+        }
+        if (!oneMeta.obj.style.bold && !gabaritFileTmp.templateGabaritPointDefault[0].meta[indexMeta].obj.style.bold) {
+          metaPoint[index][indexMeta].obj.style.bold = this.transformStringToBoolean(
+            this.props.options.gabaritDefault.templateGabaritPointDefault[0].meta[indexMeta].obj.style.bold
+          );
+        }
+        // ITALIC
+        if (!oneMeta.obj.style.italic) {
+          metaPoint[index][indexMeta].obj.style.italic = this.transformStringToBoolean(
+            gabaritFileTmp.templateGabaritPointDefault[0].meta[indexMeta].obj.style.italic
+          );
+        }
+        if (!oneMeta.obj.style.italic && !gabaritFileTmp.templateGabaritPointDefault[0].meta[indexMeta].obj.style.italic) {
+          metaPoint[index][indexMeta].obj.style.italic = this.transformStringToBoolean(
+            this.props.options.gabaritDefault.templateGabaritPointDefault[0].meta[indexMeta].obj.style.italic
+          );
+        }
+        // UNDERLINE
+        if (!oneMeta.obj.style.underline) {
+          metaPoint[index][indexMeta].obj.style.underline = this.transformStringToBoolean(
+            gabaritFileTmp.templateGabaritPointDefault[0].meta[indexMeta].obj.style.underline
+          );
+        }
+        if (!oneMeta.obj.style.underline && !gabaritFileTmp.templateGabaritPointDefault[0].meta[indexMeta].obj.style.underline) {
+          metaPoint[index][indexMeta].obj.style.underline = this.transformStringToBoolean(
+            this.props.options.gabaritDefault.templateGabaritPointDefault[0].meta[indexMeta].obj.style.underline
+          );
+        }
+      });
+      // if (!metaPoint[index]) {
+      //   metaPoint[index] = this.metaConstructor(gabaritFileTmp.templateGabaritPointDefault[0].meta);
+      // }
+
+      // if (!metaPoint[index]) {
+      //   metaPoint[index] = this.metaConstructor(this.props.options.gabaritDefault.templateGabaritPointDefault[0].meta);
+      // }
       labelPoint.push(point.label); // c'est le label du point qui est afficher pour la selection
       if (!labelPoint[index]) {
         labelPoint[index] = gabaritFileTmp.templateGabaritPointDefault[0].label;
@@ -1060,7 +1127,7 @@ class Gabarit extends React.Component<Props, State> {
     let labelCoord: LabelCoord2D[][] = [];
 
     posPoint.forEach((pos, index) => {
-      if (gabaritFileTmp.templateGabaritPoint[index].labelfix.toString() === 'false') {
+      if (gabaritFileTmp.templateGabaritPoint[index].labelfix === 'false') {
         this.props.data.series.forEach((element) => {
           let remove = element.name?.split('{');
           if (element.refId === mainMetricPoint[index]!.refId) {
@@ -1317,7 +1384,7 @@ class Gabarit extends React.Component<Props, State> {
     let isIncurvedLink: Array<SelectableValue<boolean>> = []; //
 
     gabaritFileTmp.templateGabaritLink.forEach((link, index) => {
-      if (link.labelfix.toString() === 'false') {
+      if (link.labelfix === 'false') {
         posALink.push(coordParse(link.xylabelA));
         if (!posALink[index].x || !posALink[index].y) {
           posALink[index] = coordParse(gabaritFileTmp.templateGabaritLinkDefault[0].xylabelA);
@@ -1377,12 +1444,47 @@ class Gabarit extends React.Component<Props, State> {
         nameLink[index] = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].name;
       }
       metaLink.push(this.metaConstructor(link.meta));
-      if (!metaLink[index]) {
-        metaLink[index] = this.metaConstructor(gabaritFileTmp.templateGabaritLinkDefault[0].meta);
-      }
-      if (!metaLink[index]) {
-        metaLink[index] = this.metaConstructor(this.props.options.gabaritDefault.templateGabaritLinkDefault[0].meta);
-      }
+      link.meta.forEach((oneMeta, indexMeta) => {
+        // BOLD
+        if (!oneMeta.obj.style.bold) {
+          metaLink[index][indexMeta].obj.style.bold = this.transformStringToBoolean(
+            gabaritFileTmp.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.bold
+          );
+        }
+        if (!oneMeta.obj.style.bold && !gabaritFileTmp.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.bold) {
+          metaLink[index][indexMeta].obj.style.bold = this.transformStringToBoolean(
+            this.props.options.gabaritDefault.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.bold
+          );
+        }
+        // ITALIC
+        if (!oneMeta.obj.style.italic) {
+          metaLink[index][indexMeta].obj.style.italic = this.transformStringToBoolean(
+            gabaritFileTmp.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.italic
+          );
+        }
+        if (!oneMeta.obj.style.italic && !gabaritFileTmp.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.italic) {
+          metaLink[index][indexMeta].obj.style.italic = this.transformStringToBoolean(
+            this.props.options.gabaritDefault.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.italic
+          );
+        }
+        // UNDERLINE
+        if (!oneMeta.obj.style.underline) {
+          metaLink[index][indexMeta].obj.style.underline = this.transformStringToBoolean(
+            gabaritFileTmp.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.underline
+          );
+        }
+        if (!oneMeta.obj.style.underline && !gabaritFileTmp.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.underline) {
+          metaLink[index][indexMeta].obj.style.underline = this.transformStringToBoolean(
+            this.props.options.gabaritDefault.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.underline
+          );
+        }
+      });
+      // if (!metaLink[index]) {
+      //   metaLink[index] = this.metaConstructor(gabaritFileTmp.templateGabaritLinkDefault[0].meta);
+      // }
+      // if (!metaLink[index]) {
+      //   metaLink[index] = this.metaConstructor(this.props.options.gabaritDefault.templateGabaritLinkDefault[0].meta);
+      // }
       labelLink.push(link.label);
       if (!labelLink[index]) {
         labelLink[index] = gabaritFileTmp.templateGabaritLinkDefault[0].label;
@@ -1617,19 +1719,45 @@ class Gabarit extends React.Component<Props, State> {
       if (!regionOutLink[index]) {
         regionOutLink[index] = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].regionOut;
       }
-      isIncurvedLink.push({ label: link.isIncurved.label, value: Boolean(link.isIncurved.value) });
-      if (!isIncurvedLink[index].label || !isIncurvedLink[index].value) {
+      isIncurvedLink.push({ label: link.isIncurved.label, value: this.transformStringToBoolean(link.isIncurved.value || '') });
+      if (
+        (link.isIncurved.label?.toLowerCase() !== 'yes' && link.isIncurved.label?.toLowerCase() !== 'no') ||
+        (link.isIncurved.value !== 'true' && link.isIncurved.value !== 'false')
+      ) {
+        console.log('level1');
         isIncurvedLink[index] = {
-          label: gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.label,
-          value: Boolean(gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.value),
+          label: gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.label?.toLowerCase(),
+          value: this.transformStringToBoolean(gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.value || ''),
         };
       }
-      if (!isIncurvedLink[index].label || !isIncurvedLink[index].value) {
+      if (
+        (((link.isIncurved.label?.toLowerCase() !== 'yes' && link.isIncurved.label?.toLowerCase() !== 'no') ||
+          (link.isIncurved.value !== 'true' && link.isIncurved.value !== 'false')) &&
+          gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.label?.toLowerCase() !== 'yes' &&
+          gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.label?.toLowerCase() !== 'no') ||
+        (((link.isIncurved.label?.toLowerCase() !== 'yes' && link.isIncurved.label?.toLowerCase() !== 'no') ||
+          (link.isIncurved.value !== 'true' && link.isIncurved.value !== 'false')) &&
+          gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.value !== 'true' &&
+          gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.value !== 'false')
+      ) {
         isIncurvedLink[index] = {
           label: this.props.options.gabaritDefault.templateGabaritLinkDefault[0].isIncurved.label,
-          value: Boolean(this.props.options.gabaritDefault.templateGabaritLinkDefault[0].isIncurved.value),
+          value: this.transformStringToBoolean(this.props.options.gabaritDefault.templateGabaritLinkDefault[0].isIncurved.value || ''),
         };
       }
+      isIncurvedLink[index] = this.transformWithUpperCase(isIncurvedLink[index]);
+      // if (!isIncurvedLink[index].label || !isIncurvedLink[index].value) {
+      //   isIncurvedLink[index] = {
+      //     label: gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.label,
+      //     value: this.transformStringToBoolean(gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.value || ''),
+      //   };
+      // }
+      // if (!isIncurvedLink[index].label || !isIncurvedLink[index].value) {
+      //   isIncurvedLink[index] = {
+      //     label: this.props.options.gabaritDefault.templateGabaritLinkDefault[0].isIncurved.label,
+      //     value: this.transformStringToBoolean(this.props.options.gabaritDefault.templateGabaritLinkDefault[0].isIncurved.value || ''),
+      //   };
+      // }
     });
 
     newID = 0;
@@ -1642,7 +1770,7 @@ class Gabarit extends React.Component<Props, State> {
     let labelCoordA: LabelCoord2D[][] = [];
 
     posALink.forEach((pos, index) => {
-      if (gabaritFileTmp.templateGabaritLink[index].labelfix.toString() === 'false') {
+      if (gabaritFileTmp.templateGabaritLink[index].labelfix === 'false') {
         this.props.data.series.forEach((element) => {
           if (element.refId === mainMetricALink[index]!.refId) {
             let remove = element.name?.split('{');
@@ -1716,7 +1844,7 @@ class Gabarit extends React.Component<Props, State> {
     let labelCoordB: LabelCoord2D[][] = [];
 
     posALink.forEach((pos, index) => {
-      if (gabaritFileTmp.templateGabaritLink[index].labelfix.toString() === 'false') {
+      if (gabaritFileTmp.templateGabaritLink[index].labelfix === 'false') {
         this.props.data.series.forEach((element) => {
           if (element.refId === mainMetricBLink[index]!.refId) {
             let remove = element.name?.split('{');
@@ -1790,7 +1918,7 @@ class Gabarit extends React.Component<Props, State> {
     let labelCoordC: LabelCoord2D[][] = [];
 
     posALink.forEach((pos, index) => {
-      if (gabaritFileTmp.templateGabaritLink[index].labelfix.toString() === 'false') {
+      if (gabaritFileTmp.templateGabaritLink[index].labelfix === 'false') {
         this.props.data.series.forEach((element) => {
           const nameQuery: string[] =
             element.name?.split(',').map((value) => {
@@ -2345,7 +2473,7 @@ class Gabarit extends React.Component<Props, State> {
     let orientedLinkAssociate: OrientedLinkClass[][] = [];
 
     gabaritFileTmp.templateGabaritRegion.forEach((region, index) => {
-      if (region.labelfix.toString() === 'false') {
+      if (region.labelfix === 'false') {
         posRegion.push(coordParseRegion(region.xylabel));
         if (!posRegion[index].xMax || !posRegion[index].xMin || !posRegion[index].yMax || !posRegion[index].yMin) {
           posRegion[index] = coordParseRegion(gabaritFileTmp.templateGabaritRegionDefault[0].xylabel);
@@ -2386,14 +2514,49 @@ class Gabarit extends React.Component<Props, State> {
       }
       // changement
       metaRegion.push(this.metaConstructor(region.meta));
-      if (!metaRegion[index]) {
-        metaRegion[index] = this.metaConstructor(gabaritFileTmp.templateGabaritRegionDefault[0].meta);
-      }
-      if (!metaRegion[index]) {
-        // changement
-        // metaRegion[index] = this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta;
-        metaRegion[index] = this.metaConstructor(this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta);
-      }
+      region.meta.forEach((oneMeta, indexMeta) => {
+        // BOLD
+        if (!oneMeta.obj.style.bold) {
+          metaRegion[index][indexMeta].obj.style.bold = this.transformStringToBoolean(
+            gabaritFileTmp.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.bold
+          );
+        }
+        if (!oneMeta.obj.style.bold && !gabaritFileTmp.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.bold) {
+          metaRegion[index][indexMeta].obj.style.bold = this.transformStringToBoolean(
+            this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.bold
+          );
+        }
+        // ITALIC
+        if (!oneMeta.obj.style.italic) {
+          metaRegion[index][indexMeta].obj.style.italic = this.transformStringToBoolean(
+            gabaritFileTmp.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.italic
+          );
+        }
+        if (!oneMeta.obj.style.italic && !gabaritFileTmp.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.italic) {
+          metaRegion[index][indexMeta].obj.style.italic = this.transformStringToBoolean(
+            this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.italic
+          );
+        }
+        // UNDERLINE
+        if (!oneMeta.obj.style.underline) {
+          metaRegion[index][indexMeta].obj.style.underline = this.transformStringToBoolean(
+            gabaritFileTmp.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.underline
+          );
+        }
+        if (!oneMeta.obj.style.underline && !gabaritFileTmp.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.underline) {
+          metaRegion[index][indexMeta].obj.style.underline = this.transformStringToBoolean(
+            this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.underline
+          );
+        }
+      });
+      // if (!metaRegion[index]) {
+      //   metaRegion[index] = this.metaConstructor(gabaritFileTmp.templateGabaritRegionDefault[0].meta);
+      // }
+      // if (!metaRegion[index]) {
+      //   // changement
+      //   // metaRegion[index] = this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta;
+      //   metaRegion[index] = this.metaConstructor(this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta);
+      // }
       labelRegion.push(region.label);
       if (!labelRegion[index]) {
         labelRegion[index] = gabaritFileTmp.templateGabaritRegionDefault[0].label;
@@ -2451,12 +2614,12 @@ class Gabarit extends React.Component<Props, State> {
           manageValue: element.manageValue,
         });
       });
-      modeRegion.push(Boolean(region.mode));
-      if (typeof modeRegion[index] === 'undefined') {
-        modeRegion[index] = Boolean(gabaritFileTmp.templateGabaritRegionDefault[0].mode);
+      modeRegion.push(this.transformStringToBoolean(region.mode));
+      if (!region.mode) {
+        modeRegion[index] = this.transformStringToBoolean(gabaritFileTmp.templateGabaritRegionDefault[0].mode);
       }
-      if (typeof modeRegion[index] === 'undefined') {
-        modeRegion[index] = Boolean(this.props.options.gabaritDefault.templateGabaritRegionDefault[0].mode);
+      if (!region.mode && !gabaritFileTmp.templateGabaritRegionDefault[0].mode) {
+        modeRegion[index] = this.transformStringToBoolean(this.props.options.gabaritDefault.templateGabaritRegionDefault[0].mode);
       }
       idSVGRegion.push(region.idSVG);
       if (!idSVGRegion[index]) {
@@ -2598,12 +2761,12 @@ class Gabarit extends React.Component<Props, State> {
             key={'GabaritUrl' + index.toString()}
             label={'Url'}
             labelWidth={10}
-            inputWidth={20}
+            inputWidth={25}
             onChange={this.onGabaritListUrlChanged.bind(this)}
             type="string"
             value={url || ''}
           />
-          <Button variant="danger" id={index.toString()} key={'ButtunDel' + index.toString()} onClick={this.gabaritDeletUrl.bind(this)}>
+          <Button size={'md'} variant="danger" id={index.toString()} key={'ButtunDel' + index.toString()} onClick={this.gabaritDeletUrl.bind(this)}>
             Delete
           </Button>
         </div>
@@ -2620,32 +2783,43 @@ class Gabarit extends React.Component<Props, State> {
           key={'GabaritDiv' + index.toString()}
           style={{
             display: 'flex',
+            justifyContent: 'space-between',
           }}
         >
-          <FormField
-            id={index.toString()}
-            key={'Gabarit' + index.toString()}
-            label={'Gabarit'}
-            labelWidth={5}
-            inputWidth={20}
-            type="string"
-            value={gabarit.fileName || ''}
-            readOnly
-          />
-          <FormLabel width={15}>Querry ID</FormLabel>
-          <Select
-            onChange={(value) => this.onChangeSelectQuerryID(value, index)}
-            allowCustomValue={false}
-            options={this.state.selectQuerryID}
-            width={10}
-            value={{ label: this.props.options.saveGabaritFile[index].queryID, value: this.props.options.saveGabaritFile[index].queryID }}
-          />
-          <Button id={index.toString()} key={'ButtunLoad' + index.toString()} onClick={this.checkLoaderGabarit.bind(this)}>
-            Load
-          </Button>
-          <Button variant="danger" id={index.toString()} key={'ButtunDel' + index.toString()} onClick={this.gabaritDeletFile.bind(this)}>
-            Delete
-          </Button>
+          <div style={{ display: 'flex' }}>
+            <FormField
+              id={index.toString()}
+              key={'Gabarit' + index.toString()}
+              label={'Gabarit'}
+              labelWidth={5}
+              inputWidth={20}
+              type="string"
+              value={gabarit.fileName || ''}
+              readOnly
+            />
+            <FormLabel width={15}>Querry ID</FormLabel>
+            <Select
+              onChange={(value) => this.onChangeSelectQuerryID(value, index)}
+              allowCustomValue={false}
+              options={this.state.selectQuerryID}
+              width={10}
+              value={{ label: this.props.options.saveGabaritFile[index].queryID, value: this.props.options.saveGabaritFile[index].queryID }}
+            />
+          </div>
+          <div>
+            <Button size={'md'} id={index.toString()} key={'ButtunLoad' + index.toString()} onClick={this.checkLoaderGabarit.bind(this)}>
+              <span style={{ padding: '0px 5px' }}>Load</span>
+            </Button>
+            <Button
+              size={'md'}
+              variant="danger"
+              id={index.toString()}
+              key={'ButtunDel' + index.toString()}
+              onClick={this.gabaritDeletFile.bind(this)}
+            >
+              <span style={{ padding: '0px 23px' }}>Delete</span>
+            </Button>
+          </div>
         </div>
       ));
       return <div>{list}</div>;
@@ -2665,12 +2839,12 @@ class Gabarit extends React.Component<Props, State> {
             key={'GabaritDefault'}
             label={'GabaritDefault'}
             labelWidth={10}
-            inputWidth={20}
+            inputWidth={25}
             type="string"
             value={props.list.fileName || ''}
             readOnly
           />
-          <Button variant="danger" key={'ButtunDelDefault'} onClick={this.gabaritDeletFileDefault.bind(this)}>
+          <Button size={'md'} variant="danger" key={'ButtunDelDefault'} onClick={this.gabaritDeletFileDefault.bind(this)}>
             Delete
           </Button>
         </div>
@@ -2728,13 +2902,13 @@ class Gabarit extends React.Component<Props, State> {
               label="Gabarit Default Url"
               labelWidth={10}
               key={'GabaritDefaultUrl'}
-              inputWidth={20}
+              inputWidth={25}
               onChange={this.onGabaritDefaultUrlChanged.bind(this)}
               type="string"
               value={options.saveGabaritDefaultUrl || ''}
             />
-            <Button key={'AddGabaritDefaultUrl'} onClick={this.addGabaritDefaultUrlInput}>
-              Finish
+            <Button size={'md'} key={'AddGabaritDefaultUrl'} onClick={this.addGabaritDefaultUrlInput}>
+              <span style={{ padding: '0px 8px' }}>Add</span>
             </Button>
           </div>
           <this.gabaritDefaultDisplay list={options.gabaritDefault} />
@@ -2745,22 +2919,34 @@ class Gabarit extends React.Component<Props, State> {
               label="Gabarit Url"
               labelWidth={10}
               key={'GabaritUrl'}
-              inputWidth={20}
+              inputWidth={25}
               onChange={this.onGabaritUrlChanged.bind(this)}
               type="string"
               value={options.gabaritUrlInput || ''}
             />
-            <Button key={'AddGabaritUrl'} onClick={this.addGabaritUrlInput}>
-              Add
+            <Button size={'md'} key={'AddGabaritUrl'} onClick={this.addGabaritUrlInput}>
+              <span style={{ padding: '0px 8px' }}>Add</span>
             </Button>
-            <Button onClick={this.fetchGabarit}>Finish</Button>
           </div>
           {/* <div className="section gf-form-group"> */}
           <div>
             <this.gabaritUrlDisplay list={options.saveGabaritURL} />
-            <Button key={'delAll'} onClick={this.delAll} variant="danger">
-              Delete all urls
-            </Button>
+            {this.props.options.saveGabaritURL.length !== 0 && (
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'right',
+                }}
+              >
+                <Button size={'md'} onClick={this.fetchGabarit}>
+                  Finish
+                </Button>
+                <Button size={'md'} key={'delAll'} onClick={this.delAll} variant="danger">
+                  Delete all urls
+                </Button>
+              </div>
+            )}
           </div>
         </Collapse>
         <Collapse isOpen={this.state.collapseGabarit} label="Gabarit List" onToggle={this.onToggleGabarit}>

@@ -32,19 +32,18 @@ export const editGoodParameter = (
 };
 
 export const limitValueInitialSpace = (coorInitialSpace: string, position: number, widthBackground: number, heigthBackground: number): string => {
-  //let result = 0;
-  //result = parseInt(coorInitialSpace, 10);
-  // if (position === 1 || position === 2) {
-  //   //xMin + xMax
-  //   if (result > widthBackground) {
-  //     result = widthBackground;
-  //   }
-  // } else if (position === 3 || position === 4) {
-  //   //yMin + yMax
-  //   if (result > heigthBackground) {
-  //     result = heigthBackground;
-  //   }
-  // }
+  let result = parseInt(coorInitialSpace, 10);
+  if (position === 1 || position === 2) {
+    //xMin + xMax
+    if (result > widthBackground) {
+      result = widthBackground;
+    }
+  } else if (position === 3 || position === 4) {
+    //yMin + yMax
+    if (result > heigthBackground) {
+      result = heigthBackground;
+    }
+  }
   // if (!defaultInitialSpace) {
   //   result = coorInt;
   // } else {
@@ -58,7 +57,10 @@ export const limitValueInitialSpace = (coorInitialSpace: string, position: numbe
   //     result = 0;
   //   }
   // }
-  return coorInitialSpace;
+  if (!result) {
+    result = 0;
+  }
+  return result.toString();
 };
 
 export const editGoodParameterExtend = (

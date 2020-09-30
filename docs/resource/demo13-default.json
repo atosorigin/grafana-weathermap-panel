@@ -30,8 +30,8 @@
         "colorBackElement": ""
       },
       "generateAuxiliaryElement": {
-        "legendElement": "",
-        "numericFormatElement": "",
+        "legendElement": "Legend Auxiliary",
+        "numericFormatElement": "?",
         "unit": "Hz",
         "displayObjectInTooltip": "true",
         "addColorTextElement": "true",
@@ -48,12 +48,25 @@
     "templates": [
       {
         "filtered": "",
-        "labelfix": true,
+        "labelfix": "true",
         "xylabel": "",
         "xylabelfix": "x|90#y|90",
         "type": "point",
         "name": "Point",
-        "meta": [],
+        "meta": [
+          {
+            "meta": "meta exemple",
+            "obj": {
+              "colorText": "#FF00FF",
+              "colorBack": "#CCCCCC",
+              "style": {
+                "bold": "false",
+                "italic": "false",
+                "underline": "false"
+              }
+            }
+          }
+        ],
         "label": "label",
         "positionParameter": {
           "xylabelA": "x|0#y|0",
@@ -104,7 +117,7 @@
       },
       {
         "filtered": "device|ens3",
-        "labelfix": true,
+        "labelfix": "true",
         "xylabelA": "x|quantile#y|quantile",
         "xylabelB": "x|quantile#y|quantile",
         "xylabelC": "x|quantile#y|quantile",
@@ -120,9 +133,9 @@
               "colorText": "#FF00FF",
               "colorBack": "#CCCCCC",
               "style": {
-                "bold": false,
-                "italic": false,
-                "underline": true
+                "bold": "false",
+                "italic": "false",
+                "underline": "true"
               }
             }
           }
@@ -178,7 +191,7 @@
         "regionOut": "",
         "isIncurved": {
           "label": "No",
-          "value": false
+          "value": "false"
         },
         "zIndex": "2",
         "color": "green"

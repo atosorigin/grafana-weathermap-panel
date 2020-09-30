@@ -68,14 +68,14 @@ In the **Gabarit** tab
 
 ![](../../screenshots/demo/tutorial13/demo13-0.png)
 
-vous ajoutez le fichier par défaut
+you add the default file
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo13-default.json
 
 ```
 
-puis 1 clic que le bouton **Add**
+then 1 click that the **Add** button
 
 ![](../../screenshots/demo/tutorial13/demo13-1.png)
 
@@ -105,8 +105,6 @@ he must be given a query for
 - B for the second file
 
 
-
-In **Text Object** you uncheck the line **Object display in text or tooltip**.
 
 ## Result
 

@@ -1181,20 +1181,19 @@ var editGoodParameter = function editGoodParameter(name, editCoor, newValue, wid
   return editCoor;
 };
 var limitValueInitialSpace = function limitValueInitialSpace(coorInitialSpace, position, widthBackground, heigthBackground) {
-  //let result = 0;
-  //result = parseInt(coorInitialSpace, 10);
-  // if (position === 1 || position === 2) {
-  //   //xMin + xMax
-  //   if (result > widthBackground) {
-  //     result = widthBackground;
-  //   }
-  // } else if (position === 3 || position === 4) {
-  //   //yMin + yMax
-  //   if (result > heigthBackground) {
-  //     result = heigthBackground;
-  //   }
-  // }
-  // if (!defaultInitialSpace) {
+  var result = parseInt(coorInitialSpace, 10);
+
+  if (position === 1 || position === 2) {
+    //xMin + xMax
+    if (result > widthBackground) {
+      result = widthBackground;
+    }
+  } else if (position === 3 || position === 4) {
+    //yMin + yMax
+    if (result > heigthBackground) {
+      result = heigthBackground;
+    }
+  } // if (!defaultInitialSpace) {
   //   result = coorInt;
   // } else {
   //   if (coorInt > 100) {
@@ -1207,7 +1206,13 @@ var limitValueInitialSpace = function limitValueInitialSpace(coorInitialSpace, p
   //     result = 0;
   //   }
   // }
-  return coorInitialSpace;
+
+
+  if (!result) {
+    result = 0;
+  }
+
+  return result.toString();
 };
 var editGoodParameterExtend = function editGoodParameterExtend(name, editCoor, newValue // widthInitialSpace?: string,
 // heightInitialSpace?: string
@@ -6216,7 +6221,7 @@ function (_super) {
 
     _this.componentDidMount = function () {
       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
-        var width, height, text, result, resultWidth, resultHeight, id, newBaseMap;
+        var width, height, text, result, resultWidth, resultHeight, id, newBaseMap, coordinateSpace;
 
         var _this = this;
 
@@ -6324,15 +6329,21 @@ function (_super) {
             }
           } else {
             this.chargeRegion();
-          } //Set value initialSpace with width and height of background
-          // const widthInitialSpace = this.props.options.baseMap.width === '' ? '0' : this.props.options.baseMap.width;
-          // const heightInitialSpace = this.props.options.baseMap.height === '' ? '0' : this.props.options.baseMap.height;
-          // this.props.options.coordinateSpaceInitial.coordinate.xMax = widthInitialSpace;
-          // this.props.options.coordinateSpaceInitial.coordinate.yMax = heightInitialSpace;
+          }
 
+          coordinateSpace = this.props.options.coordinateSpaceInitial;
+          coordinateSpace.coordinate.xMax = this.props.options.baseMap.width || '0';
+          coordinateSpace.coordinate.yMax = this.props.options.baseMap.height || '0'; // if (coordinateSpace.coordinate.xMax === '') {
+          //   coordinateSpace.coordinate.xMax = '0';
+          // }
+          // if (!coordinateSpace.coordinate.yMax) {
+          //   coordinateSpace.coordinate.yMax = '0';
+          // }
+          // this.props.onOptionsChange({
+          //   ...this.props.options,
+          //   coordinateSpaceInitial: coordinateSpace,
+          // });
 
-          this.props.options.coordinateSpaceInitial.coordinate.xMax = this.props.options.baseMap.width;
-          this.props.options.coordinateSpaceInitial.coordinate.yMax = this.props.options.baseMap.height;
           this.updateButtonCss();
           return [2
           /*return*/
@@ -7340,12 +7351,12 @@ function (_super) {
 
 
     if (this.props.options.baseMap.width !== this.props.options.coordinateSpaceInitial.coordinate.xMax && !this.props.options.updateOnlyInitialSpace) {
-      this.props.options.coordinateSpaceInitial.coordinate.xMax = this.props.options.baseMap.width;
+      this.props.options.coordinateSpaceInitial.coordinate.xMax = this.props.options.baseMap.width || '0';
     } //Set height initialSpace if new height in display
 
 
     if (this.props.options.baseMap.height !== this.props.options.coordinateSpaceInitial.coordinate.yMax && !this.props.options.updateOnlyInitialSpace) {
-      this.props.options.coordinateSpaceInitial.coordinate.yMax = this.props.options.baseMap.height;
+      this.props.options.coordinateSpaceInitial.coordinate.yMax = this.props.options.baseMap.height || '0';
     } // if (this.props.options.baseMap.image !== prevProps.options.baseMap.image) {
     //   this.componentDidMount();
     // }
@@ -10234,24 +10245,14 @@ function (_super) {
               border: '1px solid black',
               padding: '10px'
             }
-          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
             style: {
-              display: 'flex',
-              justifyContent: 'right',
-              marginBottom: '10px'
+              fontSize: '16px',
+              fontWeight: 'normal',
+              textAlign: 'left',
+              paddingLeft: '8px'
             }
-          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-            variant: 'danger',
-            onClick: function onClick() {
-              var newArrayPoints = _this.props.options.arrayPoints;
-
-              _this.getCurrentPoint().meta.splice(index, 1);
-
-              _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-                arrayPoints: newArrayPoints
-              }));
-            }
-          }, "Delete")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          }, "Metadata ", index + 1), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             key: 'Meta' + index,
             style: {
               display: 'flex',
@@ -10358,7 +10359,24 @@ function (_super) {
                 arrayPoints: newArrayPoint
               }));
             }
-          })))));
+          })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            style: {
+              display: 'flex',
+              justifyContent: 'right',
+              margin: '10px 0px'
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+            variant: 'danger',
+            onClick: function onClick() {
+              var newArrayPoints = _this.props.options.arrayPoints;
+
+              _this.getCurrentPoint().meta.splice(index, 1);
+
+              _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+                arrayPoints: newArrayPoints
+              }));
+            }
+          }, "Delete")));
         });
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, list);
       }
@@ -10374,24 +10392,14 @@ function (_super) {
               border: '1px solid black',
               padding: '10px'
             }
-          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
             style: {
-              display: 'flex',
-              justifyContent: 'right',
-              marginBottom: '10px'
+              fontSize: '16px',
+              fontWeight: 'normal',
+              textAlign: 'center',
+              paddingLeft: '8px'
             }
-          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-            variant: 'danger',
-            onClick: function onClick() {
-              var newArrayRegion = _this.props.options.regionCoordinateSpace;
-
-              _this.getCurrentRegion().meta.splice(index, 1);
-
-              _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-                regionCoordinateSpace: newArrayRegion
-              }));
-            }
-          }, "Delete")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          }, "Metadata ", index + 1), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             key: 'Meta' + index,
             style: {
               display: 'flex',
@@ -10498,7 +10506,24 @@ function (_super) {
                 regionCoordinateSpace: newArrayRegion
               }));
             }
-          })))));
+          })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            style: {
+              display: 'flex',
+              justifyContent: 'right',
+              margin: '10px'
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+            variant: 'danger',
+            onClick: function onClick() {
+              var newArrayRegion = _this.props.options.regionCoordinateSpace;
+
+              _this.getCurrentRegion().meta.splice(index, 1);
+
+              _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+                regionCoordinateSpace: newArrayRegion
+              }));
+            }
+          }, "Delete")));
         });
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, list);
       }
@@ -10514,24 +10539,14 @@ function (_super) {
               border: '1px solid black',
               padding: '10px'
             }
-          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
             style: {
-              display: 'flex',
-              justifyContent: 'right',
-              marginBottom: '10px'
+              fontSize: '16px',
+              fontWeight: 'normal',
+              textAlign: 'center',
+              paddingLeft: '8px'
             }
-          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-            variant: 'danger',
-            onClick: function onClick() {
-              var newArrayOrientedLink = _this.props.options.arrayOrientedLinks;
-
-              _this.getCurrentLink().meta.splice(index, 1);
-
-              _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-                arrayOrientedLinks: newArrayOrientedLink
-              }));
-            }
-          }, "Delete")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          }, "Metadata ", index + 1), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             key: 'Meta' + index,
             style: {
               display: 'flex',
@@ -10638,7 +10653,24 @@ function (_super) {
                 arrayOrientedLinks: newArrayOrientedLink
               }));
             }
-          })))));
+          })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            style: {
+              display: 'flex',
+              justifyContent: 'right',
+              marginBottom: '10px'
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+            variant: 'danger',
+            onClick: function onClick() {
+              var newArrayOrientedLink = _this.props.options.arrayOrientedLinks;
+
+              _this.getCurrentLink().meta.splice(index, 1);
+
+              _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
+                arrayOrientedLinks: newArrayOrientedLink
+              }));
+            }
+          }, "Delete")));
         });
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, list);
       }
@@ -10692,7 +10724,11 @@ function (_super) {
       variant: "primary",
       className: "button",
       onClick: this.addMeta
-    }, "Add")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.displayMetaList, {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      style: {
+        padding: '0px 8px'
+      }
+    }, "Add"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.displayMetaList, {
       type: this.props.type,
       id: this.props.idCoordinate - 1
     })));
@@ -22325,14 +22361,14 @@ function (_super) {
       inputWidth: 30,
       type: "text",
       onChange: this.onChangeWidthBaseMap,
-      value: options.baseMap.width || ''
+      value: options.baseMap.width || '0'
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
       label: "Height",
       labelWidth: 15,
       inputWidth: 30,
       type: "text",
       onChange: this.onChangeHeightBaseMap,
-      value: options.baseMap.height || ''
+      value: options.baseMap.height || '0'
     })));
   };
 
@@ -22592,6 +22628,9 @@ function (_super) {
               case 2:
                 file = _a.sent();
                 this.loadGabarit(file, url);
+                this.setState({
+                  collapseGabarit: true
+                });
                 return [3
                 /*break*/
                 , 4];
@@ -22759,7 +22798,7 @@ function (_super) {
 
     _this.addGabaritDefaultUrlInput = function (onClick) {
       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
-        var url, file, response, error_3;
+        var url, file, response, newFileName, newGabaritDefault, error_3;
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
           switch (_a.label) {
             case 0:
@@ -22773,6 +22812,12 @@ function (_super) {
 
             case 1:
               response = _a.sent();
+              newFileName = url.split('/')[url.split('/').length - 1];
+              newGabaritDefault = this.props.options.gabaritDefault;
+              newGabaritDefault.fileName = newFileName;
+              this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.props.options), {
+                gabaritDefault: newGabaritDefault
+              }));
               return [4
               /*yield*/
               , response.json()];
@@ -22780,6 +22825,9 @@ function (_super) {
             case 2:
               file = _a.sent();
               this.loadDefaultGabarit(file, url);
+              this.setState({
+                collapseSelectURL: true
+              });
               return [3
               /*break*/
               , 4];
@@ -22885,7 +22933,8 @@ function (_super) {
       };
 
       _this.props.onOptionsChange(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, _this.props.options), {
-        gabaritDefault: _this.props.options.gabaritDefault
+        gabaritDefault: _this.props.options.gabaritDefault,
+        saveGabaritDefaultUrl: ''
       }));
     };
     /**************************************LOADER******************************************/
@@ -22905,9 +22954,9 @@ function (_super) {
       var result = [];
       metas.forEach(function (meta, index) {
         var textObject = new Models_TextObjectClass__WEBPACK_IMPORTED_MODULE_9__["TextObject"]('', false, meta.obj.colorBack, meta.obj.colorText, {
-          bold: meta.obj.style.bold,
-          italic: meta.obj.style.italic,
-          underline: meta.obj.style.underline
+          bold: _this.transformStringToBoolean(meta.obj.style.bold),
+          italic: _this.transformStringToBoolean(meta.obj.style.italic),
+          underline: _this.transformStringToBoolean(meta.obj.style.underline)
         }, false, {
           legendElement: '',
           numericFormatElement: '',
@@ -22937,6 +22986,26 @@ function (_super) {
 
     _this.transformStringToBoolean = function (text) {
       return text === 'true' ? true : false;
+    };
+
+    _this.transformWithUpperCase = function (oldSelectableValue) {
+      var newSelectableValue = {
+        label: '',
+        value: false
+      };
+      var newLabel = '';
+      (oldSelectableValue.label || '').split('').forEach(function (letter, index) {
+        if (index === 0) {
+          newLabel += letter.toUpperCase();
+        } else {
+          newLabel += letter;
+        }
+      });
+      newSelectableValue = {
+        label: newLabel,
+        value: oldSelectableValue.value
+      };
+      return newSelectableValue;
     };
 
     _this.loaderGabarit = function (gab, idx) {
@@ -23264,17 +23333,13 @@ function (_super) {
       /// Lower Limit
 
       lowerLimit = gabaritFileTmp.globalGabarit.lowerLimit;
-      console.log(lowerLimit);
 
       if (lowerLimit.length === 0) {
-        console.log('default');
         lowerLimit = _this.props.options.gabaritDefault.globalGabarit.lowerLimit;
-        console.log(lowerLimit);
       }
 
-      console.log(lowerLimit);
       gabaritFileTmp.templateGabaritPoint.forEach(function (point, index) {
-        if (point.labelfix.toString() === 'false') {
+        if (point.labelfix === 'false') {
           posPoint.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(point.xylabel));
 
           if (!posPoint[index].y || !posPoint[index].x) {
@@ -23317,14 +23382,39 @@ function (_super) {
         }
 
         metaPoint.push(_this.metaConstructor(point.meta));
+        point.meta.forEach(function (oneMeta, indexMeta) {
+          // BOLD
+          if (!oneMeta.obj.style.bold) {
+            metaPoint[index][indexMeta].obj.style.bold = _this.transformStringToBoolean(gabaritFileTmp.templateGabaritPointDefault[0].meta[indexMeta].obj.style.bold);
+          }
 
-        if (!metaPoint[index]) {
-          metaPoint[index] = _this.metaConstructor(gabaritFileTmp.templateGabaritPointDefault[0].meta);
-        }
+          if (!oneMeta.obj.style.bold && !gabaritFileTmp.templateGabaritPointDefault[0].meta[indexMeta].obj.style.bold) {
+            metaPoint[index][indexMeta].obj.style.bold = _this.transformStringToBoolean(_this.props.options.gabaritDefault.templateGabaritPointDefault[0].meta[indexMeta].obj.style.bold);
+          } // ITALIC
 
-        if (!metaPoint[index]) {
-          metaPoint[index] = _this.metaConstructor(_this.props.options.gabaritDefault.templateGabaritPointDefault[0].meta);
-        }
+
+          if (!oneMeta.obj.style.italic) {
+            metaPoint[index][indexMeta].obj.style.italic = _this.transformStringToBoolean(gabaritFileTmp.templateGabaritPointDefault[0].meta[indexMeta].obj.style.italic);
+          }
+
+          if (!oneMeta.obj.style.italic && !gabaritFileTmp.templateGabaritPointDefault[0].meta[indexMeta].obj.style.italic) {
+            metaPoint[index][indexMeta].obj.style.italic = _this.transformStringToBoolean(_this.props.options.gabaritDefault.templateGabaritPointDefault[0].meta[indexMeta].obj.style.italic);
+          } // UNDERLINE
+
+
+          if (!oneMeta.obj.style.underline) {
+            metaPoint[index][indexMeta].obj.style.underline = _this.transformStringToBoolean(gabaritFileTmp.templateGabaritPointDefault[0].meta[indexMeta].obj.style.underline);
+          }
+
+          if (!oneMeta.obj.style.underline && !gabaritFileTmp.templateGabaritPointDefault[0].meta[indexMeta].obj.style.underline) {
+            metaPoint[index][indexMeta].obj.style.underline = _this.transformStringToBoolean(_this.props.options.gabaritDefault.templateGabaritPointDefault[0].meta[indexMeta].obj.style.underline);
+          }
+        }); // if (!metaPoint[index]) {
+        //   metaPoint[index] = this.metaConstructor(gabaritFileTmp.templateGabaritPointDefault[0].meta);
+        // }
+        // if (!metaPoint[index]) {
+        //   metaPoint[index] = this.metaConstructor(this.props.options.gabaritDefault.templateGabaritPointDefault[0].meta);
+        // }
 
         labelPoint.push(point.label); // c'est le label du point qui est afficher pour la selection
 
@@ -23561,7 +23651,7 @@ function (_super) {
       var labelCoordY = [];
       var labelCoord = [];
       posPoint.forEach(function (pos, index) {
-        if (gabaritFileTmp.templateGabaritPoint[index].labelfix.toString() === 'false') {
+        if (gabaritFileTmp.templateGabaritPoint[index].labelfix === 'false') {
           _this.props.data.series.forEach(function (element) {
             var e_1, _a, e_2, _b, e_3, _c;
 
@@ -23808,7 +23898,9 @@ function (_super) {
       var isIncurvedLink = []; //
 
       gabaritFileTmp.templateGabaritLink.forEach(function (link, index) {
-        if (link.labelfix.toString() === 'false') {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+
+        if (link.labelfix === 'false') {
           posALink.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParse"])(link.xylabelA));
 
           if (!posALink[index].x || !posALink[index].y) {
@@ -23891,14 +23983,39 @@ function (_super) {
         }
 
         metaLink.push(_this.metaConstructor(link.meta));
+        link.meta.forEach(function (oneMeta, indexMeta) {
+          // BOLD
+          if (!oneMeta.obj.style.bold) {
+            metaLink[index][indexMeta].obj.style.bold = _this.transformStringToBoolean(gabaritFileTmp.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.bold);
+          }
 
-        if (!metaLink[index]) {
-          metaLink[index] = _this.metaConstructor(gabaritFileTmp.templateGabaritLinkDefault[0].meta);
-        }
+          if (!oneMeta.obj.style.bold && !gabaritFileTmp.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.bold) {
+            metaLink[index][indexMeta].obj.style.bold = _this.transformStringToBoolean(_this.props.options.gabaritDefault.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.bold);
+          } // ITALIC
 
-        if (!metaLink[index]) {
-          metaLink[index] = _this.metaConstructor(_this.props.options.gabaritDefault.templateGabaritLinkDefault[0].meta);
-        }
+
+          if (!oneMeta.obj.style.italic) {
+            metaLink[index][indexMeta].obj.style.italic = _this.transformStringToBoolean(gabaritFileTmp.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.italic);
+          }
+
+          if (!oneMeta.obj.style.italic && !gabaritFileTmp.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.italic) {
+            metaLink[index][indexMeta].obj.style.italic = _this.transformStringToBoolean(_this.props.options.gabaritDefault.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.italic);
+          } // UNDERLINE
+
+
+          if (!oneMeta.obj.style.underline) {
+            metaLink[index][indexMeta].obj.style.underline = _this.transformStringToBoolean(gabaritFileTmp.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.underline);
+          }
+
+          if (!oneMeta.obj.style.underline && !gabaritFileTmp.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.underline) {
+            metaLink[index][indexMeta].obj.style.underline = _this.transformStringToBoolean(_this.props.options.gabaritDefault.templateGabaritLinkDefault[0].meta[indexMeta].obj.style.underline);
+          }
+        }); // if (!metaLink[index]) {
+        //   metaLink[index] = this.metaConstructor(gabaritFileTmp.templateGabaritLinkDefault[0].meta);
+        // }
+        // if (!metaLink[index]) {
+        //   metaLink[index] = this.metaConstructor(this.props.options.gabaritDefault.templateGabaritLinkDefault[0].meta);
+        // }
 
         labelLink.push(link.label);
 
@@ -24183,22 +24300,36 @@ function (_super) {
 
         isIncurvedLink.push({
           label: link.isIncurved.label,
-          value: Boolean(link.isIncurved.value)
+          value: _this.transformStringToBoolean(link.isIncurved.value || '')
         });
 
-        if (!isIncurvedLink[index].label || !isIncurvedLink[index].value) {
+        if (((_a = link.isIncurved.label) === null || _a === void 0 ? void 0 : _a.toLowerCase()) !== 'yes' && ((_b = link.isIncurved.label) === null || _b === void 0 ? void 0 : _b.toLowerCase()) !== 'no' || link.isIncurved.value !== 'true' && link.isIncurved.value !== 'false') {
+          console.log('level1');
           isIncurvedLink[index] = {
-            label: gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.label,
-            value: Boolean(gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.value)
+            label: (_c = gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.label) === null || _c === void 0 ? void 0 : _c.toLowerCase(),
+            value: _this.transformStringToBoolean(gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.value || '')
           };
         }
 
-        if (!isIncurvedLink[index].label || !isIncurvedLink[index].value) {
+        if ((((_d = link.isIncurved.label) === null || _d === void 0 ? void 0 : _d.toLowerCase()) !== 'yes' && ((_e = link.isIncurved.label) === null || _e === void 0 ? void 0 : _e.toLowerCase()) !== 'no' || link.isIncurved.value !== 'true' && link.isIncurved.value !== 'false') && ((_f = gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.label) === null || _f === void 0 ? void 0 : _f.toLowerCase()) !== 'yes' && ((_g = gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.label) === null || _g === void 0 ? void 0 : _g.toLowerCase()) !== 'no' || (((_h = link.isIncurved.label) === null || _h === void 0 ? void 0 : _h.toLowerCase()) !== 'yes' && ((_j = link.isIncurved.label) === null || _j === void 0 ? void 0 : _j.toLowerCase()) !== 'no' || link.isIncurved.value !== 'true' && link.isIncurved.value !== 'false') && gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.value !== 'true' && gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.value !== 'false') {
           isIncurvedLink[index] = {
             label: _this.props.options.gabaritDefault.templateGabaritLinkDefault[0].isIncurved.label,
-            value: Boolean(_this.props.options.gabaritDefault.templateGabaritLinkDefault[0].isIncurved.value)
+            value: _this.transformStringToBoolean(_this.props.options.gabaritDefault.templateGabaritLinkDefault[0].isIncurved.value || '')
           };
         }
+
+        isIncurvedLink[index] = _this.transformWithUpperCase(isIncurvedLink[index]); // if (!isIncurvedLink[index].label || !isIncurvedLink[index].value) {
+        //   isIncurvedLink[index] = {
+        //     label: gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.label,
+        //     value: this.transformStringToBoolean(gabaritFileTmp.templateGabaritLinkDefault[0].isIncurved.value || ''),
+        //   };
+        // }
+        // if (!isIncurvedLink[index].label || !isIncurvedLink[index].value) {
+        //   isIncurvedLink[index] = {
+        //     label: this.props.options.gabaritDefault.templateGabaritLinkDefault[0].isIncurved.label,
+        //     value: this.transformStringToBoolean(this.props.options.gabaritDefault.templateGabaritLinkDefault[0].isIncurved.value || ''),
+        //   };
+        // }
       });
       newID = 0;
 
@@ -24210,7 +24341,7 @@ function (_super) {
       labelCoordY = [];
       var labelCoordA = [];
       posALink.forEach(function (pos, index) {
-        if (gabaritFileTmp.templateGabaritLink[index].labelfix.toString() === 'false') {
+        if (gabaritFileTmp.templateGabaritLink[index].labelfix === 'false') {
           _this.props.data.series.forEach(function (element) {
             var e_5, _a, e_6, _b, e_7, _c;
 
@@ -24338,7 +24469,7 @@ function (_super) {
       labelCoordY = [];
       var labelCoordB = [];
       posALink.forEach(function (pos, index) {
-        if (gabaritFileTmp.templateGabaritLink[index].labelfix.toString() === 'false') {
+        if (gabaritFileTmp.templateGabaritLink[index].labelfix === 'false') {
           _this.props.data.series.forEach(function (element) {
             var e_8, _a, e_9, _b, e_10, _c;
 
@@ -24466,7 +24597,7 @@ function (_super) {
       labelCoordY = [];
       var labelCoordC = [];
       posALink.forEach(function (pos, index) {
-        if (gabaritFileTmp.templateGabaritLink[index].labelfix.toString() === 'false') {
+        if (gabaritFileTmp.templateGabaritLink[index].labelfix === 'false') {
           _this.props.data.series.forEach(function (element) {
             var e_11, _a;
 
@@ -24743,7 +24874,7 @@ function (_super) {
       var imgRegion = [];
       var orientedLinkAssociate = [];
       gabaritFileTmp.templateGabaritRegion.forEach(function (region, index) {
-        if (region.labelfix.toString() === 'false') {
+        if (region.labelfix === 'false') {
           posRegion.push(Object(_Functions_loaderGabarit__WEBPACK_IMPORTED_MODULE_3__["coordParseRegion"])(region.xylabel));
 
           if (!posRegion[index].xMax || !posRegion[index].xMin || !posRegion[index].yMax || !posRegion[index].yMin) {
@@ -24787,16 +24918,41 @@ function (_super) {
 
 
         metaRegion.push(_this.metaConstructor(region.meta));
+        region.meta.forEach(function (oneMeta, indexMeta) {
+          // BOLD
+          if (!oneMeta.obj.style.bold) {
+            metaRegion[index][indexMeta].obj.style.bold = _this.transformStringToBoolean(gabaritFileTmp.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.bold);
+          }
 
-        if (!metaRegion[index]) {
-          metaRegion[index] = _this.metaConstructor(gabaritFileTmp.templateGabaritRegionDefault[0].meta);
-        }
+          if (!oneMeta.obj.style.bold && !gabaritFileTmp.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.bold) {
+            metaRegion[index][indexMeta].obj.style.bold = _this.transformStringToBoolean(_this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.bold);
+          } // ITALIC
 
-        if (!metaRegion[index]) {
-          // changement
-          // metaRegion[index] = this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta;
-          metaRegion[index] = _this.metaConstructor(_this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta);
-        }
+
+          if (!oneMeta.obj.style.italic) {
+            metaRegion[index][indexMeta].obj.style.italic = _this.transformStringToBoolean(gabaritFileTmp.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.italic);
+          }
+
+          if (!oneMeta.obj.style.italic && !gabaritFileTmp.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.italic) {
+            metaRegion[index][indexMeta].obj.style.italic = _this.transformStringToBoolean(_this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.italic);
+          } // UNDERLINE
+
+
+          if (!oneMeta.obj.style.underline) {
+            metaRegion[index][indexMeta].obj.style.underline = _this.transformStringToBoolean(gabaritFileTmp.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.underline);
+          }
+
+          if (!oneMeta.obj.style.underline && !gabaritFileTmp.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.underline) {
+            metaRegion[index][indexMeta].obj.style.underline = _this.transformStringToBoolean(_this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta[indexMeta].obj.style.underline);
+          }
+        }); // if (!metaRegion[index]) {
+        //   metaRegion[index] = this.metaConstructor(gabaritFileTmp.templateGabaritRegionDefault[0].meta);
+        // }
+        // if (!metaRegion[index]) {
+        //   // changement
+        //   // metaRegion[index] = this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta;
+        //   metaRegion[index] = this.metaConstructor(this.props.options.gabaritDefault.templateGabaritRegionDefault[0].meta);
+        // }
 
         labelRegion.push(region.label);
 
@@ -24861,14 +25017,14 @@ function (_super) {
             manageValue: element.manageValue
           });
         });
-        modeRegion.push(Boolean(region.mode));
+        modeRegion.push(_this.transformStringToBoolean(region.mode));
 
-        if (typeof modeRegion[index] === 'undefined') {
-          modeRegion[index] = Boolean(gabaritFileTmp.templateGabaritRegionDefault[0].mode);
+        if (!region.mode) {
+          modeRegion[index] = _this.transformStringToBoolean(gabaritFileTmp.templateGabaritRegionDefault[0].mode);
         }
 
-        if (typeof modeRegion[index] === 'undefined') {
-          modeRegion[index] = Boolean(_this.props.options.gabaritDefault.templateGabaritRegionDefault[0].mode);
+        if (!region.mode && !gabaritFileTmp.templateGabaritRegionDefault[0].mode) {
+          modeRegion[index] = _this.transformStringToBoolean(_this.props.options.gabaritDefault.templateGabaritRegionDefault[0].mode);
         }
 
         idSVGRegion.push(region.idSVG);
@@ -24994,11 +25150,12 @@ function (_super) {
             key: 'GabaritUrl' + index.toString(),
             label: 'Url',
             labelWidth: 10,
-            inputWidth: 20,
+            inputWidth: 25,
             onChange: _this.onGabaritListUrlChanged.bind(_this),
             type: "string",
             value: url || ''
           }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+            size: 'md',
             variant: "danger",
             id: index.toString(),
             key: 'ButtunDel' + index.toString(),
@@ -25016,6 +25173,11 @@ function (_super) {
         var list = props.list.map(function (gabarit, index) {
           return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             key: 'GabaritDiv' + index.toString(),
+            style: {
+              display: 'flex',
+              justifyContent: 'space-between'
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             style: {
               display: 'flex'
             }
@@ -25041,16 +25203,26 @@ function (_super) {
               label: _this.props.options.saveGabaritFile[index].queryID,
               value: _this.props.options.saveGabaritFile[index].queryID
             }
-          }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+            size: 'md',
             id: index.toString(),
             key: 'ButtunLoad' + index.toString(),
             onClick: _this.checkLoaderGabarit.bind(_this)
-          }, "Load"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+            style: {
+              padding: '0px 5px'
+            }
+          }, "Load")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+            size: 'md',
             variant: "danger",
             id: index.toString(),
             key: 'ButtunDel' + index.toString(),
             onClick: _this.gabaritDeletFile.bind(_this)
-          }, "Delete"));
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+            style: {
+              padding: '0px 23px'
+            }
+          }, "Delete"))));
         });
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, list);
       }
@@ -25068,11 +25240,12 @@ function (_super) {
           key: 'GabaritDefault',
           label: 'GabaritDefault',
           labelWidth: 10,
-          inputWidth: 20,
+          inputWidth: 25,
           type: "string",
           value: props.list.fileName || '',
           readOnly: true
         }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          size: 'md',
           variant: "danger",
           key: 'ButtunDelDefault',
           onClick: _this.gabaritDeletFileDefault.bind(_this)
@@ -25206,7 +25379,7 @@ function (_super) {
       }],
       collapseSelectURL: false,
       collapseGabarit: false,
-      collapseGabaritDefault: false
+      collapseGabaritDefault: true
     };
     return _this;
   }
@@ -25225,14 +25398,19 @@ function (_super) {
       label: "Gabarit Default Url",
       labelWidth: 10,
       key: 'GabaritDefaultUrl',
-      inputWidth: 20,
+      inputWidth: 25,
       onChange: this.onGabaritDefaultUrlChanged.bind(this),
       type: "string",
       value: options.saveGabaritDefaultUrl || ''
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+      size: 'md',
       key: 'AddGabaritDefaultUrl',
       onClick: this.addGabaritDefaultUrlInput
-    }, "Finish")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.gabaritDefaultDisplay, {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      style: {
+        padding: '0px 8px'
+      }
+    }, "Add"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.gabaritDefaultDisplay, {
       list: options.gabaritDefault
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
       isOpen: this.state.collapseSelectURL,
@@ -25246,22 +25424,35 @@ function (_super) {
       label: "Gabarit Url",
       labelWidth: 10,
       key: 'GabaritUrl',
-      inputWidth: 20,
+      inputWidth: 25,
       onChange: this.onGabaritUrlChanged.bind(this),
       type: "string",
       value: options.gabaritUrlInput || ''
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+      size: 'md',
       key: 'AddGabaritUrl',
       onClick: this.addGabaritUrlInput
-    }, "Add"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-      onClick: this.fetchGabarit
-    }, "Finish")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.gabaritUrlDisplay, {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      style: {
+        padding: '0px 8px'
+      }
+    }, "Add"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.gabaritUrlDisplay, {
       list: options.saveGabaritURL
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    }), this.props.options.saveGabaritURL.length !== 0 && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'right'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+      size: 'md',
+      onClick: this.fetchGabarit
+    }, "Finish"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+      size: 'md',
       key: 'delAll',
       onClick: this.delAll,
       variant: "danger"
-    }, "Delete all urls"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
+    }, "Delete all urls")))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
       isOpen: this.state.collapseGabarit,
       label: "Gabarit List",
       onToggle: this.onToggleGabarit
@@ -26552,8 +26743,8 @@ var defaults = {
     image: '',
     layerImage: '',
     modeSVG: true,
-    width: '',
-    height: '',
+    width: '0',
+    height: '0',
     idSVG: '',
     isUploaded: false
   },

@@ -50,7 +50,7 @@
     "templates": [
       {
         "filtered": "handler|/api/v1/label/:name/values",
-        "labelfix": true,
+        "labelfix": "true",
         "xylabel": "",
         "xylabelfix": "x|90#y|90",
         "type": "point",
@@ -62,9 +62,9 @@
               "colorText": "#FF00FF",
               "colorBack": "#CCCCCC",
               "style": {
-                "bold": false,
-                "italic": false,
-                "underline": true
+                "bold": "false",
+                "italic": "false",
+                "underline": "true"
               }
             }
           }
@@ -122,7 +122,7 @@
   "templates": [
     {
       "filtered": "handler|/api/v1/label/:name/values",
-      "labelfix": false,
+      "labelfix": "false",
       "xylabel": "x|le#y|le",
       "xylabelfix": "",
       "type": "point",

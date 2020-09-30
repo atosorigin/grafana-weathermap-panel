@@ -27,9 +27,9 @@ export interface MetaFile {
     colorText: string;
     colorBack: string;
     style: {
-      bold: boolean;
-      italic: boolean;
-      underline: boolean;
+      bold: string;
+      italic: string;
+      underline: string;
     };
   };
 }
@@ -67,7 +67,7 @@ export interface GlobalGabarit {
 
 export interface TemplateGabaritPoint {
   filtered: string;
-  labelfix: boolean;
+  labelfix: string;
   xylabel: string;
   xylabelfix: string;
   type: string;
@@ -104,7 +104,7 @@ export interface TemplateGabaritRegion {
   metrics: Metric[];
   linkURL: any;
   idSVG: string;
-  mode: boolean;
+  mode: string;
   img: string;
   orientedLink: OrientedLinkClass[];
   color: string;
@@ -112,7 +112,7 @@ export interface TemplateGabaritRegion {
 
 export interface TemplateGabaritLink {
   filtered: string;
-  labelfix: boolean;
+  labelfix: string;
   xylabelA: string;
   xylabelB: string;
   xylabelC: string;
@@ -140,7 +140,7 @@ export interface TemplateGabaritLink {
   regionIn: string;
   regionOut: string;
   zIndex: string;
-  isIncurved: SelectableValue<boolean>;
+  isIncurved: SelectableValue<string>;
   color: string;
 }
 
@@ -563,8 +563,8 @@ export const defaults: SimpleOptions = {
     image: '',
     layerImage: '',
     modeSVG: true,
-    width: '',
-    height: '',
+    width: '0',
+    height: '0',
     idSVG: '',
     isUploaded: false,
   },
