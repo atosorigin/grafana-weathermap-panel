@@ -492,7 +492,7 @@ class Gabarit extends React.Component<Props, State> {
   };
 
   transformWithUpperCase = (oldSelectableValue: SelectableValue<boolean>): SelectableValue<boolean> => {
-    let newSelectableValue: SelectableValue<boolean> = { label: '', value: false };
+    let newSelectableValue: SelectableValue<boolean>;
     let newLabel = '';
     (oldSelectableValue.label || '').split('').forEach((letter, index) => {
       if (index === 0) {
@@ -1367,6 +1367,11 @@ class Gabarit extends React.Component<Props, State> {
     let labelLink: string[] = []; //
     let positionParameterLink: PositionParameterClass[] = []; //
     let mainMetricALink: Metric[] = []; //
+    // let unitA: string;
+    // let formatA: string;
+    // let keyA: string;
+    // let keyValueA: string;
+    // let manageValueA: TManageValue;
     let metricALink: Metric[][] = []; //
     let mainMetricBLink: Metric[] = []; //
     let metricBLink: Metric[][] = []; //
@@ -1492,6 +1497,67 @@ class Gabarit extends React.Component<Props, State> {
       if (!labelLink[index]) {
         labelLink[index] = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].label;
       }
+
+      // // MainMetricA
+
+      // // unitA
+      // unitA = link.mainMetric.unit;
+      // if (!link.mainMetric.unit) {
+      //   unitA = gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.unit;
+      // };
+      // if (!gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.unit) {
+      //   unitA = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].mainMetric.unit;
+      // };
+
+      // // formatA
+      // formatA = link.mainMetric.format;
+      // if (!link.mainMetric.format) {
+      //   formatA = gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.format;
+      // };
+      // if (!gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.format) {
+      //   formatA = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].mainMetric.format;
+      // };
+
+      // // keyA
+      // keyA = link.mainMetric.key;
+      // if (!link.mainMetric.key) {
+      //   keyA = gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.key;
+      // };
+      // if (!gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.key) {
+      //   keyA = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].mainMetric.key;
+      // };
+
+      // // keyValueA
+      // keyValueA = link.mainMetric.keyValue;
+      // if (!link.mainMetric.keyValue) {
+      //   keyValueA = gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.keyValue;
+      // };
+      // if (!gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.keyValue) {
+      //   keyValueA = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].mainMetric.keyValue;
+      // };
+
+      // // manageValueA
+      // manageValueA = link.mainMetric.manageValue;
+      // console.log(manageValueA);
+      // if (!link.mainMetric.manageValue) {
+      //   manageValueA = gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.manageValue;
+      // };
+      // if (!gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.manageValue) {
+      //   manageValueA = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].mainMetric.manageValue;
+      // };
+
+      // mainMetricALink.push({
+      //   unit: unitA,
+      //   format: formatA,
+      //   key: keyA,
+      //   keyValue: keyValueA,
+      //   filter: filterLink[index],
+      //   refId: gabaritFileTmp.queryID,
+      //   expr: '',
+      //   returnQuery: [],
+      //   manageValue: manageValueA,
+      // });
+
       mainMetricALink.push({
         key: link.mainMetric.key,
         unit: link.mainMetric.unit,

@@ -102,7 +102,7 @@ class ManageLowerLimit extends React.Component<Props, State> {
 
     newValue.colorMode = !newValue.colorMode;
     if (!this.state.coordinate.colorMode) {
-      if (this.state.coordinate.lowerLimit.length > 0) {
+      if (this.state.coordinate.lowerLimit && this.state.coordinate.lowerLimit.length > 0) {
         this.setState({
           lowerLimitVariable: this.state.coordinate.lowerLimit,
         });
@@ -117,7 +117,7 @@ class ManageLowerLimit extends React.Component<Props, State> {
       newValue.lowerLimit[0] = lowerLimitFix;
       await this.setStateAsyncCoordinate({ coordinate: newValue });
     } else {
-      if (this.state.coordinate.lowerLimit.length > 0) {
+      if (this.state.coordinate && this.state.coordinate.lowerLimit && this.state.coordinate.lowerLimit.length > 0) {
         this.setState({
           lowerLimitFix: this.state.coordinate.lowerLimit[0],
         });

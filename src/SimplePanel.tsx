@@ -1049,6 +1049,7 @@ export class SimplePanel extends PureComponent<Props, State> {
     const mapItems: JSX.Element[] = [];
     let item: JSX.Element = <div></div>;
     arrayOrientedLink.forEach((orientedLink: OrientedLinkClass) => {
+      console.log(orientedLink);
       const valueMainMetricA: string = this.getValuesMainMetricOrientedLink(orientedLink).toString();
       const valueMainMetricB: string = this.getValuesMainMetricOrientedLinkB(orientedLink).toString();
       this.getValuesMainMetricOrientedLinkB(orientedLink);
@@ -1830,8 +1831,8 @@ export class SimplePanel extends PureComponent<Props, State> {
           ySVG = parseInt(event.target.attributes['cy'].nodeValue, 10);
           widthSVG = parseInt(event.target.attributes['rx'].nodeValue, 10) * 2;
           heightSVG = parseInt(event.target.attributes['ry'].nodeValue, 10) * 2;
-          positionX = xSVG.toString();
-          positionY = ySVG.toString();
+          // positionX = xSVG.toString();
+          // positionY = ySVG.toString();
           if (positionParameter === 'top') {
             positionX = (xSVG - widthTooltip / 2).toString();
             positionY = (ySVG - heightTooltip - heightSVG / 2).toString();
