@@ -86,7 +86,20 @@
         "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
         "type": "region",
-        "meta": [],
+      "meta": [
+        {
+          "meta": "meta link 1",
+          "obj": {
+            "colorText": "green",
+            "colorBack": "blue",
+            "style": {
+              "bold": false,
+              "italic": true,
+              "underline": false
+            }
+          }
+        }
+      ],
         "label": "0.5-inner_eval",
         "positionParameter": {
           "xylabelA": "x|0#y|0",

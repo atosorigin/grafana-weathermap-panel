@@ -39,20 +39,7 @@
         "returnQuery": [],
         "unit": ""
       },
-      "meta": [
-        {
-          "meta": "meta point 1",
-          "obj": {
-            "colorText": "#FF0000",
-            "colorBack": "#CCCCCC",
-            "style": {
-              "bold": true,
-              "italic": false,
-              "underline": false
-            }
-          }
-        }
-      ],
+      "meta": [],
       "metrics": [],
       "name": "point1",
       "positionParameter": {
@@ -73,10 +60,6 @@
       "shape": {
         "label": "Circle",
         "value": "circle"
-      },
-      "sizeHeight": {
-        "label": "",
-        "value": ""
       },
       "sizeWidth": "12",
       "textObj": {
@@ -154,20 +137,7 @@
         "returnQuery": [],
         "unit": ""
       },
-      "meta": [
-        {
-          "meta": "meta point 2",
-          "obj": {
-            "colorText": "green",
-            "colorBack": "white",
-            "style": {
-              "bold": false,
-              "italic": false,
-              "underline": true
-            }
-          }
-        }
-      ],
+      "meta": [],
       "metrics": [],
       "name": "point2",
       "positionParameter": {
@@ -188,10 +158,6 @@
       "shape": {
         "label": "Circle",
         "value": "circle"
-      },
-      "sizeHeight": {
-        "label": "",
-        "value": ""
       },
       "sizeWidth": "12",
       "textObj": {

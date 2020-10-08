@@ -18,43 +18,36 @@ The required information to display the points are :
 
 Si vous avez choisi d'ajouter, il faut cliquer sur **save** Si vous êtes en mode édition, la mise à jour sera automatique
 
-## Main metric
+## Other parameter
+
+### Main metric
 
 A dedicated page for filling in the fields is available [here](coordinates-main-metric.md)
 
-## Auxiliary metrics
+### Auxiliary metrics
 
 A dedicated page for filling in the fields is available [here](coordinates-auxiliary-metric.md)
 
-## Metadata
+### Metadata
 
 A dedicated page to fill in the fields is available [here](coordinates-metada.md)
 
-## Manage link
+### Manage link
 
 A dedicated page to fill in the fields is available [here](coordinates-manage-link.md)
 
-## Text object
+### Text object
 
 A dedicated page to fill in the fields is available [here](coordinates-object-text.md)
 
-## Lower Limit
+### Lower Limit
 
 A dedicated page to fill in the fields is available [here](coordinates-lower-limit.md)
 
-## Position Parameter
+### Position Parameter
 
-![position parameter](../../screenshots/editor/coordinates/screen-point/position-parameter.jpg)
+A dedicated page to fill in the fields is available [here](coordinates-position-parameter.md)
 
-You can define the position of the
-
-- The position of the label in X and Y
-
-* The tooltip position :
-  - up
-  - down
-  - right
-  - left
 
 # See too
 

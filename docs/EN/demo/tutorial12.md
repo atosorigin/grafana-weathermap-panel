@@ -22,11 +22,12 @@ The `A` marker will be used to identify this query
 
 ## Add background image
 
-![fileselect background](../../screenshots/demo/tutorial12/background.jpg)
+![fileselect background](../../screenshots/demo/tutorial12/background.png)
 
 Adding a background image can be done from the menu `display`.
 
 We choose the file selector to choose the selected image will be [demo01-background.svg](../../resource/demo01-background.svg).
+
 
 ## Import files
 

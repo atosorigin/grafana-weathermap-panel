@@ -2,7 +2,7 @@
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
-![menu](../../screenshots/panel/point.jpg)
+![menu](../../screenshots/panel/point-menu.jpg)
 
 After clicking on the **point** button
 
@@ -17,3 +17,8 @@ The result will be automatically obtained.
 The editing of the point is done from the form of the [Point editor](../editor/coordinates-space-point.md).
 
 To access it, click on **Coordinate space**, then **Point**, then **Edit coordinate space**.
+
+
+# See too
+
+- [Tutorial 03 : Create dashboard Avanced with link directionnel](../demo/tutorial03.md)

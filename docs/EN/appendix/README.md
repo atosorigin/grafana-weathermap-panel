@@ -16,11 +16,11 @@
 
 - SVG
 
-  - [Creation image SVG en background](svg.md)
+  - [Create image SVG in background](svg.md)
 
 - Server
 
-  - [serveur de stockage](server.md)
+  - [Storage server](server.md)
 
 - Frequently Asked Questions (FAQ)
 

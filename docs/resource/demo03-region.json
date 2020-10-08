@@ -44,20 +44,7 @@
         "returnQuery": [],
         "unit": ""
       },
-      "meta": [
-        {
-          "meta": "meta region 1",
-          "obj": {
-            "colorText": "white",
-            "colorBack": "black",
-            "style": {
-              "bold": true,
-              "italic": true,
-              "underline": false
-            }
-          }
-        }
-      ],
+      "meta": [],
       "metrics": [],
       "mode": false,
       "orientedLink": [],

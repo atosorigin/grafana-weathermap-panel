@@ -107,7 +107,7 @@ To do that, go to `Queries` and fill the input like follow :
 ```
 Metric A :
 
-rate(nnode_network_receive_bytes_total{device="ens3"}[10s])*100*8/1024/1024
+rate(node_network_receive_bytes_total{device="ens3"}[10s])*100*8/1024/1024
 
 
 Metric B :
@@ -151,7 +151,7 @@ Then you can this on this picture that the link is clickable
 
 ## Result
 
-![result](../../screenshots/demo/tutorial07/demo7.png)
+![](../../screenshots/demo/tutorial07/resultat.png)
 
 ## Import JSON file
 

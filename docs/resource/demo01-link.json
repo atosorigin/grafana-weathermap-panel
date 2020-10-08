@@ -25,20 +25,7 @@
         "hoveringTooltipText": ""
       },
       "lowerLimit": [],
-      "meta": [
-        {
-          "meta": "meta link",
-          "obj": {
-            "colorText": "orange",
-            "colorBack": "blue",
-            "style": {
-              "bold": false,
-              "italic": false,
-              "underline": false
-            }
-          }
-        }
-      ],
+      "meta": [],
       "metrics": [],
       "name": "orientedLink1",
       "orientationLink": {

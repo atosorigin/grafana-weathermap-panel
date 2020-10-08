@@ -2,7 +2,7 @@
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
-![menu](../../screenshots/panel/incurved.jpg)
+![menu](../../screenshots/panel/incurved-menu.jpg)
 
 Après avoir cliqué sur le bouton **incurved oriented link**
 

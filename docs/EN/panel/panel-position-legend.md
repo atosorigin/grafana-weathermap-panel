@@ -2,7 +2,7 @@
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
-![legend](../../screenshots/panel/legend.jpg)
+![legend](../../screenshots/panel/legend-menu.jpg)
 
 The legend will allow you to see what values each color corresponds to for the different regions and points.
 

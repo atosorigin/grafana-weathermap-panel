@@ -25,11 +25,11 @@ You have to save and reload the page.
 
 ### Step 1: Add a point
 
-![step 09](../../screenshots/demo/tutorial01/add-coordinate.png)
+![](../../screenshots/demo/tutorial01/add-coordinate.png)
 
 - To place a point, go to `Visualization`, then `Coordinates space`, `Point`, and `Add coordinate space`.
 
-![step 09](../../screenshots/demo/tutorial01/point1.png)
+![](../../screenshots/demo/tutorial01/point1.png)
 
 You have to fill out the form like this:
 
@@ -39,7 +39,7 @@ You have to fill out the form like this:
 
 ### Step 2 : Add main metric
 
-![step 05](../../screenshots/demo/tutorial01/step05.jpg)
+![](../../screenshots/demo/tutorial01/step05.jpg)
 
 The first step is through the `Queries` tab.
 
@@ -55,7 +55,7 @@ The "A" marker will be used to identify this query as you can see below.
 
 Once you have done that, you will associate this query to your point
 
-![step 06](../../screenshots/demo/tutorial01/step06.jpg)
+![](../../screenshots/demo/tutorial01/step06.jpg)
 
 The second step is from the `Coordinates space`, `region`, and `Edit coordinate space` menu of the `visualization` tab.
 
@@ -72,11 +72,30 @@ It is possible to fill in the other fields with the additional settings availabl
 
 Go to `Auxiliary metrics` and fill the form like `Main metric`
 
-![auxiliere](../../screenshots/demo/tutorial08/auxiliere.png)
+![](../../screenshots/demo/tutorial08/auxiliere.png)
+
+
+## Add an meta data to a point
+
+![](../../screenshots/demo/tutorial08/metadata.png)
+
+We add 2 lines in the point's `metadata`.
+
+
+We choose for the first line:
+
+  - Text: Red
+  - Style: Bold, Italic
+
+For the second line:
+
+ - Text : white
+ - Style: Bold
+
 
 After that, you will be able to see your auxiliary metric on the toolbox of your point
 
-![auxiliere](../../screenshots/demo/tutorial08/toolbox.png)
+![](../../screenshots/demo/tutorial08/toolbox.png)
 
 ### Import JSON file
 

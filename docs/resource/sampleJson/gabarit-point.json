@@ -92,7 +92,7 @@
         "positionShapeX": "",
         "positionShapeY": "",
         "color": "green",
-        "assiciateOrientedLinksIn": [],
+        "associateOrientedLinksIn": [],
         "associateOrientedLinksOut": []
       }
     ]
@@ -146,7 +146,7 @@
       "positionShapeX": "",
       "positionShapeY": "",
       "color": "black",
-      "assiciateOrientedLinksIn": [],
+      "associateOrientedLinksIn": [],
       "associateOrientedLinksOut": [
         {
           "label": "lien device",

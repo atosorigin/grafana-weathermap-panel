@@ -101,10 +101,6 @@
           "value": "circle"
         },
         "sizeWidth": "12",
-        "sizeHeight": {
-          "label": "",
-          "value": ""
-        },
         "rotateArrow": {
           "label": "",
           "value": ""
@@ -112,7 +108,7 @@
         "positionShapeX": "",
         "positionShapeY": "",
         "color": "green",
-        "assiciateOrientedLinksIn": [],
+        "associateOrientedLinksIn": [],
         "associateOrientedLinksOut": []
       },
       {

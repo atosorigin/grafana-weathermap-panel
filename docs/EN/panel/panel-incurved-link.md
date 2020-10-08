@@ -2,7 +2,7 @@
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
-![menu](../../screenshots/panel/incurved.jpg)
+![menu](../../screenshots/panel/incurved-menu.jpg)
 
 After clicking on the **incurved oriented link** button
 
@@ -17,3 +17,8 @@ The result obtained will be automatically
 The point is edited using the [editor oriented link](../editor/coordinates-space-link.md) form.
 
 To access it, click on **Coordinate space**, then **OrientedLink**, then on your link
+
+
+# See too
+
+- [Tutorial 03 : Create dashboard Avanced with link directionnel](../demo/tutorial03.md)

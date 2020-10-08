@@ -50,7 +50,7 @@ There are 2 ways to create a region:
 - SVG Region
 - Coordinated region
 
-### Region SVG
+### SVG Region
 
 The creation of a region from an SVG element must contain the following values
 
@@ -89,7 +89,7 @@ The creation of a region from an SVG element must contain the following values
 
 ```
 
-### Region coordonnées
+### Coordinated region
 
 The creation of a region from coordinates must necessarily contain the following values
 
@@ -108,7 +108,7 @@ The creation of a region from coordinates must necessarily contain the following
       "colorMode": false,
       "coords": {
         "xMax": "50",
-        "xMin": "-20",
+        "xMin": "20",
         "yMax": "30",
         "yMin": "10"
       },
@@ -270,6 +270,14 @@ Compatible format is JPG / PNG / GIF / SVG
 ```
 
 ## meta
+
+- **meta** message
+- **colorText**: Choose the color of the text in rgba. Example : rgba(0, 0, 0, 1)
+- **colorBack**: Choose the background color of the text in rgba. Example: rgba(255, 255, 255, 0)
+- **bold** Add a bold to the text. "true or "false"
+- **italic** Add a italic to the text. "true or "false"
+- **underline** Add a underline to the text. "true or "false"
+
 
 ```
 "meta": [

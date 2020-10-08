@@ -103,10 +103,6 @@
           "value": "circle"
         },
         "sizeWidth": "10",
-        "sizeHeight": {
-          "label": "",
-          "value": ""
-        },
         "rotateArrow": {
           "label": "",
           "value": ""
@@ -114,7 +110,7 @@
         "positionShapeX": "",
         "positionShapeY": "",
         "color": "#00FFFF",
-        "assiciateOrientedLinksIn": [],
+        "associateOrientedLinksIn": [],
         "associateOrientedLinksOut": []
       }
     ]
@@ -157,10 +153,6 @@
         "value": "circle"
       },
       "sizeWidth": "12",
-      "sizeHeight": {
-        "label": "",
-        "value": ""
-      },
       "rotateArrow": {
         "label": "",
         "value": ""
@@ -168,7 +160,7 @@
       "positionShapeX": "",
       "positionShapeY": "",
       "color": "blue",
-      "assiciateOrientedLinksIn": [],
+      "associateOrientedLinksIn": [],
       "associateOrientedLinksOut": []
     }
   ]

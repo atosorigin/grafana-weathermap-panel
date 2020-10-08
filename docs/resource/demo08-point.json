@@ -35,7 +35,32 @@
         "returnQuery": [],
         "unit": ""
       },
-      "meta": [],
+      "meta": [
+        {
+          "meta": "welcome",
+          "obj": {
+            "colorText": "rgb(255, 103, 25)",
+            "colorBack": "",
+            "style": {
+              "bold": true,
+              "italic": true,
+              "underline": false
+            }
+          }
+        },
+        {
+          "meta": "tutorial 08",
+          "obj": {
+            "colorText": "#FFFFFF",
+            "colorBack": "",
+            "style": {
+              "bold": true,
+              "italic": false,
+              "underline": false
+            }
+          }
+        }
+      ],
       "metrics": [
         {
           "format": "",
@@ -64,10 +89,6 @@
       "shape": {
         "label": "Circle",
         "value": "circle"
-      },
-      "sizeHeight": {
-        "label": "",
-        "value": ""
       },
       "sizeWidth": "12",
       "textObj": {

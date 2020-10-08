@@ -19,3 +19,8 @@ The result obtained will be automatically
 The point is edited using the [editor oriented link](../editor/coordinates-space-link.md) form.
 
 To access it, click on **Coordinate space**, then **OrientedLink**, then on your link
+
+
+# See too
+
+- [Tutorial 02 : Add a dashboard PNG/JPEG](../demo/tutorial02.md)

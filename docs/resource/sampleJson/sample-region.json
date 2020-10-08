@@ -36,7 +36,20 @@
         "returnQuery": [],
         "unit": ""
       },
-      "meta": "",
+      "meta": [
+        {
+          "meta": "meta link 1",
+          "obj": {
+            "colorText": "green",
+            "colorBack": "blue",
+            "style": {
+              "bold": false,
+              "italic": true,
+              "underline": false
+            }
+          }
+        }
+      ],
       "metrics": [],
       "mode": true,
       "orientedLink": [],

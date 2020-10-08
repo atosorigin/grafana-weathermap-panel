@@ -44,7 +44,7 @@ Sous la forme d'une **démo**, vous apprendrez à utiliser le plugin pour obteni
 
   [![demo10](../../screenshots/demo/demo01.png)](tutorial10.md)
 
-- 11 [Comment utiliser initial viewing space](tutorial11.md)
+- 11 [Comment changer initial viewing space](tutorial11.md)
 
   [![demo11](../../screenshots/demo/demo11.png)](tutorial11.md)
 

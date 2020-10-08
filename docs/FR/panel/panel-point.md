@@ -2,7 +2,7 @@
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
-![menu](../../screenshots/panel/point.jpg)
+![menu](../../screenshots/panel/point-menu.jpg)
 
 Après avoir cliqué sur le bouton **point**
 

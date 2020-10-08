@@ -1,4 +1,4 @@
-# CORS
+# CORS (Access-Control-Allow-Origin)
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 

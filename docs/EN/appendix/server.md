@@ -19,7 +19,7 @@ The configuration file must be modified as follows
 From the terminal:
 
 ```
-sudo /etc/apache2/apache2.conf
+sudo nano /etc/apache2/apache2.conf
 ```
 
 change:

@@ -6449,9 +6449,8 @@ function (_super) {
               xSVG = parseInt(event.target.attributes['cx'].nodeValue, 10);
               ySVG = parseInt(event.target.attributes['cy'].nodeValue, 10);
               widthSVG = parseInt(event.target.attributes['rx'].nodeValue, 10) * 2;
-              heightSVG = parseInt(event.target.attributes['ry'].nodeValue, 10) * 2;
-              positionX = xSVG.toString();
-              positionY = ySVG.toString();
+              heightSVG = parseInt(event.target.attributes['ry'].nodeValue, 10) * 2; // positionX = xSVG.toString();
+              // positionY = ySVG.toString();
 
               if (positionParameter === 'top') {
                 positionX = (xSVG - widthTooltip / 2).toString();
@@ -7228,6 +7227,8 @@ function (_super) {
     var mapItems = [];
     var item = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
     arrayOrientedLink.forEach(function (orientedLink) {
+      console.log(orientedLink);
+
       var valueMainMetricA = _this.getValuesMainMetricOrientedLink(orientedLink).toString();
 
       var valueMainMetricB = _this.getValuesMainMetricOrientedLinkB(orientedLink).toString();
@@ -19898,7 +19899,7 @@ function (_super) {
               /*break*/
               , 2];
 
-              if (this.state.coordinate.lowerLimit.length > 0) {
+              if (this.state.coordinate.lowerLimit && this.state.coordinate.lowerLimit.length > 0) {
                 this.setState({
                   lowerLimitVariable: this.state.coordinate.lowerLimit
                 });
@@ -19921,7 +19922,7 @@ function (_super) {
               , 4];
 
             case 2:
-              if (this.state.coordinate.lowerLimit.length > 0) {
+              if (this.state.coordinate && this.state.coordinate.lowerLimit && this.state.coordinate.lowerLimit.length > 0) {
                 this.setState({
                   lowerLimitFix: this.state.coordinate.lowerLimit[0]
                 });
@@ -22989,10 +22990,7 @@ function (_super) {
     };
 
     _this.transformWithUpperCase = function (oldSelectableValue) {
-      var newSelectableValue = {
-        label: '',
-        value: false
-      };
+      var newSelectableValue;
       var newLabel = '';
       (oldSelectableValue.label || '').split('').forEach(function (letter, index) {
         if (index === 0) {
@@ -23866,6 +23864,11 @@ function (_super) {
       var positionParameterLink = []; //
 
       var mainMetricALink = []; //
+      // let unitA: string;
+      // let formatA: string;
+      // let keyA: string;
+      // let keyValueA: string;
+      // let manageValueA: TManageValue;
 
       var metricALink = []; //
 
@@ -24025,7 +24028,60 @@ function (_super) {
 
         if (!labelLink[index]) {
           labelLink[index] = _this.props.options.gabaritDefault.templateGabaritLinkDefault[0].label;
-        }
+        } // // MainMetricA
+        // // unitA
+        // unitA = link.mainMetric.unit;
+        // if (!link.mainMetric.unit) {
+        //   unitA = gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.unit;
+        // };
+        // if (!gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.unit) {
+        //   unitA = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].mainMetric.unit;
+        // };
+        // // formatA
+        // formatA = link.mainMetric.format;
+        // if (!link.mainMetric.format) {
+        //   formatA = gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.format;
+        // };
+        // if (!gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.format) {
+        //   formatA = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].mainMetric.format;
+        // };
+        // // keyA
+        // keyA = link.mainMetric.key;
+        // if (!link.mainMetric.key) {
+        //   keyA = gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.key;
+        // };
+        // if (!gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.key) {
+        //   keyA = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].mainMetric.key;
+        // };
+        // // keyValueA
+        // keyValueA = link.mainMetric.keyValue;
+        // if (!link.mainMetric.keyValue) {
+        //   keyValueA = gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.keyValue;
+        // };
+        // if (!gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.keyValue) {
+        //   keyValueA = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].mainMetric.keyValue;
+        // };
+        // // manageValueA
+        // manageValueA = link.mainMetric.manageValue;
+        // console.log(manageValueA);
+        // if (!link.mainMetric.manageValue) {
+        //   manageValueA = gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.manageValue;
+        // };
+        // if (!gabaritFileTmp.templateGabaritLinkDefault[0].mainMetric.manageValue) {
+        //   manageValueA = this.props.options.gabaritDefault.templateGabaritLinkDefault[0].mainMetric.manageValue;
+        // };
+        // mainMetricALink.push({
+        //   unit: unitA,
+        //   format: formatA,
+        //   key: keyA,
+        //   keyValue: keyValueA,
+        //   filter: filterLink[index],
+        //   refId: gabaritFileTmp.queryID,
+        //   expr: '',
+        //   returnQuery: [],
+        //   manageValue: manageValueA,
+        // });
+
 
         mainMetricALink.push({
           key: link.mainMetric.key,

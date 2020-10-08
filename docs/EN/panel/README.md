@@ -15,4 +15,4 @@ To do this, various functions are available from the menu bar
 - [Add oriented link](panel-oriented-link.md)
 - [Add incurved oriented link](panel-incurved-link.md)
 - [Position Legend](panel-position-legend.md)
-- [More and less](panel-more-less.md)
+- [Zoom](panel-zoom.md)

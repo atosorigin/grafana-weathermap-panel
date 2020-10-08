@@ -4,7 +4,7 @@
 
 ## Totals are wrong
 
-You must check the box **instant** in the query. [more information](../queries/query.md)
+You must check the box **instant** in the query. [more information](../queries/queries.md)
 
 ## Message in the browser console
 
@@ -38,4 +38,10 @@ to associate a region or a point, is made by a link or import files **links**.
 
 The import of the file **links** is done in the last step
 
-## L'image SVG ne s'affiche pas
+## SVG image not showing
+
+You can watch how to make [svg](svg.md) file
+
+## objects are not displayed correctly with a background svg
+
+You have to check if your background file is in pixel. You can watch [tutorial 4](../demo/tutorial04.md)

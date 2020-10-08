@@ -47,6 +47,7 @@ You can add :
   - You can add a point where you want on your background and add a metric, a color or other to it
 
 - Oriented Link
+
   - Allows you to create a link between two objects by adding a metric to it. This can be useful to represent a data transfer or something else.
 
 ### Query
@@ -55,53 +56,17 @@ It is also possible to assimilate requests to the Coordination Space, just as we
 To do so, we use a database that gathers all the necessary data. These data are sorted and collected using queries with filters.
 Once the data has been processed and collected, it can be affected.
 
+you can have more details on the dedicated page [queries](../queries/queries.md)
+
 ### Workflow
 
-![workflow0](../../screenshots/init/workflow0.png)
+the plugin proposes several methods to process a refined request, which are : 
 
-Here, we will explain the different step of "How to use WeatherMap Panel Plugin"
+ - Displays the result of a query by the editor 
+ - Manipulate the elements of a query by the editor
+ - Import predefined views for queries into the editor
+ - Control of the rendering by the query template
+ 
+ 
 
-Step 1 : Connect you to Grafana and add our plugin by following [This tutoriel](config-data-source.md)
-
-Step 2 : Create a new dashboard
-
-Step 3 : On the `queries` menu, select `Prometheus` and add as many queries as you want
-
-Step 4 : On the `visualization` menu, you will be able to choose your background (SVG image, Bitmap image, or no image)
-
-Step 5 : Once you have done that, by going to the editor tabs, you can add some regions, points, and link to your dashboard
-
-Step 6 : Then, you can assimilate metrics to the regions/points/links you just created. To do that, there are 3 different way that we are going to explain to you
-
-#### Method 1
-
-![workflow1](../../screenshots/init/workflow1.png)
-
-First method :
-
-- You choose a query that returns only one value and you want to assimilate the result without adding any filter
-
-#### Method 2
-
-![workflow2](../../screenshots/init/workflow2.png)
-
-Second method :
-
-- You choose a query that return multiple values with differents key/valueKey, and you want to add a filter to refine your query.
-
-#### Method 3
-
-![workflow3](../../screenshots/init/workflow3.png)
-
-Third method :
-
-- You choose a query that return multiple values with differents key/valueKey.
-- Then, to add the different regions, points, and links, you can use a global json file. This file contains all the necessary information to create and associate each object with its metrics
-
-Step 7 : Once you have done all of those steps, you will see the result of your query on the dashboard, assimilate with a region/a point, or a link.
-
-#### Method 4
-
-![workflow4](../../screenshots/init/workflow4.png)
-
-Fourth method
+All these methods are detailed on the dedicated page  [Workflow](workflow.md)

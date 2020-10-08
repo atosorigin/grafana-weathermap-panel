@@ -46,18 +46,45 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 
 Then choose the size of the region for your image. Here we choose :
 
-- X Min : -55
-- X Max : -80
-- Y Min : -30
-- Y Max : 15
+- X Min : 70
+- X Max : 180
+- Y Min : 200
+- Y Max : 270
 
-![step 03](../../screenshots/demo/tutorial02/ImageRegion.png)
+![](../../screenshots/demo/tutorial02/ImageRegion.png)
 
 ### Result
 
 The end result will be like this:
 
-![step 08](../../screenshots/demo/tutorial02/Result1.png)
+![](../../screenshots/demo/tutorial02/Result1.png)
+
+
+### Metadata
+
+In the editor, we choose the `metadata` line to add a message.
+
+![](../../screenshots/demo/tutorial02/meta-new.png)
+
+An empty field is displayed and we fill it with our `region` object. For that, we fill in the field, then a click on `add`
+
+
+![](../../screenshots/demo/tutorial02/meta-config.png)
+
+A configuration panel is available to configure the display of the result.
+
+
+We choose :
+
+ - Background: white
+ - Text: Red
+ - Style: Bold
+
+
+![](../../screenshots/demo/tutorial02/meta-result.png)
+
+The message will be visible when the mouse hovers over the object
+
 
 ## Define a coordinate mode region without image
 
@@ -69,17 +96,17 @@ The creation of a region in an SVG image is done from the `Coordinates space`, `
 
 You have to fill out the form like this:
 
-- Enter a `label` for example New Computer
+- Enter a `label` for example hello
 - Select `Coordinate mode`.
 
 ![step 03](../../screenshots/demo/tutorial02/CoordinateModeNoImage.png)
 
 Then choose the size of the region for your image. Here we choose :
 
-- X Min : -18
-- X Max : 0
-- Y Min : -5
-- Y Max : 8
+- X Min : 308
+- X Max : 374
+- Y Min : 237
+- Y Max : 270
 
 To finish
 
@@ -98,7 +125,7 @@ You select the `Lower limit' line and then complete the form like this:
 
 You get the following result
 
-![step 04](../../screenshots/demo/tutorial02/Cumputer2.png)
+![](../../screenshots/demo/tutorial02/Cumputer2.png)
 
 It is possible to define other parameters, referring to the [coordinates lower limit](../editor/coordinates-lower-limit.md) page.
 
@@ -106,11 +133,38 @@ It is possible to define other parameters, referring to the [coordinates lower l
 
 The end result will be like this:
 
-![step 08](../../screenshots/demo/tutorial02/Result2.png)
+![](../../screenshots/demo/tutorial02/Result2.png)
 
 ## Define an oriented link between two regions
 
 To create an oriented link you have to pass by [the panel menu](../panel/panel-oriented-link.md).
+
+## New Result
+
+![](../../screenshots/demo/tutorial02/Result3.png)
+
+
+## Add metadata for the link
+
+In the editor, we choose the `metadata` line to add a message in the `orientedLink`.
+
+![](../../screenshots/demo/tutorial02/link-meta-new.png)
+
+An empty field is displayed and we fill it with our `link` object. For that, we fill in the field, then a click on `add`
+
+![](../../screenshots/demo/tutorial02/link-meta-config.png)
+
+A configuration panel is available to configure the display of the result.
+
+
+We choose :
+
+ - Background: white
+ - Text: Red
+ - Style: Bold, Italic, Underline
+
+
+The message will be visible when the mouse hovers over the object
 
 ## Final Result
 

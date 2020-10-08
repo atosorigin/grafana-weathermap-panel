@@ -1,4 +1,4 @@
-# How to use initial viewing space
+# How to change initial viewing space
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
@@ -12,9 +12,22 @@ We modify the graduation of the rendering. For that, we modify `initial viewing 
 
 ![result](../../screenshots/demo/tutorial11/initial.png)
 
-The representation is recalculated with the new limitations. The objects will be automatically recalculated to get new values like this with region 3:
+The representation is recalculated with the new limitations. The objects will be automatically recalculated to get new values like this :
 
-![result](../../screenshots/demo/tutorial11/region3.png)
+
+`Region 1`
+
+![](../../screenshots/demo/tutorial11/region1.png)
+
+
+`Region 2`
+
+![](../../screenshots/demo/tutorial11/region2.png)
+
+
+`Region 3`
+
+![](../../screenshots/demo/tutorial11/region3.png)
 
 the new result will be
 

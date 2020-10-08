@@ -78,27 +78,14 @@ A dedicated page to fill in the fields is available [here](coordinates-manage-li
 
 A dedicated page to fill in the fields is available [here](coordinates-object-text.md)
 
-### LowerLimit
+### Lower Limit
 
-A dedicated page to fill in the fields is available [here](coordinates-lower-limit.md)
+A dedicated page to fill in the fields is available [here](coordinates-lower-limit-link.md)
 
 ### Position Parameter
 
-![position parameter](../../screenshots/editor/coordinates/screen-oriented-link/position-parameter.jpg)
+A dedicated page to fill in the fields is available [here](coordinates-position-parameter.md)
 
-You can define the position of the
-
-- The position of the label in X and Y depending on the position in (A) and out (B)
-
-* The tooltip position :
-  - up
-  - down
-  - right
-  - left
-
-- Layer level
-  - Upgrade on : choose the other link that you want to see bellow this one
-  - Downgrade on : choose the other link that you want to see above this one
 
 # See too
 

@@ -2,7 +2,7 @@
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
-![legend](../../screenshots/panel/legend.jpg)
+![legend](../../screenshots/panel/legend-menu.jpg)
 
 La légende vous permettra de voir à quelles valeurs correspondent chaque couleur pour les différentes régions et points
 

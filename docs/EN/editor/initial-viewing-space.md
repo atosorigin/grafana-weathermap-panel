@@ -44,4 +44,4 @@ It is possible to leave with negative values.
 
 # See too
 
-- [Tutorial 11 : How to use initial viewing space](../demo/tutorial11.md)
+- [Tutorial 11 : How to change initial viewing space](../demo/tutorial11.md)

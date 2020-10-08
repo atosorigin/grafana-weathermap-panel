@@ -38,10 +38,10 @@ The **global** file must be declared as a JSON file like this:
 ```
     "coordinateSpaceInitial": {
         "coordinate": {
-            "xMin": "-100",
-            "xMax": "100",
-            "yMin": "-100",
-            "yMax": "100"
+            "xMin": "0",
+            "xMax": "400",
+            "yMin": "0",
+            "yMax": "400"
         },
         "displayArea": false
     },

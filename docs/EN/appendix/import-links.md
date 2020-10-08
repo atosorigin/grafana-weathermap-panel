@@ -44,7 +44,7 @@ The **link** file must be declared as a JSON file like this:
         "positionParameter": {...},
         "regionIn": "",
         "regionOut": "",
-        "size": { "value": "Medium", "label": "Medium" },
+        "size": "12",
         "textObj": {...},
         "traceBack": true,
         "traceBorder": true,
@@ -251,6 +251,14 @@ With similarly:
 
 ## meta
 
+- **meta** message
+- **colorText**: Choose the color of the text in rgba. Example : rgba(0, 0, 0, 1)
+- **colorBack**: Choose the background color of the text in rgba. Example: rgba(255, 255, 255, 0)
+- **bold** Add a bold to the text. "true or "false"
+- **italic** Add a italic to the text. "true or "false"
+- **underline** Add a underline to the text. "true or "false"
+
+
 ```
 "meta": [
         {
@@ -386,9 +394,7 @@ With similarly:
 
 ## size
 
-- **size** : Allow you to choose the size of your link
-  - **value** : What is the size. Could be Small, Medium, Large
-  - **label** : Choose a label for the size
+- **size** : What is the size in pixel (px)
 
 ## textObj
 

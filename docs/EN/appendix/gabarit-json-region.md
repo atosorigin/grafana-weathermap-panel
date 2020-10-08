@@ -10,19 +10,19 @@ The **gabarit** file must be declared as a JSON file like this:
 
 ```
       {
-        "filtered": "quantile|0.5#slice|inner_eval",
-        "labelfix": false,
-        "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
-        "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+        "filtered": "",
+        "labelfix": "false",
+        "xylabel": "",
+        "xylabelfix": "",
         "type": "region",
         "meta": [],
-        "label": "label",
+        "label": "",
         "positionParameter": {},
         "mainMetric": {},
         "metrics": [],
         "linkURL": {},
         "idSVG": "",
-        "mode": true,
+        "mode": "true",
         "img": "",
         "orientedLink": [],
         "color": "black"
@@ -32,54 +32,104 @@ The **gabarit** file must be declared as a JSON file like this:
 ## Type
 
 - **type** : region
-- **label** is name
+
+
+```
+        "type": "region",
+```
+
+
+## Label
+
+- **Label** is the name of the region
+
+```
+        "label": "0.5-inner_eval",
+```
+
+
 
 ## Filter
 
+- **filtered** one or more filters build key|value[#key|value][#key|value]
+
+```
         "filtered": "quantile|0.5#slice|inner_eval",
-        "labelfix": false,
-        "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
-        "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+```
 
 
-
-
-
-- **filtered** is the id of the region. Working as a counter
-- **labelfix** - **value**: Choose a value. "true" or "false"
-- **xylabel** to true
-- **xylabelfix** is the id of the desired SVG area as region
-
-## Meta
-
-- **meta** descriptif
-
-## Région
+## Region
 
 There are 2 ways to create a region:
 
 - SVG Region
 - Coordinated region
 
-### Region SVG
+
+### SVG Region
 
 The creation of a region from an SVG element must contain the following values
 
-- **id** is the id of the region. Working as a counter
-- **Label** is the name of the region
-- **mode** to true
+
+- **labelfix** to false
+- **xylabel** coordinates with : xMin|<value>#xMax|<value>#yMin|<value>#yMax|<value>
 - **idSVG** is the id of the desired SVG area as region
+- **mode** to true
+
+```
+    "xylabel": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName",
+
+```
+
+### Coordinated region
+
+The creation of a region from coordinates must necessarily contain the following values
+
+- **labelfix** to true
+- **idSVG** empty
+- **xylabelfix** coordinates with : xMin|<value>#xMax|<value>#yMin|<value>#yMax|<value>
+- **mode** to false
+
+```
+    "xylabelfix": "xMin|labelName#xMax|labelName#yMin|labelName#yMax|labelName"
+
+```
+
+
+## Meta
+
+
+- **meta** is the name of the message
+- **colorText**: Choose the color of the text in rgba. Example : rgba(0, 0, 0, 1)
+- **colorBack**: Choose the background color of the text in rgba. Example: rgba(255, 255, 255, 0)
+- **bold** Add a bold to the text. "true or "false"
+- **italic** Add a italic to the text. "true or "false"
+- **underline** Add a underline to the text. "true or "false"
+
+
+```
+"meta": [
+        {
+          "meta": "string",
+          "colorText": "string",
+          "colorBack": "string",
+          "bold": "true",
+          "italic": "true",
+          "underline": "true"
+        }
+      ]
+```
+
+
 
 ## positionParameter
 
 - **positionParameter**
 
-  - **labelAPosition** : Choose the horizontal position of label A
-  - **labelAPosition** : Choose the vertical position of label A
-  - **labelBPosition** : Choose the horizontal position of label B
-  - **labelBPosition** : Choose the vertical position of label B
-  - **tooltipPositionA**: Tooltip A position
-  - **tooltipPositionB**: Tooltip B position
+  - **xylabelA** : Choose the horizontal position X and Y of label A
+  - **xylabelB** : Choose the horizontal position X and Y of label B
+  - **tooltipA**: Tooltip A position
+  - **tooltipB**: Tooltip B position
 
 ```
         "positionParameter": {
@@ -90,27 +140,19 @@ The creation of a region from an SVG element must contain the following values
         },
 ```
 
+
 ## mainMetric
 
-- **expr** : Expression in PrompQL
 - **format** "" (Leaves blank)
 - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
 - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
 - **manageValue** : You can choose between "sum", "avg" or "err".
-- **refId**: Metric reference associated with this region
-- **returnQuery**: (Leave blank)
-- **unit** : (Leave blank)
 
 ```
         "mainMetric": {
-          "key": "",
-          "unit": "",
           "format": "",
+          "key": "",
           "keyValue": "",
-          "filter": [],
-          "refId": "",
-          "expr": "",
-          "returnQuery": [],
           "manageValue": "avg"
         },
 ```
@@ -161,16 +203,6 @@ The creation of a region from an SVG element must contain the following values
 
 ```
 
-          "key": "",
-          "unit": "",
-          "format": "",
-          "keyValue": "",
-          "filter": [],
-          "refId": "",
-          "expr": "",
-          "returnQuery": [],
-          "manageValue": "avg"
-
 
 ## linkURL
 
@@ -187,6 +219,16 @@ The creation of a region from an SVG element must contain the following values
 
 ```
 
+## img
+
+This is the path representing a graphical representation
+
+Compatible format is JPG / PNG / GIF / SVG
+
+```
+      "img": "",
+```
+
 ## orientedLink
 
 ```
@@ -196,17 +238,3 @@ The creation of a region from an SVG element must contain the following values
         }
 ```
 
-## meta
-
-```
-"meta": [
-        {
-          "meta": "string",
-          "colorText": "string",
-          "colorBack": "string",
-          "bold": true,
-          "italic": true,
-          "underline": true
-        }
-      ]
-```

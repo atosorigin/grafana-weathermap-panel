@@ -2,6 +2,11 @@
 
 [![](../../screenshots/other/Go-back.png)](coordinates.md)
 
+This part is common for
+
+- [Oriented Link](coordinates-space-link.md)
+
+
 ### color fixed
 
 ![lower limit](../../screenshots/editor/coordinates/lower-limit/lower-limit-link.png)

@@ -40,7 +40,6 @@ The **point** file must be declared as a JSON file like this:
             "positionShapeY": "60",
             "rotateArrow": "0",
             "shape": {},
-            "sizeHeight": {},
             "sizeWidth": {},
             "textObj": {},
             "traceBack": false,
@@ -252,6 +251,14 @@ With similarly:
 
 ## meta
 
+- **meta** message
+- **colorText**: Choose the color of the text in rgba. Example : rgba(0, 0, 0, 1)
+- **colorBack**: Choose the background color of the text in rgba. Example: rgba(255, 255, 255, 0)
+- **bold** Add a bold to the text. "true or "false"
+- **italic** Add a italic to the text. "true or "false"
+- **underline** Add a underline to the text. "true or "false"
+
+
 ```
 "meta": [
         {
@@ -369,34 +376,11 @@ With similarly:
 
 ```
 
-## sizeHeight
-
-- **sizeHeight**
-
-  - **label** : Choose a label for the size in height
-  - **value**: Choose a value for height
-
-```
-     "sizeHeight": {
-                "label": "Medium",
-                "value": "medium"
-            },
-
-```
 
 ## sizeWidth
 
-- **sizeWidth**
-  - **label** : Choose a label for the width size
-  - **value**: Choose a value for the width size
+- **sizeWidth** : What is the size in pixel (px)
 
-```
- "sizeWidth": {
-                "label": "Medium",
-                "value": "medium"
-            },
-
-```
 
 ## textObj
 

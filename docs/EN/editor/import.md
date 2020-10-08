@@ -47,3 +47,4 @@ It is possible to upload an additional configuration file but you have to save t
 # See too
 
 - [Tutorial 10 : How to add a global json file](tutorial10.md)
+- [Tutorial 12 : Building your dashboard from your computer](tutorial12.md)

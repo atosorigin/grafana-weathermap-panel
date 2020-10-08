@@ -44,7 +44,7 @@ In the form of a **demo**, you will learn how to use the plugin to get a dynamic
 
   [![demo10](../../screenshots/demo/demo01.png)](tutorial10.md)
 
-- 11 [How to use initial viewing space](tutorial11.md)
+- 11 [How to change initial viewing space](tutorial11.md)
 
   [![demo11](../../screenshots/demo/demo11.png)](tutorial11.md)
 

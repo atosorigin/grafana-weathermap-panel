@@ -2,7 +2,8 @@
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
-The complete [sample-gabarit.json](../../resource/sampleJson/sample-gabarit.json) script is available, the construction details of which can be found below.
+
+The complete [gabarit-point.json](../../resource/sampleJson/gabarit-point.json) script is available, the construction details of which can be found below.
 
 The **gabarit** file must be declared as a JSON file like this:
 
@@ -26,7 +27,6 @@ The **gabarit** file must be declared as a JSON file like this:
         "drawGraphicMarker": {},
         "shape": {},
         "sizeWidth": "12",
-        "sizeHeight": {},
         "rotateArrow": {},
         "positionShapeX": "",
         "positionShapeY": "",
@@ -36,32 +36,106 @@ The **gabarit** file must be declared as a JSON file like this:
       },
 ```
 
-## templates
 
-The creation of a region from an SVG element must contain the following values
 
-- **filtered** : key|value[#key|value][#key|value]
-- **Labelfix** is the name of the region
-- **xylabel**
-- **xylabelfix**
+## Type
+
 - **type** : point
 
-       "name": "unPoint",
-        "meta": "uneMeta",
-        "label": "mtu ens3",
 
+```
+        "type": "point",
+```
+
+
+## Label
+
+- **Label** is the name of the point
+
+```
+        "label": "label",
+```
+
+## Name
+
+- **Name** is the name of the point
+
+```
+        "Name": "point1",
+```
+
+
+
+
+## Filter
+
+- **filtered** one or more filters build key|value[#key|value][#key|value]
+
+```
+        "filtered": "quantile|0.5#slice|inner_eval",
+```
+
+
+## Point position
+
+There are 2 ways to create point label :
+
+### variable label position
+
+- **labelfix** to false
+- **xylabel** coordinates with : x|<labelName>#y|<labelName>
+
+
+```
+    "xylabel": "x|labelName#y|labelName",
+
+```
+
+
+### fixed label position
+
+- **labelfix** to true
+- **xylabelfix** coordinates with : x|<value>#y|<value>
+
+
+```
+    "xylabelfix": "x|243#y|57"
+
+```
+
+
+## meta
+
+- **meta** message
+- **colorText**: Choose the color of the text in rgba. Example : rgba(0, 0, 0, 1)
+- **colorBack**: Choose the background color of the text in rgba. Example: rgba(255, 255, 255, 0)
+- **bold** Add a bold to the text. "true or "false"
+- **italic** Add a italic to the text. "true or "false"
+- **underline** Add a underline to the text. "true or "false"
+
+
+```
+"meta": [
+        {
+          "meta": "string",
+          "colorText": "string",
+          "colorBack": "string",
+          "bold": true,
+          "italic": true,
+          "underline": true
+        }
+      ]
+```
 
 
 ## positionParameter
 
 - **positionParameter**
 
-  - **labelAPosition** : Choose the horizontal position of label A
-  - **labelAPosition** : Choose the vertical position of label A
-  - **labelBPosition** : Choose the horizontal position of label B
-  - **labelBPosition** : Choose the vertical position of label B
-  - **tooltipPositionA**: Tooltip A position
-  - **tooltipPositionB**: Tooltip B position
+  - **xylabelA** : Choose the horizontal position X and Y of label A
+  - **xylabelB** : Choose the horizontal position X and Y of label B
+  - **tooltipA**: Tooltip A position
+  - **tooltipB**: Tooltip B position
 
 ```
         "positionParameter": {
@@ -71,6 +145,27 @@ The creation of a region from an SVG element must contain the following values
           "tooltipB": "Bottom"
         },
 ```
+
+
+## mainMetric
+
+- **format** "" (Leaves blank)
+- **key**: Allows you to filter the data received by the Query to keep only what is important to you.
+- **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
+- **manageValue** : You can choose between "sum", "avg" or "err".
+
+```
+        "mainMetric": {
+          "format": "",
+          "key": "",
+          "keyValue": "",
+          "manageValue": "avg"
+        },
+```
+
+## Metrics
+
+TODO
 
 ## linkURL
 
@@ -87,30 +182,9 @@ The creation of a region from an SVG element must contain the following values
 
 ```
 
-## mainMetric
+## ValueMetric
 
-- **expr** : Expression in PrompQL
-- **format** "" (Leaves blank)
-- **key**: Allows you to filter the data received by the Query to keep only what is important to you.
-- **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
-- **manageValue** : You can choose between "sum", "avg" or "err".
-- **refId**: Metric reference associated with this region
-- **returnQuery**: (Leave blank)
-- **unit** : (Leave blank)
-
-```
-        "mainMetric": {
-          "key": "",
-          "unit": "",
-          "format": "",
-          "keyValue": "",
-          "filter": [],
-          "refId": "",
-          "expr": "",
-          "returnQuery": [],
-          "manageValue": "avg"
-        },
-```
+TODO
 
 ## drawGraphicMarker
 
@@ -119,7 +193,7 @@ The creation of a region from an SVG element must contain the following values
   - **value**: Choose a value. "true" or "false"
 
 ```
-"drawGraphicMarker": {
+    "drawGraphicMarker": {
                 "label": "Yes",
                 "value": "true"
             },
@@ -133,45 +207,71 @@ The creation of a region from an SVG element must contain the following values
   - **value**: Choose a value for the shape
 
 ```
-"shape": {
+    "shape": {
                 "label": "Circle",
                 "value": "circle"
             },
 
 ```
 
-## meta
+
+## sizeWidth
+
+- **sizeWidth** : Choose a value for the width size
 
 ```
-"meta": [
+ "sizeWidth": "12",
+
+```
+
+## rotateArrow
+
+- **rotateArrow** : Choose the rotation of the arrow
+
+```
+    "rotateArrow": {
+        "label": "",
+        "value": ""
+      },
+```
+
+## positionShape X/Y
+
+- **positionShapeX** and **positionShapeY** : Choose to place the shape of the point on the board
+
+```
+    "positionShapeX": "100",
+    "positionShapeY": "60",
+```
+
+## color
+
+- **color** : Allow you to choose a color for the point
+
+```
+    "color": "red",
+```
+
+## associateOrientedLinksIn
+
+TODO
+
+```
+    "associateOrientedLinksIn": [],
+```
+
+
+
+## associateOrientedLinksOut
+
+TODO
+```
+      "associateOrientedLinksOut": [
         {
-          "meta": "string",
-          "colorText": "string",
-          "colorBack": "string",
-          "bold": true,
-          "italic": true,
-          "underline": true
+          "label": "lien device",
+          "name": "orientedLink1"
         }
       ]
 ```
-
-///////////////////////////////
-
-"metrics": [],
-
-        "valueMetric": "",
-
-        "sizeWidth": "12",
-        "sizeHeight": {
-          "label": "",
-          "value": ""
-        },
-        "rotateArrow": {
-          "label": "",
-          "value": ""
-        },
-        "positionShapeX": "",
-        "positionShapeY": "",
-        "color": "green",
-        "assiciateOrientedLinksIn": [],
-        "associateOrientedLinksOut": []
+      
+      

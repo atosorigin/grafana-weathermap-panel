@@ -158,7 +158,7 @@
           "refId": "",
           "expr": "",
           "returnQuery": [],
-          "manageValue": "avg"
+          "manageValue": "sum"
         },
         "metrics": [],
         "mainMetricB": {
@@ -170,7 +170,7 @@
           "refId": "",
           "expr": "",
           "returnQuery": [],
-          "manageValue": "avg"
+          "manageValue": ""
         },
         "metricsB": [],
         "linkURL": {
@@ -205,7 +205,7 @@
       "filtered": "device|ens3",
       "labelfix": "true",
       "xylabel": "",
-      "xylabelfix": "x|90#y|310",
+      "xylabelfix": "x|100#y|310",
       "type": "point",
       "name": "point0",
       "meta": [
@@ -274,7 +274,7 @@
       "filtered": "device|lo",
       "labelfix": "true",
       "xylabel": "",
-      "xylabelfix": "x|320#y|180",
+      "xylabelfix": "x|350#y|150",
       "type": "point",
       "name": "point1",
       "meta": [
@@ -376,7 +376,7 @@
         "key": "",
         "keyValue": "",
         "manageValue": "sum"
-      },
+      },      
       "metrics": [],
       "mainMetricB": {
         "format": "",

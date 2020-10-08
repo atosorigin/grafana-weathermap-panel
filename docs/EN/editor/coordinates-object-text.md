@@ -12,7 +12,7 @@ This part is common for
 
 #### Region
 
-![text object](../../screenshots/editor/coordinates/text-object/textobject-principal-region.jpg)
+![text object](../../screenshots/editor/coordinates/object-text/textobject-principal-region.jpg)
 
 By unchecking this option, the label name will be displayed in the defined region.
 
@@ -24,7 +24,7 @@ Several options for displaying the text in the region will then appear:
 
 #### Tooltip
 
-![text object](../../screenshots/editor/coordinates/text-object/textobject-principal-tooltips.jpg)
+![text object](../../screenshots/editor/coordinates/object-text/textobject-principal-tooltips.jpg)
 
 By checking this option, the name of the label and the link "Link tooltip" will be displayed in the tooltip that appears when passing the cursor on the region.
 
@@ -36,7 +36,7 @@ Several options for displaying the text in the tooltip then appear:
 
 ### Generate texte object
 
-![text object](../../screenshots/editor/coordinates/text-object/textobject-generate.jpg)
+![text object](../../screenshots/editor/coordinates/object-text/textobject-generate.jpg)
 
 By checking this option, you will want to display the value of the metric. You then have different options:
 
@@ -49,7 +49,7 @@ By checking this option, you will want to display the value of the metric. You t
 
 ### Auxiliary element
 
-![text object](../../screenshots/editor/coordinates/text-object/textobject-auxiliary.jpg)
+![text object](../../screenshots/editor/coordinates/object-text/textobject-auxiliary.jpg)
 
 By checking this option, you will want to display the value of the auxiliary defined beforehand. You then have different options:
 

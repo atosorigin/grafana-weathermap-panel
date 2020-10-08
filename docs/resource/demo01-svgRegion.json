@@ -41,20 +41,7 @@
         "returnQuery": {},
         "unit": ""
       },
-      "meta": [
-        {
-          "meta": "meta svg 1",
-          "obj": {
-            "colorText": "white",
-            "colorBack": "black",
-            "style": {
-              "bold": true,
-              "italic": true,
-              "underline": true
-            }
-          }
-        }
-      ],
+      "meta": [],
       "metrics": [],
       "mode": true,
       "orientedLink": [],

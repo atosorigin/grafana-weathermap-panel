@@ -40,31 +40,40 @@ A graphical representation will be :
 
 If you chose to add, you have to click on **save** If you are in edit mode, the update will be automatic
 
-## Main metric
+## Other parameter
+
+### Main metric
 
 A dedicated page for filling in the fields is available [here](coordinates-main-metric.md)
 
-## Auxiliary metrics
+### Auxiliary metrics
 
 A dedicated page for filling in the fields is available [here](coordinates-auxiliary-metric.md)
 
-## Metadata
+### Metadata
 
 A dedicated page to fill in the fields is available [here](coordinates-metada.md)
 
-## Manage link
+### Manage link
 
 A dedicated page to fill in the fields is available [here](coordinates-manage-link.md)
 
-## Text object
+### Text object
 
 A dedicated page to fill in the fields is available [here](coordinates-object-text.md)
 
-## Lower Limit
+### Lower Limit
 
 A dedicated page to fill in the fields is available [here](coordinates-lower-limit.md)
+
+### Position Parameter
+
+A dedicated page to fill in the fields is available [here](coordinates-position-parameter.md)
+
+
 
 # See too
 
 - [Tutorial 01 : Add a dashboard SVG](../demo/tutorial01.md)
+- [Tutorial 02 : Add a dashboard PNG/JPEG](../demo/tutorial02.md)
 - [Tutorial 09 : How to create a coordinate mode region](../demo/tutorial09.md)

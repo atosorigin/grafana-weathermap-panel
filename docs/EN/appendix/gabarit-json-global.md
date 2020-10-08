@@ -11,42 +11,15 @@ la structure de la partie **global** se décompose de la manière suivante :
 ```
   "global": {
     "lowerLimit": [],
-    "textObject": {
-      "value": "",
-      "isTextTooltip": false,
-      "colorBack": "black",
-      "colorText": "white",
-      "style": {
-        "bold": true,
-        "italic": false,
-        "underline": false
-      },
-      "generateObjectText": true,
-      "valueGenerateObjectText": {
-        "legendElement": "uneLegend",
-        "numericFormatElement": "2",
-        "unit": "Hz",
-        "displayObjectInTooltip": true,
-        "addColorTextElement": false,
-        "addColorBackElement": false,
-        "colorTextElement": "",
-        "colorBackElement": ""
-      },
-      "generateAuxiliaryElement": {
-        "legendElement": "uneLegend",
-        "numericFormatElement": "?",
-        "unit": "Hz",
-        "displayObjectInTooltip": true,
-        "addColorTextElement": true,
-        "addColorBackElement": true,
-        "colorTextElement": "#000000",
-        "colorBackElement": "#FFFFFF"
-      }
+    "textObject": {},
+      "generateObjectText": "true",
+      "valueGenerateObjectText": {},
+      "generateAuxiliaryElement": {}
     },
-    "colorMode": true,
-    "traceBack": false,
-    "traceBorder": false
-  },
+    "colorMode": "false",
+    "traceBack": "true",
+    "traceBorder": "true"
+}
 ```
 
 ## lowerLimit
@@ -170,6 +143,41 @@ With similarly:
   - **colorTextElement** : Choose the color of the text
   - **colorBackElement**: Choose the background color
 
+```  
+  "textObject": {
+      "value": "",
+      "isTextTooltip": "false",
+      "colorBack": "red",
+      "colorText": "white",
+      "style": {
+        "bold": "true",
+        "italic": "false",
+        "underline": "false"
+      },
+      "generateObjectText": "true",
+      "valueGenerateObjectText": {
+        "legendElement": "uneLegend",
+        "numericFormatElement": "2",
+        "unit": "Hz",
+        "displayObjectInTooltip": "true",
+        "addColorTextElement": "false",
+        "addColorBackElement": "false",
+        "colorTextElement": "",
+        "colorBackElement": ""
+      },
+      "generateAuxiliaryElement": {
+        "legendElement": "uneLegend",
+        "numericFormatElement": "?",
+        "unit": "Hz",
+        "displayObjectInTooltip": "true",
+        "addColorTextElement": "true",
+        "addColorBackElement": "true",
+        "colorTextElement": "#000000",
+        "colorBackElement": "#FFFFFF"
+      }
+    },
+``` 
+  
 ## traceBack
 
 - **traceBack**: Allow you to associate a color to the background. "true" or "false"
