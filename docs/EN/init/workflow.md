@@ -108,8 +108,6 @@ Step 7: From the request elements (refined request), it will search for the elem
 
 Step 8: Once you have completed all these steps, you will see the result of your query in the panel (view).
 
-Translated with www.DeepL.com/Translator (free version)
-
 
 **See too**
 
