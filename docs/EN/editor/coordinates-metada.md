@@ -14,7 +14,7 @@ Les metadata permettent d'afficher un ou plusieurs messages.
 
 ![](../../screenshots/editor/coordinates/metadata/input.png)
 
-After clicking on the ʻadd` button, a configuration screen is offered like this:
+After clicking on the `add` button, a configuration screen is offered like this:
 
 
 

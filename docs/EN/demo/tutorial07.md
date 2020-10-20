@@ -1,5 +1,3 @@
-refaire capture ecran
-
 # Create link bi directionnel
 
 [![](../../screenshots/other/Go-back.png)](README.md)
@@ -79,9 +77,6 @@ You associate the line with the region `AssociateRegionIn` and `AssociateRegionO
 
 To change the color, go to the `lower limit` menu.
 
-### Étape 2 : Choisissez la couleur de votre lien
-
-To change the color, go to the `lower limit` menu.
 
 ![LowerLimit](../../screenshots/demo/tutorial07/LowerLimitLink.png)
 
@@ -149,7 +144,7 @@ Then you can this on this picture that the link is clickable
 
 ![Metric](../../screenshots/demo/tutorial07/Link-ConvertImage.jpg)
 
-## Result
+## Result final
 
 ![](../../screenshots/demo/tutorial07/resultat.png)
 

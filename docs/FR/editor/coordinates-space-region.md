@@ -40,30 +40,38 @@ Une représentation graphique sera :
 
 Si vous avez choisi d'ajouter, il faut cliquer sur **save** Si vous êtes en mode édition, la mise à jour sera automatique
 
-## Main metric
+## Autres paramètres
+
+### Main metric
 
 Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-main-metric.md)
 
-## Auxiliary metrics
+### Auxiliary metrics
 
 Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-auxiliary-metric.md)
 
-## Metadata
+### Metadata
 
 Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-metadata.md)
 
-## Manage link
+### Manage link
 
 Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-manage-link.md)
 
-## Text object
+### Text object
 
 Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-object-text.md)
 
-## Lower Limit
+### Lower Limit
 
 Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-lower-limit.md)
 
+### Position Parameter
+
+Une page dédiée pour remplir les champs est disponible [ici](coordinates-position-parameter.md)
+
 # Voir aussi
 
+- [Tutorial 01 : Ajoutez SVG dans votre tableau de bord](../demo/tutorial01.md)
+- [Tutorial 02 : Ajoutez PNG/JPG dans votre tableau de bord](../demo/tutorial02.md)
 - [Tutorial 09 : Comment créer une région en mode coordonnée](../demo/tutorial09.md)

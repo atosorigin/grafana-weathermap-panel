@@ -71,7 +71,7 @@ The **template** file must be declared as a JSON file like this:
 
 It is important to note that you must have a **default templates** associated with a **template**, i.e. if you want to have a template (point or link or region) you must have a **default templates**.
 
-You can have a template with link and region, then you will need a ** default templates ** with link and region
+You can have a template with link and region, then you will need a **default templates** with link and region
 
 > If the rendering was just a region, you must have a region in **default templates** and **template**
 

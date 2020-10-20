@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.0.2 (2020-09-24)
+## [v1.0.2](https://github.com/atosorigin/grafana-weathermap-panel/releases/tag/1.0.2) (2020-10-20)
 
 - Add gabarit
 - Add meta data

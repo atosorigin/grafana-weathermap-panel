@@ -19,7 +19,7 @@ Le fichier de configuration doit être modifié comme ceci
 Depuis le terminal :
 
 ```
-sudo /etc/apache2/apache2.conf
+sudo nano /etc/apache2/apache2.conf
 ```
 
 change:
@@ -43,7 +43,7 @@ en:
     </Directory>
 ```
 
-After saving, you load the header and restart the service:
+Après l'enregistrement, vous chargez l'en-tête et redémarrez le service :
 
 ```
 $ sudo a2enmod headers
@@ -59,7 +59,7 @@ Vous placez les fichiers de _resource_ dans le dossier suivant
 
 ```
 
-# Result
+# Resultat
 
 pour obtenir le résultat suivant
 

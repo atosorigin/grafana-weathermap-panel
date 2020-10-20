@@ -66,7 +66,7 @@ A dedicated page to fill in the fields is available [here](coordinates-space-mai
 
 A dedicated page for filling in the fields is available [here](coordinates-auxiliary-metric.md)
 
-## Metadata
+### Metadata
 
 A dedicated page to fill in the fields is available [here](coordinates-metada.md)
 

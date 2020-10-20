@@ -10,7 +10,6 @@ Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme c
 {  "links": [
 
 ]}
-
 ```
 
 ## Structure
@@ -20,40 +19,39 @@ Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme c
     "links": [{
         "colorCoordinateA": "#5794F2",
         "colorCoordinateB": "#E54658",
-        "colorMode": false,
+        "colorMode": true,
         "id": 1,
-        "mainMetric": {},
-        "isIncurved": {},
+        "isIncurved": {...},
         "label": "",
-        "linkURL": { },
-        "lowerLimit": [],
-        "meta": "",
+        "linkURL": {...},
+        "lowerLimit": [{...},{...}],
+        "mainMetric": {...},
+        "mainMetricB": {...},
+        "meta": [],
         "metrics": [],
+        "metricsB": [],
         "name": "orientedLink1",
-        "orientationLink": {},
-        "pointAPositionX": "-14",
-        "pointAPositionY": "88",
-        "pointBPositionX": "72",
-        "pointBPositionY": "70",
-        "pointCPositionX": "29",
-        "pointCPositionY": "79",
-        "pointIn": "point2",
-        "pointOut": "point1",
-        "positionParameter": {},
+        "orientationLink": {... },
+        "pointAPositionX": "",
+        "pointAPositionY": "",
+        "pointBPositionX": "",
+        "pointBPositionY": "",
+        "pointCPositionX": "",
+        "pointCPositionY": "",
+        "pointIn": "pointRouteur",
+        "pointOut": "ProxyServer",
+        "positionParameter": {...},
         "regionIn": "",
         "regionOut": "",
-        "textObj": {},
-        "traceBack": false,
-        "traceBorder": false,
-        "valueMainMetricA": "-",
-        "valueMainMetricB": "-",
-        "zIndex": "5",
-        "mainMetricB": {},
-        "metricsB": []
+        "size": "12",
+        "textObj": {...},
+        "traceBack": true,
+        "traceBorder": true,
+        "valueMainMetricA": "",
+        "valueMainMetricB": "",
+        "zIndex": 2
     }]
 }
-
-
 
 ```
 
@@ -62,9 +60,8 @@ Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme c
 - **colorCoordinateA** et **colorCoordinateB** : Choisissez la couleur des coordonnées A et B
 
 ```
-
-    "colorCoordinateA": "black",
-    "colorCoordinateB": "black",
+    "colorCoordinateA": "#5794F2",
+    "colorCoordinateB": "#E54658",
 
 ```
 
@@ -86,31 +83,6 @@ Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme c
 
 ```
 
-## mainMetric et mainMetricB
-
-- **mainMetric**
-  - **format** "" (Laisser vide)
-  - **key** : Correspond à une clef associée à la métrique
-  - **keyValue** : Vous permet de filtrer les données reçues par la Query en renseignant la valeur de la clef associée à la métrique
-  - **manageValue** : Vous avez le choix entre "sum", "avg" ou "err"
-  - **refId** : Référence de la métrique associée à cette région
-  - **returnQuery** : Ne pas renseigner.
-  - **unit** : (Laisser vide)
-
-```
-"mainMetric": {
-            "format": "",
-            "key": "",
-            "keyValue": "",
-            "manageValue": "avg",
-            "refId": "",
-            "returnQuery": [],
-            "unit": ""
-        },
-
-
-```
-
 ## isIncurved
 
 - **isIncurved** : Permettra de définir sur il y aura un troisième point pour faire une courbure
@@ -118,7 +90,6 @@ Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme c
   - **value** : Choisir si vous voulez une courbure ou non. "true" ou "false"
 
 ```
-
   "isIncurved": {
             "label": "No",
             "value": false
@@ -132,9 +103,8 @@ Le fichier **link** doit être déclaré sous la forme d'un fichier JSON comme c
 - **name** : Donne un nom au lien
 
 ```
-
-    "label": "lien1",
-    "name": "réseau",
+    "label": "link1",
+    "name": "network",
 
 ```
 
@@ -166,7 +136,7 @@ Il est possible de choisir entre 2 méthodes de couleur :
 Si "colorMode" est "false"
 
 ```
-"colorMode": false,
+    "colorMode": false,
 ```
 
 La couleur sera alors définie comme cela
@@ -245,9 +215,53 @@ Avec de même :
 - **lowerLimitMin**: Valeur minimale de la métrique pour cette couleur
 - **sizeBorder** : Épaisseur de la frontière
 
+## mainMetric et mainMetricB
+
+- **mainMetric**
+  - **format** "" (Laisser vide)
+  - **key** : Correspond à une clef associée à la métrique
+  - **keyValue** : Vous permet de filtrer les données reçues par la Query en renseignant la valeur de la clef associée à la métrique
+  - **manageValue** : Vous avez le choix entre "sum", "avg" ou "err"
+  - **refId** : Référence de la métrique associée à cette région
+  - **returnQuery** : Ne pas renseigner.
+  - **unit** : (Laisser vide)
+
+```
+"mainMetric": {
+            "expr": "",
+            "format": "",
+            "key": "",
+            "keyValue": "",
+            "manageValue": "avg",
+            "refId": "A",
+            "returnQuery": [],
+            "unit": ""
+        },
+```
+
+
 ## meta
 
-pas de valeurs
+- **meta** message
+- **colorText**: Choisir la couleur du texte en rgba. Exemple : rgba(0, 0, 0, 1)
+- **colorBack**: Choisissez la couleur de fond du texte dans rgba. Exemple: rgba(255, 255, 255, 0)
+- **bold** Ajoutez un gras au texte. "true ou "false"
+- **italic** Ajoutez une italique au texte. "true ou "false"
+- **underline** Ajouter un soulignement au texte. "true ou "false"
+
+
+```
+"meta": [
+        {
+          "meta": "string",
+          "colorText": "string",
+          "colorBack": "string",
+          "bold": true,
+          "italic": true,
+          "underline": true
+        }
+      ]
+```
 
 ## metrics et metricsB
 
@@ -298,9 +312,8 @@ pas de valeurs
   - **label** : Choisissez un label pour l'orientation. (monodirectionel ou bidirectionel)
   - **value** : Choisissez la valeur de l'orientation. Par exemple "AB".
 
+
 ```
-
-
  "orientationLink": {
             "label": "Monodirectional",
             "value": "AB"
@@ -311,6 +324,7 @@ pas de valeurs
 ## point A/B/C Position X/Y
 
 - **pointAPositionX** etc.. : Vous permet de placer vos points sur le tableau
+
 
 ```
     "pointAPositionX": "-14",
@@ -326,6 +340,7 @@ pas de valeurs
 
 - **pointIn**: Indiquez le nom du point d'entrée. Par exemple "point2".
 - **pointOut**: Indiquez le nom du point de sortie. Par exemple "point1".
+
 
 ```
 
@@ -363,19 +378,17 @@ pas de valeurs
 - **regionOut**: Indiquez le nom de la région de sortie. Par exemple "région1".
 
 ```
-
-    "pointIn": "region2",
-    "pointOut": "region1",
+    "regionIn": "region2",
+    "regionOut": "region1",
 
 ```
 
 ## size
 
-- **size** : Vous permet de choisir la taille de votre lien
-  - **value** : Quelle est la taille. Peut être small, medium, large
-  - **label** : Choisissez un label pour la taille
+- **size** : What is the size in pixel (px)
 
 ## textObj
+
 
 - **colorBack** : Choisir la couleur du background du texte en rgba. Exemple : rgba(255, 255, 255, 0)
   - **colorText** : Choisir la couleur du texte en rgba. Exemple : rgba(0, 0, 0, 1)
@@ -439,8 +452,6 @@ pas de valeurs
                 "unit": ""
             }
         },
-
-
 ```
 
 ## traceBack
@@ -476,9 +487,9 @@ pas de valeurs
 
 ```
    "zIndex": "5",
-
 ```
 
 # Voir aussi
 
 - [Tutorial 12 : Construire son dashboard depuis son ordinateur](../demo/tutorial12.md)
+

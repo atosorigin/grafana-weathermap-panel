@@ -47,7 +47,7 @@ Ici, nous voulons filtrer le résultat pour n'afficher que l'appareil qui nous i
 
 ## Créer des régions et filtrer la métrique
 
-### Etape 1 : Importer notre image PNG
+### Etape 1 : Importer notre image SVG
 
 L'ajout d'une image de fond se fait à partir du menu `display`.
 

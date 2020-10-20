@@ -17,6 +17,7 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
 ## Structure
 
 ```
+
 {
     "coordinateSpaceInitial": {},
     "texteSettings": {},
@@ -37,14 +38,13 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
 ```
     "coordinateSpaceInitial": {
         "coordinate": {
-            "xMin": "-100",
-            "xMax": "100",
-            "yMin": "-100",
-            "yMax": "100"
+            "xMin": "0",
+            "xMax": "400",
+            "yMin": "0",
+            "yMax": "400"
         },
         "displayArea": false
     },
-
 ```
 
 ## texteSettings
@@ -83,7 +83,7 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
 
 ```
    "baseMap": {
-        "image": "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-background.svg",
+        "image": "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-background.svg",
         "layerImage": "",
         "modeSVG": true,
         "width": "",
@@ -102,7 +102,7 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
 ```
 
    "regions": [
-        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-svgRegion.json"
+        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-svgRegion.json"
     ],
 
 
@@ -115,20 +115,17 @@ Le fichier **global** doit être déclaré comme un fichier JSON comme ceci :
 
 ```
     "points": [
-        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-point.json"
+        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-point.json"
     ],
 
-
 ```
-
-## links
 
 - **links**
   - **0** : Lien vers le fichier .json links [Cliquez ici pour savoir comment les remplir](import-links.md)
 
 ```
     "links": [
-        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo1-link.json"
+        "https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo01-link.json"
     ]
 
 ```

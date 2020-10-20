@@ -48,3 +48,4 @@ Il est possible d'uploader un fichier de configuration supplémentaire mais il f
 # Voir aussi
 
 - [Tutorial 10 : Comment ajouter un fichier json global](tutorial10.md)
+- [Tutorial 12 : Construire son dashboard depuis son ordinateur](tutorial12.md)

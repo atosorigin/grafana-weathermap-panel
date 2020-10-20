@@ -17,3 +17,9 @@ Le résultat obtenu sera automatiquement.
 L'édition du point s'effectue à partir du formulaire de l'[éditeur Point](../editor/coordinates-space-point.md).
 
 Pour y accéder, il faut cliquer sur **Coordinate space**, puis **Point**, puis **Edit coordinate space**
+
+
+
+# Voir aussi
+
+- [Tutorial 03 : Créer un dashboard avancé avec des liens directionnels](../demo/tutorial03.md)

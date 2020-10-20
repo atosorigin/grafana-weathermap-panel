@@ -58,49 +58,15 @@ Il est également possible d'assimiler les demandes à l'Espace de coordination,
 Pour ce faire, nous utilisons une base de données qui rassemble toutes les données nécessaires. Ces données sont triées et collectées à l'aide de requêtes avec filtres.
 Une fois que les données ont été traitées et collectées, elles peuvent être affectées.
 
-![resultat](../../screenshots/init/resultat.png)
+vous pouvez avoir plus de détails sur la page dédiée [queries](../queries/queries.md)
 
-### Workflow
+### Flux de travail (workflow)
 
-![workflow0](../../screenshots/init/workflow0.png)
+Le plugin propose plusieurs méthodes pour traiter une demande affinée, qui sont : 
 
-Ici, nous allons expliquer les différentes étapes de "Comment utiliser WeatherMap Panel Plugin".
+ - Affiche le résultat d'une requête par l'éditeur 
+ - Manipuler les éléments d'une requête par l'éditeur
+ - Importer des vues prédéfinies pour les requêtes dans l'éditeur
+ - Contrôle du rendu par le modèle de requête
 
-Etape 1 : Connectez-vous à Grafana et ajoutez notre plugin en suivant [Ce tutoriel](config-data-source.md)
-
-Étape 2 : Créer un nouveau dashboard
-
-Etape 3 : Dans le menu `queries`, sélectionnez `Prometheus` et ajoutez autant de requêtes que vous le souhaitez
-
-Etape 4 : Dans le menu `visualisation`, vous pourrez choisir votre fond d'écran (image SVG, image Bitmap, ou pas d'image)
-
-Étape 5 : Une fois que vous avez fait cela, en allant dans les onglets de l'éditeur, vous pouvez ajouter des régions, des points et un lien vers votre tableau de bord
-
-Etape 6 : Ensuite, vous pouvez assimiler les mesures aux régions/points/liens que vous venez de créer. Pour ce faire, il y a 3 façons différentes que nous allons vous expliquer
-
-#### Méthode 1
-
-![workflow1](../../screenshots/init/workflow1.png)
-
-Première méthode :
-
-- Vous choisissez une requête qui ne renvoie qu'une seule valeur et vous voulez assimiler le résultat à une région un point ou un lien, sans ajouter de filtre
-
-#### Méthode 2
-
-![workflow2](../../screenshots/init/workflow2.png)
-
-Deuxième méthode :
-
-- Vous choisissez une requête qui renvoie plusieurs valeurs avec différentes clés/valeurs, et vous voulez ajouter un filtre pour affiner votre requête.
-
-#### Méthode 3
-
-![workflow2](../../screenshots/init/workflow3.png)
-
-Troisième méthode :
-
-- Vous choisissez une requête qui renvoie une valeur multiple avec différentes clés/valeurs.
-- Ensuite, pour ajouter les différentes régions, points et liens, vous pouvez utiliser un fichier json global. Ce fichier contient toutes les informations nécessaires pour créer et associer chaque objet avec ses métriques
-
-Étape 7 : Une fois que vous avez effectué toutes ces étapes, vous verrez le résultat de votre requête sur le tableau de bord, assimilé à une région/un point ou un lien.
+Toutes ces méthodes sont détaillées sur la page dédiée [Workflow](workflow.md)

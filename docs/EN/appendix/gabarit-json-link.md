@@ -1,12 +1,14 @@
-# Gabarit file
+# Gabarit link file
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
 The complete [gabarit-link.json](../../resource/sampleJson/gabarit-link.json) script is available, the construction details of which can be found below.
 
-The **gabarit** file must be declared as a JSON file like this:
 
-### OrientedLink
+## Structure
+
+The **gabarit link** file must be declared as a JSON file like this:
+
 
 ```
      {
@@ -58,7 +60,7 @@ The **gabarit** file must be declared as a JSON file like this:
 
 ## Label
 
-- **Label** is the name of the point
+- **Label** is the name of the link
 
 ```
         "label": "label",
@@ -66,7 +68,7 @@ The **gabarit** file must be declared as a JSON file like this:
 
 ## Name
 
-- **Name** is the name of the point
+- **Name** is the name of the link
 
 ```
         "Name": "orientedLink1",
@@ -164,6 +166,9 @@ There are 2 ways to create point label :
         },
 ```
 
+## Metrics et MetricsB
+
+Empty
 
 ## mainMetric et mainMetricB
 

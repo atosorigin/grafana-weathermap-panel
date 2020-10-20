@@ -10,64 +10,46 @@ Définir les coordonnées des points
 
 Les informations obligatoires pour afficher les points sont :
 
-- Label : This is a key to add the result of value to the parameters
-- Display : Show or not show the point
-- Shape : Choose you form : none / Circle / Square / Diamond
-- Size : Choose you size : small / medium / large
-- Position : X and Y position
+- Label : C'est une clé pour ajouter le résultat de la valeur aux paramètres
+- Afficher : Afficher ou non le point
+- Forme : Choisissez votre forme : aucune / Cercle / Carré / Diamant
+- Taille : Permet de choisir la taille du lien en tapant un nombre (ex : 1 à 128)
+- Position : Position X et Y
 
-If you chose to add, you have to click on **save** If you are in edit mode, the update will be automatic
+Si vous avez choisi d'ajouter, vous devez cliquer sur **sauvegarder** Si vous êtes en mode édition, la mise à jour sera automatique
 
-### Label
 
-il s'agit d'une clé permettant d'ajouter le résultat d'une valeur à des paramètres
+## Autres paramètres
 
-### display
-
-affiche ou ne pas afficher point
-
-### size
-
-taille : petit / moyen / gros
-
-### Position
-
-position X et Y
-
-## Main metric
+### Main metric
 
 Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-main-metric.md)
 
-## Auxiliary metrics
+### Auxiliary metrics
 
 Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-auxiliary-metric.md)
 
-## Metadata
+### Metadata
 
 Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-metadata.md)
 
-## Manage link
+### Manage link
 
 Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-manage-link.md)
 
-## Text object
+### Text object
 
 Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-object-text.md)
 
-## Lower Limit
+### Lower Limit
 
 Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-lower-limit.md)
 
-## Position Parameter
+### Position Parameter
 
-![position parameter](../../screenshots/editor/coordinates/screen-point/position-parameter.jpg)
+Une page dédiée pour remplir les champs est disponible [ici](coordinates-position-parameter.md)
 
-vous pouvez définir la position du paramètre
 
-- La position du label en X et Y
+# Voir aussi
 
-* la position tooltip :
-  - haut
-  - bas
-  - droite
-  - gauche
+- [Tutorial 03 : Créer un dashboard avancé avec des liens directionnels](../demo/tutorial03.md)

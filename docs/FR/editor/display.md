@@ -37,7 +37,7 @@ Différents styles sont possibles : gras, italique, souligné, etc.
 
 Permet de télécharger un SVG pour pouvoir gérer les régions. En décochant, vous pouvez télécharger n'importe quelle image, mais elle ne sera pas interactive
 
-# Image
+## Image
 
 Il est important de définir un espace pour délimiter son environnement, pour cela vous pouvez télécharger
 
@@ -48,17 +48,17 @@ Il est important de définir un espace pour délimiter son environnement, pour c
 
 Pour cela, il est possible de charger une image en arrière-plan suivant une des méthodes proposées :
 
-## Si vous utilisez une image SVG
+### Si vous utilisez une image SVG
 
-### Image Vectoriel
+#### Image Vectoriel
 
 Il s'agit d'une image vectorielle au format SVG. La création du fichier SVG est décrite dans la page dédiée : [Construire un fichier SVG](../appendix/svg.md)
 
 ![display](../../screenshots/editor/display/svg-background.jpg)
 
-## Si vous n'utilisez pas une image SVG
+### Si vous n'utilisez pas une image SVG
 
-### Image Bitmap
+#### Image Bitmap
 
 Il s'agit d'une image créée point par point dont le contenu n'est dynamique, ni vectoriel
 

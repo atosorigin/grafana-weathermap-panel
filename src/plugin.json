@@ -17,8 +17,8 @@
       { "name": "License", "url": "https://github.com/atosorigin/grafana-weathermap/blob/master/LICENCE" }
     ],
     "screenshots": [],
-    "version": "1.0.2rc9",
-    "updated": "2020-10-08"
+    "version": "1.0.2",
+    "updated": "2020-10-20"
   },
 
   "dependencies": {

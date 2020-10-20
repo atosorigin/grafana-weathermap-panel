@@ -1,4 +1,4 @@
-# Annex create file
+# Annexe 
 
 [![](../../screenshots/other/Go-back.png)](../../README-fr.md)
 
@@ -11,19 +11,19 @@
 
 - Gabarit
 
-  - [Defaut](gabarit-defaut.md)
-  - [Region](gabarit-region.md)
-  - [Point](gabarit-point.md)
-  - [Link](gabarit-link.md)
+  - [Default](gabarit-default.md)
+  - [Template](gabarit-template.md)
 
 - SVG
 
   - [Creation image SVG en background](svg.md)
 
-- Server
+- Serveurr
 
   - [serveur de stockage](server.md)
 
-- FAQ
+- FAQ (Foire aux questions)
 
   - [FAQ](faq.md)
+
+ 

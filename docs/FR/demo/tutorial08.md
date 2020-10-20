@@ -73,6 +73,24 @@ Allez à la rubrique `Auxiliary metrics` et remplissez le formulaire comme `Main
 
 ![auxiliere](../../screenshots/demo/tutorial08/auxiliere.png)
 
+## Add an meta data to a point
+
+![](../../screenshots/demo/tutorial08/metadata.png)
+
+We add 2 lines in the point's `metadata`.
+
+
+We choose for the first line:
+
+  - Text: Red
+  - Style: Bold, Italic
+
+For the second line:
+
+ - Text : white
+ - Style: Bold
+
+
 Après cela, vous pourrez voir votre métrique auxiliaire dans la toolbox de votre point
 
 ![auxiliere](../../screenshots/demo/tutorial08/toolbox.png)

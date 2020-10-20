@@ -1,6 +1,8 @@
-## Construire un fichier SVG
+## SVG
 
 [![](../../screenshots/other/Go-back.png)](README.md)
+
+## Build an SVG file
 
 ### Background
 
@@ -67,7 +69,7 @@ Vous devez exporter l'image au format SVG.
 
 Les paramètres obligatoires à cocher sont `embed images`
 
-#### Sauvegarde
+## Sauvegarde
 
 ![main metric](../../screenshots/appendix/draw-export-svg.jpg)
 

@@ -1,6 +1,6 @@
 # Workflow
 
-[![](../../screenshots/other/Go-back.png)](../../README.md)
+[![](../../screenshots/other/Go-back.png)](../../introduction.md)
 
 
 ![workflow0](../../screenshots/init/workflow0.png)
@@ -32,13 +32,13 @@ The plugin proposes several methods to display the result of the query in the id
 
 First method :
 
-To apply this method, you must have previously completed steps 1 to 4.
+To apply this method, you must have previously completed steps 1 to 5.
  
-Step 5 : Once you have done that, by going to the editor tabs, you can add some regions, points, and link to your dashboard
+Step 6 : Once you have done that, by going to the editor tabs, you can add some regions, points, and link to your dashboard
 
-Step 6 : Then, you can assimilate metrics to the regions/points/links you just created. To do that, there are 3 different way that we are going to explain to you
+Step 7 : Then, you can assimilate metrics to the regions/points/links you just created. To do that, there are 3 different way that we are going to explain to you
 
-Step 7 : You choose a query that returns only one value and you want to assimilate the result without adding any filter
+Step 8 : You choose a query that returns only one value and you want to assimilate the result without adding any filter
 
 **See too**
 
@@ -53,13 +53,13 @@ Step 7 : You choose a query that returns only one value and you want to assimila
 
 Second method :
 
-To apply this method, you must have previously completed steps 1 to 4.
+To apply this method, you must have previously completed steps 1 to 5.
 
-Step 5 : Once you have done that, by going to the editor tabs, you can add some regions, points, and link to your dashboard
+Step 6 : Once you have done that, by going to the editor tabs, you can add some regions, points, and link to your dashboard
 
-Step 6 : Then, you can assimilate metrics to the regions/points/links you just created. To do that, there are 3 different way that we are going to explain to you
+Step 7 : Then, you can assimilate metrics to the regions/points/links you just created. To do that, there are 3 different way that we are going to explain to you
 
-Step 7 : You choose a query that return multiple values with differents key/valueKey, and you want to add a filter to refine your query.
+Step 8 : You choose a query that return multiple values with differents key/valueKey, and you want to add a filter to refine your query.
 
  
 **See too**
@@ -75,13 +75,13 @@ Step 7 : You choose a query that return multiple values with differents key/valu
 
 Third method :
 
-To apply this method, you must have previously completed steps 1 to 4.
+To apply this method, you must have previously completed steps 1 to 5.
 
-Step 5 :  You choose a query that return multiple values with differents key/valueKey.
+Step 6 :  You choose a query that return multiple values with differents key/valueKey.
 
-Step 6 : Then, to add the different regions, points, and links, you can use a global json file. This file contains all the necessary information to create and associate each object with its metrics
+Step 7 : Then, to add the different regions, points, and links, you can use a global json file. This file contains all the necessary information to create and associate each object with its metrics
 
-Step 7 : Once you have done all of those steps, you will see the result of your query on the dashboard, assimilate with a region/a point, or a link.
+Step 8 : Once you have done all of those steps, you will see the result of your query on the dashboard, assimilate with a region/a point, or a link.
 
  
 **See too**
@@ -98,17 +98,16 @@ Step 7 : Once you have done all of those steps, you will see the result of your 
 
 Fourth method : 
 
-To apply this method, you must have previously completed steps 1 to 4.
+To apply this method, you must have previously completed steps 1 to 5.
 
-Step 5 : in the `Gabarit` tab, you load the **default** file
+Step 6 : in the `Gabarit` tab, you load the **default** file
 
-Step 6: You load the template file(s) that will be composed of the different rendering forms 
+Step 7 : You load the template file(s) that will be composed of the different rendering forms 
 
-Step 7: From the request elements (refined request), it will search for the elements of the associated filter by associating the query and the file
+Step 8 : From the request elements (refined request), it will search for the elements of the associated filter by associating the query and the file
 
-Step 8: Once you have completed all these steps, you will see the result of your query in the panel (view).
+Step 9 : Once you have completed all these steps, you will see the result of your query in the panel (view).
 
-Translated with www.DeepL.com/Translator (free version)
 
 
 **See too**

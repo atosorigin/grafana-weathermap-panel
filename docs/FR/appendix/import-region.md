@@ -16,6 +16,7 @@ Le fichier **region** doit être déclaré sous la forme d'un fichier JSON comme
 
 ## Structure
 
+
 ```
 {
   "regions":
@@ -30,7 +31,7 @@ Le fichier **region** doit être déclaré sous la forme d'un fichier JSON comme
       "linkURL": {},
       "lowerLimit": [],
       "mainMetric": {},
-      "meta": "",
+      "meta": [],
       "metrics": [],
       "mode": true,
       "orientedLink": [],
@@ -41,7 +42,6 @@ Le fichier **region** doit être déclaré sous la forme d'un fichier JSON comme
     }
   ]
 }
-
 ```
 
 ## Région
@@ -78,7 +78,7 @@ La création d'une région à partir d'un élément SVG doit contenir obligatoir
       "linkURL": {},
       "lowerLimit": [],
       "mainMetric": {},
-      "meta": "",
+      "meta": [],
       "metrics": [],
       "mode": true,
       "orientedLink": [],
@@ -109,7 +109,7 @@ La création d'une région à partir de coordonnées doit contenir obligatoireme
       "colorMode": false,
       "coords": {
         "xMax": "50",
-        "xMin": "-20",
+        "xMin": "20",
         "yMax": "30",
         "yMin": "10"
       },
@@ -117,7 +117,7 @@ La création d'une région à partir de coordonnées doit contenir obligatoireme
       "linkURL": {},
       "lowerLimit": [],
       "mainMetric": {},
-      "meta": "",
+      "meta": [],
       "metrics": [],
       "mode": true,
       "orientedLink": [],
@@ -127,8 +127,6 @@ La création d'une région à partir de coordonnées doit contenir obligatoireme
   ]}
 
 ```
-
-## lowerLimit
 
 Il est possible de choisir entre 2 méthodes de couleurs :
 
@@ -219,6 +217,7 @@ Avec de même :
 - **lowerLimitMin**: Valeur minimale de la métrique pour cette couleur
 - **sizeBorder** : Épaisseur de la frontière
 
+
 ## img
 
 Il s'agit du chemin représentant une représentation graphique
@@ -274,7 +273,27 @@ Le format compatible est JPG / PNG / GIF / SVG
 
 ## meta
 
-Pas de valeurs
+- **meta** message
+- **colorText**: Choisir la couleur du texte en rgba. Exemple : rgba(0, 0, 0, 1)
+- **colorBack**: Choisissez la couleur de fond du texte dans rgba. Exemple: rgba(255, 255, 255, 0)
+- **bold** Ajoutez un gras au texte. "true ou "false"
+- **italic** Ajoutez une italique au texte. "true ou "false"
+- **underline** Ajouter un soulignement au texte. "true ou "false"
+
+
+```
+"meta": [
+        {
+          "meta": "string",
+          "colorText": "string",
+          "colorBack": "string",
+          "bold": true,
+          "italic": true,
+          "underline": true
+        }
+      ]
+```
+
 
 ## metrics
 
@@ -290,6 +309,7 @@ Pas de valeurs
     - **unit** : (Laisser vide)
   - **1**
     - ...
+
 
 ```
    "metrics": [
@@ -321,7 +341,7 @@ Pas de valeurs
 
 ## orientedLink
 
-Pas de valeurs
+no value
 
 ## positionParameter
 
@@ -440,3 +460,4 @@ Pas de valeurs
 # Voir aussi
 
 - [Tutorial 12 : Construire son dashboard depuis son ordinateur](../demo/tutorial12.md)
+

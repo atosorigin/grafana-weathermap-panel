@@ -28,7 +28,7 @@ il s'agit d'une clé permettant d'ajouter le résultat d'une valeur à des param
 
 Vous permet de choisir la taille du lien en tapant un chiffre (ex : 1 à 128)
 
-## Associate Point/Region In
+## Associé Point/Region In
 
 ![associate in](../../screenshots/editor/coordinates/screen-oriented-link/in.jpg)
 
@@ -38,7 +38,7 @@ Pour cela vous pouvez l'associer à un point et/ou une région.
 
 Si vous ne l'associez, vous saisissez les coordonnées (X et Y) de départ.
 
-## Associate Point/Region Out
+## Associé Point/Region Out
 
 ![associate out](../../screenshots/editor/coordinates/screen-oriented-link/out.jpg)
 
@@ -56,7 +56,7 @@ Il est possible d'ajouter un point supplémentaire pour faire une courbe.
 
 Pour cela, vous devez dire **oui** au champ **incurved** pour ajouter un nouveau point C en position X et Y.
 
-## Autre paramètre
+## Autres paramètres
 
 ### Main metric
 
@@ -69,6 +69,10 @@ Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-met
 ### Auxiliary metrics
 
 Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-auxiliary-metric.md)
+
+### Metadata
+
+Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-metada.md)
 
 ### Manage link
 
@@ -84,22 +88,11 @@ Une page dédiée, pour remplir les champs, est disponible [ici](coordinates-low
 
 ### Position Parameter
 
-![position parameter](../../screenshots/editor/coordinates/screen-oriented-link/position-parameter.jpg)
+Une page dédiée pour remplir les champs est disponible [ici](coordinates-position-parameter.md)
 
-Vous pouvez définir la position du e différent paramètre.
-
-- La position du label en X et Y suivant la position in (A) et out (B)
-
-* La position tooltip :
-  - haut
-  - bas
-  - droite
-  - gauche
-
-- Layer level
-  - Upgrade on : choisissez l'autre lien que vous voulez voir en dessous de celui ci
-  - Downgrade on : choisissez l'autre lien que vous voulez voir au-dessus de celui-ci
 
 # Voir aussi
 
+- [Tutorial 03 : Créer un dashboard avancé avec des liens directionnels](../demo/tutorial03.md)
 - [Tutorial 07 : Créer un lien bi directionnel](../demo/tutorial07.md)
+

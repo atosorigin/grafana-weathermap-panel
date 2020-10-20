@@ -95,7 +95,9 @@ Vous choississez des tranches et une couleur
 ### Étape 3 : Ajouter une query à votre lien
 
 Vous devez d'abord créer la requête.
+
 Pour ce faire, allez à "Requêtes" et remplissez les champs comme suit :
+
 ![query](../../screenshots/demo/tutorial07/query.png)
 
 ```
@@ -143,7 +145,7 @@ Vous pouvez alors constater sur cette image que le lien est cliquable
 
 ![Metric](../../screenshots/demo/tutorial07/Link-ConvertImage.jpg)
 
-## Résultat
+## Résultat Finale
 
 ![result](../../screenshots/demo/tutorial07/resultat.png)
 

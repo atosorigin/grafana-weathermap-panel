@@ -32,7 +32,7 @@ Le fichier **point** doit être déclaré sous la forme d'un fichier JSON comme 
             "linkURL": {},
             "lowerLimit": [],
             "mainMetric": {},
-            "meta": "",
+            "meta": [],
             "metrics": [],
             "name": "point1",
             "positionParameter": {},
@@ -40,7 +40,6 @@ Le fichier **point** doit être déclaré sous la forme d'un fichier JSON comme 
             "positionShapeY": "60",
             "rotateArrow": "0",
             "shape": {},
-            "sizeHeight": {},
             "sizeWidth": {},
             "textObj": {},
             "traceBack": false,
@@ -92,6 +91,7 @@ Le fichier **point** doit être déclaré sous la forme d'un fichier JSON comme 
 - **drawGraphicMarker**
   - **label** : Choisissez un label
   - **value**: Choisissez une valeur. "true" ou "false"
+
 
 ```
 "drawGraphicMarker": {
@@ -224,6 +224,7 @@ Avec de même :
 - **lowerLimitMin**: Valeur minimale de la métrique pour cette couleur
 - **sizeBorder** : Épaisseur de la frontière
 
+
 ## mainMetric
 
 - **mainMetric**
@@ -253,7 +254,26 @@ Avec de même :
 
 ## meta
 
-pas de valeurs
+- **meta** message
+- **colorText**: Choisir la couleur du texte en rgba. Exemple : rgba(0, 0, 0, 1)
+- **colorBack**: Choisissez la couleur de fond du texte dans rgba. Exemple: rgba(255, 255, 255, 0)
+- **bold** Ajoutez un gras au texte. "true ou "false"
+- **italic** Ajoutez une italique au texte. "true ou "false"
+- **underline** Ajouter un soulignement au texte. "true ou "false"
+
+
+```
+"meta": [
+        {
+          "meta": "string",
+          "colorText": "string",
+          "colorBack": "string",
+          "bold": true,
+          "italic": true,
+          "underline": true
+        }
+      ]
+```
 
 ## metrics
 
@@ -269,35 +289,8 @@ pas de valeurs
     - **unit** : (Laisser vide)
   - **1**
     - ...
-
-```
-   "metrics": [
-     "0":
-        {
-            "expr": "",
-            "format": "",
-            "key": "",
-            "keyValue": "",
-            "manageValue": "avg",
-            "refId": "",
-            "returnQuery": [],
-            "unit": ""
-        }
-      "1":
-        {
-            "expr": "",
-            "format": "",
-            "key": "",
-            "keyValue": "",
-            "manageValue": "avg",
-            "refId": "",
-            "returnQuery": [],
-            "unit": ""
-        }
-   ]
-
-```
-
+    
+    
 ## name
 
 - **name** : Choisissez le nom de votre point
@@ -316,6 +309,7 @@ pas de valeurs
   - **tooltipPositionA** : Position du tooltip A
   - **tooltipPositionB** : Position du tooltip B
 
+
 ```
             "positionParameter": {
                 "labelAPositionX": "0",
@@ -331,6 +325,7 @@ pas de valeurs
 ## positionShape X/Y
 
 - **positionShape X** et **positionShapeY** : Choisissez où vous voulez placer le point sur le tableau
+
 
 ```
     "positionShapeX": "-60",
@@ -353,42 +348,20 @@ pas de valeurs
 
 ```
 "shape": {
-                "label": "circle",
+                "label": "Circle",
                 "value": "circle"
             },
 
 ```
 
-## sizeHeight
-
-- **sizeHeight**
-
-  - **label** : Choisissez un label pour la taille de la hauteur
-  - **value**: Choisissez une valeur pour la taille de la hauteur
-
-```
-     "sizeHeight": {
-                "label": "Medium",
-                "value": "medium"
-            },
-
-```
 
 ## sizeWidth
 
-- **sizeWidth**
-  - **label** : Choisissez un label pour la taille de la largeur
-  - **value**: Choisissez une valeur pour la taille de la largeur
+- **sizeWidth** : What is the size in pixel (px)
 
-```
- "sizeWidth": {
-                "label": "Medium",
-                "value": "medium"
-            },
-
-```
 
 ## textObj
+
 
 - **textObj**
 - **colorBack** : Choisir la couleur du background du texte en rgba. Exemple : rgba(255, 255, 255, 0)
@@ -492,3 +465,4 @@ pas de valeurs
 # Voir aussi
 
 - [Tutorial 12 : Construire son dashboard depuis son ordinateur](../demo/tutorial12.md)
+

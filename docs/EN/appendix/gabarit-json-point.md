@@ -1,13 +1,15 @@
-# Gabarit file
+# Gabarit point file
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
 
 The complete [gabarit-point.json](../../resource/sampleJson/gabarit-point.json) script is available, the construction details of which can be found below.
 
-The **gabarit** file must be declared as a JSON file like this:
 
-### points
+
+## structure
+
+The **gabarit point** file must be declared as a JSON file like this:
 
 ```
       {
@@ -165,7 +167,7 @@ There are 2 ways to create point label :
 
 ## Metrics
 
-TODO
+Empty
 
 ## linkURL
 
@@ -184,7 +186,7 @@ TODO
 
 ## ValueMetric
 
-TODO
+Empty
 
 ## drawGraphicMarker
 
@@ -252,20 +254,19 @@ TODO
     "color": "red",
 ```
 
-## associateOrientedLinksIn
+## associateOrientedLinks In/Out
 
-TODO
+- **associateOrientedLinksIn/Out** : Fill in the link that starts/ends at this point
+  - label : You can choose a label for this association
+  - name : choose the unique name of this association
 
 ```
-    "associateOrientedLinksIn": [],
-```
-
-
-
-## associateOrientedLinksOut
-
-TODO
-```
+      "associateOrientedLinksOut": [
+        {
+          "label": "lien device",
+          "name": "orientedLink2"
+        }
+      ],
       "associateOrientedLinksOut": [
         {
           "label": "lien device",
@@ -273,5 +274,6 @@ TODO
         }
       ]
 ```
+
       
       

@@ -42,10 +42,10 @@ L'image sélectionnée sera [cumputer-png.png](../../resource/computer-png.png).
 
 Definissez ensuite la taille de la région pour votre image. Ici, nous choisirons :
 
-- X Min : -55
-- X Max : -80
-- Y Min : -30
-- Y Max : 15
+- X Min : 70
+- X Max : 180
+- Y Min : 200
+- Y Max : 270
 
 ![step 03](../../screenshots/demo/tutorial02/ImageRegion.png)
 
@@ -54,6 +54,32 @@ Definissez ensuite la taille de la région pour votre image. Ici, nous choisiron
 Le résultat final sera le suivant :
 
 ![step 08](../../screenshots/demo/tutorial02/Result1.png)
+
+### Metadata
+
+Dans l'éditeur, nous choisissons la ligne `metadata` pour ajouter un message.
+
+![](../../screenshots/demo/tutorial02/meta-new.png)
+
+
+Un champ vide est affiché et nous le remplissons avec notre objet `region`. Pour cela, on remplit le champ, puis on clique sur `add`.
+
+![](../../screenshots/demo/tutorial02/meta-config.png)
+
+Un panneau de configuration est disponible pour configurer l'affichage du résultat.
+
+
+On choisit :
+
+ - Fond : blanc
+ - Texte : Rouge
+ - Le style : Gras
+
+
+![](../../screenshots/demo/tutorial02/meta-result.png)
+
+Le message sera visible lorsque la souris passera sur l'objet
+
 
 ## Définir une région en mode de coordination sans image
 
@@ -72,10 +98,10 @@ Vous devez remplir le formulaire comme ceci :
 
 Definissez ensuite la taille de la région pour votre image. Ici, nous choisirons :
 
-- X Min : -18
-- X Max : 0
-- Y Min : -5
-- Y Max : 8
+- X Min : 308
+- X Max : 374
+- Y Min : 237
+- Y Max : 270
 
 Pour finir
 
@@ -109,6 +135,36 @@ Le résultat final sera le suivant :
 Pour créer un lien orienté, vous devez passer par [le menu du panneau](../panel/panel-oriented-link.md).
 
 Vous pouvez aussi vous rendre au [tutoriel3](tutorial3.md) qui explique comment faire
+
+## Nouveau résultat
+
+![](../../screenshots/demo/tutorial02/Result3.png)
+
+
+## Add metadata for the link
+
+
+Dans l'éditeur, nous choisissons la ligne `metadata` pour ajouter un message dans le `orientedLink`.
+
+![](../../screenshots/demo/tutorial02/link-meta-new.png)
+
+
+Un champ vide est affiché et nous le remplissons avec notre objet `link`. Pour cela, on remplit le champ, puis on clique sur `add`.
+
+![](../../screenshots/demo/tutorial02/link-meta-config.png)
+
+Un panneau de configuration est disponible pour configurer l'affichage du résultat.
+
+
+On choisit :
+
+ - Fond : blanc
+ - Texte : Rouge
+ - Le style : Gras, Italique, Souligné
+
+
+Le message sera visible lorsque la souris passera sur l'objet
+
 
 ## Résultat final
 

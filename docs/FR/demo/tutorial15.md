@@ -1,24 +1,25 @@
-# Multiple gabarit loading
+# Chargement multiple de gabarit
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
-Demo 15 will position a variable element in an X and Y space, and display its value at the point defined by an element in a query.
+Demo 15 positionne un élément variable dans un espace X et Y, et affiche sa valeur au point défini par un élément dans une requête.
 
-In the example, it will display a certain number of points in relation to the return of the filtred query.
+Dans l'exemple, elle affichera un certain nombre de points par rapport au retour de la requête filtrée.
 
-## Add a query
 
-The example shows how to use query filters to obtain precise metrics
+## Ajouter une requête
+
+L'exemple montre comment utiliser des filtres de requête pour obtenir des mesures précises
 
 ![fileselect background](../../screenshots/demo/tutorial15/query.jpg)
 
-In a query, we want to analyze what the network card receives
+Dans une requête, nous voulons analyser ce que la carte réseau reçoit
 
 ```
 prometheus_http_request_duration_seconds_bucket
 ```
 
-The result shows several possible outcomes
+Le résultat montre plusieurs issues possibles
 
 ```
 prometheus_http_request_duration_seconds_bucket{handler="/api/v1/label/:name/values",instance="localhost:9090",job="prometheus",le="+Inf"}
@@ -34,81 +35,86 @@ prometheus_http_request_duration_seconds_bucket{handler="/api/v1/label/:name/val
 ...
 ```
 
-The elements that interest us are :
+Les éléments qui nous intéressent sont :
 
 - handler
 - instance
 - job
 - le
 
-that will be used in the json template file in the list **filtered**
 
-we will use the element `le` of the query which will be used as the position of the point (X, Y) 
+qui sera utilisé dans le fichier modèle json de la liste **filtered**.
+
+nous utiliserons l'élément `le` de la requête qui sera utilisé comme position du point (X, Y) 
 
 ## Determining a space
 
 ![](../../screenshots/demo/tutorial15/display.png)
 
-The creation of a background space is done from the `display` menu.
 
-It requires
 
-- Uncheck `use svg`
-- Enter the width (ex : 400)
-- Enter height (ex : 400)
+La création d'un espace d'arrière-plan se fait à partir du menu `display`.
 
-It is possible to have more details with the [display](../editor/display.md) page.
+Elle nécessite
 
-## Advanced gabarit
+- Décocher la case `use svg`.
+- Entrez la largeur (ex : 400)
+- Entrez la hauteur (ex : 400)
 
-In the tab **Gabarit**
+Il est possible d'avoir plus de détails avec la page [display](../editor/display.md) page.
+
+## Gabarit avancé
+
+Dans l'onglet **Gabarit**
 
 ![](../../screenshots/demo/tutorial15/demo15-0.png)
 
-you add the default file
+Vous ajoutez le fichier par défaut
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo15-default.json
 
 ```
-then 1 click that the button **finish**
+puis 1 clic que le boutonn **finish**
 
 
 ![](../../screenshots/demo/tutorial15/demo15-1.png)
 
-you add the link of the `json` file in the tab `url list`
+
+vous ajoutez le lien du fichier `json` dans l'onglet `url list`.
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo15-point-multi.json
 
 ```
 
-then 1 click that the button **Add** followed by **finish**.
 
-the link will be displayed in the second part of the screen
+puis 1 clic que le bouton **Add** suivi de **finish**.
+
+le lien sera affiché dans la deuxième partie de l'écran
 
 ![](../../screenshots/demo/tutorial15/demo15-2.png)
 
-this file must be associated to a query
+ce fichier doit être associé à une requête
 
-then 1 click **load**
+puis 1 clic **load**
 
-## Result
+## Résultat
 
 ![](../../screenshots/demo/tutorial15/result.png)
 
-## Structure gabarit files
+## Structure fichier gabarit
 
-the `template` file will use : 
+le fichier `template` utilisera : 
 
- - a fixed color in lowerlimit
- - the position of the points in X and Y will be variable and defined by the name of the element
- - the result of the query is displayed in a tooltip. The value appears when the mouse passes over the point
- - Position parameter
+ - une couleur fixe en limite inférieure
+ - la position des points dans X et Y sera variable et définie par le nom de l'élément
+ - le résultat de la requête est affiché dans une info-bulle. La valeur apparaît lorsque la souris passe sur le point
+ - Paramètre de position
 
 ### default gabarit : demo15-default.json
 
-for the good functioning of the demo 15, the structure of the file will be : 
+pour le bon fonctionnement de la démo 14, la structure du dossier sera : 
 
 ```
 {
@@ -134,7 +140,7 @@ for the good functioning of the demo 15, the structure of the file will be :
 
 ### Template gabarit : demo15-point-multi.json
 
-for the good functioning of the demo 15, the structure of the file will be : 
+pour le bon fonctionnement de la démo 14, la structure du dossier sera : 
 
 ```
 {
@@ -157,7 +163,7 @@ for the good functioning of the demo 15, the structure of the file will be :
 
 ```
 
-# See too
+# Voir aussi
 
 - [Gabarit default](../appendix/gabarit-default.md)
 - [Gabarit template](../appendix/gabarit-template.md)

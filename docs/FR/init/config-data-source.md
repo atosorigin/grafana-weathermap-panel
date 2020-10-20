@@ -4,18 +4,10 @@
 
 ## Les données des séries chronologiques comme source de données
 
-Le plugin `grafana-weathermap-panel` peut être utilisé avec toute la base de données utilisée dans Grafana.
 
-Bases de données supportées :
+Le plugin `grafana-weathermap-panel` est actuellement compatible avec Prometheus.
 
-- Graphite
-- InfluxDB
-- OpenTSDB
-- Prometheus
-- MySQL
-- Postgres
-- MSSQL
-- Elasticsearch
+Les autres bases de données comme : Graphite, InfluxDB, OpenTSDB, Prometheus, MySQL, Postgres, MSSQL, Elasticsearch pourront être de nouveaux compatibles dans les prochaines versions.
 
 ## Exemple d'utilisation avec Prometheus
 

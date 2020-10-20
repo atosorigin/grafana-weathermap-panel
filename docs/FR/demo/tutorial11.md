@@ -8,20 +8,27 @@ Pour cette démonstration 11, nous prendrons le résultat du [tutorial 09](tutor
 
 ![tutorial9](../../screenshots/demo/tutorial09/result.png)
 
-Ensuite, nous allons modifier `initial viewing space` pour travailler seulement sur la partie supérieure droite du dashboard
-
-Pour faire ca :
-
-- Changez xMin de 0 à 400
-- Changez Ymin de 0 à 200
+Nous modifions la graduation du rendu. Pour cela, nous modifions `initial viewing space` avec les nouvelles valeurs.
 
 ![result](../../screenshots/demo/tutorial11/initial.png)
 
-Ensuite, vous verrez que l'espace inital se déplacera et vous ne pourrez travailler que sur la partie supérieure droite du dashboard.
+La représentation est recalculée avec les nouvelles limitations. Les objets seront automatiquement recalculés pour obtenir de nouvelles valeurs comme celle-ci :
 
-![result](../../screenshots/demo/tutorial11/result.png)
 
--200
-376
-100
-380
+`Region 1`
+
+![](../../screenshots/demo/tutorial11/region1.png)
+
+
+`Region 2`
+
+![](../../screenshots/demo/tutorial11/region2.png)
+
+
+`Region 3`
+
+![](../../screenshots/demo/tutorial11/region3.png)
+
+Le nouveau résultat sera
+
+![result](../../screenshots/demo/tutorial11/newresult.png)

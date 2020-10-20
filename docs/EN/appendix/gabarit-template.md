@@ -52,7 +52,7 @@ The list of elements is described in the dedicated part [gabarit point](gabarit-
 
 ### Link
 
-The **liens** format consists of a list of ordinates of values and sets of pairs (key/value).
+The **link** format consists of a list of ordinates of values and sets of pairs (key/value).
 
 The list of elements is described in the dedicated part [gabarit link](gabarit-json-link.md)
 

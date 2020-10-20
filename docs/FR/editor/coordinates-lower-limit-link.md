@@ -2,6 +2,10 @@
 
 [![](../../screenshots/other/Go-back.png)](coordinates.md)
 
+Cette partie est commune pour
+
+- [Oriented Link](coordinates-space-link.md)
+
 ### Couleur fixe
 
 ![lower limit](../../screenshots/editor/coordinates/lower-limit/lower-limit-link.png)
@@ -19,6 +23,7 @@ Si la `color variable` est cochée, un nouveau formulaire apparaît pour défini
 ![lower limit](../../screenshots/editor/coordinates/lower-limit/lower-limit-variable.png)
 
 Indiquez le nombre d'étapes (par défaut 3)
+
 Cliquez sur `add color`.
 
 Vous obtenez cet écran :

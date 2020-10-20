@@ -1,12 +1,14 @@
-# Gabarit Region
+# Gabarit Region file
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
 The complete [gabarit-region.json](../../resource/sampleJson/gabarit-region.json) script is available, the construction details of which can be found below.
 
-The **gabarit** file must be declared as a JSON file like this:
 
 ## Structure
+
+The **gabarit region** file must be declared as a JSON file like this:
+
 
 ```
       {
@@ -159,49 +161,7 @@ The creation of a region from coordinates must necessarily contain the following
 
 ## metrics
 
-- **metrics** This is a metric table to add auxilary metrics.
-
-  - **0**
-
-    - **expr** : Expression in PrompQL
-    - **format** : (Leaves blank)
-    - **key**: Allows you to filter the data received by the Query to keep only what is important to you.
-    - **keyValue** : Allows you to filter the data received by the Query to keep only what is important to you.
-    - **manageValue** : You can choose between "sum", "avg" or "err".
-    - **refId**: Metric reference associated with this region
-    - **returnQuery**: (Leave blank)
-    - **unit** : (Leave blank)
-
-  - **1**
-    - ...
-
-```
-   "metrics": [
-     "0":
-        {
-            "expr": "",
-            "format": "",
-            "key": "",
-            "keyValue": "",
-            "manageValue": "avg",
-            "refId": "",
-            "returnQuery": [],
-            "unit": ""
-        }
-      "1":
-        {
-            "expr": "",
-            "format": "",
-            "key": "",
-            "keyValue": "",
-            "manageValue": "avg",
-            "refId": "",
-            "returnQuery": [],
-            "unit": ""
-        }
-   ]
-
-```
+Empty
 
 
 ## linkURL
@@ -230,6 +190,11 @@ Compatible format is JPG / PNG / GIF / SVG
 ```
 
 ## orientedLink
+
+Fill in the link that starts at this region
+
+  - label : You can choose a label for this association
+  - name : choose the unique name of this association
 
 ```
         {

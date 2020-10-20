@@ -59,3 +59,12 @@ En cochant cette option, vous allez vouloir afficher la valeur de l'auxiliaire d
 - Object display in text or tooltip : En cochant cette case, la valeur de la métrique s'affichera dans l'info bulle
 - Color text : En cochant cette case, vous pourrez choisir une couleur pour le texte de la valeur de la métrique
 - Background color : En cochant cette case, vous pourrez choisir une couleur pour le background de la valeur de la métrique
+
+
+# Voir aussi
+
+- [Tutorial 01 : Ajoutez SVG dans votre tableau de bord](../demo/tutorial01.md)
+- [Tutorial 05 : Créer une requête personnalisable](../demo/tutorial05.md)
+- [Tutorial 06 : Créer une modélisation avancée](../demo/tutorial06.md)
+- [Tutorial 07 : Créer un lien bi directionnel](../demo/tutorial07.md)
+- [Tutorial 10 : Comment ajouter un fichier json global](../demo/tutorial10.md)

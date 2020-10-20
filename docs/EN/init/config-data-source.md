@@ -4,18 +4,10 @@
 
 ## Time Series Data as the Data Source
 
-The plugin `grafana-weathermap-panel` can be use with all the database used in Grafana.
+The `grafana-weathermap-panel` plugin is currently compatible with Prometheus.
 
-Supported Databases:
 
-- Graphite
-- InfluxDB
-- OpenTSDB
-- Prometheus
-- MySQL
-- Postgres
-- MSSQL
-- Elasticsearch
+Other databases such as: Graphite, InfluxDB, OpenTSDB, Prometheus, MySQL, Postgres, MSSQL, Elasticsearch may be compatible in future versions.
 
 ## Example of use with Prometheus
 

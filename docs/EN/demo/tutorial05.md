@@ -1,5 +1,3 @@
-update TODO
-
 # Create a customizable query
 
 [![](../../screenshots/other/Go-back.png)](README.md)
@@ -21,21 +19,13 @@ The result shows several possible outcomes
 
 ```
 node_network_receive_bytes_total{device="br-565444d7f7ec",instance="localhost:9100",job="node"}
-
 node_network_receive_bytes_total{device="br-d1bef2b848cd",instance="localhost:9100",job="node"}
-
 node_network_receive_bytes_total{device="br-f19a1cf1980f",instance="localhost:9100",job="node"}
-
 node_network_receive_bytes_total{device="docker0",instance="localhost:9100",job="node"}
-
 node_network_receive_bytes_total{device="eno0",instance="localhost:9100",job="node"}
-
 node_network_receive_bytes_total{device="veth17769f7",instance="localhost:9100",job="node"}
-
 node_network_receive_bytes_total{device="vetha317d1e",instance="localhost:9100",job="node"}
-
 node_network_receive_bytes_total{device="vethc04149a",instance="localhost:9100",job="node"}
-
 node_network_receive_bytes_total{device="vethdee87cd",instance="localhost:9100",job="node"}
 
 ```

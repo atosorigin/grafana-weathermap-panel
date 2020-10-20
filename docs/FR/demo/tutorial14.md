@@ -1,10 +1,14 @@
-# construire un dashboard par les Query
+# Gabarit dynamique avancé
 
 [![](../../screenshots/other/Go-back.png)](README.md)
 
+Le fichier SVG est composé de différents éléments d'identification, qui serviront d'ID de région pour le plugin.
+
+La démo 14 affichera la valeur de la même requête dans une requête, avec une couleur variable prédéfinie.
+
 ## Add a query
 
-The example shows how to use query filters to obtain precise metrics
+L'exemple montre comment utiliser des filtres de requête pour obtenir des mesures précises
 
 ![fileselect background](../../screenshots/demo/tutorial14/query.jpg)
 
@@ -14,7 +18,7 @@ In a query, we want to analyze what the network card receives
 prometheus_engine_query_duration_seconds*100000
 ```
 
-The result shows several possible outcomes
+Dans une requête, nous voulons analyser ce que la carte réseau reçoit
 
 ```
 prometheus_engine_query_duration_seconds{instance="localhost:9090",job="prometheus",quantile="0.5",slice="inner_eval"}
@@ -32,35 +36,49 @@ prometheus_engine_query_duration_seconds{instance="localhost:9090",job="promethe
 
 ```
 
-Les elements qui nous interressent sont :
+Les éléments qui nous intéressent sont :
 
 - instance
-- job
+- emploi
 - quantile
-- slice
+- tranche
 
-qui seront utilisés dans le fichier json de gabarit dans la liste **filtered**
+qui sera utilisé dans le fichier modèle json de la liste **filtrée**.
 
-## Add background image
+## Ajouter une image de fond
 
-![fileselect background](../../screenshots/demo/tutorial14/background.jpg)
+![background](../../screenshots/demo/tutorial14/display.png)
 
-Adding a background image can be done from the menu `display`.
 
-The selected image will be [demo14-background.svg](../../resource/demo14-background.svg).
+L'ajout d'une image de fond se fait à partir du menu `display`.
 
-To do this, we download it in base64 with the `Copy image address` function, or with the direct link to the repository:
+L'image sélectionnée sera [demo14-background.svg](../../resource/demo14-background.svg).
+
+Pour ce faire, nous la téléchargeons en base64 avec la fonction `Copier l'adresse de l'image`, ou avec le lien direct du dépôt :
+
 
 ```
 https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo14-background.svg
 
 ```
 
-It is possible to have more details with the [display](../editor/display.md) page.
+Il est possible d'avoir plus de détails avec la page [display](../editor/display.md).
 
-## Advanced gabarit
+## Gabarit avancé
 
 Dans l'onglet **Gabarit**
+
+![](../../screenshots/demo/tutorial14/demo14-0.png)
+
+vous ajoutez le fichier par défaut
+
+```
+https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/docs/resource/demo14-default.json
+
+```
+
+puis 1 clic que le bouton **finish**
+
 
 ![](../../screenshots/demo/tutorial14/demo14-1.png)
 
@@ -71,16 +89,115 @@ https://raw.githubusercontent.com/atosorigin/grafana-weathermap-panel/master/doc
 
 ```
 
-puis 1 clic que le bouton **Add** suivi de **finish**
 
-le lien s'affichera dans la deuxième partie de l'écran
+puis 1 clic que le bouton **Add** suivi de **finish**.
+
+le lien sera affiché dans la deuxième partie de l'écran
+
 
 ![](../../screenshots/demo/tutorial14/demo14-2.png)
 
-il faut lui attribuer une query
+une requête doit lui être attribuée
 
 puis 1 clic **load**
 
-## Resultat
+## Résultat
 
 ![](../../screenshots/demo/tutorial14/result.png)
+
+## Structure des fichiers gabarit
+
+le fichier `template` utilisera : 
+
+- Une couleur variable en limite inférieure
+- Chaque SVG ID sera déterminé comme une région
+- Dans un fond SVG, chaque ID SVG affichera la couleur de la demande selon les limites définies
+- Affiche une Meta donnée lorsque vous passez la souris sur une des régions
+- Ajout d'une région de coordonnées avec le résultat du filtre d'interrogation
+
+
+
+### gabarit par défaut : demo14-default.json
+
+pour le bon fonctionnement de la démo 14, la structure du dossier sera : 
+
+
+
+```
+{
+  "global": {
+     // global
+  },
+  "default": {
+    "templates": [
+      {
+        // Point
+      },
+      {
+        // Link
+      },
+      {
+        // Region
+      }
+    ]
+  }
+}
+
+```
+
+### Template gabarit : demo14-svg.json
+
+pour le bon fonctionnement de la démo 14, la structure du dossier sera : 
+
+```
+{
+  "global": {
+    // global
+  },
+  "default": {
+    "templates": [
+      {
+        // Region
+      }
+    ]
+  },
+  "templates": [
+      {
+        // Region 0
+      },
+      {
+        // Region 1
+      },
+      {
+        // Region 2
+      },
+      {
+        // Region 3
+      },
+      {
+        // Region 4
+      },
+      {
+        // Region 5
+      },
+      {
+        // Region 6
+      },
+      {
+        // Region 7
+      },
+      {
+        // Region 8
+      },
+      {
+        // Coordinate Region
+      },
+   ]
+}
+
+```
+
+# Voir aussi
+
+- [Gabarit default](../appendix/gabarit-default.md)
+- [Gabarit template](../appendix/gabarit-template.md)
