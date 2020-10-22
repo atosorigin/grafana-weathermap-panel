@@ -19,11 +19,11 @@
     "screenshots": [
       {
         "name": "demo01",
-        "path": "img/demo01.png"
+        "path": "docs/screenshots/demo/demo01.png"
       },
       {
         "name": "demo14",
-        "path": "img/demo14.png"
+        "path": "src/img/demo14.png"
       },
       {
         "name": "demo15",
