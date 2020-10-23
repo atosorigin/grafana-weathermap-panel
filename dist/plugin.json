@@ -16,20 +16,7 @@
       { "name": "Github", "url": "https://github.com/atosorigin/grafana-weathermap" },
       { "name": "License", "url": "https://github.com/atosorigin/grafana-weathermap/blob/master/LICENCE" }
     ],
-    "screenshots": [
-      {
-        "name": "demo01",
-        "path": "img/demo01.png"
-      },
-      {
-        "name": "demo14",
-        "path": "img/demo14.png"
-      },
-      {
-        "name": "demo15",
-        "path": "img/demo15.png"
-      }
-    ],
+    "screenshots": [],
     "version": "1.0.2",
     "updated": "2020-10-20"
   },
