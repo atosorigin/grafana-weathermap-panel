@@ -40,7 +40,7 @@ class ManageLink extends React.Component<Props, State> {
   }
 
   /**
-   * edit followLink whith Promise
+   * edit followLink with Promise
    */
   setStateAsyncFollowLink = (state: {
     /**
@@ -54,7 +54,7 @@ class ManageLink extends React.Component<Props, State> {
   };
 
   /**
-   * edit link for tooltip whith Promise
+   * edit link for tooltip with Promise
    */
   setStateAsyncHoveringTooltipLink = (state: {
     /**
@@ -68,7 +68,7 @@ class ManageLink extends React.Component<Props, State> {
   };
 
   /**
-   * edit text for tooltip whith Promise
+   * edit text for tooltip with Promise
    */
   setStateAsyncHoveringTooltipText = (state: {
     /**

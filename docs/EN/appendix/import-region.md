@@ -294,7 +294,7 @@ Compatible format is JPG / PNG / GIF / SVG
 
 ## metrics
 
-- **metrics** This is a metric table to add auxilary metrics.
+- **metrics** This is a metric table to add auxiliary metrics.
 
   - **0**
 

@@ -568,7 +568,7 @@ export default class OrientedLink extends React.Component<Props, State> {
     });
   };
   /**
-   * fill input whith data
+   * fill input with data
    * this function is called by mount and update event
    */
   getDataInInput = async () => {

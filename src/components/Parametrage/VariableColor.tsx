@@ -67,7 +67,7 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
   }
 
   /**
-   * set state for arrayInputClass whith Promise
+   * set state for arrayInputClass with Promise
    */
   setStateAsyncArrayInputClass = (state: {
     /**
@@ -81,7 +81,7 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
   };
 
   /**
-   * set state for seuil whith Promise
+   * set state for seuil with Promise
    */
   setStateAsyncLowerLimit = (state: {
     /**
@@ -95,7 +95,7 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
   };
 
   /**
-   * set state for index whith Promise
+   * set state for index with Promise
    */
   setStateAsyncIndex = (state: {
     /**
@@ -109,7 +109,7 @@ class VariableColor extends React.Component<Props, State, PanelEditorProps<Simpl
   };
 
   /**
-   * set state for nbVariation whith Promise
+   * set state for nbVariation with Promise
    */
   setStateAsyncNbVariation = (state: {
     /**

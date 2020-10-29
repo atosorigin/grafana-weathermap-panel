@@ -85,7 +85,7 @@ class EditOrientedLink extends React.Component<Props, State> {
     });
   };
 
-  /** fill select whith array region object */
+  /** fill select with array region object */
   fillSelectOrientedLink = () => {
     let valueExist = false;
     const valueSelect: SelectOrientedLink[] = [];
