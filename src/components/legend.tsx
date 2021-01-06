@@ -113,14 +113,14 @@ class LegendComponent extends React.Component<Props, State> {
     // const close = document.getElementById('iconclose');
     // close?.addEventListener('click', () => {
 
-    //   const disapear = document.getElementById('L');
+    //   const disappear = document.getElementById('L');
     //   const appear = document.getElementById('legnd');
-    //   if (disapear) {
-    //     disapear.style.visibility = 'hidden';
+    //   if (disappear) {
+    //     disappear.style.visibility = 'hidden';
     //   }
     //   appear?.addEventListener('click', () => {
-    //     if (disapear) {
-    //       disapear.style.visibility = 'visible';
+    //     if (disappear) {
+    //       disappear.style.visibility = 'visible';
     //     }
     //   });
     // });

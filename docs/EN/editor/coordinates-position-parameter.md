@@ -77,7 +77,7 @@ Part B
 the `Layer lavel` parameter is only available for the `OrientedLink` tab. You can perform the following operation : 
 
 
-  - Upgrade on : choose the other link that you want to see bellow this one
+  - Upgrade on : choose the other link that you want to see below this one
   - Downgrade on : choose the other link that you want to see above this one
   
 

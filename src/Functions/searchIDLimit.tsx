@@ -24,7 +24,7 @@ export interface Coor4DNum {
 //   return false;
 // };
 
-// /** search all coordinate if atribute is d */
+// /** search all coordinate if attribute is d */
 // const searchOtherLimitDAttribute = (data: string, limit: number[]): boolean => {
 //   const parseWithLetter = [];
 //   const regex = /[a-zA-Z]{1}[0-9.\W]*/g;

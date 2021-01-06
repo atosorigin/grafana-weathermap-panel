@@ -274,7 +274,7 @@ With similarly:
 
 ## metrics
 
-- **metrics** : This is a metric table to add auxilary metrics.
+- **metrics** : This is a metric table to add auxiliary metrics.
   - **0**
     - **expr** : Expression in PrompQL
     - **format** : (Leaves blank)

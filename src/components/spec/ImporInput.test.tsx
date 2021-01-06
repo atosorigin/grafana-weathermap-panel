@@ -1174,7 +1174,7 @@ describe('waiting test', () => {
 //   });
 
 //   describe('pointUpdate', () => {
-//     test('Expecto to arrayPoints have been updated in teh good way', done => {
+//     test('Expecto to arrayPoints have been updated in the good way', done => {
 //       component.props.options.arrayPoints = [];
 //       const goodInput = new PointClass(
 //         point.id,
@@ -1248,7 +1248,7 @@ describe('waiting test', () => {
 //   });
 
 //   describe('regionUpdate', () => {
-//     test('Expecto to regionCoordinateSpace have been updated in teh good way', done => {
+//     test('Expecto to regionCoordinateSpace have been updated in the good way', done => {
 //       const goodInput = new RegionClass(
 //         regionCoods.id,
 //         regionCoods.linkURL,
@@ -1305,7 +1305,7 @@ describe('waiting test', () => {
 //   });
 
 //   describe('linkUpdate', () => {
-//     test('Expecto to arrayOrientedLinks have been updated in teh good way', done => {
+//     test('Expecto to arrayOrientedLinks have been updated in the good way', done => {
 //       const goodInput = new OrientedLinkClass(
 //         link.id,
 //         link.linkURL,
@@ -2167,7 +2167,7 @@ describe('waiting test', () => {
 //});
 
 // describe('fonction name', () => {
-//   test('Explaination and expect return', (done) => {
+//   test('Explanation and expect return', (done) => {
 //     //input and preparation for test
 //     const spy = jest.spyOn(component, 'function name');
 //     const result = component.function(input);
@@ -3291,7 +3291,7 @@ describe('waiting test', () => {
 //   });
 
 //   describe('pointUpdate', () => {
-//     test('Expecto to arrayPoints have been updated in teh good way', (done) => {
+//     test('Expecto to arrayPoints have been updated in the good way', (done) => {
 //       component.props.options.arrayPoints = [];
 //       const goodInput = new PointClass(
 //         point.id,
@@ -3357,7 +3357,7 @@ describe('waiting test', () => {
 //   });
 
 //   describe('regionUpdate', () => {
-//     test('Expecto to regionCoordinateSpace have been updated in teh good way', (done) => {
+//     test('Expecto to regionCoordinateSpace have been updated in the good way', (done) => {
 //       const goodInput = new RegionClass(
 //         regionCoods.id,
 //         regionCoods.linkURL,
@@ -3408,7 +3408,7 @@ describe('waiting test', () => {
 //   });
 
 //   describe('linkUpdate', () => {
-//     test('Expecto to arrayOrientedLinks have been updated in teh good way', (done) => {
+//     test('Expecto to arrayOrientedLinks have been updated in the good way', (done) => {
 //       const goodInput = new OrientedLinkClass(
 //         link.id,
 //         link.linkURL,
@@ -4142,7 +4142,7 @@ describe('waiting test', () => {
 //     });
 //   });
 //   // describe('fonction name', () => {
-//   //   test('Explaination and expect return', done => {
+//   //   test('Explanation and expect return', done => {
 //   //     //input and preparation for test
 //   //     const spy = jest.spyOn(component, 'function name');
 //   //     const result = component.function(input);

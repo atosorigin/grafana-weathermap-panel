@@ -86,7 +86,7 @@ class EditPoint extends React.Component<Props, State> {
     });
   };
 
-  /** fill select whith array region object */
+  /** fill select with array region object */
   fillSelectPoint = () => {
     let valueExist = false;
     const valueSelect: SelectPoint[] = [];
