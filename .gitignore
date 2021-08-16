@@ -80,7 +80,7 @@ typings/
 # nuxt.js build output
 .nuxt
 
-# react / gatsby 
+# react / gatsby
 public/
 
 # vuepress build output
@@ -112,4 +112,6 @@ psd
 thumb
 sketch
 
+
+.directory
 # End of https://www.gitignore.io/api/node,react
