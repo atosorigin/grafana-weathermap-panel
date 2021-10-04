@@ -1,6 +1,6 @@
 # Changelog
 
-## [v1.0.3](https://github.com/atosorigin/grafana-weathermap-panel/releases/tag/1.0.3) (2020-01-15)
+## [v1.0.3](https://github.com/atosorigin/grafana-weathermap-panel/releases/tag/1.0.3) (2021-01-15)
 
 - Add Sign plugin
 - Merge fix typos
